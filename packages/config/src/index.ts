@@ -1,3 +1,3 @@
 export const baz = {
-  test: "test",
+  test: 'test',
 };
