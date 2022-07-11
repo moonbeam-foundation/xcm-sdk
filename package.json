@@ -1,0 +1,25 @@
+{
+  "author": "PureStake",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "homepage": "https://github.com/PureStake/xcm#readme",
+  "bugs": {
+    "url": "https://github.com/PureStake/xcm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PureStake/xcm.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prebuild": "rimraf packages/**/build",
+    "build": "tsc -b -verbose",
+    "postbuild": "rimraf packages/**/*.tsbuildinfo"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4"
+  }
+}

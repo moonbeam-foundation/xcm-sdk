@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/config/tsconfig.mjs.json"
+    },
+    {
+      "path": "packages/config/tsconfig.cjs.json"
+    },
+    {
+      "path": "packages/xcm/tsconfig.mjs.json"
+    },
+    {
+      "path": "packages/xcm/tsconfig.cjs.json"
+    }
+  ]
+}
