@@ -1,0 +1,42 @@
+{
+  "name": "@moonbeam-network/xcm-config",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "directory": "packages/config",
+    "type": "git",
+    "url": "git+https://github.com/PureStake/xcm.git"
+  },
+  "keywords": [
+    "moonbeam",
+    "moonriver",
+    "xcm"
+  ],
+  "author": "PureStake",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/PureStake/xcm/issues"
+  },
+  "homepage": "https://github.com/PureStake/xcm#readme",
+  "files": [
+    "build"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/mjs/src/index.d.ts",
+        "default": "./build/mjs/src/index.js"
+      },
+      "require": {
+        "types": "./build/cjs/src/index.d.ts",
+        "default": "./build/cjs/src/index.js"
+      }
+    }
+  },
+  "types": "./build/cjs/src/index.d.ts",
+  "main": "./build/cjs/src/index.js"
+}
