@@ -6,9 +6,9 @@ export const GLMR_ID = {
 };
 
 export enum Assets {
-  DOT = 'DOT',
   ACA = 'ACA',
   AUSD = 'AUSD',
+  DOT = 'DOT',
   PARA = 'PARA',
 }
 

@@ -8,21 +8,21 @@ export const DEV_ID = {
 };
 
 export enum Assets {
-  UNIT = 'UNIT',
-  KAR = 'KAR',
-  KINT = 'KINT',
+  ASTR = 'ASTR',
   BNC = 'BNC',
-  KBTC = 'KBTC',
-  CRU = 'CRU',
   BSX = 'BSX',
-  KUSD = 'KUSD',
-  PHA = 'PHA',
+  CRU = 'CRU',
   HKO = 'HKO',
+  KAR = 'KAR',
+  KBTC = 'KBTC',
+  KINT = 'KINT',
   KMA = 'KMA',
+  KUSD = 'KUSD',
   LIT = 'LIT',
   PARING = 'PARING',
+  PHA = 'PHA',
   TEER = 'TEER',
-  ASTR = 'ASTR',
+  UNIT = 'UNIT',
 }
 
 export const AssetsConfig = <const>{

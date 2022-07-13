@@ -10,20 +10,20 @@ export const MOVR_ID = {
 };
 
 export enum Assets {
-  KSM = 'KSM',
-  RMRK = 'RMRK',
-  KINT = 'KINT',
-  KBTC = 'KBTC',
-  KAR = 'KAR',
-  BNC = 'BNC',
   AUSD = 'AUSD',
-  USDT = 'USDT',
-  CSM = 'CSM',
-  PHA = 'PHA',
-  HKO = 'HKO',
-  KMA = 'KMA',
+  BNC = 'BNC',
   CRAB = 'CRAB',
+  CSM = 'CSM',
+  HKO = 'HKO',
+  KAR = 'KAR',
+  KBTC = 'KBTC',
+  KINT = 'KINT',
+  KMA = 'KMA',
+  KSM = 'KSM',
+  PHA = 'PHA',
+  RMRK = 'RMRK',
   TEER = 'TEER',
+  USDT = 'USDT',
 }
 
 export const AssetsConfig = <const>{
