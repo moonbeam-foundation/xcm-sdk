@@ -38,5 +38,10 @@
     }
   },
   "types": "./build/cjs/src/index.d.ts",
-  "main": "./build/cjs/src/index.js"
+  "main": "./build/cjs/src/index.js",
+  "dependencies": {
+    "@polkadot/types": "^8.12.2",
+    "@polkadot/util": "^10.0.2",
+    "@polkadot/util-crypto": "^10.0.2"
+  }
 }
