@@ -40,6 +40,7 @@
   "types": "./build/cjs/src/index.d.ts",
   "main": "./build/cjs/src/index.js",
   "dependencies": {
+    "@moonbeam-network/api-augment": "^0.1606.2",
     "@polkadot/types": "^8.12.2",
     "@polkadot/util": "^10.0.2",
     "@polkadot/util-crypto": "^10.0.2"
