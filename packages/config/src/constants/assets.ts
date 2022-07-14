@@ -50,7 +50,6 @@ export const MOONBASE_ASSETS = <const>[
   Assets.TEER,
   Assets.UNIT,
 ];
-
 export const MOONBASE_ASSETS_CONFIGS: Readonly<
   Record<MoonbaseAssets, AssetConfig>
 > = {
@@ -133,8 +132,7 @@ export const MOONRIVER_ASSETS = <const>[
   Assets.TEER,
   Assets.USDT,
 ];
-
-export const MoonriverAssetsConfigs: Readonly<
+export const MOONRIVER_ASSETS_CONFIGS: Readonly<
   Record<MoonriverAssets, AssetConfig>
 > = {
   [Assets.AUSD]: {
@@ -204,8 +202,9 @@ export const MOONBEAM_ASSETS = <const>[
   Assets.DOT,
   Assets.PARA,
 ];
-
-export const AssetsConfig: Readonly<Record<MoonbeamAssets, AssetConfig>> = {
+export const MOONBEAM_ASSETS_CONFIGS: Readonly<
+  Record<MoonbeamAssets, AssetConfig>
+> = {
   [Assets.ACA]: {
     id: '224821240862170613278369189818311486111',
     originSymbol: Assets.ACA,
