@@ -1,5 +1,15 @@
 export enum Pallet {
+  PolkadotXcm = 'polkadotXcm',
+  XcmPallet = 'xcmPallet',
   XTokens = 'xTokens',
   XTransfer = 'xTransfer',
-  PolkadotXcm = 'polkadotXcm',
+}
+
+export enum PolkadotXcmExtrinsic {
+  LimitedReserveTransferAssets = 'limitedReserveTransferAssets',
+  LimitedReserveWithdrawAssets = 'limitedReserveWithdrawAssets',
+}
+
+export enum PolkadotXcmExtrinsicSuccessEvent {
+  Attempted = 'Attempted',
 }
