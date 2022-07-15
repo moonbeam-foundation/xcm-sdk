@@ -6,7 +6,7 @@ export type PolkadotXcmPalletParams = [
    */
   {
     V1: {
-      parents: Parents;
+      parents: 1;
       interior: {
         X1: {
           Parachain: number;
@@ -19,7 +19,7 @@ export type PolkadotXcmPalletParams = [
    */
   {
     V1: {
-      parents: Parents;
+      parents: 0;
       interior: {
         X1: {
           AccountKey20: {
@@ -27,7 +27,7 @@ export type PolkadotXcmPalletParams = [
             /**
              * account
              */
-            key: '%account%';
+            key: string;
           };
         };
       };
@@ -36,7 +36,7 @@ export type PolkadotXcmPalletParams = [
   /**
    * asset
    */
-  PolkadotXcmAssetParamV0 | PolkadotXcmAssetParamV1,
+  PolkadotXcmAssetParam,
   /**
    * fee
    */
@@ -45,16 +45,20 @@ export type PolkadotXcmPalletParams = [
    * weight
    */
   {
-    Limited: '%weight%';
+    Limited: number;
   },
 ];
+
+export type PolkadotXcmAssetParam =
+  | PolkadotXcmAssetParamV0
+  | PolkadotXcmAssetParamV1;
 
 export interface PolkadotXcmAssetParamV0 {
   V0: [
     {
       ConcreteFungible: {
         id: 'Null';
-        amount: '%plankAmount%';
+        amount: bigint;
       };
     },
   ];
@@ -73,7 +77,7 @@ export interface PolkadotXcmAssetParamV1 {
         };
       };
       fun: {
-        Fungible: '%plankAmount%';
+        Fungible: bigint;
       };
     },
   ];

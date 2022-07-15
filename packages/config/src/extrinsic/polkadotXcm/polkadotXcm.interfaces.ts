@@ -9,5 +9,5 @@ export interface PolkadotXcmPallet {
   pallet: Pallet.PolkadotXcm;
   extrinsic: PolkadotXcmExtrinsic;
   successEvent: PolkadotXcmExtrinsicSuccessEvent;
-  params: PolkadotXcmPalletParams;
+  getParams: (account: string, amount: bigint) => PolkadotXcmPalletParams;
 }

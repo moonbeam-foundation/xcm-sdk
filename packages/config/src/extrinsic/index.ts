@@ -5,7 +5,7 @@ import { xTransfer } from './xTransfer';
 
 export function createExtrinsicBuilder<Assets>(config: MoonChainConfig) {
   return {
-    polkadotXcm: () => polkadotXcm<Assets>(config),
+    polkadotXcm: () => polkadotXcm(config),
     xTokens: () => xTokens<Assets>(config),
     xTransfer: () => xTransfer<Assets>(config),
   };
