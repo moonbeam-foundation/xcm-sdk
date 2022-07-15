@@ -1,7 +1,7 @@
 // TODO: move to interfaces
-export interface AssetConfig {
+export interface AssetConfig<Assets> {
   id: string;
-  originSymbol: string;
+  originSymbol: Assets;
   originAssetId?: number;
 }
 
@@ -51,7 +51,7 @@ export const MOONBASE_ASSETS = <const>[
   Assets.UNIT,
 ];
 export const MOONBASE_ASSETS_CONFIGS: Readonly<
-  Record<MoonbaseAssets, AssetConfig>
+  Record<MoonbaseAssets, AssetConfig<MoonbaseAssets>>
 > = {
   [Assets.ASTR]: {
     id: '16797826370226091782818345603793389938',
@@ -133,7 +133,7 @@ export const MOONRIVER_ASSETS = <const>[
   Assets.USDT,
 ];
 export const MOONRIVER_ASSETS_CONFIGS: Readonly<
-  Record<MoonriverAssets, AssetConfig>
+  Record<MoonriverAssets, AssetConfig<MoonriverAssets>>
 > = {
   [Assets.AUSD]: {
     id: '214920334981412447805621250067209749032',
@@ -203,7 +203,7 @@ export const MOONBEAM_ASSETS = <const>[
   Assets.PARA,
 ];
 export const MOONBEAM_ASSETS_CONFIGS: Readonly<
-  Record<MoonbeamAssets, AssetConfig>
+  Record<MoonbeamAssets, AssetConfig<MoonbeamAssets>>
 > = {
   [Assets.ACA]: {
     id: '224821240862170613278369189818311486111',

@@ -1,17 +1,41 @@
 // TODO: move to interfaces
 export interface ChainConfig {
+  name: string;
   ws: string;
   weight: number;
-  parachainId?: number;
+  parachainId: number;
+}
+export interface MoonChainConfig {
+  name: string;
+  ws: string;
+  parachainId: number;
 }
 
-export enum MoonChains {
+export enum MoonChain {
+  MoonbaseAlpha = 'MoonbaseAlpha',
   Moonbeam = 'Moonbeam',
   Moonriver = 'Moonriver',
-  MoonbaseAlpha = 'MoonbaseAlpha',
 }
+export const MOON_CHINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
+  {
+    [MoonChain.MoonbaseAlpha]: {
+      name: 'Moonbase Alpha',
+      ws: 'wss://wss.api.moonbase.moonbeam.network',
+      parachainId: 1000,
+    },
+    [MoonChain.Moonbeam]: {
+      name: 'Moonbeam',
+      ws: 'wss://wss.api.moonbeam.network',
+      parachainId: 2004,
+    },
+    [MoonChain.Moonriver]: {
+      name: 'Moonriver',
+      ws: 'wss://wss.api.moonriver.moonbeam.network',
+      parachainId: 2023,
+    },
+  };
 
-export enum Chains {
+export enum Chain {
   Acala = 'Acala',
   AlphanetRelay = 'AlphanetRelay',
   AstarAlphanet = 'AstarAlphanet',
@@ -42,83 +66,97 @@ export enum Chains {
 
 export type MoonbaseChains = typeof MOONBASE_CHAINS[number];
 export const MOONBASE_CHAINS = <const>[
-  Chains.AlphanetRelay,
-  Chains.AstarAlphanet,
-  Chains.BasiliskAlphanet,
-  Chains.BifrostAlphanet,
-  Chains.CalamariAlphanet,
-  Chains.CrustShadowAlphanet,
-  Chains.DarwiniaAlphanet,
-  Chains.IntegriteeAlphanet,
-  Chains.InterBTCAlphanet,
-  Chains.KaruraAlphanet,
-  Chains.KhalaAlphanet,
-  Chains.LitentryAlphanet,
-  Chains.ParallelAlphanet,
+  Chain.AlphanetRelay,
+  Chain.AstarAlphanet,
+  Chain.BasiliskAlphanet,
+  Chain.BifrostAlphanet,
+  Chain.CalamariAlphanet,
+  Chain.CrustShadowAlphanet,
+  Chain.DarwiniaAlphanet,
+  Chain.IntegriteeAlphanet,
+  Chain.InterBTCAlphanet,
+  Chain.KaruraAlphanet,
+  Chain.KhalaAlphanet,
+  Chain.LitentryAlphanet,
+  Chain.ParallelAlphanet,
 ];
 export const MOONBASE_CHINS_CONFIGS: Readonly<
   Record<MoonbaseChains, ChainConfig>
 > = {
-  [Chains.AlphanetRelay]: {
+  [Chain.AlphanetRelay]: {
+    name: 'Alphanet Relay',
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
+    parachainId: 0,
   },
-  [Chains.AstarAlphanet]: {
+  [Chain.AstarAlphanet]: {
+    name: 'Astar Alphanet',
     ws: 'wss://alphanet.astar.network/',
     weight: 1_000_000_000,
     parachainId: 2007,
   },
-  [Chains.BasiliskAlphanet]: {
+  [Chain.BasiliskAlphanet]: {
+    name: 'Basilisk Alphanet',
     ws: 'wss://rpc-01.basilisk-moonbase.hydradx.io',
     weight: 1_000_000_000,
     parachainId: 2090,
   },
-  [Chains.BifrostAlphanet]: {
+  [Chain.BifrostAlphanet]: {
+    name: 'Bifrost Alphanet',
     ws: 'wss://moonriver.bifrost-rpc.testnet.liebi.com/ws',
     weight: 1_000_000_000,
     parachainId: 2001,
   },
-  [Chains.CalamariAlphanet]: {
+  [Chain.CalamariAlphanet]: {
+    name: 'Calamari Alphanet',
     ws: 'wss://crispy.moonbase-relay.testnet.calamari.systems',
     weight: 1_000_000_000,
     parachainId: 2084,
   },
-  [Chains.CrustShadowAlphanet]: {
+  [Chain.CrustShadowAlphanet]: {
+    name: 'Crust Shadow Alphanet',
     ws: 'wss://shadow-rpc-alpha.crustapps.net/',
     weight: 1_000_000_000,
     parachainId: 2012,
   },
-  [Chains.DarwiniaAlphanet]: {
+  [Chain.DarwiniaAlphanet]: {
+    name: 'Darwinia Alphanet',
     ws: 'wss://pangolin-parachain-alpha-rpc.darwinia.network',
     weight: 1_000_000_000,
     parachainId: 2105,
   },
-  [Chains.IntegriteeAlphanet]: {
+  [Chain.IntegriteeAlphanet]: {
+    name: 'Integritee Alphanet',
     ws: 'wss://moonbeam-test.integritee.network',
     weight: 1_000_000_000,
     parachainId: 2015,
   },
-  [Chains.InterBTCAlphanet]: {
+  [Chain.InterBTCAlphanet]: {
+    name: 'interBTC Alphanet',
     ws: 'wss://api-dev-moonbeam.interlay.io/parachain',
     weight: 1_000_000_000,
     parachainId: 1002,
   },
-  [Chains.KaruraAlphanet]: {
+  [Chain.KaruraAlphanet]: {
+    name: 'Karura Alphanet',
     ws: 'wss://crosschain-dev.polkawallet.io:9908',
     weight: 1_000_000_000,
     parachainId: 2000,
   },
-  [Chains.KhalaAlphanet]: {
+  [Chain.KhalaAlphanet]: {
+    name: 'Khala Alphanet',
     ws: 'wss://bridge-testnet-api.phala.network/moon/ws',
     weight: 1_000_000_000,
     parachainId: 2004,
   },
-  [Chains.LitentryAlphanet]: {
+  [Chain.LitentryAlphanet]: {
+    name: 'Litentry Alphanet',
     ws: 'wss://moonbase-parachain-sg-0.litentry.io',
     weight: 1_000_000_000,
     parachainId: 2106,
   },
-  [Chains.ParallelAlphanet]: {
+  [Chain.ParallelAlphanet]: {
+    name: 'Parallel Alphanet',
     ws: 'wss://crosschain-dev-rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2085,
@@ -127,71 +165,83 @@ export const MOONBASE_CHINS_CONFIGS: Readonly<
 
 export type MoonriverChains = typeof MOONRIVER_CHAINS[number];
 export const MOONRIVER_CHAINS = <const>[
-  Chains.Bifrost,
-  Chains.Calamari,
-  Chains.CrustShadow,
-  Chains.Darwinia,
-  Chains.Integritee,
-  Chains.Karura,
-  Chains.Khala,
-  Chains.Kintsugi,
-  Chains.Kusama,
-  Chains.Parallel,
-  Chains.Statemine,
+  Chain.Bifrost,
+  Chain.Calamari,
+  Chain.CrustShadow,
+  Chain.Darwinia,
+  Chain.Integritee,
+  Chain.Karura,
+  Chain.Khala,
+  Chain.Kintsugi,
+  Chain.Kusama,
+  Chain.Parallel,
+  Chain.Statemine,
 ];
 export const MOONRIVER_CHINS_CONFIGS: Readonly<
   Record<MoonriverChains, ChainConfig>
 > = {
-  [Chains.Bifrost]: {
+  [Chain.Bifrost]: {
+    name: 'Bifrost',
     ws: 'wss://bifrost-rpc.liebi.com/ws',
     weight: 1_000_000_000,
     parachainId: 2001,
   },
-  [Chains.Calamari]: {
+  [Chain.Calamari]: {
+    name: 'Calamari',
     ws: 'wss://ws.calamari.systems',
     weight: 1_000_000_000,
     parachainId: 2084,
   },
-  [Chains.CrustShadow]: {
+  [Chain.CrustShadow]: {
+    name: 'CrustShadow',
     ws: 'wss://rpc2-shadow.crust.network',
     weight: 1_000_000_000,
     parachainId: 2012,
   },
-  [Chains.Darwinia]: {
+  [Chain.Darwinia]: {
+    name: 'Darwinia',
     ws: 'wss://crab-parachain-rpc.darwinia.network',
     weight: 1_000_000_000,
     parachainId: 2105,
   },
-  [Chains.Integritee]: {
+  [Chain.Integritee]: {
+    name: 'Integritee',
     ws: 'wss://integritee-kusama.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2015,
   },
-  [Chains.Karura]: {
+  [Chain.Karura]: {
+    name: 'Karura',
     ws: 'wss://karura.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2000,
   },
-  [Chains.Khala]: {
+  [Chain.Khala]: {
+    name: 'Khala',
     ws: 'wss://khala.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2004,
   },
-  [Chains.Kintsugi]: {
+  [Chain.Kintsugi]: {
+    name: 'Kintsugi',
     ws: 'wss://api-kusama.interlay.io/parachain',
     weight: 1_000_000_000,
     parachainId: 2092,
   },
-  [Chains.Kusama]: {
+  [Chain.Kusama]: {
+    name: 'Kusama',
     ws: 'wss://kusama-rpc.polkadot.io',
     weight: 1_000_000_000,
+    parachainId: 0,
   },
-  [Chains.Parallel]: {
+  [Chain.Parallel]: {
+    name: 'Parallel',
     ws: 'wss://heiko-rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2085,
   },
-  [Chains.Statemine]: {
+  [Chain.Statemine]: {
+    name: 'Statemine',
     ws: 'wss://statemine-rpc.polkadot.io',
     weight: 1_000_000_000,
     parachainId: 1000,
@@ -200,25 +250,29 @@ export const MOONRIVER_CHINS_CONFIGS: Readonly<
 
 export type MoonbeamChains = typeof MOONBEAM_CHAINS[number];
 export const MOONBEAM_CHAINS = <const>[
-  Chains.Acala,
-  Chains.Parallel,
-  Chains.Polkadot,
+  Chain.Acala,
+  Chain.Parallel,
+  Chain.Polkadot,
 ];
 export const MOONRBEAM_CHINS_CONFIGS: Readonly<
   Record<MoonbeamChains, ChainConfig>
 > = {
-  [Chains.Acala]: {
+  [Chain.Acala]: {
+    name: 'Acala',
     ws: 'wss://acala-polkadot.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2000,
   },
-  [Chains.Parallel]: {
+  [Chain.Parallel]: {
+    name: 'Parallel',
     ws: 'wss://rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2012,
   },
-  [Chains.Polkadot]: {
+  [Chain.Polkadot]: {
+    name: 'Polkadot',
     ws: 'wss://rpc.polkadot.io',
     weight: 1_000_000_000,
+    parachainId: 0,
   },
 };

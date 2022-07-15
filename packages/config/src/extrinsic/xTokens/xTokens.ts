@@ -1,3 +1,4 @@
+import { AssetConfig, ChainConfig, MoonChainConfig } from '../../constants';
 import { Pallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,
@@ -5,26 +6,27 @@ import {
 } from './xTokens.constants';
 import {
   XTokensTransferExtrinsic,
-  XTokensTransferOptions,
+  XTokensTransferMultiAssetExtrinsic,
+  XTokensTransferMultiCurrenciesExtrinsic,
+  XTokenTransferExtrinsicParamsToken,
 } from './xTokens.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xTokens<Assets>() {
+export function xTokens<Assets>(config: MoonChainConfig) {
   return {
-    transfer: () => transfer<Assets>(),
-    transferMultiAsset: () => transferMultiAsset<Assets>(),
-    transferMultiCurrencies: () => transferMultiCurrencies<Assets>(),
+    transfer: () => transfer<Assets>(config),
+    transferMultiAsset: () => transferMultiAsset<Assets>(config),
+    transferMultiCurrencies: () => transferMultiCurrencies<Assets>(config),
   };
 }
 
-function transfer<Assets>() {
+function transfer<Assets>(config: MoonChainConfig) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
-      options: ({
-        token,
-        weight,
-        parachainId,
-      }: XTokensTransferOptions<Assets>): XTokensTransferExtrinsic<Assets> => ({
+      params: (
+        origin: ChainConfig,
+        token: XTokenTransferExtrinsicParamsToken<Assets>,
+      ): XTokensTransferExtrinsic<Assets> => ({
         pallet: Pallet.XTokens,
         extrinsic: XTokensExtrinsic.Transfer,
         successEvent: event,
@@ -37,7 +39,7 @@ function transfer<Assets>() {
               interior: {
                 X2: [
                   {
-                    Parachain: parachainId,
+                    Parachain: config.parachainId,
                   },
                   {
                     AccountKey20: {
@@ -49,17 +51,119 @@ function transfer<Assets>() {
               },
             },
           },
-          weight,
+          origin.weight,
         ],
       }),
     }),
   };
 }
 
-function transferMultiAsset<Assets>() {
-  return {};
+function transferMultiAsset<Assets>(config: MoonChainConfig) {
+  return {
+    successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
+      params: (
+        origin: ChainConfig,
+        asset: AssetConfig<Assets>,
+      ): XTokensTransferMultiAssetExtrinsic<Assets> => ({
+        pallet: Pallet.XTokens,
+        extrinsic: XTokensExtrinsic.TransferMultiAsset,
+        successEvent: event,
+        getParams: (account, amount) => [
+          {
+            V1: {
+              id: {
+                Concrete: {
+                  parents: 1,
+                  interior: {
+                    X2: [
+                      {
+                        Parachain: origin.parachainId,
+                      },
+                      {
+                        GeneralKey: asset.originSymbol,
+                      },
+                    ],
+                  },
+                },
+              },
+              fun: {
+                Fungible: amount,
+              },
+            },
+          },
+          {
+            V1: {
+              parents: 1,
+              interior: {
+                X2: [
+                  {
+                    Parachain: config.parachainId,
+                  },
+                  {
+                    AccountKey20: {
+                      network: 'Any',
+                      key: account,
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          origin.weight,
+        ],
+      }),
+    }),
+  };
 }
 
-function transferMultiCurrencies<Assets>() {
-  return {};
+function transferMultiCurrencies<Assets>(config: MoonChainConfig) {
+  return {
+    successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
+      params: (
+        origin: ChainConfig,
+        asset: AssetConfig<Assets>,
+        feeAsset: AssetConfig<Assets>,
+      ): XTokensTransferMultiCurrenciesExtrinsic<Assets> => ({
+        pallet: Pallet.XTokens,
+        extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
+        successEvent: event,
+        getParams: (account, amount, fee = 0n) => [
+          [
+            [
+              {
+                Token: asset.originSymbol,
+              },
+              amount,
+            ],
+            [
+              {
+                Token: feeAsset.originSymbol,
+              },
+              fee,
+            ],
+          ],
+          1,
+          {
+            V1: {
+              parents: 1,
+              interior: {
+                X2: [
+                  {
+                    Parachain: config.parachainId,
+                  },
+                  {
+                    AccountKey20: {
+                      network: 'Any',
+                      key: account,
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          origin.weight,
+        ],
+      }),
+    }),
+  };
 }

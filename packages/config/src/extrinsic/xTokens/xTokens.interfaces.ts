@@ -29,6 +29,7 @@ export interface XTokensBaseExtrinsic<
   getParams: (
     account: string,
     amount: bigint,
+    fee?: bigint,
   ) => XTokensParamsByExtrinsic<Assets>[Extrinsic];
 }
 
@@ -36,12 +37,6 @@ export interface XTokensParamsByExtrinsic<Assets> {
   [XTokensExtrinsic.Transfer]: XTokenTransferExtrinsicParams<Assets>;
   [XTokensExtrinsic.TransferMultiAsset]: XTokensTransferMultiAssetExtrinsicParams<Assets>;
   [XTokensExtrinsic.TransferMultiCurrencies]: XTokensTransferMultiCurrenciesExtrinsicParams<Assets>;
-}
-
-export interface XTokensTransferOptions<Assets> {
-  token: XTokenTransferExtrinsicParamsToken<Assets>;
-  weight: number;
-  parachainId: number;
 }
 
 export type XTokenTransferExtrinsicParams<Assets> = [
