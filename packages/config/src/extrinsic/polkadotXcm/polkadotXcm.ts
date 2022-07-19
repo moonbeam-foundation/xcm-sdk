@@ -1,4 +1,4 @@
-import { ChainConfig, MoonChainConfig } from '../../constants';
+import { AssetConfig, ChainConfig, MoonChainConfig } from '../../constants';
 import {
   Pallet,
   PolkadotXcmExtrinsic,
@@ -8,34 +8,103 @@ import { PolkadotXcmAssetParam } from '../extrinsic.interfaces';
 import { PolkadotXcmPallet } from './polkadotXcm.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function polkadotXcm(config: MoonChainConfig) {
+export function polkadotXcm<Assets>(config: MoonChainConfig) {
   return {
-    limitedReserveTransferAssets: () => limitedReserveTransferAssets(config),
+    limitedReserveTransferAssets: () =>
+      limitedReserveTransferAssets<Assets>(config),
     limitedReserveWithdrawAssets: () => limitedReserveWithdrawAssets(config),
   };
 }
 
-function limitedReserveTransferAssets(config: MoonChainConfig) {
+function limitedReserveTransferAssets<Assets>(config: MoonChainConfig) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      params: (origin: ChainConfig) => ({
-        V0: () =>
-          createExtrinsic(event, config, origin, (amount) => ({
-            V0: [
-              {
-                ConcreteFungible: {
-                  id: 'Null',
-                  amount,
+      params: (origin: ChainConfig) => {
+        const createExtrinsic = getCreateExtrinsic(
+          PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
+          event,
+          config,
+          origin,
+        );
+
+        return {
+          V0: () =>
+            createExtrinsic((amount) => ({
+              V0: [
+                {
+                  ConcreteFungible: {
+                    id: 'Null',
+                    amount,
+                  },
                 },
-              },
-            ],
-          })),
-        V1: () => ({
-          here: () => ({}),
-          X1: () => ({}),
-          X2: () => ({}),
-        }),
-      }),
+              ],
+            })),
+          V1: () => ({
+            here: () =>
+              createExtrinsic((amount) => ({
+                V1: [
+                  {
+                    id: {
+                      Concrete: {
+                        parents: 0,
+                        interior: 'Here',
+                      },
+                    },
+                    fun: {
+                      Fungible: amount,
+                    },
+                  },
+                ],
+              })),
+            X1: () =>
+              createExtrinsic((amount) => ({
+                V1: [
+                  {
+                    id: {
+                      Concrete: {
+                        parents: 0,
+                        interior: {
+                          X1: {
+                            PalletInstance: 5,
+                          },
+                        },
+                      },
+                    },
+                    fun: {
+                      Fungible: amount,
+                    },
+                  },
+                ],
+              })),
+            X2: (palletInstance: number, asset: AssetConfig<Assets>) =>
+              createExtrinsic((amount) => ({
+                V1: [
+                  {
+                    id: {
+                      Concrete: {
+                        parents: 0,
+                        interior: {
+                          X2: [
+                            {
+                              PalletInstance: palletInstance,
+                            },
+                            {
+                              // TODO: throw an error if id is not defined or fix types
+                              GeneralIndex: asset.originAssetId || 0,
+                            },
+                          ],
+                        },
+                      },
+                    },
+                    fun: {
+                      Fungible: amount,
+                    },
+                  },
+                ],
+              })),
+          }),
+        };
+      },
     }),
   };
 }
@@ -43,25 +112,59 @@ function limitedReserveTransferAssets(config: MoonChainConfig) {
 function limitedReserveWithdrawAssets(config: MoonChainConfig) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      params: (): PolkadotXcmPallet => ({
-        pallet: Pallet.PolkadotXcm,
-        extrinsic: PolkadotXcmExtrinsic.LimitedReserveWithdrawAssets,
-        successEvent: event,
-        getParams: (account, amount) => [],
-      }),
+      params: (origin: ChainConfig) => {
+        const createExtrinsic = getCreateExtrinsic(
+          PolkadotXcmExtrinsic.LimitedReserveWithdrawAssets,
+          event,
+          config,
+          origin,
+        );
+
+        return {
+          V1: () => ({
+            X2: (palletInstance: number) =>
+              createExtrinsic((amount) => ({
+                V1: [
+                  {
+                    id: {
+                      Concrete: {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              PalletInstance: palletInstance,
+                            },
+                            {
+                              Parachain: config.parachainId,
+                            },
+                          ],
+                        },
+                      },
+                    },
+                    fun: {
+                      Fungible: amount,
+                    },
+                  },
+                ],
+              })),
+          }),
+        };
+      },
     }),
   };
 }
 
-function createExtrinsic(
+function getCreateExtrinsic(
+  extrinsic: PolkadotXcmExtrinsic,
   event: PolkadotXcmExtrinsicSuccessEvent,
   config: MoonChainConfig,
   origin: ChainConfig,
-  getAsset: (amount: bigint) => PolkadotXcmAssetParam,
-): PolkadotXcmPallet {
-  return {
+) {
+  return (
+    getAsset: (amount: bigint) => PolkadotXcmAssetParam,
+  ): PolkadotXcmPallet => ({
     pallet: Pallet.PolkadotXcm,
-    extrinsic: PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
+    extrinsic,
     successEvent: event,
     getParams: (account, amount) => [
       {
@@ -93,5 +196,5 @@ function createExtrinsic(
         Limited: origin.weight,
       },
     ],
-  };
+  });
 }
