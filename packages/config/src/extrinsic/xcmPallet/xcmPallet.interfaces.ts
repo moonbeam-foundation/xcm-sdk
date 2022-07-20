@@ -1,13 +1,6 @@
-import {
-  Pallet,
-  PolkadotXcmExtrinsic,
-  PolkadotXcmExtrinsicSuccessEvent,
-} from '../extrinsic.constants';
-import { PolkadotXcmPalletParams } from '../extrinsic.interfaces';
+import { Pallet } from '../extrinsic.constants';
+import { PolkadotXcmPallet } from '../polkadotXcm';
 
-export interface XcmPallet {
+export interface XcmPallet extends Omit<PolkadotXcmPallet, 'pallet'> {
   pallet: Pallet.XcmPallet;
-  extrinsic: PolkadotXcmExtrinsic.LimitedReserveTransferAssets;
-  successEvent: PolkadotXcmExtrinsicSuccessEvent;
-  params: PolkadotXcmPalletParams;
 }
