@@ -1,6 +1,6 @@
 import { ChainConfig, MoonChainConfig } from '../../constants';
 import {
-  Pallet,
+  XcmPallet,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
 } from '../extrinsic.constants';
@@ -37,7 +37,7 @@ function limitedReserveTransferAssets(config: MoonChainConfig) {
               },
             ],
           })),
-          pallet: Pallet.XcmPallet,
+          pallet: XcmPallet.XcmPallet,
         };
       },
     }),

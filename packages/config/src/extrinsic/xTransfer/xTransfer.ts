@@ -1,5 +1,5 @@
 import { ChainConfig, MoonChainConfig } from '../../constants';
-import { Pallet } from '../extrinsic.constants';
+import { XcmPallet } from '../extrinsic.constants';
 import {
   XTransferExtrinsic,
   XTransferExtrinsicSuccessEvent,
@@ -60,7 +60,7 @@ export function getCreateExtrinsic(
   origin: ChainConfig,
 ) {
   return (getConcrete: () => XTransferConcreteParam): XTransferPallet => ({
-    pallet: Pallet.XTransfer,
+    pallet: XcmPallet.XTransfer,
     extrinsic,
     successEvent: event,
     getParams: (account, amount) => [

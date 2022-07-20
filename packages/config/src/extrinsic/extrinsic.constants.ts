@@ -1,4 +1,4 @@
-export enum Pallet {
+export enum XcmPallet {
   PolkadotXcm = 'polkadotXcm',
   XcmPallet = 'xcmPallet',
   XTokens = 'xTokens',

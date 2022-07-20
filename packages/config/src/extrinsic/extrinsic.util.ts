@@ -1,6 +1,6 @@
 import { ChainConfig, MoonChainConfig } from '../constants';
 import {
-  Pallet,
+  XcmPallet,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
 } from './extrinsic.constants';
@@ -16,7 +16,7 @@ export function getCreateExtrinsic(
   return (
     getAsset: (amount: bigint) => PolkadotXcmAssetParam,
   ): PolkadotXcmPallet => ({
-    pallet: Pallet.PolkadotXcm,
+    pallet: XcmPallet.PolkadotXcm,
     extrinsic,
     successEvent: event,
     getParams: (account, amount) => [

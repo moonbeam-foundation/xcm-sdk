@@ -1,5 +1,5 @@
 import { AssetConfig, ChainConfig, MoonChainConfig } from '../../constants';
-import { Pallet } from '../extrinsic.constants';
+import { XcmPallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,
   XTokensExtrinsicSuccessEvent,
@@ -27,7 +27,7 @@ function transfer<Assets>(config: MoonChainConfig) {
         origin: ChainConfig,
         token: XTokenTransferExtrinsicParamsToken<Assets>,
       ): XTokensTransferExtrinsic<Assets> => ({
-        pallet: Pallet.XTokens,
+        pallet: XcmPallet.XTokens,
         extrinsic: XTokensExtrinsic.Transfer,
         successEvent: event,
         getParams: (account, amount) => [
@@ -65,7 +65,7 @@ function transferMultiAsset<Assets>(config: MoonChainConfig) {
         origin: ChainConfig,
         asset: AssetConfig<Assets>,
       ): XTokensTransferMultiAssetExtrinsic<Assets> => ({
-        pallet: Pallet.XTokens,
+        pallet: XcmPallet.XTokens,
         extrinsic: XTokensExtrinsic.TransferMultiAsset,
         successEvent: event,
         getParams: (account, amount) => [
@@ -124,7 +124,7 @@ function transferMultiCurrencies<Assets>(config: MoonChainConfig) {
         asset: AssetConfig<Assets>,
         feeAsset: AssetConfig<Assets>,
       ): XTokensTransferMultiCurrenciesExtrinsic<Assets> => ({
-        pallet: Pallet.XTokens,
+        pallet: XcmPallet.XTokens,
         extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
         successEvent: event,
         getParams: (account, amount, fee = 0n) => [
