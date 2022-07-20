@@ -1,7 +1,7 @@
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 
-export type BalanceConfig<Assets extends string> =
+export type BalanceConfig<Assets> =
   | SystemBalanceConfig
   | AssetsBalanceConfig
   | TokensBalanceConfig<Assets>;
