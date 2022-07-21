@@ -1,4 +1,4 @@
-import { AssetConfig, ChainConfig, MoonChainConfig } from '../../constants';
+import { AssetConfig, ChainConfig, MoonChainConfig } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,

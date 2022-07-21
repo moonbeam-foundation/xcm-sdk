@@ -1,3 +1,4 @@
+import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 
@@ -21,10 +22,15 @@ export interface AssetsBalanceConfig {
   getParams: (account: string) => [number, string];
 }
 
+export interface TokensPalletAccountData {
+  free: u128;
+  reserved: u128;
+  frozen: u128;
+}
+
 export interface TokensBalanceConfig<Assets> {
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
-  path: ['free'];
   getParams: (account: string) => [
     string,
     (
@@ -34,6 +40,7 @@ export interface TokensBalanceConfig<Assets> {
       | { ForeignAsset: number }
     ),
   ];
+  calc: (data: TokensPalletAccountData) => bigint;
 }
 
 export interface MinBalanceConfig {

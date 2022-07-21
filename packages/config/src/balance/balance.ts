@@ -5,6 +5,7 @@ import {
   AssetsBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
+  TokensPalletAccountData,
 } from './balance.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -53,12 +54,13 @@ function tokens<Asset>(
   return {
     pallet: BalancePallet.Tokens,
     function: BalanceFunction.Accounts,
-    path: ['free'],
     getParams: (account: string) => [
       account,
       Number.isInteger(asset)
         ? { ForeignAsset: asset as number }
         : { Token: asset as Asset },
     ],
+    calc: ({ free, frozen }: TokensPalletAccountData) =>
+      BigInt(free.sub(frozen).toString()),
   };
 }
