@@ -1,27 +1,27 @@
-import { AssetConfig, ChainConfig, MoonChainConfig } from '../../constants';
+import { AssetConfig, ChainConfig, MoonChainConfig } from '../../interfaces';
 import {
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
-} from '../extrinsic.constants';
-import { getCreateExtrinsic } from '../extrinsic.util';
+} from './polkadotXcm.constants';
+import { getCreateExtrinsic } from './polkadotXcm.util';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function polkadotXcm<Assets>(config: MoonChainConfig) {
+export function polkadotXcm<Assets>(chain: MoonChainConfig) {
   return {
     limitedReserveTransferAssets: () =>
-      limitedReserveTransferAssets<Assets>(config),
-    limitedReserveWithdrawAssets: () => limitedReserveWithdrawAssets(config),
+      limitedReserveTransferAssets<Assets>(chain),
+    limitedReserveWithdrawAssets: () => limitedReserveWithdrawAssets(chain),
   };
 }
 
-function limitedReserveTransferAssets<Assets>(config: MoonChainConfig) {
+function limitedReserveTransferAssets<Assets>(chain: MoonChainConfig) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      params: (origin: ChainConfig) => {
+      origin: (origin: ChainConfig) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
           event,
-          config,
+          chain,
           origin,
         );
 
@@ -107,14 +107,14 @@ function limitedReserveTransferAssets<Assets>(config: MoonChainConfig) {
   };
 }
 
-function limitedReserveWithdrawAssets(config: MoonChainConfig) {
+function limitedReserveWithdrawAssets(chain: MoonChainConfig) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      params: (origin: ChainConfig) => {
+      origin: (origin: ChainConfig) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveWithdrawAssets,
           event,
-          config,
+          chain,
           origin,
         );
 
@@ -133,7 +133,7 @@ function limitedReserveWithdrawAssets(config: MoonChainConfig) {
                               PalletInstance: palletInstance,
                             },
                             {
-                              Parachain: config.parachainId,
+                              Parachain: chain.parachainId,
                             },
                           ],
                         },

@@ -2,9 +2,8 @@ import { DepositConfig } from '../deposit';
 import { AssetConfig, ChainConfig, MoonChainConfig } from '../interfaces';
 import { WithdrawConfig } from '../withdraw';
 
-export type ChainXcmConfigs<Asset extends string> = Record<
-  Asset,
-  XcmConfig<Asset>
+export type ChainXcmConfigs<Asset extends string> = Readonly<
+  Record<Asset, XcmConfig<Asset>>
 >;
 
 export interface XcmConfig<Asset> {

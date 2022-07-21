@@ -1,4 +1,4 @@
-import { ChainConfig, MoonChainConfig } from '../../constants';
+import { ChainConfig, MoonChainConfig } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTransferExtrinsic,
@@ -10,20 +10,20 @@ import {
 } from './xTransfer.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xTransfer(config: MoonChainConfig) {
+export function xTransfer(chain: MoonChainConfig) {
   return {
-    transfer: () => transfer(config),
+    transfer: () => transfer(chain),
   };
 }
 
-function transfer(config: MoonChainConfig) {
+function transfer(chain: MoonChainConfig) {
   return {
     successEvent: (event: XTransferExtrinsicSuccessEvent) => ({
       params: (origin: ChainConfig) => {
         const createExtrinsic = getCreateExtrinsic(
           XTransferExtrinsic.Transfer,
           event,
-          config,
+          chain,
           origin,
         );
 
@@ -39,7 +39,7 @@ function transfer(config: MoonChainConfig) {
               interior: {
                 X2: [
                   {
-                    Parachain: config.parachainId,
+                    Parachain: chain.parachainId,
                   },
                   {
                     PalletInstance: palletInstance,
@@ -56,7 +56,7 @@ function transfer(config: MoonChainConfig) {
 function getCreateExtrinsic(
   extrinsic: XTransferExtrinsic,
   event: XTransferExtrinsicSuccessEvent,
-  config: MoonChainConfig,
+  chain: MoonChainConfig,
   origin: ChainConfig,
 ) {
   return (getConcrete: () => XTransferConcreteParam): XTransferPallet => ({
@@ -77,7 +77,7 @@ function getCreateExtrinsic(
         interior: {
           X2: [
             {
-              Parachain: config.parachainId,
+              Parachain: chain.parachainId,
             },
             {
               AccountKey20: {
