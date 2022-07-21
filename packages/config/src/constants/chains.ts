@@ -1,15 +1,11 @@
-// TODO: move to interfaces
-export interface ChainConfig {
-  name: string;
-  ws: string;
-  weight: number;
-  parachainId: number;
-}
-export interface MoonChainConfig {
-  name: string;
-  ws: string;
-  parachainId: number;
-}
+// eslint-disable-next-line import/no-cycle
+import {
+  ChainConfig,
+  MoonbaseChains,
+  MoonbeamChains,
+  MoonChainConfig,
+  MoonriverChains,
+} from '../interfaces';
 
 export enum MoonChain {
   MoonbaseAlpha = 'MoonbaseAlpha',
@@ -64,7 +60,6 @@ export enum Chain {
   Statemine = 'Statemine',
 }
 
-export type MoonbaseChains = typeof MOONBASE_CHAINS[number];
 export const MOONBASE_CHAINS = <const>[
   Chain.AlphanetRelay,
   Chain.AstarAlphanet,
@@ -163,7 +158,6 @@ export const MOONBASE_CHINS_CONFIGS: Readonly<
   },
 };
 
-export type MoonriverChains = typeof MOONRIVER_CHAINS[number];
 export const MOONRIVER_CHAINS = <const>[
   Chain.Bifrost,
   Chain.Calamari,
@@ -248,13 +242,12 @@ export const MOONRIVER_CHINS_CONFIGS: Readonly<
   },
 };
 
-export type MoonbeamChains = typeof MOONBEAM_CHAINS[number];
 export const MOONBEAM_CHAINS = <const>[
   Chain.Acala,
   Chain.Parallel,
   Chain.Polkadot,
 ];
-export const MOONRBEAM_CHINS_CONFIGS: Readonly<
+export const MOONBEAM_CHINS_CONFIGS: Readonly<
   Record<MoonbeamChains, ChainConfig>
 > = {
   [Chain.Acala]: {

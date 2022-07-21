@@ -1,7 +1,7 @@
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 import {
-  AssetMinBalanceConfig,
+  MinBalanceConfig,
   AssetsBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
@@ -27,7 +27,7 @@ function assets(asset: number): AssetsBalanceConfig {
   };
 }
 
-function min(asset: number): AssetMinBalanceConfig {
+function min(asset: number): MinBalanceConfig {
   return {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Asset,

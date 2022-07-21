@@ -36,7 +36,7 @@ export interface TokensBalanceConfig<Assets> {
   ];
 }
 
-export interface AssetMinBalanceConfig {
+export interface MinBalanceConfig {
   pallet: BalancePallet.Assets;
   function: BalanceFunction.Asset;
   path: ['minBalance'];

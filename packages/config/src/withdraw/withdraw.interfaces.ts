@@ -1,5 +1,5 @@
 import { BalanceConfig } from '../balance';
-import { ChainConfig } from '../constants';
+import { ChainConfig } from '../interfaces';
 
 export type WithdrawConfig<Asset> = WithdrawXTokensConfig<Asset>;
 

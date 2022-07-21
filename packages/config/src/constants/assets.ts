@@ -1,16 +1,10 @@
-// TODO: move to interfaces
-export interface AssetConfig<Asset> {
-  id: string;
-  /**
-   * id -> erc20Id
-   * `0xffffffff${BigInt(id).toString(16).padStart(32, '0')}`
-   * exceptions are native tokens, for them we use
-   * Erc20BalancesPrecompile 0x0000000000000000000000000000000000000802
-   */
-  erc20Id: string;
-  originSymbol: Asset;
-  originAssetId?: number;
-}
+// eslint-disable-next-line import/no-cycle
+import {
+  AssetConfig,
+  MoonbaseAssets,
+  MoonbeamAssets,
+  MoonriverAssets,
+} from '../interfaces';
 
 export enum Assets {
   ACA = 'ACA',
@@ -42,7 +36,6 @@ export enum Assets {
   USDT = 'USDT',
 }
 
-export type MoonbaseAssets = typeof MOONBASE_ASSETS[number];
 export const MOONBASE_ASSETS = <const>[
   Assets.ASTR,
   Assets.BNC,
@@ -146,7 +139,6 @@ export const MOONBASE_ASSETS_CONFIGS: Readonly<
   },
 };
 
-export type MoonriverAssets = typeof MOONRIVER_ASSETS[number];
 export const MOONRIVER_ASSETS = <const>[
   Assets.AUSD,
   Assets.BNC,
@@ -246,7 +238,6 @@ export const MOONRIVER_ASSETS_CONFIGS: Readonly<
   },
 };
 
-export type MoonbeamAssets = typeof MOONBEAM_ASSETS[number];
 export const MOONBEAM_ASSETS = <const>[
   Assets.ACA,
   Assets.AUSD,
