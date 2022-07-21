@@ -1,11 +1,13 @@
-import { ChainConfig, MoonChainConfig } from '../constants';
+import { ChainConfig, MoonChainConfig } from '../../constants';
+import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
-  XcmPallet,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
-} from './extrinsic.constants';
-import { PolkadotXcmAssetParam } from './extrinsic.interfaces';
-import { PolkadotXcmPallet } from './polkadotXcm/polkadotXcm.interfaces';
+} from './polkadotXcm.constants';
+import {
+  PolkadotXcmAssetParam,
+  PolkadotXcmPallet,
+} from './polkadotXcm.interfaces';
 
 export function getCreateExtrinsic(
   extrinsic: PolkadotXcmExtrinsic,
@@ -16,7 +18,7 @@ export function getCreateExtrinsic(
   return (
     getAsset: (amount: bigint) => PolkadotXcmAssetParam,
   ): PolkadotXcmPallet => ({
-    pallet: XcmPallet.PolkadotXcm,
+    pallet: ExtrinsicPallet.PolkadotXcm,
     extrinsic,
     successEvent: event,
     getParams: (account, amount) => [

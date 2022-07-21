@@ -6,7 +6,7 @@ import {
 } from './withdraw.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function withdraw<Asset>() {
+export function createWithdrawBuilder<Asset>() {
   return {
     xTokens: (options: WithdrawXTokensOptions<Asset>) =>
       xTokens<Asset>(options),

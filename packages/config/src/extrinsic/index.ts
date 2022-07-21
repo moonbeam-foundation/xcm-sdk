@@ -1,14 +1,9 @@
-import { MoonChainConfig } from '../constants';
-import { polkadotXcm } from './polkadotXcm';
-import { xcmPallet } from './xcmPallet';
-import { xTokens } from './xTokens';
-import { xTransfer } from './xTransfer';
+export * from './polkadotXcm';
+export * from './xcmPallet';
+export * from './xTokens';
+export * from './xTransfer';
 
-export function createExtrinsicBuilder<Assets>(config: MoonChainConfig) {
-  return {
-    polkadotXcm: () => polkadotXcm(config),
-    xcmPallet: () => xcmPallet(config),
-    xTokens: () => xTokens<Assets>(config),
-    xTransfer: () => xTransfer(config),
-  };
-}
+export * from './common.interfaces';
+export * from './extrinsic';
+export * from './extrinsic.constants';
+export * from './extrinsic.interfaces';

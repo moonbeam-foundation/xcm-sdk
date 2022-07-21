@@ -8,7 +8,7 @@ import {
 } from './balance.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function balance<Asset>() {
+export function createBalanceBuilder<Asset>() {
   return {
     assets,
     min,

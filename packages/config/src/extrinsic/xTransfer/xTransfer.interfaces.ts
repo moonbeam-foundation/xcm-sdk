@@ -1,12 +1,12 @@
-import { XcmPallet } from '../extrinsic.constants';
-import { Parents } from '../extrinsic.interfaces';
+import { ExtrinsicPallet } from '../extrinsic.constants';
+import { Parents } from '../common.interfaces';
 import {
   XTransferExtrinsic,
   XTransferExtrinsicSuccessEvent,
 } from './xTransfer.constants';
 
 export interface XTransferPallet {
-  pallet: XcmPallet.XTransfer;
+  pallet: ExtrinsicPallet.XTransfer;
   extrinsic: XTransferExtrinsic;
   successEvent: XTransferExtrinsicSuccessEvent;
   getParams: (account: string, amount: bigint) => XTransferPalletParams;

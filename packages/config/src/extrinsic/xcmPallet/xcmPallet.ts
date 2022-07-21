@@ -1,10 +1,10 @@
 import { ChainConfig, MoonChainConfig } from '../../constants';
+import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
-  XcmPallet,
+  getCreateExtrinsic,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
-} from '../extrinsic.constants';
-import { getCreateExtrinsic } from '../extrinsic.util';
+} from '../polkadotXcm';
 import { XcmPallet } from './xcmPallet.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -26,7 +26,6 @@ function limitedReserveTransferAssets(config: MoonChainConfig) {
         );
 
         return {
-          // TODO: is there better way?
           ...createExtrinsic((amount) => ({
             V0: [
               {
@@ -37,7 +36,7 @@ function limitedReserveTransferAssets(config: MoonChainConfig) {
               },
             ],
           })),
-          pallet: XcmPallet.XcmPallet,
+          pallet: ExtrinsicPallet.XcmPallet,
         };
       },
     }),
