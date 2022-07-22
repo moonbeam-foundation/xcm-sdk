@@ -60,6 +60,14 @@ export enum Chain {
   Statemine = 'Statemine',
 }
 
+export const DEV_ID = {
+  [Chain.AstarAlphanet]: 100,
+  [Chain.BasiliskAlphanet]: 0,
+  [Chain.CalamariAlphanet]: 8,
+  [Chain.KaruraAlphanet]: 0,
+  [Chain.ParallelAlphanet]: 113,
+};
+
 export const MOONBASE_CHAINS = <const>[
   Chain.AlphanetRelay,
   Chain.AstarAlphanet,
