@@ -242,6 +242,11 @@ export const MOONRIVER_CHINS_CONFIGS: Readonly<
   },
 };
 
+export const GLMR_ID = {
+  [Chain.Acala]: 0,
+  [Chain.Parallel]: 114,
+};
+
 export const MOONBEAM_CHAINS = <const>[
   Chain.Acala,
   Chain.Parallel,
