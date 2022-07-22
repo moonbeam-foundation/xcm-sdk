@@ -158,6 +158,12 @@ export const MOONBASE_CHINS_CONFIGS: Readonly<
   },
 };
 
+export const MOVR_ID = {
+  [Chain.Karura]: 3,
+  [Chain.Khala]: 6,
+  [Chain.Parallel]: 113,
+};
+
 export const MOONRIVER_CHAINS = <const>[
   Chain.Bifrost,
   Chain.Calamari,

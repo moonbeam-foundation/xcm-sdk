@@ -1,4 +1,4 @@
-import { ChainConfig, MoonChainConfig } from '../../constants';
+import { ChainConfig, MoonChainConfig } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   PolkadotXcmExtrinsic,

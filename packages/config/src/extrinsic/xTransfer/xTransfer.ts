@@ -19,7 +19,7 @@ export function xTransfer(chain: MoonChainConfig) {
 function transfer(chain: MoonChainConfig) {
   return {
     successEvent: (event: XTransferExtrinsicSuccessEvent) => ({
-      params: (origin: ChainConfig) => {
+      origin: (origin: ChainConfig) => {
         const createExtrinsic = getCreateExtrinsic(
           XTransferExtrinsic.Transfer,
           event,

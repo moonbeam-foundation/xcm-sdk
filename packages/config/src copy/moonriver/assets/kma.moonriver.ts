@@ -24,7 +24,7 @@ export const kmaConfig: XcmConfig<Assets> = {
             MantaCurrency: 1,
           },
           '%plankAmount%',
-          //dest
+          // dest
           {
             V1: {
               parents: 1,
