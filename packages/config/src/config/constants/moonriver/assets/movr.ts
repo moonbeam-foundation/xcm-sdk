@@ -1,5 +1,6 @@
 import { Assets, Chain, MOVR_ID } from '../../../../constants';
 import {
+  PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../../extrinsic';
@@ -19,9 +20,12 @@ const bifrost = chains[Chain.Bifrost];
 const karura = chains[Chain.Karura];
 const khala = chains[Chain.Khala];
 const parallel = chains[Chain.Parallel];
+const shiden = chains[Chain.Shiden];
+
 const karuraMovrId = MOVR_ID[Chain.Karura];
 const khalaMovrId = MOVR_ID[Chain.Khala];
 const parallelMovrId = MOVR_ID[Chain.Parallel];
+const shidenMovrId = MOVR_ID[Chain.Shiden];
 
 export const MOVR: XcmConfig<MoonriverAssets> = {
   asset,
@@ -75,6 +79,18 @@ export const MOVR: XcmConfig<MoonriverAssets> = {
         .origin(parallel)
         .asset(parallelMovrId),
     },
+    {
+      origin: shiden,
+      balance: balance.assets(shidenMovrId),
+      extrinsicFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .polkadotXcm()
+        .limitedReserveWithdrawAssets()
+        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+        .origin(shiden)
+        .V1()
+        .X2(10),
+    },
   ],
   withdraw: [
     withdraw.xTokens({
@@ -99,6 +115,11 @@ export const MOVR: XcmConfig<MoonriverAssets> = {
       balance: balance.assets(parallelMovrId),
       destination: parallel,
       feePerWeight: 0.48,
+    }),
+    withdraw.xTokens({
+      balance: balance.assets(shidenMovrId),
+      destination: shiden,
+      feePerWeight: 50_000,
     }),
   ],
 };
