@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/no-cycle
 import {
+  Chain,
   MOONBASE_ASSETS,
   MOONBASE_CHAINS,
   MOONBEAM_ASSETS,
   MOONBEAM_CHAINS,
+  MoonChain,
   MOONRIVER_ASSETS,
   MOONRIVER_CHAINS,
 } from './constants';
@@ -26,11 +28,16 @@ export type MoonriverAssets = typeof MOONRIVER_ASSETS[number];
 export type MoonbeamAssets = typeof MOONBEAM_ASSETS[number];
 
 export interface MoonChainConfig {
+  chain: MoonChain;
   name: string;
   ws: string;
   parachainId: number;
 }
-export interface ChainConfig extends MoonChainConfig {
+export interface ChainConfig {
+  chain: Chain;
+  name: string;
+  ws: string;
+  parachainId: number;
   weight: number;
 }
 
