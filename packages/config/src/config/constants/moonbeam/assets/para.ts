@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbeamAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbeam.common';
 
-const asset = assets[Assets.PARA];
+const asset = assets[Asset.PARA];
 const origin = chains[Chain.Parallel];
 
 export const PARA: XcmConfig<MoonbeamAssets> = {

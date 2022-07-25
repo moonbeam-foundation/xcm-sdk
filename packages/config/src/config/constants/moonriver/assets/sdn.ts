@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonriver.common';
 
-const asset = assets[Assets.SDN];
+const asset = assets[Asset.SDN];
 const origin = chains[Chain.Shiden];
 
 export const SDN: XcmConfig<MoonriverAssets> = {

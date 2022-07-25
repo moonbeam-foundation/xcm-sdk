@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbaseAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbase.common';
 
-const asset = assets[Assets.HKO];
+const asset = assets[Asset.HKO];
 const origin = chains[Chain.ParallelAlphanet];
 
 export const HKO: XcmConfig<MoonbaseAssets> = {

@@ -1,4 +1,4 @@
-import { Assets, Chain, DEV_ID } from '../../../../constants';
+import { Asset, Chain, DEV_ID } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbaseAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbase.common';
 
-const asset = assets[Assets.BSX];
+const asset = assets[Asset.BSX];
 const origin = chains[Chain.BasiliskAlphanet];
 const basiliskDevId = DEV_ID[Chain.BasiliskAlphanet];
 

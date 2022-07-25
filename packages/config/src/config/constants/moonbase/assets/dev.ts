@@ -1,4 +1,4 @@
-import { Assets, Chain, DEV_ID } from '../../../../constants';
+import { Asset, Chain, DEV_ID } from '../../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
@@ -14,7 +14,7 @@ import {
   withdraw,
 } from '../moonbase.common';
 
-const asset = assets[Assets.DEV];
+const asset = assets[Asset.DEV];
 const karura = chains[Chain.KaruraAlphanet];
 const calamari = chains[Chain.CalamariAlphanet];
 const astar = chains[Chain.AstarAlphanet];

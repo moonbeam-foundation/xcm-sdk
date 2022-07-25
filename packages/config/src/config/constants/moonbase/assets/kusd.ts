@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbaseAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,8 +10,8 @@ import {
   withdraw,
 } from '../moonbase.common';
 
-const asset = assets[Assets.KUSD];
-const feeAsset = assets[Assets.KAR];
+const asset = assets[Asset.KUSD];
+const feeAsset = assets[Asset.KAR];
 const origin = chains[Chain.KaruraAlphanet];
 
 export const KUSD: XcmConfig<MoonbaseAssets> = {

@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbeamAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbeam.common';
 
-const asset = assets[Assets.DOT];
+const asset = assets[Asset.DOT];
 const origin = chains[Chain.Polkadot];
 
 export const DOT: XcmConfig<MoonbeamAssets> = {

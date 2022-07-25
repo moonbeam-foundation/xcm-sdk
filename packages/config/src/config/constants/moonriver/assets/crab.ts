@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonriver.common';
 
-const asset = assets[Assets.CRAB];
+const asset = assets[Asset.CRAB];
 const origin = chains[Chain.Darwinia];
 
 export const CRAB: XcmConfig<MoonriverAssets> = {

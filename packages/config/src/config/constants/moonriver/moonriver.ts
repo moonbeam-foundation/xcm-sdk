@@ -1,4 +1,4 @@
-import { Assets } from '../../../constants';
+import { Asset } from '../../../constants';
 import { MoonriverAssets } from '../../../interfaces';
 import { ChainXcmConfigs } from '../../config.interfaces';
 
@@ -20,20 +20,20 @@ import { TEER } from './assets/teer';
 import { USDT } from './assets/usdt';
 
 export const MOONRIVER_CONFIGS: ChainXcmConfigs<MoonriverAssets> = {
-  [Assets.AUSD]: AUSD,
-  [Assets.BNC]: BNC,
-  [Assets.CRAB]: CRAB,
-  [Assets.CSM]: CSM,
-  [Assets.HKO]: HKO,
-  [Assets.KAR]: KAR,
-  [Assets.KBTC]: KBTC,
-  [Assets.KINT]: KINT,
-  [Assets.KMA]: KMA,
-  [Assets.KSM]: KSM,
-  [Assets.MOVR]: MOVR,
-  [Assets.PHA]: PHA,
-  [Assets.RMRK]: RMRK,
-  [Assets.SDN]: SDN,
-  [Assets.TEER]: TEER,
-  [Assets.USDT]: USDT,
+  [Asset.AUSD]: AUSD,
+  [Asset.BNC]: BNC,
+  [Asset.CRAB]: CRAB,
+  [Asset.CSM]: CSM,
+  [Asset.HKO]: HKO,
+  [Asset.KAR]: KAR,
+  [Asset.KBTC]: KBTC,
+  [Asset.KINT]: KINT,
+  [Asset.KMA]: KMA,
+  [Asset.KSM]: KSM,
+  [Asset.MOVR]: MOVR,
+  [Asset.PHA]: PHA,
+  [Asset.RMRK]: RMRK,
+  [Asset.SDN]: SDN,
+  [Asset.TEER]: TEER,
+  [Asset.USDT]: USDT,
 };

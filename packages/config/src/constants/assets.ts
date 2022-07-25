@@ -6,7 +6,7 @@ import {
   MoonriverAssets,
 } from '../interfaces';
 
-export enum Assets {
+export enum Asset {
   ACA = 'ACA',
   ASTR = 'ASTR',
   AUSD = 'AUSD',
@@ -38,246 +38,246 @@ export enum Assets {
 }
 
 export const MOONBASE_ASSETS = <const>[
-  Assets.ASTR,
-  Assets.BNC,
-  Assets.BSX,
-  Assets.CRU,
-  Assets.DEV,
-  Assets.HKO,
-  Assets.KAR,
-  Assets.KBTC,
-  Assets.KINT,
-  Assets.KMA,
-  Assets.KUSD,
-  Assets.LIT,
-  Assets.PARING,
-  Assets.PHA,
-  Assets.TEER,
-  Assets.UNIT,
+  Asset.ASTR,
+  Asset.BNC,
+  Asset.BSX,
+  Asset.CRU,
+  Asset.DEV,
+  Asset.HKO,
+  Asset.KAR,
+  Asset.KBTC,
+  Asset.KINT,
+  Asset.KMA,
+  Asset.KUSD,
+  Asset.LIT,
+  Asset.PARING,
+  Asset.PHA,
+  Asset.TEER,
+  Asset.UNIT,
 ];
 export const MOONBASE_ASSETS_CONFIGS: Readonly<
   Record<MoonbaseAssets, AssetConfig<MoonbaseAssets>>
 > = {
-  [Assets.ASTR]: {
+  [Asset.ASTR]: {
     id: '16797826370226091782818345603793389938',
     erc20Id: '0xffffffff0ca324c842330521525e7de111f38972',
-    originSymbol: Assets.ASTR,
+    originSymbol: Asset.ASTR,
   },
-  [Assets.BNC]: {
+  [Asset.BNC]: {
     id: '42109858202732255156900361585267092733',
     erc20Id: '0xffffffff1fae104dc4c134306bca8e2e1990acfd',
-    originSymbol: Assets.BNC,
+    originSymbol: Asset.BNC,
   },
-  [Assets.BSX]: {
+  [Asset.BSX]: {
     id: '102433417954722588084020852587557555194',
     erc20Id: '0xffffffff4d0ff56d0097bbd14920eac488540bfa',
-    originSymbol: Assets.BSX,
+    originSymbol: Asset.BSX,
   },
-  [Assets.CRU]: {
+  [Asset.CRU]: {
     id: '108457044225666871745333730479173774551',
     erc20Id: '0xffffffff519811215e05efa24830eebe9c43acd7',
-    originSymbol: Assets.CRU,
+    originSymbol: Asset.CRU,
   },
-  [Assets.DEV]: {
+  [Asset.DEV]: {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
-    originSymbol: Assets.DEV,
+    originSymbol: Asset.DEV,
   },
-  [Assets.HKO]: {
+  [Asset.HKO]: {
     id: '76100021443485661246318545281171740067',
     erc20Id: '0xffffffff394054bcda1902b6a6436840435655a3',
-    originSymbol: Assets.HKO,
+    originSymbol: Asset.HKO,
   },
-  [Assets.KAR]: {
+  [Asset.KAR]: {
     id: '10810581592933651521121702237638664357',
     erc20Id: '0xffffffff08220ad2e6e157f26ed8bd22a336a0a5',
-    originSymbol: Assets.KAR,
+    originSymbol: Asset.KAR,
   },
-  [Assets.KBTC]: {
+  [Asset.KBTC]: {
     id: '122531866982275221270783173426160033062',
     erc20Id: '0xffffffff5c2ec77818d0863088929c1106635d26',
-    originSymbol: Assets.KBTC,
+    originSymbol: Asset.KBTC,
   },
-  [Assets.KINT]: {
+  [Asset.KINT]: {
     id: '52837329483626033197882584414163773570',
     erc20Id: '0xffffffff27c019790dfbee7cb70f5996671b2882',
-    originSymbol: Assets.KINT,
+    originSymbol: Asset.KINT,
   },
-  [Assets.KMA]: {
+  [Asset.KMA]: {
     id: '213357169630950964874127107356898319277',
     erc20Id: '0xffffffffa083189f870640b141ae1e882c2b5bad',
-    originSymbol: Assets.KMA,
+    originSymbol: Asset.KMA,
   },
-  [Assets.KUSD]: {
+  [Asset.KUSD]: {
     id: '214920334981412447805621250067209749032',
     erc20Id: '0xffffffffa1b026a00fbaa67c86d5d1d5bf8d8228',
-    originSymbol: Assets.KUSD,
+    originSymbol: Asset.KUSD,
   },
-  [Assets.LIT]: {
+  [Asset.LIT]: {
     id: '65216491554813189869575508812319036608',
     erc20Id: '0xffffffff31103d490325bb0a8e40ef62e2f614c0',
-    originSymbol: Assets.LIT,
+    originSymbol: Asset.LIT,
   },
-  [Assets.PARING]: {
+  [Asset.PARING]: {
     id: '173481220575862801646329923366065693029',
     erc20Id: '0xffffffff8283448b3cb519ca4732f2dddc6a6165',
-    originSymbol: Assets.PARING,
+    originSymbol: Asset.PARING,
   },
-  [Assets.PHA]: {
+  [Asset.PHA]: {
     id: '189307976387032586987344677431204943363',
     erc20Id: '0xffffffff8e6b63d9e447b6d4c45bda8af9dc9603',
-    originSymbol: Assets.PHA,
+    originSymbol: Asset.PHA,
   },
-  [Assets.TEER]: {
+  [Asset.TEER]: {
     id: '105075627293246237499203909093923548958',
     erc20Id: '0xffffffff4f0cd46769550e5938f6bee2f5d4ef1e',
-    originSymbol: Assets.TEER,
+    originSymbol: Asset.TEER,
   },
-  [Assets.UNIT]: {
+  [Asset.UNIT]: {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
-    originSymbol: Assets.UNIT,
+    originSymbol: Asset.UNIT,
   },
 };
 
 export const MOONRIVER_ASSETS = <const>[
-  Assets.AUSD,
-  Assets.BNC,
-  Assets.CRAB,
-  Assets.CSM,
-  Assets.HKO,
-  Assets.KAR,
-  Assets.KBTC,
-  Assets.KINT,
-  Assets.KMA,
-  Assets.KSM,
-  Assets.MOVR,
-  Assets.PHA,
-  Assets.RMRK,
-  Assets.SDN,
-  Assets.TEER,
-  Assets.USDT,
+  Asset.AUSD,
+  Asset.BNC,
+  Asset.CRAB,
+  Asset.CSM,
+  Asset.HKO,
+  Asset.KAR,
+  Asset.KBTC,
+  Asset.KINT,
+  Asset.KMA,
+  Asset.KSM,
+  Asset.MOVR,
+  Asset.PHA,
+  Asset.RMRK,
+  Asset.SDN,
+  Asset.TEER,
+  Asset.USDT,
 ];
 export const MOONRIVER_ASSETS_CONFIGS: Readonly<
   Record<MoonriverAssets, AssetConfig<MoonriverAssets>>
 > = {
-  [Assets.AUSD]: {
+  [Asset.AUSD]: {
     id: '214920334981412447805621250067209749032',
     erc20Id: '0xffffffffa1b026a00fbaa67c86d5d1d5bf8d8228',
-    originSymbol: Assets.AUSD,
+    originSymbol: Asset.AUSD,
   },
-  [Assets.BNC]: {
+  [Asset.BNC]: {
     id: '319623561105283008236062145480775032445',
     erc20Id: '0xfffffffff075423be54811ecb478e911f22dde7d',
-    originSymbol: Assets.BNC,
+    originSymbol: Asset.BNC,
   },
-  [Assets.CRAB]: {
+  [Asset.CRAB]: {
     id: '173481220575862801646329923366065693029',
     erc20Id: '0xffffffff8283448b3cb519ca4732f2dddc6a6165',
-    originSymbol: Assets.CRAB,
+    originSymbol: Asset.CRAB,
   },
-  [Assets.CSM]: {
+  [Asset.CSM]: {
     id: '108457044225666871745333730479173774551',
     erc20Id: '0xffffffff519811215e05efa24830eebe9c43acd7',
-    originSymbol: Assets.CSM,
+    originSymbol: Asset.CSM,
   },
-  [Assets.HKO]: {
+  [Asset.HKO]: {
     id: '76100021443485661246318545281171740067',
     erc20Id: '0xffffffff394054bcda1902b6a6436840435655a3',
-    originSymbol: Assets.HKO,
+    originSymbol: Asset.HKO,
   },
-  [Assets.KAR]: {
+  [Asset.KAR]: {
     id: '10810581592933651521121702237638664357',
     erc20Id: '0xffffffff08220ad2e6e157f26ed8bd22a336a0a5',
-    originSymbol: Assets.KAR,
+    originSymbol: Asset.KAR,
   },
-  [Assets.KBTC]: {
+  [Asset.KBTC]: {
     id: '328179947973504579459046439826496046832',
     erc20Id: '0xfffffffff6e528ad57184579beee00c5d5e646f0',
-    originSymbol: Assets.KBTC,
+    originSymbol: Asset.KBTC,
   },
-  [Assets.KINT]: {
+  [Asset.KINT]: {
     id: '175400718394635817552109270754364440562',
     erc20Id: '0xffffffff83f4f317d3cbf6ec6250aec3697b3ff2',
-    originSymbol: Assets.KINT,
+    originSymbol: Asset.KINT,
   },
-  [Assets.KMA]: {
+  [Asset.KMA]: {
     id: '213357169630950964874127107356898319277',
     erc20Id: '0xffffffffa083189f870640b141ae1e882c2b5bad',
-    originSymbol: Assets.KMA,
+    originSymbol: Asset.KMA,
   },
-  [Assets.KSM]: {
+  [Asset.KSM]: {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
-    originSymbol: Assets.KSM,
+    originSymbol: Asset.KSM,
   },
-  [Assets.MOVR]: {
+  [Asset.MOVR]: {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
-    originSymbol: Assets.MOVR,
+    originSymbol: Asset.MOVR,
   },
-  [Assets.PHA]: {
+  [Asset.PHA]: {
     id: '189307976387032586987344677431204943363',
     erc20Id: '0xffffffff8e6b63d9e447b6d4c45bda8af9dc9603',
-    originSymbol: Assets.PHA,
+    originSymbol: Asset.PHA,
   },
-  [Assets.RMRK]: {
+  [Asset.RMRK]: {
     id: '182365888117048807484804376330534607370',
     erc20Id: '0xffffffff893264794d9d57e1e0e21e0042af5a0a',
-    originSymbol: Assets.RMRK,
+    originSymbol: Asset.RMRK,
     originAssetId: 8,
   },
-  [Assets.SDN]: {
+  [Asset.SDN]: {
     id: '16797826370226091782818345603793389938',
     erc20Id: '0xffffffff0ca324c842330521525e7de111f38972',
-    originSymbol: Assets.SDN,
+    originSymbol: Asset.SDN,
   },
-  [Assets.TEER]: {
+  [Asset.TEER]: {
     id: '105075627293246237499203909093923548958',
     erc20Id: '0xffffffff4f0cd46769550e5938f6bee2f5d4ef1e',
-    originSymbol: Assets.TEER,
+    originSymbol: Asset.TEER,
   },
-  [Assets.USDT]: {
+  [Asset.USDT]: {
     id: '311091173110107856861649819128533077277',
     erc20Id: '0xffffffffea09fb06d082fd1275cd48b191cbcd1d',
-    originSymbol: Assets.USDT,
+    originSymbol: Asset.USDT,
     originAssetId: 1984,
   },
 };
 
 export const MOONBEAM_ASSETS = <const>[
-  Assets.ACA,
-  Assets.AUSD,
-  Assets.DOT,
-  Assets.GLMR,
-  Assets.PARA,
+  Asset.ACA,
+  Asset.AUSD,
+  Asset.DOT,
+  Asset.GLMR,
+  Asset.PARA,
 ];
 export const MOONBEAM_ASSETS_CONFIGS: Readonly<
   Record<MoonbeamAssets, AssetConfig<MoonbeamAssets>>
 > = {
-  [Assets.ACA]: {
+  [Asset.ACA]: {
     id: '224821240862170613278369189818311486111',
     erc20Id: '0xffffffffa922fef94566104a6e5a35a4fcddaa9f',
-    originSymbol: Assets.ACA,
+    originSymbol: Asset.ACA,
   },
-  [Assets.AUSD]: {
+  [Asset.AUSD]: {
     id: '110021739665376159354538090254163045594',
     erc20Id: '0xffffffff52c56a9257bb97f4b2b6f7b2d624ecda',
-    originSymbol: Assets.AUSD,
+    originSymbol: Asset.AUSD,
   },
-  [Assets.DOT]: {
+  [Asset.DOT]: {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
-    originSymbol: Assets.DOT,
+    originSymbol: Asset.DOT,
   },
-  [Assets.GLMR]: {
+  [Asset.GLMR]: {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
-    originSymbol: Assets.GLMR,
+    originSymbol: Asset.GLMR,
   },
-  [Assets.PARA]: {
+  [Asset.PARA]: {
     id: '32615670524745285411807346420584982855',
     erc20Id: '0xffffffff18898cb5fe1e88e668152b4f4052a947',
-    originSymbol: Assets.PARA,
+    originSymbol: Asset.PARA,
   },
 };

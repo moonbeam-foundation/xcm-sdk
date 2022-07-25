@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import {
+  Asset,
   Chain,
   MOONBASE_ASSETS,
   MOONBASE_CHAINS,
@@ -10,7 +11,7 @@ import {
   MOONRIVER_CHAINS,
 } from './constants';
 
-export interface AssetConfig<Asset> {
+export interface AssetConfig<Assets extends Asset> {
   id: string;
   /**
    * id -> erc20Id
@@ -19,7 +20,7 @@ export interface AssetConfig<Asset> {
    * Erc20BalancesPrecompile 0x0000000000000000000000000000000000000802
    */
   erc20Id: string;
-  originSymbol: Asset;
+  originSymbol: Assets;
   originAssetId?: number;
 }
 

@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTransferExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbaseAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbase.common';
 
-const asset = assets[Assets.PHA];
+const asset = assets[Asset.PHA];
 const origin = chains[Chain.KhalaAlphanet];
 
 export const PHA: XcmConfig<MoonbaseAssets> = {

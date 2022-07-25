@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonriver.common';
 
-const asset = assets[Assets.KAR];
+const asset = assets[Asset.KAR];
 const origin = chains[Chain.Karura];
 
 export const KAR: XcmConfig<MoonriverAssets> = {

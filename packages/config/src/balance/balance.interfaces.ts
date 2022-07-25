@@ -1,8 +1,9 @@
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
+import { Asset } from '../constants';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 
-export type BalanceConfig<Assets> =
+export type BalanceConfig<Assets extends Asset> =
   | SystemBalanceConfig
   | AssetsBalanceConfig
   | TokensBalanceConfig<Assets>;
@@ -28,7 +29,7 @@ export interface TokensPalletAccountData {
   frozen: u128;
 }
 
-export interface TokensBalanceConfig<Assets> {
+export interface TokensBalanceConfig<Assets extends Asset> {
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
   getParams: (account: string) => [

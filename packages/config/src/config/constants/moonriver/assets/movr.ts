@@ -1,4 +1,4 @@
-import { Assets, Chain, MOVR_ID } from '../../../../constants';
+import { Asset, Chain, MOVR_ID } from '../../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
@@ -15,7 +15,7 @@ import {
   withdraw,
 } from '../moonriver.common';
 
-const asset = assets[Assets.MOVR];
+const asset = assets[Asset.MOVR];
 const bifrost = chains[Chain.Bifrost];
 const karura = chains[Chain.Karura];
 const khala = chains[Chain.Khala];

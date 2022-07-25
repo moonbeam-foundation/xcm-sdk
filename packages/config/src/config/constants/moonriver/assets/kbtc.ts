@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,8 +10,8 @@ import {
   withdraw,
 } from '../moonriver.common';
 
-const asset = assets[Assets.KBTC];
-const feeAsset = assets[Assets.KINT];
+const asset = assets[Asset.KBTC];
+const feeAsset = assets[Asset.KINT];
 const origin = chains[Chain.Kintsugi];
 
 export const KBTC: XcmConfig<MoonriverAssets> = {

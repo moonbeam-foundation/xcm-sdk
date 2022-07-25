@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbeamAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbeam.common';
 
-const asset = assets[Assets.ACA];
+const asset = assets[Asset.ACA];
 const origin = chains[Chain.Acala];
 
 export const ACA: XcmConfig<MoonbeamAssets> = {

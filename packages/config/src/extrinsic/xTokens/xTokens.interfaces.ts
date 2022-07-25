@@ -1,26 +1,23 @@
+import { Asset } from '../../constants';
 import {
   XTokensExtrinsic,
   XTokensExtrinsicSuccessEvent,
 } from './xTokens.constants';
 
-export type XTokensPallet<Assets> =
+export type XTokensPallet<Assets extends Asset> =
   | XTokensTransferExtrinsic<Assets>
   | XTokensTransferMultiAssetExtrinsic<Assets>
   | XTokensTransferMultiCurrenciesExtrinsic<Assets>;
 
-export type XTokensTransferExtrinsic<Assets> = XTokensBaseExtrinsic<
-  Assets,
-  XTokensExtrinsic.Transfer
->;
-export type XTokensTransferMultiAssetExtrinsic<Assets> = XTokensBaseExtrinsic<
-  Assets,
-  XTokensExtrinsic.TransferMultiAsset
->;
-export type XTokensTransferMultiCurrenciesExtrinsic<Assets> =
+export type XTokensTransferExtrinsic<Assets extends Asset> =
+  XTokensBaseExtrinsic<Assets, XTokensExtrinsic.Transfer>;
+export type XTokensTransferMultiAssetExtrinsic<Assets extends Asset> =
+  XTokensBaseExtrinsic<Assets, XTokensExtrinsic.TransferMultiAsset>;
+export type XTokensTransferMultiCurrenciesExtrinsic<Assets extends Asset> =
   XTokensBaseExtrinsic<Assets, XTokensExtrinsic.TransferMultiCurrencies>;
 
 export interface XTokensBaseExtrinsic<
-  Assets,
+  Assets extends Asset,
   Extrinsic extends XTokensExtrinsic,
 > {
   pallet: 'xTokens';
@@ -33,13 +30,13 @@ export interface XTokensBaseExtrinsic<
   ) => XTokensParamsByExtrinsic<Assets>[Extrinsic];
 }
 
-export interface XTokensParamsByExtrinsic<Assets> {
+export interface XTokensParamsByExtrinsic<Assets extends Asset> {
   [XTokensExtrinsic.Transfer]: XTokenTransferExtrinsicParams<Assets>;
   [XTokensExtrinsic.TransferMultiAsset]: XTokensTransferMultiAssetExtrinsicParams<Assets>;
   [XTokensExtrinsic.TransferMultiCurrencies]: XTokensTransferMultiCurrenciesExtrinsicParams<Assets>;
 }
 
-export type XTokenTransferExtrinsicParams<Assets> = [
+export type XTokenTransferExtrinsicParams<Assets extends Asset> = [
   /**
    * asset
    */
@@ -94,7 +91,7 @@ export type XTokenTransferExtrinsicParams<Assets> = [
   number,
 ];
 
-export type XTokenTransferExtrinsicParamsToken<Assets> =
+export type XTokenTransferExtrinsicParamsToken<Assets extends Asset> =
   | {
       Token: Assets | 'KUSD' | 'MOVR';
     }
@@ -111,7 +108,7 @@ export type XTokenTransferExtrinsicParamsToken<Assets> =
   | number
   | string;
 
-export type XTokensTransferMultiAssetExtrinsicParams<Assets> = [
+export type XTokensTransferMultiAssetExtrinsicParams<Assets extends Asset> = [
   /**
    * asset
    */
@@ -167,7 +164,9 @@ export type XTokensTransferMultiAssetExtrinsicParams<Assets> = [
   number,
 ];
 
-export type XTokensTransferMultiCurrenciesExtrinsicParams<Assets> = [
+export type XTokensTransferMultiCurrenciesExtrinsicParams<
+  Assets extends Asset,
+> = [
   [
     [
       {

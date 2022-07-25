@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbaseAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonbase.common';
 
-const asset = assets[Assets.CRU];
+const asset = assets[Asset.CRU];
 const origin = chains[Chain.CrustShadowAlphanet];
 
 export const CRU: XcmConfig<MoonbaseAssets> = {

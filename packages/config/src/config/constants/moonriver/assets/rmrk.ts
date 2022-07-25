@@ -1,10 +1,10 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
 import { assets, balance, chains, extrinsic } from '../moonriver.common';
 
-const asset = assets[Assets.RMRK];
+const asset = assets[Asset.RMRK];
 const origin = chains[Chain.Statemine];
 
 // TODO: throw error if there is no asset.originAssetId

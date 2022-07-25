@@ -1,4 +1,4 @@
-import { Assets, Chain, GLMR_ID } from '../../../../constants';
+import { Asset, Chain, GLMR_ID } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonbeamAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -11,7 +11,7 @@ import {
   withdraw,
 } from '../moonbeam.common';
 
-const asset = assets[Assets.GLMR];
+const asset = assets[Asset.GLMR];
 const acala = chains[Chain.Acala];
 const parallel = chains[Chain.Parallel];
 const acalaGlmrId = GLMR_ID[Chain.Acala];

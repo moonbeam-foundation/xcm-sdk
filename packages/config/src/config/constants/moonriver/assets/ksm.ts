@@ -1,4 +1,4 @@
-import { Assets, Chain } from '../../../../constants';
+import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
 import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
@@ -10,7 +10,7 @@ import {
   withdraw,
 } from '../moonriver.common';
 
-const asset = assets[Assets.KSM];
+const asset = assets[Asset.KSM];
 const origin = chains[Chain.Kusama];
 
 export const KSM: XcmConfig<MoonriverAssets> = {
