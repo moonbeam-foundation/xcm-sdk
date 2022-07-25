@@ -15,6 +15,7 @@ import { KSM } from './assets/ksm';
 import { MOVR } from './assets/movr';
 import { PHA } from './assets/pha';
 import { RMRK } from './assets/rmrk';
+import { SDN } from './assets/sdn';
 import { TEER } from './assets/teer';
 import { USDT } from './assets/usdt';
 
@@ -32,6 +33,7 @@ export const MOONRIVER_CONFIGS: ChainXcmConfigs<MoonriverAssets> = {
   [Assets.MOVR]: MOVR,
   [Assets.PHA]: PHA,
   [Assets.RMRK]: RMRK,
+  [Assets.SDN]: SDN,
   [Assets.TEER]: TEER,
   [Assets.USDT]: USDT,
 };

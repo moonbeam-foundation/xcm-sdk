@@ -19,7 +19,7 @@ export function createBalanceBuilder<Asset>() {
   };
 }
 
-function assets(asset: number): AssetsBalanceConfig {
+function assets(asset: number | bigint): AssetsBalanceConfig {
   return {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Account,

@@ -57,10 +57,11 @@ export enum Chain {
   Parallel = 'Parallel',
   ParallelAlphanet = 'ParallelAlphanet',
   Polkadot = 'Polkadot',
+  Shiden = 'Shiden',
   Statemine = 'Statemine',
 }
 
-export const DEV_ID = {
+export const DEV_ID = <const>{
   [Chain.AstarAlphanet]: 100,
   [Chain.BasiliskAlphanet]: 0,
   [Chain.CalamariAlphanet]: 8,
@@ -166,10 +167,11 @@ export const MOONBASE_CHINS_CONFIGS: Readonly<
   },
 };
 
-export const MOVR_ID = {
+export const MOVR_ID = <const>{
   [Chain.Karura]: 3,
   [Chain.Khala]: 6,
   [Chain.Parallel]: 113,
+  [Chain.Shiden]: 18446744073709551620n,
 };
 
 export const MOONRIVER_CHAINS = <const>[
@@ -183,6 +185,7 @@ export const MOONRIVER_CHAINS = <const>[
   Chain.Kintsugi,
   Chain.Kusama,
   Chain.Parallel,
+  Chain.Shiden,
   Chain.Statemine,
 ];
 export const MOONRIVER_CHINS_CONFIGS: Readonly<
@@ -248,6 +251,12 @@ export const MOONRIVER_CHINS_CONFIGS: Readonly<
     weight: 1_000_000_000,
     parachainId: 2085,
   },
+  [Chain.Shiden]: {
+    name: 'Shiden',
+    ws: 'wss://shiden.api.onfinality.io/public-ws',
+    weight: 1_000_000_000,
+    parachainId: 2007,
+  },
   [Chain.Statemine]: {
     name: 'Statemine',
     ws: 'wss://statemine-rpc.polkadot.io',
@@ -256,7 +265,7 @@ export const MOONRIVER_CHINS_CONFIGS: Readonly<
   },
 };
 
-export const GLMR_ID = {
+export const GLMR_ID = <const>{
   [Chain.Acala]: 0,
   [Chain.Parallel]: 114,
 };

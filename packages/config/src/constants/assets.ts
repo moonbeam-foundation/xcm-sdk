@@ -31,6 +31,7 @@ export enum Assets {
   PARING = 'PARING',
   PHA = 'PHA',
   RMRK = 'RMRK',
+  SDN = 'SDN',
   TEER = 'TEER',
   UNIT = 'UNIT',
   USDT = 'USDT',
@@ -153,6 +154,7 @@ export const MOONRIVER_ASSETS = <const>[
   Assets.MOVR,
   Assets.PHA,
   Assets.RMRK,
+  Assets.SDN,
   Assets.TEER,
   Assets.USDT,
 ];
@@ -224,6 +226,11 @@ export const MOONRIVER_ASSETS_CONFIGS: Readonly<
     erc20Id: '0xffffffff893264794d9d57e1e0e21e0042af5a0a',
     originSymbol: Assets.RMRK,
     originAssetId: 8,
+  },
+  [Assets.SDN]: {
+    id: '16797826370226091782818345603793389938',
+    erc20Id: '0xffffffff0ca324c842330521525e7de111f38972',
+    originSymbol: Assets.SDN,
   },
   [Assets.TEER]: {
     id: '105075627293246237499203909093923548958',

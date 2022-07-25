@@ -1,6 +1,6 @@
 import { Assets, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonbaseAssets } from '../../../../interfaces';
+import { MoonriverAssets } from '../../../../interfaces';
 import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
@@ -8,12 +8,12 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonbase.common';
+} from '../moonriver.common';
 
-const asset = assets[Assets.UNIT];
-const origin = chains[Chain.AlphanetRelay];
+const asset = assets[Assets.SDN];
+const origin = chains[Chain.Shiden];
 
-export const UNIT: XcmConfig<MoonbaseAssets> = {
+export const SDN: XcmConfig<MoonriverAssets> = {
   asset,
   origin,
   deposit: [
@@ -21,17 +21,20 @@ export const UNIT: XcmConfig<MoonbaseAssets> = {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
-        .xcmPallet()
+        .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin),
+        .origin(origin)
+        .V1()
+        .X1(),
     },
   ],
   withdraw: [
     withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      feePerWeight: 13.77,
+      feePerWeight: 8_000_000,
+      existentialDeposit: 1_000_000,
     }),
   ],
 };

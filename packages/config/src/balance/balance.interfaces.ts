@@ -19,7 +19,7 @@ export interface AssetsBalanceConfig {
   pallet: BalancePallet.Assets;
   function: BalanceFunction.Account;
   path: ['balance'];
-  getParams: (account: string) => [number, string];
+  getParams: (account: string) => [number | bigint, string];
 }
 
 export interface TokensPalletAccountData {

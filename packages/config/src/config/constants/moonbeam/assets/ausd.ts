@@ -19,7 +19,8 @@ export const AUSD: XcmConfig<MoonbeamAssets> = {
   deposit: [
     {
       origin,
-      balance: balance.system(),
+      balance: balance.tokens(asset.originSymbol),
+      extrinsicFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
