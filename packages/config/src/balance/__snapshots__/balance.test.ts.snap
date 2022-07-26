@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Balance assets should return assets balance config with params 1`] = `
+Object {
+  "function": "account",
+  "getParams": [Function],
+  "pallet": "assets",
+  "path": Array [
+    "balance",
+  ],
+}
+`;
+
+exports[`Balance assets should return assets balance config with params 2`] = `
+Array [
+  1,
+  "<ACCOUNT>",
+]
+`;
+
+exports[`Balance min should return min balance config with params 1`] = `
+Object {
+  "function": "asset",
+  "getParams": [Function],
+  "pallet": "assets",
+  "path": Array [
+    "minBalance",
+  ],
+}
+`;
+
+exports[`Balance min should return min balance config with params 2`] = `
+Array [
+  1,
+]
+`;
