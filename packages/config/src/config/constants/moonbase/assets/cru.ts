@@ -1,7 +1,5 @@
 import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonbaseAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -9,15 +7,16 @@ import {
   extrinsic,
   withdraw,
 } from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.CRU];
 const origin = chains[Chain.CrustShadowAlphanet];
 
-export const CRU: XcmConfig<MoonbaseAssets> = {
+export const CRU: MoonbaseXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -27,12 +26,12 @@ export const CRU: XcmConfig<MoonbaseAssets> = {
         .origin(origin)
         .V0(),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 1,
     }),
-  ],
+  },
 };

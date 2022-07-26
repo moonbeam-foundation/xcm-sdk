@@ -1,5 +1,5 @@
 import { Asset } from '../../../constants';
-import { MoonbaseAssets } from '../../../interfaces';
+import { MoonbaseAssets, MoonbaseChains } from '../../../interfaces';
 import { ChainXcmConfigs } from '../../config.interfaces';
 
 import { ASTR } from './assets/astr';
@@ -19,21 +19,22 @@ import { PHA } from './assets/pha';
 import { TEER } from './assets/teer';
 import { UNIT } from './assets/unit';
 
-export const MOONBASE_CONFIGS: ChainXcmConfigs<MoonbaseAssets> = {
-  [Asset.ASTR]: ASTR,
-  [Asset.BNC]: BNC,
-  [Asset.BSX]: BSX,
-  [Asset.CRU]: CRU,
-  [Asset.DEV]: DEV,
-  [Asset.HKO]: HKO,
-  [Asset.KAR]: KAR,
-  [Asset.KBTC]: KBTC,
-  [Asset.KINT]: KINT,
-  [Asset.KMA]: KMA,
-  [Asset.KUSD]: KUSD,
-  [Asset.LIT]: LIT,
-  [Asset.PARING]: PARING,
-  [Asset.PHA]: PHA,
-  [Asset.TEER]: TEER,
-  [Asset.UNIT]: UNIT,
-};
+export const MOONBASE_CONFIGS: ChainXcmConfigs<MoonbaseAssets, MoonbaseChains> =
+  <const>{
+    [Asset.ASTR]: ASTR,
+    [Asset.BNC]: BNC,
+    [Asset.BSX]: BSX,
+    [Asset.CRU]: CRU,
+    [Asset.DEV]: DEV,
+    [Asset.HKO]: HKO,
+    [Asset.KAR]: KAR,
+    [Asset.KBTC]: KBTC,
+    [Asset.KINT]: KINT,
+    [Asset.KMA]: KMA,
+    [Asset.KUSD]: KUSD,
+    [Asset.LIT]: LIT,
+    [Asset.PARING]: PARING,
+    [Asset.PHA]: PHA,
+    [Asset.TEER]: TEER,
+    [Asset.UNIT]: UNIT,
+  };

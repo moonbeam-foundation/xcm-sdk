@@ -1,5 +1,5 @@
 import { Asset } from '../../../constants';
-import { MoonriverAssets } from '../../../interfaces';
+import { MoonriverAssets, MoonriverChains } from '../../../interfaces';
 import { ChainXcmConfigs } from '../../config.interfaces';
 
 import { AUSD } from './assets/ausd';
@@ -19,7 +19,10 @@ import { SDN } from './assets/sdn';
 import { TEER } from './assets/teer';
 import { USDT } from './assets/usdt';
 
-export const MOONRIVER_CONFIGS: ChainXcmConfigs<MoonriverAssets> = {
+export const MOONRIVER_CONFIGS: ChainXcmConfigs<
+  MoonriverAssets,
+  MoonriverChains
+> = <const>{
   [Asset.AUSD]: AUSD,
   [Asset.BNC]: BNC,
   [Asset.CRAB]: CRAB,

@@ -1,7 +1,5 @@
 import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonriverAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -9,15 +7,16 @@ import {
   extrinsic,
   withdraw,
 } from '../moonriver.common';
+import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
 const asset = assets[Asset.CRAB];
 const origin = chains[Chain.Darwinia];
 
-export const CRAB: XcmConfig<MoonriverAssets> = {
+export const CRAB: MoonriverXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -28,12 +27,12 @@ export const CRAB: XcmConfig<MoonriverAssets> = {
         .V1()
         .X1(),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 8,
     }),
-  ],
+  },
 };

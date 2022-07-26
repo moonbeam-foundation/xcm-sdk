@@ -3,8 +3,6 @@ import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
 } from '../../../../extrinsic';
-import { MoonbaseAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -13,6 +11,7 @@ import {
   moonbase,
   withdraw,
 } from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.DEV];
 const karura = chains[Chain.KaruraAlphanet];
@@ -23,11 +22,11 @@ const karuraDevId = DEV_ID[Chain.KaruraAlphanet];
 const calamariDevId = DEV_ID[Chain.CalamariAlphanet];
 const astarDevId = DEV_ID[Chain.AstarAlphanet];
 
-export const DEV: XcmConfig<MoonbaseAssets> = {
+export const DEV: MoonbaseXcmConfig = <const>{
   asset,
   origin: moonbase,
-  deposit: [
-    {
+  deposit: {
+    [astar.chain]: {
       origin: astar,
       balance: balance.assets(astarDevId),
       extrinsicFeeBalance: balance.system(),
@@ -39,7 +38,7 @@ export const DEV: XcmConfig<MoonbaseAssets> = {
         .V1()
         .X2(3),
     },
-    {
+    [calamari.chain]: {
       origin: calamari,
       balance: balance.assets(karuraDevId),
       extrinsicFeeBalance: balance.system(),
@@ -50,7 +49,7 @@ export const DEV: XcmConfig<MoonbaseAssets> = {
         .origin(calamari)
         .asset({ MantaCurrency: calamariDevId }),
     },
-    {
+    [karura.chain]: {
       origin: karura,
       balance: balance.tokens(karuraDevId),
       extrinsicFeeBalance: balance.system(),
@@ -61,22 +60,22 @@ export const DEV: XcmConfig<MoonbaseAssets> = {
         .origin(karura)
         .asset({ ForeignAsset: karuraDevId }),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [astar.chain]: withdraw.xTokens({
       balance: balance.assets(astarDevId),
       destination: astar,
       feePerWeight: 50_000,
     }),
-    withdraw.xTokens({
+    [calamari.chain]: withdraw.xTokens({
       balance: balance.assets(calamariDevId),
       destination: calamari,
       feePerWeight: 50_000,
     }),
-    withdraw.xTokens({
+    [karura.chain]: withdraw.xTokens({
       balance: balance.assets(karuraDevId),
       destination: karura,
       feePerWeight: 50_000,
     }),
-  ],
+  },
 };

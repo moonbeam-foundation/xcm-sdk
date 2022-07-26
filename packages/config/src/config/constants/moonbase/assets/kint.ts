@@ -1,7 +1,5 @@
 import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonbaseAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -9,15 +7,16 @@ import {
   extrinsic,
   withdraw,
 } from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.KINT];
 const origin = chains[Chain.InterBTCAlphanet];
 
-export const KINT: XcmConfig<MoonbaseAssets> = {
+export const KINT: MoonbaseXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
       extrinsic: extrinsic
@@ -27,12 +26,12 @@ export const KINT: XcmConfig<MoonbaseAssets> = {
         .origin(origin)
         .asset({ Token: asset.originSymbol }),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [origin.chain]: withdraw.xTokens({
       balance: balance.tokens(asset.originSymbol),
       destination: origin,
       feePerWeight: 8,
     }),
-  ],
+  },
 };

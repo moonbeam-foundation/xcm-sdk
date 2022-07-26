@@ -1,7 +1,5 @@
 import { Asset, Chain, DEV_ID } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonbaseAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -9,16 +7,17 @@ import {
   extrinsic,
   withdraw,
 } from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.BSX];
 const origin = chains[Chain.BasiliskAlphanet];
 const basiliskDevId = DEV_ID[Chain.BasiliskAlphanet];
 
-export const BSX: XcmConfig<MoonbaseAssets> = {
+export const BSX: MoonbaseXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -28,12 +27,12 @@ export const BSX: XcmConfig<MoonbaseAssets> = {
         .origin(origin)
         .asset(basiliskDevId),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 1,
     }),
-  ],
+  },
 };

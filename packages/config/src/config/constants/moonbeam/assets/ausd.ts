@@ -1,7 +1,5 @@
 import { Asset, Chain } from '../../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonbeamAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -9,15 +7,16 @@ import {
   extrinsic,
   withdraw,
 } from '../moonbeam.common';
+import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
 const asset = assets[Asset.AUSD];
 const origin = chains[Chain.Acala];
 
-export const AUSD: XcmConfig<MoonbeamAssets> = {
+export const AUSD: MoonbeamXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
       extrinsicFeeBalance: balance.system(),
@@ -30,13 +29,13 @@ export const AUSD: XcmConfig<MoonbeamAssets> = {
           Token: asset.originSymbol,
         }),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [origin.chain]: withdraw.xTokens({
       balance: balance.tokens(asset.originSymbol),
       destination: origin,
       existentialDeposit: 100_000_000_000,
       feePerWeight: 64,
     }),
-  ],
+  },
 };

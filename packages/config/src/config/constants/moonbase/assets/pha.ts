@@ -1,7 +1,5 @@
 import { Asset, Chain } from '../../../../constants';
 import { XTransferExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonbaseAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import {
   assets,
   balance,
@@ -9,15 +7,16 @@ import {
   extrinsic,
   withdraw,
 } from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.PHA];
 const origin = chains[Chain.KhalaAlphanet];
 
-export const PHA: XcmConfig<MoonbaseAssets> = {
+export const PHA: MoonbaseXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -27,13 +26,13 @@ export const PHA: XcmConfig<MoonbaseAssets> = {
         .origin(origin)
         .here(),
     },
-  ],
-  withdraw: [
-    withdraw.xTokens({
+  },
+  withdraw: {
+    [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 80,
       existentialDeposit: 10_000_000_000,
     }),
-  ],
+  },
 };

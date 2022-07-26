@@ -1,19 +1,18 @@
 import { Asset, Chain } from '../../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../../extrinsic';
-import { MoonriverAssets } from '../../../../interfaces';
-import { XcmConfig } from '../../../config.interfaces';
 import { assets, balance, chains, extrinsic } from '../moonriver.common';
+import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
 const asset = assets[Asset.USDT];
 const origin = chains[Chain.Statemine];
 
 // TODO: throw error if there is no asset.originAssetId
 
-export const USDT: XcmConfig<MoonriverAssets> = {
+export const USDT: MoonriverXcmConfig = <const>{
   asset,
   origin,
-  deposit: [
-    {
+  deposit: {
+    [origin.chain]: {
       origin,
       balance: balance.assets(asset.originAssetId!),
       extrinsicFeeBalance: balance.system(),
@@ -26,6 +25,6 @@ export const USDT: XcmConfig<MoonriverAssets> = {
         .V1()
         .X1(),
     },
-  ],
-  withdraw: [],
+  },
+  withdraw: {},
 };
