@@ -11,6 +11,14 @@ import {
   MOONRIVER_CHAINS,
 } from './constants';
 
+export type MoonbaseAssets = typeof MOONBASE_ASSETS[number];
+export type MoonriverAssets = typeof MOONRIVER_ASSETS[number];
+export type MoonbeamAssets = typeof MOONBEAM_ASSETS[number];
+
+export type MoonbaseChains = typeof MOONBASE_CHAINS[number];
+export type MoonriverChains = typeof MOONRIVER_CHAINS[number];
+export type MoonbeamChains = typeof MOONBEAM_CHAINS[number];
+
 export interface AssetConfig<Assets extends Asset> {
   id: string;
   /**
@@ -23,10 +31,6 @@ export interface AssetConfig<Assets extends Asset> {
   originSymbol: Assets;
   originAssetId?: number;
 }
-
-export type MoonbaseAssets = typeof MOONBASE_ASSETS[number];
-export type MoonriverAssets = typeof MOONRIVER_ASSETS[number];
-export type MoonbeamAssets = typeof MOONBEAM_ASSETS[number];
 
 export interface MoonChainConfig {
   chain: MoonChain;
@@ -41,7 +45,3 @@ export interface ChainConfig {
   parachainId: number;
   weight: number;
 }
-
-export type MoonbaseChains = typeof MOONBASE_CHAINS[number];
-export type MoonriverChains = typeof MOONRIVER_CHAINS[number];
-export type MoonbeamChains = typeof MOONBEAM_CHAINS[number];
