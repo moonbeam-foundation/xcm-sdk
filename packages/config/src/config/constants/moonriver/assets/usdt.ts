@@ -6,8 +6,6 @@ import { MoonriverXcmConfig } from '../moonriver.interfaces';
 const asset = assets[Asset.USDT];
 const origin = chains[Chain.Statemine];
 
-// TODO: throw error if there is no asset.originAssetId
-
 export const USDT: MoonriverXcmConfig = <const>{
   asset,
   origin,

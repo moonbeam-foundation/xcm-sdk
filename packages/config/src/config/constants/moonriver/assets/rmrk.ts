@@ -6,8 +6,6 @@ import { MoonriverXcmConfig } from '../moonriver.interfaces';
 const asset = assets[Asset.RMRK];
 const origin = chains[Chain.Statemine];
 
-// TODO: throw error if there is no asset.originAssetId
-
 export const RMRK: MoonriverXcmConfig = <const>{
   asset,
   origin,
@@ -23,7 +21,7 @@ export const RMRK: MoonriverXcmConfig = <const>{
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(origin)
         .V1()
-        .X2(50, asset),
+        .X2(50, asset.originAssetId!),
     },
   },
   withdraw: {},

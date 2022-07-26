@@ -1,5 +1,4 @@
-import { Asset } from '../../constants';
-import { AssetConfig, ChainConfig, MoonChainConfig } from '../../interfaces';
+import { ChainConfig, MoonChainConfig } from '../../interfaces';
 import {
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
@@ -7,17 +6,14 @@ import {
 import { getCreateExtrinsic } from './polkadotXcm.util';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function polkadotXcm<Assets extends Asset>(chain: MoonChainConfig) {
+export function polkadotXcm(chain: MoonChainConfig) {
   return {
-    limitedReserveTransferAssets: () =>
-      limitedReserveTransferAssets<Assets>(chain),
+    limitedReserveTransferAssets: () => limitedReserveTransferAssets(chain),
     limitedReserveWithdrawAssets: () => limitedReserveWithdrawAssets(chain),
   };
 }
 
-function limitedReserveTransferAssets<Assets extends Asset>(
-  chain: MoonChainConfig,
-) {
+function limitedReserveTransferAssets(chain: MoonChainConfig) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
       origin: (origin: ChainConfig) => {
@@ -77,7 +73,7 @@ function limitedReserveTransferAssets<Assets extends Asset>(
                   },
                 ],
               })),
-            X2: (palletInstance: number, asset: AssetConfig<Assets>) =>
+            X2: (palletInstance: number, assetId: number) =>
               createExtrinsic((amount) => ({
                 V1: [
                   {
@@ -90,8 +86,7 @@ function limitedReserveTransferAssets<Assets extends Asset>(
                               PalletInstance: palletInstance,
                             },
                             {
-                              // TODO: throw an error if id is not defined or fix types
-                              GeneralIndex: asset.originAssetId || 0,
+                              GeneralIndex: assetId,
                             },
                           ],
                         },
