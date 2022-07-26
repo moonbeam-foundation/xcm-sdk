@@ -15,5 +15,5 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "packages/**/build", "**/*.test.ts"]
+  "exclude": ["node_modules", "packages/**/build"]
 }
