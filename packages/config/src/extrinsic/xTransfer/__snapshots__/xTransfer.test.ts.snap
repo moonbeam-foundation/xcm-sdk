@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`xTransfer transfer here should be correct config 1`] = `
+Object {
+  "extrinsic": "transfer",
+  "getParams": [Function],
+  "pallet": "xTransfer",
+  "successEvent": "Deposited",
+}
+`;
+
+exports[`xTransfer transfer here should get correct params 1`] = `
+Array [
+  Object {
+    "fun": Object {
+      "Fungible": 1000n,
+    },
+    "id": Object {
+      "Concrete": Object {
+        "interior": "Here",
+        "parents": 0,
+      },
+    },
+  },
+  Object {
+    "interior": Object {
+      "X2": Array [
+        Object {
+          "Parachain": 1000,
+        },
+        Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      ],
+    },
+    "parents": 1,
+  },
+  1000000000,
+]
+`;
+
+exports[`xTransfer transfer x2 should be correct config 1`] = `
+Object {
+  "extrinsic": "transfer",
+  "getParams": [Function],
+  "pallet": "xTransfer",
+  "successEvent": "Deposited",
+}
+`;
+
+exports[`xTransfer transfer x2 should get correct params 1`] = `
+Array [
+  Object {
+    "fun": Object {
+      "Fungible": 1000n,
+    },
+    "id": Object {
+      "Concrete": Object {
+        "interior": Object {
+          "X2": Array [
+            Object {
+              "Parachain": 1000,
+            },
+            Object {
+              "PalletInstance": 99,
+            },
+          ],
+        },
+        "parents": 1,
+      },
+    },
+  },
+  Object {
+    "interior": Object {
+      "X2": Array [
+        Object {
+          "Parachain": 1000,
+        },
+        Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      ],
+    },
+    "parents": 1,
+  },
+  1000000000,
+]
+`;
