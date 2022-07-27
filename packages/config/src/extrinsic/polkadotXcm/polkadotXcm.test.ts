@@ -37,8 +37,78 @@ describe('polkadotXcm', () => {
       });
     });
 
-    describe('v1', () => {});
+    describe('v1', () => {
+      describe('here', () => {
+        const cfg = extrinsic
+          .limitedReserveTransferAssets()
+          .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+          .origin(origin)
+          .V1()
+          .here();
+
+        it('should be correct config', () => {
+          expect(cfg).toMatchSnapshot();
+        });
+
+        it('should get correct params', () => {
+          expect(cfg.getParams(account, amount)).toMatchSnapshot();
+        });
+      });
+
+      describe('x1', () => {
+        const cfg = extrinsic
+          .limitedReserveTransferAssets()
+          .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+          .origin(origin)
+          .V1()
+          .X1();
+
+        it('should be correct config', () => {
+          expect(cfg).toMatchSnapshot();
+        });
+
+        it('should get correct params', () => {
+          expect(cfg.getParams(account, amount)).toMatchSnapshot();
+        });
+      });
+
+      describe('x2', () => {
+        const cfg = extrinsic
+          .limitedReserveTransferAssets()
+          .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+          .origin(origin)
+          .V1()
+          .X2(10, 50);
+
+        it('should be correct config', () => {
+          expect(cfg).toMatchSnapshot();
+        });
+
+        it('should get correct params', () => {
+          expect(cfg.getParams(account, amount)).toMatchSnapshot();
+        });
+      });
+    });
   });
 
-  describe('limitedReserveWithdrawAssets', () => {});
+  describe('limitedReserveWithdrawAssets', () => {
+    describe('v1', () => {
+      describe('x2', () => {
+        const cfg = extrinsic
+          .limitedReserveWithdrawAssets()
+          .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+          .origin(origin)
+          .V1()
+          .X2(10);
+
+        it('should be correct config', () => {
+          expect(cfg).toMatchSnapshot();
+        });
+
+        it('should get correct params', () => {
+          expect(cfg.getParams(account, amount)).toMatchSnapshot();
+        });
+      });
+    });
+  });
 });
