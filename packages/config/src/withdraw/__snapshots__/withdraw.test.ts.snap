@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Withdraw xTokens should be correct withdraw config 1`] = `
+exports[`withdraw xTokens should be correct withdraw config 1`] = `
 Object {
   "balance": "<BALANCE>",
   "destination": Object {
@@ -13,7 +13,7 @@ Object {
 }
 `;
 
-exports[`Withdraw xTokens should get params with parachain id 1`] = `
+exports[`withdraw xTokens should get params with parachain id 1`] = `
 Array [
   1,
   Array [
@@ -23,7 +23,7 @@ Array [
 ]
 `;
 
-exports[`Withdraw xTokens should get params without parachain id 1`] = `
+exports[`withdraw xTokens should get params without parachain id 1`] = `
 Array [
   1,
   Array [

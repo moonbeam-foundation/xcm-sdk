@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Balance assets should be correct balance config 1`] = `
+exports[`balance assets should be correct balance config 1`] = `
 Object {
   "function": "account",
   "getParams": [Function],
@@ -11,14 +11,14 @@ Object {
 }
 `;
 
-exports[`Balance assets should get correct params 1`] = `
+exports[`balance assets should get correct params 1`] = `
 Array [
   1,
   "<ACCOUNT>",
 ]
 `;
 
-exports[`Balance min should be correct min config 1`] = `
+exports[`balance min should be correct min config 1`] = `
 Object {
   "function": "asset",
   "getParams": [Function],
@@ -29,13 +29,13 @@ Object {
 }
 `;
 
-exports[`Balance min should get correct params 1`] = `
+exports[`balance min should get correct params 1`] = `
 Array [
   1,
 ]
 `;
 
-exports[`Balance system should be correct system config 1`] = `
+exports[`balance system should be correct system config 1`] = `
 Object {
   "calc": [Function],
   "function": "account",
@@ -47,13 +47,13 @@ Object {
 }
 `;
 
-exports[`Balance system should get correct params 1`] = `
+exports[`balance system should get correct params 1`] = `
 Array [
   "<ACCOUNT>",
 ]
 `;
 
-exports[`Balance tokens should be correct balance config 1`] = `
+exports[`balance tokens should be correct balance config 1`] = `
 Object {
   "calc": [Function],
   "function": "accounts",
@@ -62,7 +62,7 @@ Object {
 }
 `;
 
-exports[`Balance tokens should be correct params with ForeignAsset 1`] = `
+exports[`balance tokens should be correct params with ForeignAsset 1`] = `
 Array [
   "<ACCOUNT>",
   Object {
@@ -71,7 +71,7 @@ Array [
 ]
 `;
 
-exports[`Balance tokens should be correct params with Token 1`] = `
+exports[`balance tokens should be correct params with Token 1`] = `
 Array [
   "<ACCOUNT>",
   Object {

@@ -1,6 +1,6 @@
 import { createBalanceBuilder } from './balance';
 
-describe('Balance', () => {
+describe('balance', () => {
   const account = '<ACCOUNT>';
   const balance = createBalanceBuilder();
 
