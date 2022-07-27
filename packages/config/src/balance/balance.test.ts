@@ -7,11 +7,11 @@ describe('Balance', () => {
   describe('assets', () => {
     const cfg = balance.assets(1);
 
-    it('should return assets balance config', () => {
+    it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();
     });
 
-    it('should return assets balance params', () => {
+    it('should get correct params', () => {
       expect(cfg.getParams(account)).toMatchSnapshot();
     });
   });
@@ -19,11 +19,11 @@ describe('Balance', () => {
   describe('min', () => {
     const cfg = balance.min(1);
 
-    it('should return min balance config', () => {
+    it('should be correct min config', () => {
       expect(cfg).toMatchSnapshot();
     });
 
-    it('should return min balance config params', () => {
+    it('should get correct params', () => {
       expect(cfg.getParams()).toMatchSnapshot();
     });
   });
@@ -31,11 +31,11 @@ describe('Balance', () => {
   describe('system', () => {
     const cfg = balance.system();
 
-    it('should return system balance config', () => {
+    it('should be correct system config', () => {
       expect(cfg).toMatchSnapshot();
     });
 
-    it('should return system balance config params', () => {
+    it('should get correct params', () => {
       expect(cfg.getParams(account)).toMatchSnapshot();
     });
   });
@@ -43,15 +43,15 @@ describe('Balance', () => {
   describe('tokens', () => {
     const cfg = balance.tokens('MOVR');
 
-    it('should return tokens balance config', () => {
+    it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();
     });
 
-    it('should return tokens balance config with Token params', () => {
+    it('should be correct params with Token', () => {
       expect(cfg.getParams(account)).toMatchSnapshot();
     });
 
-    it('should return tokens balance config with ForeignAsset params', () => {
+    it('should be correct params with ForeignAsset', () => {
       const cfg2 = balance.tokens(5);
 
       expect(cfg2.getParams(account)).toMatchSnapshot();
