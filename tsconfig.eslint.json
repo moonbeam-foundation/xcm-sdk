@@ -1,9 +1,4 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": [
-    "packages",
-    "jest.config.js",
-    "jestSetupFile.ts",
-    "jestCheckAssertionsNumber.ts"
-  ]
+  "include": ["packages", "jest.config.js", "jestSetupFile.ts"]
 }
