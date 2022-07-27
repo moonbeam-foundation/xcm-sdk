@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Withdraw xTokens should be correct withdraw config 1`] = `
+Object {
+  "balance": "<BALANCE>",
+  "destination": Object {
+    "parachainId": 1000,
+  },
+  "existentialDeposit": 100000000000,
+  "feePerWeight": 8,
+  "getParams": [Function],
+  "weight": 4000000000,
+}
+`;
+
+exports[`Withdraw xTokens should get params with parachain id 1`] = `
+Array [
+  1,
+  Array [
+    "0x00000003e8",
+    "0x01ef46c7649270c912704fb09b75097f6e32208b8500",
+  ],
+]
+`;
+
+exports[`Withdraw xTokens should get params without parachain id 1`] = `
+Array [
+  1,
+  Array [
+    "0x01ef46c7649270c912704fb09b75097f6e32208b8500",
+  ],
+]
+`;

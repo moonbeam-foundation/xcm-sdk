@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Balance assets should return assets balance config with params 1`] = `
+exports[`Balance assets should return assets balance config 1`] = `
 Object {
   "function": "account",
   "getParams": [Function],
@@ -11,14 +11,14 @@ Object {
 }
 `;
 
-exports[`Balance assets should return assets balance config with params 2`] = `
+exports[`Balance assets should return assets balance params 1`] = `
 Array [
   1,
   "<ACCOUNT>",
 ]
 `;
 
-exports[`Balance min should return min balance config with params 1`] = `
+exports[`Balance min should return min balance config 1`] = `
 Object {
   "function": "asset",
   "getParams": [Function],
@@ -29,8 +29,53 @@ Object {
 }
 `;
 
-exports[`Balance min should return min balance config with params 2`] = `
+exports[`Balance min should return min balance config params 1`] = `
 Array [
   1,
+]
+`;
+
+exports[`Balance system should return system balance config 1`] = `
+Object {
+  "calc": [Function],
+  "function": "account",
+  "getParams": [Function],
+  "pallet": "system",
+  "path": Array [
+    "data",
+  ],
+}
+`;
+
+exports[`Balance system should return system balance config params 1`] = `
+Array [
+  "<ACCOUNT>",
+]
+`;
+
+exports[`Balance tokens should return tokens balance config 1`] = `
+Object {
+  "calc": [Function],
+  "function": "accounts",
+  "getParams": [Function],
+  "pallet": "tokens",
+}
+`;
+
+exports[`Balance tokens should return tokens balance config with ForeignAsset params 1`] = `
+Array [
+  "<ACCOUNT>",
+  Object {
+    "ForeignAsset": 5,
+  },
+]
+`;
+
+exports[`Balance tokens should return tokens balance config with Token params 1`] = `
+Array [
+  "<ACCOUNT>",
+  Object {
+    "Token": "MOVR",
+  },
 ]
 `;
