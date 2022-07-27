@@ -87,7 +87,7 @@ export const MOONBASE_CHAINS = <const>[
   Chain.LitentryAlphanet,
   Chain.ParallelAlphanet,
 ];
-export const MOONBASE_CHINS_CONFIGS: Readonly<
+export const MOONBASE_CHAINS_CONFIGS: Readonly<
   Record<MoonbaseChains, ChainConfig>
 > = {
   [Chain.AlphanetRelay]: {
@@ -204,7 +204,7 @@ export const MOONRIVER_CHAINS = <const>[
   Chain.Shiden,
   Chain.Statemine,
 ];
-export const MOONRIVER_CHINS_CONFIGS: Readonly<
+export const MOONRIVER_CHAINS_CONFIGS: Readonly<
   Record<MoonriverChains, ChainConfig>
 > = {
   [Chain.Bifrost]: {
@@ -303,7 +303,7 @@ export const MOONBEAM_CHAINS = <const>[
   Chain.Parallel,
   Chain.Polkadot,
 ];
-export const MOONBEAM_CHINS_CONFIGS: Readonly<
+export const MOONBEAM_CHAINS_CONFIGS: Readonly<
   Record<MoonbeamChains, ChainConfig>
 > = {
   [Chain.Acala]: {

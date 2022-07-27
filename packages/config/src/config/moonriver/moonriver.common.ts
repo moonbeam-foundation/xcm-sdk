@@ -1,7 +1,7 @@
 import { createBalanceBuilder } from '../../balance';
 import {
   MOONRIVER_ASSETS_CONFIGS as assets,
-  MOONRIVER_CHINS_CONFIGS as chains,
+  MOONRIVER_CHAINS_CONFIGS as chains,
   MoonChain,
   MOON_CHINS_CONFIGS,
 } from '../../constants';
