@@ -12,7 +12,7 @@ export enum MoonChain {
   Moonbeam = 'Moonbeam',
   Moonriver = 'Moonriver',
 }
-export const MOON_CHINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
+export const MOON_CHAINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
   {
     [MoonChain.MoonbaseAlpha]: {
       chain: MoonChain.MoonbaseAlpha,
