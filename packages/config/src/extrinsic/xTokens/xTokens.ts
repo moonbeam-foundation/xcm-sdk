@@ -9,7 +9,7 @@ import {
   XTokensTransferExtrinsic,
   XTokensTransferMultiAssetExtrinsic,
   XTokensTransferMultiCurrenciesExtrinsic,
-  XTokenTransferExtrinsicParamsToken,
+  XTokensTransferExtrinsicParamsAsset,
 } from './xTokens.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -26,7 +26,7 @@ function transfer<Assets extends Asset>(chain: MoonChainConfig) {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
       origin: (origin: ChainConfig) => ({
         asset: (
-          token: XTokenTransferExtrinsicParamsToken<Assets>,
+          token: XTokensTransferExtrinsicParamsAsset<Assets>,
         ): XTokensTransferExtrinsic<Assets> => ({
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.Transfer,
