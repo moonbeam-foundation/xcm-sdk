@@ -3,5 +3,6 @@ module.exports = {
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   testPathIgnorePatterns: ['build'],
-  setupFilesAfterEnv: ['./jestSetupFile.ts'],
+  setupFiles: ['./jestSetupFile.ts'],
+  setupFilesAfterEnv: ['./jestSetupFileAfterEnv.ts'],
 };

@@ -15,7 +15,7 @@ export function createBalanceBuilder<Assets extends Asset>() {
     assets,
     min,
     system,
-    tokens: (asset: number | Assets | 'MOVR' | 'KUSD' | 'AUSD') =>
+    tokens: (asset: number | bigint | Assets | 'MOVR' | 'KUSD' | 'AUSD') =>
       tokens<Assets>(asset),
   };
 }
@@ -50,7 +50,7 @@ function system(): SystemBalanceConfig {
 }
 
 function tokens<Assets extends Asset>(
-  asset: number | Assets | 'MOVR' | 'KUSD' | 'AUSD',
+  asset: number | bigint | Assets | 'MOVR' | 'KUSD' | 'AUSD',
 ): TokensBalanceConfig<Assets> {
   return {
     pallet: BalancePallet.Tokens,

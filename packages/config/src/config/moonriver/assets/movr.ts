@@ -1,9 +1,10 @@
-import { Asset, Chain, MOVR_ID } from '../../../constants';
+import { Asset, Chain } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../extrinsic';
+import { getMoonAssetId, getPalletInstance } from '../../config.utils';
 import {
   assets,
   balance,
@@ -21,10 +22,10 @@ const khala = chains[Chain.Khala];
 const parallel = chains[Chain.Parallel];
 const shiden = chains[Chain.Shiden];
 
-const karuraMovrId = MOVR_ID[Chain.Karura];
-const khalaMovrId = MOVR_ID[Chain.Khala];
-const parallelMovrId = MOVR_ID[Chain.Parallel];
-const shidenMovrId = MOVR_ID[Chain.Shiden];
+const karuraMovrId = getMoonAssetId(karura);
+const khalaMovrId = getMoonAssetId(khala);
+const parallelMovrId = getMoonAssetId(parallel);
+const shidenMovrId = getMoonAssetId(shiden);
 
 export const MOVR: MoonriverXcmConfig = <const>{
   asset,
@@ -65,7 +66,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
         .transfer()
         .successEvent(XTransferExtrinsicSuccessEvent.Withdrawn)
         .origin(khala)
-        .X2(10),
+        .X2(getPalletInstance(khala)),
     },
     [parallel.chain]: {
       origin: parallel,
@@ -88,7 +89,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(shiden)
         .V1()
-        .X2(10),
+        .X2(getPalletInstance(shiden)),
     },
   },
   withdraw: {

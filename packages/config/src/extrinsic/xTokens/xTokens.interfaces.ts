@@ -31,12 +31,12 @@ export interface XTokensBaseExtrinsic<
 }
 
 export interface XTokensParamsByExtrinsic<Assets extends Asset> {
-  [XTokensExtrinsic.Transfer]: XTokenTransferExtrinsicParams<Assets>;
+  [XTokensExtrinsic.Transfer]: XTokensTransferExtrinsicParams<Assets>;
   [XTokensExtrinsic.TransferMultiAsset]: XTokensTransferMultiAssetExtrinsicParams<Assets>;
   [XTokensExtrinsic.TransferMultiCurrencies]: XTokensTransferMultiCurrenciesExtrinsicParams<Assets>;
 }
 
-export type XTokenTransferExtrinsicParams<Assets extends Asset> = [
+export type XTokensTransferExtrinsicParams<Assets extends Asset> = [
   /**
    * asset
    */
@@ -48,13 +48,14 @@ export type XTokenTransferExtrinsicParams<Assets extends Asset> = [
         Native: Assets;
       }
     | {
-        ForeignAsset: number;
+        ForeignAsset: number | bigint;
       }
     | {
-        MantaCurrency: number;
+        MantaCurrency: number | bigint;
       }
     | Assets
     | number
+    | bigint
     | string
   ),
   /**
@@ -91,7 +92,7 @@ export type XTokenTransferExtrinsicParams<Assets extends Asset> = [
   number,
 ];
 
-export type XTokenTransferExtrinsicParamsToken<Assets extends Asset> =
+export type XTokensTransferExtrinsicParamsAsset<Assets extends Asset> =
   | {
       Token: Assets | 'KUSD' | 'MOVR';
     }
@@ -99,13 +100,14 @@ export type XTokenTransferExtrinsicParamsToken<Assets extends Asset> =
       Native: Assets;
     }
   | {
-      ForeignAsset: number;
+      ForeignAsset: number | bigint;
     }
   | {
-      MantaCurrency: number;
+      MantaCurrency: number | bigint;
     }
   | Assets
   | number
+  | bigint
   | string;
 
 export type XTokensTransferMultiAssetExtrinsicParams<Assets extends Asset> = [
