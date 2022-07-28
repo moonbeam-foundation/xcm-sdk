@@ -1,13 +1,10 @@
 import { createBalanceBuilder } from '../../balance';
-import {
-  MOONRIVER_ASSETS_CONFIGS as assets,
-  MOONRIVER_CHAINS_CONFIGS as chains,
-  MoonChain,
-  MOON_CHAINS_CONFIGS,
-} from '../../constants';
+import { MoonChain, MOON_CHAINS_CONFIGS } from '../../constants';
+import { MOONRIVER_ASSETS_CONFIGS as assets } from './moonriver.assets';
+import { MOONRIVER_CHAINS_CONFIGS as chains } from './moonriver.chains';
 import { createExtrinsicBuilder } from '../../extrinsic';
-import { MoonriverAssets } from '../../interfaces';
 import { createWithdrawBuilder } from '../../withdraw';
+import { MoonriverAssets } from './moonriver.interfaces';
 
 export { assets, chains };
 

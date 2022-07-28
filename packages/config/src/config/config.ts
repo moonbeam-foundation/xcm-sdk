@@ -1,18 +1,15 @@
 import { Asset, Chain } from '../constants';
 import { DepositConfig } from '../deposit';
-import {
-  MoonbaseAssets,
-  MoonbaseChains,
-  MoonbeamAssets,
-  MoonbeamChains,
-  MoonriverAssets,
-  MoonriverChains,
-} from '../interfaces';
+import {} from '../interfaces';
 import { WithdrawConfig } from '../withdraw';
 import { ChainXcmConfigs } from './config.interfaces';
-import { MOONBASE_CONFIGS } from './moonbase';
-import { MOONBEAM_CONFIGS } from './moonbeam';
-import { MOONRIVER_CONFIGS } from './moonriver';
+import { MoonbaseAssets, MoonbaseChains, MOONBASE_CONFIGS } from './moonbase';
+import { MoonbeamAssets, MoonbeamChains, MOONBEAM_CONFIGS } from './moonbeam';
+import {
+  MoonriverAssets,
+  MoonriverChains,
+  MOONRIVER_CONFIGS,
+} from './moonriver';
 
 export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
   configs: ChainXcmConfigs<Assets, Chains>,

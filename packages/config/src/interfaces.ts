@@ -1,23 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import {
-  Asset,
-  Chain,
-  MOONBASE_ASSETS,
-  MOONBASE_CHAINS,
-  MOONBEAM_ASSETS,
-  MOONBEAM_CHAINS,
-  MoonChain,
-  MOONRIVER_ASSETS,
-  MOONRIVER_CHAINS,
-} from './constants';
-
-export type MoonbaseAssets = typeof MOONBASE_ASSETS[number];
-export type MoonriverAssets = typeof MOONRIVER_ASSETS[number];
-export type MoonbeamAssets = typeof MOONBEAM_ASSETS[number];
-
-export type MoonbaseChains = typeof MOONBASE_CHAINS[number];
-export type MoonriverChains = typeof MOONRIVER_CHAINS[number];
-export type MoonbeamChains = typeof MOONBEAM_CHAINS[number];
+import { Asset, Chain, MoonChain } from './constants';
 
 export interface AssetConfig<Assets extends Asset> {
   id: string;
