@@ -44,4 +44,6 @@ export interface ChainConfig {
   ws: string;
   parachainId: number;
   weight: number;
+  moonAssetId?: number | bigint;
+  palletInstance?: number;
 }

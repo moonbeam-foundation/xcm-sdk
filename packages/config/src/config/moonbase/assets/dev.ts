@@ -1,8 +1,9 @@
-import { Asset, Chain, DEV_ID } from '../../../constants';
+import { Asset, Chain } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
 } from '../../../extrinsic';
+import { getMoonAssetId, getPalletInstance } from '../../config.utils';
 import {
   assets,
   balance,
@@ -14,13 +15,13 @@ import {
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.DEV];
-const karura = chains[Chain.KaruraAlphanet];
-const calamari = chains[Chain.CalamariAlphanet];
 const astar = chains[Chain.AstarAlphanet];
+const calamari = chains[Chain.CalamariAlphanet];
+const karura = chains[Chain.KaruraAlphanet];
 
-const karuraDevId = DEV_ID[Chain.KaruraAlphanet];
-const calamariDevId = DEV_ID[Chain.CalamariAlphanet];
-const astarDevId = DEV_ID[Chain.AstarAlphanet];
+const astarDevId = getMoonAssetId(astar);
+const calamariDevId = getMoonAssetId(calamari);
+const karuraDevId = getMoonAssetId(karura);
 
 export const DEV: MoonbaseXcmConfig = <const>{
   asset,
@@ -36,11 +37,11 @@ export const DEV: MoonbaseXcmConfig = <const>{
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(astar)
         .V1()
-        .X2(3),
+        .X2(getPalletInstance(astar)),
     },
     [calamari.chain]: {
       origin: calamari,
-      balance: balance.assets(karuraDevId),
+      balance: balance.assets(calamariDevId),
       extrinsicFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -68,7 +69,7 @@ export const DEV: MoonbaseXcmConfig = <const>{
       feePerWeight: 50_000,
     }),
     [calamari.chain]: withdraw.xTokens({
-      balance: balance.assets(calamariDevId),
+      balance: balance.assets(astarDevId),
       destination: calamari,
       feePerWeight: 50_000,
     }),

@@ -72,6 +72,7 @@ export const MOONBASE_ASSETS_CONFIGS: Readonly<
     id: '102433417954722588084020852587557555194',
     erc20Id: '0xffffffff4d0ff56d0097bbd14920eac488540bfa',
     originSymbol: Asset.BSX,
+    originAssetId: 0,
   },
   [Asset.CRU]: {
     id: '108457044225666871745333730479173774551',

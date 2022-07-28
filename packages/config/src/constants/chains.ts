@@ -64,14 +64,6 @@ export enum Chain {
   Statemine = 'Statemine',
 }
 
-export const DEV_ID = <const>{
-  [Chain.AstarAlphanet]: 100,
-  [Chain.BasiliskAlphanet]: 0,
-  [Chain.CalamariAlphanet]: 8,
-  [Chain.KaruraAlphanet]: 0,
-  [Chain.ParallelAlphanet]: 113,
-};
-
 export const MOONBASE_CHAINS = <const>[
   Chain.AlphanetRelay,
   Chain.AstarAlphanet,
@@ -96,6 +88,7 @@ export const MOONBASE_CHAINS_CONFIGS: Readonly<
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
     parachainId: 0,
+    moonAssetId: 100,
   },
   [Chain.AstarAlphanet]: {
     chain: Chain.AstarAlphanet,
@@ -103,6 +96,7 @@ export const MOONBASE_CHAINS_CONFIGS: Readonly<
     ws: 'wss://alphanet.astar.network/',
     weight: 1_000_000_000,
     parachainId: 2007,
+    palletInstance: 3,
   },
   [Chain.BasiliskAlphanet]: {
     chain: Chain.BasiliskAlphanet,
@@ -110,6 +104,7 @@ export const MOONBASE_CHAINS_CONFIGS: Readonly<
     ws: 'wss://rpc-01.basilisk-moonbase.hydradx.io',
     weight: 1_000_000_000,
     parachainId: 2090,
+    moonAssetId: 0,
   },
   [Chain.BifrostAlphanet]: {
     chain: Chain.BifrostAlphanet,
@@ -124,6 +119,7 @@ export const MOONBASE_CHAINS_CONFIGS: Readonly<
     ws: 'wss://crispy.moonbase-relay.testnet.calamari.systems',
     weight: 1_000_000_000,
     parachainId: 2084,
+    moonAssetId: 8,
   },
   [Chain.CrustShadowAlphanet]: {
     chain: Chain.CrustShadowAlphanet,
@@ -159,6 +155,7 @@ export const MOONBASE_CHAINS_CONFIGS: Readonly<
     ws: 'wss://crosschain-dev.polkawallet.io:9908',
     weight: 1_000_000_000,
     parachainId: 2000,
+    moonAssetId: 0,
   },
   [Chain.KhalaAlphanet]: {
     chain: Chain.KhalaAlphanet,
@@ -180,14 +177,8 @@ export const MOONBASE_CHAINS_CONFIGS: Readonly<
     ws: 'wss://crosschain-dev-rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2085,
+    moonAssetId: 113,
   },
-};
-
-export const MOVR_ID = <const>{
-  [Chain.Karura]: 3,
-  [Chain.Khala]: 6,
-  [Chain.Parallel]: 113,
-  [Chain.Shiden]: 18446744073709551620n,
 };
 
 export const MOONRIVER_CHAINS = <const>[
@@ -248,6 +239,7 @@ export const MOONRIVER_CHAINS_CONFIGS: Readonly<
     ws: 'wss://karura.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2000,
+    moonAssetId: 3,
   },
   [Chain.Khala]: {
     chain: Chain.Khala,
@@ -255,6 +247,8 @@ export const MOONRIVER_CHAINS_CONFIGS: Readonly<
     ws: 'wss://khala.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2004,
+    moonAssetId: 6,
+    palletInstance: 10,
   },
   [Chain.Kintsugi]: {
     chain: Chain.Kintsugi,
@@ -276,6 +270,7 @@ export const MOONRIVER_CHAINS_CONFIGS: Readonly<
     ws: 'wss://heiko-rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2085,
+    moonAssetId: 113,
   },
   [Chain.Shiden]: {
     chain: Chain.Shiden,
@@ -283,6 +278,8 @@ export const MOONRIVER_CHAINS_CONFIGS: Readonly<
     ws: 'wss://shiden.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2007,
+    moonAssetId: 18446744073709551620n,
+    palletInstance: 10,
   },
   [Chain.Statemine]: {
     chain: Chain.Statemine,
@@ -290,12 +287,8 @@ export const MOONRIVER_CHAINS_CONFIGS: Readonly<
     ws: 'wss://statemine-rpc.polkadot.io',
     weight: 1_000_000_000,
     parachainId: 1000,
+    palletInstance: 50,
   },
-};
-
-export const GLMR_ID = <const>{
-  [Chain.Acala]: 0,
-  [Chain.Parallel]: 114,
 };
 
 export const MOONBEAM_CHAINS = <const>[
@@ -312,6 +305,7 @@ export const MOONBEAM_CHAINS_CONFIGS: Readonly<
     ws: 'wss://acala-polkadot.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2000,
+    moonAssetId: 0,
   },
   [Chain.Parallel]: {
     chain: Chain.Parallel,
@@ -319,6 +313,7 @@ export const MOONBEAM_CHAINS_CONFIGS: Readonly<
     ws: 'wss://rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2012,
+    moonAssetId: 114,
   },
   [Chain.Polkadot]: {
     chain: Chain.Polkadot,

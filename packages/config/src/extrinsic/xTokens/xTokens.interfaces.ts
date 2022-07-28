@@ -48,13 +48,14 @@ export type XTokensTransferExtrinsicParams<Assets extends Asset> = [
         Native: Assets;
       }
     | {
-        ForeignAsset: number;
+        ForeignAsset: number | bigint;
       }
     | {
-        MantaCurrency: number;
+        MantaCurrency: number | bigint;
       }
     | Assets
     | number
+    | bigint
     | string
   ),
   /**
@@ -99,13 +100,14 @@ export type XTokensTransferExtrinsicParamsAsset<Assets extends Asset> =
       Native: Assets;
     }
   | {
-      ForeignAsset: number;
+      ForeignAsset: number | bigint;
     }
   | {
-      MantaCurrency: number;
+      MantaCurrency: number | bigint;
     }
   | Assets
   | number
+  | bigint
   | string;
 
 export type XTokensTransferMultiAssetExtrinsicParams<Assets extends Asset> = [
