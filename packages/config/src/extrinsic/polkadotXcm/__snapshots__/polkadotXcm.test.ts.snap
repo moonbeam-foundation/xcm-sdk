@@ -1,0 +1,298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`polkadotXcm limitedReserveTransferAssets v0 should be correct config 1`] = `
+Object {
+  "extrinsic": "limitedReserveTransferAssets",
+  "getParams": [Function],
+  "pallet": "polkadotXcm",
+  "successEvent": "Attempted",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v0 should get correct params 1`] = `
+Array [
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  Object {
+    "V0": Array [
+      Object {
+        "ConcreteFungible": Object {
+          "amount": 1000n,
+          "id": "Null",
+        },
+      },
+    ],
+  },
+  0,
+  Object {
+    "Limited": 1000000000,
+  },
+]
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v1 here should be correct config 1`] = `
+Object {
+  "extrinsic": "limitedReserveTransferAssets",
+  "getParams": [Function],
+  "pallet": "polkadotXcm",
+  "successEvent": "Attempted",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v1 here should get correct params 1`] = `
+Array [
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  Object {
+    "V1": Array [
+      Object {
+        "fun": Object {
+          "Fungible": 1000n,
+        },
+        "id": Object {
+          "Concrete": Object {
+            "interior": "Here",
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  Object {
+    "Limited": 1000000000,
+  },
+]
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v1 x1 should be correct config 1`] = `
+Object {
+  "extrinsic": "limitedReserveTransferAssets",
+  "getParams": [Function],
+  "pallet": "polkadotXcm",
+  "successEvent": "Attempted",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v1 x1 should get correct params 1`] = `
+Array [
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  Object {
+    "V1": Array [
+      Object {
+        "fun": Object {
+          "Fungible": 1000n,
+        },
+        "id": Object {
+          "Concrete": Object {
+            "interior": Object {
+              "X1": Object {
+                "PalletInstance": 5,
+              },
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  Object {
+    "Limited": 1000000000,
+  },
+]
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v1 x2 should be correct config 1`] = `
+Object {
+  "extrinsic": "limitedReserveTransferAssets",
+  "getParams": [Function],
+  "pallet": "polkadotXcm",
+  "successEvent": "Attempted",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets v1 x2 should get correct params 1`] = `
+Array [
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  Object {
+    "V1": Array [
+      Object {
+        "fun": Object {
+          "Fungible": 1000n,
+        },
+        "id": Object {
+          "Concrete": Object {
+            "interior": Object {
+              "X2": Array [
+                Object {
+                  "PalletInstance": 10,
+                },
+                Object {
+                  "GeneralIndex": 50,
+                },
+              ],
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  Object {
+    "Limited": 1000000000,
+  },
+]
+`;
+
+exports[`polkadotXcm limitedReserveWithdrawAssets v1 x2 should be correct config 1`] = `
+Object {
+  "extrinsic": "limitedReserveWithdrawAssets",
+  "getParams": [Function],
+  "pallet": "polkadotXcm",
+  "successEvent": "Attempted",
+}
+`;
+
+exports[`polkadotXcm limitedReserveWithdrawAssets v1 x2 should get correct params 1`] = `
+Array [
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X1": Object {
+          "AccountKey20": Object {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  Object {
+    "V1": Array [
+      Object {
+        "fun": Object {
+          "Fungible": 1000n,
+        },
+        "id": Object {
+          "Concrete": Object {
+            "interior": Object {
+              "X2": Array [
+                Object {
+                  "PalletInstance": 10,
+                },
+                Object {
+                  "Parachain": 1000,
+                },
+              ],
+            },
+            "parents": 1,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  Object {
+    "Limited": 1000000000,
+  },
+]
+`;

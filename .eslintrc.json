@@ -1,6 +1,12 @@
 {
-  "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:jest/all",
+    "prettier"
+  ],
   "plugins": [
+    "jest",
     // this should be last
     "prettier"
   ],
@@ -11,6 +17,7 @@
   "rules": {
     "prettier/prettier": "error",
     "import/prefer-default-export": "off",
-    "import/no-default-export": "error"
+    "import/no-default-export": "error",
+    "jest/prefer-expect-assertions": "off"
   }
 }

@@ -1,0 +1,19 @@
+name: lint
+
+on: push
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 16.x
+          cache: 'npm'
+      - run: npm ci
+
+      - name: Run linter
+        run: npm run lint

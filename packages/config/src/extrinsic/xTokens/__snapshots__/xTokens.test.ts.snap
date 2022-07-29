@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`xTokens transfer should be correct config 1`] = `
+Object {
+  "extrinsic": "transfer",
+  "getParams": [Function],
+  "pallet": "xTokens",
+  "successEvent": "Transferred",
+}
+`;
+
+exports[`xTokens transfer should get correct params 1`] = `
+Array [
+  Object {
+    "Token": "MOVR",
+  },
+  1000n,
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X2": Array [
+          Object {
+            "Parachain": 1000,
+          },
+          Object {
+            "AccountKey20": Object {
+              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+              "network": "Any",
+            },
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  1000000000,
+]
+`;
+
+exports[`xTokens transferMultiAsset should be correct config 1`] = `
+Object {
+  "extrinsic": "transferMultiasset",
+  "getParams": [Function],
+  "pallet": "xTokens",
+  "successEvent": "Transferred",
+}
+`;
+
+exports[`xTokens transferMultiAsset should get correct params 1`] = `
+Array [
+  Object {
+    "V1": Object {
+      "fun": Object {
+        "Fungible": 1000n,
+      },
+      "id": Object {
+        "Concrete": Object {
+          "interior": Object {
+            "X2": Array [
+              Object {
+                "Parachain": 0,
+              },
+              Object {
+                "GeneralKey": "ASTR",
+              },
+            ],
+          },
+          "parents": 1,
+        },
+      },
+    },
+  },
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X2": Array [
+          Object {
+            "Parachain": 1000,
+          },
+          Object {
+            "AccountKey20": Object {
+              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+              "network": "Any",
+            },
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  1000000000,
+]
+`;
+
+exports[`xTokens transferMultiCurrencies should be correct config 1`] = `
+Object {
+  "extrinsic": "transferMulticurrencies",
+  "getParams": [Function],
+  "pallet": "xTokens",
+  "successEvent": "Transferred",
+}
+`;
+
+exports[`xTokens transferMultiCurrencies should get correct params 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "Token": "ASTR",
+      },
+      1000n,
+    ],
+    Array [
+      Object {
+        "Token": "ASTR",
+      },
+      99n,
+    ],
+  ],
+  1,
+  Object {
+    "V1": Object {
+      "interior": Object {
+        "X2": Array [
+          Object {
+            "Parachain": 1000,
+          },
+          Object {
+            "AccountKey20": Object {
+              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+              "network": "Any",
+            },
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  1000000000,
+]
+`;
