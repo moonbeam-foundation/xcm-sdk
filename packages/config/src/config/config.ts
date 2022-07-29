@@ -1,19 +1,33 @@
 import { Asset, Chain } from '../constants';
-import { DepositConfig } from '../deposit';
 import {} from '../interfaces';
-import { WithdrawConfig } from '../withdraw';
-import { ChainXcmConfigs } from './config.interfaces';
-import { MoonbaseAssets, MoonbaseChains, MOONBASE_CONFIGS } from './moonbase';
-import { MoonbeamAssets, MoonbeamChains, MOONBEAM_CONFIGS } from './moonbeam';
+import {
+  ChainsConfigs,
+  ChainXcmConfigs,
+  ConfigGetter,
+} from './config.interfaces';
+import {
+  MoonbaseAssets,
+  MoonbaseChains,
+  MOONBASE_CHAINS_CONFIGS,
+  MOONBASE_CONFIGS,
+} from './moonbase';
+import {
+  MoonbeamAssets,
+  MoonbeamChains,
+  MOONBEAM_CHAINS_CONFIGS,
+  MOONBEAM_CONFIGS,
+} from './moonbeam';
 import {
   MoonriverAssets,
   MoonriverChains,
+  MOONRIVER_CHAINS_CONFIGS,
   MOONRIVER_CONFIGS,
 } from './moonriver';
 
 export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
   configs: ChainXcmConfigs<Assets, Chains>,
-) {
+  chains: ChainsConfigs<Chains>,
+): ConfigGetter<Assets, Chains> {
   return {
     deposit: (asset: Assets) => {
       const config = configs[asset];
@@ -23,17 +37,23 @@ export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
       }
 
       return {
-        chains: Object.keys(config.deposit) as Chains[],
-        from: (chain: Chains): DepositConfig<Assets> => {
-          const cfg = config.deposit[chain];
+        chains: (Object.keys(config.deposit) as Chains[]).map(
+          (chain) => chains[chain],
+        ),
+        from: (chain: Chains) => {
+          const depositConfig = config.deposit[chain];
 
-          if (!cfg) {
+          if (!depositConfig) {
             throw new Error(
               `No deposit config found for asset: ${asset} and chain: ${chain}`,
             );
           }
 
-          return cfg;
+          return {
+            asset: config.asset,
+            origin: config.origin,
+            config: depositConfig,
+          };
         },
       };
     },
@@ -45,17 +65,23 @@ export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
       }
 
       return {
-        chains: Object.keys(config.withdraw) as Chains[],
-        to: (chain: Chains): WithdrawConfig<Assets> => {
-          const cfg = config.withdraw[chain];
+        chains: (Object.keys(config.withdraw) as Chains[]).map(
+          (chain) => chains[chain],
+        ),
+        to: (chain: Chains) => {
+          const withdrawConfig = config.withdraw[chain];
 
-          if (!cfg) {
+          if (!withdrawConfig) {
             throw new Error(
               `No withdraw config found for asset: ${asset} and chain: ${chain}`,
             );
           }
 
-          return cfg;
+          return {
+            asset: config.asset,
+            origin: config.origin,
+            config: withdrawConfig,
+          };
         },
       };
     },
@@ -64,10 +90,13 @@ export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
 
 export const moonbase = createConfigGetter<MoonbaseAssets, MoonbaseChains>(
   MOONBASE_CONFIGS,
+  MOONBASE_CHAINS_CONFIGS,
 );
 export const moonbeam = createConfigGetter<MoonbeamAssets, MoonbeamChains>(
   MOONBEAM_CONFIGS,
+  MOONBEAM_CHAINS_CONFIGS,
 );
 export const moonriver = createConfigGetter<MoonriverAssets, MoonriverChains>(
   MOONRIVER_CONFIGS,
+  MOONRIVER_CHAINS_CONFIGS,
 );

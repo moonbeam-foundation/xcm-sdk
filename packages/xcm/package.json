@@ -38,5 +38,9 @@
     }
   },
   "types": "./build/cjs/src/index.d.ts",
-  "main": "./build/cjs/src/index.js"
+  "main": "./build/cjs/src/index.js",
+  "dependencies": {
+    "@polkadot/api": "^8.14.1",
+    "ethers": "^5.6.9"
+  }
 }

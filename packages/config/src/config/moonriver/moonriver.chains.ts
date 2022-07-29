@@ -1,5 +1,5 @@
 import { Chain } from '../../constants';
-import { ChainConfig } from '../../interfaces';
+import { ChainsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonriverChains } from './moonriver.interfaces';
 
@@ -17,9 +17,8 @@ export const MOONRIVER_CHAINS = <const>[
   Chain.Shiden,
   Chain.Statemine,
 ];
-export const MOONRIVER_CHAINS_CONFIGS: Readonly<
-  Record<MoonriverChains, ChainConfig>
-> = {
+
+export const MOONRIVER_CHAINS_CONFIGS: ChainsConfigs<MoonriverChains> = {
   [Chain.Bifrost]: {
     chain: Chain.Bifrost,
     name: 'Bifrost',

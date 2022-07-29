@@ -5,6 +5,6 @@
     "rootDir": ".",
     "outDir": "build/cjs"
   },
-  "include": ["src"],
+  "include": ["src", "**/*.json"],
   "exclude": ["**/*.test.ts"]
 }

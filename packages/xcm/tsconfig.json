@@ -4,6 +4,6 @@
     "rootDir": ".",
     "outDir": "build/mjs"
   },
-  "include": ["src"],
+  "include": ["src", "**/*.json"],
   "exclude": ["**/*.test.ts"]
 }

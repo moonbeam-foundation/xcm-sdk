@@ -1,5 +1,5 @@
 import { Chain } from '../../constants';
-import { ChainConfig } from '../../interfaces';
+import { ChainsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbaseChains } from './moonbase.interfaces';
 
@@ -18,9 +18,8 @@ export const MOONBASE_CHAINS = <const>[
   Chain.LitentryAlphanet,
   Chain.ParallelAlphanet,
 ];
-export const MOONBASE_CHAINS_CONFIGS: Readonly<
-  Record<MoonbaseChains, ChainConfig>
-> = {
+
+export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
   [Chain.AlphanetRelay]: {
     chain: Chain.AlphanetRelay,
     name: 'Alphanet Relay',
