@@ -1,5 +1,5 @@
-import { Asset, Chain } from '../constants';
-import {} from '../interfaces';
+import { Asset, Chain, MoonChain, MOON_CHAINS_CONFIGS } from '../constants';
+import { MoonChainConfig } from '../interfaces';
 import {
   ChainsConfigs,
   ChainXcmConfigs,
@@ -25,10 +25,12 @@ import {
 } from './moonriver';
 
 export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
-  configs: ChainXcmConfigs<Assets, Chains>,
+  moonChain: MoonChainConfig,
   chains: ChainsConfigs<Chains>,
+  configs: ChainXcmConfigs<Assets, Chains>,
 ): ConfigGetter<Assets, Chains> {
   return {
+    chain: moonChain,
     deposit: (asset: Assets) => {
       const config = configs[asset];
 
@@ -89,14 +91,17 @@ export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
 }
 
 export const moonbase = createConfigGetter<MoonbaseAssets, MoonbaseChains>(
-  MOONBASE_CONFIGS,
+  MOON_CHAINS_CONFIGS[MoonChain.MoonbaseAlpha],
   MOONBASE_CHAINS_CONFIGS,
+  MOONBASE_CONFIGS,
 );
 export const moonbeam = createConfigGetter<MoonbeamAssets, MoonbeamChains>(
-  MOONBEAM_CONFIGS,
+  MOON_CHAINS_CONFIGS[MoonChain.Moonbeam],
   MOONBEAM_CHAINS_CONFIGS,
+  MOONBEAM_CONFIGS,
 );
 export const moonriver = createConfigGetter<MoonriverAssets, MoonriverChains>(
-  MOONRIVER_CONFIGS,
+  MOON_CHAINS_CONFIGS[MoonChain.Moonriver],
   MOONRIVER_CHAINS_CONFIGS,
+  MOONRIVER_CONFIGS,
 );

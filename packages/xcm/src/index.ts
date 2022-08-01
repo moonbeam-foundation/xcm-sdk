@@ -17,6 +17,7 @@ import {
 import { Signer as PolkadotSigner } from '@polkadot/api/types';
 import { Signer as EthersSigner } from 'ethers';
 import { XTokensContract } from './contracts/XTokensContract';
+import { PolkadotService } from './polkadot';
 
 export interface Options {
   ethersSigner: EthersSigner;
@@ -59,19 +60,29 @@ function setup<Assets extends Asset, Chains extends Chain>(
           const { asset: assetConfig, origin, config } = to(chain);
 
           return {
-            params: async (account: string, amount: bigint) => ({
-              asset: assetConfig,
-              origin,
-              destination: config.destination,
-              fee: await contract.getTransferFees(
-                account,
-                amount,
-                assetConfig,
-                config,
-              ),
-              send: async () =>
-                contract.transfer(account, amount, assetConfig, config),
-            }),
+            get: async (account: string, amount: bigint) => {
+              const polkadot = await PolkadotService.create(
+                config.destination.ws,
+              );
+
+              return {
+                asset: assetConfig,
+                origin,
+                destination: config.destination,
+                destinationBalance: await polkadot.getGenericBalance(
+                  account,
+                  config.balance,
+                ),
+                fee: await contract.getTransferFees(
+                  account,
+                  amount,
+                  assetConfig,
+                  config,
+                ),
+                send: async () =>
+                  contract.transfer(account, amount, assetConfig, config),
+              };
+            },
           };
         },
       };

@@ -2,6 +2,7 @@
 
 exports[`balance assets should be correct balance config 1`] = `
 Object {
+  "calc": [Function],
   "function": "account",
   "getParams": [Function],
   "pallet": "assets",
@@ -20,6 +21,7 @@ Array [
 
 exports[`balance min should be correct min config 1`] = `
 Object {
+  "calc": [Function],
   "function": "asset",
   "getParams": [Function],
   "pallet": "assets",
@@ -59,6 +61,7 @@ Object {
   "function": "accounts",
   "getParams": [Function],
   "pallet": "tokens",
+  "path": Array [],
 }
 `;
 

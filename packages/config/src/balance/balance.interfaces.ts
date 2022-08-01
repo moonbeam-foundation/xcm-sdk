@@ -21,6 +21,7 @@ export interface AssetsBalanceConfig {
   function: BalanceFunction.Account;
   path: ['balance'];
   getParams: (account: string) => [number | bigint, string];
+  calc: (balance: u128) => bigint;
 }
 
 export interface TokensPalletAccountData {
@@ -32,6 +33,7 @@ export interface TokensPalletAccountData {
 export interface TokensBalanceConfig<Assets extends Asset> {
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
+  path: [];
   getParams: (account: string) => [
     string,
     (
@@ -49,4 +51,5 @@ export interface MinBalanceConfig {
   function: BalanceFunction.Asset;
   path: ['minBalance'];
   getParams: () => [number];
+  calc: (balance: u128) => bigint;
 }
