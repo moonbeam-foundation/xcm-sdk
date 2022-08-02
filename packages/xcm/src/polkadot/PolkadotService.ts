@@ -1,6 +1,9 @@
+import '@moonbeam-network/api-augment';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Asset, BalanceConfig } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
+import { PalletAssetsAssetMetadata } from '@polkadot/types/lookup';
 import { get } from 'lodash';
 import { getPolkadotApi } from './polkadot.api';
 
@@ -13,6 +16,21 @@ export class PolkadotService {
 
   static async create(ws: string): Promise<PolkadotService> {
     return new PolkadotService(await getPolkadotApi(ws));
+  }
+
+  async getDecimals(id: string): Promise<number> {
+    const meta = await this.getAssetMeta(id);
+
+    return meta.decimals.toNumber();
+  }
+
+  async getAssetMeta(id: string): Promise<PalletAssetsAssetMetadata> {
+    // TODO: how to fix any?
+    return this.#api.query.assets.metadata(id) as any;
+  }
+
+  getExistentialDeposit(): bigint {
+    return this.#api.consts.balances?.existentialDeposit.toBigInt() || 0n;
   }
 
   async getGenericBalance<Assets extends Asset>(

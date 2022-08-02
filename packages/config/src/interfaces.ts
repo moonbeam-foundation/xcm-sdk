@@ -21,7 +21,9 @@ export interface ChainBaseConfig<Chains = Chain> {
   parachainId: number;
 }
 
-export interface MoonChainConfig extends ChainBaseConfig<MoonChain> {}
+export interface MoonChainConfig extends ChainBaseConfig<MoonChain> {
+  decimals: number;
+}
 
 export interface ChainConfig extends ChainBaseConfig {
   weight: number;

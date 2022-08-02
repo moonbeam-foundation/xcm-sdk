@@ -28,6 +28,7 @@ export interface WithdrawConfigGetter<
 }
 
 export interface ConfigGetter<Assets extends Asset, Chains extends Chain> {
+  asset: AssetConfig<Assets>;
   chain: MoonChainConfig;
   deposit: (asset: Assets) => DepositConfigGetter<Assets, Chains>;
   withdraw: (asset: Assets) => WithdrawConfigGetter<Assets, Chains>;

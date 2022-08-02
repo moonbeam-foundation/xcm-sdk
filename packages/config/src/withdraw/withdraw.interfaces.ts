@@ -10,7 +10,7 @@ export interface WithdrawXTokensConfig<Assets extends Asset> {
   destination: ChainConfig;
   existentialDeposit: number | bigint;
   feePerWeight: number;
-  weight: number | bigint;
+  weight: number;
   getParams: (account: string) => WithdrawXTokensParams;
 }
 
@@ -52,5 +52,5 @@ export interface WithdrawXTokensOptions<Assets extends Asset> {
   destination: ChainConfig;
   existentialDeposit?: number | bigint;
   feePerWeight: number;
-  weight?: number | bigint;
+  weight?: number;
 }

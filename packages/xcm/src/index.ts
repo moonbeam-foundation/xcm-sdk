@@ -26,28 +26,53 @@ export interface Options {
 
 export function XcmSDK(options: Options) {
   return {
-    moonbase: setup<MoonbaseAssets, MoonbaseChains>(moonbase, options),
-    moonbeam: setup<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
-    moonriver: setup<MoonriverAssets, MoonriverChains>(moonriver, options),
+    moonbase: create<MoonbaseAssets, MoonbaseChains>(moonbase, options),
+    moonbeam: create<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
+    moonriver: create<MoonriverAssets, MoonriverChains>(moonriver, options),
   };
 }
 
-function setup<Assets extends Asset, Chains extends Chain>(
+function create<Assets extends Asset, Chains extends Chain>(
   configGetter: ConfigGetter<Assets, Chains>,
   options: Options,
 ) {
   const contract = new XTokensContract<Assets>(options.ethersSigner);
 
   return {
+    // TODO: balances
+    asset: configGetter.asset,
+    chain: configGetter.chain,
     deposit: (asset: Assets) => {
-      const depositConfig = configGetter.deposit(asset);
+      const { chains, from } = configGetter.deposit(asset);
 
       return {
-        chains: depositConfig.chains,
-        from: async (chain: Chains) => {
-          const cfg = depositConfig.from(chain);
+        chains,
+        from: (chain: Chains) => {
+          const { asset: assetConfig, origin, config } = from(chain);
 
-          return { cfg, options };
+          return {
+            get: async (account: string, amount: bigint) => {
+              const polkadot = await PolkadotService.create(config.origin.ws);
+              const [decimals, sourceBalance] = await Promise.all([
+                polkadot.getDecimals(assetConfig.id),
+                polkadot.getGenericBalance(account, config.balance),
+              ]);
+              const extrinsicFeeBalance = config.extrinsicFeeBalance
+                ? await polkadot.getGenericBalance(
+                    account,
+                    config.extrinsicFeeBalance,
+                  )
+                : undefined;
+
+              return {
+                asset: { ...assetConfig, decimals },
+                origin,
+                source: config.origin,
+                sourceBalance,
+                extrinsicFeeBalance,
+              };
+            },
+          };
         },
       };
     },
@@ -64,21 +89,21 @@ function setup<Assets extends Asset, Chains extends Chain>(
               const polkadot = await PolkadotService.create(
                 config.destination.ws,
               );
+              const [decimals, destinationBalance, fee] = await Promise.all([
+                polkadot.getDecimals(assetConfig.id),
+                polkadot.getGenericBalance(account, config.balance),
+                contract.getTransferFees(account, amount, assetConfig, config),
+              ]);
 
+              // TODO: create interface
               return {
-                asset: assetConfig,
-                origin,
+                asset: { ...assetConfig, decimals },
                 destination: config.destination,
-                destinationBalance: await polkadot.getGenericBalance(
-                  account,
-                  config.balance,
-                ),
-                fee: await contract.getTransferFees(
-                  account,
-                  amount,
-                  assetConfig,
-                  config,
-                ),
+                destinationBalance,
+                destinationFee: config.weight * config.feePerWeight,
+                existentialDeposit: config.existentialDeposit,
+                fee,
+                origin,
                 send: async () =>
                   contract.transfer(account, amount, assetConfig, config),
               };
