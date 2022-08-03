@@ -36,8 +36,7 @@ function min(asset: number): MinBalanceConfig {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Asset,
     path: ['minBalance'],
-    getParams: () => [asset],
-    calc: (balance: u128) => balance.toBigInt(),
+    params: [asset],
   };
 }
 

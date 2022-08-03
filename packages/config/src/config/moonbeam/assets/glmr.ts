@@ -5,8 +5,8 @@ import {
   assets,
   balance,
   chains,
-  moonbeam,
   extrinsic,
+  moonbeam,
   withdraw,
 } from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
@@ -51,7 +51,6 @@ export const GLMR: MoonbeamXcmConfig = <const>{
     [acala.chain]: withdraw.xTokens({
       balance: balance.tokens(acalaGlmrId),
       destination: acala,
-      existentialDeposit: 100_000_000_000_000_000n,
       feePerWeight: 8_000_000,
     }),
     [parallel.chain]: withdraw.xTokens({

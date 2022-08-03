@@ -30,7 +30,6 @@ export const DOT: MoonbeamXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      existentialDeposit: 10_000_000_000,
       feePerWeight: 0.13,
     }),
   },

@@ -33,7 +33,6 @@ export const BNC: MoonriverXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      existentialDeposit: 10_000_000_000,
       feePerWeight: 6.4,
     }),
   },

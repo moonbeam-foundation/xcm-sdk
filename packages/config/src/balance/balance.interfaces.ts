@@ -50,6 +50,5 @@ export interface MinBalanceConfig {
   pallet: BalancePallet.Assets;
   function: BalanceFunction.Asset;
   path: ['minBalance'];
-  getParams: () => [number];
-  calc: (balance: u128) => bigint;
+  params: [number];
 }

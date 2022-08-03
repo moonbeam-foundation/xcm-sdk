@@ -31,7 +31,6 @@ export const PARA: MoonbeamXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      existentialDeposit: 100_000_000_000,
       feePerWeight: 16,
     }),
   },

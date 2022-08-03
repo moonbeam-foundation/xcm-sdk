@@ -34,7 +34,6 @@ export const KAR: MoonriverXcmConfig = <const>{
       balance: balance.system(),
       destination: origin,
       feePerWeight: 8,
-      existentialDeposit: 100_000_000_000,
     }),
   },
 };

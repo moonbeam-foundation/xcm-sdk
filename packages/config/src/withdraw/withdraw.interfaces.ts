@@ -8,7 +8,6 @@ export type WithdrawConfig<Assets extends Asset> =
 export interface WithdrawXTokensConfig<Assets extends Asset> {
   balance: BalanceConfig<Assets>;
   destination: ChainConfig;
-  existentialDeposit: number | bigint;
   feePerWeight: number;
   weight: number;
   getParams: (account: string) => WithdrawXTokensParams;
@@ -50,7 +49,6 @@ export type WithdrawXTokensParams = [
 export interface WithdrawXTokensOptions<Assets extends Asset> {
   balance: BalanceConfig<Assets>;
   destination: ChainConfig;
-  existentialDeposit?: number | bigint;
   feePerWeight: number;
   weight?: number;
 }

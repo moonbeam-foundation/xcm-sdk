@@ -34,7 +34,6 @@ export const AUSD: MoonbeamXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.tokens(asset.originSymbol),
       destination: origin,
-      existentialDeposit: 100_000_000_000,
       feePerWeight: 64,
     }),
   },

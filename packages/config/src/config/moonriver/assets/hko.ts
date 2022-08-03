@@ -32,7 +32,6 @@ export const HKO: MoonriverXcmConfig = <const>{
       balance: balance.system(),
       destination: origin,
       feePerWeight: 4.8,
-      existentialDeposit: 10_000_000_000,
     }),
   },
 };
