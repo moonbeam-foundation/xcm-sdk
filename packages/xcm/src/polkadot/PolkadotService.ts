@@ -12,21 +12,30 @@ export class PolkadotService {
 
   constructor(api: ApiPromise) {
     this.#api = api;
+
+    this.getGenericBalance.bind(this);
   }
 
   static async create(ws: string): Promise<PolkadotService> {
     return new PolkadotService(await getPolkadotApi(ws));
   }
 
-  async getDecimals(id: string): Promise<number> {
-    const meta = await this.getAssetMeta(id);
+  getMetadata() {
+    return {
+      decimals: this.#api.registry.chainDecimals.at(0) || 12,
+      symbol: this.#api.registry.chainTokens.at(0) || 'unknown',
+    };
+  }
+
+  async getAssetDecimals(assetId: string): Promise<number> {
+    const meta = await this.getAssetMeta(assetId);
 
     return meta.decimals.toNumber();
   }
 
-  async getAssetMeta(id: string): Promise<PalletAssetsAssetMetadata> {
+  async getAssetMeta(assetId: string): Promise<PalletAssetsAssetMetadata> {
     // TODO: how to fix any?
-    return this.#api.query.assets.metadata(id) as any;
+    return this.#api.query.assets.metadata(assetId) as any;
   }
 
   getExistentialDeposit(): bigint {

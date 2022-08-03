@@ -18,25 +18,30 @@ import { Signer as PolkadotSigner } from '@polkadot/api/types';
 import { Signer as EthersSigner } from 'ethers';
 import { XTokensContract } from './contracts/XTokensContract';
 import { PolkadotService } from './polkadot';
+import { call } from './utils';
 
 export interface Options {
   ethersSigner: EthersSigner;
   polkadotSigner: PolkadotSigner;
 }
 
-export function XcmSDK(options: Options) {
+export async function XcmSDK(options: Options) {
   return {
-    moonbase: create<MoonbaseAssets, MoonbaseChains>(moonbase, options),
-    moonbeam: create<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
-    moonriver: create<MoonriverAssets, MoonriverChains>(moonriver, options),
+    moonbase: await create<MoonbaseAssets, MoonbaseChains>(moonbase, options),
+    moonbeam: await create<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
+    moonriver: await create<MoonriverAssets, MoonriverChains>(
+      moonriver,
+      options,
+    ),
   };
 }
 
-function create<Assets extends Asset, Chains extends Chain>(
+async function create<Assets extends Asset, Chains extends Chain>(
   configGetter: ConfigGetter<Assets, Chains>,
   options: Options,
 ) {
   const contract = new XTokensContract<Assets>(options.ethersSigner);
+  const polkadot = await PolkadotService.create(configGetter.chain.ws);
 
   return {
     // TODO: balances
@@ -52,17 +57,24 @@ function create<Assets extends Asset, Chains extends Chain>(
 
           return {
             get: async (account: string, amount: bigint) => {
-              const polkadot = await PolkadotService.create(config.origin.ws);
+              const foreignPolkadot = await PolkadotService.create(
+                config.origin.ws,
+              );
               const [decimals, sourceBalance] = await Promise.all([
-                polkadot.getDecimals(assetConfig.id),
-                polkadot.getGenericBalance(account, config.balance),
+                polkadot.getAssetDecimals(assetConfig.id),
+                foreignPolkadot.getGenericBalance(account, config.balance),
               ]);
               const extrinsicFeeBalance = config.extrinsicFeeBalance
-                ? await polkadot.getGenericBalance(
+                ? await foreignPolkadot.getGenericBalance(
                     account,
                     config.extrinsicFeeBalance,
                   )
                 : undefined;
+              const extrinsicFeeBalance2 = call(
+                foreignPolkadot.getGenericBalance,
+                account,
+                config.extrinsicFeeBalance,
+              );
 
               return {
                 asset: { ...assetConfig, decimals },
@@ -86,12 +98,12 @@ function create<Assets extends Asset, Chains extends Chain>(
 
           return {
             get: async (account: string, amount: bigint) => {
-              const polkadot = await PolkadotService.create(
+              const foreignPolkadot = await PolkadotService.create(
                 config.destination.ws,
               );
               const [decimals, destinationBalance, fee] = await Promise.all([
-                polkadot.getDecimals(assetConfig.id),
-                polkadot.getGenericBalance(account, config.balance),
+                foreignPolkadot.getAssetDecimals(assetConfig.id),
+                foreignPolkadot.getGenericBalance(account, config.balance),
                 contract.getTransferFees(account, amount, assetConfig, config),
               ]);
 
