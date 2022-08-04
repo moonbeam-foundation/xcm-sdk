@@ -4,14 +4,19 @@ import '@moonbeam-network/api-augment';
 import {
   Asset,
   BalanceConfig,
+  ExtrinsicConfig,
   MinBalanceConfig,
 } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
-import { PalletAssetsAssetMetadata } from '@polkadot/types/lookup';
+import { SubmittableExtrinsic } from '@polkadot/api/types';
+import {
+  MoonbeamRuntimeXcmConfigAssetType,
+  PalletAssetsAssetMetadata,
+} from '@polkadot/types/lookup';
 import { get } from 'lodash';
 import { getPolkadotApi } from './polkadot.api';
 
-export class PolkadotService {
+export class PolkadotService<Assets extends Asset> {
   readonly #api: ApiPromise;
 
   constructor(api: ApiPromise) {
@@ -20,14 +25,16 @@ export class PolkadotService {
     this.getGenericBalance.bind(this);
   }
 
-  static async create(ws: string): Promise<PolkadotService> {
+  static async create<Assets extends Asset>(
+    ws: string,
+  ): Promise<PolkadotService<Assets>> {
     return new PolkadotService(await getPolkadotApi(ws));
   }
 
   getMetadata() {
     return {
       decimals: this.#api.registry.chainDecimals.at(0) || 12,
-      symbol: this.#api.registry.chainTokens.at(0) || 'unknown',
+      symbol: this.#api.registry.chainTokens.at(0) as Assets,
     };
   }
 
@@ -46,7 +53,7 @@ export class PolkadotService {
     return this.#api.query.assets.metadata(assetId) as any;
   }
 
-  async getGenericBalance<Assets extends Asset>(
+  async getGenericBalance(
     account: string,
     { pallet, function: fn, getParams, path, calc }: BalanceConfig<Assets>,
   ): Promise<bigint> {
@@ -78,30 +85,20 @@ export class PolkadotService {
   }
 
   getXcmExtrinsic(
-    extrinsicConfig: any,
-    plankAmount: bigint,
     account: string,
-    primaryAccount: string,
-    isProxy: boolean,
-    weight: number,
-    xcmFee?: bigint,
+    amount: bigint,
+    { pallet, extrinsic, getParams }: ExtrinsicConfig<Assets>,
+    fee?: bigint,
+    primaryAccount?: string,
   ): SubmittableExtrinsic<'promise'> {
-    let rawParams = JSON.stringify(extrinsicConfig.params)
-      .replace('%plankAmount%', plankAmount.toString())
-      .replace('%account%', account)
-      .replace('%weight%', weight.toString());
-    if (xcmFee)
-      rawParams = rawParams.replace('%xcmFeePlankAmount%', xcmFee.toString());
+    let transferExtrinsic = this.#api.tx[pallet][extrinsic](
+      // TODO: check issue with types and if we can fix it
+      // @ts-ignore
+      ...getParams(account, amount, fee),
+    );
 
-    const params = JSON.parse(rawParams);
-
-    let transferExtrinsic = this.api.tx[extrinsicConfig.pallet][
-      extrinsicConfig.extrinsic
-    ](...params);
-
-    if (isProxy) {
-      // TODO Check if it's a valid proxy account
-      transferExtrinsic = this.api.tx.proxy.proxy(
+    if (primaryAccount) {
+      transferExtrinsic = this.#api.tx.proxy.proxy(
         primaryAccount,
         null,
         transferExtrinsic,
@@ -109,5 +106,35 @@ export class PolkadotService {
     }
 
     return transferExtrinsic;
+  }
+
+  async getAssetFee(id: string, weight: number): Promise<bigint> {
+    const type = await this.getAssetType(id);
+
+    if (!type) {
+      return 0n;
+    }
+
+    const unitsPerSecond =
+      await this.#api.query.assetManager.assetTypeUnitsPerSecond(type);
+
+    return this.calculateMin(
+      weight,
+      unitsPerSecond.unwrapOrDefault().toBigInt(),
+    );
+  }
+
+  async getAssetType(
+    id: string,
+  ): Promise<MoonbeamRuntimeXcmConfigAssetType | undefined> {
+    const type = await this.#api.query.assetManager.assetIdType(id);
+
+    return type.unwrapOr(undefined);
+  }
+
+  // TODO: move to utils
+  // eslint-disable-next-line class-methods-use-this
+  calculateMin(weight: number, unitsPerSecond: bigint): bigint {
+    return (BigInt(weight) * unitsPerSecond) / BigInt(10 ** 12); // 10**12 weight = 1 second
   }
 }
