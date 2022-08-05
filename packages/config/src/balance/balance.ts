@@ -1,3 +1,5 @@
+import '@moonbeam-network/api-augment';
+
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { Asset } from '../constants';

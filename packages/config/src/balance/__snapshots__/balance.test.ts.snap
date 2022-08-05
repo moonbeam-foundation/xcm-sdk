@@ -21,20 +21,15 @@ Array [
 
 exports[`balance min should be correct min config 1`] = `
 Object {
-  "calc": [Function],
   "function": "asset",
-  "getParams": [Function],
   "pallet": "assets",
+  "params": Array [
+    1,
+  ],
   "path": Array [
     "minBalance",
   ],
 }
-`;
-
-exports[`balance min should get correct params 1`] = `
-Array [
-  1,
-]
 `;
 
 exports[`balance system should be correct system config 1`] = `
