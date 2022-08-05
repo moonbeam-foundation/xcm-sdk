@@ -22,10 +22,6 @@ describe('balance', () => {
     it('should be correct min config', () => {
       expect(cfg).toMatchSnapshot();
     });
-
-    it('should get correct params', () => {
-      expect(cfg.getParams()).toMatchSnapshot();
-    });
   });
 
   describe('system', () => {

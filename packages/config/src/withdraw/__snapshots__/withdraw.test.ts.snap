@@ -6,7 +6,6 @@ Object {
   "destination": Object {
     "parachainId": 1000,
   },
-  "existentialDeposit": 100000000000,
   "feePerWeight": 8,
   "getParams": [Function],
   "weight": 4000000000,
