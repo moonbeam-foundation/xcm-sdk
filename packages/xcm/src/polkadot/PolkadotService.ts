@@ -3,20 +3,26 @@ import '@moonbeam-network/api-augment';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Asset,
+  AssetConfig,
   BalanceConfig,
+  Chain,
+  ConfigGetter,
   ExtrinsicConfig,
   MinBalanceConfig,
 } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
-import { SubmittableExtrinsic } from '@polkadot/api/types';
+import { SubmittableExtrinsic, UnsubscribePromise } from '@polkadot/api/types';
 import {
   MoonbeamRuntimeXcmConfigAssetType,
+  PalletAssetsAssetAccount,
   PalletAssetsAssetMetadata,
 } from '@polkadot/types/lookup';
 import { get } from 'lodash';
 import { getPolkadotApi } from './polkadot.api';
+import { AssetBalanceInfo } from './polkadot.interfaces';
+import { calculateMin, sortByBalanceAndChainName } from './polkadot.utils';
 
-export class PolkadotService<Assets extends Asset> {
+export class PolkadotService<Assets extends Asset, Chains extends Chain> {
   readonly #api: ApiPromise;
 
   constructor(api: ApiPromise) {
@@ -25,9 +31,9 @@ export class PolkadotService<Assets extends Asset> {
     this.getGenericBalance.bind(this);
   }
 
-  static async create<Assets extends Asset>(
+  static async create<Assets extends Asset, Chains extends Chain>(
     ws: string,
-  ): Promise<PolkadotService<Assets>> {
+  ): Promise<PolkadotService<Assets, Chains>> {
     return new PolkadotService(await getPolkadotApi(ws));
   }
 
@@ -118,10 +124,7 @@ export class PolkadotService<Assets extends Asset> {
     const unitsPerSecond =
       await this.#api.query.assetManager.assetTypeUnitsPerSecond(type);
 
-    return this.calculateMin(
-      weight,
-      unitsPerSecond.unwrapOrDefault().toBigInt(),
-    );
+    return calculateMin(weight, unitsPerSecond.unwrapOrDefault().toBigInt());
   }
 
   async getAssetType(
@@ -132,9 +135,50 @@ export class PolkadotService<Assets extends Asset> {
     return type.unwrapOr(undefined);
   }
 
-  // TODO: move to utils
-  // eslint-disable-next-line class-methods-use-this
-  calculateMin(weight: number, unitsPerSecond: bigint): bigint {
-    return (BigInt(weight) * unitsPerSecond) / BigInt(10 ** 12); // 10**12 weight = 1 second
+  async subscribeToAssetsBalanceInfo(
+    account: string,
+    configGetter: ConfigGetter<Assets, Chains>,
+    callback: (data: AssetBalanceInfo<Assets>[]) => void,
+  ): UnsubscribePromise {
+    const assetsArray = Object.values<AssetConfig<Assets>>(configGetter.assets);
+    const ids: string[] = assetsArray.map((asset) => asset.id);
+    const meta: PalletAssetsAssetMetadata[] =
+      (await this.#api.query.assets.metadata.multi(ids)) as any;
+
+    return this.subscribeToAccountBalances(account, ids, (data) => {
+      callback(
+        data
+          .map((balance, index): AssetBalanceInfo<Assets> => {
+            const asset = assetsArray[index];
+            const {
+              chains: [chain],
+              from,
+            } = configGetter.deposit(asset.originSymbol);
+
+            return {
+              asset,
+              balance,
+              meta: meta[index],
+              // TODO: remove as
+              origin: from(chain.chain as Chains).origin,
+            };
+          })
+          .sort(sortByBalanceAndChainName),
+      );
+    });
+  }
+
+  async subscribeToAccountBalances(
+    account: string,
+    ids: string[],
+    callback: (balances: PalletAssetsAssetAccount[]) => void,
+  ): UnsubscribePromise {
+    const keys = ids.map((x) => [x, account]);
+
+    return this.#api.query.assets.account.multi(keys, (res) => {
+      const response = res.map((balance) => balance.unwrapOrDefault());
+
+      callback(response);
+    });
   }
 }

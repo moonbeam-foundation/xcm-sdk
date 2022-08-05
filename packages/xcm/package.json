@@ -43,6 +43,7 @@
     "@moonbeam-network/api-augment": "^0.1700.0",
     "@polkadot/api": "^8.14.1",
     "@polkadot/types": "^9.0.1",
+    "@polkadot/util": "^10.1.2",
     "ethers": "^5.6.9",
     "lodash": "^4.17.21",
     "lru-cache": "^7.13.1"
