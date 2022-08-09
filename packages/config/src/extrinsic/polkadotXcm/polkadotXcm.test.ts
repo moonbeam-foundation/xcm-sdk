@@ -10,6 +10,7 @@ describe('polkadotXcm', () => {
     name: 'Moonbase Alpha',
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
+    decimals: 10,
   };
   const origin = {
     chain: Chain.AlphanetRelay,

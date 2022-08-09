@@ -32,7 +32,6 @@ export const CSM: MoonriverXcmConfig = <const>{
       balance: balance.system(),
       destination: origin,
       feePerWeight: 1,
-      existentialDeposit: 100_000_000_000,
     }),
   },
 };

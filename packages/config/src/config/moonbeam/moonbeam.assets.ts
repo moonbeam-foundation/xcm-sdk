@@ -1,5 +1,5 @@
 import { Asset } from '../../constants';
-import { AssetConfig } from '../../interfaces';
+import { AssetsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbeamAssets } from './moonbeam.interfaces';
 
@@ -10,9 +10,8 @@ export const MOONBEAM_ASSETS = <const>[
   Asset.GLMR,
   Asset.PARA,
 ];
-export const MOONBEAM_ASSETS_CONFIGS: Readonly<
-  Record<MoonbeamAssets, AssetConfig<MoonbeamAssets>>
-> = {
+
+export const MOONBEAM_ASSETS_CONFIGS: AssetsConfigs<MoonbeamAssets> = {
   [Asset.ACA]: {
     id: '224821240862170613278369189818311486111',
     erc20Id: '0xffffffffa922fef94566104a6e5a35a4fcddaa9f',

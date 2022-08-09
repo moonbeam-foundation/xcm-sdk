@@ -1,5 +1,5 @@
-import { xTokens } from './xTokens';
 import { Asset, Chain, MoonChain } from '../../constants';
+import { xTokens } from './xTokens';
 import { XTokensExtrinsicSuccessEvent } from './xTokens.constants';
 
 describe('xTokens', () => {
@@ -10,6 +10,7 @@ describe('xTokens', () => {
     name: 'Moonbase Alpha',
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
+    decimals: 10,
   };
   const origin = {
     chain: Chain.AlphanetRelay,

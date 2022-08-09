@@ -34,7 +34,6 @@ export const AUSD: MoonriverXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.tokens('KUSD'),
       destination: origin,
-      existentialDeposit: 10_000_000_000,
       feePerWeight: 64,
     }),
   },

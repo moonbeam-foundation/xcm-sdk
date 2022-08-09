@@ -1,6 +1,6 @@
-import { xcmPallet } from './xcmPallet';
 import { Chain, MoonChain } from '../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../polkadotXcm';
+import { xcmPallet } from './xcmPallet';
 
 describe('xcmPallet', () => {
   const amount = 1000n;
@@ -10,6 +10,7 @@ describe('xcmPallet', () => {
     name: 'Moonbase Alpha',
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
+    decimals: 10,
   };
   const origin = {
     chain: Chain.AlphanetRelay,

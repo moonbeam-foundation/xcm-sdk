@@ -32,7 +32,6 @@ export const KMA: MoonbaseXcmConfig = <const>{
       balance: balance.system(),
       destination: origin,
       feePerWeight: 0.001,
-      existentialDeposit: 100_000_000_000,
     }),
   },
 };

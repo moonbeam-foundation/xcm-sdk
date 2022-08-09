@@ -1,9 +1,12 @@
+import '@moonbeam-network/api-augment';
+
+import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { Asset } from '../constants';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 import {
-  MinBalanceConfig,
   AssetsBalanceConfig,
+  MinBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
   TokensPalletAccountData,
@@ -26,6 +29,7 @@ function assets(asset: number | bigint): AssetsBalanceConfig {
     function: BalanceFunction.Account,
     path: ['balance'],
     getParams: (account: string) => [asset, account],
+    calc: (balance: u128) => balance.toBigInt(),
   };
 }
 
@@ -34,7 +38,7 @@ function min(asset: number): MinBalanceConfig {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Asset,
     path: ['minBalance'],
-    getParams: () => [asset],
+    params: [asset],
   };
 }
 
@@ -55,6 +59,7 @@ function tokens<Assets extends Asset>(
   return {
     pallet: BalancePallet.Tokens,
     function: BalanceFunction.Accounts,
+    path: [],
     getParams: (account: string) => [
       account,
       Number.isInteger(asset)

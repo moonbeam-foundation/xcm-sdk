@@ -1,5 +1,5 @@
 import { Asset } from '../../constants';
-import { AssetConfig } from '../../interfaces';
+import { AssetsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbaseAssets } from './moonbase.interfaces';
 
@@ -21,9 +21,8 @@ export const MOONBASE_ASSETS = <const>[
   Asset.TEER,
   Asset.UNIT,
 ];
-export const MOONBASE_ASSETS_CONFIGS: Readonly<
-  Record<MoonbaseAssets, AssetConfig<MoonbaseAssets>>
-> = {
+
+export const MOONBASE_ASSETS_CONFIGS: AssetsConfigs<MoonbaseAssets> = {
   [Asset.ASTR]: {
     id: '16797826370226091782818345603793389938',
     erc20Id: '0xffffffff0ca324c842330521525e7de111f38972',

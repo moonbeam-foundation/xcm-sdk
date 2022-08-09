@@ -1,5 +1,5 @@
 import { Chain } from '../../constants';
-import { ChainConfig } from '../../interfaces';
+import { ChainsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbeamChains } from './moonbeam.interfaces';
 
@@ -8,9 +8,8 @@ export const MOONBEAM_CHAINS = <const>[
   Chain.Parallel,
   Chain.Polkadot,
 ];
-export const MOONBEAM_CHAINS_CONFIGS: Readonly<
-  Record<MoonbeamChains, ChainConfig>
-> = {
+
+export const MOONBEAM_CHAINS_CONFIGS: ChainsConfigs<MoonbeamChains> = {
   [Chain.Acala]: {
     chain: Chain.Acala,
     name: 'Acala',

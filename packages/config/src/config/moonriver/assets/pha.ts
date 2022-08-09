@@ -32,7 +32,6 @@ export const PHA: MoonriverXcmConfig = <const>{
       balance: balance.system(),
       destination: origin,
       feePerWeight: 80,
-      existentialDeposit: 10_000_000_000,
     }),
   },
 };

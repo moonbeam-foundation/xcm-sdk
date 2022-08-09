@@ -1,5 +1,5 @@
-import { xTransfer } from './xTransfer';
 import { Chain, MoonChain } from '../../constants';
+import { xTransfer } from './xTransfer';
 import { XTransferExtrinsicSuccessEvent } from './xTransfer.constants';
 
 describe('xTransfer', () => {
@@ -10,6 +10,7 @@ describe('xTransfer', () => {
     name: 'Moonbase Alpha',
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
+    decimals: 10,
   };
   const origin = {
     chain: Chain.AlphanetRelay,

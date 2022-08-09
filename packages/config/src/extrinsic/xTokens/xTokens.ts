@@ -7,9 +7,9 @@ import {
 } from './xTokens.constants';
 import {
   XTokensTransferExtrinsic,
+  XTokensTransferExtrinsicParamsAsset,
   XTokensTransferMultiAssetExtrinsic,
   XTokensTransferMultiCurrenciesExtrinsic,
-  XTokensTransferExtrinsicParamsAsset,
 } from './xTokens.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */

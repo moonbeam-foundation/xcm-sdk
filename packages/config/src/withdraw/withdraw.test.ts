@@ -8,7 +8,6 @@ describe('withdraw', () => {
     const cfg = withdraw.xTokens({
       balance: '<BALANCE>' as any,
       destination: { parachainId: 1000 } as any,
-      existentialDeposit: 100_000_000_000,
       feePerWeight: 8,
     });
 
@@ -24,7 +23,6 @@ describe('withdraw', () => {
       const cfg2 = withdraw.xTokens({
         balance: '<BALANCE>' as any,
         destination: {} as any,
-        existentialDeposit: 100_000_000_000,
         feePerWeight: 8,
       });
 

@@ -21,7 +21,6 @@ export const KBTC: MoonbaseXcmConfig = <const>{
       origin,
       balance: balance.tokens(asset.originSymbol),
       extrinsicFeeBalance: balance.tokens(feeAsset.originSymbol),
-      xcmFeeAsset: feeAsset,
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()

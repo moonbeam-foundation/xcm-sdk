@@ -33,7 +33,6 @@ export const ASTR: MoonbaseXcmConfig = <const>{
       balance: balance.system(),
       destination: origin,
       feePerWeight: 8_000_000,
-      existentialDeposit: 1_000_000,
     }),
   },
 };

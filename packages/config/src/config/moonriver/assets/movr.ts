@@ -9,8 +9,8 @@ import {
   assets,
   balance,
   chains,
-  moonriver,
   extrinsic,
+  moonriver,
   withdraw,
 } from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
@@ -96,19 +96,16 @@ export const MOVR: MoonriverXcmConfig = <const>{
     [bifrost.chain]: withdraw.xTokens({
       balance: balance.tokens('MOVR'),
       destination: bifrost,
-      existentialDeposit: 1_000_000_000_000,
       feePerWeight: 213_600,
     }),
     [karura.chain]: withdraw.xTokens({
       balance: balance.tokens(karuraMovrId),
       destination: karura,
-      existentialDeposit: 1_000_000_000_000_000,
       feePerWeight: 50_000,
     }),
     [khala.chain]: withdraw.xTokens({
       balance: balance.tokens(khalaMovrId),
       destination: khala,
-      existentialDeposit: 10_000_000_000,
       feePerWeight: 50_000,
     }),
     [parallel.chain]: withdraw.xTokens({

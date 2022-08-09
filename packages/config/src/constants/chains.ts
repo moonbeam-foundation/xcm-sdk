@@ -13,18 +13,21 @@ export const MOON_CHAINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
       name: 'Moonbase Alpha',
       ws: 'wss://wss.api.moonbase.moonbeam.network',
       parachainId: 1000,
+      decimals: 18,
     },
     [MoonChain.Moonbeam]: {
       chain: MoonChain.Moonbeam,
       name: 'Moonbeam',
       ws: 'wss://wss.api.moonbeam.network',
       parachainId: 2004,
+      decimals: 18,
     },
     [MoonChain.Moonriver]: {
       chain: MoonChain.Moonriver,
       name: 'Moonriver',
       ws: 'wss://wss.api.moonriver.moonbeam.network',
       parachainId: 2023,
+      decimals: 18,
     },
   };
 

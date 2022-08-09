@@ -16,5 +16,9 @@
     "Shiden",
     "Statemine",
     "TEER"
-  ]
+  ],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

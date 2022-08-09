@@ -30,7 +30,6 @@ export const KSM: MoonriverXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      existentialDeposit: 33_333_333,
       feePerWeight: 0.42,
     }),
   },

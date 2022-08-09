@@ -8,13 +8,12 @@ export type WithdrawConfig<Assets extends Asset> =
 export interface WithdrawXTokensConfig<Assets extends Asset> {
   balance: BalanceConfig<Assets>;
   destination: ChainConfig;
-  existentialDeposit: number | bigint;
   feePerWeight: number;
-  weight: number | bigint;
-  getParams: (account: string) => DestinationML;
+  weight: number;
+  getParams: (account: string) => WithdrawXTokensParams;
 }
 
-export type DestinationML = [
+export type WithdrawXTokensParams = [
   /**
    * 1 - if transaction is going through a relay chain
    */
@@ -50,7 +49,6 @@ export type DestinationML = [
 export interface WithdrawXTokensOptions<Assets extends Asset> {
   balance: BalanceConfig<Assets>;
   destination: ChainConfig;
-  existentialDeposit?: number | bigint;
   feePerWeight: number;
-  weight?: number | bigint;
+  weight?: number;
 }

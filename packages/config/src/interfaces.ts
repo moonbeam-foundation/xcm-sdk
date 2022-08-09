@@ -14,17 +14,18 @@ export interface AssetConfig<Assets extends Asset> {
   originAssetId?: number;
 }
 
-export interface MoonChainConfig {
-  chain: MoonChain;
+export interface ChainBaseConfig<Chains = Chain> {
+  chain: Chains;
   name: string;
   ws: string;
   parachainId: number;
 }
-export interface ChainConfig {
-  chain: Chain;
-  name: string;
-  ws: string;
-  parachainId: number;
+
+export interface MoonChainConfig extends ChainBaseConfig<MoonChain> {
+  decimals: number;
+}
+
+export interface ChainConfig extends ChainBaseConfig {
   weight: number;
   moonAssetId?: number | bigint;
   palletInstance?: number;
