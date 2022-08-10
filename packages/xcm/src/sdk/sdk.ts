@@ -19,10 +19,17 @@ import {
 import { UnsubscribePromise } from '@polkadot/api/types';
 import { XTokensContract } from '../contracts/XTokensContract';
 import { AssetBalanceInfo, PolkadotService } from '../polkadot';
-import { ExtrinsicEvent, SdkOptions, XcmSdk } from './sdk.interfaces';
+import {
+  ExtrinsicEvent,
+  SdkOptions,
+  XcmSdk,
+  XcmSdkByChain,
+  XcmSdkDeposit,
+  XcmSdkWithdraw,
+} from './sdk.interfaces';
 import { createExtrinsicEventHandler } from './sdk.utils';
 
-export async function create(options: SdkOptions) {
+export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
   return {
     moonbase: await createChainSdk<MoonbaseAssets, MoonbaseChains>(
       moonbase,
@@ -56,7 +63,7 @@ async function createChainSdk<Assets extends Asset, Chains extends Chain>(
       cb: (data: AssetBalanceInfo<Assets>[]) => void,
     ): UnsubscribePromise =>
       polkadot.subscribeToAssetsBalanceInfo(account, configGetter, cb),
-    deposit: (asset: Assets) => {
+    deposit: (asset: Assets): XcmSdkDeposit<Assets, Chains> => {
       const { chains, from } = configGetter.deposit(asset);
 
       return {
@@ -148,7 +155,7 @@ async function createChainSdk<Assets extends Asset, Chains extends Chain>(
         },
       };
     },
-    withdraw: (asset: Assets) => {
+    withdraw: (asset: Assets): XcmSdkWithdraw<Assets, Chains> => {
       const { chains, to } = configGetter.withdraw(asset);
 
       return {

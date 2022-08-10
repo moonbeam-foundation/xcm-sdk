@@ -22,9 +22,9 @@ import { AssetBalanceInfo } from '../polkadot';
 export type Hash = string;
 
 export interface XcmSdkByChain {
-  moonbase: XcmSdk<MoonbaseAssets, MoonbaseChains>;
-  moonbeam: XcmSdk<MoonbeamAssets, MoonbeamChains>;
-  moonriver: XcmSdk<MoonriverAssets, MoonriverChains>;
+  moonbase: MoonbaseXcmSdk;
+  moonbeam: MoonbeamXcmSdk;
+  moonriver: MoonriverXcmSdk;
 }
 
 export type MoonXcmSdk = MoonbaseXcmSdk | MoonbeamXcmSdk | MoonriverXcmSdk;
@@ -40,24 +40,32 @@ export interface XcmSdk<Assets extends Asset, Chains extends Chain> {
     account: string,
     cb: (data: AssetBalanceInfo<Assets>[]) => void,
   ) => UnsubscribePromise;
-  deposit: (asset: Assets) => {
-    chains: ChainConfig[];
-    from: (chain: Chains) => {
-      get: (
-        account: string,
-        primaryAccount?: string,
-      ) => Promise<DepositTransferData<Assets>>;
-    };
-  };
-  withdraw: (asset: Assets) => {
-    chains: ChainConfig[];
-    to: (chain: Chains) => {
-      get: (
-        account: string,
-        amount: bigint,
-      ) => Promise<WithdrawTransferData<Assets>>;
-    };
-  };
+  deposit: (asset: Assets) => XcmSdkDeposit<Assets, Chains>;
+  withdraw: (asset: Assets) => XcmSdkWithdraw<Assets, Chains>;
+}
+
+export interface XcmSdkDeposit<Assets extends Asset, Chains extends Chain> {
+  chains: ChainConfig[];
+  from: (chain: Chains) => XcmSdkDepositFrom<Assets>;
+}
+
+export interface XcmSdkWithdraw<Assets extends Asset, Chains extends Chain> {
+  chains: ChainConfig[];
+  to: (chain: Chains) => XcmSdkDepositTo<Assets>;
+}
+
+export interface XcmSdkDepositFrom<Assets extends Asset> {
+  get: (
+    account: string,
+    primaryAccount?: string,
+  ) => Promise<DepositTransferData<Assets>>;
+}
+
+export interface XcmSdkDepositTo<Assets extends Asset> {
+  get: (
+    account: string,
+    amount: bigint,
+  ) => Promise<WithdrawTransferData<Assets>>;
 }
 
 export interface DepositTransferData<Assets extends Asset> {
