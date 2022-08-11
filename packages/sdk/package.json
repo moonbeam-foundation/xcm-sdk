@@ -1,11 +1,11 @@
 {
-  "name": "@moonbeam-network/xcm",
-  "version": "1.0.0",
+  "name": "@moonbeam-network/xcm-sdk",
+  "version": "0.0.1",
   "description": "",
   "author": "PureStake",
   "license": "GPL-3.0-only",
   "repository": {
-    "directory": "packages/xcm",
+    "directory": "packages/sdk",
     "type": "git",
     "url": "git+https://github.com/PureStake/xcm.git"
   },
