@@ -16,7 +16,7 @@
   "scripts": {
     "prebuild": "rimraf packages/**/build",
     "build": "tsc -b -verbose",
-    "postbuild": "rimraf packages/**/build/**/*.tsbuildinfo packages/**/build/**/tsconfig*.json",
+    "postbuild": "node scripts/postbuild.mjs",
     "lint": "eslint 'packages' --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",

@@ -2,9 +2,6 @@
   "name": "@moonbeam-network/xcm-config",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "directory": "packages/config",
     "type": "git",
