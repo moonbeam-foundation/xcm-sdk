@@ -1,5 +1,4 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Asset,
   AssetConfig,

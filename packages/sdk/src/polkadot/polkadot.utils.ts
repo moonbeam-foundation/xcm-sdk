@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Asset } from '@moonbeam-network/xcm-config';
-import { BN } from '@polkadot/util';
 import { AssetBalanceInfo } from './polkadot.interfaces';
 
 export function calculateMin(weight: number, unitsPerSecond: bigint): bigint {
@@ -12,15 +10,13 @@ export function sortByBalanceAndChainName<Assets extends Asset>(
   a: AssetBalanceInfo<Assets>,
   b: AssetBalanceInfo<Assets>,
 ) {
-  const aBalance = new BN(a.balance.balance.toString()).div(
-    new BN(10 ** a.meta.decimals.toNumber()),
-  );
-  const bBalance = new BN(b.balance.balance.toString()).div(
-    new BN(10 ** b.meta.decimals.toNumber()),
-  );
+  const aBalance =
+    a.balance.balance.toNumber() / 10 ** a.meta.decimals.toNumber();
+  const bBalance =
+    b.balance.balance.toNumber() / 10 ** b.meta.decimals.toNumber();
 
-  if (bBalance.sub(aBalance).toNumber()) {
-    return bBalance.sub(aBalance).toNumber();
+  if (aBalance || bBalance) {
+    return bBalance - aBalance;
   }
 
   if (

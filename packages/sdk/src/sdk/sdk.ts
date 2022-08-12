@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Asset,
   Chain,

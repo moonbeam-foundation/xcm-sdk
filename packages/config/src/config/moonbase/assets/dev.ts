@@ -19,7 +19,6 @@ const astar = chains[Chain.AstarAlphanet];
 const calamari = chains[Chain.CalamariAlphanet];
 const karura = chains[Chain.KaruraAlphanet];
 
-const astarDevId = getMoonAssetId(astar);
 const calamariDevId = getMoonAssetId(calamari);
 const karuraDevId = getMoonAssetId(karura);
 
@@ -29,7 +28,7 @@ export const DEV: MoonbaseXcmConfig = <const>{
   deposit: {
     [astar.chain]: {
       origin: astar,
-      balance: balance.assets(astarDevId),
+      balance: balance.system(),
       extrinsicFeeBalance: balance.system(),
       extrinsic: extrinsic
         .polkadotXcm()
@@ -64,12 +63,12 @@ export const DEV: MoonbaseXcmConfig = <const>{
   },
   withdraw: {
     [astar.chain]: withdraw.xTokens({
-      balance: balance.assets(astarDevId),
+      balance: balance.system(),
       destination: astar,
       feePerWeight: 50_000,
     }),
     [calamari.chain]: withdraw.xTokens({
-      balance: balance.assets(astarDevId),
+      balance: balance.assets(calamariDevId),
       destination: calamari,
       feePerWeight: 50_000,
     }),

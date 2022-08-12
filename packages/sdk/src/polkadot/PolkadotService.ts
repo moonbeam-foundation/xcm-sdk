@@ -1,6 +1,5 @@
 import '@moonbeam-network/api-augment';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Asset,
   AssetConfig,
