@@ -31,6 +31,7 @@ export const MOONBEAM_ASSETS_CONFIGS: AssetsConfigs<MoonbeamAssets> = {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: Asset.GLMR,
+    isNative: true,
   },
   [Asset.PARA]: {
     id: '32615670524745285411807346420584982855',

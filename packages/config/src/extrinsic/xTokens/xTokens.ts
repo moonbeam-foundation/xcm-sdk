@@ -13,7 +13,7 @@ import {
 } from './xTokens.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xTokens<Assets extends Asset>(chain: MoonChainConfig) {
+export function xTokens<Assets extends Asset = Asset>(chain: MoonChainConfig) {
   return {
     transfer: () => transfer<Assets>(chain),
     transferMultiAsset: () => transferMultiAsset<Assets>(chain),
@@ -21,7 +21,7 @@ export function xTokens<Assets extends Asset>(chain: MoonChainConfig) {
   };
 }
 
-function transfer<Assets extends Asset>(chain: MoonChainConfig) {
+function transfer<Assets extends Asset = Asset>(chain: MoonChainConfig) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
       origin: (origin: ChainConfig) => ({
@@ -60,7 +60,9 @@ function transfer<Assets extends Asset>(chain: MoonChainConfig) {
   };
 }
 
-function transferMultiAsset<Assets extends Asset>(chain: MoonChainConfig) {
+function transferMultiAsset<Assets extends Asset = Asset>(
+  chain: MoonChainConfig,
+) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
       origin: (origin: ChainConfig) => ({
@@ -119,7 +121,9 @@ function transferMultiAsset<Assets extends Asset>(chain: MoonChainConfig) {
   };
 }
 
-function transferMultiCurrencies<Assets extends Asset>(chain: MoonChainConfig) {
+function transferMultiCurrencies<Assets extends Asset = Asset>(
+  chain: MoonChainConfig,
+) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
       origin: (origin: ChainConfig) => ({

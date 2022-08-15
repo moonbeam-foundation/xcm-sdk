@@ -28,7 +28,10 @@ import {
   MOONRIVER_CONFIGS,
 } from './moonriver';
 
-export function createConfigGetter<Assets extends Asset, Chains extends Chain>(
+export function createConfigGetter<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+>(
   assets: AssetsConfigs<Assets>,
   moonAsset: AssetConfig<Assets>,
   moonChain: MoonChainConfig,

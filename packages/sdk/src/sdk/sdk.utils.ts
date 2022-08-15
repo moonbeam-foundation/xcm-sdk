@@ -4,9 +4,28 @@ import {
   PolkadotXcmExtrinsicSuccessEvent,
 } from '@moonbeam-network/xcm-config';
 import { ISubmittableResult } from '@polkadot/types/types';
-import { ExtrinsicEvent, ExtrinsicStatus } from './sdk.interfaces';
+import { Signer as EthersSigner } from 'ethers';
+import {
+  ExtrinsicEvent,
+  ExtrinsicStatus,
+  Hash,
+  XcmSdkDeposit,
+  XcmSdkWithdraw,
+} from './sdk.interfaces';
 
-export function createExtrinsicEventHandler<Assets extends Asset>(
+export function isXcmSdkDeposit(
+  config: XcmSdkDeposit | XcmSdkWithdraw,
+): config is XcmSdkDeposit {
+  return !!(config as XcmSdkDeposit).from;
+}
+
+export function isXcmSdkWithdraw(
+  config: XcmSdkDeposit | XcmSdkWithdraw,
+): config is XcmSdkWithdraw {
+  return !!(config as XcmSdkWithdraw).to;
+}
+
+export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
   config: DepositConfig<Assets>,
   cb: (event: ExtrinsicEvent) => void,
 ) {
@@ -29,7 +48,7 @@ export function createExtrinsicEventHandler<Assets extends Asset>(
             if (eventData.isIncomplete) {
               cb({
                 status: ExtrinsicStatus.Failed,
-                block,
+                blockHash: block,
                 message: eventData.asIncomplete.toHuman().join('; '),
               });
 
@@ -39,18 +58,55 @@ export function createExtrinsicEventHandler<Assets extends Asset>(
 
           cb({
             status: ExtrinsicStatus.Success,
-            block,
+            blockHash: block,
           });
         }
 
         if (section === 'system' && method === 'ExtrinsicFailed') {
           cb({
             status: ExtrinsicStatus.Failed,
-            block,
+            blockHash: block,
             message: data.join('; '),
           });
         }
       });
     }
   };
+}
+
+export async function createTransactionEventHandler(
+  ethersSigner: EthersSigner,
+  txHash: Hash,
+  cb: (event: ExtrinsicEvent) => void,
+  skipSentEvent = false,
+) {
+  if (!ethersSigner.provider) {
+    throw new Error('options.ethersSigner has not provider');
+  }
+
+  if (!skipSentEvent) {
+    cb({ status: ExtrinsicStatus.Sent });
+  }
+
+  const tx = await ethersSigner.provider.getTransactionReceipt(txHash);
+
+  if (!tx) {
+    setTimeout(
+      () => createTransactionEventHandler(ethersSigner, txHash, cb, true),
+      2000,
+    );
+    return;
+  }
+
+  if (tx.status === 1) {
+    cb({
+      status: ExtrinsicStatus.Success,
+      blockHash: tx.blockHash,
+    });
+  } else {
+    cb({
+      status: ExtrinsicStatus.Failed,
+      blockHash: tx.blockHash,
+    });
+  }
 }

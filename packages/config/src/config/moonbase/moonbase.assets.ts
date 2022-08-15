@@ -48,6 +48,7 @@ export const MOONBASE_ASSETS_CONFIGS: AssetsConfigs<MoonbaseAssets> = {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: Asset.DEV,
+    isNative: true,
   },
   [Asset.HKO]: {
     id: '76100021443485661246318545281171740067',

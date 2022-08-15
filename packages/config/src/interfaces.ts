@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { Asset, Chain, MoonChain } from './constants';
 
-export interface AssetConfig<Assets extends Asset> {
+export interface AssetConfig<Assets extends Asset = Asset> {
   id: string;
   /**
    * id -> erc20Id
@@ -12,6 +12,7 @@ export interface AssetConfig<Assets extends Asset> {
   erc20Id: string;
   originSymbol: Assets;
   originAssetId?: number;
+  isNative?: boolean;
 }
 
 export interface ChainBaseConfig<Chains = Chain> {

@@ -35,6 +35,7 @@ export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
     weight: 1_000_000_000,
     parachainId: 2007,
     palletInstance: 3,
+    moonAssetId: 100,
   },
   [Chain.BasiliskAlphanet]: {
     chain: Chain.BasiliskAlphanet,

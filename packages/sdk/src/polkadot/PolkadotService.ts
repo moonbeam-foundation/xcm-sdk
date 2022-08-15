@@ -21,7 +21,10 @@ import { getPolkadotApi } from './polkadot.api';
 import { AssetBalanceInfo } from './polkadot.interfaces';
 import { calculateMin, sortByBalanceAndChainName } from './polkadot.utils';
 
-export class PolkadotService<Assets extends Asset, Chains extends Chain> {
+export class PolkadotService<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+> {
   readonly #api: ApiPromise;
 
   constructor(api: ApiPromise) {
@@ -30,9 +33,10 @@ export class PolkadotService<Assets extends Asset, Chains extends Chain> {
     this.getGenericBalance.bind(this);
   }
 
-  static async create<Assets extends Asset, Chains extends Chain>(
-    ws: string,
-  ): Promise<PolkadotService<Assets, Chains>> {
+  static async create<
+    Assets extends Asset = Asset,
+    Chains extends Chain = Chain,
+  >(ws: string): Promise<PolkadotService<Assets, Chains>> {
     return new PolkadotService(await getPolkadotApi(ws));
   }
 

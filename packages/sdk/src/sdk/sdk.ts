@@ -26,7 +26,10 @@ import {
   XcmSdkDeposit,
   XcmSdkWithdraw,
 } from './sdk.interfaces';
-import { createExtrinsicEventHandler } from './sdk.utils';
+import {
+  createExtrinsicEventHandler,
+  createTransactionEventHandler,
+} from './sdk.utils';
 
 export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
   return {
@@ -45,7 +48,10 @@ export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
   };
 }
 
-async function createChainSdk<Assets extends Asset, Chains extends Chain>(
+async function createChainSdk<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+>(
   configGetter: ConfigGetter<Assets, Chains>,
   options: SdkOptions,
 ): Promise<XcmSdk<Assets, Chains>> {
@@ -163,23 +169,22 @@ async function createChainSdk<Assets extends Asset, Chains extends Chain>(
           const { asset: assetConfig, origin, config } = to(chain);
 
           return {
-            get: async (account: string, amount: bigint) => {
-              const foreignPolkadot = await PolkadotService.create<
+            get: async (destinationAccount: string) => {
+              const destinationPolkadot = await PolkadotService.create<
                 Assets,
                 Chains
               >(config.destination.ws);
-              const meta = foreignPolkadot.getMetadata();
-              const [decimals, destinationBalance, fee, existentialDeposit] =
+              const meta = destinationPolkadot.getMetadata();
+              const [decimals, destinationBalance, existentialDeposit] =
                 await Promise.all([
-                  polkadot.getAssetDecimals(assetConfig.id),
-                  foreignPolkadot.getGenericBalance(account, config.balance),
-                  contract.getTransferFees(
-                    account,
-                    amount,
-                    assetConfig,
-                    config,
+                  assetConfig.isNative
+                    ? configGetter.chain.decimals
+                    : polkadot.getAssetDecimals(assetConfig.id),
+                  destinationPolkadot.getGenericBalance(
+                    destinationAccount,
+                    config.balance,
                   ),
-                  foreignPolkadot.getExistentialDeposit(),
+                  destinationPolkadot.getExistentialDeposit(),
                 ]);
 
               return {
@@ -187,18 +192,34 @@ async function createChainSdk<Assets extends Asset, Chains extends Chain>(
                 native: { decimals: meta.decimals, symbol: meta.symbol },
                 destination: config.destination,
                 destinationBalance,
-                destinationFee: config.weight * config.feePerWeight,
+                destinationFee: BigInt(config.weight * config.feePerWeight),
                 existentialDeposit,
-                fee,
                 origin,
-                // TODO: the same as for deposits return events to callback
-                send: async () => {
+                getFee: async (amount: bigint) =>
+                  contract.getTransferFees(
+                    destinationAccount,
+                    amount,
+                    assetConfig,
+                    config,
+                  ),
+                send: async (
+                  amount: bigint,
+                  cb?: (event: ExtrinsicEvent) => void,
+                ) => {
                   const tx = await contract.transfer(
-                    account,
+                    destinationAccount,
                     amount,
                     assetConfig,
                     config,
                   );
+
+                  if (cb) {
+                    createTransactionEventHandler(
+                      options.ethersSigner,
+                      tx.hash,
+                      cb,
+                    );
+                  }
 
                   return tx.hash;
                 },

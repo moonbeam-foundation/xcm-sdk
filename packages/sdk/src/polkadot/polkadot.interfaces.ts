@@ -9,7 +9,7 @@ import {
   PalletAssetsAssetMetadata,
 } from '@polkadot/types/lookup';
 
-export interface AssetBalanceInfo<Assets extends Asset> {
+export interface AssetBalanceInfo<Assets extends Asset = Asset> {
   asset: AssetConfig<Assets>;
   balance: PalletAssetsAssetAccount;
   meta: PalletAssetsAssetMetadata;

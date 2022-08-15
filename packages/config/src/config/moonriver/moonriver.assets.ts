@@ -77,6 +77,7 @@ export const MOONRIVER_ASSETS_CONFIGS: AssetsConfigs<MoonriverAssets> = {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: Asset.MOVR,
+    isNative: true,
   },
   [Asset.PHA]: {
     id: '189307976387032586987344677431204943363',

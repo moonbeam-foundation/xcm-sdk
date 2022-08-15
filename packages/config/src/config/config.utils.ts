@@ -2,7 +2,7 @@ import { isUndefined } from '@polkadot/util';
 import { Asset } from '../constants';
 import { AssetConfig, ChainConfig } from '../interfaces';
 
-export function getOriginAssetId<Assets extends Asset>(
+export function getOriginAssetId<Assets extends Asset = Asset>(
   asset: AssetConfig<Assets>,
 ) {
   if (isUndefined(asset.originAssetId)) {

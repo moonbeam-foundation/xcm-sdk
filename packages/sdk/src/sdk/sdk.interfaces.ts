@@ -32,7 +32,10 @@ export type MoonbaseXcmSdk = XcmSdk<MoonbaseAssets, MoonbaseChains>;
 export type MoonbeamXcmSdk = XcmSdk<MoonbeamAssets, MoonbeamChains>;
 export type MoonriverXcmSdk = XcmSdk<MoonriverAssets, MoonriverChains>;
 
-export interface XcmSdk<Assets extends Asset, Chains extends Chain> {
+export interface XcmSdk<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+> {
   asset: AssetConfig<Assets>;
   chain: MoonChainConfig;
   subscribeToAssetsBalanceInfo: (
@@ -43,31 +46,34 @@ export interface XcmSdk<Assets extends Asset, Chains extends Chain> {
   withdraw: (asset: Assets) => XcmSdkWithdraw<Assets, Chains>;
 }
 
-export interface XcmSdkDeposit<Assets extends Asset, Chains extends Chain> {
+export interface XcmSdkDeposit<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+> {
   chains: ChainConfig[];
   from: (chain: Chains) => XcmSdkDepositFrom<Assets>;
 }
 
-export interface XcmSdkWithdraw<Assets extends Asset, Chains extends Chain> {
+export interface XcmSdkWithdraw<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+> {
   chains: ChainConfig[];
   to: (chain: Chains) => XcmSdkDepositTo<Assets>;
 }
 
-export interface XcmSdkDepositFrom<Assets extends Asset> {
+export interface XcmSdkDepositFrom<Assets extends Asset = Asset> {
   get: (
     account: string,
     primaryAccount?: string,
   ) => Promise<DepositTransferData<Assets>>;
 }
 
-export interface XcmSdkDepositTo<Assets extends Asset> {
-  get: (
-    account: string,
-    amount: bigint,
-  ) => Promise<WithdrawTransferData<Assets>>;
+export interface XcmSdkDepositTo<Assets extends Asset = Asset> {
+  get: (account: string) => Promise<WithdrawTransferData<Assets>>;
 }
 
-export interface DepositTransferData<Assets extends Asset> {
+export interface DepositTransferData<Assets extends Asset = Asset> {
   asset: AssetConfigWithDecimals<Assets>;
   native: NativeAsset<Assets>;
   origin: MoonChainConfig | ChainConfig;
@@ -79,29 +85,29 @@ export interface DepositTransferData<Assets extends Asset> {
   send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }
 
-export interface WithdrawTransferData<Assets extends Asset> {
+export interface WithdrawTransferData<Assets extends Asset = Asset> {
   asset: AssetConfigWithDecimals<Assets>;
   native: NativeAsset<Assets>;
   origin: MoonChainConfig | ChainConfig;
   destination: ChainConfig;
   destinationBalance: bigint;
-  destinationFee: number;
+  destinationFee: bigint;
   existentialDeposit: bigint;
-  fee: bigint;
-  send: () => Promise<Hash>;
+  getFee: (amount: bigint) => Promise<bigint>;
+  send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }
 
-export interface AssetConfigWithDecimals<Assets extends Asset>
+export interface AssetConfigWithDecimals<Assets extends Asset = Asset>
   extends AssetConfig<Assets> {
   decimals: number;
 }
 
-export interface NativeAsset<Assets extends Asset> {
+export interface NativeAsset<Assets extends Asset = Asset> {
   decimals: number;
   symbol: Assets;
 }
 
-export interface ExtrinsicFeeBalance<Assets extends Asset> {
+export interface ExtrinsicFeeBalance<Assets extends Asset = Asset> {
   amount: bigint;
   decimals: number;
   symbol: Assets;
@@ -119,8 +125,8 @@ export type ExtrinsicEvent =
 
 export interface ExtrinsicFailedEvent {
   status: ExtrinsicStatus.Failed;
-  message: string;
-  block: Hash;
+  message?: string;
+  blockHash: Hash;
 }
 
 export interface ExtrinsicSentEvent {
@@ -129,7 +135,7 @@ export interface ExtrinsicSentEvent {
 
 export interface ExtrinsicSuccessEvent {
   status: ExtrinsicStatus.Success;
-  block: Hash;
+  blockHash: Hash;
 }
 
 export enum ExtrinsicStatus {

@@ -6,7 +6,7 @@ export function calculateMin(weight: number, unitsPerSecond: bigint): bigint {
   return (BigInt(weight) * unitsPerSecond) / BigInt(10 ** 12);
 }
 
-export function sortByBalanceAndChainName<Assets extends Asset>(
+export function sortByBalanceAndChainName<Assets extends Asset = Asset>(
   a: AssetBalanceInfo<Assets>,
   b: AssetBalanceInfo<Assets>,
 ) {

@@ -3,7 +3,7 @@ import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { Asset } from '../constants';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 
-export type BalanceConfig<Assets extends Asset> =
+export type BalanceConfig<Assets extends Asset = Asset> =
   | SystemBalanceConfig
   | AssetsBalanceConfig
   | TokensBalanceConfig<Assets>;
@@ -30,7 +30,7 @@ export interface TokensPalletAccountData {
   frozen: u128;
 }
 
-export interface TokensBalanceConfig<Assets extends Asset> {
+export interface TokensBalanceConfig<Assets extends Asset = Asset> {
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
   path: [];
