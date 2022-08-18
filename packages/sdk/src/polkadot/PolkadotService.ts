@@ -8,9 +8,11 @@ import {
   ConfigGetter,
   ExtrinsicConfig,
   MinBalanceConfig,
+  MoonChainConfig,
 } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
 import { SubmittableExtrinsic, UnsubscribePromise } from '@polkadot/api/types';
+import { AccountInfo } from '@polkadot/types/interfaces';
 import {
   MoonbeamRuntimeXcmConfigAssetType,
   PalletAssetsAssetAccount,
@@ -19,7 +21,7 @@ import {
 import { get } from 'lodash';
 import { getPolkadotApi } from './polkadot.api';
 import { AssetBalanceInfo } from './polkadot.interfaces';
-import { calculateMin, sortByBalanceAndChainName } from './polkadot.utils';
+import { calculateMin } from './polkadot.utils';
 
 export class PolkadotService<
   Assets extends Asset = Asset,
@@ -29,8 +31,6 @@ export class PolkadotService<
 
   constructor(api: ApiPromise) {
     this.#api = api;
-
-    this.getGenericBalance.bind(this);
   }
 
   static async create<
@@ -38,6 +38,10 @@ export class PolkadotService<
     Chains extends Chain = Chain,
   >(ws: string): Promise<PolkadotService<Assets, Chains>> {
     return new PolkadotService(await getPolkadotApi(ws));
+  }
+
+  static getChainMin(weight: number, unitsPerSecond: bigint): bigint {
+    return calculateMin(weight, unitsPerSecond);
   }
 
   getMetadata() {
@@ -60,6 +64,22 @@ export class PolkadotService<
   async getAssetMeta(assetId: string): Promise<PalletAssetsAssetMetadata> {
     // TODO: how to fix any?
     return this.#api.query.assets.metadata(assetId) as any;
+  }
+
+  async subscribeToAccountInfo(
+    account: string,
+    callback: (info: AccountInfo) => void,
+  ): UnsubscribePromise {
+    return this.#api.query.system.account<AccountInfo>(account, callback);
+  }
+
+  async subscribeToBalance(
+    account: string,
+    callback: (balance: bigint) => void,
+  ): UnsubscribePromise {
+    return this.subscribeToAccountInfo(account, ({ data }) =>
+      callback(data.free.toBigInt() - data.miscFrozen.toBigInt()),
+    );
   }
 
   async getGenericBalance(
@@ -145,28 +165,38 @@ export class PolkadotService<
   ): UnsubscribePromise {
     const assetsArray = Object.values<AssetConfig<Assets>>(configGetter.assets);
     const ids: string[] = assetsArray.map((asset) => asset.id);
-    const meta: PalletAssetsAssetMetadata[] =
+    const metadata: PalletAssetsAssetMetadata[] =
       (await this.#api.query.assets.metadata.multi(ids)) as any;
 
     return this.subscribeToAccountBalances(account, ids, (data) => {
       callback(
-        data
-          .map((balance, index): AssetBalanceInfo<Assets> => {
-            const asset = assetsArray[index];
-            const {
-              chains: [chain],
-              from,
-            } = configGetter.deposit(asset.originSymbol);
+        data.map((balance, index): AssetBalanceInfo<Assets> => {
+          const asset = assetsArray[index];
+          const meta = metadata[index];
+          const {
+            chains: [chain],
+            from,
+          } = configGetter.deposit(asset.originSymbol);
+          // TODO: remove as
+          const { origin } = from(chain.chain as Chains);
 
-            return {
-              asset,
-              balance,
-              meta: meta[index],
-              // TODO: remove as
-              origin: from(chain.chain as Chains).origin,
-            };
-          })
-          .sort(sortByBalanceAndChainName),
+          return {
+            asset,
+            balance: balance.balance.toBigInt(),
+            meta: {
+              decimals: asset.isNative
+                ? (origin as MoonChainConfig).decimals
+                : meta.decimals.toNumber(),
+              symbol: asset.isNative
+                ? asset.originSymbol
+                : meta.symbol.toHuman()?.toString() || '',
+              originSymbol: asset.isNative
+                ? asset.originSymbol
+                : (meta.name.toHuman()?.toString() as Assets),
+            },
+            origin,
+          };
+        }),
       );
     });
   }

@@ -25,7 +25,7 @@ export const GLMR: MoonbeamXcmConfig = <const>{
     [acala.chain]: {
       origin: acala,
       balance: balance.tokens(acalaGlmrId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -38,7 +38,7 @@ export const GLMR: MoonbeamXcmConfig = <const>{
     [parallel.chain]: {
       origin: parallel,
       balance: balance.assets(parallelGlmrId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()

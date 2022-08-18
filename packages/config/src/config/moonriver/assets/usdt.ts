@@ -15,8 +15,8 @@ export const USDT: MoonriverXcmConfig = <const>{
     [origin.chain]: {
       origin,
       balance: balance.assets(originAssetId),
-      extrinsicFeeBalance: balance.system(),
-      minBalance: balance.min(originAssetId),
+      sourceFeeBalance: balance.system(),
+      sourceMinBalance: balance.min(originAssetId),
       extrinsic: extrinsic
         .polkadotXcm()
         .limitedReserveTransferAssets()

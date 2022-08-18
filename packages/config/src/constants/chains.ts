@@ -14,6 +14,7 @@ export const MOON_CHAINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
       ws: 'wss://wss.api.moonbase.moonbeam.network',
       parachainId: 1000,
       decimals: 18,
+      unitsPerSecond: 50_000_000_000_000_000n,
     },
     [MoonChain.Moonbeam]: {
       chain: MoonChain.Moonbeam,
@@ -21,6 +22,7 @@ export const MOON_CHAINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
       ws: 'wss://wss.api.moonbeam.network',
       parachainId: 2004,
       decimals: 18,
+      unitsPerSecond: 10_000_000_000_000_000_000n,
     },
     [MoonChain.Moonriver]: {
       chain: MoonChain.Moonriver,
@@ -28,6 +30,7 @@ export const MOON_CHAINS_CONFIGS: Readonly<Record<MoonChain, MoonChainConfig>> =
       ws: 'wss://wss.api.moonriver.moonbeam.network',
       parachainId: 2023,
       decimals: 18,
+      unitsPerSecond: 100_000_000_000_000_000n,
     },
   };
 

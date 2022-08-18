@@ -34,7 +34,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
     [bifrost.chain]: {
       origin: bifrost,
       balance: balance.tokens('MOVR'),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -47,7 +47,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
     [karura.chain]: {
       origin: karura,
       balance: balance.tokens(karuraMovrId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -60,7 +60,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
     [khala.chain]: {
       origin: khala,
       balance: balance.assets(khalaMovrId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTransfer()
         .transfer()
@@ -71,7 +71,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
     [parallel.chain]: {
       origin: parallel,
       balance: balance.assets(parallelMovrId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -82,7 +82,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
     [shiden.chain]: {
       origin: shiden,
       balance: balance.assets(shidenMovrId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .polkadotXcm()
         .limitedReserveWithdrawAssets()

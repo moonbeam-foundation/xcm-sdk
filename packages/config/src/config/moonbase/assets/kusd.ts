@@ -20,7 +20,8 @@ export const KUSD: MoonbaseXcmConfig = <const>{
     [origin.chain]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
+      isNativeAssetPayingMoonFee: true,
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()

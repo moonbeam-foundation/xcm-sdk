@@ -1,10 +1,14 @@
 import {
   Asset,
+  AssetConfig,
+  Chain,
   DepositConfig,
+  isMultiCurrency,
   PolkadotXcmExtrinsicSuccessEvent,
 } from '@moonbeam-network/xcm-config';
 import { ISubmittableResult } from '@polkadot/types/types';
 import { Signer as EthersSigner } from 'ethers';
+import { PolkadotService } from '../polkadot';
 import {
   ExtrinsicEvent,
   ExtrinsicStatus,
@@ -109,4 +113,39 @@ export async function createTransactionEventHandler(
       blockHash: tx.blockHash,
     });
   }
+}
+
+export interface CreateExtrinsicOptions<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+> {
+  account: string;
+  config: DepositConfig<Assets>;
+  foreignPolkadot: PolkadotService<Assets, Chains>;
+  nativeAsset: AssetConfig<Assets>;
+  polkadot: PolkadotService<Assets, Chains>;
+  primaryAccount?: string;
+}
+
+export function getCreateExtrinsic<Assets extends Asset = Asset>({
+  account,
+  config,
+  foreignPolkadot,
+  nativeAsset,
+  polkadot,
+  primaryAccount,
+}: CreateExtrinsicOptions<Assets>) {
+  return async (amount: bigint) => {
+    const fee = isMultiCurrency(config.extrinsic)
+      ? await polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
+      : 0n;
+
+    return foreignPolkadot.getXcmExtrinsic(
+      account,
+      amount,
+      config.extrinsic,
+      fee,
+      primaryAccount,
+    );
+  };
 }

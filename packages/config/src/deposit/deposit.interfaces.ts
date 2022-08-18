@@ -6,7 +6,8 @@ import { ChainConfig } from '../interfaces';
 export interface DepositConfig<Assets extends Asset = Asset> {
   balance: BalanceConfig<Assets>;
   extrinsic: ExtrinsicConfig<Assets>;
-  extrinsicFeeBalance?: BalanceConfig<Assets>;
-  minBalance?: MinBalanceConfig;
+  sourceFeeBalance?: BalanceConfig<Assets>;
+  sourceMinBalance?: MinBalanceConfig;
+  isNativeAssetPayingMoonFee?: boolean;
   origin: ChainConfig;
 }

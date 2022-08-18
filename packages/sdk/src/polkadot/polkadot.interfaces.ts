@@ -4,14 +4,16 @@ import {
   ChainConfig,
   MoonChainConfig,
 } from '@moonbeam-network/xcm-config';
-import {
-  PalletAssetsAssetAccount,
-  PalletAssetsAssetMetadata,
-} from '@polkadot/types/lookup';
+
+export interface AssetMetadata<Assets extends Asset = Asset> {
+  decimals: number;
+  symbol: string;
+  originSymbol?: Assets;
+}
 
 export interface AssetBalanceInfo<Assets extends Asset = Asset> {
   asset: AssetConfig<Assets>;
-  balance: PalletAssetsAssetAccount;
-  meta: PalletAssetsAssetMetadata;
+  balance: bigint;
+  meta: AssetMetadata<Assets>;
   origin: ChainConfig | MoonChainConfig;
 }

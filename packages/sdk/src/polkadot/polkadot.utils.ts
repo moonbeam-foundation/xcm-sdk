@@ -11,9 +11,9 @@ export function sortByBalanceAndChainName<Assets extends Asset = Asset>(
   b: AssetBalanceInfo<Assets>,
 ) {
   const aBalance =
-    a.balance.balance.toNumber() / 10 ** a.meta.decimals.toNumber();
+    Number((a.balance * 1000000n) / 10n ** BigInt(a.meta.decimals)) / 1000000;
   const bBalance =
-    b.balance.balance.toNumber() / 10 ** b.meta.decimals.toNumber();
+    Number((b.balance * 1000000n) / 10n ** BigInt(b.meta.decimals)) / 1000000;
 
   if (aBalance || bBalance) {
     return bBalance - aBalance;

@@ -20,7 +20,8 @@ export const KBTC: MoonriverXcmConfig = <const>{
     [origin.chain]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
-      extrinsicFeeBalance: balance.tokens(feeAsset.originSymbol),
+      sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
+      isNativeAssetPayingMoonFee: true,
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()

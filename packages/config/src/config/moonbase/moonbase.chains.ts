@@ -26,7 +26,6 @@ export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
     parachainId: 0,
-    moonAssetId: 100,
   },
   [Chain.AstarAlphanet]: {
     chain: Chain.AstarAlphanet,

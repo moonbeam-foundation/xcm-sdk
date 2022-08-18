@@ -24,6 +24,7 @@ export interface ChainBaseConfig<Chains = Chain> {
 
 export interface MoonChainConfig extends ChainBaseConfig<MoonChain> {
   decimals: number;
+  unitsPerSecond: bigint;
 }
 
 export interface ChainConfig extends ChainBaseConfig {

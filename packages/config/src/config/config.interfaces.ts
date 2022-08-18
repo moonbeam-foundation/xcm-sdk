@@ -3,6 +3,17 @@ import { DepositConfig } from '../deposit';
 import { AssetConfig, ChainConfig, MoonChainConfig } from '../interfaces';
 import { WithdrawConfig } from '../withdraw';
 
+export interface ConfigGetter<
+  Assets extends Asset = Asset,
+  Chains extends Chain = Chain,
+> {
+  asset: AssetConfig<Assets>;
+  assets: AssetsConfigs<Assets>;
+  chain: MoonChainConfig;
+  deposit: (asset: Assets) => DepositConfigGetter<Assets, Chains>;
+  withdraw: (asset: Assets) => WithdrawConfigGetter<Assets, Chains>;
+}
+
 export interface DepositConfigGetter<
   Assets extends Asset = Asset,
   Chains extends Chain = Chain,
@@ -25,17 +36,6 @@ export interface WithdrawConfigGetter<
     origin: ChainConfig | MoonChainConfig;
     config: WithdrawConfig<Assets>;
   };
-}
-
-export interface ConfigGetter<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
-> {
-  asset: AssetConfig<Assets>;
-  assets: AssetsConfigs<Assets>;
-  chain: MoonChainConfig;
-  deposit: (asset: Assets) => DepositConfigGetter<Assets, Chains>;
-  withdraw: (asset: Assets) => WithdrawConfigGetter<Assets, Chains>;
 }
 
 export type AssetsConfigs<Assets extends Asset = Asset> = Readonly<

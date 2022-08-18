@@ -29,8 +29,8 @@ export const DEV: MoonbaseXcmConfig = <const>{
   deposit: {
     [astar.chain]: {
       origin: astar,
-      balance: balance.system(),
-      extrinsicFeeBalance: balance.system(),
+      balance: balance.assets(astarDevId),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .polkadotXcm()
         .limitedReserveWithdrawAssets()
@@ -42,7 +42,7 @@ export const DEV: MoonbaseXcmConfig = <const>{
     [calamari.chain]: {
       origin: calamari,
       balance: balance.assets(calamariDevId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -53,7 +53,7 @@ export const DEV: MoonbaseXcmConfig = <const>{
     [karura.chain]: {
       origin: karura,
       balance: balance.tokens(karuraDevId),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()

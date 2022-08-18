@@ -1,5 +1,11 @@
 import { isUndefined } from '@polkadot/util';
 import { Asset } from '../constants';
+import {
+  ExtrinsicConfig,
+  ExtrinsicPallet,
+  XTokensExtrinsic,
+  XTokensTransferMultiCurrenciesExtrinsic,
+} from '../extrinsic';
 import { AssetConfig, ChainConfig } from '../interfaces';
 
 export function getOriginAssetId<Assets extends Asset = Asset>(
@@ -26,4 +32,13 @@ export function getPalletInstance(chain: ChainConfig) {
   }
 
   return chain.palletInstance;
+}
+
+export function isMultiCurrency<Assets extends Asset = Asset>(
+  extrinsic: ExtrinsicConfig<Assets>,
+): extrinsic is XTokensTransferMultiCurrenciesExtrinsic<Assets> {
+  return (
+    extrinsic.pallet === ExtrinsicPallet.XTokens &&
+    extrinsic.extrinsic === XTokensExtrinsic.TransferMultiCurrencies
+  );
 }

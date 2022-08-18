@@ -59,7 +59,7 @@ export interface XcmSdkWithdraw<
   Chains extends Chain = Chain,
 > {
   chains: ChainConfig[];
-  to: (chain: Chains) => XcmSdkDepositTo<Assets>;
+  to: (chain: Chains) => XcmSdkWithdrawTo<Assets>;
 }
 
 export interface XcmSdkDepositFrom<Assets extends Asset = Asset> {
@@ -69,30 +69,33 @@ export interface XcmSdkDepositFrom<Assets extends Asset = Asset> {
   ) => Promise<DepositTransferData<Assets>>;
 }
 
-export interface XcmSdkDepositTo<Assets extends Asset = Asset> {
+export interface XcmSdkWithdrawTo<Assets extends Asset = Asset> {
   get: (account: string) => Promise<WithdrawTransferData<Assets>>;
 }
 
 export interface DepositTransferData<Assets extends Asset = Asset> {
   asset: AssetConfigWithDecimals<Assets>;
-  native: NativeAsset<Assets>;
+  existentialDeposit: bigint;
+  min: bigint;
+  moonChainFee?: bigint;
+  native: AssetConfigWithDecimals<Assets>;
   origin: MoonChainConfig | ChainConfig;
   source: ChainConfig;
   sourceBalance: bigint;
-  existentialDeposit: bigint;
-  minBalance?: bigint;
-  extrinsicFeeBalance?: ExtrinsicFeeBalance<Assets>;
+  sourceFeeBalance?: FeeBalance<Assets>;
+  sourceMinBalance: bigint;
+  getFee: (amount?: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }
 
 export interface WithdrawTransferData<Assets extends Asset = Asset> {
   asset: AssetConfigWithDecimals<Assets>;
-  native: NativeAsset<Assets>;
-  origin: MoonChainConfig | ChainConfig;
   destination: ChainConfig;
   destinationBalance: bigint;
   destinationFee: bigint;
   existentialDeposit: bigint;
+  native: AssetConfigWithDecimals<Assets>;
+  origin: MoonChainConfig | ChainConfig;
   getFee: (amount: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }
@@ -102,12 +105,7 @@ export interface AssetConfigWithDecimals<Assets extends Asset = Asset>
   decimals: number;
 }
 
-export interface NativeAsset<Assets extends Asset = Asset> {
-  decimals: number;
-  symbol: Assets;
-}
-
-export interface ExtrinsicFeeBalance<Assets extends Asset = Asset> {
+export interface FeeBalance<Assets extends Asset = Asset> {
   amount: bigint;
   decimals: number;
   symbol: Assets;
