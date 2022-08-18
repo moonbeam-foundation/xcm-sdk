@@ -116,6 +116,7 @@ async function createChainSdk<
           return {
             get: async (
               account: string,
+              sourceAccount: string,
               primaryAccount?: string,
             ): Promise<DepositTransferData<Assets>> => {
               const foreignPolkadot = await PolkadotService.create<
@@ -143,11 +144,14 @@ async function createChainSdk<
                 min,
               ] = await Promise.all([
                 polkadot.getAssetDecimals(assetConfig.id),
-                foreignPolkadot.getGenericBalance(account, config.balance),
+                foreignPolkadot.getGenericBalance(
+                  sourceAccount,
+                  config.balance,
+                ),
                 foreignPolkadot.getExistentialDeposit(),
                 config.sourceFeeBalance
                   ? foreignPolkadot.getGenericBalance(
-                      account,
+                      sourceAccount,
                       config.sourceFeeBalance,
                     )
                   : undefined,
@@ -194,7 +198,7 @@ async function createChainSdk<
                 ): Promise<string> => {
                   const extrinsic = await createExtrinsic(amount);
                   const hash = await extrinsic.signAndSend(
-                    account,
+                    sourceAccount,
                     {
                       signer: options.polkadotSigner,
                     },

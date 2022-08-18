@@ -65,6 +65,7 @@ export interface XcmSdkWithdraw<
 export interface XcmSdkDepositFrom<Assets extends Asset = Asset> {
   get: (
     account: string,
+    sourceAccount: string,
     primaryAccount?: string,
   ) => Promise<DepositTransferData<Assets>>;
 }

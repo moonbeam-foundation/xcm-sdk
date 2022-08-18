@@ -8,7 +8,7 @@ const cache = new LRU<string, ApiPromise>({
   ttl: tenMin,
   updateAgeOnGet: true,
   ttlAutopurge: true,
-  dispose: (api: ApiPromise) => api.disconnect(),
+  dispose: async (api: ApiPromise) => api.isConnected && api.disconnect(),
 });
 
 export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
