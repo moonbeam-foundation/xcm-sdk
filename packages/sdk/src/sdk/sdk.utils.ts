@@ -33,9 +33,11 @@ export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
   config: DepositConfig<Assets>,
   cb: (event: ExtrinsicEvent) => void,
 ) {
-  return ({ events = [], status }: ISubmittableResult) => {
+  return ({ events = [], status, txHash }: ISubmittableResult) => {
+    const hash = txHash.toHex();
+
     if (status.isReady) {
-      cb({ status: ExtrinsicStatus.Sent });
+      cb({ status: ExtrinsicStatus.Sent, txHash: hash });
     }
 
     if (status.isInBlock) {
@@ -53,6 +55,7 @@ export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
               cb({
                 status: ExtrinsicStatus.Failed,
                 blockHash: block,
+                txHash: hash,
                 message: eventData.asIncomplete.toHuman().join('; '),
               });
 
@@ -63,6 +66,7 @@ export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
           cb({
             status: ExtrinsicStatus.Success,
             blockHash: block,
+            txHash: hash,
           });
         }
 
@@ -70,6 +74,7 @@ export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
           cb({
             status: ExtrinsicStatus.Failed,
             blockHash: block,
+            txHash: hash,
             message: data.join('; '),
           });
         }
@@ -89,7 +94,7 @@ export async function createTransactionEventHandler(
   }
 
   if (!skipSentEvent) {
-    cb({ status: ExtrinsicStatus.Sent });
+    cb({ status: ExtrinsicStatus.Sent, txHash });
   }
 
   const tx = await ethersSigner.provider.getTransactionReceipt(txHash);
@@ -106,11 +111,13 @@ export async function createTransactionEventHandler(
     cb({
       status: ExtrinsicStatus.Success,
       blockHash: tx.blockHash,
+      txHash,
     });
   } else {
     cb({
       status: ExtrinsicStatus.Failed,
       blockHash: tx.blockHash,
+      txHash,
     });
   }
 }

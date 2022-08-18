@@ -123,18 +123,21 @@ export type ExtrinsicEvent =
   | ExtrinsicSuccessEvent;
 
 export interface ExtrinsicFailedEvent {
-  status: ExtrinsicStatus.Failed;
-  message?: string;
   blockHash: Hash;
+  message?: string;
+  status: ExtrinsicStatus.Failed;
+  txHash: Hash;
 }
 
 export interface ExtrinsicSentEvent {
   status: ExtrinsicStatus.Sent;
+  txHash: Hash;
 }
 
 export interface ExtrinsicSuccessEvent {
-  status: ExtrinsicStatus.Success;
   blockHash: Hash;
+  status: ExtrinsicStatus.Success;
+  txHash: Hash;
 }
 
 export enum ExtrinsicStatus {
