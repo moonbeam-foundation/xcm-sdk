@@ -1,8 +1,5 @@
 import { Asset, Chain } from '../../../constants';
-import {
-  PolkadotXcmExtrinsicSuccessEvent,
-  XTokensExtrinsicSuccessEvent,
-} from '../../../extrinsic';
+import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
 import { getMoonAssetId, getPalletInstance } from '../../config.utils';
 import {
   assets,
@@ -16,12 +13,10 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[Asset.DEV];
 const astar = chains[Chain.AstarAlphanet];
-const calamari = chains[Chain.CalamariAlphanet];
-const karura = chains[Chain.KaruraAlphanet];
+const clover = chains[Chain.CloverAlphanet];
 
 const astarDevId = getMoonAssetId(astar);
-const calamariDevId = getMoonAssetId(calamari);
-const karuraDevId = getMoonAssetId(karura);
+const cloverDevId = getMoonAssetId(clover);
 
 export const DEV: MoonbaseXcmConfig = <const>{
   asset,
@@ -39,27 +34,17 @@ export const DEV: MoonbaseXcmConfig = <const>{
         .V1()
         .X2(getPalletInstance(astar)),
     },
-    [calamari.chain]: {
-      origin: calamari,
-      balance: balance.assets(calamariDevId),
+    [clover.chain]: {
+      origin: clover,
+      balance: balance.assets(cloverDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
-        .xTokens()
-        .transfer()
-        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
-        .origin(calamari)
-        .asset({ MantaCurrency: calamariDevId }),
-    },
-    [karura.chain]: {
-      origin: karura,
-      balance: balance.tokens(karuraDevId),
-      sourceFeeBalance: balance.system(),
-      extrinsic: extrinsic
-        .xTokens()
-        .transfer()
-        .successEvent(XTokensExtrinsicSuccessEvent.Transferred)
-        .origin(karura)
-        .asset({ ForeignAsset: karuraDevId }),
+        .polkadotXcm()
+        .limitedReserveWithdrawAssets()
+        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+        .origin(clover)
+        .V1()
+        .X2(getPalletInstance(clover)),
     },
   },
   withdraw: {
@@ -68,14 +53,9 @@ export const DEV: MoonbaseXcmConfig = <const>{
       destination: astar,
       feePerWeight: 50_000,
     }),
-    [calamari.chain]: withdraw.xTokens({
-      balance: balance.assets(calamariDevId),
-      destination: calamari,
-      feePerWeight: 50_000,
-    }),
-    [karura.chain]: withdraw.xTokens({
-      balance: balance.assets(karuraDevId),
-      destination: karura,
+    [clover.chain]: withdraw.xTokens({
+      balance: balance.assets(cloverDevId),
+      destination: clover,
       feePerWeight: 50_000,
     }),
   },
