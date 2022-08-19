@@ -22,6 +22,7 @@
     "test": "jest",
     "test:watch": "jest -w",
     "test:update": "jest -u",
+    "link": "npm run build && cd packages/config && npm ln && cd ../sdk && npm ln @moonbeam-network/xcm-config && npm ln",
     "prepare": "husky install"
   },
   "dependencies": {

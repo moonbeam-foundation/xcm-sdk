@@ -95,6 +95,7 @@ export interface WithdrawTransferData<Assets extends Asset = Asset> {
   destinationBalance: bigint;
   destinationFee: bigint;
   existentialDeposit: bigint;
+  min: bigint;
   native: AssetConfigWithDecimals<Assets>;
   origin: MoonChainConfig | ChainConfig;
   getFee: (amount: bigint) => Promise<bigint>;

@@ -242,14 +242,19 @@ async function createChainSdk<
                   ),
                   destinationPolkadot.getExistentialDeposit(),
                 ]);
+              const destinationFee = BigInt(
+                config.weight * config.feePerWeight,
+              );
+              const min = destinationFee + existentialDeposit;
 
               return {
                 asset: { ...assetConfig, decimals },
-                native: { ...nativeAsset, decimals: meta.decimals },
                 destination: config.destination,
                 destinationBalance,
-                destinationFee: BigInt(config.weight * config.feePerWeight),
+                destinationFee,
                 existentialDeposit,
+                min,
+                native: { ...nativeAsset, decimals: meta.decimals },
                 origin,
                 getFee: async (amount) =>
                   contract.getTransferFees(
