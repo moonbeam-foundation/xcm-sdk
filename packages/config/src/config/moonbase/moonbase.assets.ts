@@ -6,6 +6,7 @@ import { MoonbaseAssets } from './moonbase.interfaces';
 export const MOONBASE_ASSETS = <const>[
   Asset.ASTR,
   Asset.BSX,
+  Asset.CLV,
   Asset.CRU,
   Asset.DEV,
   Asset.KBTC,
@@ -27,6 +28,11 @@ export const MOONBASE_ASSETS_CONFIGS: AssetsConfigs<MoonbaseAssets> = {
     erc20Id: '0xffffffff4d0ff56d0097bbd14920eac488540bfa',
     originSymbol: Asset.BSX,
     originAssetId: 0,
+  },
+  [Asset.CLV]: {
+    id: '281434042901349570144900941495462927562',
+    erc20Id: '0xffffffffd3ba399d7d9d684d94b22767a5fa1cca',
+    originSymbol: Asset.CLV,
   },
   [Asset.CRU]: {
     id: '108457044225666871745333730479173774551',

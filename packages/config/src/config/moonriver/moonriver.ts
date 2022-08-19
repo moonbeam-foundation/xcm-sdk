@@ -11,6 +11,7 @@ import { KBTC } from './assets/kbtc';
 import { KINT } from './assets/kint';
 import { KMA } from './assets/kma';
 import { KSM } from './assets/ksm';
+import { LIT } from './assets/lit';
 import { MOVR } from './assets/movr';
 import { PHA } from './assets/pha';
 import { RMRK } from './assets/rmrk';
@@ -29,6 +30,7 @@ export const MOONRIVER_CONFIGS: MoonriverXcmConfigs = <const>{
   [Asset.KINT]: KINT,
   [Asset.KMA]: KMA,
   [Asset.KSM]: KSM,
+  [Asset.LIT]: LIT,
   [Asset.MOVR]: MOVR,
   [Asset.PHA]: PHA,
   [Asset.RMRK]: RMRK,

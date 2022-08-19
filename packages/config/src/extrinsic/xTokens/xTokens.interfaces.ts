@@ -41,24 +41,7 @@ export type XTokensTransferExtrinsicParams<Assets extends Asset = Asset> = [
   /**
    * asset
    */
-  (
-    | {
-        Token: Assets | 'KUSD' | 'MOVR';
-      }
-    | {
-        Native: Assets;
-      }
-    | {
-        ForeignAsset: number | bigint;
-      }
-    | {
-        MantaCurrency: number | bigint;
-      }
-    | Assets
-    | number
-    | bigint
-    | string
-  ),
+  XTokensTransferExtrinsicParamsAsset<Assets>,
   /**
    * amount
    */
@@ -92,24 +75,6 @@ export type XTokensTransferExtrinsicParams<Assets extends Asset = Asset> = [
    */
   number,
 ];
-
-export type XTokensTransferExtrinsicParamsAsset<Assets extends Asset = Asset> =
-  | {
-      Token: Assets | 'KUSD' | 'MOVR';
-    }
-  | {
-      Native: Assets;
-    }
-  | {
-      ForeignAsset: number | bigint;
-    }
-  | {
-      MantaCurrency: number | bigint;
-    }
-  | Assets
-  | number
-  | bigint
-  | string;
 
 export type XTokensTransferMultiAssetExtrinsicParams<
   Assets extends Asset = Asset,
@@ -222,3 +187,24 @@ export type XTokensTransferMultiCurrenciesExtrinsicParams<
    */
   number,
 ];
+
+export type XTokensTransferExtrinsicParamsAsset<Assets extends Asset = Asset> =
+  | {
+      Token: Assets | 'KUSD' | 'MOVR';
+    }
+  | {
+      Native: Assets;
+    }
+  | {
+      ForeignAsset: number | bigint;
+    }
+  | {
+      MantaCurrency: number | bigint;
+    }
+  | {
+      OtherReserve: number | bigint;
+    }
+  | Assets
+  | number
+  | bigint
+  | string;

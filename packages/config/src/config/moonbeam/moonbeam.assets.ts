@@ -8,6 +8,8 @@ export const MOONBEAM_ASSETS = <const>[
   Asset.AUSD,
   Asset.DOT,
   Asset.GLMR,
+  Asset.IBTC,
+  Asset.INTR,
   Asset.PARA,
 ];
 
@@ -32,6 +34,16 @@ export const MOONBEAM_ASSETS_CONFIGS: AssetsConfigs<MoonbeamAssets> = {
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: Asset.GLMR,
     isNative: true,
+  },
+  [Asset.IBTC]: {
+    id: '120637696315203257380661607956669368914',
+    erc20Id: '0xffffffff5ac1f9a51a93f5c527385edf7fe98a52',
+    originSymbol: Asset.IBTC,
+  },
+  [Asset.INTR]: {
+    id: '101170542313601871197860408087030232491',
+    erc20Id: '0xffffffff4c1cbcd97597339702436d4f18a375ab',
+    originSymbol: Asset.INTR,
   },
   [Asset.PARA]: {
     id: '32615670524745285411807346420584982855',

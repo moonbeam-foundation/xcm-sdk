@@ -46,7 +46,7 @@ export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
     ws: 'wss://test-para-api.clv.org/',
     weight: 1_000_000_000,
     parachainId: 2002,
-    moonAssetId: 100,
+    moonAssetId: 4,
     palletInstance: 3,
   },
   [Chain.CrustShadowAlphanet]: {

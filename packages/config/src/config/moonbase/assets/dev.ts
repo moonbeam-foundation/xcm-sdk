@@ -1,5 +1,8 @@
 import { Asset, Chain } from '../../../constants';
-import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  PolkadotXcmExtrinsicSuccessEvent,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import { getMoonAssetId, getPalletInstance } from '../../config.utils';
 import {
   assets,
@@ -39,12 +42,13 @@ export const DEV: MoonbaseXcmConfig = <const>{
       balance: balance.assets(cloverDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
-        .polkadotXcm()
-        .limitedReserveWithdrawAssets()
-        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(clover)
-        .V1()
-        .X2(getPalletInstance(clover)),
+        .asset({
+          OtherReserve: cloverDevId,
+        }),
     },
   },
   withdraw: {

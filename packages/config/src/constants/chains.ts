@@ -55,6 +55,7 @@ export enum Chain {
   Kintsugi = 'Kintsugi',
   Kusama = 'Kusama',
   LitentryAlphanet = 'LitentryAlphanet',
+  Litmus = 'Litmus',
   Parallel = 'Parallel',
   ParallelHeiko = 'ParallelHeiko',
   Polkadot = 'Polkadot',

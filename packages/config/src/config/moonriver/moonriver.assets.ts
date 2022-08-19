@@ -14,6 +14,7 @@ export const MOONRIVER_ASSETS = <const>[
   Asset.KINT,
   Asset.KMA,
   Asset.KSM,
+  Asset.LIT,
   Asset.MOVR,
   Asset.PHA,
   Asset.RMRK,
@@ -72,6 +73,11 @@ export const MOONRIVER_ASSETS_CONFIGS: AssetsConfigs<MoonriverAssets> = {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
     originSymbol: Asset.KSM,
+  },
+  [Asset.LIT]: {
+    id: '65216491554813189869575508812319036608',
+    erc20Id: '0xffffffff31103d490325bb0a8e40ef62e2f614c0',
+    originSymbol: Asset.LIT,
   },
   [Asset.MOVR]: {
     id: '',
