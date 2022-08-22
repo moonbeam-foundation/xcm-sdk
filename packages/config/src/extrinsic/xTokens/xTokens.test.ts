@@ -1,18 +1,20 @@
 import { Asset, Chain, MoonChain } from '../../constants';
+import { ChainConfig, MoonChainConfig } from '../../interfaces';
 import { xTokens } from './xTokens';
 import { XTokensExtrinsicSuccessEvent } from './xTokens.constants';
 
 describe('xTokens', () => {
   const amount = 1000n;
   const account = '0xeF46c7649270C912704fB09B75097f6E32208b85';
-  const chain = {
+  const chain: MoonChainConfig = {
     chain: MoonChain.MoonbaseAlpha,
     name: 'Moonbase Alpha',
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
     decimals: 10,
+    unitsPerSecond: 100n,
   };
-  const origin = {
+  const origin: ChainConfig = {
     chain: Chain.AlphanetRelay,
     name: 'Alphanet Relay',
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
