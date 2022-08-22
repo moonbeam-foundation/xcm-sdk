@@ -188,7 +188,7 @@ async function createChainSdk<
                   }
 
                   const extrinsic = await createExtrinsic(amount);
-                  const info = await extrinsic.paymentInfo(account);
+                  const info = await extrinsic.paymentInfo(sourceAccount);
 
                   return info.partialFee.toBigInt();
                 },
