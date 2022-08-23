@@ -59,9 +59,6 @@ async function createChainSdk<
   options: SdkOptions,
 ): Promise<XcmSdk<Assets, Chains>> {
   const contract = new XTokensContract<Assets>(options.ethersSigner);
-  const polkadot = await PolkadotService.create<Assets, Chains>(
-    configGetter.chain.ws,
-  );
 
   return {
     asset: configGetter.asset,
@@ -72,6 +69,9 @@ async function createChainSdk<
     ): UnsubscribePromise => {
       let lastBalance = 0n;
       let lastInfo: AssetBalanceInfo<Assets>[] = [];
+      const polkadot = await PolkadotService.create<Assets, Chains>(
+        configGetter.chain.ws,
+      );
       const handler = (data: bigint | AssetBalanceInfo<Assets>[]) => {
         const isBalance = typeof data === 'bigint';
 
@@ -119,6 +119,9 @@ async function createChainSdk<
               sourceAccount: string,
               primaryAccount?: string,
             ): Promise<DepositTransferData<Assets>> => {
+              const polkadot = await PolkadotService.create<Assets, Chains>(
+                configGetter.chain.ws,
+              );
               const foreignPolkadot = await PolkadotService.create<
                 Assets,
                 Chains
@@ -225,6 +228,9 @@ async function createChainSdk<
             get: async (
               destinationAccount: string,
             ): Promise<WithdrawTransferData<Assets>> => {
+              const polkadot = await PolkadotService.create<Assets, Chains>(
+                configGetter.chain.ws,
+              );
               const destinationPolkadot = await PolkadotService.create<
                 Assets,
                 Chains

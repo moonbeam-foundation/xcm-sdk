@@ -3,28 +3,32 @@ import LRU from 'lru-cache';
 
 const tenMin = 10 * 60 * 1000;
 
-const cache = new LRU<string, ApiPromise>({
+const cache = new LRU<string, Promise<ApiPromise>>({
   max: 20,
   ttl: tenMin,
   updateAgeOnGet: true,
   ttlAutopurge: true,
-  dispose: (api: ApiPromise) => api.isConnected && api.disconnect(),
+  dispose: async (promise: Promise<ApiPromise>) => {
+    const api = await promise;
+
+    if (api.isConnected) {
+      api.disconnect();
+    }
+  },
 });
 
 export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
-  const cached = cache.get(ws);
+  const promise =
+    cache.get(ws) ||
+    ApiPromise.create({
+      provider: new WsProvider(ws),
+    });
 
-  if (cached) {
-    return cached;
-  }
+  cache.set(ws, promise);
 
-  const newApi = await ApiPromise.create({
-    provider: new WsProvider(ws),
-  });
+  const api = await promise;
 
-  await newApi.isReady;
+  await api.isReady;
 
-  cache.set(ws, newApi);
-
-  return newApi;
+  return api;
 }
