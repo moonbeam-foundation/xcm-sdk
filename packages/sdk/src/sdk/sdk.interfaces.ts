@@ -108,7 +108,7 @@ export interface AssetConfigWithDecimals<Assets extends Asset = Asset>
 }
 
 export interface FeeBalance<Assets extends Asset = Asset> {
-  amount: bigint;
+  balance: bigint;
   decimals: number;
   symbol: Assets;
 }

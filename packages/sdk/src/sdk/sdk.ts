@@ -182,14 +182,10 @@ async function createChainSdk<
                 source: config.origin,
                 sourceBalance,
                 sourceFeeBalance: !isUndefined(sourceFeeBalance)
-                  ? { ...meta, amount: sourceFeeBalance }
+                  ? { ...meta, balance: sourceFeeBalance }
                   : undefined,
                 sourceMinBalance,
                 getFee: async (amount = sourceBalance): Promise<bigint> => {
-                  if (!sourceFeeBalance) {
-                    return 0n;
-                  }
-
                   const extrinsic = await createExtrinsic(amount);
                   const info = await extrinsic.paymentInfo(sourceAccount);
 
