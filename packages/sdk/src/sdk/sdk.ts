@@ -148,7 +148,7 @@ async function createChainSdk<
               ] = await Promise.all([
                 polkadot.getAssetDecimals(assetConfig.id),
                 foreignPolkadot.getGenericBalance(
-                  sourceAccount,
+                  primaryAccount || sourceAccount,
                   config.balance,
                 ),
                 foreignPolkadot.getExistentialDeposit(),
