@@ -22,7 +22,7 @@ export const KMA: MoonriverXcmConfig = <const>{
       extrinsic: extrinsic
         .xTokens()
         .transfer()
-        .successEvent(XTokensExtrinsicSuccessEvent.Transferred)
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
         .asset({ MantaCurrency: 1 }),
     },
