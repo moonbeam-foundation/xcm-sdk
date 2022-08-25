@@ -58,6 +58,7 @@ export enum Chain {
   Litmus = 'Litmus',
   Parallel = 'Parallel',
   ParallelHeiko = 'ParallelHeiko',
+  Phala = 'Phala',
   Polkadot = 'Polkadot',
   Shiden = 'Shiden',
   Statemine = 'Statemine',

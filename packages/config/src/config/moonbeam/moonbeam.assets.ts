@@ -11,6 +11,7 @@ export const MOONBEAM_ASSETS = <const>[
   Asset.IBTC,
   Asset.INTR,
   Asset.PARA,
+  Asset.PHA,
 ];
 
 export const MOONBEAM_ASSETS_CONFIGS: AssetsConfigs<MoonbeamAssets> = {
@@ -49,5 +50,10 @@ export const MOONBEAM_ASSETS_CONFIGS: AssetsConfigs<MoonbeamAssets> = {
     id: '32615670524745285411807346420584982855',
     erc20Id: '0xffffffff18898cb5fe1e88e668152b4f4052a947',
     originSymbol: Asset.PARA,
+  },
+  [Asset.PHA]: {
+    id: '132685552157663328694213725410064821485',
+    erc20Id: '0xffffffff63d24ecc8eb8a7b5d0803e900f7b6ced',
+    originSymbol: Asset.PHA,
   },
 };

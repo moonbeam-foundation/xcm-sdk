@@ -1,5 +1,8 @@
 import { Asset, Chain } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicSuccessEvent,
+  XTransferExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import { getMoonAssetId } from '../../config.utils';
 import {
   assets,
@@ -14,9 +17,11 @@ import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 const asset = assets[Asset.GLMR];
 const acala = chains[Chain.Acala];
 const parallel = chains[Chain.Parallel];
+const phala = chains[Chain.Phala];
 
 const acalaGlmrId = getMoonAssetId(acala);
 const parallelGlmrId = getMoonAssetId(parallel);
+const phalaGlmrId = getMoonAssetId(phala);
 
 export const GLMR: MoonbeamXcmConfig = <const>{
   asset,
@@ -46,6 +51,17 @@ export const GLMR: MoonbeamXcmConfig = <const>{
         .origin(parallel)
         .asset(parallelGlmrId),
     },
+    [phala.chain]: {
+      origin: phala,
+      balance: balance.assets(phalaGlmrId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTransfer()
+        .transfer()
+        .successEvent(XTransferExtrinsicSuccessEvent.Withdrawn)
+        .origin(phala)
+        .X2(10),
+    },
   },
   withdraw: {
     [acala.chain]: withdraw.xTokens({
@@ -57,6 +73,11 @@ export const GLMR: MoonbeamXcmConfig = <const>{
       balance: balance.assets(parallelGlmrId),
       destination: parallel,
       feePerWeight: 8,
+    }),
+    [phala.chain]: withdraw.xTokens({
+      balance: balance.assets(phalaGlmrId),
+      destination: phala,
+      feePerWeight: 50_000,
     }),
   },
 };

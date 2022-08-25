@@ -8,6 +8,7 @@ import { GLMR } from './assets/glmr';
 import { IBTC } from './assets/ibtc';
 import { INTR } from './assets/intr';
 import { PARA } from './assets/para';
+import { PHA } from './assets/pha';
 
 export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = <const>{
   [Asset.ACA]: ACA,
@@ -17,4 +18,5 @@ export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = <const>{
   [Asset.IBTC]: IBTC,
   [Asset.INTR]: INTR,
   [Asset.PARA]: PARA,
+  [Asset.PHA]: PHA,
 };

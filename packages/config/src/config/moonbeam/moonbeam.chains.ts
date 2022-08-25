@@ -7,6 +7,7 @@ export const MOONBEAM_CHAINS = <const>[
   Chain.Acala,
   Chain.Interley,
   Chain.Parallel,
+  Chain.Phala,
   Chain.Polkadot,
 ];
 
@@ -33,6 +34,14 @@ export const MOONBEAM_CHAINS_CONFIGS: ChainsConfigs<MoonbeamChains> = {
     weight: 1_000_000_000,
     parachainId: 2012,
     moonAssetId: 114,
+  },
+  [Chain.Phala]: {
+    chain: Chain.Phala,
+    name: 'Phala',
+    ws: 'wss://api.phala.network/ws',
+    weight: 1_000_000_000,
+    parachainId: 2035,
+    moonAssetId: 1,
   },
   [Chain.Polkadot]: {
     chain: Chain.Polkadot,
