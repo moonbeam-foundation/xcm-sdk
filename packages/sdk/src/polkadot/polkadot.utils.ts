@@ -14,7 +14,7 @@ export function sortByBalanceAndChainName<Assets extends Asset = Asset>(
     return -1;
   }
 
-  if (a.asset.isNative) {
+  if (b.asset.isNative) {
     return 1;
   }
 
