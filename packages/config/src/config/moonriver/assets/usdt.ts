@@ -23,7 +23,7 @@ export const USDT: MoonriverXcmConfig = <const>{
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(origin)
         .V1()
-        .X1(),
+        .X2(50, originAssetId),
     },
   },
   withdraw: {},
