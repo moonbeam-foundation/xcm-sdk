@@ -49,7 +49,7 @@ export enum Chain {
   Integritee = 'Integritee',
   IntegriteeAlphanet = 'IntegriteeAlphanet',
   InterBTCAlphanet = 'InterBTCAlphanet',
-  Interley = 'Interley',
+  Interlay = 'Interlay',
   Karura = 'Karura',
   Khala = 'Khala',
   Kintsugi = 'Kintsugi',
