@@ -7,9 +7,9 @@ export interface ConfigGetter<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: Asset<Symbols>;
   assets: AssetsConfigs<Symbols>;
-  chain: MoonChain;
+  moonAsset: Asset<Symbols>;
+  moonChain: MoonChain;
   deposit: (symbol: Symbols) => DepositConfigGetter<Symbols, ChainKeys>;
   withdraw: (symbol: Symbols) => WithdrawConfigGetter<Symbols, ChainKeys>;
 }

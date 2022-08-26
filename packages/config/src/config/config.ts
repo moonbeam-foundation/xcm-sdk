@@ -39,9 +39,9 @@ export function createConfigGetter<
   configs: ChainXcmConfigs<Symbols, ChainKeys>,
 ): ConfigGetter<Symbols, ChainKeys> {
   return {
-    asset: moonAsset,
     assets,
-    chain: moonChain,
+    moonAsset,
+    moonChain,
     deposit: (symbol: Symbols) => {
       const config = configs[symbol];
 
