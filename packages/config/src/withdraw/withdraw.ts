@@ -7,14 +7,14 @@ import {
 } from './withdraw.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function createWithdrawBuilder<Assets extends Asset>() {
+export function createWithdrawBuilder<Assets extends Asset = Asset>() {
   return {
     xTokens: (options: WithdrawXTokensOptions<Assets>) =>
       xTokens<Assets>(options),
   };
 }
 
-function xTokens<Assets extends Asset>({
+function xTokens<Assets extends Asset = Asset>({
   balance,
   destination,
   feePerWeight,

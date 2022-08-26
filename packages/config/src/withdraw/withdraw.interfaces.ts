@@ -2,10 +2,10 @@ import { BalanceConfig } from '../balance';
 import { Asset } from '../constants';
 import { ChainConfig } from '../interfaces';
 
-export type WithdrawConfig<Assets extends Asset> =
+export type WithdrawConfig<Assets extends Asset = Asset> =
   WithdrawXTokensConfig<Assets>;
 
-export interface WithdrawXTokensConfig<Assets extends Asset> {
+export interface WithdrawXTokensConfig<Assets extends Asset = Asset> {
   balance: BalanceConfig<Assets>;
   destination: ChainConfig;
   feePerWeight: number;
@@ -46,7 +46,7 @@ export type WithdrawXTokensParams = [
   ),
 ];
 
-export interface WithdrawXTokensOptions<Assets extends Asset> {
+export interface WithdrawXTokensOptions<Assets extends Asset = Asset> {
   balance: BalanceConfig<Assets>;
   destination: ChainConfig;
   feePerWeight: number;

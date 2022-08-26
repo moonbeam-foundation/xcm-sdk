@@ -1,5 +1,4 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   Asset,
   AssetConfig,
@@ -9,7 +8,7 @@ import { Contract, Signer } from 'ethers';
 
 import ContractInterface from './XTokensABI.json';
 
-export class XTokensContract<Assets extends Asset> {
+export class XTokensContract<Assets extends Asset = Asset> {
   readonly address: string = '0x0000000000000000000000000000000000000804';
 
   readonly #contract: Contract;

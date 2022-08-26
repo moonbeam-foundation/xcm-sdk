@@ -13,6 +13,7 @@ export const MOONRIVER_CHAINS = <const>[
   Chain.Khala,
   Chain.Kintsugi,
   Chain.Kusama,
+  Chain.Litmus,
   Chain.Parallel,
   Chain.Shiden,
   Chain.Statemine,
@@ -84,6 +85,13 @@ export const MOONRIVER_CHAINS_CONFIGS: ChainsConfigs<MoonriverChains> = {
     ws: 'wss://kusama-rpc.polkadot.io',
     weight: 1_000_000_000,
     parachainId: 0,
+  },
+  [Chain.Litmus]: {
+    chain: Chain.Litmus,
+    name: 'Litmus',
+    ws: 'wss://rpc.litmus-parachain.litentry.io',
+    weight: 1_000_000_000,
+    parachainId: 2106,
   },
   [Chain.Parallel]: {
     chain: Chain.Parallel,

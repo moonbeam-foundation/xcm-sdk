@@ -1,10 +1,7 @@
 {
   "name": "@moonbeam-network/xcm-config",
-  "version": "1.0.0",
+  "version": "0.0.9",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "directory": "packages/config",
     "type": "git",
@@ -24,7 +21,7 @@
   "files": [
     "build"
   ],
-  "type": "module",
+  "type": "commonjs",
   "exports": {
     ".": {
       "import": {

@@ -9,10 +9,10 @@
       "path": "packages/config/tsconfig.cjs.json"
     },
     {
-      "path": "packages/xcm/tsconfig.json"
+      "path": "packages/sdk/tsconfig.json"
     },
     {
-      "path": "packages/xcm/tsconfig.cjs.json"
+      "path": "packages/sdk/tsconfig.cjs.json"
     }
   ]
 }

@@ -1,10 +1,17 @@
+import { isUndefined } from '@polkadot/util';
 import { Asset } from '../constants';
+import {
+  ExtrinsicConfig,
+  ExtrinsicPallet,
+  XTokensExtrinsic,
+  XTokensTransferMultiCurrenciesExtrinsic,
+} from '../extrinsic';
 import { AssetConfig, ChainConfig } from '../interfaces';
 
-export function getOriginAssetId<Assets extends Asset>(
+export function getOriginAssetId<Assets extends Asset = Asset>(
   asset: AssetConfig<Assets>,
 ) {
-  if (!asset.originAssetId) {
+  if (isUndefined(asset.originAssetId)) {
     throw new Error(`No originAssetId defined for asset ${asset.originSymbol}`);
   }
 
@@ -12,7 +19,7 @@ export function getOriginAssetId<Assets extends Asset>(
 }
 
 export function getMoonAssetId(chain: ChainConfig) {
-  if (!chain.moonAssetId) {
+  if (isUndefined(chain.moonAssetId)) {
     throw new Error(`No moonAssetId defined for chain ${chain.chain}`);
   }
 
@@ -20,9 +27,18 @@ export function getMoonAssetId(chain: ChainConfig) {
 }
 
 export function getPalletInstance(chain: ChainConfig) {
-  if (!chain.palletInstance) {
+  if (isUndefined(chain.palletInstance)) {
     throw new Error(`No palletInstance defined for chain ${chain.chain}`);
   }
 
   return chain.palletInstance;
+}
+
+export function isMultiCurrency<Assets extends Asset = Asset>(
+  extrinsic: ExtrinsicConfig<Assets>,
+): extrinsic is XTokensTransferMultiCurrenciesExtrinsic<Assets> {
+  return (
+    extrinsic.pallet === ExtrinsicPallet.XTokens &&
+    extrinsic.extrinsic === XTokensExtrinsic.TransferMultiCurrencies
+  );
 }

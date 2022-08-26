@@ -1,14 +1,11 @@
 {
-  "name": "@moonbeam-network/xcm",
-  "version": "1.0.0",
+  "name": "@moonbeam-network/xcm-sdk",
+  "version": "0.0.9",
   "description": "",
   "author": "PureStake",
   "license": "GPL-3.0-only",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
-    "directory": "packages/xcm",
+    "directory": "packages/sdk",
     "type": "git",
     "url": "git+https://github.com/PureStake/xcm.git"
   },
@@ -24,7 +21,7 @@
   "files": [
     "build"
   ],
-  "type": "module",
+  "type": "commonjs",
   "exports": {
     ".": {
       "import": {
@@ -41,6 +38,7 @@
   "main": "./build/cjs/src/index.js",
   "dependencies": {
     "@moonbeam-network/api-augment": "^0.1700.0",
+    "@moonbeam-network/xcm-config": "^0.0.9",
     "@polkadot/api": "^9.1.1",
     "@polkadot/types": "^9.1.1",
     "@polkadot/util": "^10.1.3",

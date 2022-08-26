@@ -6,25 +6,26 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonbase.common';
-import { MoonbaseXcmConfig } from '../moonbase.interfaces';
+} from '../moonbeam.common';
+import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
-const asset = assets[Asset.KUSD];
-const feeAsset = assets[Asset.KAR];
-const origin = chains[Chain.KaruraAlphanet];
+const asset = assets[Asset.IBTC];
+const feeAsset = assets[Asset.INTR];
+const origin = chains[Chain.Interley];
 
-export const KUSD: MoonbaseXcmConfig = <const>{
+export const IBTC: MoonbeamXcmConfig = <const>{
   asset,
   origin,
   deposit: {
     [origin.chain]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
+      isNativeAssetPayingMoonFee: true,
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()
-        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiCurrencies)
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
         .assets(asset, feeAsset),
     },
@@ -33,7 +34,7 @@ export const KUSD: MoonbaseXcmConfig = <const>{
     [origin.chain]: withdraw.xTokens({
       balance: balance.tokens(asset.originSymbol),
       destination: origin,
-      feePerWeight: 1,
+      feePerWeight: 0.00000619,
     }),
   },
 };

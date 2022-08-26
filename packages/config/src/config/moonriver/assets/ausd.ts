@@ -19,7 +19,7 @@ export const AUSD: MoonriverXcmConfig = <const>{
     [origin.chain]: {
       origin,
       balance: balance.tokens('KUSD'),
-      extrinsicFeeBalance: balance.system(),
+      sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()

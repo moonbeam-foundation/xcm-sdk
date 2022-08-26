@@ -5,7 +5,7 @@ import { xcmPallet } from './xcmPallet';
 import { xTokens } from './xTokens';
 import { xTransfer } from './xTransfer';
 
-export function createExtrinsicBuilder<Assets extends Asset>(
+export function createExtrinsicBuilder<Assets extends Asset = Asset>(
   chain: MoonChainConfig,
 ) {
   return {

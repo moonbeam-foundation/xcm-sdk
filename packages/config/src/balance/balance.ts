@@ -13,7 +13,7 @@ import {
 } from './balance.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function createBalanceBuilder<Assets extends Asset>() {
+export function createBalanceBuilder<Assets extends Asset = Asset>() {
   return {
     assets,
     min,
@@ -53,7 +53,7 @@ function system(): SystemBalanceConfig {
   };
 }
 
-function tokens<Assets extends Asset>(
+function tokens<Assets extends Asset = Asset>(
   asset: number | bigint | Assets | 'MOVR' | 'KUSD' | 'AUSD',
 ): TokensBalanceConfig<Assets> {
   return {

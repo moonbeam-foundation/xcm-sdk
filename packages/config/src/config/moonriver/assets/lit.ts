@@ -6,32 +6,30 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonbase.common';
-import { MoonbaseXcmConfig } from '../moonbase.interfaces';
+} from '../moonriver.common';
+import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
-const asset = assets[Asset.KMA];
-const origin = chains[Chain.CalamariAlphanet];
+const asset = assets[Asset.LIT];
+const origin = chains[Chain.Litmus];
 
-export const KMA: MoonbaseXcmConfig = <const>{
+export const LIT: MoonriverXcmConfig = <const>{
   asset,
   origin,
   deposit: {
     [origin.chain]: {
-      origin,
-      balance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
-        .asset({ MantaCurrency: 1 }),
+        .asset('SelfReserve'),
     },
   },
   withdraw: {
     [origin.chain]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      feePerWeight: 0.001,
+      feePerWeight: 0.8,
     }),
   },
 };
