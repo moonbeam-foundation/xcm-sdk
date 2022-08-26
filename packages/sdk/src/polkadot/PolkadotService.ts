@@ -110,7 +110,7 @@ export class PolkadotService<
       return 0n;
     }
 
-    return get(details, path).toBigInt();
+    return get(details.value, path).toBigInt();
   }
 
   getXcmExtrinsic(
