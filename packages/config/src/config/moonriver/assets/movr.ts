@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
@@ -15,23 +15,23 @@ import {
 } from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
-const asset = assets[Asset.MOVR];
-const bifrost = chains[Chain.Bifrost];
-const karura = chains[Chain.Karura];
-const khala = chains[Chain.Khala];
-const parallel = chains[Chain.Parallel];
-const shiden = chains[Chain.Shiden];
+const asset = assets[AssetSymbol.MOVR];
+const bifrost = chains[ChainKey.Bifrost];
+const karura = chains[ChainKey.Karura];
+const khala = chains[ChainKey.Khala];
+const parallel = chains[ChainKey.Parallel];
+const shiden = chains[ChainKey.Shiden];
 
 const karuraMovrId = getMoonAssetId(karura);
 const khalaMovrId = getMoonAssetId(khala);
 const parallelMovrId = getMoonAssetId(parallel);
 const shidenMovrId = getMoonAssetId(shiden);
 
-export const MOVR: MoonriverXcmConfig = <const>{
+export const MOVR: MoonriverXcmConfig = {
   asset,
   origin: moonriver,
   deposit: {
-    [bifrost.chain]: {
+    [bifrost.key]: {
       origin: bifrost,
       balance: balance.tokens('MOVR'),
       sourceFeeBalance: balance.system(),
@@ -44,7 +44,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
           Token: asset.originSymbol,
         }),
     },
-    [karura.chain]: {
+    [karura.key]: {
       origin: karura,
       balance: balance.tokens(karuraMovrId),
       sourceFeeBalance: balance.system(),
@@ -57,7 +57,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
           ForeignAsset: karuraMovrId,
         }),
     },
-    [khala.chain]: {
+    [khala.key]: {
       origin: khala,
       balance: balance.assets(khalaMovrId),
       sourceFeeBalance: balance.system(),
@@ -68,7 +68,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
         .origin(khala)
         .X2(getPalletInstance(khala)),
     },
-    [parallel.chain]: {
+    [parallel.key]: {
       origin: parallel,
       balance: balance.assets(parallelMovrId),
       sourceFeeBalance: balance.system(),
@@ -79,7 +79,7 @@ export const MOVR: MoonriverXcmConfig = <const>{
         .origin(parallel)
         .asset(parallelMovrId),
     },
-    [shiden.chain]: {
+    [shiden.key]: {
       origin: shiden,
       balance: balance.assets(shidenMovrId),
       sourceFeeBalance: balance.system(),
@@ -93,27 +93,27 @@ export const MOVR: MoonriverXcmConfig = <const>{
     },
   },
   withdraw: {
-    [bifrost.chain]: withdraw.xTokens({
+    [bifrost.key]: withdraw.xTokens({
       balance: balance.tokens('MOVR'),
       destination: bifrost,
       feePerWeight: 213_600,
     }),
-    [karura.chain]: withdraw.xTokens({
+    [karura.key]: withdraw.xTokens({
       balance: balance.tokens(karuraMovrId),
       destination: karura,
       feePerWeight: 50_000,
     }),
-    [khala.chain]: withdraw.xTokens({
+    [khala.key]: withdraw.xTokens({
       balance: balance.tokens(khalaMovrId),
       destination: khala,
       feePerWeight: 50_000,
     }),
-    [parallel.chain]: withdraw.xTokens({
+    [parallel.key]: withdraw.xTokens({
       balance: balance.assets(parallelMovrId),
       destination: parallel,
       feePerWeight: 0.48,
     }),
-    [shiden.chain]: withdraw.xTokens({
+    [shiden.key]: withdraw.xTokens({
       balance: balance.assets(shidenMovrId),
       destination: shiden,
       feePerWeight: 50_000,

@@ -1,14 +1,14 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
 import {
   Asset,
-  AssetConfig,
+  AssetSymbol,
   WithdrawXTokensConfig,
 } from '@moonbeam-network/xcm-config';
 import { Contract, Signer } from 'ethers';
 
 import ContractInterface from './XTokensABI.json';
 
-export class XTokensContract<Assets extends Asset = Asset> {
+export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
   readonly address: string = '0x0000000000000000000000000000000000000804';
 
   readonly #contract: Contract;
@@ -23,8 +23,8 @@ export class XTokensContract<Assets extends Asset = Asset> {
   async transfer(
     account: string,
     amount: bigint,
-    asset: AssetConfig<Assets>,
-    config: WithdrawXTokensConfig<Assets>,
+    asset: Asset<Symbols>,
+    config: WithdrawXTokensConfig<Symbols>,
   ): Promise<TransactionResponse> {
     return this.#contract.transfer(
       asset.erc20Id,
@@ -37,8 +37,8 @@ export class XTokensContract<Assets extends Asset = Asset> {
   async getTransferFees(
     account: string,
     amount: bigint,
-    asset: AssetConfig<Assets>,
-    config: WithdrawXTokensConfig<Assets>,
+    asset: Asset<Symbols>,
+    config: WithdrawXTokensConfig<Symbols>,
   ) {
     const estimatedGas = (
       await this.#contract.estimateGas.transfer(

@@ -1,50 +1,50 @@
-import { Chain } from '../../constants';
+import { ChainKey } from '../../constants';
 import { ChainsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbeamChains } from './moonbeam.interfaces';
 
 export const MOONBEAM_CHAINS = <const>[
-  Chain.Acala,
-  Chain.Interley,
-  Chain.Parallel,
-  Chain.Phala,
-  Chain.Polkadot,
+  ChainKey.Acala,
+  ChainKey.Interley,
+  ChainKey.Parallel,
+  ChainKey.Phala,
+  ChainKey.Polkadot,
 ];
 
 export const MOONBEAM_CHAINS_CONFIGS: ChainsConfigs<MoonbeamChains> = {
-  [Chain.Acala]: {
-    chain: Chain.Acala,
+  [ChainKey.Acala]: {
+    key: ChainKey.Acala,
     name: 'Acala',
     ws: 'wss://acala-polkadot.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2000,
     moonAssetId: 0,
   },
-  [Chain.Interley]: {
-    chain: Chain.Interley,
+  [ChainKey.Interley]: {
+    key: ChainKey.Interley,
     name: 'Interley',
     ws: 'wss://interlay.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2032,
   },
-  [Chain.Parallel]: {
-    chain: Chain.Parallel,
+  [ChainKey.Parallel]: {
+    key: ChainKey.Parallel,
     name: 'Parallel',
     ws: 'wss://rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2012,
     moonAssetId: 114,
   },
-  [Chain.Phala]: {
-    chain: Chain.Phala,
+  [ChainKey.Phala]: {
+    key: ChainKey.Phala,
     name: 'Phala',
     ws: 'wss://api.phala.network/ws',
     weight: 1_000_000_000,
     parachainId: 2035,
     moonAssetId: 1,
   },
-  [Chain.Polkadot]: {
-    chain: Chain.Polkadot,
+  [ChainKey.Polkadot]: {
+    key: ChainKey.Polkadot,
     name: 'Polkadot',
     ws: 'wss://rpc.polkadot.io',
     weight: 1_000_000_000,

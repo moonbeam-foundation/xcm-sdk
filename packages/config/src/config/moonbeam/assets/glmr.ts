@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
@@ -14,20 +14,20 @@ import {
 } from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
-const asset = assets[Asset.GLMR];
-const acala = chains[Chain.Acala];
-const parallel = chains[Chain.Parallel];
-const phala = chains[Chain.Phala];
+const asset = assets[AssetSymbol.GLMR];
+const acala = chains[ChainKey.Acala];
+const parallel = chains[ChainKey.Parallel];
+const phala = chains[ChainKey.Phala];
 
 const acalaGlmrId = getMoonAssetId(acala);
 const parallelGlmrId = getMoonAssetId(parallel);
 const phalaGlmrId = getMoonAssetId(phala);
 
-export const GLMR: MoonbeamXcmConfig = <const>{
+export const GLMR: MoonbeamXcmConfig = {
   asset,
   origin: moonbeam,
   deposit: {
-    [acala.chain]: {
+    [acala.key]: {
       origin: acala,
       balance: balance.tokens(acalaGlmrId),
       sourceFeeBalance: balance.system(),
@@ -40,7 +40,7 @@ export const GLMR: MoonbeamXcmConfig = <const>{
           ForeignAsset: acalaGlmrId,
         }),
     },
-    [parallel.chain]: {
+    [parallel.key]: {
       origin: parallel,
       balance: balance.assets(parallelGlmrId),
       sourceFeeBalance: balance.system(),
@@ -51,7 +51,7 @@ export const GLMR: MoonbeamXcmConfig = <const>{
         .origin(parallel)
         .asset(parallelGlmrId),
     },
-    [phala.chain]: {
+    [phala.key]: {
       origin: phala,
       balance: balance.assets(phalaGlmrId),
       sourceFeeBalance: balance.system(),
@@ -64,17 +64,17 @@ export const GLMR: MoonbeamXcmConfig = <const>{
     },
   },
   withdraw: {
-    [acala.chain]: withdraw.xTokens({
+    [acala.key]: withdraw.xTokens({
       balance: balance.tokens(acalaGlmrId),
       destination: acala,
       feePerWeight: 8_000_000,
     }),
-    [parallel.chain]: withdraw.xTokens({
+    [parallel.key]: withdraw.xTokens({
       balance: balance.assets(parallelGlmrId),
       destination: parallel,
       feePerWeight: 8,
     }),
-    [phala.chain]: withdraw.xTokens({
+    [phala.key]: withdraw.xTokens({
       balance: balance.assets(phalaGlmrId),
       destination: phala,
       feePerWeight: 50_000,

@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
-const asset = assets[Asset.LIT];
-const origin = chains[Chain.Litmus];
+const asset = assets[AssetSymbol.LIT];
+const origin = chains[ChainKey.Litmus];
 
-export const LIT: MoonriverXcmConfig = <const>{
+export const LIT: MoonriverXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -26,7 +26,7 @@ export const LIT: MoonriverXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 0.8,

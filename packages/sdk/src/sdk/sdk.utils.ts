@@ -1,7 +1,7 @@
 import {
   Asset,
-  AssetConfig,
-  Chain,
+  AssetSymbol,
+  ChainKey,
   DepositConfig,
   isMultiCurrency,
   PolkadotXcmExtrinsicSuccessEvent,
@@ -29,10 +29,9 @@ export function isXcmSdkWithdraw(
   return !!(config as XcmSdkWithdraw).to;
 }
 
-export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
-  config: DepositConfig<Assets>,
-  cb: (event: ExtrinsicEvent) => void,
-) {
+export function createExtrinsicEventHandler<
+  Symbols extends AssetSymbol = AssetSymbol,
+>(config: DepositConfig<Symbols>, cb: (event: ExtrinsicEvent) => void) {
   return ({ events = [], status, txHash }: ISubmittableResult) => {
     const hash = txHash.toHex();
 
@@ -123,25 +122,25 @@ export async function createTransactionEventHandler(
 }
 
 export interface CreateExtrinsicOptions<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
   account: string;
-  config: DepositConfig<Assets>;
-  foreignPolkadot: PolkadotService<Assets, Chains>;
-  nativeAsset: AssetConfig<Assets>;
-  polkadot: PolkadotService<Assets, Chains>;
+  config: DepositConfig<Symbols>;
+  foreignPolkadot: PolkadotService<Symbols, ChainKeys>;
+  nativeAsset: Asset<Symbols>;
+  polkadot: PolkadotService<Symbols, ChainKeys>;
   primaryAccount?: string;
 }
 
-export function getCreateExtrinsic<Assets extends Asset = Asset>({
+export function getCreateExtrinsic<Symbols extends AssetSymbol = AssetSymbol>({
   account,
   config,
   foreignPolkadot,
   nativeAsset,
   polkadot,
   primaryAccount,
-}: CreateExtrinsicOptions<Assets>) {
+}: CreateExtrinsicOptions<Symbols>) {
   return async (amount: bigint) => {
     const fee = isMultiCurrency(config.extrinsic)
       ? await polkadot.getAssetFee(nativeAsset.id, config.origin.weight)

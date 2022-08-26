@@ -1,62 +1,64 @@
-import { Asset, Chain } from '../constants';
+import { AssetSymbol, ChainKey } from '../constants';
 import { DepositConfig } from '../deposit';
-import { AssetConfig, ChainConfig, MoonChainConfig } from '../interfaces';
+import { Asset, Chain, MoonChain } from '../interfaces';
 import { WithdrawConfig } from '../withdraw';
 
 export interface ConfigGetter<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: AssetConfig<Assets>;
-  assets: AssetsConfigs<Assets>;
-  chain: MoonChainConfig;
-  deposit: (asset: Assets) => DepositConfigGetter<Assets, Chains>;
-  withdraw: (asset: Assets) => WithdrawConfigGetter<Assets, Chains>;
+  asset: Asset<Symbols>;
+  assets: AssetsConfigs<Symbols>;
+  chain: MoonChain;
+  deposit: (symbol: Symbols) => DepositConfigGetter<Symbols, ChainKeys>;
+  withdraw: (symbol: Symbols) => WithdrawConfigGetter<Symbols, ChainKeys>;
 }
 
 export interface DepositConfigGetter<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: ChainConfig[];
-  from: (chain: Chains) => {
-    asset: AssetConfig<Assets>;
-    origin: ChainConfig | MoonChainConfig;
-    config: DepositConfig<Assets>;
+  chains: Chain[];
+  from: (chain: ChainKeys) => {
+    asset: Asset<Symbols>;
+    origin: Chain | MoonChain;
+    config: DepositConfig<Symbols>;
   };
 }
 
 export interface WithdrawConfigGetter<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: ChainConfig[];
-  to: (chain: Chains) => {
-    asset: AssetConfig<Assets>;
-    origin: ChainConfig | MoonChainConfig;
-    config: WithdrawConfig<Assets>;
+  chains: Chain[];
+  to: (chain: ChainKeys) => {
+    asset: Asset<Symbols>;
+    origin: Chain | MoonChain;
+    config: WithdrawConfig<Symbols>;
   };
 }
 
-export type AssetsConfigs<Assets extends Asset = Asset> = Readonly<
-  Record<Assets, AssetConfig<Assets>>
+export type AssetsConfigs<Symbols extends AssetSymbol = AssetSymbol> = Record<
+  Symbols,
+  Asset<Symbols>
 >;
 
-export type ChainsConfigs<Chains extends Chain = Chain> = Readonly<
-  Record<Chains, ChainConfig>
+export type ChainsConfigs<ChainKeys extends ChainKey = ChainKey> = Record<
+  ChainKeys,
+  Chain
 >;
 
 export type ChainXcmConfigs<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
-> = Partial<Record<Asset, XcmConfig<Assets, Chains>>>;
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
+> = Partial<Record<AssetSymbol, XcmConfig<Symbols, ChainKeys>>>;
 
 export interface XcmConfig<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: AssetConfig<Assets>;
-  origin: ChainConfig | MoonChainConfig;
-  deposit: Partial<Record<Chains, DepositConfig<Assets>>>;
-  withdraw: Partial<Record<Chains, WithdrawConfig<Assets>>>;
+  asset: Asset<Symbols>;
+  origin: Chain | MoonChain;
+  deposit: Partial<Record<ChainKeys, DepositConfig<Symbols>>>;
+  withdraw: Partial<Record<ChainKeys, WithdrawConfig<Symbols>>>;
 }

@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
-const asset = assets[Asset.INTR];
-const origin = chains[Chain.Interley];
+const asset = assets[AssetSymbol.INTR];
+const origin = chains[ChainKey.Interley];
 
-export const INTR: MoonbeamXcmConfig = <const>{
+export const INTR: MoonbeamXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
       extrinsic: extrinsic
@@ -28,7 +28,7 @@ export const INTR: MoonbeamXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.tokens(asset.originSymbol),
       destination: origin,
       feePerWeight: 1.87,

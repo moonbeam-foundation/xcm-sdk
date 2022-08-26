@@ -1,4 +1,4 @@
-import { Asset } from '@moonbeam-network/xcm-config';
+import { AssetSymbol } from '@moonbeam-network/xcm-config';
 import { AssetBalanceInfo } from './polkadot.interfaces';
 
 export function calculateMin(weight: number, unitsPerSecond: bigint): bigint {
@@ -6,10 +6,9 @@ export function calculateMin(weight: number, unitsPerSecond: bigint): bigint {
   return (BigInt(weight) * unitsPerSecond) / BigInt(10 ** 12);
 }
 
-export function sortByBalanceAndChainName<Assets extends Asset = Asset>(
-  a: AssetBalanceInfo<Assets>,
-  b: AssetBalanceInfo<Assets>,
-) {
+export function sortByBalanceAndChainName<
+  Symbols extends AssetSymbol = AssetSymbol,
+>(a: AssetBalanceInfo<Symbols>, b: AssetBalanceInfo<Symbols>) {
   if (a.asset.isNative) {
     return -1;
   }

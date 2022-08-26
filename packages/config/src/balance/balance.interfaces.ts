@@ -1,12 +1,12 @@
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
-import { Asset } from '../constants';
+import { AssetSymbol } from '../constants';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 
-export type BalanceConfig<Assets extends Asset = Asset> =
+export type BalanceConfig<Symbols extends AssetSymbol = AssetSymbol> =
   | SystemBalanceConfig
   | AssetsBalanceConfig
-  | TokensBalanceConfig<Assets>;
+  | TokensBalanceConfig<Symbols>;
 
 export interface SystemBalanceConfig {
   pallet: BalancePallet.System;
@@ -30,7 +30,9 @@ export interface TokensPalletAccountData {
   frozen: u128;
 }
 
-export interface TokensBalanceConfig<Assets extends Asset = Asset> {
+export interface TokensBalanceConfig<
+  Symbols extends AssetSymbol = AssetSymbol,
+> {
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
   path: [];
@@ -38,7 +40,7 @@ export interface TokensBalanceConfig<Assets extends Asset = Asset> {
     string,
     (
       | {
-          Token: Assets | 'MOVR' | 'KUSD';
+          Token: Symbols | 'MOVR' | 'KUSD';
         }
       | { ForeignAsset: number }
     ),

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import {
-  Asset,
-  Chain,
+  AssetSymbol,
+  ChainKey,
   ConfigGetter,
   moonbase,
   MoonbaseAssets,
@@ -52,27 +52,27 @@ export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
 }
 
 async function createChainSdk<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 >(
-  configGetter: ConfigGetter<Assets, Chains>,
+  configGetter: ConfigGetter<Symbols, ChainKeys>,
   options: SdkOptions,
-): Promise<XcmSdk<Assets, Chains>> {
-  const contract = new XTokensContract<Assets>(options.ethersSigner);
+): Promise<XcmSdk<Symbols, ChainKeys>> {
+  const contract = new XTokensContract<Symbols>(options.ethersSigner);
 
   return {
     asset: configGetter.asset,
     chain: configGetter.chain,
     subscribeToAssetsBalanceInfo: async (
       account: string,
-      cb: (data: AssetBalanceInfo<Assets>[]) => void,
+      cb: (data: AssetBalanceInfo<Symbols>[]) => void,
     ): UnsubscribePromise => {
-      let lastBalance = 0n;
-      let lastInfo: AssetBalanceInfo<Assets>[] = [];
-      const polkadot = await PolkadotService.create<Assets, Chains>(
+      const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
         configGetter.chain.ws,
       );
-      const handler = (data: bigint | AssetBalanceInfo<Assets>[]) => {
+      let lastBalance = 0n;
+      let lastInfo: AssetBalanceInfo<Symbols>[] = [];
+      const handler = (data: bigint | AssetBalanceInfo<Symbols>[]) => {
         const isBalance = typeof data === 'bigint';
 
         lastBalance = isBalance ? data : lastBalance;
@@ -105,12 +105,12 @@ async function createChainSdk<
         unsubscribeInfo();
       };
     },
-    deposit: (asset: Assets): XcmSdkDeposit<Assets, Chains> => {
-      const { chains, from } = configGetter.deposit(asset);
+    deposit: (symbol: Symbols): XcmSdkDeposit<Symbols, ChainKeys> => {
+      const { chains, from } = configGetter.deposit(symbol);
 
       return {
         chains,
-        from: (chain: Chains) => {
+        from: (chain: ChainKeys) => {
           const { asset: assetConfig, origin, config } = from(chain);
 
           return {
@@ -118,13 +118,13 @@ async function createChainSdk<
               account: string,
               sourceAccount: string,
               primaryAccount?: string,
-            ): Promise<DepositTransferData<Assets>> => {
-              const polkadot = await PolkadotService.create<Assets, Chains>(
+            ): Promise<DepositTransferData<Symbols>> => {
+              const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
                 configGetter.chain.ws,
               );
               const foreignPolkadot = await PolkadotService.create<
-                Assets,
-                Chains
+                Symbols,
+                ChainKeys
               >(config.origin.ws);
               const meta = foreignPolkadot.getMetadata();
               const nativeAsset = configGetter.assets[meta.symbol];
@@ -212,24 +212,24 @@ async function createChainSdk<
         },
       };
     },
-    withdraw: (asset: Assets): XcmSdkWithdraw<Assets, Chains> => {
-      const { chains, to } = configGetter.withdraw(asset);
+    withdraw: (symbol: Symbols): XcmSdkWithdraw<Symbols, ChainKeys> => {
+      const { chains, to } = configGetter.withdraw(symbol);
 
       return {
         chains,
-        to: (chain: Chains) => {
+        to: (chain: ChainKeys) => {
           const { asset: assetConfig, origin, config } = to(chain);
 
           return {
             get: async (
               destinationAccount: string,
-            ): Promise<WithdrawTransferData<Assets>> => {
-              const polkadot = await PolkadotService.create<Assets, Chains>(
+            ): Promise<WithdrawTransferData<Symbols>> => {
+              const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
                 configGetter.chain.ws,
               );
               const destinationPolkadot = await PolkadotService.create<
-                Assets,
-                Chains
+                Symbols,
+                ChainKeys
               >(config.destination.ws);
               const meta = destinationPolkadot.getMetadata();
               const nativeAsset = configGetter.assets[meta.symbol];

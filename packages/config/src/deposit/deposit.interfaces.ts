@@ -1,13 +1,13 @@
 import { BalanceConfig, MinBalanceConfig } from '../balance';
-import { Asset } from '../constants';
+import { AssetSymbol } from '../constants';
 import { ExtrinsicConfig } from '../extrinsic';
-import { ChainConfig } from '../interfaces';
+import { Chain } from '../interfaces';
 
-export interface DepositConfig<Assets extends Asset = Asset> {
-  balance: BalanceConfig<Assets>;
-  extrinsic: ExtrinsicConfig<Assets>;
+export interface DepositConfig<Symbols extends AssetSymbol = AssetSymbol> {
+  balance: BalanceConfig<Symbols>;
+  extrinsic: ExtrinsicConfig<Symbols>;
   isNativeAssetPayingMoonFee?: boolean;
-  origin: ChainConfig;
-  sourceFeeBalance?: BalanceConfig<Assets>;
+  origin: Chain;
+  sourceFeeBalance?: BalanceConfig<Symbols>;
   sourceMinBalance?: MinBalanceConfig;
 }

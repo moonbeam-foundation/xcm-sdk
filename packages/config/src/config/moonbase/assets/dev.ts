@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
   XTokensExtrinsicSuccessEvent,
@@ -14,18 +14,18 @@ import {
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[Asset.DEV];
-const astar = chains[Chain.AstarAlphanet];
-const clover = chains[Chain.CloverAlphanet];
+const asset = assets[AssetSymbol.DEV];
+const astar = chains[ChainKey.AstarAlphanet];
+const clover = chains[ChainKey.CloverAlphanet];
 
 const astarDevId = getMoonAssetId(astar);
 const cloverDevId = getMoonAssetId(clover);
 
-export const DEV: MoonbaseXcmConfig = <const>{
+export const DEV: MoonbaseXcmConfig = {
   asset,
   origin: moonbase,
   deposit: {
-    [astar.chain]: {
+    [astar.key]: {
       origin: astar,
       balance: balance.assets(astarDevId),
       sourceFeeBalance: balance.system(),
@@ -37,7 +37,7 @@ export const DEV: MoonbaseXcmConfig = <const>{
         .V1()
         .X2(getPalletInstance(astar)),
     },
-    [clover.chain]: {
+    [clover.key]: {
       origin: clover,
       balance: balance.assets(cloverDevId),
       sourceFeeBalance: balance.system(),
@@ -52,12 +52,12 @@ export const DEV: MoonbaseXcmConfig = <const>{
     },
   },
   withdraw: {
-    [astar.chain]: withdraw.xTokens({
+    [astar.key]: withdraw.xTokens({
       balance: balance.assets(astarDevId),
       destination: astar,
       feePerWeight: 50_000,
     }),
-    [clover.chain]: withdraw.xTokens({
+    [clover.key]: withdraw.xTokens({
       balance: balance.assets(cloverDevId),
       destination: clover,
       feePerWeight: 50_000,

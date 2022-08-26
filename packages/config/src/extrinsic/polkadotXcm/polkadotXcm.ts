@@ -1,4 +1,4 @@
-import { ChainConfig, MoonChainConfig } from '../../interfaces';
+import { Chain, MoonChain } from '../../interfaces';
 import {
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
@@ -6,17 +6,17 @@ import {
 import { getCreateExtrinsic } from './polkadotXcm.util';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function polkadotXcm(chain: MoonChainConfig) {
+export function polkadotXcm(chain: MoonChain) {
   return {
     limitedReserveTransferAssets: () => limitedReserveTransferAssets(chain),
     limitedReserveWithdrawAssets: () => limitedReserveWithdrawAssets(chain),
   };
 }
 
-function limitedReserveTransferAssets(chain: MoonChainConfig) {
+function limitedReserveTransferAssets(chain: MoonChain) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: ChainConfig) => {
+      origin: (origin: Chain) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
           event,
@@ -105,10 +105,10 @@ function limitedReserveTransferAssets(chain: MoonChainConfig) {
   };
 }
 
-function limitedReserveWithdrawAssets(chain: MoonChainConfig) {
+function limitedReserveWithdrawAssets(chain: MoonChain) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: ChainConfig) => {
+      origin: (origin: Chain) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveWithdrawAssets,
           event,

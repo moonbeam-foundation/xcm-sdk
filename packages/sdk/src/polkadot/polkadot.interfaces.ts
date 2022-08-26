@@ -1,19 +1,19 @@
 import {
   Asset,
-  AssetConfig,
-  ChainConfig,
-  MoonChainConfig,
+  AssetSymbol,
+  Chain,
+  MoonChain,
 } from '@moonbeam-network/xcm-config';
 
-export interface AssetMetadata<Assets extends Asset = Asset> {
+export interface AssetMetadata<Symbols extends AssetSymbol = AssetSymbol> {
   decimals: number;
   symbol: string;
-  originSymbol?: Assets;
+  originSymbol?: Symbols;
 }
 
-export interface AssetBalanceInfo<Assets extends Asset = Asset> {
-  asset: AssetConfig<Assets>;
+export interface AssetBalanceInfo<Symbols extends AssetSymbol = AssetSymbol> {
+  asset: Asset<Symbols>;
   balance: bigint;
-  meta: AssetMetadata<Assets>;
-  origin: ChainConfig | MoonChainConfig;
+  meta: AssetMetadata<Symbols>;
+  origin: Chain | MoonChain;
 }

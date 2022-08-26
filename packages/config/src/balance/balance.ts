@@ -2,7 +2,7 @@ import '@moonbeam-network/api-augment';
 
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
-import { Asset } from '../constants';
+import { AssetSymbol } from '../constants';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 import {
   AssetsBalanceConfig,
@@ -13,13 +13,15 @@ import {
 } from './balance.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function createBalanceBuilder<Assets extends Asset = Asset>() {
+export function createBalanceBuilder<
+  Symbols extends AssetSymbol = AssetSymbol,
+>() {
   return {
     assets,
     min,
     system,
-    tokens: (asset: number | bigint | Assets | 'MOVR' | 'KUSD' | 'AUSD') =>
-      tokens<Assets>(asset),
+    tokens: (asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
+      tokens<Symbols>(asset),
   };
 }
 
@@ -53,9 +55,9 @@ function system(): SystemBalanceConfig {
   };
 }
 
-function tokens<Assets extends Asset = Asset>(
-  asset: number | bigint | Assets | 'MOVR' | 'KUSD' | 'AUSD',
-): TokensBalanceConfig<Assets> {
+function tokens<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD',
+): TokensBalanceConfig<Symbols> {
   return {
     pallet: BalancePallet.Tokens,
     function: BalanceFunction.Accounts,
@@ -64,7 +66,7 @@ function tokens<Assets extends Asset = Asset>(
       account,
       Number.isInteger(asset)
         ? { ForeignAsset: asset as number }
-        : { Token: asset as Assets },
+        : { Token: asset as Symbols },
     ],
     calc: ({ free, frozen }: TokensPalletAccountData) =>
       BigInt(free.sub(frozen).toString()),

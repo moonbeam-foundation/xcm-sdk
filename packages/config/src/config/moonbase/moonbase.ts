@@ -1,4 +1,4 @@
-import { Asset } from '../../constants';
+import { AssetSymbol } from '../../constants';
 import { MoonbaseXcmConfigs } from './moonbase.interfaces';
 
 import { ASTR } from './assets/astr';
@@ -13,16 +13,16 @@ import { PARING } from './assets/paring';
 import { TEER } from './assets/teer';
 import { UNIT } from './assets/unit';
 
-export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = <const>{
-  [Asset.ASTR]: ASTR,
-  [Asset.BSX]: BSX,
-  [Asset.CLV]: CLV,
-  [Asset.CRU]: CRU,
-  [Asset.DEV]: DEV,
-  [Asset.KBTC]: KBTC,
-  [Asset.KINT]: KINT,
-  [Asset.LIT]: LIT,
-  [Asset.PARING]: PARING,
-  [Asset.TEER]: TEER,
-  [Asset.UNIT]: UNIT,
+export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
+  [AssetSymbol.ASTR]: ASTR,
+  [AssetSymbol.BSX]: BSX,
+  [AssetSymbol.CLV]: CLV,
+  [AssetSymbol.CRU]: CRU,
+  [AssetSymbol.DEV]: DEV,
+  [AssetSymbol.KBTC]: KBTC,
+  [AssetSymbol.KINT]: KINT,
+  [AssetSymbol.LIT]: LIT,
+  [AssetSymbol.PARING]: PARING,
+  [AssetSymbol.TEER]: TEER,
+  [AssetSymbol.UNIT]: UNIT,
 };

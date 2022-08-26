@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,15 +9,15 @@ import {
 } from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
-const asset = assets[Asset.KBTC];
-const feeAsset = assets[Asset.KINT];
-const origin = chains[Chain.Kintsugi];
+const asset = assets[AssetSymbol.KBTC];
+const feeAsset = assets[AssetSymbol.KINT];
+const origin = chains[ChainKey.Kintsugi];
 
-export const KBTC: MoonriverXcmConfig = <const>{
+export const KBTC: MoonriverXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.tokens(asset.originSymbol),
       sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
@@ -31,7 +31,7 @@ export const KBTC: MoonriverXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.tokens(asset.originSymbol),
       destination: origin,
       feePerWeight: 0.000000107,

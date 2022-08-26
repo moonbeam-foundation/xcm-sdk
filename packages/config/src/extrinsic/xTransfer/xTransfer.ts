@@ -1,4 +1,4 @@
-import { ChainConfig, MoonChainConfig } from '../../interfaces';
+import { Chain, MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTransferExtrinsic,
@@ -10,16 +10,16 @@ import {
 } from './xTransfer.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xTransfer(chain: MoonChainConfig) {
+export function xTransfer(chain: MoonChain) {
   return {
     transfer: () => transfer(chain),
   };
 }
 
-function transfer(chain: MoonChainConfig) {
+function transfer(chain: MoonChain) {
   return {
     successEvent: (event: XTransferExtrinsicSuccessEvent) => ({
-      origin: (origin: ChainConfig) => {
+      origin: (origin: Chain) => {
         const createExtrinsic = getCreateExtrinsic(
           XTransferExtrinsic.Transfer,
           event,
@@ -56,8 +56,8 @@ function transfer(chain: MoonChainConfig) {
 function getCreateExtrinsic(
   extrinsic: XTransferExtrinsic,
   event: XTransferExtrinsicSuccessEvent,
-  chain: MoonChainConfig,
-  origin: ChainConfig,
+  chain: MoonChain,
+  origin: Chain,
 ) {
   return (getConcrete: () => XTransferConcreteParam): XTransferPallet => ({
     pallet: ExtrinsicPallet.XTransfer,

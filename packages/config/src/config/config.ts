@@ -1,5 +1,5 @@
-import { Asset, Chain, MoonChain, MOON_CHAINS_CONFIGS } from '../constants';
-import { AssetConfig, MoonChainConfig } from '../interfaces';
+import { AssetSymbol, ChainKey, MoonChainKey, MOON_CHAINS } from '../constants';
+import { Asset, MoonChain } from '../interfaces';
 import {
   AssetsConfigs,
   ChainsConfigs,
@@ -29,36 +29,36 @@ import {
 } from './moonriver';
 
 export function createConfigGetter<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 >(
-  assets: AssetsConfigs<Assets>,
-  moonAsset: AssetConfig<Assets>,
-  moonChain: MoonChainConfig,
-  chains: ChainsConfigs<Chains>,
-  configs: ChainXcmConfigs<Assets, Chains>,
-): ConfigGetter<Assets, Chains> {
+  assets: AssetsConfigs<Symbols>,
+  moonAsset: Asset<Symbols>,
+  moonChain: MoonChain,
+  chains: ChainsConfigs<ChainKeys>,
+  configs: ChainXcmConfigs<Symbols, ChainKeys>,
+): ConfigGetter<Symbols, ChainKeys> {
   return {
     asset: moonAsset,
     assets,
     chain: moonChain,
-    deposit: (asset: Assets) => {
-      const config = configs[asset];
+    deposit: (symbol: Symbols) => {
+      const config = configs[symbol];
 
       if (!config) {
-        throw new Error(`No config found for asset: ${asset}`);
+        throw new Error(`No config found for asset: ${symbol}`);
       }
 
       return {
-        chains: (Object.keys(config.deposit) as Chains[]).map(
+        chains: (Object.keys(config.deposit) as ChainKeys[]).map(
           (chain) => chains[chain],
         ),
-        from: (chain: Chains) => {
+        from: (chain: ChainKeys) => {
           const depositConfig = config.deposit[chain];
 
           if (!depositConfig) {
             throw new Error(
-              `No deposit config found for asset: ${asset} and chain: ${chain}`,
+              `No deposit config found for asset: ${symbol} and chain: ${chain}`,
             );
           }
 
@@ -70,23 +70,23 @@ export function createConfigGetter<
         },
       };
     },
-    withdraw: (asset: Assets) => {
-      const config = configs[asset];
+    withdraw: (symbol: Symbols) => {
+      const config = configs[symbol];
 
       if (!config) {
-        throw new Error(`No config found for asset: ${asset}`);
+        throw new Error(`No config found for asset: ${symbol}`);
       }
 
       return {
-        chains: (Object.keys(config.withdraw) as Chains[]).map(
+        chains: (Object.keys(config.withdraw) as ChainKeys[]).map(
           (chain) => chains[chain],
         ),
-        to: (chain: Chains) => {
+        to: (chain: ChainKeys) => {
           const withdrawConfig = config.withdraw[chain];
 
           if (!withdrawConfig) {
             throw new Error(
-              `No withdraw config found for asset: ${asset} and chain: ${chain}`,
+              `No withdraw config found for asset: ${symbol} and chain: ${chain}`,
             );
           }
 
@@ -103,22 +103,22 @@ export function createConfigGetter<
 
 export const moonbase = createConfigGetter<MoonbaseAssets, MoonbaseChains>(
   MOONBASE_ASSETS_CONFIGS,
-  MOONBASE_ASSETS_CONFIGS[Asset.DEV],
-  MOON_CHAINS_CONFIGS[MoonChain.MoonbaseAlpha],
+  MOONBASE_ASSETS_CONFIGS[AssetSymbol.DEV],
+  MOON_CHAINS[MoonChainKey.MoonbaseAlpha],
   MOONBASE_CHAINS_CONFIGS,
   MOONBASE_CONFIGS,
 );
 export const moonbeam = createConfigGetter<MoonbeamAssets, MoonbeamChains>(
   MOONBEAM_ASSETS_CONFIGS,
-  MOONBEAM_ASSETS_CONFIGS[Asset.GLMR],
-  MOON_CHAINS_CONFIGS[MoonChain.Moonbeam],
+  MOONBEAM_ASSETS_CONFIGS[AssetSymbol.GLMR],
+  MOON_CHAINS[MoonChainKey.Moonbeam],
   MOONBEAM_CHAINS_CONFIGS,
   MOONBEAM_CONFIGS,
 );
 export const moonriver = createConfigGetter<MoonriverAssets, MoonriverChains>(
   MOONRIVER_ASSETS_CONFIGS,
-  MOONRIVER_ASSETS_CONFIGS[Asset.MOVR],
-  MOON_CHAINS_CONFIGS[MoonChain.Moonriver],
+  MOONRIVER_ASSETS_CONFIGS[AssetSymbol.MOVR],
+  MOON_CHAINS[MoonChainKey.Moonriver],
   MOONRIVER_CHAINS_CONFIGS,
   MOONRIVER_CONFIGS,
 );
