@@ -1,3 +1,4 @@
+import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
@@ -8,16 +9,19 @@ import {
 import { XcmPallet } from './xcmPallet.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xcmPallet(chain: MoonChain) {
+export function xcmPallet<ChainKeys extends ChainKey>(chain: MoonChain) {
   return {
-    limitedReserveTransferAssets: () => limitedReserveTransferAssets(chain),
+    limitedReserveTransferAssets: () =>
+      limitedReserveTransferAssets<ChainKeys>(chain),
   };
 }
 
-function limitedReserveTransferAssets(chain: MoonChain) {
+function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
+  chain: MoonChain,
+) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain): XcmPallet => {
+      origin: (origin: Chain<ChainKeys>): XcmPallet => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
           event,

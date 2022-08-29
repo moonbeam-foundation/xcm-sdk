@@ -177,8 +177,7 @@ export class PolkadotService<
             chains: [chain],
             from,
           } = configGetter.deposit(asset.originSymbol);
-          // TODO: remove as
-          const { origin } = from(chain.key as ChainKeys);
+          const { origin } = from(chain.key);
 
           return {
             asset,

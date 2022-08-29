@@ -1,5 +1,5 @@
 import { isUndefined } from '@polkadot/util';
-import { AssetSymbol } from '../constants';
+import { AssetSymbol, ChainKey } from '../constants';
 import {
   ExtrinsicConfig,
   ExtrinsicPallet,
@@ -18,7 +18,9 @@ export function getOriginAssetId<Symbols extends AssetSymbol = AssetSymbol>(
   return asset.originAssetId;
 }
 
-export function getMoonAssetId(chain: Chain) {
+export function getMoonAssetId<ChainKeys extends ChainKey>(
+  chain: Chain<ChainKeys>,
+) {
   if (isUndefined(chain.moonAssetId)) {
     throw new Error(`No moonAssetId defined for chain ${chain.key}`);
   }
@@ -26,7 +28,9 @@ export function getMoonAssetId(chain: Chain) {
   return chain.moonAssetId;
 }
 
-export function getPalletInstance(chain: Chain) {
+export function getPalletInstance<ChainKeys extends ChainKey>(
+  chain: Chain<ChainKeys>,
+) {
   if (isUndefined(chain.palletInstance)) {
     throw new Error(`No palletInstance defined for chain ${chain.key}`);
   }

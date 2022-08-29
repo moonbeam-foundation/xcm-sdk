@@ -1,3 +1,4 @@
+import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
@@ -9,11 +10,11 @@ import {
   PolkadotXcmPallet,
 } from './polkadotXcm.interfaces';
 
-export function getCreateExtrinsic(
+export function getCreateExtrinsic<ChainKeys extends ChainKey>(
   extrinsic: PolkadotXcmExtrinsic,
   event: PolkadotXcmExtrinsicSuccessEvent,
   config: MoonChain,
-  origin: Chain,
+  origin: Chain<ChainKeys>,
 ) {
   return (
     getAsset: (amount: bigint) => PolkadotXcmAssetParam,

@@ -29,8 +29,8 @@ import {
 } from './moonriver';
 
 export function createConfigGetter<
-  Symbols extends AssetSymbol = AssetSymbol,
-  ChainKeys extends ChainKey = ChainKey,
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
 >(
   assets: AssetsConfigs<Symbols>,
   moonAsset: Asset<Symbols>,

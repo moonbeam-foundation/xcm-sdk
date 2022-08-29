@@ -36,8 +36,8 @@ export interface XcmSdk<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: Asset<Symbols>;
-  chain: MoonChain;
+  moonAsset: Asset<Symbols>;
+  moonChain: MoonChain;
   subscribeToAssetsBalanceInfo: (
     account: string,
     cb: (data: AssetBalanceInfo<Symbols>[]) => void,
@@ -50,7 +50,7 @@ export interface XcmSdkDeposit<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: Chain[];
+  chains: Chain<ChainKeys>[];
   from: (chain: ChainKeys) => XcmSdkDepositFrom<Symbols>;
 }
 
@@ -58,7 +58,7 @@ export interface XcmSdkWithdraw<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: Chain[];
+  chains: Chain<ChainKeys>[];
   to: (chain: ChainKeys) => XcmSdkWithdrawTo<Symbols>;
 }
 
@@ -76,14 +76,15 @@ export interface XcmSdkWithdrawTo<Symbols extends AssetSymbol = AssetSymbol> {
 
 export interface DepositTransferData<
   Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
   asset: AssetConfigWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
   moonChainFee?: bigint;
   native: AssetConfigWithDecimals<Symbols>;
-  origin: MoonChain | Chain;
-  source: Chain;
+  origin: MoonChain | Chain<ChainKeys>;
+  source: Chain<ChainKeys>;
   sourceBalance: bigint;
   sourceFeeBalance?: FeeBalance<Symbols>;
   sourceMinBalance: bigint;
@@ -93,15 +94,16 @@ export interface DepositTransferData<
 
 export interface WithdrawTransferData<
   Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
   asset: AssetConfigWithDecimals<Symbols>;
-  destination: Chain;
+  destination: Chain<ChainKeys>;
   destinationBalance: bigint;
   destinationFee: bigint;
   existentialDeposit: bigint;
   min: bigint;
   native: AssetConfigWithDecimals<Symbols>;
-  origin: MoonChain | Chain;
+  origin: MoonChain | Chain<ChainKeys>;
   getFee: (amount: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }

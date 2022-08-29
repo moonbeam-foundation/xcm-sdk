@@ -18,10 +18,10 @@ export interface DepositConfigGetter<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: Chain[];
+  chains: Chain<ChainKeys>[];
   from: (chain: ChainKeys) => {
     asset: Asset<Symbols>;
-    origin: Chain | MoonChain;
+    origin: Chain<ChainKeys> | MoonChain;
     config: DepositConfig<Symbols>;
   };
 }
@@ -30,10 +30,10 @@ export interface WithdrawConfigGetter<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: Chain[];
+  chains: Chain<ChainKeys>[];
   to: (chain: ChainKeys) => {
     asset: Asset<Symbols>;
-    origin: Chain | MoonChain;
+    origin: Chain<ChainKeys> | MoonChain;
     config: WithdrawConfig<Symbols>;
   };
 }
@@ -45,7 +45,7 @@ export type AssetsConfigs<Symbols extends AssetSymbol = AssetSymbol> = Record<
 
 export type ChainsConfigs<ChainKeys extends ChainKey = ChainKey> = Record<
   ChainKeys,
-  Chain
+  Chain<ChainKeys>
 >;
 
 export type ChainXcmConfigs<
@@ -58,7 +58,7 @@ export interface XcmConfig<
   ChainKeys extends ChainKey = ChainKey,
 > {
   asset: Asset<Symbols>;
-  origin: Chain | MoonChain;
+  origin: Chain<ChainKeys> | MoonChain;
   deposit: Partial<Record<ChainKeys, DepositConfig<Symbols>>>;
   withdraw: Partial<Record<ChainKeys, WithdrawConfig<Symbols>>>;
 }

@@ -4,11 +4,13 @@ import { createExtrinsicBuilder } from '../../extrinsic';
 import { createWithdrawBuilder } from '../../withdraw';
 import { MOONBEAM_ASSETS_CONFIGS as assets } from './moonbeam.assets';
 import { MOONBEAM_CHAINS_CONFIGS as chains } from './moonbeam.chains';
-import { MoonbeamAssets } from './moonbeam.interfaces';
+import { MoonbeamAssets, MoonbeamChains } from './moonbeam.interfaces';
 
 export { assets, chains };
 
 export const moonbeam = MOON_CHAINS[MoonChainKey.Moonbeam];
 export const balance = createBalanceBuilder<MoonbeamAssets>();
-export const extrinsic = createExtrinsicBuilder<MoonbeamAssets>(moonbeam);
+export const extrinsic = createExtrinsicBuilder<MoonbeamAssets, MoonbeamChains>(
+  moonbeam,
+);
 export const withdraw = createWithdrawBuilder<MoonbeamAssets>();

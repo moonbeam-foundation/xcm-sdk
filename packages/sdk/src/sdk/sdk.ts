@@ -14,10 +14,13 @@ import {
   MoonriverChains,
 } from '@moonbeam-network/xcm-config';
 import { UnsubscribePromise } from '@polkadot/api/types';
-import { isUndefined } from '@polkadot/util';
 import { XTokensContract } from '../contracts/XTokensContract';
-import { AssetBalanceInfo, PolkadotService } from '../polkadot';
-import { sortByBalanceAndChainName } from '../polkadot/polkadot.utils';
+import {
+  AssetBalanceInfo,
+  createPolkadotServices,
+  PolkadotService,
+} from '../polkadot';
+import { getDepositData } from './sdk.deposit';
 import {
   DepositTransferData,
   ExtrinsicEvent,
@@ -28,11 +31,8 @@ import {
   XcmSdkDeposit,
   XcmSdkWithdraw,
 } from './sdk.interfaces';
-import {
-  createExtrinsicEventHandler,
-  createTransactionEventHandler,
-  getCreateExtrinsic,
-} from './sdk.utils';
+import { sortByBalanceAndChainName } from './sdk.utils';
+import { createTransactionEventHandler } from './sdk.withdraw';
 
 export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
   return {
@@ -52,8 +52,8 @@ export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
 }
 
 async function createChainSdk<
-  Symbols extends AssetSymbol = AssetSymbol,
-  ChainKeys extends ChainKey = ChainKey,
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
 >(
   configGetter: ConfigGetter<Symbols, ChainKeys>,
   options: SdkOptions,
@@ -61,8 +61,8 @@ async function createChainSdk<
   const contract = new XTokensContract<Symbols>(options.ethersSigner);
 
   return {
-    asset: configGetter.moonAsset,
-    chain: configGetter.moonChain,
+    moonAsset: configGetter.moonAsset,
+    moonChain: configGetter.moonChain,
     subscribeToAssetsBalanceInfo: async (
       account: string,
       cb: (data: AssetBalanceInfo<Symbols>[]) => void,
@@ -111,7 +111,7 @@ async function createChainSdk<
       return {
         chains,
         from: (chain: ChainKeys) => {
-          const { asset: assetConfig, origin, config } = from(chain);
+          const { asset, origin, config } = from(chain);
 
           return {
             get: async (
@@ -119,97 +119,26 @@ async function createChainSdk<
               sourceAccount: string,
               primaryAccount?: string,
             ): Promise<DepositTransferData<Symbols>> => {
-              const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
-                configGetter.moonChain.ws,
-              );
-              const foreignPolkadot = await PolkadotService.create<
+              const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,
                 ChainKeys
-              >(config.origin.ws);
+              >([configGetter.moonChain.ws, config.origin.ws]);
               const meta = foreignPolkadot.getMetadata();
               const nativeAsset = configGetter.assets[meta.symbol];
-              const createExtrinsic = getCreateExtrinsic({
+
+              return getDepositData({
                 account,
+                asset,
                 config,
                 foreignPolkadot,
+                moonChain: configGetter.moonChain,
                 nativeAsset,
+                options,
+                origin,
                 polkadot,
                 primaryAccount,
+                sourceAccount,
               });
-
-              const [
-                decimals,
-                sourceBalance,
-                existentialDeposit,
-                sourceFeeBalance,
-                moonChainFee,
-                sourceMinBalance = 0n,
-                min,
-              ] = await Promise.all([
-                polkadot.getAssetDecimals(assetConfig.id),
-                foreignPolkadot.getGenericBalance(
-                  primaryAccount || sourceAccount,
-                  config.balance,
-                ),
-                foreignPolkadot.getExistentialDeposit(),
-                config.sourceFeeBalance
-                  ? foreignPolkadot.getGenericBalance(
-                      sourceAccount,
-                      config.sourceFeeBalance,
-                    )
-                  : undefined,
-                config.isNativeAssetPayingMoonFee
-                  ? polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
-                  : undefined,
-                config.sourceMinBalance
-                  ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
-                  : undefined,
-                // eslint-disable-next-line no-nested-ternary
-                config.sourceFeeBalance
-                  ? 0n
-                  : assetConfig.isNative
-                  ? PolkadotService.getChainMin(
-                      config.origin.weight,
-                      configGetter.moonChain.unitsPerSecond,
-                    )
-                  : polkadot.getAssetFee(assetConfig.id, config.origin.weight),
-              ]);
-
-              return {
-                asset: { ...assetConfig, decimals },
-                existentialDeposit,
-                min,
-                moonChainFee,
-                native: { ...nativeAsset, decimals: meta.decimals },
-                origin,
-                source: config.origin,
-                sourceBalance,
-                sourceFeeBalance: !isUndefined(sourceFeeBalance)
-                  ? { ...meta, balance: sourceFeeBalance }
-                  : undefined,
-                sourceMinBalance,
-                getFee: async (amount = sourceBalance): Promise<bigint> => {
-                  const extrinsic = await createExtrinsic(amount);
-                  const info = await extrinsic.paymentInfo(sourceAccount);
-
-                  return info.partialFee.toBigInt();
-                },
-                send: async (
-                  amount: bigint,
-                  cb?: (event: ExtrinsicEvent) => void,
-                ): Promise<string> => {
-                  const extrinsic = await createExtrinsic(amount);
-                  const hash = await extrinsic.signAndSend(
-                    sourceAccount,
-                    {
-                      signer: options.polkadotSigner,
-                    },
-                    cb && createExtrinsicEventHandler(config, cb),
-                  );
-
-                  return hash.toString();
-                },
-              };
             },
           };
         },
@@ -227,13 +156,11 @@ async function createChainSdk<
             get: async (
               destinationAccount: string,
             ): Promise<WithdrawTransferData<Symbols>> => {
-              const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
-                configGetter.moonChain.ws,
-              );
-              const destinationPolkadot = await PolkadotService.create<
-                Symbols,
-                ChainKeys
-              >(config.destination.ws);
+              const [polkadot, destinationPolkadot] =
+                await createPolkadotServices<Symbols, ChainKeys>([
+                  configGetter.moonChain.ws,
+                  config.destination.ws,
+                ]);
               const meta = destinationPolkadot.getMetadata();
               const nativeAsset = configGetter.assets[meta.symbol];
               const [decimals, destinationBalance, existentialDeposit] =

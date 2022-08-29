@@ -1,3 +1,4 @@
+import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
 import {
   PolkadotXcmExtrinsic,
@@ -6,17 +7,21 @@ import {
 import { getCreateExtrinsic } from './polkadotXcm.util';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function polkadotXcm(chain: MoonChain) {
+export function polkadotXcm<ChainKeys extends ChainKey>(chain: MoonChain) {
   return {
-    limitedReserveTransferAssets: () => limitedReserveTransferAssets(chain),
-    limitedReserveWithdrawAssets: () => limitedReserveWithdrawAssets(chain),
+    limitedReserveTransferAssets: () =>
+      limitedReserveTransferAssets<ChainKeys>(chain),
+    limitedReserveWithdrawAssets: () =>
+      limitedReserveWithdrawAssets<ChainKeys>(chain),
   };
 }
 
-function limitedReserveTransferAssets(chain: MoonChain) {
+function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
+  chain: MoonChain,
+) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain) => {
+      origin: (origin: Chain<ChainKeys>) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
           event,
@@ -105,10 +110,12 @@ function limitedReserveTransferAssets(chain: MoonChain) {
   };
 }
 
-function limitedReserveWithdrawAssets(chain: MoonChain) {
+function limitedReserveWithdrawAssets<ChainKeys extends ChainKey>(
+  chain: MoonChain,
+) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain) => {
+      origin: (origin: Chain<ChainKeys>) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveWithdrawAssets,
           event,

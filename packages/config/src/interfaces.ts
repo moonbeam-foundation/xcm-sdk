@@ -15,8 +15,8 @@ export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
   isNative?: boolean;
 }
 
-export interface ChainBase<Key = ChainKey> {
-  key: Key;
+export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {
+  key: ChainKeys;
   name: string;
   ws: string;
   parachainId: number;
@@ -27,7 +27,8 @@ export interface MoonChain extends ChainBase<MoonChainKey> {
   unitsPerSecond: bigint;
 }
 
-export interface Chain extends ChainBase {
+export interface Chain<ChainKeys extends ChainKey = ChainKey>
+  extends ChainBase<ChainKeys> {
   weight: number;
   moonAssetId?: number | bigint;
   palletInstance?: number;
