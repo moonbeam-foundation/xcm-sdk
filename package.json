@@ -2,13 +2,13 @@
   "author": "PureStake",
   "license": "GPL-3.0-only",
   "private": true,
-  "homepage": "https://github.com/PureStake/xcm#readme",
+  "homepage": "https://github.com/PureStake/xcm-sdk#readme",
   "bugs": {
-    "url": "https://github.com/PureStake/xcm/issues"
+    "url": "https://github.com/PureStake/xcm-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm.git"
+    "url": "git+https://github.com/PureStake/xcm-sdk.git"
   },
   "workspaces": [
     "packages/*"
