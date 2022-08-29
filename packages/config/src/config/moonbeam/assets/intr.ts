@@ -10,7 +10,7 @@ import {
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
 const asset = assets[AssetSymbol.INTR];
-const origin = chains[ChainKey.Interley];
+const origin = chains[ChainKey.Interlay];
 
 export const INTR: MoonbeamXcmConfig = {
   asset,

@@ -61,14 +61,14 @@ async function createChainSdk<
   const contract = new XTokensContract<Symbols>(options.ethersSigner);
 
   return {
-    asset: configGetter.asset,
-    chain: configGetter.chain,
+    asset: configGetter.moonAsset,
+    chain: configGetter.moonChain,
     subscribeToAssetsBalanceInfo: async (
       account: string,
       cb: (data: AssetBalanceInfo<Symbols>[]) => void,
     ): UnsubscribePromise => {
       const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
-        configGetter.chain.ws,
+        configGetter.moonChain.ws,
       );
       let lastBalance = 0n;
       let lastInfo: AssetBalanceInfo<Symbols>[] = [];
@@ -120,7 +120,7 @@ async function createChainSdk<
               primaryAccount?: string,
             ): Promise<DepositTransferData<Symbols>> => {
               const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
-                configGetter.chain.ws,
+                configGetter.moonChain.ws,
               );
               const foreignPolkadot = await PolkadotService.create<
                 Symbols,
@@ -164,10 +164,13 @@ async function createChainSdk<
                 config.sourceMinBalance
                   ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
                   : undefined,
-                assetConfig.isNative
+                // eslint-disable-next-line no-nested-ternary
+                config.sourceFeeBalance
+                  ? 0n
+                  : assetConfig.isNative
                   ? PolkadotService.getChainMin(
                       config.origin.weight,
-                      configGetter.chain.unitsPerSecond,
+                      configGetter.moonChain.unitsPerSecond,
                     )
                   : polkadot.getAssetFee(assetConfig.id, config.origin.weight),
               ]);
@@ -225,7 +228,7 @@ async function createChainSdk<
               destinationAccount: string,
             ): Promise<WithdrawTransferData<Symbols>> => {
               const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
-                configGetter.chain.ws,
+                configGetter.moonChain.ws,
               );
               const destinationPolkadot = await PolkadotService.create<
                 Symbols,
@@ -236,7 +239,7 @@ async function createChainSdk<
               const [decimals, destinationBalance, existentialDeposit] =
                 await Promise.all([
                   assetConfig.isNative
-                    ? configGetter.chain.decimals
+                    ? configGetter.moonChain.decimals
                     : polkadot.getAssetDecimals(assetConfig.id),
                   destinationPolkadot.getGenericBalance(
                     destinationAccount,
