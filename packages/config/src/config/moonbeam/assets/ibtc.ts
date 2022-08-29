@@ -11,7 +11,7 @@ import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
 const asset = assets[Asset.IBTC];
 const feeAsset = assets[Asset.INTR];
-const origin = chains[Chain.Interley];
+const origin = chains[Chain.Interlay];
 
 export const IBTC: MoonbeamXcmConfig = <const>{
   asset,

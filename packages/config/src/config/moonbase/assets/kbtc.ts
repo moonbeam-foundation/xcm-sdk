@@ -25,7 +25,7 @@ export const KBTC: MoonbaseXcmConfig = <const>{
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()
-        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiCurrencies)
         .origin(origin)
         .assets(asset, feeAsset),
     },

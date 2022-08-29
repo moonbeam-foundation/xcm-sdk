@@ -5,7 +5,7 @@ import { MoonbeamChains } from './moonbeam.interfaces';
 
 export const MOONBEAM_CHAINS = <const>[
   Chain.Acala,
-  Chain.Interley,
+  Chain.Interlay,
   Chain.Parallel,
   Chain.Phala,
   Chain.Polkadot,
@@ -20,9 +20,9 @@ export const MOONBEAM_CHAINS_CONFIGS: ChainsConfigs<MoonbeamChains> = {
     parachainId: 2000,
     moonAssetId: 0,
   },
-  [Chain.Interley]: {
-    chain: Chain.Interley,
-    name: 'Interley',
+  [Chain.Interlay]: {
+    chain: Chain.Interlay,
+    name: 'Interlay',
     ws: 'wss://interlay.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2032,

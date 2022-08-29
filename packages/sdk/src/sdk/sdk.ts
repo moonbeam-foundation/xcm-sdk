@@ -164,7 +164,10 @@ async function createChainSdk<
                 config.sourceMinBalance
                   ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
                   : undefined,
-                assetConfig.isNative
+                // eslint-disable-next-line no-nested-ternary
+                config.sourceFeeBalance
+                  ? 0n
+                  : assetConfig.isNative
                   ? PolkadotService.getChainMin(
                       config.origin.weight,
                       configGetter.chain.unitsPerSecond,
