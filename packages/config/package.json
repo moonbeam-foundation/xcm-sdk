@@ -1,11 +1,11 @@
 {
   "name": "@moonbeam-network/xcm-config",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "",
   "repository": {
     "directory": "packages/config",
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm.git"
+    "url": "git+https://github.com/PureStake/xcm-sdk.git"
   },
   "keywords": [
     "moonbeam",
@@ -15,9 +15,9 @@
   "author": "PureStake",
   "license": "GPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/PureStake/xcm/issues"
+    "url": "https://github.com/PureStake/xcm-sdk/issues"
   },
-  "homepage": "https://github.com/PureStake/xcm#readme",
+  "homepage": "https://github.com/PureStake/xcm-sdk#readme",
   "files": [
     "build"
   ],
