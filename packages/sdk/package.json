@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-sdk",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "",
   "author": "PureStake",
   "license": "GPL-3.0-only",
