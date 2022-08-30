@@ -1,7 +1,7 @@
 import {
   AssetSymbol,
   ChainKey,
-  ConfigGetter,
+  XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
 import { UnsubscribePromise } from '@polkadot/api/types';
 import { AssetBalanceInfo, PolkadotService } from '../polkadot';
@@ -59,8 +59,8 @@ export interface SubscribeToAssetsBalanceInfoParams<
   ChainKeys extends ChainKey,
 > {
   account: string;
-  configGetter: ConfigGetter<Symbols, ChainKeys>;
   polkadot: PolkadotService<Symbols, ChainKeys>;
+  configBuilder: XcmConfigBuilder<Symbols, ChainKeys>;
   cb: (data: AssetBalanceInfo<Symbols>[]) => void;
 }
 
@@ -69,8 +69,8 @@ export async function subscribeToAssetsBalanceInfo<
   ChainKeys extends ChainKey,
 >({
   account,
-  configGetter,
   polkadot,
+  configBuilder,
   cb,
 }: SubscribeToAssetsBalanceInfoParams<Symbols, ChainKeys>): UnsubscribePromise {
   let lastBalance = 0n;
@@ -99,7 +99,7 @@ export async function subscribeToAssetsBalanceInfo<
   );
   const unsubscribeInfo = await polkadot.subscribeToAssetsBalanceInfo(
     account,
-    configGetter,
+    configBuilder,
     handler,
   );
 

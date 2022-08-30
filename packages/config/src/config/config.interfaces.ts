@@ -3,18 +3,18 @@ import { DepositConfig } from '../deposit';
 import { Asset, Chain, MoonChain } from '../interfaces';
 import { WithdrawConfig } from '../withdraw';
 
-export interface ConfigGetter<
+export interface XcmConfigBuilder<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
   assets: AssetsConfigs<Symbols>;
   moonAsset: Asset<Symbols>;
   moonChain: MoonChain;
-  deposit: (symbol: Symbols) => DepositConfigGetter<Symbols, ChainKeys>;
-  withdraw: (symbol: Symbols) => WithdrawConfigGetter<Symbols, ChainKeys>;
+  deposit: (symbol: Symbols) => DepositConfigBuilder<Symbols, ChainKeys>;
+  withdraw: (symbol: Symbols) => WithdrawConfigBuilder<Symbols, ChainKeys>;
 }
 
-export interface DepositConfigGetter<
+export interface DepositConfigBuilder<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
@@ -26,7 +26,7 @@ export interface DepositConfigGetter<
   };
 }
 
-export interface WithdrawConfigGetter<
+export interface WithdrawConfigBuilder<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {

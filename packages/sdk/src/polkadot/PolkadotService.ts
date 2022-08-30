@@ -5,10 +5,10 @@ import {
   AssetSymbol,
   BalanceConfig,
   ChainKey,
-  ConfigGetter,
   ExtrinsicConfig,
   MinBalanceConfig,
   MoonChain,
+  XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
 import { SubmittableExtrinsic, UnsubscribePromise } from '@polkadot/api/types';
@@ -158,10 +158,10 @@ export class PolkadotService<
 
   async subscribeToAssetsBalanceInfo(
     account: string,
-    configGetter: ConfigGetter<Symbols, ChainKeys>,
+    config: XcmConfigBuilder<Symbols, ChainKeys>,
     callback: (data: AssetBalanceInfo<Symbols>[]) => void,
   ): UnsubscribePromise {
-    const assetsArray = Object.values<Asset<Symbols>>(configGetter.assets);
+    const assetsArray = Object.values<Asset<Symbols>>(config.assets);
     const ids: string[] = assetsArray.map((asset) => asset.id);
     const metadata: PalletAssetsAssetMetadata[] =
       (await this.#api.query.assets.metadata.multi(ids)) as any;
@@ -174,7 +174,7 @@ export class PolkadotService<
           const {
             chains: [chain],
             from,
-          } = configGetter.deposit(asset.originSymbol);
+          } = config.deposit(asset.originSymbol);
           const { origin } = from(chain.key);
 
           return {

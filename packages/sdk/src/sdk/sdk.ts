@@ -2,7 +2,6 @@
 import {
   AssetSymbol,
   ChainKey,
-  ConfigGetter,
   moonbase,
   MoonbaseAssets,
   MoonbaseChains,
@@ -12,6 +11,7 @@ import {
   moonriver,
   MoonriverAssets,
   MoonriverChains,
+  XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
 import { UnsubscribePromise } from '@polkadot/api/types';
 import { XTokensContract } from '../contracts';
@@ -29,31 +29,23 @@ import {
 import { subscribeToAssetsBalanceInfo } from './sdk.utils';
 import { getWithdrawData } from './sdk.withdraw';
 
-export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
+export function init(options: SdkOptions): XcmSdkByChain {
   return {
-    moonbase: await createChainSdk<MoonbaseAssets, MoonbaseChains>(
-      moonbase,
-      options,
-    ),
-    moonbeam: await createChainSdk<MoonbeamAssets, MoonbeamChains>(
-      moonbeam,
-      options,
-    ),
-    moonriver: await createChainSdk<MoonriverAssets, MoonriverChains>(
+    moonbase: initByChain<MoonbaseAssets, MoonbaseChains>(moonbase, options),
+    moonbeam: initByChain<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
+    moonriver: initByChain<MoonriverAssets, MoonriverChains>(
       moonriver,
       options,
     ),
   };
 }
 
-async function createChainSdk<
-  Symbols extends AssetSymbol,
-  ChainKeys extends ChainKey,
->(
-  configGetter: ConfigGetter<Symbols, ChainKeys>,
+function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
+  configBuilder: XcmConfigBuilder<Symbols, ChainKeys>,
   options: SdkOptions,
-): Promise<XcmSdk<Symbols, ChainKeys>> {
-  const { moonAsset, moonChain } = configGetter;
+): XcmSdk<Symbols, ChainKeys> {
+  const { moonAsset, moonChain } = configBuilder;
+
   return {
     moonAsset,
     moonChain,
@@ -62,18 +54,18 @@ async function createChainSdk<
       cb: (data: AssetBalanceInfo<Symbols>[]) => void,
     ): UnsubscribePromise => {
       const [polkadot] = await createPolkadotServices<Symbols, ChainKeys>([
-        configGetter.moonChain.ws,
+        configBuilder.moonChain.ws,
       ]);
 
       return subscribeToAssetsBalanceInfo({
         account,
-        configGetter,
         polkadot,
+        configBuilder,
         cb,
       });
     },
     deposit: (symbol: Symbols): XcmSdkDeposit<Symbols, ChainKeys> => {
-      const { chains, from } = configGetter.deposit(symbol);
+      const { chains, from } = configBuilder.deposit(symbol);
 
       return {
         chains,
@@ -89,9 +81,9 @@ async function createChainSdk<
               const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,
                 ChainKeys
-              >([configGetter.moonChain.ws, config.origin.ws]);
+              >([configBuilder.moonChain.ws, config.origin.ws]);
               const meta = foreignPolkadot.getMetadata();
-              const nativeAsset = configGetter.assets[meta.symbol];
+              const nativeAsset = configBuilder.assets[meta.symbol];
 
               return getDepositData({
                 account,
@@ -112,7 +104,7 @@ async function createChainSdk<
       };
     },
     withdraw: (symbol: Symbols): XcmSdkWithdraw<Symbols, ChainKeys> => {
-      const { chains, to } = configGetter.withdraw(symbol);
+      const { chains, to } = configBuilder.withdraw(symbol);
 
       return {
         chains,
@@ -128,11 +120,11 @@ async function createChainSdk<
               );
               const [polkadot, destinationPolkadot] =
                 await createPolkadotServices<Symbols, ChainKeys>([
-                  configGetter.moonChain.ws,
+                  configBuilder.moonChain.ws,
                   config.destination.ws,
                 ]);
               const meta = destinationPolkadot.getMetadata();
-              const nativeAsset = configGetter.assets[meta.symbol];
+              const nativeAsset = configBuilder.assets[meta.symbol];
 
               return getWithdrawData({
                 asset,
