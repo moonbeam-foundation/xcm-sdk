@@ -1,5 +1,21 @@
+import {
+  Asset,
+  AssetSymbol,
+  Chain,
+  ChainKey,
+  MoonChain,
+  WithdrawConfig,
+} from '@moonbeam-network/xcm-config';
 import { Signer as EthersSigner } from 'ethers';
-import { ExtrinsicEvent, ExtrinsicStatus, Hash } from './sdk.interfaces';
+import { XTokensContract } from '../contracts';
+import { PolkadotService } from '../polkadot';
+import {
+  ExtrinsicEvent,
+  ExtrinsicStatus,
+  Hash,
+  SdkOptions,
+  WithdrawTransferData,
+} from './sdk.interfaces';
 
 export async function createTransactionEventHandler(
   ethersSigner: EthersSigner,
@@ -38,4 +54,74 @@ export async function createTransactionEventHandler(
       txHash,
     });
   }
+}
+
+export interface GetWithdrawDataParams<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+> {
+  asset: Asset<Symbols>;
+  config: WithdrawConfig<Symbols>;
+  contract: XTokensContract;
+  destinationAccount: string;
+  destinationPolkadot: PolkadotService<Symbols, ChainKeys>;
+  moonChain: MoonChain;
+  nativeAsset: Asset<Symbols>;
+  options: SdkOptions;
+  origin: MoonChain | Chain<ChainKeys>;
+  polkadot: PolkadotService<Symbols, ChainKeys>;
+}
+
+export async function getWithdrawData<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>({
+  asset,
+  config,
+  contract,
+  destinationAccount,
+  destinationPolkadot,
+  moonChain,
+  nativeAsset,
+  options,
+  origin,
+  polkadot,
+}: GetWithdrawDataParams<Symbols, ChainKeys>): Promise<
+  WithdrawTransferData<Symbols>
+> {
+  const meta = destinationPolkadot.getMetadata();
+  const [decimals, destinationBalance, existentialDeposit] = await Promise.all([
+    asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset.id),
+    destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
+    destinationPolkadot.getExistentialDeposit(),
+  ]);
+  const destinationFee = BigInt(config.weight * config.feePerWeight);
+  const min = destinationFee + existentialDeposit;
+
+  return {
+    asset: { ...asset, decimals },
+    destination: config.destination,
+    destinationBalance,
+    destinationFee,
+    existentialDeposit,
+    min,
+    native: { ...nativeAsset, decimals: meta.decimals },
+    origin,
+    getFee: async (amount) =>
+      contract.getTransferFees(destinationAccount, amount, asset, config),
+    send: async (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => {
+      const tx = await contract.transfer(
+        destinationAccount,
+        amount,
+        asset,
+        config,
+      );
+
+      if (cb) {
+        createTransactionEventHandler(options.ethersSigner, tx.hash, cb);
+      }
+
+      return tx.hash;
+    },
+  };
 }

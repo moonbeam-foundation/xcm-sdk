@@ -11,7 +11,12 @@ import {
 import { ISubmittableResult } from '@polkadot/types/types';
 import { isUndefined } from '@polkadot/util';
 import { PolkadotService } from '../polkadot';
-import { ExtrinsicEvent, ExtrinsicStatus, SdkOptions } from './sdk.interfaces';
+import {
+  DepositTransferData,
+  ExtrinsicEvent,
+  ExtrinsicStatus,
+  SdkOptions,
+} from './sdk.interfaces';
 
 export function createExtrinsicEventHandler<Symbols extends AssetSymbol>(
   config: DepositConfig<Symbols>,
@@ -137,7 +142,9 @@ export async function getDepositData<
   polkadot,
   primaryAccount,
   sourceAccount,
-}: GetDepositDataParams<Symbols, ChainKeys>) {
+}: GetDepositDataParams<Symbols, ChainKeys>): Promise<
+  DepositTransferData<Symbols>
+> {
   const meta = foreignPolkadot.getMetadata();
   const createExtrinsic = getCreateExtrinsic({
     account,

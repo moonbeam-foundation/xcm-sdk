@@ -1,5 +1,10 @@
-import { AssetSymbol } from '@moonbeam-network/xcm-config';
-import { AssetBalanceInfo } from '../polkadot';
+import {
+  AssetSymbol,
+  ChainKey,
+  ConfigGetter,
+} from '@moonbeam-network/xcm-config';
+import { UnsubscribePromise } from '@polkadot/api/types';
+import { AssetBalanceInfo, PolkadotService } from '../polkadot';
 import { XcmSdkDeposit, XcmSdkWithdraw } from './sdk.interfaces';
 
 export function isXcmSdkDeposit(
@@ -47,4 +52,59 @@ export function sortByBalanceAndChainName<Symbols extends AssetSymbol>(
   }
 
   return 0;
+}
+
+export interface SubscribeToAssetsBalanceInfoParams<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+> {
+  account: string;
+  configGetter: ConfigGetter<Symbols, ChainKeys>;
+  polkadot: PolkadotService<Symbols, ChainKeys>;
+  cb: (data: AssetBalanceInfo<Symbols>[]) => void;
+}
+
+export async function subscribeToAssetsBalanceInfo<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>({
+  account,
+  configGetter,
+  polkadot,
+  cb,
+}: SubscribeToAssetsBalanceInfoParams<Symbols, ChainKeys>): UnsubscribePromise {
+  let lastBalance = 0n;
+  let lastInfo: AssetBalanceInfo<Symbols>[] = [];
+  const handler = (data: bigint | AssetBalanceInfo<Symbols>[]) => {
+    const isBalance = typeof data === 'bigint';
+
+    lastBalance = isBalance ? data : lastBalance;
+    lastInfo = (isBalance ? lastInfo : data)
+      .map((info) => {
+        if (info.asset.isNative) {
+          // eslint-disable-next-line no-param-reassign
+          info.balance = lastBalance;
+        }
+
+        return info;
+      })
+      .sort(sortByBalanceAndChainName);
+
+    cb(lastInfo);
+  };
+
+  const unsubscribeBalance = await polkadot.subscribeToBalance(
+    account,
+    handler,
+  );
+  const unsubscribeInfo = await polkadot.subscribeToAssetsBalanceInfo(
+    account,
+    configGetter,
+    handler,
+  );
+
+  return () => {
+    unsubscribeBalance();
+    unsubscribeInfo();
+  };
 }

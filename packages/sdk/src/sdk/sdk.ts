@@ -14,16 +14,11 @@ import {
   MoonriverChains,
 } from '@moonbeam-network/xcm-config';
 import { UnsubscribePromise } from '@polkadot/api/types';
-import { XTokensContract } from '../contracts/XTokensContract';
-import {
-  AssetBalanceInfo,
-  createPolkadotServices,
-  PolkadotService,
-} from '../polkadot';
+import { XTokensContract } from '../contracts';
+import { AssetBalanceInfo, createPolkadotServices } from '../polkadot';
 import { getDepositData } from './sdk.deposit';
 import {
   DepositTransferData,
-  ExtrinsicEvent,
   SdkOptions,
   WithdrawTransferData,
   XcmSdk,
@@ -31,8 +26,8 @@ import {
   XcmSdkDeposit,
   XcmSdkWithdraw,
 } from './sdk.interfaces';
-import { sortByBalanceAndChainName } from './sdk.utils';
-import { createTransactionEventHandler } from './sdk.withdraw';
+import { subscribeToAssetsBalanceInfo } from './sdk.utils';
+import { getWithdrawData } from './sdk.withdraw';
 
 export async function create(options: SdkOptions): Promise<XcmSdkByChain> {
   return {
@@ -58,52 +53,24 @@ async function createChainSdk<
   configGetter: ConfigGetter<Symbols, ChainKeys>,
   options: SdkOptions,
 ): Promise<XcmSdk<Symbols, ChainKeys>> {
-  const contract = new XTokensContract<Symbols>(options.ethersSigner);
-
+  const { moonAsset, moonChain } = configGetter;
   return {
-    moonAsset: configGetter.moonAsset,
-    moonChain: configGetter.moonChain,
+    moonAsset,
+    moonChain,
     subscribeToAssetsBalanceInfo: async (
       account: string,
       cb: (data: AssetBalanceInfo<Symbols>[]) => void,
     ): UnsubscribePromise => {
-      const polkadot = await PolkadotService.create<Symbols, ChainKeys>(
+      const [polkadot] = await createPolkadotServices<Symbols, ChainKeys>([
         configGetter.moonChain.ws,
-      );
-      let lastBalance = 0n;
-      let lastInfo: AssetBalanceInfo<Symbols>[] = [];
-      const handler = (data: bigint | AssetBalanceInfo<Symbols>[]) => {
-        const isBalance = typeof data === 'bigint';
+      ]);
 
-        lastBalance = isBalance ? data : lastBalance;
-        lastInfo = (isBalance ? lastInfo : data)
-          .map((info) => {
-            if (info.asset.isNative) {
-              // eslint-disable-next-line no-param-reassign
-              info.balance = lastBalance;
-            }
-
-            return info;
-          })
-          .sort(sortByBalanceAndChainName);
-
-        cb(lastInfo);
-      };
-
-      const unsubscribeBalance = await polkadot.subscribeToBalance(
-        account,
-        handler,
-      );
-      const unsubscribeInfo = await polkadot.subscribeToAssetsBalanceInfo(
+      return subscribeToAssetsBalanceInfo({
         account,
         configGetter,
-        handler,
-      );
-
-      return () => {
-        unsubscribeBalance();
-        unsubscribeInfo();
-      };
+        polkadot,
+        cb,
+      });
     },
     deposit: (symbol: Symbols): XcmSdkDeposit<Symbols, ChainKeys> => {
       const { chains, from } = configGetter.deposit(symbol);
@@ -131,7 +98,7 @@ async function createChainSdk<
                 asset,
                 config,
                 foreignPolkadot,
-                moonChain: configGetter.moonChain,
+                moonChain,
                 nativeAsset,
                 options,
                 origin,
@@ -150,12 +117,15 @@ async function createChainSdk<
       return {
         chains,
         to: (chain: ChainKeys) => {
-          const { asset: assetConfig, origin, config } = to(chain);
+          const { asset, origin, config } = to(chain);
 
           return {
             get: async (
               destinationAccount: string,
             ): Promise<WithdrawTransferData<Symbols>> => {
+              const contract = new XTokensContract<Symbols>(
+                options.ethersSigner,
+              );
               const [polkadot, destinationPolkadot] =
                 await createPolkadotServices<Symbols, ChainKeys>([
                   configGetter.moonChain.ws,
@@ -163,60 +133,19 @@ async function createChainSdk<
                 ]);
               const meta = destinationPolkadot.getMetadata();
               const nativeAsset = configGetter.assets[meta.symbol];
-              const [decimals, destinationBalance, existentialDeposit] =
-                await Promise.all([
-                  assetConfig.isNative
-                    ? configGetter.moonChain.decimals
-                    : polkadot.getAssetDecimals(assetConfig.id),
-                  destinationPolkadot.getGenericBalance(
-                    destinationAccount,
-                    config.balance,
-                  ),
-                  destinationPolkadot.getExistentialDeposit(),
-                ]);
-              const destinationFee = BigInt(
-                config.weight * config.feePerWeight,
-              );
-              const min = destinationFee + existentialDeposit;
 
-              return {
-                asset: { ...assetConfig, decimals },
-                destination: config.destination,
-                destinationBalance,
-                destinationFee,
-                existentialDeposit,
-                min,
-                native: { ...nativeAsset, decimals: meta.decimals },
+              return getWithdrawData({
+                asset,
+                config,
+                contract,
+                destinationAccount,
+                destinationPolkadot,
+                moonChain,
+                nativeAsset,
+                options,
                 origin,
-                getFee: async (amount) =>
-                  contract.getTransferFees(
-                    destinationAccount,
-                    amount,
-                    assetConfig,
-                    config,
-                  ),
-                send: async (
-                  amount: bigint,
-                  cb?: (event: ExtrinsicEvent) => void,
-                ) => {
-                  const tx = await contract.transfer(
-                    destinationAccount,
-                    amount,
-                    assetConfig,
-                    config,
-                  );
-
-                  if (cb) {
-                    createTransactionEventHandler(
-                      options.ethersSigner,
-                      tx.hash,
-                      cb,
-                    );
-                  }
-
-                  return tx.hash;
-                },
-              };
+                polkadot,
+              });
             },
           };
         },
