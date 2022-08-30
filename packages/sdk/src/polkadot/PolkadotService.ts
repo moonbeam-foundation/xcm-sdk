@@ -62,8 +62,7 @@ export class PolkadotService<
   }
 
   async getAssetMeta(assetId: string): Promise<PalletAssetsAssetMetadata> {
-    // TODO: how to fix any?
-    return this.#api.query.assets.metadata(assetId) as any;
+    return this.#api.query.assets.metadata(assetId);
   }
 
   async subscribeToAccountInfo(
@@ -92,7 +91,6 @@ export class PolkadotService<
       return 0n;
     }
 
-    // TODO: improve types here and in balance interfaces
     const unwrapped = (response as any).unwrap?.() || response;
 
     return calc(path.length ? get(unwrapped, path) : unwrapped);
