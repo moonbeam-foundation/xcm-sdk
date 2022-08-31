@@ -10,17 +10,16 @@ import { Signer as EthersSigner } from 'ethers';
 import { XTokensContract } from '../contracts';
 import { PolkadotService } from '../polkadot';
 import {
-  ExtrinsicEvent,
+  ExtrinsicEventsCallback,
   ExtrinsicStatus,
   Hash,
-  SdkOptions,
   WithdrawTransferData,
 } from './sdk.interfaces';
 
 export async function createTransactionEventHandler(
   ethersSigner: EthersSigner,
   txHash: Hash,
-  cb: (event: ExtrinsicEvent) => void,
+  cb: ExtrinsicEventsCallback,
   skipSentEvent = false,
 ) {
   if (!ethersSigner.provider) {
@@ -65,9 +64,9 @@ export interface GetWithdrawDataParams<
   contract: XTokensContract;
   destinationAccount: string;
   destinationPolkadot: PolkadotService<Symbols, ChainKeys>;
+  ethersSigner: EthersSigner;
   moonChain: MoonChain;
   nativeAsset: Asset<Symbols>;
-  options: SdkOptions;
   origin: MoonChain | Chain<ChainKeys>;
   polkadot: PolkadotService<Symbols, ChainKeys>;
 }
@@ -81,9 +80,9 @@ export async function getWithdrawData<
   contract,
   destinationAccount,
   destinationPolkadot,
+  ethersSigner,
   moonChain,
   nativeAsset,
-  options,
   origin,
   polkadot,
 }: GetWithdrawDataParams<Symbols, ChainKeys>): Promise<
@@ -109,7 +108,7 @@ export async function getWithdrawData<
     origin,
     getFee: async (amount) =>
       contract.getTransferFees(destinationAccount, amount, asset, config),
-    send: async (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => {
+    send: async (amount: bigint, cb?: ExtrinsicEventsCallback) => {
       const tx = await contract.transfer(
         destinationAccount,
         amount,
@@ -118,7 +117,7 @@ export async function getWithdrawData<
       );
 
       if (cb) {
-        createTransactionEventHandler(options.ethersSigner, tx.hash, cb);
+        createTransactionEventHandler(ethersSigner, tx.hash, cb);
       }
 
       return tx.hash;
