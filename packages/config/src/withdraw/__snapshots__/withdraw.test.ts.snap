@@ -8,6 +8,7 @@ Object {
   },
   "feePerWeight": 8,
   "getParams": [Function],
+  "sourceMinBalance": undefined,
   "weight": 4000000000,
 }
 `;
