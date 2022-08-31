@@ -1,13 +1,13 @@
 import {
   Asset,
-  AssetConfig,
+  AssetSymbol,
   Chain,
-  ChainConfig,
+  ChainKey,
   MoonbaseAssets,
   MoonbaseChains,
   MoonbeamAssets,
   MoonbeamChains,
-  MoonChainConfig,
+  MoonChain,
   MoonriverAssets,
   MoonriverChains,
 } from '@moonbeam-network/xcm-config';
@@ -33,84 +33,91 @@ export type MoonbeamXcmSdk = XcmSdk<MoonbeamAssets, MoonbeamChains>;
 export type MoonriverXcmSdk = XcmSdk<MoonriverAssets, MoonriverChains>;
 
 export interface XcmSdk<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: AssetConfig<Assets>;
-  chain: MoonChainConfig;
+  moonAsset: Asset<Symbols>;
+  moonChain: MoonChain;
   subscribeToAssetsBalanceInfo: (
     account: string,
-    cb: (data: AssetBalanceInfo<Assets>[]) => void,
+    cb: (data: AssetBalanceInfo<Symbols>[]) => void,
   ) => UnsubscribePromise;
-  deposit: (asset: Assets) => XcmSdkDeposit<Assets, Chains>;
-  withdraw: (asset: Assets) => XcmSdkWithdraw<Assets, Chains>;
+  deposit: (symbol: Symbols) => XcmSdkDeposit<Symbols, ChainKeys>;
+  withdraw: (symbol: Symbols) => XcmSdkWithdraw<Symbols, ChainKeys>;
 }
 
 export interface XcmSdkDeposit<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: ChainConfig[];
-  from: (chain: Chains) => XcmSdkDepositFrom<Assets>;
+  chains: Chain<ChainKeys>[];
+  from: (chain: ChainKeys) => XcmSdkDepositFrom<Symbols>;
 }
 
 export interface XcmSdkWithdraw<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
-  chains: ChainConfig[];
-  to: (chain: Chains) => XcmSdkWithdrawTo<Assets>;
+  chains: Chain<ChainKeys>[];
+  to: (chain: ChainKeys) => XcmSdkWithdrawTo<Symbols>;
 }
 
-export interface XcmSdkDepositFrom<Assets extends Asset = Asset> {
+export interface XcmSdkDepositFrom<Symbols extends AssetSymbol = AssetSymbol> {
   get: (
     account: string,
     sourceAccount: string,
     primaryAccount?: string,
-  ) => Promise<DepositTransferData<Assets>>;
+  ) => Promise<DepositTransferData<Symbols>>;
 }
 
-export interface XcmSdkWithdrawTo<Assets extends Asset = Asset> {
-  get: (account: string) => Promise<WithdrawTransferData<Assets>>;
+export interface XcmSdkWithdrawTo<Symbols extends AssetSymbol = AssetSymbol> {
+  get: (account: string) => Promise<WithdrawTransferData<Symbols>>;
 }
 
-export interface DepositTransferData<Assets extends Asset = Asset> {
-  asset: AssetConfigWithDecimals<Assets>;
+export interface DepositTransferData<
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
+> {
+  asset: AssetConfigWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
   moonChainFee?: bigint;
-  native: AssetConfigWithDecimals<Assets>;
-  origin: MoonChainConfig | ChainConfig;
-  source: ChainConfig;
+  native: AssetConfigWithDecimals<Symbols>;
+  origin: MoonChain | Chain<ChainKeys>;
+  source: Chain<ChainKeys>;
   sourceBalance: bigint;
-  sourceFeeBalance?: FeeBalance<Assets>;
+  sourceFeeBalance?: FeeBalance<Symbols>;
   sourceMinBalance: bigint;
   getFee: (amount?: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }
 
-export interface WithdrawTransferData<Assets extends Asset = Asset> {
-  asset: AssetConfigWithDecimals<Assets>;
-  destination: ChainConfig;
+export interface WithdrawTransferData<
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
+> {
+  asset: AssetConfigWithDecimals<Symbols>;
+  destination: Chain<ChainKeys>;
   destinationBalance: bigint;
   destinationFee: bigint;
   existentialDeposit: bigint;
   min: bigint;
-  native: AssetConfigWithDecimals<Assets>;
-  origin: MoonChainConfig | ChainConfig;
+  native: AssetConfigWithDecimals<Symbols>;
+  origin: MoonChain | Chain<ChainKeys>;
   getFee: (amount: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
 }
 
-export interface AssetConfigWithDecimals<Assets extends Asset = Asset>
-  extends AssetConfig<Assets> {
+export interface AssetConfigWithDecimals<
+  Symbols extends AssetSymbol = AssetSymbol,
+> extends Asset<Symbols> {
   decimals: number;
 }
 
-export interface FeeBalance<Assets extends Asset = Asset> {
+export interface FeeBalance<Symbols extends AssetSymbol = AssetSymbol> {
   balance: bigint;
   decimals: number;
-  symbol: Assets;
+  symbol: Symbols;
 }
 
 export interface SdkOptions {

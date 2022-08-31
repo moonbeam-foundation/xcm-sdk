@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[Asset.TEER];
-const origin = chains[Chain.IntegriteeAlphanet];
+const asset = assets[AssetSymbol.TEER];
+const origin = chains[ChainKey.IntegriteeAlphanet];
 
-export const TEER: MoonbaseXcmConfig = <const>{
+export const TEER: MoonbaseXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -28,7 +28,7 @@ export const TEER: MoonbaseXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 1,

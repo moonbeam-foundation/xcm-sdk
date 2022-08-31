@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
-const asset = assets[Asset.DOT];
-const origin = chains[Chain.Polkadot];
+const asset = assets[AssetSymbol.DOT];
+const origin = chains[ChainKey.Polkadot];
 
-export const DOT: MoonbeamXcmConfig = <const>{
+export const DOT: MoonbeamXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -27,7 +27,7 @@ export const DOT: MoonbeamXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 0.13,

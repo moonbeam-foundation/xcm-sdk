@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[Asset.LIT];
-const origin = chains[Chain.LitentryAlphanet];
+const asset = assets[AssetSymbol.LIT];
+const origin = chains[ChainKey.LitentryAlphanet];
 
-export const LIT: MoonbaseXcmConfig = <const>{
+export const LIT: MoonbaseXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -28,7 +28,7 @@ export const LIT: MoonbaseXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 8,

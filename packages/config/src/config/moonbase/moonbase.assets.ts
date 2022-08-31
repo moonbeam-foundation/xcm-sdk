@@ -1,78 +1,78 @@
-import { Asset } from '../../constants';
+import { AssetSymbol } from '../../constants';
 import { AssetsConfigs } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbaseAssets } from './moonbase.interfaces';
 
 export const MOONBASE_ASSETS = <const>[
-  Asset.ASTR,
-  Asset.BSX,
-  Asset.CLV,
-  Asset.CRU,
-  Asset.DEV,
-  Asset.KBTC,
-  Asset.KINT,
-  Asset.LIT,
-  Asset.PARING,
-  Asset.TEER,
-  Asset.UNIT,
+  AssetSymbol.ASTR,
+  AssetSymbol.BSX,
+  AssetSymbol.CLV,
+  AssetSymbol.CRU,
+  AssetSymbol.DEV,
+  AssetSymbol.KBTC,
+  AssetSymbol.KINT,
+  AssetSymbol.LIT,
+  AssetSymbol.PARING,
+  AssetSymbol.TEER,
+  AssetSymbol.UNIT,
 ];
 
 export const MOONBASE_ASSETS_CONFIGS: AssetsConfigs<MoonbaseAssets> = {
-  [Asset.ASTR]: {
+  [AssetSymbol.ASTR]: {
     id: '16797826370226091782818345603793389938',
     erc20Id: '0xffffffff0ca324c842330521525e7de111f38972',
-    originSymbol: Asset.ASTR,
+    originSymbol: AssetSymbol.ASTR,
   },
-  [Asset.BSX]: {
+  [AssetSymbol.BSX]: {
     id: '102433417954722588084020852587557555194',
     erc20Id: '0xffffffff4d0ff56d0097bbd14920eac488540bfa',
-    originSymbol: Asset.BSX,
+    originSymbol: AssetSymbol.BSX,
     originAssetId: 0,
   },
-  [Asset.CLV]: {
+  [AssetSymbol.CLV]: {
     id: '281434042901349570144900941495462927562',
     erc20Id: '0xffffffffd3ba399d7d9d684d94b22767a5fa1cca',
-    originSymbol: Asset.CLV,
+    originSymbol: AssetSymbol.CLV,
   },
-  [Asset.CRU]: {
+  [AssetSymbol.CRU]: {
     id: '108457044225666871745333730479173774551',
     erc20Id: '0xffffffff519811215e05efa24830eebe9c43acd7',
-    originSymbol: Asset.CRU,
+    originSymbol: AssetSymbol.CRU,
   },
-  [Asset.DEV]: {
+  [AssetSymbol.DEV]: {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
-    originSymbol: Asset.DEV,
+    originSymbol: AssetSymbol.DEV,
     isNative: true,
   },
-  [Asset.KBTC]: {
+  [AssetSymbol.KBTC]: {
     id: '122531866982275221270783173426160033062',
     erc20Id: '0xffffffff5c2ec77818d0863088929c1106635d26',
-    originSymbol: Asset.KBTC,
+    originSymbol: AssetSymbol.KBTC,
   },
-  [Asset.KINT]: {
+  [AssetSymbol.KINT]: {
     id: '52837329483626033197882584414163773570',
     erc20Id: '0xffffffff27c019790dfbee7cb70f5996671b2882',
-    originSymbol: Asset.KINT,
+    originSymbol: AssetSymbol.KINT,
   },
-  [Asset.LIT]: {
+  [AssetSymbol.LIT]: {
     id: '65216491554813189869575508812319036608',
     erc20Id: '0xffffffff31103d490325bb0a8e40ef62e2f614c0',
-    originSymbol: Asset.LIT,
+    originSymbol: AssetSymbol.LIT,
   },
-  [Asset.PARING]: {
+  [AssetSymbol.PARING]: {
     id: '173481220575862801646329923366065693029',
     erc20Id: '0xffffffff8283448b3cb519ca4732f2dddc6a6165',
-    originSymbol: Asset.PARING,
+    originSymbol: AssetSymbol.PARING,
   },
-  [Asset.TEER]: {
+  [AssetSymbol.TEER]: {
     id: '105075627293246237499203909093923548958',
     erc20Id: '0xffffffff4f0cd46769550e5938f6bee2f5d4ef1e',
-    originSymbol: Asset.TEER,
+    originSymbol: AssetSymbol.TEER,
   },
-  [Asset.UNIT]: {
+  [AssetSymbol.UNIT]: {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
-    originSymbol: Asset.UNIT,
+    originSymbol: AssetSymbol.UNIT,
   },
 };

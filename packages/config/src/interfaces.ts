@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-cycle
-import { Asset, Chain, MoonChain } from './constants';
+import { AssetSymbol, ChainKey, MoonChainKey } from './constants';
 
-export interface AssetConfig<Assets extends Asset = Asset> {
+export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
   id: string;
   /**
    * id -> erc20Id
@@ -10,24 +10,25 @@ export interface AssetConfig<Assets extends Asset = Asset> {
    * Erc20BalancesPrecompile 0x0000000000000000000000000000000000000802
    */
   erc20Id: string;
-  originSymbol: Assets;
+  originSymbol: Symbols;
   originAssetId?: number;
   isNative?: boolean;
 }
 
-export interface ChainBaseConfig<Chains = Chain> {
-  chain: Chains;
+export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {
+  key: ChainKeys;
   name: string;
   ws: string;
   parachainId: number;
 }
 
-export interface MoonChainConfig extends ChainBaseConfig<MoonChain> {
+export interface MoonChain extends ChainBase<MoonChainKey> {
   decimals: number;
   unitsPerSecond: bigint;
 }
 
-export interface ChainConfig extends ChainBaseConfig {
+export interface Chain<ChainKeys extends ChainKey = ChainKey>
+  extends ChainBase<ChainKeys> {
   weight: number;
   moonAssetId?: number | bigint;
   palletInstance?: number;

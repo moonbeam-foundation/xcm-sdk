@@ -1,4 +1,4 @@
-import { Asset } from '../../constants';
+import { AssetSymbol } from '../../constants';
 import { MoonbeamXcmConfigs } from './moonbeam.interfaces';
 
 import { ACA } from './assets/aca';
@@ -10,13 +10,13 @@ import { INTR } from './assets/intr';
 import { PARA } from './assets/para';
 import { PHA } from './assets/pha';
 
-export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = <const>{
-  [Asset.ACA]: ACA,
-  [Asset.AUSD]: AUSD,
-  [Asset.DOT]: DOT,
-  [Asset.GLMR]: GLMR,
-  [Asset.IBTC]: IBTC,
-  [Asset.INTR]: INTR,
-  [Asset.PARA]: PARA,
-  [Asset.PHA]: PHA,
+export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = {
+  [AssetSymbol.ACA]: ACA,
+  [AssetSymbol.AUSD]: AUSD,
+  [AssetSymbol.DOT]: DOT,
+  [AssetSymbol.GLMR]: GLMR,
+  [AssetSymbol.IBTC]: IBTC,
+  [AssetSymbol.INTR]: INTR,
+  [AssetSymbol.PARA]: PARA,
+  [AssetSymbol.PHA]: PHA,
 };

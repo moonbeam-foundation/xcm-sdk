@@ -1,21 +1,11 @@
 import {
-  Asset,
-  AssetConfig,
-  Chain,
-  DepositConfig,
-  isMultiCurrency,
-  PolkadotXcmExtrinsicSuccessEvent,
+  AssetSymbol,
+  ChainKey,
+  XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
-import { ISubmittableResult } from '@polkadot/types/types';
-import { Signer as EthersSigner } from 'ethers';
-import { PolkadotService } from '../polkadot';
-import {
-  ExtrinsicEvent,
-  ExtrinsicStatus,
-  Hash,
-  XcmSdkDeposit,
-  XcmSdkWithdraw,
-} from './sdk.interfaces';
+import { UnsubscribePromise } from '@polkadot/api/types';
+import { AssetBalanceInfo, PolkadotService } from '../polkadot';
+import { XcmSdkDeposit, XcmSdkWithdraw } from './sdk.interfaces';
 
 export function isXcmSdkDeposit(
   config: XcmSdkDeposit | XcmSdkWithdraw,
@@ -29,130 +19,92 @@ export function isXcmSdkWithdraw(
   return !!(config as XcmSdkWithdraw).to;
 }
 
-export function createExtrinsicEventHandler<Assets extends Asset = Asset>(
-  config: DepositConfig<Assets>,
-  cb: (event: ExtrinsicEvent) => void,
+export function sortByBalanceAndChainName<Symbols extends AssetSymbol>(
+  a: AssetBalanceInfo<Symbols>,
+  b: AssetBalanceInfo<Symbols>,
 ) {
-  return ({ events = [], status, txHash }: ISubmittableResult) => {
-    const hash = txHash.toHex();
+  if (a.asset.isNative) {
+    return -1;
+  }
 
-    if (status.isReady) {
-      cb({ status: ExtrinsicStatus.Sent, txHash: hash });
-    }
+  if (b.asset.isNative) {
+    return 1;
+  }
 
-    if (status.isInBlock) {
-      const block = status.asInBlock.toString();
+  const aBalance =
+    Number((a.balance * 1000000n) / 10n ** BigInt(a.meta.decimals)) / 1000000;
+  const bBalance =
+    Number((b.balance * 1000000n) / 10n ** BigInt(b.meta.decimals)) / 1000000;
 
-      events.forEach(({ event: { data, method, section } }) => {
-        if (
-          section === config.extrinsic.pallet &&
-          method === config.extrinsic.successEvent
-        ) {
-          if (method === PolkadotXcmExtrinsicSuccessEvent.Attempted) {
-            const eventData = data.at(0) as any;
+  if (aBalance || bBalance) {
+    return bBalance - aBalance;
+  }
 
-            if (eventData.isIncomplete) {
-              cb({
-                status: ExtrinsicStatus.Failed,
-                blockHash: block,
-                txHash: hash,
-                message: eventData.asIncomplete.toHuman().join('; '),
-              });
+  const aName = (a.origin.name + a.asset.originSymbol).toLowerCase();
+  const bName = (b.origin.name + b.asset.originSymbol).toLowerCase();
 
-              return;
-            }
-          }
+  if (aName < bName) {
+    return -1;
+  }
 
-          cb({
-            status: ExtrinsicStatus.Success,
-            blockHash: block,
-            txHash: hash,
-          });
-        }
+  if (aName > bName) {
+    return 1;
+  }
 
-        if (section === 'system' && method === 'ExtrinsicFailed') {
-          cb({
-            status: ExtrinsicStatus.Failed,
-            blockHash: block,
-            txHash: hash,
-            message: data.join('; '),
-          });
-        }
-      });
-    }
-  };
+  return 0;
 }
 
-export async function createTransactionEventHandler(
-  ethersSigner: EthersSigner,
-  txHash: Hash,
-  cb: (event: ExtrinsicEvent) => void,
-  skipSentEvent = false,
-) {
-  if (!ethersSigner.provider) {
-    throw new Error('options.ethersSigner has not provider');
-  }
-
-  if (!skipSentEvent) {
-    cb({ status: ExtrinsicStatus.Sent, txHash });
-  }
-
-  const tx = await ethersSigner.provider.getTransactionReceipt(txHash);
-
-  if (!tx) {
-    setTimeout(
-      () => createTransactionEventHandler(ethersSigner, txHash, cb, true),
-      2000,
-    );
-    return;
-  }
-
-  if (tx.status === 1) {
-    cb({
-      status: ExtrinsicStatus.Success,
-      blockHash: tx.blockHash,
-      txHash,
-    });
-  } else {
-    cb({
-      status: ExtrinsicStatus.Failed,
-      blockHash: tx.blockHash,
-      txHash,
-    });
-  }
-}
-
-export interface CreateExtrinsicOptions<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+export interface SubscribeToAssetsBalanceInfoParams<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
 > {
   account: string;
-  config: DepositConfig<Assets>;
-  foreignPolkadot: PolkadotService<Assets, Chains>;
-  nativeAsset: AssetConfig<Assets>;
-  polkadot: PolkadotService<Assets, Chains>;
-  primaryAccount?: string;
+  polkadot: PolkadotService<Symbols, ChainKeys>;
+  configBuilder: XcmConfigBuilder<Symbols, ChainKeys>;
+  cb: (data: AssetBalanceInfo<Symbols>[]) => void;
 }
 
-export function getCreateExtrinsic<Assets extends Asset = Asset>({
+export async function subscribeToAssetsBalanceInfo<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>({
   account,
-  config,
-  foreignPolkadot,
-  nativeAsset,
   polkadot,
-  primaryAccount,
-}: CreateExtrinsicOptions<Assets>) {
-  return async (amount: bigint) => {
-    const fee = isMultiCurrency(config.extrinsic)
-      ? await polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
-      : 0n;
+  configBuilder,
+  cb,
+}: SubscribeToAssetsBalanceInfoParams<Symbols, ChainKeys>): UnsubscribePromise {
+  let lastBalance = 0n;
+  let lastInfo: AssetBalanceInfo<Symbols>[] = [];
+  const handler = (data: bigint | AssetBalanceInfo<Symbols>[]) => {
+    const isBalance = typeof data === 'bigint';
 
-    return foreignPolkadot.getXcmExtrinsic(
-      account,
-      amount,
-      config.extrinsic,
-      fee,
-      primaryAccount,
-    );
+    lastBalance = isBalance ? data : lastBalance;
+    lastInfo = (isBalance ? lastInfo : data)
+      .map((info) => {
+        if (info.asset.isNative) {
+          // eslint-disable-next-line no-param-reassign
+          info.balance = lastBalance;
+        }
+
+        return info;
+      })
+      .sort(sortByBalanceAndChainName);
+
+    cb(lastInfo);
+  };
+
+  const unsubscribeBalance = await polkadot.subscribeToBalance(
+    account,
+    handler,
+  );
+  const unsubscribeInfo = await polkadot.subscribeToAssetsBalanceInfo(
+    account,
+    configBuilder,
+    handler,
+  );
+
+  return () => {
+    unsubscribeBalance();
+    unsubscribeInfo();
   };
 }

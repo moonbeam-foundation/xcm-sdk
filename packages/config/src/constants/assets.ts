@@ -1,4 +1,4 @@
-export enum Asset {
+export enum AssetSymbol {
   ACA = 'ACA',
   ASTR = 'ASTR',
   AUSD = 'AUSD',

@@ -1,5 +1,5 @@
-import { Asset } from '../../constants';
-import { AssetConfig, ChainConfig, MoonChainConfig } from '../../interfaces';
+import { AssetSymbol, ChainKey } from '../../constants';
+import { Asset, Chain, MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,
@@ -13,21 +13,27 @@ import {
 } from './xTokens.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xTokens<Assets extends Asset = Asset>(chain: MoonChainConfig) {
+export function xTokens<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>(chain: MoonChain) {
   return {
-    transfer: () => transfer<Assets>(chain),
-    transferMultiAsset: () => transferMultiAsset<Assets>(chain),
-    transferMultiCurrencies: () => transferMultiCurrencies<Assets>(chain),
+    transfer: () => transfer<Symbols, ChainKeys>(chain),
+    transferMultiAsset: () => transferMultiAsset<Symbols, ChainKeys>(chain),
+    transferMultiCurrencies: () =>
+      transferMultiCurrencies<Symbols, ChainKeys>(chain),
   };
 }
 
-function transfer<Assets extends Asset = Asset>(chain: MoonChainConfig) {
+function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
+  chain: MoonChain,
+) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
-      origin: (origin: ChainConfig) => ({
+      origin: (origin: Chain<ChainKeys>) => ({
         asset: (
-          token: XTokensTransferExtrinsicParamsAsset<Assets>,
-        ): XTokensTransferExtrinsic<Assets> => ({
+          token: XTokensTransferExtrinsicParamsAsset<Symbols>,
+        ): XTokensTransferExtrinsic<Symbols> => ({
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.Transfer,
           successEvent: event,
@@ -60,15 +66,16 @@ function transfer<Assets extends Asset = Asset>(chain: MoonChainConfig) {
   };
 }
 
-function transferMultiAsset<Assets extends Asset = Asset>(
-  chain: MoonChainConfig,
-) {
+function transferMultiAsset<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>(chain: MoonChain) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
-      origin: (origin: ChainConfig) => ({
+      origin: (origin: Chain<ChainKeys>) => ({
         asset: (
-          asset: AssetConfig<Assets>,
-        ): XTokensTransferMultiAssetExtrinsic<Assets> => ({
+          asset: Asset<Symbols>,
+        ): XTokensTransferMultiAssetExtrinsic<Symbols> => ({
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiAsset,
           successEvent: event,
@@ -121,16 +128,17 @@ function transferMultiAsset<Assets extends Asset = Asset>(
   };
 }
 
-function transferMultiCurrencies<Assets extends Asset = Asset>(
-  chain: MoonChainConfig,
-) {
+function transferMultiCurrencies<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>(chain: MoonChain) {
   return {
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
-      origin: (origin: ChainConfig) => ({
+      origin: (origin: Chain<ChainKeys>) => ({
         assets: (
-          asset: AssetConfig<Assets>,
-          feeAsset: AssetConfig<Assets>,
-        ): XTokensTransferMultiCurrenciesExtrinsic<Assets> => ({
+          asset: Asset<Symbols>,
+          feeAsset: Asset<Symbols>,
+        ): XTokensTransferMultiCurrenciesExtrinsic<Symbols> => ({
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
           successEvent: event,

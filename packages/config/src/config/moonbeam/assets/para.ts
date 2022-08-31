@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
-const asset = assets[Asset.PARA];
-const origin = chains[Chain.Parallel];
+const asset = assets[AssetSymbol.PARA];
+const origin = chains[ChainKey.Parallel];
 
-export const PARA: MoonbeamXcmConfig = <const>{
+export const PARA: MoonbeamXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -28,7 +28,7 @@ export const PARA: MoonbeamXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 16,

@@ -1,25 +1,27 @@
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
-import { Asset } from '../constants';
+import { AssetSymbol } from '../constants';
 import {
   WithdrawXTokensConfig,
   WithdrawXTokensOptions,
 } from './withdraw.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function createWithdrawBuilder<Assets extends Asset = Asset>() {
+export function createWithdrawBuilder<
+  Symbols extends AssetSymbol = AssetSymbol,
+>() {
   return {
-    xTokens: (options: WithdrawXTokensOptions<Assets>) =>
-      xTokens<Assets>(options),
+    xTokens: (options: WithdrawXTokensOptions<Symbols>) =>
+      xTokens<Symbols>(options),
   };
 }
 
-function xTokens<Assets extends Asset = Asset>({
+function xTokens<Symbols extends AssetSymbol = AssetSymbol>({
   balance,
   destination,
   feePerWeight,
   weight = 4_000_000_000,
-}: WithdrawXTokensOptions<Assets>): WithdrawXTokensConfig<Assets> {
+}: WithdrawXTokensOptions<Symbols>): WithdrawXTokensConfig<Symbols> {
   return {
     balance,
     destination,

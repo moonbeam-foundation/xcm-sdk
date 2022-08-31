@@ -1,4 +1,4 @@
-import { Asset } from '../../constants';
+import { AssetSymbol } from '../../constants';
 import { MoonriverXcmConfigs } from './moonriver.interfaces';
 
 import { AUSD } from './assets/ausd';
@@ -19,22 +19,22 @@ import { SDN } from './assets/sdn';
 import { TEER } from './assets/teer';
 import { USDT } from './assets/usdt';
 
-export const MOONRIVER_CONFIGS: MoonriverXcmConfigs = <const>{
-  [Asset.AUSD]: AUSD,
-  [Asset.BNC]: BNC,
-  [Asset.CRAB]: CRAB,
-  [Asset.CSM]: CSM,
-  [Asset.HKO]: HKO,
-  [Asset.KAR]: KAR,
-  [Asset.KBTC]: KBTC,
-  [Asset.KINT]: KINT,
-  [Asset.KMA]: KMA,
-  [Asset.KSM]: KSM,
-  [Asset.LIT]: LIT,
-  [Asset.MOVR]: MOVR,
-  [Asset.PHA]: PHA,
-  [Asset.RMRK]: RMRK,
-  [Asset.SDN]: SDN,
-  [Asset.TEER]: TEER,
-  [Asset.USDT]: USDT,
+export const MOONRIVER_CONFIGS: MoonriverXcmConfigs = {
+  [AssetSymbol.AUSD]: AUSD,
+  [AssetSymbol.BNC]: BNC,
+  [AssetSymbol.CRAB]: CRAB,
+  [AssetSymbol.CSM]: CSM,
+  [AssetSymbol.HKO]: HKO,
+  [AssetSymbol.KAR]: KAR,
+  [AssetSymbol.KBTC]: KBTC,
+  [AssetSymbol.KINT]: KINT,
+  [AssetSymbol.KMA]: KMA,
+  [AssetSymbol.KSM]: KSM,
+  [AssetSymbol.LIT]: LIT,
+  [AssetSymbol.MOVR]: MOVR,
+  [AssetSymbol.PHA]: PHA,
+  [AssetSymbol.RMRK]: RMRK,
+  [AssetSymbol.SDN]: SDN,
+  [AssetSymbol.TEER]: TEER,
+  [AssetSymbol.USDT]: USDT,
 };

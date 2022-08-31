@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
-const asset = assets[Asset.CSM];
-const origin = chains[Chain.CrustShadow];
+const asset = assets[AssetSymbol.CSM];
+const origin = chains[ChainKey.CrustShadow];
 
-export const CSM: MoonriverXcmConfig = <const>{
+export const CSM: MoonriverXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -28,7 +28,7 @@ export const CSM: MoonriverXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 1,

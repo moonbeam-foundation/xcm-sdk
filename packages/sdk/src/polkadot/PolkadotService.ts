@@ -2,13 +2,13 @@ import '@moonbeam-network/api-augment';
 
 import {
   Asset,
-  AssetConfig,
+  AssetSymbol,
   BalanceConfig,
-  Chain,
-  ConfigGetter,
+  ChainKey,
   ExtrinsicConfig,
   MinBalanceConfig,
-  MoonChainConfig,
+  MoonChain,
+  XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
 import { SubmittableExtrinsic, UnsubscribePromise } from '@polkadot/api/types';
@@ -24,8 +24,8 @@ import { AssetBalanceInfo } from './polkadot.interfaces';
 import { calculateMin } from './polkadot.utils';
 
 export class PolkadotService<
-  Assets extends Asset = Asset,
-  Chains extends Chain = Chain,
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
 > {
   readonly #api: ApiPromise;
 
@@ -34,9 +34,9 @@ export class PolkadotService<
   }
 
   static async create<
-    Assets extends Asset = Asset,
-    Chains extends Chain = Chain,
-  >(ws: string): Promise<PolkadotService<Assets, Chains>> {
+    Symbols extends AssetSymbol = AssetSymbol,
+    ChainKeys extends ChainKey = ChainKey,
+  >(ws: string): Promise<PolkadotService<Symbols, ChainKeys>> {
     return new PolkadotService(await getPolkadotApi(ws));
   }
 
@@ -47,7 +47,7 @@ export class PolkadotService<
   getMetadata() {
     return {
       decimals: this.#api.registry.chainDecimals.at(0) || 12,
-      symbol: this.#api.registry.chainTokens.at(0) as Assets,
+      symbol: this.#api.registry.chainTokens.at(0) as Symbols,
     };
   }
 
@@ -62,8 +62,7 @@ export class PolkadotService<
   }
 
   async getAssetMeta(assetId: string): Promise<PalletAssetsAssetMetadata> {
-    // TODO: how to fix any?
-    return this.#api.query.assets.metadata(assetId) as any;
+    return this.#api.query.assets.metadata(assetId);
   }
 
   async subscribeToAccountInfo(
@@ -84,7 +83,7 @@ export class PolkadotService<
 
   async getGenericBalance(
     account: string,
-    { pallet, function: fn, getParams, path, calc }: BalanceConfig<Assets>,
+    { pallet, function: fn, getParams, path, calc }: BalanceConfig<Symbols>,
   ): Promise<bigint> {
     const response = await this.#api.query[pallet][fn](...getParams(account));
 
@@ -92,7 +91,6 @@ export class PolkadotService<
       return 0n;
     }
 
-    // TODO: improve types here and in balance interfaces
     const unwrapped = (response as any).unwrap?.() || response;
 
     return calc(path.length ? get(unwrapped, path) : unwrapped);
@@ -116,7 +114,7 @@ export class PolkadotService<
   getXcmExtrinsic(
     account: string,
     amount: bigint,
-    { pallet, extrinsic, getParams }: ExtrinsicConfig<Assets>,
+    { pallet, extrinsic, getParams }: ExtrinsicConfig<Symbols>,
     fee?: bigint,
     primaryAccount?: string,
   ): SubmittableExtrinsic<'promise'> {
@@ -160,39 +158,38 @@ export class PolkadotService<
 
   async subscribeToAssetsBalanceInfo(
     account: string,
-    configGetter: ConfigGetter<Assets, Chains>,
-    callback: (data: AssetBalanceInfo<Assets>[]) => void,
+    config: XcmConfigBuilder<Symbols, ChainKeys>,
+    callback: (data: AssetBalanceInfo<Symbols>[]) => void,
   ): UnsubscribePromise {
-    const assetsArray = Object.values<AssetConfig<Assets>>(configGetter.assets);
+    const assetsArray = Object.values<Asset<Symbols>>(config.assets);
     const ids: string[] = assetsArray.map((asset) => asset.id);
     const metadata: PalletAssetsAssetMetadata[] =
       (await this.#api.query.assets.metadata.multi(ids)) as any;
 
     return this.subscribeToAccountBalances(account, ids, (data) => {
       callback(
-        data.map((balance, index): AssetBalanceInfo<Assets> => {
+        data.map((balance, index): AssetBalanceInfo<Symbols> => {
           const asset = assetsArray[index];
           const meta = metadata[index];
           const {
             chains: [chain],
             from,
-          } = configGetter.deposit(asset.originSymbol);
-          // TODO: remove as
-          const { origin } = from(chain.chain as Chains);
+          } = config.deposit(asset.originSymbol);
+          const { origin } = from(chain.key);
 
           return {
             asset,
             balance: balance.balance.toBigInt(),
             meta: {
               decimals: asset.isNative
-                ? (origin as MoonChainConfig).decimals
+                ? (origin as MoonChain).decimals
                 : meta.decimals.toNumber(),
               symbol: asset.isNative
                 ? asset.originSymbol
                 : meta.symbol.toHuman()?.toString() || '',
               originSymbol: asset.isNative
                 ? asset.originSymbol
-                : (meta.name.toHuman()?.toString() as Assets),
+                : (meta.name.toHuman()?.toString() as Symbols),
             },
             origin,
           };

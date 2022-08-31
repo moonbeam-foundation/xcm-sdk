@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[Asset.ASTR];
-const origin = chains[Chain.AstarAlphanet];
+const asset = assets[AssetSymbol.ASTR];
+const origin = chains[ChainKey.AstarAlphanet];
 
-export const ASTR: MoonbaseXcmConfig = <const>{
+export const ASTR: MoonbaseXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -29,7 +29,7 @@ export const ASTR: MoonbaseXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 8_000_000,

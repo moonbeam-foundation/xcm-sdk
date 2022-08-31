@@ -1,4 +1,4 @@
-import { Asset, Chain } from '../../../constants';
+import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
 import {
   assets,
@@ -9,14 +9,14 @@ import {
 } from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
-const asset = assets[Asset.BNC];
-const origin = chains[Chain.Bifrost];
+const asset = assets[AssetSymbol.BNC];
+const origin = chains[ChainKey.Bifrost];
 
-export const BNC: MoonriverXcmConfig = <const>{
+export const BNC: MoonriverXcmConfig = {
   asset,
   origin,
   deposit: {
-    [origin.chain]: {
+    [origin.key]: {
       origin,
       balance: balance.system(),
       extrinsic: extrinsic
@@ -30,7 +30,7 @@ export const BNC: MoonriverXcmConfig = <const>{
     },
   },
   withdraw: {
-    [origin.chain]: withdraw.xTokens({
+    [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
       feePerWeight: 6.4,
