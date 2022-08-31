@@ -1,5 +1,6 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
+import { getOriginAssetId, getPalletInstance } from '../../config.utils';
 import {
   assets,
   balance,
@@ -9,28 +10,32 @@ import {
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[AssetSymbol.UNIT];
-const origin = chains[ChainKey.AlphanetRelay];
+const asset = assets[AssetSymbol.TT1];
+const origin = chains[ChainKey.StatemineAlphanet];
+const originAssetId = getOriginAssetId(asset);
 
-export const UNIT: MoonbaseXcmConfig = {
+export const TT1: MoonbaseXcmConfig = {
   asset,
   origin,
   deposit: {
     [origin.key]: {
       origin,
-      balance: balance.system(),
+      balance: balance.assets(originAssetId),
+      sourceMinBalance: balance.min(originAssetId),
       extrinsic: extrinsic
-        .xcmPallet()
+        .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin),
+        .origin(origin)
+        .V1()
+        .X2(getPalletInstance(origin), originAssetId),
     },
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.system(),
+      balance: balance.assets(originAssetId),
       destination: origin,
-      feePerWeight: 12.65,
+      feePerWeight: 1_265_000_000,
     }),
   },
 };

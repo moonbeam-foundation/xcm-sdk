@@ -11,6 +11,7 @@ import { KINT } from './assets/kint';
 import { LIT } from './assets/lit';
 import { PARING } from './assets/paring';
 import { TEER } from './assets/teer';
+import { TT1 } from './assets/tt1';
 import { UNIT } from './assets/unit';
 
 export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
@@ -24,5 +25,6 @@ export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
   [AssetSymbol.LIT]: LIT,
   [AssetSymbol.PARING]: PARING,
   [AssetSymbol.TEER]: TEER,
+  [AssetSymbol.TT1]: TT1,
   [AssetSymbol.UNIT]: UNIT,
 };
