@@ -18,7 +18,7 @@ export type PolkadotXcmPalletParams = [
    */
   {
     V1: {
-      parents: 1;
+      parents: Parents;
       interior: {
         X1: {
           Parachain: number;
