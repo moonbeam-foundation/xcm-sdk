@@ -8,19 +8,19 @@ import {
   MoonChain,
   PolkadotXcmExtrinsicSuccessEvent,
 } from '@moonbeam-network/xcm-config';
+import { Signer as PolkadotSigner } from '@polkadot/api/types';
 import { ISubmittableResult } from '@polkadot/types/types';
 import { isUndefined } from '@polkadot/util';
 import { PolkadotService } from '../polkadot';
 import {
   DepositTransferData,
-  ExtrinsicEvent,
+  ExtrinsicEventsCallback,
   ExtrinsicStatus,
-  SdkOptions,
 } from './sdk.interfaces';
 
 export function createExtrinsicEventHandler<Symbols extends AssetSymbol>(
   config: DepositConfig<Symbols>,
-  cb: (event: ExtrinsicEvent) => void,
+  cb: ExtrinsicEventsCallback,
 ) {
   return ({ events = [], status, txHash }: ISubmittableResult) => {
     const hash = txHash.toHex();
@@ -120,9 +120,9 @@ export interface GetDepositDataParams<
   foreignPolkadot: PolkadotService<Symbols, ChainKeys>;
   moonChain: MoonChain;
   nativeAsset: Asset<Symbols>;
-  options: SdkOptions;
   origin: MoonChain | Chain<ChainKeys>;
   polkadot: PolkadotService<Symbols, ChainKeys>;
+  polkadotSigner: PolkadotSigner;
   primaryAccount?: string;
   sourceAccount: string;
 }
@@ -137,9 +137,9 @@ export async function getDepositData<
   foreignPolkadot,
   moonChain,
   nativeAsset,
-  options,
   origin,
   polkadot,
+  polkadotSigner,
   primaryAccount,
   sourceAccount,
 }: GetDepositDataParams<Symbols, ChainKeys>): Promise<
@@ -207,13 +207,13 @@ export async function getDepositData<
     },
     send: async (
       amount: bigint,
-      cb?: (event: ExtrinsicEvent) => void,
+      cb?: ExtrinsicEventsCallback,
     ): Promise<string> => {
       const extrinsic = await createExtrinsic(amount);
       const hash = await extrinsic.signAndSend(
         sourceAccount,
         {
-          signer: options.polkadotSigner,
+          signer: polkadotSigner,
         },
         cb && createExtrinsicEventHandler(config, cb),
       );

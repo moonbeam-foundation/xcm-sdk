@@ -20,6 +20,7 @@ import { getDepositData } from './sdk.deposit';
 import {
   DepositTransferData,
   SdkOptions,
+  WithdrawGetParams,
   WithdrawTransferData,
   XcmSdk,
   XcmSdkByChain,
@@ -29,7 +30,7 @@ import {
 import { subscribeToAssetsBalanceInfo } from './sdk.utils';
 import { getWithdrawData } from './sdk.withdraw';
 
-export function init(options: SdkOptions): XcmSdkByChain {
+export function init(options?: SdkOptions): XcmSdkByChain {
   return {
     moonbase: initByChain<MoonbaseAssets, MoonbaseChains>(moonbase, options),
     moonbeam: initByChain<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
@@ -42,7 +43,7 @@ export function init(options: SdkOptions): XcmSdkByChain {
 
 function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
   configBuilder: XcmConfigBuilder<Symbols, ChainKeys>,
-  options: SdkOptions,
+  options?: SdkOptions,
 ): XcmSdk<Symbols, ChainKeys> {
   const { moonAsset, moonChain } = configBuilder;
 
@@ -76,8 +77,14 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
             get: async (
               account: string,
               sourceAccount: string,
-              primaryAccount?: string,
+              { primaryAccount, polkadotSigner } = {},
             ): Promise<DepositTransferData<Symbols>> => {
+              const signer = polkadotSigner || options?.polkadotSigner;
+
+              if (!signer) {
+                throw new Error('Polkadot signer is not provided to XCM-SDK');
+              }
+
               const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,
                 ChainKeys
@@ -92,9 +99,9 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 foreignPolkadot,
                 moonChain,
                 nativeAsset,
-                options,
                 origin,
                 polkadot,
+                polkadotSigner: signer,
                 primaryAccount,
                 sourceAccount,
               });
@@ -114,10 +121,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           return {
             get: async (
               destinationAccount: string,
+              { ethersSigner }: WithdrawGetParams = {},
             ): Promise<WithdrawTransferData<Symbols>> => {
-              const contract = new XTokensContract<Symbols>(
-                options.ethersSigner,
-              );
+              const signer = ethersSigner || options?.ethersSigner;
+
+              if (!signer) {
+                throw new Error('Ethers signer is not provided to XCM-SDK');
+              }
+
+              const contract = new XTokensContract<Symbols>(signer);
               const [polkadot, destinationPolkadot] =
                 await createPolkadotServices<Symbols, ChainKeys>([
                   configBuilder.moonChain.ws,
@@ -132,9 +144,9 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 contract,
                 destinationAccount,
                 destinationPolkadot,
+                ethersSigner: signer,
                 moonChain,
                 nativeAsset,
-                options,
                 origin,
                 polkadot,
               });
