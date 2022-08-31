@@ -27,6 +27,7 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
           event,
           chain,
           origin,
+          0,
         );
 
         return {

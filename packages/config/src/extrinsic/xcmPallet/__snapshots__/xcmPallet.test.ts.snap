@@ -18,7 +18,7 @@ Array [
           "Parachain": 1000,
         },
       },
-      "parents": 1,
+      "parents": 0,
     },
   },
   Object {
