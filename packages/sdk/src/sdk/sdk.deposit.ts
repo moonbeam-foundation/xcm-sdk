@@ -182,15 +182,8 @@ export async function getDepositData<
     config.sourceMinBalance
       ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
       : undefined,
-    // eslint-disable-next-line no-nested-ternary
-    config.sourceFeeBalance
-      ? 0n
-      : asset.isNative
-      ? PolkadotService.getChainMin(
-          config.origin.weight,
-          moonChain.unitsPerSecond,
-        )
-      : polkadot.getAssetFee(asset.id, config.origin.weight),
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    getMin({ asset, config, moonChain, polkadot }),
   ]);
 
   return {
@@ -228,4 +221,35 @@ export async function getDepositData<
       return hash.toString();
     },
   };
+}
+
+export interface GetMinParams<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+> {
+  asset: Asset<Symbols>;
+  config: DepositConfig<Symbols>;
+  moonChain: MoonChain;
+  polkadot: PolkadotService<Symbols, ChainKeys>;
+}
+
+export async function getMin<
+  Symbols extends AssetSymbol,
+  ChainKeys extends ChainKey,
+>({
+  asset,
+  config,
+  moonChain,
+  polkadot,
+}: GetMinParams<Symbols, ChainKeys>): Promise<bigint> {
+  if (config.sourceFeeBalance && config.isNativeAssetPayingMoonFee) {
+    return 0n;
+  }
+
+  return asset.isNative
+    ? PolkadotService.getChainMin(
+        config.origin.weight,
+        moonChain.unitsPerSecond,
+      )
+    : polkadot.getAssetFee(asset.id, config.origin.weight);
 }
