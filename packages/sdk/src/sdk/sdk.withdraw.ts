@@ -95,8 +95,14 @@ export async function getWithdrawData<
     destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
     destinationPolkadot.getExistentialDeposit(),
   ]);
-  const destinationFee = BigInt(config.weight * config.feePerWeight);
-  const min = destinationFee + existentialDeposit;
+
+  const assetMinBalance = config.sourceMinBalance
+    ? await destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
+    : 0n;
+  const calculatedFee = BigInt(config.weight * config.feePerWeight);
+  const destinationFee =
+    assetMinBalance > calculatedFee ? assetMinBalance : calculatedFee;
+  const min = destinationFee + (assetMinBalance || existentialDeposit);
 
   return {
     asset: { ...asset, decimals },

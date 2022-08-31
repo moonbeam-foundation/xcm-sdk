@@ -34,6 +34,7 @@ export const TT1: MoonbaseXcmConfig = {
   withdraw: {
     [origin.key]: withdraw.xTokens({
       balance: balance.assets(originAssetId),
+      sourceMinBalance: balance.min(originAssetId),
       destination: origin,
       feePerWeight: 1_265_000_000,
     }),

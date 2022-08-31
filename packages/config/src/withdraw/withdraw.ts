@@ -20,12 +20,14 @@ function xTokens<Symbols extends AssetSymbol = AssetSymbol>({
   balance,
   destination,
   feePerWeight,
+  sourceMinBalance,
   weight = 4_000_000_000,
 }: WithdrawXTokensOptions<Symbols>): WithdrawXTokensConfig<Symbols> {
   return {
     balance,
     destination,
     feePerWeight,
+    sourceMinBalance,
     weight,
     getParams: (account: string) => {
       const { parachainId } = destination;
