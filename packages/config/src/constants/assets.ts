@@ -28,6 +28,7 @@ export enum AssetSymbol {
   RMRK = 'RMRK',
   SDN = 'SDN',
   TEER = 'TEER',
+  TT1 = 'TT1',
   UNIT = 'UNIT',
   USDT = 'USDT',
 }
