@@ -102,17 +102,21 @@ export interface PolkadotXcmAssetParamV1InteriorX1 {
 }
 
 export interface PolkadotXcmAssetParamV1InteriorX2 {
-  X2: [
-    {
-      PalletInstance: number;
-    },
-    (
-      | {
+  X2:
+    | [
+        {
+          PalletInstance: number;
+        },
+        {
           GeneralIndex: number;
-        }
-      | {
+        },
+      ]
+    | [
+        {
           Parachain: number;
-        }
-    ),
-  ];
+        },
+        {
+          PalletInstance: number;
+        },
+      ];
 }

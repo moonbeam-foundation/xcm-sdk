@@ -36,14 +36,14 @@ export const MOONRIVER_CHAINS_CONFIGS: ChainsConfigs<MoonriverChains> = {
   },
   [ChainKey.CrustShadow]: {
     key: ChainKey.CrustShadow,
-    name: 'CrustShadow',
+    name: 'Crust Shadow',
     ws: 'wss://rpc2-shadow.crust.network',
     weight: 1_000_000_000,
     parachainId: 2012,
   },
   [ChainKey.Darwinia]: {
     key: ChainKey.Darwinia,
-    name: 'Darwinia',
+    name: 'Darwinia Crab',
     ws: 'wss://crab-parachain-rpc.darwinia.network',
     weight: 1_000_000_000,
     parachainId: 2105,
@@ -95,7 +95,7 @@ export const MOONRIVER_CHAINS_CONFIGS: ChainsConfigs<MoonriverChains> = {
   },
   [ChainKey.Parallel]: {
     key: ChainKey.Parallel,
-    name: 'Parallel',
+    name: 'Parallel Heiko',
     ws: 'wss://heiko-rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2085,
