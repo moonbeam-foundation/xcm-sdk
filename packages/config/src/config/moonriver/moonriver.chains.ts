@@ -36,7 +36,7 @@ export const MOONRIVER_CHAINS_CONFIGS: ChainsConfigs<MoonriverChains> = {
   },
   [ChainKey.CrustShadow]: {
     key: ChainKey.CrustShadow,
-    name: 'CrustShadow',
+    name: 'Crust Shadow',
     ws: 'wss://rpc2-shadow.crust.network',
     weight: 1_000_000_000,
     parachainId: 2012,
