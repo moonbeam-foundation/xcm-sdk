@@ -95,7 +95,7 @@ export const MOONRIVER_CHAINS_CONFIGS: ChainsConfigs<MoonriverChains> = {
   },
   [ChainKey.Parallel]: {
     key: ChainKey.Parallel,
-    name: 'Parallel',
+    name: 'Parallel Heiko',
     ws: 'wss://heiko-rpc.parallel.fi',
     weight: 1_000_000_000,
     parachainId: 2085,

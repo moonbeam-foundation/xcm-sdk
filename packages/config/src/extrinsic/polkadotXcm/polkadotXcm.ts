@@ -135,10 +135,10 @@ function limitedReserveWithdrawAssets<ChainKeys extends ChainKey>(
                         interior: {
                           X2: [
                             {
-                              PalletInstance: palletInstance,
+                              Parachain: chain.parachainId,
                             },
                             {
-                              Parachain: chain.parachainId,
+                              PalletInstance: palletInstance,
                             },
                           ],
                         },
