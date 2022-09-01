@@ -25,7 +25,7 @@ export const SDN: MoonriverXcmConfig = {
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(origin)
         .V1()
-        .X1(),
+        .here(),
     },
   },
   withdraw: {
