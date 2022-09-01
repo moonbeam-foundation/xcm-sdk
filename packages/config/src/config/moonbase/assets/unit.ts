@@ -30,7 +30,7 @@ export const UNIT: MoonbaseXcmConfig = {
     [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      feePerWeight: 13.77,
+      feePerWeight: 12.65,
     }),
   },
 };

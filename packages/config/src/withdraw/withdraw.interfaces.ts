@@ -1,4 +1,4 @@
-import { BalanceConfig } from '../balance';
+import { BalanceConfig, MinBalanceConfig } from '../balance';
 import { AssetSymbol, ChainKey } from '../constants';
 import { Chain } from '../interfaces';
 
@@ -12,6 +12,7 @@ export interface WithdrawXTokensConfig<
   balance: BalanceConfig<Symbols>;
   destination: Chain<ChainKeys>;
   feePerWeight: number;
+  sourceMinBalance?: MinBalanceConfig;
   weight: number;
   getParams: (account: string) => WithdrawXTokensParams;
 }
@@ -56,5 +57,6 @@ export interface WithdrawXTokensOptions<
   balance: BalanceConfig<Symbols>;
   destination: Chain<ChainKeys>;
   feePerWeight: number;
+  sourceMinBalance?: MinBalanceConfig;
   weight?: number;
 }

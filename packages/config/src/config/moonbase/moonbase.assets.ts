@@ -14,6 +14,7 @@ export const MOONBASE_ASSETS = <const>[
   AssetSymbol.LIT,
   AssetSymbol.PARING,
   AssetSymbol.TEER,
+  AssetSymbol.TT1,
   AssetSymbol.UNIT,
 ];
 
@@ -74,5 +75,11 @@ export const MOONBASE_ASSETS_CONFIGS: AssetsConfigs<MoonbaseAssets> = {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
     originSymbol: AssetSymbol.UNIT,
+  },
+  [AssetSymbol.TT1]: {
+    id: '156305701417244550631956600137082963628',
+    erc20Id: '0xffffffff75976211c786fe4d73d2477e222786ac',
+    originSymbol: AssetSymbol.TT1,
+    originAssetId: 2,
   },
 };
