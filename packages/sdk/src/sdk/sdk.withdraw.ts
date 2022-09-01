@@ -89,15 +89,16 @@ export async function getWithdrawData<
   WithdrawTransferData<Symbols>
 > {
   const meta = destinationPolkadot.getMetadata();
-  const [decimals, destinationBalance, existentialDeposit] = await Promise.all([
-    asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset.id),
-    destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
-    destinationPolkadot.getExistentialDeposit(),
-  ]);
+  const [decimals, destinationBalance, existentialDeposit, assetMinBalance] =
+    await Promise.all([
+      asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset.id),
+      destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
+      destinationPolkadot.getExistentialDeposit(),
+      config.sourceMinBalance
+        ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
+        : 0n,
+    ]);
 
-  const assetMinBalance = config.sourceMinBalance
-    ? await destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
-    : 0n;
   const calculatedFee = BigInt(config.weight * config.feePerWeight);
   const destinationFee =
     assetMinBalance > calculatedFee ? assetMinBalance : calculatedFee;
