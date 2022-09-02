@@ -1,7 +1,13 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
 import { getOriginAssetId, getPalletInstance } from '../../config.utils';
-import { assets, balance, chains, extrinsic } from '../moonriver.common';
+import {
+  assets,
+  balance,
+  chains,
+  extrinsic,
+  withdraw,
+} from '../moonriver.common';
 import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
 const asset = assets[AssetSymbol.RMRK];
@@ -27,5 +33,12 @@ export const RMRK: MoonriverXcmConfig = {
         .X2(palletInstance, originAssetId),
     },
   },
-  withdraw: {},
+  withdraw: {
+    [origin.key]: withdraw.xTokens({
+      balance: balance.assets(originAssetId),
+      sourceMinBalance: balance.min(originAssetId),
+      destination: origin,
+      feePerWeight: 0.000126,
+    }),
+  },
 };
