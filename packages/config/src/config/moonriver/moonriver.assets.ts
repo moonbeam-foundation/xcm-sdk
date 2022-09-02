@@ -1,5 +1,5 @@
 import { AssetSymbol } from '../../constants';
-import { AssetsConfigs } from '../config.interfaces';
+import { AssetsMap } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonriverAssets } from './moonriver.interfaces';
 
@@ -23,7 +23,7 @@ export const MOONRIVER_ASSETS = <const>[
   AssetSymbol.USDT,
 ];
 
-export const MOONRIVER_ASSETS_CONFIGS: AssetsConfigs<MoonriverAssets> = {
+export const MOONRIVER_ASSETS_CONFIGS: AssetsMap<MoonriverAssets> = {
   [AssetSymbol.AUSD]: {
     id: '214920334981412447805621250067209749032',
     erc20Id: '0xffffffffa1b026a00fbaa67c86d5d1d5bf8d8228',

@@ -1,5 +1,5 @@
 import { AssetSymbol } from '../../constants';
-import { AssetsConfigs } from '../config.interfaces';
+import { AssetsMap } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbaseAssets } from './moonbase.interfaces';
 
@@ -18,7 +18,7 @@ export const MOONBASE_ASSETS = <const>[
   AssetSymbol.UNIT,
 ];
 
-export const MOONBASE_ASSETS_CONFIGS: AssetsConfigs<MoonbaseAssets> = {
+export const MOONBASE_ASSETS_CONFIGS: AssetsMap<MoonbaseAssets> = {
   [AssetSymbol.ASTR]: {
     id: '16797826370226091782818345603793389938',
     erc20Id: '0xffffffff0ca324c842330521525e7de111f38972',

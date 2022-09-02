@@ -3,8 +3,10 @@ import { ApiPromise, WsProvider } from '@polkadot/api';
 
 const dot = AssetSymbol.DOT;
 const polkadot = ChainKey.Polkadot;
-
-const account = '5DnP2NuCTxfW4E9rJvzbt895sEsYRD7HC9QEgcqmNt7VWkD4';
+/**
+ * Add your polkadot address
+ */
+const account = '';
 
 /**
  * Example 1
@@ -19,11 +21,10 @@ async function example1() {
 
   await api.isReady;
 
-  const balance = await api.query[config.balance.pallet][
-    config.balance.function
-  ](...config.balance.getParams(account));
+  const { pallet, function: fn, getParams } = config.balance;
+  const balance = await api.query[pallet][fn](...getParams(account));
 
-  console.log(`Your balance`);
+  console.log(`Your ${asset.originSymbol} balance in ${origin.name} is`);
   console.log(balance.toHuman());
 
   api.disconnect();
@@ -34,14 +35,50 @@ async function example1() {
  */
 
 async function example2() {
-  // const asset: MoonbeamAssets = moonbeam.assets.ACA.originSymbol;
-  // const { chains, from } = moonbeam.deposit(asset);
-  // const chain: Chain<MoonbeamChains> = chains[0]!;
-  // const chainKey: MoonbeamChains = chain.key;
-  // const config = from(chainKey);
-  // console.log(config);
+  console.log(`You can deposit/withdraw these assets: ${moonbeam.symbols}\n`);
+
+  for (const symbol of moonbeam.symbols) {
+    const { chains: depositChains, from } = moonbeam.deposit(symbol);
+    const { chains: withdrawChains, to } = moonbeam.withdraw(symbol);
+
+    /**
+     * Deposit
+     */
+    console.log(
+      `Deposit ${symbol} from ${depositChains.map((chain) => chain.name)}`,
+    );
+    depositChains.forEach((chain) => {
+      const {
+        config: { balance, extrinsic },
+      } = from(chain.key);
+      console.log(
+        `Balance pallet: ${balance.pallet} function: ${balance.function}`,
+      );
+      console.log(
+        `Extrinsic pallet: ${extrinsic.pallet} extrinsic: ${extrinsic.extrinsic}\n`,
+      );
+    });
+
+    /**
+     * Withdraw
+     */
+    console.log(
+      `Withdraw ${symbol} to ${withdrawChains.map((chain) => chain.name)}`,
+    );
+    withdrawChains.forEach((chain) => {
+      const {
+        config: { balance },
+      } = to(chain.key);
+      console.log(
+        `Balance pallet: ${balance.pallet}d function: ${balance.function}`,
+      );
+    });
+
+    console.log('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n');
+  }
 }
 
+console.log('████████████████████▓▓▒▒░ Example 1 ░▒▒▓▓████████████████████');
 example1()
   .then(() =>
     console.log(

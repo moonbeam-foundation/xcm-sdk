@@ -1,5 +1,5 @@
 import { ChainKey } from '../../constants';
-import { ChainsConfigs } from '../config.interfaces';
+import { ChainsMap } from '../config.interfaces';
 // eslint-disable-next-line import/no-cycle
 import { MoonbaseChains } from './moonbase.interfaces';
 
@@ -16,7 +16,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.StatemineAlphanet,
 ];
 
-export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
+export const MOONBASE_CHAINS_CONFIGS: ChainsMap<MoonbaseChains> = {
   [ChainKey.AlphanetRelay]: {
     key: ChainKey.AlphanetRelay,
     name: 'Alphanet Relay',

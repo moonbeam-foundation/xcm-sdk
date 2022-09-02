@@ -1,8 +1,8 @@
 import { AssetSymbol, ChainKey, MoonChainKey, MOON_CHAINS } from '../constants';
 import { Asset, MoonChain } from '../interfaces';
 import {
-  AssetsConfigs,
-  ChainsConfigs,
+  AssetsMap,
+  ChainsMap,
   ChainXcmConfigs,
   XcmConfigBuilder,
 } from './config.interfaces';
@@ -32,13 +32,14 @@ export function createConfig<
   Symbols extends AssetSymbol,
   ChainKeys extends ChainKey,
 >(
-  assets: AssetsConfigs<Symbols>,
+  assets: AssetsMap<Symbols>,
   moonAsset: Asset<Symbols>,
   moonChain: MoonChain,
-  chains: ChainsConfigs<ChainKeys>,
+  chains: ChainsMap<ChainKeys>,
   configs: ChainXcmConfigs<Symbols, ChainKeys>,
 ): XcmConfigBuilder<Symbols, ChainKeys> {
   return {
+    symbols: Object.keys(assets) as Symbols[],
     assets,
     moonAsset,
     moonChain,
