@@ -66,12 +66,24 @@ export interface XcmSdkDepositFrom<Symbols extends AssetSymbol = AssetSymbol> {
   get: (
     account: string,
     sourceAccount: string,
-    primaryAccount?: string,
+    params?: DepositGetParams,
   ) => Promise<DepositTransferData<Symbols>>;
 }
 
+export interface DepositGetParams {
+  polkadotSigner?: PolkadotSigner;
+  primaryAccount?: string;
+}
+
 export interface XcmSdkWithdrawTo<Symbols extends AssetSymbol = AssetSymbol> {
-  get: (account: string) => Promise<WithdrawTransferData<Symbols>>;
+  get: (
+    account: string,
+    params?: WithdrawGetParams,
+  ) => Promise<WithdrawTransferData<Symbols>>;
+}
+
+export interface WithdrawGetParams {
+  ethersSigner?: EthersSigner;
 }
 
 export interface DepositTransferData<
@@ -89,7 +101,7 @@ export interface DepositTransferData<
   sourceFeeBalance?: FeeBalance<Symbols>;
   sourceMinBalance: bigint;
   getFee: (amount?: bigint) => Promise<bigint>;
-  send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
+  send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }
 
 export interface WithdrawTransferData<
@@ -105,8 +117,10 @@ export interface WithdrawTransferData<
   native: AssetConfigWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   getFee: (amount: bigint) => Promise<bigint>;
-  send: (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => Promise<Hash>;
+  send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }
+
+export type ExtrinsicEventsCallback = (event: ExtrinsicEvent) => void;
 
 export interface AssetConfigWithDecimals<
   Symbols extends AssetSymbol = AssetSymbol,
@@ -121,8 +135,8 @@ export interface FeeBalance<Symbols extends AssetSymbol = AssetSymbol> {
 }
 
 export interface SdkOptions {
-  ethersSigner: EthersSigner;
-  polkadotSigner: PolkadotSigner;
+  ethersSigner?: EthersSigner;
+  polkadotSigner?: PolkadotSigner;
 }
 
 export type ExtrinsicEvent =

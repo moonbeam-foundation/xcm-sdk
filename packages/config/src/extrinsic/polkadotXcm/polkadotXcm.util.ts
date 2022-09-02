@@ -1,5 +1,6 @@
 import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
+import { Parents } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   PolkadotXcmExtrinsic,
@@ -15,6 +16,7 @@ export function getCreateExtrinsic<ChainKeys extends ChainKey>(
   event: PolkadotXcmExtrinsicSuccessEvent,
   config: MoonChain,
   origin: Chain<ChainKeys>,
+  parents: Parents = 1,
 ) {
   return (
     getAsset: (amount: bigint) => PolkadotXcmAssetParam,
@@ -25,7 +27,7 @@ export function getCreateExtrinsic<ChainKeys extends ChainKey>(
     getParams: (account, amount) => [
       {
         V1: {
-          parents: 1,
+          parents,
           interior: {
             X1: {
               Parachain: config.parachainId,

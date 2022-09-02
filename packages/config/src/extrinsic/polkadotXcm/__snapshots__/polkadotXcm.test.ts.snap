@@ -277,10 +277,10 @@ Array [
             "interior": Object {
               "X2": Array [
                 Object {
-                  "PalletInstance": 10,
+                  "Parachain": 1000,
                 },
                 Object {
-                  "Parachain": 1000,
+                  "PalletInstance": 10,
                 },
               ],
             },

@@ -17,6 +17,8 @@ export const LIT: MoonriverXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
+      origin,
+      balance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()

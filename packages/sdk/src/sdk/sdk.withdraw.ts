@@ -10,17 +10,16 @@ import { Signer as EthersSigner } from 'ethers';
 import { XTokensContract } from '../contracts';
 import { PolkadotService } from '../polkadot';
 import {
-  ExtrinsicEvent,
+  ExtrinsicEventsCallback,
   ExtrinsicStatus,
   Hash,
-  SdkOptions,
   WithdrawTransferData,
 } from './sdk.interfaces';
 
 export async function createTransactionEventHandler(
   ethersSigner: EthersSigner,
   txHash: Hash,
-  cb: (event: ExtrinsicEvent) => void,
+  cb: ExtrinsicEventsCallback,
   skipSentEvent = false,
 ) {
   if (!ethersSigner.provider) {
@@ -65,9 +64,9 @@ export interface GetWithdrawDataParams<
   contract: XTokensContract;
   destinationAccount: string;
   destinationPolkadot: PolkadotService<Symbols, ChainKeys>;
+  ethersSigner: EthersSigner;
   moonChain: MoonChain;
   nativeAsset: Asset<Symbols>;
-  options: SdkOptions;
   origin: MoonChain | Chain<ChainKeys>;
   polkadot: PolkadotService<Symbols, ChainKeys>;
 }
@@ -81,22 +80,29 @@ export async function getWithdrawData<
   contract,
   destinationAccount,
   destinationPolkadot,
+  ethersSigner,
   moonChain,
   nativeAsset,
-  options,
   origin,
   polkadot,
 }: GetWithdrawDataParams<Symbols, ChainKeys>): Promise<
   WithdrawTransferData<Symbols>
 > {
   const meta = destinationPolkadot.getMetadata();
-  const [decimals, destinationBalance, existentialDeposit] = await Promise.all([
-    asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset.id),
-    destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
-    destinationPolkadot.getExistentialDeposit(),
-  ]);
-  const destinationFee = BigInt(config.weight * config.feePerWeight);
-  const min = destinationFee + existentialDeposit;
+  const [decimals, destinationBalance, existentialDeposit, assetMinBalance] =
+    await Promise.all([
+      asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset.id),
+      destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
+      destinationPolkadot.getExistentialDeposit(),
+      config.sourceMinBalance
+        ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
+        : 0n,
+    ]);
+
+  const calculatedFee = BigInt(config.weight * config.feePerWeight);
+  const destinationFee =
+    assetMinBalance > calculatedFee ? assetMinBalance : calculatedFee;
+  const min = destinationFee + (assetMinBalance || existentialDeposit);
 
   return {
     asset: { ...asset, decimals },
@@ -109,7 +115,7 @@ export async function getWithdrawData<
     origin,
     getFee: async (amount) =>
       contract.getTransferFees(destinationAccount, amount, asset, config),
-    send: async (amount: bigint, cb?: (event: ExtrinsicEvent) => void) => {
+    send: async (amount: bigint, cb?: ExtrinsicEventsCallback) => {
       const tx = await contract.transfer(
         destinationAccount,
         amount,
@@ -118,7 +124,7 @@ export async function getWithdrawData<
       );
 
       if (cb) {
-        createTransactionEventHandler(options.ethersSigner, tx.hash, cb);
+        createTransactionEventHandler(ethersSigner, tx.hash, cb);
       }
 
       return tx.hash;

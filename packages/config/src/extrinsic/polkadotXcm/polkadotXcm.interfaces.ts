@@ -18,7 +18,7 @@ export type PolkadotXcmPalletParams = [
    */
   {
     V1: {
-      parents: 1;
+      parents: Parents;
       interior: {
         X1: {
           Parachain: number;
@@ -102,17 +102,21 @@ export interface PolkadotXcmAssetParamV1InteriorX1 {
 }
 
 export interface PolkadotXcmAssetParamV1InteriorX2 {
-  X2: [
-    {
-      PalletInstance: number;
-    },
-    (
-      | {
+  X2:
+    | [
+        {
+          PalletInstance: number;
+        },
+        {
           GeneralIndex: number;
-        }
-      | {
+        },
+      ]
+    | [
+        {
           Parachain: number;
-        }
-    ),
-  ];
+        },
+        {
+          PalletInstance: number;
+        },
+      ];
 }

@@ -13,6 +13,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.IntegriteeAlphanet,
   ChainKey.InterBTCAlphanet,
   ChainKey.LitentryAlphanet,
+  ChainKey.StatemineAlphanet,
 ];
 
 export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
@@ -83,5 +84,13 @@ export const MOONBASE_CHAINS_CONFIGS: ChainsConfigs<MoonbaseChains> = {
     ws: 'wss://moonbase-parachain-sg-0.litentry.io',
     weight: 1_000_000_000,
     parachainId: 2106,
+  },
+  [ChainKey.StatemineAlphanet]: {
+    key: ChainKey.StatemineAlphanet,
+    name: 'Statemine Alphanet',
+    ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
+    weight: 1_000_000_000,
+    parachainId: 1001,
+    palletInstance: 50,
   },
 };

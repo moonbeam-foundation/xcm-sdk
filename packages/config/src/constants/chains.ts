@@ -61,4 +61,5 @@ export enum ChainKey {
   Polkadot = 'Polkadot',
   Shiden = 'Shiden',
   Statemine = 'Statemine',
+  StatemineAlphanet = 'StatemineAlphanet',
 }
