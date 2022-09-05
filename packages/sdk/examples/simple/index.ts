@@ -55,7 +55,8 @@ async function deposit() {
     )}. Minimum transferable amount is: ${toDecimal(min, asset.decimals)}`,
   );
 
-  await send(min, (event) => console.log(event));
+  // sending enough to withdraw later
+  await send(600000000n, (event) => console.log(event));
 }
 
 async function withdraw() {
@@ -66,7 +67,7 @@ async function withdraw() {
     chains.map((chain) => chain.name),
   );
 
-  const { asset, destination, destinationBalance, min } = await to(
+  const { asset, destination, destinationBalance, min, send } = await to(
     polkadot,
   ).get(polkadotAddress, {
     ethersSigner: signer,
@@ -78,6 +79,8 @@ async function withdraw() {
       asset.decimals,
     )}. Minimum transferable amount is: ${toDecimal(min, asset.decimals)}`,
   );
+
+  await send(min, (event) => console.log(event));
 }
 
 async function main() {
