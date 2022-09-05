@@ -36,6 +36,7 @@ export const MOON_CHAINS: Record<MoonChainKey, MoonChain> = {
 export enum ChainKey {
   Acala = 'Acala',
   AlphanetRelay = 'AlphanetRelay',
+  Astar = 'Astar',
   AstarAlphanet = 'AstarAlphanet',
   BasiliskAlphanet = 'BasiliskAlphanet',
   Bifrost = 'Bifrost',

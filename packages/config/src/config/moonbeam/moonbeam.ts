@@ -2,6 +2,7 @@ import { AssetSymbol } from '../../constants';
 import { MoonbeamXcmConfigs } from './moonbeam.interfaces';
 
 import { ACA } from './assets/aca';
+import { ASTR } from './assets/astr';
 import { AUSD } from './assets/ausd';
 import { DOT } from './assets/dot';
 import { GLMR } from './assets/glmr';
@@ -12,6 +13,7 @@ import { PHA } from './assets/pha';
 
 export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = {
   [AssetSymbol.ACA]: ACA,
+  [AssetSymbol.ASTR]: ASTR,
   [AssetSymbol.AUSD]: AUSD,
   [AssetSymbol.DOT]: DOT,
   [AssetSymbol.GLMR]: GLMR,
