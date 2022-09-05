@@ -1,7 +1,5 @@
 import { ChainXcmConfigs, XcmConfig } from '../config.interfaces';
-// eslint-disable-next-line import/no-cycle
 import { MOONBEAM_ASSETS } from './moonbeam.assets';
-// eslint-disable-next-line import/no-cycle
 import { MOONBEAM_CHAINS } from './moonbeam.chains';
 
 export type MoonbeamAssets = typeof MOONBEAM_ASSETS[number];

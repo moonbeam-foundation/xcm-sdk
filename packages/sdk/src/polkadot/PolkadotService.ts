@@ -179,17 +179,14 @@ export class PolkadotService<
 
           return {
             asset,
-            balance: balance.balance.toBigInt(),
-            meta: {
+            balance: {
+              balance: balance.balance.toBigInt(),
               decimals: asset.isNative
                 ? (origin as MoonChain).decimals
                 : meta.decimals.toNumber(),
               symbol: asset.isNative
                 ? asset.originSymbol
                 : meta.symbol.toHuman()?.toString() || '',
-              originSymbol: asset.isNative
-                ? asset.originSymbol
-                : (meta.name.toHuman()?.toString() as Symbols),
             },
             origin,
           };

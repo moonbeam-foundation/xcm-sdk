@@ -9,22 +9,22 @@ import {
 import {
   MoonbaseAssets,
   MoonbaseChains,
-  MOONBASE_ASSETS_CONFIGS,
-  MOONBASE_CHAINS_CONFIGS,
+  MOONBASE_ASSETS_MAP,
+  MOONBASE_CHAINS_MAP,
   MOONBASE_CONFIGS,
 } from './moonbase';
 import {
   MoonbeamAssets,
   MoonbeamChains,
-  MOONBEAM_ASSETS_CONFIGS,
-  MOONBEAM_CHAINS_CONFIGS,
+  MOONBEAM_ASSETS_MAP,
+  MOONBEAM_CHAINS_MAP,
   MOONBEAM_CONFIGS,
 } from './moonbeam';
 import {
   MoonriverAssets,
   MoonriverChains,
-  MOONRIVER_ASSETS_CONFIGS,
-  MOONRIVER_CHAINS_CONFIGS,
+  MOONRIVER_ASSETS_MAP,
+  MOONRIVER_CHAINS_MAP,
   MOONRIVER_CONFIGS,
 } from './moonriver';
 
@@ -103,23 +103,23 @@ export function createConfig<
 }
 
 export const moonbase = createConfig<MoonbaseAssets, MoonbaseChains>(
-  MOONBASE_ASSETS_CONFIGS,
-  MOONBASE_ASSETS_CONFIGS[AssetSymbol.DEV],
+  MOONBASE_ASSETS_MAP,
+  MOONBASE_ASSETS_MAP[AssetSymbol.DEV],
   MOON_CHAINS[MoonChainKey.MoonbaseAlpha],
-  MOONBASE_CHAINS_CONFIGS,
+  MOONBASE_CHAINS_MAP,
   MOONBASE_CONFIGS,
 );
 export const moonbeam = createConfig<MoonbeamAssets, MoonbeamChains>(
-  MOONBEAM_ASSETS_CONFIGS,
-  MOONBEAM_ASSETS_CONFIGS[AssetSymbol.GLMR],
+  MOONBEAM_ASSETS_MAP,
+  MOONBEAM_ASSETS_MAP[AssetSymbol.GLMR],
   MOON_CHAINS[MoonChainKey.Moonbeam],
-  MOONBEAM_CHAINS_CONFIGS,
+  MOONBEAM_CHAINS_MAP,
   MOONBEAM_CONFIGS,
 );
 export const moonriver = createConfig<MoonriverAssets, MoonriverChains>(
-  MOONRIVER_ASSETS_CONFIGS,
-  MOONRIVER_ASSETS_CONFIGS[AssetSymbol.MOVR],
+  MOONRIVER_ASSETS_MAP,
+  MOONRIVER_ASSETS_MAP[AssetSymbol.MOVR],
   MOON_CHAINS[MoonChainKey.Moonriver],
-  MOONRIVER_CHAINS_CONFIGS,
+  MOONRIVER_CHAINS_MAP,
   MOONRIVER_CONFIGS,
 );

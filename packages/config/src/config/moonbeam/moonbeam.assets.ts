@@ -1,6 +1,5 @@
 import { AssetSymbol } from '../../constants';
 import { AssetsMap } from '../config.interfaces';
-// eslint-disable-next-line import/no-cycle
 import { MoonbeamAssets } from './moonbeam.interfaces';
 
 export const MOONBEAM_ASSETS = <const>[
@@ -14,7 +13,7 @@ export const MOONBEAM_ASSETS = <const>[
   AssetSymbol.PHA,
 ];
 
-export const MOONBEAM_ASSETS_CONFIGS: AssetsMap<MoonbeamAssets> = {
+export const MOONBEAM_ASSETS_MAP: AssetsMap<MoonbeamAssets> = {
   [AssetSymbol.ACA]: {
     id: '224821240862170613278369189818311486111',
     erc20Id: '0xffffffffa922fef94566104a6e5a35a4fcddaa9f',

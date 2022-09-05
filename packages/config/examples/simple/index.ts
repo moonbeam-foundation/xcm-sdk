@@ -1,12 +1,13 @@
 import { AssetSymbol, ChainKey, moonbeam } from '@moonbeam-network/xcm-config';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 
-const dot = AssetSymbol.DOT;
-const polkadot = ChainKey.Polkadot;
 /**
  * Add your polkadot address
  */
 const account = '';
+
+const dot = AssetSymbol.DOT;
+const polkadot = ChainKey.Polkadot;
 
 /**
  * Example 1

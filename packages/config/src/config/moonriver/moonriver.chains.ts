@@ -1,6 +1,5 @@
 import { ChainKey } from '../../constants';
 import { ChainsMap } from '../config.interfaces';
-// eslint-disable-next-line import/no-cycle
 import { MoonriverChains } from './moonriver.interfaces';
 
 export const MOONRIVER_CHAINS = <const>[
@@ -19,7 +18,7 @@ export const MOONRIVER_CHAINS = <const>[
   ChainKey.Statemine,
 ];
 
-export const MOONRIVER_CHAINS_CONFIGS: ChainsMap<MoonriverChains> = {
+export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
   [ChainKey.Bifrost]: {
     key: ChainKey.Bifrost,
     name: 'Bifrost',

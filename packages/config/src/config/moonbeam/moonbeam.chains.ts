@@ -1,6 +1,5 @@
 import { ChainKey } from '../../constants';
 import { ChainsMap } from '../config.interfaces';
-// eslint-disable-next-line import/no-cycle
 import { MoonbeamChains } from './moonbeam.interfaces';
 
 export const MOONBEAM_CHAINS = <const>[
@@ -11,7 +10,7 @@ export const MOONBEAM_CHAINS = <const>[
   ChainKey.Polkadot,
 ];
 
-export const MOONBEAM_CHAINS_CONFIGS: ChainsMap<MoonbeamChains> = {
+export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
   [ChainKey.Acala]: {
     key: ChainKey.Acala,
     name: 'Acala',
