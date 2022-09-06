@@ -33,9 +33,9 @@ jobs:
 
       - name: Get new package version
         run: |
-          LAST_VERSION=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '\d+$') \
+          LAST_VERSION=$(npm show @moonbeam-network/xcm-sdk dist-tags.beta | grep -Eo '\d+$') \
           NEW_VERSION=$(($LAST_VERSION+1)) \
-          NEW_TAG=${{ inputs.version }}-${{ inputs.tag }}.$NEW_VERSION \
+          NEW_TAG=0.0.1-beta.$NEW_VERSION \
           echo $NEW_TAG \
           echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
 
