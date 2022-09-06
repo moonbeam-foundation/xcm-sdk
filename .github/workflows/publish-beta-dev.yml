@@ -11,11 +11,6 @@ on:
         options:
           - dev
           - beta
-      version:
-        description: 'Specific version'
-        default: '0.0.1'
-        type: string
-
 jobs:
   publish-beta-dev:
     runs-on: ubuntu-latest
@@ -31,27 +26,20 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: npm ci
 
+      - name: Get last version number
+        run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$')" >> $GITHUB_ENV
+      - name: Increase version number
+        run: echo "new_version_number=$((${{ env.last_version_number }}+1))" >> $GITHUB_ENV
       - name: Get new version
-        run: |
-          last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$') \
-          && ew_version_number=$(($last_version_number+1)) \ 
-          && new_version=${{ inputs.version }}-${{ inputs.tag }}.$new_version_number \
-          && echo $new_version
+        run: echo "new_version=0.0.1-${{ inputs.tag }}.${{ env.new_version_number }}" >> $GITHUB_ENV
 
-      # - name: Get last version number
-      #   run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$')" >> $GITHUB_ENV
-      # - name: Increase version number
-      #   run: echo "new_version_number=$((${{ env.last_version_number }}+1))" >> $GITHUB_ENV
-      # - name: Get new version
-      #   run: echo "new_version=${{ inputs.version }}-${{ inputs.tag }}.${{ env.new_version_number }}" >> $GITHUB_ENV
+      - name: Build
+        run: npm run build
 
-      # - name: Build
-      #   run: npm run build
+      - name: Publish config
+        working-directory: ./packages/config
+        run: npm version ${{ env.new_version }} --no-git-tag-version
 
-      # - name: Publish config
-      #   working-directory: ./packages/config
-      #   run: npm version ${{ env.new_version }} --no-git-tag-version
-
-      # - name: Publish sdk
-      #   working-directory: ./packages/sdk
-      #   run: npm version ${{ env.new_version }} --no-git-tag-version
+      - name: Publish sdk
+        working-directory: ./packages/sdk
+        run: npm version ${{ env.new_version }} --no-git-tag-version
