@@ -31,13 +31,12 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: npm ci
 
-      - name: Get new version
-        run: | 
-        last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$'); \
-        new_version_number=$(($last_version_number+1)); \ 
-        new_version=${{ inputs.version }}-${{ inputs.tag }}.$new_version_number; \
-        echo $new_version
-
+      # - name: Get new version
+      #   run: |
+      #   last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$'); \
+      #   new_version_number=$(($last_version_number+1)); \
+      #   new_version=${{ inputs.version }}-${{ inputs.tag }}.$new_version_number; \
+      #   echo $new_version
 
       # - name: Get last version number
       #   run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$')" >> $GITHUB_ENV
