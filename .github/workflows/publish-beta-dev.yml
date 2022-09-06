@@ -1,4 +1,4 @@
-name: Publish beta or dev tag
+name: publish dev or beta
 
 on:
   workflow_dispatch:
@@ -11,11 +11,6 @@ on:
         options:
           - dev
           - beta
-      version:
-        description: 'Specific version'
-        default: '0.0.1'
-        type: string
-
 jobs:
   publish-beta-dev:
     runs-on: ubuntu-latest
@@ -31,16 +26,29 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: npm ci
 
-      - name: Get new package version
+      - name: Get last version number
+        run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$')" >> $GITHUB_ENV
+      - name: Increase version number
+        run: echo "new_version_number=$((${{ env.last_version_number }}+1))" >> $GITHUB_ENV
+      - name: Get new version
+        run: echo "new_version=0.0.1-${{ inputs.tag }}.${{ env.new_version_number }}" >> $GITHUB_ENV
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish config
+        working-directory: ./packages/config
         run: |
-          LAST_VERSION=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '\d+$') \
-          NEW_VERSION=$(($LAST_VERSION+1)) \
-          NEW_TAG=${{ inputs.version }}-${{ inputs.tag }}.$NEW_VERSION \
-          echo $NEW_TAG \
-          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+          npm version ${{ env.new_version }} --no-git-tag-version \
+            && npm publish --tag ${{ inputs.tag }}
 
-      - name: Print
-        run: echo ${{ env.NEW_TAG }}
+      - name: Sleep for 10 seconds
+        run: sleep 10s
+        shell: bash
 
-      # - name: Build
-      #   run: npm run build
+      - name: Publish sdk
+        working-directory: ./packages/sdk
+        run: |
+          npm i @moonbeam-network/xcm-config@${{ inputs.tag }} \
+          && npm version ${{ env.new_version }} --no-git-tag-version \
+          && npm publish --tag ${{ inputs.tag }}
