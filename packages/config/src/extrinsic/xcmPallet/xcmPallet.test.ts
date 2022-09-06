@@ -12,6 +12,7 @@ describe('xcmPallet', () => {
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
     decimals: 10,
+    chainId: 1287,
     unitsPerSecond: 100n,
   };
   const origin: Chain = {

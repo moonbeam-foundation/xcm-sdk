@@ -1,7 +1,5 @@
 import { ChainXcmConfigs, XcmConfig } from '../config.interfaces';
-// eslint-disable-next-line import/no-cycle
 import { MOONBASE_ASSETS } from './moonbase.assets';
-// eslint-disable-next-line import/no-cycle
 import { MOONBASE_CHAINS } from './moonbase.chains';
 
 export type MoonbaseAssets = typeof MOONBASE_ASSETS[number];

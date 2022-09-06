@@ -1,5 +1,6 @@
 import {
   Asset,
+  AssetsMap,
   AssetSymbol,
   Chain,
   ChainKey,
@@ -15,6 +16,7 @@ import {
   Signer as PolkadotSigner,
   UnsubscribePromise,
 } from '@polkadot/api/types';
+import { IKeyringPair } from '@polkadot/types/types';
 import { Signer as EthersSigner } from 'ethers';
 import { AssetBalanceInfo } from '../polkadot';
 
@@ -36,6 +38,8 @@ export interface XcmSdk<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
+  symbols: Symbols[];
+  assets: AssetsMap<Symbols>;
   moonAsset: Asset<Symbols>;
   moonChain: MoonChain;
   subscribeToAssetsBalanceInfo: (
@@ -65,7 +69,7 @@ export interface XcmSdkWithdraw<
 export interface XcmSdkDepositFrom<Symbols extends AssetSymbol = AssetSymbol> {
   get: (
     account: string,
-    sourceAccount: string,
+    sourceAccount: string | IKeyringPair,
     params?: DepositGetParams,
   ) => Promise<DepositTransferData<Symbols>>;
 }
@@ -90,15 +94,15 @@ export interface DepositTransferData<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: AssetConfigWithDecimals<Symbols>;
+  asset: AssetWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
   moonChainFee?: bigint;
-  native: AssetConfigWithDecimals<Symbols>;
+  native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   source: Chain<ChainKeys>;
   sourceBalance: bigint;
-  sourceFeeBalance?: FeeBalance<Symbols>;
+  sourceFeeBalance?: Balance<Symbols>;
   sourceMinBalance: bigint;
   getFee: (amount?: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
@@ -108,13 +112,13 @@ export interface WithdrawTransferData<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  asset: AssetConfigWithDecimals<Symbols>;
+  asset: AssetWithDecimals<Symbols>;
   destination: Chain<ChainKeys>;
   destinationBalance: bigint;
   destinationFee: bigint;
   existentialDeposit: bigint;
   min: bigint;
-  native: AssetConfigWithDecimals<Symbols>;
+  native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   getFee: (amount: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
@@ -122,13 +126,12 @@ export interface WithdrawTransferData<
 
 export type ExtrinsicEventsCallback = (event: ExtrinsicEvent) => void;
 
-export interface AssetConfigWithDecimals<
-  Symbols extends AssetSymbol = AssetSymbol,
-> extends Asset<Symbols> {
+export interface AssetWithDecimals<Symbols extends AssetSymbol = AssetSymbol>
+  extends Asset<Symbols> {
   decimals: number;
 }
 
-export interface FeeBalance<Symbols extends AssetSymbol = AssetSymbol> {
+export interface Balance<Symbols extends string | AssetSymbol = AssetSymbol> {
   balance: bigint;
   decimals: number;
   symbol: Symbols;
