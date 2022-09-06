@@ -31,7 +31,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: npm ci
 
-      - run: npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$' | echo
+      - run: npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$'
       - run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '\d+$')" >> $GITHUB_ENV
       - run: echo "new_version_number=$((${{ env.last_version_number }}+1))" >> $GITHUB_ENV
       - run: echo "new_version=${{ inputs.version }}-${{ inputs.tag }}.${{ env.new_version_number }}" >> $GITHUB_ENV
