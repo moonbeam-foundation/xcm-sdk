@@ -4,6 +4,7 @@ import { MoonbeamChains } from './moonbeam.interfaces';
 
 export const MOONBEAM_CHAINS = <const>[
   ChainKey.Acala,
+  ChainKey.Astar,
   ChainKey.Interlay,
   ChainKey.Parallel,
   ChainKey.Phala,
@@ -18,6 +19,15 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     weight: 1_000_000_000,
     parachainId: 2000,
     moonAssetId: 0,
+  },
+  [ChainKey.Astar]: {
+    key: ChainKey.Astar,
+    name: 'Astar',
+    ws: 'wss://rpc.astar.network',
+    weight: 1_000_000_000,
+    parachainId: 2006,
+    moonAssetId: 18446744073709551619n,
+    palletInstance: 10,
   },
   [ChainKey.Interlay]: {
     key: ChainKey.Interlay,

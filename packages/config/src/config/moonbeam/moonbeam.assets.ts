@@ -4,6 +4,7 @@ import { MoonbeamAssets } from './moonbeam.interfaces';
 
 export const MOONBEAM_ASSETS = <const>[
   AssetSymbol.ACA,
+  AssetSymbol.ASTR,
   AssetSymbol.AUSD,
   AssetSymbol.DOT,
   AssetSymbol.GLMR,
@@ -18,6 +19,11 @@ export const MOONBEAM_ASSETS_MAP: AssetsMap<MoonbeamAssets> = {
     id: '224821240862170613278369189818311486111',
     erc20Id: '0xffffffffa922fef94566104a6e5a35a4fcddaa9f',
     originSymbol: AssetSymbol.ACA,
+  },
+  [AssetSymbol.ASTR]: {
+    id: '224077081838586484055667086558292981199',
+    erc20Id: '0xffffffffa893ad19e540e172c10d78d4d479b5cf',
+    originSymbol: AssetSymbol.ASTR,
   },
   [AssetSymbol.AUSD]: {
     id: '110021739665376159354538090254163045594',
