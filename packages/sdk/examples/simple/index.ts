@@ -25,7 +25,7 @@ const { moonbeam } = init();
 
 const keyring = new Keyring({ type: 'sr25519' });
 
-const provider = new ethers.providers.JsonRpcProvider(moonbeam.moonChain.ws, {
+const provider = new ethers.providers.WebSocketProvider(moonbeam.moonChain.ws, {
   name: moonbeam.moonChain.name,
   chainId: moonbeam.moonChain.chainId,
 });
@@ -84,11 +84,13 @@ async function withdraw() {
 }
 
 async function main() {
+  const thirtySeconds = 30 * 1000;
   const unsubscribe = await moonbeam.subscribeToAssetsBalanceInfo(
     moonbeamAddress,
     (balances) => {
+      console.log('\nUpdated balances:');
+      console.log('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄');
       balances.forEach(({ asset, balance, origin }) => {
-        console.log('\nYour balances:');
         console.log(
           `${balance.symbol}: ${toDecimal(
             balance.balance,
@@ -96,13 +98,14 @@ async function main() {
           )} (${origin.name} ${asset.originSymbol})`,
         );
       });
+      console.log('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄');
     },
   );
 
   await deposit();
-  await setTimeout(20 * 1000);
+  await setTimeout(thirtySeconds);
   await withdraw();
-  await setTimeout(20 * 1000);
+  await setTimeout(thirtySeconds);
 
   unsubscribe();
 }
