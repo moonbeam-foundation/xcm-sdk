@@ -31,16 +31,20 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: npm ci
 
-      - name: Get new package version
-        run: |
-          LAST_VERSION=$(npm show @moonbeam-network/xcm-sdk dist-tags.beta | grep -Eo '\d+$') \
-          NEW_VERSION=$(($LAST_VERSION+1)) \
-          NEW_TAG=0.0.1-beta.$NEW_VERSION \
-          echo $NEW_TAG \
-          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+      - run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '\d+$')" >> $GITHUB_ENV
+      - run: echo "new_version_number=$((${{ env.last_version_number }}+1))" >> $GITHUB_ENV
+      - run: echo "new_version=${{ inputs.version }}-${{ inputs.tag }}.${{ env.new_version_number }}" >> $GITHUB_ENV
+      - run: echo "${{ env.new_version }}"
 
-      - name: Print
-        run: echo ${{ env.NEW_TAG }}
+        # run: |
+        #   LAST_VERSION=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '\d+$') \
+        #   NEW_VERSION=$(($LAST_VERSION+1)) \
+        #   NEW_TAG=${{ inputs.version }}-${{ inputs.tag }}.$NEW_VERSION \
+        #   echo $NEW_TAG \
+        #   echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+
+      # - name: Print
+      #   run: echo ${{ env.NEW_TAG }}
 
       # - name: Build
       #   run: npm run build
