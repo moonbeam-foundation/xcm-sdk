@@ -19,6 +19,18 @@ export function isXcmSdkWithdraw(
   return !!(config as XcmSdkWithdraw).to;
 }
 
+export function toDecimal(
+  number: bigint,
+  decimals: number,
+  maxDecimal = 6,
+): number {
+  const decimalMultiplier = 10 ** maxDecimal;
+  const dividend = number * BigInt(decimalMultiplier);
+  const divisor = 10n ** BigInt(decimals);
+
+  return Number(dividend / divisor) / decimalMultiplier;
+}
+
 export function sortByBalanceAndChainName<Symbols extends AssetSymbol>(
   a: AssetBalanceInfo<Symbols>,
   b: AssetBalanceInfo<Symbols>,
@@ -31,13 +43,11 @@ export function sortByBalanceAndChainName<Symbols extends AssetSymbol>(
     return 1;
   }
 
-  const aBalance =
-    Number((a.balance * 1000000n) / 10n ** BigInt(a.meta.decimals)) / 1000000;
-  const bBalance =
-    Number((b.balance * 1000000n) / 10n ** BigInt(b.meta.decimals)) / 1000000;
+  const aDecimal = toDecimal(a.balance.balance, a.balance.decimals);
+  const bDecimal = toDecimal(b.balance.balance, b.balance.decimals);
 
-  if (aBalance || bBalance) {
-    return bBalance - aBalance;
+  if (aDecimal || bDecimal) {
+    return bDecimal - aDecimal;
   }
 
   const aName = (a.origin.name + a.asset.originSymbol).toLowerCase();
@@ -83,14 +93,16 @@ export async function subscribeToAssetsBalanceInfo<
       .map((info) => {
         if (info.asset.isNative) {
           // eslint-disable-next-line no-param-reassign
-          info.balance = lastBalance;
+          info.balance.balance = lastBalance;
         }
 
         return info;
       })
       .sort(sortByBalanceAndChainName);
 
-    cb(lastInfo);
+    if (lastInfo.length) {
+      cb(lastInfo);
+    }
   };
 
   const unsubscribeBalance = await polkadot.subscribeToBalance(

@@ -2,8 +2,8 @@ import { createBalanceBuilder } from '../../balance';
 import { MoonChainKey, MOON_CHAINS } from '../../constants';
 import { createExtrinsicBuilder } from '../../extrinsic';
 import { createWithdrawBuilder } from '../../withdraw';
-import { MOONBEAM_ASSETS_CONFIGS as assets } from './moonbeam.assets';
-import { MOONBEAM_CHAINS_CONFIGS as chains } from './moonbeam.chains';
+import { MOONBEAM_ASSETS_MAP as assets } from './moonbeam.assets';
+import { MOONBEAM_CHAINS_MAP as chains } from './moonbeam.chains';
 import { MoonbeamAssets, MoonbeamChains } from './moonbeam.interfaces';
 
 export { assets, chains };

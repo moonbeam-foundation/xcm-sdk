@@ -1,0 +1,46 @@
+name: Publish beta or dev tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'NPM tag'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - beta
+      version:
+        description: 'Specific version'
+        default: '0.0.1'
+        type: string
+
+jobs:
+  publish-beta-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 16.x
+          cache: 'npm'
+      - name: Authenticate with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - run: npm ci
+
+      - name: Get new package version
+        run: |
+          LAST_VERSION=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '\d+$') \
+          NEW_VERSION=$(($LAST_VERSION+1)) \
+          NEW_TAG=${{ inputs.version }}-${{ inputs.tag }}.$NEW_VERSION \
+          echo $NEW_TAG \
+          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+
+      - name: Print
+        run: echo ${{ env.NEW_TAG }}
+
+      # - name: Build
+      #   run: npm run build

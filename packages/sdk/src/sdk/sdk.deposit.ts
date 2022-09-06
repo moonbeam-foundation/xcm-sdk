@@ -9,7 +9,7 @@ import {
   PolkadotXcmExtrinsicSuccessEvent,
 } from '@moonbeam-network/xcm-config';
 import { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { ISubmittableResult } from '@polkadot/types/types';
+import { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
 import { isUndefined } from '@polkadot/util';
 import { PolkadotService } from '../polkadot';
 import {
@@ -122,9 +122,9 @@ export interface GetDepositDataParams<
   nativeAsset: Asset<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   polkadot: PolkadotService<Symbols, ChainKeys>;
-  polkadotSigner: PolkadotSigner;
+  polkadotSigner?: PolkadotSigner;
   primaryAccount?: string;
-  sourceAccount: string;
+  sourceAccount: string | IKeyringPair;
 }
 
 export async function getDepositData<
@@ -145,6 +145,8 @@ export async function getDepositData<
 }: GetDepositDataParams<Symbols, ChainKeys>): Promise<
   DepositTransferData<Symbols>
 > {
+  const sourceAddress =
+    typeof sourceAccount === 'string' ? sourceAccount : sourceAccount.address;
   const meta = foreignPolkadot.getMetadata();
   const createExtrinsic = getCreateExtrinsic({
     account,
@@ -166,13 +168,13 @@ export async function getDepositData<
   ] = await Promise.all([
     polkadot.getAssetDecimals(asset.id),
     foreignPolkadot.getGenericBalance(
-      primaryAccount || sourceAccount,
+      primaryAccount || sourceAddress,
       config.balance,
     ),
     foreignPolkadot.getExistentialDeposit(),
     config.sourceFeeBalance
       ? foreignPolkadot.getGenericBalance(
-          sourceAccount,
+          sourceAddress,
           config.sourceFeeBalance,
         )
       : undefined,

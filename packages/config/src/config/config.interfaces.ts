@@ -7,7 +7,8 @@ export interface XcmConfigBuilder<
   Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
-  assets: AssetsConfigs<Symbols>;
+  symbols: Symbols[];
+  assets: AssetsMap<Symbols>;
   moonAsset: Asset<Symbols>;
   moonChain: MoonChain;
   deposit: (symbol: Symbols) => DepositConfigBuilder<Symbols, ChainKeys>;
@@ -38,12 +39,12 @@ export interface WithdrawConfigBuilder<
   };
 }
 
-export type AssetsConfigs<Symbols extends AssetSymbol = AssetSymbol> = Record<
+export type AssetsMap<Symbols extends AssetSymbol = AssetSymbol> = Record<
   Symbols,
   Asset<Symbols>
 >;
 
-export type ChainsConfigs<ChainKeys extends ChainKey = ChainKey> = Record<
+export type ChainsMap<ChainKeys extends ChainKey = ChainKey> = Record<
   ChainKeys,
   Chain<ChainKeys>
 >;

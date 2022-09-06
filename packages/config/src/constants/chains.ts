@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { MoonChain } from '../interfaces';
 
 export enum MoonChainKey {
@@ -13,6 +12,7 @@ export const MOON_CHAINS: Record<MoonChainKey, MoonChain> = {
     ws: 'wss://wss.api.moonbase.moonbeam.network',
     parachainId: 1000,
     decimals: 18,
+    chainId: 1287,
     unitsPerSecond: 50_000_000_000_000_000n,
   },
   [MoonChainKey.Moonbeam]: {
@@ -21,6 +21,7 @@ export const MOON_CHAINS: Record<MoonChainKey, MoonChain> = {
     ws: 'wss://wss.api.moonbeam.network',
     parachainId: 2004,
     decimals: 18,
+    chainId: 1284,
     unitsPerSecond: 10_000_000_000_000_000_000n,
   },
   [MoonChainKey.Moonriver]: {
@@ -29,6 +30,7 @@ export const MOON_CHAINS: Record<MoonChainKey, MoonChain> = {
     ws: 'wss://wss.api.moonriver.moonbeam.network',
     parachainId: 2023,
     decimals: 18,
+    chainId: 1285,
     unitsPerSecond: 100_000_000_000_000_000n,
   },
 };

@@ -1,7 +1,5 @@
 import { ChainXcmConfigs, XcmConfig } from '../config.interfaces';
-// eslint-disable-next-line import/no-cycle
 import { MOONRIVER_ASSETS } from './moonriver.assets';
-// eslint-disable-next-line import/no-cycle
 import { MOONRIVER_CHAINS } from './moonriver.chains';
 
 export type MoonriverAssets = typeof MOONRIVER_ASSETS[number];
