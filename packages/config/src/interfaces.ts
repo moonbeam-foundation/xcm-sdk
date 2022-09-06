@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { AssetSymbol, ChainKey, MoonChainKey } from './constants';
 
 export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
@@ -23,6 +22,7 @@ export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {
 }
 
 export interface MoonChain extends ChainBase<MoonChainKey> {
+  chainId: number;
   decimals: number;
   unitsPerSecond: bigint;
 }

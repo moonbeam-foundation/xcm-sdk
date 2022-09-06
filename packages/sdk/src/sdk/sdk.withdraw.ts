@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   Asset,
   AssetSymbol,
@@ -99,10 +100,12 @@ export async function getWithdrawData<
         : 0n,
     ]);
 
-  const calculatedFee = BigInt(config.weight * config.feePerWeight);
-  const destinationFee =
-    assetMinBalance > calculatedFee ? assetMinBalance : calculatedFee;
-  const min = destinationFee + (assetMinBalance || existentialDeposit);
+  const destinationFee = getFee(assetMinBalance, config);
+  const min = getMin(
+    assetMinBalance || existentialDeposit,
+    destinationBalance,
+    destinationFee,
+  );
 
   return {
     asset: { ...asset, decimals },
@@ -130,4 +133,26 @@ export async function getWithdrawData<
       return tx.hash;
     },
   };
+}
+
+export function getFee<Symbols extends AssetSymbol>(
+  assetMinBalance: bigint,
+  config: WithdrawConfig<Symbols>,
+) {
+  const calculatedFee = BigInt(config.weight * config.feePerWeight);
+
+  return assetMinBalance > calculatedFee ? assetMinBalance : calculatedFee;
+}
+
+export function getMin(
+  balanceNeeded: bigint,
+  destinationBalance: bigint,
+  destinationFee: bigint,
+) {
+  const extra =
+    destinationBalance >= balanceNeeded
+      ? 0n
+      : balanceNeeded - destinationBalance;
+
+  return destinationFee + extra;
 }

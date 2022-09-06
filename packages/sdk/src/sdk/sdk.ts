@@ -14,6 +14,8 @@ import {
   XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
 import { UnsubscribePromise } from '@polkadot/api/types';
+import { IKeyringPair } from '@polkadot/types/types';
+import { isString } from 'lodash';
 import { XTokensContract } from '../contracts';
 import { AssetBalanceInfo, createPolkadotServices } from '../polkadot';
 import { getDepositData } from './sdk.deposit';
@@ -45,9 +47,11 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
   configBuilder: XcmConfigBuilder<Symbols, ChainKeys>,
   options?: SdkOptions,
 ): XcmSdk<Symbols, ChainKeys> {
-  const { moonAsset, moonChain } = configBuilder;
+  const { symbols, assets, moonAsset, moonChain } = configBuilder;
 
   return {
+    symbols,
+    assets,
     moonAsset,
     moonChain,
     subscribeToAssetsBalanceInfo: async (
@@ -76,13 +80,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           return {
             get: async (
               account: string,
-              sourceAccount: string,
+              sourceAccount: string | IKeyringPair,
               { primaryAccount, polkadotSigner } = {},
             ): Promise<DepositTransferData<Symbols>> => {
               const signer = polkadotSigner || options?.polkadotSigner;
 
-              if (!signer) {
-                throw new Error('Polkadot signer is not provided to XCM-SDK');
+              if (isString(sourceAccount) && !signer) {
+                throw new Error(
+                  'Polkadot Signer/KeyringPair are not provided to XCM-SDK',
+                );
               }
 
               const [polkadot, foreignPolkadot] = await createPolkadotServices<

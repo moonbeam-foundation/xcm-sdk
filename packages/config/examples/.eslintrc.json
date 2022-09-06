@@ -1,0 +1,14 @@
+{
+  "extends": ["../../../.eslintrc.json"],
+  "rules": {
+    "no-console": "off",
+    "no-restricted-syntax": "off",
+    "jest/prefer-expect-assertions": "off",
+    "jest/require-hook": "off",
+    "jest/no-disabled-tests": "off",
+    "jest/no-focused-tests": "off",
+    "jest/no-identical-title": "off",
+    "jest/prefer-to-have-length": "off",
+    "jest/valid-expect": "off"
+  }
+}
