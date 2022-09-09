@@ -13,7 +13,6 @@ import { MoonriverXcmConfig } from '../moonriver.interfaces';
 const asset = assets[AssetSymbol.RMRK];
 const origin = chains[ChainKey.Statemine];
 const originAssetId = getOriginAssetId(asset);
-const palletInstance = getPalletInstance(origin);
 
 export const RMRK: MoonriverXcmConfig = {
   asset,
@@ -30,7 +29,7 @@ export const RMRK: MoonriverXcmConfig = {
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(origin)
         .V1()
-        .X2(palletInstance, originAssetId),
+        .X2(getPalletInstance(origin), originAssetId),
     },
   },
   withdraw: {
