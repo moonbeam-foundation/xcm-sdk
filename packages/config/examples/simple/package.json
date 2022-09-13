@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "^0.0.21",
-    "@moonbeam-network/xcm-sdk": "^0.0.21",
+    "@moonbeam-network/xcm-config": "^0.0.23",
+    "@moonbeam-network/xcm-sdk": "^0.0.23",
     "@polkadot/api": "^9.2.4"
   },
   "devDependencies": {

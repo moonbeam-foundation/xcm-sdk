@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-config",
-  "version": "0.0.21",
+  "version": "0.0.23",
   "description": "",
   "repository": {
     "directory": "packages/config",
