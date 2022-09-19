@@ -1,10 +1,4 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": [
-    "packages",
-    "scripts",
-    "jest.config.js",
-    "jestSetupFile.ts",
-    "jestSetupFileAfterEnv.ts"
-  ]
+  "include": ["packages", "scripts", "*.js", "*.ts"]
 }
