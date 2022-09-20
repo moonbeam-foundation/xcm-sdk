@@ -22,7 +22,7 @@
     "test": "jest ./packages/**/src",
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- -u",
-    "test:acc": "jest ./packages/**/tests/acceptance",
+    "test:acc": "jest --forceExit ./packages/**/tests/acceptance",
     "link": "npm run build && cd packages/config && npm ln && cd ../sdk && npm ln @moonbeam-network/xcm-config && npm ln",
     "prepare": "husky install"
   },
@@ -33,6 +33,7 @@
     "@types/jest": "^28.1.6",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
+    "dotenv": "^16.0.2",
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",

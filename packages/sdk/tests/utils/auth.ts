@@ -1,11 +1,22 @@
 import { MoonChain } from '@moonbeam-network/xcm-config';
 import { Keyring } from '@polkadot/api';
 import { assert } from '@polkadot/util';
-import { ethers } from 'ethers';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { KeyringPair } from '@polkadot/keyring/types';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { cryptoWaitReady } from '@polkadot/util-crypto';
+import { ethers, Wallet } from 'ethers';
 
 const keyring = new Keyring({ type: 'sr25519' });
 
-export function getEthersWalletSigner(chain: MoonChain) {
+let wallet: Wallet;
+let keyringPair: KeyringPair;
+
+export function getEthersWalletSigner(chain: MoonChain): Wallet {
+  if (wallet) {
+    return wallet;
+  }
+
   const { TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY } = process.env;
 
   assert(
@@ -18,16 +29,24 @@ export function getEthersWalletSigner(chain: MoonChain) {
     chainId: chain.chainId,
   });
 
-  return new ethers.Wallet(TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY, provider);
+  wallet = new ethers.Wallet(TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY, provider);
+
+  return wallet;
 }
 
-export function getPolkadotKeyringPair() {
+export async function getPolkadotKeyringPair(): Promise<KeyringPair> {
+  if (keyringPair) {
+    return keyringPair;
+  }
+
   const { TESTS_POLKADOT_ACCOUNT_SEED } = process.env;
 
   assert(
     TESTS_POLKADOT_ACCOUNT_SEED,
     'Please provide a seed phrase of Polkadot account as environment variable TESTS_POLKADOT_ACCOUNT_SEED',
   );
+
+  await cryptoWaitReady();
 
   return keyring.createFromUri(TESTS_POLKADOT_ACCOUNT_SEED);
 }

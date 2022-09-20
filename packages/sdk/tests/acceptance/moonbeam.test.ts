@@ -1,19 +1,26 @@
 import { MoonbeamAssets } from '@moonbeam-network/xcm-config';
+import { KeyringPair } from '@polkadot/keyring/types';
+import { Wallet } from 'ethers';
 import { init } from '../../src';
-
-// TODO: get from seed and private key?
-const moonbeamAddress = '0xeF46c7649270C912704fB09B75097f6E32208b85';
-const substrateAddress = '5DG5Fn3ww3KPza1RLoap6QJNzQfEvRebxypDGp35YuMX5y2K';
-
-function getMoonbeam() {
-  const { moonbeam } = init();
-
-  return moonbeam;
-}
+import { getEthersWalletSigner, getPolkadotKeyringPair } from '../utils/auth';
 
 describe('moonbeam acceptance', () => {
-  const moonbeam = getMoonbeam();
+  jest.setTimeout(30000);
+
+  const { moonbeam } = init();
   const assets = Object.keys(moonbeam.assets) as MoonbeamAssets[];
+  // to hide polkadot unnecessary warnings
+  const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
+
+  let ethersSigner: Wallet;
+  let keyringPair: KeyringPair;
+
+  beforeAll(async () => {
+    ethersSigner = getEthersWalletSigner(moonbeam.moonChain);
+    keyringPair = await getPolkadotKeyringPair();
+  });
+
+  afterAll(() => consoleWarnMock.mockRestore());
 
   describe.each(assets)('asset %s', (asset) => {
     const { chains: fromChains, from } = moonbeam.deposit(asset);
@@ -22,8 +29,8 @@ describe('moonbeam acceptance', () => {
     describe.each(fromChains)('deposit from $key', (chain) => {
       it('should deposit', async () => {
         const data = await from(chain.key).get(
-          moonbeamAddress,
-          substrateAddress,
+          ethersSigner.address,
+          keyringPair,
         );
 
         expect(data).toBeTruthy();
@@ -32,7 +39,9 @@ describe('moonbeam acceptance', () => {
 
     describe.each(toChains)('withdraw to $key', (chain) => {
       it('should withdraw', async () => {
-        const data = await to(chain.key).get(substrateAddress);
+        const data = await to(chain.key).get(keyringPair.address, {
+          ethersSigner,
+        });
 
         expect(data).toBeTruthy();
       });
