@@ -1,4 +1,4 @@
-import { readdirSync, rmSync } from 'fs';
+import { copyFileSync, readdirSync, rmSync } from 'fs';
 
 const modules = ['cjs', 'mjs'];
 const filesToRemove = [
@@ -14,10 +14,12 @@ const packages = readdirSync('packages', { withFileTypes: true })
   .filter((pkg) => pkg.isDirectory())
   .map((pkg) => pkg.name);
 
-packages.forEach((pkg) =>
+packages.forEach((pkg) => {
+  copyFileSync('LICENSE', `packages/${pkg}/LICENSE`);
+
   modules.forEach((module) =>
     filesToRemove.forEach((file) =>
       rmSync(`packages/${pkg}/build/${module}/${file}`, { force: true }),
     ),
-  ),
-);
+  );
+});

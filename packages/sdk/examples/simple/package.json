@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@moonbeam-network/xcm-config": "^0.0.23",
     "@moonbeam-network/xcm-sdk": "^0.0.23",
