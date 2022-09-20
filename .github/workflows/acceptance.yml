@@ -1,0 +1,22 @@
+name: acceptance
+
+on: push
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 16.x
+          cache: 'npm'
+
+      - name: Authenticate with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - run: npm ci
+
+      - name: Run acceptance tests
+        run: npm run test:acc -- --ci
