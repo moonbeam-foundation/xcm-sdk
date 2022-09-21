@@ -1,9 +1,9 @@
 {
   "name": "@moonbeam-network/xcm-sdk",
-  "version": "0.0.22",
-  "description": "",
+  "version": "0.0.23",
+  "description": "Easy way to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
   "author": "PureStake",
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "repository": {
     "directory": "packages/sdk",
     "type": "git",
@@ -38,7 +38,7 @@
   "main": "./build/cjs/src/index.js",
   "dependencies": {
     "@moonbeam-network/api-augment": "^0.1700.0",
-    "@moonbeam-network/xcm-config": "^0.0.22",
+    "@moonbeam-network/xcm-config": "^0.0.23",
     "@polkadot/api": "^9.1.1",
     "@polkadot/types": "^9.1.1",
     "@polkadot/util": "^10.1.3",
