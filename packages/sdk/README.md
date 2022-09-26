@@ -1,6 +1,6 @@
-# XCM-SDK
+![Moonbeam](https://moonbeam.network/wp-content/uploads/2020/03/Moonbeam-Logo-Final-500px.png)
 
-## :warning: This package is not production ready and is in heavy development!
+# XCM-SDK
 
 ## Installation
 
