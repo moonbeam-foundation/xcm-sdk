@@ -46,3 +46,17 @@ export function isMultiCurrency<Symbols extends AssetSymbol = AssetSymbol>(
     extrinsic.extrinsic === XTokensExtrinsic.TransferMultiCurrencies
   );
 }
+
+export function getSymbol<Symbols extends AssetSymbol>(
+  symbolOrAsset: Symbols | Asset<Symbols>,
+): Symbols {
+  return typeof symbolOrAsset === 'string'
+    ? symbolOrAsset
+    : symbolOrAsset.originSymbol;
+}
+
+export function getChainKey<ChainKeys extends ChainKey>(
+  keyOrChain: ChainKeys | Chain<ChainKeys>,
+): ChainKeys {
+  return typeof keyOrChain === 'string' ? keyOrChain : keyOrChain.key;
+}

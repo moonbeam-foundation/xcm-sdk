@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import {
+  Asset,
   AssetSymbol,
+  Chain,
   ChainKey,
   moonbase,
   MoonbaseAssets,
@@ -69,13 +71,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
         cb,
       });
     },
-    deposit: (symbol: Symbols): XcmSdkDeposit<Symbols, ChainKeys> => {
-      const { chains, from } = configBuilder.deposit(symbol);
+    deposit: (
+      symbolOrAsset: Symbols | Asset<Symbols>,
+    ): XcmSdkDeposit<Symbols, ChainKeys> => {
+      const { chains, from } = configBuilder.deposit(symbolOrAsset);
 
       return {
         chains,
-        from: (chain: ChainKeys) => {
-          const { asset, origin, config } = from(chain);
+        from: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
+          const { asset, origin, config } = from(keyOrChain);
 
           return {
             get: async (
@@ -116,13 +120,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
         },
       };
     },
-    withdraw: (symbol: Symbols): XcmSdkWithdraw<Symbols, ChainKeys> => {
-      const { chains, to } = configBuilder.withdraw(symbol);
+    withdraw: (
+      symbolOrAsset: Symbols | Asset<Symbols>,
+    ): XcmSdkWithdraw<Symbols, ChainKeys> => {
+      const { chains, to } = configBuilder.withdraw(symbolOrAsset);
 
       return {
         chains,
-        to: (chain: ChainKeys) => {
-          const { asset, origin, config } = to(chain);
+        to: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
+          const { asset, origin, config } = to(keyOrChain);
 
           return {
             get: async (
