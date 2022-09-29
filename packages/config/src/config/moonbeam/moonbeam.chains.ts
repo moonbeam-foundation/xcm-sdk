@@ -9,6 +9,7 @@ export const MOONBEAM_CHAINS = <const>[
   ChainKey.Parallel,
   ChainKey.Phala,
   ChainKey.Polkadot,
+  ChainKey.Statemint,
 ];
 
 export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
@@ -58,5 +59,13 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     ws: 'wss://rpc.polkadot.io',
     weight: 1_000_000_000,
     parachainId: 0,
+  },
+  [ChainKey.Statemint]: {
+    key: ChainKey.Statemint,
+    name: 'Statemint',
+    ws: 'wss://statemint-rpc.polkadot.io',
+    weight: 1_000_000_000,
+    parachainId: 1000,
+    palletInstance: 50,
   },
 };

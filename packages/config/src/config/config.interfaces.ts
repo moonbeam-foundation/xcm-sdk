@@ -11,8 +11,12 @@ export interface XcmConfigBuilder<
   assets: AssetsMap<Symbols>;
   moonAsset: Asset<Symbols>;
   moonChain: MoonChain;
-  deposit: (symbol: Symbols) => DepositConfigBuilder<Symbols, ChainKeys>;
-  withdraw: (symbol: Symbols) => WithdrawConfigBuilder<Symbols, ChainKeys>;
+  deposit: (
+    symbolOrAsset: Symbols | Asset<Symbols>,
+  ) => DepositConfigBuilder<Symbols, ChainKeys>;
+  withdraw: (
+    symbolOrAsset: Symbols | Asset<Symbols>,
+  ) => WithdrawConfigBuilder<Symbols, ChainKeys>;
 }
 
 export interface DepositConfigBuilder<
@@ -20,7 +24,7 @@ export interface DepositConfigBuilder<
   ChainKeys extends ChainKey = ChainKey,
 > {
   chains: Chain<ChainKeys>[];
-  from: (chain: ChainKeys) => {
+  from: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
     asset: Asset<Symbols>;
     origin: Chain<ChainKeys> | MoonChain;
     config: DepositConfig<Symbols>;
@@ -32,7 +36,7 @@ export interface WithdrawConfigBuilder<
   ChainKeys extends ChainKey = ChainKey,
 > {
   chains: Chain<ChainKeys>[];
-  to: (chain: ChainKeys) => {
+  to: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
     asset: Asset<Symbols>;
     origin: Chain<ChainKeys> | MoonChain;
     config: WithdrawConfig<Symbols>;

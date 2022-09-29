@@ -4,7 +4,6 @@ import { MoonbaseChains } from './moonbase.interfaces';
 
 export const MOONBASE_CHAINS = <const>[
   ChainKey.AlphanetRelay,
-  ChainKey.AstarAlphanet,
   ChainKey.BasiliskAlphanet,
   ChainKey.CloverAlphanet,
   ChainKey.CrustShadowAlphanet,
@@ -22,15 +21,6 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
     parachainId: 0,
-  },
-  [ChainKey.AstarAlphanet]: {
-    key: ChainKey.AstarAlphanet,
-    name: 'Astar Alphanet',
-    ws: 'wss://alphanet.astar.network/',
-    weight: 1_000_000_000,
-    parachainId: 2007,
-    palletInstance: 3,
-    moonAssetId: 100,
   },
   [ChainKey.BasiliskAlphanet]: {
     key: ChainKey.BasiliskAlphanet,
