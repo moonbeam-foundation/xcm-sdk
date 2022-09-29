@@ -1,16 +1,21 @@
-![Moonbeam](https://moonbeam.network/wp-content/uploads/2020/03/Moonbeam-Logo-Final-500px.png)
+![Moonbeam](https://docs.moonbeam.network/images/builders/xcm/sdk/xcm-sdk-banner.png)
 
-# XCM-SDK
+The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to Moonbeam/Moonriver from the relay chain and other parachains in the Polkadot/Kusama ecosystem. With the SDK, you don't need to worry about determining the multilocation of the origin or destination assets or which extrinsics are used on which networks to send XCM transfers. To deposit or withdraw assets, you simply define the asset and origin chain you want to deposit from or withdraw back to, along with the sending account's signer, and the amount to send.
 
-## Installation
+# Documentation
+
+- [usage](https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/)
+- [references](https://docs.moonbeam.network/builders/xcm/xcm-sdk/reference/)
+
+# Installation
 
 ```bash
 npm i @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
 ```
 
-## Usage
+# Usage
 
-### Init
+## Init
 
 ```typescript
 import { init } from '@moonbeam-network/xcm-sdk';
@@ -24,14 +29,14 @@ const { moonbeam } = init({
 });
 ```
 
-### Accounts
+## Accounts
 
 ```typescript
 const moonbeamAddress = '0xeF46c7649270C912704fB09B75097f6E32208b85';
 const substrateAddress = '5DG5Fn3ww3KPza1RLoap6QJNzQfEvRebxypDGp35YuMX5y2K';
 ```
 
-### Deposit
+## Deposit
 
 ```typescript
 // moonbeam.symbols is a list of asset symbols that you can deposit/withdraw
@@ -48,7 +53,7 @@ const { min, send } = await from(chains[0]).get(
 await send(min, (event) => console.log(event));
 ```
 
-### Withdraw
+## Withdraw
 
 ```typescript
 const { chains, to } = moonbeam.withdraw(moonbeam.symbols[0]);
@@ -62,7 +67,7 @@ const { min, send } = await to(chains[0]).get(
 await send(min, (event) => console.log(event));
 ```
 
-### Get balances
+## Get balances
 
 ```typescript
 const unsubscribe = await moonbeam.subscribeToAssetsBalanceInfo(
@@ -83,7 +88,7 @@ const unsubscribe = await moonbeam.subscribeToAssetsBalanceInfo(
 unsubscribe();
 ```
 
-## Examples
+# Examples
 
 - [simple](https://github.com/PureStake/xcm-sdk/blob/main/packages/sdk/examples/simple)
 
