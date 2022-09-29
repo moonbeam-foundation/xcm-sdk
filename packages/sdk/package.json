@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-sdk",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to Moonbeam/Moonriver from the relay chain and other parachains in the Polkadot/Kusama ecosystem",
   "author": "PureStake",
   "license": "MIT",
@@ -38,7 +38,7 @@
   "main": "./build/cjs/src/index.js",
   "dependencies": {
     "@moonbeam-network/api-augment": "^0.1700.0",
-    "@moonbeam-network/xcm-config": "^0.0.24",
+    "@moonbeam-network/xcm-config": "^0.0.25",
     "@polkadot/api": "^9.1.1",
     "@polkadot/types": "^9.1.1",
     "@polkadot/util": "^10.1.3",
