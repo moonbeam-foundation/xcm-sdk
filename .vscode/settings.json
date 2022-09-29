@@ -14,6 +14,7 @@
     "Kintsugi",
     "KUSD",
     "Litentry",
+    "menmonic",
     "parachain",
     "parachains",
     "Phala",
@@ -21,6 +22,7 @@
     "RMRK",
     "Shiden",
     "Statemine",
+    "Suri",
     "TEER"
   ],
   "editor.formatOnSave": true,
