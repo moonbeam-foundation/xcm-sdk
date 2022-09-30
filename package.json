@@ -1,6 +1,6 @@
 {
   "author": "PureStake",
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "private": true,
   "homepage": "https://github.com/PureStake/xcm-sdk#readme",
   "bugs": {

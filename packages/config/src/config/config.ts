@@ -1,11 +1,12 @@
 import { AssetSymbol, ChainKey, MoonChainKey, MOON_CHAINS } from '../constants';
-import { Asset, MoonChain } from '../interfaces';
+import { Asset, Chain, MoonChain } from '../interfaces';
 import {
   AssetsMap,
   ChainsMap,
   ChainXcmConfigs,
   XcmConfigBuilder,
 } from './config.interfaces';
+import { getChainKey, getSymbol } from './config.utils';
 import {
   MoonbaseAssets,
   MoonbaseChains,
@@ -43,7 +44,8 @@ export function createConfig<
     assets,
     moonAsset,
     moonChain,
-    deposit: (symbol: Symbols) => {
+    deposit: (symbolOrAsset: Symbols | Asset<Symbols>) => {
+      const symbol = getSymbol(symbolOrAsset);
       const config = configs[symbol];
 
       if (!config) {
@@ -54,12 +56,13 @@ export function createConfig<
         chains: (Object.keys(config.deposit) as ChainKeys[]).map(
           (chain) => chains[chain],
         ),
-        from: (chain: ChainKeys) => {
-          const depositConfig = config.deposit[chain];
+        from: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
+          const key = getChainKey(keyOrChain);
+          const depositConfig = config.deposit[key];
 
           if (!depositConfig) {
             throw new Error(
-              `No deposit config found for asset: ${symbol} and chain: ${chain}`,
+              `No deposit config found for asset: ${symbol} and chain: ${key}`,
             );
           }
 
@@ -71,7 +74,8 @@ export function createConfig<
         },
       };
     },
-    withdraw: (symbol: Symbols) => {
+    withdraw: (symbolOrAsset: Symbols | Asset<Symbols>) => {
+      const symbol = getSymbol(symbolOrAsset);
       const config = configs[symbol];
 
       if (!config) {
@@ -82,12 +86,13 @@ export function createConfig<
         chains: (Object.keys(config.withdraw) as ChainKeys[]).map(
           (chain) => chains[chain],
         ),
-        to: (chain: ChainKeys) => {
-          const withdrawConfig = config.withdraw[chain];
+        to: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
+          const key = getChainKey(keyOrChain);
+          const withdrawConfig = config.withdraw[key];
 
           if (!withdrawConfig) {
             throw new Error(
-              `No withdraw config found for asset: ${symbol} and chain: ${chain}`,
+              `No withdraw config found for asset: ${symbol} and chain: ${key}`,
             );
           }
 

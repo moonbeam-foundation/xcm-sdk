@@ -1,7 +1,7 @@
 {
   "name": "@moonbeam-network/xcm-config",
-  "version": "0.0.23",
-  "description": "",
+  "version": "0.0.25",
+  "description": "All necessary configuration to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
   "repository": {
     "directory": "packages/config",
     "type": "git",
@@ -13,7 +13,7 @@
     "xcm"
   ],
   "author": "PureStake",
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/PureStake/xcm-sdk/issues"
   },

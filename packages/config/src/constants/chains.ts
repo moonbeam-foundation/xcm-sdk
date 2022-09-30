@@ -39,7 +39,6 @@ export enum ChainKey {
   Acala = 'Acala',
   AlphanetRelay = 'AlphanetRelay',
   Astar = 'Astar',
-  AstarAlphanet = 'AstarAlphanet',
   BasiliskAlphanet = 'BasiliskAlphanet',
   Bifrost = 'Bifrost',
   Calamari = 'Calamari',
@@ -65,4 +64,5 @@ export enum ChainKey {
   Shiden = 'Shiden',
   Statemine = 'Statemine',
   StatemineAlphanet = 'StatemineAlphanet',
+  Statemint = 'Statemint',
 }

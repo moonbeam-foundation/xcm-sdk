@@ -46,8 +46,12 @@ export interface XcmSdk<
     account: string,
     cb: (data: AssetBalanceInfo<Symbols>[]) => void,
   ) => UnsubscribePromise;
-  deposit: (symbol: Symbols) => XcmSdkDeposit<Symbols, ChainKeys>;
-  withdraw: (symbol: Symbols) => XcmSdkWithdraw<Symbols, ChainKeys>;
+  deposit: (
+    symbolOrAsset: Symbols | Asset<Symbols>,
+  ) => XcmSdkDeposit<Symbols, ChainKeys>;
+  withdraw: (
+    symbolOrAsset: Symbols | Asset<Symbols>,
+  ) => XcmSdkWithdraw<Symbols, ChainKeys>;
 }
 
 export interface XcmSdkDeposit<
@@ -55,7 +59,9 @@ export interface XcmSdkDeposit<
   ChainKeys extends ChainKey = ChainKey,
 > {
   chains: Chain<ChainKeys>[];
-  from: (chain: ChainKeys) => XcmSdkDepositFrom<Symbols>;
+  from: (
+    keyOrChain: ChainKeys | Chain<ChainKeys>,
+  ) => XcmSdkDepositFrom<Symbols>;
 }
 
 export interface XcmSdkWithdraw<
@@ -63,7 +69,7 @@ export interface XcmSdkWithdraw<
   ChainKeys extends ChainKey = ChainKey,
 > {
   chains: Chain<ChainKeys>[];
-  to: (chain: ChainKeys) => XcmSdkWithdrawTo<Symbols>;
+  to: (keyOrChain: ChainKeys | Chain<ChainKeys>) => XcmSdkWithdrawTo<Symbols>;
 }
 
 export interface XcmSdkDepositFrom<Symbols extends AssetSymbol = AssetSymbol> {
