@@ -3,7 +3,7 @@ name: acceptance
 on:
   push:
     branches:
-      - 'main'
+      - main
   schedule:
     - cron: '0 */6 * * 1-5' # Monday to Friday every 6 hours
   workflow_dispatch:

@@ -17,11 +17,11 @@ export function getEthersWalletSigner(chain: MoonChain): Wallet {
     return wallet;
   }
 
-  const { TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY } = process.env;
+  const { TESTS_MOONBEAM_PRIVATE_KEY } = process.env;
 
   assert(
-    TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY,
-    'Please provide a private key of Moonbeam account as environment variable TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY',
+    TESTS_MOONBEAM_PRIVATE_KEY,
+    'Please provide a private key of Moonbeam account as environment variable TESTS_MOONBEAM_PRIVATE_KEY',
   );
 
   const provider = new ethers.providers.WebSocketProvider(chain.ws, {
@@ -29,7 +29,7 @@ export function getEthersWalletSigner(chain: MoonChain): Wallet {
     chainId: chain.chainId,
   });
 
-  wallet = new ethers.Wallet(TESTS_MOONBEAM_ACCOUNT_PRIVATE_KEY, provider);
+  wallet = new ethers.Wallet(TESTS_MOONBEAM_PRIVATE_KEY, provider);
 
   return wallet;
 }
@@ -39,14 +39,14 @@ export async function getPolkadotKeyringPair(): Promise<KeyringPair> {
     return keyringPair;
   }
 
-  const { TESTS_POLKADOT_ACCOUNT_SEED } = process.env;
+  const { TESTS_POLKADOT_SURI } = process.env;
 
   assert(
-    TESTS_POLKADOT_ACCOUNT_SEED,
-    'Please provide a seed phrase of Polkadot account as environment variable TESTS_POLKADOT_ACCOUNT_SEED',
+    TESTS_POLKADOT_SURI,
+    'Please provide a seed phrase of Polkadot account as environment variable TESTS_POLKADOT_SURI',
   );
 
   await cryptoWaitReady();
 
-  return keyring.createFromUri(TESTS_POLKADOT_ACCOUNT_SEED);
+  return keyring.createFromUri(TESTS_POLKADOT_SURI);
 }
