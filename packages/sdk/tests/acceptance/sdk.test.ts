@@ -1,3 +1,5 @@
+/* eslint-disable jest/max-expects */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable jest/no-standalone-expect */
 /* eslint-disable jest/require-hook */
 import {
@@ -7,7 +9,8 @@ import {
 } from '@moonbeam-network/xcm-config';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { Wallet } from 'ethers';
-import { init } from '../../src';
+import { get } from 'lodash';
+import { ExtrinsicStatus, init } from '../../src';
 import { getEthersWalletSigner, getPolkadotKeyringPair } from '../utils/auth';
 import { itIf } from '../utils/itIf';
 
@@ -38,8 +41,8 @@ const CONFIG = {
       withdraw: { [ChainKey.Interlay]: 0n },
     },
     [AssetSymbol.INTR]: {
-      deposit: { [ChainKey.Interlay]: 0n },
-      withdraw: { [ChainKey.Interlay]: 0n },
+      deposit: { [ChainKey.Interlay]: 57525733900n },
+      withdraw: { [ChainKey.Interlay]: 53529278900n },
     },
     [AssetSymbol.PARA]: {
       deposit: { [ChainKey.Parallel]: 0n },
@@ -56,12 +59,7 @@ const CONFIG = {
   },
 };
 
-// eslint-disable-next-line no-console
-console.log('CONFIG', CONFIG);
-
 describe('sdk', () => {
-  jest.setTimeout(5 * 60 * 1000);
-
   const { moonbeam } = init();
   // to hide polkadot unnecessary warnings
   const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation();
@@ -78,24 +76,66 @@ describe('sdk', () => {
 
   describe.each([moonbeam])('on $moonChain.name', (sdk) => {
     describe.each(sdk.symbols)('%s', (symbol) => {
-      const { chains: fromChains, from } = moonbeam.deposit(symbol);
-      const { chains: toChains, to } = moonbeam.withdraw(symbol);
-      describe.each(fromChains)('deposit from $key', (chain) => {
-        itIf(true)('should deposit', async () => {
-          const data = await from(chain).get(ethersSigner.address, keyringPair);
-          expect(data).toBeTruthy();
-        });
-      });
+      const { chains: fromChains, from } = sdk.deposit(symbol);
+      const { chains: toChains, to } = sdk.withdraw(symbol);
 
-      describe.each(toChains)('withdraw to $key', (chain) => {
-        itIf(true)('should withdraw', async () => {
-          const data = await to(chain).get(keyringPair.address, {
-            ethersSigner,
+      fromChains.length &&
+        describe.each(fromChains)('deposit from $key', (chain) => {
+          const amount: bigint | undefined = get(CONFIG, [
+            sdk.moonChain.key,
+            symbol,
+            'deposit',
+            chain.key,
+          ]);
+
+          itIf(!!amount)('should deposit', (done) => {
+            from(chain)
+              .get(ethersSigner.address, keyringPair)
+              .then(({ send }) => {
+                const hash = send(amount!, (event) => {
+                  expect(event.status).not.toBe(ExtrinsicStatus.Failed);
+
+                  if (event.status === ExtrinsicStatus.Success) {
+                    expect(event.txHash).toBeDefined();
+                    expect(event.blockHash).toBeDefined();
+                    done();
+                  }
+                });
+
+                expect(hash).toBeDefined();
+              });
           });
-
-          expect(data).toBeTruthy();
         });
-      });
+
+      toChains.length &&
+        describe.each(toChains)('withdraw to $key', (chain) => {
+          const amount: bigint | undefined = get(CONFIG, [
+            sdk.moonChain.key,
+            symbol,
+            'withdraw',
+            chain.key,
+          ]);
+
+          itIf(!!amount)('should withdraw', (done) => {
+            to(chain)
+              .get(keyringPair.address, {
+                ethersSigner,
+              })
+              .then(({ send }) => {
+                const hash = send(amount!, (event) => {
+                  expect(event.status).not.toBe(ExtrinsicStatus.Failed);
+
+                  if (event.status === ExtrinsicStatus.Success) {
+                    expect(event.txHash).toBeDefined();
+                    expect(event.blockHash).toBeDefined();
+                    done();
+                  }
+                });
+
+                expect(hash).toBeDefined();
+              });
+          });
+        });
     });
   });
 });

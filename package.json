@@ -22,7 +22,7 @@
     "test": "jest ./packages/**/src",
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- -u",
-    "test:acc": "jest --forceExit ./packages/**/tests/acceptance",
+    "test:acc": "jest --forceExit --testTimeout 300000 ./packages/**/tests/acceptance",
     "link": "npm run build && cd packages/config && npm ln && cd ../sdk && npm ln @moonbeam-network/xcm-config && npm ln",
     "prepare": "husky install"
   },
