@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 */6 * * 1-5' # Monday to Friday every 6 hours
+    - cron: '0 */12 * * 1-5' # Monday to Friday every 6 hours
   workflow_dispatch:
 
 jobs:
@@ -27,4 +27,7 @@ jobs:
       - run: npm ci
 
       - name: 🧪 Run acceptance tests
+        env:
+          TESTS_MOONBEAM_PRIVATE_KEY: ${{ secrets.TESTS_MOONBEAM_PRIVATE_KEY }}
+          TESTS_POLKADOT_SURI: ${{ secrets.TESTS_POLKADOT_SURI }}
         run: npm run test:acc -- --ci

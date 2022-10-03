@@ -17,40 +17,50 @@ import { itIf } from '../utils/itIf';
 const CONFIG = {
   [MoonChainKey.Moonbeam]: {
     [AssetSymbol.ACA]: {
-      deposit: { [ChainKey.Acala]: 0n },
-      withdraw: { [ChainKey.Acala]: 0n },
+      deposit: { [ChainKey.Acala]: 2000000000000n },
+      withdraw: { [ChainKey.Acala]: 2000000000000n },
     },
     [AssetSymbol.ASTR]: {
-      deposit: { [ChainKey.Astar]: 0n },
-      withdraw: { [ChainKey.Astar]: 0n },
+      deposit: { [ChainKey.Astar]: 2000000000000000000n },
+      withdraw: { [ChainKey.Astar]: 2000000000000000000n },
     },
     [AssetSymbol.AUSD]: {
-      deposit: { [ChainKey.Acala]: 0n },
-      withdraw: { [ChainKey.Acala]: 0n },
+      deposit: { [ChainKey.Acala]: 2000000000000n },
+      withdraw: { [ChainKey.Acala]: 2000000000000n },
     },
     [AssetSymbol.DOT]: {
-      deposit: { [ChainKey.Polkadot]: 0n },
-      withdraw: { [ChainKey.Polkadot]: 0n },
+      deposit: { [ChainKey.Polkadot]: 10000000000n },
+      withdraw: { [ChainKey.Polkadot]: 10000000000n },
     },
     [AssetSymbol.GLMR]: {
-      deposit: { [ChainKey.Acala]: 0n },
-      withdraw: { [ChainKey.Acala]: 0n },
+      deposit: {
+        [ChainKey.Acala]: 2000000000000n,
+        [ChainKey.Astar]: 2000000000000000000n,
+        [ChainKey.Parallel]: 2000000000000n,
+        [ChainKey.Phala]: 2000000000000n,
+      },
+      withdraw: {
+        [ChainKey.Acala]: 2000000000000n,
+        [ChainKey.Astar]: 2000000000000000000n,
+        [ChainKey.Parallel]: 2000000000000n,
+        [ChainKey.Phala]: 2000000000000n,
+      },
     },
     [AssetSymbol.IBTC]: {
       deposit: { [ChainKey.Interlay]: 0n },
       withdraw: { [ChainKey.Interlay]: 0n },
     },
     [AssetSymbol.INTR]: {
-      deposit: { [ChainKey.Interlay]: 57525733900n },
-      withdraw: { [ChainKey.Interlay]: 53529278900n },
+      deposit: { [ChainKey.Interlay]: 10000000000n },
+      withdraw: { [ChainKey.Interlay]: 10000000000n },
     },
     [AssetSymbol.PARA]: {
-      deposit: { [ChainKey.Parallel]: 0n },
-      withdraw: { [ChainKey.Parallel]: 0n },
+      deposit: { [ChainKey.Parallel]: 2000000000000n },
+      withdraw: { [ChainKey.Parallel]: 2000000000000n },
     },
     [AssetSymbol.PHA]: {
-      deposit: { [ChainKey.Phala]: 0n },
-      withdraw: { [ChainKey.Phala]: 0n },
+      deposit: { [ChainKey.Phala]: 2000000000000n },
+      withdraw: { [ChainKey.Phala]: 2000000000000n },
     },
     [AssetSymbol.USDT]: {
       deposit: { [ChainKey.Statemint]: 0n },
