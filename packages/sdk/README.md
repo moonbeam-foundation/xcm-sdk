@@ -114,7 +114,7 @@ npm run test
 
 ```bash
 cp .env.example .env
-# add private key and seed phrase to .env file
+# add private key and suri to .env file
 
 npm run test:acc
 ```
