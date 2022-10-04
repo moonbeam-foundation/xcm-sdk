@@ -57,7 +57,7 @@ export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
   [ChainKey.Karura]: {
     key: ChainKey.Karura,
     name: 'Karura',
-    ws: 'wss://karura.api.onfinality.io/public-ws',
+    ws: 'wss://karura-rpc-0.aca-api.network',
     weight: 1_000_000_000,
     parachainId: 2000,
     moonAssetId: 3,

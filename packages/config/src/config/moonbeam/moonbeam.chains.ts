@@ -16,7 +16,7 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
   [ChainKey.Acala]: {
     key: ChainKey.Acala,
     name: 'Acala',
-    ws: 'wss://acala-polkadot.api.onfinality.io/public-ws',
+    ws: 'wss://acala-rpc-0.aca-api.network',
     weight: 1_000_000_000,
     parachainId: 2000,
     moonAssetId: 0,
