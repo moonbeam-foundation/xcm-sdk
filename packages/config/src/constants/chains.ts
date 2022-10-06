@@ -42,6 +42,7 @@ export enum ChainKey {
   BasiliskAlphanet = 'BasiliskAlphanet',
   Bifrost = 'Bifrost',
   Calamari = 'Calamari',
+  CentrifugeAlphanet = 'CentrifugeAlphanet',
   CloverAlphanet = 'CloverAlphanet',
   CrustShadow = 'CrustShadow',
   CrustShadowAlphanet = 'CrustShadowAlphanet',

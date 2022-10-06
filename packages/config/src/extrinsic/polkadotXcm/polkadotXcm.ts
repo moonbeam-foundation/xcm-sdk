@@ -1,5 +1,6 @@
 import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
+import { AssetId } from '../../types';
 import {
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
@@ -78,7 +79,7 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
                   },
                 ],
               })),
-            X2: (palletInstance: number, assetId: number) =>
+            X2: (palletInstance: number, assetId: AssetId) =>
               createExtrinsic((amount) => ({
                 V1: [
                   {

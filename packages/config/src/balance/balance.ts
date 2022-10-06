@@ -3,10 +3,12 @@ import '@moonbeam-network/api-augment';
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
+import { AssetId } from '../types';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 import {
   AssetsBalanceConfig,
   MinBalanceConfig,
+  OrmlTokensBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
   TokensPalletAccountData,
@@ -19,13 +21,14 @@ export function createBalanceBuilder<
   return {
     assets,
     min,
+    ormlTokens,
     system,
     tokens: (asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
       tokens<Symbols>(asset),
   };
 }
 
-function assets(asset: number | bigint): AssetsBalanceConfig {
+function assets(asset: AssetId): AssetsBalanceConfig {
   return {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Account,
@@ -35,12 +38,23 @@ function assets(asset: number | bigint): AssetsBalanceConfig {
   };
 }
 
-function min(asset: number): MinBalanceConfig {
+function min(asset: AssetId): MinBalanceConfig {
   return {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Asset,
     path: ['minBalance'],
     params: [asset],
+  };
+}
+
+function ormlTokens(asset: AssetId): OrmlTokensBalanceConfig {
+  return {
+    pallet: BalancePallet.OrmlTokens,
+    function: BalanceFunction.Accounts,
+    path: [],
+    getParams: (account: string) => [account, { ForeignAsset: asset }],
+    calc: ({ free, frozen }: TokensPalletAccountData) =>
+      BigInt(free.sub(frozen).toString()),
   };
 }
 

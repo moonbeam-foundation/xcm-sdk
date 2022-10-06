@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   Asset,
@@ -94,6 +95,9 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                   'Polkadot Signer/KeyringPair are not provided to XCM-SDK',
                 );
               }
+              console.log('asset', asset);
+              console.log('origin', origin);
+              console.log('config', config);
 
               const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,

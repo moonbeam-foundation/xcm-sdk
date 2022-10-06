@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import {
   assets,
   balance,
@@ -21,13 +24,23 @@ export const KBTC: MoonbaseXcmConfig = {
       origin,
       balance: balance.tokens(asset.originSymbol),
       sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
-      isNativeAssetPayingMoonFee: true,
+      xcmFeeAsset: {
+        asset: feeAsset,
+        balance: balance.tokens(feeAsset.originSymbol),
+      },
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiCurrencies)
         .origin(origin)
-        .assets(asset, feeAsset),
+        .assets(
+          {
+            [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
+          },
+          {
+            [XTokensExtrinsicCurrencyTypes.Token]: feeAsset.originSymbol,
+          },
+        ),
     },
   },
   withdraw: {

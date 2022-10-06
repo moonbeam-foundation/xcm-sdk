@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import {
   assets,
   balance,
@@ -25,7 +28,7 @@ export const ACA: MoonbeamXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
         .asset({
-          Token: asset.originSymbol,
+          [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
         }),
     },
   },

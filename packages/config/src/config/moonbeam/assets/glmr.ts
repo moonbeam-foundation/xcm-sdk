@@ -1,6 +1,7 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
+  XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../extrinsic';
@@ -40,7 +41,7 @@ export const GLMR: MoonbeamXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(acala)
         .asset({
-          ForeignAsset: acalaGlmrId,
+          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: acalaGlmrId,
         }),
     },
     [astar.key]: {

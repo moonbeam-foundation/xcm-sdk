@@ -1,17 +1,22 @@
 import { AssetSymbol, ChainKey, MoonChainKey } from './constants';
+import { AssetId } from './types';
 
 export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
   id: string;
   /**
-   * id -> erc20Id
+   * Forgeign assets id -> erc20Id
    * `0xffffffff${BigInt(id).toString(16).padStart(32, '0')}`
+   * Local assets id -> erc20Id
+   * `0xfffffffe${BigInt(id).toString(16).padStart(32, '0')}`
    * exceptions are native tokens, for them we use
    * Erc20BalancesPrecompile 0x0000000000000000000000000000000000000802
    */
   erc20Id: string;
   originSymbol: Symbols;
-  originAssetId?: number;
+  foreignAssetId?: Partial<Record<ChainKey, AssetId>>;
+  originAssetId?: AssetId;
   isNative?: boolean;
+  isLocalAsset?: boolean;
 }
 
 export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {

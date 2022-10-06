@@ -1,6 +1,7 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
+  XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../extrinsic';
@@ -41,7 +42,7 @@ export const MOVR: MoonriverXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(bifrost)
         .asset({
-          Token: asset.originSymbol,
+          [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
         }),
     },
     [karura.key]: {
@@ -54,7 +55,7 @@ export const MOVR: MoonriverXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(karura)
         .asset({
-          ForeignAsset: karuraMovrId,
+          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: karuraMovrId,
         }),
     },
     [khala.key]: {

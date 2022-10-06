@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import {
   assets,
   balance,
@@ -24,7 +27,7 @@ export const KINT: MoonbaseXcmConfig = {
         .transfer()
         .successEvent(XTokensExtrinsicSuccessEvent.Transferred)
         .origin(origin)
-        .asset({ Token: asset.originSymbol }),
+        .asset({ [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol }),
     },
   },
   withdraw: {

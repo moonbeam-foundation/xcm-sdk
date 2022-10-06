@@ -4,7 +4,6 @@ import {
   Chain,
   ChainKey,
   DepositConfig,
-  isMultiCurrency,
   MoonChain,
   PolkadotXcmExtrinsicSuccessEvent,
 } from '@moonbeam-network/xcm-config';
@@ -78,9 +77,8 @@ export interface CreateExtrinsicOptions<
 > {
   account: string;
   config: DepositConfig<Symbols>;
+  fee?: bigint;
   foreignPolkadot: PolkadotService<Symbols, ChainKeys>;
-  nativeAsset: Asset<Symbols>;
-  polkadot: PolkadotService<Symbols, ChainKeys>;
   primaryAccount?: string;
 }
 
@@ -91,23 +89,17 @@ export function getCreateExtrinsic<
   account,
   config,
   foreignPolkadot,
-  nativeAsset,
-  polkadot,
   primaryAccount,
+  fee,
 }: CreateExtrinsicOptions<Symbols, ChainKeys>) {
-  return async (amount: bigint) => {
-    const fee = isMultiCurrency(config.extrinsic)
-      ? await polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
-      : 0n;
-
-    return foreignPolkadot.getXcmExtrinsic(
+  return (amount: bigint) =>
+    foreignPolkadot.getXcmExtrinsic(
       account,
       amount,
       config.extrinsic,
       fee,
       primaryAccount,
     );
-  };
 }
 
 export interface GetDepositDataParams<
@@ -148,14 +140,6 @@ export async function getDepositData<
   const sourceAddress =
     typeof sourceAccount === 'string' ? sourceAccount : sourceAccount.address;
   const meta = foreignPolkadot.getMetadata();
-  const createExtrinsic = getCreateExtrinsic({
-    account,
-    config,
-    foreignPolkadot,
-    nativeAsset,
-    polkadot,
-    primaryAccount,
-  });
 
   const [
     decimals,
@@ -166,7 +150,7 @@ export async function getDepositData<
     sourceMinBalance = 0n,
     min,
   ] = await Promise.all([
-    polkadot.getAssetDecimals(asset.id),
+    polkadot.getAssetDecimals(asset),
     foreignPolkadot.getGenericBalance(
       primaryAccount || sourceAddress,
       config.balance,
@@ -178,9 +162,16 @@ export async function getDepositData<
           config.sourceFeeBalance,
         )
       : undefined,
-    config.isNativeAssetPayingMoonFee
-      ? polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
+    config.xcmFeeAsset
+      ? polkadot.getAssetFee(
+          config.xcmFeeAsset.asset,
+          config.origin.weight,
+          moonChain,
+        )
       : undefined,
+    // config.isNativeAssetPayingMoonFee
+    //   ? polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
+    //   : undefined,
     config.sourceMinBalance
       ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
       : undefined,
@@ -188,11 +179,20 @@ export async function getDepositData<
     getMin({ asset, config, moonChain, polkadot }),
   ]);
 
+  const createExtrinsic = getCreateExtrinsic({
+    account,
+    config,
+    foreignPolkadot,
+    primaryAccount,
+    fee: moonChainFee,
+  });
+
   return {
     asset: { ...asset, decimals },
     existentialDeposit,
     min,
     moonChainFee,
+    // TODO add xcmAsset
     native: { ...nativeAsset, decimals: meta.decimals },
     origin,
     source: config.origin,
@@ -244,7 +244,7 @@ export async function getMin<
   moonChain,
   polkadot,
 }: GetMinParams<Symbols, ChainKeys>): Promise<bigint> {
-  if (config.sourceFeeBalance && config.isNativeAssetPayingMoonFee) {
+  if (config.sourceFeeBalance && config.xcmFeeAsset) {
     return 0n;
   }
 
@@ -253,5 +253,5 @@ export async function getMin<
         config.origin.weight,
         moonChain.unitsPerSecond,
       )
-    : polkadot.getAssetFee(asset.id, config.origin.weight);
+    : polkadot.getAssetFee(asset, config.origin.weight, moonChain);
 }

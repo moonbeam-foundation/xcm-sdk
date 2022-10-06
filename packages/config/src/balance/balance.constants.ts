@@ -1,5 +1,6 @@
 export enum BalancePallet {
   Assets = 'assets',
+  OrmlTokens = 'ormlTokens',
   System = 'system',
   Tokens = 'tokens',
 }

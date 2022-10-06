@@ -92,7 +92,7 @@ export async function getWithdrawData<
   const meta = destinationPolkadot.getMetadata();
   const [decimals, destinationBalance, existentialDeposit, assetMinBalance] =
     await Promise.all([
-      asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset.id),
+      asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
       destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
       destinationPolkadot.getExistentialDeposit(),
       config.sourceMinBalance

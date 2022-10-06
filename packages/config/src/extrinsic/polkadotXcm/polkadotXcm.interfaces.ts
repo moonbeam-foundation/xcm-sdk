@@ -1,3 +1,4 @@
+import { AssetId } from '../../types';
 import { Parents } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
@@ -108,7 +109,7 @@ export interface PolkadotXcmAssetParamV1InteriorX2 {
           PalletInstance: number;
         },
         {
-          GeneralIndex: number;
+          GeneralIndex: AssetId;
         },
       ]
     | [

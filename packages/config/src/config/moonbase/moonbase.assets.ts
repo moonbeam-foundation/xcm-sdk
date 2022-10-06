@@ -1,4 +1,4 @@
-import { AssetSymbol } from '../../constants';
+import { AssetSymbol, ChainKey } from '../../constants';
 import { AssetsMap } from '../config.interfaces';
 import { MoonbaseAssets } from './moonbase.interfaces';
 
@@ -14,6 +14,8 @@ export const MOONBASE_ASSETS = <const>[
   AssetSymbol.TEER,
   AssetSymbol.TT1,
   AssetSymbol.UNIT,
+  AssetSymbol.XUSDC,
+  AssetSymbol.DEVEL,
 ];
 
 export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
@@ -37,6 +39,9 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: AssetSymbol.DEV,
+    foreignAssetId: {
+      [ChainKey.CentrifugeAlphanet]: 1,
+    },
     isNative: true,
   },
   [AssetSymbol.KBTC]: {
@@ -74,5 +79,17 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     erc20Id: '0xffffffff75976211c786fe4d73d2477e222786ac',
     originSymbol: AssetSymbol.TT1,
     originAssetId: 2,
+  },
+  [AssetSymbol.XUSDC]: {
+    id: '337110116006454532607322340792629567158',
+    erc20Id: '0xfffffffefd9d0bf45a2947a519a741c4b9e99eb6',
+    originSymbol: AssetSymbol.XUSDC,
+    originAssetId: 2,
+    isLocalAsset: true,
+  },
+  [AssetSymbol.DEVEL]: {
+    id: '337110116006454532607322340792629567158',
+    erc20Id: '0xfffffffefd9d0bf45a2947a519a741c4b9e99eb6',
+    originSymbol: AssetSymbol.DEVEL,
   },
 };
