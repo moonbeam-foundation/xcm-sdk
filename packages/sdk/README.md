@@ -97,7 +97,24 @@ git clone git@github.com:PureStake/xcm-sdk.git
 cd packages/sdk/examples/simple/
 npm i
 
-// edit index.ts by adding your accounts
+# edit index.ts by adding your accounts
 
 npm start
+```
+
+# Tests
+
+## Unit tests
+
+```bash
+npm run test
+```
+
+## Acceptance tests
+
+```bash
+cp .env.example .env
+# add private key and suri to .env file
+
+npm run test:acc
 ```
