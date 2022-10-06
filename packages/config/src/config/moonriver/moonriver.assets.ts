@@ -11,7 +11,7 @@ export const MOONRIVER_ASSETS = <const>[
   AssetSymbol.KAR,
   AssetSymbol.KBTC,
   AssetSymbol.KINT,
-  AssetSymbol.KMA,
+  // AssetSymbol.KMA,
   AssetSymbol.KSM,
   AssetSymbol.LIT,
   AssetSymbol.MOVR,
@@ -63,11 +63,11 @@ export const MOONRIVER_ASSETS_MAP: AssetsMap<MoonriverAssets> = {
     erc20Id: '0xffffffff83f4f317d3cbf6ec6250aec3697b3ff2',
     originSymbol: AssetSymbol.KINT,
   },
-  [AssetSymbol.KMA]: {
-    id: '213357169630950964874127107356898319277',
-    erc20Id: '0xffffffffa083189f870640b141ae1e882c2b5bad',
-    originSymbol: AssetSymbol.KMA,
-  },
+  // [AssetSymbol.KMA]: {
+  //   id: '213357169630950964874127107356898319277',
+  //   erc20Id: '0xffffffffa083189f870640b141ae1e882c2b5bad',
+  //   originSymbol: AssetSymbol.KMA,
+  // },
   [AssetSymbol.KSM]: {
     id: '42259045809535163221576417993425387648',
     erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',

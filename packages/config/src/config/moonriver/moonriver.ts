@@ -9,7 +9,6 @@ import { HKO } from './assets/hko';
 import { KAR } from './assets/kar';
 import { KBTC } from './assets/kbtc';
 import { KINT } from './assets/kint';
-import { KMA } from './assets/kma';
 import { KSM } from './assets/ksm';
 import { LIT } from './assets/lit';
 import { MOVR } from './assets/movr';
@@ -28,7 +27,7 @@ export const MOONRIVER_CONFIGS: MoonriverXcmConfigs = {
   [AssetSymbol.KAR]: KAR,
   [AssetSymbol.KBTC]: KBTC,
   [AssetSymbol.KINT]: KINT,
-  [AssetSymbol.KMA]: KMA,
+  // [AssetSymbol.KMA]: KMA,
   [AssetSymbol.KSM]: KSM,
   [AssetSymbol.LIT]: LIT,
   [AssetSymbol.MOVR]: MOVR,
