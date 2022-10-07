@@ -4,7 +4,7 @@ import { AssetId } from './types';
 export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
   id: string;
   /**
-   * Forgeign assets id -> erc20Id
+   * Foreign assets id -> erc20Id
    * `0xffffffff${BigInt(id).toString(16).padStart(32, '0')}`
    * Local assets id -> erc20Id
    * `0xfffffffe${BigInt(id).toString(16).padStart(32, '0')}`
