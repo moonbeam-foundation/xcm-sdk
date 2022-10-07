@@ -40,7 +40,7 @@ export const DEV: MoonbaseXcmConfig = {
     },
     [centrifuge.key]: {
       origin: centrifuge,
-      balance: balance.assets(centrifugeDevId),
+      balance: balance.ormlTokens(centrifugeDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -48,7 +48,7 @@ export const DEV: MoonbaseXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(centrifuge)
         .asset({
-          [XTokensExtrinsicCurrencyTypes.OtherReserve]: cloverDevId,
+          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: centrifugeDevId,
         }),
     },
   },
