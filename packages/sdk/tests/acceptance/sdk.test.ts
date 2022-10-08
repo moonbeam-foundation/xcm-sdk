@@ -16,55 +16,13 @@ import { itIf } from '../utils/itIf';
 
 const CONFIG = {
   [MoonChainKey.Moonbeam]: {
-    [AssetSymbol.ACA]: {
-      deposit: { [ChainKey.Acala]: 2000000000000n },
-      withdraw: { [ChainKey.Acala]: 2000000000000n },
-    },
-    [AssetSymbol.ASTR]: {
-      deposit: { [ChainKey.Astar]: 2000000000000000000n },
-      withdraw: { [ChainKey.Astar]: 2000000000000000000n },
-    },
-    [AssetSymbol.AUSD]: {
-      deposit: { [ChainKey.Acala]: 2000000000000n },
-      withdraw: { [ChainKey.Acala]: 2000000000000n },
-    },
-    [AssetSymbol.DOT]: {
-      deposit: { [ChainKey.Polkadot]: 10000000000n },
-      withdraw: { [ChainKey.Polkadot]: 10000000000n },
-    },
-    [AssetSymbol.GLMR]: {
-      deposit: {
-        [ChainKey.Acala]: 2000000000000n,
-        [ChainKey.Astar]: 2000000000000000000n,
-        [ChainKey.Parallel]: 2000000000000n,
-        [ChainKey.Phala]: 2000000000000n,
-      },
-      withdraw: {
-        [ChainKey.Acala]: 2000000000000n,
-        [ChainKey.Astar]: 2000000000000000000n,
-        [ChainKey.Parallel]: 2000000000000n,
-        [ChainKey.Phala]: 2000000000000n,
-      },
-    },
     [AssetSymbol.IBTC]: {
-      deposit: { [ChainKey.Interlay]: 0n },
-      withdraw: { [ChainKey.Interlay]: 0n },
-    },
-    [AssetSymbol.INTR]: {
-      deposit: { [ChainKey.Interlay]: 10000000000n },
-      withdraw: { [ChainKey.Interlay]: 10000000000n },
-    },
-    [AssetSymbol.PARA]: {
-      deposit: { [ChainKey.Parallel]: 2000000000000n },
-      withdraw: { [ChainKey.Parallel]: 2000000000000n },
-    },
-    [AssetSymbol.PHA]: {
-      deposit: { [ChainKey.Phala]: 2000000000000n },
-      withdraw: { [ChainKey.Phala]: 2000000000000n },
+      deposit: { [ChainKey.Interlay]: true },
+      withdraw: { [ChainKey.Interlay]: true },
     },
     [AssetSymbol.USDT]: {
-      deposit: { [ChainKey.Statemint]: 0n },
-      withdraw: { [ChainKey.Statemint]: 0n },
+      deposit: { [ChainKey.Statemint]: true },
+      withdraw: { [ChainKey.Statemint]: true },
     },
   },
 };
@@ -91,18 +49,18 @@ describe('sdk', () => {
 
       fromChains.length &&
         describe.each(fromChains)('deposit from $key', (chain) => {
-          const amount: bigint | undefined = get(CONFIG, [
+          const skip: boolean | undefined = get(CONFIG, [
             sdk.moonChain.key,
             symbol,
             'deposit',
             chain.key,
           ]);
 
-          itIf(!!amount)('should deposit', (done) => {
+          itIf(!skip)('should deposit', (done) => {
             from(chain)
               .get(ethersSigner.address, keyringPair)
-              .then(({ send }) => {
-                const hash = send(amount!, (event) => {
+              .then(({ min, send }) => {
+                const hash = send(min, (event) => {
                   expect(event.status).not.toBe(ExtrinsicStatus.Failed);
 
                   if (event.status === ExtrinsicStatus.Success) {
@@ -119,20 +77,20 @@ describe('sdk', () => {
 
       toChains.length &&
         describe.each(toChains)('withdraw to $key', (chain) => {
-          const amount: bigint | undefined = get(CONFIG, [
+          const skip: boolean | undefined = get(CONFIG, [
             sdk.moonChain.key,
             symbol,
             'withdraw',
             chain.key,
           ]);
 
-          itIf(!!amount)('should withdraw', (done) => {
+          itIf(!skip)('should withdraw', (done) => {
             to(chain)
               .get(keyringPair.address, {
                 ethersSigner,
               })
-              .then(({ send }) => {
-                const hash = send(amount!, (event) => {
+              .then(({ min, send }) => {
+                const hash = send(min, (event) => {
                   expect(event.status).not.toBe(ExtrinsicStatus.Failed);
 
                   if (event.status === ExtrinsicStatus.Success) {
