@@ -110,6 +110,8 @@ export interface DepositTransferData<
   sourceBalance: bigint;
   sourceFeeBalance?: Balance<Symbols>;
   sourceMinBalance: bigint;
+  xcmFeeAsset?: Asset<Symbols>;
+  xcmFeeAssetBalance?: Balance<Symbols>;
   getFee: (amount?: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }

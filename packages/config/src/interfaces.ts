@@ -12,11 +12,13 @@ export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
    * Erc20BalancesPrecompile 0x0000000000000000000000000000000000000802
    */
   erc20Id: string;
-  originSymbol: Symbols;
   foreignAssetId?: Partial<Record<ChainKey, AssetId>>;
+  // TODO delete originAssetId in favor of foreignAssetId?
   originAssetId?: AssetId;
+  originSymbol: Symbols;
   isNative?: boolean;
   isLocalAsset?: boolean;
+  isDummy?: boolean;
 }
 
 export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {

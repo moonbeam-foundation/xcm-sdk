@@ -104,7 +104,9 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 ChainKeys
               >([configBuilder.moonChain.ws, config.origin.ws]);
               const meta = foreignPolkadot.getMetadata();
-              const nativeAsset = configBuilder.assets[meta.symbol];
+              const nativeAsset = configBuilder.assets[meta.symbol] || {
+                originSymbol: meta.symbol,
+              };
 
               return getDepositData({
                 account,

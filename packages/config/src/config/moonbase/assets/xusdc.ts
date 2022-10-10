@@ -9,6 +9,7 @@ import {
   balance,
   chains,
   extrinsic,
+  moonbase,
   withdraw,
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
@@ -24,7 +25,7 @@ const xcmFeeAssetId = getForeignAssetId(
 
 export const XUSDC: MoonbaseXcmConfig = {
   asset,
-  origin: centrifuge,
+  origin: moonbase,
   deposit: {
     [centrifuge.key]: {
       origin: centrifuge,

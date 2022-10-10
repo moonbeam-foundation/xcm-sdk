@@ -142,11 +142,12 @@ export async function getDepositData<
   const meta = foreignPolkadot.getMetadata();
 
   const [
-    decimals,
+    assetDecimals,
     sourceBalance,
     existentialDeposit,
     sourceFeeBalance,
-    moonChainFee,
+    xcmFee,
+    xcmFeeDecimals,
     sourceMinBalance = 0n,
     min,
   ] = await Promise.all([
@@ -169,9 +170,9 @@ export async function getDepositData<
           moonChain,
         )
       : undefined,
-    // config.isNativeAssetPayingMoonFee
-    //   ? polkadot.getAssetFee(nativeAsset.id, config.origin.weight)
-    //   : undefined,
+    config.xcmFeeAsset
+      ? polkadot.getAssetDecimals(config.xcmFeeAsset.asset)
+      : undefined,
     config.sourceMinBalance
       ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
       : undefined,
@@ -184,15 +185,14 @@ export async function getDepositData<
     config,
     foreignPolkadot,
     primaryAccount,
-    fee: moonChainFee,
+    fee: xcmFee,
   });
 
   return {
-    asset: { ...asset, decimals },
+    asset: { ...asset, decimals: assetDecimals },
     existentialDeposit,
     min,
-    moonChainFee,
-    // TODO add xcmAsset
+    moonChainFee: xcmFee,
     native: { ...nativeAsset, decimals: meta.decimals },
     origin,
     source: config.origin,
@@ -201,6 +201,19 @@ export async function getDepositData<
       ? { ...meta, balance: sourceFeeBalance }
       : undefined,
     sourceMinBalance,
+    xcmFeeAsset: config.xcmFeeAsset?.asset,
+    xcmFeeAssetBalance:
+      !isUndefined(xcmFee) &&
+      !isUndefined(config.xcmFeeAsset) &&
+      !isUndefined(xcmFeeDecimals)
+        ? {
+            balance: xcmFee,
+            decimals: config.xcmFeeAsset.asset.isNative
+              ? meta.decimals
+              : xcmFeeDecimals,
+            symbol: config.xcmFeeAsset.asset.originSymbol,
+          }
+        : undefined,
     getFee: async (amount = sourceBalance): Promise<bigint> => {
       const extrinsic = await createExtrinsic(amount);
       const info = await extrinsic.paymentInfo(sourceAccount);
