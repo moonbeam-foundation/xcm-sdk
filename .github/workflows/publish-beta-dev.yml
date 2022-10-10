@@ -15,16 +15,22 @@ jobs:
   publish-beta-dev:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: 🤘 checkout
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js environment
+      - name: ⚙️ Setup Node.js environment
         uses: actions/setup-node@v3.0.0
         with:
           node-version: 16.x
           cache: 'npm'
-      - name: Authenticate with NPM
+
+      - name: 🔐 Authenticate with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - run: npm ci
+
+      - name: 🛠️ Build
+        run: npm run build
 
       - name: Get last version number
         run: echo "last_version_number=$(npm show @moonbeam-network/xcm-sdk dist-tags.${{ inputs.tag }} | grep -Eo '[0-9]+$')" >> $GITHUB_ENV
@@ -33,22 +39,14 @@ jobs:
       - name: Get new version
         run: echo "new_version=0.0.1-${{ inputs.tag }}.${{ env.new_version_number }}" >> $GITHUB_ENV
 
-      - name: Build
-        run: npm run build
-
-      - name: Publish config
+      - name: 🚀 Publish config
         working-directory: ./packages/config
         run: |
-          npm version ${{ env.new_version }} --no-git-tag-version \
-            && npm publish --tag ${{ inputs.tag }}
+          npm version ${{ env.new_version }} --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
 
-      - name: Sleep for 10 seconds
-        run: sleep 10s
-        shell: bash
-
-      - name: Publish sdk
+      - name: 🚀 Publish sdk
         working-directory: ./packages/sdk
         run: |
-          npm i @moonbeam-network/xcm-config@${{ inputs.tag }} \
-          && npm version ${{ env.new_version }} --no-git-tag-version \
-          && npm publish --tag ${{ inputs.tag }}
+          npm version ${{ env.new_version }} --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
