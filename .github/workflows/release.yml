@@ -53,9 +53,6 @@ jobs:
           npm version ${{ env.VERSION }} --no-git-tag-version
           npm publish
 
-      - name: Update main package-lock.json file
-        run: npm i
-
       - name: 📁 Commit package.json files
         run: |
           git config --local user.name github-actions
