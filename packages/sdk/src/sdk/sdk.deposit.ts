@@ -151,18 +151,23 @@ export async function getDepositData<
     sourceMinBalance = 0n,
     min,
   ] = await Promise.all([
+    // assetDecimals
     polkadot.getAssetDecimals(asset),
+    // sourceBalance
     foreignPolkadot.getGenericBalance(
       primaryAccount || sourceAddress,
       config.balance,
     ),
+    // existentialDeposit
     foreignPolkadot.getExistentialDeposit(),
+    // sourceFeeBalance
     config.sourceFeeBalance
       ? foreignPolkadot.getGenericBalance(
           sourceAddress,
           config.sourceFeeBalance,
         )
       : undefined,
+    // xcmFee
     config.xcmFeeAsset
       ? polkadot.getAssetFee(
           config.xcmFeeAsset.asset,
@@ -170,12 +175,15 @@ export async function getDepositData<
           moonChain,
         )
       : undefined,
+    // xcmFeeDecimals
     config.xcmFeeAsset
       ? polkadot.getAssetDecimals(config.xcmFeeAsset.asset)
       : undefined,
+    // sourceMinBalance
     config.sourceMinBalance
       ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
       : undefined,
+    // min
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     getMin({ asset, config, moonChain, polkadot }),
   ]);
@@ -202,18 +210,13 @@ export async function getDepositData<
       : undefined,
     sourceMinBalance,
     xcmFeeAsset: config.xcmFeeAsset?.asset,
-    xcmFeeAssetBalance:
-      !isUndefined(xcmFee) &&
-      !isUndefined(config.xcmFeeAsset) &&
-      !isUndefined(xcmFeeDecimals)
-        ? {
-            balance: xcmFee,
-            decimals: config.xcmFeeAsset.asset.isNative
-              ? meta.decimals
-              : xcmFeeDecimals,
-            symbol: config.xcmFeeAsset.asset.originSymbol,
-          }
-        : undefined,
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    xcmFeeAssetBalance: getXcmAssetBalance({
+      xcmFeeAsset: config.xcmFeeAsset?.asset,
+      xcmFee,
+      xcmFeeDecimals,
+      nativeDecimals: meta.decimals,
+    }),
     getFee: async (amount = sourceBalance): Promise<bigint> => {
       const extrinsic = await createExtrinsic(amount);
       const info = await extrinsic.paymentInfo(sourceAccount);
@@ -267,4 +270,28 @@ export async function getMin<
         moonChain.unitsPerSecond,
       )
     : polkadot.getAssetFee(asset, config.origin.weight, moonChain);
+}
+
+interface GetXcmAssetBalanceParams<Symbols extends AssetSymbol> {
+  xcmFeeAsset?: Asset<Symbols>;
+  xcmFee?: bigint;
+  xcmFeeDecimals?: number;
+  nativeDecimals: number;
+}
+
+function getXcmAssetBalance<Symbols extends AssetSymbol>({
+  xcmFee,
+  xcmFeeDecimals,
+  xcmFeeAsset,
+  nativeDecimals,
+}: GetXcmAssetBalanceParams<Symbols>) {
+  return !isUndefined(xcmFee) &&
+    !isUndefined(xcmFeeAsset) &&
+    !isUndefined(xcmFeeDecimals)
+    ? {
+        balance: xcmFee,
+        decimals: xcmFeeAsset.isNative ? nativeDecimals : xcmFeeDecimals,
+        symbol: xcmFeeAsset.originSymbol,
+      }
+    : undefined;
 }

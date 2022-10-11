@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   Asset,
@@ -32,7 +31,7 @@ import {
   XcmSdkDeposit,
   XcmSdkWithdraw,
 } from './sdk.interfaces';
-import { subscribeToAssetsBalanceInfo } from './sdk.utils';
+import { createDummyAsset, subscribeToAssetsBalanceInfo } from './sdk.utils';
 import { getWithdrawData } from './sdk.withdraw';
 
 export function init(options?: SdkOptions): XcmSdkByChain {
@@ -95,18 +94,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                   'Polkadot Signer/KeyringPair are not provided to XCM-SDK',
                 );
               }
-              console.log('asset', asset);
-              console.log('origin', origin);
-              console.log('config', config);
 
               const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,
                 ChainKeys
               >([configBuilder.moonChain.ws, config.origin.ws]);
               const meta = foreignPolkadot.getMetadata();
-              const nativeAsset = configBuilder.assets[meta.symbol] || {
-                originSymbol: meta.symbol,
-              };
+              const nativeAsset =
+                configBuilder.assets[meta.symbol] ||
+                createDummyAsset(meta.symbol);
 
               return getDepositData({
                 account,

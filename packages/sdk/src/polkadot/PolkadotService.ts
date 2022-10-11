@@ -129,11 +129,6 @@ export class PolkadotService<
     fee?: bigint,
     primaryAccount?: string,
   ): SubmittableExtrinsic<'promise'> {
-    // eslint-disable-next-line no-console
-    console.log(
-      'getParams(account, amount, fee)',
-      getParams(account, amount, fee),
-    );
     let transferExtrinsic = this.#api.tx[pallet][extrinsic](
       // TODO: check issue with types and if we can fix it
       // @ts-ignore

@@ -1,4 +1,5 @@
 import {
+  Asset,
   AssetSymbol,
   ChainKey,
   XcmConfigBuilder,
@@ -118,5 +119,13 @@ export async function subscribeToAssetsBalanceInfo<
   return () => {
     unsubscribeBalance();
     unsubscribeInfo();
+  };
+}
+
+export function createDummyAsset(symbol: AssetSymbol): Asset<AssetSymbol> {
+  return {
+    id: '',
+    erc20Id: '',
+    originSymbol: symbol,
   };
 }
