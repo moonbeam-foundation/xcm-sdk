@@ -4,12 +4,8 @@ import { MoonbaseChains } from './moonbase.interfaces';
 
 export const MOONBASE_CHAINS = <const>[
   ChainKey.AlphanetRelay,
-  ChainKey.BasiliskAlphanet,
   ChainKey.CloverAlphanet,
   ChainKey.CrustShadowAlphanet,
-  ChainKey.DarwiniaAlphanet,
-  ChainKey.IntegriteeAlphanet,
-  ChainKey.InterBTCAlphanet,
   ChainKey.LitentryAlphanet,
   ChainKey.StatemineAlphanet,
 ];
@@ -21,14 +17,6 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
     parachainId: 0,
-  },
-  [ChainKey.BasiliskAlphanet]: {
-    key: ChainKey.BasiliskAlphanet,
-    name: 'Basilisk Alphanet',
-    ws: 'wss://rpc-01.basilisk-moonbase.hydradx.io',
-    weight: 1_000_000_000,
-    parachainId: 2090,
-    moonAssetId: 0,
   },
   [ChainKey.CloverAlphanet]: {
     key: ChainKey.CloverAlphanet,
@@ -45,27 +33,6 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://shadow-rpc-alpha.crustapps.net/',
     weight: 1_000_000_000,
     parachainId: 2012,
-  },
-  [ChainKey.DarwiniaAlphanet]: {
-    key: ChainKey.DarwiniaAlphanet,
-    name: 'Pangolin Alphanet',
-    ws: 'wss://pangolin-parachain-alpha-rpc.darwinia.network',
-    weight: 1_000_000_000,
-    parachainId: 2105,
-  },
-  [ChainKey.IntegriteeAlphanet]: {
-    key: ChainKey.IntegriteeAlphanet,
-    name: 'Integritee Alphanet',
-    ws: 'wss://moonbeam-test.integritee.network',
-    weight: 1_000_000_000,
-    parachainId: 2015,
-  },
-  [ChainKey.InterBTCAlphanet]: {
-    key: ChainKey.InterBTCAlphanet,
-    name: 'interBTC Alphanet',
-    ws: 'wss://api-dev-moonbeam.interlay.io/parachain',
-    weight: 1_000_000_000,
-    parachainId: 1002,
   },
   [ChainKey.LitentryAlphanet]: {
     key: ChainKey.LitentryAlphanet,
