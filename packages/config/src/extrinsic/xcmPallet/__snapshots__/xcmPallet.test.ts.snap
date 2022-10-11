@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`xcmPallet limitedReserveTransferAssets should be correct config 1`] = `
-Object {
+{
   "extrinsic": "limitedReserveTransferAssets",
   "getParams": [Function],
   "pallet": "xcmPallet",
@@ -10,22 +10,22 @@ Object {
 `;
 
 exports[`xcmPallet limitedReserveTransferAssets should get correct params 1`] = `
-Array [
-  Object {
-    "V1": Object {
-      "interior": Object {
-        "X1": Object {
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
           "Parachain": 1000,
         },
       },
       "parents": 0,
     },
   },
-  Object {
-    "V1": Object {
-      "interior": Object {
-        "X1": Object {
-          "AccountKey20": Object {
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountKey20": {
             "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
             "network": "Any",
           },
@@ -34,10 +34,10 @@ Array [
       "parents": 0,
     },
   },
-  Object {
-    "V0": Array [
-      Object {
-        "ConcreteFungible": Object {
+  {
+    "V0": [
+      {
+        "ConcreteFungible": {
           "amount": 1000n,
           "id": "Null",
         },
@@ -45,7 +45,7 @@ Array [
     ],
   },
   0,
-  Object {
+  {
     "Limited": 1000000000,
   },
 ]

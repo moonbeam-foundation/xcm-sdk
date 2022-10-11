@@ -1,12 +1,6 @@
 {
-  "extends": [
-    "airbnb-base",
-    "airbnb-typescript/base",
-    "plugin:jest/all",
-    "prettier"
-  ],
+  "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
   "plugins": [
-    "jest",
     // this should be last
     "prettier"
   ],
@@ -14,11 +8,22 @@
     "project": "./tsconfig.eslint.json"
   },
   "ignorePatterns": ["packages/**/build"],
+  "overrides": [
+    {
+      "files": ["**/*.test.ts"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/all"],
+      "rules": {
+        "jest/prefer-expect-assertions": "off",
+        "jest/no-hooks": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
   "rules": {
     "prettier/prettier": "error",
     "import/prefer-default-export": "off",
     "import/no-default-export": "error",
-    "import/no-cycle": "off",
-    "jest/prefer-expect-assertions": "off"
+    "import/no-cycle": "off"
   }
 }

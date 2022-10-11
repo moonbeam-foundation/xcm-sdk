@@ -1,5 +1,5 @@
 {
-  "name": "simple",
+  "name": "simple-config",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -10,8 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "^0.0.23",
-    "@moonbeam-network/xcm-sdk": "^0.0.23",
+    "@moonbeam-network/xcm-config": "*",
     "@polkadot/api": "^9.2.4"
   },
   "devDependencies": {

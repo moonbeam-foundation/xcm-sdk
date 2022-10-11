@@ -1,0 +1,36 @@
+name: acceptance
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 */12 * * 1-5' # Monday to Friday every 6 hours
+  workflow_dispatch:
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 16.x
+          cache: 'npm'
+
+      - name: 🔐 Authenticate with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - run: npm ci
+
+      - name: 🛠️ Build
+        run: npm run build
+
+      - name: 🧪 Run acceptance tests
+        env:
+          TESTS_MOONBEAM_PRIVATE_KEY: ${{ secrets.TESTS_MOONBEAM_PRIVATE_KEY }}
+          TESTS_POLKADOT_SURI: ${{ secrets.TESTS_POLKADOT_SURI }}
+        run: npm run test:acc -- --ci

@@ -47,19 +47,11 @@ jobs:
           npm version ${{ env.VERSION }} --no-git-tag-version
           npm publish
 
-      - name: 💤 Sleep for 10 seconds
-        run: sleep 10s
-        shell: bash
-
       - name: 🚀 Publish sdk
         working-directory: ./packages/sdk
         run: |
-          npm i @moonbeam-network/xcm-config@${{ env.VERSION }}
           npm version ${{ env.VERSION }} --no-git-tag-version
           npm publish
-
-      - name: Update main package-lock.json file
-        run: npm i
 
       - name: 📁 Commit package.json files
         run: |
