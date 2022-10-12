@@ -22,7 +22,7 @@ export interface AssetsBalanceConfig {
   pallet: BalancePallet.Assets;
   function: BalanceFunction.Account;
   path: ['balance'];
-  getParams: (account: string) => [number | bigint | string, string];
+  getParams: (account: string) => [AssetId, string];
   calc: (balance: u128) => bigint;
 }
 
