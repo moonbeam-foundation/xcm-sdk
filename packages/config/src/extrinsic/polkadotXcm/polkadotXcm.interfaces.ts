@@ -1,4 +1,4 @@
-import { AssetId } from '../../types';
+import { AssetId } from '../../interfaces';
 import { Parents } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {

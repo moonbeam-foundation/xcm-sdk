@@ -1,5 +1,5 @@
 import { AssetSymbol } from '../../constants';
-import { AssetId } from '../../types';
+import { AssetId } from '../../interfaces';
 import {
   XTokensExtrinsic,
   XTokensExtrinsicCurrencyTypes,

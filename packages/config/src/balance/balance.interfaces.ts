@@ -1,7 +1,7 @@
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
-import { AssetId } from '../types';
+import { AssetId } from '../interfaces';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 
 export type BalanceConfig<Symbols extends AssetSymbol = AssetSymbol> =

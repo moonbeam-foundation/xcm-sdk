@@ -1,5 +1,6 @@
 import { AssetSymbol, ChainKey, MoonChainKey } from './constants';
-import { AssetId } from './types';
+
+export type AssetId = number | bigint | string;
 
 export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
   id: string;

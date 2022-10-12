@@ -1,6 +1,5 @@
 import { ChainKey } from '../../constants';
-import { Chain, MoonChain } from '../../interfaces';
-import { AssetId } from '../../types';
+import { AssetId, Chain, MoonChain } from '../../interfaces';
 import {
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
