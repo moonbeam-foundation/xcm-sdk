@@ -1,6 +1,6 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
-import { getOriginAssetId, getPalletInstance } from '../../config.utils';
+import { getAssetForeignId, getPalletInstance } from '../../config.utils';
 import {
   assets,
   balance,
@@ -12,7 +12,7 @@ import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
 const asset = assets[AssetSymbol.USDT];
 const origin = chains[ChainKey.Statemine];
-const originAssetId = getOriginAssetId(asset);
+const originAssetId = getAssetForeignId(asset, origin.key);
 
 export const USDT: MoonriverXcmConfig = {
   asset,

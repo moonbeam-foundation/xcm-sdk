@@ -21,8 +21,10 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
   [AssetSymbol.BSX]: {
     id: '102433417954722588084020852587557555194',
     erc20Id: '0xffffffff4d0ff56d0097bbd14920eac488540bfa',
+    foreignIds: {
+      [ChainKey.BasiliskAlphanet]: 0,
+    },
     originSymbol: AssetSymbol.BSX,
-    originAssetId: 0,
   },
   [AssetSymbol.CLV]: {
     id: '281434042901349570144900941495462927562',
@@ -38,7 +40,7 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     id: '',
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: AssetSymbol.DEV,
-    foreignAssetId: {
+    foreignIds: {
       [ChainKey.CentrifugeAlphanet]: 1,
     },
     isNative: true,
@@ -77,13 +79,17 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     id: '156305701417244550631956600137082963628',
     erc20Id: '0xffffffff75976211c786fe4d73d2477e222786ac',
     originSymbol: AssetSymbol.TT1,
-    originAssetId: 2,
+    foreignIds: {
+      [ChainKey.StatemineAlphanet]: 2,
+    },
   },
   [AssetSymbol.XUSDC]: {
     id: '337110116006454532607322340792629567158',
     erc20Id: '0xfffffffefd9d0bf45a2947a519a741c4b9e99eb6',
     originSymbol: AssetSymbol.XUSDC,
-    originAssetId: 2,
+    foreignIds: {
+      [ChainKey.CentrifugeAlphanet]: 2,
+    },
     isLocalAsset: true,
   },
 };

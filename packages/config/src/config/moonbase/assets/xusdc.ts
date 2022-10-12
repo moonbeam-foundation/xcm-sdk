@@ -3,7 +3,7 @@ import {
   XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
 } from '../../../extrinsic';
-import { getForeignAssetId, getOriginAssetId } from '../../config.utils';
+import { getAssetForeignId } from '../../config.utils';
 import {
   assets,
   balance,
@@ -17,8 +17,8 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 const asset = assets[AssetSymbol.XUSDC];
 const xcmFeeAsset = assets[AssetSymbol.DEV];
 const centrifuge = chains[ChainKey.CentrifugeAlphanet];
-const originAssetId = getOriginAssetId(asset);
-const xcmFeeAssetId = getForeignAssetId(
+const originAssetId = getAssetForeignId(asset, centrifuge.key);
+const xcmFeeAssetId = getAssetForeignId(
   xcmFeeAsset,
   ChainKey.CentrifugeAlphanet,
 );

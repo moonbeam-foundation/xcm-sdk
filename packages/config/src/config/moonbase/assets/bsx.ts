@@ -1,6 +1,6 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
-import { getOriginAssetId } from '../../config.utils';
+import { getAssetForeignId } from '../../config.utils';
 import {
   assets,
   balance,
@@ -12,7 +12,7 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.BSX];
 const origin = chains[ChainKey.BasiliskAlphanet];
-const originAssetId = getOriginAssetId(asset);
+const originAssetId = getAssetForeignId(asset, origin.key);
 
 export const BSX: MoonbaseXcmConfig = {
   asset,

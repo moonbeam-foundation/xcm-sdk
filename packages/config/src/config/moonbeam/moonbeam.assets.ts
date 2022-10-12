@@ -1,4 +1,4 @@
-import { AssetSymbol } from '../../constants';
+import { AssetSymbol, ChainKey } from '../../constants';
 import { AssetsMap } from '../config.interfaces';
 import { MoonbeamAssets } from './moonbeam.interfaces';
 
@@ -66,6 +66,8 @@ export const MOONBEAM_ASSETS_MAP: AssetsMap<MoonbeamAssets> = {
     id: '311091173110107856861649819128533077277',
     erc20Id: '0xffffffffea09fb06d082fd1275cd48b191cbcd1d',
     originSymbol: AssetSymbol.USDT,
-    originAssetId: 1984,
+    foreignIds: {
+      [ChainKey.Statemint]: 1984,
+    },
   },
 };

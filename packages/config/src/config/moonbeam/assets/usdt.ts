@@ -1,12 +1,12 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
-import { getOriginAssetId, getPalletInstance } from '../../config.utils';
+import { getAssetForeignId, getPalletInstance } from '../../config.utils';
 import { assets, balance, chains, extrinsic } from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
 const asset = assets[AssetSymbol.USDT];
 const origin = chains[ChainKey.Statemint];
-const originAssetId = getOriginAssetId(asset);
+const originAssetId = getAssetForeignId(asset, origin.key);
 
 export const USDT: MoonbeamXcmConfig = {
   asset,

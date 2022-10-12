@@ -12,9 +12,7 @@ export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
    * Erc20BalancesPrecompile 0x0000000000000000000000000000000000000802
    */
   erc20Id: string;
-  foreignAssetId?: Partial<Record<ChainKey, AssetId>>;
-  // TODO delete originAssetId in favor of foreignAssetId?
-  originAssetId?: AssetId;
+  foreignIds?: Partial<Record<ChainKey, AssetId>>;
   originSymbol: Symbols;
   isNative?: boolean;
   isLocalAsset?: boolean;

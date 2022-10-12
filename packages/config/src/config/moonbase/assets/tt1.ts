@@ -1,6 +1,6 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
-import { getOriginAssetId, getPalletInstance } from '../../config.utils';
+import { getAssetForeignId, getPalletInstance } from '../../config.utils';
 import {
   assets,
   balance,
@@ -12,7 +12,7 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.TT1];
 const origin = chains[ChainKey.StatemineAlphanet];
-const originAssetId = getOriginAssetId(asset);
+const originAssetId = getAssetForeignId(asset, origin.key);
 
 export const TT1: MoonbaseXcmConfig = {
   asset,

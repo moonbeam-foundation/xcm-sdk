@@ -9,31 +9,21 @@ import {
 import { Asset, Chain } from '../interfaces';
 import { AssetId } from '../types';
 
-export function getOriginAssetId<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: Asset<Symbols>,
-) {
-  if (isUndefined(asset.originAssetId)) {
-    throw new Error(`No originAssetId defined for asset ${asset.originSymbol}`);
-  }
-
-  return asset.originAssetId;
-}
-
-export function getForeignAssetId<Symbols extends AssetSymbol = AssetSymbol>(
+export function getAssetForeignId<Symbols extends AssetSymbol = AssetSymbol>(
   asset: Asset<Symbols>,
   chain: ChainKey,
 ): AssetId {
-  if (isUndefined(asset.foreignAssetId)) {
-    throw new Error(
-      `No foreignAssetId defined for asset ${asset.originSymbol}`,
-    );
+  if (isUndefined(asset.foreignId)) {
+    throw new Error(`No foreignId defined for asset ${asset.originSymbol}`);
   }
-  if (typeof asset.foreignAssetId[chain] === 'undefined') {
-    return 0;
+  if (isUndefined(asset.foreignId[chain])) {
+    throw new Error(
+      `No foreignId defined for asset ${asset.originSymbol} and chain ${chain}`,
+    );
   }
 
   // TODO FIX TYPING
-  return asset.foreignAssetId[chain] || '0';
+  return asset.foreignId[chain] || 0;
 }
 
 export function getMoonAssetId<ChainKeys extends ChainKey>(
