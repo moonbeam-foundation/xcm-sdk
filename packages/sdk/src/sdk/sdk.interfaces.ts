@@ -103,15 +103,13 @@ export interface DepositTransferData<
   asset: AssetWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
-  moonChainFee?: bigint;
+  moonChainDepositFee?: Balance<Symbols>;
   native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   source: Chain<ChainKeys>;
   sourceBalance: bigint;
   sourceFeeBalance?: Balance<Symbols>;
   sourceMinBalance: bigint;
-  xcmFeeAsset?: Asset<Symbols>;
-  xcmFeeAssetBalance?: Balance<Symbols>;
   getFee: (amount?: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }

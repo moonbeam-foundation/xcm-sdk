@@ -45,10 +45,6 @@ export class PolkadotService<
     return new PolkadotService(await getPolkadotApi(ws));
   }
 
-  static getChainMin(weight: number, unitsPerSecond: bigint): bigint {
-    return calculateMin(weight, unitsPerSecond);
-  }
-
   getMetadata() {
     return {
       decimals: this.#api.registry.chainDecimals.at(0) || 12,
@@ -151,25 +147,22 @@ export class PolkadotService<
     weight: number,
     moonChain: MoonChain,
   ): Promise<bigint> {
-    let unitsPerSecond: bigint;
+    return calculateMin(weight, await this.getUnitsPerSecond(asset, moonChain));
+  }
 
+  async getUnitsPerSecond(asset: Asset, moonChain: MoonChain): Promise<bigint> {
     if (asset.isNative) {
-      unitsPerSecond = moonChain.unitsPerSecond;
-    } else {
-      const type = await this.getAssetType(asset.id);
+      return moonChain.unitsPerSecond;
+    }
+    const type = await this.getAssetType(asset.id);
 
-      if (!type) {
-        return 0n;
-      }
-
-      unitsPerSecond = (
-        await this.#api.query.assetManager.assetTypeUnitsPerSecond(type)
-      )
-        .unwrapOrDefault()
-        .toBigInt();
+    if (!type) {
+      return 0n;
     }
 
-    return calculateMin(weight, unitsPerSecond);
+    return (await this.#api.query.assetManager.assetTypeUnitsPerSecond(type))
+      .unwrapOrDefault()
+      .toBigInt();
   }
 
   async getAssetType(

@@ -17,7 +17,6 @@ export interface Asset<Symbols extends AssetSymbol = AssetSymbol> {
   originSymbol: Symbols;
   isNative?: boolean;
   isLocalAsset?: boolean;
-  isDummy?: boolean;
 }
 
 export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {

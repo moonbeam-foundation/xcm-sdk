@@ -20,7 +20,7 @@ export const BNC: MoonriverXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .xTokens()

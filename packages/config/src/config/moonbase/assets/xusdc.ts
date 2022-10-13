@@ -28,7 +28,7 @@ export const XUSDC: MoonbaseXcmConfig = {
   origin: moonbase,
   deposit: {
     [centrifuge.key]: {
-      origin: centrifuge,
+      source: centrifuge,
       balance: balance.ormlTokens(originAssetId),
       sourceFeeBalance: balance.system(),
       xcmFeeAsset: {

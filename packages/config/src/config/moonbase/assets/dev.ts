@@ -26,7 +26,7 @@ export const DEV: MoonbaseXcmConfig = {
   origin: moonbase,
   deposit: {
     [clover.key]: {
-      origin: clover,
+      source: clover,
       balance: balance.assets(cloverDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -39,7 +39,7 @@ export const DEV: MoonbaseXcmConfig = {
         }),
     },
     [centrifuge.key]: {
-      origin: centrifuge,
+      source: centrifuge,
       balance: balance.ormlTokens(centrifugeDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic

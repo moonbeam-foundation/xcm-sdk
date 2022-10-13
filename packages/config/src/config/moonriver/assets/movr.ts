@@ -33,7 +33,7 @@ export const MOVR: MoonriverXcmConfig = {
   origin: moonriver,
   deposit: {
     [bifrost.key]: {
-      origin: bifrost,
+      source: bifrost,
       balance: balance.tokens('MOVR'),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -46,7 +46,7 @@ export const MOVR: MoonriverXcmConfig = {
         }),
     },
     [karura.key]: {
-      origin: karura,
+      source: karura,
       balance: balance.tokens(karuraMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -59,7 +59,7 @@ export const MOVR: MoonriverXcmConfig = {
         }),
     },
     [khala.key]: {
-      origin: khala,
+      source: khala,
       balance: balance.assets(khalaMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -70,7 +70,7 @@ export const MOVR: MoonriverXcmConfig = {
         .X2(getPalletInstance(khala)),
     },
     [parallel.key]: {
-      origin: parallel,
+      source: parallel,
       balance: balance.assets(parallelMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -81,7 +81,7 @@ export const MOVR: MoonriverXcmConfig = {
         .asset(parallelMovrId),
     },
     [shiden.key]: {
-      origin: shiden,
+      source: shiden,
       balance: balance.assets(shidenMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic

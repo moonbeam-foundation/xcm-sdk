@@ -13,7 +13,7 @@ export const USDT: MoonbeamXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.assets(originAssetId),
       sourceFeeBalance: balance.system(),
       sourceMinBalance: balance.min(originAssetId),

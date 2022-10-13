@@ -20,7 +20,7 @@ export const INTR: MoonbeamXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.tokens(asset.originSymbol),
       extrinsic: extrinsic
         .xTokens()

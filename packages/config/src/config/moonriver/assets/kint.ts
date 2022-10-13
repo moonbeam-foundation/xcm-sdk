@@ -20,7 +20,7 @@ export const KINT: MoonriverXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.tokens(asset.originSymbol),
       extrinsic: extrinsic
         .xTokens()

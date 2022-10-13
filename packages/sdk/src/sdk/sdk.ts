@@ -98,7 +98,7 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
               const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,
                 ChainKeys
-              >([configBuilder.moonChain.ws, config.origin.ws]);
+              >([configBuilder.moonChain.ws, config.source.ws]);
               const meta = foreignPolkadot.getMetadata();
               const nativeAsset =
                 configBuilder.assets[meta.symbol] ||

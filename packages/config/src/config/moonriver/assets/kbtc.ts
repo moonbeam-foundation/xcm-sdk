@@ -21,7 +21,7 @@ export const KBTC: MoonriverXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.tokens(asset.originSymbol),
       sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
       xcmFeeAsset: {
