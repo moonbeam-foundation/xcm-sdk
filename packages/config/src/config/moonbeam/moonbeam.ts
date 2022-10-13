@@ -10,6 +10,7 @@ import { IBTC } from './assets/ibtc';
 import { INTR } from './assets/intr';
 import { PARA } from './assets/para';
 import { PHA } from './assets/pha';
+import { RING } from './assets/ring';
 import { USDT } from './assets/usdt';
 
 export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = {
@@ -22,5 +23,6 @@ export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = {
   [AssetSymbol.INTR]: INTR,
   [AssetSymbol.PARA]: PARA,
   [AssetSymbol.PHA]: PHA,
+  [AssetSymbol.RING]: RING,
   [AssetSymbol.USDT]: USDT,
 };

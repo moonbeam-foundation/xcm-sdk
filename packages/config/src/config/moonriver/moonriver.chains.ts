@@ -6,7 +6,7 @@ export const MOONRIVER_CHAINS = <const>[
   ChainKey.Bifrost,
   ChainKey.Calamari,
   ChainKey.CrustShadow,
-  ChainKey.Darwinia,
+  ChainKey.Crab,
   ChainKey.Integritee,
   ChainKey.Karura,
   ChainKey.Khala,
@@ -40,8 +40,8 @@ export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
     weight: 1_000_000_000,
     parachainId: 2012,
   },
-  [ChainKey.Darwinia]: {
-    key: ChainKey.Darwinia,
+  [ChainKey.Crab]: {
+    key: ChainKey.Crab,
     name: 'Darwinia Crab',
     ws: 'wss://crab-parachain-rpc.darwinia.network',
     weight: 1_000_000_000,
