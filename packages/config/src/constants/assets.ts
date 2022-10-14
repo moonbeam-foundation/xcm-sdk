@@ -25,6 +25,7 @@ export enum AssetSymbol {
   NEER = 'NEER',
   PARA = 'PARA',
   PHA = 'PHA',
+  RING = 'RING',
   RMRK = 'RMRK',
   SDN = 'SDN',
   TEER = 'TEER',
