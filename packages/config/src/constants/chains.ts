@@ -56,6 +56,7 @@ export enum ChainKey {
   Parallel = 'Parallel',
   ParallelHeiko = 'ParallelHeiko',
   Phala = 'Phala',
+  PioneerAlphanet = 'PioneerAlphanet',
   Polkadot = 'Polkadot',
   Shiden = 'Shiden',
   Statemine = 'Statemine',

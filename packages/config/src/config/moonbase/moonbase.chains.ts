@@ -7,6 +7,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.CloverAlphanet,
   ChainKey.CrustShadowAlphanet,
   ChainKey.LitentryAlphanet,
+  ChainKey.PioneerAlphanet,
   ChainKey.StatemineAlphanet,
 ];
 
@@ -40,6 +41,13 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://moonbase-parachain-sg-0.litentry.io',
     weight: 1_000_000_000,
     parachainId: 2106,
+  },
+  [ChainKey.PioneerAlphanet]: {
+    key: ChainKey.PioneerAlphanet,
+    name: 'Pioneer Alphanet',
+    ws: 'wss://moonbase-rpc.bit.country',
+    weight: 1_000_000_000,
+    parachainId: 2096,
   },
   [ChainKey.StatemineAlphanet]: {
     key: ChainKey.StatemineAlphanet,
