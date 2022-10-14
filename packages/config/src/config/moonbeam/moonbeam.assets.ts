@@ -12,6 +12,7 @@ export const MOONBEAM_ASSETS = <const>[
   AssetSymbol.INTR,
   AssetSymbol.PARA,
   AssetSymbol.PHA,
+  AssetSymbol.RING,
   AssetSymbol.USDT,
 ];
 
@@ -61,6 +62,11 @@ export const MOONBEAM_ASSETS_MAP: AssetsMap<MoonbeamAssets> = {
     id: '132685552157663328694213725410064821485',
     erc20Id: '0xffffffff63d24ecc8eb8a7b5d0803e900f7b6ced',
     originSymbol: AssetSymbol.PHA,
+  },
+  [AssetSymbol.RING]: {
+    id: '125699734534028342599692732320197985871',
+    erc20Id: '0xffffffff5e90e365edca87fb4c8306df1e91464f',
+    originSymbol: AssetSymbol.RING,
   },
   [AssetSymbol.USDT]: {
     id: '311091173110107856861649819128533077277',

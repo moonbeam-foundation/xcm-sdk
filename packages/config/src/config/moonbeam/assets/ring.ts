@@ -6,18 +6,18 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonriver.common';
-import { MoonriverXcmConfig } from '../moonriver.interfaces';
+} from '../moonbeam.common';
+import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
-const asset = assets[AssetSymbol.CRAB];
-const origin = chains[ChainKey.Crab];
+const asset = assets[AssetSymbol.RING];
+const origin = chains[ChainKey.Darwinia];
 
-export const CRAB: MoonriverXcmConfig = {
+export const RING: MoonbeamXcmConfig = {
   asset,
   origin,
   deposit: {
     [origin.key]: {
-      source: origin,
+      origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .polkadotXcm()

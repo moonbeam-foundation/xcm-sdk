@@ -25,6 +25,7 @@ export enum AssetSymbol {
   MOVR = 'MOVR',
   PARA = 'PARA',
   PHA = 'PHA',
+  RING = 'RING',
   RMRK = 'RMRK',
   SDN = 'SDN',
   TEER = 'TEER',

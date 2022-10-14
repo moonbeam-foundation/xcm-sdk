@@ -43,6 +43,7 @@ export enum ChainKey {
   Calamari = 'Calamari',
   CentrifugeAlphanet = 'CentrifugeAlphanet',
   CloverAlphanet = 'CloverAlphanet',
+  Crab = 'Crab',
   CrustShadow = 'CrustShadow',
   CrustShadowAlphanet = 'CrustShadowAlphanet',
   Darwinia = 'Darwinia',

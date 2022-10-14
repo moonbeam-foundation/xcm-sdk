@@ -5,6 +5,7 @@ import { MoonbeamChains } from './moonbeam.interfaces';
 export const MOONBEAM_CHAINS = <const>[
   ChainKey.Acala,
   ChainKey.Astar,
+  ChainKey.Darwinia,
   ChainKey.Interlay,
   ChainKey.Parallel,
   ChainKey.Phala,
@@ -29,6 +30,13 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     parachainId: 2006,
     moonAssetId: 18446744073709551619n,
     palletInstance: 10,
+  },
+  [ChainKey.Darwinia]: {
+    key: ChainKey.Darwinia,
+    name: 'Darwinia',
+    ws: 'wss://parachain-rpc.darwinia.network',
+    weight: 1_000_000_000,
+    parachainId: 2046,
   },
   [ChainKey.Interlay]: {
     key: ChainKey.Interlay,
