@@ -190,8 +190,8 @@ export async function getDepositData<
     polkadot.getAssetDecimals(xcmFeeAssetConfig.asset),
   ]);
 
-  // Min is basically the XCM fee. If less is sent then Moon* won't process
-  // the message.
+  // Min is basically the XCM fee, if it's the same asset. If less is sent then
+  // Moon* won't process the message.
   const min = config.xcmFeeAsset ? 0n : xcmFee;
   const createExtrinsic = getCreateExtrinsic({
     account,
