@@ -140,25 +140,30 @@ export async function getDepositData<
   const sourceAddress =
     typeof sourceAccount === 'string' ? sourceAccount : sourceAccount.address;
   const meta = foreignPolkadot.getMetadata();
+  const xcmFeeAssetConfig = {
+    asset: config.xcmFeeAsset?.asset ?? asset,
+    balance: config.xcmFeeAsset?.balance ?? config.balance,
+  };
 
   const [
     assetDecimals,
-    sourceBalance,
     existentialDeposit,
+    sourceBalance,
     sourceFeeBalance,
-    xcmFee,
-    xcmFeeDecimals,
     sourceMinBalance = 0n,
+    xcmFee,
+    xcmFeeBalance,
+    xcmFeeDecimals,
   ] = await Promise.all([
     // assetDecimals
     polkadot.getAssetDecimals(asset),
+    // existentialDeposit
+    foreignPolkadot.getExistentialDeposit(),
     // sourceBalance
     foreignPolkadot.getGenericBalance(
       primaryAccount || sourceAddress,
       config.balance,
     ),
-    // existentialDeposit
-    foreignPolkadot.getExistentialDeposit(),
     // sourceFeeBalance
     config.sourceFeeBalance
       ? foreignPolkadot.getGenericBalance(
@@ -166,28 +171,28 @@ export async function getDepositData<
           config.sourceFeeBalance,
         )
       : undefined,
-    // xcmFee
-    config.xcmFeeAsset
-      ? polkadot.getAssetFee(
-          config.xcmFeeAsset.asset,
-          config.source.weight,
-          moonChain,
-        )
-      : undefined,
-    // xcmFeeDecimals
-    config.xcmFeeAsset
-      ? polkadot.getAssetDecimals(config.xcmFeeAsset.asset)
-      : undefined,
     // sourceMinBalance
     config.sourceMinBalance
       ? foreignPolkadot.getAssetMinBalance(config.sourceMinBalance)
       : undefined,
+    // xcmFee
+    polkadot.getAssetFee(
+      xcmFeeAssetConfig.asset,
+      config.source.weight,
+      moonChain,
+    ),
+    // xcmFeeBalance
+    foreignPolkadot.getGenericBalance(
+      primaryAccount || sourceAddress,
+      xcmFeeAssetConfig.balance,
+    ),
+    // xcmFeeDecimals
+    polkadot.getAssetDecimals(xcmFeeAssetConfig.asset),
   ]);
 
   // Min is basically the XCM fee. If less is sent then Moon* won't process
   // the message.
-  const min =
-    (config.sourceFeeBalance && config.xcmFeeAsset) || !xcmFee ? 0n : xcmFee;
+  const min = config.xcmFeeAsset ? 0n : xcmFee;
   const createExtrinsic = getCreateExtrinsic({
     account,
     config,
@@ -200,14 +205,15 @@ export async function getDepositData<
     asset: { ...asset, decimals: assetDecimals },
     existentialDeposit,
     min,
-    // TODO make this not undefinable
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    moonChainDepositFee: getXcmAssetBalance({
-      xcmFeeAsset: config.xcmFeeAsset?.asset,
-      xcmFee,
-      xcmFeeDecimals,
-      nativeDecimals: meta.decimals,
-    }),
+    moonChainFee: {
+      balance: xcmFeeBalance,
+      decimals: xcmFeeAssetConfig.asset.isNative
+        ? meta.decimals
+        : xcmFeeDecimals,
+      fee: xcmFee,
+      isDifferentAsset: xcmFeeAssetConfig.asset.id !== asset.id,
+      symbol: xcmFeeAssetConfig.asset.originSymbol,
+    },
     native: { ...nativeAsset, decimals: meta.decimals },
     origin,
     source: config.source,
@@ -216,14 +222,6 @@ export async function getDepositData<
       ? { ...meta, balance: sourceFeeBalance }
       : undefined,
     sourceMinBalance,
-    // xcmFeeAsset: config.xcmFeeAsset?.asset,
-    // // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    // xcmFeeAssetBalance: getXcmAssetBalance({
-    //   xcmFeeAsset: config.xcmFeeAsset?.asset,
-    //   xcmFee,
-    //   xcmFeeDecimals,
-    //   nativeDecimals: meta.decimals,
-    // }),
     getFee: async (amount = sourceBalance): Promise<bigint> => {
       const extrinsic = await createExtrinsic(amount);
       const info = await extrinsic.paymentInfo(sourceAccount);
@@ -246,28 +244,4 @@ export async function getDepositData<
       return hash.toString();
     },
   };
-}
-
-interface GetXcmAssetBalanceParams<Symbols extends AssetSymbol> {
-  xcmFeeAsset?: Asset<Symbols>;
-  xcmFee?: bigint;
-  xcmFeeDecimals?: number;
-  nativeDecimals: number;
-}
-
-function getXcmAssetBalance<Symbols extends AssetSymbol>({
-  xcmFee,
-  xcmFeeDecimals,
-  xcmFeeAsset,
-  nativeDecimals,
-}: GetXcmAssetBalanceParams<Symbols>) {
-  return !isUndefined(xcmFee) &&
-    !isUndefined(xcmFeeAsset) &&
-    !isUndefined(xcmFeeDecimals)
-    ? {
-        balance: xcmFee,
-        decimals: xcmFeeAsset.isNative ? nativeDecimals : xcmFeeDecimals,
-        symbol: xcmFeeAsset.originSymbol,
-      }
-    : undefined;
 }

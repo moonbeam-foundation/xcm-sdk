@@ -17,7 +17,7 @@ export const RING: MoonbeamXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .polkadotXcm()
