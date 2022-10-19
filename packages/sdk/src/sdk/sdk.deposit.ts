@@ -211,7 +211,6 @@ export async function getDepositData<
         ? meta.decimals
         : xcmFeeDecimals,
       fee: xcmFee,
-      isDifferentAsset: xcmFeeAssetConfig.asset.id !== asset.id,
       symbol: xcmFeeAssetConfig.asset.originSymbol,
     },
     native: { ...nativeAsset, decimals: meta.decimals },

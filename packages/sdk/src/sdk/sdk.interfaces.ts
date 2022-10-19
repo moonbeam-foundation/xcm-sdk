@@ -145,7 +145,6 @@ export interface Balance<Symbols extends string | AssetSymbol = AssetSymbol> {
 
 export interface XcmFeeWithBalance extends Balance {
   fee: bigint;
-  isDifferentAsset: boolean;
 }
 
 export interface SdkOptions {
