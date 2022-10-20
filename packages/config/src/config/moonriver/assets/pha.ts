@@ -17,7 +17,7 @@ export const PHA: MoonriverXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .xTransfer()

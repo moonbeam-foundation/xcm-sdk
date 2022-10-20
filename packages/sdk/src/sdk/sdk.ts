@@ -31,7 +31,7 @@ import {
   XcmSdkDeposit,
   XcmSdkWithdraw,
 } from './sdk.interfaces';
-import { subscribeToAssetsBalanceInfo } from './sdk.utils';
+import { createDummyAsset, subscribeToAssetsBalanceInfo } from './sdk.utils';
 import { getWithdrawData } from './sdk.withdraw';
 
 export function init(options?: SdkOptions): XcmSdkByChain {
@@ -98,9 +98,11 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
               const [polkadot, foreignPolkadot] = await createPolkadotServices<
                 Symbols,
                 ChainKeys
-              >([configBuilder.moonChain.ws, config.origin.ws]);
+              >([configBuilder.moonChain.ws, config.source.ws]);
               const meta = foreignPolkadot.getMetadata();
-              const nativeAsset = configBuilder.assets[meta.symbol];
+              const nativeAsset =
+                configBuilder.assets[meta.symbol] ||
+                createDummyAsset(meta.symbol);
 
               return getDepositData({
                 account,

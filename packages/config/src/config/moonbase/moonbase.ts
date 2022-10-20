@@ -7,6 +7,7 @@ import { DEV } from './assets/dev';
 import { LIT } from './assets/lit';
 import { TT1 } from './assets/tt1';
 import { UNIT } from './assets/unit';
+import { XUSDC } from './assets/xusdc';
 
 export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
   [AssetSymbol.CLV]: CLV,
@@ -15,4 +16,5 @@ export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
   [AssetSymbol.LIT]: LIT,
   [AssetSymbol.TT1]: TT1,
   [AssetSymbol.UNIT]: UNIT,
+  [AssetSymbol.XUSDC]: XUSDC,
 };

@@ -1,4 +1,4 @@
-import { AssetSymbol } from '../../constants';
+import { AssetSymbol, ChainKey } from '../../constants';
 import { AssetsMap } from '../config.interfaces';
 import { MoonriverAssets } from './moonriver.interfaces';
 
@@ -93,7 +93,9 @@ export const MOONRIVER_ASSETS_MAP: AssetsMap<MoonriverAssets> = {
     id: '182365888117048807484804376330534607370',
     erc20Id: '0xffffffff893264794d9d57e1e0e21e0042af5a0a',
     originSymbol: AssetSymbol.RMRK,
-    originAssetId: 8,
+    foreignIds: {
+      [ChainKey.Statemine]: 8,
+    },
   },
   [AssetSymbol.SDN]: {
     id: '16797826370226091782818345603793389938',
@@ -109,6 +111,8 @@ export const MOONRIVER_ASSETS_MAP: AssetsMap<MoonriverAssets> = {
     id: '311091173110107856861649819128533077277',
     erc20Id: '0xffffffffea09fb06d082fd1275cd48b191cbcd1d',
     originSymbol: AssetSymbol.USDT,
-    originAssetId: 1984,
+    foreignIds: {
+      [ChainKey.Statemine]: 1984,
+    },
   },
 };

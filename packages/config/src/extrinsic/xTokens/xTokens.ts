@@ -136,26 +136,16 @@ function transferMultiCurrencies<
     successEvent: (event: XTokensExtrinsicSuccessEvent) => ({
       origin: (origin: Chain<ChainKeys>) => ({
         assets: (
-          asset: Asset<Symbols>,
-          feeAsset: Asset<Symbols>,
+          asset: XTokensTransferExtrinsicParamsAsset<Symbols>,
+          feeAsset: XTokensTransferExtrinsicParamsAsset<Symbols>,
         ): XTokensTransferMultiCurrenciesExtrinsic<Symbols> => ({
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
           successEvent: event,
           getParams: (account, amount, fee = 0n) => [
             [
-              [
-                {
-                  Token: asset.originSymbol,
-                },
-                amount,
-              ],
-              [
-                {
-                  Token: feeAsset.originSymbol,
-                },
-                fee,
-              ],
+              [asset, amount],
+              [feeAsset, fee],
             ],
             1,
             {

@@ -11,7 +11,12 @@ import {
   XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
 import { ApiPromise } from '@polkadot/api';
-import { SubmittableExtrinsic, UnsubscribePromise } from '@polkadot/api/types';
+import {
+  QueryableStorageMultiArg,
+  SubmittableExtrinsic,
+  UnsubscribePromise,
+} from '@polkadot/api/types';
+import { Option } from '@polkadot/types';
 import { AccountInfo } from '@polkadot/types/interfaces';
 import {
   MoonbeamRuntimeXcmConfigAssetType,
@@ -40,10 +45,6 @@ export class PolkadotService<
     return new PolkadotService(await getPolkadotApi(ws));
   }
 
-  static getChainMin(weight: number, unitsPerSecond: bigint): bigint {
-    return calculateMin(weight, unitsPerSecond);
-  }
-
   getMetadata() {
     return {
       decimals: this.#api.registry.chainDecimals.at(0) || 12,
@@ -55,14 +56,20 @@ export class PolkadotService<
     return this.#api.consts.balances?.existentialDeposit.toBigInt() || 0n;
   }
 
-  async getAssetDecimals(assetId: string): Promise<number> {
-    const meta = await this.getAssetMeta(assetId);
+  async getAssetDecimals(asset: Asset<Symbols>): Promise<number> {
+    const meta = await this.getAssetMeta(asset);
 
     return meta.decimals.toNumber();
   }
 
-  async getAssetMeta(assetId: string): Promise<PalletAssetsAssetMetadata> {
-    return this.#api.query.assets.metadata(assetId);
+  async getAssetMeta(
+    asset: Asset<Symbols>,
+  ): Promise<PalletAssetsAssetMetadata> {
+    return (
+      asset.isLocalAsset
+        ? this.#api.query.localAssets.metadata
+        : this.#api.query.assets.metadata
+    )(asset.id);
   }
 
   async subscribeToAccountInfo(
@@ -135,17 +142,27 @@ export class PolkadotService<
     return transferExtrinsic;
   }
 
-  async getAssetFee(id: string, weight: number): Promise<bigint> {
-    const type = await this.getAssetType(id);
+  async getAssetFee(
+    asset: Asset,
+    weight: number,
+    moonChain: MoonChain,
+  ): Promise<bigint> {
+    return calculateMin(weight, await this.getUnitsPerSecond(asset, moonChain));
+  }
+
+  async getUnitsPerSecond(asset: Asset, moonChain: MoonChain): Promise<bigint> {
+    if (asset.isNative) {
+      return moonChain.unitsPerSecond;
+    }
+    const type = await this.getAssetType(asset.id);
 
     if (!type) {
       return 0n;
     }
 
-    const unitsPerSecond =
-      await this.#api.query.assetManager.assetTypeUnitsPerSecond(type);
-
-    return calculateMin(weight, unitsPerSecond.unwrapOrDefault().toBigInt());
+    return (await this.#api.query.assetManager.assetTypeUnitsPerSecond(type))
+      .unwrapOrDefault()
+      .toBigInt();
   }
 
   async getAssetType(
@@ -162,11 +179,9 @@ export class PolkadotService<
     callback: (data: AssetBalanceInfo<Symbols>[]) => void,
   ): UnsubscribePromise {
     const assetsArray = Object.values<Asset<Symbols>>(config.assets);
-    const ids: string[] = assetsArray.map((asset) => asset.id);
-    const metadata: PalletAssetsAssetMetadata[] =
-      (await this.#api.query.assets.metadata.multi(ids)) as any;
+    const metadata = await this.getAssetsMetadata(assetsArray);
 
-    return this.subscribeToAccountBalances(account, ids, (data) => {
+    return this.subscribeToAccountBalances(account, assetsArray, (data) => {
       callback(
         data.map((balance, index): AssetBalanceInfo<Symbols> => {
           const asset = assetsArray[index];
@@ -195,17 +210,44 @@ export class PolkadotService<
     });
   }
 
+  async getAssetsMetadata(
+    assetsArray: Asset<Symbols>[],
+  ): Promise<PalletAssetsAssetMetadata[]> {
+    const queries = assetsArray.map(
+      (x) =>
+        [
+          x.isLocalAsset
+            ? this.#api.query.localAssets.metadata
+            : this.#api.query.assets.metadata,
+          [x.id],
+        ] as QueryableStorageMultiArg<'promise'>,
+    );
+
+    return this.#api.queryMulti(queries);
+  }
+
   async subscribeToAccountBalances(
     account: string,
-    ids: string[],
+    assetsArray: Asset<Symbols>[],
     callback: (balances: PalletAssetsAssetAccount[]) => void,
   ): UnsubscribePromise {
-    const keys = ids.map((x) => [x, account]);
+    const queries = assetsArray.map(
+      (x) =>
+        [
+          x.isLocalAsset
+            ? this.#api.query.localAssets.account
+            : this.#api.query.assets.account,
+          [x.id, account],
+        ] as QueryableStorageMultiArg<'promise'>,
+    );
 
-    return this.#api.query.assets.account.multi(keys, (res) => {
-      const response = res.map((balance) => balance.unwrapOrDefault());
+    return this.#api.queryMulti(
+      queries,
+      (res: Option<PalletAssetsAssetAccount>[]) => {
+        const response = res.map((item) => item.unwrapOrDefault());
 
-      callback(response);
-    });
+        callback(response);
+      },
+    );
   }
 }

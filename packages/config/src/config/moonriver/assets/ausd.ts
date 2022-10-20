@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import {
   assets,
   balance,
@@ -17,7 +20,7 @@ export const AUSD: MoonriverXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.tokens('KUSD'),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -26,7 +29,7 @@ export const AUSD: MoonriverXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
         .asset({
-          Token: 'KUSD',
+          [XTokensExtrinsicCurrencyTypes.Token]: 'KUSD',
         }),
     },
   },

@@ -1,6 +1,7 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
+  XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../extrinsic';
@@ -31,7 +32,7 @@ export const GLMR: MoonbeamXcmConfig = {
   origin: moonbeam,
   deposit: {
     [acala.key]: {
-      origin: acala,
+      source: acala,
       balance: balance.tokens(acalaGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -40,11 +41,11 @@ export const GLMR: MoonbeamXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(acala)
         .asset({
-          ForeignAsset: acalaGlmrId,
+          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: acalaGlmrId,
         }),
     },
     [astar.key]: {
-      origin: astar,
+      source: astar,
       balance: balance.assets(astarGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -56,7 +57,7 @@ export const GLMR: MoonbeamXcmConfig = {
         .X2(getPalletInstance(astar)),
     },
     [parallel.key]: {
-      origin: parallel,
+      source: parallel,
       balance: balance.assets(parallelGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -67,7 +68,7 @@ export const GLMR: MoonbeamXcmConfig = {
         .asset(parallelGlmrId),
     },
     [phala.key]: {
-      origin: phala,
+      source: phala,
       balance: balance.assets(phalaGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic

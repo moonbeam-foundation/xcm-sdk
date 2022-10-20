@@ -17,7 +17,7 @@ export const CRU: MoonbaseXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .polkadotXcm()

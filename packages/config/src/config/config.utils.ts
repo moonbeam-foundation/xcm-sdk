@@ -6,16 +6,21 @@ import {
   XTokensExtrinsic,
   XTokensTransferMultiCurrenciesExtrinsic,
 } from '../extrinsic';
-import { Asset, Chain } from '../interfaces';
+import { Asset, AssetId, Chain } from '../interfaces';
 
-export function getOriginAssetId<Symbols extends AssetSymbol = AssetSymbol>(
+export function getAssetForeignId<Symbols extends AssetSymbol = AssetSymbol>(
   asset: Asset<Symbols>,
-) {
-  if (isUndefined(asset.originAssetId)) {
-    throw new Error(`No originAssetId defined for asset ${asset.originSymbol}`);
+  chain: ChainKey,
+): AssetId {
+  const id = asset.foreignIds?.[chain];
+
+  if (isUndefined(id)) {
+    throw new Error(
+      `No foreignAssetId defined for asset ${asset.originSymbol} and chain ${chain}`,
+    );
   }
 
-  return asset.originAssetId;
+  return id;
 }
 
 export function getMoonAssetId<ChainKeys extends ChainKey>(

@@ -17,7 +17,7 @@ export const PHA: MoonbeamXcmConfig = <const>{
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .xTransfer()

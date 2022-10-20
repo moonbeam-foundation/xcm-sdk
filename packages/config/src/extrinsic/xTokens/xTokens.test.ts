@@ -1,7 +1,10 @@
 import { AssetSymbol, ChainKey, MoonChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
 import { xTokens } from './xTokens';
-import { XTokensExtrinsicSuccessEvent } from './xTokens.constants';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from './xTokens.constants';
 
 describe('xTokens', () => {
   const amount = 1000n;
@@ -66,7 +69,14 @@ describe('xTokens', () => {
       .transferMultiCurrencies()
       .successEvent(XTokensExtrinsicSuccessEvent.Transferred)
       .origin(origin)
-      .assets(asset, asset);
+      .assets(
+        {
+          [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
+        },
+        {
+          [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
+        },
+      );
 
     it('should be correct config', () => {
       expect(cfg).toMatchSnapshot();
