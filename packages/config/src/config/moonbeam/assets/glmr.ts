@@ -84,6 +84,7 @@ export const GLMR: MoonbeamXcmConfig = {
       balance: balance.tokens(acalaGlmrId),
       destination: acala,
       feePerWeight: 8_000_000,
+      sourceMinBalance: balance.minAssetRegistryPallet(acalaGlmrId),
     }),
     [astar.key]: withdraw.xTokens({
       balance: balance.assets(astarGlmrId),

@@ -20,7 +20,8 @@ export function createBalanceBuilder<
 >() {
   return {
     assets,
-    min,
+    minAssetPallet,
+    minAssetRegistryPallet,
     ormlTokens,
     system,
     tokens: (asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
@@ -38,12 +39,21 @@ function assets(asset: AssetId): AssetsBalanceConfig {
   };
 }
 
-function min(asset: AssetId): MinBalanceConfig {
+function minAssetPallet(asset: AssetId): MinBalanceConfig {
   return {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Asset,
     path: ['minBalance'],
     params: [asset],
+  };
+}
+
+function minAssetRegistryPallet(asset: AssetId): MinBalanceConfig {
+  return {
+    pallet: BalancePallet.AssetRegistry,
+    function: BalanceFunction.AssetMetadatas,
+    path: ['minimalBalance'],
+    params: [{ ForeignAssetId: asset }],
   };
 }
 

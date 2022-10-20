@@ -59,8 +59,8 @@ export interface TokensBalanceConfig<
 }
 
 export interface MinBalanceConfig {
-  pallet: BalancePallet.Assets;
-  function: BalanceFunction.Asset;
-  path: ['minBalance'];
-  params: [AssetId];
+  pallet: BalancePallet.Assets | BalancePallet.AssetRegistry;
+  function: BalanceFunction.Asset | BalanceFunction.AssetMetadatas;
+  path: ['minBalance' | 'minimalBalance'];
+  params: [AssetId | { ForeignAssetId: AssetId }];
 }

@@ -115,6 +115,7 @@ export class PolkadotService<
       return 0n;
     }
 
+    // @ts-ignore
     return get(details.value, path).toBigInt();
   }
 
