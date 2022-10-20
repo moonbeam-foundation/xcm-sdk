@@ -6,32 +6,32 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonbeam.common';
-import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
+} from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[AssetSymbol.INTR];
-const origin = chains[ChainKey.Interlay];
+const asset = assets[AssetSymbol.NEER];
+const origin = chains[ChainKey.BitCountryPioneer];
 
-export const INTR: MoonbeamXcmConfig = {
+export const NEER: MoonbaseXcmConfig = {
   asset,
   origin,
   deposit: {
     [origin.key]: {
       origin,
-      balance: balance.tokens({ Token: asset.originSymbol }),
+      balance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
-        .asset({ Token: asset.originSymbol }),
+        .asset({ NativeToken: 0 }),
     },
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens({ Token: asset.originSymbol }),
+      balance: balance.system(),
       destination: origin,
-      feePerWeight: 1.87,
+      feePerWeight: 800_000,
     }),
   },
 };

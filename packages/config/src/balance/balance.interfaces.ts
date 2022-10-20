@@ -36,17 +36,17 @@ export interface TokensBalanceConfig<
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
   path: [];
-  getParams: (account: string) => [
-    string,
-    (
-      | {
-          Token: Symbols | 'MOVR' | 'KUSD';
-        }
-      | { ForeignAsset: number }
-    ),
-  ];
+  getParams: (account: string) => [string, TokensBalanceParam<Symbols>];
   calc: (data: TokensPalletAccountData) => bigint;
 }
+
+export type TokensBalanceParam<Symbols extends AssetSymbol = AssetSymbol> =
+  | {
+      Token: Symbols | 'MOVR' | 'KUSD';
+    }
+  | { ForeignAsset: number | bigint }
+  | { MiningResource: number }
+  | { FungibleToken: number };
 
 export interface MinBalanceConfig {
   pallet: BalancePallet.Assets;

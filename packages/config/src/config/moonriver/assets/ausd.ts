@@ -18,7 +18,7 @@ export const AUSD: MoonriverXcmConfig = {
   deposit: {
     [origin.key]: {
       origin,
-      balance: balance.tokens('KUSD'),
+      balance: balance.tokens({ Token: 'KUSD' }),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -32,7 +32,7 @@ export const AUSD: MoonriverXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens('KUSD'),
+      balance: balance.tokens({ Token: 'KUSD' }),
       destination: origin,
       feePerWeight: 64,
     }),

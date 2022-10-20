@@ -9,6 +9,7 @@ import {
   MinBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
+  TokensBalanceParam,
   TokensPalletAccountData,
 } from './balance.interfaces';
 
@@ -20,8 +21,7 @@ export function createBalanceBuilder<
     assets,
     min,
     system,
-    tokens: (asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
-      tokens<Symbols>(asset),
+    tokens: (asset: TokensBalanceParam<Symbols>) => tokens<Symbols>(asset),
   };
 }
 
@@ -56,18 +56,13 @@ function system(): SystemBalanceConfig {
 }
 
 function tokens<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD',
+  asset: TokensBalanceParam<Symbols>,
 ): TokensBalanceConfig<Symbols> {
   return {
     pallet: BalancePallet.Tokens,
     function: BalanceFunction.Accounts,
     path: [],
-    getParams: (account: string) => [
-      account,
-      Number.isInteger(asset)
-        ? { ForeignAsset: asset as number }
-        : { Token: asset as Symbols },
-    ],
+    getParams: (account: string) => [account, asset],
     calc: ({ free, frozen }: TokensPalletAccountData) =>
       BigInt(free.sub(frozen).toString()),
   };

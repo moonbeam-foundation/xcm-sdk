@@ -32,7 +32,7 @@ export const GLMR: MoonbeamXcmConfig = {
   deposit: {
     [acala.key]: {
       origin: acala,
-      balance: balance.tokens(acalaGlmrId),
+      balance: balance.tokens({ ForeignAsset: acalaGlmrId }),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -80,7 +80,7 @@ export const GLMR: MoonbeamXcmConfig = {
   },
   withdraw: {
     [acala.key]: withdraw.xTokens({
-      balance: balance.tokens(acalaGlmrId),
+      balance: balance.tokens({ ForeignAsset: acalaGlmrId }),
       destination: acala,
       feePerWeight: 8_000_000,
     }),

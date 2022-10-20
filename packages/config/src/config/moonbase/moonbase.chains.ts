@@ -7,7 +7,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.CloverAlphanet,
   ChainKey.CrustShadowAlphanet,
   ChainKey.LitentryAlphanet,
-  ChainKey.PioneerAlphanet,
+  ChainKey.BitCountryPioneer,
   ChainKey.StatemineAlphanet,
 ];
 
@@ -18,6 +18,13 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
     parachainId: 0,
+  },
+  [ChainKey.BitCountryPioneer]: {
+    key: ChainKey.BitCountryPioneer,
+    name: 'Bit.Country Pioneer',
+    ws: 'wss://moonbase-rpc.bit.country',
+    weight: 1_000_000_000,
+    parachainId: 2096,
   },
   [ChainKey.CloverAlphanet]: {
     key: ChainKey.CloverAlphanet,
@@ -42,13 +49,7 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     weight: 1_000_000_000,
     parachainId: 2106,
   },
-  [ChainKey.PioneerAlphanet]: {
-    key: ChainKey.PioneerAlphanet,
-    name: 'Pioneer Alphanet',
-    ws: 'wss://moonbase-rpc.bit.country',
-    weight: 1_000_000_000,
-    parachainId: 2096,
-  },
+
   [ChainKey.StatemineAlphanet]: {
     key: ChainKey.StatemineAlphanet,
     name: 'Statemine Alphanet',

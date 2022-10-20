@@ -18,7 +18,7 @@ export const KINT: MoonriverXcmConfig = {
   deposit: {
     [origin.key]: {
       origin,
-      balance: balance.tokens(asset.originSymbol),
+      balance: balance.tokens({ Token: asset.originSymbol }),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -29,7 +29,7 @@ export const KINT: MoonriverXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens(asset.originSymbol),
+      balance: balance.tokens({ Token: asset.originSymbol }),
       destination: origin,
       feePerWeight: 0.21,
     }),
