@@ -1,6 +1,7 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
+  XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../extrinsic';
@@ -32,7 +33,7 @@ export const MOVR: MoonriverXcmConfig = {
   origin: moonriver,
   deposit: {
     [bifrost.key]: {
-      origin: bifrost,
+      source: bifrost,
       balance: balance.tokens({ Token: 'MOVR' }),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -41,11 +42,11 @@ export const MOVR: MoonriverXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(bifrost)
         .asset({
-          Token: asset.originSymbol,
+          [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
         }),
     },
     [karura.key]: {
-      origin: karura,
+      source: karura,
       balance: balance.tokens({ ForeignAsset: karuraMovrId }),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -54,11 +55,11 @@ export const MOVR: MoonriverXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(karura)
         .asset({
-          ForeignAsset: karuraMovrId,
+          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: karuraMovrId,
         }),
     },
     [khala.key]: {
-      origin: khala,
+      source: khala,
       balance: balance.assets(khalaMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -69,7 +70,7 @@ export const MOVR: MoonriverXcmConfig = {
         .X2(getPalletInstance(khala)),
     },
     [parallel.key]: {
-      origin: parallel,
+      source: parallel,
       balance: balance.assets(parallelMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -80,7 +81,7 @@ export const MOVR: MoonriverXcmConfig = {
         .asset(parallelMovrId),
     },
     [shiden.key]: {
-      origin: shiden,
+      source: shiden,
       balance: balance.assets(shidenMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic

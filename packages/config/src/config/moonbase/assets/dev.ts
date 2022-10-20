@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import { getMoonAssetId } from '../../config.utils';
 import {
   assets,
@@ -13,15 +16,17 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.DEV];
 const clover = chains[ChainKey.CloverAlphanet];
+const centrifuge = chains[ChainKey.CentrifugeAlphanet];
 
 const cloverDevId = getMoonAssetId(clover);
+const centrifugeDevId = getMoonAssetId(centrifuge);
 
 export const DEV: MoonbaseXcmConfig = {
   asset,
   origin: moonbase,
   deposit: {
     [clover.key]: {
-      origin: clover,
+      source: clover,
       balance: balance.assets(cloverDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
@@ -30,7 +35,20 @@ export const DEV: MoonbaseXcmConfig = {
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(clover)
         .asset({
-          OtherReserve: cloverDevId,
+          [XTokensExtrinsicCurrencyTypes.OtherReserve]: cloverDevId,
+        }),
+    },
+    [centrifuge.key]: {
+      source: centrifuge,
+      balance: balance.ormlTokens(centrifugeDevId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(centrifuge)
+        .asset({
+          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: centrifugeDevId,
         }),
     },
   },
@@ -38,6 +56,11 @@ export const DEV: MoonbaseXcmConfig = {
     [clover.key]: withdraw.xTokens({
       balance: balance.assets(cloverDevId),
       destination: clover,
+      feePerWeight: 50_000,
+    }),
+    [centrifuge.key]: withdraw.xTokens({
+      balance: balance.ormlTokens(centrifugeDevId),
+      destination: centrifuge,
       feePerWeight: 50_000,
     }),
   },

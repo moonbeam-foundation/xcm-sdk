@@ -17,7 +17,7 @@ export const UNIT: MoonbaseXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .xcmPallet()

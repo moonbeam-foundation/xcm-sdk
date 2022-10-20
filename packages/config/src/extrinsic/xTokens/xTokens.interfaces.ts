@@ -1,6 +1,8 @@
 import { AssetSymbol } from '../../constants';
+import { AssetId } from '../../interfaces';
 import {
   XTokensExtrinsic,
+  XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
 } from './xTokens.constants';
 
@@ -145,18 +147,14 @@ export type XTokensTransferMultiCurrenciesExtrinsicParams<
 > = [
   [
     [
-      {
-        Token: Symbols;
-      },
+      XTokensTransferExtrinsicParamsAsset<Symbols>,
       /**
        * amount
        */
       bigint,
     ],
     [
-      {
-        Token: Symbols;
-      },
+      XTokensTransferExtrinsicParamsAsset<Symbols>,
       /**
        * fee
        */
@@ -198,21 +196,20 @@ export type XTokensTransferExtrinsicParamsAsset<
   Symbols extends AssetSymbol = AssetSymbol,
 > =
   | {
-      Token: Symbols | 'KUSD' | 'MOVR';
+      [XTokensExtrinsicCurrencyTypes.Token]: Symbols | 'KUSD' | 'MOVR';
     }
   | {
-      Native: Symbols;
+      [XTokensExtrinsicCurrencyTypes.Native]: Symbols;
     }
   | {
-      ForeignAsset: number | bigint;
+      [XTokensExtrinsicCurrencyTypes.ForeignAsset]: AssetId;
     }
   | {
-      MantaCurrency: number | bigint;
+      [XTokensExtrinsicCurrencyTypes.MantaCurrency]: AssetId;
     }
   | {
-      OtherReserve: number | bigint;
+      [XTokensExtrinsicCurrencyTypes.OtherReserve]: AssetId;
     }
   | Symbols
-  | number
-  | bigint
-  | string;
+  | AssetId
+  | 'SelfReserve';
