@@ -1,4 +1,4 @@
-import { isUndefined } from '@polkadot/util';
+import { isString, isUndefined } from '@polkadot/util';
 import { AssetSymbol, ChainKey } from '../constants';
 import {
   ExtrinsicConfig,
@@ -6,7 +6,7 @@ import {
   XTokensExtrinsic,
   XTokensTransferMultiCurrenciesExtrinsic,
 } from '../extrinsic';
-import { Asset, AssetId, Chain } from '../interfaces';
+import { Asset, AssetId, Chain, MoonChain } from '../interfaces';
 
 export function getAssetForeignId<Symbols extends AssetSymbol = AssetSymbol>(
   asset: Asset<Symbols>,
@@ -33,6 +33,16 @@ export function getMoonAssetId<ChainKeys extends ChainKey>(
   return chain.moonAssetId;
 }
 
+export function getUnitsPerSecond<ChainKeys extends ChainKey>(
+  chain: Chain<ChainKeys>,
+) {
+  if (isUndefined(chain.unitsPerSecond)) {
+    throw new Error(`No unitsPerSecond defined for chain ${chain.key}`);
+  }
+
+  return chain.unitsPerSecond;
+}
+
 export function getPalletInstance<ChainKeys extends ChainKey>(
   chain: Chain<ChainKeys>,
 ) {
@@ -55,13 +65,44 @@ export function isMultiCurrency<Symbols extends AssetSymbol = AssetSymbol>(
 export function getSymbol<Symbols extends AssetSymbol>(
   symbolOrAsset: Symbols | Asset<Symbols>,
 ): Symbols {
-  return typeof symbolOrAsset === 'string'
-    ? symbolOrAsset
-    : symbolOrAsset.originSymbol;
+  return isString(symbolOrAsset) ? symbolOrAsset : symbolOrAsset.originSymbol;
 }
 
 export function getChainKey<ChainKeys extends ChainKey>(
   keyOrChain: ChainKeys | Chain<ChainKeys>,
 ): ChainKeys {
-  return typeof keyOrChain === 'string' ? keyOrChain : keyOrChain.key;
+  return isString(keyOrChain) ? keyOrChain : keyOrChain.key;
+}
+
+export function getOverallWeight<ChainKeys extends ChainKey = ChainKey>(
+  chain: Chain<ChainKeys> | MoonChain,
+  txWeight: bigint,
+): bigint {
+  if (!chain.weights) {
+    throw new Error(`No weights found for chain: ${chain.key}`);
+  }
+
+  const {
+    descendOriginWeight,
+    withdrawAssetWeight,
+    buyExecutionWeight,
+    transactWeight,
+    baseExtrinsicWeight,
+  } = chain.weights;
+
+  return (
+    descendOriginWeight +
+    withdrawAssetWeight +
+    buyExecutionWeight +
+    transactWeight +
+    baseExtrinsicWeight +
+    txWeight
+  );
+}
+
+export function getOverallFee(
+  overallWeight: bigint,
+  unitsPerSecond: bigint,
+): bigint {
+  return (overallWeight * unitsPerSecond) / 1_000_000_000_000n;
 }

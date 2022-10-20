@@ -3,6 +3,12 @@
   "files": [],
   "references": [
     {
+      "path": "packages/utils/tsconfig.json"
+    },
+    {
+      "path": "packages/utils/tsconfig.cjs.json"
+    },
+    {
       "path": "packages/config/tsconfig.json"
     },
     {
@@ -13,6 +19,12 @@
     },
     {
       "path": "packages/sdk/tsconfig.cjs.json"
+    },
+    {
+      "path": "packages/transact/tsconfig.json"
+    },
+    {
+      "path": "packages/transact/tsconfig.cjs.json"
     }
   ]
 }

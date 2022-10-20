@@ -55,6 +55,7 @@ export enum ChainKey {
   Kusama = 'Kusama',
   LitentryAlphanet = 'LitentryAlphanet',
   Litmus = 'Litmus',
+  MoonbaseBeta = 'MoonbaseBeta',
   Parallel = 'Parallel',
   ParallelHeiko = 'ParallelHeiko',
   Phala = 'Phala',

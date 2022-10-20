@@ -6,4 +6,5 @@ export * from './constants';
 export * from './deposit';
 export * from './extrinsic';
 export * from './interfaces';
+export * from './transact';
 export * from './withdraw';

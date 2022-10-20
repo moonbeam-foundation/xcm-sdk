@@ -7,6 +7,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.CloverAlphanet,
   ChainKey.CrustShadowAlphanet,
   ChainKey.LitentryAlphanet,
+  ChainKey.MoonbaseBeta,
   ChainKey.StatemineAlphanet,
   ChainKey.CentrifugeAlphanet,
 ];
@@ -41,6 +42,25 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://moonbase-parachain-sg-0.litentry.io',
     weight: 1_000_000_000,
     parachainId: 2106,
+  },
+  [ChainKey.MoonbaseBeta]: {
+    key: ChainKey.MoonbaseBeta,
+    name: 'Moonbase Beta',
+    ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
+    // TODO: move to weights?
+    weight: 1_000_000_000,
+    palletInstance: 3,
+    parachainId: 888,
+    // TODO: use correct one, for now i'm using random number
+    unitsPerSecond: 1_000_000_000n,
+    weights: {
+      // TODO: use correct ones, for now i'm using random numbers
+      descendOriginWeight: 1_000_000_000n,
+      withdrawAssetWeight: 1_000_000_000n,
+      buyExecutionWeight: 1_000_000_000n,
+      transactWeight: 1_000_000_000n,
+      baseExtrinsicWeight: 1_000_000_000n,
+    },
   },
   [ChainKey.StatemineAlphanet]: {
     key: ChainKey.StatemineAlphanet,

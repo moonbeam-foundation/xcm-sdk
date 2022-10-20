@@ -1,18 +1,23 @@
 import { AssetSymbol, ChainKey, MoonChainKey, MOON_CHAINS } from '../constants';
-import { Asset, Chain, MoonChain } from '../interfaces';
+import { Asset, Chain } from '../interfaces';
 import {
-  AssetsMap,
-  ChainsMap,
-  ChainXcmConfigs,
+  CreateConfigParams,
+  TransactConfig,
   XcmConfigBuilder,
 } from './config.interfaces';
-import { getChainKey, getSymbol } from './config.utils';
+import {
+  getChainKey,
+  getOverallFee,
+  getOverallWeight,
+  getSymbol,
+} from './config.utils';
 import {
   MoonbaseAssets,
   MoonbaseChains,
   MOONBASE_ASSETS_MAP,
   MOONBASE_CHAINS_MAP,
   MOONBASE_CONFIGS,
+  MOONBASE_TRANSACT_CONFIGS,
 } from './moonbase';
 import {
   MoonbeamAssets,
@@ -32,13 +37,17 @@ import {
 export function createConfig<
   Symbols extends AssetSymbol,
   ChainKeys extends ChainKey,
->(
-  assets: AssetsMap<Symbols>,
-  moonAsset: Asset<Symbols>,
-  moonChain: MoonChain,
-  chains: ChainsMap<ChainKeys>,
-  configs: ChainXcmConfigs<Symbols, ChainKeys>,
-): XcmConfigBuilder<Symbols, ChainKeys> {
+>({
+  assets,
+  moonAsset,
+  moonChain,
+  chains,
+  configs,
+  transact,
+}: CreateConfigParams<Symbols, ChainKeys>): XcmConfigBuilder<
+  Symbols,
+  ChainKeys
+> {
   return {
     symbols: Object.keys(assets) as Symbols[],
     assets,
@@ -104,27 +113,90 @@ export function createConfig<
         },
       };
     },
+    transact: () => {
+      const { chainsTo, chainsFrom } = Object.values<TransactConfig<ChainKeys>>(
+        transact as { [s: string]: TransactConfig<ChainKeys> },
+      ).reduce(
+        (acc, config) => {
+          if (config.from) {
+            acc.chainsFrom.push(config.chain);
+          }
+
+          if (config.to) {
+            acc.chainsTo.push(config.chain);
+          }
+
+          return acc;
+        },
+        {
+          chainsTo: [] as Chain<ChainKeys>[],
+          chainsFrom: [] as Chain<ChainKeys>[],
+        },
+      );
+
+      return {
+        chainsFrom,
+        chainsTo,
+        from: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
+          const key = getChainKey(keyOrChain);
+          const config = transact[key];
+
+          if (!config?.from) {
+            throw new Error(`No transact config found from chain: ${key}`);
+          }
+
+          return {
+            chain: config.chain,
+            config: config.from,
+            getOverallFee: (overallWeight: bigint) =>
+              getOverallFee(overallWeight, moonChain.unitsPerSecond),
+            getOverallWeight: (txWeight: bigint) =>
+              getOverallWeight(moonChain, txWeight),
+          };
+        },
+        to: (keyOrChain: ChainKeys | Chain<ChainKeys>) => {
+          const key = getChainKey(keyOrChain);
+          const config = transact[key];
+
+          if (!config?.to) {
+            throw new Error(`No transact config found to chain: ${key}`);
+          }
+
+          return {
+            chain: config.chain,
+            config: config.to,
+            getOverallFee: (overallWeight: bigint) =>
+              getOverallFee(overallWeight, config.unitsPerSecond),
+            getOverallWeight: (txWeight: bigint) =>
+              getOverallWeight(config.chain, txWeight),
+          };
+        },
+      };
+    },
   };
 }
 
-export const moonbase = createConfig<MoonbaseAssets, MoonbaseChains>(
-  MOONBASE_ASSETS_MAP,
-  MOONBASE_ASSETS_MAP[AssetSymbol.DEV],
-  MOON_CHAINS[MoonChainKey.MoonbaseAlpha],
-  MOONBASE_CHAINS_MAP,
-  MOONBASE_CONFIGS,
-);
-export const moonbeam = createConfig<MoonbeamAssets, MoonbeamChains>(
-  MOONBEAM_ASSETS_MAP,
-  MOONBEAM_ASSETS_MAP[AssetSymbol.GLMR],
-  MOON_CHAINS[MoonChainKey.Moonbeam],
-  MOONBEAM_CHAINS_MAP,
-  MOONBEAM_CONFIGS,
-);
-export const moonriver = createConfig<MoonriverAssets, MoonriverChains>(
-  MOONRIVER_ASSETS_MAP,
-  MOONRIVER_ASSETS_MAP[AssetSymbol.MOVR],
-  MOON_CHAINS[MoonChainKey.Moonriver],
-  MOONRIVER_CHAINS_MAP,
-  MOONRIVER_CONFIGS,
-);
+export const moonbase = createConfig<MoonbaseAssets, MoonbaseChains>({
+  assets: MOONBASE_ASSETS_MAP,
+  moonAsset: MOONBASE_ASSETS_MAP[AssetSymbol.DEV],
+  moonChain: MOON_CHAINS[MoonChainKey.MoonbaseAlpha],
+  chains: MOONBASE_CHAINS_MAP,
+  configs: MOONBASE_CONFIGS,
+  transact: MOONBASE_TRANSACT_CONFIGS,
+});
+export const moonbeam = createConfig<MoonbeamAssets, MoonbeamChains>({
+  assets: MOONBEAM_ASSETS_MAP,
+  moonAsset: MOONBEAM_ASSETS_MAP[AssetSymbol.GLMR],
+  moonChain: MOON_CHAINS[MoonChainKey.Moonbeam],
+  chains: MOONBEAM_CHAINS_MAP,
+  configs: MOONBEAM_CONFIGS,
+  transact: {},
+});
+export const moonriver = createConfig<MoonriverAssets, MoonriverChains>({
+  assets: MOONRIVER_ASSETS_MAP,
+  moonAsset: MOONRIVER_ASSETS_MAP[AssetSymbol.MOVR],
+  moonChain: MOON_CHAINS[MoonChainKey.Moonriver],
+  chains: MOONRIVER_CHAINS_MAP,
+  configs: MOONRIVER_CONFIGS,
+  transact: {},
+});

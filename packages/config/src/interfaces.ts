@@ -24,6 +24,13 @@ export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {
   name: string;
   ws: string;
   parachainId: number;
+  weights?: {
+    descendOriginWeight: bigint;
+    withdrawAssetWeight: bigint;
+    buyExecutionWeight: bigint;
+    transactWeight: bigint;
+    baseExtrinsicWeight: bigint;
+  };
 }
 
 export interface MoonChain extends ChainBase<MoonChainKey> {
@@ -34,7 +41,12 @@ export interface MoonChain extends ChainBase<MoonChainKey> {
 
 export interface Chain<ChainKeys extends ChainKey = ChainKey>
   extends ChainBase<ChainKeys> {
+  // TODO: move weight to weights?
   weight: number;
   moonAssetId?: number | bigint;
   palletInstance?: number;
+  // TODO: check with Gorka is this the same as westendCostPerSecond from example
+  // what is the correct name?
+  // how to calculate it?
+  unitsPerSecond?: bigint;
 }

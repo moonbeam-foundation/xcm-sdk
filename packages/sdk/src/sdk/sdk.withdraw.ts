@@ -7,54 +7,14 @@ import {
   MoonChain,
   WithdrawConfig,
 } from '@moonbeam-network/xcm-config';
+import {
+  createTxEventHandler,
+  ExtrinsicEventsCallback,
+} from '@moonbeam-network/xcm-utils';
 import { Signer as EthersSigner } from 'ethers';
 import { XTokensContract } from '../contracts';
 import { PolkadotService } from '../polkadot';
-import {
-  ExtrinsicEventsCallback,
-  ExtrinsicStatus,
-  Hash,
-  WithdrawTransferData,
-} from './sdk.interfaces';
-
-export async function createTransactionEventHandler(
-  ethersSigner: EthersSigner,
-  txHash: Hash,
-  cb: ExtrinsicEventsCallback,
-  skipSentEvent = false,
-) {
-  if (!ethersSigner.provider) {
-    throw new Error('options.ethersSigner has not provider');
-  }
-
-  if (!skipSentEvent) {
-    cb({ status: ExtrinsicStatus.Sent, txHash });
-  }
-
-  const tx = await ethersSigner.provider.getTransactionReceipt(txHash);
-
-  if (!tx) {
-    setTimeout(
-      () => createTransactionEventHandler(ethersSigner, txHash, cb, true),
-      2000,
-    );
-    return;
-  }
-
-  if (tx.status === 1) {
-    cb({
-      status: ExtrinsicStatus.Success,
-      blockHash: tx.blockHash,
-      txHash,
-    });
-  } else {
-    cb({
-      status: ExtrinsicStatus.Failed,
-      blockHash: tx.blockHash,
-      txHash,
-    });
-  }
-}
+import { WithdrawTransferData } from './sdk.interfaces';
 
 export interface GetWithdrawDataParams<
   Symbols extends AssetSymbol,
@@ -127,7 +87,7 @@ export async function getWithdrawData<
       );
 
       if (cb) {
-        createTransactionEventHandler(ethersSigner, tx.hash, cb);
+        createTxEventHandler(ethersSigner, tx.hash, cb);
       }
 
       return tx.hash;

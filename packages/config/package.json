@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/PureStake/xcm-sdk/issues"
   },
-  "homepage": "https://github.com/PureStake/xcm-sdk#readme",
+  "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
   "files": [
     "build"
   ],

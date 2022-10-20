@@ -1,4 +1,9 @@
-import { ChainXcmConfigs, XcmConfig } from '../config.interfaces';
+import {
+  ChainTransactConfigs,
+  ChainXcmConfigs,
+  TransactConfig,
+  XcmConfig,
+} from '../config.interfaces';
 import { MOONBASE_ASSETS } from './moonbase.assets';
 import { MOONBASE_CHAINS } from './moonbase.chains';
 
@@ -10,3 +15,6 @@ export type MoonbaseXcmConfigs = ChainXcmConfigs<
   MoonbaseAssets,
   MoonbaseChains
 >;
+
+export type MoonbaseTransactConfig = TransactConfig<MoonbaseChains>;
+export type MoonbaseTransactConfigs = ChainTransactConfigs<MoonbaseChains>;
