@@ -103,6 +103,7 @@ export const MOVR: MoonriverXcmConfig = {
       balance: balance.tokens(karuraMovrId),
       destination: karura,
       feePerWeight: 50_000,
+      sourceMinBalance: balance.minAssetRegistryPallet(karuraMovrId),
     }),
     [khala.key]: withdraw.xTokens({
       balance: balance.assets(khalaMovrId),
