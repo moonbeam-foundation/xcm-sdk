@@ -202,7 +202,16 @@ export type XTokensTransferExtrinsicParamsAsset<
       [XTokensExtrinsicCurrencyTypes.Native]: Symbols;
     }
   | {
+      [XTokensExtrinsicCurrencyTypes.NativeToken]: AssetId;
+    }
+  | {
+      [XTokensExtrinsicCurrencyTypes.MiningResource]: AssetId;
+    }
+  | {
       [XTokensExtrinsicCurrencyTypes.ForeignAsset]: AssetId;
+    }
+  | {
+      [XTokensExtrinsicCurrencyTypes.FungibleToken]: AssetId;
     }
   | {
       [XTokensExtrinsicCurrencyTypes.MantaCurrency]: AssetId;

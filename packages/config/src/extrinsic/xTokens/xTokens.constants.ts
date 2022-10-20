@@ -11,9 +11,12 @@ export enum XTokensExtrinsicSuccessEvent {
 }
 
 export enum XTokensExtrinsicCurrencyTypes {
-  Token = 'Token',
-  Native = 'Native',
   ForeignAsset = 'ForeignAsset',
+  FungibleToken = 'FungibleToken',
   MantaCurrency = 'MantaCurrency',
+  MiningResource = 'MiningResource',
+  Native = 'Native',
+  NativeToken = 'NativeToken',
   OtherReserve = 'OtherReserve',
+  Token = 'Token',
 }
