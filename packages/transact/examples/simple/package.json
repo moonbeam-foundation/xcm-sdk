@@ -12,6 +12,7 @@
   "dependencies": {
     "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-transact": "*",
+    "@moonbeam-network/xcm-utils": "*",
     "@polkadot/api": "^9.3.2",
     "ethers": "^5.7.0"
   },

@@ -42,7 +42,7 @@ const { moonbase } = init({ ethersSigner, polkadotSigner: {} });
 async function toBeta() {
   const { send } = await moonbase.to(ChainKey.MoonbaseBeta).transact(callHash);
 
-  await send((event: any) => console.log(event));
+  await send((event) => console.log(event));
 }
 
 async function fromBeta() {
