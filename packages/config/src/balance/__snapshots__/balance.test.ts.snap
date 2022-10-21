@@ -19,7 +19,7 @@ exports[`balance assets should get correct params 1`] = `
 ]
 `;
 
-exports[`balance min should be correct min config 1`] = `
+exports[`balance min should be correct minAssetPallet config 1`] = `
 {
   "function": "asset",
   "pallet": "assets",
@@ -28,6 +28,21 @@ exports[`balance min should be correct min config 1`] = `
   ],
   "path": [
     "minBalance",
+  ],
+}
+`;
+
+exports[`balance min should be correct minAssetRegistryPallet config 1`] = `
+{
+  "function": "assetMetadatas",
+  "pallet": "assetRegistry",
+  "params": [
+    {
+      "ForeignAssetId": 1,
+    },
+  ],
+  "path": [
+    "minimalBalance",
   ],
 }
 `;

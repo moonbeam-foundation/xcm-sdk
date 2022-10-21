@@ -94,7 +94,7 @@ export async function getWithdrawData<
     await Promise.all([
       asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
       destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
-      destinationPolkadot.getExistentialDeposit(),
+      asset.isNative ? 0n : destinationPolkadot.getExistentialDeposit(),
       config.sourceMinBalance
         ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
         : 0n,

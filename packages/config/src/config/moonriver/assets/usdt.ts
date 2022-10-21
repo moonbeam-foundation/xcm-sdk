@@ -22,7 +22,7 @@ export const USDT: MoonriverXcmConfig = {
       source: origin,
       balance: balance.assets(originAssetId),
       sourceFeeBalance: balance.system(),
-      sourceMinBalance: balance.min(originAssetId),
+      sourceMinBalance: balance.minAssetPallet(originAssetId),
       extrinsic: extrinsic
         .polkadotXcm()
         .limitedReserveTransferAssets()
@@ -35,7 +35,7 @@ export const USDT: MoonriverXcmConfig = {
   withdraw: {
     [origin.key]: withdraw.xTokens({
       balance: balance.assets(originAssetId),
-      sourceMinBalance: balance.min(originAssetId),
+      sourceMinBalance: balance.minAssetPallet(originAssetId),
       destination: origin,
       feePerWeight: 0.00000126,
     }),
