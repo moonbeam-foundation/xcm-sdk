@@ -47,18 +47,18 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     key: ChainKey.MoonbaseBeta,
     name: 'Moonbase Beta',
     ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
-    // TODO: move to weights?
     weight: 1_000_000_000,
     palletInstance: 3,
     parachainId: 888,
-    // TODO: use correct one, for now i'm using random number
-    unitsPerSecond: 1_000_000_000n,
+    unitsPerSecond: 50_000_000_000_000_000n,
     weights: {
-      // TODO: use correct ones, for now i'm using random numbers
-      descendOriginWeight: 1_000_000_000n,
-      withdrawAssetWeight: 1_000_000_000n,
-      buyExecutionWeight: 1_000_000_000n,
-      transactWeight: 1_000_000_000n,
+      descendOriginWeight: 9_620_000n,
+      // TODO: check with Gorka, second and third numbers are random
+      withdrawAssetWeight: 465_091_000n + 100_000_000n + 100_000_000n,
+      buyExecutionWeight: 130_464_000n,
+      // TODO: check with Gorka, second number is random
+      transactWeight: 31_693_000n + 100_000_000n,
+      // TODO: check with Gorka
       baseExtrinsicWeight: 1_000_000_000n,
     },
   },
