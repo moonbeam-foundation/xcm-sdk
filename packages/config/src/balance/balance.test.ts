@@ -17,10 +17,12 @@ describe('balance', () => {
   });
 
   describe('min', () => {
-    const cfg = balance.min(1);
+    it('should be correct minAssetPallet config', () => {
+      expect(balance.minAssetPallet(1)).toMatchSnapshot();
+    });
 
-    it('should be correct min config', () => {
-      expect(cfg).toMatchSnapshot();
+    it('should be correct minAssetRegistryPallet config', () => {
+      expect(balance.minAssetRegistryPallet(1)).toMatchSnapshot();
     });
   });
 
