@@ -16,7 +16,7 @@ export const USDT: MoonbeamXcmConfig = {
       source: origin,
       balance: balance.assets(originAssetId),
       sourceFeeBalance: balance.system(),
-      sourceMinBalance: balance.min(originAssetId),
+      sourceMinBalance: balance.minAssetPallet(originAssetId),
       extrinsic: extrinsic
         .polkadotXcm()
         .limitedReserveTransferAssets()

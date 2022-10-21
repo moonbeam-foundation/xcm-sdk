@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 */12 * * 1-5' # Monday to Friday every 6 hours
   workflow_dispatch:
 
 jobs:

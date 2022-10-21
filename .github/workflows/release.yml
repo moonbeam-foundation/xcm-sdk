@@ -58,5 +58,5 @@ jobs:
           git config --local user.name github-actions
           git config --local user.email actions@github.com
           git add **/package*.json
-          git commit -m "Updated package.json files after release ${GITHUB_REF#refs/*/}"
+          git commit -m "Updated package.json files after release ${GITHUB_REF#refs/*/} [skip ci]"
           git push

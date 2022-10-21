@@ -9,7 +9,6 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.LitentryAlphanet,
   ChainKey.MoonbaseBeta,
   ChainKey.StatemineAlphanet,
-  ChainKey.CentrifugeAlphanet,
 ];
 
 export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
@@ -69,14 +68,5 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     weight: 1_000_000_000,
     parachainId: 1001,
     palletInstance: 50,
-  },
-  [ChainKey.CentrifugeAlphanet]: {
-    key: ChainKey.CentrifugeAlphanet,
-    name: 'Centrifuge Alphanet',
-    ws: 'wss://fullnode.moonbase-dev.cntrfg.com',
-    weight: 1_000_000_000,
-    parachainId: 2031,
-    moonAssetId: 1,
-    palletInstance: 150,
   },
 };
