@@ -42,7 +42,6 @@ export enum ChainKey {
   Bifrost = 'Bifrost',
   BitCountryPioneer = 'BitCountryPioneer',
   Calamari = 'Calamari',
-  CentrifugeAlphanet = 'CentrifugeAlphanet',
   CloverAlphanet = 'CloverAlphanet',
   Crab = 'Crab',
   CrustShadow = 'CrustShadow',

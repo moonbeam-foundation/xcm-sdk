@@ -9,7 +9,6 @@ import { LIT } from './assets/lit';
 import { NEER } from './assets/neer';
 import { TT1 } from './assets/tt1';
 import { UNIT } from './assets/unit';
-import { XUSDC } from './assets/xusdc';
 
 export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
   [AssetSymbol.BIT]: BIT,
@@ -20,5 +19,4 @@ export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
   [AssetSymbol.NEER]: NEER,
   [AssetSymbol.TT1]: TT1,
   [AssetSymbol.UNIT]: UNIT,
-  [AssetSymbol.XUSDC]: XUSDC,
 };

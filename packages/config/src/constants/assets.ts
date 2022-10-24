@@ -34,5 +34,4 @@ export enum AssetSymbol {
   TT1 = 'TT1',
   UNIT = 'UNIT',
   USDT = 'USDT',
-  XUSDC = 'XUSDC',
 }

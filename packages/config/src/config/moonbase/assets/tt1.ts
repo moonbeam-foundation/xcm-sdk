@@ -22,7 +22,7 @@ export const TT1: MoonbaseXcmConfig = {
       source: origin,
       balance: balance.assets(originAssetId),
       sourceFeeBalance: balance.system(),
-      sourceMinBalance: balance.min(originAssetId),
+      sourceMinBalance: balance.minAssetPallet(originAssetId),
       extrinsic: extrinsic
         .polkadotXcm()
         .limitedReserveTransferAssets()
@@ -35,7 +35,7 @@ export const TT1: MoonbaseXcmConfig = {
   withdraw: {
     [origin.key]: withdraw.xTokens({
       balance: balance.assets(originAssetId),
-      sourceMinBalance: balance.min(originAssetId),
+      sourceMinBalance: balance.minAssetPallet(originAssetId),
       destination: origin,
       feePerWeight: 1_265_000_000,
     }),

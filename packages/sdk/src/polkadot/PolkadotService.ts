@@ -109,7 +109,9 @@ export class PolkadotService<
     params,
     path,
   }: MinBalanceConfig): Promise<bigint> {
-    const details = await this.#api.query[pallet][fn](...params);
+    const details = (await this.#api.query[pallet][fn](
+      ...params,
+    )) as Option<any>;
 
     if (details.isEmpty) {
       return 0n;

@@ -16,10 +16,8 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.DEV];
 const clover = chains[ChainKey.CloverAlphanet];
-const centrifuge = chains[ChainKey.CentrifugeAlphanet];
 
 const cloverDevId = getMoonAssetId(clover);
-const centrifugeDevId = getMoonAssetId(centrifuge);
 
 export const DEV: MoonbaseXcmConfig = {
   asset,
@@ -38,29 +36,11 @@ export const DEV: MoonbaseXcmConfig = {
           [XTokensExtrinsicCurrencyTypes.OtherReserve]: cloverDevId,
         }),
     },
-    [centrifuge.key]: {
-      source: centrifuge,
-      balance: balance.ormlTokens(centrifugeDevId),
-      sourceFeeBalance: balance.system(),
-      extrinsic: extrinsic
-        .xTokens()
-        .transfer()
-        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
-        .origin(centrifuge)
-        .asset({
-          [XTokensExtrinsicCurrencyTypes.ForeignAsset]: centrifugeDevId,
-        }),
-    },
   },
   withdraw: {
     [clover.key]: withdraw.xTokens({
       balance: balance.assets(cloverDevId),
       destination: clover,
-      feePerWeight: 50_000,
-    }),
-    [centrifuge.key]: withdraw.xTokens({
-      balance: balance.ormlTokens(centrifugeDevId),
-      destination: centrifuge,
       feePerWeight: 50_000,
     }),
   },

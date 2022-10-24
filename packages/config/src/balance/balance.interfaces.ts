@@ -58,9 +58,20 @@ export type TokensBalanceParam<Symbols extends AssetSymbol = AssetSymbol> =
   | { MiningResource: number }
   | { FungibleToken: number };
 
-export interface MinBalanceConfig {
+export type MinBalanceConfig =
+  | MinBalanceAssetsConfig
+  | MinBalanceAssetRegistryConfig;
+
+export interface MinBalanceAssetsConfig {
   pallet: BalancePallet.Assets;
   function: BalanceFunction.Asset;
   path: ['minBalance'];
   params: [AssetId];
+}
+
+export interface MinBalanceAssetRegistryConfig {
+  pallet: BalancePallet.AssetRegistry;
+  function: BalanceFunction.AssetMetadatas;
+  path: ['minimalBalance'];
+  params: [{ ForeignAssetId: AssetId }];
 }

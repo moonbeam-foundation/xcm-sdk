@@ -7,7 +7,8 @@ import { AssetId } from '../interfaces';
 import { BalanceFunction, BalancePallet } from './balance.constants';
 import {
   AssetsBalanceConfig,
-  MinBalanceConfig,
+  MinBalanceAssetRegistryConfig,
+  MinBalanceAssetsConfig,
   OrmlTokensBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
@@ -21,7 +22,8 @@ export function createBalanceBuilder<
 >() {
   return {
     assets,
-    min,
+    minAssetPallet,
+    minAssetRegistryPallet,
     ormlTokens,
     system,
     tokens: (asset: TokensBalanceParam<Symbols>) => tokens<Symbols>(asset),
@@ -38,12 +40,21 @@ function assets(asset: AssetId): AssetsBalanceConfig {
   };
 }
 
-function min(asset: AssetId): MinBalanceConfig {
+function minAssetPallet(asset: AssetId): MinBalanceAssetsConfig {
   return {
     pallet: BalancePallet.Assets,
     function: BalanceFunction.Asset,
     path: ['minBalance'],
     params: [asset],
+  };
+}
+
+function minAssetRegistryPallet(asset: AssetId): MinBalanceAssetRegistryConfig {
+  return {
+    pallet: BalancePallet.AssetRegistry,
+    function: BalanceFunction.AssetMetadatas,
+    path: ['minimalBalance'],
+    params: [{ ForeignAssetId: asset }],
   };
 }
 
