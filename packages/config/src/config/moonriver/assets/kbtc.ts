@@ -26,10 +26,14 @@ export const KBTC: MoonriverXcmConfig = {
       balance: balance.tokens({
         [BalanceCurrencyTypes.Token]: asset.originSymbol,
       }),
-      sourceFeeBalance: balance.tokens({ Token: feeAsset.originSymbol }),
+      sourceFeeBalance: balance.tokens({
+        [BalanceCurrencyTypes.Token]: feeAsset.originSymbol,
+      }),
       xcmFeeAsset: {
         asset: feeAsset,
-        balance: balance.tokens({ Token: feeAsset.originSymbol }),
+        balance: balance.tokens({
+          [BalanceCurrencyTypes.Token]: feeAsset.originSymbol,
+        }),
       },
       extrinsic: extrinsic
         .xTokens()
