@@ -16,5 +16,11 @@ export type MoonbaseXcmConfigs = ChainXcmConfigs<
   MoonbaseChains
 >;
 
-export type MoonbaseTransactConfig = TransactConfig<MoonbaseChains>;
-export type MoonbaseTransactConfigs = ChainTransactConfigs<MoonbaseChains>;
+export type MoonbaseTransactConfig = TransactConfig<
+  MoonbaseAssets,
+  MoonbaseChains
+>;
+export type MoonbaseTransactConfigs = ChainTransactConfigs<
+  MoonbaseAssets,
+  MoonbaseChains
+>;

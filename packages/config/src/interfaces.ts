@@ -29,7 +29,6 @@ export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {
     withdrawAssetWeight: bigint;
     buyExecutionWeight: bigint;
     transactWeight: bigint;
-    baseExtrinsicWeight: bigint;
   };
 }
 

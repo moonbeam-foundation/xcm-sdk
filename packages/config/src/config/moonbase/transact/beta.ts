@@ -15,17 +15,16 @@ const unitsPerSecond = getUnitsPerSecond(beta);
 export const BETA: MoonbaseTransactConfig = {
   chain: beta,
   unitsPerSecond,
+  balance: balance.system(),
   from: {
-    balance: balance.system(),
     multilocation: {
-      account: multilocation.v1().account(moonbase.parachainId),
+      account: multilocation.v1().account(beta.parachainId),
     },
     transact: transact.xcmTransactor().transactThroughSigned(beta),
   },
   to: {
-    balance: balance.system(),
     multilocation: {
-      account: multilocation.v1().account(beta.parachainId),
+      account: multilocation.v1().account(moonbase.parachainId),
     },
     transact: transact.xcmTransactor().transactThroughSignedMultilocation(beta),
   },

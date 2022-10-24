@@ -14,6 +14,12 @@ export const MOON_CHAINS: Record<MoonChainKey, MoonChain> = {
     decimals: 18,
     chainId: 1287,
     unitsPerSecond: 50_000_000_000_000_000n,
+    weights: {
+      descendOriginWeight: 9_620_000n,
+      withdrawAssetWeight: 200_000_000n,
+      buyExecutionWeight: 130_464_000n + 100_000_000n,
+      transactWeight: 31_693_000n + 25_000_000n,
+    },
   },
   [MoonChainKey.Moonbeam]: {
     key: MoonChainKey.Moonbeam,

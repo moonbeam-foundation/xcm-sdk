@@ -52,13 +52,9 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     unitsPerSecond: 50_000_000_000_000_000n,
     weights: {
       descendOriginWeight: 9_620_000n,
-      // TODO: check with Gorka, second and third numbers are random
-      withdrawAssetWeight: 465_091_000n + 100_000_000n + 100_000_000n,
-      buyExecutionWeight: 130_464_000n,
-      // TODO: check with Gorka, second number is random
-      transactWeight: 31_693_000n + 100_000_000n,
-      // TODO: check with Gorka
-      baseExtrinsicWeight: 1_000_000_000n,
+      withdrawAssetWeight: 200_000_000n,
+      buyExecutionWeight: 130_464_000n + 100_000_000n,
+      transactWeight: 31_693_000n + 25_000_000n,
     },
   },
   [ChainKey.StatemineAlphanet]: {

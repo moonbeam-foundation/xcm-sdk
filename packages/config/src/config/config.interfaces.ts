@@ -18,7 +18,7 @@ export interface CreateConfigParams<
   moonChain: MoonChain;
   chains: ChainsMap<ChainKeys>;
   configs: ChainXcmConfigs<Symbols, ChainKeys>;
-  transact: ChainTransactConfigs<ChainKeys>;
+  transact: ChainTransactConfigs<Symbols, ChainKeys>;
 }
 
 export interface XcmConfigBuilder<
@@ -35,7 +35,7 @@ export interface XcmConfigBuilder<
   withdraw: (
     symbolOrAsset: Symbols | Asset<Symbols>,
   ) => WithdrawConfigBuilder<Symbols, ChainKeys>;
-  transact: () => TransactConfigBuilder<ChainKeys>;
+  transact: () => TransactConfigBuilder<Symbols, ChainKeys>;
 }
 
 export interface DepositConfigBuilder<
@@ -87,55 +87,66 @@ export interface XcmConfig<
   withdraw: Partial<Record<ChainKeys, WithdrawConfig<Symbols>>>;
 }
 
-export type ChainTransactConfigs<ChainKeys extends ChainKey = ChainKey> =
-  Partial<Record<ChainKeys, TransactConfig<ChainKeys>>>;
+export type ChainTransactConfigs<
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
+> = Partial<Record<ChainKeys, TransactConfig<Symbols, ChainKeys>>>;
 
-export interface TransactConfigBuilder<ChainKeys extends ChainKey = ChainKey> {
+export interface TransactConfigBuilder<
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
+> {
   chainsFrom: Chain<ChainKeys>[];
   chainsTo: Chain<ChainKeys>[];
   from: (
     keyOrChain: ChainKeys | Chain<ChainKeys>,
-  ) => TransactConfigFromBuilder<ChainKeys>;
+  ) => TransactConfigFromBuilder<Symbols, ChainKeys>;
   to: (
     keyOrChain: ChainKeys | Chain<ChainKeys>,
-  ) => TransactConfigToBuilder<ChainKeys>;
+  ) => TransactConfigToBuilder<Symbols, ChainKeys>;
 }
 
 export interface TransactConfigFromBuilder<
+  Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
   chain: Chain<ChainKeys>;
   config: TransactFromConfig;
+  balance: BalanceConfig<Symbols>;
   getOverallWeight: (txWeight: bigint) => bigint;
   getOverallFee: (overallWeight: bigint) => bigint;
 }
 
 export interface TransactConfigToBuilder<
+  Symbols extends AssetSymbol = AssetSymbol,
   ChainKeys extends ChainKey = ChainKey,
 > {
   chain: Chain<ChainKeys>;
   config: TransactToConfig;
+  balance: BalanceConfig<Symbols>;
   getOverallWeight: (txWeight: bigint) => bigint;
   getOverallFee: (overallWeight: bigint) => bigint;
 }
 
-export interface TransactConfig<ChainKeys extends ChainKey = ChainKey> {
+export interface TransactConfig<
+  Symbols extends AssetSymbol = AssetSymbol,
+  ChainKeys extends ChainKey = ChainKey,
+> {
   chain: Chain<ChainKeys>;
   unitsPerSecond: bigint;
+  balance: BalanceConfig<Symbols>;
   from?: TransactFromConfig;
   to?: TransactToConfig;
 }
 
-export interface TransactFromConfig<Symbols extends AssetSymbol = AssetSymbol> {
-  balance: BalanceConfig<Symbols>;
+export interface TransactFromConfig {
   multilocation: {
     account: GetterAccountMultilocationV1;
   };
   transact: XcmTransactThroughSigned;
 }
 
-export interface TransactToConfig<Symbols extends AssetSymbol = AssetSymbol> {
-  balance: BalanceConfig<Symbols>;
+export interface TransactToConfig {
   multilocation: {
     account: GetterAccountMultilocationV1;
   };

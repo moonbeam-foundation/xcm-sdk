@@ -114,9 +114,9 @@ export function createConfig<
       };
     },
     transact: () => {
-      const { chainsTo, chainsFrom } = Object.values<TransactConfig<ChainKeys>>(
-        transact as { [s: string]: TransactConfig<ChainKeys> },
-      ).reduce(
+      const { chainsTo, chainsFrom } = Object.values<
+        TransactConfig<Symbols, ChainKeys>
+      >(transact as { [s: string]: TransactConfig<Symbols, ChainKeys> }).reduce(
         (acc, config) => {
           if (config.from) {
             acc.chainsFrom.push(config.chain);
@@ -148,6 +148,7 @@ export function createConfig<
           return {
             chain: config.chain,
             config: config.from,
+            balance: config.balance,
             getOverallFee: (overallWeight: bigint) =>
               getOverallFee(overallWeight, moonChain.unitsPerSecond),
             getOverallWeight: (txWeight: bigint) =>
@@ -165,6 +166,7 @@ export function createConfig<
           return {
             chain: config.chain,
             config: config.to,
+            balance: config.balance,
             getOverallFee: (overallWeight: bigint) =>
               getOverallFee(overallWeight, config.unitsPerSecond),
             getOverallWeight: (txWeight: bigint) =>

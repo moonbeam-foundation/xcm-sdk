@@ -1,14 +1,21 @@
-import type { XcmTransactThroughSignedParams } from '@moonbeam-network/xcm-config';
+import type {
+  AccountMultilocationV1,
+  AssetSymbol,
+  BalanceConfig,
+  XcmTransactThroughSignedParams,
+} from '@moonbeam-network/xcm-config';
 import {
   createExtrinsicEventHandler,
-  ExtrinsicEventsCallback,
-  Hash,
+  type ExtrinsicEventsCallback,
+  type Hash,
 } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
 import type { XcmV1MultiLocation } from '@polkadot/types/lookup';
 import type { IKeyringPair } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
+import { get } from 'lodash';
+import type { Balance } from './transact.interfaces';
 
 // random account, I used the same as Polkadot.js is using
 // https://github.com/PureStake/apps/blob/master/packages/react-hooks/src/useWeight.ts#L36
@@ -26,7 +33,7 @@ export async function getTxWeight(
 
 export async function getDerivatedAddress(
   api: ApiPromise,
-  multilocation: any,
+  multilocation: AccountMultilocationV1,
 ): Promise<{ address20: string; address32: string }> {
   const ml: XcmV1MultiLocation = api.createType(
     'XcmV1MultiLocation',
@@ -77,4 +84,38 @@ export async function transactThroughSigned({
     );
 
   return hash.toString();
+}
+
+export async function getGenericBalance<
+  Symbols extends AssetSymbol = AssetSymbol,
+>(
+  api: ApiPromise,
+  address: string,
+  { pallet, function: fn, getParams, path, calc }: BalanceConfig<Symbols>,
+): Promise<bigint> {
+  const response = await api.query[pallet][fn](...getParams(address));
+
+  if (response.isEmpty) {
+    return 0n;
+  }
+
+  const unwrapped = (response as any).unwrap?.() || response;
+
+  return calc(path.length ? get(unwrapped, path) : unwrapped);
+}
+
+export async function getBalance<Symbols extends AssetSymbol = AssetSymbol>(
+  api: ApiPromise,
+  address: string,
+  config: BalanceConfig<Symbols>,
+): Promise<Balance<Symbols>> {
+  const decimals = api.registry.chainDecimals.at(0) || 12;
+  const symbol = (api.registry.chainTokens.at(0) || 'UNIT') as Symbols;
+  const balance = await getGenericBalance(api, address, config);
+
+  return {
+    balance,
+    decimals,
+    symbol,
+  };
 }

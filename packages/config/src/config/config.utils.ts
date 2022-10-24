@@ -87,7 +87,6 @@ export function getOverallWeight<ChainKeys extends ChainKey = ChainKey>(
     withdrawAssetWeight,
     buyExecutionWeight,
     transactWeight,
-    baseExtrinsicWeight,
   } = chain.weights;
 
   return (
@@ -95,7 +94,6 @@ export function getOverallWeight<ChainKeys extends ChainKey = ChainKey>(
     withdrawAssetWeight +
     buyExecutionWeight +
     transactWeight +
-    baseExtrinsicWeight +
     txWeight
   );
 }
@@ -104,8 +102,5 @@ export function getOverallFee(
   overallWeight: bigint,
   unitsPerSecond: bigint,
 ): bigint {
-  // TODO: check with Gorka if it's constant
-  // is it a weight per second?
-  // where to get it?
   return (overallWeight * unitsPerSecond) / 1_000_000_000_000n;
 }

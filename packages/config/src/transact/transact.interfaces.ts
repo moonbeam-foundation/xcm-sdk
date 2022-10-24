@@ -42,7 +42,6 @@ export interface PrecompileXcmTransactThroughSignedMultilocationParams {
   /**
    * fee - a fee of the transaction
    * (overallWeight * unitsPerSecond) / 1_000_000_000_000n
-   * TODO: check if this is correct. Is 1_000_000_000_000n a constant?
    */
   overallFee: bigint;
   /**

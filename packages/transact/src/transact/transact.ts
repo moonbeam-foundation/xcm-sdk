@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import {
+  AssetSymbol,
   Chain,
   ChainKey,
   moonbase,
+  MoonbaseAssets,
   moonbeam,
+  MoonbeamAssets,
   moonriver,
+  MoonriverAssets,
   type MoonbaseChains,
   type MoonbeamChains,
   type MoonriverChains,
@@ -29,6 +33,7 @@ import type {
   TransactToData,
 } from './transact.interfaces';
 import {
+  getBalance,
   getDerivatedAddress,
   getTxWeight,
   transactThroughSigned,
@@ -41,16 +46,19 @@ export interface TransactInitOptions {
 
 export function init(options: TransactInitOptions) {
   return {
-    moonbase: initByChain<MoonbaseChains>(moonbase, options),
-    moonbeam: initByChain<MoonbeamChains>(moonbeam, options),
-    moonriver: initByChain<MoonriverChains>(moonriver, options),
+    moonbase: initByChain<MoonbaseAssets, MoonbaseChains>(moonbase, options),
+    moonbeam: initByChain<MoonbeamAssets, MoonbeamChains>(moonbeam, options),
+    moonriver: initByChain<MoonriverAssets, MoonriverChains>(
+      moonriver,
+      options,
+    ),
   };
 }
 
-function initByChain<ChainKeys extends ChainKey>(
+function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
   configBuilder: XcmConfigBuilder<any, ChainKeys>,
   options?: TransactInitOptions,
-): Transactor<ChainKeys> {
+): Transactor<Symbols, ChainKeys> {
   const { moonChain, transact } = configBuilder;
   const { chainsFrom, chainsTo, from, to } = transact();
 
@@ -60,16 +68,21 @@ function initByChain<ChainKeys extends ChainKey>(
     chainsTo,
     from: (
       keyOrChain: ChainKeys | Chain<ChainKeys>,
-    ): TransactorFrom<ChainKeys> => {
-      const { chain, config, getOverallWeight, getOverallFee } =
-        from(keyOrChain);
+    ): TransactorFrom<Symbols, ChainKeys> => {
+      const {
+        balance: balanceConfig,
+        chain,
+        config,
+        getOverallWeight,
+        getOverallFee,
+      } = from(keyOrChain);
 
       return {
         transact: async (
           callHash: string,
           sourceAccount: string | IKeyringPair,
           polkadotSigner?: PolkadotSigner,
-        ): Promise<TransactFromData<ChainKeys>> => {
+        ): Promise<TransactFromData<Symbols, ChainKeys>> => {
           const signer = polkadotSigner || options?.polkadotSigner;
 
           if (isString(sourceAccount) && !signer) {
@@ -82,13 +95,13 @@ function initByChain<ChainKeys extends ChainKey>(
             ? sourceAccount
             : sourceAccount.address;
 
-          const api = await getPolkadotApi(moonChain.ws);
-          const txWeight = await getTxWeight(callHash, api);
+          const sourceApi = await getPolkadotApi(chain.ws);
+          const destinationApi = await getPolkadotApi(moonChain.ws);
+          const txWeight = await getTxWeight(callHash, destinationApi);
           const overallWeight = getOverallWeight(txWeight);
           const overallFee = getOverallFee(overallWeight);
-          // TODO: works for substrate address?
           const { address20, address32 } = await getDerivatedAddress(
-            api,
+            destinationApi,
             config.multilocation.account.get(sourceAddress),
           );
           const params = config.transact.getParams({
@@ -97,23 +110,31 @@ function initByChain<ChainKeys extends ChainKey>(
             overallWeight,
             txWeight,
           });
+          const balance = await getBalance(sourceApi, address20, balanceConfig);
+          const destinationBalance = await getBalance(
+            destinationApi,
+            address20,
+            balanceConfig,
+          );
 
           return {
             overallFee,
             overallWeight,
             txWeight,
             source: {
-              chain,
               address: sourceAddress,
+              balance,
+              chain,
             },
-            target: {
-              chain: moonChain,
-              address20,
+            destination: {
+              address: address20,
               address32,
+              balance: destinationBalance,
+              chain: moonChain,
             },
             send: async (cb?: ExtrinsicEventsCallback): Promise<Hash> =>
               transactThroughSigned({
-                api,
+                api: destinationApi,
                 cb,
                 params,
                 polkadotSigner,
@@ -123,14 +144,22 @@ function initByChain<ChainKeys extends ChainKey>(
         },
       };
     },
-    to: (keyOrChain: ChainKeys | Chain<ChainKeys>): TransactorTo<ChainKeys> => {
-      const { chain, config, getOverallWeight, getOverallFee } = to(keyOrChain);
+    to: (
+      keyOrChain: ChainKeys | Chain<ChainKeys>,
+    ): TransactorTo<Symbols, ChainKeys> => {
+      const {
+        balance: balanceConfig,
+        chain,
+        config,
+        getOverallWeight,
+        getOverallFee,
+      } = to(keyOrChain);
 
       return {
         transact: async (
           callHash: string,
           ethersSigner?: EthersSigner,
-        ): Promise<TransactToData<ChainKeys>> => {
+        ): Promise<TransactToData<Symbols, ChainKeys>> => {
           const signer = ethersSigner || options?.ethersSigner;
 
           if (!signer) {
@@ -139,13 +168,24 @@ function initByChain<ChainKeys extends ChainKey>(
 
           const contract = new XcmTransactorContract(signer);
           const address = await signer.getAddress();
-          const api = await getPolkadotApi(chain.ws);
-          const txWeight = await getTxWeight(callHash, api);
+          const sourceApi = await getPolkadotApi(moonChain.ws);
+          const destinationApi = await getPolkadotApi(chain.ws);
+          const txWeight = await getTxWeight(callHash, destinationApi);
           const overallWeight = getOverallWeight(txWeight);
           const overallFee = getOverallFee(overallWeight);
           const { address20, address32 } = await getDerivatedAddress(
-            api,
+            destinationApi,
             config.multilocation.account.get(address),
+          );
+          const balance = await getBalance(
+            destinationApi,
+            address20,
+            balanceConfig,
+          );
+          const sourceBalance = await getBalance(
+            sourceApi,
+            address,
+            balanceConfig,
           );
 
           return {
@@ -153,13 +193,15 @@ function initByChain<ChainKeys extends ChainKey>(
             overallWeight,
             txWeight,
             source: {
-              chain: moonChain,
               address,
+              balance: sourceBalance,
+              chain: moonChain,
             },
-            target: {
-              chain,
-              address20,
+            destination: {
+              address: address20,
               address32,
+              balance,
+              chain,
             },
             send: async (cb?: ExtrinsicEventsCallback): Promise<Hash> => {
               const tx = await contract.transactThroughSignedMultilocation(
