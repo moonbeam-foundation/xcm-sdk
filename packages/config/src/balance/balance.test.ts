@@ -1,4 +1,5 @@
 import { createBalanceBuilder } from './balance';
+import { BalanceCurrencyTypes } from './balance.constants';
 
 describe('balance', () => {
   const account = '<ACCOUNT>';
@@ -39,7 +40,7 @@ describe('balance', () => {
   });
 
   describe('tokens', () => {
-    const cfg = balance.tokens({ Token: 'MOVR' });
+    const cfg = balance.tokens({ [BalanceCurrencyTypes.Token]: 'MOVR' });
 
     it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();
