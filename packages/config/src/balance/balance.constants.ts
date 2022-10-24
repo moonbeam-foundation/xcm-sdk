@@ -12,3 +12,11 @@ export enum BalanceFunction {
   Asset = 'asset',
   AssetMetadatas = 'assetMetadatas',
 }
+
+export enum BalanceCurrencyTypes {
+  Token = 'Token',
+  ForeignAsset = 'ForeignAsset',
+  NativeToken = 'NativeToken',
+  MiningResource = 'MiningResource',
+  FungibleToken = 'FungibleToken',
+}

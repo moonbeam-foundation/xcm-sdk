@@ -1,3 +1,4 @@
+import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   XTokensExtrinsicCurrencyTypes,
@@ -13,6 +14,7 @@ import {
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.BIT];
+const feeAsset = assets[AssetSymbol.NEER];
 const origin = chains[ChainKey.BitCountryPioneer];
 
 export const BIT: MoonbaseXcmConfig = {
@@ -20,10 +22,13 @@ export const BIT: MoonbaseXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
-      balance: balance.tokens({ MiningResource: 0 }),
+      source: origin,
+      balance: balance.tokens({ [BalanceCurrencyTypes.MiningResource]: 0 }),
       sourceFeeBalance: balance.system(),
-      isNativeAssetPayingMoonFee: true,
+      xcmFeeAsset: {
+        asset: feeAsset,
+        balance: balance.system(),
+      },
       extrinsic: extrinsic
         .xTokens()
         .transferMultiCurrencies()

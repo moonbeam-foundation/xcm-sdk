@@ -1,3 +1,4 @@
+import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   XTokensExtrinsicCurrencyTypes,
@@ -22,7 +23,9 @@ export const IBTC: MoonbeamXcmConfig = {
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens({ Token: asset.originSymbol }),
+      balance: balance.tokens({
+        [BalanceCurrencyTypes.Token]: asset.originSymbol,
+      }),
       sourceFeeBalance: balance.tokens({ Token: feeAsset.originSymbol }),
       xcmFeeAsset: {
         asset: feeAsset,
@@ -45,7 +48,9 @@ export const IBTC: MoonbeamXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens({ Token: asset.originSymbol }),
+      balance: balance.tokens({
+        [BalanceCurrencyTypes.Token]: asset.originSymbol,
+      }),
       destination: origin,
       feePerWeight: 0.00000619,
     }),

@@ -25,6 +25,7 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://moonbase-rpc.bit.country',
     weight: 1_000_000_000,
     parachainId: 2096,
+    moonAssetId: 0,
   },
   [ChainKey.CloverAlphanet]: {
     key: ChainKey.CloverAlphanet,

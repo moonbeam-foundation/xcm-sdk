@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import {
   assets,
   balance,
@@ -17,14 +20,14 @@ export const NEER: MoonbaseXcmConfig = {
   origin,
   deposit: {
     [origin.key]: {
-      origin,
+      source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
-        .asset({ NativeToken: 0 }),
+        .asset({ [XTokensExtrinsicCurrencyTypes.NativeToken]: 0 }),
     },
   },
   withdraw: {

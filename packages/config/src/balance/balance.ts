@@ -12,7 +12,7 @@ import {
   OrmlTokensBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
-  TokensBalanceParam,
+  TokensBalanceParamAsset,
   TokensPalletAccountData,
 } from './balance.interfaces';
 
@@ -26,7 +26,7 @@ export function createBalanceBuilder<
     minAssetRegistryPallet,
     ormlTokens,
     system,
-    tokens: (asset: TokensBalanceParam<Symbols>) => tokens<Symbols>(asset),
+    tokens: (asset: TokensBalanceParamAsset<Symbols>) => tokens<Symbols>(asset),
   };
 }
 
@@ -81,7 +81,7 @@ function system(): SystemBalanceConfig {
 }
 
 function tokens<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: TokensBalanceParam<Symbols>,
+  asset: TokensBalanceParamAsset<Symbols>,
 ): TokensBalanceConfig<Symbols> {
   return {
     pallet: BalancePallet.Tokens,

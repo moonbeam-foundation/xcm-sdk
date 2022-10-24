@@ -2,7 +2,11 @@ import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
 import { AssetId } from '../interfaces';
-import { BalanceFunction, BalancePallet } from './balance.constants';
+import {
+  BalanceCurrencyTypes,
+  BalanceFunction,
+  BalancePallet,
+} from './balance.constants';
 
 export type BalanceConfig<Symbols extends AssetSymbol = AssetSymbol> =
   | SystemBalanceConfig
@@ -46,17 +50,18 @@ export interface TokensBalanceConfig<
   pallet: BalancePallet.Tokens;
   function: BalanceFunction.Accounts;
   path: [];
-  getParams: (account: string) => [string, TokensBalanceParam<Symbols>];
+  getParams: (account: string) => [string, TokensBalanceParamAsset<Symbols>];
   calc: (data: TokensPalletAccountData) => bigint;
 }
 
-export type TokensBalanceParam<Symbols extends AssetSymbol = AssetSymbol> =
-  | {
-      Token: Symbols | 'MOVR' | 'KUSD';
-    }
-  | { ForeignAsset: AssetId }
-  | { MiningResource: number }
-  | { FungibleToken: number };
+export type TokensBalanceParamAsset<Symbols extends AssetSymbol = AssetSymbol> =
+
+    | {
+        [BalanceCurrencyTypes.Token]: Symbols | 'MOVR' | 'KUSD';
+      }
+    | { [BalanceCurrencyTypes.ForeignAsset]: AssetId }
+    | { [BalanceCurrencyTypes.MiningResource]: AssetId }
+    | { [BalanceCurrencyTypes.FungibleToken]: AssetId };
 
 export type MinBalanceConfig =
   | MinBalanceAssetsConfig
