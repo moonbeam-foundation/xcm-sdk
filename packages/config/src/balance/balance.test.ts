@@ -39,7 +39,7 @@ describe('balance', () => {
   });
 
   describe('tokens', () => {
-    const cfg = balance.tokens('MOVR');
+    const cfg = balance.tokens({ Token: 'MOVR' });
 
     it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();
@@ -47,12 +47,6 @@ describe('balance', () => {
 
     it('should be correct params with Token', () => {
       expect(cfg.getParams(account)).toMatchSnapshot();
-    });
-
-    it('should be correct params with ForeignAsset', () => {
-      const cfg2 = balance.tokens(5);
-
-      expect(cfg2.getParams(account)).toMatchSnapshot();
     });
   });
 });
