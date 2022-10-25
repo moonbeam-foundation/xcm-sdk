@@ -1,3 +1,4 @@
+import { AssetSymbol } from '../constants';
 import { createBalanceBuilder } from './balance';
 
 describe('balance', () => {
@@ -39,7 +40,7 @@ describe('balance', () => {
   });
 
   describe('tokens', () => {
-    const cfg = balance.tokens().token('MOVR');
+    const cfg = balance.tokens().token(AssetSymbol.MOVR);
 
     it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();

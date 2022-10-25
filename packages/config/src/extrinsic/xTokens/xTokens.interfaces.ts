@@ -196,7 +196,7 @@ export type XTokensTransferExtrinsicParamsAsset<
   Symbols extends AssetSymbol = AssetSymbol,
 > =
   | {
-      [XTokensExtrinsicCurrencyTypes.Token]: Symbols | 'KUSD' | 'MOVR';
+      [XTokensExtrinsicCurrencyTypes.Token]: Symbols | AssetSymbol.KUSD;
     }
   | {
       [XTokensExtrinsicCurrencyTypes.Native]: Symbols;

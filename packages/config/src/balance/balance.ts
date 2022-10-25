@@ -86,7 +86,7 @@ function system(): SystemBalanceConfig {
 
 function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
   return {
-    token: (asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
+    token: (asset: Symbols | AssetSymbol.KUSD) =>
       tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset }),
     foreignAsset: (asset: AssetId | Symbols) =>
       tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset }),

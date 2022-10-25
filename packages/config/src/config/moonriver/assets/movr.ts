@@ -34,7 +34,7 @@ export const MOVR: MoonriverXcmConfig = {
   deposit: {
     [bifrost.key]: {
       source: bifrost,
-      balance: balance.tokens().token('MOVR'),
+      balance: balance.tokens().token(AssetSymbol.MOVR),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -95,7 +95,7 @@ export const MOVR: MoonriverXcmConfig = {
   },
   withdraw: {
     [bifrost.key]: withdraw.xTokens({
-      balance: balance.tokens().token('MOVR'),
+      balance: balance.tokens().token(AssetSymbol.MOVR),
       destination: bifrost,
       feePerWeight: 213_600,
     }),
