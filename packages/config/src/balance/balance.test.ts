@@ -1,5 +1,4 @@
 import { createBalanceBuilder } from './balance';
-import { BalanceCurrencyTypes } from './balance.constants';
 
 describe('balance', () => {
   const account = '<ACCOUNT>';
@@ -40,10 +39,36 @@ describe('balance', () => {
   });
 
   describe('tokens', () => {
-    const cfg = balance.tokens({ [BalanceCurrencyTypes.Token]: 'MOVR' });
+    const cfg = balance.tokens().token('MOVR');
 
     it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();
+    });
+
+    it('should be correct params with Token', () => {
+      expect(cfg.getParams(account)).toMatchSnapshot();
+    });
+
+    const cfg2 = balance.tokens().foreignAsset(0);
+
+    it('should be correct balance config foreignAsset', () => {
+      expect(cfg2).toMatchSnapshot();
+    });
+
+    it('should be correct params with ForeignAsset', () => {
+      expect(cfg2.getParams(account)).toMatchSnapshot();
+    });
+
+    const cfg3 = balance.tokens().miningResource(0);
+
+    it('should be correct params with MiningResource', () => {
+      expect(cfg3.getParams(account)).toMatchSnapshot();
+    });
+
+    const cfg4 = balance.tokens().fungibleToken(0);
+
+    it('should be correct params with FungibleToken', () => {
+      expect(cfg4.getParams(account)).toMatchSnapshot();
     });
   });
 });

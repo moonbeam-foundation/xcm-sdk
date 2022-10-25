@@ -96,7 +96,7 @@ function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
 function token<Symbols extends AssetSymbol = AssetSymbol>(
   asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD',
 ) {
-  return tokensBase({ [BalanceCurrencyTypes.Token]: asset });
+  return tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset });
 }
 
 function foreignAsset<Symbols extends AssetSymbol = AssetSymbol>(

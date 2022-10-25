@@ -74,3 +74,49 @@ exports[`balance tokens should be correct balance config 1`] = `
   "path": [],
 }
 `;
+
+exports[`balance tokens should be correct balance config foreignAsset 1`] = `
+{
+  "calc": [Function],
+  "function": "accounts",
+  "getParams": [Function],
+  "pallet": "tokens",
+  "path": [],
+}
+`;
+
+exports[`balance tokens should be correct params with ForeignAsset 1`] = `
+[
+  "<ACCOUNT>",
+  {
+    "ForeignAsset": 0,
+  },
+]
+`;
+
+exports[`balance tokens should be correct params with FungibleToken 1`] = `
+[
+  "<ACCOUNT>",
+  {
+    "FungibleToken": 0,
+  },
+]
+`;
+
+exports[`balance tokens should be correct params with MiningResource 1`] = `
+[
+  "<ACCOUNT>",
+  {
+    "MiningResource": 0,
+  },
+]
+`;
+
+exports[`balance tokens should be correct params with Token 1`] = `
+[
+  "<ACCOUNT>",
+  {
+    "Token": "MOVR",
+  },
+]
+`;
