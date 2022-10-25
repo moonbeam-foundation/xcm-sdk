@@ -86,35 +86,15 @@ function system(): SystemBalanceConfig {
 
 function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
   return {
-    token: (asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD') => token<Symbols>(asset),
-    foreignAsset: (asset: AssetId | Symbols) => foreignAsset<Symbols>(asset),
-    miningResource: (asset: AssetId) => miningResource<Symbols>(asset),
-    fungibleToken: (asset: AssetId) => fungibleToken<Symbols>(asset),
+    token: (asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset }),
+    foreignAsset: (asset: AssetId | Symbols) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset }),
+    miningResource: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.MiningResource]: asset }),
+    fungibleToken: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.FungibleToken]: asset }),
   };
-}
-
-function token<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD',
-) {
-  return tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset });
-}
-
-function foreignAsset<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: AssetId,
-) {
-  return tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset });
-}
-
-function miningResource<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: AssetId,
-) {
-  return tokensBase<Symbols>({ [BalanceCurrencyTypes.MiningResource]: asset });
-}
-
-function fungibleToken<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: AssetId,
-) {
-  return tokensBase<Symbols>({ [BalanceCurrencyTypes.FungibleToken]: asset });
 }
 
 function tokensBase<Symbols extends AssetSymbol = AssetSymbol>(
