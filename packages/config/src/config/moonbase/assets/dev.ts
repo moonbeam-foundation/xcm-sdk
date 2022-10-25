@@ -1,4 +1,3 @@
-import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   XTokensExtrinsicCurrencyTypes,
@@ -41,9 +40,7 @@ export const DEV: MoonbaseXcmConfig = {
     },
     [pioneer.key]: {
       source: pioneer,
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.FungibleToken]: pioneerDevId,
-      }),
+      balance: balance.tokens().fungibleToken(pioneerDevId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -60,9 +57,7 @@ export const DEV: MoonbaseXcmConfig = {
       feePerWeight: 50_000,
     }),
     [pioneer.key]: withdraw.xTokens({
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.FungibleToken]: pioneerDevId,
-      }),
+      balance: balance.tokens().fungibleToken(pioneerDevId),
       destination: pioneer,
       feePerWeight: 50_000,
     }),

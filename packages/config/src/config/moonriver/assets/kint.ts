@@ -1,4 +1,3 @@
-import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   XTokensExtrinsicCurrencyTypes,
@@ -22,9 +21,7 @@ export const KINT: MoonriverXcmConfig = {
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.Token]: asset.originSymbol,
-      }),
+      balance: balance.tokens().token(asset.originSymbol),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -35,9 +32,7 @@ export const KINT: MoonriverXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.Token]: asset.originSymbol,
-      }),
+      balance: balance.tokens().token(asset.originSymbol),
       destination: origin,
       feePerWeight: 0.21,
     }),

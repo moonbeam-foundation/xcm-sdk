@@ -1,4 +1,3 @@
-import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   XTokensExtrinsicCurrencyTypes,
@@ -22,9 +21,7 @@ export const AUSD: MoonbeamXcmConfig = {
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.Token]: asset.originSymbol,
-      }),
+      balance: balance.tokens().token(asset.originSymbol),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -38,9 +35,7 @@ export const AUSD: MoonbeamXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.Token]: asset.originSymbol,
-      }),
+      balance: balance.tokens().token(asset.originSymbol),
       destination: origin,
       feePerWeight: 64,
     }),

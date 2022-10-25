@@ -4,7 +4,11 @@ import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
 import { AssetId } from '../interfaces';
-import { BalanceFunction, BalancePallet } from './balance.constants';
+import {
+  BalanceCurrencyTypes,
+  BalanceFunction,
+  BalancePallet,
+} from './balance.constants';
 import {
   AssetsBalanceConfig,
   MinBalanceAssetRegistryConfig,
@@ -26,7 +30,7 @@ export function createBalanceBuilder<
     minAssetRegistryPallet,
     ormlTokens,
     system,
-    tokens: (asset: TokensBalanceParamAsset<Symbols>) => tokens<Symbols>(asset),
+    tokens: () => tokens<Symbols>(),
   };
 }
 
@@ -80,7 +84,40 @@ function system(): SystemBalanceConfig {
   };
 }
 
-function tokens<Symbols extends AssetSymbol = AssetSymbol>(
+function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
+  return {
+    token: (asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD') => token<Symbols>(asset),
+    foreignAsset: (asset: AssetId | Symbols) => foreignAsset<Symbols>(asset),
+    miningResource: (asset: AssetId) => miningResource<Symbols>(asset),
+    fungibleToken: (asset: AssetId) => fungibleToken<Symbols>(asset),
+  };
+}
+
+function token<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: Symbols | 'MOVR' | 'KUSD' | 'AUSD',
+) {
+  return tokensBase({ [BalanceCurrencyTypes.Token]: asset });
+}
+
+function foreignAsset<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: AssetId,
+) {
+  return tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset });
+}
+
+function miningResource<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: AssetId,
+) {
+  return tokensBase<Symbols>({ [BalanceCurrencyTypes.MiningResource]: asset });
+}
+
+function fungibleToken<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: AssetId,
+) {
+  return tokensBase<Symbols>({ [BalanceCurrencyTypes.FungibleToken]: asset });
+}
+
+function tokensBase<Symbols extends AssetSymbol = AssetSymbol>(
   asset: TokensBalanceParamAsset<Symbols>,
 ): TokensBalanceConfig<Symbols> {
   return {

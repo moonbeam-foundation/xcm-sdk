@@ -1,4 +1,3 @@
-import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
@@ -34,9 +33,7 @@ export const GLMR: MoonbeamXcmConfig = {
   deposit: {
     [acala.key]: {
       source: acala,
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.ForeignAsset]: acalaGlmrId,
-      }),
+      balance: balance.tokens().foreignAsset(acalaGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -84,9 +81,7 @@ export const GLMR: MoonbeamXcmConfig = {
   },
   withdraw: {
     [acala.key]: withdraw.xTokens({
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.ForeignAsset]: acalaGlmrId,
-      }),
+      balance: balance.tokens().foreignAsset(acalaGlmrId),
       destination: acala,
       feePerWeight: 8_000_000,
       sourceMinBalance: balance.minAssetRegistryPallet(acalaGlmrId),

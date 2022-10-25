@@ -1,4 +1,3 @@
-import { BalanceCurrencyTypes } from '../../../balance';
 import { AssetSymbol, ChainKey } from '../../../constants';
 import {
   PolkadotXcmExtrinsicSuccessEvent,
@@ -35,7 +34,7 @@ export const MOVR: MoonriverXcmConfig = {
   deposit: {
     [bifrost.key]: {
       source: bifrost,
-      balance: balance.tokens({ [BalanceCurrencyTypes.Token]: 'MOVR' }),
+      balance: balance.tokens().token('MOVR'),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -48,9 +47,7 @@ export const MOVR: MoonriverXcmConfig = {
     },
     [karura.key]: {
       source: karura,
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.ForeignAsset]: karuraMovrId,
-      }),
+      balance: balance.tokens().foreignAsset(karuraMovrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -98,14 +95,12 @@ export const MOVR: MoonriverXcmConfig = {
   },
   withdraw: {
     [bifrost.key]: withdraw.xTokens({
-      balance: balance.tokens({ [BalanceCurrencyTypes.Token]: 'MOVR' }),
+      balance: balance.tokens().token('MOVR'),
       destination: bifrost,
       feePerWeight: 213_600,
     }),
     [karura.key]: withdraw.xTokens({
-      balance: balance.tokens({
-        [BalanceCurrencyTypes.ForeignAsset]: karuraMovrId,
-      }),
+      balance: balance.tokens().foreignAsset(karuraMovrId),
       destination: karura,
       feePerWeight: 50_000,
       sourceMinBalance: balance.minAssetRegistryPallet(karuraMovrId),

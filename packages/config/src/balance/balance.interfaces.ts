@@ -57,7 +57,7 @@ export interface TokensBalanceConfig<
 export type TokensBalanceParamAsset<Symbols extends AssetSymbol = AssetSymbol> =
 
     | {
-        [BalanceCurrencyTypes.Token]: Symbols | 'MOVR' | 'KUSD';
+        [BalanceCurrencyTypes.Token]: Symbols | 'MOVR' | 'KUSD' | 'AUSD';
       }
     | { [BalanceCurrencyTypes.ForeignAsset]: AssetId }
     | { [BalanceCurrencyTypes.MiningResource]: AssetId }
