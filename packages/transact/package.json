@@ -1,6 +1,17 @@
 {
   "name": "@moonbeam-network/xcm-transact",
   "version": "0.0.0",
+  "description": "Moonbeam XCM Transact",
+  "scripts": {
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest /src",
+    "test:watch": "npm test -- --watch",
+    "test:update": "npm test -- -u",
+    "prepack": "prettier --write build/index.d.ts"
+  },
   "author": "PureStake",
   "license": "MIT",
   "repository": {
@@ -25,17 +36,17 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./build/mjs/src/index.d.ts",
-        "default": "./build/mjs/src/index.js"
+        "types": "./build/index.d.ts",
+        "default": "./build/index.mjs"
       },
       "require": {
-        "types": "./build/cjs/src/index.d.ts",
-        "default": "./build/cjs/src/index.js"
+        "types": "./build/index.d.ts",
+        "default": "./build/index.cjs"
       }
     }
   },
-  "types": "./build/cjs/src/index.d.ts",
-  "main": "./build/cjs/src/index.js",
+  "types": "./build/index.d.ts",
+  "main": "./build/index.cjs",
   "dependencies": {
     "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-utils": "*",

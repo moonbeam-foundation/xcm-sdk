@@ -1,8 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "build/mjs"
+    "outDir": "build"
   },
   "include": ["src", "**/*.json"],
   "exclude": ["**/*.test.ts", "build"]

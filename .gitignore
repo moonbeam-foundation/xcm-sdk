@@ -11,6 +11,9 @@ packages/*/build
 # we copy them in after build script
 packages/*/LICENSE
 
+# turbo files
+.turbo
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

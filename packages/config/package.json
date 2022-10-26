@@ -2,6 +2,16 @@
   "name": "@moonbeam-network/xcm-config",
   "version": "0.1.0",
   "description": "All necessary configuration to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
+  "scripts": {
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest /src",
+    "test:watch": "npm test -- --watch",
+    "test:update": "npm test -- -u",
+    "prepack": "prettier --write build/index.d.ts"
+  },
   "repository": {
     "directory": "packages/config",
     "type": "git",
@@ -25,17 +35,17 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./build/mjs/src/index.d.ts",
-        "default": "./build/mjs/src/index.js"
+        "types": "./build/index.d.ts",
+        "default": "./build/index.mjs"
       },
       "require": {
-        "types": "./build/cjs/src/index.d.ts",
-        "default": "./build/cjs/src/index.js"
+        "types": "./build/index.d.ts",
+        "default": "./build/index.cjs"
       }
     }
   },
-  "types": "./build/cjs/src/index.d.ts",
-  "main": "./build/cjs/src/index.js",
+  "types": "./build/index.d.ts",
+  "main": "./build/index.cjs",
   "dependencies": {
     "@moonbeam-network/api-augment": "^0.1801.0",
     "@polkadot/types": "^9.5.2",
