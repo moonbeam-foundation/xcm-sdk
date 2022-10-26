@@ -39,8 +39,8 @@
   "dependencies": {
     "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-utils": "*",
-    "@polkadot/api": "^9.5.1",
-    "@polkadot/types": "^9.5.2",
+    "@polkadot/api": "^9.6.1",
+    "@polkadot/types": "^9.6.1",
     "@polkadot/util": "^10.1.11",
     "ethers": "^5.7.1",
     "lodash": "^4.17.21"
