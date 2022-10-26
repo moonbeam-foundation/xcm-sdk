@@ -3,6 +3,7 @@ import {
   AssetSymbol,
   Chain,
   ChainKey,
+  createBalanceBuilder,
   moonbase,
   MoonbaseAssets,
   moonbeam,
@@ -61,6 +62,8 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
 ): Transactor<Symbols, ChainKeys> {
   const { moonChain, transact } = configBuilder;
   const { chainsFrom, chainsTo, from, to } = transact();
+  const balanceBuilder = createBalanceBuilder<Symbols>();
+  const moonBalanceConfig = balanceBuilder.system();
 
   return {
     moonChain,
@@ -110,11 +113,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
             overallWeight,
             txWeight,
           });
-          const balance = await getBalance(sourceApi, address20, balanceConfig);
-          const destinationBalance = await getBalance(
+          const balance = await getBalance<Symbols>(
+            sourceApi,
+            sourceAddress,
+            balanceConfig,
+          );
+          const destinationBalance = await getBalance<Symbols>(
             destinationApi,
             address20,
-            balanceConfig,
+            moonBalanceConfig,
           );
 
           return {
@@ -177,15 +184,15 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
             destinationApi,
             config.multilocation.account.get(address),
           );
-          const balance = await getBalance(
+          const balance = await getBalance<Symbols>(
             destinationApi,
             address20,
             balanceConfig,
           );
-          const sourceBalance = await getBalance(
+          const sourceBalance = await getBalance<Symbols>(
             sourceApi,
             address,
-            balanceConfig,
+            moonBalanceConfig,
           );
 
           return {

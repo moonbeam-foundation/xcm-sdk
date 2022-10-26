@@ -23,8 +23,7 @@ const betaPrivateKey = '';
 /**
  * Add your moonbeam private key
  */
-const callHash =
-  '0x0303d1d463af8df4f2318d700598c0c0479f19396ba41300008a5d78456301';
+const callHash = '';
 
 // ===========================================================================
 
@@ -48,7 +47,7 @@ async function toBeta() {
 
   console.log('data', data);
 
-  // await send((event) => console.log(event));
+  await data.send((event) => console.log(event));
 }
 
 async function fromBeta() {
@@ -57,21 +56,22 @@ async function fromBeta() {
     .transact(callHash, pair);
 
   console.log('data', data);
+
+  await data.send((event) => console.log(event));
 }
 
 async function main() {
   console.log('starting...');
 
-  // todo: change back
-  const thirtySeconds = 5 * 1000;
+  const fortyFiveSeconds = 45 * 1000;
 
   console.log('\nto...');
   await toBeta();
-  await setTimeout(thirtySeconds);
+  await setTimeout(fortyFiveSeconds);
 
   console.log('\nfrom...');
   await fromBeta();
-  await setTimeout(thirtySeconds);
+  await setTimeout(fortyFiveSeconds);
 }
 
 // to suppress unnecessary warning from polkadot and ethers
