@@ -26,6 +26,9 @@
     "test:acc": {
       "dependsOn": ["^build"],
       "outputs": ["src/**/*.snap", "test/**/*.snap"]
+    },
+    "test:ci": {
+      "cache": false
     }
   }
 }

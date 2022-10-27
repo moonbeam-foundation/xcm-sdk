@@ -10,6 +10,7 @@
     "test": "jest /src",
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- -u",
+    "test:ci": "npm test -- --ci",
     "prepack": "prettier --write build/index.d.ts"
   },
   "repository": {
