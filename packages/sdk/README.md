@@ -90,16 +90,27 @@ unsubscribe();
 
 # Examples
 
-- [simple](https://github.com/PureStake/xcm-sdk/blob/main/packages/sdk/examples/simple)
+- [sdk](https://github.com/PureStake/xcm-sdk/blob/main/examples/sdk-simple)
+- [config](https://github.com/PureStake/xcm-sdk/blob/main/examples/config-simple)
+- [transact](https://github.com/PureStake/xcm-sdk/blob/main/examples/transact-simple)
 
 ```bash
 git clone git@github.com:PureStake/xcm-sdk.git
-cd packages/sdk/examples/simple/
+cd xcm-sdk
 npm i
+cd examples/sdk-simple
 
 # edit index.ts by adding your accounts
 
 npm start
+```
+
+# Contributing
+
+```bash
+git clone git@github.com:PureStake/xcm-sdk.git
+npm i
+npm run dev
 ```
 
 # Tests
