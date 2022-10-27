@@ -9,7 +9,6 @@ lerna-debug.log*
 # build folders
 packages/*/build
 # we copy them in after build script
-packages/*/LICENSE
 
 # turbo files
 .turbo

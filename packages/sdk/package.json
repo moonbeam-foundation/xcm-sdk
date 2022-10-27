@@ -5,11 +5,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "npm run build -- --watch",
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest /src",
-    "test:watch": "npm test -- --watch",
-    "test:update": "npm test -- -u",
+    "test:acc": "jest --forceExit --testTimeout 300000 ./tests/acceptance",
     "prepack": "prettier --write build/index.d.ts"
   },
   "author": "PureStake",

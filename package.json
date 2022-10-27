@@ -11,17 +11,18 @@
     "url": "git+https://github.com/PureStake/xcm-sdk.git"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "npm run build -- --watch",
-    "lint": "eslint 'packages' --ext .js,.ts",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "jest ./packages/**/src",
-    "test:watch": "npm test -- --watch",
-    "test:update": "npm test -- -u",
-    "test:acc": "jest --forceExit --testTimeout 300000 ./packages/**/tests/acceptance",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "test:update": "turbo run test:update",
+    "test:acc": "turbo run test:acc",
     "prepare": "husky install"
   },
   "dependencies": {

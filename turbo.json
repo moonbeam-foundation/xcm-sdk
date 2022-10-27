@@ -3,10 +3,29 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["build"]
+      "outputs": ["build/**"]
     },
     "lint": {
       "outputs": []
+    },
+    "lint:fix": {
+      "cache": false
+    },
+    "test": {
+      "inputs": ["src/**/*.ts", "test/**/*.ts"],
+      "outputs": ["src/**/*.snap", "test/**/*.snap"]
+    },
+    "test:watch": {
+      "cache": false,
+      "outputs": ["src/**/*.snap", "test/**/*.snap"]
+    },
+    "test:update": {
+      "inputs": ["src/**/*.ts", "test/**/*.ts"],
+      "outputs": ["src/**/*.snap", "test/**/*.snap"]
+    },
+    "test:acc": {
+      "dependsOn": ["^build"],
+      "outputs": ["src/**/*.snap", "test/**/*.snap"]
     }
   }
 }

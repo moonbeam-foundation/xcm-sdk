@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "npm run build -- --watch",
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest /src",
     "test:watch": "npm test -- --watch",
