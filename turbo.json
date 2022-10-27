@@ -5,11 +5,14 @@
       "dependsOn": ["^build"],
       "outputs": ["build/**"]
     },
+    "dev": {
+      "cache": false
+    },
     "lint": {
       "outputs": []
     },
     "lint:fix": {
-      "cache": false
+      "outputs": ["src/**/*.ts", "test/**/*.ts"]
     },
     "test": {
       "inputs": ["src/**/*.ts", "test/**/*.ts"],

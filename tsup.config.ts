@@ -6,6 +6,7 @@ export default defineConfig(({ watch }) => ({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   outDir: 'build',
+  target: 'node16',
   minify: !watch,
   sourcemap: true,
   clean: true,
