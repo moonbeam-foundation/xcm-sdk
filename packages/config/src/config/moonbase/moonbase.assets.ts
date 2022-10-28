@@ -9,6 +9,7 @@ export const MOONBASE_ASSETS = <const>[
   AssetSymbol.LIT,
   AssetSymbol.TT1,
   AssetSymbol.UNIT,
+  AssetSymbol.XRT,
 ];
 
 export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
@@ -45,5 +46,10 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     foreignIds: {
       [ChainKey.StatemineAlphanet]: 2,
     },
+  },
+  [AssetSymbol.XRT]: {
+    id: '108036400430056508975016746969135344601',
+    erc20Id: '0xffffffff51470dca3dbe535bd2880a9ccdbc6bd9',
+    originSymbol: AssetSymbol.XRT,
   },
 };
