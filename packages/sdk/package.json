@@ -29,7 +29,7 @@
   "files": [
     "build"
   ],
-  "type": "module",
+  "type": "commonjs",
   "exports": {
     ".": {
       "import": {
