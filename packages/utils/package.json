@@ -1,0 +1,43 @@
+{
+  "name": "@moonbeam-network/xcm-utils",
+  "version": "0.0.0",
+  "author": "PureStake",
+  "license": "MIT",
+  "repository": {
+    "directory": "packages/utils",
+    "type": "git",
+    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+  },
+  "keywords": [
+    "moonbeam",
+    "moonriver",
+    "xcm",
+    "utils"
+  ],
+  "bugs": {
+    "url": "https://github.com/PureStake/xcm-sdk/issues"
+  },
+  "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
+  "files": [
+    "build"
+  ],
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/mjs/src/index.d.ts",
+        "default": "./build/mjs/src/index.js"
+      },
+      "require": {
+        "types": "./build/cjs/src/index.d.ts",
+        "default": "./build/cjs/src/index.js"
+      }
+    }
+  },
+  "types": "./build/cjs/src/index.d.ts",
+  "main": "./build/cjs/src/index.js",
+  "dependencies": {
+    "@polkadot/api": "^9.5.2",
+    "lru-cache": "^7.14.0"
+  }
+}

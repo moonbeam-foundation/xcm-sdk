@@ -5,71 +5,16 @@ import {
   ChainKey,
   DepositConfig,
   MoonChain,
-  PolkadotXcmExtrinsicSuccessEvent,
 } from '@moonbeam-network/xcm-config';
+import {
+  createExtrinsicEventHandler,
+  ExtrinsicEventsCallback,
+} from '@moonbeam-network/xcm-utils';
 import { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
+import { IKeyringPair } from '@polkadot/types/types';
 import { isUndefined } from '@polkadot/util';
 import { PolkadotService } from '../polkadot';
-import {
-  DepositTransferData,
-  ExtrinsicEventsCallback,
-  ExtrinsicStatus,
-} from './sdk.interfaces';
-
-export function createExtrinsicEventHandler<Symbols extends AssetSymbol>(
-  config: DepositConfig<Symbols>,
-  cb: ExtrinsicEventsCallback,
-) {
-  return ({ events = [], status, txHash }: ISubmittableResult) => {
-    const hash = txHash.toHex();
-
-    if (status.isReady) {
-      cb({ status: ExtrinsicStatus.Sent, txHash: hash });
-    }
-
-    if (status.isInBlock) {
-      const block = status.asInBlock.toString();
-
-      events.forEach(({ event: { data, method, section } }) => {
-        if (
-          section === config.extrinsic.pallet &&
-          method === config.extrinsic.successEvent
-        ) {
-          if (method === PolkadotXcmExtrinsicSuccessEvent.Attempted) {
-            const eventData = data.at(0) as any;
-
-            if (eventData.isIncomplete) {
-              cb({
-                status: ExtrinsicStatus.Failed,
-                blockHash: block,
-                txHash: hash,
-                message: eventData.asIncomplete.toHuman().join('; '),
-              });
-
-              return;
-            }
-          }
-
-          cb({
-            status: ExtrinsicStatus.Success,
-            blockHash: block,
-            txHash: hash,
-          });
-        }
-
-        if (section === 'system' && method === 'ExtrinsicFailed') {
-          cb({
-            status: ExtrinsicStatus.Failed,
-            blockHash: block,
-            txHash: hash,
-            message: data.join('; '),
-          });
-        }
-      });
-    }
-  };
-}
+import { DepositTransferData } from './sdk.interfaces';
 
 export interface CreateExtrinsicOptions<
   Symbols extends AssetSymbol,
@@ -237,7 +182,13 @@ export async function getDepositData<
         {
           signer: polkadotSigner,
         },
-        cb && createExtrinsicEventHandler(config, cb),
+
+        cb &&
+          createExtrinsicEventHandler(
+            config.extrinsic.pallet,
+            config.extrinsic.successEvent,
+            cb,
+          ),
       );
 
       return hash.toString();

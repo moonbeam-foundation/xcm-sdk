@@ -24,6 +24,12 @@ export interface ChainBase<ChainKeys extends ChainKey | MoonChainKey> {
   name: string;
   ws: string;
   parachainId: number;
+  weights?: {
+    descendOriginWeight: bigint;
+    withdrawAssetWeight: bigint;
+    buyExecutionWeight: bigint;
+    transactWeight: bigint;
+  };
 }
 
 export interface MoonChain extends ChainBase<MoonChainKey> {
@@ -37,4 +43,9 @@ export interface Chain<ChainKeys extends ChainKey = ChainKey>
   weight: number;
   moonAssetId?: number | bigint;
   palletInstance?: number;
+  /**
+   * units per second - a number of units per second
+   * unitsPerSecond = weightPerSecond * baseExtrinsicCost / baseExtrinsicWeight
+   */
+  unitsPerSecond?: bigint;
 }
