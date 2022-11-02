@@ -8,6 +8,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.CrustShadowAlphanet,
   ChainKey.LitentryAlphanet,
   ChainKey.MoonbaseBeta,
+  ChainKey.RobonomicsAlphanet,
   ChainKey.StatemineAlphanet,
 ];
 
@@ -56,6 +57,13 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
       buyExecutionWeight: 130_464_000n + 100_000_000n,
       transactWeight: 31_693_000n + 25_000_000n,
     },
+  },
+  [ChainKey.RobonomicsAlphanet]: {
+    key: ChainKey.RobonomicsAlphanet,
+    name: 'Robonomics Alphanet',
+    ws: 'wss://moonriver.rpc.robonomics.network',
+    weight: 1_000_000_000,
+    parachainId: 2048,
   },
   [ChainKey.StatemineAlphanet]: {
     key: ChainKey.StatemineAlphanet,
