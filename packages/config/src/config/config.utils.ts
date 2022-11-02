@@ -25,7 +25,7 @@ export function getAssetForeignId<Symbols extends AssetSymbol = AssetSymbol>(
 
 export function getMoonAssetId<ChainKeys extends ChainKey>(
   chain: Chain<ChainKeys>,
-) {
+): bigint | number {
   if (isUndefined(chain.moonAssetId)) {
     throw new Error(`No moonAssetId defined for chain ${chain.key}`);
   }
@@ -35,7 +35,7 @@ export function getMoonAssetId<ChainKeys extends ChainKey>(
 
 export function getUnitsPerSecond<ChainKeys extends ChainKey>(
   chain: Chain<ChainKeys>,
-) {
+): bigint {
   if (isUndefined(chain.unitsPerSecond)) {
     throw new Error(`No unitsPerSecond defined for chain ${chain.key}`);
   }
@@ -45,7 +45,7 @@ export function getUnitsPerSecond<ChainKeys extends ChainKey>(
 
 export function getPalletInstance<ChainKeys extends ChainKey>(
   chain: Chain<ChainKeys>,
-) {
+): number {
   if (isUndefined(chain.palletInstance)) {
     throw new Error(`No palletInstance defined for chain ${chain.key}`);
   }
@@ -102,5 +102,7 @@ export function getOverallFee(
   overallWeight: bigint,
   unitsPerSecond: bigint,
 ): bigint {
-  return (overallWeight * unitsPerSecond) / 1_000_000_000_000n;
+  const weightPerSecond = 1_000_000_000_000n;
+
+  return (overallWeight * unitsPerSecond) / weightPerSecond;
 }

@@ -98,31 +98,30 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
             ? sourceAccount
             : sourceAccount.address;
 
-          const sourceApi = await getPolkadotApi(chain.ws);
-          const destinationApi = await getPolkadotApi(moonChain.ws);
-          const txWeight = await getTxWeight(callHash, destinationApi);
+          const [sourceApi, destinationApi] = await Promise.all([
+            getPolkadotApi(chain.ws),
+            getPolkadotApi(moonChain.ws),
+          ]);
+          const [txWeight, { address20, address32 }] = await Promise.all([
+            getTxWeight(callHash, destinationApi),
+            getDerivatedAddress(
+              destinationApi,
+              config.multilocation.account.get(sourceAddress),
+            ),
+          ]);
+          const [sourceBalance, destinationBalance] = await Promise.all([
+            getBalance<Symbols>(sourceApi, sourceAddress, balanceConfig),
+            getBalance<Symbols>(destinationApi, address20, moonBalanceConfig),
+          ]);
+
           const overallWeight = getOverallWeight(txWeight);
           const overallFee = getOverallFee(overallWeight);
-          const { address20, address32 } = await getDerivatedAddress(
-            destinationApi,
-            config.multilocation.account.get(sourceAddress),
-          );
           const params = config.transact.getParams({
             callHash,
             overallFee,
             overallWeight,
             txWeight,
           });
-          const balance = await getBalance<Symbols>(
-            sourceApi,
-            sourceAddress,
-            balanceConfig,
-          );
-          const destinationBalance = await getBalance<Symbols>(
-            destinationApi,
-            address20,
-            moonBalanceConfig,
-          );
 
           return {
             overallFee,
@@ -130,7 +129,7 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
             txWeight,
             source: {
               address: sourceAddress,
-              balance,
+              balance: sourceBalance,
               chain,
             },
             destination: {
@@ -174,40 +173,39 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           }
 
           const contract = new XcmTransactorContract(signer);
-          const address = await signer.getAddress();
-          const sourceApi = await getPolkadotApi(moonChain.ws);
-          const destinationApi = await getPolkadotApi(chain.ws);
-          const txWeight = await getTxWeight(callHash, destinationApi);
+
+          const [sourceAddress, sourceApi, destinationApi] = await Promise.all([
+            signer.getAddress(),
+            getPolkadotApi(moonChain.ws),
+            getPolkadotApi(chain.ws),
+          ]);
+          const [txWeight, { address20, address32 }] = await Promise.all([
+            getTxWeight(callHash, destinationApi),
+            getDerivatedAddress(
+              destinationApi,
+              config.multilocation.account.get(sourceAddress),
+            ),
+          ]);
+          const [sourceBalance, destinationBalance] = await Promise.all([
+            getBalance<Symbols>(sourceApi, sourceAddress, moonBalanceConfig),
+            getBalance<Symbols>(destinationApi, address20, balanceConfig),
+          ]);
           const overallWeight = getOverallWeight(txWeight);
           const overallFee = getOverallFee(overallWeight);
-          const { address20, address32 } = await getDerivatedAddress(
-            destinationApi,
-            config.multilocation.account.get(address),
-          );
-          const balance = await getBalance<Symbols>(
-            destinationApi,
-            address20,
-            balanceConfig,
-          );
-          const sourceBalance = await getBalance<Symbols>(
-            sourceApi,
-            address,
-            moonBalanceConfig,
-          );
 
           return {
             overallFee,
             overallWeight,
             txWeight,
             source: {
-              address,
+              address: sourceAddress,
               balance: sourceBalance,
               chain: moonChain,
             },
             destination: {
               address: address20,
               address32,
-              balance,
+              balance: destinationBalance,
               chain,
             },
             send: async (cb?: ExtrinsicEventsCallback): Promise<Hash> => {
