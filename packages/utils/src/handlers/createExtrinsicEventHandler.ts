@@ -29,7 +29,7 @@ export function createExtrinsicEventHandler(
                 status: ExtrinsicStatus.Failed,
                 blockHash: block,
                 txHash: hash,
-                message: eventData.asIncomplete.toHuman().join('; '),
+                message: eventData.asIncomplete?.toHuman().join('; '),
               });
 
               return;
