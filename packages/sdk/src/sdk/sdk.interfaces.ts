@@ -12,15 +12,14 @@ import {
   MoonriverAssets,
   MoonriverChains,
 } from '@moonbeam-network/xcm-config';
-import {
+import { ExtrinsicEventsCallback, Hash } from '@moonbeam-network/xcm-utils';
+import type {
   Signer as PolkadotSigner,
   UnsubscribePromise,
 } from '@polkadot/api/types';
-import { IKeyringPair } from '@polkadot/types/types';
-import { Signer as EthersSigner } from 'ethers';
+import type { IKeyringPair } from '@polkadot/types/types';
+import type { Signer as EthersSigner } from 'ethers';
 import { AssetBalanceInfo } from '../polkadot';
-
-export type Hash = string;
 
 export interface XcmSdkByChain {
   moonbase: MoonbaseXcmSdk;
@@ -103,7 +102,7 @@ export interface DepositTransferData<
   asset: AssetWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
-  moonChainFee: XcmFeeWithBalance;
+  moonChainFee: XcmFeeWithBalance<Symbols>;
   native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   source: Chain<ChainKeys>;
@@ -130,8 +129,6 @@ export interface WithdrawTransferData<
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }
 
-export type ExtrinsicEventsCallback = (event: ExtrinsicEvent) => void;
-
 export interface AssetWithDecimals<Symbols extends AssetSymbol = AssetSymbol>
   extends Asset<Symbols> {
   decimals: number;
@@ -143,40 +140,13 @@ export interface Balance<Symbols extends string | AssetSymbol = AssetSymbol> {
   symbol: Symbols;
 }
 
-export interface XcmFeeWithBalance extends Balance {
+export interface XcmFeeWithBalance<
+  Symbols extends string | AssetSymbol = AssetSymbol,
+> extends Balance<Symbols> {
   fee: bigint;
 }
 
 export interface SdkOptions {
   ethersSigner?: EthersSigner;
   polkadotSigner?: PolkadotSigner;
-}
-
-export type ExtrinsicEvent =
-  | ExtrinsicFailedEvent
-  | ExtrinsicSentEvent
-  | ExtrinsicSuccessEvent;
-
-export interface ExtrinsicFailedEvent {
-  blockHash: Hash;
-  message?: string;
-  status: ExtrinsicStatus.Failed;
-  txHash: Hash;
-}
-
-export interface ExtrinsicSentEvent {
-  status: ExtrinsicStatus.Sent;
-  txHash: Hash;
-}
-
-export interface ExtrinsicSuccessEvent {
-  blockHash: Hash;
-  status: ExtrinsicStatus.Success;
-  txHash: Hash;
-}
-
-export enum ExtrinsicStatus {
-  Failed = 'Failed',
-  Sent = 'Sent',
-  Success = 'Success',
 }
