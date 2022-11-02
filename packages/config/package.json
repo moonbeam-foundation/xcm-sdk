@@ -32,7 +32,7 @@
   "files": [
     "build"
   ],
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "import": {
