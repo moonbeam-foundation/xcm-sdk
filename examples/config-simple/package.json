@@ -2,7 +2,7 @@
   "name": "config-simple",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "ts-node index.ts"
   },
@@ -10,10 +10,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "*",
-    "@polkadot/api": "^9.3.2"
+    "@moonbeam-network/xcm-config": "*"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "9.x"
   }
 }

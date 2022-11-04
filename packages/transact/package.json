@@ -29,7 +29,7 @@
   "files": [
     "build"
   ],
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "import": {
@@ -47,13 +47,15 @@
   "dependencies": {
     "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-utils": "*",
-    "@polkadot/api": "^9.6.1",
-    "@polkadot/types": "^9.6.1",
-    "@polkadot/util": "^10.1.11",
-    "ethers": "^5.7.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.186"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "9.x",
+    "@polkadot/types": "9.x",
+    "@polkadot/util": "10.x",
+    "ethers": "5.x"
   }
 }

@@ -13,6 +13,12 @@ The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to
 npm i @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
 ```
 
+:warning: You need to have peer dependencies of SDK installed as well.
+
+```bash
+npm i @polkadot/api-augment @polkadot/types @polkadot/util @polkadot/util-crypto ethers
+```
+
 # Usage
 
 ## Init

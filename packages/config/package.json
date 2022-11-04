@@ -32,7 +32,7 @@
   "files": [
     "build"
   ],
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "import": {
@@ -47,10 +47,10 @@
   },
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
-  "dependencies": {
-    "@moonbeam-network/api-augment": "^0.1801.0",
-    "@polkadot/types": "^9.6.1",
-    "@polkadot/util": "^10.1.11",
-    "@polkadot/util-crypto": "^10.1.11"
+  "peerDependencies": {
+    "@polkadot/api-augment": "9.x",
+    "@polkadot/types": "9.x",
+    "@polkadot/util": "10.x",
+    "@polkadot/util-crypto": "10.x"
   }
 }

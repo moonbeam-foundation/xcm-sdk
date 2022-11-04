@@ -29,7 +29,7 @@
   "files": [
     "build"
   ],
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "import": {
@@ -45,7 +45,9 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@polkadot/api": "^9.5.2",
     "lru-cache": "^7.14.0"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "9.x"
   }
 }
