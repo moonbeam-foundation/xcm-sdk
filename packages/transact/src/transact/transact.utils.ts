@@ -11,7 +11,6 @@ import {
 } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { XcmV1MultiLocation } from '@polkadot/types/lookup';
 import type { IKeyringPair } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
 import _ from 'lodash';
@@ -35,10 +34,7 @@ export async function getDerivatedAddress(
   api: ApiPromise,
   multilocation: AccountMultilocationV1,
 ): Promise<{ address20: string; address32: string }> {
-  const ml: XcmV1MultiLocation = api.createType(
-    'XcmV1MultiLocation',
-    multilocation,
-  );
+  const ml = api.createType('XcmV1MultiLocation', multilocation);
 
   const toHash = new Uint8Array([
     ...new Uint8Array([32]),
