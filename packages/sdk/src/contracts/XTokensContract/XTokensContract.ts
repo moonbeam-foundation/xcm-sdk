@@ -25,23 +25,22 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
     amount: bigint,
     asset: Asset<Symbols>,
     config: WithdrawXTokensConfig<Symbols>,
+    destinationFee: bigint,
   ): Promise<TransactionResponse> {
+    if (config.xcmFeeAsset) {
+      return this.#contract.transferMultiCurrencies(
+        [
+          [config.xcmFeeAsset.erc20Id, destinationFee],
+          [asset.erc20Id, amount],
+        ],
+        0,
+        config.getParams(account),
+        config.weight,
+      );
+    }
     return this.#contract.transfer(
       asset.erc20Id,
       amount,
-      config.getParams(account),
-      config.weight,
-    );
-  }
-
-  async transferMultiCurrencies(
-    account: string,
-    currencies: Array<[string, bigint]>,
-    config: WithdrawXTokensConfig<Symbols>,
-  ): Promise<TransactionResponse> {
-    return this.#contract.transferMultiCurrencies(
-      currencies,
-      0,
       config.getParams(account),
       config.weight,
     );
