@@ -1,3 +1,4 @@
+import { BalanceConfig } from './balance';
 import { AssetSymbol, ChainKey, MoonChainKey } from './constants';
 
 export type AssetId = number | bigint | string;
@@ -48,4 +49,9 @@ export interface Chain<ChainKeys extends ChainKey = ChainKey>
    * unitsPerSecond = weightPerSecond * baseExtrinsicCost / baseExtrinsicWeight
    */
   unitsPerSecond?: bigint;
+}
+
+export interface XcmFeeAsset<Symbols extends AssetSymbol = AssetSymbol> {
+  balance: BalanceConfig<Symbols>;
+  asset: Asset<Symbols>;
 }

@@ -54,7 +54,10 @@ export const BIT: MoonbaseXcmConfig = {
       destination: origin,
       feePerWeight: neerWithdrawConfig.feePerWeight,
       weight: neerWithdrawConfig.weight,
-      xcmFeeAsset: feeAsset,
+      xcmFeeAsset: {
+        asset: feeAsset,
+        balance: balance.system(),
+      },
     }),
   },
 };

@@ -25,12 +25,12 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
     amount: bigint,
     asset: Asset<Symbols>,
     config: WithdrawXTokensConfig<Symbols>,
-    destinationFee: bigint,
+    minAmount: bigint,
   ): Promise<TransactionResponse> {
     if (config.xcmFeeAsset) {
       return this.#contract.transferMultiCurrencies(
         [
-          [config.xcmFeeAsset.erc20Id, destinationFee],
+          [config.xcmFeeAsset.asset.erc20Id, minAmount],
           [asset.erc20Id, amount],
         ],
         0,
