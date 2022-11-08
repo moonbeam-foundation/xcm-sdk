@@ -34,6 +34,19 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
     );
   }
 
+  async transferMultiCurrencies(
+    account: string,
+    currencies: Array<[string, bigint]>,
+    config: WithdrawXTokensConfig<Symbols>,
+  ): Promise<TransactionResponse> {
+    return this.#contract.transferMultiCurrencies(
+      currencies,
+      0,
+      config.getParams(account),
+      config.weight,
+    );
+  }
+
   async getTransferFees(
     account: string,
     amount: bigint,

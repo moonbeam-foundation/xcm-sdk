@@ -50,15 +50,22 @@ export async function getWithdrawData<
   WithdrawTransferData<Symbols>
 > {
   const meta = destinationPolkadot.getMetadata();
-  const [decimals, destinationBalance, existentialDeposit, assetMinBalance] =
-    await Promise.all([
-      asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
-      destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
-      asset.isNative ? 0n : destinationPolkadot.getExistentialDeposit(),
-      config.sourceMinBalance
-        ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
-        : 0n,
-    ]);
+  const xcmFeeAsset = config.xcmFeeAsset ?? asset;
+  const [
+    decimals,
+    destinationBalance,
+    existentialDeposit,
+    assetMinBalance,
+    xcmFeeDecimals,
+  ] = await Promise.all([
+    asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
+    destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
+    asset.isNative ? 0n : destinationPolkadot.getExistentialDeposit(),
+    config.sourceMinBalance
+      ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
+      : 0n,
+    polkadot.getAssetDecimals(xcmFeeAsset),
+  ]);
 
   const destinationFee = getFee(assetMinBalance, config);
   const min = getMin(
@@ -71,7 +78,11 @@ export async function getWithdrawData<
     asset: { ...asset, decimals },
     destination: config.destination,
     destinationBalance,
-    destinationFee,
+    destinationFee: {
+      fee: destinationFee,
+      decimals: xcmFeeDecimals,
+      symbol: xcmFeeAsset.originSymbol,
+    },
     existentialDeposit,
     min,
     native: { ...nativeAsset, decimals: meta.decimals },
@@ -79,11 +90,13 @@ export async function getWithdrawData<
     getFee: async (amount) =>
       contract.getTransferFees(destinationAccount, amount, asset, config),
     send: async (amount: bigint, cb?: ExtrinsicEventsCallback) => {
-      const tx = await contract.transfer(
+      const tx = await getTx(
+        contract,
         destinationAccount,
+        config,
         amount,
         asset,
-        config,
+        destinationFee,
       );
 
       if (cb) {
@@ -115,4 +128,25 @@ export function getMin(
       : balanceNeeded - destinationBalance;
 
   return destinationFee + extra;
+}
+
+async function getTx<Symbols extends AssetSymbol>(
+  contract: XTokensContract<AssetSymbol>,
+  destinationAccount: string,
+  config: WithdrawConfig<Symbols>,
+  amount: bigint,
+  asset: Asset<Symbols>,
+  destinationFee: bigint,
+) {
+  if (config.xcmFeeAsset) {
+    return contract.transferMultiCurrencies(
+      destinationAccount,
+      [
+        [config.xcmFeeAsset.erc20Id, destinationFee],
+        [asset.erc20Id, amount],
+      ],
+      config,
+    );
+  }
+  return contract.transfer(destinationAccount, amount, asset, config);
 }

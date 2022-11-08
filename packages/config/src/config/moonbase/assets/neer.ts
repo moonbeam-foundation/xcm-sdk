@@ -34,7 +34,7 @@ export const NEER: MoonbaseXcmConfig = {
     [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      feePerWeight: 800_000,
+      feePerWeight: 8_000_000,
     }),
   },
 };

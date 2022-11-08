@@ -120,7 +120,7 @@ export interface WithdrawTransferData<
   asset: AssetWithDecimals<Symbols>;
   destination: Chain<ChainKeys>;
   destinationBalance: bigint;
-  destinationFee: bigint;
+  destinationFee: XcmFeeWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
   native: AssetWithDecimals<Symbols>;
@@ -132,6 +132,12 @@ export interface WithdrawTransferData<
 export interface AssetWithDecimals<Symbols extends AssetSymbol = AssetSymbol>
   extends Asset<Symbols> {
   decimals: number;
+}
+
+export interface XcmFeeWithDecimals<Symbols extends AssetSymbol = AssetSymbol> {
+  fee: bigint;
+  decimals: number;
+  symbol: Symbols;
 }
 
 export interface Balance<Symbols extends string | AssetSymbol = AssetSymbol> {

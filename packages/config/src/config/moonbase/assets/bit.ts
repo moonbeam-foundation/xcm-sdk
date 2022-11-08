@@ -3,6 +3,7 @@ import {
   XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
 } from '../../../extrinsic';
+import { WithdrawConfig } from '../../../withdraw';
 import {
   assets,
   balance,
@@ -11,10 +12,14 @@ import {
   withdraw,
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
+import { NEER } from './neer';
 
 const asset = assets[AssetSymbol.BIT];
 const feeAsset = assets[AssetSymbol.NEER];
 const origin = chains[ChainKey.BitCountryPioneer];
+const neerWithdrawConfig = NEER.withdraw[
+  origin.key
+] as WithdrawConfig<AssetSymbol.NEER>;
 
 export const BIT: MoonbaseXcmConfig = {
   asset,
@@ -47,7 +52,9 @@ export const BIT: MoonbaseXcmConfig = {
     [origin.key]: withdraw.xTokens({
       balance: balance.tokens().miningResource(0),
       destination: origin,
-      feePerWeight: 800_000,
+      feePerWeight: neerWithdrawConfig.feePerWeight,
+      weight: neerWithdrawConfig.weight,
+      xcmFeeAsset: feeAsset,
     }),
   },
 };

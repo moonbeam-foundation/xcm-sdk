@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "currency_address",
+        "name": "currencyAddress",
         "type": "address"
       },
       {
@@ -44,24 +44,24 @@
       {
         "components": [
           {
-            "internalType": "uint8",
-            "name": "parents",
-            "type": "uint8"
+            "internalType": "address",
+            "name": "currencyAddress",
+            "type": "address"
           },
           {
-            "internalType": "bytes[]",
-            "name": "interior",
-            "type": "bytes[]"
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
           }
         ],
-        "internalType": "struct Xtokens.Multilocation",
-        "name": "asset",
-        "type": "tuple"
+        "internalType": "struct Xtokens.Currency[]",
+        "name": "currencies",
+        "type": "tuple[]"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
+        "internalType": "uint32",
+        "name": "feeItem",
+        "type": "uint32"
       },
       {
         "components": [
@@ -86,7 +86,7 @@
         "type": "uint64"
       }
     ],
-    "name": "transfer_multiasset",
+    "name": "transferMultiCurrencies",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
