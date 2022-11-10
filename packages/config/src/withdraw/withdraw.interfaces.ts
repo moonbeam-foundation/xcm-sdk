@@ -1,6 +1,6 @@
 import { BalanceConfig, MinBalanceConfig } from '../balance';
 import { AssetSymbol, ChainKey } from '../constants';
-import { Chain, XcmFeeAsset } from '../interfaces';
+import { Asset, Chain } from '../interfaces';
 
 export type WithdrawConfig<Symbols extends AssetSymbol = AssetSymbol> =
   WithdrawXTokensConfig<Symbols>;
@@ -13,7 +13,7 @@ export interface WithdrawXTokensConfig<
   destination: Chain<ChainKeys>;
   feePerWeight: number;
   sourceMinBalance?: MinBalanceConfig;
-  xcmFeeAsset?: XcmFeeAsset<Symbols>;
+  xcmFeeAsset?: WithdrawXcmFeeAsset<Symbols>;
   weight: number;
   getParams: (account: string) => WithdrawXTokensParams;
 }
@@ -60,5 +60,13 @@ export interface WithdrawXTokensOptions<
   feePerWeight: number;
   sourceMinBalance?: MinBalanceConfig;
   weight?: number;
-  xcmFeeAsset?: XcmFeeAsset<Symbols>;
+  xcmFeeAsset?: WithdrawXcmFeeAsset<Symbols>;
+}
+
+interface WithdrawXcmFeeAsset<Symbols extends AssetSymbol = AssetSymbol> {
+  asset: Asset<Symbols>;
+  balance: {
+    origin: BalanceConfig<Symbols>;
+    destination: BalanceConfig<Symbols>;
+  };
 }

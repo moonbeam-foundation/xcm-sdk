@@ -86,7 +86,8 @@ export interface DepositGetParams {
 
 export interface XcmSdkWithdrawTo<Symbols extends AssetSymbol = AssetSymbol> {
   get: (
-    account: string,
+    originAccount: string,
+    destinationAccount: string,
     params?: WithdrawGetParams,
   ) => Promise<WithdrawTransferData<Symbols>>;
 }
@@ -125,6 +126,7 @@ export interface WithdrawTransferData<
   min: XcmFeeWithDecimals<Symbols>;
   native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
+  originXcmFeeAssetBalanceNotEnough: boolean;
   getFee: (amount: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }
