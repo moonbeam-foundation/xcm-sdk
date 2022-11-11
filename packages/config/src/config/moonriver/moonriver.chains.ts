@@ -32,6 +32,7 @@ export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
     ws: 'wss://ws.calamari.systems',
     weight: 1_000_000_000,
     parachainId: 2084,
+    moonAssetId: 11,
   },
   [ChainKey.CrustShadow]: {
     key: ChainKey.CrustShadow,
