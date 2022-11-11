@@ -11,10 +11,9 @@ import {
 } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
-import type { XcmV1MultiLocation } from '@polkadot/types/lookup';
 import type { IKeyringPair } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
-import { get } from 'lodash';
+import _ from 'lodash';
 import type { Balance } from './transact.interfaces';
 
 // random account, I used the same as Polkadot.js is using
@@ -35,10 +34,7 @@ export async function getDerivatedAddress(
   api: ApiPromise,
   multilocation: AccountMultilocationV1,
 ): Promise<{ address20: string; address32: string }> {
-  const ml: XcmV1MultiLocation = api.createType(
-    'XcmV1MultiLocation',
-    multilocation,
-  );
+  const ml = api.createType('XcmV1MultiLocation', multilocation);
 
   const toHash = new Uint8Array([
     ...new Uint8Array([32]),
@@ -101,7 +97,7 @@ export async function getGenericBalance<
 
   const unwrapped = (response as any).unwrap?.() || response;
 
-  return calc(path.length ? get(unwrapped, path) : unwrapped);
+  return calc(path.length ? _.get(unwrapped, path) : unwrapped);
 }
 
 export async function getBalance<Symbols extends AssetSymbol = AssetSymbol>(

@@ -2,6 +2,14 @@
   "name": "@moonbeam-network/xcm-sdk",
   "version": "0.1.1",
   "description": "The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to Moonbeam/Moonriver from the relay chain and other parachains in the Polkadot/Kusama ecosystem",
+  "scripts": {
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test:acc": "jest --forceExit --testTimeout 300000 ./tests/acceptance",
+    "prepack": "prettier --write build/index.d.ts"
+  },
   "author": "PureStake",
   "license": "MIT",
   "repository": {
@@ -21,33 +29,35 @@
   "files": [
     "build"
   ],
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "import": {
-        "types": "./build/mjs/src/index.d.ts",
-        "default": "./build/mjs/src/index.js"
+        "types": "./build/index.d.ts",
+        "default": "./build/index.mjs"
       },
       "require": {
-        "types": "./build/cjs/src/index.d.ts",
-        "default": "./build/cjs/src/index.js"
+        "types": "./build/index.d.ts",
+        "default": "./build/index.cjs"
       }
     }
   },
-  "types": "./build/cjs/src/index.d.ts",
-  "main": "./build/cjs/src/index.js",
+  "types": "./build/index.d.ts",
+  "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/api-augment": "^0.1801.0",
     "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-utils": "*",
-    "@polkadot/api": "^9.5.2",
-    "@polkadot/types": "^9.5.2",
-    "@polkadot/util": "^10.1.11",
-    "ethers": "^5.7.1",
     "lodash": "^4.17.21",
     "lru-cache": "^7.14.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.186"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "9.x",
+    "@polkadot/api-augment": "9.x",
+    "@polkadot/types": "9.x",
+    "@polkadot/util": "10.x",
+    "ethers": "5.x"
   }
 }
