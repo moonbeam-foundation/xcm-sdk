@@ -18,11 +18,13 @@ import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
 const asset = assets[AssetSymbol.MOVR];
 const bifrost = chains[ChainKey.Bifrost];
+const crust = chains[ChainKey.CrustShadow];
 const karura = chains[ChainKey.Karura];
 const khala = chains[ChainKey.Khala];
 const parallel = chains[ChainKey.Parallel];
 const shiden = chains[ChainKey.Shiden];
 
+const crustMovrId = getMoonAssetId(crust);
 const karuraMovrId = getMoonAssetId(karura);
 const khalaMovrId = getMoonAssetId(khala);
 const parallelMovrId = getMoonAssetId(parallel);
@@ -43,6 +45,19 @@ export const MOVR: MoonriverXcmConfig = {
         .origin(bifrost)
         .asset({
           [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
+        }),
+    },
+    [crust.key]: {
+      source: crust,
+      balance: balance.assets(crustMovrId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(crust)
+        .asset({
+          [XTokensExtrinsicCurrencyTypes.OtherReserve]: crustMovrId,
         }),
     },
     [karura.key]: {
@@ -98,6 +113,11 @@ export const MOVR: MoonriverXcmConfig = {
       balance: balance.tokens('MOVR'),
       destination: bifrost,
       feePerWeight: 213_600,
+    }),
+    [crust.key]: withdraw.xTokens({
+      balance: balance.assets(crustMovrId),
+      destination: crust,
+      feePerWeight: 50_000,
     }),
     [karura.key]: withdraw.xTokens({
       balance: balance.tokens(karuraMovrId),

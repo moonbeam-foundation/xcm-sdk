@@ -39,6 +39,7 @@ export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
     ws: 'wss://rpc2-shadow.crust.network',
     weight: 1_000_000_000,
     parachainId: 2012,
+    moonAssetId: 232263652204149413431520870009560565298n,
   },
   [ChainKey.Crab]: {
     key: ChainKey.Crab,
