@@ -5,9 +5,9 @@
     "prettier"
   ],
   "parserOptions": {
-    "project": "./tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["packages/**/build"],
+  "ignorePatterns": ["**/build"],
   "overrides": [
     {
       "files": ["**/*.test.ts"],

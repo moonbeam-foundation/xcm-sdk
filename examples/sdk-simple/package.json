@@ -1,8 +1,8 @@
 {
-  "name": "simple-sdk",
+  "name": "sdk-simple",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "ts-node index.ts"
   },
@@ -11,11 +11,13 @@
   "license": "MIT",
   "dependencies": {
     "@moonbeam-network/xcm-config": "*",
-    "@moonbeam-network/xcm-sdk": "*",
-    "@polkadot/api": "^9.3.2",
-    "ethers": "^5.7.0"
+    "@moonbeam-network/xcm-sdk": "*"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "9.x",
+    "ethers": "5.x"
   }
 }
