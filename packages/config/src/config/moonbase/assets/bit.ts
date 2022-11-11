@@ -51,7 +51,6 @@ export const BIT: MoonbaseXcmConfig = {
   withdraw: {
     [origin.key]: withdraw.xTokens({
       balance: balance.tokens().miningResource(0),
-      // TODO pass originBalance ?
       destination: origin,
       feePerWeight: neerWithdrawConfig.feePerWeight,
       weight: neerWithdrawConfig.weight,
