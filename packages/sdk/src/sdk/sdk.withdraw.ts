@@ -92,19 +92,27 @@ export async function getWithdrawData<
   ]);
 
   const destinationFee = getFee(assetMinBalance, config);
-  const min = getMin(
-    assetMinBalance || existentialDeposit,
-    destinationXcmFeeAssetBalance !== undefined
-      ? destinationXcmFeeAssetBalance
-      : destinationBalance,
-    destinationFee,
-  );
+  const min = config.xcmFeeAsset
+    ? 0n
+    : getMin(
+        assetMinBalance || existentialDeposit,
+        destinationBalance,
+        destinationFee,
+      );
 
-  // @TODO add a check for transferred token balance as well
+  const minXcmFeeAsset =
+    config.xcmFeeAsset && destinationXcmFeeAssetBalance !== undefined
+      ? getMin(
+          assetMinBalance || existentialDeposit,
+          destinationXcmFeeAssetBalance,
+          destinationFee,
+        )
+      : 0n;
+
   const originXcmFeeAssetBalanceNotEnough =
     originXcmFeeAssetBalance === undefined
       ? false
-      : originXcmFeeAssetBalance < min;
+      : originXcmFeeAssetBalance < minXcmFeeAsset;
 
   return {
     asset: { ...asset, decimals },
@@ -114,6 +122,11 @@ export async function getWithdrawData<
     existentialDeposit,
     min: {
       amount: min,
+      decimals,
+      symbol: asset.originSymbol,
+    },
+    minXcmFeeAsset: {
+      amount: minXcmFeeAsset,
       decimals: xcmFeeDecimals,
       symbol: xcmFeeAsset.originSymbol,
     },
@@ -128,7 +141,7 @@ export async function getWithdrawData<
         amount,
         asset,
         config,
-        min,
+        minXcmFeeAsset,
       );
 
       if (cb) {
