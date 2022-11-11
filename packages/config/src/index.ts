@@ -1,4 +1,4 @@
-import '@moonbeam-network/api-augment';
+import '@polkadot/api-augment';
 
 export * from './balance';
 export * from './config';

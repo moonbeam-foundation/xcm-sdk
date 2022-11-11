@@ -1,4 +1,4 @@
-import '@moonbeam-network/api-augment';
+import '@polkadot/api-augment';
 
 import {
   Asset,
@@ -16,16 +16,15 @@ import {
   SubmittableExtrinsic,
   UnsubscribePromise,
 } from '@polkadot/api/types';
-import { Option } from '@polkadot/types';
+import { Option, u128 } from '@polkadot/types';
 import { AccountInfo } from '@polkadot/types/interfaces';
 import {
-  MoonbeamRuntimeXcmConfigAssetType,
   PalletAssetsAssetAccount,
   PalletAssetsAssetMetadata,
 } from '@polkadot/types/lookup';
-import { get } from 'lodash';
+import _ from 'lodash';
 import { getPolkadotApi } from './polkadot.api';
-import { AssetBalanceInfo } from './polkadot.interfaces';
+import { AssetBalanceInfo, XCMType } from './polkadot.interfaces';
 import { calculateMin } from './polkadot.utils';
 
 export class PolkadotService<
@@ -65,11 +64,11 @@ export class PolkadotService<
   async getAssetMeta(
     asset: Asset<Symbols>,
   ): Promise<PalletAssetsAssetMetadata> {
-    return (
-      asset.isLocalAsset
-        ? this.#api.query.localAssets.metadata
-        : this.#api.query.assets.metadata
-    )(asset.id);
+    const data = await (asset.isLocalAsset
+      ? this.#api.query.localAssets.metadata
+      : this.#api.query.assets.metadata)(asset.id);
+
+    return data as PalletAssetsAssetMetadata;
   }
 
   async subscribeToAccountInfo(
@@ -100,7 +99,7 @@ export class PolkadotService<
 
     const unwrapped = (response as any).unwrap?.() || response;
 
-    return calc(path.length ? get(unwrapped, path) : unwrapped);
+    return calc(path.length ? _.get(unwrapped, path) : unwrapped);
   }
 
   async getAssetMinBalance({
@@ -117,7 +116,7 @@ export class PolkadotService<
       return 0n;
     }
 
-    return get(details.value, path).toBigInt();
+    return _.get(details.value, path).toBigInt();
   }
 
   getXcmExtrinsic(
@@ -162,15 +161,20 @@ export class PolkadotService<
       return 0n;
     }
 
-    return (await this.#api.query.assetManager.assetTypeUnitsPerSecond(type))
-      .unwrapOrDefault()
-      .toBigInt();
+    const res = (await this.#api.query.assetManager.assetTypeUnitsPerSecond(
+      type,
+    )) as Option<u128>;
+
+    return res.unwrapOrDefault().toBigInt();
   }
 
-  async getAssetType(
-    id: string,
-  ): Promise<MoonbeamRuntimeXcmConfigAssetType | undefined> {
-    const type = await this.#api.query.assetManager.assetIdType(id);
+  /**
+   * this is only for Moon* chains
+   */
+  async getAssetType(id: string): Promise<XCMType | undefined> {
+    const type = (await this.#api.query.assetManager.assetIdType(
+      id,
+    )) as Option<any>;
 
     return type.unwrapOr(undefined);
   }

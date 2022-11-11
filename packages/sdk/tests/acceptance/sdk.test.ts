@@ -9,7 +9,7 @@ import {
 } from '@moonbeam-network/xcm-config';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { Wallet } from 'ethers';
-import { get } from 'lodash';
+import _ from 'lodash';
 import { ExtrinsicStatus, init } from '../../src';
 import { getEthersWalletSigner, getPolkadotKeyringPair } from '../utils/auth';
 import { itIf } from '../utils/itIf';
@@ -49,7 +49,7 @@ describe('sdk', () => {
 
       fromChains.length &&
         describe.each(fromChains)('deposit from $key', (chain) => {
-          const skip: boolean | undefined = get(CONFIG, [
+          const skip: boolean | undefined = _.get(CONFIG, [
             sdk.moonChain.key,
             symbol,
             'deposit',
@@ -77,7 +77,7 @@ describe('sdk', () => {
 
       toChains.length &&
         describe.each(toChains)('withdraw to $key', (chain) => {
-          const skip: boolean | undefined = get(CONFIG, [
+          const skip: boolean | undefined = _.get(CONFIG, [
             sdk.moonChain.key,
             symbol,
             'withdraw',

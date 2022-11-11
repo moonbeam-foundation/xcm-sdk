@@ -15,3 +15,10 @@ export interface AssetBalanceInfo<
   balance: Balance<string>;
   origin: Chain<ChainKeys> | MoonChain;
 }
+
+export interface XCMType {
+  Xcm: {
+    parents: number;
+    interior: unknown;
+  };
+}
