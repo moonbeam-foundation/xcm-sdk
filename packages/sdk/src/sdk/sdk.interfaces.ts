@@ -123,7 +123,7 @@ export interface WithdrawTransferData<
   destinationBalance: bigint;
   destinationFee: bigint;
   existentialDeposit: bigint;
-  min: XcmFeeWithDecimals<Symbols>;
+  min: bigint;
   minXcmFeeAsset: XcmFeeWithDecimals<Symbols>;
   native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;

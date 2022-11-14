@@ -115,11 +115,7 @@ export async function getWithdrawData<
     destinationBalance,
     destinationFee,
     existentialDeposit,
-    min: {
-      amount: min,
-      decimals,
-      symbol: asset.originSymbol,
-    },
+    min,
     minXcmFeeAsset: {
       amount: minXcmFeeAsset,
       decimals: xcmFeeDecimals,

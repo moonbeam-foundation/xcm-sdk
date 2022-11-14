@@ -74,10 +74,10 @@ async function withdraw() {
     `Your ${asset.originSymbol} balance in ${destination.name}: ${toDecimal(
       destinationBalance,
       asset.decimals,
-    )}. Minimum transferable amount is: ${toDecimal(min.amount, min.decimals)}`,
+    )}. Minimum transferable amount is: ${toDecimal(min, asset.decimals)}`,
   );
 
-  await send(min.amount, (event) => console.log(event));
+  await send(min, (event) => console.log(event));
 }
 
 async function main() {
