@@ -45,28 +45,28 @@ jobs:
         run: npm run build
 
       - name: 🚀 Publish utils
-        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'utils' }}
+        if: ${{ inputs.tag }} == 'all' || ${{ inputs.tag }} == 'utils'
         working-directory: ./packages/utils
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish config
-        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'config' }}
+        if: ${{ inputs.tag }} == 'all' || ${{ inputs.tag }} == 'config'
         working-directory: ./packages/config
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-config ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish sdk
-        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'sdk' }}
+        if: ${{ inputs.tag }} == 'all' || ${{ inputs.tag }} == 'sdk'
         working-directory: ./packages/sdk
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish transact
-        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'transact' }}
+        if: ${{ inputs.tag }} == 'all' || ${{ inputs.tag }} == 'transact'
         working-directory: ./packages/transact
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.tag }}) --no-git-tag-version
