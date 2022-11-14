@@ -44,7 +44,7 @@ jobs:
         run: npm run build
 
       - name: 🚀 Publish utils
-        if: ${{ inputs.tag == 'all' || inputs.tag == 'utils' }}
+        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'utils' }}
         working-directory: ./packages/utils
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -53,7 +53,7 @@ jobs:
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish config
-        if: ${{ inputs.tag == 'all' || inputs.tag == 'config' }}
+        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'config' }}
         working-directory: ./packages/config
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -62,7 +62,7 @@ jobs:
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish sdk
-        if: ${{ inputs.tag == 'all' || inputs.tag == 'sdk' }}
+        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'sdk' }}
         working-directory: ./packages/sdk
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -71,7 +71,7 @@ jobs:
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish transact
-        if: ${{ inputs.tag == 'all' || inputs.tag == 'transact' }}
+        if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'transact' }}
         working-directory: ./packages/transact
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
