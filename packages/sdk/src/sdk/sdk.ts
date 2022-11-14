@@ -135,8 +135,7 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           return {
             get: async (
               destinationAccount: string,
-              originAccount: string = '',
-              { ethersSigner }: WithdrawGetParams = {},
+              { ethersSigner, originAccount = '' }: WithdrawGetParams = {},
             ): Promise<WithdrawTransferData<Symbols>> => {
               const signer = ethersSigner || options?.ethersSigner;
 

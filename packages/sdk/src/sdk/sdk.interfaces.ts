@@ -87,13 +87,13 @@ export interface DepositGetParams {
 export interface XcmSdkWithdrawTo<Symbols extends AssetSymbol = AssetSymbol> {
   get: (
     destinationAccount: string,
-    originAccount?: string,
     params?: WithdrawGetParams,
   ) => Promise<WithdrawTransferData<Symbols>>;
 }
 
 export interface WithdrawGetParams {
   ethersSigner?: EthersSigner;
+  originAccount?: string;
 }
 
 export interface DepositTransferData<
