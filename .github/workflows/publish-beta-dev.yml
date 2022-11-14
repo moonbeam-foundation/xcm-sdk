@@ -47,11 +47,11 @@ jobs:
       - run: echo ${{ inputs.package }}
 
       - name: test utils
-        if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'utils'
+        if: inputs.package == 'all' || inputs.package == 'utils'
         run: echo utils
 
       - name: test config
-        if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'config'
+        if: inputs.package == 'all' || inputs.package == 'config'
         run: echo config
 
       # - name: 🚀 Publish utils
