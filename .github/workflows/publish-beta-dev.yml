@@ -44,40 +44,30 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      - run: echo ${{ inputs.package }}
-
-      - name: test utils
+      - name: 🚀 Publish utils
         if: inputs.package == 'all' || inputs.package == 'utils'
-        run: echo utils
+        working-directory: ./packages/utils
+        run: |
+          npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.package }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.package }}
 
-      - name: test config
+      - name: 🚀 Publish config
         if: inputs.package == 'all' || inputs.package == 'config'
-        run: echo config
+        working-directory: ./packages/config
+        run: |
+          npm version $(../../scripts/get_next_version.sh xcm-config ${{ inputs.package }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.package }}
 
-      # - name: 🚀 Publish utils
-      #   if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'utils'
-      #   working-directory: ./packages/utils
-      #   run: |
-      #     npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.package }}) --no-git-tag-version
-      #     npm publish --tag ${{ inputs.package }}
+      - name: 🚀 Publish sdk
+        if: inputs.package == 'all' || inputs.package == 'sdk'
+        working-directory: ./packages/sdk
+        run: |
+          npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.package }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.package }}
 
-      # - name: 🚀 Publish config
-      #   if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'config'
-      #   working-directory: ./packages/config
-      #   run: |
-      #     npm version $(../../scripts/get_next_version.sh xcm-config ${{ inputs.package }}) --no-git-tag-version
-      #     npm publish --tag ${{ inputs.package }}
-
-      # - name: 🚀 Publish sdk
-      #   if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'sdk'
-      #   working-directory: ./packages/sdk
-      #   run: |
-      #     npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.package }}) --no-git-tag-version
-      #     npm publish --tag ${{ inputs.package }}
-
-      # - name: 🚀 Publish transact
-      #   if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'transact'
-      #   working-directory: ./packages/transact
-      #   run: |
-      #     npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.package }}) --no-git-tag-version
-      #     npm publish --tag ${{ inputs.package }}
+      - name: 🚀 Publish transact
+        if: inputs.package == 'all' || inputs.package == 'transact'
+        working-directory: ./packages/transact
+        run: |
+          npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.package }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.package }}
