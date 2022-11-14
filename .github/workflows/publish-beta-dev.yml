@@ -44,7 +44,7 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      - name: echo ${{ inputs.package }}
+      - run: echo ${{ inputs.package }}
 
       - name: test utils
         if: ${{ inputs.package }} == 'all' || ${{ inputs.package }} == 'utils'
