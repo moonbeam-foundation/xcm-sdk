@@ -127,7 +127,7 @@ export interface WithdrawTransferData<
   minXcmFeeAsset: XcmFeeWithDecimals<Symbols>;
   native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
-  originXcmFeeAssetBalanceNotEnough: boolean;
+  originXcmFeeAssetBalance?: bigint;
   getFee: (amount: bigint) => Promise<bigint>;
   send: (amount: bigint, cb?: ExtrinsicEventsCallback) => Promise<Hash>;
 }

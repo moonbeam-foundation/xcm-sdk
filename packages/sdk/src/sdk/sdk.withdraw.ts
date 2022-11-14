@@ -109,11 +109,6 @@ export async function getWithdrawData<
         )
       : 0n;
 
-  const originXcmFeeAssetBalanceNotEnough =
-    originXcmFeeAssetBalance === undefined
-      ? false
-      : originXcmFeeAssetBalance < minXcmFeeAsset;
-
   return {
     asset: { ...asset, decimals },
     destination: config.destination,
@@ -132,7 +127,7 @@ export async function getWithdrawData<
     },
     native: { ...nativeAsset, decimals: meta.decimals },
     origin,
-    originXcmFeeAssetBalanceNotEnough,
+    originXcmFeeAssetBalance,
     getFee: async (amount) =>
       contract.getTransferFees(destinationAccount, amount, asset, config),
     send: async (amount: bigint, cb?: ExtrinsicEventsCallback) => {
