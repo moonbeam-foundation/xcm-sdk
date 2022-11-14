@@ -68,16 +68,16 @@ async function withdraw() {
 
   const { asset, destination, destinationBalance, min, send } = await to(
     polkadot,
-  ).get(polkadotAddress, { ethersSigner });
+  ).get(polkadotAddress, ethersSigner.address, { ethersSigner });
 
   console.log(
     `Your ${asset.originSymbol} balance in ${destination.name}: ${toDecimal(
       destinationBalance,
       asset.decimals,
-    )}. Minimum transferable amount is: ${toDecimal(min, asset.decimals)}`,
+    )}. Minimum transferable amount is: ${toDecimal(min.amount, min.decimals)}`,
   );
 
-  await send(min, (event) => console.log(event));
+  await send(min.amount, (event) => console.log(event));
 }
 
 async function main() {
