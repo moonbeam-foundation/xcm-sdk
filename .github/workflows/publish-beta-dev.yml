@@ -36,9 +36,10 @@ jobs:
           node-version: 16.x
           cache: 'npm'
 
+      - name: 🔐 Authenticate with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🛠️ Build
         run: npm run build
@@ -46,8 +47,6 @@ jobs:
       - name: 🚀 Publish utils
         if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'utils' }}
         working-directory: ./packages/utils
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
@@ -55,8 +54,6 @@ jobs:
       - name: 🚀 Publish config
         if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'config' }}
         working-directory: ./packages/config
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-config ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
@@ -64,8 +61,6 @@ jobs:
       - name: 🚀 Publish sdk
         if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'sdk' }}
         working-directory: ./packages/sdk
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
@@ -73,8 +68,6 @@ jobs:
       - name: 🚀 Publish transact
         if: ${{ inputs.tag == 'all' }} || ${{ inputs.tag == 'transact' }}
         working-directory: ./packages/transact
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
