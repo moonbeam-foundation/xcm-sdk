@@ -48,26 +48,26 @@ jobs:
         if: inputs.package == 'all' || inputs.package == 'utils'
         working-directory: ./packages/utils
         run: |
-          npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.package }}) --no-git-tag-version
-          npm publish --tag ${{ inputs.package }}
+          npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.tag }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish config
         if: inputs.package == 'all' || inputs.package == 'config'
         working-directory: ./packages/config
         run: |
-          npm version $(../../scripts/get_next_version.sh xcm-config ${{ inputs.package }}) --no-git-tag-version
-          npm publish --tag ${{ inputs.package }}
+          npm version $(../../scripts/get_next_version.sh xcm-config ${{ inputs.tag }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish sdk
         if: inputs.package == 'all' || inputs.package == 'sdk'
         working-directory: ./packages/sdk
         run: |
-          npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.package }}) --no-git-tag-version
-          npm publish --tag ${{ inputs.package }}
+          npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.tag }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish transact
         if: inputs.package == 'all' || inputs.package == 'transact'
         working-directory: ./packages/transact
         run: |
-          npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.package }}) --no-git-tag-version
-          npm publish --tag ${{ inputs.package }}
+          npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.tag }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
