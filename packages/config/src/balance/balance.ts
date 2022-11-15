@@ -23,10 +23,12 @@ export function createBalanceBuilder<
     assets,
     minAssetPallet,
     minAssetRegistryPallet,
+    minCurrencyMetadata,
     ormlTokens,
     system,
     tokens: (asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
       tokens<Symbols>(asset),
+    tokens2: (asset: AssetId) => tokens2<Symbols>(asset),
   };
 }
 
@@ -58,6 +60,15 @@ function minAssetRegistryPallet(asset: AssetId): MinBalanceAssetRegistryConfig {
   };
 }
 
+function minCurrencyMetadata(asset: AssetId): MinBalanceAssetRegistryConfig {
+  return {
+    pallet: BalancePallet.AssetRegistry,
+    function: BalanceFunction.CurrencyMetadatas,
+    path: ['minimalBalance'],
+    params: [{ Token2: asset }],
+  };
+}
+
 function ormlTokens(asset: AssetId): OrmlTokensBalanceConfig {
   return {
     pallet: BalancePallet.OrmlTokens,
@@ -80,6 +91,10 @@ function system(): SystemBalanceConfig {
   };
 }
 
+function calcTokensBalance({ free, frozen }: TokensPalletAccountData): bigint {
+  return BigInt(free.sub(frozen).toString());
+}
+
 function tokens<Symbols extends AssetSymbol = AssetSymbol>(
   asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD',
 ): TokensBalanceConfig<Symbols> {
@@ -93,7 +108,18 @@ function tokens<Symbols extends AssetSymbol = AssetSymbol>(
         ? { ForeignAsset: asset as number }
         : { Token: asset as Symbols },
     ],
-    calc: ({ free, frozen }: TokensPalletAccountData) =>
-      BigInt(free.sub(frozen).toString()),
+    calc: calcTokensBalance,
+  };
+}
+
+function tokens2<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: AssetId,
+): TokensBalanceConfig<Symbols> {
+  return {
+    pallet: BalancePallet.Tokens,
+    function: BalanceFunction.Accounts,
+    path: [],
+    getParams: (account: string) => [account, { Token2: asset }],
+    calc: calcTokensBalance,
   };
 }

@@ -19,11 +19,13 @@ import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 const asset = assets[AssetSymbol.GLMR];
 const acala = chains[ChainKey.Acala];
 const astar = chains[ChainKey.Astar];
+const bifrost = chains[ChainKey.BifrostPolkadot];
 const parallel = chains[ChainKey.Parallel];
 const phala = chains[ChainKey.Phala];
 
 const acalaGlmrId = getMoonAssetId(acala);
 const astarGlmrId = getMoonAssetId(astar);
+const bifrostGlmrId = getMoonAssetId(bifrost);
 const parallelGlmrId = getMoonAssetId(parallel);
 const phalaGlmrId = getMoonAssetId(phala);
 
@@ -55,6 +57,19 @@ export const GLMR: MoonbeamXcmConfig = {
         .origin(astar)
         .V1()
         .X2(getPalletInstance(astar)),
+    },
+    [bifrost.key]: {
+      source: bifrost,
+      balance: balance.tokens2(bifrostGlmrId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(bifrost)
+        .asset({
+          [XTokensExtrinsicCurrencyTypes.Token2]: bifrostGlmrId,
+        }),
     },
     [parallel.key]: {
       source: parallel,
@@ -90,6 +105,12 @@ export const GLMR: MoonbeamXcmConfig = {
       balance: balance.assets(astarGlmrId),
       destination: astar,
       feePerWeight: 50_000,
+    }),
+    [bifrost.key]: withdraw.xTokens({
+      balance: balance.tokens2(bifrostGlmrId),
+      destination: bifrost,
+      feePerWeight: 0.8,
+      sourceMinBalance: balance.minCurrencyMetadata(bifrostGlmrId),
     }),
     [parallel.key]: withdraw.xTokens({
       balance: balance.assets(parallelGlmrId),
