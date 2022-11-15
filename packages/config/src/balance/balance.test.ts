@@ -54,5 +54,11 @@ describe('balance', () => {
 
       expect(cfg2.getParams(account)).toMatchSnapshot();
     });
+
+    it('should be correct params with Token2', () => {
+      const cfg2 = balance.tokens2(1);
+
+      expect(cfg2.getParams(account)).toMatchSnapshot();
+    });
   });
 });
