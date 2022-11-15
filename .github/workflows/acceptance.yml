@@ -20,8 +20,6 @@ jobs:
           cache: 'npm'
 
       - run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🛠️ Build
         run: npm run build

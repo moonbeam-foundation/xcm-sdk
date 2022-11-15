@@ -18,11 +18,15 @@ import { MoonriverXcmConfig } from '../moonriver.interfaces';
 
 const asset = assets[AssetSymbol.MOVR];
 const bifrost = chains[ChainKey.Bifrost];
+const calamari = chains[ChainKey.Calamari];
+const crust = chains[ChainKey.CrustShadow];
 const karura = chains[ChainKey.Karura];
 const khala = chains[ChainKey.Khala];
 const parallel = chains[ChainKey.Parallel];
 const shiden = chains[ChainKey.Shiden];
 
+const calamariMovrId = getMoonAssetId(calamari);
+const crustMovrId = getMoonAssetId(crust);
 const karuraMovrId = getMoonAssetId(karura);
 const khalaMovrId = getMoonAssetId(khala);
 const parallelMovrId = getMoonAssetId(parallel);
@@ -43,6 +47,32 @@ export const MOVR: MoonriverXcmConfig = {
         .origin(bifrost)
         .asset({
           [XTokensExtrinsicCurrencyTypes.Token]: asset.originSymbol,
+        }),
+    },
+    [calamari.key]: {
+      source: calamari,
+      balance: balance.assets(calamariMovrId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(calamari)
+        .asset({
+          [XTokensExtrinsicCurrencyTypes.MantaCurrency]: calamariMovrId,
+        }),
+    },
+    [crust.key]: {
+      source: crust,
+      balance: balance.assets(crustMovrId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(crust)
+        .asset({
+          [XTokensExtrinsicCurrencyTypes.OtherReserve]: crustMovrId,
         }),
     },
     [karura.key]: {
@@ -98,6 +128,17 @@ export const MOVR: MoonriverXcmConfig = {
       balance: balance.tokens().token(AssetSymbol.MOVR),
       destination: bifrost,
       feePerWeight: 213_600,
+    }),
+    [calamari.key]: withdraw.xTokens({
+      balance: balance.assets(calamariMovrId),
+      destination: calamari,
+      feePerWeight: 50_000,
+      sourceMinBalance: balance.minAssetPallet(calamariMovrId),
+    }),
+    [crust.key]: withdraw.xTokens({
+      balance: balance.assets(crustMovrId),
+      destination: crust,
+      feePerWeight: 50_000,
     }),
     [karura.key]: withdraw.xTokens({
       balance: balance.tokens().foreignAsset(karuraMovrId),
