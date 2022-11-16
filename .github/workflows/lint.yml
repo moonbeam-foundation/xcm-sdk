@@ -16,8 +16,6 @@ jobs:
           cache: 'npm'
 
       - run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🧪 Run linter
         run: npm run lint
