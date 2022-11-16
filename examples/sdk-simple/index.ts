@@ -68,7 +68,7 @@ async function withdraw() {
 
   const { asset, destination, destinationBalance, min, send } = await to(
     polkadot,
-  ).get(polkadotAddress, { ethersSigner, originAccount: ethersSigner.address });
+  ).get(polkadotAddress, { ethersSigner });
 
   console.log(
     `Your ${asset.originSymbol} balance in ${destination.name}: ${toDecimal(
