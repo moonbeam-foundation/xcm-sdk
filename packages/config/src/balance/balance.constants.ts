@@ -11,4 +11,5 @@ export enum BalanceFunction {
   Accounts = 'accounts',
   Asset = 'asset',
   AssetMetadatas = 'assetMetadatas',
+  CurrencyMetadatas = 'currencyMetadatas',
 }

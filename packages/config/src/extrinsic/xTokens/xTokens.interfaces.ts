@@ -199,6 +199,9 @@ export type XTokensTransferExtrinsicParamsAsset<
       [XTokensExtrinsicCurrencyTypes.Token]: Symbols | 'KUSD' | 'MOVR';
     }
   | {
+      [XTokensExtrinsicCurrencyTypes.Token2]: AssetId;
+    }
+  | {
       [XTokensExtrinsicCurrencyTypes.Native]: Symbols;
     }
   | {

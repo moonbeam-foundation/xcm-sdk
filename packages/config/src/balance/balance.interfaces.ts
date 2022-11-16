@@ -53,6 +53,7 @@ export interface TokensBalanceConfig<
           Token: Symbols | 'MOVR' | 'KUSD';
         }
       | { ForeignAsset: AssetId }
+      | { Token2: AssetId }
     ),
   ];
   calc: (data: TokensPalletAccountData) => bigint;
@@ -71,7 +72,7 @@ export interface MinBalanceAssetsConfig {
 
 export interface MinBalanceAssetRegistryConfig {
   pallet: BalancePallet.AssetRegistry;
-  function: BalanceFunction.AssetMetadatas;
+  function: BalanceFunction.AssetMetadatas | BalanceFunction.CurrencyMetadatas;
   path: ['minimalBalance'];
-  params: [{ ForeignAssetId: AssetId }];
+  params: [{ ForeignAssetId: AssetId } | { Token2: AssetId }];
 }
