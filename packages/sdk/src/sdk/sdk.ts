@@ -135,13 +135,14 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           return {
             get: async (
               destinationAccount: string,
-              { ethersSigner, originAccount = '' }: WithdrawGetParams = {},
+              { ethersSigner }: WithdrawGetParams = {},
             ): Promise<WithdrawTransferData<Symbols>> => {
               const signer = ethersSigner || options?.ethersSigner;
 
               if (!signer) {
                 throw new Error('Ethers signer is not provided to XCM-SDK');
               }
+              const originAccount = await signer.getAddress();
 
               const contract = new XTokensContract<Symbols>(signer);
               const [polkadot, destinationPolkadot] =

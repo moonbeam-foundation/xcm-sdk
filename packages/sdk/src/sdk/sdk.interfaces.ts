@@ -93,7 +93,6 @@ export interface XcmSdkWithdrawTo<Symbols extends AssetSymbol = AssetSymbol> {
 
 export interface WithdrawGetParams {
   ethersSigner?: EthersSigner;
-  originAccount?: string;
 }
 
 export interface DepositTransferData<
