@@ -11,10 +11,12 @@ export enum BalanceFunction {
   Accounts = 'accounts',
   Asset = 'asset',
   AssetMetadatas = 'assetMetadatas',
+  CurrencyMetadatas = 'currencyMetadatas',
 }
 
 export enum BalanceCurrencyTypes {
   Token = 'Token',
+  Token2 = 'Token2',
   ForeignAsset = 'ForeignAsset',
   NativeToken = 'NativeToken',
   MiningResource = 'MiningResource',

@@ -19,4 +19,5 @@ export enum XTokensExtrinsicCurrencyTypes {
   NativeToken = 'NativeToken',
   OtherReserve = 'OtherReserve',
   Token = 'Token',
+  Token2 = 'Token2',
 }

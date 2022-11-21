@@ -199,6 +199,9 @@ export type XTokensTransferExtrinsicParamsAsset<
       [XTokensExtrinsicCurrencyTypes.Token]: Symbols | AssetSymbol.KUSD;
     }
   | {
+      [XTokensExtrinsicCurrencyTypes.Token2]: AssetId;
+    }
+  | {
       [XTokensExtrinsicCurrencyTypes.Native]: Symbols;
     }
   | {

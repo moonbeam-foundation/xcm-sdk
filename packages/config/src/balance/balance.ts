@@ -28,6 +28,7 @@ export function createBalanceBuilder<
     assets,
     minAssetPallet,
     minAssetRegistryPallet,
+    minCurrencyMetadata,
     ormlTokens,
     system,
     tokens: () => tokens<Symbols>(),
@@ -62,6 +63,15 @@ function minAssetRegistryPallet(asset: AssetId): MinBalanceAssetRegistryConfig {
   };
 }
 
+function minCurrencyMetadata(asset: AssetId): MinBalanceAssetRegistryConfig {
+  return {
+    pallet: BalancePallet.AssetRegistry,
+    function: BalanceFunction.CurrencyMetadatas,
+    path: ['minimalBalance'],
+    params: [{ Token2: asset }],
+  };
+}
+
 function ormlTokens(asset: AssetId): OrmlTokensBalanceConfig {
   return {
     pallet: BalancePallet.OrmlTokens,
@@ -86,14 +96,16 @@ function system(): SystemBalanceConfig {
 
 function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
   return {
-    token: (asset: Symbols | AssetSymbol.KUSD) =>
-      tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset }),
     foreignAsset: (asset: AssetId | Symbols) =>
       tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset }),
-    miningResource: (asset: AssetId) =>
-      tokensBase<Symbols>({ [BalanceCurrencyTypes.MiningResource]: asset }),
     fungibleToken: (asset: AssetId) =>
       tokensBase<Symbols>({ [BalanceCurrencyTypes.FungibleToken]: asset }),
+    miningResource: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.MiningResource]: asset }),
+    token: (asset: Symbols | AssetSymbol.KUSD) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset }),
+    token2: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.Token2]: asset }),
   };
 }
 

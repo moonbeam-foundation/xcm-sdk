@@ -71,5 +71,11 @@ describe('balance', () => {
     it('should be correct params with FungibleToken', () => {
       expect(cfg4.getParams(account)).toMatchSnapshot();
     });
+
+    it('should be correct params with Token2', () => {
+      const cfg5 = balance.tokens().token2(1);
+
+      expect(cfg5.getParams(account)).toMatchSnapshot();
+    });
   });
 });

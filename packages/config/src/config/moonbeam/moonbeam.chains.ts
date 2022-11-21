@@ -5,6 +5,7 @@ import { MoonbeamChains } from './moonbeam.interfaces';
 export const MOONBEAM_CHAINS = <const>[
   ChainKey.Acala,
   ChainKey.Astar,
+  ChainKey.BifrostPolkadot,
   ChainKey.Darwinia,
   ChainKey.Interlay,
   ChainKey.Parallel,
@@ -30,6 +31,14 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     parachainId: 2006,
     moonAssetId: 18446744073709551619n,
     palletInstance: 10,
+  },
+  [ChainKey.BifrostPolkadot]: {
+    key: ChainKey.BifrostPolkadot,
+    name: 'Bifrost',
+    ws: 'wss://hk.p.bifrost-rpc.liebi.com/ws',
+    weight: 1_000_000_000,
+    parachainId: 2030,
+    moonAssetId: 1,
   },
   [ChainKey.Darwinia]: {
     key: ChainKey.Darwinia,

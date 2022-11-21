@@ -61,7 +61,8 @@ export type TokensBalanceParamAsset<Symbols extends AssetSymbol = AssetSymbol> =
       }
     | { [BalanceCurrencyTypes.ForeignAsset]: AssetId }
     | { [BalanceCurrencyTypes.MiningResource]: AssetId }
-    | { [BalanceCurrencyTypes.FungibleToken]: AssetId };
+    | { [BalanceCurrencyTypes.FungibleToken]: AssetId }
+    | { [BalanceCurrencyTypes.Token2]: AssetId };
 
 export type MinBalanceConfig =
   | MinBalanceAssetsConfig
@@ -76,7 +77,7 @@ export interface MinBalanceAssetsConfig {
 
 export interface MinBalanceAssetRegistryConfig {
   pallet: BalancePallet.AssetRegistry;
-  function: BalanceFunction.AssetMetadatas;
+  function: BalanceFunction.AssetMetadatas | BalanceFunction.CurrencyMetadatas;
   path: ['minimalBalance'];
-  params: [{ ForeignAssetId: AssetId }];
+  params: [{ ForeignAssetId: AssetId } | { Token2: AssetId }];
 }

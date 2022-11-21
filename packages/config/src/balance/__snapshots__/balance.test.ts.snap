@@ -120,3 +120,12 @@ exports[`balance tokens should be correct params with Token 1`] = `
   },
 ]
 `;
+
+exports[`balance tokens should be correct params with Token2 1`] = `
+[
+  "<ACCOUNT>",
+  {
+    "Token2": 1,
+  },
+]
+`;
