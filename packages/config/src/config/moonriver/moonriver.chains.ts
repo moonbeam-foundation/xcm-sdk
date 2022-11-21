@@ -14,6 +14,7 @@ export const MOONRIVER_CHAINS = <const>[
   ChainKey.Kusama,
   ChainKey.Litmus,
   ChainKey.Parallel,
+  ChainKey.Robonomics,
   ChainKey.Shiden,
   ChainKey.Statemine,
 ];
@@ -101,6 +102,13 @@ export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
     weight: 1_000_000_000,
     parachainId: 2085,
     moonAssetId: 113,
+  },
+  [ChainKey.Robonomics]: {
+    key: ChainKey.Robonomics,
+    name: 'Robonomics',
+    ws: 'wss://robonomics.api.onfinality.io/public-ws',
+    weight: 1_000_000_000,
+    parachainId: 2048,
   },
   [ChainKey.Shiden]: {
     key: ChainKey.Shiden,

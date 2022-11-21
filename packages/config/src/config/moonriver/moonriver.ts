@@ -18,6 +18,7 @@ import { RMRK } from './assets/rmrk';
 import { SDN } from './assets/sdn';
 import { TEER } from './assets/teer';
 import { USDT } from './assets/usdt';
+import { XRT } from './assets/xrt';
 
 export const MOONRIVER_CONFIGS: MoonriverXcmConfigs = {
   [AssetSymbol.AUSD]: AUSD,
@@ -37,4 +38,5 @@ export const MOONRIVER_CONFIGS: MoonriverXcmConfigs = {
   [AssetSymbol.SDN]: SDN,
   [AssetSymbol.TEER]: TEER,
   [AssetSymbol.USDT]: USDT,
+  [AssetSymbol.XRT]: XRT,
 };

@@ -20,6 +20,7 @@ export const MOONRIVER_ASSETS = <const>[
   AssetSymbol.SDN,
   AssetSymbol.TEER,
   AssetSymbol.USDT,
+  AssetSymbol.XRT,
 ];
 
 export const MOONRIVER_ASSETS_MAP: AssetsMap<MoonriverAssets> = {
@@ -114,5 +115,10 @@ export const MOONRIVER_ASSETS_MAP: AssetsMap<MoonriverAssets> = {
     foreignIds: {
       [ChainKey.Statemine]: 1984,
     },
+  },
+  [AssetSymbol.XRT]: {
+    id: '108036400430056508975016746969135344601',
+    erc20Id: '0xffffffff51470dca3dbe535bd2880a9ccdbc6bd9',
+    originSymbol: AssetSymbol.XRT,
   },
 };
