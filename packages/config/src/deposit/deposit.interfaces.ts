@@ -1,7 +1,7 @@
 import { BalanceConfig, MinBalanceConfig } from '../balance';
 import { AssetSymbol, ChainKey } from '../constants';
 import { ExtrinsicConfig } from '../extrinsic';
-import { Asset, Chain } from '../interfaces';
+import { Chain, XcmFeeAsset } from '../interfaces';
 
 export interface DepositConfig<
   Symbols extends AssetSymbol = AssetSymbol,
@@ -34,8 +34,5 @@ export interface DepositConfig<
    * Optional - Asset to pay for the XCM fee in Moon*. Needed if the asset being
    * sent is not accepted as XCM fee payment method.
    */
-  xcmFeeAsset?: {
-    balance: BalanceConfig<Symbols>;
-    asset: Asset<Symbols>;
-  };
+  xcmFeeAsset?: XcmFeeAsset<Symbols>;
 }

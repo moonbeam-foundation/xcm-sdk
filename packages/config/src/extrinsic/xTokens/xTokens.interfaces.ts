@@ -196,7 +196,7 @@ export type XTokensTransferExtrinsicParamsAsset<
   Symbols extends AssetSymbol = AssetSymbol,
 > =
   | {
-      [XTokensExtrinsicCurrencyTypes.Token]: Symbols | 'KUSD' | 'MOVR';
+      [XTokensExtrinsicCurrencyTypes.Token]: Symbols | AssetSymbol.KUSD;
     }
   | {
       [XTokensExtrinsicCurrencyTypes.Token2]: AssetId;
@@ -205,7 +205,16 @@ export type XTokensTransferExtrinsicParamsAsset<
       [XTokensExtrinsicCurrencyTypes.Native]: Symbols;
     }
   | {
+      [XTokensExtrinsicCurrencyTypes.NativeToken]: AssetId;
+    }
+  | {
+      [XTokensExtrinsicCurrencyTypes.MiningResource]: AssetId;
+    }
+  | {
       [XTokensExtrinsicCurrencyTypes.ForeignAsset]: AssetId;
+    }
+  | {
+      [XTokensExtrinsicCurrencyTypes.FungibleToken]: AssetId;
     }
   | {
       [XTokensExtrinsicCurrencyTypes.MantaCurrency]: AssetId;

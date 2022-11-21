@@ -142,6 +142,7 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
               if (!signer) {
                 throw new Error('Ethers signer is not provided to XCM-SDK');
               }
+              const originAccount = await signer.getAddress();
 
               const contract = new XTokensContract<Symbols>(signer);
               const [polkadot, destinationPolkadot] =
@@ -156,6 +157,7 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 asset,
                 config,
                 contract,
+                originAccount,
                 destinationAccount,
                 destinationPolkadot,
                 ethersSigner: signer,

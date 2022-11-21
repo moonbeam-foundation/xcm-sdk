@@ -22,11 +22,11 @@ export const IBTC: MoonbeamXcmConfig = {
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens(asset.originSymbol),
-      sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
+      balance: balance.tokens().token(asset.originSymbol),
+      sourceFeeBalance: balance.tokens().token(feeAsset.originSymbol),
       xcmFeeAsset: {
         asset: feeAsset,
-        balance: balance.tokens(feeAsset.originSymbol),
+        balance: balance.tokens().token(feeAsset.originSymbol),
       },
       extrinsic: extrinsic
         .xTokens()
@@ -45,7 +45,7 @@ export const IBTC: MoonbeamXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens(asset.originSymbol),
+      balance: balance.tokens().token(asset.originSymbol),
       destination: origin,
       feePerWeight: 0.00000619,
     }),

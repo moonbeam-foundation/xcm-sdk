@@ -9,35 +9,32 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonriver.common';
-import { MoonriverXcmConfig } from '../moonriver.interfaces';
+} from '../moonbase.common';
+import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
-const asset = assets[AssetSymbol.AUSD];
-const origin = chains[ChainKey.Karura];
+const asset = assets[AssetSymbol.NEER];
+const origin = chains[ChainKey.BitCountryPioneer];
 
-export const AUSD: MoonriverXcmConfig = {
+export const NEER: MoonbaseXcmConfig = {
   asset,
   origin,
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens().token(AssetSymbol.KUSD),
-      sourceFeeBalance: balance.system(),
+      balance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
-        .asset({
-          [XTokensExtrinsicCurrencyTypes.Token]: AssetSymbol.KUSD,
-        }),
+        .asset({ [XTokensExtrinsicCurrencyTypes.NativeToken]: 0 }),
     },
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens().token(AssetSymbol.KUSD),
+      balance: balance.system(),
       destination: origin,
-      feePerWeight: 64,
+      feePerWeight: 8_000_000,
     }),
   },
 };

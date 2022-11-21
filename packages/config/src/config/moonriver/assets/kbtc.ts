@@ -22,11 +22,11 @@ export const KBTC: MoonriverXcmConfig = {
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens(asset.originSymbol),
-      sourceFeeBalance: balance.tokens(feeAsset.originSymbol),
+      balance: balance.tokens().token(asset.originSymbol),
+      sourceFeeBalance: balance.tokens().token(feeAsset.originSymbol),
       xcmFeeAsset: {
         asset: feeAsset,
-        balsance: balance.tokens(feeAsset.originSymbol),
+        balance: balance.tokens().token(feeAsset.originSymbol),
       },
       extrinsic: extrinsic
         .xTokens()
@@ -45,7 +45,7 @@ export const KBTC: MoonriverXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens(asset.originSymbol),
+      balance: balance.tokens().token(asset.originSymbol),
       destination: origin,
       feePerWeight: 0.000000107,
     }),

@@ -23,6 +23,7 @@ export interface GetWithdrawDataParams<
   asset: Asset<Symbols>;
   config: WithdrawConfig<Symbols>;
   contract: XTokensContract;
+  originAccount: string;
   destinationAccount: string;
   destinationPolkadot: PolkadotService<Symbols, ChainKeys>;
   ethersSigner: EthersSigner;
@@ -39,6 +40,7 @@ export async function getWithdrawData<
   asset,
   config,
   contract,
+  originAccount,
   destinationAccount,
   destinationPolkadot,
   ethersSigner,
@@ -50,22 +52,62 @@ export async function getWithdrawData<
   WithdrawTransferData<Symbols>
 > {
   const meta = destinationPolkadot.getMetadata();
-  const [decimals, destinationBalance, existentialDeposit, assetMinBalance] =
-    await Promise.all([
-      asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
-      destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
-      asset.isNative ? 0n : destinationPolkadot.getExistentialDeposit(),
-      config.sourceMinBalance
-        ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
-        : 0n,
-    ]);
+  const xcmFeeAsset = config.xcmFeeAsset?.asset ?? asset;
+  const [
+    decimals,
+    // destinationBalance,
+    originXcmFeeAssetBalance,
+    destinationBalance,
+    destinationXcmFeeAssetBalance,
+    existentialDeposit,
+    assetMinBalance,
+    xcmFeeDecimals,
+  ] = await Promise.all([
+    // decimals
+    asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
+    // originXcmFeeAssetBalance
+    config.xcmFeeAsset
+      ? await polkadot.getGenericBalance(
+          originAccount,
+          config.xcmFeeAsset?.balance.origin,
+        )
+      : undefined,
+    // destinationBalance
+    destinationPolkadot.getGenericBalance(destinationAccount, config.balance),
+    // destinationXcmFeeAssetBalance
+    config.xcmFeeAsset
+      ? destinationPolkadot.getGenericBalance(
+          destinationAccount,
+          config.xcmFeeAsset.balance.destination,
+        )
+      : undefined,
+    // existentialDeposit
+    asset.isNative ? 0n : destinationPolkadot.getExistentialDeposit(),
+    // assetMinBalance
+    config.sourceMinBalance
+      ? destinationPolkadot.getAssetMinBalance(config.sourceMinBalance)
+      : 0n,
+    // xcmFeeDecimals
+    polkadot.getAssetDecimals(xcmFeeAsset),
+  ]);
 
   const destinationFee = getFee(assetMinBalance, config);
-  const min = getMin(
-    assetMinBalance || existentialDeposit,
-    destinationBalance,
-    destinationFee,
-  );
+  const min = config.xcmFeeAsset
+    ? 0n
+    : getMin(
+        assetMinBalance || existentialDeposit,
+        destinationBalance,
+        destinationFee,
+      );
+
+  const minXcmFeeAsset =
+    config.xcmFeeAsset && destinationXcmFeeAssetBalance !== undefined
+      ? getMin(
+          assetMinBalance || existentialDeposit,
+          destinationXcmFeeAssetBalance,
+          destinationFee,
+        )
+      : 0n;
 
   return {
     asset: { ...asset, decimals },
@@ -74,8 +116,14 @@ export async function getWithdrawData<
     destinationFee,
     existentialDeposit,
     min,
+    minXcmFeeAsset: {
+      amount: minXcmFeeAsset,
+      decimals: xcmFeeDecimals,
+      symbol: xcmFeeAsset.originSymbol,
+    },
     native: { ...nativeAsset, decimals: meta.decimals },
     origin,
+    originXcmFeeAssetBalance,
     getFee: async (amount) =>
       contract.getTransferFees(destinationAccount, amount, asset, config),
     send: async (amount: bigint, cb?: ExtrinsicEventsCallback) => {
@@ -84,6 +132,7 @@ export async function getWithdrawData<
         amount,
         asset,
         config,
+        minXcmFeeAsset,
       );
 
       if (cb) {

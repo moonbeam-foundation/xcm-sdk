@@ -4,7 +4,11 @@ import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
 import { AssetId } from '../interfaces';
-import { BalanceFunction, BalancePallet } from './balance.constants';
+import {
+  BalanceCurrencyTypes,
+  BalanceFunction,
+  BalancePallet,
+} from './balance.constants';
 import {
   AssetsBalanceConfig,
   MinBalanceAssetRegistryConfig,
@@ -12,6 +16,7 @@ import {
   OrmlTokensBalanceConfig,
   SystemBalanceConfig,
   TokensBalanceConfig,
+  TokensBalanceParamAsset,
   TokensPalletAccountData,
 } from './balance.interfaces';
 
@@ -26,9 +31,7 @@ export function createBalanceBuilder<
     minCurrencyMetadata,
     ormlTokens,
     system,
-    tokens: (asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD') =>
-      tokens<Symbols>(asset),
-    tokens2: (asset: AssetId) => tokens2<Symbols>(asset),
+    tokens: () => tokens<Symbols>(),
   };
 }
 
@@ -91,35 +94,30 @@ function system(): SystemBalanceConfig {
   };
 }
 
-function calcTokensBalance({ free, frozen }: TokensPalletAccountData): bigint {
-  return BigInt(free.sub(frozen).toString());
-}
-
-function tokens<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: number | bigint | Symbols | 'MOVR' | 'KUSD' | 'AUSD',
-): TokensBalanceConfig<Symbols> {
+function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
   return {
-    pallet: BalancePallet.Tokens,
-    function: BalanceFunction.Accounts,
-    path: [],
-    getParams: (account: string) => [
-      account,
-      Number.isInteger(asset)
-        ? { ForeignAsset: asset as number }
-        : { Token: asset as Symbols },
-    ],
-    calc: calcTokensBalance,
+    foreignAsset: (asset: AssetId | Symbols) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset }),
+    fungibleToken: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.FungibleToken]: asset }),
+    miningResource: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.MiningResource]: asset }),
+    token: (asset: Symbols | AssetSymbol.KUSD) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.Token]: asset }),
+    token2: (asset: AssetId) =>
+      tokensBase<Symbols>({ [BalanceCurrencyTypes.Token2]: asset }),
   };
 }
 
-function tokens2<Symbols extends AssetSymbol = AssetSymbol>(
-  asset: AssetId,
+function tokensBase<Symbols extends AssetSymbol = AssetSymbol>(
+  asset: TokensBalanceParamAsset<Symbols>,
 ): TokensBalanceConfig<Symbols> {
   return {
     pallet: BalancePallet.Tokens,
     function: BalanceFunction.Accounts,
     path: [],
-    getParams: (account: string) => [account, { Token2: asset }],
-    calc: calcTokensBalance,
+    getParams: (account: string) => [account, asset],
+    calc: ({ free, frozen }: TokensPalletAccountData) =>
+      BigInt(free.sub(frozen).toString()),
   };
 }

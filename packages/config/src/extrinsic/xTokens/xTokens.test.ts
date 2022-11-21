@@ -37,7 +37,7 @@ describe('xTokens', () => {
       .transfer()
       .successEvent(XTokensExtrinsicSuccessEvent.Transferred)
       .origin(origin)
-      .asset({ Token: 'MOVR' });
+      .asset({ Token: AssetSymbol.MOVR });
 
     it('should be correct config', () => {
       expect(cfg).toMatchSnapshot();

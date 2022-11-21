@@ -21,7 +21,7 @@ export const INTR: MoonbeamXcmConfig = {
   deposit: {
     [origin.key]: {
       source: origin,
-      balance: balance.tokens(asset.originSymbol),
+      balance: balance.tokens().token(asset.originSymbol),
       extrinsic: extrinsic
         .xTokens()
         .transfer()
@@ -32,7 +32,7 @@ export const INTR: MoonbeamXcmConfig = {
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
-      balance: balance.tokens(asset.originSymbol),
+      balance: balance.tokens().token(asset.originSymbol),
       destination: origin,
       feePerWeight: 1.87,
     }),

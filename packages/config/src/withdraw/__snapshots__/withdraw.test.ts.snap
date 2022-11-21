@@ -10,6 +10,7 @@ exports[`withdraw xTokens should be correct withdraw config 1`] = `
   "getParams": [Function],
   "sourceMinBalance": undefined,
   "weight": 4000000000,
+  "xcmFeeAsset": undefined,
 }
 `;
 

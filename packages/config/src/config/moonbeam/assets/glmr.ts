@@ -35,7 +35,7 @@ export const GLMR: MoonbeamXcmConfig = {
   deposit: {
     [acala.key]: {
       source: acala,
-      balance: balance.tokens(acalaGlmrId),
+      balance: balance.tokens().foreignAsset(acalaGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -60,7 +60,7 @@ export const GLMR: MoonbeamXcmConfig = {
     },
     [bifrost.key]: {
       source: bifrost,
-      balance: balance.tokens2(bifrostGlmrId),
+      balance: balance.tokens().token2(bifrostGlmrId),
       sourceFeeBalance: balance.system(),
       extrinsic: extrinsic
         .xTokens()
@@ -96,7 +96,7 @@ export const GLMR: MoonbeamXcmConfig = {
   },
   withdraw: {
     [acala.key]: withdraw.xTokens({
-      balance: balance.tokens(acalaGlmrId),
+      balance: balance.tokens().foreignAsset(acalaGlmrId),
       destination: acala,
       feePerWeight: 8_000_000,
       sourceMinBalance: balance.minAssetRegistryPallet(acalaGlmrId),
@@ -107,7 +107,7 @@ export const GLMR: MoonbeamXcmConfig = {
       feePerWeight: 50_000,
     }),
     [bifrost.key]: withdraw.xTokens({
-      balance: balance.tokens2(bifrostGlmrId),
+      balance: balance.tokens().token2(bifrostGlmrId),
       destination: bifrost,
       feePerWeight: 0.8,
       sourceMinBalance: balance.minCurrencyMetadata(bifrostGlmrId),

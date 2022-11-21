@@ -16,8 +16,10 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.DEV];
 const clover = chains[ChainKey.CloverAlphanet];
+const pioneer = chains[ChainKey.BitCountryPioneer];
 
 const cloverDevId = getMoonAssetId(clover);
+const pioneerDevId = getMoonAssetId(pioneer);
 
 export const DEV: MoonbaseXcmConfig = {
   asset,
@@ -36,11 +38,27 @@ export const DEV: MoonbaseXcmConfig = {
           [XTokensExtrinsicCurrencyTypes.OtherReserve]: cloverDevId,
         }),
     },
+    [pioneer.key]: {
+      source: pioneer,
+      balance: balance.tokens().fungibleToken(pioneerDevId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(pioneer)
+        .asset({ [XTokensExtrinsicCurrencyTypes.FungibleToken]: pioneerDevId }),
+    },
   },
   withdraw: {
     [clover.key]: withdraw.xTokens({
       balance: balance.assets(cloverDevId),
       destination: clover,
+      feePerWeight: 50_000,
+    }),
+    [pioneer.key]: withdraw.xTokens({
+      balance: balance.tokens().fungibleToken(pioneerDevId),
+      destination: pioneer,
       feePerWeight: 50_000,
     }),
   },

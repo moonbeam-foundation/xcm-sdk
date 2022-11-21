@@ -1,3 +1,4 @@
+import { AssetSymbol } from '../constants';
 import { createBalanceBuilder } from './balance';
 
 describe('balance', () => {
@@ -39,7 +40,7 @@ describe('balance', () => {
   });
 
   describe('tokens', () => {
-    const cfg = balance.tokens('MOVR');
+    const cfg = balance.tokens().token(AssetSymbol.MOVR);
 
     it('should be correct balance config', () => {
       expect(cfg).toMatchSnapshot();
@@ -49,16 +50,32 @@ describe('balance', () => {
       expect(cfg.getParams(account)).toMatchSnapshot();
     });
 
-    it('should be correct params with ForeignAsset', () => {
-      const cfg2 = balance.tokens(5);
+    const cfg2 = balance.tokens().foreignAsset(0);
 
+    it('should be correct balance config foreignAsset', () => {
+      expect(cfg2).toMatchSnapshot();
+    });
+
+    it('should be correct params with ForeignAsset', () => {
       expect(cfg2.getParams(account)).toMatchSnapshot();
     });
 
-    it('should be correct params with Token2', () => {
-      const cfg2 = balance.tokens2(1);
+    const cfg3 = balance.tokens().miningResource(0);
 
-      expect(cfg2.getParams(account)).toMatchSnapshot();
+    it('should be correct params with MiningResource', () => {
+      expect(cfg3.getParams(account)).toMatchSnapshot();
+    });
+
+    const cfg4 = balance.tokens().fungibleToken(0);
+
+    it('should be correct params with FungibleToken', () => {
+      expect(cfg4.getParams(account)).toMatchSnapshot();
+    });
+
+    it('should be correct params with Token2', () => {
+      const cfg5 = balance.tokens().token2(1);
+
+      expect(cfg5.getParams(account)).toMatchSnapshot();
     });
   });
 });
