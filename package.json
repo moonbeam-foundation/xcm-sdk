@@ -24,7 +24,8 @@
     "test:update": "turbo run test:update",
     "test:ci": "turbo run test:ci",
     "test:acc": "turbo run test:acc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "link": "npm run build && cd packages/config && npm ln && cd ../sdk && npm ln @moonbeam-network/xcm-config && npm ln"
   },
   "dependencies": {
     "@polkadot/api-augment": "^9.6.2",

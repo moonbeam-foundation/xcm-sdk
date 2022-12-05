@@ -6,6 +6,7 @@ import {
   BalanceConfig,
   ChainKey,
   ExtrinsicConfig,
+  ExtrinsicPallet,
   MinBalanceConfig,
   MoonChain,
   XcmConfigBuilder,
@@ -126,11 +127,24 @@ export class PolkadotService<
     fee?: bigint,
     primaryAccount?: string,
   ): SubmittableExtrinsic<'promise'> {
-    let transferExtrinsic = this.#api.tx[pallet][extrinsic](
+    const call = this.#api.tx[pallet][extrinsic];
+
+    let transferExtrinsic = call(
       // TODO: check issue with types and if we can fix it
       // @ts-ignore
       ...getParams(account, amount, fee),
     );
+
+    if (pallet === ExtrinsicPallet.XTokens) {
+      transferExtrinsic = call(
+        ...getParams(
+          account,
+          amount,
+          fee,
+          call.meta.args.at(-1)?.type.eq('XcmV2WeightLimit'),
+        ),
+      );
+    }
 
     if (primaryAccount) {
       transferExtrinsic = this.#api.tx.proxy.proxy(

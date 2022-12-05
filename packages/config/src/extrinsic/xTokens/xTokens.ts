@@ -37,7 +37,7 @@ function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.Transfer,
           successEvent: event,
-          getParams: (account, amount) => [
+          getParams: (account, amount, _, isWeightEnum = false) => [
             token,
             amount,
             {
@@ -58,7 +58,11 @@ function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 },
               },
             },
-            origin.weight,
+            isWeightEnum
+              ? {
+                  Limited: origin.weight,
+                }
+              : origin.weight,
           ],
         }),
       }),
@@ -79,7 +83,7 @@ function transferMultiAsset<
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiAsset,
           successEvent: event,
-          getParams: (account, amount) => [
+          getParams: (account, amount, _, isWeightEnum = false) => [
             {
               V1: {
                 id: {
@@ -120,7 +124,11 @@ function transferMultiAsset<
                 },
               },
             },
-            origin.weight,
+            isWeightEnum
+              ? {
+                  Limited: origin.weight,
+                }
+              : origin.weight,
           ],
         }),
       }),
@@ -142,7 +150,7 @@ function transferMultiCurrencies<
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
           successEvent: event,
-          getParams: (account, amount, fee = 0n) => [
+          getParams: (account, amount, fee = 0n, isWeightEnum = false) => [
             [
               [asset, amount],
               [feeAsset, fee],
@@ -166,7 +174,11 @@ function transferMultiCurrencies<
                 },
               },
             },
-            origin.weight,
+            isWeightEnum
+              ? {
+                  Limited: origin.weight,
+                }
+              : origin.weight,
           ],
         }),
       }),
