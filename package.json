@@ -17,6 +17,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "link": "turbo run link",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "test": "turbo run test",
