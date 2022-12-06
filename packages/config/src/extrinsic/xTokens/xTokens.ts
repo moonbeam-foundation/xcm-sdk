@@ -11,6 +11,7 @@ import {
   XTokensTransferMultiAssetExtrinsic,
   XTokensTransferMultiCurrenciesExtrinsic,
 } from './xTokens.interfaces';
+import { getWeightXTokens } from './xTokens.util';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 export function xTokens<
@@ -37,7 +38,7 @@ function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.Transfer,
           successEvent: event,
-          getParams: (account, amount) => [
+          getParams: ({ account, amount, extrinsicCall }) => [
             token,
             amount,
             {
@@ -58,7 +59,7 @@ function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 },
               },
             },
-            origin.weight,
+            getWeightXTokens(origin.weight, extrinsicCall),
           ],
         }),
       }),
@@ -79,7 +80,7 @@ function transferMultiAsset<
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiAsset,
           successEvent: event,
-          getParams: (account, amount) => [
+          getParams: ({ account, amount, extrinsicCall }) => [
             {
               V1: {
                 id: {
@@ -120,7 +121,7 @@ function transferMultiAsset<
                 },
               },
             },
-            origin.weight,
+            getWeightXTokens(origin.weight, extrinsicCall),
           ],
         }),
       }),
@@ -142,7 +143,7 @@ function transferMultiCurrencies<
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
           successEvent: event,
-          getParams: (account, amount, fee = 0n) => [
+          getParams: ({ account, amount, extrinsicCall, fee = 0n }) => [
             [
               [asset, amount],
               [feeAsset, fee],
@@ -166,7 +167,7 @@ function transferMultiCurrencies<
                 },
               },
             },
-            origin.weight,
+            getWeightXTokens(origin.weight, extrinsicCall),
           ],
         }),
       }),

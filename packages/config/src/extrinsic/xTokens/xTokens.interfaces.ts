@@ -1,5 +1,7 @@
 import { AssetSymbol } from '../../constants';
 import { AssetId } from '../../interfaces';
+import { XcmExtrinsicGetParams } from '../common.interfaces';
+import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,
   XTokensExtrinsicCurrencyTypes,
@@ -21,17 +23,17 @@ export type XTokensTransferMultiCurrenciesExtrinsic<
   Symbols extends AssetSymbol = AssetSymbol,
 > = XTokensBaseExtrinsic<XTokensExtrinsic.TransferMultiCurrencies, Symbols>;
 
+export type XTokensWeightLimit = number | { Limited: number };
+
 export interface XTokensBaseExtrinsic<
   Extrinsic extends XTokensExtrinsic,
   Symbols extends AssetSymbol = AssetSymbol,
 > {
-  pallet: 'xTokens';
+  pallet: ExtrinsicPallet.XTokens;
   extrinsic: Extrinsic;
   successEvent: XTokensExtrinsicSuccessEvent;
   getParams: (
-    account: string,
-    amount: bigint,
-    fee?: bigint,
+    params: XcmExtrinsicGetParams,
   ) => XTokensParamsByExtrinsic<Symbols>[Extrinsic];
 }
 
@@ -81,7 +83,7 @@ export type XTokensTransferExtrinsicParams<
   /**
    * weight
    */
-  number,
+  XTokensWeightLimit,
 ];
 
 export type XTokensTransferMultiAssetExtrinsicParams<
@@ -139,7 +141,7 @@ export type XTokensTransferMultiAssetExtrinsicParams<
   /**
    * weight
    */
-  number,
+  XTokensWeightLimit,
 ];
 
 export type XTokensTransferMultiCurrenciesExtrinsicParams<
@@ -189,7 +191,7 @@ export type XTokensTransferMultiCurrenciesExtrinsicParams<
   /**
    * weight
    */
-  number,
+  XTokensWeightLimit,
 ];
 
 export type XTokensTransferExtrinsicParamsAsset<

@@ -1,5 +1,5 @@
 import { AssetId } from '../../interfaces';
-import { Parents } from '../common.interfaces';
+import { Parents, XcmExtrinsicGetParams } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   PolkadotXcmExtrinsic,
@@ -10,7 +10,7 @@ export interface PolkadotXcmPallet {
   pallet: ExtrinsicPallet.PolkadotXcm;
   extrinsic: PolkadotXcmExtrinsic;
   successEvent: PolkadotXcmExtrinsicSuccessEvent;
-  getParams: (account: string, amount: bigint) => PolkadotXcmPalletParams;
+  getParams: (params: XcmExtrinsicGetParams) => PolkadotXcmPalletParams;
 }
 
 export type PolkadotXcmPalletParams = [

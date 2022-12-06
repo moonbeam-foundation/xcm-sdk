@@ -35,7 +35,7 @@ describe('xcmPallet', () => {
     });
 
     it('should get correct params', () => {
-      expect(cfg.getParams(account, amount)).toMatchSnapshot();
+      expect(cfg.getParams({ account, amount })).toMatchSnapshot();
     });
   });
 });

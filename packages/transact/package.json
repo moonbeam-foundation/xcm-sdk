@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "npm run build -- --watch",
+    "link": "npm ln",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "prepack": "prettier --write build/index.d.ts"
