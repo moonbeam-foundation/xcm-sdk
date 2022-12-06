@@ -24,7 +24,7 @@ export function getCreateExtrinsic<ChainKeys extends ChainKey>(
     pallet: ExtrinsicPallet.PolkadotXcm,
     extrinsic,
     successEvent: event,
-    getParams: (account, amount) => [
+    getParams: ({ account, amount }) => [
       {
         V1: {
           parents,

@@ -44,7 +44,7 @@ describe('xTokens', () => {
     });
 
     it('should get correct params', () => {
-      expect(cfg.getParams(account, amount)).toMatchSnapshot();
+      expect(cfg.getParams({ account, amount })).toMatchSnapshot();
     });
   });
 
@@ -60,7 +60,7 @@ describe('xTokens', () => {
     });
 
     it('should get correct params', () => {
-      expect(cfg.getParams(account, amount)).toMatchSnapshot();
+      expect(cfg.getParams({ account, amount })).toMatchSnapshot();
     });
   });
 
@@ -83,7 +83,7 @@ describe('xTokens', () => {
     });
 
     it('should get correct params', () => {
-      expect(cfg.getParams(account, amount, 99n)).toMatchSnapshot();
+      expect(cfg.getParams({ account, amount, fee: 99n })).toMatchSnapshot();
     });
   });
 });

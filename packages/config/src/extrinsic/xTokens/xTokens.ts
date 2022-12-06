@@ -37,7 +37,7 @@ function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.Transfer,
           successEvent: event,
-          getParams: (account, amount, _, isWeightEnum = false) => [
+          getParams: ({ account, amount, isWeightEnum = false }) => [
             token,
             amount,
             {
@@ -83,7 +83,7 @@ function transferMultiAsset<
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiAsset,
           successEvent: event,
-          getParams: (account, amount, _, isWeightEnum = false) => [
+          getParams: ({ account, amount, isWeightEnum = false }) => [
             {
               V1: {
                 id: {
@@ -150,7 +150,7 @@ function transferMultiCurrencies<
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.TransferMultiCurrencies,
           successEvent: event,
-          getParams: (account, amount, fee = 0n, isWeightEnum = false) => [
+          getParams: ({ account, amount, fee = 0n, isWeightEnum = false }) => [
             [
               [asset, amount],
               [feeAsset, fee],

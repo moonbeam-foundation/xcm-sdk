@@ -1,7 +1,7 @@
 export type Parents = 0 | 1;
 
-export type WeightLimit =
-  | string
-  | {
-      Limited: number;
-    };
+export interface XcmExtrinsicGetParams {
+  account: string;
+  amount: bigint;
+  fee?: bigint;
+}

@@ -1,5 +1,6 @@
 import { AssetSymbol } from '../../constants';
 import { AssetId } from '../../interfaces';
+import { XcmExtrinsicGetParams } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,
@@ -24,6 +25,10 @@ export type XTokensTransferMultiCurrenciesExtrinsic<
 
 export type XTokensWeightLimit = number | { Limited: number };
 
+export interface XTokensExtrinsicGetParams extends XcmExtrinsicGetParams {
+  isWeightEnum?: boolean;
+}
+
 export interface XTokensBaseExtrinsic<
   Extrinsic extends XTokensExtrinsic,
   Symbols extends AssetSymbol = AssetSymbol,
@@ -32,10 +37,7 @@ export interface XTokensBaseExtrinsic<
   extrinsic: Extrinsic;
   successEvent: XTokensExtrinsicSuccessEvent;
   getParams: (
-    account: string,
-    amount: bigint,
-    fee?: bigint,
-    isWeightEnum?: boolean,
+    params: XTokensExtrinsicGetParams,
   ) => XTokensParamsByExtrinsic<Symbols>[Extrinsic];
 }
 

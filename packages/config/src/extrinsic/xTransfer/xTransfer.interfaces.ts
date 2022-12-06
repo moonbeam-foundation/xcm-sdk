@@ -1,5 +1,5 @@
+import { Parents, XcmExtrinsicGetParams } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
-import { Parents } from '../common.interfaces';
 import {
   XTransferExtrinsic,
   XTransferExtrinsicSuccessEvent,
@@ -9,7 +9,7 @@ export interface XTransferPallet {
   pallet: ExtrinsicPallet.XTransfer;
   extrinsic: XTransferExtrinsic;
   successEvent: XTransferExtrinsicSuccessEvent;
-  getParams: (account: string, amount: bigint) => XTransferPalletParams;
+  getParams: (params: XcmExtrinsicGetParams) => XTransferPalletParams;
 }
 
 export type XTransferPalletParams = [

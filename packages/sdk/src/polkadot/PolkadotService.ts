@@ -129,24 +129,22 @@ export class PolkadotService<
   ): SubmittableExtrinsic<'promise'> {
     const call = this.#api.tx[pallet][extrinsic];
 
-    let transferExtrinsic: SubmittableExtrinsic<'promise'>;
-
-    if (pallet === ExtrinsicPallet.XTokens) {
-      transferExtrinsic = call(
-        ...getParams(
-          account,
-          amount,
-          fee,
-          call.meta.args.at(-1)?.type.eq('XcmV2WeightLimit'),
-        ),
-      );
-    } else {
-      transferExtrinsic = call(
-        // TODO: check issue with types and if we can fix it
-        // @ts-ignore
-        ...getParams(account, amount, fee),
-      );
-    }
+    let transferExtrinsic = call(
+      ...getParams(
+        pallet !== ExtrinsicPallet.XTokens
+          ? {
+              account,
+              amount,
+              fee,
+            }
+          : {
+              account,
+              amount,
+              fee,
+              isWeightEnum: call.meta.args.at(-1)?.type.eq('XcmV2WeightLimit'),
+            },
+      ),
+    );
 
     if (primaryAccount) {
       transferExtrinsic = this.#api.tx.proxy.proxy(

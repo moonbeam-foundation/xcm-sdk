@@ -64,7 +64,7 @@ function getCreateExtrinsic<ChainKeys extends ChainKey>(
     pallet: ExtrinsicPallet.XTransfer,
     extrinsic,
     successEvent: event,
-    getParams: (account, amount) => [
+    getParams: ({ account, amount }) => [
       {
         id: {
           Concrete: getConcrete(),
