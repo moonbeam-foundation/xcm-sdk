@@ -17,6 +17,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "link": "turbo run link",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "test": "turbo run test",
@@ -24,10 +25,10 @@
     "test:update": "turbo run test:update",
     "test:ci": "turbo run test:ci",
     "test:acc": "turbo run test:acc",
-    "prepare": "husky install",
-    "link": "npm run build && cd packages/config && npm ln && cd ../sdk && npm ln @moonbeam-network/xcm-config && npm ln"
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@polkadot/api": "^9.10.1",
     "@polkadot/api-augment": "^9.6.2",
     "@polkadot/types": "^9.6.2",
     "@polkadot/util": "^10.1.11",
