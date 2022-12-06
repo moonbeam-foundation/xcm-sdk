@@ -28,7 +28,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@polkadot/api": "^9.10.1",
     "@polkadot/api-augment": "^9.6.2",
     "@polkadot/types": "^9.6.2",
     "@polkadot/util": "^10.1.11",
