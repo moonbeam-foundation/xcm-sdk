@@ -49,6 +49,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "peerDependencies": {
+    "@polkadot/api": "9.x",
     "@polkadot/api-augment": "9.x",
     "@polkadot/types": "9.x",
     "@polkadot/util": "10.x",

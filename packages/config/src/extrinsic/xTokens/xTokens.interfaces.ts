@@ -25,10 +25,6 @@ export type XTokensTransferMultiCurrenciesExtrinsic<
 
 export type XTokensWeightLimit = number | { Limited: number };
 
-export interface XTokensExtrinsicGetParams extends XcmExtrinsicGetParams {
-  isWeightEnum?: boolean;
-}
-
 export interface XTokensBaseExtrinsic<
   Extrinsic extends XTokensExtrinsic,
   Symbols extends AssetSymbol = AssetSymbol,
@@ -37,7 +33,7 @@ export interface XTokensBaseExtrinsic<
   extrinsic: Extrinsic;
   successEvent: XTokensExtrinsicSuccessEvent;
   getParams: (
-    params: XTokensExtrinsicGetParams,
+    params: XcmExtrinsicGetParams,
   ) => XTokensParamsByExtrinsic<Symbols>[Extrinsic];
 }
 
