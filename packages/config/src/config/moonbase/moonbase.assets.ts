@@ -4,14 +4,11 @@ import { MoonbaseAssets } from './moonbase.interfaces';
 
 export const MOONBASE_ASSETS = <const>[
   AssetSymbol.BIT,
-  AssetSymbol.CLV,
-  AssetSymbol.CRU,
   AssetSymbol.DEV,
   AssetSymbol.LIT,
   AssetSymbol.NEER,
   AssetSymbol.TT1,
   AssetSymbol.UNIT,
-  AssetSymbol.XRT,
 ];
 
 export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
@@ -19,16 +16,6 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     id: '306639095083798603270835754515874921389',
     erc20Id: '0xffffffffe6b08aa1fbbaa02f004d3e5aa27f3bad',
     originSymbol: AssetSymbol.BIT,
-  },
-  [AssetSymbol.CLV]: {
-    id: '281434042901349570144900941495462927562',
-    erc20Id: '0xffffffffd3ba399d7d9d684d94b22767a5fa1cca',
-    originSymbol: AssetSymbol.CLV,
-  },
-  [AssetSymbol.CRU]: {
-    id: '108457044225666871745333730479173774551',
-    erc20Id: '0xffffffff519811215e05efa24830eebe9c43acd7',
-    originSymbol: AssetSymbol.CRU,
   },
   [AssetSymbol.DEV]: {
     id: '',
@@ -58,10 +45,5 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     foreignIds: {
       [ChainKey.StatemineAlphanet]: 2,
     },
-  },
-  [AssetSymbol.XRT]: {
-    id: '108036400430056508975016746969135344601',
-    erc20Id: '0xffffffff51470dca3dbe535bd2880a9ccdbc6bd9',
-    originSymbol: AssetSymbol.XRT,
   },
 };
