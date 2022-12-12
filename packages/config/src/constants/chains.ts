@@ -46,7 +46,6 @@ export enum ChainKey {
   AlphanetRelay = 'AlphanetRelay',
   Astar = 'Astar',
   Bifrost = 'Bifrost',
-  BitCountryPioneer = 'BitCountryPioneer',
   BifrostPolkadot = 'BifrostPolkadot',
   Calamari = 'Calamari',
   Crab = 'Crab',
