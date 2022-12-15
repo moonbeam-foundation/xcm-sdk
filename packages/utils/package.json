@@ -8,6 +8,10 @@
     "link": "npm ln",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
+    "test": "jest /src",
+    "test:watch": "npm test -- --watch",
+    "test:update": "npm test -- -u",
+    "test:ci": "npm test -- --ci",
     "prepack": "prettier --write build/index.d.ts"
   },
   "author": "PureStake",
@@ -46,7 +50,11 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
+    "big.js": "^6.2.1",
     "lru-cache": "^7.14.0"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.1.6"
   },
   "peerDependencies": {
     "@polkadot/api": "9.x"
