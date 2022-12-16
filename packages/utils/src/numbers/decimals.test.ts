@@ -64,5 +64,14 @@ describe('utils - decimals', () => {
       expect(toBigInt('0.372', 12)).toBe(372_000_000_000n);
       expect(toBigInt('0.372209875392', 12)).toBe(372_209_875_392n);
     });
+
+    it('should convert to BigInt from number', () => {
+      expect(toBigInt(52.912391, 12)).toBe(52_912_391_000_000n);
+      expect(toBigInt(80, 12)).toBe(80_000_000_000_000n);
+      expect(toBigInt(370, 12)).toBe(370_000_000_000_000n);
+      expect(toBigInt(0.78, 12)).toBe(780_000_000_000n);
+      expect(toBigInt(0.372, 12)).toBe(372_000_000_000n);
+      expect(toBigInt(0.372209875392, 12)).toBe(372_209_875_392n);
+    });
   });
 });
