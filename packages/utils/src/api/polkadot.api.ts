@@ -1,13 +1,8 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import LRU from 'lru-cache';
 
-const tenMin = 10 * 60 * 1000;
-
 const cache = new LRU<string, Promise<ApiPromise>>({
   max: 20,
-  ttl: tenMin,
-  updateAgeOnGet: true,
-  ttlAutopurge: true,
   dispose: async (promise: Promise<ApiPromise>) => {
     const api = await promise;
 
@@ -17,7 +12,10 @@ const cache = new LRU<string, Promise<ApiPromise>>({
   },
 });
 
-export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
+export async function getPolkadotApi(
+  ws: string,
+  onDisconnect?: VoidFunction,
+): Promise<ApiPromise> {
   const promise =
     cache.get(ws) ||
     ApiPromise.create({
@@ -29,6 +27,10 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
   const api = await promise;
 
   await api.isReady;
+
+  if (onDisconnect) {
+    api.once('disconnected', onDisconnect);
+  }
 
   return api;
 }

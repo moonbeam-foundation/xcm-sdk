@@ -1,3 +1,8 @@
 export * from './sdk';
 export * from './sdk.interfaces';
-export { isXcmSdkDeposit, isXcmSdkWithdraw } from './sdk.utils';
+export {
+  isDepositTransferData,
+  isWithdrawTransferData,
+  isXcmSdkDeposit,
+  isXcmSdkWithdraw,
+} from './sdk.utils';

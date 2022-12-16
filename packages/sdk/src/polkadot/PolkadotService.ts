@@ -10,6 +10,7 @@ import {
   MoonChain,
   XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
+import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import {
   QueryableStorageMultiArg,
@@ -23,7 +24,6 @@ import {
   PalletAssetsAssetMetadata,
 } from '@polkadot/types/lookup';
 import _ from 'lodash';
-import { getPolkadotApi } from './polkadot.api';
 import { AssetBalanceInfo, XCMType } from './polkadot.interfaces';
 import { calculateMin } from './polkadot.utils';
 

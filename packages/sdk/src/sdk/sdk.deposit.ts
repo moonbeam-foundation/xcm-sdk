@@ -167,7 +167,7 @@ export async function getDepositData<
       : undefined,
     sourceMinBalance,
     getFee: async (amount = sourceBalance): Promise<bigint> => {
-      const extrinsic = await createExtrinsic(amount);
+      const extrinsic = createExtrinsic(amount);
       const info = await extrinsic.paymentInfo(sourceAccount);
 
       return info.partialFee.toBigInt();
@@ -176,7 +176,7 @@ export async function getDepositData<
       amount: bigint,
       cb?: ExtrinsicEventsCallback,
     ): Promise<string> => {
-      const extrinsic = await createExtrinsic(amount);
+      const extrinsic = createExtrinsic(amount);
       const hash = await extrinsic.signAndSend(
         sourceAccount,
         {

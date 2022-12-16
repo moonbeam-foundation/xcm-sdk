@@ -32,7 +32,7 @@ export function isWithdrawTransferData(
   return !!(data as WithdrawTransferData)?.destination;
 }
 
-export function useIsDepositTransferData(
+export function isDepositTransferData(
   data?: WithdrawTransferData | DepositTransferData,
 ): data is DepositTransferData {
   return !!(data as DepositTransferData)?.moonChainFee;
