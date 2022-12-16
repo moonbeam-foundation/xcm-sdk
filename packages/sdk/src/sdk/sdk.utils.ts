@@ -4,9 +4,15 @@ import {
   ChainKey,
   XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
+import { toDecimal } from '@moonbeam-network/xcm-utils';
 import { UnsubscribePromise } from '@polkadot/api/types';
 import { AssetBalanceInfo, PolkadotService } from '../polkadot';
-import { XcmSdkDeposit, XcmSdkWithdraw } from './sdk.interfaces';
+import {
+  DepositTransferData,
+  WithdrawTransferData,
+  XcmSdkDeposit,
+  XcmSdkWithdraw,
+} from './sdk.interfaces';
 
 export function isXcmSdkDeposit(
   config: XcmSdkDeposit | XcmSdkWithdraw,
@@ -20,16 +26,16 @@ export function isXcmSdkWithdraw(
   return !!(config as XcmSdkWithdraw).to;
 }
 
-export function toDecimal(
-  number: bigint,
-  decimals: number,
-  maxDecimal = 6,
-): number {
-  const decimalMultiplier = 10 ** maxDecimal;
-  const dividend = number * BigInt(decimalMultiplier);
-  const divisor = 10n ** BigInt(decimals);
+export function isWithdrawTransferData(
+  data?: WithdrawTransferData | DepositTransferData,
+): data is WithdrawTransferData {
+  return !!(data as WithdrawTransferData)?.destination;
+}
 
-  return Number(dividend / divisor) / decimalMultiplier;
+export function useIsDepositTransferData(
+  data?: WithdrawTransferData | DepositTransferData,
+): data is DepositTransferData {
+  return !!(data as DepositTransferData)?.moonChainFee;
 }
 
 export function sortByBalanceAndChainName<Symbols extends AssetSymbol>(
