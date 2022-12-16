@@ -187,7 +187,7 @@ export async function getDepositData<
           createExtrinsicEventHandler(
             config.extrinsic.pallet,
             config.extrinsic.successEvent,
-            cb as any,
+            cb,
           ),
       );
 
