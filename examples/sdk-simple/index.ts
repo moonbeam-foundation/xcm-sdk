@@ -1,5 +1,6 @@
 import { AssetSymbol, ChainKey } from '@moonbeam-network/xcm-config';
-import { init, toDecimal } from '@moonbeam-network/xcm-sdk';
+import { init } from '@moonbeam-network/xcm-sdk';
+import { toDecimal } from '@moonbeam-network/xcm-utils';
 import { Keyring } from '@polkadot/api';
 import { ethers } from 'ethers';
 import { setTimeout } from 'timers/promises';
