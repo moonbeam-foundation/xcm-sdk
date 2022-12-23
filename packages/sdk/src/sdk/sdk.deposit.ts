@@ -101,7 +101,7 @@ export async function getDepositData<
     xcmFeeDecimals,
   ] = await Promise.all([
     // assetDecimals
-    polkadot.getAssetDecimals(asset),
+    asset.isNative ? moonChain.decimals : polkadot.getAssetDecimals(asset),
     // existentialDeposit
     foreignPolkadot.getExistentialDeposit(),
     // sourceBalance
@@ -153,7 +153,7 @@ export async function getDepositData<
     moonChainFee: {
       balance: xcmFeeBalance,
       decimals: xcmFeeAssetConfig.asset.isNative
-        ? meta.decimals
+        ? moonChain.decimals
         : xcmFeeDecimals,
       fee: xcmFee,
       symbol: xcmFeeAssetConfig.asset.originSymbol,
