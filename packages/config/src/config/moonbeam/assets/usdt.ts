@@ -1,7 +1,13 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
 import { PolkadotXcmExtrinsicSuccessEvent } from '../../../extrinsic';
 import { getAssetForeignId, getPalletInstance } from '../../config.utils';
-import { assets, balance, chains, extrinsic } from '../moonbeam.common';
+import {
+  assets,
+  balance,
+  chains,
+  extrinsic,
+  withdraw,
+} from '../moonbeam.common';
 import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
 const asset = assets[AssetSymbol.USDT];
@@ -26,5 +32,12 @@ export const USDT: MoonbeamXcmConfig = {
         .X2(getPalletInstance(origin), originAssetId),
     },
   },
-  withdraw: {},
+  withdraw: {
+    [origin.key]: withdraw.xTokens({
+      balance: balance.assets(originAssetId),
+      sourceMinBalance: balance.minAssetPallet(originAssetId),
+      destination: origin,
+      feePerWeight: 0.00000378,
+    }),
+  },
 };
