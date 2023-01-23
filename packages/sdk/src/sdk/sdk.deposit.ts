@@ -160,7 +160,11 @@ export async function getDepositData<
     },
     native: { ...nativeAsset, decimals: meta.decimals },
     origin,
-    source: config.source,
+    source: {
+      ...config.source,
+      ss58Format: meta.ss58Format,
+      genesisHash: meta.genesisHash,
+    },
     sourceBalance,
     sourceFeeBalance: !isUndefined(sourceFeeBalance)
       ? { ...meta, balance: sourceFeeBalance }
