@@ -48,6 +48,8 @@ export class PolkadotService<
     return {
       decimals: this.#api.registry.chainDecimals.at(0) || 12,
       symbol: this.#api.registry.chainTokens.at(0) as Symbols,
+      ss58Format: this.#api.registry.chainSS58 || 42,
+      genesisHash: this.#api.genesisHash.toHex(),
     };
   }
 

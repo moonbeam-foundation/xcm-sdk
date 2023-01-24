@@ -49,6 +49,8 @@ export interface Chain<ChainKeys extends ChainKey = ChainKey>
    * unitsPerSecond = weightPerSecond * baseExtrinsicCost / baseExtrinsicWeight
    */
   unitsPerSecond?: bigint;
+  ss58Format?: number;
+  genesisHash?: string;
 }
 
 export interface XcmFeeAsset<Symbols extends AssetSymbol = AssetSymbol> {

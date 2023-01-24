@@ -111,7 +111,11 @@ export async function getWithdrawData<
 
   return {
     asset: { ...asset, decimals },
-    destination: config.destination,
+    destination: {
+      ...config.destination,
+      ss58Format: meta.ss58Format,
+      genesisHash: meta.genesisHash,
+    },
     destinationBalance,
     destinationFee,
     existentialDeposit,
