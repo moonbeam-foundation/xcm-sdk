@@ -162,8 +162,6 @@ export async function getDepositData<
     origin,
     source: {
       ...config.source,
-      ss58Format: meta.ss58Format,
-      genesisHash: meta.genesisHash,
     },
     sourceBalance,
     sourceFeeBalance: !isUndefined(sourceFeeBalance)
