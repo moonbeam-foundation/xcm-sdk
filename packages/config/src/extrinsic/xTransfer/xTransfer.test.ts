@@ -21,6 +21,9 @@ describe('xTransfer', () => {
     ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
     weight: 1_000_000_000,
     parachainId: 0,
+    ss58Format: 42,
+    genesisHash:
+      '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
   };
   const extrinsic = xTransfer(chain);
 

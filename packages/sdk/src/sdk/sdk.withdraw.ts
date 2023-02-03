@@ -113,8 +113,6 @@ export async function getWithdrawData<
     asset: { ...asset, decimals },
     destination: {
       ...config.destination,
-      ss58Format: meta.ss58Format,
-      genesisHash: meta.genesisHash,
     },
     destinationBalance,
     destinationFee,
