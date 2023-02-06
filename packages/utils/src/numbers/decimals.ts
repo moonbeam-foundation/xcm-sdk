@@ -1,13 +1,14 @@
-import Big from 'big.js';
+import Big, { RoundingMode } from 'big.js';
 
 export function toDecimal(
   number: bigint | number | string,
   decimals: number,
   maxDecimal = 6,
+  roundType?: RoundingMode,
 ): number {
   const dividend = Big(number.toString().replace(/[^0-9]/g, ''));
   const divisor = Big(10).pow(decimals);
-  const result = dividend.div(divisor).round(maxDecimal);
+  const result = dividend.div(divisor).round(maxDecimal, roundType);
 
   return result.toNumber();
 }

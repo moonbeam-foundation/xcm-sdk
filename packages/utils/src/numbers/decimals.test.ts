@@ -1,4 +1,5 @@
 /* eslint-disable jest/max-expects */
+import Big from 'big.js';
 import { toBigInt, toDecimal } from './decimals';
 
 describe('utils - decimals', () => {
@@ -41,6 +42,20 @@ describe('utils - decimals', () => {
       expect(toDecimal('711_158_793', 9, 3)).toBe(0.711);
       expect(toDecimal('711_158_793', 9, 9)).toBe(0.711158793);
       expect(toDecimal('711_158_793n', 9, 9)).toBe(0.711158793);
+    });
+
+    it('should convert to decimals with the correct rounding types', () => {
+      expect(toDecimal(477_844_894, 9, 0)).toBe(0);
+      expect(toDecimal(370_024_965_982_774n, 12, 1, Big.roundDown)).toBe(370);
+      expect(toDecimal(477_844_894, 9, 0, Big.roundUp)).toBe(1);
+      expect(toDecimal('167_850_000n', 9, 4, Big.roundHalfEven)).toBe(0.1678);
+      expect(toDecimal('7_117_587_933_365_016_000', 18, 2)).toBe(7.12);
+      expect(toDecimal('7_117_587_933_365_016_000', 18, 2, Big.roundDown)).toBe(
+        7.11,
+      );
+      expect(
+        toDecimal('7_117_587_933_365_016_000', 18, 2, Big.roundHalfUp),
+      ).toBe(7.12);
     });
   });
 
