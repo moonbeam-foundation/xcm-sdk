@@ -8,6 +8,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.BitCountryPioneer,
   ChainKey.MoonbaseBeta,
   ChainKey.StatemineAlphanet,
+  ChainKey.UniqueAlpha,
 ];
 
 export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
@@ -70,5 +71,15 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ss58Format: 42,
     genesisHash:
       '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
+  },
+  [ChainKey.UniqueAlpha]: {
+    key: ChainKey.UniqueAlpha,
+    name: 'Unique Alphanet',
+    ws: 'wss://unique-alpha.unique.network',
+    weight: 1_000_000_000,
+    parachainId: 2095,
+    ss58Format: 255,
+    genesisHash:
+      '0xbdf55f33d9f0b390f56413ec803c693af348edae64a659760248974b48b9a99e',
   },
 };
