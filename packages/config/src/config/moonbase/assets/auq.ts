@@ -34,7 +34,7 @@ export const AUQ: MoonbaseXcmConfig = {
     [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      feePerWeight: 0, // currently not charging anything
+      feePerWeight: 0,
     }),
   },
 };
