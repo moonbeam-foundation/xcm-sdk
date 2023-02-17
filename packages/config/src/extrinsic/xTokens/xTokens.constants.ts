@@ -16,6 +16,7 @@ export enum XTokensExtrinsicCurrencyTypes {
   MantaCurrency = 'MantaCurrency',
   MiningResource = 'MiningResource',
   Native = 'Native',
+  NativeAssetId = 'NativeAssetId',
   NativeToken = 'NativeToken',
   OtherReserve = 'OtherReserve',
   Token = 'Token',

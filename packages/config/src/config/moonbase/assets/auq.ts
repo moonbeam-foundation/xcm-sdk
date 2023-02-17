@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { XTokensExtrinsicSuccessEvent } from '../../../extrinsic';
+import {
+  XTokensExtrinsicCurrencyTypes,
+  XTokensExtrinsicSuccessEvent,
+} from '../../../extrinsic';
 import {
   assets,
   balance,
@@ -24,14 +27,14 @@ export const AUQ: MoonbaseXcmConfig = {
         .transfer()
         .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
         .origin(origin)
-        .asset('SelfReserve'),
+        .asset({ [XTokensExtrinsicCurrencyTypes.NativeAssetId]: 'Here' }),
     },
   },
   withdraw: {
     [origin.key]: withdraw.xTokens({
       balance: balance.system(),
       destination: origin,
-      feePerWeight: 8,
+      feePerWeight: 0, // currently not charging anything
     }),
   },
 };
