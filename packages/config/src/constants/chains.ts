@@ -70,4 +70,5 @@ export enum ChainKey {
   Statemine = 'Statemine',
   StatemineAlphanet = 'StatemineAlphanet',
   Statemint = 'Statemint',
+  UniqueAlpha = 'UniqueAlpha',
 }

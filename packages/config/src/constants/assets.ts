@@ -2,6 +2,7 @@ export enum AssetSymbol {
   ACA = 'ACA',
   ASTR = 'ASTR',
   AUSD = 'AUSD',
+  AUQ = 'AUQ',
   BIT = 'BIT',
   BNC = 'BNC',
   CRAB = 'CRAB',

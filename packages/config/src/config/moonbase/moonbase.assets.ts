@@ -3,6 +3,7 @@ import { AssetsMap } from '../config.interfaces';
 import { MoonbaseAssets } from './moonbase.interfaces';
 
 export const MOONBASE_ASSETS = <const>[
+  AssetSymbol.AUQ,
   AssetSymbol.BIT,
   AssetSymbol.DEV,
   AssetSymbol.LIT,
@@ -12,6 +13,11 @@ export const MOONBASE_ASSETS = <const>[
 ];
 
 export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
+  [AssetSymbol.AUQ]: {
+    id: '69536036667157951501899290870203586130',
+    erc20Id: '0xffffffff3450274d4ab181de8830c189f4509652',
+    originSymbol: AssetSymbol.AUQ,
+  },
   [AssetSymbol.BIT]: {
     id: '306639095083798603270835754515874921389',
     erc20Id: '0xffffffffe6b08aa1fbbaa02f004d3e5aa27f3bad',

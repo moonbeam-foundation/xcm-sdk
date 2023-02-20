@@ -207,6 +207,9 @@ export type XTokensTransferExtrinsicParamsAsset<
       [XTokensExtrinsicCurrencyTypes.Native]: Symbols;
     }
   | {
+      [XTokensExtrinsicCurrencyTypes.NativeAssetId]: 'Here';
+    }
+  | {
       [XTokensExtrinsicCurrencyTypes.NativeToken]: AssetId;
     }
   | {
