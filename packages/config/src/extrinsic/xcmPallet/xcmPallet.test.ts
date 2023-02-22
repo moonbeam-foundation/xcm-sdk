@@ -28,17 +28,36 @@ describe('xcmPallet', () => {
   const extrinsic = xcmPallet(chain);
 
   describe('limitedReserveTransferAssets', () => {
-    const cfg = extrinsic
-      .limitedReserveTransferAssets()
-      .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-      .origin(origin);
+    describe('v0', () => {
+      const cfg = extrinsic
+        .limitedReserveTransferAssets()
+        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+        .origin(origin)
+        .V0();
 
-    it('should be correct config', () => {
-      expect(cfg).toMatchSnapshot();
+      it('should be correct config', () => {
+        expect(cfg).toMatchSnapshot();
+      });
+
+      it('should get correct V0 params', () => {
+        expect(cfg.getParams({ account, amount })).toMatchSnapshot();
+      });
     });
 
-    it('should get correct params', () => {
-      expect(cfg.getParams({ account, amount })).toMatchSnapshot();
+    describe('v2', () => {
+      const cfg = extrinsic
+        .limitedReserveTransferAssets()
+        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
+        .origin(origin)
+        .V2();
+
+      it('should be correct config', () => {
+        expect(cfg).toMatchSnapshot();
+      });
+
+      it('should get correct V0 params', () => {
+        expect(cfg.getParams({ account, amount })).toMatchSnapshot();
+      });
     });
   });
 });
