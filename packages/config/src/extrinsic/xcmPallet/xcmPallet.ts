@@ -7,7 +7,6 @@ import {
   PolkadotXcmExtrinsicSuccessEvent,
   XcmMLVersion,
 } from '../polkadotXcm';
-import { XcmPallet } from './xcmPallet.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 export function xcmPallet<ChainKeys extends ChainKey>(chain: MoonChain) {
@@ -22,7 +21,7 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
 ) {
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain<ChainKeys>): XcmPallet => {
+      origin: (origin: Chain<ChainKeys>) => {
         const createExtrinsic = getCreateExtrinsic(
           PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
           event,
@@ -32,20 +31,43 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
         );
 
         return {
-          ...createExtrinsic(
-            (amount) => ({
-              V0: [
-                {
-                  ConcreteFungible: {
-                    id: 'Null',
-                    amount,
+          V0: () => ({
+            ...createExtrinsic(
+              (amount) => ({
+                V0: [
+                  {
+                    ConcreteFungible: {
+                      id: 'Null',
+                      amount,
+                    },
                   },
-                },
-              ],
-            }),
-            XcmMLVersion.v0,
-          ),
-          pallet: ExtrinsicPallet.XcmPallet,
+                ],
+              }),
+              XcmMLVersion.v0,
+            ),
+            pallet: ExtrinsicPallet.XcmPallet,
+          }),
+          V2: () => ({
+            ...createExtrinsic(
+              (amount) => ({
+                V2: [
+                  {
+                    id: {
+                      Concrete: {
+                        parents: 0,
+                        interior: 'Here',
+                      },
+                    },
+                    fun: {
+                      Fungible: amount,
+                    },
+                  },
+                ],
+              }),
+              XcmMLVersion.v2,
+            ),
+            pallet: ExtrinsicPallet.XcmPallet,
+          }),
         };
       },
     }),

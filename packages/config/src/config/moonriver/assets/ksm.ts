@@ -23,7 +23,8 @@ export const KSM: MoonriverXcmConfig = {
         .xcmPallet()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin),
+        .origin(origin)
+        .V0(),
     },
   },
   withdraw: {
