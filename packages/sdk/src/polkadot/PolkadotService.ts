@@ -54,7 +54,11 @@ export class PolkadotService<
   }
 
   getExistentialDeposit(): bigint {
-    return this.#api.consts.balances?.existentialDeposit.toBigInt() || 0n;
+    return (
+      (
+        this.#api.consts.balances?.existentialDeposit as unknown as u128
+      ).toBigInt() || 0n
+    );
   }
 
   async getAssetDecimals(asset: Asset<Symbols>): Promise<number> {
@@ -70,14 +74,14 @@ export class PolkadotService<
       ? this.#api.query.localAssets.metadata
       : this.#api.query.assets.metadata)(asset.id);
 
-    return data as PalletAssetsAssetMetadata;
+    return data as unknown as PalletAssetsAssetMetadata;
   }
 
   async subscribeToAccountInfo(
     account: string,
     callback: (info: AccountInfo) => void,
   ): UnsubscribePromise {
-    return this.#api.query.system.account<AccountInfo>(account, callback);
+    return (this.#api.query.system.account as any)(account, callback);
   }
 
   async subscribeToBalance(
@@ -110,9 +114,7 @@ export class PolkadotService<
     params,
     path,
   }: MinBalanceConfig): Promise<bigint> {
-    const details = (await this.#api.query[pallet][fn](
-      ...params,
-    )) as Option<any>;
+    const details = (await this.#api.query[pallet][fn](...params)) as any;
 
     if (details.isEmpty) {
       return 0n;
@@ -170,7 +172,7 @@ export class PolkadotService<
 
     const res = (await this.#api.query.assetManager.assetTypeUnitsPerSecond(
       type,
-    )) as Option<u128>;
+    )) as unknown as Option<u128>;
 
     return res.unwrapOrDefault().toBigInt();
   }
@@ -181,7 +183,7 @@ export class PolkadotService<
   async getAssetType(id: string): Promise<XCMType | undefined> {
     const type = (await this.#api.query.assetManager.assetIdType(
       id,
-    )) as Option<any>;
+    )) as unknown as Option<any>;
 
     return type.unwrapOr(undefined);
   }
@@ -236,7 +238,9 @@ export class PolkadotService<
         ] as QueryableStorageMultiArg<'promise'>,
     );
 
-    return this.#api.queryMulti(queries);
+    return this.#api.queryMulti(queries) as unknown as Promise<
+      PalletAssetsAssetMetadata[]
+    >;
   }
 
   async subscribeToAccountBalances(
@@ -254,13 +258,12 @@ export class PolkadotService<
         ] as QueryableStorageMultiArg<'promise'>,
     );
 
-    return this.#api.queryMulti(
-      queries,
-      (res: Option<PalletAssetsAssetAccount>[]) => {
-        const response = res.map((item) => item.unwrapOrDefault());
+    return this.#api.queryMulti(queries, (res: unknown) => {
+      const response = (res as Array<Option<PalletAssetsAssetAccount>>).map(
+        (item: any) => item.unwrapOrDefault(),
+      );
 
-        callback(response);
-      },
-    );
+      callback(response);
+    });
   }
 }

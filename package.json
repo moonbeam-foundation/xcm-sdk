@@ -28,10 +28,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@polkadot/api-augment": "^9.6.2",
-    "@polkadot/types": "^9.6.2",
-    "@polkadot/util": "^10.1.11",
-    "@polkadot/util-crypto": "^10.1.11",
+    "@polkadot/api-augment": "^9.14.2",
+    "@polkadot/types": "^9.14.2",
+    "@polkadot/util": "^10.4.2",
+    "@polkadot/util-crypto": "^10.4.2",
     "ethers": "^5.7.2"
   },
   "devDependencies": {
