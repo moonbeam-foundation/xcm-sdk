@@ -20,10 +20,12 @@ export const UNIT: MoonbaseXcmConfig = {
       source: origin,
       balance: balance.system(),
       extrinsic: extrinsic
-        .xcmPallet()
+        .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin),
+        .origin(origin)
+        .V2()
+        .here(),
     },
   },
   withdraw: {

@@ -13,7 +13,7 @@ export interface PolkadotXcmPallet {
   getParams: (params: XcmExtrinsicGetParams) => PolkadotXcmPalletParams;
 }
 
-export type PolkadotXcmPalletParams = [
+export type PolkadotXcmPalletParamsV1 = [
   /**
    * destination
    */
@@ -62,9 +62,61 @@ export type PolkadotXcmPalletParams = [
   },
 ];
 
+export type PolkadotXcmPalletParamsV2 = [
+  /**
+   * destination
+   */
+  {
+    V2: {
+      parents: Parents;
+      interior: {
+        X1: {
+          Parachain: number;
+        };
+      };
+    };
+  },
+  /**
+   * beneficiary
+   */
+  {
+    V2: {
+      parents: 0;
+      interior: {
+        X1: {
+          AccountKey20: {
+            network: 'Any';
+            /**
+             * account
+             */
+            key: string;
+          };
+        };
+      };
+    };
+  },
+  /**
+   * asset
+   */
+  PolkadotXcmAssetParam,
+  /**
+   * fee
+   */
+  0,
+  /**
+   * weight
+   */
+  'Unlimited',
+];
+
+export type PolkadotXcmPalletParams =
+  | PolkadotXcmPalletParamsV1
+  | PolkadotXcmPalletParamsV2;
+
 export type PolkadotXcmAssetParam =
   | PolkadotXcmAssetParamV0
-  | PolkadotXcmAssetParamV1;
+  | PolkadotXcmAssetParamV1
+  | PolkadotXcmAssetParamV2;
 
 export interface PolkadotXcmAssetParamV0 {
   V0: [
@@ -120,4 +172,29 @@ export interface PolkadotXcmAssetParamV1InteriorX2 {
           PalletInstance: number;
         },
       ];
+}
+
+export interface PolkadotXcmAssetParamV2 {
+  V2: [
+    {
+      id: {
+        Concrete: {
+          parents: Parents;
+          interior:
+            | 'Here'
+            | PolkadotXcmAssetParamV1InteriorX1
+            | PolkadotXcmAssetParamV1InteriorX2;
+        };
+      };
+      fun: {
+        Fungible: bigint;
+      };
+    },
+  ];
+}
+
+export enum XcmMLVersion {
+  v0 = 'V0',
+  v1 = 'V1',
+  v2 = 'V2',
 }

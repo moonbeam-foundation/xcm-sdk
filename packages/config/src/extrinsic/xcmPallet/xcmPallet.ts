@@ -5,6 +5,7 @@ import {
   getCreateExtrinsic,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
+  XcmMLVersion,
 } from '../polkadotXcm';
 import { XcmPallet } from './xcmPallet.interfaces';
 
@@ -31,16 +32,19 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
         );
 
         return {
-          ...createExtrinsic((amount) => ({
-            V0: [
-              {
-                ConcreteFungible: {
-                  id: 'Null',
-                  amount,
+          ...createExtrinsic(
+            (amount) => ({
+              V0: [
+                {
+                  ConcreteFungible: {
+                    id: 'Null',
+                    amount,
+                  },
                 },
-              },
-            ],
-          })),
+              ],
+            }),
+            XcmMLVersion.v0,
+          ),
           pallet: ExtrinsicPallet.XcmPallet,
         };
       },
