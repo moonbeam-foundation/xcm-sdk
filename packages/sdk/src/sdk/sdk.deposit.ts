@@ -10,8 +10,8 @@ import {
   createExtrinsicEventHandler,
   ExtrinsicEventsCallback,
 } from '@moonbeam-network/xcm-utils';
-import { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { IKeyringPair } from '@polkadot/types/types';
+import type { Signer as PolkadotSigner } from '@polkadot/api/types';
+import type { IKeyringPair } from '@polkadot/types/types';
 import { isUndefined } from '@polkadot/util';
 import { PolkadotService } from '../polkadot';
 import { DepositTransferData } from './sdk.interfaces';
@@ -37,7 +37,7 @@ export function getCreateExtrinsic<
   primaryAccount,
   fee,
 }: CreateExtrinsicOptions<Symbols, ChainKeys>) {
-  return (amount: bigint) =>
+  return (amount: bigint): any =>
     foreignPolkadot.getXcmExtrinsic(
       account,
       amount,
