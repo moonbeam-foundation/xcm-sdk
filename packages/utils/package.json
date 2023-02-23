@@ -51,7 +51,7 @@
   "main": "./build/index.cjs",
   "dependencies": {
     "big.js": "^6.2.1",
-    "lru-cache": "^7.14.0"
+    "lru-cache": "^7.17.0"
   },
   "devDependencies": {
     "@types/big.js": "^6.1.6"
