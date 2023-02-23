@@ -9,7 +9,7 @@ exports[`xcmPallet limitedReserveTransferAssets v0 should be correct config 1`] 
 }
 `;
 
-exports[`xcmPallet limitedReserveTransferAssets v0 should get correct V0 params 1`] = `
+exports[`xcmPallet limitedReserveTransferAssets v0 should get correct params 1`] = `
 [
   {
     "V1": {
@@ -60,7 +60,7 @@ exports[`xcmPallet limitedReserveTransferAssets v2 should be correct config 1`] 
 }
 `;
 
-exports[`xcmPallet limitedReserveTransferAssets v2 should get correct V0 params 1`] = `
+exports[`xcmPallet limitedReserveTransferAssets v2 should get correct params 1`] = `
 [
   {
     "V2": {
