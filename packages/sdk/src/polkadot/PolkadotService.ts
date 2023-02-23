@@ -116,7 +116,9 @@ export class PolkadotService<
     params,
     path,
   }: MinBalanceConfig): Promise<bigint> {
-    const details = (await this.#api.query[pallet][fn](...params)) as any;
+    const details = (await this.#api.query[pallet][fn](
+      ...params,
+    )) as unknown as Option<any>;
 
     if (details.isEmpty) {
       return 0n;
@@ -262,7 +264,7 @@ export class PolkadotService<
 
     return this.#api.queryMulti(queries, (res: unknown) => {
       const response = (res as Array<Option<PalletAssetsAssetAccount>>).map(
-        (item: any) => item.unwrapOrDefault(),
+        (item) => item.unwrapOrDefault(),
       );
 
       callback(response);
