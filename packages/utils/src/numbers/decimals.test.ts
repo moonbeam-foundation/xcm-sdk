@@ -1,7 +1,7 @@
 /* eslint-disable jest/no-focused-tests */
 /* eslint-disable jest/max-expects */
 import Big from 'big.js';
-import { toBigInt, toDecimal } from './decimals';
+import { hasDecimalOverflow, toBigInt, toDecimal } from './decimals';
 
 describe('utils - decimals', () => {
   describe('toDecimals', () => {
@@ -118,6 +118,29 @@ describe('utils - decimals', () => {
       expect(toBigInt('4756.50334457721117752', 18)).toBe(
         4_756_503_344_577_211_177_520n,
       );
+      expect(toBigInt('66712.0367386073069948646', 18)).toBe(
+        66_712_036_738_607_306_994_864n,
+      );
+    });
+  });
+
+  describe('hasDecimalOverflow', () => {
+    it('should return true if the value has more decimals that allowed', () => {
+      expect(hasDecimalOverflow('66712.0367386073069948646', 18)).toBe(true);
+      expect(hasDecimalOverflow('66712.0367386073069948645', 18)).toBe(true);
+      expect(hasDecimalOverflow('12.036073069948646', 12)).toBe(true);
+      expect(hasDecimalOverflow('12.0360730692110', 12)).toBe(true);
+      expect(hasDecimalOverflow('12.036073069', 12)).toBe(false);
+      expect(hasDecimalOverflow('12.036073069210', 12)).toBe(false);
+      expect(hasDecimalOverflow('66712.036738607306994864', 18)).toBe(false);
+      expect(hasDecimalOverflow(9.43535, 4)).toBe(true);
+    });
+
+    it('should return false if the value has a correct number of decimals', () => {
+      expect(hasDecimalOverflow('12.036073069', 12)).toBe(false);
+      expect(hasDecimalOverflow('12.036073069210', 12)).toBe(false);
+      expect(hasDecimalOverflow('66712.036738607306994864', 18)).toBe(false);
+      expect(hasDecimalOverflow(9.4353, 12)).toBe(false);
     });
   });
 });

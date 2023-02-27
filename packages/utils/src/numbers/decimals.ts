@@ -17,5 +17,10 @@ export function toBigInt(amount: string | number, decimals: number): bigint {
   const multiplier = Big(10).pow(decimals);
   const result = Big(amount).mul(multiplier);
 
-  return BigInt(result.toFixed());
+  return BigInt(result.toFixed(0, 0));
+}
+
+export function hasDecimalOverflow(fl: number | string, maxDecimal: number) {
+  const parts = fl.toString().split('.');
+  return parts.length > 1 && parts[1].length > maxDecimal;
 }
