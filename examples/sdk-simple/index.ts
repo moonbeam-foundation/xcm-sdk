@@ -51,7 +51,10 @@ async function deposit() {
     `Your ${asset.originSymbol} balance in ${source.name}: ${toDecimal(
       sourceBalance,
       asset.decimals,
-    )}. Minimum transferable amount is: ${toDecimal(min, asset.decimals)}`,
+    ).toFixed()}. Minimum transferable amount is: ${toDecimal(
+      min,
+      asset.decimals,
+    ).toFixed()}`,
   );
 
   // sending enough to withdraw later
@@ -75,7 +78,10 @@ async function withdraw() {
     `Your ${asset.originSymbol} balance in ${destination.name}: ${toDecimal(
       destinationBalance,
       asset.decimals,
-    )}. Minimum transferable amount is: ${toDecimal(min, asset.decimals)}`,
+    ).toFixed()}. Minimum transferable amount is: ${toDecimal(
+      min,
+      asset.decimals,
+    ).toFixed()}`,
   );
 
   await send(min, (event) => console.log(event));
@@ -95,7 +101,7 @@ async function main() {
           `${balance.symbol}: ${toDecimal(
             balance.balance,
             balance.decimals,
-          )} (${origin.name} ${asset.originSymbol})`,
+          ).toFixed()} (${origin.name} ${asset.originSymbol})`,
         );
       });
       console.log('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄');

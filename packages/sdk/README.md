@@ -83,9 +83,10 @@ const unsubscribe = await moonbeam.subscribeToAssetsBalanceInfo(
       // xcDOT: 0.073742 (Polkadot DOT)
       // ...
       console.log(
-        `${balance.symbol}: ${toDecimal(balance.balance, balance.decimals)} (${
-          origin.name
-        } ${asset.originSymbol})`,
+        `${balance.symbol}: ${toDecimal(
+          balance.balance,
+          balance.decimals,
+        ).toFixed()} (${origin.name} ${asset.originSymbol})`,
       );
     });
   },
