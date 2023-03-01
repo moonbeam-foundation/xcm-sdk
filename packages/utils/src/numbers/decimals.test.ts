@@ -130,9 +130,6 @@ describe('utils - decimals', () => {
       expect(hasDecimalOverflow('66712.0367386073069948645', 18)).toBe(true);
       expect(hasDecimalOverflow('12.036073069948646', 12)).toBe(true);
       expect(hasDecimalOverflow('12.0360730692110', 12)).toBe(true);
-      expect(hasDecimalOverflow('12.036073069', 12)).toBe(false);
-      expect(hasDecimalOverflow('12.036073069210', 12)).toBe(false);
-      expect(hasDecimalOverflow('66712.036738607306994864', 18)).toBe(false);
       expect(hasDecimalOverflow(9.43535, 4)).toBe(true);
     });
 
@@ -141,6 +138,9 @@ describe('utils - decimals', () => {
       expect(hasDecimalOverflow('12.036073069210', 12)).toBe(false);
       expect(hasDecimalOverflow('66712.036738607306994864', 18)).toBe(false);
       expect(hasDecimalOverflow(9.4353, 12)).toBe(false);
+      expect(hasDecimalOverflow('12.036073069', 12)).toBe(false);
+      expect(hasDecimalOverflow('12.036073069210', 12)).toBe(false);
+      expect(hasDecimalOverflow('66712.036738607306994864', 18)).toBe(false);
     });
   });
 });
