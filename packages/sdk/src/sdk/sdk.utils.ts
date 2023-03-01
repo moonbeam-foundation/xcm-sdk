@@ -4,7 +4,6 @@ import {
   ChainKey,
   XcmConfigBuilder,
 } from '@moonbeam-network/xcm-config';
-import { toDecimal } from '@moonbeam-network/xcm-utils';
 import { UnsubscribePromise } from '@polkadot/api/types';
 import { AssetBalanceInfo, PolkadotService } from '../polkadot';
 import {
@@ -50,11 +49,8 @@ export function sortByBalanceAndChainName<Symbols extends AssetSymbol>(
     return 1;
   }
 
-  const aDecimal = toDecimal(a.balance.balance, a.balance.decimals);
-  const bDecimal = toDecimal(b.balance.balance, b.balance.decimals);
-
-  if (aDecimal || bDecimal) {
-    return bDecimal - aDecimal;
+  if (a.balance.balance || b.balance.balance) {
+    return Number(b.balance.balance - a.balance.balance);
   }
 
   const aName = (a.origin.name + a.asset.originSymbol).toLowerCase();
