@@ -1,3 +1,5 @@
+import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
+import { getTypeDef } from '@polkadot/types/create';
 import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
 import { Parents } from '../common.interfaces';
@@ -13,7 +15,22 @@ import {
   XcmMLVersion,
 } from './polkadotXcm.interfaces';
 
-export function getCreateExtrinsic<ChainKeys extends ChainKey>(
+function getAvailableVersion(
+  extrinsicCall?: SubmittableExtrinsicFunction<'promise'>,
+): XcmMLVersion {
+  if (!extrinsicCall) return XcmMLVersion.v1;
+
+  const { type } = extrinsicCall.meta.args[0];
+  const instance = extrinsicCall.meta.registry.createType(type.toString());
+  const raw = getTypeDef(instance?.toRawType());
+
+  if (Array.isArray(raw.sub) && raw.sub.find((x) => x.name === 'V2'))
+    return XcmMLVersion.v2;
+
+  return XcmMLVersion.v1;
+}
+
+export function getCreateV1V2Extrinsic<ChainKeys extends ChainKey>(
   extrinsic: PolkadotXcmExtrinsic,
   event: PolkadotXcmExtrinsicSuccessEvent,
   config: MoonChain,
@@ -21,46 +38,20 @@ export function getCreateExtrinsic<ChainKeys extends ChainKey>(
   parents: Parents = 1,
 ) {
   return (
-    getAsset: (amount: bigint) => PolkadotXcmAssetParam,
-    xcmMLVersion: XcmMLVersion,
+    getAsset: (amount: bigint) => PolkadotXcmAssetParam[],
   ): PolkadotXcmPallet => ({
     pallet: ExtrinsicPallet.PolkadotXcm,
     extrinsic,
     successEvent: event,
-    getParams: ({ account, amount }): PolkadotXcmPalletParams => {
-      if (xcmMLVersion === XcmMLVersion.v2)
-        return [
-          {
-            V2: {
-              parents,
-              interior: {
-                X1: {
-                  Parachain: config.parachainId,
-                },
-              },
-            },
-          },
-          {
-            V2: {
-              parents: 0,
-              interior: {
-                X1: {
-                  AccountKey20: {
-                    network: 'Any',
-                    key: account,
-                  },
-                },
-              },
-            },
-          },
-          getAsset(amount),
-          0,
-          'Unlimited',
-        ];
-
+    getParams: ({
+      account,
+      amount,
+      extrinsicCall,
+    }): PolkadotXcmPalletParams => {
+      const versionKey = getAvailableVersion(extrinsicCall);
       return [
         {
-          V1: {
+          [versionKey]: {
             parents,
             interior: {
               X1: {
@@ -70,7 +61,7 @@ export function getCreateExtrinsic<ChainKeys extends ChainKey>(
           },
         },
         {
-          V1: {
+          [versionKey]: {
             parents: 0,
             interior: {
               X1: {
@@ -82,11 +73,11 @@ export function getCreateExtrinsic<ChainKeys extends ChainKey>(
             },
           },
         },
-        getAsset(amount),
-        0,
         {
-          Limited: origin.weight,
+          [versionKey]: getAsset(amount),
         },
+        0,
+        'Unlimited',
       ];
     },
   });

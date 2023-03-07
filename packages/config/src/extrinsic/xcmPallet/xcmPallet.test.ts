@@ -28,28 +28,11 @@ describe('xcmPallet', () => {
   const extrinsic = xcmPallet(chain);
 
   describe('limitedReserveTransferAssets', () => {
-    describe('v0', () => {
+    describe('v1v2', () => {
       const cfg = extrinsic
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
-        .V0();
-
-      it('should be correct config', () => {
-        expect(cfg).toMatchSnapshot();
-      });
-
-      it('should get correct params', () => {
-        expect(cfg.getParams({ account, amount })).toMatchSnapshot();
-      });
-    });
-
-    describe('v2', () => {
-      const cfg = extrinsic
-        .limitedReserveTransferAssets()
-        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
-        .V2();
+        .origin(origin);
 
       it('should be correct config', () => {
         expect(cfg).toMatchSnapshot();

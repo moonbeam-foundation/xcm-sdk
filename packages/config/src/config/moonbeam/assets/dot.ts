@@ -23,8 +23,7 @@ export const DOT: MoonbeamXcmConfig = {
         .xcmPallet()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
-        .V0(),
+        .origin(origin),
     },
   },
   withdraw: {

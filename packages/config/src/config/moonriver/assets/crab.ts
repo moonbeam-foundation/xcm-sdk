@@ -24,7 +24,7 @@ export const CRAB: MoonriverXcmConfig = {
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(origin)
-        .V1()
+        .V1V2()
         .X1(),
     },
   },

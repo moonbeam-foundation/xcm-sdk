@@ -2,10 +2,9 @@ import { ChainKey } from '../../constants';
 import { Chain, MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
-  getCreateExtrinsic,
+  getCreateV1V2Extrinsic,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
-  XcmMLVersion,
 } from '../polkadotXcm';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -22,7 +21,7 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
   return {
     successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
       origin: (origin: Chain<ChainKeys>) => {
-        const createExtrinsic = getCreateExtrinsic(
+        const createExtrinsic = getCreateV1V2Extrinsic(
           PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
           event,
           chain,
@@ -31,43 +30,20 @@ function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
         );
 
         return {
-          V0: () => ({
-            ...createExtrinsic(
-              (amount) => ({
-                V0: [
-                  {
-                    ConcreteFungible: {
-                      id: 'Null',
-                      amount,
-                    },
-                  },
-                ],
-              }),
-              XcmMLVersion.v0,
-            ),
-            pallet: ExtrinsicPallet.XcmPallet,
-          }),
-          V2: () => ({
-            ...createExtrinsic(
-              (amount) => ({
-                V2: [
-                  {
-                    id: {
-                      Concrete: {
-                        parents: 0,
-                        interior: 'Here',
-                      },
-                    },
-                    fun: {
-                      Fungible: amount,
-                    },
-                  },
-                ],
-              }),
-              XcmMLVersion.v2,
-            ),
-            pallet: ExtrinsicPallet.XcmPallet,
-          }),
+          ...createExtrinsic((amount) => [
+            {
+              id: {
+                Concrete: {
+                  parents: 0,
+                  interior: 'Here',
+                },
+              },
+              fun: {
+                Fungible: amount,
+              },
+            },
+          ]),
+          pallet: ExtrinsicPallet.XcmPallet,
         };
       },
     }),

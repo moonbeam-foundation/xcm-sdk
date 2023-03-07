@@ -24,7 +24,7 @@ export const XRT: MoonriverXcmConfig = {
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
         .origin(origin)
-        .V1()
+        .V1V2()
         .here(),
     },
   },
