@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`xcmPallet limitedReserveTransferAssets v0 should be correct config 1`] = `
+exports[`xcmPallet limitedReserveTransferAssets v1v2 should be correct config 1`] = `
 {
   "extrinsic": "limitedReserveTransferAssets",
   "getParams": [Function],
@@ -9,7 +9,7 @@ exports[`xcmPallet limitedReserveTransferAssets v0 should be correct config 1`] 
 }
 `;
 
-exports[`xcmPallet limitedReserveTransferAssets v0 should get correct params 1`] = `
+exports[`xcmPallet limitedReserveTransferAssets v1v2 should get correct params 1`] = `
 [
   {
     "V1": {
@@ -35,58 +35,7 @@ exports[`xcmPallet limitedReserveTransferAssets v0 should get correct params 1`]
     },
   },
   {
-    "V0": [
-      {
-        "ConcreteFungible": {
-          "amount": 1000n,
-          "id": "Null",
-        },
-      },
-    ],
-  },
-  0,
-  {
-    "Limited": 1000000000,
-  },
-]
-`;
-
-exports[`xcmPallet limitedReserveTransferAssets v2 should be correct config 1`] = `
-{
-  "extrinsic": "limitedReserveTransferAssets",
-  "getParams": [Function],
-  "pallet": "xcmPallet",
-  "successEvent": "Attempted",
-}
-`;
-
-exports[`xcmPallet limitedReserveTransferAssets v2 should get correct params 1`] = `
-[
-  {
-    "V2": {
-      "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V2": {
-      "interior": {
-        "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            "network": "Any",
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V2": [
+    "V1": [
       {
         "fun": {
           "Fungible": 1000n,
