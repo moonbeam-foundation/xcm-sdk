@@ -1,7 +1,6 @@
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import { getTypeDef } from '@polkadot/types/create';
-import { ChainKey } from '../../constants';
-import { Chain, MoonChain } from '../../interfaces';
+import { MoonChain } from '../../interfaces';
 import { Parents } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
@@ -30,11 +29,10 @@ function getAvailableVersion(
   return XcmMLVersion.v1;
 }
 
-export function getCreateV1V2Extrinsic<ChainKeys extends ChainKey>(
+export function getCreateV1V2Extrinsic(
   extrinsic: PolkadotXcmExtrinsic,
   event: PolkadotXcmExtrinsicSuccessEvent,
   config: MoonChain,
-  origin: Chain<ChainKeys>,
   parents: Parents = 1,
 ) {
   return (

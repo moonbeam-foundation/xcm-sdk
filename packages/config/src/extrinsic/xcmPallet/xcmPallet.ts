@@ -1,5 +1,4 @@
-import { ChainKey } from '../../constants';
-import { Chain, MoonChain } from '../../interfaces';
+import { MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   getCreateV1V2Extrinsic,
@@ -8,44 +7,38 @@ import {
 } from '../polkadotXcm';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xcmPallet<ChainKeys extends ChainKey>(chain: MoonChain) {
+export function xcmPallet(chain: MoonChain) {
   return {
-    limitedReserveTransferAssets: () =>
-      limitedReserveTransferAssets<ChainKeys>(chain),
+    limitedReserveTransferAssets: () => limitedReserveTransferAssets(chain),
   };
 }
 
-function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
-  chain: MoonChain,
-) {
+function limitedReserveTransferAssets(chain: MoonChain) {
   return {
-    successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain<ChainKeys>) => {
-        const createExtrinsic = getCreateV1V2Extrinsic(
-          PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
-          event,
-          chain,
-          origin,
-          0,
-        );
+    successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => {
+      const createExtrinsic = getCreateV1V2Extrinsic(
+        PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
+        event,
+        chain,
+        0,
+      );
 
-        return {
-          ...createExtrinsic((amount) => [
-            {
-              id: {
-                Concrete: {
-                  parents: 0,
-                  interior: 'Here',
-                },
-              },
-              fun: {
-                Fungible: amount,
+      return {
+        ...createExtrinsic((amount) => [
+          {
+            id: {
+              Concrete: {
+                parents: 0,
+                interior: 'Here',
               },
             },
-          ]),
-          pallet: ExtrinsicPallet.XcmPallet,
-        };
-      },
-    }),
+            fun: {
+              Fungible: amount,
+            },
+          },
+        ]),
+        pallet: ExtrinsicPallet.XcmPallet,
+      };
+    },
   };
 }

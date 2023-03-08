@@ -10,8 +10,8 @@ export function createExtrinsicBuilder<
   ChainKeys extends ChainKey,
 >(chain: MoonChain) {
   return {
-    polkadotXcm: () => polkadotXcm<ChainKeys>(chain),
-    xcmPallet: () => xcmPallet<ChainKeys>(chain),
+    polkadotXcm: () => polkadotXcm(chain),
+    xcmPallet: () => xcmPallet(chain),
     xTokens: () => xTokens<Symbols, ChainKeys>(chain),
     xTransfer: () => xTransfer<ChainKeys>(chain),
   };
