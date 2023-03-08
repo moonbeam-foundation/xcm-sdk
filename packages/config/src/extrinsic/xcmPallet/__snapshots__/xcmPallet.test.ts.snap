@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`xcmPallet limitedReserveTransferAssets v1v2 should be correct config 1`] = `
+exports[`xcmPallet limitedReserveTransferAssets should be correct config 1`] = `
 {
   "extrinsic": "limitedReserveTransferAssets",
   "getParams": [Function],
@@ -9,7 +9,7 @@ exports[`xcmPallet limitedReserveTransferAssets v1v2 should be correct config 1`
 }
 `;
 
-exports[`xcmPallet limitedReserveTransferAssets v1v2 should get correct params 1`] = `
+exports[`xcmPallet limitedReserveTransferAssets should get correct params 1`] = `
 [
   {
     "V1": {
