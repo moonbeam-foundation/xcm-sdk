@@ -23,7 +23,6 @@ export const ASTR: MoonbeamXcmConfig = {
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
         .V1V2()
         .here(),
     },

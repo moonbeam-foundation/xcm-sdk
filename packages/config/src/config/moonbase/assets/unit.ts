@@ -22,8 +22,7 @@ export const UNIT: MoonbaseXcmConfig = {
       extrinsic: extrinsic
         .xcmPallet()
         .limitedReserveTransferAssets()
-        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin),
+        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted),
     },
   },
   withdraw: {

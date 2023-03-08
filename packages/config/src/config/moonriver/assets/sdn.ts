@@ -23,7 +23,6 @@ export const SDN: MoonriverXcmConfig = {
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
         .V1V2()
         .here(),
     },

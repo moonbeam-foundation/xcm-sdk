@@ -23,7 +23,6 @@ export const CRAB: MoonriverXcmConfig = {
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
         .V1V2()
         .X1(),
     },
