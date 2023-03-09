@@ -1,75 +1,44 @@
-import { ChainKey } from '../../constants';
-import { Chain, MoonChain } from '../../interfaces';
+import { MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
-  getCreateExtrinsic,
+  getCreateV1V2Extrinsic,
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
-  XcmMLVersion,
 } from '../polkadotXcm';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xcmPallet<ChainKeys extends ChainKey>(chain: MoonChain) {
+export function xcmPallet(chain: MoonChain) {
   return {
-    limitedReserveTransferAssets: () =>
-      limitedReserveTransferAssets<ChainKeys>(chain),
+    limitedReserveTransferAssets: () => limitedReserveTransferAssets(chain),
   };
 }
 
-function limitedReserveTransferAssets<ChainKeys extends ChainKey>(
-  chain: MoonChain,
-) {
+function limitedReserveTransferAssets(chain: MoonChain) {
   return {
-    successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain<ChainKeys>) => {
-        const createExtrinsic = getCreateExtrinsic(
-          PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
-          event,
-          chain,
-          origin,
-          0,
-        );
+    successEvent: (event: PolkadotXcmExtrinsicSuccessEvent) => {
+      const createExtrinsic = getCreateV1V2Extrinsic(
+        PolkadotXcmExtrinsic.LimitedReserveTransferAssets,
+        event,
+        chain,
+        0,
+      );
 
-        return {
-          V0: () => ({
-            ...createExtrinsic(
-              (amount) => ({
-                V0: [
-                  {
-                    ConcreteFungible: {
-                      id: 'Null',
-                      amount,
-                    },
-                  },
-                ],
-              }),
-              XcmMLVersion.v0,
-            ),
-            pallet: ExtrinsicPallet.XcmPallet,
-          }),
-          V2: () => ({
-            ...createExtrinsic(
-              (amount) => ({
-                V2: [
-                  {
-                    id: {
-                      Concrete: {
-                        parents: 0,
-                        interior: 'Here',
-                      },
-                    },
-                    fun: {
-                      Fungible: amount,
-                    },
-                  },
-                ],
-              }),
-              XcmMLVersion.v2,
-            ),
-            pallet: ExtrinsicPallet.XcmPallet,
-          }),
-        };
-      },
-    }),
+      return {
+        ...createExtrinsic((amount) => [
+          {
+            id: {
+              Concrete: {
+                parents: 0,
+                interior: 'Here',
+              },
+            },
+            fun: {
+              Fungible: amount,
+            },
+          },
+        ]),
+        pallet: ExtrinsicPallet.XcmPallet,
+      };
+    },
   };
 }

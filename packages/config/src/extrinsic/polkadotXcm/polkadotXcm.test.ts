@@ -1,5 +1,5 @@
-import { ChainKey, MoonChainKey } from '../../constants';
-import { Chain, MoonChain } from '../../interfaces';
+import { MoonChainKey } from '../../constants';
+import { MoonChain } from '../../interfaces';
 import { polkadotXcm } from './polkadotXcm';
 import { PolkadotXcmExtrinsicSuccessEvent } from './polkadotXcm.constants';
 
@@ -15,42 +15,15 @@ describe('polkadotXcm', () => {
     chainId: 1287,
     unitsPerSecond: 100n,
   };
-  const origin: Chain = {
-    key: ChainKey.AlphanetRelay,
-    name: 'Alphanet Relay',
-    ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
-    weight: 1_000_000_000,
-    parachainId: 0,
-    ss58Format: 42,
-    genesisHash:
-      '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
-  };
   const extrinsic = polkadotXcm(chain);
 
   describe('limitedReserveTransferAssets', () => {
-    describe('v0', () => {
-      const cfg = extrinsic
-        .limitedReserveTransferAssets()
-        .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
-        .V0();
-
-      it('should be correct config', () => {
-        expect(cfg).toMatchSnapshot();
-      });
-
-      it('should get correct params', () => {
-        expect(cfg.getParams({ account, amount })).toMatchSnapshot();
-      });
-    });
-
-    describe('v1', () => {
+    describe('v1v2', () => {
       describe('here', () => {
         const cfg = extrinsic
           .limitedReserveTransferAssets()
           .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-          .origin(origin)
-          .V1()
+          .V1V2()
           .here();
 
         it('should be correct config', () => {
@@ -66,8 +39,7 @@ describe('polkadotXcm', () => {
         const cfg = extrinsic
           .limitedReserveTransferAssets()
           .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-          .origin(origin)
-          .V1()
+          .V1V2()
           .X1();
 
         it('should be correct config', () => {
@@ -83,8 +55,7 @@ describe('polkadotXcm', () => {
         const cfg = extrinsic
           .limitedReserveTransferAssets()
           .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-          .origin(origin)
-          .V1()
+          .V1V2()
           .X2(10, 50);
 
         it('should be correct config', () => {
@@ -99,13 +70,12 @@ describe('polkadotXcm', () => {
   });
 
   describe('limitedReserveWithdrawAssets', () => {
-    describe('v1', () => {
+    describe('v1v2', () => {
       describe('x2', () => {
         const cfg = extrinsic
           .limitedReserveWithdrawAssets()
           .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-          .origin(origin)
-          .V1()
+          .V1V2()
           .X2(10);
 
         it('should be correct config', () => {

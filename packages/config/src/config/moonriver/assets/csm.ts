@@ -23,8 +23,8 @@ export const CSM: MoonriverXcmConfig = {
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
-        .V0(),
+        .V1V2()
+        .here(),
     },
   },
   withdraw: {

@@ -27,8 +27,7 @@ export const RMRK: MoonriverXcmConfig = {
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(origin)
-        .V1()
+        .V1V2()
         .X2(getPalletInstance(origin), originAssetId),
     },
   },

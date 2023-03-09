@@ -118,8 +118,7 @@ export const MOVR: MoonriverXcmConfig = {
         .polkadotXcm()
         .limitedReserveWithdrawAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(shiden)
-        .V1()
+        .V1V2()
         .X2(getPalletInstance(shiden)),
     },
   },

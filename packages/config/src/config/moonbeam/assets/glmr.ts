@@ -54,8 +54,7 @@ export const GLMR: MoonbeamXcmConfig = {
         .polkadotXcm()
         .limitedReserveWithdrawAssets()
         .successEvent(PolkadotXcmExtrinsicSuccessEvent.Attempted)
-        .origin(astar)
-        .V1()
+        .V1V2()
         .X2(getPalletInstance(astar)),
     },
     [bifrost.key]: {
