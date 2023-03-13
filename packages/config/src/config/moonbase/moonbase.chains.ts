@@ -6,6 +6,7 @@ export const MOONBASE_CHAINS = <const>[
   ChainKey.AlphanetRelay,
   ChainKey.LitentryAlphanet,
   ChainKey.BitCountryPioneer,
+  ChainKey.DarwiniaPangoro,
   ChainKey.MoonbaseBeta,
   ChainKey.StatemineAlphanet,
   ChainKey.UniqueAlpha,
@@ -32,6 +33,16 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ss58Format: 268,
     genesisHash:
       '0xb27da7332d3a229f0d5f2a83f711b3f74a70f22b68021e92c37817057de58e74',
+  },
+  [ChainKey.DarwiniaPangoro]: {
+    key: ChainKey.DarwiniaPangoro,
+    name: 'Pangoro',
+    ws: 'wss://pangoro-rpc.darwinia.network',
+    weight: 1_000_000_000,
+    parachainId: 2105,
+    ss58Format: 18,
+    genesisHash:
+      '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
   },
   [ChainKey.LitentryAlphanet]: {
     key: ChainKey.LitentryAlphanet,
