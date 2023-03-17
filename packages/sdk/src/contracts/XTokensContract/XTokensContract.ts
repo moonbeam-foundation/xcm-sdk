@@ -28,6 +28,8 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
     minAmount: bigint,
   ): Promise<TransactionResponse> {
     const { usesEthereumAccounts } = config.destination;
+    const params = config.getParams(account, usesEthereumAccounts);
+
     if (config.xcmFeeAsset) {
       return this.#contract.transferMultiCurrencies(
         [
@@ -35,14 +37,15 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
           [asset.erc20Id, amount],
         ],
         0,
-        config.getParams(account, usesEthereumAccounts),
+        params,
         config.weight,
       );
     }
+
     return this.#contract.transfer(
       asset.erc20Id,
       amount,
-      config.getParams(account, usesEthereumAccounts),
+      params,
       config.weight,
     );
   }
