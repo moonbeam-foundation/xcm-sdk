@@ -31,9 +31,18 @@ function xTokens<Symbols extends AssetSymbol = AssetSymbol>({
     sourceMinBalance,
     xcmFeeAsset,
     weight,
-    getParams: (account: string) => {
+    getParams: (account: string, usesEthereumAccounts = false) => {
       const { parachainId } = destination;
-      const acc = `0x01${u8aToHex(decodeAddress(account), -1, false)}00`;
+      // 01: AccountId32
+      // 03: AccountKey20
+      // https://docs.moonbeam.network/builders/interoperability/xcm/xc20/xtokens/#building-the-precompile-multilocation
+      const accountType = usesEthereumAccounts ? '03' : '01';
+
+      const acc = `0x${accountType}${u8aToHex(
+        decodeAddress(account),
+        -1,
+        false,
+      )}00`;
 
       return [
         1,

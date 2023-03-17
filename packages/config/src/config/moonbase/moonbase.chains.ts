@@ -40,7 +40,7 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://pangoro-rpc.darwinia.network',
     weight: 1_000_000_000,
     parachainId: 2105,
-    ss58Format: 18,
+    usesEthereumAccounts: true,
     genesisHash:
       '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
   },

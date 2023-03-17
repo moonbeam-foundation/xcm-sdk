@@ -15,7 +15,10 @@ export interface WithdrawXTokensConfig<
   sourceMinBalance?: MinBalanceConfig;
   xcmFeeAsset?: WithdrawXcmFeeAsset<Symbols>;
   weight: number;
-  getParams: (account: string) => WithdrawXTokensParams;
+  getParams: (
+    account: string,
+    isEthereumAccount: boolean | undefined,
+  ) => WithdrawXTokensParams;
 }
 
 export type WithdrawXTokensParams = [

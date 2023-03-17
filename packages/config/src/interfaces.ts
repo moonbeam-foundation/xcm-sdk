@@ -49,7 +49,8 @@ export interface Chain<ChainKeys extends ChainKey = ChainKey>
    * unitsPerSecond = weightPerSecond * baseExtrinsicCost / baseExtrinsicWeight
    */
   unitsPerSecond?: bigint;
-  ss58Format: number;
+  ss58Format?: number;
+  usesEthereumAccounts?: boolean;
   genesisHash: string;
 }
 
