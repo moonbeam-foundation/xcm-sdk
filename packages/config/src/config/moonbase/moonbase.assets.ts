@@ -8,6 +8,7 @@ export const MOONBASE_ASSETS = <const>[
   AssetSymbol.DEV,
   AssetSymbol.LIT,
   AssetSymbol.NEER,
+  AssetSymbol.PARING,
   AssetSymbol.TT1,
   AssetSymbol.UNIT,
 ];
@@ -39,10 +40,10 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     erc20Id: '0xffffffff2754f0bdf7eb215503c69204ccd61c5d',
     originSymbol: AssetSymbol.NEER,
   },
-  [AssetSymbol.UNIT]: {
-    id: '42259045809535163221576417993425387648',
-    erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
-    originSymbol: AssetSymbol.UNIT,
+  [AssetSymbol.PARING]: {
+    id: '173481220575862801646329923366065693029',
+    erc20Id: '0xffffffff8283448b3cb519ca4732f2dddc6a6165',
+    originSymbol: AssetSymbol.PARING,
   },
   [AssetSymbol.TT1]: {
     id: '156305701417244550631956600137082963628',
@@ -51,5 +52,10 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     foreignIds: {
       [ChainKey.StatemineAlphanet]: 2,
     },
+  },
+  [AssetSymbol.UNIT]: {
+    id: '42259045809535163221576417993425387648',
+    erc20Id: '0xffffffff1fcacbd218edc0eba20fc2308c778080',
+    originSymbol: AssetSymbol.UNIT,
   },
 };

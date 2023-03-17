@@ -6,6 +6,7 @@ import { BIT } from './assets/bit';
 import { DEV } from './assets/dev';
 import { LIT } from './assets/lit';
 import { NEER } from './assets/neer';
+import { PARING } from './assets/paring';
 import { TT1 } from './assets/tt1';
 import { UNIT } from './assets/unit';
 
@@ -15,6 +16,7 @@ export const MOONBASE_CONFIGS: MoonbaseXcmConfigs = {
   [AssetSymbol.DEV]: DEV,
   [AssetSymbol.LIT]: LIT,
   [AssetSymbol.NEER]: NEER,
+  [AssetSymbol.PARING]: PARING,
   [AssetSymbol.TT1]: TT1,
   [AssetSymbol.UNIT]: UNIT,
 };

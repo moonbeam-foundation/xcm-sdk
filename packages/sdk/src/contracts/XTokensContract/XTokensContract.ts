@@ -27,6 +27,9 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
     config: WithdrawXTokensConfig<Symbols>,
     minAmount: bigint,
   ): Promise<TransactionResponse> {
+    const { usesEthereumAccounts } = config.destination;
+    const params = config.getParams(account, usesEthereumAccounts);
+
     if (config.xcmFeeAsset) {
       return this.#contract.transferMultiCurrencies(
         [
@@ -34,14 +37,15 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
           [asset.erc20Id, amount],
         ],
         0,
-        config.getParams(account),
+        params,
         config.weight,
       );
     }
+
     return this.#contract.transfer(
       asset.erc20Id,
       amount,
-      config.getParams(account),
+      params,
       config.weight,
     );
   }
@@ -56,7 +60,7 @@ export class XTokensContract<Symbols extends AssetSymbol = AssetSymbol> {
       await this.#contract.estimateGas.transfer(
         asset.erc20Id,
         amount,
-        config.getParams(account),
+        config.getParams(account, config.destination.usesEthereumAccounts),
         config.weight,
       )
     ).toBigInt();

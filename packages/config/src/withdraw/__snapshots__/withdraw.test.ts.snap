@@ -1,10 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`withdraw xTokens eth account should get params with parachain id 1`] = `
+[
+  1,
+  [
+    "0x000000064",
+    "0x03ef46c7649270c912704fb09b75097f6e32208b8500",
+  ],
+]
+`;
+
+exports[`withdraw xTokens eth account should get params without parachain id 1`] = `
+[
+  1,
+  [
+    "0x03ef46c7649270c912704fb09b75097f6e32208b8500",
+  ],
+]
+`;
+
 exports[`withdraw xTokens should be correct withdraw config 1`] = `
 {
   "balance": "<BALANCE>",
   "destination": {
-    "parachainId": 1000,
+    "parachainId": 100,
   },
   "feePerWeight": 8,
   "getParams": [Function],
@@ -14,21 +33,21 @@ exports[`withdraw xTokens should be correct withdraw config 1`] = `
 }
 `;
 
-exports[`withdraw xTokens should get params with parachain id 1`] = `
+exports[`withdraw xTokens substrate account should get params with parachain id 1`] = `
 [
   1,
   [
-    "0x00000003e8",
-    "0x01ef46c7649270c912704fb09b75097f6e32208b8500",
+    "0x000000064",
+    "0x01c4db7bcb733e117c0b34ac96354b10d47e84a006b9e7e66a229d174e8ff2a06300",
   ],
 ]
 `;
 
-exports[`withdraw xTokens should get params without parachain id 1`] = `
+exports[`withdraw xTokens substrate account should get params without parachain id 1`] = `
 [
   1,
   [
-    "0x01ef46c7649270c912704fb09b75097f6e32208b8500",
+    "0x01c4db7bcb733e117c0b34ac96354b10d47e84a006b9e7e66a229d174e8ff2a06300",
   ],
 ]
 `;
