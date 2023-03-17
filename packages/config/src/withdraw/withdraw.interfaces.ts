@@ -17,7 +17,7 @@ export interface WithdrawXTokensConfig<
   weight: number;
   getParams: (
     account: string,
-    isEthereumAccount: boolean | undefined,
+    usesEthereumAccounts: boolean | undefined,
   ) => WithdrawXTokensParams;
 }
 
