@@ -11,6 +11,8 @@ import {
 } from './balance.constants';
 import {
   AssetsBalanceConfig,
+  EquilibriumSystemBalanceConfig,
+  EquilibriumSystemBalanceData,
   MinBalanceAssetRegistryConfig,
   MinBalanceAssetsConfig,
   OrmlTokensBalanceConfig,
@@ -31,6 +33,7 @@ export function createBalanceBuilder<
     minCurrencyMetadata,
     ormlTokens,
     system,
+    systemEquilibrium,
     tokens: () => tokens<Symbols>(),
   };
 }
@@ -91,6 +94,29 @@ function system(): SystemBalanceConfig {
     getParams: (account: string) => [account],
     calc: ({ free, miscFrozen }: PalletBalancesAccountData) =>
       BigInt(free.sub(miscFrozen).toString()),
+  };
+}
+
+function systemEquilibrium(id: number): EquilibriumSystemBalanceConfig {
+  return {
+    pallet: BalancePallet.System,
+    function: BalanceFunction.Account,
+    path: ['data'],
+    getParams: (account: string) => [account],
+    calc: (data) => {
+      if (data.isEmpty) {
+        return 0n;
+      }
+
+      const balances = data.toJSON() as any as EquilibriumSystemBalanceData;
+      const balance = balances.find(([assetId]) => assetId === id);
+
+      if (!balance) {
+        return 0n;
+      }
+
+      return BigInt(balance[1].positive);
+    },
   };
 }
 

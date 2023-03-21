@@ -1,4 +1,4 @@
-import { u128 } from '@polkadot/types';
+import { Type, u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
 import { AssetId } from '../interfaces';
@@ -11,16 +11,22 @@ import {
 export type BalanceConfig<Symbols extends AssetSymbol = AssetSymbol> =
   | SystemBalanceConfig
   | AssetsBalanceConfig
+  | EquilibriumSystemBalanceConfig
   | OrmlTokensBalanceConfig
   | TokensBalanceConfig<Symbols>;
 
-export interface SystemBalanceConfig {
+export interface SystemBalanceConfig<Data = PalletBalancesAccountData> {
   pallet: BalancePallet.System;
   function: BalanceFunction.Account;
   path: ['data'];
   getParams: (account: string) => [string];
-  calc: (data: PalletBalancesAccountData) => bigint;
+  calc: (data: Data) => bigint;
 }
+
+export type EquilibriumSystemBalanceConfig = SystemBalanceConfig<Type>;
+export type EquilibriumSystemBalanceData = Array<
+  [number, { positive: number }]
+>;
 
 export interface AssetsBalanceConfig {
   pallet: BalancePallet.Assets;

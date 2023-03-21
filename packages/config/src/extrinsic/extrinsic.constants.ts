@@ -3,4 +3,5 @@ export enum ExtrinsicPallet {
   XcmPallet = 'xcmPallet',
   XTokens = 'xTokens',
   XTransfer = 'xTransfer',
+  EqBalances = 'eqBalances',
 }

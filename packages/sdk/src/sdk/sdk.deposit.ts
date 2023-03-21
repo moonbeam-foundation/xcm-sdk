@@ -90,6 +90,14 @@ export async function getDepositData<
     balance: config.xcmFeeAsset?.balance ?? config.balance,
   };
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ sdk.deposit.ts:93 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* config.source = ', config.source);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
   const [
     assetDecimals,
     existentialDeposit,
