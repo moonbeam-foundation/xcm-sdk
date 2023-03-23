@@ -6,6 +6,8 @@ export const MOONBASE_ASSETS = <const>[
   AssetSymbol.AUQ,
   AssetSymbol.BIT,
   AssetSymbol.DEV,
+  AssetSymbol.EQ,
+  AssetSymbol.EQD,
   AssetSymbol.LIT,
   AssetSymbol.NEER,
   AssetSymbol.PARING,
@@ -29,6 +31,16 @@ export const MOONBASE_ASSETS_MAP: AssetsMap<MoonbaseAssets> = {
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: AssetSymbol.DEV,
     isNative: true,
+  },
+  [AssetSymbol.EQ]: {
+    id: '190590555344745888270686124937537713878',
+    erc20Id: '0xffffffff8f6267e040d8a0638c576dfba4f0f6d6',
+    originSymbol: AssetSymbol.EQ,
+  },
+  [AssetSymbol.EQD]: {
+    id: '187224307232923873519830480073807488153',
+    erc20Id: '0xffffffff8cda1707baf23834d211b08726b1e499',
+    originSymbol: AssetSymbol.EQD,
   },
   [AssetSymbol.LIT]: {
     id: '65216491554813189869575508812319036608',
