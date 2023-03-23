@@ -25,24 +25,22 @@ export type EqBalancesPalletParams = [
    * destination
    */
   {
-    V1: {
-      parents: 1;
-      interior: {
-        X2: [
-          {
-            Parachain: number;
-          },
-          {
-            AccountKey20: {
-              network: 'Any';
-              /**
-               * account
-               */
-              key: string;
-            };
-          },
-        ];
-      };
+    parents: 1;
+    interior: {
+      X2: [
+        {
+          Parachain: number;
+        },
+        {
+          AccountKey20: {
+            network: 'Any';
+            /**
+             * account
+             */
+            key: string;
+          };
+        },
+      ];
     };
   },
   /**

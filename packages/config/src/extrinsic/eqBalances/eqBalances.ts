@@ -24,21 +24,19 @@ function xcmTransfer(chain: MoonChain) {
           id,
           amount,
           {
-            V1: {
-              parents: 1,
-              interior: {
-                X2: [
-                  {
-                    Parachain: chain.parachainId,
+            parents: 1,
+            interior: {
+              X2: [
+                {
+                  Parachain: chain.parachainId,
+                },
+                {
+                  AccountKey20: {
+                    network: 'Any',
+                    key: account,
                   },
-                  {
-                    AccountKey20: {
-                      network: 'Any',
-                      key: account,
-                    },
-                  },
-                ],
-              },
+                },
+              ],
             },
           },
           'SovereignAccWillPay',

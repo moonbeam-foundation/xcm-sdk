@@ -10,7 +10,10 @@ import {
   createExtrinsicEventHandler,
   ExtrinsicEventsCallback,
 } from '@moonbeam-network/xcm-utils';
-import type { Signer as PolkadotSigner } from '@polkadot/api/types';
+import type {
+  Signer as PolkadotSigner,
+  SubmittableExtrinsic,
+} from '@polkadot/api/types';
 import type { IKeyringPair } from '@polkadot/types/types';
 import { isUndefined } from '@polkadot/util';
 import { PolkadotService } from '../polkadot';
@@ -37,7 +40,7 @@ export function getCreateExtrinsic<
   primaryAccount,
   fee,
 }: CreateExtrinsicOptions<Symbols, ChainKeys>) {
-  return (amount: bigint): any =>
+  return (amount: bigint): SubmittableExtrinsic<'promise'> =>
     foreignPolkadot.getXcmExtrinsic(
       account,
       amount,
@@ -90,22 +93,13 @@ export async function getDepositData<
     balance: config.xcmFeeAsset?.balance ?? config.balance,
   };
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ sdk.deposit.ts:93 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* config.source = ', config.source);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
-
   const [
-    assetDecimals,
+    decimals,
     existentialDeposit,
     sourceBalance,
     sourceFeeBalance,
     sourceMinBalance = 0n,
     xcmFee,
-    xcmFeeBalance,
     xcmFeeDecimals,
   ] = await Promise.all([
     // assetDecimals
@@ -134,11 +128,6 @@ export async function getDepositData<
       config.source.weight,
       moonChain,
     ),
-    // xcmFeeBalance
-    foreignPolkadot.getGenericBalance(
-      primaryAccount || sourceAddress,
-      xcmFeeAssetConfig.balance,
-    ),
     // xcmFeeDecimals
     polkadot.getAssetDecimals(xcmFeeAssetConfig.asset),
   ]);
@@ -155,15 +144,14 @@ export async function getDepositData<
   });
 
   return {
-    asset: { ...asset, decimals: assetDecimals },
+    asset: { ...asset, decimals },
     existentialDeposit,
     min,
     moonChainFee: {
-      balance: xcmFeeBalance,
+      amount: xcmFee,
       decimals: xcmFeeAssetConfig.asset.isNative
         ? moonChain.decimals
         : xcmFeeDecimals,
-      fee: xcmFee,
       symbol: xcmFeeAssetConfig.asset.originSymbol,
     },
     native: { ...nativeAsset, decimals: meta.decimals },
@@ -172,13 +160,15 @@ export async function getDepositData<
       ...config.source,
     },
     sourceBalance,
+    sourceAssetDecimals:
+      config.source.assetsDecimals?.[asset.originSymbol] || decimals,
     sourceFeeBalance: !isUndefined(sourceFeeBalance)
       ? { ...meta, balance: sourceFeeBalance }
       : undefined,
     sourceMinBalance,
     getFee: async (amount = sourceBalance): Promise<bigint> => {
       const extrinsic = createExtrinsic(amount);
-      const info = await extrinsic.paymentInfo(sourceAccount);
+      const info = await extrinsic.paymentInfo(sourceAccount, { nonce: -1 });
 
       return info.partialFee.toBigInt();
     },
@@ -191,14 +181,14 @@ export async function getDepositData<
         sourceAccount,
         {
           signer: polkadotSigner,
+          nonce: -1,
         },
-
         cb &&
-          createExtrinsicEventHandler(
+          (createExtrinsicEventHandler(
             config.extrinsic.pallet,
             config.extrinsic.successEvent,
             cb,
-          ),
+          ) as any),
       );
 
       return hash.toString();

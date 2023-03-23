@@ -135,15 +135,14 @@ export class PolkadotService<
     primaryAccount?: string,
   ): SubmittableExtrinsic<'promise'> {
     const call = this.#api.tx[pallet][extrinsic];
+    const params = getParams({
+      account,
+      amount,
+      extrinsicCall: call,
+      fee,
+    });
 
-    let transferExtrinsic = call(
-      ...getParams({
-        account,
-        amount,
-        extrinsicCall: call,
-        fee,
-      }),
-    );
+    let transferExtrinsic = call(...params);
 
     if (primaryAccount) {
       transferExtrinsic = this.#api.tx.proxy.proxy(

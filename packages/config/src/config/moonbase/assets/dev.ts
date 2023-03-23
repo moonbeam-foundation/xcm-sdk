@@ -51,8 +51,7 @@ export const DEV: MoonbaseXcmConfig = {
     [eqa.key]: withdraw.xTokens({
       balance: balance.systemEquilibrium(eqaDevId),
       destination: eqa,
-      // TODO: what is here?
-      feePerWeight: 50_000,
+      feePerWeight: 0.1,
     }),
     [pioneer.key]: withdraw.xTokens({
       balance: balance.tokens().fungibleToken(pioneerDevId),
