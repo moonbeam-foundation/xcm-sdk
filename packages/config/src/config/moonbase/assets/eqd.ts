@@ -1,5 +1,8 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { EqBalancesSuccessEvent } from '../../../extrinsic/eqBalances';
+import {
+  EqBalancesFee,
+  EqBalancesSuccessEvent,
+} from '../../../extrinsic/eqBalances';
 import {
   assets,
   balance,
@@ -12,7 +15,7 @@ import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.EQD];
 const eqa = chains[ChainKey.EquilibriumAlphanet];
-const eqId = 25_969;
+const eqdId = 6_648_164;
 
 export const EQD: MoonbaseXcmConfig = {
   asset,
@@ -20,17 +23,18 @@ export const EQD: MoonbaseXcmConfig = {
   deposit: {
     [eqa.key]: {
       source: eqa,
-      balance: balance.systemEquilibrium(eqId),
+      balance: balance.systemEquilibrium(eqdId),
       extrinsic: extrinsic
         .eqBalances()
         .xcmTransfer()
         .successEvent(EqBalancesSuccessEvent.ExtrinsicSuccess)
-        .asset(eqId),
+        .asset(eqdId)
+        .fee(EqBalancesFee.ThisAccWillPay),
     },
   },
   withdraw: {
     [eqa.key]: withdraw.xTokens({
-      balance: balance.systemEquilibrium(eqId),
+      balance: balance.systemEquilibrium(eqdId),
       destination: eqa,
       feePerWeight: 0.1,
     }),

@@ -1,11 +1,13 @@
 import { AssetSymbol, ChainKey } from '../../../constants';
-import { EqBalancesSuccessEvent } from '../../../extrinsic/eqBalances';
+import {
+  EqBalancesFee,
+  EqBalancesSuccessEvent,
+} from '../../../extrinsic/eqBalances';
 import {
   assets,
   balance,
   chains,
   extrinsic,
-  moonbase,
   withdraw,
 } from '../moonbase.common';
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
@@ -16,7 +18,7 @@ const eqId = 25_969;
 
 export const EQ: MoonbaseXcmConfig = {
   asset,
-  origin: moonbase,
+  origin: eqa,
   deposit: {
     [eqa.key]: {
       source: eqa,
@@ -25,7 +27,8 @@ export const EQ: MoonbaseXcmConfig = {
         .eqBalances()
         .xcmTransfer()
         .successEvent(EqBalancesSuccessEvent.ExtrinsicSuccess)
-        .asset(eqId),
+        .asset(eqId)
+        .fee(EqBalancesFee.ThisAccWillPay),
     },
   },
   withdraw: {

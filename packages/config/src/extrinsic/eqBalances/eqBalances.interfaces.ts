@@ -2,6 +2,7 @@ import { XcmExtrinsicGetParams } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   EqBalancesExtrinsic,
+  EqBalancesFee,
   EqBalancesSuccessEvent,
 } from './eqBalances.constants';
 
@@ -44,7 +45,7 @@ export type EqBalancesPalletParams = [
     };
   },
   /**
-   * weight
+   * Fee type
    */
-  'SovereignAccWillPay',
+  EqBalancesFee,
 ];
