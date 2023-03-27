@@ -58,7 +58,7 @@ export const MOONRIVER_CHAINS_MAP: ChainsMap<MoonriverChains> = {
     ws: 'wss://crab-parachain-rpc.darwinia.network',
     weight: 1_000_000_000,
     parachainId: 2105,
-    ss58Format: 42,
+    usesEthereumAccounts: true,
     genesisHash:
       '0xeac895d7768b17837a9c3a9f0280c01502c3ef40193df923490a0fa9c60ea076',
   },
