@@ -14,7 +14,9 @@ import {
 import { MoonbaseXcmConfig } from '../moonbase.interfaces';
 
 const asset = assets[AssetSymbol.EQD];
+const feeAsset = assets[AssetSymbol.EQ];
 const eqa = chains[ChainKey.EquilibriumAlphanet];
+const eqId = 25_969;
 const eqdId = 6_648_164;
 
 export const EQD: MoonbaseXcmConfig = {
@@ -24,6 +26,11 @@ export const EQD: MoonbaseXcmConfig = {
     [eqa.key]: {
       source: eqa,
       balance: balance.systemEquilibrium(eqdId),
+      sourceFeeBalance: balance.systemEquilibrium(eqId),
+      xcmFeeAsset: {
+        asset: feeAsset,
+        balance: balance.systemEquilibrium(eqId),
+      },
       extrinsic: extrinsic
         .eqBalances()
         .xcmTransfer()
