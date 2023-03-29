@@ -16,6 +16,7 @@ import {
   MinBalanceAssetRegistryConfig,
   MinBalanceAssetsConfig,
   OrmlTokensBalanceConfig,
+  PalletBalancesAccountDataOld,
   SystemBalanceConfig,
   TokensBalanceConfig,
   TokensBalanceParamAsset,
@@ -92,8 +93,13 @@ function system(): SystemBalanceConfig {
     function: BalanceFunction.Account,
     path: ['data'],
     getParams: (account: string) => [account],
-    calc: ({ free, miscFrozen }: PalletBalancesAccountData) =>
-      BigInt(free.sub(miscFrozen).toString()),
+    calc: (data: PalletBalancesAccountData | PalletBalancesAccountDataOld) => {
+      const frozen =
+        (data as PalletBalancesAccountDataOld).miscFrozen ||
+        (data as PalletBalancesAccountData).frozen;
+
+      return BigInt(data.free.sub(frozen).toString());
+    },
   };
 }
 
