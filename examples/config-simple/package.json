@@ -16,6 +16,6 @@
     "ts-node": "^10.9.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "9.x"
+    "@polkadot/api": "10.x"
   }
 }

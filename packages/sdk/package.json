@@ -55,10 +55,10 @@
     "@types/lodash": "^4.14.191"
   },
   "peerDependencies": {
-    "@polkadot/api": "9.x",
-    "@polkadot/api-augment": "9.x",
-    "@polkadot/types": "9.x",
-    "@polkadot/util": "10.x",
+    "@polkadot/api": "10.x",
+    "@polkadot/api-augment": "10.x",
+    "@polkadot/types": "10.x",
+    "@polkadot/util": "11.x",
     "ethers": "5.x"
   }
 }

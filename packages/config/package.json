@@ -49,10 +49,10 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "peerDependencies": {
-    "@polkadot/api": "9.x",
-    "@polkadot/api-augment": "9.x",
-    "@polkadot/types": "9.x",
-    "@polkadot/util": "10.x",
-    "@polkadot/util-crypto": "10.x"
+    "@polkadot/api": "10.x",
+    "@polkadot/api-augment": "10.x",
+    "@polkadot/types": "10.x",
+    "@polkadot/util": "11.x",
+    "@polkadot/util-crypto": "11.x"
   }
 }

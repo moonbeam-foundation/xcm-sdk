@@ -1,4 +1,4 @@
-import { u128 } from '@polkadot/types';
+import { Struct, u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { AssetSymbol } from '../constants';
 import { AssetId } from '../interfaces';
@@ -80,4 +80,11 @@ export interface MinBalanceAssetRegistryConfig {
   function: BalanceFunction.AssetMetadatas | BalanceFunction.CurrencyMetadatas;
   path: ['minimalBalance'];
   params: [{ ForeignAssetId: AssetId } | { Token2: AssetId }];
+}
+
+export interface PalletBalancesAccountDataOld extends Struct {
+  readonly free: u128;
+  readonly reserved: u128;
+  readonly miscFrozen: u128;
+  readonly feeFrozen: u128;
 }
