@@ -54,12 +54,13 @@ export class PolkadotService<
   }
 
   getExistentialDeposit(): bigint {
+    const existentialDeposit = this.#api.consts.balances
+      ?.existentialDeposit as unknown as u128 | undefined;
+    const eqExistentialDeposit = this.#api.consts.eqBalances
+      ?.existentialDeposit as unknown as u128 | undefined;
+
     return (
-      (
-        this.#api.consts.balances?.existentialDeposit as unknown as
-          | u128
-          | undefined
-      )?.toBigInt() || 0n
+      existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n
     );
   }
 

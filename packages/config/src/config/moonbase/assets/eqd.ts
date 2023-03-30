@@ -43,7 +43,7 @@ export const EQD: MoonbaseXcmConfig = {
     [eqa.key]: withdraw.xTokens({
       balance: balance.systemEquilibrium(eqdId),
       destination: eqa,
-      feePerWeight: 0.1,
+      feePerWeight: 0.05,
     }),
   },
 };
