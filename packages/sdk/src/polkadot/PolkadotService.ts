@@ -54,12 +54,13 @@ export class PolkadotService<
   }
 
   getExistentialDeposit(): bigint {
+    const existentialDeposit = this.#api.consts.balances
+      ?.existentialDeposit as unknown as u128 | undefined;
+    const eqExistentialDeposit = this.#api.consts.eqBalances
+      ?.existentialDeposit as unknown as u128 | undefined;
+
     return (
-      (
-        this.#api.consts.balances?.existentialDeposit as unknown as
-          | u128
-          | undefined
-      )?.toBigInt() || 0n
+      existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n
     );
   }
 
@@ -135,15 +136,14 @@ export class PolkadotService<
     primaryAccount?: string,
   ): SubmittableExtrinsic<'promise'> {
     const call = this.#api.tx[pallet][extrinsic];
+    const params = getParams({
+      account,
+      amount,
+      extrinsicCall: call,
+      fee,
+    });
 
-    let transferExtrinsic = call(
-      ...getParams({
-        account,
-        amount,
-        extrinsicCall: call,
-        fee,
-      }),
-    );
+    let transferExtrinsic = call(...params);
 
     if (primaryAccount) {
       transferExtrinsic = this.#api.tx.proxy.proxy(

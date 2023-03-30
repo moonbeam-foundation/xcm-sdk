@@ -102,11 +102,12 @@ export interface DepositTransferData<
   asset: AssetWithDecimals<Symbols>;
   existentialDeposit: bigint;
   min: bigint;
-  moonChainFee: XcmFeeWithBalance<Symbols>;
+  moonChainFee: XcmFeeWithDecimals<Symbols>;
   native: AssetWithDecimals<Symbols>;
   origin: MoonChain | Chain<ChainKeys>;
   source: Chain<ChainKeys>;
   sourceBalance: bigint;
+  sourceAssetDecimals: number;
   sourceFeeBalance?: Balance<Symbols>;
   sourceMinBalance: bigint;
   getFee: (amount?: bigint) => Promise<bigint>;
@@ -120,6 +121,7 @@ export interface WithdrawTransferData<
   asset: AssetWithDecimals<Symbols>;
   destination: Chain<ChainKeys>;
   destinationBalance: bigint;
+  destinationAssetDecimals: number;
   destinationFee: bigint;
   existentialDeposit: bigint;
   min: bigint;
@@ -146,12 +148,6 @@ export interface Balance<Symbols extends string | AssetSymbol = AssetSymbol> {
   balance: bigint;
   decimals: number;
   symbol: Symbols;
-}
-
-export interface XcmFeeWithBalance<
-  Symbols extends string | AssetSymbol = AssetSymbol,
-> extends Balance<Symbols> {
-  fee: bigint;
 }
 
 export interface SdkOptions {

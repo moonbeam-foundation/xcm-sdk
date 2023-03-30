@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`eqBalances xcmTransfer should be correct config 1`] = `
+{
+  "extrinsic": "xcmTransfer",
+  "getParams": [Function],
+  "pallet": "eqBalances",
+  "successEvent": "ExtrinsicSuccess",
+}
+`;
+
+exports[`eqBalances xcmTransfer should get correct params 1`] = `
+[
+  25969,
+  1000n,
+  {
+    "interior": {
+      "X2": [
+        {
+          "Parachain": 1000,
+        },
+        {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      ],
+    },
+    "parents": 1,
+  },
+  "SovereignAccWillPay",
+]
+`;

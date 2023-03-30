@@ -52,6 +52,7 @@ export interface Chain<ChainKeys extends ChainKey = ChainKey>
   ss58Format?: number;
   usesEthereumAccounts?: boolean;
   genesisHash: string;
+  assetsDecimals?: Record<string, number>;
 }
 
 export interface XcmFeeAsset<Symbols extends AssetSymbol = AssetSymbol> {

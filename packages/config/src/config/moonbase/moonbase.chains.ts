@@ -1,9 +1,10 @@
-import { ChainKey } from '../../constants';
+import { AssetSymbol, ChainKey } from '../../constants';
 import { ChainsMap } from '../config.interfaces';
 import { MoonbaseChains } from './moonbase.interfaces';
 
 export const MOONBASE_CHAINS = <const>[
   ChainKey.AlphanetRelay,
+  ChainKey.EquilibriumAlphanet,
   ChainKey.LitentryAlphanet,
   ChainKey.BitCountryPioneer,
   ChainKey.DarwiniaPangoro,
@@ -43,6 +44,20 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     usesEthereumAccounts: true,
     genesisHash:
       '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
+  },
+  [ChainKey.EquilibriumAlphanet]: {
+    key: ChainKey.EquilibriumAlphanet,
+    name: 'EquilibriumAlphanet',
+    ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
+    weight: 1_000_000_000,
+    parachainId: 2011,
+    moonAssetId: 1735159154,
+    ss58Format: 68,
+    genesisHash:
+      '0x0ba4508078664cfd04f00bf17892dd1a0764ce61d90857f76c6a2ea61f008247',
+    assetsDecimals: {
+      [AssetSymbol.DEV]: 9,
+    },
   },
   [ChainKey.LitentryAlphanet]: {
     key: ChainKey.LitentryAlphanet,

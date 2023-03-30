@@ -1,5 +1,6 @@
 import { AssetSymbol, ChainKey } from '../constants';
 import { MoonChain } from '../interfaces';
+import { eqBalances } from './eqBalances';
 import { polkadotXcm } from './polkadotXcm';
 import { xcmPallet } from './xcmPallet';
 import { xTokens } from './xTokens';
@@ -14,5 +15,6 @@ export function createExtrinsicBuilder<
     xcmPallet: () => xcmPallet(chain),
     xTokens: () => xTokens<Symbols, ChainKeys>(chain),
     xTransfer: () => xTransfer<ChainKeys>(chain),
+    eqBalances: () => eqBalances(chain),
   };
 }

@@ -115,6 +115,8 @@ export async function getWithdrawData<
       ...config.destination,
     },
     destinationBalance,
+    destinationAssetDecimals:
+      config.destination.assetsDecimals?.[asset.originSymbol] || decimals,
     destinationFee,
     existentialDeposit,
     min,
