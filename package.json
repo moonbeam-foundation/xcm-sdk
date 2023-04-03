@@ -28,7 +28,7 @@
     "prepare": "husky install",
     "changeset": "changeset",
     "changeset:version": "changeset version && npm i --package-lock-only",
-    "changeset:release": "npm run build && changeset publish"
+    "changeset:publish": "npm run build && changeset publish"
   },
   "dependencies": {
     "@polkadot/api-augment": "^10.2.1",
