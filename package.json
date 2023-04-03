@@ -26,7 +26,9 @@
     "test:ci": "turbo run test:ci",
     "test:acc": "turbo run test:acc",
     "prepare": "husky install",
-    "publish-packages": "turbo run build lint test && changeset version && changeset publish"
+    "changeset": "changeset",
+    "changeset:version": "changeset version && npm i --package-lock-only",
+    "changeset:release": "npm run build && changeset publish"
   },
   "dependencies": {
     "@polkadot/api-augment": "^10.2.1",

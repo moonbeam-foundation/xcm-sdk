@@ -23,6 +23,8 @@ on:
           - utils
           - transact
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   publish-beta-dev:
     runs-on: ubuntu-latest
@@ -33,7 +35,7 @@ jobs:
       - name: ⚙️ Setup Node.js environment
         uses: actions/setup-node@v3.0.0
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: 'npm'
 
       - name: 🔐 Authenticate with NPM

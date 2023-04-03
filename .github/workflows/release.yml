@@ -1,62 +1,33 @@
 name: release
 
 on:
-  release:
-    types: [released]
+  push:
+    branches:
+      - main
 
-env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: 🔍 GH_TOKEN
-        if: env.GH_TOKEN == ''
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
-
       - name: 🤘 checkout
         uses: actions/checkout@v3
-        with:
-          ref: main
-          fetch-depth: 0
-          token: ${{ env.GH_TOKEN }}
-
-      - name: 🆕 Get a new version
-        run: echo "VERSION=$(echo ${GITHUB_REF#refs/*/} | cut -c2-)" >> $GITHUB_ENV
 
       - name: ⚙️ Setup Node.js environment
         uses: actions/setup-node@v3.0.0
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: 'npm'
 
-      - name: 🔐 Authenticate with NPM
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - run: npm ci --ignore-scripts
 
-      - run: npm ci
-
-      - name: 🛠️ Build
-        run: npm run build
-
-      - name: 🚀 Publish config
-        working-directory: ./packages/config
-        run: |
-          npm version ${{ env.VERSION }} --no-git-tag-version
-          npm publish
-
-      - name: 🚀 Publish sdk
-        working-directory: ./packages/sdk
-        run: |
-          npm version ${{ env.VERSION }} --no-git-tag-version
-          npm publish
-
-      - name: 📁 Commit package.json files
-        run: |
-          git config --local user.name github-actions
-          git config --local user.email actions@github.com
-          git add **/package*.json
-          git commit -m "Updated package.json files after release ${GITHUB_REF#refs/*/} [skip ci]"
-          git push
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: npm run changeset:version
+          publish: npm run changeset:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
