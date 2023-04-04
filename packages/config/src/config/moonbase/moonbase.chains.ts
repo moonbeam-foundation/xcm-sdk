@@ -49,7 +49,7 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     key: ChainKey.EquilibriumAlphanet,
     name: 'EquilibriumAlphanet',
     ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
-    weight: 1_000_000_000,
+    weight: 2_000_000_000,
     parachainId: 2011,
     moonAssetId: 1735159154,
     ss58Format: 68,
