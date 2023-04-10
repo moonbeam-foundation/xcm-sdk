@@ -23,7 +23,6 @@ export const PHA: MoonbeamXcmConfig = <const>{
         .xTransfer()
         .transfer()
         .successEvent(XTransferExtrinsicSuccessEvent.Deposited)
-        .origin(origin)
         .here(),
     },
   },

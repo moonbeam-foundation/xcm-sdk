@@ -1,5 +1,4 @@
-import { ChainKey } from '../../constants';
-import { Chain, MoonChain } from '../../interfaces';
+import { MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTransferExtrinsic,
@@ -11,54 +10,51 @@ import {
 } from './xTransfer.interfaces';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export function xTransfer<ChainKeys extends ChainKey>(chain: MoonChain) {
+export function xTransfer(chain: MoonChain) {
   return {
-    transfer: () => transfer<ChainKeys>(chain),
+    transfer: () => transfer(chain),
   };
 }
 
-function transfer<ChainKeys extends ChainKey>(chain: MoonChain) {
+function transfer(chain: MoonChain) {
   return {
-    successEvent: (event: XTransferExtrinsicSuccessEvent) => ({
-      origin: (origin: Chain<ChainKeys>) => {
-        const createExtrinsic = getCreateExtrinsic(
-          XTransferExtrinsic.Transfer,
-          event,
-          chain,
-          origin,
-        );
+    successEvent: (event: XTransferExtrinsicSuccessEvent) => {
+      const createExtrinsic = getCreateExtrinsic(
+        XTransferExtrinsic.Transfer,
+        event,
+        chain,
+      );
 
-        return {
-          here: () =>
-            createExtrinsic(() => ({
-              parents: 0,
-              interior: 'Here',
-            })),
-          X2: (palletInstance: number) =>
-            createExtrinsic(() => ({
-              parents: 1,
-              interior: {
-                X2: [
-                  {
-                    Parachain: chain.parachainId,
-                  },
-                  {
-                    PalletInstance: palletInstance,
-                  },
-                ],
-              },
-            })),
-        };
-      },
-    }),
+      return {
+        here: () =>
+          createExtrinsic(() => ({
+            parents: 0,
+            interior: 'Here',
+          })),
+        X2: (palletInstance: number) =>
+          createExtrinsic(() => ({
+            parents: 1,
+            interior: {
+              X2: [
+                {
+                  Parachain: chain.parachainId,
+                },
+                {
+                  PalletInstance: palletInstance,
+                },
+              ],
+            },
+          })),
+      };
+    },
   };
 }
 
-function getCreateExtrinsic<ChainKeys extends ChainKey>(
+function getCreateExtrinsic(
   extrinsic: XTransferExtrinsic,
   event: XTransferExtrinsicSuccessEvent,
   chain: MoonChain,
-  origin: Chain<ChainKeys>,
+  // origin: Chain<ChainKeys>,
 ) {
   return (getConcrete: () => XTransferConcreteParam): XTransferPallet => ({
     pallet: ExtrinsicPallet.XTransfer,
@@ -82,14 +78,16 @@ function getCreateExtrinsic<ChainKeys extends ChainKey>(
             },
             {
               AccountKey20: {
-                network: 'Any',
                 key: account,
               },
             },
           ],
         },
       },
-      origin.weight,
+      {
+        refTime: 5_000_000_000,
+        proofSize: 0,
+      },
     ],
   });
 }

@@ -36,7 +36,6 @@ export type XTransferPalletParams = [
         },
         {
           AccountKey20: {
-            network: 'Any';
             /**
              * account
              */
@@ -49,7 +48,10 @@ export type XTransferPalletParams = [
   /**
    * weight
    */
-  number,
+  {
+    refTime: 5_000_000_000;
+    proofSize: 0;
+  },
 ];
 
 export interface XTransferConcreteParam {
