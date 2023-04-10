@@ -14,7 +14,7 @@ export function createExtrinsicBuilder<
     polkadotXcm: () => polkadotXcm(chain),
     xcmPallet: () => xcmPallet(chain),
     xTokens: () => xTokens<Symbols, ChainKeys>(chain),
-    xTransfer: () => xTransfer<ChainKeys>(chain),
+    xTransfer: () => xTransfer(chain),
     eqBalances: () => eqBalances(chain),
   };
 }

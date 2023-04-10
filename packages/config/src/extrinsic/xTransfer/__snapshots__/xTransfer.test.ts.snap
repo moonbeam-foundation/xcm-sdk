@@ -31,14 +31,16 @@ exports[`xTransfer transfer here should get correct params 1`] = `
         {
           "AccountKey20": {
             "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            "network": "Any",
           },
         },
       ],
     },
     "parents": 1,
   },
-  1000000000,
+  {
+    "proofSize": 0,
+    "refTime": 5000000000,
+  },
 ]
 `;
 
@@ -82,13 +84,15 @@ exports[`xTransfer transfer x2 should get correct params 1`] = `
         {
           "AccountKey20": {
             "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            "network": "Any",
           },
         },
       ],
     },
     "parents": 1,
   },
-  1000000000,
+  {
+    "proofSize": 0,
+    "refTime": 5000000000,
+  },
 ]
 `;

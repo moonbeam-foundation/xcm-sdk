@@ -54,7 +54,6 @@ function getCreateExtrinsic(
   extrinsic: XTransferExtrinsic,
   event: XTransferExtrinsicSuccessEvent,
   chain: MoonChain,
-  // origin: Chain<ChainKeys>,
 ) {
   return (getConcrete: () => XTransferConcreteParam): XTransferPallet => ({
     pallet: ExtrinsicPallet.XTransfer,
