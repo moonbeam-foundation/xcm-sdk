@@ -23,7 +23,6 @@ export const PHA: MoonriverXcmConfig = {
         .xTransfer()
         .transfer()
         .successEvent(XTransferExtrinsicSuccessEvent.Deposited)
-        .origin(origin)
         .here(),
     },
   },
