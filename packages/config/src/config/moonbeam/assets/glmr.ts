@@ -89,7 +89,6 @@ export const GLMR: MoonbeamXcmConfig = {
         .xTransfer()
         .transfer()
         .successEvent(XTransferExtrinsicSuccessEvent.Withdrawn)
-        .origin(phala)
         .X2(10),
     },
   },

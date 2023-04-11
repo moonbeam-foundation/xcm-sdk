@@ -96,7 +96,6 @@ export const MOVR: MoonriverXcmConfig = {
         .xTransfer()
         .transfer()
         .successEvent(XTransferExtrinsicSuccessEvent.Withdrawn)
-        .origin(khala)
         .X2(getPalletInstance(khala)),
     },
     [parallel.key]: {
