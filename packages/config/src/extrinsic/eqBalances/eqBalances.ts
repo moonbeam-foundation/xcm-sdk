@@ -56,31 +56,35 @@ function xcmTransfer(chain: MoonChain) {
 function transferXcm(chain: MoonChain) {
   return {
     successEvent: (event: EqBalancesSuccessEvent) => ({
-      asset: (id: number) => ({
-        feeAsset: (feeAsset: number): EqBalancesTransferXcm => ({
+      asset: (assetId: number) => ({
+        feeAsset: (feeAssetId: number): EqBalancesTransferXcm => ({
           pallet: ExtrinsicPallet.EqBalances,
           extrinsic: EqBalancesExtrinsic.TransferXcm,
           successEvent: event,
-          getParams: ({ account, amount, fee = 0n }) => [
-            [id, amount],
-            [feeAsset, fee],
-            {
-              parents: 1,
-              interior: {
-                X2: [
-                  {
-                    Parachain: chain.parachainId,
-                  },
-                  {
-                    AccountKey20: {
-                      network: 'Any',
-                      key: account,
+          getParams: ({ account, amount, fee = 0n }) => {
+            const amountWithoutFee = amount - fee > 0n ? amount - fee : 0n;
+
+            return [
+              [assetId, assetId === feeAssetId ? amountWithoutFee : amount],
+              [feeAssetId, fee],
+              {
+                parents: 1,
+                interior: {
+                  X2: [
+                    {
+                      Parachain: chain.parachainId,
                     },
-                  },
-                ],
+                    {
+                      AccountKey20: {
+                        network: 'Any',
+                        key: account,
+                      },
+                    },
+                  ],
+                },
               },
-            },
-          ],
+            ];
+          },
         }),
       }),
     }),
