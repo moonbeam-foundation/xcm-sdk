@@ -23,8 +23,6 @@ on:
           - utils
           - transact
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-
 jobs:
   publish-beta-dev:
     runs-on: ubuntu-latest
