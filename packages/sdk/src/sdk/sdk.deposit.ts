@@ -7,8 +7,9 @@ import {
   MoonChain,
 } from '@moonbeam-network/xcm-config';
 import {
-  createExtrinsicEventHandler,
   ExtrinsicEventsCallback,
+  convertDecimals,
+  createExtrinsicEventHandler,
 } from '@moonbeam-network/xcm-utils';
 import type {
   Signer as PolkadotSigner,
@@ -131,16 +132,26 @@ export async function getDepositData<
     // xcmFeeDecimals
     polkadot.getAssetDecimals(xcmFeeAssetConfig.asset),
   ]);
+  const sourceAssetDecimals =
+    config.source.assetsDecimals?.[asset.originSymbol] || decimals;
 
   // Min is basically the XCM fee, if it's the same asset. If less is sent then
   // Moon* won't process the message.
   const min = config.xcmFeeAsset ? 0n : xcmFee;
+  /*
+   * We need this for Equilibrium when we send Moon* assets.
+   * Because xcmFee will be in 18 decimals but to Equilibrium we need to provide the fee in 9 decimals.
+   */
+  const extrinsicFee =
+    decimals !== sourceAssetDecimals
+      ? convertDecimals(xcmFee, decimals, sourceAssetDecimals)
+      : xcmFee;
   const createExtrinsic = getCreateExtrinsic({
     account,
     config,
     foreignPolkadot,
     primaryAccount,
-    fee: xcmFee,
+    fee: extrinsicFee,
   });
 
   return {
@@ -160,8 +171,7 @@ export async function getDepositData<
       ...config.source,
     },
     sourceBalance,
-    sourceAssetDecimals:
-      config.source.assetsDecimals?.[asset.originSymbol] || decimals,
+    sourceAssetDecimals,
     sourceFeeBalance: !isUndefined(sourceFeeBalance)
       ? { ...meta, balance: sourceFeeBalance }
       : undefined,
