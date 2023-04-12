@@ -3,10 +3,7 @@ import {
   XTokensExtrinsicCurrencyTypes,
   XTokensExtrinsicSuccessEvent,
 } from '../../../extrinsic';
-import {
-  EqBalancesFee,
-  EqBalancesSuccessEvent,
-} from '../../../extrinsic/eqBalances';
+import { EqBalancesSuccessEvent } from '../../../extrinsic/eqBalances';
 import { getMoonAssetId } from '../../config.utils';
 import {
   assets,
@@ -34,10 +31,10 @@ export const DEV: MoonbaseXcmConfig = {
       balance: balance.systemEquilibrium(eqaDevId),
       extrinsic: extrinsic
         .eqBalances()
-        .xcmTransfer()
+        .transferXcm()
         .successEvent(EqBalancesSuccessEvent.ExtrinsicSuccess)
         .asset(eqaDevId)
-        .fee(EqBalancesFee.SovereignAccWillPay),
+        .feeAsset(eqaDevId),
     },
     [pioneer.key]: {
       source: pioneer,

@@ -6,14 +6,23 @@ import {
   EqBalancesSuccessEvent,
 } from './eqBalances.constants';
 
-export interface EqBalancesPallet {
+export type EqBalancesPallet = EqBalancesXcmTransfer | EqBalancesTransferXcm;
+
+export interface EqBalancesXcmTransfer {
   pallet: ExtrinsicPallet.EqBalances;
-  extrinsic: EqBalancesExtrinsic;
+  extrinsic: EqBalancesExtrinsic.XcmTransfer;
   successEvent: EqBalancesSuccessEvent;
-  getParams: (params: XcmExtrinsicGetParams) => EqBalancesPalletParams;
+  getParams: (params: XcmExtrinsicGetParams) => EqBalancesXcmTransferParams;
 }
 
-export type EqBalancesPalletParams = [
+export interface EqBalancesTransferXcm {
+  pallet: ExtrinsicPallet.EqBalances;
+  extrinsic: EqBalancesExtrinsic.TransferXcm;
+  successEvent: EqBalancesSuccessEvent;
+  getParams: (params: XcmExtrinsicGetParams) => EqBalancesTransferXcmParams;
+}
+
+export type EqBalancesXcmTransferParams = [
   /**
    * asset
    */
@@ -49,3 +58,38 @@ export type EqBalancesPalletParams = [
    */
   EqBalancesFee,
 ];
+
+export type EqBalancesTransferXcmParams = [
+  /**
+   * asset
+   */
+  TransferXcmAsset,
+  /**
+   * Fee
+   */
+  TransferXcmAsset,
+  {
+    parents: 1;
+    interior: {
+      X2: [
+        {
+          Parachain: number;
+        },
+        {
+          AccountKey20: {
+            network: 'Any';
+            /**
+             * account
+             */
+            key: string;
+          };
+        },
+      ];
+    };
+  },
+];
+
+/**
+ * [id, amount]
+ */
+export type TransferXcmAsset = [number, bigint];

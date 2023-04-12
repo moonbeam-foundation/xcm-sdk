@@ -20,6 +20,16 @@ export function toBigInt(amount: string | number, decimals: number): bigint {
   return BigInt(result.toFixed(0, Big.roundDown));
 }
 
+export function convertDecimals(
+  number: string | bigint,
+  decimals: number,
+  targetDecimals: number,
+): bigint {
+  const decimalNumber = toDecimal(number, decimals, decimals);
+
+  return toBigInt(decimalNumber.toString(), targetDecimals);
+}
+
 export function hasDecimalOverflow(fl: number | string, maxDecimal: number) {
   const parts = fl.toString().split('.');
   return parts.length > 1 && parts[1].length > maxDecimal;

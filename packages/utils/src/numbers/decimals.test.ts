@@ -1,7 +1,12 @@
 /* eslint-disable jest/no-focused-tests */
 /* eslint-disable jest/max-expects */
 import Big from 'big.js';
-import { hasDecimalOverflow, toBigInt, toDecimal } from './decimals';
+import {
+  convertDecimals,
+  hasDecimalOverflow,
+  toBigInt,
+  toDecimal,
+} from './decimals';
 
 describe('utils - decimals', () => {
   describe('toDecimals', () => {
@@ -141,6 +146,42 @@ describe('utils - decimals', () => {
       expect(hasDecimalOverflow('12.036073069', 12)).toBe(false);
       expect(hasDecimalOverflow('12.036073069210', 12)).toBe(false);
       expect(hasDecimalOverflow('66712.036738607306994864', 18)).toBe(false);
+    });
+  });
+
+  describe('convertDecimals', () => {
+    it('should convert decimals correctly', () => {
+      expect(convertDecimals(1_000_000_000_000_000_000n, 18, 9)).toBe(
+        1_000_000_000n,
+      );
+      expect(convertDecimals(100_000_000_000_000_000n, 18, 9)).toBe(
+        100_000_000n,
+      );
+      expect(convertDecimals(1_000_000_000_000_000n, 18, 9)).toBe(1_000_000n);
+      expect(convertDecimals(1_000_000_000_000_000n, 18, 12)).toBe(
+        1_000_000_000n,
+      );
+      expect(convertDecimals(100_123_456_789_000_000n, 18, 12)).toBe(
+        100_123_456_789n,
+      );
+      expect(convertDecimals(100_123_456_789_000_000n, 18, 9)).toBe(
+        100_123_456n,
+      );
+      expect(convertDecimals(100_123_451_789_000_000n, 18, 9)).toBe(
+        100_123_451n,
+      );
+    });
+
+    it('should keep the same', () => {
+      expect(convertDecimals(100_123_451_789_000_000n, 18, 18)).toBe(
+        100_123_451_789_000_000n,
+      );
+    });
+
+    it('should ignores if too many digits', () => {
+      expect(convertDecimals(100_123_451_789_000_000n, 12, 9)).toBe(
+        100_123_451_789_000n,
+      );
     });
   });
 });

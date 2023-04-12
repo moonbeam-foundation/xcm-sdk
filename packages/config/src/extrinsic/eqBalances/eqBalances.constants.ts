@@ -1,5 +1,6 @@
 export enum EqBalancesExtrinsic {
   XcmTransfer = 'xcmTransfer',
+  TransferXcm = 'transferXcm',
 }
 
 export enum EqBalancesSuccessEvent {
