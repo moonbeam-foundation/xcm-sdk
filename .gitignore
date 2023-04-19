@@ -1,3 +1,6 @@
+# TMP
+packages/*/tmp
+
 # Logs
 logs
 *.log

@@ -1,1 +1,0 @@
-export { XTokensContract } from './XTokensContract';
