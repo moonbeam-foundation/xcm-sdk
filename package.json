@@ -1,4 +1,5 @@
 {
+  "name": "xcm-sdk",
   "author": "PureStake",
   "license": "MIT",
   "private": true,
