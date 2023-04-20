@@ -6,7 +6,7 @@ export enum ChainType {
   Substrate = 'Substrate',
 }
 
-export interface ChainConstructorParams {
+export interface ChainConstructorProps {
   decimals?: number;
   genesisHash?: string;
   id: string | number;
@@ -47,7 +47,7 @@ export abstract class Chain {
     parachainId,
     type,
     ws,
-  }: ChainConstructorParams) {
+  }: ChainConstructorProps) {
     this.decimals = decimals;
     this.genesisHash = genesisHash;
     this.id = id;

@@ -1,8 +1,8 @@
 import { SetOptional } from 'type-fest';
-import { Chain, ChainConstructorParams, ChainType } from './Chain';
+import { Chain, ChainConstructorProps, ChainType } from './Chain';
 
-export interface SubstrateChainConstructorParams
-  extends SetOptional<Omit<ChainConstructorParams, 'type'>, 'id'> {
+export interface SubstrateChainConstructorProps
+  extends SetOptional<Omit<ChainConstructorProps, 'type'>, 'id'> {
   genesisHash: string;
   parachainId: number;
   ss58Format: number;
@@ -21,8 +21,8 @@ export class SubstrateChain extends Chain {
     ss58Format,
     id,
     ...other
-  }: SubstrateChainConstructorParams) {
-    super({ ...other, type: ChainType.Substrate, id: id || parachainId });
+  }: SubstrateChainConstructorProps) {
+    super({ ...other, id: id || parachainId, type: ChainType.Substrate });
 
     this.genesisHash = genesisHash;
     this.parachainId = parachainId;

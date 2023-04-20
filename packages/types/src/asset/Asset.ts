@@ -1,34 +1,15 @@
-export interface AssetConstructorParams {
-  amount: string | number;
-  decimals?: number;
-  id?: string;
-  originSymbol?: string;
-  symbol: string;
+export interface AssetConstructorProps {
+  key: string;
+  originSymbol: string;
 }
 
 export class Asset {
-  amount: bigint;
-
-  decimals?: number;
-
-  id?: string;
+  key: string;
 
   originSymbol: string;
 
-  symbol: string;
-
-  constructor({
-    amount,
-    decimals,
-    originSymbol,
-    symbol,
-  }: AssetConstructorParams) {
-    this.amount = BigInt(amount);
-    this.decimals = decimals;
-    this.originSymbol = originSymbol || symbol;
-    this.symbol = symbol;
+  constructor({ key, originSymbol }: AssetConstructorProps) {
+    this.key = key;
+    this.originSymbol = originSymbol;
   }
-
-  // toBigInt(): bigint;
-  // toDecimal(): string;
 }
