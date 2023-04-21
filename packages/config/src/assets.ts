@@ -14,6 +14,7 @@ export const astr = new Asset({
 
 export const auq = new Asset({
   ecosystems: [Ecosystem.AlphanetRelay],
+  isTestAsset: true,
   key: 'auq',
   originSymbol: 'AUQ',
 });
@@ -50,6 +51,7 @@ export const csm = new Asset({
 
 export const dev = new Asset({
   ecosystems: [Ecosystem.AlphanetRelay],
+  isTestAsset: true,
   key: 'dev',
   originSymbol: 'DEV',
 });
@@ -188,12 +190,14 @@ export const teer = new Asset({
 
 export const tt1 = new Asset({
   ecosystems: [Ecosystem.AlphanetRelay],
+  isTestAsset: true,
   key: 'tt1',
   originSymbol: 'TT1',
 });
 
 export const unit = new Asset({
   ecosystems: [Ecosystem.AlphanetRelay],
+  isTestAsset: true,
   key: 'unit',
   originSymbol: 'UNIT',
 });
