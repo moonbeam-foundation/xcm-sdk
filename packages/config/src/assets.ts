@@ -1,211 +1,211 @@
-import { Asset, Relay } from '@moonbeam-network/xcm-types';
+import { Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 
 export const aca = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'aca',
   originSymbol: 'ACA',
-  relays: [Relay.Polkadot],
 });
 
 export const astr = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'astr',
   originSymbol: 'ASTR',
-  relays: [Relay.Polkadot],
 });
 
 export const auq = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'auq',
   originSymbol: 'AUQ',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const ausd = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'ausd',
   originSymbol: 'AUSD',
-  relays: [Relay.Polkadot],
 });
 
 export const bit = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'bit',
   originSymbol: 'BIT',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const bnc = new Asset({
+  ecosystems: [Ecosystem.Kusama, Ecosystem.Polkadot],
   key: 'bnc',
   originSymbol: 'BNC',
-  relays: [Relay.Kusama, Relay.Polkadot],
 });
 
 export const crab = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'crab',
   originSymbol: 'CRAB',
-  relays: [Relay.Kusama],
 });
 
 export const csm = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'csm',
   originSymbol: 'CSM',
-  relays: [Relay.Kusama],
 });
 
 export const dev = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'dev',
   originSymbol: 'DEV',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const dot = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'dot',
   originSymbol: 'DOT',
-  relays: [Relay.Polkadot],
 });
 
 export const eq = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'eq',
   originSymbol: 'EQ',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const eqd = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'eqd',
   originSymbol: 'EQD',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const glmr = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'glmr',
   originSymbol: 'GLMR',
-  relays: [Relay.Polkadot],
 });
 
 export const hko = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'hko',
   originSymbol: 'HKO',
-  relays: [Relay.Kusama],
 });
 
 export const ibtc = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'ibtc',
   originSymbol: 'IBTC',
-  relays: [Relay.Polkadot],
 });
 
 export const intr = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'intr',
   originSymbol: 'INTR',
-  relays: [Relay.Polkadot],
 });
 
 export const kar = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'kar',
   originSymbol: 'KAR',
-  relays: [Relay.Kusama],
 });
 
 export const kbtc = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'kbtc',
   originSymbol: 'KBTC',
-  relays: [Relay.Kusama],
 });
 
 export const kint = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'kint',
   originSymbol: 'KINT',
-  relays: [Relay.Kusama],
 });
 
 export const kma = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'kma',
   originSymbol: 'KMA',
-  relays: [Relay.Kusama],
 });
 
 export const ksm = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'ksm',
   originSymbol: 'KSM',
-  relays: [Relay.Kusama],
 });
 
 export const lit = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay, Ecosystem.Kusama],
   key: 'lit',
   originSymbol: 'LIT',
-  relays: [Relay.AlphanetRelay, Relay.Kusama],
 });
 
 export const movr = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'movr',
   originSymbol: 'MOVR',
-  relays: [Relay.Kusama],
 });
 
 export const neer = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'neer',
   originSymbol: 'NEER',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const para = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'para',
   originSymbol: 'PARA',
-  relays: [Relay.Polkadot],
 });
 
 export const paring = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'paring',
   originSymbol: 'PARING',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const pha = new Asset({
+  ecosystems: [Ecosystem.Kusama, Ecosystem.Polkadot],
   key: 'pha',
   originSymbol: 'PHA',
-  relays: [Relay.Kusama, Relay.Polkadot],
 });
 
 export const ring = new Asset({
+  ecosystems: [Ecosystem.Polkadot],
   key: 'ring',
   originSymbol: 'RING',
-  relays: [Relay.Polkadot],
 });
 
 export const rmrk = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'rmrk',
   originSymbol: 'RMRK',
-  relays: [Relay.Kusama],
 });
 
 export const sdn = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'sdn',
   originSymbol: 'SDN',
-  relays: [Relay.Kusama],
 });
 
 export const teer = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'teer',
   originSymbol: 'TEER',
-  relays: [Relay.Kusama],
 });
 
 export const tt1 = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'tt1',
   originSymbol: 'TT1',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const unit = new Asset({
+  ecosystems: [Ecosystem.AlphanetRelay],
   key: 'unit',
   originSymbol: 'UNIT',
-  relays: [Relay.AlphanetRelay],
 });
 
 export const usdt = new Asset({
+  ecosystems: [Ecosystem.Kusama, Ecosystem.Polkadot],
   key: 'usdt',
   originSymbol: 'USDT',
-  relays: [Relay.Kusama, Relay.Polkadot],
 });
 
 export const xrt = new Asset({
+  ecosystems: [Ecosystem.Kusama],
   key: 'xrt',
   originSymbol: 'XRT',
-  relays: [Relay.Kusama],
 });

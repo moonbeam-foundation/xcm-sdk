@@ -1,10 +1,10 @@
-import { Relay } from '../chain';
+import { Ecosystem } from '../chain';
 
 export interface AssetConstructorProps {
   isTestAsset?: boolean;
   key: string;
   originSymbol: string;
-  relays: Relay[];
+  ecosystems: Ecosystem[];
 }
 
 export class Asset {
@@ -14,17 +14,17 @@ export class Asset {
 
   originSymbol: string;
 
-  relays: Relay[];
+  ecosystems: Ecosystem[];
 
   constructor({
     isTestAsset = false,
     key,
     originSymbol,
-    relays,
+    ecosystems,
   }: AssetConstructorProps) {
     this.isTestAsset = isTestAsset;
     this.key = key;
     this.originSymbol = originSymbol;
-    this.relays = relays;
+    this.ecosystems = ecosystems;
   }
 }

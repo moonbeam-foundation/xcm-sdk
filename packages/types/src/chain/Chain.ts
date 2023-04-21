@@ -1,7 +1,7 @@
 import { EthereumChain } from './EthereumChain';
 import { SubstrateChain } from './SubstrateChain';
 
-export enum Relay {
+export enum Ecosystem {
   Polkadot = 'Polkadot',
   Kusama = 'Kusama',
   AlphanetRelay = 'AlphanetRelay',
@@ -19,7 +19,7 @@ export interface ChainConstructorProps {
   key: string;
   name: string;
   parachainId?: number;
-  relay?: Relay;
+  ecosystem?: Ecosystem;
   type: ChainType;
   ws: string;
 }
@@ -37,7 +37,7 @@ export abstract class Chain {
 
   readonly parachainId?: number;
 
-  readonly relay?: Relay;
+  readonly ecosystem?: Ecosystem;
 
   readonly type: ChainType;
 
@@ -50,7 +50,7 @@ export abstract class Chain {
     key,
     name,
     parachainId,
-    relay,
+    ecosystem,
     type,
     ws,
   }: ChainConstructorProps) {
@@ -60,7 +60,7 @@ export abstract class Chain {
     this.key = key;
     this.name = name;
     this.parachainId = parachainId;
-    this.relay = relay;
+    this.ecosystem = ecosystem;
     this.type = type;
     this.ws = ws;
   }
