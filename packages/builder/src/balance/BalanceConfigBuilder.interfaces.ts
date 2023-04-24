@@ -7,6 +7,7 @@ export interface BalanceConfigBuilder {
 
 export interface BalanceConfigBuilderPrams {
   account: string;
+  asset?: string | number | bigint;
 }
 
 export interface PalletBalancesAccountDataOld extends Struct {
@@ -15,3 +16,13 @@ export interface PalletBalancesAccountDataOld extends Struct {
   readonly miscFrozen: u128;
   readonly feeFrozen: u128;
 }
+
+export interface TokensPalletAccountData {
+  free: u128;
+  reserved: u128;
+  frozen: u128;
+}
+
+export type EquilibriumSystemBalanceData = Array<
+  [number, { positive: number }]
+>;

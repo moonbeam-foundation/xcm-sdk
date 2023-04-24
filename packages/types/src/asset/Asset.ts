@@ -1,6 +1,6 @@
 import { Ecosystem } from '../chain';
 
-export interface AssetConstructorProps {
+export interface AssetConstructorParams {
   isTestAsset?: boolean;
   key: string;
   originSymbol: string;
@@ -21,7 +21,7 @@ export class Asset {
     key,
     originSymbol,
     ecosystems,
-  }: AssetConstructorProps) {
+  }: AssetConstructorParams) {
     this.isTestAsset = isTestAsset;
     this.key = key;
     this.originSymbol = originSymbol;

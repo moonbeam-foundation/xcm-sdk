@@ -12,7 +12,7 @@ export enum ChainType {
   Substrate = 'Substrate',
 }
 
-export interface ChainConstructorProps {
+export interface ChainConstructorParams {
   genesisHash?: string;
   id: string | number;
   isTestChain?: boolean;
@@ -53,7 +53,7 @@ export abstract class Chain {
     ecosystem,
     type,
     ws,
-  }: ChainConstructorProps) {
+  }: ChainConstructorParams) {
     this.genesisHash = genesisHash;
     this.id = id;
     this.isTestChain = isTestChain;

@@ -1,4 +1,4 @@
-import { Asset, AssetConstructorProps } from './Asset';
+import { Asset, AssetConstructorParams } from './Asset';
 
 export interface AssetAmountProps {
   amount: string | number | bigint;
@@ -7,7 +7,7 @@ export interface AssetAmountProps {
 }
 
 export interface AssetAmountConstructorProps
-  extends AssetConstructorProps,
+  extends AssetConstructorParams,
     AssetAmountProps {}
 
 export class AssetAmount extends Asset {
