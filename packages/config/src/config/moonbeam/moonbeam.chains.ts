@@ -55,6 +55,7 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     ws: 'wss://parachain-rpc.darwinia.network',
     weight: 1_000_000_000,
     parachainId: 2046,
+    usesEthereumAccounts: true,
     ss58Format: 18,
     genesisHash:
       '0xe71578b37a7c799b0ab4ee87ffa6f059a6b98f71f06fb8c84a8d88013a548ad6',
