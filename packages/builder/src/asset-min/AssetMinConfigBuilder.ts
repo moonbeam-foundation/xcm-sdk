@@ -15,7 +15,7 @@ export function AssetMinBuilder() {
   };
 }
 
-export function assets() {
+function assets() {
   return {
     asset: (): AssetMinConfigBuilder => ({
       build: ({ asset }: AssetMinConfigBuilderPrams): AssetMinConfig =>
@@ -30,7 +30,7 @@ export function assets() {
   };
 }
 
-export function assetRegistry() {
+function assetRegistry() {
   return {
     assetMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }: AssetMinConfigBuilderPrams): AssetMinConfig =>

@@ -20,7 +20,7 @@ export function BalanceBuilder() {
   };
 }
 
-export function assets() {
+function assets() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ account, asset }: BalanceConfigBuilderPrams): BalanceConfig =>
@@ -35,7 +35,7 @@ export function assets() {
   };
 }
 
-export function ormlTokens() {
+function ormlTokens() {
   return {
     accounts: (): BalanceConfigBuilder => ({
       build: ({ account, asset }: BalanceConfigBuilderPrams): BalanceConfig =>
@@ -50,7 +50,7 @@ export function ormlTokens() {
   };
 }
 
-export function system() {
+function system() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ account }: BalanceConfigBuilderPrams): BalanceConfig =>
