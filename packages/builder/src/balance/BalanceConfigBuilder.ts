@@ -6,7 +6,6 @@ import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { BalanceConfig } from './BalanceConfig';
 import {
   BalanceConfigBuilder,
-  BalanceConfigBuilderPrams,
   EquilibriumSystemBalanceData,
   PalletBalancesAccountDataOld,
   TokensPalletAccountData,
@@ -17,13 +16,14 @@ export function BalanceBuilder() {
     assets,
     ormlTokens,
     system,
+    tokens,
   };
 }
 
 function assets() {
   return {
     account: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }: BalanceConfigBuilderPrams): BalanceConfig =>
+      build: ({ account, asset }) =>
         new BalanceConfig({
           pallet: 'assets',
           method: 'account',
@@ -38,7 +38,7 @@ function assets() {
 function ormlTokens() {
   return {
     accounts: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }: BalanceConfigBuilderPrams): BalanceConfig =>
+      build: ({ account, asset }) =>
         new BalanceConfig({
           pallet: 'ormlTokens',
           method: 'accounts',
@@ -53,7 +53,7 @@ function ormlTokens() {
 function system() {
   return {
     account: (): BalanceConfigBuilder => ({
-      build: ({ account }: BalanceConfigBuilderPrams): BalanceConfig =>
+      build: ({ account }) =>
         new BalanceConfig({
           pallet: 'system',
           method: 'account',
@@ -68,7 +68,7 @@ function system() {
         }),
     }),
     accountEquilibrium: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }: BalanceConfigBuilderPrams): BalanceConfig =>
+      build: ({ account, asset }) =>
         new BalanceConfig({
           pallet: 'system',
           method: 'account',
@@ -90,5 +90,64 @@ function system() {
           },
         }),
     }),
+  };
+}
+
+function tokens() {
+  return {
+    accounts: () => {
+      const pallet = 'tokens';
+      const method = 'accounts';
+      const transform = ({ free, frozen }: TokensPalletAccountData): bigint =>
+        BigInt(free.sub(frozen).toString());
+
+      return {
+        foreignAsset: (): BalanceConfigBuilder => ({
+          build: ({ account, asset }) =>
+            new BalanceConfig({
+              pallet,
+              method,
+              args: [account, { ForeignAsset: asset }],
+              transform,
+            }),
+        }),
+        fungibleToken: (): BalanceConfigBuilder => ({
+          build: ({ account, asset }) =>
+            new BalanceConfig({
+              pallet,
+              method,
+              args: [account, { FungibleToken: asset }],
+              transform,
+            }),
+        }),
+        miningResource: (): BalanceConfigBuilder => ({
+          build: ({ account, asset }) =>
+            new BalanceConfig({
+              pallet,
+              method,
+              args: [account, { MiningResource: asset }],
+              transform,
+            }),
+        }),
+        token: (): BalanceConfigBuilder => ({
+          build: ({ account, asset }) =>
+            new BalanceConfig({
+              pallet,
+              method,
+              args: [account, { Token: asset }],
+              transform,
+            }),
+        }),
+        token2: (): BalanceConfigBuilder => ({
+          build: ({ account, asset }) =>
+            new BalanceConfig({
+              pallet,
+              method,
+              args: [account, { Token2: asset }],
+              transform,
+            }),
+        }),
+      };
+    },
   };
 }

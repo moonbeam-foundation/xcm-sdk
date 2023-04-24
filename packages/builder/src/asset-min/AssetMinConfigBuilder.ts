@@ -3,10 +3,7 @@
 
 import { u128 } from '@polkadot/types';
 import { AssetMinConfig } from './AssetMinConfig';
-import {
-  AssetMinConfigBuilder,
-  AssetMinConfigBuilderPrams,
-} from './AssetMinConfigBuilder.interfaces';
+import { AssetMinConfigBuilder } from './AssetMinConfigBuilder.interfaces';
 
 export function AssetMinBuilder() {
   return {
@@ -18,7 +15,7 @@ export function AssetMinBuilder() {
 function assets() {
   return {
     asset: (): AssetMinConfigBuilder => ({
-      build: ({ asset }: AssetMinConfigBuilderPrams): AssetMinConfig =>
+      build: ({ asset }) =>
         new AssetMinConfig({
           pallet: 'assets',
           method: 'asset',
@@ -33,7 +30,7 @@ function assets() {
 function assetRegistry() {
   return {
     assetMetadatas: (): AssetMinConfigBuilder => ({
-      build: ({ asset }: AssetMinConfigBuilderPrams): AssetMinConfig =>
+      build: ({ asset }) =>
         new AssetMinConfig({
           pallet: 'assetRegistry',
           method: 'assetMetadatas',
@@ -43,7 +40,7 @@ function assetRegistry() {
         }),
     }),
     currencyMetadatas: (): AssetMinConfigBuilder => ({
-      build: ({ asset }: AssetMinConfigBuilderPrams): AssetMinConfig =>
+      build: ({ asset }) =>
         new AssetMinConfig({
           pallet: 'assetRegistry',
           method: 'currencyMetadatas',
