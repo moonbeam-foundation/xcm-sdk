@@ -1,8 +1,7 @@
-export interface CallConfigConstructorProps {
+export interface CallConfigConstructorParams {
   pallet: string;
   method: string;
   args: any[];
-  transform: (data: any) => bigint;
 }
 
 export class CallConfig {
@@ -12,12 +11,9 @@ export class CallConfig {
 
   readonly args: any[];
 
-  readonly transform: (data: any) => bigint;
-
-  constructor({ pallet, method, args, transform }: CallConfigConstructorProps) {
+  constructor({ pallet, method, args }: CallConfigConstructorParams) {
     this.pallet = pallet;
     this.method = method;
     this.args = args;
-    this.transform = transform;
   }
 }

@@ -1,3 +1,3 @@
-import { CallConfig } from '../CallConfig';
+import { CallConfigWithTransform } from '../CallConfigWithTransform';
 
-export class AssetMinConfig extends CallConfig {}
+export class AssetMinConfig extends CallConfigWithTransform {}

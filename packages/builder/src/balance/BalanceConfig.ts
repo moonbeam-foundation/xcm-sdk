@@ -1,3 +1,3 @@
-import { CallConfig } from '../CallConfig';
+import { CallConfigWithTransform } from '../CallConfigWithTransform';
 
-export class BalanceConfig extends CallConfig {}
+export class BalanceConfig extends CallConfigWithTransform {}
