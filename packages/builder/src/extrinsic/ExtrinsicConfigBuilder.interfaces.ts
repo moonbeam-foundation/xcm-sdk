@@ -9,9 +9,17 @@ export interface ExtrinsicConfigBuilder {
 export interface ExtrinsicConfigBuilderPrams {
   address: string;
   amount: bigint;
-  asset: string | number | bigint;
+  asset: ExtrinsicAssetId;
   destination: Chain;
   extrinsicFunction: SubmittableExtrinsicFunction<'promise'>;
-  feeAsset: string | number | bigint;
+  fee: bigint;
+  feeAsset: ExtrinsicAssetId;
+  origin: Chain;
   source: Chain;
 }
+
+export type ExtrinsicAssetId =
+  | string
+  | number
+  | bigint
+  | { [key: string]: string | number | bigint };
