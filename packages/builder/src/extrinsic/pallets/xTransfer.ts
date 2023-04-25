@@ -2,10 +2,11 @@
 import { ExtrinsicConfig } from '../ExtrinsicConfig';
 import { ExtrinsicConfigBuilder } from '../ExtrinsicConfigBuilder.interfaces';
 
+const pallet = 'xTransfer';
+
 export function xTransfer() {
   return {
     transfer: () => {
-      const pallet = 'xTransfer';
       const method = 'transfer';
 
       return {

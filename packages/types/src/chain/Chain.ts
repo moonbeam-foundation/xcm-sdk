@@ -22,6 +22,7 @@ export interface ChainConstructorParams {
   ecosystem?: Ecosystem;
   type: ChainType;
   ws: string;
+  weight?: number;
 }
 
 export abstract class Chain {
@@ -43,6 +44,8 @@ export abstract class Chain {
 
   readonly ws: string;
 
+  readonly weight: number;
+
   constructor({
     genesisHash,
     id,
@@ -53,6 +56,7 @@ export abstract class Chain {
     ecosystem,
     type,
     ws,
+    weight,
   }: ChainConstructorParams) {
     this.genesisHash = genesisHash;
     this.id = id;
@@ -63,6 +67,7 @@ export abstract class Chain {
     this.ecosystem = ecosystem;
     this.type = type;
     this.ws = ws;
+    this.weight = weight ?? 1_000_000_000;
   }
 
   isEthereumChain(): this is EthereumChain {

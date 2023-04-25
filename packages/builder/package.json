@@ -54,6 +54,7 @@
   },
   "peerDependencies": {
     "@polkadot/api-augment": "10.x",
-    "@polkadot/types": "10.x"
+    "@polkadot/types": "10.x",
+    "@polkadot/api": "10.x"
   }
 }
