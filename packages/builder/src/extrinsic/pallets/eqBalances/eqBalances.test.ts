@@ -11,7 +11,7 @@ describe('eqBalances', () => {
       expect(extrinsic).toMatchSnapshot();
     });
 
-    it('should get correct params', () => {
+    it('should get correct arguments', () => {
       expect(extrinsic.getArgs({} as any)).toMatchSnapshot();
     });
   });
@@ -25,7 +25,7 @@ describe('eqBalances', () => {
       expect(extrinsic).toMatchSnapshot();
     });
 
-    it('should get correct params', () => {
+    it('should get correct arguments', () => {
       expect(extrinsic.getArgs({} as any)).toMatchSnapshot();
     });
   });

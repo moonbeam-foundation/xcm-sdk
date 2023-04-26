@@ -8,7 +8,7 @@ ExtrinsicConfig {
 }
 `;
 
-exports[`eqBalances transferXcm should get correct params 1`] = `
+exports[`eqBalances transferXcm should get correct arguments 1`] = `
 [
   [
     25969,
@@ -45,7 +45,7 @@ ExtrinsicConfig {
 }
 `;
 
-exports[`eqBalances xcmTransfer should get correct params 1`] = `
+exports[`eqBalances xcmTransfer should get correct arguments 1`] = `
 [
   25969,
   99000000000n,
