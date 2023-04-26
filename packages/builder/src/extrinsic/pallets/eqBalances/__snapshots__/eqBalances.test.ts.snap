@@ -11,11 +11,11 @@ ExtrinsicConfig {
 exports[`eqBalances transferXcm should get correct arguments 1`] = `
 [
   [
-    25969,
+    "USDT",
     99000000000n,
   ],
   [
-    25000,
+    "RMRK",
     5000000000n,
   ],
   {
@@ -47,7 +47,7 @@ ExtrinsicConfig {
 
 exports[`eqBalances xcmTransfer should get correct arguments 1`] = `
 [
-  25969,
+  "USDT",
   99000000000n,
   {
     "interior": {

@@ -65,7 +65,7 @@ exports[`xTransfer transfer x2 should get correct arguments 1`] = `
               "Parachain": 1000,
             },
             {
-              "PalletInstance": 25969,
+              "PalletInstance": "USDT",
             },
           ],
         },

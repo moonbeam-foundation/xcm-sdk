@@ -10,7 +10,7 @@ ExtrinsicConfig {
 
 exports[`xTokens transfer should get correct arguments 1`] = `
 [
-  25969,
+  "USDT",
   99000000000n,
   {
     "V1": {
@@ -57,7 +57,7 @@ exports[`xTokens transferMultiAsset should get correct arguments 1`] = `
                 "Parachain": 1000,
               },
               {
-                "GeneralKey": 25969,
+                "GeneralKey": "USDT",
               },
             ],
           },
@@ -100,11 +100,11 @@ exports[`xTokens transferMultiCurrencies should get correct arguments 1`] = `
 [
   [
     [
-      25969,
+      "USDT",
       99000000000n,
     ],
     [
-      25000,
+      "RMRK",
       5000000000n,
     ],
   ],

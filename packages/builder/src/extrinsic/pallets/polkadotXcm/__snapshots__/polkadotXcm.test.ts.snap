@@ -157,7 +157,7 @@ exports[`polkadotXcm limitedReserveTransferAssets x2 should get correct argument
                   "PalletInstance": 10,
                 },
                 {
-                  "GeneralIndex": 25969,
+                  "GeneralIndex": "USDT",
                 },
               ],
             },
