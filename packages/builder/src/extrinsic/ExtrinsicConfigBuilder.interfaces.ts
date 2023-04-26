@@ -1,4 +1,4 @@
-import { Chain } from '@moonbeam-network/xcm-types';
+import { EthereumChain, SubstrateChain } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from './ExtrinsicConfig';
 
 export interface ExtrinsicConfigBuilder {
@@ -9,12 +9,12 @@ export interface ExtrinsicConfigBuilderPrams {
   address: string;
   amount: bigint;
   asset: ExtrinsicAssetId;
-  destination: Chain;
+  destination: SubstrateChain | EthereumChain;
   fee: bigint;
   feeAsset: ExtrinsicAssetId;
-  origin: Chain;
+  origin: SubstrateChain | EthereumChain;
   palletInstance?: number;
-  source: Chain;
+  source: SubstrateChain | EthereumChain;
 }
 
 export type ExtrinsicAssetId =

@@ -1,5 +1,5 @@
-import { EthereumChain } from './EthereumChain';
-import { SubstrateChain } from './SubstrateChain';
+import type { EthereumChain } from './EthereumChain';
+import type { SubstrateChain } from './SubstrateChain';
 
 export enum Ecosystem {
   Polkadot = 'Polkadot',
@@ -71,10 +71,10 @@ export abstract class Chain {
   }
 
   isEthereumChain(): this is EthereumChain {
-    return this instanceof EthereumChain;
+    return this.type === ChainType.Ethereum;
   }
 
   isSubstrateChain(): this is SubstrateChain {
-    return this instanceof SubstrateChain;
+    return this.type === ChainType.Substrate;
   }
 }

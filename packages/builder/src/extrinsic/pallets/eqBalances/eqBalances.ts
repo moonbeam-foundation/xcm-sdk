@@ -2,12 +2,18 @@
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicConfigBuilder.interfaces';
 
+export enum EqBalancesFee {
+  SovereignAccWillPay = 'SovereignAccWillPay',
+  TargetChainAccWillPay = 'TargetChainAccWillPay',
+  ThisAccWillPay = 'ThisAccWillPay',
+}
+
 const pallet = 'eqBalances';
 
 export function eqBalances() {
   return {
     xcmTransfer: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee }) =>
+      build: ({ address, amount, asset, destination }) =>
         new ExtrinsicConfig({
           pallet,
           func: 'xcmTransfer',
@@ -30,7 +36,7 @@ export function eqBalances() {
                 ],
               },
             },
-            fee,
+            EqBalancesFee.ThisAccWillPay,
           ],
         }),
     }),
