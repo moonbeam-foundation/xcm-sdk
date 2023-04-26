@@ -7,8 +7,12 @@ import { XTokensWeightLimit } from './xTokens.interfaces';
  */
 export function getWeight(
   weight: number,
-  func: SubmittableExtrinsicFunction<'promise'>,
+  func?: SubmittableExtrinsicFunction<'promise'>,
 ): XTokensWeightLimit {
+  if (!func) {
+    return weight;
+  }
+
   return func.meta.args.at(-1)?.type.eq('XcmV2WeightLimit')
     ? {
         Limited: weight,
