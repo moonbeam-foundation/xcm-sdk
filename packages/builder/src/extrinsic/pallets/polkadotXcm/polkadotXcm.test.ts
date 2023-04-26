@@ -13,7 +13,7 @@ describe('polkadotXcm', () => {
         expect(extrinsic).toMatchSnapshot();
       });
 
-      it('should get correct params', () => {
+      it('should get correct arguments', () => {
         expect(extrinsic.getArgs()).toMatchSnapshot();
       });
     });
@@ -28,7 +28,7 @@ describe('polkadotXcm', () => {
         expect(extrinsic).toMatchSnapshot();
       });
 
-      it('should get correct params', () => {
+      it('should get correct arguments', () => {
         expect(extrinsic.getArgs()).toMatchSnapshot();
       });
     });
@@ -43,7 +43,7 @@ describe('polkadotXcm', () => {
         expect(extrinsic).toMatchSnapshot();
       });
 
-      it('should get correct params', () => {
+      it('should get correct arguments', () => {
         expect(extrinsic.getArgs()).toMatchSnapshot();
       });
     });
@@ -60,7 +60,7 @@ describe('polkadotXcm', () => {
         expect(extrinsic).toMatchSnapshot();
       });
 
-      it('should get correct params', () => {
+      it('should get correct arguments', () => {
         expect(extrinsic.getArgs()).toMatchSnapshot();
       });
     });

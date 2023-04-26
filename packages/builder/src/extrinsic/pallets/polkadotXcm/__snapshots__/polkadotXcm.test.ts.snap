@@ -8,7 +8,7 @@ ExtrinsicConfig {
 }
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets here should get correct params 1`] = `
+exports[`polkadotXcm limitedReserveTransferAssets here should get correct arguments 1`] = `
 [
   {
     "V1": {
@@ -61,7 +61,7 @@ ExtrinsicConfig {
 }
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets x1 should get correct params 1`] = `
+exports[`polkadotXcm limitedReserveTransferAssets x1 should get correct arguments 1`] = `
 [
   {
     "V1": {
@@ -118,7 +118,7 @@ ExtrinsicConfig {
 }
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets x2 should get correct params 1`] = `
+exports[`polkadotXcm limitedReserveTransferAssets x2 should get correct arguments 1`] = `
 [
   {
     "V1": {
@@ -180,7 +180,7 @@ ExtrinsicConfig {
 }
 `;
 
-exports[`polkadotXcm limitedReserveWithdrawAssets x2 should get correct params 1`] = `
+exports[`polkadotXcm limitedReserveWithdrawAssets x2 should get correct arguments 1`] = `
 [
   {
     "V1": {
