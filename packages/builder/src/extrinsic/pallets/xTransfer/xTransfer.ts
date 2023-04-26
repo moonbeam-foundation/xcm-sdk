@@ -15,7 +15,7 @@ export function xTransfer() {
             new ExtrinsicConfig({
               pallet,
               func: method,
-              args: [
+              getArgs: () => [
                 {
                   id: {
                     Concrete: {
@@ -54,7 +54,7 @@ export function xTransfer() {
             new ExtrinsicConfig({
               pallet,
               func: method,
-              args: [
+              getArgs: () => [
                 {
                   id: {
                     Concrete: {
