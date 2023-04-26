@@ -105,7 +105,7 @@ export function polkadotXcm() {
       const func = 'limitedReserveWithdrawAssets';
 
       return {
-        here: (): ExtrinsicConfigBuilder => ({
+        X2: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
               pallet,

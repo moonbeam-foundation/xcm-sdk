@@ -1,11 +1,9 @@
-import { extrinsicConfigBuilderPrams } from '../../../../fixtures';
+import { buildParamsMock } from '../../../../fixtures';
 import { eqBalances } from './eqBalances';
 
 describe('eqBalances', () => {
   describe('xcmTransfer', () => {
-    const extrinsic = eqBalances()
-      .xcmTransfer()
-      .build(extrinsicConfigBuilderPrams);
+    const extrinsic = eqBalances().xcmTransfer().build(buildParamsMock);
 
     it('should be correct config', () => {
       expect(extrinsic).toMatchSnapshot();
@@ -17,9 +15,7 @@ describe('eqBalances', () => {
   });
 
   describe('transferXcm', () => {
-    const extrinsic = eqBalances()
-      .transferXcm()
-      .build(extrinsicConfigBuilderPrams);
+    const extrinsic = eqBalances().transferXcm().build(buildParamsMock);
 
     it('should be correct config', () => {
       expect(extrinsic).toMatchSnapshot();

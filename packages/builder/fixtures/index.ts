@@ -1,1 +1,1 @@
-export * from './extrinsicConfigBuilderPrams';
+export * from './builderPramsMock';

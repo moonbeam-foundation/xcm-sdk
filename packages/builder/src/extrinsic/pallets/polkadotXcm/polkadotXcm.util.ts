@@ -9,7 +9,7 @@ import {
 
 export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
   asset: any;
-  func: SubmittableExtrinsicFunction<'promise'>;
+  func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
 }
 
@@ -56,9 +56,11 @@ export function getPolkadotXcmExtrinsicArgs({
 }
 
 function getAvailableVersion(
-  func: SubmittableExtrinsicFunction<'promise'>,
+  func?: SubmittableExtrinsicFunction<'promise'>,
 ): XcmMultiLocationVersion {
-  if (!func) return XcmMultiLocationVersion.v1;
+  if (!func) {
+    return XcmMultiLocationVersion.v1;
+  }
 
   const { type } = func.meta.args[0];
   const instance = func.meta.registry.createType(type.toString());

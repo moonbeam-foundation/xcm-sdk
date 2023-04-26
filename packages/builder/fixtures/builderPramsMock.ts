@@ -5,7 +5,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfigBuilderPrams } from '../src/extrinsic';
 
-export const equilibriumAlphanet = new SubstrateChain({
+export const equilibriumAlphanetMock = new SubstrateChain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x0ba4508078664cfd04f00bf17892dd1a0764ce61d90857f76c6a2ea61f008247',
@@ -17,7 +17,7 @@ export const equilibriumAlphanet = new SubstrateChain({
   ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
 });
 
-export const moonbaseAlpha = new EthereumChain({
+export const moonbaseAlphaMock = new EthereumChain({
   ecosystem: Ecosystem.AlphanetRelay,
   id: 1287,
   isTestChain: true,
@@ -27,14 +27,14 @@ export const moonbaseAlpha = new EthereumChain({
   ws: 'wss://wss.api.moonbase.moonbeam.network',
 });
 
-export const extrinsicConfigBuilderPrams: ExtrinsicConfigBuilderPrams = {
+export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   amount: 99_000_000_000n,
   asset: 25_969,
-  destination: moonbaseAlpha,
+  destination: moonbaseAlphaMock,
   fee: 5_000_000_000n,
   feeAsset: 25_000,
-  origin: moonbaseAlpha,
+  origin: moonbaseAlphaMock,
   palletInstance: 10,
-  source: equilibriumAlphanet,
+  source: equilibriumAlphanetMock,
 };

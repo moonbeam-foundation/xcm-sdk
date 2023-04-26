@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`polkadotXcm limitedReserveTransferAssets here should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "limitedReserveTransferAssets",
+  "getArgs": [Function],
+  "pallet": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets here should get correct params 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": "Here",
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets x1 should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "limitedReserveTransferAssets",
+  "getArgs": [Function],
+  "pallet": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets x1 should get correct params 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X1": {
+                "PalletInstance": 5,
+              },
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets x2 should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "limitedReserveTransferAssets",
+  "getArgs": [Function],
+  "pallet": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets x2 should get correct params 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X2": [
+                {
+                  "PalletInstance": 10,
+                },
+                {
+                  "GeneralIndex": 25969,
+                },
+              ],
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
+exports[`polkadotXcm limitedReserveWithdrawAssets x2 should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "limitedReserveWithdrawAssets",
+  "getArgs": [Function],
+  "pallet": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm limitedReserveWithdrawAssets x2 should get correct params 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X2": [
+                {
+                  "Parachain": 1000,
+                },
+                {
+                  "PalletInstance": 10,
+                },
+              ],
+            },
+            "parents": 1,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
