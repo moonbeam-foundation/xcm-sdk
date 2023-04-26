@@ -1,8 +1,8 @@
 import { Struct, u128 } from '@polkadot/types';
-import { BalanceConfig } from './BalanceConfig';
+import { QueryConfig } from '../QueryConfig';
 
 export interface BalanceConfigBuilder {
-  build: (params: BalanceConfigBuilderPrams) => BalanceConfig;
+  build: (params: BalanceConfigBuilderPrams) => QueryConfig;
 }
 
 export interface BalanceConfigBuilderPrams {

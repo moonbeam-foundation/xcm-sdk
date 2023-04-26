@@ -1,7 +1,7 @@
-import { AssetMinConfig } from './AssetMinConfig';
+import { QueryConfig } from '../QueryConfig';
 
 export interface AssetMinConfigBuilder {
-  build: (params: AssetMinConfigBuilderPrams) => AssetMinConfig;
+  build: (params: AssetMinConfigBuilderPrams) => QueryConfig;
 }
 
 export interface AssetMinConfigBuilderPrams {

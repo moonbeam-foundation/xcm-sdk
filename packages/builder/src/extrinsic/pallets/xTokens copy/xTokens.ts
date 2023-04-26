@@ -8,11 +8,18 @@ const pallet = 'xTokens';
 export function xTokens() {
   return {
     transfer: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, source }) =>
+      build: ({
+        address,
+        amount,
+        asset,
+        destination,
+        extrinsicFunction,
+        source,
+      }) =>
         new ExtrinsicConfig({
           pallet,
           func: 'transfer',
-          getArgs: (func) => [
+          args: [
             asset,
             amount,
             {
@@ -33,16 +40,24 @@ export function xTokens() {
                 },
               },
             },
-            getWeight(source.weight, func),
+            getWeight(source.weight, extrinsicFunction),
           ],
         }),
     }),
     transferMultiAsset: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, origin, source }) =>
+      build: ({
+        address,
+        amount,
+        asset,
+        destination,
+        extrinsicFunction,
+        origin,
+        source,
+      }) =>
         new ExtrinsicConfig({
           pallet,
           func: 'transferMultiAsset',
-          getArgs: (func) => [
+          args: [
             {
               V1: {
                 id: {
@@ -83,16 +98,25 @@ export function xTokens() {
                 },
               },
             },
-            getWeight(source.weight, func),
+            getWeight(source.weight, extrinsicFunction),
           ],
         }),
     }),
     transferMultiCurrencies: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee, feeAsset, source }) =>
+      build: ({
+        address,
+        amount,
+        asset,
+        destination,
+        extrinsicFunction,
+        fee,
+        feeAsset,
+        source,
+      }) =>
         new ExtrinsicConfig({
           pallet,
           func: 'transferMultiCurrencies',
-          getArgs: (func) => [
+          args: [
             [
               [asset, amount],
               [feeAsset, fee],
@@ -116,7 +140,7 @@ export function xTokens() {
                 },
               },
             },
-            getWeight(source.weight, func),
+            getWeight(source.weight, extrinsicFunction),
           ],
         }),
     }),

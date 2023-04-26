@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { u128 } from '@polkadot/types';
-import { AssetMinConfig } from './AssetMinConfig';
+import { QueryConfig } from '../QueryConfig';
 import { AssetMinConfigBuilder } from './AssetMinConfigBuilder.interfaces';
 
 export function AssetMinBuilder() {
@@ -16,9 +16,9 @@ function assets() {
   return {
     asset: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
-        new AssetMinConfig({
+        new QueryConfig({
           pallet: 'assets',
-          method: 'asset',
+          func: 'asset',
           args: [asset],
           transform: (response: any): bigint =>
             (response.minBalance as u128).toBigInt(),
@@ -28,12 +28,14 @@ function assets() {
 }
 
 function assetRegistry() {
+  const pallet = 'assetRegistry';
+
   return {
     assetMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
-        new AssetMinConfig({
-          pallet: 'assetRegistry',
-          method: 'assetMetadatas',
+        new QueryConfig({
+          pallet,
+          func: 'assetMetadatas',
           args: [{ ForeignAssetId: asset }],
           transform: (response: any): bigint =>
             (response.minimalBalance as u128).toBigInt(),
@@ -41,9 +43,9 @@ function assetRegistry() {
     }),
     currencyMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
-        new AssetMinConfig({
-          pallet: 'assetRegistry',
-          method: 'currencyMetadatas',
+        new QueryConfig({
+          pallet,
+          func: 'currencyMetadatas',
           args: [{ Token2: asset }],
           transform: (response: any): bigint =>
             (response.minimalBalance as u128).toBigInt(),

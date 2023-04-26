@@ -3,7 +3,7 @@
 
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
-import { BalanceConfig } from './BalanceConfig';
+import { QueryConfig } from '../QueryConfig';
 import {
   BalanceConfigBuilder,
   EquilibriumSystemBalanceData,
@@ -24,9 +24,9 @@ function assets() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ account, asset }) =>
-        new BalanceConfig({
+        new QueryConfig({
           pallet: 'assets',
-          method: 'account',
+          func: 'account',
           args: [asset, account],
           transform: (response: any): bigint =>
             (response.balance as u128).toBigInt(),
@@ -39,9 +39,9 @@ function ormlTokens() {
   return {
     accounts: (): BalanceConfigBuilder => ({
       build: ({ account, asset }) =>
-        new BalanceConfig({
+        new QueryConfig({
           pallet: 'ormlTokens',
-          method: 'accounts',
+          func: 'accounts',
           args: [account, { ForeignAsset: asset }],
           transform: ({ free, frozen }: TokensPalletAccountData): bigint =>
             BigInt(free.sub(frozen).toString()),
@@ -54,9 +54,9 @@ function system() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ account }) =>
-        new BalanceConfig({
+        new QueryConfig({
           pallet: 'system',
-          method: 'account',
+          func: 'account',
           args: [account],
           transform: (response: any): bigint => {
             const balance = response.data as PalletBalancesAccountData &
@@ -69,9 +69,9 @@ function system() {
     }),
     accountEquilibrium: (): BalanceConfigBuilder => ({
       build: ({ account, asset }) =>
-        new BalanceConfig({
+        new QueryConfig({
           pallet: 'system',
-          method: 'account',
+          func: 'account',
           args: [account],
           transform: (response: any): bigint => {
             if (response.data.isEmpty) {
@@ -97,52 +97,52 @@ function tokens() {
   return {
     accounts: () => {
       const pallet = 'tokens';
-      const method = 'accounts';
+      const func = 'accounts';
       const transform = ({ free, frozen }: TokensPalletAccountData): bigint =>
         BigInt(free.sub(frozen).toString());
 
       return {
         foreignAsset: (): BalanceConfigBuilder => ({
           build: ({ account, asset }) =>
-            new BalanceConfig({
+            new QueryConfig({
               pallet,
-              method,
+              func,
               args: [account, { ForeignAsset: asset }],
               transform,
             }),
         }),
         fungibleToken: (): BalanceConfigBuilder => ({
           build: ({ account, asset }) =>
-            new BalanceConfig({
+            new QueryConfig({
               pallet,
-              method,
+              func,
               args: [account, { FungibleToken: asset }],
               transform,
             }),
         }),
         miningResource: (): BalanceConfigBuilder => ({
           build: ({ account, asset }) =>
-            new BalanceConfig({
+            new QueryConfig({
               pallet,
-              method,
+              func,
               args: [account, { MiningResource: asset }],
               transform,
             }),
         }),
         token: (): BalanceConfigBuilder => ({
           build: ({ account, asset }) =>
-            new BalanceConfig({
+            new QueryConfig({
               pallet,
-              method,
+              func,
               args: [account, { Token: asset }],
               transform,
             }),
         }),
         token2: (): BalanceConfigBuilder => ({
           build: ({ account, asset }) =>
-            new BalanceConfig({
+            new QueryConfig({
               pallet,
-              method,
+              func,
               args: [account, { Token2: asset }],
               transform,
             }),

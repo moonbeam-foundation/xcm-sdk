@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
-import { ExtrinsicConfig } from '../ExtrinsicConfig';
-import { ExtrinsicConfigBuilder } from '../ExtrinsicConfigBuilder.interfaces';
+import { ExtrinsicConfig } from '../../ExtrinsicConfig';
+import { ExtrinsicConfigBuilder } from '../../ExtrinsicConfigBuilder.interfaces';
 
 const pallet = 'xTransfer';
 
@@ -14,7 +14,7 @@ export function xTransfer() {
           build: ({ address, amount, destination }) =>
             new ExtrinsicConfig({
               pallet,
-              method,
+              func: method,
               args: [
                 {
                   id: {
@@ -53,7 +53,7 @@ export function xTransfer() {
           build: ({ address, amount, destination, asset }) =>
             new ExtrinsicConfig({
               pallet,
-              method,
+              func: method,
               args: [
                 {
                   id: {
