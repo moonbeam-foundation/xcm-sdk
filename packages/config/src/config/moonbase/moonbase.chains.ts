@@ -51,7 +51,7 @@ export const MOONBASE_CHAINS_MAP: ChainsMap<MoonbaseChains> = {
     ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
     weight: 1_000_000_000,
     parachainId: 2011,
-    moonAssetId: 1735159154,
+    moonAssetId: 1_735_159_154,
     ss58Format: 68,
     genesisHash:
       '0x0ba4508078664cfd04f00bf17892dd1a0764ce61d90857f76c6a2ea61f008247',
