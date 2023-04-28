@@ -39,7 +39,7 @@ export const EQD: MoonbeamXcmConfig = {
     [origin.key]: withdraw.xTokens({
       balance: balance.systemEquilibrium(eqdId),
       destination: origin,
-      feePerWeight: 1,
+      feePerWeight: 0.0375,
     }),
   },
 };
