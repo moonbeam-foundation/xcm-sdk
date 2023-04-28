@@ -5,6 +5,7 @@ import {
   XTokensExtrinsicSuccessEvent,
   XTransferExtrinsicSuccessEvent,
 } from '../../../extrinsic';
+import { EqBalancesSuccessEvent } from '../../../extrinsic/eqBalances';
 import { getMoonAssetId, getPalletInstance } from '../../config.utils';
 import {
   assets,
@@ -20,12 +21,14 @@ const asset = assets[AssetSymbol.GLMR];
 const acala = chains[ChainKey.Acala];
 const astar = chains[ChainKey.Astar];
 const bifrost = chains[ChainKey.BifrostPolkadot];
+const equilibrium = chains[ChainKey.Equilibrium];
 const parallel = chains[ChainKey.Parallel];
 const phala = chains[ChainKey.Phala];
 
 const acalaGlmrId = getMoonAssetId(acala);
 const astarGlmrId = getMoonAssetId(astar);
 const bifrostGlmrId = getMoonAssetId(bifrost);
+const equilibriumGlmrId = getMoonAssetId(equilibrium) as number;
 const parallelGlmrId = getMoonAssetId(parallel);
 const phalaGlmrId = getMoonAssetId(phala);
 
@@ -70,6 +73,16 @@ export const GLMR: MoonbeamXcmConfig = {
           [XTokensExtrinsicCurrencyTypes.Token2]: bifrostGlmrId,
         }),
     },
+    [equilibrium.key]: {
+      source: equilibrium,
+      balance: balance.systemEquilibrium(equilibriumGlmrId),
+      extrinsic: extrinsic
+        .eqBalances()
+        .transferXcm()
+        .successEvent(EqBalancesSuccessEvent.ExtrinsicSuccess)
+        .asset(equilibriumGlmrId)
+        .feeAsset(equilibriumGlmrId),
+    },
     [parallel.key]: {
       source: parallel,
       balance: balance.assets(parallelGlmrId),
@@ -109,6 +122,11 @@ export const GLMR: MoonbeamXcmConfig = {
       destination: bifrost,
       feePerWeight: 0.8,
       sourceMinBalance: balance.minCurrencyMetadata(bifrostGlmrId),
+    }),
+    [equilibrium.key]: withdraw.xTokens({
+      balance: balance.systemEquilibrium(equilibriumGlmrId),
+      destination: equilibrium,
+      feePerWeight: 0.125,
     }),
     [parallel.key]: withdraw.xTokens({
       balance: balance.assets(parallelGlmrId),

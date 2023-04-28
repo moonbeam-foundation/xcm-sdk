@@ -53,6 +53,7 @@ export enum ChainKey {
   CrustShadow = 'CrustShadow',
   Darwinia = 'Darwinia',
   DarwiniaPangoro = 'DarwiniaPangoro',
+  Equilibrium = 'Equilibrium',
   EquilibriumAlphanet = 'EquilibriumAlphanet',
   Integritee = 'Integritee',
   Interlay = 'Interlay',

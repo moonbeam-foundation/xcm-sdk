@@ -114,7 +114,21 @@ function systemEquilibrium(id: number): EquilibriumSystemBalanceConfig {
         return 0n;
       }
 
-      const balances = data.toJSON() as any as EquilibriumSystemBalanceData;
+      const res = data.toJSON() as unknown;
+      let balances: EquilibriumSystemBalanceData | undefined;
+
+      if (Array.isArray(res)) {
+        balances = res;
+      }
+
+      if (Array.isArray((res as any)?.v0?.balance)) {
+        balances = (res as any).v0.balance;
+      }
+
+      if (!balances) {
+        throw new Error("Can't get balance from Equilibrium chain");
+      }
+
       const balance = balances.find(([assetId]) => assetId === id);
 
       if (!balance) {

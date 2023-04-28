@@ -6,6 +6,8 @@ import { ASTR } from './assets/astr';
 import { AUSD } from './assets/ausd';
 import { BNC } from './assets/bnc';
 import { DOT } from './assets/dot';
+import { EQ } from './assets/eq';
+import { EQD } from './assets/eqd';
 import { GLMR } from './assets/glmr';
 import { IBTC } from './assets/ibtc';
 import { INTR } from './assets/intr';
@@ -19,6 +21,8 @@ export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = {
   [AssetSymbol.ASTR]: ASTR,
   [AssetSymbol.AUSD]: AUSD,
   [AssetSymbol.BNC]: BNC,
+  [AssetSymbol.EQ]: EQ,
+  [AssetSymbol.EQD]: EQD,
   [AssetSymbol.DOT]: DOT,
   [AssetSymbol.GLMR]: GLMR,
   [AssetSymbol.IBTC]: IBTC,

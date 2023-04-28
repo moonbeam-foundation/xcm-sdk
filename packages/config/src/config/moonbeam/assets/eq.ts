@@ -6,14 +6,14 @@ import {
   chains,
   extrinsic,
   withdraw,
-} from '../moonbase.common';
-import { MoonbaseXcmConfig } from '../moonbase.interfaces';
+} from '../moonbeam.common';
+import { MoonbeamXcmConfig } from '../moonbeam.interfaces';
 
 const asset = assets[AssetSymbol.EQ];
-const origin = chains[ChainKey.EquilibriumAlphanet];
+const origin = chains[ChainKey.Equilibrium];
 const eqId = 25_969;
 
-export const EQ: MoonbaseXcmConfig = {
+export const EQ: MoonbeamXcmConfig = {
   asset,
   origin,
   deposit: {
@@ -32,7 +32,7 @@ export const EQ: MoonbaseXcmConfig = {
     [origin.key]: withdraw.xTokens({
       balance: balance.systemEquilibrium(eqId),
       destination: origin,
-      feePerWeight: 3.5,
+      feePerWeight: 100,
     }),
   },
 };

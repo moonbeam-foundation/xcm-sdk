@@ -1,4 +1,4 @@
-import { ChainKey } from '../../constants';
+import { AssetSymbol, ChainKey } from '../../constants';
 import { ChainsMap } from '../config.interfaces';
 import { MoonbeamChains } from './moonbeam.interfaces';
 
@@ -7,6 +7,7 @@ export const MOONBEAM_CHAINS = <const>[
   ChainKey.Astar,
   ChainKey.BifrostPolkadot,
   ChainKey.Darwinia,
+  ChainKey.Equilibrium,
   ChainKey.Interlay,
   ChainKey.Parallel,
   ChainKey.Phala,
@@ -58,6 +59,20 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     ss58Format: 18,
     genesisHash:
       '0xe71578b37a7c799b0ab4ee87ffa6f059a6b98f71f06fb8c84a8d88013a548ad6',
+  },
+  [ChainKey.Equilibrium]: {
+    key: ChainKey.Equilibrium,
+    name: 'Equilibrium',
+    ws: 'wss://node.pol.equilibrium.io',
+    weight: 1_000_000_000,
+    parachainId: 2011,
+    moonAssetId: 1_735_159_154,
+    ss58Format: 68,
+    genesisHash:
+      '0x89d3ec46d2fb43ef5a9713833373d5ea666b092fa8fd68fbc34596036571b907',
+    assetsDecimals: {
+      [AssetSymbol.GLMR]: 9,
+    },
   },
   [ChainKey.Interlay]: {
     key: ChainKey.Interlay,
