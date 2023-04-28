@@ -100,9 +100,13 @@ function initByChain<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
                 ChainKeys
               >([configBuilder.moonChain.ws, config.source.ws]);
               const meta = foreignPolkadot.getMetadata();
-              const nativeAsset =
-                configBuilder.assets[meta.symbol] ||
-                createDummyAsset(meta.symbol);
+              const nativeAsset = [
+                ChainKey.Equilibrium,
+                ChainKey.EquilibriumAlphanet,
+              ].includes(config.source.key)
+                ? configBuilder.assets[AssetSymbol.EQ as Symbols]
+                : configBuilder.assets[meta.symbol] ||
+                  createDummyAsset(meta.symbol);
 
               return getDepositData({
                 account,
