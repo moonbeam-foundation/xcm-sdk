@@ -126,7 +126,7 @@ export const GLMR: MoonbeamXcmConfig = {
     [equilibrium.key]: withdraw.xTokens({
       balance: balance.systemEquilibrium(equilibriumGlmrId),
       destination: equilibrium,
-      feePerWeight: 1,
+      feePerWeight: 0.125,
     }),
     [parallel.key]: withdraw.xTokens({
       balance: balance.assets(parallelGlmrId),
