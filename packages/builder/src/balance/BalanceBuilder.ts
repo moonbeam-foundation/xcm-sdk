@@ -9,7 +9,7 @@ import {
   EquilibriumSystemBalanceData,
   PalletBalancesAccountDataOld,
   TokensPalletAccountData,
-} from './BalanceConfigBuilder.interfaces';
+} from './BalanceBuilder.interfaces';
 
 export function BalanceBuilder() {
   return {
@@ -61,7 +61,7 @@ function system() {
           transform: (response: any): bigint => {
             const balance = response.data as PalletBalancesAccountData &
               PalletBalancesAccountDataOld;
-            const frozen = balance.miscFrozen ?? balance.frozen ?? 0n;
+            const frozen = balance.miscFrozen ?? balance.frozen;
 
             return BigInt(balance.free.sub(frozen).toString());
           },
@@ -73,13 +73,26 @@ function system() {
           pallet: 'system',
           func: 'account',
           args: [account],
-          transform: (response: any): bigint => {
+          transform: (response): bigint => {
             if (response.data.isEmpty) {
               return 0n;
             }
 
-            const balances =
-              response.data.toJSON() as any as EquilibriumSystemBalanceData;
+            const res = response.data.toJSON() as unknown;
+            let balances: EquilibriumSystemBalanceData | undefined;
+
+            if (Array.isArray(res)) {
+              balances = res;
+            }
+
+            if (Array.isArray((res as any)?.v0?.balance)) {
+              balances = (res as any).v0.balance;
+            }
+
+            if (!balances) {
+              throw new Error("Can't get balance from Equilibrium chain");
+            }
+
             const balance = balances.find(([assetId]) => assetId === asset);
 
             if (!balance) {

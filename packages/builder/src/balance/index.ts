@@ -1,2 +1,2 @@
-export * from './BalanceConfigBuilder';
-export * from './BalanceConfigBuilder.interfaces';
+export * from './BalanceBuilder';
+export * from './BalanceBuilder.interfaces';

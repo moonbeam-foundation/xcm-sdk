@@ -5,7 +5,7 @@ import {
   ExtrinsicConfigBuilderPrams,
   Parents,
   XcmMultiLocationVersion,
-} from '../../ExtrinsicConfigBuilder.interfaces';
+} from '../../ExtrinsicBuilder.interfaces';
 
 export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
   asset: any;

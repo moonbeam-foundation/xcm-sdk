@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
+import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
-import { ExtrinsicConfigBuilder } from '../../ExtrinsicConfigBuilder.interfaces';
 import { getPolkadotXcmExtrinsicArgs } from '../polkadotXcm/polkadotXcm.util';
 
 const pallet = 'xcmPallet';
