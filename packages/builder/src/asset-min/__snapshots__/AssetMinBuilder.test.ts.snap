@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`assetMinBuilder assetRegistry assetMetadatas should be correct config 1`] = `
+QueryConfig {
+  "args": [
+    {
+      "ForeignAssetId": "<ASSET>",
+    },
+  ],
+  "func": "assetMetadatas",
+  "pallet": "assetRegistry",
+  "transform": [Function],
+}
+`;
+
+exports[`assetMinBuilder assetRegistry currencyMetadatas should be correct config 1`] = `
+QueryConfig {
+  "args": [
+    {
+      "Token2": "<ASSET>",
+    },
+  ],
+  "func": "currencyMetadatas",
+  "pallet": "assetRegistry",
+  "transform": [Function],
+}
+`;
+
+exports[`assetMinBuilder assets asset should be correct config 1`] = `
+QueryConfig {
+  "args": [
+    "<ASSET>",
+  ],
+  "func": "asset",
+  "pallet": "assets",
+  "transform": [Function],
+}
+`;

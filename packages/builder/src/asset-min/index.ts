@@ -1,2 +1,2 @@
-export * from './AssetMinConfigBuilder';
-export * from './AssetMinConfigBuilder.interfaces';
+export * from './AssetMinBuilder';
+export * from './AssetMinBuilder.interfaces';
