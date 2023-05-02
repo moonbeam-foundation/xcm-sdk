@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 0.4.3
+
+### Patch Changes
+
+- [#77](https://github.com/PureStake/xcm-sdk/pull/77) [`9aa203e`](https://github.com/PureStake/xcm-sdk/commit/9aa203e1fd8866c066cd538dea15c05ca4ebc91c) Thanks [@ekenigs](https://github.com/ekenigs)! - Added EQ, EQD to Moonbeam and GLMR to Equilibrium
+
 ## 0.4.2
 
 ### Patch Changes

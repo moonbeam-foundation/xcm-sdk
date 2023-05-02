@@ -122,6 +122,17 @@ export const darwiniaPangoro = new EthereumChain({
   ws: 'wss://pangoro-rpc.darwinia.network',
 });
 
+export const equilibrium = new SubstrateChain({
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x89d3ec46d2fb43ef5a9713833373d5ea666b092fa8fd68fbc34596036571b907',
+  key: 'equilibrium',
+  name: 'Equilibrium',
+  parachainId: 2011,
+  ss58Format: 68,
+  ws: 'wss://node.pol.equilibrium.io',
+});
+
 export const equilibriumAlphanet = new SubstrateChain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -385,6 +396,7 @@ export const chainsList: (EthereumChain | SubstrateChain)[] = [
   darwinia,
   darwiniaCrab,
   darwiniaPangoro,
+  equilibrium,
   equilibriumAlphanet,
   integritee,
   interlay,
