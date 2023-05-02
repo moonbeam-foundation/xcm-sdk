@@ -1,4 +1,5 @@
 import {
+  AssetMinConfigBuilder,
   BalanceConfigBuilder,
   ExtrinsicConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -9,6 +10,7 @@ interface CommonParams {
   balance: BalanceConfigBuilder;
   destinations: Chain[];
   extrinsic: ExtrinsicConfigBuilder;
+  min?: AssetMinConfigBuilder;
 }
 
 interface PropsWithFee extends CommonParams {
@@ -36,6 +38,8 @@ export class AssetConfig {
 
   readonly feeBalance?: BalanceConfigBuilder;
 
+  readonly min?: AssetMinConfigBuilder;
+
   constructor({
     asset,
     balance,
@@ -43,6 +47,7 @@ export class AssetConfig {
     extrinsic,
     feeAsset,
     feeBalance,
+    min,
   }: AssetConfigConstructorParams) {
     this.asset = asset;
     this.balance = balance;
@@ -50,6 +55,7 @@ export class AssetConfig {
     this.extrinsic = extrinsic;
     this.feeAsset = feeAsset;
     this.feeBalance = feeBalance;
+    this.min = min;
 
     if (feeAsset && !feeBalance) {
       throw new Error(
