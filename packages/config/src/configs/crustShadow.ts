@@ -7,7 +7,7 @@ import { ChainConfig } from '../ChainConfig';
 import { csm, movr } from '../assets';
 import { crustShadow, moonriver } from '../chains';
 
-export const calamariConfig = new ChainConfig({
+export const crustShadowConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: csm,
