@@ -32,7 +32,7 @@ export function xTokens() {
               [formatAssetIdToERC20(asset), amount],
               [formatAssetIdToERC20(feeAsset), fee],
             ],
-            1,
+            1, // index of the fee asset
             getDestinationMultilocation(address, destination),
             4_000_000_000, // TODO: where we can put this value?
           ],
