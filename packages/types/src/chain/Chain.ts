@@ -20,6 +20,7 @@ export type ChainAssetId =
   | { [key: string]: string | number | bigint };
 
 export type ChainAssetsData = {
+  decimals?: number;
   id?: ChainAssetId;
   palletInstance?: number;
 };
@@ -109,5 +110,9 @@ export abstract class Chain {
 
   getAssetPalletInstance(asset: Asset): number | undefined {
     return this.assetsData.get(asset.key)?.palletInstance;
+  }
+
+  getAssetDecimals(asset: Asset): number | undefined {
+    return this.assetsData.get(asset.key)?.decimals;
   }
 }

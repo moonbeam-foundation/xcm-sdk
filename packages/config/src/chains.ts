@@ -3,8 +3,19 @@ import {
   EthereumChain,
   SubstrateChain,
 } from '@moonbeam-network/xcm-types';
+import { ausd, glmr } from './assets';
 
 export const acala = new SubstrateChain({
+  assetsData: [
+    {
+      asset: ausd,
+      id: { Token: ausd.originSymbol },
+    },
+    {
+      asset: glmr,
+      id: { ForeignAsset: 0 },
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xfc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c',
@@ -21,7 +32,7 @@ export const alphanetRelay = new SubstrateChain({
     '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
   isTestChain: true,
   key: 'alphanet-relay',
-  name: 'Alphanet Ecosystem',
+  name: 'Alphanet Relay',
   parachainId: 0,
   ss58Format: 42,
   ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
