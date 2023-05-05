@@ -12,6 +12,12 @@ export enum ChainType {
   Substrate = 'Substrate',
 }
 
+export type ChainAssetId =
+  | string
+  | number
+  | bigint
+  | { [key: string]: string | number | bigint };
+
 export interface ChainConstructorParams {
   genesisHash?: string;
   id: string | number;

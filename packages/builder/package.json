@@ -55,6 +55,8 @@
   "peerDependencies": {
     "@polkadot/api-augment": "10.x",
     "@polkadot/types": "10.x",
-    "@polkadot/api": "10.x"
+    "@polkadot/api": "10.x",
+    "@polkadot/util": "11.x",
+    "@polkadot/util-crypto": "11.x"
   }
 }
