@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 0.4.4
+
+### Patch Changes
+
+- [#79](https://github.com/PureStake/xcm-sdk/pull/79) [`13708fc`](https://github.com/PureStake/xcm-sdk/commit/13708fc658d0d159a0831edec1da90ff5e89dfb2) Thanks [@ekenigs](https://github.com/ekenigs)! - Fixed xTokens XCM V3 for Bifrost
+
 ## 0.4.3
 
 ### Patch Changes
