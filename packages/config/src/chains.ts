@@ -3,7 +3,43 @@ import {
   EthereumChain,
   SubstrateChain,
 } from '@moonbeam-network/xcm-types';
-import { ausd, dev, glmr, movr } from './assets';
+import {
+  aca,
+  astr,
+  auq,
+  ausd,
+  bit,
+  bnc,
+  crab,
+  csm,
+  dev,
+  dot,
+  eq,
+  eqd,
+  glmr,
+  hko,
+  ibtc,
+  intr,
+  kar,
+  kbtc,
+  kint,
+  kma,
+  ksm,
+  lit,
+  movr,
+  neer,
+  para,
+  paring,
+  pha,
+  ring,
+  rmrk,
+  sdn,
+  teer,
+  tt1,
+  unit,
+  usdt,
+  xrt,
+} from './assets';
 
 export const acala = new SubstrateChain({
   assetsData: [
@@ -112,7 +148,8 @@ export const calamari = new SubstrateChain({
   assetsData: [
     {
       asset: movr,
-      id: 11,
+      balanceId: 11,
+      id: { MantaCurrency: 11 },
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -126,6 +163,13 @@ export const calamari = new SubstrateChain({
 });
 
 export const crustShadow = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      balanceId: 232263652204149413431520870009560565298n,
+      id: { OtherReserve: 232263652204149413431520870009560565298n },
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xd4c0c08ca49dc7c680c3dac71a7c0703e5b222f4b6c03fe4c5219bb8f22c18dc',
@@ -165,6 +209,21 @@ export const darwiniaPangoro = new EthereumChain({
 });
 
 export const equilibrium = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      decimals: 9,
+      id: 1_735_159_154,
+    },
+    {
+      asset: eq,
+      id: 25_969,
+    },
+    {
+      asset: eqd,
+      id: 6_648_164,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x89d3ec46d2fb43ef5a9713833373d5ea666b092fa8fd68fbc34596036571b907',
@@ -176,6 +235,21 @@ export const equilibrium = new SubstrateChain({
 });
 
 export const equilibriumAlphanet = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      decimals: 9,
+      id: 1_735_159_154,
+    },
+    {
+      asset: eq,
+      id: 25_969,
+    },
+    {
+      asset: eqd,
+      id: 6_648_164,
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x0ba4508078664cfd04f00bf17892dd1a0764ce61d90857f76c6a2ea61f008247',
@@ -188,6 +262,16 @@ export const equilibriumAlphanet = new SubstrateChain({
 });
 
 export const interlay = new SubstrateChain({
+  assetsData: [
+    {
+      asset: intr,
+      id: { Token: intr.originSymbol },
+    },
+    {
+      asset: ibtc,
+      id: { Token: ibtc.originSymbol },
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xbf88efe70e9e0e916416e8bed61f2b45717f517d7f3523e33c7b001e5ffcbc72',
@@ -210,6 +294,16 @@ export const integritee = new SubstrateChain({
 });
 
 export const karura = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      id: { ForeignAsset: 3 },
+    },
+    {
+      asset: ausd,
+      id: { Token: 'KUSD' },
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xbaf5aabe40646d11f0ee8abbdc64f4a4b7674925cba08e4a05ff9ebed6e2126b',
@@ -221,6 +315,13 @@ export const karura = new SubstrateChain({
 });
 
 export const khala = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      id: 6,
+      palletInstance: 10,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xd43540ba6d3eb4897c28a77d48cb5b729fea37603cbbfc7a86a73b72adb3be8d',
@@ -232,6 +333,16 @@ export const khala = new SubstrateChain({
 });
 
 export const kinitsugi = new SubstrateChain({
+  assetsData: [
+    {
+      asset: kint,
+      id: { Token: kint.originSymbol },
+    },
+    {
+      asset: kbtc,
+      id: { Token: kbtc.originSymbol },
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x9af9a64e6e4da8e3073901c3ff0cc4c3aad9563786d89daf6ad820b6e14a0b8b',
@@ -254,6 +365,12 @@ export const kusama = new SubstrateChain({
 });
 
 export const litentryAlphanet = new SubstrateChain({
+  assetsData: [
+    {
+      asset: lit,
+      id: 'SelfReserve',
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x4decfd421755d9008781d00ce40ea4cf47ec24a3717a34ca995126fc4a78c4f8',
@@ -266,6 +383,12 @@ export const litentryAlphanet = new SubstrateChain({
 });
 
 export const litmus = new SubstrateChain({
+  assetsData: [
+    {
+      asset: lit,
+      id: 'SelfReserve',
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xda5831fbc8570e3c6336d0d72b8c08f8738beefec812df21ef2afc2982ede09c',
@@ -277,6 +400,48 @@ export const litmus = new SubstrateChain({
 });
 
 export const moonbaseAlpha = new EthereumChain({
+  assetsData: [
+    {
+      asset: auq,
+      id: '69536036667157951501899290870203586130',
+    },
+    {
+      asset: bit,
+      id: '306639095083798603270835754515874921389',
+    },
+    {
+      asset: dev,
+      id: '0x0000000000000000000000000000000000000802',
+    },
+    {
+      asset: eq,
+      id: '190590555344745888270686124937537713878',
+    },
+    {
+      asset: eqd,
+      id: '187224307232923873519830480073807488153',
+    },
+    {
+      asset: lit,
+      id: '65216491554813189869575508812319036608',
+    },
+    {
+      asset: neer,
+      id: '52280927600883288560727505734200597597',
+    },
+    {
+      asset: paring,
+      id: '173481220575862801646329923366065693029',
+    },
+    {
+      asset: tt1,
+      id: '156305701417244550631956600137082963628',
+    },
+    {
+      asset: unit,
+      id: '42259045809535163221576417993425387648',
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   id: 1287,
   isTestChain: true,
@@ -297,6 +462,56 @@ export const moonbaseBeta = new EthereumChain({
 });
 
 export const moonbeam = new EthereumChain({
+  assetsData: [
+    {
+      asset: aca,
+      id: '224821240862170613278369189818311486111',
+    },
+    {
+      asset: astr,
+      id: '224077081838586484055667086558292981199',
+    },
+    {
+      asset: ausd,
+      id: '110021739665376159354538090254163045594',
+    },
+    {
+      asset: bnc,
+      id: '165823357460190568952172802245839421906',
+    },
+    {
+      asset: dot,
+      id: '42259045809535163221576417993425387648',
+    },
+    {
+      asset: glmr,
+      id: '0x0000000000000000000000000000000000000802',
+    },
+    {
+      asset: ibtc,
+      id: '120637696315203257380661607956669368914',
+    },
+    {
+      asset: intr,
+      id: '101170542313601871197860408087030232491',
+    },
+    {
+      asset: para,
+      id: '32615670524745285411807346420584982855',
+    },
+    {
+      asset: pha,
+      id: '132685552157663328694213725410064821485',
+    },
+    {
+      asset: ring,
+      id: '125699734534028342599692732320197985871',
+    },
+    {
+      asset: usdt,
+      id: '311091173110107856861649819128533077277',
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   id: 1284,
   key: 'moonbeam',
@@ -306,6 +521,80 @@ export const moonbeam = new EthereumChain({
 });
 
 export const moonriver = new EthereumChain({
+  assetsData: [
+    {
+      asset: ausd,
+      id: '214920334981412447805621250067209749032',
+    },
+    {
+      asset: bnc,
+      id: '319623561105283008236062145480775032445',
+    },
+    {
+      asset: crab,
+      id: '173481220575862801646329923366065693029',
+    },
+    {
+      asset: csm,
+      id: '108457044225666871745333730479173774551',
+    },
+    {
+      asset: hko,
+      id: '76100021443485661246318545281171740067',
+    },
+    {
+      asset: kar,
+      id: '10810581592933651521121702237638664357',
+    },
+    {
+      asset: kbtc,
+      id: '328179947973504579459046439826496046832',
+    },
+    {
+      asset: kint,
+      id: '175400718394635817552109270754364440562',
+    },
+    {
+      asset: kma,
+      id: '213357169630950964874127107356898319277',
+    },
+    {
+      asset: ksm,
+      id: '42259045809535163221576417993425387648',
+    },
+    {
+      asset: lit,
+      id: '65216491554813189869575508812319036608',
+    },
+    {
+      asset: movr,
+      id: '0x0000000000000000000000000000000000000802',
+    },
+    {
+      asset: pha,
+      id: '189307976387032586987344677431204943363',
+    },
+    {
+      asset: rmrk,
+      id: '182365888117048807484804376330534607370',
+    },
+    {
+      asset: sdn,
+      id: '16797826370226091782818345603793389938',
+    },
+    {
+      asset: teer,
+      id: '105075627293246237499203909093923548958',
+    },
+    {
+      asset: usdt,
+      id: '311091173110107856861649819128533077277',
+    },
+    {
+      asset: xrt,
+      id: '108036400430056508975016746969135344601',
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   id: 1285,
   key: 'moonriver',
@@ -315,6 +604,12 @@ export const moonriver = new EthereumChain({
 });
 
 export const parallel = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      id: 114,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97',
@@ -326,6 +621,12 @@ export const parallel = new SubstrateChain({
 });
 
 export const parallelHeiko = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      id: 113,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x64a1c658a48b2e70a7fb1ad4c39eea35022568c20fc44a6e2e3d0a57aee6053b',
@@ -337,6 +638,12 @@ export const parallelHeiko = new SubstrateChain({
 });
 
 export const phala = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      id: 1,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736',
@@ -370,6 +677,13 @@ export const robonomics = new SubstrateChain({
 });
 
 export const shiden = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      id: 18446744073709551620n,
+      palletInstance: 10,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xf1cf9022c7ebb34b162d5b5e34e705a5a740b2d0ecc1009fb89023e62a488108',
@@ -381,6 +695,13 @@ export const shiden = new SubstrateChain({
 });
 
 export const statemine = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      id: 18446744073709551620n,
+      palletInstance: 10,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',

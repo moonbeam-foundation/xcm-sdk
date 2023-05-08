@@ -19,17 +19,16 @@ export type ChainAssetId =
   | bigint
   | { [key: string]: string | number | bigint };
 
-export type ChainAssetsData = {
+export interface ChainAssetsData {
   decimals?: number;
   id?: ChainAssetId;
+  balanceId?: ChainAssetId;
   palletInstance?: number;
-};
+}
 
-export type ChainAssetsDataWithAsset = {
+export interface ChainAssetsDataWithAsset extends ChainAssetsData {
   asset: Asset;
-  id?: ChainAssetId;
-  palletInstance?: number;
-};
+}
 
 export interface ChainConstructorParams {
   assetsData?: ChainAssetsDataWithAsset[];
@@ -106,6 +105,10 @@ export abstract class Chain {
 
   getAssetId(asset: Asset): ChainAssetId {
     return this.assetsData.get(asset.key)?.id ?? asset.originSymbol;
+  }
+
+  getBalanceAssetId(asset: Asset): ChainAssetId {
+    return this.assetsData.get(asset.key)?.balanceId ?? this.getAssetId(asset);
   }
 
   getAssetPalletInstance(asset: Asset): number | undefined {
