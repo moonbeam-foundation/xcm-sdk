@@ -3,7 +3,7 @@ import {
   EthereumChain,
   SubstrateChain,
 } from '@moonbeam-network/xcm-types';
-import { ausd, glmr } from './assets';
+import { ausd, dev, glmr, movr } from './assets';
 
 export const acala = new SubstrateChain({
   assetsData: [
@@ -39,6 +39,13 @@ export const alphanetRelay = new SubstrateChain({
 });
 
 export const astar = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      id: 18446744073709551619n,
+      palletInstance: 10,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6',
@@ -50,6 +57,12 @@ export const astar = new SubstrateChain({
 });
 
 export const bifrostKusama = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      id: { Token: movr.originSymbol },
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x9f28c6a68e0fc9646eff64935684f6eeeece527e37bbe1f213d22caa1d9d6bed',
@@ -61,6 +74,12 @@ export const bifrostKusama = new SubstrateChain({
 });
 
 export const bifrostPolkadot = new SubstrateChain({
+  assetsData: [
+    {
+      asset: glmr,
+      id: { Token2: 1 },
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b',
@@ -72,6 +91,12 @@ export const bifrostPolkadot = new SubstrateChain({
 });
 
 export const bitCountryPioneer = new SubstrateChain({
+  assetsData: [
+    {
+      asset: dev,
+      id: { FungibleToken: 0 },
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xb27da7332d3a229f0d5f2a83f711b3f74a70f22b68021e92c37817057de58e74',
@@ -84,6 +109,12 @@ export const bitCountryPioneer = new SubstrateChain({
 });
 
 export const calamari = new SubstrateChain({
+  assetsData: [
+    {
+      asset: movr,
+      id: 11,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x4ac80c99289841dd946ef92765bf659a307d39189b3ce374a92b5f0415ee17a1',
