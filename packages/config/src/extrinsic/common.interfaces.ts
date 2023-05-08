@@ -8,3 +8,9 @@ export interface XcmExtrinsicGetParams {
   extrinsicCall?: SubmittableExtrinsicFunction<'promise'>;
   fee?: bigint;
 }
+
+export enum XcmVersion {
+  v1 = 'V1',
+  v2 = 'V2',
+  v3 = 'V3',
+}

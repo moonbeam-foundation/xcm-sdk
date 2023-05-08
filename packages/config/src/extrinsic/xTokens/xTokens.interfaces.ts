@@ -1,6 +1,6 @@
 import { AssetSymbol } from '../../constants';
 import { AssetId } from '../../interfaces';
-import { XcmExtrinsicGetParams } from '../common.interfaces';
+import { XcmExtrinsicGetParams, XcmVersion } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   XTokensExtrinsic,
@@ -23,7 +23,10 @@ export type XTokensTransferMultiCurrenciesExtrinsic<
   Symbols extends AssetSymbol = AssetSymbol,
 > = XTokensBaseExtrinsic<XTokensExtrinsic.TransferMultiCurrencies, Symbols>;
 
-export type XTokensWeightLimit = number | { Limited: number };
+export type XTokensWeightLimit =
+  | number
+  | { Limited: number }
+  | { Limited: { refTime: number; proofSize: number } };
 
 export interface XTokensBaseExtrinsic<
   Extrinsic extends XTokensExtrinsic,
@@ -60,7 +63,7 @@ export type XTokensTransferExtrinsicParams<
    * destination
    */
   {
-    V1: {
+    [Key in XcmVersion]?: {
       parents: 1;
       interior: {
         X2: [

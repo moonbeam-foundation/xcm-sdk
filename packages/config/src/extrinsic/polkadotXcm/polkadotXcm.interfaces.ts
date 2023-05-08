@@ -1,5 +1,9 @@
 import { AssetId } from '../../interfaces';
-import { Parents, XcmExtrinsicGetParams } from '../common.interfaces';
+import {
+  Parents,
+  XcmExtrinsicGetParams,
+  XcmVersion,
+} from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
 import {
   PolkadotXcmExtrinsic,
@@ -18,7 +22,7 @@ export type PolkadotXcmPalletParams = [
    * destination
    */
   {
-    [v in XcmMLVersion]?: {
+    [v in XcmVersion]?: {
       parents: Parents;
       interior: {
         X1: {
@@ -31,7 +35,7 @@ export type PolkadotXcmPalletParams = [
    * beneficiary
    */
   {
-    [v in XcmMLVersion]?: {
+    [v in XcmVersion]?: {
       parents: 0;
       interior: {
         X1: {
@@ -50,7 +54,7 @@ export type PolkadotXcmPalletParams = [
    * asset
    */
   {
-    [v in XcmMLVersion]?: PolkadotXcmAssetParam[];
+    [v in XcmVersion]?: PolkadotXcmAssetParam[];
   },
   /**
    * fee
@@ -62,10 +66,6 @@ export type PolkadotXcmPalletParams = [
   'Unlimited',
 ];
 
-export enum XcmMLVersion {
-  v1 = 'V1',
-  v2 = 'V2',
-}
 export type PolkadotXcmAssetParam = {
   id: {
     Concrete: {

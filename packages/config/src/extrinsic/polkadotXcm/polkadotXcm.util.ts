@@ -1,8 +1,7 @@
-import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import { getTypeDef } from '@polkadot/types/create';
 import { MoonChain } from '../../interfaces';
 import { Parents } from '../common.interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
+import { getExtrinsicArgumentVersion } from '../extrinsic.utils';
 import {
   PolkadotXcmExtrinsic,
   PolkadotXcmExtrinsicSuccessEvent,
@@ -11,23 +10,7 @@ import {
   PolkadotXcmAssetParam,
   PolkadotXcmPallet,
   PolkadotXcmPalletParams,
-  XcmMLVersion,
 } from './polkadotXcm.interfaces';
-
-function getAvailableVersion(
-  extrinsicCall?: SubmittableExtrinsicFunction<'promise'>,
-): XcmMLVersion {
-  if (!extrinsicCall) return XcmMLVersion.v1;
-
-  const { type } = extrinsicCall.meta.args[0];
-  const instance = extrinsicCall.meta.registry.createType(type.toString());
-  const raw = getTypeDef(instance?.toRawType());
-
-  if (Array.isArray(raw.sub) && raw.sub.find((x) => x.name === 'V2'))
-    return XcmMLVersion.v2;
-
-  return XcmMLVersion.v1;
-}
 
 export function getCreateV1V2Extrinsic(
   extrinsic: PolkadotXcmExtrinsic,
@@ -46,10 +29,11 @@ export function getCreateV1V2Extrinsic(
       amount,
       extrinsicCall,
     }): PolkadotXcmPalletParams => {
-      const versionKey = getAvailableVersion(extrinsicCall);
+      const version = getExtrinsicArgumentVersion(extrinsicCall);
+
       return [
         {
-          [versionKey]: {
+          [version]: {
             parents,
             interior: {
               X1: {
@@ -59,7 +43,7 @@ export function getCreateV1V2Extrinsic(
           },
         },
         {
-          [versionKey]: {
+          [version]: {
             parents: 0,
             interior: {
               X1: {
@@ -72,7 +56,7 @@ export function getCreateV1V2Extrinsic(
           },
         },
         {
-          [versionKey]: getAsset(amount),
+          [version]: getAsset(amount),
         },
         0,
         'Unlimited',

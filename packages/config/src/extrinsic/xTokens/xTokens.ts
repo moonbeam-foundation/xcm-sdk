@@ -1,6 +1,7 @@
 import { AssetSymbol, ChainKey } from '../../constants';
 import { Asset, Chain, MoonChain } from '../../interfaces';
 import { ExtrinsicPallet } from '../extrinsic.constants';
+import { getExtrinsicArgumentVersion } from '../extrinsic.utils';
 import {
   XTokensExtrinsic,
   XTokensExtrinsicSuccessEvent,
@@ -11,7 +12,7 @@ import {
   XTokensTransferMultiAssetExtrinsic,
   XTokensTransferMultiCurrenciesExtrinsic,
 } from './xTokens.interfaces';
-import { getWeightXTokens } from './xTokens.util';
+import { getXTokensWeight } from './xTokens.util';
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 export function xTokens<
@@ -38,29 +39,33 @@ function transfer<Symbols extends AssetSymbol, ChainKeys extends ChainKey>(
           pallet: ExtrinsicPallet.XTokens,
           extrinsic: XTokensExtrinsic.Transfer,
           successEvent: event,
-          getParams: ({ account, amount, extrinsicCall }) => [
-            token,
-            amount,
-            {
-              V1: {
-                parents: 1,
-                interior: {
-                  X2: [
-                    {
-                      Parachain: chain.parachainId,
-                    },
-                    {
-                      AccountKey20: {
-                        network: 'Any',
-                        key: account,
+          getParams: ({ account, amount, extrinsicCall }) => {
+            const version = getExtrinsicArgumentVersion(extrinsicCall, 2);
+
+            return [
+              token,
+              amount,
+              {
+                [version]: {
+                  parents: 1,
+                  interior: {
+                    X2: [
+                      {
+                        Parachain: chain.parachainId,
                       },
-                    },
-                  ],
+                      {
+                        AccountKey20: {
+                          network: 'Any',
+                          key: account,
+                        },
+                      },
+                    ],
+                  },
                 },
               },
-            },
-            getWeightXTokens(origin.weight, extrinsicCall),
-          ],
+              getXTokensWeight(origin.weight, extrinsicCall),
+            ];
+          },
         }),
       }),
     }),
@@ -121,7 +126,7 @@ function transferMultiAsset<
                 },
               },
             },
-            getWeightXTokens(origin.weight, extrinsicCall),
+            getXTokensWeight(origin.weight, extrinsicCall),
           ],
         }),
       }),
@@ -167,7 +172,7 @@ function transferMultiCurrencies<
                 },
               },
             },
-            getWeightXTokens(origin.weight, extrinsicCall),
+            getXTokensWeight(origin.weight, extrinsicCall),
           ],
         }),
       }),
