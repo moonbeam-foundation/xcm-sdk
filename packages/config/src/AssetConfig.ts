@@ -1,6 +1,7 @@
 import {
   AssetMinConfigBuilder,
   BalanceConfigBuilder,
+  ContractConfigBuilder,
   ExtrinsicConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { Asset, Chain } from '@moonbeam-network/xcm-types';
@@ -8,31 +9,34 @@ import { Asset, Chain } from '@moonbeam-network/xcm-types';
 interface CommonParams {
   asset: Asset;
   balance: BalanceConfigBuilder;
+  contract?: ContractConfigBuilder;
   destinations: Chain[];
-  extrinsic: ExtrinsicConfigBuilder;
+  extrinsic?: ExtrinsicConfigBuilder;
   min?: AssetMinConfigBuilder;
 }
 
-interface PropsWithFee extends CommonParams {
+interface ParamsWithFee extends CommonParams {
   feeAsset: Asset;
   feeBalance: BalanceConfigBuilder;
 }
 
-interface PropsWithoutFee extends CommonParams {
+interface ParamsWithoutFee extends CommonParams {
   feeAsset?: never;
   feeBalance?: never;
 }
 
-export type AssetConfigConstructorParams = PropsWithFee | PropsWithoutFee;
+export type AssetConfigConstructorParams = ParamsWithFee | ParamsWithoutFee;
 
 export class AssetConfig {
   readonly asset: Asset;
 
   readonly balance: BalanceConfigBuilder;
 
+  readonly contract?: ContractConfigBuilder;
+
   readonly destinations: Chain[];
 
-  readonly extrinsic: ExtrinsicConfigBuilder;
+  readonly extrinsic?: ExtrinsicConfigBuilder;
 
   readonly feeAsset?: Asset;
 
@@ -43,6 +47,7 @@ export class AssetConfig {
   constructor({
     asset,
     balance,
+    contract,
     destinations,
     extrinsic,
     feeAsset,
@@ -51,6 +56,7 @@ export class AssetConfig {
   }: AssetConfigConstructorParams) {
     this.asset = asset;
     this.balance = balance;
+    this.contract = contract;
     this.destinations = destinations;
     this.extrinsic = extrinsic;
     this.feeAsset = feeAsset;

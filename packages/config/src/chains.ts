@@ -126,24 +126,6 @@ export const bifrostPolkadot = new SubstrateChain({
   ws: 'wss://hk.p.bifrost-rpc.liebi.com/ws',
 });
 
-export const bitCountryPioneer = new SubstrateChain({
-  assetsData: [
-    {
-      asset: dev,
-      id: { FungibleToken: 0 },
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0xb27da7332d3a229f0d5f2a83f711b3f74a70f22b68021e92c37817057de58e74',
-  isTestChain: true,
-  key: 'bit-country-pioneer',
-  name: 'Bit.Country Pioneer',
-  parachainId: 2096,
-  ss58Format: 268,
-  ws: 'wss://moonbase-rpc.bit.country',
-});
-
 export const calamari = new SubstrateChain({
   assetsData: [
     {
@@ -778,7 +760,6 @@ export const chainsList: (EthereumChain | SubstrateChain)[] = [
   astar,
   bifrostKusama,
   bifrostPolkadot,
-  bitCountryPioneer,
   calamari,
   crustShadow,
   darwinia,

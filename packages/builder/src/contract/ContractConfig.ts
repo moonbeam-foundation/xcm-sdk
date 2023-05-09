@@ -1,4 +1,4 @@
-export interface ExtrinsicConfigConstructorParams {
+export interface ContractConfigConstructorParams {
   args: any[];
   contract: string;
   func: string;
@@ -11,7 +11,7 @@ export class ContractConfig {
 
   readonly func: string;
 
-  constructor({ args, contract, func }: ExtrinsicConfigConstructorParams) {
+  constructor({ args, contract, func }: ContractConfigConstructorParams) {
     this.args = args;
     this.contract = contract;
     this.func = func;
