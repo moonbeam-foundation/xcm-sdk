@@ -17,7 +17,7 @@ export const karuraConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: ausd,
-      balance: BalanceBuilder().tokens().accounts().token(),
+      balance: BalanceBuilder().tokens().accounts(),
       destinations: [moonriver],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       feeAsset: kar,

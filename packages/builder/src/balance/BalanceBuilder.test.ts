@@ -156,63 +156,16 @@ describe('balanceBuilder', () => {
 
   describe('tokens', () => {
     describe('accounts', () => {
-      it('should be correct foreignAsset config', () => {
-        const config = BalanceBuilder()
-          .tokens()
-          .accounts()
-          .foreignAsset()
-          .build({ account, asset });
+      const config = BalanceBuilder()
+        .tokens()
+        .accounts()
+        .build({ account, asset });
 
-        expect(config).toMatchSnapshot();
-      });
-
-      it('should be correct fungibleToken config', () => {
-        const config = BalanceBuilder()
-          .tokens()
-          .accounts()
-          .fungibleToken()
-          .build({ account, asset });
-
-        expect(config).toMatchSnapshot();
-      });
-
-      it('should be correct miningResource config', () => {
-        const config = BalanceBuilder()
-          .tokens()
-          .accounts()
-          .miningResource()
-          .build({ account, asset });
-
-        expect(config).toMatchSnapshot();
-      });
-
-      it('should be correct token config', () => {
-        const config = BalanceBuilder()
-          .tokens()
-          .accounts()
-          .token()
-          .build({ account, asset });
-
-        expect(config).toMatchSnapshot();
-      });
-
-      it('should be correct token2 config', () => {
-        const config = BalanceBuilder()
-          .tokens()
-          .accounts()
-          .token2()
-          .build({ account, asset });
-
+      it('should be correct config', () => {
         expect(config).toMatchSnapshot();
       });
 
       it('should transform correctly', () => {
-        const config = BalanceBuilder()
-          .tokens()
-          .accounts()
-          .foreignAsset()
-          .build({ account, asset });
-
         expect(
           config.transform({ free: balanceOf(999), frozen: balanceOf(99) }),
         ).toBe(900n);

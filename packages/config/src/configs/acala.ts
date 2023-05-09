@@ -17,7 +17,7 @@ export const acalaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: ausd,
-      balance: BalanceBuilder().tokens().accounts().token(),
+      balance: BalanceBuilder().tokens().accounts(),
       destinations: [moonbeam],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       feeAsset: aca,

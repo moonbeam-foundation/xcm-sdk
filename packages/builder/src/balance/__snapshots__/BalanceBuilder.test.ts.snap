@@ -48,69 +48,11 @@ QueryConfig {
 }
 `;
 
-exports[`balanceBuilder tokens accounts should be correct foreignAsset config 1`] = `
+exports[`balanceBuilder tokens accounts should be correct config 1`] = `
 QueryConfig {
   "args": [
     "<ACCOUNT>",
-    {
-      "ForeignAsset": "<ASSET>",
-    },
-  ],
-  "func": "accounts",
-  "pallet": "tokens",
-  "transform": [Function],
-}
-`;
-
-exports[`balanceBuilder tokens accounts should be correct fungibleToken config 1`] = `
-QueryConfig {
-  "args": [
-    "<ACCOUNT>",
-    {
-      "FungibleToken": "<ASSET>",
-    },
-  ],
-  "func": "accounts",
-  "pallet": "tokens",
-  "transform": [Function],
-}
-`;
-
-exports[`balanceBuilder tokens accounts should be correct miningResource config 1`] = `
-QueryConfig {
-  "args": [
-    "<ACCOUNT>",
-    {
-      "MiningResource": "<ASSET>",
-    },
-  ],
-  "func": "accounts",
-  "pallet": "tokens",
-  "transform": [Function],
-}
-`;
-
-exports[`balanceBuilder tokens accounts should be correct token config 1`] = `
-QueryConfig {
-  "args": [
-    "<ACCOUNT>",
-    {
-      "Token": "<ASSET>",
-    },
-  ],
-  "func": "accounts",
-  "pallet": "tokens",
-  "transform": [Function],
-}
-`;
-
-exports[`balanceBuilder tokens accounts should be correct token2 config 1`] = `
-QueryConfig {
-  "args": [
-    "<ACCOUNT>",
-    {
-      "Token2": "<ASSET>",
-    },
+    "<ASSET>",
   ],
   "func": "accounts",
   "pallet": "tokens",

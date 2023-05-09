@@ -17,7 +17,7 @@ export const bitCountryPioneerConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: dev,
-      balance: BalanceBuilder().tokens().accounts().fungibleToken(),
+      balance: BalanceBuilder().tokens().accounts(),
       destinations: [moonbaseAlpha],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       feeAsset: neer,

@@ -17,7 +17,7 @@ export const bifrostKusamaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().tokens().accounts().token(),
+      balance: BalanceBuilder().tokens().accounts(),
       destinations: [moonriver],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       feeAsset: bnc,

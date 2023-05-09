@@ -108,59 +108,15 @@ function system() {
 
 function tokens() {
   return {
-    accounts: () => {
-      const pallet = 'tokens';
-      const func = 'accounts';
-      const transform = ({ free, frozen }: TokensPalletAccountData): bigint =>
-        BigInt(free.sub(frozen).toString());
-
-      return {
-        foreignAsset: (): BalanceConfigBuilder => ({
-          build: ({ account, asset }) =>
-            new QueryConfig({
-              pallet,
-              func,
-              args: [account, { ForeignAsset: asset }],
-              transform,
-            }),
+    accounts: (): BalanceConfigBuilder => ({
+      build: ({ account, asset }) =>
+        new QueryConfig({
+          pallet: 'tokens',
+          func: 'accounts',
+          args: [account, asset],
+          transform: ({ free, frozen }: TokensPalletAccountData): bigint =>
+            BigInt(free.sub(frozen).toString()),
         }),
-        fungibleToken: (): BalanceConfigBuilder => ({
-          build: ({ account, asset }) =>
-            new QueryConfig({
-              pallet,
-              func,
-              args: [account, { FungibleToken: asset }],
-              transform,
-            }),
-        }),
-        miningResource: (): BalanceConfigBuilder => ({
-          build: ({ account, asset }) =>
-            new QueryConfig({
-              pallet,
-              func,
-              args: [account, { MiningResource: asset }],
-              transform,
-            }),
-        }),
-        token: (): BalanceConfigBuilder => ({
-          build: ({ account, asset }) =>
-            new QueryConfig({
-              pallet,
-              func,
-              args: [account, { Token: asset }],
-              transform,
-            }),
-        }),
-        token2: (): BalanceConfigBuilder => ({
-          build: ({ account, asset }) =>
-            new QueryConfig({
-              pallet,
-              func,
-              args: [account, { Token2: asset }],
-              transform,
-            }),
-        }),
-      };
-    },
+    }),
   };
 }
