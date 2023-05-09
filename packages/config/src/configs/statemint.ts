@@ -18,8 +18,10 @@ export const statemintConfig = new ChainConfig({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      feeAsset: dot,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: dot,
+        balance: BalanceBuilder().system().account(),
+      },
       min: AssetMinBuilder().assets().asset(),
     }),
   ],

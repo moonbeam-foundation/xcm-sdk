@@ -26,8 +26,10 @@ export const astarConfig = new ChainConfig({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      feeAsset: astr,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: astr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
   ],
   chain: astar,

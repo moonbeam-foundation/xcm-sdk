@@ -20,8 +20,10 @@ export const kinitsugiConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destinations: [moonriver],
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      feeAsset: kint,
-      feeBalance: BalanceBuilder().tokens().accounts(),
+      fee: {
+        asset: kint,
+        balance: BalanceBuilder().tokens().accounts(),
+      },
     }),
   ],
   chain: kinitsugi,

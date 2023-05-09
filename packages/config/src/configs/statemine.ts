@@ -18,8 +18,10 @@ export const statemineConfig = new ChainConfig({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      feeAsset: ksm,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: ksm,
+        balance: BalanceBuilder().system().account(),
+      },
       min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
@@ -30,8 +32,10 @@ export const statemineConfig = new ChainConfig({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      feeAsset: ksm,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: ksm,
+        balance: BalanceBuilder().system().account(),
+      },
       min: AssetMinBuilder().assets().asset(),
     }),
   ],

@@ -18,8 +18,10 @@ export const statemineAlphanetConfig = new ChainConfig({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      feeAsset: unit,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: unit,
+        balance: BalanceBuilder().system().account(),
+      },
       min: AssetMinBuilder().assets().asset(),
     }),
   ],

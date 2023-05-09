@@ -6,26 +6,20 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { Asset, Chain } from '@moonbeam-network/xcm-types';
 
-interface CommonParams {
+export interface AssetConfigConstructorParams {
   asset: Asset;
   balance: BalanceConfigBuilder;
   contract?: ContractConfigBuilder;
   destinations: Chain[];
   extrinsic?: ExtrinsicConfigBuilder;
+  fee?: FeeAssetConfig;
   min?: AssetMinConfigBuilder;
 }
 
-interface ParamsWithFee extends CommonParams {
-  feeAsset: Asset;
-  feeBalance: BalanceConfigBuilder;
+export interface FeeAssetConfig {
+  asset: Asset;
+  balance: BalanceConfigBuilder;
 }
-
-interface ParamsWithoutFee extends CommonParams {
-  feeAsset?: never;
-  feeBalance?: never;
-}
-
-export type AssetConfigConstructorParams = ParamsWithFee | ParamsWithoutFee;
 
 export class AssetConfig {
   readonly asset: Asset;
@@ -38,9 +32,7 @@ export class AssetConfig {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
-  readonly feeAsset?: Asset;
-
-  readonly feeBalance?: BalanceConfigBuilder;
+  readonly fee?: FeeAssetConfig;
 
   readonly min?: AssetMinConfigBuilder;
 
@@ -50,8 +42,7 @@ export class AssetConfig {
     contract,
     destinations,
     extrinsic,
-    feeAsset,
-    feeBalance,
+    fee,
     min,
   }: AssetConfigConstructorParams) {
     this.asset = asset;
@@ -59,14 +50,7 @@ export class AssetConfig {
     this.contract = contract;
     this.destinations = destinations;
     this.extrinsic = extrinsic;
-    this.feeAsset = feeAsset;
-    this.feeBalance = feeBalance;
+    this.fee = fee;
     this.min = min;
-
-    if (feeAsset && !feeBalance) {
-      throw new Error(
-        `feeBalance is required when feeAsset is provided for ${this.asset.key}`,
-      );
-    }
   }
 }

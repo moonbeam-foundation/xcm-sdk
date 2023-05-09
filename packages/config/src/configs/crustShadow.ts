@@ -23,8 +23,10 @@ export const crustShadowConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destinations: [moonriver],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      feeAsset: csm,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: csm,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
   ],
   chain: crustShadow,

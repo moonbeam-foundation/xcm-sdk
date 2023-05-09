@@ -20,8 +20,10 @@ export const parallelHeikoConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destinations: [moonriver],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      feeAsset: hko,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: hko,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
   ],
   chain: parallelHeiko,

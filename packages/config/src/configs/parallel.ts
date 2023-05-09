@@ -20,8 +20,10 @@ export const parallelConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destinations: [moonbeam],
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      feeAsset: para,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: para,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
   ],
   chain: parallel,

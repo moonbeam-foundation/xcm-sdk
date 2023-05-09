@@ -26,8 +26,10 @@ export const shidenConfig = new ChainConfig({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      feeAsset: sdn,
-      feeBalance: BalanceBuilder().system().account(),
+      fee: {
+        asset: sdn,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
   ],
   chain: shiden,
