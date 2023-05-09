@@ -5,7 +5,6 @@ import { alphanetRelayConfig } from './alphanetRelay';
 import { astarConfig } from './astar';
 import { bifrostKusamaConfig } from './bifrostKusama';
 import { bifrostPolkadotConfig } from './bifrostPolkadot';
-import { bitCountryPioneerConfig } from './bitCountryPioneer';
 import { calamariConfig } from './calamari';
 import { crustShadowConfig } from './crustShadow';
 import { darwiniaConfig } from './darwinia';
@@ -20,6 +19,9 @@ import { kinitsugiConfig } from './kinitsugi';
 import { kusamaConfig } from './kusama';
 import { litentryAlphanetConfig } from './litentryAlphanet';
 import { litmusConfig } from './litmus';
+import { moonbaseAlphaConfig } from './moonbaseAlpha';
+import { moonbeamConfig } from './moonbeam';
+import { moonriverConfig } from './moonriver';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
 import { phalaConfig } from './phala';
@@ -37,14 +39,13 @@ export const chainsConfigList: ChainConfig[] = [
   astarConfig,
   bifrostKusamaConfig,
   bifrostPolkadotConfig,
-  bitCountryPioneerConfig,
   calamariConfig,
   crustShadowConfig,
   darwiniaConfig,
   darwiniaCrabConfig,
   darwiniaPangoroConfig,
-  equilibriumConfig,
   equilibriumAlphanetConfig,
+  equilibriumConfig,
   integriteeConfig,
   karuraConfig,
   khalaConfig,
@@ -52,14 +53,17 @@ export const chainsConfigList: ChainConfig[] = [
   kusamaConfig,
   litentryAlphanetConfig,
   litmusConfig,
+  moonbaseAlphaConfig,
+  moonbeamConfig,
+  moonriverConfig,
   parallelConfig,
   parallelHeikoConfig,
   phalaConfig,
   polkadotConfig,
   robonomicsConfig,
   shidenConfig,
-  statemineConfig,
   statemineAlphanetConfig,
+  statemineConfig,
   statemintConfig,
   uniqueAlphaConfig,
 ];
