@@ -697,9 +697,14 @@ export const shiden = new SubstrateChain({
 export const statemine = new SubstrateChain({
   assetsData: [
     {
-      asset: movr,
-      id: 18446744073709551620n,
-      palletInstance: 10,
+      asset: usdt,
+      id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: rmrk,
+      id: 8,
+      palletInstance: 50,
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -713,6 +718,13 @@ export const statemine = new SubstrateChain({
 });
 
 export const statemineAlphanet = new SubstrateChain({
+  assetsData: [
+    {
+      asset: tt1,
+      id: 2,
+      palletInstance: 50,
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
@@ -725,6 +737,13 @@ export const statemineAlphanet = new SubstrateChain({
 });
 
 export const statemint = new SubstrateChain({
+  assetsData: [
+    {
+      asset: usdt,
+      id: 1984,
+      palletInstance: 50,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
@@ -736,6 +755,12 @@ export const statemint = new SubstrateChain({
 });
 
 export const uniqueAlpha = new SubstrateChain({
+  assetsData: [
+    {
+      asset: auq,
+      id: { NativeAssetId: 'Here' },
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xbdf55f33d9f0b390f56413ec803c693af348edae64a659760248974b48b9a99e',
