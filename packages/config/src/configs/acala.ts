@@ -1,4 +1,5 @@
 import {
+  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -34,6 +35,7 @@ export const acalaConfig = new ChainConfig({
         asset: aca,
         balance: BalanceBuilder().system().account(),
       },
+      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
   ],
   chain: acala,

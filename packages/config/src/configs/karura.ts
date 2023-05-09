@@ -1,4 +1,5 @@
 import {
+  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -34,6 +35,7 @@ export const karuraConfig = new ChainConfig({
         asset: kar,
         balance: BalanceBuilder().system().account(),
       },
+      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
   ],
   chain: karura,

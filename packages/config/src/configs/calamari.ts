@@ -1,4 +1,5 @@
 import {
+  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -24,6 +25,7 @@ export const calamariConfig = new ChainConfig({
         asset: kma,
         balance: BalanceBuilder().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
   ],
   chain: calamari,

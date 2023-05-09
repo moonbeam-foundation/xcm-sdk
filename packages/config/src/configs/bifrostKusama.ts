@@ -1,4 +1,5 @@
 import {
+  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -24,6 +25,7 @@ export const bifrostKusamaConfig = new ChainConfig({
         asset: bnc,
         balance: BalanceBuilder().system().account(),
       },
+      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
   ],
   chain: bifrostKusama,
