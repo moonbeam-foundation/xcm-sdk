@@ -1,11 +1,10 @@
 /* eslint-disable sort-keys */
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import { getTypeDef } from '@polkadot/types/create';
 import {
   ExtrinsicConfigBuilderPrams,
   Parents,
-  XcmMultiLocationVersion,
 } from '../../ExtrinsicBuilder.interfaces';
+import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
 
 export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
   asset: any;
@@ -21,7 +20,7 @@ export function getPolkadotXcmExtrinsicArgs({
   parents = 1,
 }: GetExtrinsicParams): any[] {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  const version = getAvailableVersion(func);
+  const version = getExtrinsicArgumentVersion(func);
 
   return [
     {
@@ -53,24 +52,4 @@ export function getPolkadotXcmExtrinsicArgs({
     0,
     'Unlimited',
   ];
-}
-
-function getAvailableVersion(
-  func?: SubmittableExtrinsicFunction<'promise'>,
-): XcmMultiLocationVersion {
-  if (!func) {
-    return XcmMultiLocationVersion.v1;
-  }
-
-  const { type } = func.meta.args[0];
-  const instance = func.meta.registry.createType(type.toString());
-  const raw = getTypeDef(instance?.toRawType());
-
-  if (
-    Array.isArray(raw.sub) &&
-    raw.sub.find((x) => x.name === XcmMultiLocationVersion.v2)
-  )
-    return XcmMultiLocationVersion.v2;
-
-  return XcmMultiLocationVersion.v1;
 }

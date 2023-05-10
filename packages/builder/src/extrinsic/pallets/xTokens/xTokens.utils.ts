@@ -9,13 +9,23 @@ export function getWeight(
   weight: number,
   func?: SubmittableExtrinsicFunction<'promise'>,
 ): XTokensWeightLimit {
-  if (!func) {
+  const type = func?.meta.args.at(-1)?.type;
+
+  if (!type) {
     return weight;
   }
 
-  return func.meta.args.at(-1)?.type.eq('XcmV2WeightLimit')
-    ? {
-        Limited: weight,
-      }
-    : weight;
+  if (type.eq('XcmV2WeightLimit')) {
+    return {
+      Limited: weight,
+    };
+  }
+
+  if (type.eq('XcmV3WeightLimit')) {
+    return {
+      Limited: { proofSize: 0, refTime: weight },
+    };
+  }
+
+  return weight;
 }

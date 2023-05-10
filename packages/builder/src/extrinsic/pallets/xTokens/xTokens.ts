@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
+import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 import { getWeight } from './xTokens.utils';
 
@@ -12,29 +13,33 @@ export function xTokens() {
         new ExtrinsicConfig({
           pallet,
           func: 'transfer',
-          getArgs: (func) => [
-            asset,
-            amount,
-            {
-              V1: {
-                parents: 1,
-                interior: {
-                  X2: [
-                    {
-                      Parachain: destination.parachainId,
-                    },
-                    {
-                      AccountKey20: {
-                        network: 'Any',
-                        key: address,
+          getArgs: (func) => {
+            const version = getExtrinsicArgumentVersion(func, 2);
+
+            return [
+              asset,
+              amount,
+              {
+                [version]: {
+                  parents: 1,
+                  interior: {
+                    X2: [
+                      {
+                        Parachain: destination.parachainId,
                       },
-                    },
-                  ],
+                      {
+                        AccountKey20: {
+                          network: 'Any',
+                          key: address,
+                        },
+                      },
+                    ],
+                  },
                 },
               },
-            },
-            getWeight(source.weight, func),
-          ],
+              getWeight(source.weight, func),
+            ];
+          },
         }),
     }),
     transferMultiAsset: (): ExtrinsicConfigBuilder => ({

@@ -17,9 +17,10 @@ export interface ExtrinsicConfigBuilderPrams {
   source: AnyChain;
 }
 
-export enum XcmMultiLocationVersion {
+export enum XcmVersion {
   v1 = 'V1',
   v2 = 'V2',
+  v3 = 'V3',
 }
 
 export type Parents = 0 | 1;
