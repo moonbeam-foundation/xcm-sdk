@@ -1,8 +1,4 @@
-import {
-  ChainAssetId,
-  EthereumChain,
-  SubstrateChain,
-} from '@moonbeam-network/xcm-types';
+import { AnyChain, ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from './ExtrinsicConfig';
 
 export interface ExtrinsicConfigBuilder {
@@ -13,12 +9,12 @@ export interface ExtrinsicConfigBuilderPrams {
   address: string;
   amount: bigint;
   asset: ChainAssetId;
-  destination: SubstrateChain | EthereumChain;
+  destination: AnyChain;
   fee: bigint;
   feeAsset: ChainAssetId;
-  origin: SubstrateChain | EthereumChain;
+  origin: AnyChain;
   palletInstance?: number;
-  source: SubstrateChain | EthereumChain;
+  source: AnyChain;
 }
 
 export enum XcmMultiLocationVersion {

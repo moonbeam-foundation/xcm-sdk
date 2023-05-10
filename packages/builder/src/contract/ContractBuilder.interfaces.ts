@@ -1,8 +1,4 @@
-import {
-  ChainAssetId,
-  EthereumChain,
-  SubstrateChain,
-} from '@moonbeam-network/xcm-types';
+import { AnyChain, ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ContractConfig } from './ContractConfig';
 
 export interface ContractConfigBuilder {
@@ -13,9 +9,9 @@ export interface ContractConfigBuilderPrams {
   address: string;
   amount: bigint;
   asset: ChainAssetId;
-  destination: EthereumChain | SubstrateChain;
+  destination: AnyChain;
   fee: bigint;
   feeAsset: ChainAssetId;
-  origin: SubstrateChain | EthereumChain;
-  source: SubstrateChain | EthereumChain;
+  origin: AnyChain;
+  source: AnyChain;
 }

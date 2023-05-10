@@ -8,7 +8,6 @@ import {
   astr,
   auq,
   ausd,
-  bit,
   bnc,
   crab,
   csm,
@@ -27,7 +26,6 @@ import {
   ksm,
   lit,
   movr,
-  neer,
   para,
   paring,
   pha,
@@ -388,10 +386,6 @@ export const moonbaseAlpha = new EthereumChain({
       id: '69536036667157951501899290870203586130',
     },
     {
-      asset: bit,
-      id: '306639095083798603270835754515874921389',
-    },
-    {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
     },
@@ -406,10 +400,6 @@ export const moonbaseAlpha = new EthereumChain({
     {
       asset: lit,
       id: '65216491554813189869575508812319036608',
-    },
-    {
-      asset: neer,
-      id: '52280927600883288560727505734200597597',
     },
     {
       asset: paring,

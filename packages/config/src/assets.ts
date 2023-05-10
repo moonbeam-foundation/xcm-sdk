@@ -20,11 +20,6 @@ export const ausd = new Asset({
   originSymbol: 'AUSD',
 });
 
-export const bit = new Asset({
-  key: 'bit',
-  originSymbol: 'BIT',
-});
-
 export const bnc = new Asset({
   key: 'bnc',
   originSymbol: 'BNC',
@@ -115,11 +110,6 @@ export const movr = new Asset({
   originSymbol: 'MOVR',
 });
 
-export const neer = new Asset({
-  key: 'neer',
-  originSymbol: 'NEER',
-});
-
 export const para = new Asset({
   key: 'para',
   originSymbol: 'PARA',
@@ -180,7 +170,6 @@ export const assetsList: Asset[] = [
   astr,
   auq,
   ausd,
-  bit,
   bnc,
   crab,
   csm,
@@ -199,7 +188,6 @@ export const assetsList: Asset[] = [
   ksm,
   lit,
   movr,
-  neer,
   para,
   paring,
   pha,

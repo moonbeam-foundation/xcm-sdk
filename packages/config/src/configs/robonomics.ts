@@ -5,7 +5,7 @@ import {
 import { AssetConfig } from '../AssetConfig';
 import { ChainConfig } from '../ChainConfig';
 import { xrt } from '../assets';
-import robonomics, { moonriver } from '../chains';
+import { moonriver, robonomics } from '../chains';
 
 export const robonomicsConfig = new ChainConfig({
   assets: [
