@@ -25,8 +25,8 @@ export function ConfigBuilder() {
           return {
             sourceChains,
             source: (keyOrChain: string | AnyChain) => {
-              const sourceChain = getChain(keyOrChain);
-              const sourceConfigs = getAssetConfigs(asset, sourceChain);
+              const source = getChain(keyOrChain);
+              const sourceConfigs = getAssetConfigs(asset, source);
 
               return {
                 destinationChains: getDestinations(sourceConfigs),
@@ -34,30 +34,30 @@ export function ConfigBuilder() {
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   keyOrChain: string | AnyChain,
                 ): TransferConfig => {
-                  const destinationChain = getChain(keyOrChain);
+                  const destination = getChain(keyOrChain);
                   const destinationConfigs = getAssetConfigs(
                     asset,
-                    destinationChain,
+                    destination,
                   );
 
-                  const source = filterAssetConfigsByChain(
+                  const sourceConfig = filterAssetConfigsByChain(
                     sourceConfigs,
-                    destinationChain,
+                    destination,
                   );
-                  const destination = filterAssetConfigsByChain(
+                  const destinationConfig = filterAssetConfigsByChain(
                     destinationConfigs,
-                    sourceChain,
+                    source,
                   );
 
                   return {
                     asset,
                     source: {
-                      chain: sourceChain,
-                      config: source,
+                      chain: source,
+                      config: sourceConfig,
                     },
                     destination: {
-                      chain: destinationChain,
-                      config: destination,
+                      chain: destination,
+                      config: destinationConfig,
                     },
                   };
                 },
