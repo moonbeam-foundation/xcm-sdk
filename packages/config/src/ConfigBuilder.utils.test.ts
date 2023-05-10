@@ -1,13 +1,14 @@
 import { Asset, Ecosystem, EthereumChain } from '@moonbeam-network/xcm-types';
-import { assetsList, dev, tt1, unit } from './assets';
-import { equilibriumAlphanet, moonbaseAlpha } from './chains';
 import {
   getAsset,
+  getAssetConfigs,
   getChain,
-  getDestinationChains,
+  getDestinations,
   getEcosystemAssets,
   getSourceChains,
-} from './config.utils';
+} from './ConfigBuilder.utils';
+import { assetsList, dev, tt1, unit } from './assets';
+import { equilibriumAlphanet, moonbaseAlpha } from './chains';
 
 describe('config utils', () => {
   describe('getEcosystemAssets', () => {
@@ -87,9 +88,11 @@ describe('config utils', () => {
     });
   });
 
-  describe('getDestinationChains', () => {
+  describe('getDestinations', () => {
+    const sourceConfigs = getAssetConfigs(dev, moonbaseAlpha);
+
     it('should get chains for asset and source', () => {
-      const chains = getDestinationChains(dev, moonbaseAlpha);
+      const chains = getDestinations(sourceConfigs);
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([equilibriumAlphanet]),

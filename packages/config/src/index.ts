@@ -1,1 +1,2 @@
-export * from './config';
+export * from './ConfigBuilder';
+export * from './ConfigBuilder.interfaces';

@@ -66,11 +66,19 @@ export function getAssetConfigs(asset: Asset, chain: AnyChain): AssetConfig[] {
   return assetConfigs;
 }
 
-export function getDestinationChains(
-  asset: Asset,
-  source: AnyChain,
-): AnyChain[] {
-  const assetConfigs = getAssetConfigs(asset, source);
+export function filterAssetConfigsByChain(
+  configs: AssetConfig[],
+  chain: AnyChain,
+): AssetConfig {
+  const config = configs.find((cfg) => cfg.destinations.includes(chain));
 
-  return assetConfigs.map((config) => config.destinations).flat(1);
+  if (!config) {
+    throw new Error(`Config for chain ${chain.key} not found`);
+  }
+
+  return config;
+}
+
+export function getDestinations(configs: AssetConfig[]): AnyChain[] {
+  return configs.map((config) => config.destinations).flat(1);
 }
