@@ -12,7 +12,8 @@ describe('configBuilder', () => {
       .assets(Ecosystem.AlphanetRelay)
       .asset(dev)
       .source(moonbaseAlpha)
-      .destination(equilibriumAlphanet);
+      .destination(equilibriumAlphanet)
+      .build();
 
     expect(config).toStrictEqual({
       asset: dev,
