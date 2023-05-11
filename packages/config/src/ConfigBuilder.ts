@@ -33,7 +33,7 @@ export function ConfigBuilder() {
                 destination: (
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   keyOrChain: string | AnyChain,
-                ): TransferConfig => {
+                ) => {
                   const destination = getChain(keyOrChain);
                   const destinationConfigs = getAssetConfigs(
                     asset,
@@ -50,15 +50,17 @@ export function ConfigBuilder() {
                   );
 
                   return {
-                    asset,
-                    source: {
-                      chain: source,
-                      config: sourceConfig,
-                    },
-                    destination: {
-                      chain: destination,
-                      config: destinationConfig,
-                    },
+                    build: (): TransferConfig => ({
+                      asset,
+                      source: {
+                        chain: source,
+                        config: sourceConfig,
+                      },
+                      destination: {
+                        chain: destination,
+                        config: destinationConfig,
+                      },
+                    }),
                   };
                 },
               };
