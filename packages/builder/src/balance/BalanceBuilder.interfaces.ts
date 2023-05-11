@@ -1,3 +1,4 @@
+import { ChainAssetId } from '@moonbeam-network/xcm-types';
 import { Struct, u128 } from '@polkadot/types';
 import { QueryConfig } from '../QueryConfig';
 
@@ -6,8 +7,8 @@ export interface BalanceConfigBuilder {
 }
 
 export interface BalanceConfigBuilderPrams {
-  account: string;
-  asset?: string | number | bigint;
+  address: string;
+  asset: ChainAssetId;
 }
 
 export interface PalletBalancesAccountDataOld extends Struct {

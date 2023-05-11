@@ -14,7 +14,7 @@ describe('balanceBuilder', () => {
       const config = BalanceBuilder()
         .assets()
         .account()
-        .build({ account, asset });
+        .build({ address: account, asset });
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -26,31 +26,12 @@ describe('balanceBuilder', () => {
     });
   });
 
-  describe('ormlTokens', () => {
-    describe('accounts', () => {
-      const config = BalanceBuilder()
-        .ormlTokens()
-        .accounts()
-        .build({ account, asset });
-
-      it('should be correct config', () => {
-        expect(config).toMatchSnapshot();
-      });
-
-      it('should transform correctly', () => {
-        expect(
-          config.transform({ free: balanceOf(999), frozen: balanceOf(99) }),
-        ).toBe(900n);
-      });
-    });
-  });
-
   describe('system', () => {
     describe('account', () => {
       const config = BalanceBuilder()
         .system()
         .account()
-        .build({ account, asset });
+        .build({ address: account, asset });
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -77,7 +58,7 @@ describe('balanceBuilder', () => {
       const config = BalanceBuilder()
         .system()
         .accountEquilibrium()
-        .build({ account, asset: 25969 });
+        .build({ address: account, asset: 25969 });
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -159,7 +140,7 @@ describe('balanceBuilder', () => {
       const config = BalanceBuilder()
         .tokens()
         .accounts()
-        .build({ account, asset });
+        .build({ address: account, asset });
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();

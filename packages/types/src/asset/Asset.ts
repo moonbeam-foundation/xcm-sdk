@@ -4,9 +4,9 @@ export interface AssetConstructorParams {
 }
 
 export class Asset {
-  key: string;
+  readonly key: string;
 
-  originSymbol: string;
+  readonly originSymbol: string;
 
   constructor({ key, originSymbol }: AssetConstructorParams) {
     this.key = key;

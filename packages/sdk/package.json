@@ -47,6 +47,7 @@
   "main": "./build/index.cjs",
   "dependencies": {
     "@moonbeam-network/xcm-config": "*",
+    "@moonbeam-network/xcm-builder": "*",
     "@moonbeam-network/xcm-types": "*",
     "@moonbeam-network/xcm-utils": "*"
   },

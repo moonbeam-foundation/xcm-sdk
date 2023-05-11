@@ -3,9 +3,7 @@
 exports[`assetMinBuilder assetRegistry assetMetadatas should be correct config 1`] = `
 QueryConfig {
   "args": [
-    {
-      "ForeignAssetId": "<ASSET>",
-    },
+    "<ASSET>",
   ],
   "func": "assetMetadatas",
   "pallet": "assetRegistry",
@@ -16,9 +14,7 @@ QueryConfig {
 exports[`assetMinBuilder assetRegistry currencyMetadatas should be correct config 1`] = `
 QueryConfig {
   "args": [
-    {
-      "Token2": "<ASSET>",
-    },
+    "<ASSET>",
   ],
   "func": "currencyMetadatas",
   "pallet": "assetRegistry",

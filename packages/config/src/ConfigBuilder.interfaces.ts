@@ -3,12 +3,11 @@ import { AssetConfig } from './AssetConfig';
 
 export interface TransferConfig {
   asset: Asset;
-  source: {
-    chain: AnyChain;
-    config: AssetConfig;
-  };
-  destination: {
-    chain: AnyChain;
-    config: AssetConfig;
-  };
+  source: ChainTransferConfig;
+  destination: ChainTransferConfig;
+}
+
+export interface ChainTransferConfig {
+  chain: AnyChain;
+  config: AssetConfig;
 }

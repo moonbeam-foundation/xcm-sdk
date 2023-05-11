@@ -23,7 +23,7 @@ function assetRegistry() {
         new QueryConfig({
           pallet,
           func: 'assetMetadatas',
-          args: [{ ForeignAssetId: asset }],
+          args: [asset],
           transform,
         }),
     }),
@@ -32,7 +32,7 @@ function assetRegistry() {
         new QueryConfig({
           pallet,
           func: 'currencyMetadatas',
-          args: [{ Token2: asset }],
+          args: [asset],
           transform,
         }),
     }),

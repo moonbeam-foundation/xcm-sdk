@@ -1,3 +1,4 @@
+import { ChainAssetId } from '@moonbeam-network/xcm-types';
 import { QueryConfig } from '../QueryConfig';
 
 export interface AssetMinConfigBuilder {
@@ -5,5 +6,5 @@ export interface AssetMinConfigBuilder {
 }
 
 export interface AssetMinConfigBuilderPrams {
-  asset: string | number | bigint;
+  asset: ChainAssetId;
 }

@@ -12,20 +12,6 @@ QueryConfig {
 }
 `;
 
-exports[`balanceBuilder ormlTokens accounts should be correct config 1`] = `
-QueryConfig {
-  "args": [
-    "<ACCOUNT>",
-    {
-      "ForeignAsset": "<ASSET>",
-    },
-  ],
-  "func": "accounts",
-  "pallet": "ormlTokens",
-  "transform": [Function],
-}
-`;
-
 exports[`balanceBuilder system account should be correct config 1`] = `
 QueryConfig {
   "args": [

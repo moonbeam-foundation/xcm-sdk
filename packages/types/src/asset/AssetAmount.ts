@@ -1,7 +1,7 @@
 import { Asset, AssetConstructorParams } from './Asset';
 
 export interface AssetAmountProps {
-  amount: string | number | bigint;
+  amount: bigint;
   decimals: number;
   symbol?: string;
 }
@@ -11,11 +11,11 @@ export interface AssetAmountConstructorProps
     AssetAmountProps {}
 
 export class AssetAmount extends Asset {
-  amount: bigint;
+  readonly amount: bigint;
 
-  decimals: number;
+  readonly decimals: number;
 
-  symbol: string;
+  readonly symbol: string;
 
   constructor({
     amount,
@@ -33,6 +33,13 @@ export class AssetAmount extends Asset {
   static fromAsset(asset: Asset, props: AssetAmountProps) {
     return new AssetAmount({
       ...asset,
+      ...props,
+    });
+  }
+
+  copyWith(props: Partial<AssetAmountConstructorProps>) {
+    return new AssetAmount({
+      ...this,
       ...props,
     });
   }

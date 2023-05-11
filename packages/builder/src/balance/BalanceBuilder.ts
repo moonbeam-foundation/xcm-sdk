@@ -14,7 +14,6 @@ import {
 export function BalanceBuilder() {
   return {
     assets,
-    ormlTokens,
     system,
     tokens,
   };
@@ -23,28 +22,13 @@ export function BalanceBuilder() {
 function assets() {
   return {
     account: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }) =>
+      build: ({ address, asset }) =>
         new QueryConfig({
           pallet: 'assets',
           func: 'account',
-          args: [asset, account],
+          args: [asset, address],
           transform: (response: any): bigint =>
             (response.balance as u128).toBigInt(),
-        }),
-    }),
-  };
-}
-
-function ormlTokens() {
-  return {
-    accounts: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }) =>
-        new QueryConfig({
-          pallet: 'ormlTokens',
-          func: 'accounts',
-          args: [account, { ForeignAsset: asset }],
-          transform: ({ free, frozen }: TokensPalletAccountData): bigint =>
-            BigInt(free.sub(frozen).toString()),
         }),
     }),
   };
@@ -53,11 +37,11 @@ function ormlTokens() {
 function system() {
   return {
     account: (): BalanceConfigBuilder => ({
-      build: ({ account }) =>
+      build: ({ address }) =>
         new QueryConfig({
           pallet: 'system',
           func: 'account',
-          args: [account],
+          args: [address],
           transform: (response: any): bigint => {
             const balance = response.data as PalletBalancesAccountData &
               PalletBalancesAccountDataOld;
@@ -68,11 +52,11 @@ function system() {
         }),
     }),
     accountEquilibrium: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }) =>
+      build: ({ address, asset }) =>
         new QueryConfig({
           pallet: 'system',
           func: 'account',
-          args: [account],
+          args: [address],
           transform: (response): bigint => {
             if (response.data.isEmpty) {
               return 0n;
@@ -109,11 +93,11 @@ function system() {
 function tokens() {
   return {
     accounts: (): BalanceConfigBuilder => ({
-      build: ({ account, asset }) =>
+      build: ({ address, asset }) =>
         new QueryConfig({
           pallet: 'tokens',
           func: 'accounts',
-          args: [account, asset],
+          args: [address, asset],
           transform: ({ free, frozen }: TokensPalletAccountData): bigint =>
             BigInt(free.sub(frozen).toString()),
         }),
