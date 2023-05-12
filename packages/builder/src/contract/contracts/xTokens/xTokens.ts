@@ -20,8 +20,8 @@ export function xTokens() {
             getDestinationMultilocation(address, destination),
             4_000_000_000, // TODO: where we can put this value?
           ],
-          contract: 'xTokens',
           func: 'transfer',
+          module: 'xTokens',
         }),
     }),
     transferMultiCurrencies: (): ContractConfigBuilder => ({
@@ -36,8 +36,8 @@ export function xTokens() {
             getDestinationMultilocation(address, destination),
             4_000_000_000, // TODO: where we can put this value?
           ],
-          contract: 'xTokens',
           func: 'transferMultiCurrencies',
+          module: 'xTokens',
         }),
     }),
   };
