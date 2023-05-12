@@ -14,7 +14,7 @@ export function polkadotXcm() {
         here: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func,
               getArgs: (extrinsicFunction) =>
                 getPolkadotXcmExtrinsicArgs({
@@ -39,7 +39,7 @@ export function polkadotXcm() {
         X1: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func,
               getArgs: (extrinsicFunction) =>
                 getPolkadotXcmExtrinsicArgs({
@@ -68,7 +68,7 @@ export function polkadotXcm() {
         X2: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func,
               getArgs: (extrinsicFunction) =>
                 getPolkadotXcmExtrinsicArgs({
@@ -108,7 +108,7 @@ export function polkadotXcm() {
         X2: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func,
               getArgs: (extrinsicFunction) =>
                 getPolkadotXcmExtrinsicArgs({

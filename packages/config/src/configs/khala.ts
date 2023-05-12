@@ -12,13 +12,13 @@ export const khalaConfig = new ChainConfig({
     new AssetConfig({
       asset: pha,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
     }),
     new AssetConfig({
       asset: movr,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().X2(),
       fee: {
         asset: pha,

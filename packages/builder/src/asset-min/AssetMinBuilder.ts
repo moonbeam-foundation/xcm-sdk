@@ -21,7 +21,7 @@ function assetRegistry() {
     assetMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
         new QueryConfig({
-          pallet,
+          module: pallet,
           func: 'assetMetadatas',
           args: [asset],
           transform,
@@ -30,7 +30,7 @@ function assetRegistry() {
     currencyMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
         new QueryConfig({
-          pallet,
+          module: pallet,
           func: 'currencyMetadatas',
           args: [asset],
           transform,
@@ -44,7 +44,7 @@ function assets() {
     asset: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
         new QueryConfig({
-          pallet: 'assets',
+          module: 'assets',
           func: 'asset',
           args: [asset],
           transform: (response: any): bigint =>

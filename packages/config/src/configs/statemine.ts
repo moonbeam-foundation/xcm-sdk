@@ -13,7 +13,7 @@ export const statemineConfig = new ChainConfig({
     new AssetConfig({
       asset: rmrk,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
@@ -27,7 +27,7 @@ export const statemineConfig = new ChainConfig({
     new AssetConfig({
       asset: usdt,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

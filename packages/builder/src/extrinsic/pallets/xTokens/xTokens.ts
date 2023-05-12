@@ -11,7 +11,7 @@ export function xTokens() {
     transfer: (): ExtrinsicConfigBuilder => ({
       build: ({ address, amount, asset, destination, source }) =>
         new ExtrinsicConfig({
-          pallet,
+          module: pallet,
           func: 'transfer',
           getArgs: (func) => {
             const version = getExtrinsicArgumentVersion(func, 2);
@@ -45,7 +45,7 @@ export function xTokens() {
     transferMultiAsset: (): ExtrinsicConfigBuilder => ({
       build: ({ address, amount, asset, destination, origin, source }) =>
         new ExtrinsicConfig({
-          pallet,
+          module: pallet,
           func: 'transferMultiAsset',
           getArgs: (func) => [
             {
@@ -95,7 +95,7 @@ export function xTokens() {
     transferMultiCurrencies: (): ExtrinsicConfigBuilder => ({
       build: ({ address, amount, asset, destination, fee, feeAsset, source }) =>
         new ExtrinsicConfig({
-          pallet,
+          module: pallet,
           func: 'transferMultiCurrencies',
           getArgs: (func) => [
             [

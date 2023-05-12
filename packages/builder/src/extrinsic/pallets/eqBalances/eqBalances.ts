@@ -15,7 +15,7 @@ export function eqBalances() {
     xcmTransfer: (): ExtrinsicConfigBuilder => ({
       build: ({ address, amount, asset, destination }) =>
         new ExtrinsicConfig({
-          pallet,
+          module: pallet,
           func: 'xcmTransfer',
           getArgs: () => [
             asset,
@@ -43,7 +43,7 @@ export function eqBalances() {
     transferXcm: (): ExtrinsicConfigBuilder => ({
       build: ({ address, amount, asset, destination, fee, feeAsset }) =>
         new ExtrinsicConfig({
-          pallet,
+          module: pallet,
           func: 'transferXcm',
           getArgs: () => {
             const amountWithoutFee = amount - fee > 0n ? amount - fee : 0n;

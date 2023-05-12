@@ -1,7 +1,9 @@
+import { ChainType } from '@moonbeam-network/xcm-types';
+import { SetOptional } from 'type-fest';
 import { BaseConfig, BaseConfigConstructorParams } from './BaseConfig';
 
 export interface QueryConfigConstructorParams
-  extends BaseConfigConstructorParams {
+  extends SetOptional<BaseConfigConstructorParams, 'type'> {
   args: any[];
   transform: (data: any) => bigint;
 }
@@ -11,8 +13,13 @@ export class QueryConfig extends BaseConfig {
 
   readonly transform: (data: any) => bigint;
 
-  constructor({ args, transform, ...other }: QueryConfigConstructorParams) {
-    super(other);
+  constructor({
+    args,
+    transform,
+    type = ChainType.Substrate,
+    ...other
+  }: QueryConfigConstructorParams) {
+    super({ ...other, type });
 
     this.args = args;
     this.transform = transform;

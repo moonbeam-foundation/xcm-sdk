@@ -24,7 +24,7 @@ function assets() {
     account: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) =>
         new QueryConfig({
-          pallet: 'assets',
+          module: 'assets',
           func: 'account',
           args: [asset, address],
           transform: (response: any): bigint =>
@@ -39,7 +39,7 @@ function system() {
     account: (): BalanceConfigBuilder => ({
       build: ({ address }) =>
         new QueryConfig({
-          pallet: 'system',
+          module: 'system',
           func: 'account',
           args: [address],
           transform: (response: any): bigint => {
@@ -54,7 +54,7 @@ function system() {
     accountEquilibrium: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) =>
         new QueryConfig({
-          pallet: 'system',
+          module: 'system',
           func: 'account',
           args: [address],
           transform: (response): bigint => {
@@ -95,7 +95,7 @@ function tokens() {
     accounts: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) =>
         new QueryConfig({
-          pallet: 'tokens',
+          module: 'tokens',
           func: 'accounts',
           args: [address, asset],
           transform: ({ free, frozen }: TokensPalletAccountData): bigint =>

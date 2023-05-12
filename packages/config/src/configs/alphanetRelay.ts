@@ -12,7 +12,7 @@ export const alphanetRelayConfig = new ChainConfig({
     new AssetConfig({
       asset: unit,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonbaseAlpha],
+      destinations: moonbaseAlpha,
       extrinsic: ExtrinsicBuilder()
         .xcmPallet()
         .limitedReserveTransferAssets()

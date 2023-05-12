@@ -70,7 +70,7 @@ export function filterAssetConfigsByChain(
   configs: AssetConfig[],
   chain: AnyChain,
 ): AssetConfig {
-  const config = configs.find((cfg) => cfg.destinations.includes(chain));
+  const config = configs.find((cfg) => cfg.destination.includes(chain));
 
   if (!config) {
     throw new Error(`Config for chain ${chain.key} not found`);
@@ -80,5 +80,5 @@ export function filterAssetConfigsByChain(
 }
 
 export function getDestinations(configs: AssetConfig[]): AnyChain[] {
-  return configs.map((config) => config.destinations).flat(1);
+  return configs.map((config) => config.destination).flat(1);
 }

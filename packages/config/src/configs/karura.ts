@@ -13,13 +13,13 @@ export const karuraConfig = new ChainConfig({
     new AssetConfig({
       asset: kar,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
     new AssetConfig({
       asset: ausd,
       balance: BalanceBuilder().tokens().accounts(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: kar,
@@ -29,7 +29,7 @@ export const karuraConfig = new ChainConfig({
     new AssetConfig({
       asset: movr,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: kar,

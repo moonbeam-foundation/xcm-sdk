@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
+import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { PolkadotService } from './polkadot';
 import { SourceChainTransferData, TransferData } from './sdk.interfaces';
@@ -88,14 +88,14 @@ export async function getSourceData({
   };
 }
 
-export async function getFee(config: AssetConfig) {
-  if (config.contract) {
-    return getContractFee(config);
-  }
+// export async function getFee(config: AssetConfig) {
+//   if (config.contract) {
+//     return getContractFee(config);
+//   }
 
-  return getExtrinsicFee(config);
-}
+//   return getExtrinsicFee(config);
+// }
 
-export async function getExtrinsicFee(config: AssetConfig) {}
+// export async function getExtrinsicFee(config: AssetConfig) {}
 
-export async function getContractFee(config: AssetConfig) {}
+// export async function getContractFee(config: AssetConfig) {}

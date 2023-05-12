@@ -12,7 +12,7 @@ export const shidenConfig = new ChainConfig({
     new AssetConfig({
       asset: sdn,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
@@ -21,7 +21,7 @@ export const shidenConfig = new ChainConfig({
     new AssetConfig({
       asset: movr,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

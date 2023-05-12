@@ -12,7 +12,7 @@ export const crustShadowConfig = new ChainConfig({
     new AssetConfig({
       asset: csm,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
@@ -21,7 +21,7 @@ export const crustShadowConfig = new ChainConfig({
     new AssetConfig({
       asset: movr,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: csm,

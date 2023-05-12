@@ -12,7 +12,7 @@ export const astarConfig = new ChainConfig({
     new AssetConfig({
       asset: astr,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
@@ -21,7 +21,7 @@ export const astarConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

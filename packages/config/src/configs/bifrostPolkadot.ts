@@ -13,13 +13,13 @@ export const bifrostPolkadotConfig = new ChainConfig({
     new AssetConfig({
       asset: bnc,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().tokens().accounts(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: bnc,

@@ -12,13 +12,13 @@ export const parallelConfig = new ChainConfig({
     new AssetConfig({
       asset: para,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiAsset(),
     }),
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().assets().account(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: para,

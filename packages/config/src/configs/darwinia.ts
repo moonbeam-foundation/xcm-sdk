@@ -12,7 +12,7 @@ export const darwiniaConfig = new ChainConfig({
     new AssetConfig({
       asset: ring,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

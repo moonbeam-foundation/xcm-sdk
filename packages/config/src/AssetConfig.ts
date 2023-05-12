@@ -10,7 +10,7 @@ export interface AssetConfigConstructorParams {
   asset: Asset;
   balance: BalanceConfigBuilder;
   contract?: ContractConfigBuilder;
-  destinations: Chain[];
+  destinations: Chain;
   extrinsic?: ExtrinsicConfigBuilder;
   fee?: FeeAssetConfig;
   min?: AssetMinConfigBuilder;
@@ -28,7 +28,7 @@ export class AssetConfig {
 
   readonly contract?: ContractConfigBuilder;
 
-  readonly destinations: Chain[];
+  readonly destination: Chain;
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
@@ -48,7 +48,7 @@ export class AssetConfig {
     this.asset = asset;
     this.balance = balance;
     this.contract = contract;
-    this.destinations = destinations;
+    this.destination = destinations;
     this.extrinsic = extrinsic;
     this.fee = fee;
     this.min = min;

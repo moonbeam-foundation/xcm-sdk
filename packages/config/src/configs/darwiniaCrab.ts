@@ -12,7 +12,7 @@ export const darwiniaCrabConfig = new ChainConfig({
     new AssetConfig({
       asset: crab,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonriver],
+      destinations: moonriver,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

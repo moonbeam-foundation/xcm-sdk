@@ -1,15 +1,21 @@
+import { ChainType } from '@moonbeam-network/xcm-types';
+
 export interface BaseConfigConstructorParams {
-  pallet: string;
+  module: string;
   func: string;
+  type: ChainType;
 }
 
 export class BaseConfig {
-  readonly pallet: string;
+  readonly module: string;
 
   readonly func: string;
 
-  constructor({ pallet, func }: BaseConfigConstructorParams) {
-    this.pallet = pallet;
+  readonly type: ChainType;
+
+  constructor({ module, func, type }: BaseConfigConstructorParams) {
+    this.module = module;
     this.func = func;
+    this.type = type;
   }
 }

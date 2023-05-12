@@ -13,7 +13,7 @@ export function xTransfer() {
         here: (): ExtrinsicConfigBuilder => ({
           build: ({ address, amount, destination }) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func: method,
               getArgs: () => [
                 {
@@ -52,7 +52,7 @@ export function xTransfer() {
         X2: (): ExtrinsicConfigBuilder => ({
           build: ({ address, amount, destination, asset }) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func: method,
               getArgs: () => [
                 {

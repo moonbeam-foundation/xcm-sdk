@@ -14,7 +14,7 @@ export function xcmPallet() {
         here: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
-              pallet,
+              module: pallet,
               func,
               getArgs: (extrinsicFunction) =>
                 getPolkadotXcmExtrinsicArgs({

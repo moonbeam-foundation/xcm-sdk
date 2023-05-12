@@ -12,7 +12,7 @@ export const darwiniaPangoroConfig = new ChainConfig({
     new AssetConfig({
       asset: paring,
       balance: BalanceBuilder().system().account(),
-      destinations: [moonbaseAlpha],
+      destinations: moonbaseAlpha,
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

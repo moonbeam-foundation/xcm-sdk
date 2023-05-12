@@ -12,13 +12,13 @@ export const equilibriumConfig = new ChainConfig({
     new AssetConfig({
       asset: eq,
       balance: BalanceBuilder().system().accountEquilibrium(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
     }),
     new AssetConfig({
       asset: eqd,
       balance: BalanceBuilder().system().accountEquilibrium(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
         asset: eq,
@@ -28,7 +28,7 @@ export const equilibriumConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().accountEquilibrium(),
-      destinations: [moonbeam],
+      destinations: moonbeam,
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
         asset: eq,
