@@ -1,6 +1,8 @@
 import '@polkadot/api-augment';
 
 import { QueryConfig } from '@moonbeam-network/xcm-builder';
+import { assetsMap } from '@moonbeam-network/xcm-config';
+import { Asset, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import { u128 } from '@polkadot/types';
@@ -24,14 +26,36 @@ export class PolkadotService {
     return this.#api.registry.chainDecimals.at(0) || 12;
   }
 
-  get existentialDeposit(): bigint {
+  get asset(): Asset {
+    const symbol = this.#api.registry.chainTokens
+      .at(0)
+      ?.toString()
+      .toLowerCase();
+
+    if (!symbol) {
+      throw new Error('No native symbol found');
+    }
+
+    const asset = assetsMap.get(symbol);
+
+    if (!asset) {
+      throw new Error(`No asset found for symbol ${symbol}`);
+    }
+
+    return asset;
+  }
+
+  get existentialDeposit(): AssetAmount {
     const existentialDeposit = this.#api.consts.balances?.existentialDeposit;
     const eqExistentialDeposit = this.#api.consts.eqBalances
       ?.existentialDeposit as unknown as u128 | undefined;
+    const amount =
+      existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n;
 
-    return (
-      existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n
-    );
+    return AssetAmount.fromAsset(this.asset, {
+      amount,
+      decimals: this.decimals,
+    });
   }
 
   async query<Config extends QueryConfig>(config: Config): Promise<bigint> {

@@ -4,6 +4,14 @@ import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { TransferData } from './sdk.interfaces';
 import { getTransferData } from './sdk.utils';
 
+export interface SdkTransferParams {
+  sourceAddress: string;
+  destinationAddress: string;
+  keyOrAsset: string | Asset;
+  sourceKeyOrChain: string | AnyChain;
+  destinationKeyOrChain: string | AnyChain;
+}
+
 export function Sdk() {
   return {
     assets(ecosystem?: Ecosystem) {
@@ -21,11 +29,19 @@ export function Sdk() {
 
               return {
                 destinationChains,
-                async destination(
-                  // eslint-disable-next-line @typescript-eslint/no-shadow
-                  keyOrChain: string | AnyChain,
-                ): Promise<TransferData> {
-                  return getTransferData(destination(keyOrChain).build());
+                async destination(destKeyOrChain: string | AnyChain) {
+                  return {
+                    async addresses(
+                      sourceAddress: string,
+                      destinationAddress: string,
+                    ): Promise<TransferData> {
+                      return getTransferData({
+                        sourceAddress,
+                        destinationAddress,
+                        config: destination(destKeyOrChain).build(),
+                      });
+                    },
+                  };
                 },
               };
             },
@@ -33,19 +49,23 @@ export function Sdk() {
         },
       };
     },
-    async transfer(
-      keyOrAsset: string | Asset,
-      sourceKeyOrChain: string | AnyChain,
-      destinationKeyOrChain: string | AnyChain,
-    ): Promise<TransferData> {
-      return getTransferData(
-        ConfigBuilder()
+    async transfer({
+      destinationAddress,
+      destinationKeyOrChain,
+      keyOrAsset,
+      sourceAddress,
+      sourceKeyOrChain,
+    }: SdkTransferParams): Promise<TransferData> {
+      return getTransferData({
+        config: ConfigBuilder()
           .assets()
           .asset(keyOrAsset)
           .source(sourceKeyOrChain)
           .destination(destinationKeyOrChain)
           .build(),
-      );
+        destinationAddress,
+        sourceAddress,
+      });
     },
   };
 }

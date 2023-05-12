@@ -1,12 +1,12 @@
 import { AssetAmount, Chain } from '@moonbeam-network/xcm-types';
 
 export interface TransferData {
-  destination: Omit<ChainTransferData, 'max'>;
+  destination: DestinationChainTransferData;
   getEstimate(amount: number | string): AssetAmount;
   isSwapPossible: boolean;
   max: AssetAmount;
   min: AssetAmount;
-  source: Omit<ChainTransferData, 'min'>;
+  source: SourceChainTransferData;
   swap(): Promise<TransferData | undefined>;
   transfer(amount: number | string): Promise<string>;
 }
@@ -15,13 +15,13 @@ export interface SourceChainTransferData extends ChainTransferData {
   max: AssetAmount;
 }
 
-export interface DestinationChainTransferData extends ChainTransferData {
-  min: AssetAmount;
-}
+export interface DestinationChainTransferData extends ChainTransferData {}
 
 export interface ChainTransferData {
   balance: AssetAmount;
   chain: Chain;
+  existentialDeposit?: AssetAmount;
   fee: AssetAmount;
   feeBalance: AssetAmount;
+  min: AssetAmount;
 }

@@ -152,7 +152,7 @@ export const tt1 = new Asset({
 
 export const unit = new Asset({
   key: 'unit',
-  originSymbol: 'UNIT',
+  originSymbol: 'Unit',
 });
 
 export const usdt = new Asset({
