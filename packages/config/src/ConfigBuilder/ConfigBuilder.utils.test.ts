@@ -1,12 +1,12 @@
 import { Asset, Ecosystem, EthereumChain } from '@moonbeam-network/xcm-types';
+import { assetsList, dev, tt1, unit } from '../assets';
+import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
 import {
   getAsset,
   getChain,
   getEcosystemAssets,
   getSourceChains,
 } from './ConfigBuilder.utils';
-import { assetsList, dev, tt1, unit } from './assets';
-import { equilibriumAlphanet, moonbaseAlpha } from './chains';
 
 describe('config utils', () => {
   describe('getEcosystemAssets', () => {

@@ -3,10 +3,10 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import { ausd, kar, movr } from '../assets';
 import { karura, moonriver } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const karuraConfig = new ChainConfig({
   assets: [

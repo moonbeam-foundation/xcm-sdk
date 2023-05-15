@@ -1,5 +1,5 @@
 import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
-import { AssetConfig } from './AssetConfig';
+import { AssetConfig } from '../types/AssetConfig';
 
 export interface TransferConfig {
   asset: Asset;

@@ -2,10 +2,10 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import { crab } from '../assets';
 import { darwiniaCrab, moonriver } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const darwiniaCrabConfig = new ChainConfig({
   assets: [

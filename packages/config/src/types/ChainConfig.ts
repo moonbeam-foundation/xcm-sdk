@@ -37,7 +37,7 @@ export class ChainConfig {
     );
   }
 
-  getDestinationConfig(asset: Asset, destination: Chain): AssetConfig {
+  getAssetDestinationConfig(asset: Asset, destination: Chain): AssetConfig {
     const assetConfig = this.#assets.get(`${asset.key}-${destination.key}`);
 
     if (!assetConfig) {

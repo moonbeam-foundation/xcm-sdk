@@ -1,4 +1,4 @@
-import { ChainConfig } from '../ChainConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 import { acalaConfig } from './acala';
 import { alphanetRelayConfig } from './alphanetRelay';

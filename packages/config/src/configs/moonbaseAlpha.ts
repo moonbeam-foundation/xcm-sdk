@@ -1,6 +1,4 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import { auq, dev, eq, eqd, lit, paring, tt1, unit } from '../assets';
 import {
   alphanetRelay,
@@ -11,6 +9,8 @@ import {
   statemineAlphanet,
   uniqueAlpha,
 } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const moonbaseAlphaConfig = new ChainConfig({
   assets: [

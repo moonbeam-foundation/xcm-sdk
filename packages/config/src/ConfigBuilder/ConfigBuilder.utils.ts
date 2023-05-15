@@ -1,7 +1,8 @@
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
-import { assetsList, assetsMap } from './assets';
-import { chainsMap } from './chains';
-import { chainsConfigMap } from './configs';
+import { assetsList, assetsMap } from '../assets';
+import { chainsMap } from '../chains';
+import { chainsConfigMap } from '../configs';
+import { AssetConfig } from '../types/AssetConfig';
 
 export function getEcosystemAssets(ecosystem?: Ecosystem): Asset[] {
   if (!ecosystem) {
@@ -58,4 +59,18 @@ export function getDestinationChains(
   }
 
   return chainConfig.getAssetDestinations(asset);
+}
+
+export function getAssetDestinationConfig(
+  asset: Asset,
+  source: AnyChain,
+  destination: AnyChain,
+): AssetConfig {
+  const chainConfig = chainsConfigMap.get(source.key);
+
+  if (!chainConfig) {
+    throw new Error(`Config for chain ${source.key} not found`);
+  }
+
+  return chainConfig.getAssetDestinationConfig(asset, destination);
 }

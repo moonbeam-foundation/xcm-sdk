@@ -2,10 +2,10 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import { movr, pha } from '../assets';
 import { khala, moonriver } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const khalaConfig = new ChainConfig({
   assets: [

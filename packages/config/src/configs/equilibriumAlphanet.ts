@@ -2,10 +2,10 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import { dev, eq, eqd } from '../assets';
 import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const equilibriumAlphanetConfig = new ChainConfig({
   assets: [

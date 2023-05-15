@@ -3,10 +3,10 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import { bnc, glmr } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const bifrostPolkadotConfig = new ChainConfig({
   assets: [

@@ -1,6 +1,4 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '../AssetConfig';
-import { ChainConfig } from '../ChainConfig';
 import {
   aca,
   astr,
@@ -30,6 +28,8 @@ import {
   polkadot,
   statemint,
 } from '../chains';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 
 export const moonbeamConfig = new ChainConfig({
   assets: [

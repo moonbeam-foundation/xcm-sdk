@@ -1,10 +1,10 @@
 /* eslint-disable sort-keys */
 import { Ecosystem } from '@moonbeam-network/xcm-types';
+import { dev } from '../assets';
+import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
+import { equilibriumAlphanetConfig } from '../configs/equilibriumAlphanet';
+import { moonbaseAlphaConfig } from '../configs/moonbaseAlpha';
 import { ConfigBuilder } from './ConfigBuilder';
-import { dev } from './assets';
-import { equilibriumAlphanet, moonbaseAlpha } from './chains';
-import { equilibriumAlphanetConfig } from './configs/equilibriumAlphanet';
-import { moonbaseAlphaConfig } from './configs/moonbaseAlpha';
 
 describe('configBuilder', () => {
   it('should return correct dev config', () => {
@@ -19,14 +19,14 @@ describe('configBuilder', () => {
       asset: dev,
       source: {
         chain: moonbaseAlpha,
-        config: moonbaseAlphaConfig.getDestinationConfig(
+        config: moonbaseAlphaConfig.getAssetDestinationConfig(
           dev,
           equilibriumAlphanet,
         ),
       },
       destination: {
         chain: equilibriumAlphanet,
-        config: equilibriumAlphanetConfig.getDestinationConfig(
+        config: equilibriumAlphanetConfig.getAssetDestinationConfig(
           dev,
           moonbaseAlpha,
         ),
