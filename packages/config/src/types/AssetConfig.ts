@@ -10,10 +10,16 @@ export interface AssetConfigConstructorParams {
   asset: Asset;
   balance: BalanceConfigBuilder;
   contract?: ContractConfigBuilder;
-  destinations: AnyChain;
+  destination: AnyChain;
+  destinationFee: DestinationFeeConfig;
   extrinsic?: ExtrinsicConfigBuilder;
   fee?: FeeAssetConfig;
   min?: AssetMinConfigBuilder;
+}
+
+export interface DestinationFeeConfig {
+  asset: Asset;
+  amount: number;
 }
 
 export interface FeeAssetConfig {
@@ -40,7 +46,7 @@ export class AssetConfig {
     asset,
     balance,
     contract,
-    destinations,
+    destination: destinations,
     extrinsic,
     fee,
     min,

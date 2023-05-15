@@ -12,13 +12,21 @@ export const equilibriumAlphanetConfig = new ChainConfig({
     new AssetConfig({
       asset: eq,
       balance: BalanceBuilder().system().accountEquilibrium(),
-      destinations: moonbaseAlpha,
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0,
+        asset: eq,
+      },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
     }),
     new AssetConfig({
       asset: eqd,
       balance: BalanceBuilder().system().accountEquilibrium(),
-      destinations: moonbaseAlpha,
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0,
+        asset: eq,
+      },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
         asset: eq,
@@ -28,7 +36,11 @@ export const equilibriumAlphanetConfig = new ChainConfig({
     new AssetConfig({
       asset: dev,
       balance: BalanceBuilder().system().accountEquilibrium(),
-      destinations: moonbaseAlpha,
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0,
+        asset: dev,
+      },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
         asset: eq,

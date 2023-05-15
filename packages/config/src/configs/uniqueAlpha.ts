@@ -12,7 +12,11 @@ export const uniqueAlphaConfig = new ChainConfig({
     new AssetConfig({
       asset: auq,
       balance: BalanceBuilder().assets().account(),
-      destinations: moonbaseAlpha,
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0,
+        asset: auq,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
   ],

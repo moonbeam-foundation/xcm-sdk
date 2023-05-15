@@ -13,13 +13,21 @@ export const calamariConfig = new ChainConfig({
     new AssetConfig({
       asset: kma,
       balance: BalanceBuilder().system().account(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: kma,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
     new AssetConfig({
       asset: movr,
       balance: BalanceBuilder().assets().account(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: movr,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: kma,

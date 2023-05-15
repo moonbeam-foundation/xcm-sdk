@@ -12,13 +12,21 @@ export const parallelHeikoConfig = new ChainConfig({
     new AssetConfig({
       asset: hko,
       balance: BalanceBuilder().system().account(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: hko,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiAsset(),
     }),
     new AssetConfig({
       asset: movr,
       balance: BalanceBuilder().assets().account(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: movr,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: hko,

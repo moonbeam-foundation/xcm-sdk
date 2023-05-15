@@ -12,13 +12,21 @@ export const phalaConfig = new ChainConfig({
     new AssetConfig({
       asset: pha,
       balance: BalanceBuilder().system().account(),
-      destinations: moonbeam,
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0,
+        asset: pha,
+      },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
     }),
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().assets().account(),
-      destinations: moonbeam,
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0,
+        asset: glmr,
+      },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().X2(),
       fee: {
         asset: pha,

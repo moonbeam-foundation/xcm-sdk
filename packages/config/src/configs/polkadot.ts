@@ -12,7 +12,11 @@ export const polkadotConfig = new ChainConfig({
     new AssetConfig({
       asset: dot,
       balance: BalanceBuilder().system().account(),
-      destinations: moonbeam,
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0,
+        asset: dot,
+      },
       extrinsic: ExtrinsicBuilder()
         .xcmPallet()
         .limitedReserveTransferAssets()

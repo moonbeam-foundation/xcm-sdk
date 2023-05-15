@@ -12,7 +12,11 @@ export const litmusConfig = new ChainConfig({
     new AssetConfig({
       asset: lit,
       balance: BalanceBuilder().system().account(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: lit,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
   ],

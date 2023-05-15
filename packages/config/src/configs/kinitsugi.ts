@@ -12,13 +12,21 @@ export const kinitsugiConfig = new ChainConfig({
     new AssetConfig({
       asset: kint,
       balance: BalanceBuilder().tokens().accounts(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: kint,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
     new AssetConfig({
       asset: kbtc,
       balance: BalanceBuilder().tokens().accounts(),
-      destinations: moonriver,
+      destination: moonriver,
+      destinationFee: {
+        amount: 0,
+        asset: kint,
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
         asset: kint,

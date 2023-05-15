@@ -13,7 +13,11 @@ export const statemineAlphanetConfig = new ChainConfig({
     new AssetConfig({
       asset: tt1,
       balance: BalanceBuilder().assets().account(),
-      destinations: moonbaseAlpha,
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0,
+        asset: tt1,
+      },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

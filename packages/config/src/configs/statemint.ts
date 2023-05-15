@@ -13,7 +13,11 @@ export const statemintConfig = new ChainConfig({
     new AssetConfig({
       asset: usdt,
       balance: BalanceBuilder().assets().account(),
-      destinations: moonbeam,
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0,
+        asset: usdt,
+      },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()

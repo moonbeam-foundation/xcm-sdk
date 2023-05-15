@@ -18,13 +18,21 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: dev,
       balance: BalanceBuilder().system().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: equilibriumAlphanet,
+      destination: equilibriumAlphanet,
+      destinationFee: {
+        amount: 0,
+        asset: dev,
+      },
     }),
     new AssetConfig({
       asset: auq,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: uniqueAlpha,
+      destination: uniqueAlpha,
+      destinationFee: {
+        amount: 0,
+        asset: auq,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
@@ -34,7 +42,11 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: eq,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: equilibriumAlphanet,
+      destination: equilibriumAlphanet,
+      destinationFee: {
+        amount: 0,
+        asset: eq,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
@@ -44,7 +56,11 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: eqd,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: equilibriumAlphanet,
+      destination: equilibriumAlphanet,
+      destinationFee: {
+        amount: 0,
+        asset: eqd,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
@@ -54,7 +70,11 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: lit,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: litentryAlphanet,
+      destination: litentryAlphanet,
+      destinationFee: {
+        amount: 0,
+        asset: lit,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
@@ -64,7 +84,11 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: paring,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: darwiniaPangoro,
+      destination: darwiniaPangoro,
+      destinationFee: {
+        amount: 0,
+        asset: paring,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
@@ -74,7 +98,11 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: tt1,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: statemineAlphanet,
+      destination: statemineAlphanet,
+      destinationFee: {
+        amount: 0,
+        asset: tt1,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
@@ -84,7 +112,11 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: unit,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().xTokens().transfer(),
-      destinations: alphanetRelay,
+      destination: alphanetRelay,
+      destinationFee: {
+        amount: 0,
+        asset: unit,
+      },
       fee: {
         asset: dev,
         balance: BalanceBuilder().system().account(),
