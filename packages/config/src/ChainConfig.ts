@@ -1,4 +1,4 @@
-import { Asset, Chain } from '@moonbeam-network/xcm-types';
+import { AnyChain, Asset, Chain } from '@moonbeam-network/xcm-types';
 import { AssetConfig } from './AssetConfig';
 
 export interface ChainConfigConstructorParams {
@@ -21,7 +21,23 @@ export class ChainConfig {
     );
   }
 
-  getAssetConfig(asset: Asset, destination: Chain): AssetConfig {
+  getAssetsConfigs(): AssetConfig[] {
+    return Array.from(this.#assets.values());
+  }
+
+  getAssetConfigs(asset: Asset): AssetConfig[] {
+    return this.getAssetsConfigs().filter(
+      (assetConfig) => assetConfig.asset.key === asset.key,
+    );
+  }
+
+  getAssetDestinations(asset: Asset): AnyChain[] {
+    return this.getAssetConfigs(asset).map(
+      (assetConfig) => assetConfig.destination,
+    );
+  }
+
+  getDestinationConfig(asset: Asset, destination: Chain): AssetConfig {
     const assetConfig = this.#assets.get(`${asset.key}-${destination.key}`);
 
     if (!assetConfig) {

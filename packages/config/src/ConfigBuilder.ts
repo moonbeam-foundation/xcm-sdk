@@ -1,15 +1,15 @@
 /* eslint-disable sort-keys */
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
+import { AssetConfig } from './AssetConfig';
 import { TransferConfig } from './ConfigBuilder.interfaces';
 import {
-  filterAssetConfigsByChain,
   getAsset,
-  getAssetConfigs,
   getChain,
-  getDestinations,
+  getDestinationChains,
   getEcosystemAssets,
   getSourceChains,
 } from './ConfigBuilder.utils';
+import { chainsConfigMap } from './configs';
 
 export function ConfigBuilder() {
   return {
@@ -26,28 +26,21 @@ export function ConfigBuilder() {
             sourceChains,
             source: (keyOrChain: string | AnyChain) => {
               const source = getChain(keyOrChain);
-              const sourceConfigs = getAssetConfigs(asset, source);
+              const destinationChains = getDestinationChains(asset, source);
 
               return {
-                destinationChains: getDestinations(sourceConfigs),
+                destinationChains,
                 destination: (
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   keyOrChain: string | AnyChain,
                 ) => {
                   const destination = getChain(keyOrChain);
-                  const destinationConfigs = getAssetConfigs(
-                    asset,
-                    destination,
-                  );
-
-                  const sourceConfig = filterAssetConfigsByChain(
-                    sourceConfigs,
-                    destination,
-                  );
-                  const destinationConfig = filterAssetConfigsByChain(
-                    destinationConfigs,
-                    source,
-                  );
+                  const sourceConfig = chainsConfigMap
+                    .get(source.key)
+                    ?.getDestinationConfig(asset, destination) as AssetConfig;
+                  const destinationConfig = chainsConfigMap
+                    .get(destination.key)
+                    ?.getDestinationConfig(asset, source) as AssetConfig;
 
                   return {
                     build: (): TransferConfig => ({
@@ -69,7 +62,5 @@ export function ConfigBuilder() {
         },
       };
     },
-    // TODO: implement chains
-    // chains: (ecosystem?: Ecosystem) => {},
   };
 }

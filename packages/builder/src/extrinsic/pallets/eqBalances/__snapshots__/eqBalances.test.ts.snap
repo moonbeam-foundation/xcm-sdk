@@ -4,7 +4,8 @@ exports[`eqBalances transferXcm should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "transferXcm",
   "getArgs": [Function],
-  "pallet": "eqBalances",
+  "module": "eqBalances",
+  "type": "Substrate",
 }
 `;
 
@@ -41,7 +42,8 @@ exports[`eqBalances xcmTransfer should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "xcmTransfer",
   "getArgs": [Function],
-  "pallet": "eqBalances",
+  "module": "eqBalances",
+  "type": "Substrate",
 }
 `;
 

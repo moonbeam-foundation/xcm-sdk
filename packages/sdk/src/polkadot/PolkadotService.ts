@@ -59,7 +59,7 @@ export class PolkadotService {
   }
 
   async query<Config extends QueryConfig>(config: Config): Promise<bigint> {
-    const response = await this.#api.query[config.pallet][config.func](
+    const response = await this.#api.query[config.module][config.func](
       ...config.args,
     );
 

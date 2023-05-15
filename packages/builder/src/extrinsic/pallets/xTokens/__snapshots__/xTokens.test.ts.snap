@@ -4,7 +4,8 @@ exports[`xTokens transfer should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "transfer",
   "getArgs": [Function],
-  "pallet": "xTokens",
+  "module": "xTokens",
+  "type": "Substrate",
 }
 `;
 
@@ -38,7 +39,8 @@ exports[`xTokens transferMultiAsset should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "transferMultiAsset",
   "getArgs": [Function],
-  "pallet": "xTokens",
+  "module": "xTokens",
+  "type": "Substrate",
 }
 `;
 
@@ -92,7 +94,8 @@ exports[`xTokens transferMultiCurrencies should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "transferMultiCurrencies",
   "getArgs": [Function],
-  "pallet": "xTokens",
+  "module": "xTokens",
+  "type": "Substrate",
 }
 `;
 

@@ -6,8 +6,9 @@ QueryConfig {
     "<ASSET>",
   ],
   "func": "assetMetadatas",
-  "pallet": "assetRegistry",
+  "module": "assetRegistry",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;
 
@@ -17,8 +18,9 @@ QueryConfig {
     "<ASSET>",
   ],
   "func": "currencyMetadatas",
-  "pallet": "assetRegistry",
+  "module": "assetRegistry",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;
 
@@ -28,7 +30,8 @@ QueryConfig {
     "<ASSET>",
   ],
   "func": "asset",
-  "pallet": "assets",
+  "module": "assets",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;

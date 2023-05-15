@@ -19,11 +19,17 @@ describe('configBuilder', () => {
       asset: dev,
       source: {
         chain: moonbaseAlpha,
-        config: moonbaseAlphaConfig.assets.get(dev.key)?.at(0),
+        config: moonbaseAlphaConfig.getDestinationConfig(
+          dev,
+          equilibriumAlphanet,
+        ),
       },
       destination: {
         chain: equilibriumAlphanet,
-        config: equilibriumAlphanetConfig.assets.get(dev.key)?.at(0),
+        config: equilibriumAlphanetConfig.getDestinationConfig(
+          dev,
+          moonbaseAlpha,
+        ),
       },
     });
   });

@@ -1,5 +1,4 @@
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
-import { AssetConfig } from './AssetConfig';
 import { assetsList, assetsMap } from './assets';
 import { chainsMap } from './chains';
 import { chainsConfigMap } from './configs';
@@ -13,8 +12,8 @@ export function getEcosystemAssets(ecosystem?: Ecosystem): Asset[] {
     new Set(
       Array.from(chainsConfigMap.values())
         .filter((chainConfig) => chainConfig.chain.ecosystem === ecosystem)
-        .map((chainConfig) => Array.from(chainConfig.assets.values()))
-        .flat(3)
+        .map((chainConfig) => chainConfig.getAssetsConfigs())
+        .flat(2)
         .map((assetConfig) => assetConfig.asset),
     ),
   ).sort((a, b) => a.key.localeCompare(b.key));
@@ -44,41 +43,19 @@ export function getChain(keyOrAsset: string | AnyChain): AnyChain {
 
 export function getSourceChains(asset: Asset): AnyChain[] {
   return Array.from(chainsConfigMap.values())
-    .filter((chainConfig) => chainConfig.assets.has(asset.key))
+    .filter((chainConfig) => chainConfig.getAssetConfigs(asset).length)
     .map((chainConfig) => chainConfig.chain);
 }
 
-export function getAssetConfigs(asset: Asset, chain: AnyChain): AssetConfig[] {
-  const chainConfig = chainsConfigMap.get(chain.key);
+export function getDestinationChains(
+  asset: Asset,
+  source: AnyChain,
+): AnyChain[] {
+  const chainConfig = chainsConfigMap.get(source.key);
 
   if (!chainConfig) {
-    throw new Error(`Config for chain ${chain.key} not found`);
+    throw new Error(`Config for chain ${source.key} not found`);
   }
 
-  const assetConfigs = chainConfig.assets.get(asset.key);
-
-  if (!assetConfigs) {
-    throw new Error(
-      `Config for chain ${chain.key} and asset ${asset.key} not found`,
-    );
-  }
-
-  return assetConfigs;
-}
-
-export function filterAssetConfigsByChain(
-  configs: AssetConfig[],
-  chain: AnyChain,
-): AssetConfig {
-  const config = configs.find((cfg) => cfg.destination.includes(chain));
-
-  if (!config) {
-    throw new Error(`Config for chain ${chain.key} not found`);
-  }
-
-  return config;
-}
-
-export function getDestinations(configs: AssetConfig[]): AnyChain[] {
-  return configs.map((config) => config.destination).flat(1);
+  return chainConfig.getAssetDestinations(asset);
 }

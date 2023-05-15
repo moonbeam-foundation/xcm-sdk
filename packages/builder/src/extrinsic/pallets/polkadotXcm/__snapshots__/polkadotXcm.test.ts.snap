@@ -4,7 +4,8 @@ exports[`polkadotXcm limitedReserveTransferAssets here should be correct config 
 ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
-  "pallet": "polkadotXcm",
+  "module": "polkadotXcm",
+  "type": "Substrate",
 }
 `;
 
@@ -57,7 +58,8 @@ exports[`polkadotXcm limitedReserveTransferAssets x1 should be correct config 1`
 ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
-  "pallet": "polkadotXcm",
+  "module": "polkadotXcm",
+  "type": "Substrate",
 }
 `;
 
@@ -114,7 +116,8 @@ exports[`polkadotXcm limitedReserveTransferAssets x2 should be correct config 1`
 ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
-  "pallet": "polkadotXcm",
+  "module": "polkadotXcm",
+  "type": "Substrate",
 }
 `;
 
@@ -176,7 +179,8 @@ exports[`polkadotXcm limitedReserveWithdrawAssets x2 should be correct config 1`
 ExtrinsicConfig {
   "func": "limitedReserveWithdrawAssets",
   "getArgs": [Function],
-  "pallet": "polkadotXcm",
+  "module": "polkadotXcm",
+  "type": "Substrate",
 }
 `;
 

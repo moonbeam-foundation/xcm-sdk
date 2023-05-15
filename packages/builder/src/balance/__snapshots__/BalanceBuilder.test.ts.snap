@@ -7,8 +7,9 @@ QueryConfig {
     "<ACCOUNT>",
   ],
   "func": "account",
-  "pallet": "assets",
+  "module": "assets",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;
 
@@ -18,8 +19,9 @@ QueryConfig {
     "<ACCOUNT>",
   ],
   "func": "account",
-  "pallet": "system",
+  "module": "system",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;
 
@@ -29,8 +31,9 @@ QueryConfig {
     "<ACCOUNT>",
   ],
   "func": "account",
-  "pallet": "system",
+  "module": "system",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;
 
@@ -41,7 +44,8 @@ QueryConfig {
     "<ASSET>",
   ],
   "func": "accounts",
-  "pallet": "tokens",
+  "module": "tokens",
   "transform": [Function],
+  "type": "Substrate",
 }
 `;

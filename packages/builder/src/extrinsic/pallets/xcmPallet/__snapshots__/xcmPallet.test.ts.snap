@@ -4,7 +4,8 @@ exports[`xcmPallet limitedReserveTransferAssets should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
-  "pallet": "xcmPallet",
+  "module": "xcmPallet",
+  "type": "Substrate",
 }
 `;
 
