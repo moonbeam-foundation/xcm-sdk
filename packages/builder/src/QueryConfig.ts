@@ -1,6 +1,6 @@
-import { ChainType } from '@moonbeam-network/xcm-types';
 import { SetOptional } from 'type-fest';
 import { BaseConfig, BaseConfigConstructorParams } from './BaseConfig';
+import { CallType } from './builder.interfaces';
 
 export interface QueryConfigConstructorParams
   extends SetOptional<BaseConfigConstructorParams, 'type'> {
@@ -16,7 +16,7 @@ export class QueryConfig extends BaseConfig {
   constructor({
     args,
     transform,
-    type = ChainType.Substrate,
+    type = CallType.Substrate,
     ...other
   }: QueryConfigConstructorParams) {
     super({ ...other, type });

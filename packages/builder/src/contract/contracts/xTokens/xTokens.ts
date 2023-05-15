@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import {
-  ChainAssetId,
-  EthereumChain,
-  SubstrateChain,
-} from '@moonbeam-network/xcm-types';
+import { AnyChain, ChainAssetId } from '@moonbeam-network/xcm-types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
@@ -86,14 +82,14 @@ type DestinationMultilocation = [
 
 function getDestinationMultilocation(
   address: string,
-  destination: EthereumChain | SubstrateChain,
+  destination: AnyChain,
 ): DestinationMultilocation {
   /* 
    01: AccountId32
    03: AccountKey20
    https://docs.moonbeam.network/builders/interoperability/xcm/xc20/xtokens/#building-the-precompile-multilocation
    */
-  const accountType = destination.isEthereumChain() ? '03' : '01';
+  const accountType = destination.isEvmParachain() ? '03' : '01';
   const acc = `0x${accountType}${u8aToHex(
     decodeAddress(address),
     -1,

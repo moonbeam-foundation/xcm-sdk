@@ -1,4 +1,4 @@
-import { AssetAmount, Chain } from '@moonbeam-network/xcm-types';
+import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 
 export interface TransferData {
   destination: DestinationChainTransferData;
@@ -19,7 +19,7 @@ export interface DestinationChainTransferData extends ChainTransferData {}
 
 export interface ChainTransferData {
   balance: AssetAmount;
-  chain: Chain;
+  chain: AnyChain;
   existentialDeposit?: AssetAmount;
   fee: AssetAmount;
   feeBalance: AssetAmount;

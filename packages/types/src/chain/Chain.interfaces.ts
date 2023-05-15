@@ -1,4 +1,9 @@
-import { EthereumChain } from './EthereumChain';
-import { SubstrateChain } from './SubstrateChain';
+import { EvmParachain, Parachain } from './parachain';
 
-export type AnyChain = SubstrateChain | EthereumChain;
+export type AnyChain = Parachain | EvmParachain;
+
+export enum Ecosystem {
+  Polkadot = 'Polkadot',
+  Kusama = 'Kusama',
+  AlphanetRelay = 'AlphanetRelay',
+}

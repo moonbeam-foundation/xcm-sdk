@@ -1,5 +1,5 @@
-import { ChainType } from '@moonbeam-network/xcm-types';
 import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
+import { CallType } from '../builder.interfaces';
 
 export interface ContractConfigConstructorParams
   extends Omit<BaseConfigConstructorParams, 'type'> {
@@ -10,7 +10,7 @@ export class ContractConfig extends BaseConfig {
   readonly args: any[];
 
   constructor({ args, ...other }: ContractConfigConstructorParams) {
-    super({ ...other, type: ChainType.Ethereum });
+    super({ ...other, type: CallType.Evm });
 
     this.args = args;
   }

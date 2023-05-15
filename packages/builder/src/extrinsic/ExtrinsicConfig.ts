@@ -1,6 +1,6 @@
-import { ChainType } from '@moonbeam-network/xcm-types';
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
+import { CallType } from '../builder.interfaces';
 
 export interface ExtrinsicConfigConstructorParams
   extends Omit<BaseConfigConstructorParams, 'type'> {
@@ -11,7 +11,7 @@ export class ExtrinsicConfig extends BaseConfig {
   getArgs: (func?: SubmittableExtrinsicFunction<'promise'>) => any[];
 
   constructor({ getArgs, ...other }: ExtrinsicConfigConstructorParams) {
-    super({ ...other, type: ChainType.Substrate });
+    super({ ...other, type: CallType.Substrate });
 
     this.getArgs = getArgs;
   }

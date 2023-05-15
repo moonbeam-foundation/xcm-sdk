@@ -1,57 +1,15 @@
-import { Asset } from '../asset';
-import type { EthereumChain } from './EthereumChain';
-import type { SubstrateChain } from './SubstrateChain';
-
-export enum Ecosystem {
-  Polkadot = 'Polkadot',
-  Kusama = 'Kusama',
-  AlphanetRelay = 'AlphanetRelay',
-}
-
-export enum ChainType {
-  Ethereum = 'Ethereum',
-  Substrate = 'Substrate',
-}
-
-export type ChainAssetId =
-  | string
-  | number
-  | bigint
-  | { [key: string]: string | number | bigint };
-
-export interface ChainAssetsData {
-  decimals?: number;
-  id?: ChainAssetId;
-  balanceId?: ChainAssetId;
-  palletInstance?: number;
-}
-
-export interface ChainAssetsDataWithAsset extends ChainAssetsData {
-  asset: Asset;
-}
+import { Ecosystem } from './Chain.interfaces';
+import type { EvmParachain, Parachain } from './parachain';
 
 export interface ChainConstructorParams {
-  assetsData?: ChainAssetsDataWithAsset[];
   ecosystem?: Ecosystem;
-  genesisHash?: string;
-  id: string | number;
   isTestChain?: boolean;
   key: string;
   name: string;
-  parachainId?: number;
-  type: ChainType;
-  weight?: number;
-  ws: string;
 }
 
 export abstract class Chain {
-  readonly assetsData: Map<string, ChainAssetsData>;
-
   readonly ecosystem?: Ecosystem;
-
-  readonly genesisHash?: string;
-
-  readonly id: string | number;
 
   readonly isTestChain: boolean;
 
@@ -59,63 +17,23 @@ export abstract class Chain {
 
   readonly name: string;
 
-  readonly parachainId?: number;
-
-  readonly type: ChainType;
-
-  readonly weight: number;
-
-  readonly ws: string;
-
   constructor({
-    assetsData,
     ecosystem,
-    genesisHash,
-    id,
     isTestChain = false,
     key,
     name,
-    parachainId,
-    type,
-    weight,
-    ws,
   }: ChainConstructorParams) {
-    this.assetsData = new Map(
-      assetsData?.map(({ asset, ...rest }) => [asset.key, rest]),
-    );
     this.ecosystem = ecosystem;
-    this.genesisHash = genesisHash;
-    this.id = id;
     this.isTestChain = isTestChain;
     this.key = key;
     this.name = name;
-    this.parachainId = parachainId;
-    this.type = type;
-    this.weight = weight ?? 1_000_000_000;
-    this.ws = ws;
   }
 
-  isEthereumChain(): this is EthereumChain {
-    return this.type === ChainType.Ethereum;
+  isParachain(): this is Parachain {
+    return this.constructor.name === 'Parachain';
   }
 
-  isSubstrateChain(): this is SubstrateChain {
-    return this.type === ChainType.Substrate;
-  }
-
-  getAssetId(asset: Asset): ChainAssetId {
-    return this.assetsData.get(asset.key)?.id ?? asset.originSymbol;
-  }
-
-  getBalanceAssetId(asset: Asset): ChainAssetId {
-    return this.assetsData.get(asset.key)?.balanceId ?? this.getAssetId(asset);
-  }
-
-  getAssetPalletInstance(asset: Asset): number | undefined {
-    return this.assetsData.get(asset.key)?.palletInstance;
-  }
-
-  getAssetDecimals(asset: Asset): number | undefined {
-    return this.assetsData.get(asset.key)?.decimals;
+  isEvmParachain(): this is EvmParachain {
+    return this.constructor.name === 'EvmParachain';
   }
 }

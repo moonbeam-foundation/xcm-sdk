@@ -1,7 +1,8 @@
 import {
+  AnyChain,
   Ecosystem,
-  EthereumChain,
-  SubstrateChain,
+  EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import {
   aca,
@@ -39,7 +40,7 @@ import {
   xrt,
 } from './assets';
 
-export const acala = new SubstrateChain({
+export const acala = new Parachain({
   assetsData: [
     {
       asset: ausd,
@@ -60,7 +61,7 @@ export const acala = new SubstrateChain({
   ws: 'wss://acala-rpc-0.aca-api.network',
 });
 
-export const alphanetRelay = new SubstrateChain({
+export const alphanetRelay = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
@@ -72,7 +73,7 @@ export const alphanetRelay = new SubstrateChain({
   ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
 });
 
-export const astar = new SubstrateChain({
+export const astar = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -90,7 +91,7 @@ export const astar = new SubstrateChain({
   ws: 'wss://rpc.astar.network',
 });
 
-export const bifrostKusama = new SubstrateChain({
+export const bifrostKusama = new Parachain({
   assetsData: [
     {
       asset: movr,
@@ -107,7 +108,7 @@ export const bifrostKusama = new SubstrateChain({
   ws: 'wss://bifrost-rpc.liebi.com/ws',
 });
 
-export const bifrostPolkadot = new SubstrateChain({
+export const bifrostPolkadot = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -124,7 +125,7 @@ export const bifrostPolkadot = new SubstrateChain({
   ws: 'wss://hk.p.bifrost-rpc.liebi.com/ws',
 });
 
-export const calamari = new SubstrateChain({
+export const calamari = new Parachain({
   assetsData: [
     {
       asset: movr,
@@ -142,7 +143,7 @@ export const calamari = new SubstrateChain({
   ws: 'wss://ws.calamari.systems',
 });
 
-export const crustShadow = new SubstrateChain({
+export const crustShadow = new Parachain({
   assetsData: [
     {
       asset: movr,
@@ -160,35 +161,47 @@ export const crustShadow = new SubstrateChain({
   ws: 'wss://rpc2-shadow.crust.network',
 });
 
-export const darwinia = new EthereumChain({
+export const darwinia = new EvmParachain({
   ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xf0b8924b12e8108550d28870bc03f7b45a947e1b2b9abf81bfb0b89ecb60570e',
   id: 46,
   key: 'darwinia',
   name: 'Darwinia',
   parachainId: 2046,
+  rpc: 'https://rpc.darwinia.network',
+  ss58Format: 18,
   ws: 'wss://parachain-rpc.darwinia.network',
 });
 
-export const darwiniaCrab = new EthereumChain({
+export const darwiniaCrab = new EvmParachain({
   ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0x86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24',
   id: 44,
   key: 'darwinia-crab',
   name: 'Darwinia Crab',
   parachainId: 2105,
+  rpc: 'https://crab-rpc.darwinia.network',
+  ss58Format: 18,
   ws: 'wss://crab-parachain-rpc.darwinia.network',
 });
 
-export const darwiniaPangoro = new EthereumChain({
+export const darwiniaPangoro = new EvmParachain({
   ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
   id: 45,
   isTestChain: true,
   key: 'darwinia-pangoro',
   name: 'Pangoro',
   parachainId: 2105,
+  rpc: 'https://pangoro-rpc.darwinia.network',
+  ss58Format: 18,
   ws: 'wss://pangoro-rpc.darwinia.network',
 });
 
-export const equilibrium = new SubstrateChain({
+export const equilibrium = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -214,7 +227,7 @@ export const equilibrium = new SubstrateChain({
   ws: 'wss://node.pol.equilibrium.io',
 });
 
-export const equilibriumAlphanet = new SubstrateChain({
+export const equilibriumAlphanet = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -241,7 +254,7 @@ export const equilibriumAlphanet = new SubstrateChain({
   ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
 });
 
-export const interlay = new SubstrateChain({
+export const interlay = new Parachain({
   assetsData: [
     {
       asset: intr,
@@ -262,7 +275,7 @@ export const interlay = new SubstrateChain({
   ws: 'wss://interlay.api.onfinality.io/public-ws',
 });
 
-export const integritee = new SubstrateChain({
+export const integritee = new Parachain({
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
@@ -273,7 +286,7 @@ export const integritee = new SubstrateChain({
   ws: 'wss://integritee-kusama.api.onfinality.io/public-ws',
 });
 
-export const karura = new SubstrateChain({
+export const karura = new Parachain({
   assetsData: [
     {
       asset: movr,
@@ -294,7 +307,7 @@ export const karura = new SubstrateChain({
   ws: 'wss://karura-rpc-0.aca-api.network',
 });
 
-export const khala = new SubstrateChain({
+export const khala = new Parachain({
   assetsData: [
     {
       asset: movr,
@@ -312,7 +325,7 @@ export const khala = new SubstrateChain({
   ws: 'wss://khala.api.onfinality.io/public-ws',
 });
 
-export const kinitsugi = new SubstrateChain({
+export const kinitsugi = new Parachain({
   assetsData: [
     {
       asset: kint,
@@ -333,7 +346,7 @@ export const kinitsugi = new SubstrateChain({
   ws: 'wss://api-kusama.interlay.io/parachain',
 });
 
-export const kusama = new SubstrateChain({
+export const kusama = new Parachain({
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe',
@@ -344,7 +357,7 @@ export const kusama = new SubstrateChain({
   ws: 'wss://kusama-rpc.polkadot.io',
 });
 
-export const litentryAlphanet = new SubstrateChain({
+export const litentryAlphanet = new Parachain({
   assetsData: [
     {
       asset: lit,
@@ -362,7 +375,7 @@ export const litentryAlphanet = new SubstrateChain({
   ws: 'wss://moonbase-parachain-sg-0.litentry.io',
 });
 
-export const litmus = new SubstrateChain({
+export const litmus = new Parachain({
   assetsData: [
     {
       asset: lit,
@@ -379,7 +392,7 @@ export const litmus = new SubstrateChain({
   ws: 'wss://rpc.litmus-parachain.litentry.io',
 });
 
-export const moonbaseAlpha = new EthereumChain({
+export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
       asset: auq,
@@ -415,25 +428,33 @@ export const moonbaseAlpha = new EthereumChain({
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
   parachainId: 1000,
+  rpc: 'https://rpc.api.moonbase.moonbeam.network',
+  ss58Format: 1287,
   ws: 'wss://wss.api.moonbase.moonbeam.network',
 });
 
-export const moonbaseBeta = new EthereumChain({
+export const moonbaseBeta = new EvmParachain({
   ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0xeebb5d05763801e54d6a7a60a4b7998ac125c4d050dcec418dd07ea959a54464',
   id: 1287,
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
   parachainId: 888,
+  rpc: 'https://rpc.api.moondev.network',
+  ss58Format: 1287,
   ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
 });
 
-export const moonbeam = new EthereumChain({
+export const moonbeam = new EvmParachain({
   assetsData: [
     {
       asset: aca,
@@ -485,14 +506,18 @@ export const moonbeam = new EthereumChain({
     },
   ],
   ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
   id: 1284,
   key: 'moonbeam',
   name: 'Moonbeam',
   parachainId: 2004,
+  rpc: 'https://rpc.api.moonbeam.network',
+  ss58Format: 1284,
   ws: 'wss://wss.api.moonbeam.network',
 });
 
-export const moonriver = new EthereumChain({
+export const moonriver = new EvmParachain({
   assetsData: [
     {
       asset: ausd,
@@ -568,14 +593,18 @@ export const moonriver = new EthereumChain({
     },
   ],
   ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0x401a1f9dca3da46f5c4091016c8a2f26dcea05865116b286f60f668207d1474b',
   id: 1285,
   key: 'moonriver',
   name: 'Moonriver',
   parachainId: 2023,
+  rpc: 'https://rpc.api.moonriver.moonbeam.network',
+  ss58Format: 1285,
   ws: 'wss://wss.api.moonriver.moonbeam.network',
 });
 
-export const parallel = new SubstrateChain({
+export const parallel = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -592,7 +621,7 @@ export const parallel = new SubstrateChain({
   ws: 'wss://rpc.parallel.fi',
 });
 
-export const parallelHeiko = new SubstrateChain({
+export const parallelHeiko = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -609,7 +638,7 @@ export const parallelHeiko = new SubstrateChain({
   ws: 'wss://heiko-rpc.parallel.fi',
 });
 
-export const phala = new SubstrateChain({
+export const phala = new Parachain({
   assetsData: [
     {
       asset: glmr,
@@ -626,7 +655,7 @@ export const phala = new SubstrateChain({
   ws: 'wss://api.phala.network/ws',
 });
 
-export const polkadot = new SubstrateChain({
+export const polkadot = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3',
@@ -637,7 +666,7 @@ export const polkadot = new SubstrateChain({
   ws: 'wss://rpc.polkadot.io',
 });
 
-export const robonomics = new SubstrateChain({
+export const robonomics = new Parachain({
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x631ccc82a078481584041656af292834e1ae6daab61d2875b4dd0c14bb9b17bc',
@@ -648,7 +677,7 @@ export const robonomics = new SubstrateChain({
   ws: 'wss://robonomics.api.onfinality.io/public-ws',
 });
 
-export const shiden = new SubstrateChain({
+export const shiden = new Parachain({
   assetsData: [
     {
       asset: movr,
@@ -666,7 +695,7 @@ export const shiden = new SubstrateChain({
   ws: 'wss://shiden.api.onfinality.io/public-ws',
 });
 
-export const statemine = new SubstrateChain({
+export const statemine = new Parachain({
   assetsData: [
     {
       asset: usdt,
@@ -689,7 +718,7 @@ export const statemine = new SubstrateChain({
   ws: 'wss://statemine-rpc.polkadot.io',
 });
 
-export const statemineAlphanet = new SubstrateChain({
+export const statemineAlphanet = new Parachain({
   assetsData: [
     {
       asset: tt1,
@@ -708,7 +737,7 @@ export const statemineAlphanet = new SubstrateChain({
   ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
 });
 
-export const statemint = new SubstrateChain({
+export const statemint = new Parachain({
   assetsData: [
     {
       asset: usdt,
@@ -726,7 +755,7 @@ export const statemint = new SubstrateChain({
   ws: 'wss://statemint-rpc.polkadot.io',
 });
 
-export const uniqueAlpha = new SubstrateChain({
+export const uniqueAlpha = new Parachain({
   assetsData: [
     {
       asset: auq,
@@ -744,7 +773,7 @@ export const uniqueAlpha = new SubstrateChain({
   ws: 'wss://unique-alpha.unique.network',
 });
 
-export const chainsList: (EthereumChain | SubstrateChain)[] = [
+export const chainsList: AnyChain[] = [
   acala,
   alphanetRelay,
   astar,
@@ -781,6 +810,6 @@ export const chainsList: (EthereumChain | SubstrateChain)[] = [
   uniqueAlpha,
 ];
 
-export const chainsMap = new Map<string, EthereumChain | SubstrateChain>(
+export const chainsMap = new Map<string, AnyChain>(
   chainsList.map((chain) => [chain.key, chain]),
 );

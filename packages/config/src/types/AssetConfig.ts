@@ -4,13 +4,13 @@ import {
   ContractConfigBuilder,
   ExtrinsicConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { Asset, Chain } from '@moonbeam-network/xcm-types';
+import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
 
 export interface AssetConfigConstructorParams {
   asset: Asset;
   balance: BalanceConfigBuilder;
   contract?: ContractConfigBuilder;
-  destinations: Chain;
+  destinations: AnyChain;
   extrinsic?: ExtrinsicConfigBuilder;
   fee?: FeeAssetConfig;
   min?: AssetMinConfigBuilder;
@@ -28,7 +28,7 @@ export class AssetConfig {
 
   readonly contract?: ContractConfigBuilder;
 
-  readonly destination: Chain;
+  readonly destination: AnyChain;
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 

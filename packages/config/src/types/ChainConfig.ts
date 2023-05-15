@@ -1,15 +1,15 @@
-import { AnyChain, Asset, Chain } from '@moonbeam-network/xcm-types';
+import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
 import { AssetConfig } from './AssetConfig';
 
 export interface ChainConfigConstructorParams {
   assets: AssetConfig[];
-  chain: Chain;
+  chain: AnyChain;
 }
 
 export class ChainConfig {
   readonly #assets: Map<string, AssetConfig> = new Map();
 
-  readonly chain: Chain;
+  readonly chain: AnyChain;
 
   constructor({ assets, chain }: ChainConfigConstructorParams) {
     this.chain = chain;
@@ -37,7 +37,7 @@ export class ChainConfig {
     );
   }
 
-  getAssetDestinationConfig(asset: Asset, destination: Chain): AssetConfig {
+  getAssetDestinationConfig(asset: Asset, destination: AnyChain): AssetConfig {
     const assetConfig = this.#assets.get(`${asset.key}-${destination.key}`);
 
     if (!assetConfig) {

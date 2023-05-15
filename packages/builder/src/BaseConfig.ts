@@ -1,9 +1,9 @@
-import { ChainType } from '@moonbeam-network/xcm-types';
+import { CallType } from './builder.interfaces';
 
 export interface BaseConfigConstructorParams {
   module: string;
   func: string;
-  type: ChainType;
+  type: CallType;
 }
 
 export class BaseConfig {
@@ -11,7 +11,7 @@ export class BaseConfig {
 
   readonly func: string;
 
-  readonly type: ChainType;
+  readonly type: CallType;
 
   constructor({ module, func, type }: BaseConfigConstructorParams) {
     this.module = module;
