@@ -8,10 +8,10 @@ import { ApiPromise } from '@polkadot/api';
 import { u128 } from '@polkadot/types';
 
 export class PolkadotService {
-  readonly #api: ApiPromise;
+  readonly api: ApiPromise;
 
   constructor(api: ApiPromise) {
-    this.#api = api;
+    this.api = api;
   }
 
   static async create(ws: string): Promise<PolkadotService> {
@@ -23,11 +23,11 @@ export class PolkadotService {
   }
 
   get decimals(): number {
-    return this.#api.registry.chainDecimals.at(0) || 12;
+    return this.api.registry.chainDecimals.at(0) || 12;
   }
 
   get asset(): Asset {
-    const symbol = this.#api.registry.chainTokens
+    const symbol = this.api.registry.chainTokens
       .at(0)
       ?.toString()
       .toLowerCase();
@@ -46,8 +46,8 @@ export class PolkadotService {
   }
 
   get existentialDeposit(): AssetAmount {
-    const existentialDeposit = this.#api.consts.balances?.existentialDeposit;
-    const eqExistentialDeposit = this.#api.consts.eqBalances
+    const existentialDeposit = this.api.consts.balances?.existentialDeposit;
+    const eqExistentialDeposit = this.api.consts.eqBalances
       ?.existentialDeposit as unknown as u128 | undefined;
     const amount =
       existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n;
@@ -59,7 +59,7 @@ export class PolkadotService {
   }
 
   async query<Config extends QueryConfig>(config: Config): Promise<bigint> {
-    const response = await this.#api.query[config.module][config.func](
+    const response = await this.api.query[config.module][config.func](
       ...config.args,
     );
 

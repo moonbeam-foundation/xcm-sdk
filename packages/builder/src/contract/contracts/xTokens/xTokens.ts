@@ -5,22 +5,24 @@ import { decodeAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { ContractConfig } from '../../ContractConfig';
 
-export function xTokens() {
+export function Xtokens() {
   return {
-    transfer: (): ContractConfigBuilder => ({
+    transfer: (weight = 4_000_000_000): ContractConfigBuilder => ({
       build: ({ address, amount, asset, destination }) =>
         new ContractConfig({
           args: [
             formatAssetIdToERC20(asset),
             amount,
             getDestinationMultilocation(address, destination),
-            4_000_000_000, // TODO: where we can put this value?
+            weight,
           ],
           func: 'transfer',
-          module: 'xTokens',
+          module: 'Xtokens',
         }),
     }),
-    transferMultiCurrencies: (): ContractConfigBuilder => ({
+    transferMultiCurrencies: (
+      weight = 4_000_000_000,
+    ): ContractConfigBuilder => ({
       build: ({ address, amount, asset, destination, fee, feeAsset }) =>
         new ContractConfig({
           args: [
@@ -30,10 +32,10 @@ export function xTokens() {
             ],
             1, // index of the fee asset
             getDestinationMultilocation(address, destination),
-            4_000_000_000, // TODO: where we can put this value?
+            weight,
           ],
           func: 'transferMultiCurrencies',
-          module: 'xTokens',
+          module: 'Xtokens',
         }),
     }),
   };

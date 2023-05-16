@@ -1,7 +1,7 @@
-import { xTokens } from './contracts/xTokens/xTokens';
+import { Xtokens } from './contracts/Xtokens';
 
 export function ContractBuilder() {
   return {
-    xTokens,
+    Xtokens,
   };
 }
