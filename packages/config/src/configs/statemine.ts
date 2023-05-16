@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ksm, rmrk, usdt } from '../assets';
 import { moonriver, statemine } from '../chains';
@@ -15,7 +16,7 @@ export const statemineConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: rmrk,
       },
       extrinsic: ExtrinsicBuilder()
@@ -33,7 +34,7 @@ export const statemineConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: usdt,
       },
       extrinsic: ExtrinsicBuilder()

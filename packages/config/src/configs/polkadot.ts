@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dot } from '../assets';
 import { moonbeam, polkadot } from '../chains';
@@ -14,7 +15,7 @@ export const polkadotConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: dot,
       },
       extrinsic: ExtrinsicBuilder()

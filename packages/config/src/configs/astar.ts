@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { astr, glmr } from '../assets';
 import { astar, moonbeam } from '../chains';
@@ -14,7 +15,7 @@ export const astarConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: astr,
       },
       extrinsic: ExtrinsicBuilder()
@@ -27,7 +28,7 @@ export const astarConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder()

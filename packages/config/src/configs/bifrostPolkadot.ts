@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { bnc, glmr } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
@@ -15,7 +16,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: bnc,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -25,7 +26,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { auq } from '../assets';
 import { moonbaseAlpha, uniqueAlpha } from '../chains';
@@ -14,7 +15,7 @@ export const uniqueAlphaConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: auq,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

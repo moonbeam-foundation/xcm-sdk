@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { lit } from '../assets';
 import { litmus, moonriver } from '../chains';
@@ -14,7 +15,7 @@ export const litmusConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: lit,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

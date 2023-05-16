@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { paring } from '../assets';
 import { darwiniaPangoro, moonbaseAlpha } from '../chains';
@@ -14,7 +15,7 @@ export const darwiniaPangoroConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: paring,
       },
       extrinsic: ExtrinsicBuilder()

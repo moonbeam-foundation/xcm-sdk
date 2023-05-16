@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
 import { moonbaseAlpha, statemineAlphanet } from '../chains';
@@ -15,7 +16,7 @@ export const statemineAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: tt1,
       },
       extrinsic: ExtrinsicBuilder()

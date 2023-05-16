@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, pha } from '../assets';
 import { moonbeam, phala } from '../chains';
@@ -14,7 +15,7 @@ export const phalaConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: pha,
       },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
@@ -24,7 +25,7 @@ export const phalaConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().X2(),

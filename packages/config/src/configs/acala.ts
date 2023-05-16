@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { aca, ausd, glmr } from '../assets';
 import { acala, moonbeam } from '../chains';
@@ -15,7 +16,7 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: aca,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -25,7 +26,7 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: aca,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -39,7 +40,7 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dev, eq, eqd } from '../assets';
 import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
@@ -14,7 +15,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: eq,
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
@@ -24,7 +25,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: eq,
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
@@ -38,7 +39,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: dev,
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),

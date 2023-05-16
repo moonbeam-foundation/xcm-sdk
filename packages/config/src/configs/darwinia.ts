@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ring } from '../assets';
 import { darwinia, moonbeam } from '../chains';
@@ -14,7 +15,7 @@ export const darwiniaConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: ring,
       },
       extrinsic: ExtrinsicBuilder()

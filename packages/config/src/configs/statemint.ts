@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dot, usdt } from '../assets';
 import { moonbeam, statemint } from '../chains';
@@ -15,7 +16,7 @@ export const statemintConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: usdt,
       },
       extrinsic: ExtrinsicBuilder()

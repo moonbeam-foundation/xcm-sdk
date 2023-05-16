@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { teer } from '../assets';
 import { integritee, moonriver } from '../chains';
@@ -14,7 +15,7 @@ export const integriteeConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: teer,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

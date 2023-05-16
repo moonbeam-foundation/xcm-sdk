@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { crab } from '../assets';
 import { darwiniaCrab, moonriver } from '../chains';
@@ -14,7 +15,7 @@ export const darwiniaCrabConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: crab,
       },
       extrinsic: ExtrinsicBuilder()

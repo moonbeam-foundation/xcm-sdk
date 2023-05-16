@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { xrt } from '../assets';
 import { moonriver, robonomics } from '../chains';
@@ -14,7 +15,7 @@ export const robonomicsConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: xrt,
       },
       extrinsic: ExtrinsicBuilder()

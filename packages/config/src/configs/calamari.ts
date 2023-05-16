@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { kma, movr } from '../assets';
 import { calamari, moonriver } from '../chains';
@@ -15,7 +16,7 @@ export const calamariConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: kma,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -25,7 +26,7 @@ export const calamariConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: movr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { csm, movr } from '../assets';
 import { crustShadow, moonriver } from '../chains';
@@ -14,7 +15,7 @@ export const crustShadowConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: csm,
       },
       extrinsic: ExtrinsicBuilder()
@@ -27,7 +28,7 @@ export const crustShadowConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: movr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

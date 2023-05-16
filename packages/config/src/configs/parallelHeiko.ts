@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { hko, movr } from '../assets';
 import { moonriver, parallelHeiko } from '../chains';
@@ -14,7 +15,7 @@ export const parallelHeikoConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: hko,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiAsset(),
@@ -24,7 +25,7 @@ export const parallelHeikoConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: movr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

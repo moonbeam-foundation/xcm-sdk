@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { kbtc, kint } from '../assets';
 import { kinitsugi, moonriver } from '../chains';
@@ -14,7 +15,7 @@ export const kinitsugiConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: kint,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -24,7 +25,7 @@ export const kinitsugiConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: kint,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

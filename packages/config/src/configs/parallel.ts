@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, para } from '../assets';
 import { moonbeam, parallel } from '../chains';
@@ -14,7 +15,7 @@ export const parallelConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: para,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiAsset(),
@@ -24,7 +25,7 @@ export const parallelConfig = new ChainConfig({
       balance: BalanceBuilder().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

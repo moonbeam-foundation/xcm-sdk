@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { unit } from '../assets';
 import { alphanetRelay, moonbaseAlpha } from '../chains';
@@ -14,7 +15,7 @@ export const alphanetRelayConfig = new ChainConfig({
       balance: BalanceBuilder().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0,
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: unit,
       },
       extrinsic: ExtrinsicBuilder()
