@@ -3,6 +3,7 @@ import {
   BalanceConfigBuilder,
   ContractConfigBuilder,
   ExtrinsicConfigBuilder,
+  FeeConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
 
@@ -19,7 +20,7 @@ export interface AssetConfigConstructorParams {
 
 export interface DestinationFeeConfig {
   asset: Asset;
-  amount: number;
+  amount: number | FeeConfigBuilder;
 }
 
 export interface FeeAssetConfig {

@@ -27,7 +27,7 @@ function assets() {
           module: 'assets',
           func: 'account',
           args: [asset, address],
-          transform: (response: any): bigint =>
+          transform: async (response: any): Promise<bigint> =>
             (response.balance as u128).toBigInt(),
         }),
     }),
@@ -42,7 +42,7 @@ function system() {
           module: 'system',
           func: 'account',
           args: [address],
-          transform: (response: any): bigint => {
+          transform: async (response: any): Promise<bigint> => {
             const balance = response.data as PalletBalancesAccountData &
               PalletBalancesAccountDataOld;
             const frozen = balance.miscFrozen ?? balance.frozen;
@@ -57,7 +57,7 @@ function system() {
           module: 'system',
           func: 'account',
           args: [address],
-          transform: (response): bigint => {
+          transform: async (response): Promise<bigint> => {
             if (response.data.isEmpty) {
               return 0n;
             }
@@ -98,7 +98,10 @@ function tokens() {
           module: 'tokens',
           func: 'accounts',
           args: [address, asset],
-          transform: ({ free, frozen }: TokensPalletAccountData): bigint =>
+          transform: async ({
+            free,
+            frozen,
+          }: TokensPalletAccountData): Promise<bigint> =>
             BigInt(free.sub(frozen).toString()),
         }),
     }),

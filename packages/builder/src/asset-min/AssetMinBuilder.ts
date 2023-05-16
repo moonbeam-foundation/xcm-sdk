@@ -14,7 +14,7 @@ export function AssetMinBuilder() {
 
 function assetRegistry() {
   const pallet = 'assetRegistry';
-  const transform = (response: any): bigint =>
+  const transform = async (response: any): Promise<bigint> =>
     (response.minimalBalance as u128).toBigInt();
 
   return {
@@ -47,7 +47,7 @@ function assets() {
           module: 'assets',
           func: 'asset',
           args: [asset],
-          transform: (response: any): bigint =>
+          transform: async (response: any): Promise<bigint> =>
             (response.minBalance as u128).toBigInt(),
         }),
     }),

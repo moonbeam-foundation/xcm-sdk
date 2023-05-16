@@ -4,17 +4,17 @@ import { CallType } from './builder.interfaces';
 
 export interface QueryConfigConstructorParams
   extends SetOptional<BaseConfigConstructorParams, 'type'> {
-  args: any[];
-  transform: (data: any) => bigint;
+  args?: any[];
+  transform: (data: any) => Promise<bigint>;
 }
 
 export class QueryConfig extends BaseConfig {
   readonly args: any[];
 
-  readonly transform: (data: any) => bigint;
+  readonly transform: (data: any) => Promise<bigint>;
 
   constructor({
-    args,
+    args = [],
     transform,
     type = CallType.Substrate,
     ...other
