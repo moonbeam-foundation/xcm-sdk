@@ -18,7 +18,9 @@ export const parallelHeikoConfig = new ChainConfig({
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: hko,
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiAsset(),
+      extrinsic: ExtrinsicBuilder()
+        .xTokens()
+        .transferMultiAsset(parallelHeiko.parachainId),
     }),
     new AssetConfig({
       asset: movr,

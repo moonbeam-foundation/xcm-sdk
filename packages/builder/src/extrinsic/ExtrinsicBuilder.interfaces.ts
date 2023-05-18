@@ -12,7 +12,6 @@ export interface ExtrinsicConfigBuilderPrams {
   destination: AnyChain;
   fee: bigint;
   feeAsset: ChainAssetId;
-  origin: AnyChain;
   palletInstance?: number;
   source: AnyChain;
 }

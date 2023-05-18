@@ -1,11 +1,12 @@
 import '@polkadot/api-augment';
 
-import { QueryConfig } from '@moonbeam-network/xcm-builder';
+import { ExtrinsicConfig, QueryConfig } from '@moonbeam-network/xcm-builder';
 import { assetsMap } from '@moonbeam-network/xcm-config';
-import { Asset, AssetAmount } from '@moonbeam-network/xcm-types';
+import { Asset, AssetAmount, ChainAssetId } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import { u128 } from '@polkadot/types';
+import { PalletAssetsAssetMetadata } from '@polkadot/types/lookup';
 
 export class PolkadotService {
   readonly api: ApiPromise;
@@ -58,7 +59,28 @@ export class PolkadotService {
     });
   }
 
-  async query<Config extends QueryConfig>(config: Config): Promise<bigint> {
+  async getAssetMeta(
+    asset: ChainAssetId,
+  ): Promise<{ symbol: string; decimals: number } | undefined> {
+    // TODO: Is it the same as asset min builder?
+    const fn =
+      this.api.query.assets?.metadata ||
+      this.api.query.assetRegistry?.currencyMetadatas ||
+      this.api.query.assetRegistry?.assetMetadatas;
+
+    if (!fn) {
+      return undefined;
+    }
+
+    const data = (await fn(asset)) as PalletAssetsAssetMetadata;
+
+    return {
+      decimals: data.decimals.toNumber(),
+      symbol: data.symbol.toString(),
+    };
+  }
+
+  async query(config: QueryConfig): Promise<bigint> {
     const response = await this.api.query[config.module][config.func](
       ...config.args,
     );
@@ -68,6 +90,14 @@ export class PolkadotService {
     }
 
     return config.transform(response);
+  }
+
+  async getFee(account: string, config: ExtrinsicConfig): Promise<bigint> {
+    const fn = this.api.tx[config.module][config.func];
+    const extrinsic = fn(...config.getArgs(fn));
+    const info = await extrinsic.paymentInfo(account, { nonce: -1 });
+
+    return info.partialFee.toBigInt();
   }
 
   // async queryMulti<Config extends QueryConfig>(

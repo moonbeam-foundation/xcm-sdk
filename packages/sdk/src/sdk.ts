@@ -1,8 +1,8 @@
 /* eslint-disable sort-keys */
 import { ConfigBuilder } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
+import { getTransferData } from './getSourceData';
 import { TransferData } from './sdk.interfaces';
-import { getTransferData } from './sdk.utils';
 
 export interface SdkTransferParams {
   sourceAddress: string;

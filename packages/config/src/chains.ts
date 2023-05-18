@@ -258,10 +258,12 @@ export const interlay = new Parachain({
   assetsData: [
     {
       asset: intr,
+      decimals: 10,
       id: { Token: intr.originSymbol },
     },
     {
       asset: ibtc,
+      decimals: 8,
       id: { Token: ibtc.originSymbol },
     },
   ],
@@ -329,10 +331,12 @@ export const kinitsugi = new Parachain({
   assetsData: [
     {
       asset: kint,
+      decimals: 10,
       id: { Token: kint.originSymbol },
     },
     {
       asset: kbtc,
+      decimals: 8,
       id: { Token: kbtc.originSymbol },
     },
   ],

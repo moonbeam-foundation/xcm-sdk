@@ -42,8 +42,10 @@ export function xTokens() {
           },
         }),
     }),
-    transferMultiAsset: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, origin, source }) =>
+    transferMultiAsset: (
+      originParachainId: number,
+    ): ExtrinsicConfigBuilder => ({
+      build: ({ address, amount, asset, destination, source }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'transferMultiAsset',
@@ -56,7 +58,7 @@ export function xTokens() {
                     interior: {
                       X2: [
                         {
-                          Parachain: origin.parachainId,
+                          Parachain: originParachainId,
                         },
                         {
                           GeneralKey: asset,

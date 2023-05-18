@@ -18,7 +18,9 @@ export const parallelConfig = new ChainConfig({
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: para,
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiAsset(),
+      extrinsic: ExtrinsicBuilder()
+        .xTokens()
+        .transferMultiAsset(parallel.parachainId),
     }),
     new AssetConfig({
       asset: glmr,

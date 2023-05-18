@@ -49,6 +49,8 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
+    "@moonbeam-network/xcm-utils": "*",
+    "big.js": "^6.2.1",
     "type-fest": "^3.8.0"
   }
 }

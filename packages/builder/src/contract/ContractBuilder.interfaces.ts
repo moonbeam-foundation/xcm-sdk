@@ -12,6 +12,4 @@ export interface ContractConfigBuilderPrams {
   destination: AnyChain;
   fee: bigint;
   feeAsset: ChainAssetId;
-  origin: AnyChain;
-  source: AnyChain;
 }
