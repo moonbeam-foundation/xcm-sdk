@@ -1,9 +1,9 @@
 import { ChainAssetId } from '@moonbeam-network/xcm-types';
 import { Struct, u128 } from '@polkadot/types';
-import { QueryConfig } from '../QueryConfig';
+import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 
 export interface BalanceConfigBuilder {
-  build: (params: BalanceConfigBuilderPrams) => QueryConfig;
+  build: (params: BalanceConfigBuilderPrams) => SubstrateQueryConfig;
 }
 
 export interface BalanceConfigBuilderPrams {

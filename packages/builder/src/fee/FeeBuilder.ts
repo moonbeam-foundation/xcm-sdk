@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { Option, u128 } from '@polkadot/types';
-import { QueryConfig } from '../QueryConfig';
+import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
 import { FeeConfigBuilder } from './FeeBuilder.interfaces';
 
 export function FeeBuilder() {
@@ -15,10 +15,9 @@ function assetManager() {
   return {
     assetTypeUnitsPerSecond: (weight = 1_000_000_000): FeeConfigBuilder => ({
       build: ({ api, asset }) =>
-        new QueryConfig({
-          module: 'assetManager',
-          func: 'assetTypeUnitsPerSecond',
-          transform: async (): Promise<bigint> => {
+        new SubstrateCallConfig({
+          api,
+          call: async (): Promise<bigint> => {
             const type = (await api.query.assetManager.assetIdType(
               asset,
             )) as unknown as Option<any>;

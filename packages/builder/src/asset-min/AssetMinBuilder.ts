@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { u128 } from '@polkadot/types';
-import { QueryConfig } from '../QueryConfig';
+import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import { AssetMinConfigBuilder } from './AssetMinBuilder.interfaces';
 
 export function AssetMinBuilder() {
@@ -20,7 +20,7 @@ function assetRegistry() {
   return {
     assetMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: pallet,
           func: 'assetMetadatas',
           args: [asset],
@@ -29,7 +29,7 @@ function assetRegistry() {
     }),
     currencyMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: pallet,
           func: 'currencyMetadatas',
           args: [asset],
@@ -43,7 +43,7 @@ function assets() {
   return {
     asset: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: 'assets',
           func: 'asset',
           args: [asset],

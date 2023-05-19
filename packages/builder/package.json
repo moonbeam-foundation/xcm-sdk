@@ -50,12 +50,13 @@
   "main": "./build/index.cjs",
   "dependencies": {
     "@moonbeam-network/xcm-types": "*",
+    "big.js": "^6.2.1",
     "type-fest": "^3.8.0"
   },
   "peerDependencies": {
+    "@polkadot/api": "10.x",
     "@polkadot/api-augment": "10.x",
     "@polkadot/types": "10.x",
-    "@polkadot/api": "10.x",
     "@polkadot/util": "11.x",
     "@polkadot/util-crypto": "11.x"
   }

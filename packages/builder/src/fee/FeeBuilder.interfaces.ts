@@ -1,9 +1,9 @@
 import { ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ApiPromise } from '@polkadot/api';
-import { QueryConfig } from '../QueryConfig';
+import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
 
 export interface FeeConfigBuilder {
-  build: (params: FeeConfigBuilderPrams) => QueryConfig;
+  build: (params: FeeConfigBuilderPrams) => SubstrateCallConfig;
 }
 
 export interface FeeConfigBuilderPrams {

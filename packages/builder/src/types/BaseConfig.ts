@@ -1,4 +1,4 @@
-import { CallType } from './builder.interfaces';
+import { CallType } from '../builder.interfaces';
 
 export interface BaseConfigConstructorParams {
   module: string;

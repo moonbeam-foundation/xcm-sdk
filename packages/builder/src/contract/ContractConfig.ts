@@ -1,5 +1,5 @@
-import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
 import { CallType } from '../builder.interfaces';
+import { BaseConfig, BaseConfigConstructorParams } from '../types/BaseConfig';
 
 export interface ContractConfigConstructorParams
   extends Omit<BaseConfigConstructorParams, 'type'> {

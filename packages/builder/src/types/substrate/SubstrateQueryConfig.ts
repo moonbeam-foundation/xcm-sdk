@@ -1,6 +1,6 @@
 import { SetOptional } from 'type-fest';
-import { BaseConfig, BaseConfigConstructorParams } from './BaseConfig';
-import { CallType } from './builder.interfaces';
+import { CallType } from '../../builder.interfaces';
+import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
 
 export interface QueryConfigConstructorParams
   extends SetOptional<BaseConfigConstructorParams, 'type'> {
@@ -8,7 +8,7 @@ export interface QueryConfigConstructorParams
   transform: (data: any) => Promise<bigint>;
 }
 
-export class QueryConfig extends BaseConfig {
+export class SubstrateQueryConfig extends BaseConfig {
   readonly args: any[];
 
   readonly transform: (data: any) => Promise<bigint>;

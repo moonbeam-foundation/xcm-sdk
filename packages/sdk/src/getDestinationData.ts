@@ -106,6 +106,6 @@ export async function getFee({
   });
 
   return zeroAmount.copyWith({
-    amount: await cfg.transform(undefined),
+    amount: await cfg.call(),
   });
 }

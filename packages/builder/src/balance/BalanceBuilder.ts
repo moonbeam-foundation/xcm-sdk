@@ -3,7 +3,7 @@
 
 import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
-import { QueryConfig } from '../QueryConfig';
+import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
   BalanceConfigBuilder,
   EquilibriumSystemBalanceData,
@@ -23,7 +23,7 @@ function assets() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: 'assets',
           func: 'account',
           args: [asset, address],
@@ -38,7 +38,7 @@ function system() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ address }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: 'system',
           func: 'account',
           args: [address],
@@ -53,7 +53,7 @@ function system() {
     }),
     accountEquilibrium: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: 'system',
           func: 'account',
           args: [address],
@@ -94,7 +94,7 @@ function tokens() {
   return {
     accounts: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) =>
-        new QueryConfig({
+        new SubstrateQueryConfig({
           module: 'tokens',
           func: 'accounts',
           args: [address, asset],
