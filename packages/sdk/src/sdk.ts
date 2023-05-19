@@ -38,7 +38,7 @@ export function Sdk() {
                       return getTransferData({
                         sourceAddress,
                         destinationAddress,
-                        config: destination(destKeyOrChain).build(),
+                        transferConfig: destination(destKeyOrChain).build(),
                       });
                     },
                   };
@@ -57,7 +57,7 @@ export function Sdk() {
       sourceKeyOrChain,
     }: SdkTransferParams): Promise<TransferData> {
       return getTransferData({
-        config: ConfigBuilder()
+        transferConfig: ConfigBuilder()
           .assets()
           .asset(keyOrAsset)
           .source(sourceKeyOrChain)

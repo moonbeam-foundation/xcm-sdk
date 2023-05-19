@@ -1,6 +1,9 @@
 import '@polkadot/api-augment';
 
-import { ExtrinsicConfig, QueryConfig } from '@moonbeam-network/xcm-builder';
+import {
+  ExtrinsicConfig,
+  SubstrateQueryConfig,
+} from '@moonbeam-network/xcm-builder';
 import { assetsMap } from '@moonbeam-network/xcm-config';
 import {
   Asset,
@@ -99,7 +102,7 @@ export class PolkadotService {
     );
   }
 
-  async query(config: QueryConfig): Promise<bigint> {
+  async query(config: SubstrateQueryConfig): Promise<bigint> {
     const response = await this.api.query[config.module][config.func](
       ...config.args,
     );

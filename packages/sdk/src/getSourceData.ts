@@ -11,7 +11,7 @@ import { SourceChainTransferData } from './sdk.interfaces';
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
-  destinationFee: bigint;
+  destinationFee: AssetAmount;
   ethersSigner: EthersSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
@@ -53,7 +53,7 @@ export async function getSourceData({
     amount: balance,
     asset: chain.getAssetId(asset),
     destination: destination.chain,
-    fee: destinationFee,
+    fee: destinationFee.amount,
     feeAsset: chain.getAssetId(asset),
     palletInstance: chain.getAssetPalletInstance(asset),
     source: chain,
@@ -63,7 +63,7 @@ export async function getSourceData({
     amount: balance,
     asset: chain.getAssetId(asset),
     destination: destination.chain,
-    fee: destinationFee,
+    fee: destinationFee.amount,
     feeAsset: chain.getAssetId(asset),
   });
   const fee = await getFee({
