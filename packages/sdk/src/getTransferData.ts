@@ -22,12 +22,12 @@ export async function getTransferData({
   sourceAddress,
 }: GetTransferDataParams): Promise<TransferData> {
   const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
-    config.destination.chain.ws,
-    config.source.chain.ws,
+    config.destination.chain,
+    config.source.chain,
   ]);
 
   const source = await getSourceData({
-    config,
+    transferConfig: config,
     destinationAddress,
     destinationFee,
     ethersSigner,

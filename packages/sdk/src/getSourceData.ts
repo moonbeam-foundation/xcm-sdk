@@ -2,23 +2,14 @@
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
-import type { Signer as PolkadotSigner } from '@polkadot/api/types';
+import Big from 'big.js';
 import { Signer as EthersSigner } from 'ethers';
 import { createContract } from './contract';
 import { PolkadotService } from './polkadot';
 import { SourceChainTransferData } from './sdk.interfaces';
-import { createZeroAssets } from './sdk.utils';
-
-export interface GetTransferDataParams {
-  config: TransferConfig;
-  destinationAddress: string;
-  ethersSigner: EthersSigner;
-  polkadotSigner: PolkadotSigner;
-  sourceAddress: string;
-}
 
 export interface GetSourceDataParams {
-  config: TransferConfig;
+  transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: bigint;
   ethersSigner: EthersSigner;
@@ -27,47 +18,53 @@ export interface GetSourceDataParams {
 }
 
 export async function getSourceData({
-  config,
+  transferConfig,
   destinationAddress,
   destinationFee,
   ethersSigner,
   polkadot,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
-  const { chain } = config.source;
-  const { zeroAmount, zeroFeeAmount } = await createZeroAssets({
-    asset: config.asset,
-    chain,
-    feeAsset: config.source.config.fee?.asset,
-    polkadot,
+  const {
+    asset,
+    destination,
+    source: { chain, config },
+  } = transferConfig;
+  const zeroAmount = AssetAmount.fromAsset(asset, {
+    amount: 0n,
+    decimals: await polkadot.getAssetDecimals(asset),
   });
+  const zeroFeeAmount = config.fee?.asset
+    ? AssetAmount.fromAsset(config.fee.asset, {
+        amount: 0n,
+        decimals: await polkadot.getAssetDecimals(config.fee.asset),
+      })
+    : zeroAmount;
 
   const { balance, feeBalance, min } = await getBalancesAndMin({
     address: sourceAddress,
     chain,
-    config: config.source.config,
+    config,
     polkadot,
   });
 
-  const extrinsic = config.source.config.extrinsic?.build({
+  const extrinsic = config.extrinsic?.build({
     address: destinationAddress,
     amount: balance,
-    asset: config.source.chain.getAssetId(config.asset),
-    destination: config.destination.chain,
+    asset: chain.getAssetId(asset),
+    destination: destination.chain,
     fee: destinationFee,
-    feeAsset: config.destination.chain.getAssetId(config.asset),
-    palletInstance: config.destination.chain.getAssetPalletInstance(
-      config.asset,
-    ),
-    source: config.source.chain,
+    feeAsset: chain.getAssetId(asset),
+    palletInstance: chain.getAssetPalletInstance(asset),
+    source: chain,
   });
-  const contract = config.source.config.contract?.build({
+  const contract = config.contract?.build({
     address: destinationAddress,
     amount: balance,
-    asset: config.source.chain.getAssetId(config.asset),
-    destination: config.destination.chain,
+    asset: chain.getAssetId(asset),
+    destination: destination.chain,
     fee: destinationFee,
-    feeAsset: config.destination.chain.getAssetId(config.asset),
+    feeAsset: chain.getAssetId(asset),
   });
   const fee = await getFee({
     contract,
@@ -196,12 +193,15 @@ export function getMax({
   feeAmount,
   minAmount,
 }: GetMaxParams): AssetAmount {
-  const isSameTokenPayingFee = balanceAmount.key === feeAmount.key;
-  let result = balanceAmount.toBig().minus(minAmount.toBig());
-
-  if (isSameTokenPayingFee) {
-    result = result.minus(existentialDeposit.toBig()).minus(feeAmount.toBig());
-  }
+  const result = balanceAmount
+    .toBig()
+    .minus(minAmount.toBig())
+    .minus(
+      balanceAmount.isSame(existentialDeposit)
+        ? existentialDeposit.toBig()
+        : Big(0),
+    )
+    .minus(balanceAmount.isSame(feeAmount) ? feeAmount.toBig() : Big(0));
 
   return balanceAmount.copyWith({
     amount: result.lt(0) ? 0n : BigInt(result.toString()),

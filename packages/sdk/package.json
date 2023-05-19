@@ -46,12 +46,12 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-builder": "*",
+    "@moonbeam-network/xcm-config": "*",
     "@moonbeam-network/xcm-types": "*",
-    "@moonbeam-network/xcm-utils": "*"
+    "@moonbeam-network/xcm-utils": "*",
+    "big.js": "^6.2.1"
   },
-  "devDependencies": {},
   "peerDependencies": {
     "@polkadot/api": "10.x",
     "@polkadot/api-augment": "10.x",

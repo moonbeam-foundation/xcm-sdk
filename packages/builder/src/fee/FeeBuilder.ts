@@ -14,12 +14,12 @@ export function FeeBuilder() {
 function assetManager() {
   return {
     assetTypeUnitsPerSecond: (weight = 1_000_000_000): FeeConfigBuilder => ({
-      build: ({ polkadot, asset }) =>
+      build: ({ api, asset }) =>
         new QueryConfig({
           module: 'assetManager',
           func: 'assetTypeUnitsPerSecond',
           transform: async (): Promise<bigint> => {
-            const type = (await polkadot.query.assetManager.assetIdType(
+            const type = (await api.query.assetManager.assetIdType(
               asset,
             )) as unknown as Option<any>;
 
@@ -29,10 +29,9 @@ function assetManager() {
 
             const unwrappedType = type.unwrap();
 
-            const res =
-              (await polkadot.query.assetManager.assetTypeUnitsPerSecond(
-                unwrappedType,
-              )) as unknown as Option<u128>;
+            const res = (await api.query.assetManager.assetTypeUnitsPerSecond(
+              unwrappedType,
+            )) as unknown as Option<u128>;
 
             const unitsPerSecond = res.unwrapOrDefault().toBigInt();
 

@@ -39,6 +39,14 @@ export class AssetAmount extends Asset {
     });
   }
 
+  isSame(asset: AssetAmount): boolean {
+    return super.isEqual(asset) && this.decimals === asset.decimals;
+  }
+
+  isEqual(asset: AssetAmount): boolean {
+    return this.isSame(asset) && this.amount === asset.amount;
+  }
+
   copyWith(props: Partial<AssetAmountConstructorProps>) {
     return new AssetAmount({
       ...this,
@@ -50,7 +58,7 @@ export class AssetAmount extends Asset {
     return Big(this.amount.toString());
   }
 
-  toDecimal(maxDecimal?: number, roundType?: RoundingMode): number {
+  toDecimal(maxDecimal?: number, roundType?: RoundingMode): string {
     return toDecimal(this.amount, this.decimals, maxDecimal, roundType);
   }
 }

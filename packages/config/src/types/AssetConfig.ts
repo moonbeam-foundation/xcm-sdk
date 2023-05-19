@@ -37,6 +37,8 @@ export class AssetConfig {
 
   readonly destination: AnyChain;
 
+  readonly destinationFee: DestinationFeeConfig;
+
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
   readonly fee?: FeeAssetConfig;
@@ -47,7 +49,8 @@ export class AssetConfig {
     asset,
     balance,
     contract,
-    destination: destinations,
+    destination,
+    destinationFee,
     extrinsic,
     fee,
     min,
@@ -55,7 +58,8 @@ export class AssetConfig {
     this.asset = asset;
     this.balance = balance;
     this.contract = contract;
-    this.destination = destinations;
+    this.destination = destination;
+    this.destinationFee = destinationFee;
     this.extrinsic = extrinsic;
     this.fee = fee;
     this.min = min;

@@ -8,5 +8,5 @@ export interface FeeConfigBuilder {
 
 export interface FeeConfigBuilderPrams {
   asset: ChainAssetId;
-  polkadot: ApiPromise;
+  api: ApiPromise;
 }

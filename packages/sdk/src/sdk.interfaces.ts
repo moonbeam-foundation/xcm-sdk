@@ -12,6 +12,7 @@ export interface TransferData {
 }
 
 export interface SourceChainTransferData extends ChainTransferData {
+  feeBalance: AssetAmount;
   max: AssetAmount;
 }
 
@@ -22,6 +23,5 @@ export interface ChainTransferData {
   chain: AnyChain;
   existentialDeposit?: AssetAmount;
   fee: AssetAmount;
-  feeBalance: AssetAmount;
   min: AssetAmount;
 }
