@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`assetMinBuilder assetRegistry assetMetadatas should be correct config 1`] = `
-QueryConfig {
+SubstrateQueryConfig {
   "args": [
     "<ASSET>",
   ],
@@ -12,8 +12,10 @@ QueryConfig {
 }
 `;
 
+exports[`assetMinBuilder assetRegistry assetMetadatas should transform correctly 1`] = `999n`;
+
 exports[`assetMinBuilder assetRegistry currencyMetadatas should be correct config 1`] = `
-QueryConfig {
+SubstrateQueryConfig {
   "args": [
     "<ASSET>",
   ],
@@ -24,8 +26,10 @@ QueryConfig {
 }
 `;
 
+exports[`assetMinBuilder assetRegistry currencyMetadatas should transform correctly 1`] = `999n`;
+
 exports[`assetMinBuilder assets asset should be correct config 1`] = `
-QueryConfig {
+SubstrateQueryConfig {
   "args": [
     "<ASSET>",
   ],
@@ -35,3 +39,5 @@ QueryConfig {
   "type": "Substrate",
 }
 `;
+
+exports[`assetMinBuilder assets asset should transform correctly 1`] = `999n`;

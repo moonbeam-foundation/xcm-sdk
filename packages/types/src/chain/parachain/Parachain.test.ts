@@ -3,14 +3,14 @@ import { Parachain } from './Parachain';
 
 describe('parachain', () => {
   const parachain = new Parachain({
-    assetsData: [],
     ecosystem: Ecosystem.Polkadot,
     genesisHash:
-      '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+      '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3',
     key: 'polkadot',
     name: 'Polkadot',
-    parachainId: 100,
-    ws: '',
+    parachainId: 0,
+    ss58Format: 42,
+    ws: 'wss://rpc.polkadot.io',
   });
 
   describe('isParachain', () => {

@@ -56,7 +56,7 @@ exports[`xTokens transferMultiAsset should get correct arguments 1`] = `
           "interior": {
             "X2": [
               {
-                "Parachain": 1000,
+                "Parachain": 100,
               },
               {
                 "GeneralKey": "USDT",

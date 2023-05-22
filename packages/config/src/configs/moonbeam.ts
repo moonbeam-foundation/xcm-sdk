@@ -36,7 +36,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: acala,
       destinationFee: {
         amount: 0,
@@ -46,7 +46,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: astar,
       destinationFee: {
         amount: 0,
@@ -56,7 +56,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: bifrostPolkadot,
       destinationFee: {
         amount: 0,
@@ -66,7 +66,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: equilibrium,
       destinationFee: {
         amount: 0,
@@ -76,7 +76,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: parallel,
       destinationFee: {
         amount: 0,
@@ -86,7 +86,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().system().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: phala,
       destinationFee: {
         amount: 0,
@@ -96,7 +96,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: aca,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: acala,
       destinationFee: {
         amount: 0,
@@ -106,7 +106,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: astr,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: astar,
       destinationFee: {
         amount: 0,
@@ -116,7 +116,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: ausd,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: acala,
       destinationFee: {
         amount: 0,
@@ -126,7 +126,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: bnc,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: bifrostPolkadot,
       destinationFee: {
         amount: 0,
@@ -136,7 +136,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: dot,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadot,
       destinationFee: {
         amount: 0,
@@ -146,7 +146,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: eq,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: equilibrium,
       destinationFee: {
         amount: 0,
@@ -156,7 +156,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: eqd,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: equilibrium,
       destinationFee: {
         amount: 0,
@@ -166,7 +166,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: ibtc,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: interlay,
       destinationFee: {
         amount: 0,
@@ -176,7 +176,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: intr,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: interlay,
       destinationFee: {
         amount: 0,
@@ -186,7 +186,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: para,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: parallel,
       destinationFee: {
         amount: 0,
@@ -196,7 +196,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: pha,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: phala,
       destinationFee: {
         amount: 0,
@@ -206,7 +206,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: ring,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: darwinia,
       destinationFee: {
         amount: 0,
@@ -216,7 +216,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: usdt,
       balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().xTokens().transfer(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: statemint,
       destinationFee: {
         amount: 0,

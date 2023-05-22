@@ -5,6 +5,10 @@ function balanceOf(number: number | string): U128 {
   return new U128(new TypeRegistry(), number);
 }
 
+/**
+ * Using snapshot to test bigint values because jest does not support bigint
+ */
+
 describe('balanceBuilder', () => {
   const account = '<ACCOUNT>';
   const asset = '<ASSET>';
@@ -20,8 +24,10 @@ describe('balanceBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should transform correctly', () => {
-        expect(config.transform({ balance: balanceOf(999) })).toBe(999n);
+      it('should transform correctly', async () => {
+        await expect(
+          config.transform({ balance: balanceOf(999) }),
+        ).resolves.toMatchSnapshot();
       });
     });
   });
@@ -37,20 +43,20 @@ describe('balanceBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should transform correctly with frozen balance', () => {
-        expect(
+      it('should transform correctly with frozen balance', async () => {
+        await expect(
           config.transform({
             data: { free: balanceOf(999), frozen: balanceOf(99) },
           }),
-        ).toBe(900n);
+        ).resolves.toMatchSnapshot();
       });
 
-      it('should transform correctly with miscFrozen balance', () => {
-        expect(
+      it('should transform correctly with miscFrozen balance', async () => {
+        await expect(
           config.transform({
             data: { free: balanceOf(999), miscFrozen: balanceOf(99) },
           }),
-        ).toBe(900n);
+        ).resolves.toMatchSnapshot();
       });
     });
 
@@ -64,18 +70,18 @@ describe('balanceBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should return 0 if response empty', () => {
-        expect(
+      it('should return 0 if response empty', async () => {
+        await expect(
           config.transform({
             data: {
               isEmpty: true,
             },
           }),
-        ).toBe(0n);
+        ).resolves.toMatchSnapshot();
       });
 
-      it('should transform v0 correctly', () => {
-        expect(
+      it('should transform v0 correctly', async () => {
+        await expect(
           config.transform({
             data: {
               isEmpty: false,
@@ -106,11 +112,11 @@ describe('balanceBuilder', () => {
               }),
             },
           }),
-        ).toBe(2954852364913n);
+        ).resolves.toMatchSnapshot();
       });
 
-      it('should transform correctly if not v0', () => {
-        expect(
+      it('should transform correctly if not v0', async () => {
+        await expect(
           config.transform({
             data: {
               isEmpty: false,
@@ -130,7 +136,7 @@ describe('balanceBuilder', () => {
               ],
             },
           }),
-        ).toBe(62730076931n);
+        ).resolves.toMatchSnapshot();
       });
     });
   });
@@ -146,10 +152,10 @@ describe('balanceBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should transform correctly', () => {
-        expect(
+      it('should transform correctly', async () => {
+        await expect(
           config.transform({ free: balanceOf(999), frozen: balanceOf(99) }),
-        ).toBe(900n);
+        ).resolves.toMatchSnapshot();
       });
     });
   });

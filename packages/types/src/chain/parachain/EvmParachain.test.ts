@@ -3,15 +3,16 @@ import { EvmParachain } from './EvmParachain';
 
 describe('evmParachain', () => {
   const parachain = new EvmParachain({
-    assetsData: [],
     ecosystem: Ecosystem.Polkadot,
     genesisHash:
-      '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
-    key: 'polkadot',
-    name: 'Polkadot',
-    parachainId: 100,
-    rpc: '',
-    ws: '',
+      '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
+    id: 1284,
+    key: 'moonbeam',
+    name: 'Moonbeam',
+    parachainId: 2004,
+    rpc: 'https://rpc.api.moonbeam.network',
+    ss58Format: 1284,
+    ws: 'wss://wss.api.moonbeam.network',
   });
 
   describe('isEvmParachain', () => {

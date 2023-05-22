@@ -15,7 +15,7 @@ describe('xTokens', () => {
   });
 
   describe('transferMultiAsset', () => {
-    const extrinsic = xTokens().transferMultiAsset().build(buildParamsMock);
+    const extrinsic = xTokens().transferMultiAsset(100).build(buildParamsMock);
 
     it('should be correct config', () => {
       expect(extrinsic).toMatchSnapshot();

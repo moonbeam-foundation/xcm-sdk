@@ -5,6 +5,10 @@ function balanceOf(number: number | string): U128 {
   return new U128(new TypeRegistry(), number);
 }
 
+/**
+ * Using snapshot to test bigint values because jest does not support bigint
+ */
+
 describe('assetMinBuilder', () => {
   const asset = '<ASSET>';
 
@@ -19,8 +23,10 @@ describe('assetMinBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should transform correctly', () => {
-        expect(config.transform({ minimalBalance: balanceOf(999) })).toBe(999n);
+      it('should transform correctly', async () => {
+        await expect(
+          config.transform({ minimalBalance: balanceOf(999) }),
+        ).resolves.toMatchSnapshot();
       });
     });
 
@@ -34,8 +40,10 @@ describe('assetMinBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should transform correctly', () => {
-        expect(config.transform({ minimalBalance: balanceOf(999) })).toBe(999n);
+      it('should transform correctly', async () => {
+        await expect(
+          config.transform({ minimalBalance: balanceOf(999) }),
+        ).resolves.toMatchSnapshot();
       });
     });
   });
@@ -48,8 +56,10 @@ describe('assetMinBuilder', () => {
         expect(config).toMatchSnapshot();
       });
 
-      it('should transform correctly', () => {
-        expect(config.transform({ minBalance: balanceOf(999) })).toBe(999n);
+      it('should transform correctly', async () => {
+        await expect(
+          config.transform({ minBalance: balanceOf(999) }),
+        ).resolves.toMatchSnapshot();
       });
     });
   });

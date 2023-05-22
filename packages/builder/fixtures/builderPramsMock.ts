@@ -1,11 +1,11 @@
 import {
   Ecosystem,
-  EthereumChain,
-  SubstrateChain,
+  EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfigBuilderPrams } from '../src/extrinsic';
 
-export const statemintAlphanetMock = new SubstrateChain({
+export const statemintAlphanetMock = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
@@ -17,13 +17,17 @@ export const statemintAlphanetMock = new SubstrateChain({
   ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
 });
 
-export const moonbaseAlphaMock = new EthereumChain({
+export const moonbaseAlphaMock = new EvmParachain({
   ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
   parachainId: 1000,
+  rpc: 'https://rpc.api.moonbase.moonbeam.network',
+  ss58Format: 1287,
   ws: 'wss://wss.api.moonbase.moonbeam.network',
 });
 
@@ -34,7 +38,6 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   destination: moonbaseAlphaMock,
   fee: 5_000_000_000n,
   feeAsset: 'RMRK',
-  origin: moonbaseAlphaMock,
   palletInstance: 10,
   source: statemintAlphanetMock,
 };

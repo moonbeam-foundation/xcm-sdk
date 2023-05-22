@@ -1,4 +1,4 @@
-import { Asset, Ecosystem, EthereumChain } from '@moonbeam-network/xcm-types';
+import { Asset, Ecosystem, EvmParachain } from '@moonbeam-network/xcm-types';
 import { assetsList, dev, tt1, unit } from '../assets';
 import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
 import {
@@ -65,11 +65,17 @@ describe('config utils', () => {
     it('should throw an error if chain is not in the config', () => {
       expect(() =>
         getChain(
-          new EthereumChain({
-            id: 'test',
+          new EvmParachain({
+            ecosystem: Ecosystem.AlphanetRelay,
+            genesisHash: '',
+            id: 1287,
+            isTestChain: true,
             key: 'test',
             name: 'test',
-            ws: 'test',
+            parachainId: 1000,
+            rpc: '',
+            ss58Format: 1287,
+            ws: '',
           }),
         ),
       ).toThrow(new Error('Chain test not found'));
