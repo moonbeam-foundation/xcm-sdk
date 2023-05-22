@@ -47,7 +47,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: bifrostKusama,
       destinationFee: {
-        amount: 0,
+        amount: 0.0008544,
         asset: movr,
       },
     }),
@@ -57,7 +57,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: calamari,
       destinationFee: {
-        amount: 0,
+        amount: 0.1,
         asset: movr,
       },
     }),
@@ -67,7 +67,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: crustShadow,
       destinationFee: {
-        amount: 0,
+        amount: 0.0002,
         asset: movr,
       },
     }),
@@ -77,7 +77,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: karura,
       destinationFee: {
-        amount: 0,
+        amount: 0.001,
         asset: movr,
       },
     }),
@@ -87,7 +87,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: khala,
       destinationFee: {
-        amount: 0,
+        amount: 0.0002,
         asset: movr,
       },
     }),
@@ -97,7 +97,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: parallel,
       destinationFee: {
-        amount: 0,
+        amount: 0.00000000192,
         asset: movr,
       },
     }),
@@ -107,7 +107,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: shiden,
       destinationFee: {
-        amount: 0,
+        amount: 0.0002,
         asset: movr,
       },
     }),
@@ -117,7 +117,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: karura,
       destinationFee: {
-        amount: 0,
+        amount: 0.256,
         asset: ausd,
       },
     }),
@@ -127,7 +127,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: bifrostKusama,
       destinationFee: {
-        amount: 0,
+        amount: 0.0256,
         asset: bnc,
       },
     }),
@@ -137,7 +137,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: darwiniaCrab,
       destinationFee: {
-        amount: 0,
+        amount: 4,
         asset: crab,
       },
     }),
@@ -147,7 +147,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: crustShadow,
       destinationFee: {
-        amount: 0,
+        amount: 0.004,
         asset: csm,
       },
     }),
@@ -157,7 +157,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: parallel,
       destinationFee: {
-        amount: 0,
+        amount: 0.0192,
         asset: hko,
       },
     }),
@@ -167,7 +167,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: karura,
       destinationFee: {
-        amount: 0,
+        amount: 0.032,
         asset: kar,
       },
     }),
@@ -177,7 +177,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: kinitsugi,
       destinationFee: {
-        amount: 0,
+        amount: 0.00000428,
         asset: kbtc,
       },
     }),
@@ -187,7 +187,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: kinitsugi,
       destinationFee: {
-        amount: 0,
+        amount: 0.00084,
         asset: kint,
       },
     }),
@@ -197,7 +197,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: calamari,
       destinationFee: {
-        amount: 0,
+        amount: 0.000004,
         asset: kma,
       },
     }),
@@ -207,7 +207,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: kusama,
       destinationFee: {
-        amount: 0,
+        amount: 0.00168,
         asset: ksm,
       },
     }),
@@ -217,7 +217,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: litmus,
       destinationFee: {
-        amount: 0,
+        amount: 0.0032,
         asset: lit,
       },
     }),
@@ -227,7 +227,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: khala,
       destinationFee: {
-        amount: 0,
+        amount: 0.32,
         asset: pha,
       },
     }),
@@ -237,17 +237,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: statemine,
       destinationFee: {
-        amount: 0,
-        asset: rmrk,
-      },
-    }),
-    new AssetConfig({
-      asset: rmrk,
-      balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemine,
-      destinationFee: {
-        amount: 0,
+        amount: 0.0000504,
         asset: rmrk,
       },
     }),
@@ -257,7 +247,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: shiden,
       destinationFee: {
-        amount: 0,
+        amount: 0.032,
         asset: sdn,
       },
     }),
@@ -267,7 +257,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: integritee,
       destinationFee: {
-        amount: 0,
+        amount: 0.004,
         asset: teer,
       },
     }),
@@ -277,7 +267,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: statemine,
       destinationFee: {
-        amount: 0,
+        amount: 0.00504,
         asset: usdt,
       },
     }),
@@ -287,7 +277,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: robonomics,
       destinationFee: {
-        amount: 0,
+        amount: 0.000032,
         asset: xrt,
       },
     }),

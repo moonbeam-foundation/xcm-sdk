@@ -20,7 +20,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: equilibriumAlphanet,
       destinationFee: {
-        amount: 0,
+        amount: 4,
         asset: dev,
       },
     }),
@@ -44,7 +44,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: equilibriumAlphanet,
       destinationFee: {
-        amount: 0,
+        amount: 14,
         asset: eq,
       },
       fee: {
@@ -58,7 +58,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: equilibriumAlphanet,
       destinationFee: {
-        amount: 0,
+        amount: 4,
         asset: eqd,
       },
       fee: {
@@ -72,7 +72,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: litentryAlphanet,
       destinationFee: {
-        amount: 0,
+        amount: 0.032,
         asset: lit,
       },
       fee: {
@@ -86,7 +86,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: darwiniaPangoro,
       destinationFee: {
-        amount: 0,
+        amount: 4,
         asset: paring,
       },
       fee: {
@@ -100,7 +100,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: statemineAlphanet,
       destinationFee: {
-        amount: 0,
+        amount: 5,
         asset: tt1,
       },
       fee: {
@@ -114,7 +114,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: alphanetRelay,
       destinationFee: {
-        amount: 0,
+        amount: 0.0506,
         asset: unit,
       },
       fee: {
