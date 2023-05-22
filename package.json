@@ -32,6 +32,7 @@
     "changeset:publish": "npm run build && changeset publish"
   },
   "dependencies": {
+    "@polkadot/api": "^10.7.2",
     "@polkadot/api-augment": "^10.2.1",
     "@polkadot/types": "^10.2.1",
     "@polkadot/util": "^11.1.2",

@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { ethers } from 'ethers';
 
 // Moonbeam Signer ===========================================================
@@ -18,7 +20,11 @@ console.log(`Moonbeam address: ${ethersSigner.address}`);
 
 const polkadotPrivateKey = '';
 
-const keyring = new Keyring();
+await cryptoWaitReady();
+const keyring = new Keyring({
+  ss58Format: polkadot.ss58Format,
+  type: 'sr25519',
+});
 const pair = keyring.createFromUri(polkadotPrivateKey);
 
 console.log(`Polkadot address: ${pair.address}`);
