@@ -25,7 +25,7 @@ export function Sdk(options?: SdkOptions) {
                 destinationChains,
                 async destination(destKeyOrChain: string | AnyChain) {
                   return {
-                    async addresses(
+                    async accounts(
                       sourceAddress: string,
                       destinationAddress: string,
                       signers?: Partial<Signers>,
