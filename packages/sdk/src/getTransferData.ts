@@ -1,28 +1,25 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import type { Signer as PolkadotSigner } from '@polkadot/api/types';
 import Big from 'big.js';
-import { Signer as EthersSigner } from 'ethers';
+import { createContract } from './contract';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 import { PolkadotService } from './polkadot';
-import { TransferData } from './sdk.interfaces';
+import { Signers, TransferData } from './sdk.interfaces';
 
-export interface GetTransferDataParams {
-  transferConfig: TransferConfig;
+export interface GetTransferDataParams extends Partial<Signers> {
   destinationAddress: string;
-  ethersSigner: EthersSigner;
-  polkadotSigner: PolkadotSigner;
   sourceAddress: string;
+  transferConfig: TransferConfig;
 }
 
 export async function getTransferData({
-  transferConfig,
   destinationAddress,
   ethersSigner,
   polkadotSigner,
   sourceAddress,
+  transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
   const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
     transferConfig.destination.chain,
@@ -68,7 +65,7 @@ export async function getTransferData({
     max: source.max,
     min: destination.min,
     source,
-    swap() {
+    async swap() {
       return getTransferData({
         destinationAddress: sourceAddress,
         ethersSigner,
@@ -81,6 +78,51 @@ export async function getTransferData({
         },
       });
     },
-    transfer(amount: number | string): Promise<string> {},
+    async transfer(amount: number | string): Promise<string> {
+      const bigintAmount = toBigInt(amount, source.balance.decimals);
+      const {
+        asset,
+        source: { chain, config },
+      } = transferConfig;
+
+      const contract = config.contract?.build({
+        address: destinationAddress,
+        amount: bigintAmount,
+        asset: chain.getAssetId(asset),
+        destination: destination.chain,
+        fee: destination.fee.amount,
+        feeAsset: chain.getAssetId(asset),
+      });
+      const extrinsic = config.extrinsic?.build({
+        address: destinationAddress,
+        amount: bigintAmount,
+        asset: chain.getAssetId(asset),
+        destination: destination.chain,
+        fee: destination.fee.amount,
+        feeAsset: chain.getAssetId(asset),
+        palletInstance: chain.getAssetPalletInstance(asset),
+        source: chain,
+      });
+
+      if (contract) {
+        if (!ethersSigner) {
+          throw new Error('Ethers signer must be provided');
+        }
+
+        return createContract(contract, ethersSigner)
+          .transfer()
+          .then((tx) => tx.hash);
+      }
+
+      if (extrinsic) {
+        if (!polkadotSigner) {
+          throw new Error('Polkadot signer must be provided');
+        }
+
+        return srcPolkadot.transfer(sourceAddress, extrinsic, polkadotSigner);
+      }
+
+      throw new Error('Either contract or extrinsic must be provided');
+    },
   };
 }

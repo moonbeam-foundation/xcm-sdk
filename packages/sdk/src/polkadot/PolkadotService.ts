@@ -14,6 +14,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
+import type { Signer as PolkadotSigner } from '@polkadot/api/types';
 import { u128 } from '@polkadot/types';
 import { PalletAssetsAssetMetadata } from '@polkadot/types/lookup';
 
@@ -120,5 +121,20 @@ export class PolkadotService {
     const info = await extrinsic.paymentInfo(account, { nonce: -1 });
 
     return info.partialFee.toBigInt();
+  }
+
+  async transfer(
+    account: string,
+    config: ExtrinsicConfig,
+    signer: PolkadotSigner,
+  ): Promise<string> {
+    const fn = this.api.tx[config.module][config.func];
+    const extrinsic = fn(...config.getArgs(fn));
+    const hash = await extrinsic.signAndSend(account, {
+      nonce: -1,
+      signer,
+    });
+
+    return hash.toString();
   }
 }

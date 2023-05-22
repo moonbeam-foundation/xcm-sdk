@@ -12,7 +12,7 @@ export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  ethersSigner: EthersSigner;
+  ethersSigner?: EthersSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -139,7 +139,7 @@ export async function getBalancesAndMin({
 
 export interface GetFeeParams {
   contract?: ContractConfig;
-  ethersSigner: EthersSigner;
+  ethersSigner?: EthersSigner;
   extrinsic?: ExtrinsicConfig;
   polkadot: PolkadotService;
   sourceAddress: string;
@@ -153,6 +153,10 @@ export async function getFee({
   sourceAddress,
 }: GetFeeParams): Promise<bigint> {
   if (contract) {
+    if (!ethersSigner) {
+      throw new Error('Ethers signer must be provided');
+    }
+
     return getContractFee(contract, ethersSigner);
   }
 

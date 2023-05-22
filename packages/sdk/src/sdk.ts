@@ -2,17 +2,11 @@
 import { ConfigBuilder } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { getTransferData } from './getTransferData';
-import { TransferData } from './sdk.interfaces';
+import { Signers, TransferData } from './sdk.interfaces';
 
-export interface SdkTransferParams {
-  sourceAddress: string;
-  destinationAddress: string;
-  keyOrAsset: string | Asset;
-  sourceKeyOrChain: string | AnyChain;
-  destinationKeyOrChain: string | AnyChain;
-}
+export interface SdkOptions extends Partial<Signers> {}
 
-export function Sdk() {
+export function Sdk(options?: SdkOptions) {
   return {
     assets(ecosystem?: Ecosystem) {
       const { assets, asset } = ConfigBuilder().assets(ecosystem);
@@ -34,10 +28,13 @@ export function Sdk() {
                     async addresses(
                       sourceAddress: string,
                       destinationAddress: string,
+                      signers?: Partial<Signers>,
                     ): Promise<TransferData> {
                       return getTransferData({
-                        sourceAddress,
+                        ...options,
+                        ...signers,
                         destinationAddress,
+                        sourceAddress,
                         transferConfig: destination(destKeyOrChain).build(),
                       });
                     },
@@ -52,20 +49,32 @@ export function Sdk() {
     async transfer({
       destinationAddress,
       destinationKeyOrChain,
+      ethersSigner,
       keyOrAsset,
+      polkadotSigner,
       sourceAddress,
       sourceKeyOrChain,
     }: SdkTransferParams): Promise<TransferData> {
       return getTransferData({
+        destinationAddress,
+        ethersSigner,
+        polkadotSigner,
+        sourceAddress,
         transferConfig: ConfigBuilder()
           .assets()
           .asset(keyOrAsset)
           .source(sourceKeyOrChain)
           .destination(destinationKeyOrChain)
           .build(),
-        destinationAddress,
-        sourceAddress,
       });
     },
   };
+}
+
+export interface SdkTransferParams extends Signers {
+  destinationAddress: string;
+  destinationKeyOrChain: string | AnyChain;
+  keyOrAsset: string | Asset;
+  sourceAddress: string;
+  sourceKeyOrChain: string | AnyChain;
 }
