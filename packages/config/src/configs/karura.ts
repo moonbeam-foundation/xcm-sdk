@@ -37,7 +37,7 @@ export const karuraConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().assets().account(),
+      balance: BalanceBuilder().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

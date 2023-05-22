@@ -1,10 +1,11 @@
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
+import type { IKeyringPair } from '@polkadot/types/types';
 import type { Signer as EthersSigner } from 'ethers';
 
 export interface Signers {
   ethersSigner: EthersSigner;
-  polkadotSigner: PolkadotSigner;
+  polkadotSigner: PolkadotSigner | IKeyringPair;
 }
 
 export interface TransferData {

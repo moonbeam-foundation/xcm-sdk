@@ -17,6 +17,7 @@ import { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
 import { u128 } from '@polkadot/types';
 import { PalletAssetsAssetMetadata } from '@polkadot/types/lookup';
+import { IKeyringPair } from '@polkadot/types/types';
 
 export type AnyParachain = Parachain | EvmParachain;
 
@@ -126,15 +127,23 @@ export class PolkadotService {
   async transfer(
     account: string,
     config: ExtrinsicConfig,
-    signer: PolkadotSigner,
+    signer: PolkadotSigner | IKeyringPair,
   ): Promise<string> {
     const fn = this.api.tx[config.module][config.func];
     const extrinsic = fn(...config.getArgs(fn));
-    const hash = await extrinsic.signAndSend(account, {
-      nonce: -1,
-      signer,
-    });
+    const hash = await extrinsic.signAndSend(
+      this.#isSigner(signer) ? account : signer,
+      {
+        nonce: -1,
+        signer: this.#isSigner(signer) ? signer : undefined,
+      },
+    );
 
     return hash.toString();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  #isSigner(signer: PolkadotSigner | IKeyringPair): signer is PolkadotSigner {
+    return 'signPayload' in signer;
   }
 }

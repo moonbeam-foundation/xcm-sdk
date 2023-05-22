@@ -666,7 +666,7 @@ export const polkadot = new Parachain({
   key: 'polkadot',
   name: 'Polkadot',
   parachainId: 0,
-  ss58Format: 42,
+  ss58Format: 0,
   ws: 'wss://rpc.polkadot.io',
 });
 

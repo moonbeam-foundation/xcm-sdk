@@ -1,7 +1,6 @@
 /* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { u128 } from '@polkadot/types';
 import { PalletBalancesAccountData } from '@polkadot/types/lookup';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
@@ -28,7 +27,7 @@ function assets() {
           func: 'account',
           args: [asset, address],
           transform: async (response: any): Promise<bigint> =>
-            (response.balance as u128).toBigInt(),
+            response.toJSON().balance,
         }),
     }),
   };
