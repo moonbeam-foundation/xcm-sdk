@@ -102,6 +102,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.032,
         asset: aca,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: astr,
@@ -111,6 +115,10 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.032,
         asset: astr,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -122,6 +130,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.256,
         asset: ausd,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: bnc,
@@ -131,6 +143,10 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.256,
         asset: bnc,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -142,6 +158,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.052,
         asset: dot,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: eq,
@@ -151,6 +171,10 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 400,
         asset: eq,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -162,6 +186,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.15,
         asset: eqd,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: ibtc,
@@ -171,6 +199,10 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0002476,
         asset: ibtc,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -182,6 +214,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.748,
         asset: intr,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: para,
@@ -191,6 +227,10 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.064,
         asset: para,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -202,6 +242,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.32,
         asset: pha,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: ring,
@@ -212,6 +256,10 @@ export const moonbeamConfig = new ChainConfig({
         amount: 4,
         asset: ring,
       },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: usdt,
@@ -221,6 +269,10 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.7,
         asset: usdt,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
   ],

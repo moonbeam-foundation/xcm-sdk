@@ -2,6 +2,7 @@
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { Signer as EthersSigner } from 'ethers';
 import { createContract } from './contract';
@@ -68,6 +69,7 @@ export async function getSourceData({
   });
   const fee = await getFee({
     contract,
+    decimals: zeroFeeAmount.decimals,
     ethersSigner,
     extrinsic,
     polkadot,
@@ -139,6 +141,7 @@ export async function getBalancesAndMin({
 
 export interface GetFeeParams {
   contract?: ContractConfig;
+  decimals: number;
   ethersSigner?: EthersSigner;
   extrinsic?: ExtrinsicConfig;
   polkadot: PolkadotService;
@@ -147,6 +150,7 @@ export interface GetFeeParams {
 
 export async function getFee({
   contract,
+  decimals,
   ethersSigner,
   extrinsic,
   polkadot,
@@ -157,7 +161,7 @@ export async function getFee({
       throw new Error('Ethers signer must be provided');
     }
 
-    return getContractFee(contract, ethersSigner);
+    return getContractFee(contract, decimals, ethersSigner);
   }
 
   if (extrinsic) {
@@ -169,11 +173,13 @@ export async function getFee({
 
 export async function getContractFee(
   config: ContractConfig,
+  decimals: number,
   ethersSigner: EthersSigner,
 ): Promise<bigint> {
   const contract = createContract(config, ethersSigner);
+  const fee = await contract.getFee();
 
-  return contract.getFee();
+  return convertDecimals(fee, 18, decimals);
 }
 
 export async function getExtrinsicFee(

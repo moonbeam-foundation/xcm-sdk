@@ -132,6 +132,7 @@ export async function getTransferData({
 }
 
 function getMin({
+  balance,
   existentialDeposit,
   fee,
   min,
@@ -141,7 +142,9 @@ function getMin({
       min
         .toBig()
         .plus(
-          existentialDeposit && min.isSame(existentialDeposit)
+          existentialDeposit &&
+            min.isSame(existentialDeposit) &&
+            balance.toBig().lt(existentialDeposit.toBig())
             ? existentialDeposit.toBig()
             : Big(0),
         )

@@ -23,7 +23,7 @@ export function Sdk(options?: SdkOptions) {
 
               return {
                 destinationChains,
-                async destination(destKeyOrChain: string | AnyChain) {
+                destination(destKeyOrChain: string | AnyChain) {
                   return {
                     async accounts(
                       sourceAddress: string,
@@ -71,7 +71,7 @@ export function Sdk(options?: SdkOptions) {
   };
 }
 
-export interface SdkTransferParams extends Signers {
+export interface SdkTransferParams extends Partial<Signers> {
   destinationAddress: string;
   destinationKeyOrChain: string | AnyChain;
   keyOrAsset: string | Asset;

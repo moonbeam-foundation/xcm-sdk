@@ -120,6 +120,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.256,
         asset: ausd,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: bnc,
@@ -129,6 +133,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0256,
         asset: bnc,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -140,6 +148,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 4,
         asset: crab,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: csm,
@@ -149,6 +161,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: csm,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -160,6 +176,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.0192,
         asset: hko,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: kar,
@@ -169,6 +189,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.032,
         asset: kar,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -180,6 +204,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.00000428,
         asset: kbtc,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: kint,
@@ -189,6 +217,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.00084,
         asset: kint,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -200,6 +232,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.000004,
         asset: kma,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: ksm,
@@ -209,6 +245,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.00168,
         asset: ksm,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -220,6 +260,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.0032,
         asset: lit,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: pha,
@@ -229,6 +273,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.32,
         asset: pha,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -240,6 +288,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.0000504,
         asset: rmrk,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: sdn,
@@ -249,6 +301,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.032,
         asset: sdn,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({
@@ -260,6 +316,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.004,
         asset: teer,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: usdt,
@@ -270,6 +330,10 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.00504,
         asset: usdt,
       },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
     }),
     new AssetConfig({
       asset: xrt,
@@ -279,6 +343,10 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.000032,
         asset: xrt,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
   ],
