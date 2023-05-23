@@ -2,15 +2,15 @@ import { toDecimal } from '@moonbeam-network/xcm-utils';
 import Big, { RoundingMode } from 'big.js';
 import { Asset, AssetConstructorParams } from './Asset';
 
-export interface AssetAmountProps {
+export interface AssetAmountParams {
   amount: bigint;
   decimals: number;
   symbol?: string;
 }
 
-export interface AssetAmountConstructorProps
+export interface AssetAmountConstructorParams
   extends AssetConstructorParams,
-    AssetAmountProps {}
+    AssetAmountParams {}
 
 export class AssetAmount extends Asset {
   readonly amount: bigint;
@@ -24,7 +24,7 @@ export class AssetAmount extends Asset {
     decimals,
     symbol,
     ...other
-  }: AssetAmountConstructorProps) {
+  }: AssetAmountConstructorParams) {
     super(other);
 
     this.amount = BigInt(amount);
@@ -32,10 +32,10 @@ export class AssetAmount extends Asset {
     this.symbol = symbol || this.originSymbol;
   }
 
-  static fromAsset(asset: Asset, props: AssetAmountProps) {
+  static fromAsset(asset: Asset, params: AssetAmountParams) {
     return new AssetAmount({
       ...asset,
-      ...props,
+      ...params,
     });
   }
 
@@ -47,10 +47,10 @@ export class AssetAmount extends Asset {
     return this.isSame(asset) && this.amount === asset.amount;
   }
 
-  copyWith(props: Partial<AssetAmountConstructorProps>) {
+  copyWith(params: Partial<AssetAmountConstructorParams>) {
     return new AssetAmount({
       ...this,
-      ...props,
+      ...params,
     });
   }
 

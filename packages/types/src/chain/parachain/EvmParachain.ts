@@ -1,6 +1,6 @@
 import { Parachain, ParachainConstructorParams } from './Parachain';
 
-export interface EvmParachainConstructorProps
+export interface EvmParachainConstructorParams
   extends ParachainConstructorParams {
   id: number;
   rpc: string;
@@ -11,7 +11,7 @@ export class EvmParachain extends Parachain {
 
   readonly rpc: string;
 
-  constructor({ id, rpc, ...others }: EvmParachainConstructorProps) {
+  constructor({ id, rpc, ...others }: EvmParachainConstructorParams) {
     super(others);
 
     this.id = id;
