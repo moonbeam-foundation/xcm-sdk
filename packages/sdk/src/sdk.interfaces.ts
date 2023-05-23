@@ -16,7 +16,7 @@ export interface TransferData {
   min: AssetAmount;
   source: SourceChainTransferData;
   swap(): Promise<TransferData | undefined>;
-  transfer(amount: number | string): Promise<string>;
+  transfer(amount: bigint | number | string): Promise<string>;
 }
 
 export interface SourceChainTransferData extends ChainTransferData {

@@ -112,14 +112,6 @@ export async function getBalancesAndMin({
 }: GetBalancesParams) {
   const assetId = chain.getBalanceAssetId(config.asset);
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:115 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* {} = ', { address, chain, config, polkadot });
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
-
   const balance = await polkadot.query(
     config.balance.build({
       address,

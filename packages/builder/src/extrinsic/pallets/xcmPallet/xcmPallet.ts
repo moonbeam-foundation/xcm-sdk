@@ -1,5 +1,8 @@
 /* eslint-disable sort-keys */
-import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
+import {
+  ExtrinsicConfigBuilder,
+  Parents,
+} from '../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 import { getPolkadotXcmExtrinsicArgs } from '../polkadotXcm/polkadotXcm.util';
 
@@ -7,7 +10,7 @@ const pallet = 'xcmPallet';
 
 export function xcmPallet() {
   return {
-    limitedReserveTransferAssets: () => {
+    limitedReserveTransferAssets: (parents: Parents = 1) => {
       const func = 'limitedReserveTransferAssets';
 
       return {
@@ -19,6 +22,7 @@ export function xcmPallet() {
               getArgs: (extrinsicFunction) =>
                 getPolkadotXcmExtrinsicArgs({
                   ...params,
+                  parents,
                   func: extrinsicFunction,
                   asset: [
                     {

@@ -20,7 +20,7 @@ export const alphanetRelayConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder()
         .xcmPallet()
-        .limitedReserveTransferAssets()
+        .limitedReserveTransferAssets(0)
         .here(),
     }),
   ],

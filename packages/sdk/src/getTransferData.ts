@@ -6,7 +6,11 @@ import { createContract } from './contract';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 import { PolkadotService } from './polkadot';
-import { Signers, TransferData } from './sdk.interfaces';
+import {
+  DestinationChainTransferData,
+  Signers,
+  TransferData,
+} from './sdk.interfaces';
 
 export interface GetTransferDataParams extends Partial<Signers> {
   destinationAddress: string;
@@ -63,7 +67,7 @@ export async function getTransferData({
      */
     isSwapPossible: true,
     max: source.max,
-    min: destination.min,
+    min: getMin(destination),
     source,
     async swap() {
       return getTransferData({
@@ -78,7 +82,7 @@ export async function getTransferData({
         },
       });
     },
-    async transfer(amount: number | string): Promise<string> {
+    async transfer(amount): Promise<string> {
       const bigintAmount = toBigInt(amount, source.balance.decimals);
       const {
         asset,
@@ -125,4 +129,24 @@ export async function getTransferData({
       throw new Error('Either contract or extrinsic must be provided');
     },
   };
+}
+
+function getMin({
+  existentialDeposit,
+  fee,
+  min,
+}: DestinationChainTransferData) {
+  return min.copyWith({
+    amount: BigInt(
+      min
+        .toBig()
+        .plus(
+          existentialDeposit && min.isSame(existentialDeposit)
+            ? existentialDeposit.toBig()
+            : Big(0),
+        )
+        .plus(min.isSame(fee) ? fee.toBig() : Big(0))
+        .toString(),
+    ),
+  });
 }
