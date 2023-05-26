@@ -56,7 +56,7 @@
     "@polkadot/api": "10.x",
     "@polkadot/api-augment": "10.x",
     "@polkadot/types": "10.x",
-    "@polkadot/util": "11.x",
+    "@polkadot/util": "12.x",
     "ethers": "5.x"
   }
 }

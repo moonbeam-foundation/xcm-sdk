@@ -327,7 +327,7 @@ export const khala = new Parachain({
   ws: 'wss://khala.api.onfinality.io/public-ws',
 });
 
-export const kinitsugi = new Parachain({
+export const kintsugi = new Parachain({
   assetsData: [
     {
       asset: kint,
@@ -794,7 +794,7 @@ export const chainsList: AnyChain[] = [
   interlay,
   karura,
   khala,
-  kinitsugi,
+  kintsugi,
   kusama,
   litentryAlphanet,
   litmus,

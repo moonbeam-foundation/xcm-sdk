@@ -7,12 +7,9 @@ export type ChainAssetId =
   | { [key: string]: string | number | bigint };
 
 export interface ChainAssetsData {
+  asset: Asset;
   decimals?: number;
   id?: ChainAssetId;
   balanceId?: ChainAssetId;
   palletInstance?: number;
-}
-
-export interface ChainAssetsDataWithAsset extends ChainAssetsData {
-  asset: Asset;
 }

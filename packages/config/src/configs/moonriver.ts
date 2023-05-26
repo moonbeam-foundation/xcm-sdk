@@ -27,7 +27,7 @@ import {
   integritee,
   karura,
   khala,
-  kinitsugi,
+  kintsugi,
   kusama,
   litmus,
   moonriver,
@@ -199,7 +199,7 @@ export const moonriverConfig = new ChainConfig({
       asset: kbtc,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: kinitsugi,
+      destination: kintsugi,
       destinationFee: {
         amount: 0.00000428,
         asset: kbtc,
@@ -213,7 +213,7 @@ export const moonriverConfig = new ChainConfig({
       asset: kint,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: kinitsugi,
+      destination: kintsugi,
       destinationFee: {
         amount: 0.00084,
         asset: kint,
