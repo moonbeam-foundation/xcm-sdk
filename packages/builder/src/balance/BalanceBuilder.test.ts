@@ -26,7 +26,9 @@ describe('balanceBuilder', () => {
 
       it('should transform correctly', async () => {
         await expect(
-          config.transform({ balance: balanceOf(999) }),
+          config.transform({
+            unwrapOrDefault: () => ({ balance: balanceOf(999) }),
+          }),
         ).resolves.toMatchSnapshot();
       });
     });
