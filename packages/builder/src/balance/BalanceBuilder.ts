@@ -1,7 +1,12 @@
 /* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { PalletBalancesAccountData } from '@polkadot/types/lookup';
+import { Option } from '@polkadot/types';
+import {
+  FrameSystemAccountInfo,
+  PalletAssetsAssetAccount,
+  PalletBalancesAccountData,
+} from '@polkadot/types/lookup';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
   BalanceConfigBuilder,
@@ -26,8 +31,9 @@ function assets() {
           module: 'assets',
           func: 'account',
           args: [asset, address],
-          transform: async (response: any): Promise<bigint> =>
-            response.toJSON().balance,
+          transform: async (
+            response: Option<PalletAssetsAssetAccount>,
+          ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
         }),
     }),
   };
@@ -41,7 +47,9 @@ function system() {
           module: 'system',
           func: 'account',
           args: [address],
-          transform: async (response: any): Promise<bigint> => {
+          transform: async (
+            response: FrameSystemAccountInfo,
+          ): Promise<bigint> => {
             const balance = response.data as PalletBalancesAccountData &
               PalletBalancesAccountDataOld;
             const frozen = balance.miscFrozen ?? balance.frozen;
