@@ -81,6 +81,7 @@ export const MOONBEAM_CHAINS_MAP: ChainsMap<MoonbeamChains> = {
     ws: 'wss://hydradx.api.onfinality.io/public-ws',
     weight: 1_000_000_000,
     parachainId: 2034,
+    moonAssetId: 16,
     ss58Format: 63,
     genesisHash:
       '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
