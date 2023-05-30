@@ -58,6 +58,10 @@ export class AssetAmount extends Asset {
     return Big(this.amount.toString());
   }
 
+  toBigDecimal(maxDecimal?: number, roundType?: RoundingMode): Big {
+    return Big(this.toDecimal(maxDecimal, roundType));
+  }
+
   toDecimal(maxDecimal?: number, roundType?: RoundingMode): string {
     return toDecimal(this.amount, this.decimals, maxDecimal, roundType);
   }
