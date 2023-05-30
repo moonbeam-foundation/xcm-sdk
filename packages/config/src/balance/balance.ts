@@ -142,7 +142,7 @@ function systemEquilibrium(id: number): EquilibriumSystemBalanceConfig {
 
 function tokens<Symbols extends AssetSymbol = AssetSymbol>() {
   return {
-    tokensBase: (asset: number | bigint) => tokensBase(asset),
+    tokensBase: (asset: AssetId | Symbols) => tokensBase<Symbols>(asset),
     foreignAsset: (asset: AssetId | Symbols) =>
       tokensBase<Symbols>({ [BalanceCurrencyTypes.ForeignAsset]: asset }),
     fungibleToken: (asset: AssetId) =>

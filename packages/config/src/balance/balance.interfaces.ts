@@ -69,8 +69,7 @@ export type TokensBalanceParamAsset<Symbols extends AssetSymbol = AssetSymbol> =
     | { [BalanceCurrencyTypes.MiningResource]: AssetId }
     | { [BalanceCurrencyTypes.FungibleToken]: AssetId }
     | { [BalanceCurrencyTypes.Token2]: AssetId }
-    | number
-    | bigint;
+    | AssetId;
 
 export type MinBalanceConfig =
   | MinBalanceAssetsConfig
