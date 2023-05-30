@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 0.5.0
+
+### Minor Changes
+
+- [#84](https://github.com/PureStake/xcm-sdk/pull/84) [`731df96`](https://github.com/PureStake/xcm-sdk/commit/731df96b3bed1331e19dfd60025e2d76cbbdd13a) Thanks [@mmaurello](https://github.com/mmaurello)! - HydraDX integration with Moonbeam [HDX token]
+
 ## 0.4.4
 
 ### Patch Changes
