@@ -11,6 +11,7 @@ export const MOONBEAM_ASSETS = <const>[
   AssetSymbol.EQD,
   AssetSymbol.DOT,
   AssetSymbol.GLMR,
+  AssetSymbol.HDX,
   AssetSymbol.IBTC,
   AssetSymbol.INTR,
   AssetSymbol.PARA,
@@ -60,6 +61,11 @@ export const MOONBEAM_ASSETS_MAP: AssetsMap<MoonbeamAssets> = {
     erc20Id: '0x0000000000000000000000000000000000000802',
     originSymbol: AssetSymbol.GLMR,
     isNative: true,
+  },
+  [AssetSymbol.HDX]: {
+    id: '69606720909260275826784788104880799692',
+    erc20Id: '0xffffffff345dc44ddae98df024eb494321e73fcc',
+    originSymbol: AssetSymbol.HDX,
   },
   [AssetSymbol.IBTC]: {
     id: '120637696315203257380661607956669368914',
