@@ -24,6 +24,7 @@ const bifrost = chains[ChainKey.BifrostPolkadot];
 const equilibrium = chains[ChainKey.Equilibrium];
 const parallel = chains[ChainKey.Parallel];
 const phala = chains[ChainKey.Phala];
+const hydradx = chains[ChainKey.HydraDX];
 
 const acalaGlmrId = getMoonAssetId(acala);
 const astarGlmrId = getMoonAssetId(astar);
@@ -31,6 +32,7 @@ const bifrostGlmrId = getMoonAssetId(bifrost);
 const equilibriumGlmrId = getMoonAssetId(equilibrium) as number;
 const parallelGlmrId = getMoonAssetId(parallel);
 const phalaGlmrId = getMoonAssetId(phala);
+const hydradxGlmrId = getMoonAssetId(hydradx);
 
 export const GLMR: MoonbeamXcmConfig = {
   asset,
@@ -104,6 +106,17 @@ export const GLMR: MoonbeamXcmConfig = {
         .successEvent(XTransferExtrinsicSuccessEvent.Withdrawn)
         .X2(10),
     },
+    [hydradx.key]: {
+      source: hydradx,
+      balance: balance.tokens().tokensBase(hydradxGlmrId),
+      sourceFeeBalance: balance.system(),
+      extrinsic: extrinsic
+        .xTokens()
+        .transfer()
+        .successEvent(XTokensExtrinsicSuccessEvent.TransferredMultiAssets)
+        .origin(hydradx)
+        .asset(hydradxGlmrId),
+    },
   },
   withdraw: {
     [acala.key]: withdraw.xTokens({
@@ -137,6 +150,11 @@ export const GLMR: MoonbeamXcmConfig = {
       balance: balance.assets(phalaGlmrId),
       destination: phala,
       feePerWeight: 50_000,
+    }),
+    [hydradx.key]: withdraw.xTokens({
+      balance: balance.tokens().tokensBase(hydradxGlmrId),
+      destination: hydradx,
+      feePerWeight: 12_500_000,
     }),
   },
 };

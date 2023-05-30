@@ -55,6 +55,7 @@ export enum ChainKey {
   DarwiniaPangoro = 'DarwiniaPangoro',
   Equilibrium = 'Equilibrium',
   EquilibriumAlphanet = 'EquilibriumAlphanet',
+  HydraDX = 'HydraDX',
   Integritee = 'Integritee',
   Interlay = 'Interlay',
   Karura = 'Karura',

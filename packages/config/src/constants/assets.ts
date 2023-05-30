@@ -12,6 +12,7 @@ export enum AssetSymbol {
   EQ = 'EQ',
   EQD = 'EQD',
   GLMR = 'GLMR',
+  HDX = 'HDX',
   HKO = 'HKO',
   IBTC = 'IBTC',
   INTR = 'INTR',

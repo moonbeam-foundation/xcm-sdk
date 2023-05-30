@@ -9,6 +9,7 @@ import { DOT } from './assets/dot';
 import { EQ } from './assets/eq';
 import { EQD } from './assets/eqd';
 import { GLMR } from './assets/glmr';
+import { HDX } from './assets/hdx';
 import { IBTC } from './assets/ibtc';
 import { INTR } from './assets/intr';
 import { PARA } from './assets/para';
@@ -25,6 +26,7 @@ export const MOONBEAM_CONFIGS: MoonbeamXcmConfigs = {
   [AssetSymbol.EQD]: EQD,
   [AssetSymbol.DOT]: DOT,
   [AssetSymbol.GLMR]: GLMR,
+  [AssetSymbol.HDX]: HDX,
   [AssetSymbol.IBTC]: IBTC,
   [AssetSymbol.INTR]: INTR,
   [AssetSymbol.PARA]: PARA,
