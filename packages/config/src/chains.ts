@@ -43,6 +43,10 @@ import {
 export const acala = new Parachain({
   assetsData: [
     {
+      asset: aca,
+      id: { Token: aca.originSymbol },
+    },
+    {
       asset: ausd,
       id: { Token: ausd.originSymbol },
     },
@@ -479,6 +483,14 @@ export const moonbeam = new EvmParachain({
     {
       asset: dot,
       id: '42259045809535163221576417993425387648',
+    },
+    {
+      asset: eq,
+      id: '190590555344745888270686124937537713878',
+    },
+    {
+      asset: eqd,
+      id: '187224307232923873519830480073807488153',
     },
     {
       asset: glmr,
