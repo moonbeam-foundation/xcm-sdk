@@ -54,6 +54,14 @@ export class Parachain extends Chain {
     return this.assetsData.get(asset.key)?.balanceId ?? this.getAssetId(asset);
   }
 
+  getMinAssetId(asset: Asset): ChainAssetId {
+    return this.assetsData.get(asset.key)?.minId ?? this.getAssetId(asset);
+  }
+
+  getMetadataAssetId(asset: Asset): ChainAssetId {
+    return this.assetsData.get(asset.key)?.metadataId ?? this.getAssetId(asset);
+  }
+
   getAssetPalletInstance(asset: Asset): number | undefined {
     return this.assetsData.get(asset.key)?.palletInstance;
   }

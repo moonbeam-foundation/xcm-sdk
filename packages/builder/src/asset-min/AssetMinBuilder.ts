@@ -1,7 +1,8 @@
 /* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { u128 } from '@polkadot/types';
+import { Option, u128 } from '@polkadot/types';
+import { PalletAssetsAssetDetails } from '@polkadot/types/lookup';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import { AssetMinConfigBuilder } from './AssetMinBuilder.interfaces';
 
@@ -47,8 +48,10 @@ function assets() {
           module: 'assets',
           func: 'asset',
           args: [asset],
-          transform: async (response: any): Promise<bigint> =>
-            (response.minBalance as u128).toBigInt(),
+          transform: async (
+            response: Option<PalletAssetsAssetDetails>,
+          ): Promise<bigint> =>
+            response.unwrapOrDefault().minBalance.toBigInt(),
         }),
     }),
   };

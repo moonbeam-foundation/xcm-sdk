@@ -112,12 +112,10 @@ export async function getBalancesAndMin({
   config,
   polkadot,
 }: GetBalancesParams) {
-  const assetId = chain.getBalanceAssetId(config.asset);
-
   const balance = await polkadot.query(
     config.balance.build({
       address,
-      asset: assetId,
+      asset: chain.getBalanceAssetId(config.asset),
     }),
   );
   const feeBalance = config.fee
@@ -129,7 +127,9 @@ export async function getBalancesAndMin({
       )
     : balance;
   const min = config.min
-    ? await polkadot.query(config.min.build({ asset: assetId }))
+    ? await polkadot.query(
+        config.min.build({ asset: chain.getMinAssetId(config.asset) }),
+      )
     : 0n;
 
   return {

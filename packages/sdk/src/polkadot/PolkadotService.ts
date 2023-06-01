@@ -98,7 +98,8 @@ export class PolkadotService {
 
   async getAssetDecimals(asset: Asset): Promise<number> {
     return (
-      (await this.getAssetMeta(this.chain.getAssetId(asset)))?.decimals ||
+      (await this.getAssetMeta(this.chain.getMetadataAssetId(asset)))
+        ?.decimals ||
       this.chain.getAssetDecimals(asset) ||
       this.decimals
     );

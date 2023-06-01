@@ -45,14 +45,17 @@ export const acala = new Parachain({
     {
       asset: aca,
       id: { Token: aca.originSymbol },
+      metadataId: { NativeAssetId: { Token: aca.originSymbol } },
     },
     {
       asset: ausd,
       id: { Token: ausd.originSymbol },
+      metadataId: { NativeAssetId: { Token: ausd.originSymbol } },
     },
     {
       asset: glmr,
       id: { ForeignAsset: 0 },
+      metadataId: { ForeignAssetId: { ForeignAsset: 0 } },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
