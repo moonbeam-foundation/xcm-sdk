@@ -6,20 +6,17 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { assetsMap } from '@moonbeam-network/xcm-config';
 import {
+  AnyParachain,
   Asset,
   AssetAmount,
   ChainAssetId,
-  EvmParachain,
-  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { u128 } from '@polkadot/types';
-import { PalletAssetsAssetMetadata } from '@polkadot/types/lookup';
+import { Option, u128 } from '@polkadot/types';
 import { IKeyringPair } from '@polkadot/types/types';
-
-export type AnyParachain = Parachain | EvmParachain;
+import { AssetMetadata } from './PolkadotService.interfaces';
 
 export class PolkadotService {
   readonly api: ApiPromise;
@@ -44,19 +41,16 @@ export class PolkadotService {
   }
 
   get asset(): Asset {
-    const symbol = this.api.registry.chainTokens
-      .at(0)
-      ?.toString()
-      .toLowerCase();
+    const key = this.api.registry.chainTokens.at(0)?.toString().toLowerCase();
 
-    if (!symbol) {
-      throw new Error('No native symbol found');
+    if (!key) {
+      throw new Error('No native symbol key found');
     }
 
-    const asset = assetsMap.get(symbol);
+    const asset = assetsMap.get(key);
 
     if (!asset) {
-      throw new Error(`No asset found for symbol ${symbol}`);
+      throw new Error(`No asset found for key ${key}`);
     }
 
     return asset;
@@ -78,7 +72,6 @@ export class PolkadotService {
   async getAssetMeta(
     asset: ChainAssetId,
   ): Promise<{ symbol: string; decimals: number } | undefined> {
-    // TODO: Is it the same as asset min builder?
     const fn =
       this.api.query.assets?.metadata ||
       this.api.query.assetRegistry?.currencyMetadatas ||
@@ -88,11 +81,12 @@ export class PolkadotService {
       return undefined;
     }
 
-    const data = (await fn(asset)) as PalletAssetsAssetMetadata;
+    const data = (await fn(asset)) as AssetMetadata | Option<AssetMetadata>;
+    const unwrapped = 'unwrapOrDefault' in data ? data.unwrapOrDefault() : data;
 
     return {
-      decimals: data.decimals.toNumber(),
-      symbol: data.symbol.toString(),
+      decimals: unwrapped.decimals.toNumber(),
+      symbol: unwrapped.symbol.toString(),
     };
   }
 

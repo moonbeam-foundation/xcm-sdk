@@ -68,6 +68,7 @@ export async function getSourceData({
     feeAsset: chain.getAssetId(asset),
   });
   const fee = await getFee({
+    amount: balance,
     contract,
     decimals: zeroFeeAmount.decimals,
     ethersSigner,
@@ -140,6 +141,7 @@ export async function getBalancesAndMin({
 }
 
 export interface GetFeeParams {
+  amount: bigint;
   contract?: ContractConfig;
   decimals: number;
   ethersSigner?: EthersSigner;
@@ -149,6 +151,7 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
+  amount,
   contract,
   decimals,
   ethersSigner,
@@ -161,7 +164,7 @@ export async function getFee({
       throw new Error('Ethers signer must be provided');
     }
 
-    return getContractFee(contract, decimals, ethersSigner);
+    return getContractFee(amount, contract, decimals, ethersSigner);
   }
 
   if (extrinsic) {
@@ -172,12 +175,13 @@ export async function getFee({
 }
 
 export async function getContractFee(
+  amount: bigint,
   config: ContractConfig,
   decimals: number,
   ethersSigner: EthersSigner,
 ): Promise<bigint> {
   const contract = createContract(config, ethersSigner);
-  const fee = await contract.getFee();
+  const fee = await contract.getFee(amount);
 
   return convertDecimals(fee, 18, decimals);
 }

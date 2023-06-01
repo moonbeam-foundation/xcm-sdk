@@ -23,13 +23,30 @@ export class Xtokens implements ContractInterface {
     return this.#contract[this.#config.func](...this.#config.args);
   }
 
-  async getFee(): Promise<bigint> {
-    const estimatedGas = (
-      await this.#contract.estimateGas[this.#config.func](...this.#config.args)
-    ).toBigInt();
-    const gasPrice = await this.getGasPrice();
+  async getFee(amount: bigint): Promise<bigint> {
+    if (amount === 0n) {
+      return 0n;
+    }
 
-    return estimatedGas * gasPrice;
+    /**
+     * Contract can throw an error if user balance is smaller than fee.
+     * Or if you try to send 0 as amount.
+     */
+    try {
+      const estimatedGas = (
+        await this.#contract.estimateGas[this.#config.func](
+          ...this.#config.args,
+        )
+      ).toBigInt();
+      const gasPrice = await this.getGasPrice();
+
+      return estimatedGas * gasPrice;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+
+      return 0n;
+    }
   }
 
   private async getGasPrice() {
