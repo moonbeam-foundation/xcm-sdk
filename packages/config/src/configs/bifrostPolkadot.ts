@@ -26,7 +26,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: 0.01,
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

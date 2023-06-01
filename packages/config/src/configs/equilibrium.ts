@@ -39,7 +39,7 @@ export const equilibriumConfig = new ChainConfig({
       balance: BalanceBuilder().system().accountEquilibrium(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: 0.01,
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
