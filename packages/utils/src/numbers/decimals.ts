@@ -1,5 +1,7 @@
 import Big, { RoundingMode } from 'big.js';
 
+Big.NE = -18;
+
 export function toDecimal(
   number: bigint | number | string,
   decimals: number,

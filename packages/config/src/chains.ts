@@ -55,7 +55,7 @@ export const acala = new Parachain({
     {
       asset: glmr,
       id: { ForeignAsset: 0 },
-      metadataId: { ForeignAssetId: { ForeignAsset: 0 } },
+      metadataId: { ForeignAssetId: 0 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -237,7 +237,7 @@ export const equilibrium = new Parachain({
 export const equilibriumAlphanet = new Parachain({
   assetsData: [
     {
-      asset: glmr,
+      asset: dev,
       decimals: 9,
       id: 1_735_159_154,
     },

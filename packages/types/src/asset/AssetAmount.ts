@@ -2,6 +2,8 @@ import { toDecimal } from '@moonbeam-network/xcm-utils';
 import Big, { RoundingMode } from 'big.js';
 import { Asset, AssetConstructorParams } from './Asset';
 
+Big.NE = -18;
+
 export interface AssetAmountParams {
   amount: bigint;
   decimals: number;

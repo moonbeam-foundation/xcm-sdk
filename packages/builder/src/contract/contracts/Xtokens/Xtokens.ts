@@ -9,27 +9,42 @@ import { ContractConfig } from '../../ContractConfig';
 export function Xtokens() {
   return {
     transfer: (weight = 4_000_000_000): ContractConfigBuilder => ({
-      build: ({ address, amount, asset, destination }) =>
-        new ContractConfig({
+      build: ({ address, amount, asset, destination }) => {
+        const erc20 =
+          typeof asset === 'string' && asset.startsWith('0x')
+            ? asset
+            : formatAssetIdToERC20(asset as string);
+
+        return new ContractConfig({
           args: [
-            formatAssetIdToERC20(asset as string),
+            erc20,
             amount,
             getDestinationMultilocation(address, destination),
             weight,
           ],
           func: 'transfer',
           module: 'Xtokens',
-        }),
+        });
+      },
     }),
     transferMultiCurrencies: (
       weight = 4_000_000_000,
     ): ContractConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee, feeAsset }) =>
-        new ContractConfig({
+      build: ({ address, amount, asset, destination, fee, feeAsset }) => {
+        const erc20 =
+          typeof asset === 'string' && asset.startsWith('0x')
+            ? asset
+            : formatAssetIdToERC20(asset as string);
+        const feeErc20 =
+          typeof feeAsset === 'string' && feeAsset.startsWith('0x')
+            ? feeAsset
+            : formatAssetIdToERC20(feeAsset as string);
+
+        return new ContractConfig({
           args: [
             [
-              [formatAssetIdToERC20(asset as string), amount],
-              [formatAssetIdToERC20(feeAsset as string), fee],
+              [erc20, amount],
+              [feeErc20, fee],
             ],
             1, // index of the fee asset
             getDestinationMultilocation(address, destination),
@@ -37,7 +52,8 @@ export function Xtokens() {
           ],
           func: 'transferMultiCurrencies',
           module: 'Xtokens',
-        }),
+        });
+      },
     }),
   };
 }

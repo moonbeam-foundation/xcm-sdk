@@ -4,7 +4,11 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { assetsMap } from '@moonbeam-network/xcm-config';
+import {
+  assetsMap,
+  eq,
+  equilibriumAlphanet,
+} from '@moonbeam-network/xcm-config';
 import {
   AnyParachain,
   Asset,
@@ -41,7 +45,14 @@ export class PolkadotService {
   }
 
   get asset(): Asset {
-    const key = this.api.registry.chainTokens.at(0)?.toString().toLowerCase();
+    const symbol = this.api.registry.chainTokens.at(0);
+    const key = symbol?.toString().toLowerCase();
+
+    // TODO: Remove this once Equilibrium Alphanet is updated
+    // or find better way if issue apears on other chains
+    if (key === 'token' && this.chain.key === equilibriumAlphanet.key) {
+      return eq;
+    }
 
     if (!key) {
       throw new Error('No native symbol key found');
@@ -50,7 +61,7 @@ export class PolkadotService {
     const asset = assetsMap.get(key);
 
     if (!asset) {
-      throw new Error(`No asset found for key ${key}`);
+      throw new Error(`No asset found for key "${key}" and symbol "${symbol}"`);
     }
 
     return asset;
@@ -113,7 +124,8 @@ export class PolkadotService {
 
   async getFee(account: string, config: ExtrinsicConfig): Promise<bigint> {
     const fn = this.api.tx[config.module][config.func];
-    const extrinsic = fn(...config.getArgs(fn));
+    const args = config.getArgs(fn);
+    const extrinsic = fn(...args);
     const info = await extrinsic.paymentInfo(account, { nonce: -1 });
 
     return info.partialFee.toBigInt();
@@ -125,7 +137,8 @@ export class PolkadotService {
     signer: PolkadotSigner | IKeyringPair,
   ): Promise<string> {
     const fn = this.api.tx[config.module][config.func];
-    const extrinsic = fn(...config.getArgs(fn));
+    const args = config.getArgs(fn);
+    const extrinsic = fn(...args);
     const hash = await extrinsic.signAndSend(
       this.#isSigner(signer) ? account : signer,
       {
