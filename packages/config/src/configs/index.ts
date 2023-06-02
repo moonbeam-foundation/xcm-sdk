@@ -17,7 +17,7 @@ import { integriteeConfig } from './integritee';
 import { interlayConfig } from './interlay';
 import { karuraConfig } from './karura';
 import { khalaConfig } from './khala';
-import { kinitsugiConfig } from './kinitsugi';
+import { kintsugiConfig } from './kintsugi';
 import { kusamaConfig } from './kusama';
 import { litentryAlphanetConfig } from './litentryAlphanet';
 import { litmusConfig } from './litmus';
@@ -53,7 +53,7 @@ export const chainsConfigList: ChainConfig[] = [
   interlayConfig,
   karuraConfig,
   khalaConfig,
-  kinitsugiConfig,
+  kintsugiConfig,
   kusamaConfig,
   litentryAlphanetConfig,
   litmusConfig,

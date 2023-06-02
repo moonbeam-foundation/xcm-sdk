@@ -68,6 +68,7 @@ export async function getSourceData({
     feeAsset: chain.getAssetId(asset),
   });
   const fee = await getFee({
+    amount: balance,
     contract,
     decimals: zeroFeeAmount.decimals,
     ethersSigner,
@@ -112,12 +113,10 @@ export async function getBalancesAndMin({
   config,
   polkadot,
 }: GetBalancesParams) {
-  const assetId = chain.getBalanceAssetId(config.asset);
-
   const balance = await polkadot.query(
     config.balance.build({
       address,
-      asset: assetId,
+      asset: chain.getBalanceAssetId(config.asset),
     }),
   );
   const feeBalance = config.fee
@@ -129,7 +128,9 @@ export async function getBalancesAndMin({
       )
     : balance;
   const min = config.min
-    ? await polkadot.query(config.min.build({ asset: assetId }))
+    ? await polkadot.query(
+        config.min.build({ asset: chain.getMinAssetId(config.asset) }),
+      )
     : 0n;
 
   return {
@@ -140,6 +141,7 @@ export async function getBalancesAndMin({
 }
 
 export interface GetFeeParams {
+  amount: bigint;
   contract?: ContractConfig;
   decimals: number;
   ethersSigner?: EthersSigner;
@@ -149,6 +151,7 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
+  amount,
   contract,
   decimals,
   ethersSigner,
@@ -161,7 +164,7 @@ export async function getFee({
       throw new Error('Ethers signer must be provided');
     }
 
-    return getContractFee(contract, decimals, ethersSigner);
+    return getContractFee(amount, contract, decimals, ethersSigner);
   }
 
   if (extrinsic) {
@@ -172,12 +175,13 @@ export async function getFee({
 }
 
 export async function getContractFee(
+  amount: bigint,
   config: ContractConfig,
   decimals: number,
   ethersSigner: EthersSigner,
 ): Promise<bigint> {
   const contract = createContract(config, ethersSigner);
-  const fee = await contract.getFee();
+  const fee = await contract.getFee(amount);
 
   return convertDecimals(fee, 18, decimals);
 }

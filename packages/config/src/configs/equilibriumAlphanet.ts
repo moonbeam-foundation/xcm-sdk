@@ -39,7 +39,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: 0.00005,
         asset: dev,
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),

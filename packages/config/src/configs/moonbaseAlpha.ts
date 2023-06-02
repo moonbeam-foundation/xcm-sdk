@@ -1,5 +1,5 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
-import { auq, dev, eq, eqd, lit, paring, tt1, unit } from '../assets';
+import { dev, eq, eqd, lit, paring, tt1, unit } from '../assets';
 import {
   alphanetRelay,
   darwiniaPangoro,
@@ -7,7 +7,6 @@ import {
   litentryAlphanet,
   moonbaseAlpha,
   statemineAlphanet,
-  uniqueAlpha,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -24,20 +23,21 @@ export const moonbaseAlphaConfig = new ChainConfig({
         asset: dev,
       },
     }),
-    new AssetConfig({
-      asset: auq,
-      balance: BalanceBuilder().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: uniqueAlpha,
-      destinationFee: {
-        amount: 0,
-        asset: auq,
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().system().account(),
-      },
-    }),
+    // NOTE: Disabling because ws endpoint is not working
+    // new AssetConfig({
+    //   asset: auq,
+    //   balance: BalanceBuilder().assets().account(),
+    //   contract: ContractBuilder().Xtokens().transfer(),
+    //   destination: uniqueAlpha,
+    //   destinationFee: {
+    //     amount: 0,
+    //     asset: auq,
+    //   },
+    //   fee: {
+    //     asset: dev,
+    //     balance: BalanceBuilder().system().account(),
+    //   },
+    // }),
     new AssetConfig({
       asset: eq,
       balance: BalanceBuilder().assets().account(),

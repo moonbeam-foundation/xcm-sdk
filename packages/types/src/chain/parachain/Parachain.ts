@@ -1,13 +1,9 @@
 import { Asset } from '../../asset';
 import { Chain, ChainConstructorParams } from '../Chain';
-import {
-  ChainAssetId,
-  ChainAssetsData,
-  ChainAssetsDataWithAsset,
-} from './Parachain.interfaces';
+import { ChainAssetId, ChainAssetsData } from './Parachain.interfaces';
 
 export interface ParachainConstructorParams extends ChainConstructorParams {
-  assetsData?: ChainAssetsDataWithAsset[];
+  assetsData?: Map<string, ChainAssetsData> | ChainAssetsData[];
   genesisHash: string;
   parachainId: number;
   ss58Format: number;
@@ -39,9 +35,10 @@ export class Parachain extends Chain {
   }: ParachainConstructorParams) {
     super(others);
 
-    this.assetsData = new Map(
-      assetsData?.map(({ asset, ...rest }) => [asset.key, rest]),
-    );
+    this.assetsData =
+      assetsData instanceof Map
+        ? assetsData
+        : new Map(assetsData?.map((data) => [data.asset.key, data]));
     this.genesisHash = genesisHash;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
@@ -55,6 +52,14 @@ export class Parachain extends Chain {
 
   getBalanceAssetId(asset: Asset): ChainAssetId {
     return this.assetsData.get(asset.key)?.balanceId ?? this.getAssetId(asset);
+  }
+
+  getMinAssetId(asset: Asset): ChainAssetId {
+    return this.assetsData.get(asset.key)?.minId ?? this.getAssetId(asset);
+  }
+
+  getMetadataAssetId(asset: Asset): ChainAssetId {
+    return this.assetsData.get(asset.key)?.metadataId ?? this.getAssetId(asset);
   }
 
   getAssetPalletInstance(asset: Asset): number | undefined {

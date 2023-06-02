@@ -4,15 +4,14 @@ export type ChainAssetId =
   | string
   | number
   | bigint
-  | { [key: string]: string | number | bigint };
+  | { [key: string]: ChainAssetId };
 
 export interface ChainAssetsData {
+  asset: Asset;
+  balanceId?: ChainAssetId;
   decimals?: number;
   id?: ChainAssetId;
-  balanceId?: ChainAssetId;
+  metadataId?: ChainAssetId;
+  minId?: ChainAssetId;
   palletInstance?: number;
-}
-
-export interface ChainAssetsDataWithAsset extends ChainAssetsData {
-  asset: Asset;
 }

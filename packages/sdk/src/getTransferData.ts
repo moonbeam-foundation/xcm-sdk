@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { TransferConfig } from '@moonbeam-network/xcm-config';
-import { toBigInt } from '@moonbeam-network/xcm-utils';
+import { AssetAmount } from '@moonbeam-network/xcm-types';
+import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { createContract } from './contract';
 import { getDestinationData } from './getDestinationData';
@@ -35,9 +36,13 @@ export async function getTransferData({
     polkadot: destPolkadot,
     transferConfig,
   });
+  const destinationFee = await getDestinationFeeWithSourceDecimals(
+    srcPolkadot,
+    destination.fee,
+  );
   const source = await getSourceData({
     destinationAddress,
-    destinationFee: destination.fee,
+    destinationFee,
     ethersSigner,
     polkadot: srcPolkadot,
     sourceAddress,
@@ -94,7 +99,7 @@ export async function getTransferData({
         amount: bigintAmount,
         asset: chain.getAssetId(asset),
         destination: destination.chain,
-        fee: destination.fee.amount,
+        fee: destinationFee.amount,
         feeAsset: chain.getAssetId(asset),
       });
       const extrinsic = config.extrinsic?.build({
@@ -102,7 +107,7 @@ export async function getTransferData({
         amount: bigintAmount,
         asset: chain.getAssetId(asset),
         destination: destination.chain,
-        fee: destination.fee.amount,
+        fee: destinationFee.amount,
         feeAsset: chain.getAssetId(asset),
         palletInstance: chain.getAssetPalletInstance(asset),
         source: chain,
@@ -152,4 +157,26 @@ function getMin({
         .toString(),
     ),
   });
+}
+
+export async function getDestinationFeeWithSourceDecimals(
+  sourcePolkadot: PolkadotService,
+  destinationFee: AssetAmount,
+): Promise<AssetAmount> {
+  const destinationFeeDecimals = await sourcePolkadot.getAssetDecimals(
+    destinationFee,
+  );
+  const destinationFeeAsset =
+    destinationFee.decimals === destinationFeeDecimals
+      ? destinationFee
+      : destinationFee.copyWith({
+          amount: convertDecimals(
+            destinationFee.amount,
+            destinationFee.decimals,
+            destinationFeeDecimals,
+          ),
+          decimals: destinationFeeDecimals,
+        });
+
+  return destinationFeeAsset;
 }

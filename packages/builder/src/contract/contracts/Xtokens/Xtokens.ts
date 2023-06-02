@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { AnyChain, ChainAssetId } from '@moonbeam-network/xcm-types';
+import { AnyChain } from '@moonbeam-network/xcm-types';
+import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
@@ -11,7 +12,7 @@ export function Xtokens() {
       build: ({ address, amount, asset, destination }) =>
         new ContractConfig({
           args: [
-            formatAssetIdToERC20(asset),
+            formatAssetIdToERC20(asset as string),
             amount,
             getDestinationMultilocation(address, destination),
             weight,
@@ -27,8 +28,8 @@ export function Xtokens() {
         new ContractConfig({
           args: [
             [
-              [formatAssetIdToERC20(asset), amount],
-              [formatAssetIdToERC20(feeAsset), fee],
+              [formatAssetIdToERC20(asset as string), amount],
+              [formatAssetIdToERC20(feeAsset as string), fee],
             ],
             1, // index of the fee asset
             getDestinationMultilocation(address, destination),
@@ -39,14 +40,6 @@ export function Xtokens() {
         }),
     }),
   };
-}
-
-function formatAssetIdToERC20(asset: ChainAssetId) {
-  if (typeof asset !== 'string' || !/^\d{38}$/.test(asset)) {
-    throw new Error('Asset id must be a string and have 38 digits');
-  }
-
-  return `0xffffffff${BigInt(asset).toString(16).padStart(32, '0')}`;
 }
 
 type DestinationMultilocation = [

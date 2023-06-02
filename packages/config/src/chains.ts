@@ -44,12 +44,19 @@ import {
 export const acala = new Parachain({
   assetsData: [
     {
+      asset: aca,
+      id: { Token: aca.originSymbol },
+      metadataId: { NativeAssetId: { Token: aca.originSymbol } },
+    },
+    {
       asset: ausd,
       id: { Token: ausd.originSymbol },
+      metadataId: { NativeAssetId: { Token: ausd.originSymbol } },
     },
     {
       asset: glmr,
       id: { ForeignAsset: 0 },
+      metadataId: { ForeignAssetId: 0 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -231,7 +238,7 @@ export const equilibrium = new Parachain({
 export const equilibriumAlphanet = new Parachain({
   assetsData: [
     {
-      asset: glmr,
+      asset: dev,
       decimals: 9,
       id: 1_735_159_154,
     },
@@ -349,7 +356,7 @@ export const khala = new Parachain({
   ws: 'wss://khala.api.onfinality.io/public-ws',
 });
 
-export const kinitsugi = new Parachain({
+export const kintsugi = new Parachain({
   assetsData: [
     {
       asset: kint,
@@ -501,6 +508,14 @@ export const moonbeam = new EvmParachain({
     {
       asset: dot,
       id: '42259045809535163221576417993425387648',
+    },
+    {
+      asset: eq,
+      id: '190590555344745888270686124937537713878',
+    },
+    {
+      asset: eqd,
+      id: '187224307232923873519830480073807488153',
     },
     {
       asset: glmr,
@@ -821,7 +836,7 @@ export const chainsList: AnyChain[] = [
   interlay,
   karura,
   khala,
-  kinitsugi,
+  kintsugi,
   kusama,
   litentryAlphanet,
   litmus,
