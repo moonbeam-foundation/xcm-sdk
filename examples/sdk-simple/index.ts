@@ -1,127 +1,127 @@
-import { AssetSymbol, ChainKey } from '@moonbeam-network/xcm-config';
-import { init } from '@moonbeam-network/xcm-sdk';
-import { toDecimal } from '@moonbeam-network/xcm-utils';
+/* eslint-disable import/no-extraneous-dependencies */
+import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
+import { Sdk, TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { ethers } from 'ethers';
-import { setTimeout } from 'timers/promises';
+import { setTimeout } from 'node:timers/promises';
 
-/**
- * Add your moonbeam private key
- */
+// Moonbeam Signer ===========================================================
+
 const moonbeamPrivateKey = '';
-
-/**
- * Add your polkadot menmonic or private key
- */
-const polkadotSuri = '';
-
-// ===========================================================================
-
-const dot = AssetSymbol.DOT;
-const polkadot = ChainKey.Polkadot;
-
-const { moonbeam } = init();
-
-const keyring = new Keyring({ type: 'sr25519' });
-
-const provider = new ethers.providers.WebSocketProvider(moonbeam.moonChain.ws, {
-  name: moonbeam.moonChain.name,
-  chainId: moonbeam.moonChain.chainId,
+const provider = new ethers.providers.WebSocketProvider(moonbeam.ws, {
+  chainId: moonbeam.id,
+  name: moonbeam.name,
 });
 const ethersSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
 
+// Polkadot Signer ===========================================================
+
+const polkadotPrivateKey = '';
+
+await cryptoWaitReady();
+const keyring = new Keyring({
+  ss58Format: polkadot.ss58Format,
+  type: 'sr25519',
+});
+const pair = keyring.createFromUri(polkadotPrivateKey);
+
 // ===========================================================================
 
-async function deposit() {
-  const pair = keyring.addFromUri(polkadotSuri);
-
-  const { chains, from } = moonbeam.deposit(dot);
-
+export function logBalances(data: TransferData): void {
   console.log(
-    `\nYou can deposit ${dot} from these chains: `,
-    chains.map((chain) => chain.name),
+    `Balance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${
+      data.source.balance.symbol
+    }`,
   );
-
-  const { asset, sourceBalance, source, min, send } = await from(polkadot).get(
-    ethersSigner.address,
-    pair,
-  );
-
   console.log(
-    `Your ${asset.originSymbol} balance in ${source.name}: ${toDecimal(
-      sourceBalance,
-      asset.decimals,
-    ).toFixed()}. Minimum transferable amount is: ${toDecimal(
-      min,
-      asset.decimals,
-    ).toFixed()}`,
+    `Balance on ${
+      data.destination.chain.name
+    } ${data.destination.balance.toDecimal()} ${
+      data.destination.balance.symbol
+    }`,
   );
-
-  // sending enough to withdraw later
-  await send(600000000n, (event) => console.log(event));
 }
 
-async function withdraw() {
-  const { chains, to } = moonbeam.withdraw(dot);
-  const polkadotAddress = keyring.getPairs().at(0)?.address!;
-
+export function logTxDetails(data: TransferData): void {
   console.log(
-    `\nYou can withdraw ${dot} to these chains: `,
-    chains.map((chain) => chain.name),
+    `\nYou can send min: ${data.min.toDecimal()} ${
+      data.min.symbol
+    } and max: ${data.max.toDecimal()} ${data.max.symbol} from ${
+      data.source.chain.name
+    } to ${
+      data.destination.chain.name
+    }. You will pay ${data.source.fee.toDecimal()} ${
+      data.source.fee.symbol
+    } fee on ${
+      data.source.chain.name
+    } and ${data.destination.fee.toDecimal()} ${
+      data.destination.fee.symbol
+    } fee on ${data.destination.chain.name}.`,
   );
+}
 
-  const { asset, destination, destinationBalance, min, send } = await to(
-    polkadot,
-  ).get(polkadotAddress, { ethersSigner });
+export async function fromPolkadot() {
+  console.log('\nTransfer from Polkadot to Moonbeam\n');
 
-  console.log(
-    `Your ${asset.originSymbol} balance in ${destination.name}: ${toDecimal(
-      destinationBalance,
-      asset.decimals,
-    ).toFixed()}. Minimum transferable amount is: ${toDecimal(
-      min,
-      asset.decimals,
-    ).toFixed()}`,
-  );
+  const data = await Sdk().getTransferData({
+    destinationAddress: ethersSigner.address,
+    destinationKeyOrChain: moonbeam,
+    keyOrAsset: dot,
+    polkadotSigner: pair,
+    sourceAddress: pair.address,
+    sourceKeyOrChain: polkadot,
+  });
 
-  await send(min, (event) => console.log(event));
+  logBalances(data);
+  logTxDetails(data);
+
+  const amount = +data.min.toDecimal() * 2;
+
+  console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
+
+  const hash = await data.transfer(amount);
+
+  console.log(`${data.source.chain.name} tx hash: ${hash}`);
+}
+
+export async function fromMoonbeam() {
+  console.log('\nTransfer from Moonbeam to Polkadot\n');
+
+  const data = await Sdk()
+    .assets()
+    .asset(dot)
+    .source(moonbeam)
+    .destination(polkadot)
+    .accounts(ethersSigner.address, pair.address, {
+      ethersSigner,
+    });
+
+  logBalances(data);
+  logTxDetails(data);
+
+  const amount = +data.min.toDecimal() * 2;
+
+  console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
+
+  const hash = await data.transfer(amount);
+
+  console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }
 
 async function main() {
-  console.log('starting...');
+  // disable unnecessary warning logs
+  console.warn = () => null;
+  console.clear();
 
-  const thirtySeconds = 30 * 1000;
-  const unsubscribe = await moonbeam.subscribeToAssetsBalanceInfo(
-    ethersSigner.address,
-    (balances) => {
-      console.log('\nUpdated balances:');
-      console.log('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄');
-      balances.forEach(({ asset, balance, origin }) => {
-        console.log(
-          `${balance.symbol}: ${toDecimal(
-            balance.balance,
-            balance.decimals,
-          ).toFixed()} (${origin.name} ${asset.originSymbol})`,
-        );
-      });
-      console.log('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄');
-    },
-  );
-  await setTimeout(3000);
+  console.log(`\nMoonbeam address: ${ethersSigner.address}.`);
+  console.log(`Polkadot address: ${pair.address}.`);
 
-  console.log('\ndepositing...');
-  await deposit();
-  await setTimeout(thirtySeconds);
-
-  console.log('\nwithdrawing...');
-  await withdraw();
-  await setTimeout(thirtySeconds);
-
-  unsubscribe();
+  await fromPolkadot();
+  console.log('\nWaiting 30 seconds...');
+  await setTimeout(30000);
+  await fromMoonbeam();
 }
-
-// to suppress unnecessary warning from polkadot and ethers
-console.warn = () => {};
 
 main()
   .then(() => console.log('done!'))

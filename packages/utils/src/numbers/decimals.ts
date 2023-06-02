@@ -5,15 +5,22 @@ export function toDecimal(
   decimals: number,
   maxDecimal = 6,
   roundType?: RoundingMode,
-): Big {
+): string {
   const dividend = Big(number.toString().replace(/[^0-9]/g, ''));
   const divisor = Big(10).pow(decimals);
   const result = dividend.div(divisor).round(maxDecimal, roundType);
 
-  return result;
+  return result.toString();
 }
 
-export function toBigInt(amount: string | number, decimals: number): bigint {
+export function toBigInt(
+  amount: bigint | string | number,
+  decimals: number,
+): bigint {
+  if (typeof amount === 'bigint') {
+    return amount;
+  }
+
   const multiplier = Big(10).pow(decimals);
   const result = Big(amount).mul(multiplier);
 

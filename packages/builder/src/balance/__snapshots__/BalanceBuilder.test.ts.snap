@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`balanceBuilder assets account should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ASSET>",
+    "<ACCOUNT>",
+  ],
+  "func": "account",
+  "module": "assets",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`balanceBuilder assets account should transform correctly 1`] = `999n`;
+
+exports[`balanceBuilder system account should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ACCOUNT>",
+  ],
+  "func": "account",
+  "module": "system",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`balanceBuilder system account should transform correctly with frozen balance 1`] = `900n`;
+
+exports[`balanceBuilder system account should transform correctly with miscFrozen balance 1`] = `900n`;
+
+exports[`balanceBuilder system accountEquilibrium should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ACCOUNT>",
+  ],
+  "func": "account",
+  "module": "system",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`balanceBuilder system accountEquilibrium should return 0 if response empty 1`] = `0n`;
+
+exports[`balanceBuilder system accountEquilibrium should transform correctly if not v0 1`] = `62730076931n`;
+
+exports[`balanceBuilder system accountEquilibrium should transform v0 correctly 1`] = `2954852364913n`;
+
+exports[`balanceBuilder tokens accounts should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ACCOUNT>",
+    "<ASSET>",
+  ],
+  "func": "accounts",
+  "module": "tokens",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`balanceBuilder tokens accounts should transform correctly 1`] = `900n`;

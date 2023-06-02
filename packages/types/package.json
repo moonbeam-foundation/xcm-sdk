@@ -1,0 +1,56 @@
+{
+  "name": "@moonbeam-network/xcm-types",
+  "version": "0.0.1",
+  "description": "Moonbeam XCM Types",
+  "scripts": {
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
+    "link": "npm ln",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest /src",
+    "test:watch": "npm test -- --watch",
+    "test:update": "npm test -- -u",
+    "test:ci": "npm test -- --ci",
+    "prepack": "prettier --write build/index.d.ts"
+  },
+  "repository": {
+    "directory": "packages/types",
+    "type": "git",
+    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+  },
+  "keywords": [
+    "moonbeam",
+    "moonriver",
+    "xcm"
+  ],
+  "author": "PureStake",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PureStake/xcm-sdk/issues"
+  },
+  "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
+  "files": [
+    "build"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/index.d.ts",
+        "default": "./build/index.mjs"
+      },
+      "require": {
+        "types": "./build/index.d.ts",
+        "default": "./build/index.cjs"
+      }
+    }
+  },
+  "types": "./build/index.d.ts",
+  "main": "./build/index.cjs",
+  "dependencies": {
+    "@moonbeam-network/xcm-utils": "*",
+    "big.js": "^6.2.1",
+    "type-fest": "^3.8.0"
+  }
+}

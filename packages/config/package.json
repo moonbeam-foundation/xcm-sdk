@@ -48,6 +48,10 @@
   },
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
+  "dependencies": {
+    "@moonbeam-network/xcm-builder": "*",
+    "@moonbeam-network/xcm-types": "*"
+  },
   "peerDependencies": {
     "@polkadot/api": "10.x",
     "@polkadot/api-augment": "10.x",

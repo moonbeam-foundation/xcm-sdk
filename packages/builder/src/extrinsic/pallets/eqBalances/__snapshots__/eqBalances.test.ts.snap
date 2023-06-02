@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`eqBalances transferXcm should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferXcm",
+  "getArgs": [Function],
+  "module": "eqBalances",
+  "type": "Substrate",
+}
+`;
+
+exports[`eqBalances transferXcm should get correct arguments 1`] = `
+[
+  [
+    "USDT",
+    99000000000n,
+  ],
+  [
+    "RMRK",
+    5000000000n,
+  ],
+  {
+    "interior": {
+      "X2": [
+        {
+          "Parachain": 1000,
+        },
+        {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      ],
+    },
+    "parents": 1,
+  },
+]
+`;
+
+exports[`eqBalances xcmTransfer should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "xcmTransfer",
+  "getArgs": [Function],
+  "module": "eqBalances",
+  "type": "Substrate",
+}
+`;
+
+exports[`eqBalances xcmTransfer should get correct arguments 1`] = `
+[
+  "USDT",
+  99000000000n,
+  {
+    "interior": {
+      "X2": [
+        {
+          "Parachain": 1000,
+        },
+        {
+          "AccountKey20": {
+            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      ],
+    },
+    "parents": 1,
+  },
+  "ThisAccWillPay",
+]
+`;

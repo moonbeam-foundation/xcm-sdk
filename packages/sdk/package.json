@@ -46,13 +46,11 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
+    "@moonbeam-network/xcm-builder": "*",
     "@moonbeam-network/xcm-config": "*",
+    "@moonbeam-network/xcm-types": "*",
     "@moonbeam-network/xcm-utils": "*",
-    "lodash": "^4.17.21",
-    "lru-cache": "^7.17.0"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.191"
+    "big.js": "^6.2.1"
   },
   "peerDependencies": {
     "@polkadot/api": "10.x",
