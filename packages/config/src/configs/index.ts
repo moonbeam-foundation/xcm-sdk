@@ -12,6 +12,7 @@ import { darwiniaCrabConfig } from './darwiniaCrab';
 import { darwiniaPangoroConfig } from './darwiniaPangoro';
 import { equilibriumConfig } from './equilibrium';
 import { equilibriumAlphanetConfig } from './equilibriumAlphanet';
+import { hydraDxConfig } from './hydraDX';
 import { integriteeConfig } from './integritee';
 import { interlayConfig } from './interlay';
 import { karuraConfig } from './karura';
@@ -47,6 +48,7 @@ export const chainsConfigList: ChainConfig[] = [
   darwiniaPangoroConfig,
   equilibriumAlphanetConfig,
   equilibriumConfig,
+  hydraDxConfig,
   integriteeConfig,
   interlayConfig,
   karuraConfig,

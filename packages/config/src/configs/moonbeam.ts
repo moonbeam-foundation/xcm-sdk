@@ -8,6 +8,7 @@ import {
   eq,
   eqd,
   glmr,
+  hdx,
   ibtc,
   intr,
   para,
@@ -21,6 +22,7 @@ import {
   bifrostPolkadot,
   darwinia,
   equilibrium,
+  hydraDX,
   interlay,
   moonbeam,
   parallel,
@@ -70,6 +72,16 @@ export const moonbeamConfig = new ChainConfig({
       destination: equilibrium,
       destinationFee: {
         amount: 0.5,
+        asset: glmr,
+      },
+    }),
+    new AssetConfig({
+      asset: glmr,
+      balance: BalanceBuilder().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDX,
+      destinationFee: {
+        amount: 0.01,
         asset: glmr,
       },
     }),
@@ -269,6 +281,20 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.7,
         asset: usdt,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: hdx,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDX,
+      destinationFee: {
+        amount: 0.6,
+        asset: hdx,
       },
       fee: {
         asset: glmr,
