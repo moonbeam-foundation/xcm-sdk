@@ -60,6 +60,11 @@ export const glmr = new Asset({
   originSymbol: 'GLMR',
 });
 
+export const hdx = new Asset({
+  key: 'hdx',
+  originSymbol: 'HDX',
+});
+
 export const hko = new Asset({
   key: 'hko',
   originSymbol: 'HKO',
@@ -178,6 +183,7 @@ export const assetsList: Asset[] = [
   eq,
   eqd,
   glmr,
+  hdx,
   hko,
   ibtc,
   intr,

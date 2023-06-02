@@ -17,6 +17,7 @@ import {
   eq,
   eqd,
   glmr,
+  hdx,
   hko,
   ibtc,
   intr,
@@ -261,6 +262,27 @@ export const equilibriumAlphanet = new Parachain({
   ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
 });
 
+export const hydraDX = new Parachain({
+  assetsData: [
+    {
+      asset: hdx,
+      id: 0,
+    },
+    {
+      asset: glmr,
+      id: 16,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
+  key: 'hydra-dx',
+  name: 'HydraDX',
+  parachainId: 2034,
+  ss58Format: 63,
+  ws: 'wss://hydradx.api.onfinality.io/public-ws',
+});
+
 export const interlay = new Parachain({
   assetsData: [
     {
@@ -498,6 +520,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: glmr,
       id: '0x0000000000000000000000000000000000000802',
+    },
+    {
+      asset: hdx,
+      id: '69606720909260275826784788104880799692',
     },
     {
       asset: ibtc,
@@ -805,6 +831,7 @@ export const chainsList: AnyChain[] = [
   darwiniaPangoro,
   equilibrium,
   equilibriumAlphanet,
+  hydraDX,
   integritee,
   interlay,
   karura,
