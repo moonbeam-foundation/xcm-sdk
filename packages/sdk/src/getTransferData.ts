@@ -66,7 +66,7 @@ export async function getTransferData({
       });
     },
     /**
-     * Right not it will be always true
+     * Right now it will be always true
      * because all current asset can be sent both directions
      * and our configuration need destination config.
      */
