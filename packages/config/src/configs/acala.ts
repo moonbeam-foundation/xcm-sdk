@@ -27,7 +27,7 @@ export const acalaConfig = new ChainConfig({
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: aca,
+        asset: ausd,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

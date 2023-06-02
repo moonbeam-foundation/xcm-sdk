@@ -27,7 +27,7 @@ export const karuraConfig = new ChainConfig({
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: kar,
+        asset: ausd,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

@@ -1,1 +1,1 @@
-export * from './builderPramsMock';
+export * from './builderParamsMock';
