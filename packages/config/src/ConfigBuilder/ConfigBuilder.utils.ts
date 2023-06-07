@@ -42,9 +42,15 @@ export function getChain(keyOrAsset: string | AnyChain): AnyChain {
   return chain;
 }
 
-export function getSourceChains(asset: Asset): AnyChain[] {
+export function getSourceChains(
+  asset: Asset,
+  ecosystem: Ecosystem | undefined,
+): AnyChain[] {
   return Array.from(chainsConfigMap.values())
     .filter((chainConfig) => chainConfig.getAssetConfigs(asset).length)
+    .filter(
+      (chainConfig) => !ecosystem || chainConfig.chain.ecosystem === ecosystem,
+    )
     .map((chainConfig) => chainConfig.chain);
 }
 

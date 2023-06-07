@@ -1,8 +1,11 @@
+import { SetOptional } from 'type-fest';
 import { Asset } from '../../asset';
 import { Chain, ChainConstructorParams } from '../Chain';
+import { ChainType } from '../Chain.interfaces';
 import { ChainAssetId, ChainAssetsData } from './Parachain.interfaces';
 
-export interface ParachainConstructorParams extends ChainConstructorParams {
+export interface ParachainConstructorParams
+  extends SetOptional<ChainConstructorParams, 'type'> {
   assetsData?: Map<string, ChainAssetsData> | ChainAssetsData[];
   genesisHash: string;
   parachainId: number;
@@ -31,9 +34,10 @@ export class Parachain extends Chain {
     ss58Format,
     weight,
     ws,
+    type = ChainType.Parachain,
     ...others
   }: ParachainConstructorParams) {
-    super(others);
+    super({ type, ...others });
 
     this.assetsData =
       assetsData instanceof Map

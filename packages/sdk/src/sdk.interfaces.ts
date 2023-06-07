@@ -29,7 +29,7 @@ export interface DestinationChainTransferData extends ChainTransferData {}
 export interface ChainTransferData {
   balance: AssetAmount;
   chain: AnyChain;
-  existentialDeposit?: AssetAmount;
+  existentialDeposit: AssetAmount;
   fee: AssetAmount;
   min: AssetAmount;
 }

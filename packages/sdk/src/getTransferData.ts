@@ -100,7 +100,7 @@ export async function getTransferData({
         asset: chain.getAssetId(asset),
         destination: destination.chain,
         fee: destinationFee.amount,
-        feeAsset: chain.getAssetId(asset),
+        feeAsset: chain.getAssetId(destinationFee),
       });
       const extrinsic = config.extrinsic?.build({
         address: destinationAddress,
@@ -108,7 +108,7 @@ export async function getTransferData({
         asset: chain.getAssetId(asset),
         destination: destination.chain,
         fee: destinationFee.amount,
-        feeAsset: chain.getAssetId(asset),
+        feeAsset: chain.getAssetId(destinationFee),
         palletInstance: chain.getAssetPalletInstance(asset),
         source: chain,
       });
@@ -142,20 +142,18 @@ function getMin({
   fee,
   min,
 }: DestinationChainTransferData) {
-  return min.copyWith({
-    amount: BigInt(
-      min
-        .toBig()
-        .plus(
-          existentialDeposit &&
-            min.isSame(existentialDeposit) &&
-            balance.toBig().lt(existentialDeposit.toBig())
-            ? existentialDeposit.toBig()
-            : Big(0),
-        )
-        .plus(min.isSame(fee) ? fee.toBig() : Big(0))
-        .toString(),
-    ),
+  const result = Big(0)
+    .plus(balance.isSame(fee) ? fee.toBig() : Big(0))
+    .plus(
+      balance.isSame(existentialDeposit) &&
+        balance.toBig().lt(existentialDeposit.toBig())
+        ? existentialDeposit.toBig()
+        : Big(0),
+    )
+    .plus(balance.toBig().lt(min.toBig()) ? min.toBig() : Big(0));
+
+  return balance.copyWith({
+    amount: BigInt(result.toFixed()),
   });
 }
 

@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { Option, u128 } from '@polkadot/types';
+import { Option } from '@polkadot/types';
 import { PalletAssetsAssetDetails } from '@polkadot/types/lookup';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import { AssetMinConfigBuilder } from './AssetMinBuilder.interfaces';
@@ -15,9 +15,6 @@ export function AssetMinBuilder() {
 
 function assetRegistry() {
   const pallet = 'assetRegistry';
-  const transform = async (response: any): Promise<bigint> =>
-    (response.minimalBalance as u128).toBigInt();
-
   return {
     assetMetadatas: (): AssetMinConfigBuilder => ({
       build: ({ asset }) =>
@@ -25,7 +22,8 @@ function assetRegistry() {
           module: pallet,
           func: 'assetMetadatas',
           args: [asset],
-          transform,
+          transform: async (response: Option<any>): Promise<bigint> =>
+            response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),
     }),
     currencyMetadatas: (): AssetMinConfigBuilder => ({
@@ -34,7 +32,8 @@ function assetRegistry() {
           module: pallet,
           func: 'currencyMetadatas',
           args: [asset],
-          transform,
+          transform: async (response: Option<any>): Promise<bigint> =>
+            response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),
     }),
   };

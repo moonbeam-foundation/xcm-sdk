@@ -35,7 +35,7 @@ export function Xtokens() {
             getDestinationMultilocation(address, destination),
             weight,
           ],
-          func: 'transferMultiCurrencies',
+          func: 'transferMulticurrencies',
           module: 'Xtokens',
         }),
     }),

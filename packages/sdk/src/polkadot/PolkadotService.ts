@@ -92,6 +92,14 @@ export class PolkadotService {
       return undefined;
     }
 
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ PolkadotService.ts:95 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* asset = ', asset);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     const data = (await fn(asset)) as AssetMetadata | Option<AssetMetadata>;
     const unwrapped = 'unwrapOrDefault' in data ? data.unwrapOrDefault() : data;
 
@@ -111,13 +119,33 @@ export class PolkadotService {
   }
 
   async query(config: SubstrateQueryConfig): Promise<bigint> {
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ PolkadotService.ts:114 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* this.chain = ', this.chain);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ PolkadotService.ts:114 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* config = ', config);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     const response = await this.api.query[config.module][config.func](
       ...config.args,
     );
 
-    if (response.isEmpty) {
-      return 0n;
-    }
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ PolkadotService.ts:134 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* response = ', response);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
 
     return config.transform(response);
   }
@@ -125,6 +153,20 @@ export class PolkadotService {
   async getFee(account: string, config: ExtrinsicConfig): Promise<bigint> {
     const fn = this.api.tx[config.module][config.func];
     const args = config.getArgs(fn);
+
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ PolkadotService.ts:119 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* extrinsic = ', {
+      pallet: config.module,
+      // eslint-disable-next-line sort-keys
+      extrinsic: config.func,
+      params: args,
+    });
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     const extrinsic = fn(...args);
     const info = await extrinsic.paymentInfo(account, { nonce: -1 });
 
@@ -138,6 +180,20 @@ export class PolkadotService {
   ): Promise<string> {
     const fn = this.api.tx[config.module][config.func];
     const args = config.getArgs(fn);
+
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ PolkadotService.ts:119 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* extrinsic = ', {
+      pallet: config.module,
+      // eslint-disable-next-line sort-keys
+      extrinsic: config.func,
+      params: args,
+    });
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     const extrinsic = fn(...args);
     const hash = await extrinsic.signAndSend(
       this.#isSigner(signer) ? account : signer,

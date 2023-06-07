@@ -20,6 +20,14 @@ export class Xtokens implements ContractInterface {
   }
 
   async transfer(): Promise<TransactionResponse> {
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:23 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* this.#config = ', this.#config);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     return this.#contract[this.#config.func](...this.#config.args);
   }
 

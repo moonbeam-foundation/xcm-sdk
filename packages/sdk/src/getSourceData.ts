@@ -55,7 +55,7 @@ export async function getSourceData({
     asset: chain.getAssetId(asset),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: chain.getAssetId(asset),
+    feeAsset: chain.getAssetId(destinationFee),
     palletInstance: chain.getAssetPalletInstance(asset),
     source: chain,
   });
@@ -65,7 +65,7 @@ export async function getSourceData({
     asset: chain.getAssetId(asset),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: chain.getAssetId(asset),
+    feeAsset: chain.getAssetId(destinationFee),
   });
   const fee = await getFee({
     amount: balance,
@@ -218,6 +218,6 @@ export function getMax({
     .minus(balanceAmount.isSame(feeAmount) ? feeAmount.toBig() : Big(0));
 
   return balanceAmount.copyWith({
-    amount: result.lt(0) ? 0n : BigInt(result.toString()),
+    amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
 }

@@ -19,7 +19,7 @@ export function ConfigBuilder() {
         assets,
         asset: (keyOrAsset: string | Asset) => {
           const asset = getAsset(keyOrAsset);
-          const sourceChains = getSourceChains(asset);
+          const sourceChains = getSourceChains(asset, ecosystem);
 
           return {
             sourceChains,

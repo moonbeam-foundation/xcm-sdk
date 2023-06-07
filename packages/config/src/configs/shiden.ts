@@ -33,7 +33,7 @@ export const shidenConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
+        .limitedReserveWithdrawAssets()
         .X2(),
       fee: {
         asset: sdn,
