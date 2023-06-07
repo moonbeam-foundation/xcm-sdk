@@ -17,7 +17,7 @@ jobs:
           node-version: 18.x
           cache: 'npm'
 
-      - run: npm ci --ignore-scripts
+      - run: npm i
 
       - name: 🧪 Run unit tests
         run: npm run test:ci
