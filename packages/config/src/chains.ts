@@ -57,6 +57,7 @@ export const acala = new Parachain({
       asset: glmr,
       id: { ForeignAsset: 0 },
       metadataId: { ForeignAssetId: 0 },
+      minId: { ForeignAssetId: 0 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -131,6 +132,10 @@ export const bifrostPolkadot = new Parachain({
       asset: glmr,
       id: { Token2: 1 },
     },
+    {
+      asset: bnc,
+      id: { Native: bnc.originSymbol },
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -190,6 +195,18 @@ export const crustShadow = new Parachain({
 });
 
 export const darwinia = new EvmParachain({
+  assetsData: [
+    {
+      // NOTE: no meta for native token
+      asset: ring,
+      metadataId: 0,
+    },
+    {
+      // NOTE: no meta for movr
+      asset: glmr,
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xf0b8924b12e8108550d28870bc03f7b45a947e1b2b9abf81bfb0b89ecb60570e',
@@ -701,7 +718,7 @@ export const parallel = new Parachain({
     },
     // NOTE: no meta for native token
     {
-      asset: hko,
+      asset: para,
       metadataId: 0,
     },
   ],
@@ -742,6 +759,12 @@ export const phala = new Parachain({
     {
       asset: glmr,
       id: 1,
+      palletInstance: 10,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: pha,
+      metadataId: 99999999,
     },
   ],
   ecosystem: Ecosystem.Polkadot,

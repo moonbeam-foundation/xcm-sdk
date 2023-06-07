@@ -50,7 +50,7 @@ export function xTransfer() {
             }),
         }),
         X2: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, destination, asset }) =>
+          build: ({ address, amount, destination, palletInstance }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: method,
@@ -65,14 +65,14 @@ export function xTransfer() {
                             Parachain: destination.parachainId,
                           },
                           {
-                            PalletInstance: asset,
+                            PalletInstance: palletInstance,
                           },
                         ],
                       },
                     },
                   },
                   fun: {
-                    Fungible: amount,
+                    Fungible: amount || 1n,
                   },
                 },
                 {

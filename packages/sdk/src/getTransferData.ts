@@ -56,9 +56,7 @@ export async function getTransferData({
         toBigInt(amount, source.balance.decimals).toString(),
       );
       const result = bigAmount.minus(
-        source.balance.isSame(destination.fee)
-          ? destination.fee.toBig()
-          : Big(0),
+        source.balance.isSame(destinationFee) ? destinationFee.toBig() : Big(0),
       );
 
       return source.balance.copyWith({
