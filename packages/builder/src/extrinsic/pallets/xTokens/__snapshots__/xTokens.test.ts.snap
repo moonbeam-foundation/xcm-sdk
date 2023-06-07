@@ -37,7 +37,7 @@ exports[`xTokens transfer should get correct arguments 1`] = `
 
 exports[`xTokens transferMultiAsset should be correct config 1`] = `
 ExtrinsicConfig {
-  "func": "transferMultiAsset",
+  "func": "transferMultiasset",
   "getArgs": [Function],
   "module": "xTokens",
   "type": "Substrate",
@@ -92,7 +92,7 @@ exports[`xTokens transferMultiAsset should get correct arguments 1`] = `
 
 exports[`xTokens transferMultiCurrencies should be correct config 1`] = `
 ExtrinsicConfig {
-  "func": "transferMultiCurrencies",
+  "func": "transferMulticurrencies",
   "getArgs": [Function],
   "module": "xTokens",
   "type": "Substrate",
