@@ -6,8 +6,10 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import {
   assetsMap,
+  darwiniaPangoro,
   eq,
   equilibriumAlphanet,
+  paring,
 } from '@moonbeam-network/xcm-config';
 import {
   AnyParachain,
@@ -49,9 +51,14 @@ export class PolkadotService {
     const key = symbol?.toString().toLowerCase();
 
     // TODO: Remove this once Equilibrium Alphanet is updated
-    // or find better way if issue apears on other chains
+    // or find better way if issue appears on other chains
     if (key === 'token' && this.chain.key === equilibriumAlphanet.key) {
       return eq;
+    }
+
+    // TODO: Remove this once Darwinia Pangoro is updated
+    if (key === 'oring' && this.chain.key === darwiniaPangoro.key) {
+      return paring;
     }
 
     if (!key) {

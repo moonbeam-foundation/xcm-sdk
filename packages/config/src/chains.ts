@@ -245,6 +245,18 @@ export const darwiniaCrab = new EvmParachain({
 });
 
 export const darwiniaPangoro = new EvmParachain({
+  assetsData: [
+    {
+      // NOTE: no meta for native token
+      asset: paring,
+      metadataId: 0,
+    },
+    {
+      // NOTE: no meta for movr
+      asset: dev,
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
