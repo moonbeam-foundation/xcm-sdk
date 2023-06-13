@@ -3,15 +3,15 @@ import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { createContract } from './contract';
-import { getDestinationData } from './getDestinationData';
-import { getSourceData } from './getSourceData';
-import { PolkadotService } from './polkadot';
+import { createContract } from '../contract';
+import { PolkadotService } from '../polkadot';
 import {
   DestinationChainTransferData,
   Signers,
   TransferData,
-} from './sdk.interfaces';
+} from '../sdk.interfaces';
+import { getDestinationData } from './getDestinationData';
+import { getSourceData } from './getSourceData';
 
 export interface GetTransferDataParams extends Partial<Signers> {
   destinationAddress: string;

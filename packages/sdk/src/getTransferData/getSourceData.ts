@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { Signer as EthersSigner } from 'ethers';
-import { createContract } from './contract';
-import { PolkadotService } from './polkadot';
-import { SourceChainTransferData } from './sdk.interfaces';
+import { createContract } from '../contract';
+import { PolkadotService } from '../polkadot';
+import { SourceChainTransferData } from '../sdk.interfaces';
+import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
@@ -42,12 +43,14 @@ export async function getSourceData({
       })
     : zeroAmount;
 
-  const { balance, feeBalance, min } = await getBalancesAndMin({
+  const balance = await getBalance(sourceAddress, config, polkadot);
+  const feeBalance = await getFeeBalances({
     address: sourceAddress,
-    chain,
+    balance,
     config,
     polkadot,
   });
+  const min = await getMin(config, polkadot);
 
   const extrinsic = config.extrinsic?.build({
     address: destinationAddress,
@@ -102,42 +105,25 @@ export async function getSourceData({
 
 export interface GetBalancesParams {
   address: string;
-  chain: AnyChain;
+  balance: bigint;
   config: AssetConfig;
   polkadot: PolkadotService;
 }
 
-export async function getBalancesAndMin({
+export async function getFeeBalances({
   address,
-  chain,
+  balance,
   config,
   polkadot,
 }: GetBalancesParams) {
-  const balance = await polkadot.query(
-    config.balance.build({
-      address,
-      asset: chain.getBalanceAssetId(config.asset),
-    }),
-  );
-  const feeBalance = config.fee
-    ? await polkadot.query(
+  return config.fee
+    ? polkadot.query(
         config.fee.balance.build({
           address,
-          asset: chain.getBalanceAssetId(config.fee.asset),
+          asset: polkadot.chain.getBalanceAssetId(config.fee.asset),
         }),
       )
     : balance;
-  const min = config.min
-    ? await polkadot.query(
-        config.min.build({ asset: chain.getMinAssetId(config.asset) }),
-      )
-    : 0n;
-
-  return {
-    balance,
-    feeBalance,
-    min,
-  };
 }
 
 export interface GetFeeParams {

@@ -507,6 +507,7 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
+      min: 0.01,
     },
     {
       asset: eq,
@@ -593,6 +594,7 @@ export const moonbeam = new EvmParachain({
     {
       asset: glmr,
       id: '0x0000000000000000000000000000000000000802',
+      min: 0.1,
     },
     {
       asset: hdx,
@@ -684,6 +686,7 @@ export const moonriver = new EvmParachain({
     {
       asset: movr,
       id: '0x0000000000000000000000000000000000000802',
+      min: 0.01,
     },
     {
       asset: pha,

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
-import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { TransferConfig } from '@moonbeam-network/xcm-config';
+import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import { PolkadotService } from './polkadot';
-import { DestinationChainTransferData } from './sdk.interfaces';
+import { PolkadotService } from '../polkadot';
+import { DestinationChainTransferData } from '../sdk.interfaces';
+import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
@@ -26,12 +27,8 @@ export async function getDestinationData({
     decimals: await polkadot.getAssetDecimals(asset),
   });
 
-  const { balance, min } = await getBalanceAndMin({
-    address: destinationAddress,
-    chain,
-    config,
-    polkadot,
-  });
+  const balance = await getBalance(destinationAddress, config, polkadot);
+  const min = await getMin(config, polkadot);
 
   const balanceAmount = zeroAmount.copyWith({ amount: balance });
   const { existentialDeposit } = polkadot;
@@ -44,37 +41,6 @@ export async function getDestinationData({
     existentialDeposit,
     fee: feeAmount,
     min: minAmount,
-  };
-}
-
-export interface GetBalancesParams {
-  address: string;
-  config: AssetConfig;
-  chain: AnyChain;
-  polkadot: PolkadotService;
-}
-
-export async function getBalanceAndMin({
-  address,
-  config,
-  chain,
-  polkadot,
-}: GetBalancesParams) {
-  const balance = await polkadot.query(
-    config.balance.build({
-      address,
-      asset: chain.getBalanceAssetId(config.asset),
-    }),
-  );
-  const min = config.min
-    ? await polkadot.query(
-        config.min.build({ asset: chain.getMinAssetId(config.asset) }),
-      )
-    : 0n;
-
-  return {
-    balance,
-    min,
   };
 }
 

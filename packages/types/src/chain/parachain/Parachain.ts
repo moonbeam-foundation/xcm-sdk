@@ -73,4 +73,8 @@ export class Parachain extends Chain {
   getAssetDecimals(asset: Asset): number | undefined {
     return this.assetsData.get(asset.key)?.decimals;
   }
+
+  getAssetMin(asset: Asset): number {
+    return this.assetsData.get(asset.key)?.min ?? 0;
+  }
 }
