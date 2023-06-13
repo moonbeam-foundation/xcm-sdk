@@ -34,6 +34,7 @@ export const acalaConfig = new ChainConfig({
         asset: aca,
         balance: BalanceBuilder().system().account(),
       },
+      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
     new AssetConfig({
       asset: glmr,
