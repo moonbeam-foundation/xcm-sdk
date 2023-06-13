@@ -71,7 +71,7 @@ export async function getSourceData({
     feeAsset: chain.getAssetId(destinationFee),
   });
   const fee = await getFee({
-    amount: balance,
+    balance,
     contract,
     decimals: zeroFeeAmount.decimals,
     ethersSigner,
@@ -127,7 +127,7 @@ export async function getFeeBalances({
 }
 
 export interface GetFeeParams {
-  amount: bigint;
+  balance: bigint;
   contract?: ContractConfig;
   decimals: number;
   ethersSigner?: EthersSigner;
@@ -137,7 +137,7 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
-  amount,
+  balance,
   contract,
   decimals,
   ethersSigner,
@@ -150,34 +150,48 @@ export async function getFee({
       throw new Error('Ethers signer must be provided');
     }
 
-    return getContractFee(amount, contract, decimals, ethersSigner);
+    return getContractFee(balance, contract, decimals, ethersSigner);
   }
 
   if (extrinsic) {
-    return getExtrinsicFee(extrinsic, polkadot, sourceAddress);
+    return getExtrinsicFee(balance, extrinsic, polkadot, sourceAddress);
   }
 
   throw new Error('Either contract or extrinsic must be provided');
 }
 
 export async function getContractFee(
-  amount: bigint,
+  balance: bigint,
   config: ContractConfig,
   decimals: number,
   ethersSigner: EthersSigner,
 ): Promise<bigint> {
   const contract = createContract(config, ethersSigner);
-  const fee = await contract.getFee(amount);
+  const fee = await contract.getFee(balance);
 
   return convertDecimals(fee, 18, decimals);
 }
 
 export async function getExtrinsicFee(
+  balance: bigint,
   extrinsic: ExtrinsicConfig,
   polkadot: PolkadotService,
   sourceAddress: string,
 ): Promise<bigint> {
-  return polkadot.getFee(sourceAddress, extrinsic);
+  /**
+   * If account has no balance (account doesn't exist),
+   * we can't get the fee from some chains.
+   * Example: Phala - PHA
+   */
+  try {
+    return await polkadot.getFee(sourceAddress, extrinsic);
+  } catch (error) {
+    if (balance) {
+      throw error;
+    }
+
+    return 0n;
+  }
 }
 
 export interface GetMaxParams {
