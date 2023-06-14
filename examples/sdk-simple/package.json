@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
+  "type": "module",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node --esm index.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +18,5 @@
   },
   "devDependencies": {
     "ts-node": "^10.9.1"
-  },
-  "peerDependencies": {
-    "@polkadot/api": "10.x",
-    "ethers": "5.x"
   }
 }

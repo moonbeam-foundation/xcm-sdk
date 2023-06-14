@@ -18,10 +18,11 @@ on:
         type: choice
         options:
           - all
+          - types
+          - utils
+          - builder
           - config
           - sdk
-          - utils
-          - transact
 
 jobs:
   publish-beta-dev:
@@ -44,11 +45,25 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
+      - name: 🚀 Publish types
+        if: inputs.package == 'all' || inputs.package == 'types'
+        working-directory: ./packages/types
+        run: |
+          npm version $(../../scripts/get_next_version.sh xcm-types ${{ inputs.tag }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
+
       - name: 🚀 Publish utils
         if: inputs.package == 'all' || inputs.package == 'utils'
         working-directory: ./packages/utils
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-utils ${{ inputs.tag }}) --no-git-tag-version
+          npm publish --tag ${{ inputs.tag }}
+
+      - name: 🚀 Publish builder
+        if: inputs.package == 'all' || inputs.package == 'builder'
+        working-directory: ./packages/builder
+        run: |
+          npm version $(../../scripts/get_next_version.sh xcm-builder ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}
 
       - name: 🚀 Publish config
@@ -63,11 +78,4 @@ jobs:
         working-directory: ./packages/sdk
         run: |
           npm version $(../../scripts/get_next_version.sh xcm-sdk ${{ inputs.tag }}) --no-git-tag-version
-          npm publish --tag ${{ inputs.tag }}
-
-      - name: 🚀 Publish transact
-        if: inputs.package == 'all' || inputs.package == 'transact'
-        working-directory: ./packages/transact
-        run: |
-          npm version $(../../scripts/get_next_version.sh xcm-transact ${{ inputs.tag }}) --no-git-tag-version
           npm publish --tag ${{ inputs.tag }}

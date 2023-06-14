@@ -1,11 +1,5 @@
-import '@polkadot/api-augment';
-
-export * from './balance';
-export * from './config';
-export * from './constants';
-export * from './deposit';
-export * from './extrinsic';
-export * from './interfaces';
-export * from './multilocation';
-export * from './transact';
-export * from './withdraw';
+export * from './ConfigBuilder';
+export * from './assets';
+export * from './chains';
+export * from './types/AssetConfig';
+export * from './types/ChainConfig';
