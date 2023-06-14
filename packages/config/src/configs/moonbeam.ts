@@ -41,7 +41,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: acala,
       destinationFee: {
-        amount: 0.1,
+        amount: 0.01,
         asset: glmr,
       },
     }),
@@ -81,7 +81,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: hydraDX,
       destinationFee: {
-        amount: 0.01,
+        amount: 0.05,
         asset: glmr,
       },
     }),

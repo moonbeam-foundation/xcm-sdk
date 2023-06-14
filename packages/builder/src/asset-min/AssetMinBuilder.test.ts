@@ -25,7 +25,11 @@ describe('assetMinBuilder', () => {
 
       it('should transform correctly', async () => {
         await expect(
-          config.transform({ minimalBalance: balanceOf(999) }),
+          config.transform({
+            unwrapOrDefault: () => ({
+              minimalBalance: balanceOf(999),
+            }),
+          }),
         ).resolves.toMatchSnapshot();
       });
     });
@@ -42,7 +46,11 @@ describe('assetMinBuilder', () => {
 
       it('should transform correctly', async () => {
         await expect(
-          config.transform({ minimalBalance: balanceOf(999) }),
+          config.transform({
+            unwrapOrDefault: () => ({
+              minimalBalance: balanceOf(999),
+            }),
+          }),
         ).resolves.toMatchSnapshot();
       });
     });

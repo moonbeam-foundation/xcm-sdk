@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys */
 import { ConfigBuilder } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
-import { getTransferData as gtd } from './getTransferData';
+import { getTransferData as gtd } from './getTransferData/getTransferData';
 import { Signers, TransferData } from './sdk.interfaces';
 
 export interface SdkOptions extends Partial<Signers> {}

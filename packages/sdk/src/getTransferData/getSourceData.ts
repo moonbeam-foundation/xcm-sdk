@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { Signer as EthersSigner } from 'ethers';
-import { createContract } from './contract';
-import { PolkadotService } from './polkadot';
-import { SourceChainTransferData } from './sdk.interfaces';
+import { createContract } from '../contract';
+import { PolkadotService } from '../polkadot';
+import { SourceChainTransferData } from '../sdk.interfaces';
+import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
@@ -42,12 +43,14 @@ export async function getSourceData({
       })
     : zeroAmount;
 
-  const { balance, feeBalance, min } = await getBalancesAndMin({
+  const balance = await getBalance(sourceAddress, config, polkadot);
+  const feeBalance = await getFeeBalances({
     address: sourceAddress,
-    chain,
+    balance,
     config,
     polkadot,
   });
+  const min = await getMin(config, polkadot);
 
   const extrinsic = config.extrinsic?.build({
     address: destinationAddress,
@@ -55,7 +58,7 @@ export async function getSourceData({
     asset: chain.getAssetId(asset),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: chain.getAssetId(asset),
+    feeAsset: chain.getAssetId(destinationFee),
     palletInstance: chain.getAssetPalletInstance(asset),
     source: chain,
   });
@@ -65,10 +68,10 @@ export async function getSourceData({
     asset: chain.getAssetId(asset),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: chain.getAssetId(asset),
+    feeAsset: chain.getAssetId(destinationFee),
   });
   const fee = await getFee({
-    amount: balance,
+    balance,
     contract,
     decimals: zeroFeeAmount.decimals,
     ethersSigner,
@@ -102,46 +105,29 @@ export async function getSourceData({
 
 export interface GetBalancesParams {
   address: string;
-  chain: AnyChain;
+  balance: bigint;
   config: AssetConfig;
   polkadot: PolkadotService;
 }
 
-export async function getBalancesAndMin({
+export async function getFeeBalances({
   address,
-  chain,
+  balance,
   config,
   polkadot,
 }: GetBalancesParams) {
-  const balance = await polkadot.query(
-    config.balance.build({
-      address,
-      asset: chain.getBalanceAssetId(config.asset),
-    }),
-  );
-  const feeBalance = config.fee
-    ? await polkadot.query(
+  return config.fee
+    ? polkadot.query(
         config.fee.balance.build({
           address,
-          asset: chain.getBalanceAssetId(config.fee.asset),
+          asset: polkadot.chain.getBalanceAssetId(config.fee.asset),
         }),
       )
     : balance;
-  const min = config.min
-    ? await polkadot.query(
-        config.min.build({ asset: chain.getMinAssetId(config.asset) }),
-      )
-    : 0n;
-
-  return {
-    balance,
-    feeBalance,
-    min,
-  };
 }
 
 export interface GetFeeParams {
-  amount: bigint;
+  balance: bigint;
   contract?: ContractConfig;
   decimals: number;
   ethersSigner?: EthersSigner;
@@ -151,7 +137,7 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
-  amount,
+  balance,
   contract,
   decimals,
   ethersSigner,
@@ -164,34 +150,48 @@ export async function getFee({
       throw new Error('Ethers signer must be provided');
     }
 
-    return getContractFee(amount, contract, decimals, ethersSigner);
+    return getContractFee(balance, contract, decimals, ethersSigner);
   }
 
   if (extrinsic) {
-    return getExtrinsicFee(extrinsic, polkadot, sourceAddress);
+    return getExtrinsicFee(balance, extrinsic, polkadot, sourceAddress);
   }
 
   throw new Error('Either contract or extrinsic must be provided');
 }
 
 export async function getContractFee(
-  amount: bigint,
+  balance: bigint,
   config: ContractConfig,
   decimals: number,
   ethersSigner: EthersSigner,
 ): Promise<bigint> {
   const contract = createContract(config, ethersSigner);
-  const fee = await contract.getFee(amount);
+  const fee = await contract.getFee(balance);
 
   return convertDecimals(fee, 18, decimals);
 }
 
 export async function getExtrinsicFee(
+  balance: bigint,
   extrinsic: ExtrinsicConfig,
   polkadot: PolkadotService,
   sourceAddress: string,
 ): Promise<bigint> {
-  return polkadot.getFee(sourceAddress, extrinsic);
+  /**
+   * If account has no balance (account doesn't exist),
+   * we can't get the fee from some chains.
+   * Example: Phala - PHA
+   */
+  try {
+    return await polkadot.getFee(sourceAddress, extrinsic);
+  } catch (error) {
+    if (balance) {
+      throw error;
+    }
+
+    return 0n;
+  }
 }
 
 export interface GetMaxParams {
@@ -218,6 +218,6 @@ export function getMax({
     .minus(balanceAmount.isSame(feeAmount) ? feeAmount.toBig() : Big(0));
 
   return balanceAmount.copyWith({
-    amount: result.lt(0) ? 0n : BigInt(result.toString()),
+    amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
 }

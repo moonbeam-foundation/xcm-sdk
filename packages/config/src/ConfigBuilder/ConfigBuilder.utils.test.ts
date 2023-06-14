@@ -84,7 +84,7 @@ describe('config utils', () => {
 
   describe('getSourceChains', () => {
     it('should get source chains for asset', () => {
-      const chains = getSourceChains(dev);
+      const chains = getSourceChains(dev, Ecosystem.AlphanetRelay);
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([moonbaseAlpha, equilibriumAlphanet]),

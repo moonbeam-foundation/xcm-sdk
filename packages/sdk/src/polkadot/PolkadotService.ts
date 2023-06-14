@@ -6,8 +6,10 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import {
   assetsMap,
+  darwiniaPangoro,
   eq,
   equilibriumAlphanet,
+  paring,
 } from '@moonbeam-network/xcm-config';
 import {
   AnyParachain,
@@ -49,9 +51,14 @@ export class PolkadotService {
     const key = symbol?.toString().toLowerCase();
 
     // TODO: Remove this once Equilibrium Alphanet is updated
-    // or find better way if issue apears on other chains
+    // or find better way if issue appears on other chains
     if (key === 'token' && this.chain.key === equilibriumAlphanet.key) {
       return eq;
+    }
+
+    // TODO: Remove this once Darwinia Pangoro is updated
+    if (key === 'oring' && this.chain.key === darwiniaPangoro.key) {
+      return paring;
     }
 
     if (!key) {
@@ -86,7 +93,8 @@ export class PolkadotService {
     const fn =
       this.api.query.assets?.metadata ||
       this.api.query.assetRegistry?.currencyMetadatas ||
-      this.api.query.assetRegistry?.assetMetadatas;
+      this.api.query.assetRegistry?.assetMetadatas ||
+      this.api.query.assetRegistry?.assetMetadataMap;
 
     if (!fn) {
       return undefined;
@@ -115,16 +123,13 @@ export class PolkadotService {
       ...config.args,
     );
 
-    if (response.isEmpty) {
-      return 0n;
-    }
-
     return config.transform(response);
   }
 
   async getFee(account: string, config: ExtrinsicConfig): Promise<bigint> {
     const fn = this.api.tx[config.module][config.func];
     const args = config.getArgs(fn);
+
     const extrinsic = fn(...args);
     const info = await extrinsic.paymentInfo(account, { nonce: -1 });
 
@@ -138,6 +143,7 @@ export class PolkadotService {
   ): Promise<string> {
     const fn = this.api.tx[config.module][config.func];
     const args = config.getArgs(fn);
+
     const extrinsic = fn(...args);
     const hash = await extrinsic.signAndSend(
       this.#isSigner(signer) ? account : signer,

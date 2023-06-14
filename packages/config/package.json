@@ -53,8 +53,8 @@
     "@moonbeam-network/xcm-types": "*"
   },
   "peerDependencies": {
-    "@polkadot/types": "10.x",
-    "@polkadot/util": "12.x",
-    "@polkadot/util-crypto": "12.x"
+    "@polkadot/types": "^10.8.1",
+    "@polkadot/util": "^12.2.2",
+    "@polkadot/util-crypto": "^12.2.2"
   }
 }

@@ -1,4 +1,4 @@
-import { Ecosystem } from './Chain.interfaces';
+import { ChainType, Ecosystem } from './Chain.interfaces';
 import type { EvmParachain, Parachain } from './parachain';
 
 export interface ChainConstructorParams {
@@ -6,6 +6,7 @@ export interface ChainConstructorParams {
   isTestChain?: boolean;
   key: string;
   name: string;
+  type: ChainType;
 }
 
 export abstract class Chain {
@@ -17,23 +18,27 @@ export abstract class Chain {
 
   readonly name: string;
 
+  readonly type: ChainType;
+
   constructor({
     ecosystem,
     isTestChain = false,
     key,
     name,
+    type,
   }: ChainConstructorParams) {
     this.ecosystem = ecosystem;
     this.isTestChain = isTestChain;
     this.key = key;
     this.name = name;
+    this.type = type;
   }
 
   isParachain(): this is Parachain {
-    return this.constructor.name === 'Parachain';
+    return this.type === ChainType.Parachain;
   }
 
   isEvmParachain(): this is EvmParachain {
-    return this.constructor.name === 'EvmParachain';
+    return this.type === ChainType.EvmParachain;
   }
 }

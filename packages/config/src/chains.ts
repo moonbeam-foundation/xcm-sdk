@@ -52,11 +52,13 @@ export const acala = new Parachain({
       asset: ausd,
       id: { Token: ausd.originSymbol },
       metadataId: { NativeAssetId: { Token: ausd.originSymbol } },
+      minId: { NativeAssetId: { Token: ausd.originSymbol } },
     },
     {
       asset: glmr,
       id: { ForeignAsset: 0 },
       metadataId: { ForeignAssetId: 0 },
+      minId: { ForeignAssetId: 0 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -88,6 +90,11 @@ export const astar = new Parachain({
       id: 18446744073709551619n,
       palletInstance: 10,
     },
+    // NOTE: no meta for native token
+    {
+      asset: astr,
+      metadataId: 0,
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -105,6 +112,10 @@ export const bifrostKusama = new Parachain({
       asset: movr,
       id: { Token: movr.originSymbol },
     },
+    {
+      asset: bnc,
+      id: { Native: bnc.originSymbol },
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -121,6 +132,10 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: glmr,
       id: { Token2: 1 },
+    },
+    {
+      asset: bnc,
+      id: { Native: bnc.originSymbol },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -140,6 +155,12 @@ export const calamari = new Parachain({
       balanceId: 11,
       id: { MantaCurrency: 11 },
     },
+    {
+      asset: kma,
+      id: { MantaCurrency: 1 },
+      // NOTE: no meta for native token
+      metadataId: 0,
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -158,6 +179,11 @@ export const crustShadow = new Parachain({
       balanceId: 232263652204149413431520870009560565298n,
       id: { OtherReserve: 232263652204149413431520870009560565298n },
     },
+    // NOTE: no meta for native token
+    {
+      asset: csm,
+      metadataId: 0,
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -170,6 +196,18 @@ export const crustShadow = new Parachain({
 });
 
 export const darwinia = new EvmParachain({
+  assetsData: [
+    {
+      // NOTE: no meta for native token
+      asset: ring,
+      metadataId: 0,
+    },
+    {
+      // NOTE: no meta for movr
+      asset: glmr,
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xf0b8924b12e8108550d28870bc03f7b45a947e1b2b9abf81bfb0b89ecb60570e',
@@ -183,6 +221,18 @@ export const darwinia = new EvmParachain({
 });
 
 export const darwiniaCrab = new EvmParachain({
+  assetsData: [
+    {
+      // NOTE: no meta for native token
+      asset: crab,
+      metadataId: 0,
+    },
+    {
+      // NOTE: no meta for movr
+      asset: movr,
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24',
@@ -196,6 +246,18 @@ export const darwiniaCrab = new EvmParachain({
 });
 
 export const darwiniaPangoro = new EvmParachain({
+  assetsData: [
+    {
+      // NOTE: no meta for native token
+      asset: paring,
+      metadataId: 0,
+    },
+    {
+      // NOTE: no meta for movr
+      asset: dev,
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
@@ -322,10 +384,19 @@ export const karura = new Parachain({
     {
       asset: movr,
       id: { ForeignAsset: 3 },
+      metadataId: { ForeignAssetId: 3 },
+      minId: { ForeignAssetId: 3 },
+    },
+    {
+      asset: kar,
+      id: { Token: kar.originSymbol },
+      metadataId: { NativeAssetId: { Token: kar.originSymbol } },
     },
     {
       asset: ausd,
       id: { Token: 'KUSD' },
+      metadataId: { NativeAssetId: { Token: 'KUSD' } },
+      minId: { NativeAssetId: { Token: 'KUSD' } },
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -345,6 +416,11 @@ export const khala = new Parachain({
       id: 6,
       palletInstance: 10,
     },
+    // NOTE: no meta for native token
+    {
+      asset: pha,
+      metadataId: 99999999,
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -360,7 +436,6 @@ export const kintsugi = new Parachain({
   assetsData: [
     {
       asset: kint,
-      decimals: 10,
       id: { Token: kint.originSymbol },
     },
     {
@@ -434,6 +509,7 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
+      min: 0.01,
     },
     {
       asset: eq,
@@ -520,6 +596,7 @@ export const moonbeam = new EvmParachain({
     {
       asset: glmr,
       id: '0x0000000000000000000000000000000000000802',
+      min: 0.1,
     },
     {
       asset: hdx,
@@ -611,6 +688,7 @@ export const moonriver = new EvmParachain({
     {
       asset: movr,
       id: '0x0000000000000000000000000000000000000802',
+      min: 0.01,
     },
     {
       asset: pha,
@@ -655,6 +733,11 @@ export const parallel = new Parachain({
       asset: glmr,
       id: 114,
     },
+    // NOTE: no meta for native token
+    {
+      asset: para,
+      metadataId: 0,
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -669,8 +752,13 @@ export const parallel = new Parachain({
 export const parallelHeiko = new Parachain({
   assetsData: [
     {
-      asset: glmr,
+      asset: movr,
       id: 113,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: hko,
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -688,6 +776,12 @@ export const phala = new Parachain({
     {
       asset: glmr,
       id: 1,
+      palletInstance: 10,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: pha,
+      metadataId: 99999999,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -712,6 +806,13 @@ export const polkadot = new Parachain({
 });
 
 export const robonomics = new Parachain({
+  assetsData: [
+    {
+      asset: xrt,
+      // NOTE: no meta for native token
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x631ccc82a078481584041656af292834e1ae6daab61d2875b4dd0c14bb9b17bc',
@@ -728,6 +829,11 @@ export const shiden = new Parachain({
       asset: movr,
       id: 18446744073709551620n,
       palletInstance: 10,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: sdn,
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -752,6 +858,11 @@ export const statemine = new Parachain({
       id: 8,
       palletInstance: 50,
     },
+    {
+      asset: ksm,
+      // NOTE: no meta for native token
+      metadataId: 9999999,
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -769,6 +880,11 @@ export const statemineAlphanet = new Parachain({
       asset: tt1,
       id: 2,
       palletInstance: 50,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: unit,
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
@@ -788,6 +904,11 @@ export const statemint = new Parachain({
       asset: usdt,
       id: 1984,
       palletInstance: 50,
+    },
+    {
+      asset: dot,
+      // NOTE: no meta for native token
+      metadataId: 9999999,
     },
   ],
   ecosystem: Ecosystem.Polkadot,

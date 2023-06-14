@@ -3,15 +3,15 @@ import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { createContract } from './contract';
-import { getDestinationData } from './getDestinationData';
-import { getSourceData } from './getSourceData';
-import { PolkadotService } from './polkadot';
+import { createContract } from '../contract';
+import { PolkadotService } from '../polkadot';
 import {
   DestinationChainTransferData,
   Signers,
   TransferData,
-} from './sdk.interfaces';
+} from '../sdk.interfaces';
+import { getDestinationData } from './getDestinationData';
+import { getSourceData } from './getSourceData';
 
 export interface GetTransferDataParams extends Partial<Signers> {
   destinationAddress: string;
@@ -56,9 +56,7 @@ export async function getTransferData({
         toBigInt(amount, source.balance.decimals).toString(),
       );
       const result = bigAmount.minus(
-        source.balance.isSame(destination.fee)
-          ? destination.fee.toBig()
-          : Big(0),
+        source.balance.isSame(destinationFee) ? destinationFee.toBig() : Big(0),
       );
 
       return source.balance.copyWith({
@@ -100,7 +98,7 @@ export async function getTransferData({
         asset: chain.getAssetId(asset),
         destination: destination.chain,
         fee: destinationFee.amount,
-        feeAsset: chain.getAssetId(asset),
+        feeAsset: chain.getAssetId(destinationFee),
       });
       const extrinsic = config.extrinsic?.build({
         address: destinationAddress,
@@ -108,7 +106,7 @@ export async function getTransferData({
         asset: chain.getAssetId(asset),
         destination: destination.chain,
         fee: destinationFee.amount,
-        feeAsset: chain.getAssetId(asset),
+        feeAsset: chain.getAssetId(destinationFee),
         palletInstance: chain.getAssetPalletInstance(asset),
         source: chain,
       });
@@ -142,20 +140,18 @@ function getMin({
   fee,
   min,
 }: DestinationChainTransferData) {
-  return min.copyWith({
-    amount: BigInt(
-      min
-        .toBig()
-        .plus(
-          existentialDeposit &&
-            min.isSame(existentialDeposit) &&
-            balance.toBig().lt(existentialDeposit.toBig())
-            ? existentialDeposit.toBig()
-            : Big(0),
-        )
-        .plus(min.isSame(fee) ? fee.toBig() : Big(0))
-        .toString(),
-    ),
+  const result = Big(0)
+    .plus(balance.isSame(fee) ? fee.toBig() : Big(0))
+    .plus(
+      balance.isSame(existentialDeposit) &&
+        balance.toBig().lt(existentialDeposit.toBig())
+        ? existentialDeposit.toBig()
+        : Big(0),
+    )
+    .plus(balance.toBig().lt(min.toBig()) ? min.toBig() : Big(0));
+
+  return balance.copyWith({
+    amount: BigInt(result.toFixed()),
   });
 }
 

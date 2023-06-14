@@ -48,7 +48,7 @@ export function xTokens() {
       build: ({ address, amount, asset, destination, source }) =>
         new ExtrinsicConfig({
           module: pallet,
-          func: 'transferMultiAsset',
+          func: 'transferMultiasset',
           getArgs: (func) => [
             {
               V1: {
@@ -98,7 +98,7 @@ export function xTokens() {
       build: ({ address, amount, asset, destination, fee, feeAsset, source }) =>
         new ExtrinsicConfig({
           module: pallet,
-          func: 'transferMultiCurrencies',
+          func: 'transferMulticurrencies',
           getArgs: (func) => [
             [
               [asset, amount],

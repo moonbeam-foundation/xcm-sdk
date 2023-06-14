@@ -34,6 +34,7 @@ export const karuraConfig = new ChainConfig({
         asset: kar,
         balance: BalanceBuilder().system().account(),
       },
+      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
     new AssetConfig({
       asset: movr,

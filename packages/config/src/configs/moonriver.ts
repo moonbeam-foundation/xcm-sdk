@@ -31,7 +31,7 @@ import {
   kusama,
   litmus,
   moonriver,
-  parallel,
+  parallelHeiko,
   robonomics,
   shiden,
   statemine,
@@ -57,7 +57,7 @@ export const moonriverConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: calamari,
       destinationFee: {
-        amount: 0.1,
+        amount: 0.001,
         asset: movr,
       },
     }),
@@ -95,7 +95,7 @@ export const moonriverConfig = new ChainConfig({
       asset: movr,
       balance: BalanceBuilder().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallel,
+      destination: parallelHeiko,
       destinationFee: {
         amount: 0.00000000192,
         asset: movr,
@@ -171,7 +171,7 @@ export const moonriverConfig = new ChainConfig({
       asset: hko,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallel,
+      destination: parallelHeiko,
       destinationFee: {
         amount: 0.0192,
         asset: hko,
