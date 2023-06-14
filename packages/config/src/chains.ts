@@ -52,6 +52,7 @@ export const acala = new Parachain({
       asset: ausd,
       id: { Token: ausd.originSymbol },
       metadataId: { NativeAssetId: { Token: ausd.originSymbol } },
+      minId: { NativeAssetId: { Token: ausd.originSymbol } },
     },
     {
       asset: glmr,
@@ -395,6 +396,7 @@ export const karura = new Parachain({
       asset: ausd,
       id: { Token: 'KUSD' },
       metadataId: { NativeAssetId: { Token: 'KUSD' } },
+      minId: { NativeAssetId: { Token: 'KUSD' } },
     },
   ],
   ecosystem: Ecosystem.Kusama,
