@@ -110,6 +110,11 @@ export const lit = new Asset({
   originSymbol: 'LIT',
 });
 
+export const mgx = new Asset({
+  key: 'mgx',
+  originSymbol: 'MGX',
+});
+
 export const movr = new Asset({
   key: 'movr',
   originSymbol: 'MOVR',
@@ -193,6 +198,7 @@ export const assetsList: Asset[] = [
   kma,
   ksm,
   lit,
+  mgx,
   movr,
   para,
   paring,

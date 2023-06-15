@@ -21,6 +21,7 @@ import { kintsugiConfig } from './kintsugi';
 import { kusamaConfig } from './kusama';
 import { litentryAlphanetConfig } from './litentryAlphanet';
 import { litmusConfig } from './litmus';
+import { mangataKusamaConfig } from './mangataKusama';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
@@ -57,6 +58,7 @@ export const chainsConfigList: ChainConfig[] = [
   kusamaConfig,
   litentryAlphanetConfig,
   litmusConfig,
+  mangataKusamaConfig,
   moonbaseAlphaConfig,
   moonbeamConfig,
   moonriverConfig,
