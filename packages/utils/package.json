@@ -50,6 +50,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
+    "@polkadot/apps-config": "^0.131.4",
     "big.js": "^6.2.1",
     "lru-cache": "^7.17.0"
   },
@@ -57,7 +58,6 @@
     "@types/big.js": "^6.1.6"
   },
   "peerDependencies": {
-    "@polkadot/apps-config": "^0.131.4",
     "@polkadot/api": "^10.8.1"
   }
 }
