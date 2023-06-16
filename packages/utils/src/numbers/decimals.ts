@@ -12,7 +12,7 @@ export function toDecimal(
   const divisor = Big(10).pow(decimals);
   const result = dividend.div(divisor).round(maxDecimal, roundType);
 
-  return result.toFixed();
+  return result.toString();
 }
 
 export function toBigInt(

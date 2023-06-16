@@ -22,7 +22,7 @@ npm i @moonbeam-network/xcm-builder @moonbeam-network/xcm-config @moonbeam-netwo
 :warning: You need to have peer dependencies of SDK installed as well.
 
 ```bash
-npm i @polkadot/api @polkadot/api-augment @polkadot/types @polkadot/util @polkadot/util-crypto ethers
+npm i @polkadot/api @polkadot/api-augment @polkadot/types @polkadot/util @polkadot/util-crypto @polkadot/apps-config ethers
 ```
 
 # Usage
