@@ -60,7 +60,7 @@ export async function getTransferData({
       );
 
       return source.balance.copyWith({
-        amount: result.lt(0) ? 0n : BigInt(result.toString()),
+        amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
     /**
