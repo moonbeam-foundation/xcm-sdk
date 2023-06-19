@@ -1,4 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
+import { typesBundle } from '@polkadot/apps-config';
 import LRU from 'lru-cache';
 
 const cache = new LRU<string, Promise<ApiPromise>>({
@@ -18,6 +19,7 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
     cache.get(ws) ||
     ApiPromise.create({
       provider: new WsProvider(ws),
+      typesBundle,
     });
 
   cache.set(ws, promise);

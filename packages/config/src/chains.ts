@@ -27,6 +27,7 @@ import {
   kma,
   ksm,
   lit,
+  mgx,
   movr,
   para,
   paring,
@@ -120,7 +121,7 @@ export const bifrostKusama = new Parachain({
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x9f28c6a68e0fc9646eff64935684f6eeeece527e37bbe1f213d22caa1d9d6bed',
-  key: 'bifrost-karura',
+  key: 'bifrost-kusama',
   name: 'Bifrost',
   parachainId: 2001,
   ss58Format: 6,
@@ -500,6 +501,27 @@ export const litmus = new Parachain({
   ws: 'wss://rpc.litmus-parachain.litentry.io',
 });
 
+export const mangataKusama = new Parachain({
+  assetsData: [
+    {
+      asset: mgx,
+      id: 0,
+    },
+    {
+      asset: movr,
+      id: 39,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0xd611f22d291c5b7b69f1e105cca03352984c344c4421977efaa4cbdd1834e2aa',
+  key: 'mangata-kusama',
+  name: 'Mangata',
+  parachainId: 2110,
+  ss58Format: 42,
+  ws: 'wss://kusama-archive.mangata.online',
+});
+
 export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
@@ -684,6 +706,10 @@ export const moonriver = new EvmParachain({
     {
       asset: lit,
       id: '65216491554813189869575508812319036608',
+    },
+    {
+      asset: mgx,
+      id: '118095707745084482624853002839493125353',
     },
     {
       asset: movr,
@@ -961,6 +987,7 @@ export const chainsList: AnyChain[] = [
   kusama,
   litentryAlphanet,
   litmus,
+  mangataKusama,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
