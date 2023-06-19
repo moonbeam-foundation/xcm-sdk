@@ -1,5 +1,4 @@
 import {
-  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
@@ -26,15 +25,14 @@ export const mangataKusamaConfig = new ChainConfig({
       balance: BalanceBuilder().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: 0.0001, // TODO
+        amount: 0.000008,
         asset: movr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: mgx,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().tokens().accounts(),
       },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
   ],
   chain: mangataKusama,

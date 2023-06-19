@@ -507,6 +507,10 @@ export const mangataKusama = new Parachain({
       asset: mgx,
       id: 0,
     },
+    {
+      asset: movr,
+      id: 39,
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:

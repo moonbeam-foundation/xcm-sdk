@@ -97,6 +97,16 @@ export const moonriverConfig = new ChainConfig({
       asset: movr,
       balance: BalanceBuilder().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
+      destination: mangataKusama,
+      destinationFee: {
+        amount: 0.002,
+        asset: movr,
+      },
+    }),
+    new AssetConfig({
+      asset: movr,
+      balance: BalanceBuilder().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: parallelHeiko,
       destinationFee: {
         amount: 0.00000000192,
