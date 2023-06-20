@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.0.1
+
+### Patch Changes
+
+- [#93](https://github.com/PureStake/xcm-sdk/pull/93) [`3cd3565`](https://github.com/PureStake/xcm-sdk/commit/3cd356561a2c413942b46a1a943f78e82cd29fcc) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix for bigint transformation of string number
+
 ## 1.0.0
 
 ### Major Changes

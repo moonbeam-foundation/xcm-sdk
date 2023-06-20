@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
@@ -57,6 +57,7 @@
     "@types/big.js": "^6.1.6"
   },
   "peerDependencies": {
+    "@polkadot/apps-config": "^0.132.1",
     "@polkadot/api": "^10.8.1"
   }
 }

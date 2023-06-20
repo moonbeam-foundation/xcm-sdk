@@ -11,6 +11,7 @@ import {
   kma,
   ksm,
   lit,
+  mgx,
   movr,
   pha,
   rmrk,
@@ -30,6 +31,7 @@ import {
   kintsugi,
   kusama,
   litmus,
+  mangataKusama,
   moonriver,
   parallelHeiko,
   robonomics,
@@ -88,6 +90,16 @@ export const moonriverConfig = new ChainConfig({
       destination: khala,
       destinationFee: {
         amount: 0.0002,
+        asset: movr,
+      },
+    }),
+    new AssetConfig({
+      asset: movr,
+      balance: BalanceBuilder().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: mangataKusama,
+      destinationFee: {
+        amount: 0.002,
         asset: movr,
       },
     }),
@@ -259,6 +271,20 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0032,
         asset: lit,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: mgx,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: mangataKusama,
+      destinationFee: {
+        amount: 5.5,
+        asset: mgx,
       },
       fee: {
         asset: movr,

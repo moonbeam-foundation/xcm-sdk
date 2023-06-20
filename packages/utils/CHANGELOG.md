@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 1.0.1
+
+### Patch Changes
+
+- [`069b738`](https://github.com/PureStake/xcm-sdk/commit/069b73810c6e1e271edc489ed40bae06d9d62a37) Thanks [@mmaurello](https://github.com/mmaurello)! - Mangata - Moonriver integration
+
 ## 1.0.0
 
 ### Major Changes
