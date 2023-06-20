@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 1.0.1
+
+### Patch Changes
+
+- [#95](https://github.com/PureStake/xcm-sdk/pull/95) [`533aa3a`](https://github.com/PureStake/xcm-sdk/commit/533aa3a551ca70e06d811967450f09086b0375e6) Thanks [@mmaurello](https://github.com/mmaurello)! - Detect Multilocation version for xTokens.TransferMulticurrencies
+
 ## 1.0.0
 
 ### Major Changes
