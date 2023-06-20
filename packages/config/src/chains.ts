@@ -36,6 +36,7 @@ import {
   sdn,
   teer,
   tt1,
+  tur,
   unit,
   usdt,
   xrt,
@@ -532,6 +533,10 @@ export const moonbaseAlpha = new EvmParachain({
       id: '156305701417244550631956600137082963628',
     },
     {
+      asset: tur,
+      id: '133300872918374599700079037156071917454',
+    },
+    {
       asset: unit,
       id: '42259045809535163221576417993425387648',
     },
@@ -921,6 +926,25 @@ export const statemint = new Parachain({
   ws: 'wss://statemint-rpc.polkadot.io',
 });
 
+export const turingAlphanet = new Parachain({
+  assetsData: [
+    // NOTE: no meta for native token
+    {
+      asset: tur,
+      metadataId: 0, // TODO
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x8288e57b61337833eb48e731c498e3c14652d15ead2abe5b86ba8b0fb51e917d',
+  isTestChain: true,
+  key: 'turing-alphanet',
+  name: 'Turing Alphanet',
+  parachainId: 2114,
+  ss58Format: 51,
+  ws: 'wss://turing-moonbase.rpc.oak.tech/',
+});
+
 export const uniqueAlpha = new Parachain({
   assetsData: [
     {
@@ -974,6 +998,7 @@ export const chainsList: AnyChain[] = [
   statemine,
   statemineAlphanet,
   statemint,
+  turingAlphanet,
   uniqueAlpha,
 ];
 

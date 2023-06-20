@@ -33,6 +33,7 @@ import { shidenConfig } from './shiden';
 import { statemineConfig } from './statemine';
 import { statemineAlphanetConfig } from './statemineAlphanet';
 import { statemintConfig } from './statemint';
+import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
 
 export const chainsConfigList: ChainConfig[] = [
@@ -69,6 +70,7 @@ export const chainsConfigList: ChainConfig[] = [
   statemineAlphanetConfig,
   statemineConfig,
   statemintConfig,
+  turingAlphanetConfig,
   uniqueAlphaConfig,
 ];
 
