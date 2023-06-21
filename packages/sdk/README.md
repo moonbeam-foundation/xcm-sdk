@@ -10,7 +10,7 @@ The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to
 # Installation
 
 ```bash
-npm i @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
+npm i @moonbeam-network/xcm-sdk@prev
 ```
 
 :warning: You need to have peer dependencies of SDK installed as well.
