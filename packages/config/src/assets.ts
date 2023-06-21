@@ -150,6 +150,11 @@ export const sdn = new Asset({
   originSymbol: 'SDN',
 });
 
+export const soon = new Asset({
+  key: 'soon',
+  originSymbol: 'SOON',
+});
+
 export const teer = new Asset({
   key: 'teer',
   originSymbol: 'TEER',
@@ -208,6 +213,7 @@ export const assetsList: Asset[] = [
   sdn,
   teer,
   tt1,
+  soon,
   unit,
   usdt,
   xrt,
