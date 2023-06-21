@@ -46,10 +46,10 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-builder": "*",
-    "@moonbeam-network/xcm-config": "*",
-    "@moonbeam-network/xcm-types": "*",
-    "@moonbeam-network/xcm-utils": "*",
+    "@moonbeam-network/xcm-builder": "1.x",
+    "@moonbeam-network/xcm-config": "1.x",
+    "@moonbeam-network/xcm-types": "1.x",
+    "@moonbeam-network/xcm-utils": "1.x",
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
