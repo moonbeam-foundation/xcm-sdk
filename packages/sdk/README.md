@@ -10,13 +10,14 @@ The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to
 
 ## v0 (previous)
 
+- [readme](https://github.com/PureStake/xcm-sdk/tree/v0)
 - [usage](https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/)
 - [references](https://docs.moonbeam.network/builders/xcm/xcm-sdk/reference/)
 
 # Installation
 
 ```bash
-npm i @moonbeam-network/xcm-builder @moonbeam-network/xcm-config @moonbeam-network/xcm-types @moonbeam-network/xcm-utils @moonbeam-network/xcm-sdk
+npm i @moonbeam-network/xcm-sdk
 ```
 
 :warning: You need to have peer dependencies of SDK installed as well.
