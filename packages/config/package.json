@@ -49,8 +49,8 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-builder": "*",
-    "@moonbeam-network/xcm-types": "*"
+    "@moonbeam-network/xcm-builder": "1.x",
+    "@moonbeam-network/xcm-types": "1.x"
   },
   "peerDependencies": {
     "@polkadot/types": "^10.8.1",

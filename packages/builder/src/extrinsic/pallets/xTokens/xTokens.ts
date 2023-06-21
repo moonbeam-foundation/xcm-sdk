@@ -99,32 +99,36 @@ export function xTokens() {
         new ExtrinsicConfig({
           module: pallet,
           func: 'transferMulticurrencies',
-          getArgs: (func) => [
-            [
-              [asset, amount],
-              [feeAsset, fee],
-            ],
-            1,
-            {
-              V1: {
-                parents: 1,
-                interior: {
-                  X2: [
-                    {
-                      Parachain: destination.parachainId,
-                    },
-                    {
-                      AccountKey20: {
-                        network: 'Any',
-                        key: address,
+          getArgs: (func) => {
+            const version = getExtrinsicArgumentVersion(func, 2);
+
+            return [
+              [
+                [asset, amount],
+                [feeAsset, fee],
+              ],
+              1,
+              {
+                [version]: {
+                  parents: 1,
+                  interior: {
+                    X2: [
+                      {
+                        Parachain: destination.parachainId,
                       },
-                    },
-                  ],
+                      {
+                        AccountKey20: {
+                          network: 'Any',
+                          key: address,
+                        },
+                      },
+                    ],
+                  },
                 },
               },
-            },
-            getWeight(source.weight, func),
-          ],
+              getWeight(source.weight, func),
+            ];
+          },
         }),
     }),
   };
