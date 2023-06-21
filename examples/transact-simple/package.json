@@ -11,9 +11,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "*",
-    "@moonbeam-network/xcm-transact": "*",
-    "@moonbeam-network/xcm-utils": "*"
+    "@moonbeam-network/xcm-config": "0.x",
+    "@moonbeam-network/xcm-transact": "0.x",
+    "@moonbeam-network/xcm-utils": "0.x"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"

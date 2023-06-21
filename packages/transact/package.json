@@ -46,8 +46,8 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "*",
-    "@moonbeam-network/xcm-utils": "*",
+    "@moonbeam-network/xcm-config": "0.x",
+    "@moonbeam-network/xcm-utils": "0.x",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
