@@ -773,7 +773,7 @@ export const nodleEden = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
-  key: 'nodleEden',
+  key: 'nodle-eden',
   name: 'Nodle Eden',
   parachainId: 2036,
   ss58Format: 37,
