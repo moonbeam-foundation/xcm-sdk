@@ -25,6 +25,7 @@ import { mangataKusamaConfig } from './mangataKusama';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
+import { nodleEdenConfig } from './nodleEden';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
 import { phalaConfig } from './phala';
@@ -62,6 +63,7 @@ export const chainsConfigList: ChainConfig[] = [
   moonbaseAlphaConfig,
   moonbeamConfig,
   moonriverConfig,
+  nodleEdenConfig,
   parallelConfig,
   parallelHeikoConfig,
   phalaConfig,

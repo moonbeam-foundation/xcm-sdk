@@ -1,11 +1,12 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
-import { dev, eq, eqd, lit, paring, tt1, unit } from '../assets';
+import { dev, eq, eqd, lit, nodl, paring, tt1, unit } from '../assets';
 import {
   alphanetRelay,
   darwiniaPangoro,
   equilibriumAlphanet,
   litentryAlphanet,
   moonbaseAlpha,
+  nodleEden,
   statemineAlphanet,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -74,6 +75,20 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.032,
         asset: lit,
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: nodl,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: nodleEden,
+      destinationFee: {
+        amount: 0.02,
+        asset: nodl,
       },
       fee: {
         asset: dev,
