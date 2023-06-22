@@ -120,6 +120,11 @@ export const movr = new Asset({
   originSymbol: 'MOVR',
 });
 
+export const nodl = new Asset({
+  key: 'nodl',
+  originSymbol: 'NODL',
+});
+
 export const para = new Asset({
   key: 'para',
   originSymbol: 'PARA',
@@ -148,6 +153,11 @@ export const rmrk = new Asset({
 export const sdn = new Asset({
   key: 'sdn',
   originSymbol: 'SDN',
+});
+
+export const soon = new Asset({
+  key: 'soon',
+  originSymbol: 'SOON',
 });
 
 export const teer = new Asset({
@@ -205,12 +215,14 @@ export const assetsList: Asset[] = [
   lit,
   mgx,
   movr,
+  nodl,
   para,
   paring,
   pha,
   ring,
   rmrk,
   sdn,
+  soon,
   teer,
   tt1,
   tur,

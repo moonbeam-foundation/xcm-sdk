@@ -1,5 +1,23 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`934f976`](https://github.com/PureStake/xcm-sdk/commit/934f976f53a32e3ee10aa011cd3622d70bc3afb3)]:
+  - @moonbeam-network/xcm-config@1.0.3
+
+## 1.0.2
+
+### Patch Changes
+
+- [#98](https://github.com/PureStake/xcm-sdk/pull/98) [`1031601`](https://github.com/PureStake/xcm-sdk/commit/1031601e9706fefd8edf00d9b68d224fd55cf357) Thanks [@ekenigs](https://github.com/ekenigs)! - Changed SDK packages deps to 1.x
+
+- Updated dependencies [[`1031601`](https://github.com/PureStake/xcm-sdk/commit/1031601e9706fefd8edf00d9b68d224fd55cf357), [`bb54d40`](https://github.com/PureStake/xcm-sdk/commit/bb54d40ba72a9ffd0394cd7b8731fa0b3dbf14f7)]:
+  - @moonbeam-network/xcm-builder@1.0.2
+  - @moonbeam-network/xcm-config@1.0.2
+  - @moonbeam-network/xcm-types@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes

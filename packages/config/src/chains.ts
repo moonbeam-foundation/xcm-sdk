@@ -29,12 +29,14 @@ import {
   lit,
   mgx,
   movr,
+  nodl,
   para,
   paring,
   pha,
   ring,
   rmrk,
   sdn,
+  soon,
   teer,
   tt1,
   tur,
@@ -547,8 +549,16 @@ export const moonbaseAlpha = new EvmParachain({
       id: '65216491554813189869575508812319036608',
     },
     {
+      asset: nodl,
+      id: '128910205779035707777113095265150484699',
+    },
+    {
       asset: paring,
       id: '173481220575862801646329923366065693029',
+    },
+    {
+      asset: soon,
+      id: '205153165378836428058230526014907639736',
     },
     {
       asset: tt1,
@@ -756,6 +766,23 @@ export const moonriver = new EvmParachain({
   rpc: 'https://rpc.api.moonriver.moonbeam.network',
   ss58Format: 1285,
   ws: 'wss://wss.api.moonriver.moonbeam.network',
+});
+
+export const nodleEden = new Parachain({
+  assetsData: [
+    {
+      asset: nodl,
+      id: 'NodleNative',
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
+  key: 'nodle-eden',
+  name: 'Nodle Eden',
+  parachainId: 2036,
+  ss58Format: 37,
+  ws: 'wss://node-7047027111071080448.jm.onfinality.io/ws?apikey=c49e30e4-3601-48f4-9629-57fa13cb97c0',
 });
 
 export const parallel = new Parachain({
@@ -971,6 +998,17 @@ export const turingAlphanet = new Parachain({
   ws: 'wss://turing-moonbase.rpc.oak.tech/',
 });
 
+export const subsocialAlphanet = new Parachain({
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
+  key: 'subsocialAlphanet',
+  name: 'Subsocial Alphanet',
+  parachainId: 2100,
+  ss58Format: 42,
+  ws: 'wss://alphasoon.f3joule.space',
+});
+
 export const uniqueAlpha = new Parachain({
   assetsData: [
     {
@@ -1016,6 +1054,7 @@ export const chainsList: AnyChain[] = [
   moonbaseBeta,
   moonbeam,
   moonriver,
+  nodleEden,
   parallel,
   parallelHeiko,
   phala,
@@ -1025,6 +1064,7 @@ export const chainsList: AnyChain[] = [
   statemine,
   statemineAlphanet,
   statemint,
+  subsocialAlphanet,
   turingAlphanet,
   uniqueAlpha,
 ];

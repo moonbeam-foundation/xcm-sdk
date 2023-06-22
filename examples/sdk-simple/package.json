@@ -12,8 +12,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "1.x",
-    "@moonbeam-network/xcm-sdk": "1.x",
+    "@moonbeam-network/xcm-config": "1.0.3",
+    "@moonbeam-network/xcm-sdk": "1.0.3",
     "@moonbeam-network/xcm-utils": "1.x"
   },
   "devDependencies": {

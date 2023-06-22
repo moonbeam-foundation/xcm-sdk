@@ -25,6 +25,7 @@ import { mangataKusamaConfig } from './mangataKusama';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
+import { nodleEdenConfig } from './nodleEden';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
 import { phalaConfig } from './phala';
@@ -34,6 +35,7 @@ import { shidenConfig } from './shiden';
 import { statemineConfig } from './statemine';
 import { statemineAlphanetConfig } from './statemineAlphanet';
 import { statemintConfig } from './statemint';
+import { subsocialAlphanetConfig } from './subsocialAlphanet';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
 
@@ -63,6 +65,7 @@ export const chainsConfigList: ChainConfig[] = [
   moonbaseAlphaConfig,
   moonbeamConfig,
   moonriverConfig,
+  nodleEdenConfig,
   parallelConfig,
   parallelHeikoConfig,
   phalaConfig,
@@ -72,6 +75,7 @@ export const chainsConfigList: ChainConfig[] = [
   statemineAlphanetConfig,
   statemineConfig,
   statemintConfig,
+  subsocialAlphanetConfig,
   turingAlphanetConfig,
   uniqueAlphaConfig,
 ];
