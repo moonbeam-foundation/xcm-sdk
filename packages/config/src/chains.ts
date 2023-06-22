@@ -953,11 +953,6 @@ export const statemint = new Parachain({
 });
 
 export const subsocialAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: soon,
-    },
-  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
