@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.3
+
+### Patch Changes
+
+- [#101](https://github.com/PureStake/xcm-sdk/pull/101) [`934f976`](https://github.com/PureStake/xcm-sdk/commit/934f976f53a32e3ee10aa011cd3622d70bc3afb3) Thanks [@mmaurello](https://github.com/mmaurello)! - Nodle Eden Integration with Moonbase Alpha
+
 ## 1.0.2
 
 ### Patch Changes
