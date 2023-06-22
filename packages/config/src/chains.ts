@@ -36,6 +36,7 @@ import {
   ring,
   rmrk,
   sdn,
+  soon,
   teer,
   tt1,
   unit,
@@ -555,6 +556,10 @@ export const moonbaseAlpha = new EvmParachain({
       id: '173481220575862801646329923366065693029',
     },
     {
+      asset: soon,
+      id: '205153165378836428058230526014907639736',
+    },
+    {
       asset: tt1,
       id: '156305701417244550631956600137082963628',
     },
@@ -969,6 +974,17 @@ export const statemint = new Parachain({
   ws: 'wss://statemint-rpc.polkadot.io',
 });
 
+export const subsocialAlphanet = new Parachain({
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
+  key: 'subsocialAlphanet',
+  name: 'Subsocial Alphanet',
+  parachainId: 2100,
+  ss58Format: 42,
+  ws: 'wss://alphasoon.f3joule.space',
+});
+
 export const uniqueAlpha = new Parachain({
   assetsData: [
     {
@@ -1024,6 +1040,7 @@ export const chainsList: AnyChain[] = [
   statemine,
   statemineAlphanet,
   statemint,
+  subsocialAlphanet,
   uniqueAlpha,
 ];
 

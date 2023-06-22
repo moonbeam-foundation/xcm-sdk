@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.2
+
+### Patch Changes
+
+- [#98](https://github.com/PureStake/xcm-sdk/pull/98) [`1031601`](https://github.com/PureStake/xcm-sdk/commit/1031601e9706fefd8edf00d9b68d224fd55cf357) Thanks [@ekenigs](https://github.com/ekenigs)! - Changed SDK packages deps to 1.x
+
+- [#100](https://github.com/PureStake/xcm-sdk/pull/100) [`bb54d40`](https://github.com/PureStake/xcm-sdk/commit/bb54d40ba72a9ffd0394cd7b8731fa0b3dbf14f7) Thanks [@mmaurello](https://github.com/mmaurello)! - Subsocial - Moonbase-Alpha integration
+
+- Updated dependencies [[`1031601`](https://github.com/PureStake/xcm-sdk/commit/1031601e9706fefd8edf00d9b68d224fd55cf357)]:
+  - @moonbeam-network/xcm-builder@1.0.2
+  - @moonbeam-network/xcm-types@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes
