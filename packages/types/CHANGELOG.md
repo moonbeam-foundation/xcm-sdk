@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-types
 
+## 1.0.1
+
+### Patch Changes
+
+- [#98](https://github.com/PureStake/xcm-sdk/pull/98) [`1031601`](https://github.com/PureStake/xcm-sdk/commit/1031601e9706fefd8edf00d9b68d224fd55cf357) Thanks [@ekenigs](https://github.com/ekenigs)! - Changed SDK packages deps to 1.x
+
 ## 1.0.0
 
 ### Major Changes
