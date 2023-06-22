@@ -20,7 +20,8 @@ export const parallelConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder()
         .xTokens()
-        .transferMultiAsset(parallel.parachainId),
+        .transferMultiAsset(parallel.parachainId)
+        .X2(),
     }),
     new AssetConfig({
       asset: glmr,

@@ -981,10 +981,14 @@ export const statemint = new Parachain({
 
 export const turingAlphanet = new Parachain({
   assetsData: [
-    // NOTE: no meta for native token
     {
       asset: tur,
-      metadataId: 0, // TODO
+      // NOTE: no meta for native token
+      metadataId: 0,
+    },
+    {
+      asset: dev,
+      id: 1,
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,

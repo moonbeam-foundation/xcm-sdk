@@ -42,58 +42,115 @@ export function xTokens() {
           },
         }),
     }),
-    transferMultiAsset: (
-      originParachainId: number,
-    ): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, source }) =>
-        new ExtrinsicConfig({
-          module: pallet,
-          func: 'transferMultiasset',
-          getArgs: (func) => [
-            {
-              V1: {
-                id: {
-                  Concrete: {
-                    parents: 1,
-                    interior: {
-                      X2: [
-                        {
-                          Parachain: originParachainId,
+    transferMultiAsset: (originParachainId: number) => {
+      const funcName = 'transferMultiasset';
+
+      return {
+        X1: (): ExtrinsicConfigBuilder => ({
+          build: ({ address, amount, destination }) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func: funcName,
+              getArgs: (func) => {
+                const version = getExtrinsicArgumentVersion(func, 1);
+
+                return [
+                  {
+                    [version]: {
+                      id: {
+                        Concrete: {
+                          parents: 1,
+                          interior: {
+                            X1: {
+                              Parachain: originParachainId,
+                            },
+                          },
                         },
-                        {
-                          GeneralKey: asset,
-                        },
-                      ],
-                    },
-                  },
-                },
-                fun: {
-                  Fungible: amount,
-                },
-              },
-            },
-            {
-              V1: {
-                parents: 1,
-                interior: {
-                  X2: [
-                    {
-                      Parachain: destination.parachainId,
-                    },
-                    {
-                      AccountKey20: {
-                        network: 'Any',
-                        key: address,
+                      },
+                      fun: {
+                        Fungible: amount,
                       },
                     },
-                  ],
-                },
+                  },
+                  {
+                    [version]: {
+                      parents: 1,
+                      interior: {
+                        X2: [
+                          {
+                            Parachain: destination.parachainId,
+                          },
+                          {
+                            AccountKey20: {
+                              network: 'Any',
+                              key: address,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  },
+                  'Unlimited',
+                ];
               },
-            },
-            getWeight(source.weight, func),
-          ],
+            }),
         }),
-    }),
+        X2: (): ExtrinsicConfigBuilder => ({
+          build: ({ address, amount, asset, destination, source }) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func: funcName,
+              getArgs: (func) => {
+                const version = getExtrinsicArgumentVersion(func, 1);
+
+                return [
+                  {
+                    [version]: {
+                      id: {
+                        Concrete: {
+                          parents: 1,
+                          interior: {
+                            X2: [
+                              {
+                                Parachain: originParachainId,
+                              },
+                              {
+                                GeneralKey: asset,
+                              },
+                            ],
+                          },
+                        },
+                      },
+                      fun: {
+                        Fungible: amount,
+                      },
+                    },
+                  },
+                  {
+                    [version]: {
+                      parents: 1,
+                      interior: {
+                        X2: [
+                          {
+                            Parachain: destination.parachainId,
+                          },
+                          {
+                            AccountKey20: {
+                              network: 'Any',
+                              key: address,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  },
+                  getWeight(source.weight, func),
+                ];
+              },
+            }),
+        }),
+      };
+    },
     transferMultiCurrencies: (): ExtrinsicConfigBuilder => ({
       build: ({ address, amount, asset, destination, fee, feeAsset, source }) =>
         new ExtrinsicConfig({

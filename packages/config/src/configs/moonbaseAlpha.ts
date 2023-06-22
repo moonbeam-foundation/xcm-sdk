@@ -37,6 +37,16 @@ export const moonbaseAlphaConfig = new ChainConfig({
         asset: dev,
       },
     }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: turingAlphanet,
+      destinationFee: {
+        amount: 0.00001,
+        asset: dev,
+      },
+    }),
     // NOTE: Disabling because ws endpoint is not working
     // new AssetConfig({
     //   asset: auq,
@@ -156,7 +166,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: turingAlphanet,
       destinationFee: {
-        amount: 5, // TODO
+        amount: 0.2,
         asset: tur,
       },
       fee: {
