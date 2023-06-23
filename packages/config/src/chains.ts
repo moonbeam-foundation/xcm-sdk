@@ -6,6 +6,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import {
   aca,
+  alan,
   astr,
   auq,
   ausd,
@@ -527,6 +528,10 @@ export const mangataKusama = new Parachain({
 export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
+      asset: alan,
+      id: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
+    },
+    {
       asset: auq,
       id: '69536036667157951501899290870203586130',
     },
@@ -582,16 +587,22 @@ export const moonbaseAlpha = new EvmParachain({
 });
 
 export const moonbaseBeta = new EvmParachain({
+  assetsData: [
+    {
+      asset: alan,
+      id: '85534404031760856987006367174489651085',
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xeebb5d05763801e54d6a7a60a4b7998ac125c4d050dcec418dd07ea959a54464',
-  id: 1287,
+  id: 1282,
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
   parachainId: 888,
   rpc: 'https://rpc.api.moondev.network',
-  ss58Format: 1287,
+  ss58Format: 1282,
   ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
 });
 

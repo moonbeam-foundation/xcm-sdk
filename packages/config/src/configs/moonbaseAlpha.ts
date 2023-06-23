@@ -1,11 +1,27 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
-import { dev, eq, eqd, lit, nodl, paring, soon, tt1, unit } from '../assets';
+import {
+  BalanceBuilder,
+  ContractBuilder,
+  FeeBuilder,
+} from '@moonbeam-network/xcm-builder';
+import {
+  alan,
+  dev,
+  eq,
+  eqd,
+  lit,
+  nodl,
+  paring,
+  soon,
+  tt1,
+  unit,
+} from '../assets';
 import {
   alphanetRelay,
   darwiniaPangoro,
   equilibriumAlphanet,
   litentryAlphanet,
   moonbaseAlpha,
+  moonbaseBeta,
   nodleEden,
   statemineAlphanet,
   subsocialAlphanet,
@@ -23,6 +39,16 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 4,
         asset: dev,
+      },
+    }),
+    new AssetConfig({
+      asset: alan,
+      balance: BalanceBuilder().system().account(), // TODO: how to get balance
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: moonbaseBeta,
+      destinationFee: {
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        asset: alan,
       },
     }),
     // NOTE: Disabling because ws endpoint is not working
