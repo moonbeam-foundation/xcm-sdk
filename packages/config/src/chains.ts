@@ -355,11 +355,13 @@ export const interlay = new Parachain({
       asset: intr,
       decimals: 10,
       id: { Token: intr.originSymbol },
+      metadataId: 0,
     },
     {
       asset: ibtc,
       decimals: 8,
       id: { Token: ibtc.originSymbol },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -437,15 +439,18 @@ export const khala = new Parachain({
 });
 
 export const kintsugi = new Parachain({
+  // no meta for native tokens
   assetsData: [
     {
       asset: kint,
       id: { Token: kint.originSymbol },
+      metadataId: 0,
     },
     {
       asset: kbtc,
       decimals: 8,
       id: { Token: kbtc.originSymbol },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,
