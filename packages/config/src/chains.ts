@@ -783,6 +783,7 @@ export const nodleEden = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
+  isTestChain: true,
   key: 'nodle-eden',
   name: 'Nodle Eden',
   parachainId: 2036,
@@ -1011,6 +1012,7 @@ export const subsocialAlphanet = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
+  isTestChain: true,
   key: 'subsocialAlphanet',
   name: 'Subsocial Alphanet',
   parachainId: 2100,
