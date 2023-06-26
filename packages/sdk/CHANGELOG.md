@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.0.4
+
+### Patch Changes
+
+- [#104](https://github.com/PureStake/xcm-sdk/pull/104) [`f1fc312`](https://github.com/PureStake/xcm-sdk/commit/f1fc312d77e8d579e40e48e24f3c139599bf74ca) Thanks [@mmaurello](https://github.com/mmaurello)! - Turing network integration with Moonbase Alpha
+
+- Updated dependencies [[`f1fc312`](https://github.com/PureStake/xcm-sdk/commit/f1fc312d77e8d579e40e48e24f3c139599bf74ca)]:
+  - @moonbeam-network/xcm-builder@1.0.3
+  - @moonbeam-network/xcm-config@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes
