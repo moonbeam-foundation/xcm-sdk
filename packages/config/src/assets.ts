@@ -170,6 +170,11 @@ export const tt1 = new Asset({
   originSymbol: 'TT1',
 });
 
+export const tur = new Asset({
+  key: 'tur',
+  originSymbol: 'TUR',
+});
+
 export const unit = new Asset({
   key: 'unit',
   originSymbol: 'Unit',
@@ -217,9 +222,10 @@ export const assetsList: Asset[] = [
   ring,
   rmrk,
   sdn,
+  soon,
   teer,
   tt1,
-  soon,
+  tur,
   unit,
   usdt,
   xrt,

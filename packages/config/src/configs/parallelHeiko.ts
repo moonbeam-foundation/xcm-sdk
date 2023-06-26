@@ -20,7 +20,8 @@ export const parallelHeikoConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder()
         .xTokens()
-        .transferMultiAsset(parallelHeiko.parachainId),
+        .transferMultiAsset(parallelHeiko.parachainId)
+        .X2(),
     }),
     new AssetConfig({
       asset: movr,

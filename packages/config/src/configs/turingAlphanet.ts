@@ -3,40 +3,40 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { glmr, para } from '../assets';
-import { moonbeam, parallel } from '../chains';
+import { dev, tur } from '../assets';
+import { moonbaseAlpha, turingAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const parallelConfig = new ChainConfig({
+export const turingAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
-      asset: para,
+      asset: tur,
       balance: BalanceBuilder().system().account(),
-      destination: moonbeam,
+      destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: para,
+        asset: tur,
       },
       extrinsic: ExtrinsicBuilder()
         .xTokens()
-        .transferMultiAsset(parallel.parachainId)
-        .X2(),
+        .transferMultiAsset(turingAlphanet.parachainId)
+        .X1(),
     }),
     new AssetConfig({
-      asset: glmr,
-      balance: BalanceBuilder().assets().account(),
-      destination: moonbeam,
+      asset: dev,
+      balance: BalanceBuilder().tokens().accounts(),
+      destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.01,
-        asset: glmr,
+        amount: 0.04,
+        asset: dev,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
-        asset: para,
+        asset: tur,
         balance: BalanceBuilder().system().account(),
       },
     }),
   ],
-  chain: parallel,
+  chain: turingAlphanet,
 });

@@ -22,9 +22,7 @@ export function getWeight(
   }
 
   if (type.eq('XcmV3WeightLimit')) {
-    return {
-      Limited: { proofSize: 0, refTime: weight },
-    };
+    return 'Unlimited';
   }
 
   return weight;

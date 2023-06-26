@@ -39,6 +39,7 @@ import {
   soon,
   teer,
   tt1,
+  tur,
   unit,
   usdt,
   xrt,
@@ -354,11 +355,13 @@ export const interlay = new Parachain({
       asset: intr,
       decimals: 10,
       id: { Token: intr.originSymbol },
+      metadataId: 0,
     },
     {
       asset: ibtc,
       decimals: 8,
       id: { Token: ibtc.originSymbol },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -436,15 +439,18 @@ export const khala = new Parachain({
 });
 
 export const kintsugi = new Parachain({
+  // no meta for native tokens
   assetsData: [
     {
       asset: kint,
       id: { Token: kint.originSymbol },
+      metadataId: 0,
     },
     {
       asset: kbtc,
       decimals: 8,
       id: { Token: kbtc.originSymbol },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -562,6 +568,10 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: tt1,
       id: '156305701417244550631956600137082963628',
+    },
+    {
+      asset: tur,
+      id: '133300872918374599700079037156071917454',
     },
     {
       asset: unit,
@@ -773,6 +783,7 @@ export const nodleEden = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
+  isTestChain: true,
   key: 'nodle-eden',
   name: 'Nodle Eden',
   parachainId: 2036,
@@ -974,10 +985,34 @@ export const statemint = new Parachain({
   ws: 'wss://statemint-rpc.polkadot.io',
 });
 
+export const turingAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: tur,
+      // NOTE: no meta for native token
+      metadataId: 0,
+    },
+    {
+      asset: dev,
+      id: 1,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x8288e57b61337833eb48e731c498e3c14652d15ead2abe5b86ba8b0fb51e917d',
+  isTestChain: true,
+  key: 'turing-alphanet',
+  name: 'Turing Alphanet',
+  parachainId: 2114,
+  ss58Format: 51,
+  ws: 'wss://turing-moonbase.rpc.oak.tech/',
+});
+
 export const subsocialAlphanet = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
+  isTestChain: true,
   key: 'subsocialAlphanet',
   name: 'Subsocial Alphanet',
   parachainId: 2100,
@@ -1041,6 +1076,7 @@ export const chainsList: AnyChain[] = [
   statemineAlphanet,
   statemint,
   subsocialAlphanet,
+  turingAlphanet,
   uniqueAlpha,
 ];
 
