@@ -1,1 +1,5 @@
-export type XTokensWeightLimit = number | { Limited: number } | 'Unlimited';
+export type XTokensWeightLimit =
+  | number
+  | { Limited: number }
+  | { Limited: { refTime: number; proofSize: number } }
+  | 'Unlimited';
