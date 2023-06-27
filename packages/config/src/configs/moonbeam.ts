@@ -4,6 +4,7 @@ import {
   astr,
   ausd,
   bnc,
+  cfg,
   dot,
   eq,
   eqd,
@@ -20,6 +21,7 @@ import {
   acala,
   astar,
   bifrostPolkadot,
+  centrifuge,
   darwinia,
   equilibrium,
   hydraDX,
@@ -155,6 +157,20 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.256,
         asset: bnc,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: cfg,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: centrifuge,
+      destinationFee: {
+        amount: 0.01,
+        asset: cfg,
       },
       fee: {
         asset: glmr,

@@ -6,6 +6,7 @@ import { astarConfig } from './astar';
 import { bifrostKusamaConfig } from './bifrostKusama';
 import { bifrostPolkadotConfig } from './bifrostPolkadot';
 import { calamariConfig } from './calamari';
+import { centrifugeConfig } from './centrifuge';
 import { crustShadowConfig } from './crustShadow';
 import { darwiniaConfig } from './darwinia';
 import { darwiniaCrabConfig } from './darwiniaCrab';
@@ -46,6 +47,7 @@ export const chainsConfigList: ChainConfig[] = [
   bifrostKusamaConfig,
   bifrostPolkadotConfig,
   calamariConfig,
+  centrifugeConfig,
   crustShadowConfig,
   darwiniaConfig,
   darwiniaCrabConfig,

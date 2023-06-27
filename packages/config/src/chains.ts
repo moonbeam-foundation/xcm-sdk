@@ -10,6 +10,7 @@ import {
   auq,
   ausd,
   bnc,
+  cfg,
   crab,
   csm,
   dev,
@@ -174,6 +175,23 @@ export const calamari = new Parachain({
   parachainId: 2084,
   ss58Format: 78,
   ws: 'wss://ws.calamari.systems',
+});
+
+export const centrifuge = new Parachain({
+  assetsData: [
+    {
+      asset: cfg,
+      id: 'Native',
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xb3db41421702df9a7fcac62b53ffeac85f7853cc4e689e0b93aeb3db18c09d82',
+  key: 'centrifuge',
+  name: 'Centrifuge',
+  parachainId: 2031,
+  ss58Format: 36,
+  ws: 'wss://fullnode.centrifuge.io',
 });
 
 export const crustShadow = new Parachain({
@@ -624,6 +642,10 @@ export const moonbeam = new EvmParachain({
       id: '165823357460190568952172802245839421906',
     },
     {
+      asset: cfg,
+      id: '91372035960551235635465443179559840483',
+    },
+    {
       asset: dot,
       id: '42259045809535163221576417993425387648',
     },
@@ -1045,6 +1067,7 @@ export const chainsList: AnyChain[] = [
   bifrostKusama,
   bifrostPolkadot,
   calamari,
+  centrifuge,
   crustShadow,
   darwinia,
   darwiniaCrab,
