@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.5
+
+### Patch Changes
+
+- [#106](https://github.com/PureStake/xcm-sdk/pull/106) [`2c0251d`](https://github.com/PureStake/xcm-sdk/commit/2c0251d8c24c7025099299e150a1fccebde53d1e) Thanks [@mmaurello](https://github.com/mmaurello)! - Centrifuge integration with Moonebeam
+
 ## 1.0.4
 
 ### Patch Changes
