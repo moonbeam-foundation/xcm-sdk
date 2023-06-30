@@ -25,6 +25,11 @@ export const bnc = new Asset({
   originSymbol: 'BNC',
 });
 
+export const cfg = new Asset({
+  key: 'cfg',
+  originSymbol: 'CFG',
+});
+
 export const crab = new Asset({
   key: 'crab',
   originSymbol: 'CRAB',
@@ -196,6 +201,7 @@ export const assetsList: Asset[] = [
   auq,
   ausd,
   bnc,
+  cfg,
   crab,
   csm,
   dev,
