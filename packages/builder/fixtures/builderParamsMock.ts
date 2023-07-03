@@ -10,8 +10,8 @@ export const alphanetAssetHubMock = new Parachain({
   genesisHash:
     '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
   isTestChain: true,
-  key: 'statemine-alphanet',
-  name: 'Statemine Alphanet',
+  key: 'alphanet-asset-hub',
+  name: 'Alphanet Asset Hub',
   parachainId: 1001,
   ss58Format: 42,
   ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',

@@ -960,7 +960,7 @@ export const statemine = new Parachain({
   ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
 });
 
-export const statemineAlphanet = new Parachain({
+export const alphanetAssetHub = new Parachain({
   assetsData: [
     {
       asset: tt1,
@@ -977,8 +977,8 @@ export const statemineAlphanet = new Parachain({
   genesisHash:
     '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
   isTestChain: true,
-  key: 'statemine-alphanet',
-  name: 'Statemine Alphanet',
+  key: 'alphanet-asset-hub',
+  name: 'Alphanet Asset Hub',
   parachainId: 1001,
   ss58Format: 42,
   ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
@@ -1096,7 +1096,7 @@ export const chainsList: AnyChain[] = [
   robonomics,
   shiden,
   statemine,
-  statemineAlphanet,
+  alphanetAssetHub,
   polkadotAssetHub,
   subsocialAlphanet,
   turingAlphanet,

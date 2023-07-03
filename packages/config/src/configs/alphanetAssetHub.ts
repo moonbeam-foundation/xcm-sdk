@@ -5,11 +5,11 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
-import { moonbaseAlpha, statemineAlphanet } from '../chains';
+import { alphanetAssetHub, moonbaseAlpha } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const statemineAlphanetConfig = new ChainConfig({
+export const alphanetAssetHubConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: tt1,
@@ -30,5 +30,5 @@ export const statemineAlphanetConfig = new ChainConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: statemineAlphanet,
+  chain: alphanetAssetHub,
 });

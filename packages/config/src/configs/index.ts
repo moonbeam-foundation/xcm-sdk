@@ -1,6 +1,7 @@
 import { ChainConfig } from '../types/ChainConfig';
 
 import { acalaConfig } from './acala';
+import { alphanetAssetHubConfig } from './alphanetAssetHub';
 import { alphanetRelayConfig } from './alphanetRelay';
 import { astarConfig } from './astar';
 import { bifrostKusamaConfig } from './bifrostKusama';
@@ -35,7 +36,6 @@ import { polkadotAssetHubConfig } from './polkadotAssetHub';
 import { robonomicsConfig } from './robonomics';
 import { shidenConfig } from './shiden';
 import { statemineConfig } from './statemine';
-import { statemineAlphanetConfig } from './statemineAlphanet';
 import { subsocialAlphanetConfig } from './subsocialAlphanet';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
@@ -74,7 +74,7 @@ export const chainsConfigList: ChainConfig[] = [
   polkadotConfig,
   robonomicsConfig,
   shidenConfig,
-  statemineAlphanetConfig,
+  alphanetAssetHubConfig,
   statemineConfig,
   polkadotAssetHubConfig,
   subsocialAlphanetConfig,
