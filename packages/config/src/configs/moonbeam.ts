@@ -30,7 +30,7 @@ import {
   parallel,
   phala,
   polkadot,
-  statemint,
+  polkadotAssetHub,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -293,7 +293,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: usdt,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemint,
+      destination: polkadotAssetHub,
       destinationFee: {
         amount: 0.7,
         asset: usdt,

@@ -5,11 +5,11 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dot, usdt } from '../assets';
-import { moonbeam, statemint } from '../chains';
+import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const statemintConfig = new ChainConfig({
+export const polkadotAssetHubConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: usdt,
@@ -30,5 +30,5 @@ export const statemintConfig = new ChainConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: statemint,
+  chain: polkadotAssetHub,
 });

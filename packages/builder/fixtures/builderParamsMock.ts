@@ -5,7 +5,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfigBuilderPrams } from '../src/extrinsic';
 
-export const statemintAlphanetMock = new Parachain({
+export const alphanetAssetHubMock = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
@@ -39,5 +39,5 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   fee: 5_000_000_000n,
   feeAsset: 'RMRK',
   palletInstance: 10,
-  source: statemintAlphanetMock,
+  source: alphanetAssetHubMock,
 };

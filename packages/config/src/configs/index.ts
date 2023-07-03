@@ -31,11 +31,11 @@ import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
 import { phalaConfig } from './phala';
 import { polkadotConfig } from './polkadot';
+import { polkadotAssetHubConfig } from './polkadotAssetHub';
 import { robonomicsConfig } from './robonomics';
 import { shidenConfig } from './shiden';
 import { statemineConfig } from './statemine';
 import { statemineAlphanetConfig } from './statemineAlphanet';
-import { statemintConfig } from './statemint';
 import { subsocialAlphanetConfig } from './subsocialAlphanet';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
@@ -76,7 +76,7 @@ export const chainsConfigList: ChainConfig[] = [
   shidenConfig,
   statemineAlphanetConfig,
   statemineConfig,
-  statemintConfig,
+  polkadotAssetHubConfig,
   subsocialAlphanetConfig,
   turingAlphanetConfig,
   uniqueAlphaConfig,

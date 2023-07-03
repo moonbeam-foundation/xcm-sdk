@@ -957,7 +957,7 @@ export const statemine = new Parachain({
   name: 'Statemine',
   parachainId: 1000,
   ss58Format: 2,
-  ws: 'wss://statemine-rpc.polkadot.io',
+  ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
 });
 
 export const statemineAlphanet = new Parachain({
@@ -984,7 +984,7 @@ export const statemineAlphanet = new Parachain({
   ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
 });
 
-export const statemint = new Parachain({
+export const polkadotAssetHub = new Parachain({
   assetsData: [
     {
       asset: usdt,
@@ -1000,11 +1000,11 @@ export const statemint = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
-  key: 'statemint',
-  name: 'Statemint',
+  key: 'Polkadot-asset-hub',
+  name: 'Polkadot Asset Hub',
   parachainId: 1000,
   ss58Format: 42,
-  ws: 'wss://statemint-rpc.polkadot.io',
+  ws: 'wss://polkadot-asset-hub-rpc.polkadot.io',
 });
 
 export const turingAlphanet = new Parachain({
@@ -1035,7 +1035,7 @@ export const subsocialAlphanet = new Parachain({
   genesisHash:
     '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
   isTestChain: true,
-  key: 'subsocialAlphanet',
+  key: 'subsocial-alphanet',
   name: 'Subsocial Alphanet',
   parachainId: 2100,
   ss58Format: 42,
@@ -1097,7 +1097,7 @@ export const chainsList: AnyChain[] = [
   shiden,
   statemine,
   statemineAlphanet,
-  statemint,
+  polkadotAssetHub,
   subsocialAlphanet,
   turingAlphanet,
   uniqueAlpha,
