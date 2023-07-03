@@ -21,6 +21,7 @@ import { karuraConfig } from './karura';
 import { khalaConfig } from './khala';
 import { kintsugiConfig } from './kintsugi';
 import { kusamaConfig } from './kusama';
+import { kusamaAssetHubConfig } from './kusamaAssetHub';
 import { litentryAlphanetConfig } from './litentryAlphanet';
 import { litmusConfig } from './litmus';
 import { mangataKusamaConfig } from './mangataKusama';
@@ -35,7 +36,6 @@ import { polkadotConfig } from './polkadot';
 import { polkadotAssetHubConfig } from './polkadotAssetHub';
 import { robonomicsConfig } from './robonomics';
 import { shidenConfig } from './shiden';
-import { statemineConfig } from './statemine';
 import { subsocialAlphanetConfig } from './subsocialAlphanet';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
@@ -75,7 +75,7 @@ export const chainsConfigList: ChainConfig[] = [
   robonomicsConfig,
   shidenConfig,
   alphanetAssetHubConfig,
-  statemineConfig,
+  kusamaAssetHubConfig,
   polkadotAssetHubConfig,
   subsocialAlphanetConfig,
   turingAlphanetConfig,
