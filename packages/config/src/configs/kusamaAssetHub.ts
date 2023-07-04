@@ -5,11 +5,11 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ksm, rmrk, usdt } from '../assets';
-import { moonriver, statemine } from '../chains';
+import { kusamaAssetHub, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const statemineConfig = new ChainConfig({
+export const kusamaAssetHubConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: rmrk,
@@ -48,5 +48,5 @@ export const statemineConfig = new ChainConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: statemine,
+  chain: kusamaAssetHub,
 });

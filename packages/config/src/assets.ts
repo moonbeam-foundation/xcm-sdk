@@ -30,6 +30,11 @@ export const bnc = new Asset({
   originSymbol: 'BNC',
 });
 
+export const cfg = new Asset({
+  key: 'cfg',
+  originSymbol: 'CFG',
+});
+
 export const crab = new Asset({
   key: 'crab',
   originSymbol: 'CRAB',
@@ -175,6 +180,11 @@ export const tt1 = new Asset({
   originSymbol: 'TT1',
 });
 
+export const tur = new Asset({
+  key: 'tur',
+  originSymbol: 'TUR',
+});
+
 export const unit = new Asset({
   key: 'unit',
   originSymbol: 'Unit',
@@ -197,6 +207,7 @@ export const assetsList: Asset[] = [
   auq,
   ausd,
   bnc,
+  cfg,
   crab,
   csm,
   dev,
@@ -223,9 +234,10 @@ export const assetsList: Asset[] = [
   ring,
   rmrk,
   sdn,
+  soon,
   teer,
   tt1,
-  soon,
+  tur,
   unit,
   usdt,
   xrt,

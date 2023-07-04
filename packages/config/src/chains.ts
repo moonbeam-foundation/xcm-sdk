@@ -11,6 +11,7 @@ import {
   auq,
   ausd,
   bnc,
+  cfg,
   crab,
   csm,
   dev,
@@ -40,6 +41,7 @@ import {
   soon,
   teer,
   tt1,
+  tur,
   unit,
   usdt,
   xrt,
@@ -73,6 +75,30 @@ export const acala = new Parachain({
   parachainId: 2000,
   ss58Format: 10,
   ws: 'wss://acala-rpc-0.aca-api.network',
+});
+
+export const alphanetAssetHub = new Parachain({
+  assetsData: [
+    {
+      asset: tt1,
+      id: 2,
+      palletInstance: 50,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: unit,
+      metadataId: 0,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
+  isTestChain: true,
+  key: 'alphanet-asset-hub',
+  name: 'Alphanet Asset Hub',
+  parachainId: 1001,
+  ss58Format: 42,
+  ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
 });
 
 export const alphanetRelay = new Parachain({
@@ -174,6 +200,23 @@ export const calamari = new Parachain({
   parachainId: 2084,
   ss58Format: 78,
   ws: 'wss://ws.calamari.systems',
+});
+
+export const centrifuge = new Parachain({
+  assetsData: [
+    {
+      asset: cfg,
+      id: 'Native',
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xb3db41421702df9a7fcac62b53ffeac85f7853cc4e689e0b93aeb3db18c09d82',
+  key: 'centrifuge',
+  name: 'Centrifuge',
+  parachainId: 2031,
+  ss58Format: 36,
+  ws: 'wss://fullnode.centrifuge.io',
 });
 
 export const crustShadow = new Parachain({
@@ -355,11 +398,13 @@ export const interlay = new Parachain({
       asset: intr,
       decimals: 10,
       id: { Token: intr.originSymbol },
+      metadataId: 0,
     },
     {
       asset: ibtc,
       decimals: 8,
       id: { Token: ibtc.originSymbol },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -437,15 +482,18 @@ export const khala = new Parachain({
 });
 
 export const kintsugi = new Parachain({
+  // no meta for native tokens
   assetsData: [
     {
       asset: kint,
       id: { Token: kint.originSymbol },
+      metadataId: 0,
     },
     {
       asset: kbtc,
       decimals: 8,
       id: { Token: kbtc.originSymbol },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -467,6 +515,34 @@ export const kusama = new Parachain({
   parachainId: 0,
   ss58Format: 2,
   ws: 'wss://kusama-rpc.polkadot.io',
+});
+
+export const kusamaAssetHub = new Parachain({
+  assetsData: [
+    {
+      asset: usdt,
+      id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: rmrk,
+      id: 8,
+      palletInstance: 50,
+    },
+    {
+      asset: ksm,
+      // NOTE: no meta for native token
+      metadataId: 9999999,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',
+  key: 'kusama-asset-hub',
+  name: 'Kusama Asset Hub',
+  parachainId: 1000,
+  ss58Format: 2,
+  ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
 });
 
 export const litentryAlphanet = new Parachain({
@@ -569,6 +645,10 @@ export const moonbaseAlpha = new EvmParachain({
       id: '156305701417244550631956600137082963628',
     },
     {
+      asset: tur,
+      id: '133300872918374599700079037156071917454',
+    },
+    {
       asset: unit,
       id: '42259045809535163221576417993425387648',
     },
@@ -623,6 +703,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: bnc,
       id: '165823357460190568952172802245839421906',
+    },
+    {
+      asset: cfg,
+      id: '91372035960551235635465443179559840483',
     },
     {
       asset: dot,
@@ -784,6 +868,7 @@ export const nodleEden = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
+  isTestChain: true,
   key: 'nodle-eden',
   name: 'Nodle Eden',
   parachainId: 2036,
@@ -869,6 +954,29 @@ export const polkadot = new Parachain({
   ws: 'wss://rpc.polkadot.io',
 });
 
+export const polkadotAssetHub = new Parachain({
+  assetsData: [
+    {
+      asset: usdt,
+      id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: dot,
+      // NOTE: no meta for native token
+      metadataId: 9999999,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
+  key: 'Polkadot-asset-hub',
+  name: 'Polkadot Asset Hub',
+  parachainId: 1000,
+  ss58Format: 42,
+  ws: 'wss://polkadot-asset-hub-rpc.polkadot.io',
+});
+
 export const robonomics = new Parachain({
   assetsData: [
     {
@@ -910,86 +1018,35 @@ export const shiden = new Parachain({
   ws: 'wss://shiden.api.onfinality.io/public-ws',
 });
 
-export const statemine = new Parachain({
+export const turingAlphanet = new Parachain({
   assetsData: [
     {
-      asset: usdt,
-      id: 1984,
-      palletInstance: 50,
-    },
-    {
-      asset: rmrk,
-      id: 8,
-      palletInstance: 50,
-    },
-    {
-      asset: ksm,
+      asset: tur,
       // NOTE: no meta for native token
-      metadataId: 9999999,
-    },
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',
-  key: 'statemine',
-  name: 'Statemine',
-  parachainId: 1000,
-  ss58Format: 2,
-  ws: 'wss://statemine-rpc.polkadot.io',
-});
-
-export const statemineAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: tt1,
-      id: 2,
-      palletInstance: 50,
-    },
-    // NOTE: no meta for native token
-    {
-      asset: unit,
       metadataId: 0,
+    },
+    {
+      asset: dev,
+      id: 1,
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
-    '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
+    '0x8288e57b61337833eb48e731c498e3c14652d15ead2abe5b86ba8b0fb51e917d',
   isTestChain: true,
-  key: 'statemine-alphanet',
-  name: 'Statemine Alphanet',
-  parachainId: 1001,
-  ss58Format: 42,
-  ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
-});
-
-export const statemint = new Parachain({
-  assetsData: [
-    {
-      asset: usdt,
-      id: 1984,
-      palletInstance: 50,
-    },
-    {
-      asset: dot,
-      // NOTE: no meta for native token
-      metadataId: 9999999,
-    },
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
-  key: 'statemint',
-  name: 'Statemint',
-  parachainId: 1000,
-  ss58Format: 42,
-  ws: 'wss://statemint-rpc.polkadot.io',
+  key: 'turing-alphanet',
+  name: 'Turing Alphanet',
+  parachainId: 2114,
+  ss58Format: 51,
+  ws: 'wss://turing-moonbase.rpc.oak.tech/',
 });
 
 export const subsocialAlphanet = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
-  key: 'subsocialAlphanet',
+  isTestChain: true,
+  key: 'subsocial-alphanet',
   name: 'Subsocial Alphanet',
   parachainId: 2100,
   ss58Format: 42,
@@ -1021,6 +1078,7 @@ export const chainsList: AnyChain[] = [
   bifrostKusama,
   bifrostPolkadot,
   calamari,
+  centrifuge,
   crustShadow,
   darwinia,
   darwiniaCrab,
@@ -1048,10 +1106,11 @@ export const chainsList: AnyChain[] = [
   polkadot,
   robonomics,
   shiden,
-  statemine,
-  statemineAlphanet,
-  statemint,
+  kusamaAssetHub,
+  alphanetAssetHub,
+  polkadotAssetHub,
   subsocialAlphanet,
+  turingAlphanet,
   uniqueAlpha,
 ];
 

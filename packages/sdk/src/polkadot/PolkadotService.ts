@@ -92,6 +92,7 @@ export class PolkadotService {
   ): Promise<{ symbol: string; decimals: number } | undefined> {
     const fn =
       this.api.query.assets?.metadata ||
+      this.api.query.assetRegistry?.metadata ||
       this.api.query.assetRegistry?.currencyMetadatas ||
       this.api.query.assetRegistry?.assetMetadatas ||
       this.api.query.assetRegistry?.assetMetadataMap;

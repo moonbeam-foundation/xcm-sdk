@@ -21,8 +21,8 @@ const CONFIG = {
       withdraw: { [ChainKey.Interlay]: true },
     },
     [AssetSymbol.USDT]: {
-      deposit: { [ChainKey.Statemint]: true },
-      withdraw: { [ChainKey.Statemint]: true },
+      deposit: { [ChainKey.polkadotAssetHub]: true },
+      withdraw: { [ChainKey.polkadotAssetHub]: true },
     },
   },
 };

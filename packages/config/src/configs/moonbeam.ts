@@ -4,6 +4,7 @@ import {
   astr,
   ausd,
   bnc,
+  cfg,
   dot,
   eq,
   eqd,
@@ -20,6 +21,7 @@ import {
   acala,
   astar,
   bifrostPolkadot,
+  centrifuge,
   darwinia,
   equilibrium,
   hydraDX,
@@ -28,7 +30,7 @@ import {
   parallel,
   phala,
   polkadot,
-  statemint,
+  polkadotAssetHub,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -162,6 +164,20 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: cfg,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: centrifuge,
+      destinationFee: {
+        amount: 0.01,
+        asset: cfg,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: dot,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -277,7 +293,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: usdt,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemint,
+      destination: polkadotAssetHub,
       destinationFee: {
         amount: 0.7,
         asset: usdt,

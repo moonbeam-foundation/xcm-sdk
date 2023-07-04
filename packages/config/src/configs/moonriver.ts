@@ -30,13 +30,13 @@ import {
   khala,
   kintsugi,
   kusama,
+  kusamaAssetHub,
   litmus,
   mangataKusama,
   moonriver,
   parallelHeiko,
   robonomics,
   shiden,
-  statemine,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -309,7 +309,7 @@ export const moonriverConfig = new ChainConfig({
       asset: rmrk,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemine,
+      destination: kusamaAssetHub,
       destinationFee: {
         amount: 0.0000504,
         asset: rmrk,
@@ -351,7 +351,7 @@ export const moonriverConfig = new ChainConfig({
       asset: usdt,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemine,
+      destination: kusamaAssetHub,
       destinationFee: {
         amount: 0.00504,
         asset: usdt,

@@ -15,14 +15,33 @@ describe('xTokens', () => {
   });
 
   describe('transferMultiAsset', () => {
-    const extrinsic = xTokens().transferMultiAsset(100).build(buildParamsMock);
+    describe('x1', () => {
+      const extrinsic = xTokens()
+        .transferMultiAsset(100)
+        .X1()
+        .build(buildParamsMock);
 
-    it('should be correct config', () => {
-      expect(extrinsic).toMatchSnapshot();
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
     });
+    describe('x2', () => {
+      const extrinsic = xTokens()
+        .transferMultiAsset(100)
+        .X2()
+        .build(buildParamsMock);
 
-    it('should get correct arguments', () => {
-      expect(extrinsic.getArgs()).toMatchSnapshot();
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
     });
   });
 

@@ -13,9 +13,11 @@ import {
   paring,
   soon,
   tt1,
+  tur,
   unit,
 } from '../assets';
 import {
+  alphanetAssetHub,
   alphanetRelay,
   darwiniaPangoro,
   equilibriumAlphanet,
@@ -23,8 +25,8 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   nodleEden,
-  statemineAlphanet,
   subsocialAlphanet,
+  turingAlphanet,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -38,6 +40,16 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destination: equilibriumAlphanet,
       destinationFee: {
         amount: 4,
+        asset: dev,
+      },
+    }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: turingAlphanet,
+      destinationFee: {
+        amount: 0.00001,
         asset: dev,
       },
     }),
@@ -154,10 +166,24 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: tt1,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemineAlphanet,
+      destination: alphanetAssetHub,
       destinationFee: {
         amount: 5,
         asset: tt1,
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: tur,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: turingAlphanet,
+      destinationFee: {
+        amount: 0.2,
+        asset: tur,
       },
       fee: {
         asset: dev,

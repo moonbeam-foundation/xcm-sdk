@@ -1,5 +1,29 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.6
+
+### Patch Changes
+
+- [#108](https://github.com/PureStake/xcm-sdk/pull/108) [`dcee04b`](https://github.com/PureStake/xcm-sdk/commit/dcee04be5df5c90027534a37e40e459ae0a14fa2) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Statemint/Statemine names to Asset Hub
+
+- Updated dependencies [[`dcee04b`](https://github.com/PureStake/xcm-sdk/commit/dcee04be5df5c90027534a37e40e459ae0a14fa2)]:
+  - @moonbeam-network/xcm-builder@1.0.4
+
+## 1.0.5
+
+### Patch Changes
+
+- [#106](https://github.com/PureStake/xcm-sdk/pull/106) [`2c0251d`](https://github.com/PureStake/xcm-sdk/commit/2c0251d8c24c7025099299e150a1fccebde53d1e) Thanks [@mmaurello](https://github.com/mmaurello)! - Centrifuge integration with Moonebeam
+
+## 1.0.4
+
+### Patch Changes
+
+- [#104](https://github.com/PureStake/xcm-sdk/pull/104) [`f1fc312`](https://github.com/PureStake/xcm-sdk/commit/f1fc312d77e8d579e40e48e24f3c139599bf74ca) Thanks [@mmaurello](https://github.com/mmaurello)! - Turing network integration with Moonbase Alpha
+
+- Updated dependencies [[`f1fc312`](https://github.com/PureStake/xcm-sdk/commit/f1fc312d77e8d579e40e48e24f3c139599bf74ca)]:
+  - @moonbeam-network/xcm-builder@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes
