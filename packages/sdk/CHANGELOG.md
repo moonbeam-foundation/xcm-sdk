@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.0.6
+
+### Patch Changes
+
+- [#108](https://github.com/PureStake/xcm-sdk/pull/108) [`dcee04b`](https://github.com/PureStake/xcm-sdk/commit/dcee04be5df5c90027534a37e40e459ae0a14fa2) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Statemint/Statemine names to Asset Hub
+
+- Updated dependencies [[`dcee04b`](https://github.com/PureStake/xcm-sdk/commit/dcee04be5df5c90027534a37e40e459ae0a14fa2)]:
+  - @moonbeam-network/xcm-builder@1.0.4
+  - @moonbeam-network/xcm-config@1.0.6
+
 ## 1.0.5
 
 ### Patch Changes
