@@ -76,6 +76,30 @@ export const acala = new Parachain({
   ws: 'wss://acala-rpc-0.aca-api.network',
 });
 
+export const alphanetAssetHub = new Parachain({
+  assetsData: [
+    {
+      asset: tt1,
+      id: 2,
+      palletInstance: 50,
+    },
+    // NOTE: no meta for native token
+    {
+      asset: unit,
+      metadataId: 0,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
+  isTestChain: true,
+  key: 'alphanet-asset-hub',
+  name: 'Alphanet Asset Hub',
+  parachainId: 1001,
+  ss58Format: 42,
+  ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
+});
+
 export const alphanetRelay = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -492,6 +516,34 @@ export const kusama = new Parachain({
   ws: 'wss://kusama-rpc.polkadot.io',
 });
 
+export const kusamaAssetHub = new Parachain({
+  assetsData: [
+    {
+      asset: usdt,
+      id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: rmrk,
+      id: 8,
+      palletInstance: 50,
+    },
+    {
+      asset: ksm,
+      // NOTE: no meta for native token
+      metadataId: 9999999,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',
+  key: 'kusama-asset-hub',
+  name: 'Kusama Asset Hub',
+  parachainId: 1000,
+  ss58Format: 2,
+  ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
+});
+
 export const litentryAlphanet = new Parachain({
   assetsData: [
     {
@@ -891,6 +943,29 @@ export const polkadot = new Parachain({
   ws: 'wss://rpc.polkadot.io',
 });
 
+export const polkadotAssetHub = new Parachain({
+  assetsData: [
+    {
+      asset: usdt,
+      id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: dot,
+      // NOTE: no meta for native token
+      metadataId: 9999999,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
+  key: 'Polkadot-asset-hub',
+  name: 'Polkadot Asset Hub',
+  parachainId: 1000,
+  ss58Format: 42,
+  ws: 'wss://polkadot-asset-hub-rpc.polkadot.io',
+});
+
 export const robonomics = new Parachain({
   assetsData: [
     {
@@ -932,81 +1007,6 @@ export const shiden = new Parachain({
   ws: 'wss://shiden.api.onfinality.io/public-ws',
 });
 
-export const statemine = new Parachain({
-  assetsData: [
-    {
-      asset: usdt,
-      id: 1984,
-      palletInstance: 50,
-    },
-    {
-      asset: rmrk,
-      id: 8,
-      palletInstance: 50,
-    },
-    {
-      asset: ksm,
-      // NOTE: no meta for native token
-      metadataId: 9999999,
-    },
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',
-  key: 'statemine',
-  name: 'Statemine',
-  parachainId: 1000,
-  ss58Format: 2,
-  ws: 'wss://statemine-rpc.polkadot.io',
-});
-
-export const statemineAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: tt1,
-      id: 2,
-      palletInstance: 50,
-    },
-    // NOTE: no meta for native token
-    {
-      asset: unit,
-      metadataId: 0,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
-  isTestChain: true,
-  key: 'statemine-alphanet',
-  name: 'Statemine Alphanet',
-  parachainId: 1001,
-  ss58Format: 42,
-  ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
-});
-
-export const statemint = new Parachain({
-  assetsData: [
-    {
-      asset: usdt,
-      id: 1984,
-      palletInstance: 50,
-    },
-    {
-      asset: dot,
-      // NOTE: no meta for native token
-      metadataId: 9999999,
-    },
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
-  key: 'statemint',
-  name: 'Statemint',
-  parachainId: 1000,
-  ss58Format: 42,
-  ws: 'wss://statemint-rpc.polkadot.io',
-});
-
 export const turingAlphanet = new Parachain({
   assetsData: [
     {
@@ -1035,7 +1035,7 @@ export const subsocialAlphanet = new Parachain({
   genesisHash:
     '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
   isTestChain: true,
-  key: 'subsocialAlphanet',
+  key: 'subsocial-alphanet',
   name: 'Subsocial Alphanet',
   parachainId: 2100,
   ss58Format: 42,
@@ -1095,9 +1095,9 @@ export const chainsList: AnyChain[] = [
   polkadot,
   robonomics,
   shiden,
-  statemine,
-  statemineAlphanet,
-  statemint,
+  kusamaAssetHub,
+  alphanetAssetHub,
+  polkadotAssetHub,
   subsocialAlphanet,
   turingAlphanet,
   uniqueAlpha,

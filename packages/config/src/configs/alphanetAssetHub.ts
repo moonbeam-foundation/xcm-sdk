@@ -4,31 +4,31 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { dot, usdt } from '../assets';
-import { moonbeam, statemint } from '../chains';
+import { tt1, unit } from '../assets';
+import { alphanetAssetHub, moonbaseAlpha } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const statemintConfig = new ChainConfig({
+export const alphanetAssetHubConfig = new ChainConfig({
   assets: [
     new AssetConfig({
-      asset: usdt,
+      asset: tt1,
       balance: BalanceBuilder().assets().account(),
-      destination: moonbeam,
+      destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: usdt,
+        asset: tt1,
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
       fee: {
-        asset: dot,
+        asset: unit,
         balance: BalanceBuilder().system().account(),
       },
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: statemint,
+  chain: alphanetAssetHub,
 });

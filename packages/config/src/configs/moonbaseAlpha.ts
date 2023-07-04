@@ -12,13 +12,13 @@ import {
   unit,
 } from '../assets';
 import {
+  alphanetAssetHub,
   alphanetRelay,
   darwiniaPangoro,
   equilibriumAlphanet,
   litentryAlphanet,
   moonbaseAlpha,
   nodleEden,
-  statemineAlphanet,
   subsocialAlphanet,
   turingAlphanet,
 } from '../chains';
@@ -150,7 +150,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: tt1,
       balance: BalanceBuilder().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: statemineAlphanet,
+      destination: alphanetAssetHub,
       destinationFee: {
         amount: 5,
         asset: tt1,
