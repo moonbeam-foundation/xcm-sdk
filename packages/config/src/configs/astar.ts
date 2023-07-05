@@ -12,7 +12,7 @@ export const astarConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: astr,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -25,7 +25,7 @@ export const astarConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: glmr,
-      balance: BalanceBuilder().assets().account(),
+      balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
         amount: 0.01,
@@ -37,7 +37,7 @@ export const astarConfig = new ChainConfig({
         .X2(),
       fee: {
         asset: astr,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],

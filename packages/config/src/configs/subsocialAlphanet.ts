@@ -12,7 +12,7 @@ export const subsocialAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: soon,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

@@ -13,7 +13,7 @@ export const bifrostKusamaConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: bnc,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -23,7 +23,7 @@ export const bifrostKusamaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: 0.0001,
@@ -32,7 +32,7 @@ export const bifrostKusamaConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: bnc,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),

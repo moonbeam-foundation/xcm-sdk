@@ -12,7 +12,7 @@ export const polkadotConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: dot,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

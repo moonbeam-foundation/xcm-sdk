@@ -26,6 +26,7 @@ import { litentryAlphanetConfig } from './litentryAlphanet';
 import { litmusConfig } from './litmus';
 import { mangataKusamaConfig } from './mangataKusama';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
+import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
 import { nodleEdenConfig } from './nodleEden';
@@ -65,6 +66,7 @@ export const chainsConfigList: ChainConfig[] = [
   litmusConfig,
   mangataKusamaConfig,
   moonbaseAlphaConfig,
+  moonbaseBetaConfig,
   moonbeamConfig,
   moonriverConfig,
   nodleEdenConfig,

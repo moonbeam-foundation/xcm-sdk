@@ -13,7 +13,7 @@ export const acalaConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: aca,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -23,7 +23,7 @@ export const acalaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: ausd,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -32,13 +32,13 @@ export const acalaConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: aca,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
     new AssetConfig({
       asset: glmr,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
         amount: 0.01,
@@ -47,7 +47,7 @@ export const acalaConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: aca,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),

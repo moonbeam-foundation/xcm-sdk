@@ -12,7 +12,7 @@ export const turingAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: tur,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -25,7 +25,7 @@ export const turingAlphanetConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: dev,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: 0.04,
@@ -34,7 +34,7 @@ export const turingAlphanetConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: tur,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],

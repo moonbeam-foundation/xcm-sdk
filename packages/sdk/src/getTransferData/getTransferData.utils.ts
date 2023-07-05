@@ -7,12 +7,14 @@ export async function getBalance(
   config: AssetConfig,
   polkadot: PolkadotService,
 ) {
-  return polkadot.query(
-    config.balance.build({
-      address,
-      asset: polkadot.chain.getBalanceAssetId(config.asset),
-    }),
-  );
+  const cfg = config.balance.build({
+    address,
+    asset: polkadot.chain.getBalanceAssetId(config.asset),
+  });
+
+  if (cfg.type === CallType.Substrate) {
+    return polkadot.query(cfg);
+  }
 }
 
 export async function getMin(config: AssetConfig, polkadot: PolkadotService) {

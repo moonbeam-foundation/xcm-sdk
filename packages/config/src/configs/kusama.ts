@@ -12,7 +12,7 @@ export const kusamaConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: ksm,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

@@ -12,7 +12,7 @@ export const darwiniaConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: ring,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

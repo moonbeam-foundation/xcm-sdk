@@ -12,7 +12,7 @@ export const litentryAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: lit,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

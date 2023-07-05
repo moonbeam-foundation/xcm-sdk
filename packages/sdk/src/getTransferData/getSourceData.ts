@@ -5,7 +5,7 @@ import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { Signer as EthersSigner } from 'ethers';
-import { createContract } from '../contract';
+import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { SourceChainTransferData } from '../sdk.interfaces';
 import { getBalance, getMin } from './getTransferData.utils';
@@ -166,7 +166,10 @@ export async function getContractFee(
   decimals: number,
   ethersSigner: EthersSigner,
 ): Promise<bigint> {
-  const contract = createContract(config, ethersSigner);
+  const contract = createContract(
+    config,
+    ethersSigner,
+  ) as TransferContractInterface;
   const fee = await contract.getFee(balance);
 
   return convertDecimals(fee, 18, decimals);

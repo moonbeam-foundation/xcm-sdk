@@ -7,6 +7,7 @@ import {
   PalletAssetsAssetAccount,
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
+import { ContractConfig } from '../contract';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
   BalanceConfigBuilder,
@@ -17,9 +18,34 @@ import {
 
 export function BalanceBuilder() {
   return {
+    evm,
+    substrate,
+  };
+}
+
+export function evm() {
+  return {
+    erc20,
+  };
+}
+
+export function substrate() {
+  return {
     assets,
     system,
     tokens,
+  };
+}
+
+function erc20(): BalanceConfigBuilder {
+  return {
+    build: ({ address, asset }) =>
+      new ContractConfig({
+        address: asset as string,
+        args: [address],
+        func: 'balanceOf',
+        module: 'Erc20',
+      }),
   };
 }
 

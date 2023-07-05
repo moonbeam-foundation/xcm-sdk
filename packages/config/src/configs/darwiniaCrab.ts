@@ -12,7 +12,7 @@ export const darwiniaCrabConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: crab,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

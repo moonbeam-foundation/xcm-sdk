@@ -16,7 +16,9 @@
     "Kusama",
     "KUSD",
     "Litentry",
+    "mangata",
     "mnemonic",
+    "nodle",
     "parachain",
     "parachains",
     "Phala",
@@ -28,8 +30,14 @@
     "Suri",
     "TEER"
   ],
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
   "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "typescript.preferences.importModuleSpecifier": "relative",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
   }
 }

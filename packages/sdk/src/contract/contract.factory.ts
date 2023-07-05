@@ -1,14 +1,21 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import { Signer } from 'ethers';
-import { ContractInterface } from './contract.interfaces';
-import { Xtokens } from './contracts/Xtokens';
+import {
+  BalanceContractInterface,
+  TransferContractInterface,
+} from './contract.interfaces';
+import { Erc20, Xtokens } from './contracts';
 
 export function createContract(
   config: ContractConfig,
   signer: Signer,
-): ContractInterface {
+): TransferContractInterface | BalanceContractInterface {
   if (config.module === 'Xtokens') {
     return new Xtokens(config, signer);
+  }
+
+  if (config.module === 'Erc20') {
+    return new Erc20(config, signer);
   }
 
   throw new Error(`Contract ${config.module} not found`);

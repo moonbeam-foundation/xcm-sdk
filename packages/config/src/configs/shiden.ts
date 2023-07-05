@@ -12,7 +12,7 @@ export const shidenConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: sdn,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -25,7 +25,7 @@ export const shidenConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().assets().account(),
+      balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,
       destinationFee: {
         amount: 0.0001,
@@ -37,7 +37,7 @@ export const shidenConfig = new ChainConfig({
         .X2(),
       fee: {
         asset: sdn,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],
