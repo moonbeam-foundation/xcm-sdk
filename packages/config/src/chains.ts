@@ -606,6 +606,7 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: alan,
       id: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
+      metadataId: 0, // no metadata for ERC20 tokens
     },
     {
       asset: auq,

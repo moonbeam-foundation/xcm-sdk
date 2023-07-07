@@ -18,7 +18,7 @@ export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  ethersSigner?: EthersSigner;
+  ethersSigner: EthersSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -50,6 +50,7 @@ export async function getSourceData({
   const balance = await getBalance({
     address: sourceAddress,
     config,
+    ethersSigner,
     polkadot,
   });
   const feeBalance = await getFeeBalances({

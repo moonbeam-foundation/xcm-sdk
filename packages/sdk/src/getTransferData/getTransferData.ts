@@ -3,7 +3,7 @@ import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { createContract } from '../contract';
+import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import {
   DestinationChainTransferData,
@@ -26,6 +26,10 @@ export async function getTransferData({
   sourceAddress,
   transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
+  if (!ethersSigner) {
+    throw new Error('Ethers signer must be provided');
+  }
+
   const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
     transferConfig.destination.chain,
     transferConfig.source.chain,
@@ -33,13 +37,16 @@ export async function getTransferData({
 
   const destination = await getDestinationData({
     destinationAddress,
+    ethersSigner,
     polkadot: destPolkadot,
     transferConfig,
   });
+
   const destinationFee = await getDestinationFeeWithSourceDecimals(
     srcPolkadot,
     destination.fee,
   );
+
   const source = await getSourceData({
     destinationAddress,
     destinationFee,
@@ -116,7 +123,9 @@ export async function getTransferData({
           throw new Error('Ethers signer must be provided');
         }
 
-        return createContract(contract, ethersSigner)
+        return (
+          createContract(contract, ethersSigner) as TransferContractInterface
+        )
           .transfer()
           .then((tx) => tx.hash);
       }
