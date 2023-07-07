@@ -1,5 +1,5 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Contract, Signer } from 'ethers';
+import { Contract } from 'ethers';
 import { BalanceContractInterface } from '../../contract.interfaces';
 import abi from './Erc20ABI.json';
 
@@ -10,17 +10,14 @@ export class Erc20 implements BalanceContractInterface {
 
   readonly #contract: Contract;
 
-  readonly #signer: Signer;
-
-  constructor(config: ContractConfig, signer: Signer) {
+  constructor(config: ContractConfig) {
     if (!config.address) {
       throw new Error('Contract address is required');
     }
 
     this.address = config.address;
     this.#config = config;
-    this.#signer = signer;
-    this.#contract = new Contract(this.address, abi, this.#signer);
+    this.#contract = new Contract(this.address, abi);
   }
 
   async getBalance(): Promise<bigint> {

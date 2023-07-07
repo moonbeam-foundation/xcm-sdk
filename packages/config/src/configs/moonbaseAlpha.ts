@@ -54,13 +54,27 @@ export const moonbaseAlphaConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: moonbaseBeta,
+      destinationFee: {
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        asset: dev,
+      },
+    }),
+    new AssetConfig({
       asset: alan,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbaseBeta,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: alan,
+        asset: dev,
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     // NOTE: Disabling because ws endpoint is not working

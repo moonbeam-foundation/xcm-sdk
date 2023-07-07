@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
+import {
+  ContractConfig,
+  ExtrinsicConfig,
+  SubstrateQueryConfig,
+} from '@moonbeam-network/xcm-builder';
 import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
@@ -43,7 +47,11 @@ export async function getSourceData({
       })
     : zeroAmount;
 
-  const balance = await getBalance(sourceAddress, config, polkadot);
+  const balance = await getBalance({
+    address: sourceAddress,
+    config,
+    polkadot,
+  });
   const feeBalance = await getFeeBalances({
     address: sourceAddress,
     balance,
@@ -121,7 +129,7 @@ export async function getFeeBalances({
         config.fee.balance.build({
           address,
           asset: polkadot.chain.getBalanceAssetId(config.fee.asset),
-        }),
+        }) as SubstrateQueryConfig,
       )
     : balance;
 }

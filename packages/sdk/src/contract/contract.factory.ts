@@ -8,14 +8,18 @@ import { Erc20, Xtokens } from './contracts';
 
 export function createContract(
   config: ContractConfig,
-  signer: Signer,
+  signer?: Signer,
 ): TransferContractInterface | BalanceContractInterface {
-  if (config.module === 'Xtokens') {
-    return new Xtokens(config, signer);
+  if (config.module === 'Erc20') {
+    return new Erc20(config);
   }
 
-  if (config.module === 'Erc20') {
-    return new Erc20(config, signer);
+  if (!signer) {
+    throw new Error('Signer is required for transfer contracts');
+  }
+
+  if (config.module === 'Xtokens') {
+    return new Xtokens(config, signer);
   }
 
   throw new Error(`Contract ${config.module} not found`);

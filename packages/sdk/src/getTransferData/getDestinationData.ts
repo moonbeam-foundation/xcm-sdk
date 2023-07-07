@@ -27,7 +27,11 @@ export async function getDestinationData({
     decimals: await polkadot.getAssetDecimals(asset),
   });
 
-  const balance = await getBalance(destinationAddress, config, polkadot);
+  const balance = await getBalance({
+    address: destinationAddress,
+    config,
+    polkadot,
+  });
   const min = await getMin(config, polkadot);
 
   const balanceAmount = zeroAmount.copyWith({ amount: balance });

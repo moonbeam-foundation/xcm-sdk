@@ -1,20 +1,32 @@
+import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
+import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 
-export async function getBalance(
-  address: string,
-  config: AssetConfig,
-  polkadot: PolkadotService,
-) {
+export interface GetFeeBalancesParams {
+  address: string;
+  config: AssetConfig;
+  polkadot: PolkadotService;
+}
+
+export async function getBalance({
+  address,
+  config,
+  polkadot,
+}: GetFeeBalancesParams) {
   const cfg = config.balance.build({
     address,
     asset: polkadot.chain.getBalanceAssetId(config.asset),
   });
 
   if (cfg.type === CallType.Substrate) {
-    return polkadot.query(cfg);
+    return polkadot.query(cfg as SubstrateQueryConfig);
   }
+
+  const contract = createContract(cfg) as BalanceContractInterface;
+
+  return contract.getBalance();
 }
 
 export async function getMin(config: AssetConfig, polkadot: PolkadotService) {
