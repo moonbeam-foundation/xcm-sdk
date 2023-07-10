@@ -827,6 +827,10 @@ export const moonriver = new EvmParachain({
       id: '105075627293246237499203909093923548958',
     },
     {
+      asset: tur,
+      id: '133300872918374599700079037156071917454',
+    },
+    {
       asset: usdt,
       id: '311091173110107856861649819128533077277',
     },
@@ -1007,6 +1011,28 @@ export const shiden = new Parachain({
   ws: 'wss://shiden.api.onfinality.io/public-ws',
 });
 
+export const turing = new Parachain({
+  assetsData: [
+    {
+      asset: tur,
+      // NOTE: no meta for native token
+      metadataId: 0,
+    },
+    {
+      asset: movr,
+      id: 9,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0x0f62b701fb12d02237a33b84818c11f621653d2b1614c777973babf4652b535d',
+  key: 'turing',
+  name: 'Turing',
+  parachainId: 2114,
+  ss58Format: 51,
+  ws: 'wss://rpc.turing.oak.tech',
+});
+
 export const turingAlphanet = new Parachain({
   assetsData: [
     {
@@ -1099,6 +1125,7 @@ export const chainsList: AnyChain[] = [
   alphanetAssetHub,
   polkadotAssetHub,
   subsocialAlphanet,
+  turing,
   turingAlphanet,
   uniqueAlpha,
 ];
