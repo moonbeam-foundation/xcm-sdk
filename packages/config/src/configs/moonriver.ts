@@ -17,6 +17,7 @@ import {
   rmrk,
   sdn,
   teer,
+  tur,
   usdt,
   xrt,
 } from '../assets';
@@ -37,6 +38,7 @@ import {
   parallelHeiko,
   robonomics,
   shiden,
+  turing,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -120,6 +122,16 @@ export const moonriverConfig = new ChainConfig({
       destination: shiden,
       destinationFee: {
         amount: 0.0002,
+        asset: movr,
+      },
+    }),
+    new AssetConfig({
+      asset: movr,
+      balance: BalanceBuilder().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: turing,
+      destinationFee: {
+        amount: 0.004,
         asset: movr,
       },
     }),
@@ -345,6 +357,20 @@ export const moonriverConfig = new ChainConfig({
       fee: {
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: tur,
+      balance: BalanceBuilder().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: turing,
+      destinationFee: {
+        amount: 0.2,
+        asset: tur,
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().system().account(),
       },
     }),
     new AssetConfig({

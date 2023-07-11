@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.0.7
+
+### Patch Changes
+
+- [#110](https://github.com/PureStake/xcm-sdk/pull/110) [`307f272`](https://github.com/PureStake/xcm-sdk/commit/307f272bbda95add5f986157795cd9b52c347e32) Thanks [@mmaurello](https://github.com/mmaurello)! - Turing integration with Moonriver
+
+- Updated dependencies [[`307f272`](https://github.com/PureStake/xcm-sdk/commit/307f272bbda95add5f986157795cd9b52c347e32)]:
+  - @moonbeam-network/xcm-config@1.0.7
+
 ## 1.0.6
 
 ### Patch Changes
