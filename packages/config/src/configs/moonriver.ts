@@ -127,7 +127,7 @@ export const moonriverConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: turing,
       destinationFee: {
@@ -361,7 +361,7 @@ export const moonriverConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: tur,
-      balance: BalanceBuilder().assets().account(),
+      balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: turing,
       destinationFee: {
@@ -370,7 +370,7 @@ export const moonriverConfig = new ChainConfig({
       },
       fee: {
         asset: movr,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     new AssetConfig({

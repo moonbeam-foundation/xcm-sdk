@@ -21,6 +21,7 @@
     "link": "turbo run link",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
+    "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "test:update": "turbo run test:update",

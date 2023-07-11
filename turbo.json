@@ -17,6 +17,9 @@
     "lint:fix": {
       "outputs": ["src/**/*.ts", "test/**/*.ts"]
     },
+    "typecheck": {
+      "outputs": []
+    },
     "test": {
       "inputs": ["src/**/*.ts", "test/**/*.ts"],
       "outputs": ["src/**/*.snap", "test/**/*.snap"]

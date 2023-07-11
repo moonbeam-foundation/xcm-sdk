@@ -1,4 +1,5 @@
 import { TypeRegistry, U128 } from '@polkadot/types';
+import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import { BalanceBuilder } from './BalanceBuilder';
 
 function balanceOf(number: number | string): U128 {
@@ -16,9 +17,10 @@ describe('balanceBuilder', () => {
   describe('assets', () => {
     describe('account', () => {
       const config = BalanceBuilder()
+        .substrate()
         .assets()
         .account()
-        .build({ address: account, asset });
+        .build({ address: account, asset }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -37,9 +39,10 @@ describe('balanceBuilder', () => {
   describe('system', () => {
     describe('account', () => {
       const config = BalanceBuilder()
+        .substrate()
         .system()
         .account()
-        .build({ address: account, asset });
+        .build({ address: account, asset }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -64,9 +67,10 @@ describe('balanceBuilder', () => {
 
     describe('accountEquilibrium', () => {
       const config = BalanceBuilder()
+        .substrate()
         .system()
         .accountEquilibrium()
-        .build({ address: account, asset: 25969 });
+        .build({ address: account, asset: 25969 }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -146,9 +150,10 @@ describe('balanceBuilder', () => {
   describe('tokens', () => {
     describe('accounts', () => {
       const config = BalanceBuilder()
+        .substrate()
         .tokens()
         .accounts()
-        .build({ address: account, asset });
+        .build({ address: account, asset }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
