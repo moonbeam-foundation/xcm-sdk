@@ -1,5 +1,8 @@
 /* eslint-disable sort-keys */
-import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
+import {
+  ExtrinsicConfigBuilder,
+  XcmVersion,
+} from '../../ExtrinsicBuilder.interfaces';
 import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 import { getWeight } from './xTokens.utils';
@@ -152,40 +155,35 @@ export function xTokens() {
       };
     },
     transferMultiCurrencies: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee, feeAsset, source }) =>
+      build: ({ address, amount, asset, destination, fee, feeAsset }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'transferMulticurrencies',
-          getArgs: (func) => {
-            const version = getExtrinsicArgumentVersion(func, 2);
-
-            return [
-              [
-                [asset, amount],
-                [feeAsset, fee],
-              ],
-              1,
-              {
-                [version]: {
-                  parents: 1,
-                  interior: {
-                    X2: [
-                      {
-                        Parachain: destination.parachainId,
+          getArgs: () => [
+            [
+              [asset, amount],
+              [feeAsset, fee],
+            ],
+            1,
+            {
+              [XcmVersion.v3]: {
+                parents: 1,
+                interior: {
+                  X2: [
+                    {
+                      Parachain: destination.parachainId,
+                    },
+                    {
+                      AccountKey20: {
+                        key: address,
                       },
-                      {
-                        AccountKey20: {
-                          network: 'Any',
-                          key: address,
-                        },
-                      },
-                    ],
-                  },
+                    },
+                  ],
                 },
               },
-              getWeight(source.weight, func),
-            ];
-          },
+            },
+            'Unlimited',
+          ],
         }),
     }),
   };

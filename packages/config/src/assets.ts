@@ -25,6 +25,11 @@ export const ausd = new Asset({
   originSymbol: 'AUSD',
 });
 
+export const betaDEV = new Asset({
+  key: 'beta-dev',
+  originSymbol: 'betaDEV',
+});
+
 export const bnc = new Asset({
   key: 'bnc',
   originSymbol: 'BNC',

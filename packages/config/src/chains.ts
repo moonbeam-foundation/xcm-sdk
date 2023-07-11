@@ -10,6 +10,7 @@ import {
   astr,
   auq,
   ausd,
+  betaDEV,
   bnc,
   cfg,
   crab,
@@ -615,6 +616,7 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
+      metadataId: 0,
       min: 0.01,
     },
     {
@@ -670,8 +672,18 @@ export const moonbaseAlpha = new EvmParachain({
 export const moonbaseBeta = new EvmParachain({
   assetsData: [
     {
+      asset: betaDEV,
+      metadataId: 0, // no metadata for native tokens
+    },
+    {
+      asset: dev,
+      balanceId: '222902676330054289648817870329963141953',
+      id: { ForeignAsset: '222902676330054289648817870329963141953' },
+    },
+    {
       asset: alan,
-      id: '85534404031760856987006367174489651085',
+      balanceId: '85534404031760856987006367174489651085',
+      id: { ForeignAsset: '85534404031760856987006367174489651085' },
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,

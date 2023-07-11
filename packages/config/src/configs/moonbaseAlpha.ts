@@ -1,8 +1,4 @@
-import {
-  BalanceBuilder,
-  ContractBuilder,
-  FeeBuilder,
-} from '@moonbeam-network/xcm-builder';
+import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
   alan,
   dev,
@@ -59,7 +55,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: moonbaseBeta,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: 0.0000001,
         asset: dev,
       },
     }),
@@ -69,7 +65,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbaseBeta,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: 0.0000001,
         asset: dev,
       },
       fee: {
