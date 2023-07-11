@@ -21,3 +21,7 @@ jobs:
 
       - name: 🛠️ Build
         run: npm run build
+
+      - name: 🧪 Run TypeCheck
+        run: npm run typecheck
+

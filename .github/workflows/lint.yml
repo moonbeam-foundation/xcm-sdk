@@ -21,6 +21,3 @@ jobs:
 
       - name: 🧪 Run linter
         run: npm run lint
-
-      - name: 🧪 Run TypeCheck
-        run: npm run typecheck

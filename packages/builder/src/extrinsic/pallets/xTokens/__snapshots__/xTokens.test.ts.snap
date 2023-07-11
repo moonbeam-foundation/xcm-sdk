@@ -163,7 +163,7 @@ exports[`xTokens transferMultiCurrencies should get correct arguments 1`] = `
   ],
   1,
   {
-    "V1": {
+    "V3": {
       "interior": {
         "X2": [
           {
@@ -172,7 +172,6 @@ exports[`xTokens transferMultiCurrencies should get correct arguments 1`] = `
           {
             "AccountKey20": {
               "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-              "network": "Any",
             },
           },
         ],
@@ -180,6 +179,6 @@ exports[`xTokens transferMultiCurrencies should get correct arguments 1`] = `
       "parents": 1,
     },
   },
-  1000000000,
+  "Unlimited",
 ]
 `;
