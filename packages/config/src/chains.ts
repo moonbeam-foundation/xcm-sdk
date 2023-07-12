@@ -694,8 +694,8 @@ export const moonbaseBeta = new EvmParachain({
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
   parachainId: 888,
-  rpc: 'https://rpc.api.moondev.network',
-  ss58Format: 1282,
+  rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
+  ss58Format: 1287,
   ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
 });
 
