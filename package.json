@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/PureStake/xcm-sdk.git"
   },
+  "type": "module",
   "workspaces": [
     "packages/*",
     "examples/*"
@@ -54,6 +55,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "glob": "^10.3.3",
     "husky": "^8.0.3",
     "jest": "^29.6.1",
     "lint-staged": "^13.2.3",
