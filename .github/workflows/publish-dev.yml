@@ -22,7 +22,7 @@ jobs:
       - run: npm ci --ignore-scripts
 
       - name: ✌️ Update versions
-        run: npx ts-node --esm ./scripts/update-versions.ts
+        run: npx ts-node --esm ./scripts/update-dev-versions.ts
 
       - name: 🛠️ Build
         run: npm run build
