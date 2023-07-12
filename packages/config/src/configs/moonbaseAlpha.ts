@@ -55,7 +55,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: moonbaseBeta,
       destinationFee: {
-        amount: 0.0000001,
+        amount: 0.0002,
         asset: dev,
       },
     }),
@@ -65,7 +65,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbaseBeta,
       destinationFee: {
-        amount: 0.0000001,
+        amount: 0.0002,
         asset: dev,
       },
       fee: {
