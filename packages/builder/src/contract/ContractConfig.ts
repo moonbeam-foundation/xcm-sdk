@@ -1,4 +1,4 @@
-import { isAddress } from 'ethers';
+import { ethers } from 'ethers';
 import { CallType } from '../builder.interfaces';
 import { BaseConfig, BaseConfigConstructorParams } from '../types/BaseConfig';
 
@@ -16,7 +16,7 @@ export class ContractConfig extends BaseConfig {
   constructor({ args, address, ...other }: ContractConfigConstructorParams) {
     super({ ...other, type: CallType.Evm });
 
-    if (address && !isAddress(address)) {
+    if (!address && !ethers.isAddress(address)) {
       throw new Error(`Invalid contract address: ${address}`);
     }
 

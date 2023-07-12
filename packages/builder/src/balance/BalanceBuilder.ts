@@ -7,6 +7,7 @@ import {
   PalletAssetsAssetAccount,
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
+import { isString } from '@polkadot/util';
 import { ContractConfig } from '../contract';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
@@ -39,13 +40,18 @@ export function substrate() {
 
 function erc20(): BalanceConfigBuilder {
   return {
-    build: ({ address, asset }) =>
-      new ContractConfig({
-        address: asset as string,
+    build: ({ address, asset }) => {
+      if (!asset || !isString(asset)) {
+        throw new Error(`Invalid contract address: ${asset}`);
+      }
+
+      return new ContractConfig({
+        address: asset,
         args: [address],
         func: 'balanceOf',
         module: 'Erc20',
-      }),
+      });
+    },
   };
 }
 
