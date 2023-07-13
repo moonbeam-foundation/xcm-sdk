@@ -12,7 +12,7 @@ export const turingConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: tur,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -25,7 +25,7 @@ export const turingConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: 0.00001,
@@ -34,7 +34,7 @@ export const turingConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: tur,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],

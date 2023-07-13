@@ -8,6 +8,7 @@
     "link": "npm ln",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
     "test": "jest /src",
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- -u",
@@ -52,13 +53,14 @@
     "@moonbeam-network/xcm-types": "1.0.1",
     "@moonbeam-network/xcm-utils": "1.x",
     "big.js": "^6.2.1",
+    "ethers": "^5.7.2",
     "type-fest": "^3.8.0"
   },
   "peerDependencies": {
-    "@polkadot/api": "^10.8.1",
-    "@polkadot/api-augment": "^10.8.1",
-    "@polkadot/types": "^10.8.1",
-    "@polkadot/util": "^12.2.2",
-    "@polkadot/util-crypto": "^12.2.2"
+    "@polkadot/api": "^10.9.1",
+    "@polkadot/api-augment": "^10.9.1",
+    "@polkadot/types": "^10.9.1",
+    "@polkadot/util": "^12.3.2",
+    "@polkadot/util-crypto": "^12.3.2"
   }
 }

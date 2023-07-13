@@ -6,9 +6,11 @@ import {
 } from '@moonbeam-network/xcm-types';
 import {
   aca,
+  alan,
   astr,
   auq,
   ausd,
+  betaDEV,
   bnc,
   cfg,
   crab,
@@ -603,12 +605,18 @@ export const mangataKusama = new Parachain({
 export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
+      asset: alan,
+      id: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
       asset: auq,
       id: '69536036667157951501899290870203586130',
     },
     {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
+      metadataId: 0,
       min: 0.01,
     },
     {
@@ -662,15 +670,31 @@ export const moonbaseAlpha = new EvmParachain({
 });
 
 export const moonbaseBeta = new EvmParachain({
+  assetsData: [
+    {
+      asset: betaDEV,
+      metadataId: 0, // no metadata for native tokens
+    },
+    {
+      asset: dev,
+      balanceId: '222902676330054289648817870329963141953',
+      id: { ForeignAsset: '222902676330054289648817870329963141953' },
+    },
+    {
+      asset: alan,
+      balanceId: '85534404031760856987006367174489651085',
+      id: { ForeignAsset: '85534404031760856987006367174489651085' },
+    },
+  ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xeebb5d05763801e54d6a7a60a4b7998ac125c4d050dcec418dd07ea959a54464',
-  id: 1287,
+  id: 1282,
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
   parachainId: 888,
-  rpc: 'https://rpc.api.moondev.network',
+  rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
   ss58Format: 1287,
   ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
 });

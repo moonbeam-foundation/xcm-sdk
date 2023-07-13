@@ -12,7 +12,7 @@ export const alphanetRelayConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: unit,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

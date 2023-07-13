@@ -6,7 +6,7 @@ export const uniqueAlphaConfig = new ChainConfig({
   assets: [
     // new AssetConfig({
     //   asset: auq,
-    //   balance: BalanceBuilder().assets().account(),
+    //   balance: BalanceBuilder().substrate().assets().account(),
     //   destination: moonbaseAlpha,
     //   destinationFee: {
     //     amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

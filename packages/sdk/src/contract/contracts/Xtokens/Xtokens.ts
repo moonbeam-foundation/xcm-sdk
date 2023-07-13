@@ -1,10 +1,10 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import { Contract, Signer } from 'ethers';
-import { ContractInterface } from '../../contract.interfaces';
+import { TransferContractInterface } from '../../contract.interfaces';
 import abi from './XtokensABI.json';
 
-export class Xtokens implements ContractInterface {
+export class Xtokens implements TransferContractInterface {
   readonly address: string = '0x0000000000000000000000000000000000000804';
 
   readonly #config: ContractConfig;
@@ -45,7 +45,9 @@ export class Xtokens implements ContractInterface {
       // eslint-disable-next-line no-console
       console.error(error);
 
-      return 0n;
+      throw new Error(
+        "Can't get a fee. Make sure that you have enough balance!",
+      );
     }
   }
 

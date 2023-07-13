@@ -5,6 +5,11 @@ export const aca = new Asset({
   originSymbol: 'ACA',
 });
 
+export const alan = new Asset({
+  key: 'alan',
+  originSymbol: 'ALAN',
+});
+
 export const astr = new Asset({
   key: 'astr',
   originSymbol: 'ASTR',
@@ -18,6 +23,11 @@ export const auq = new Asset({
 export const ausd = new Asset({
   key: 'ausd',
   originSymbol: 'AUSD',
+});
+
+export const betaDEV = new Asset({
+  key: 'beta-dev',
+  originSymbol: 'betaDEV',
 });
 
 export const bnc = new Asset({
@@ -197,6 +207,7 @@ export const xrt = new Asset({
 
 export const assetsList: Asset[] = [
   aca,
+  alan,
   astr,
   auq,
   ausd,

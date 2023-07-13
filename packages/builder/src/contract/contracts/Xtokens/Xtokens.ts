@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { AnyChain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
-import { u8aToHex } from '@polkadot/util';
+import { isString, u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { ContractConfig } from '../../ContractConfig';
@@ -12,7 +12,7 @@ export function Xtokens() {
       build: ({ address, amount, asset, destination }) =>
         new ContractConfig({
           args: [
-            formatAssetIdToERC20(asset as string),
+            isString(asset) ? formatAssetIdToERC20(asset) : asset,
             amount,
             getDestinationMultilocation(address, destination),
             weight,
@@ -28,14 +28,17 @@ export function Xtokens() {
         new ContractConfig({
           args: [
             [
-              [formatAssetIdToERC20(asset as string), amount],
-              [formatAssetIdToERC20(feeAsset as string), fee],
+              [isString(asset) ? formatAssetIdToERC20(asset) : asset, amount],
+              [
+                isString(feeAsset) ? formatAssetIdToERC20(feeAsset) : feeAsset,
+                fee,
+              ],
             ],
             1, // index of the fee asset
             getDestinationMultilocation(address, destination),
             weight,
           ],
-          func: 'transferMulticurrencies',
+          func: 'transferMultiCurrencies',
           module: 'Xtokens',
         }),
     }),

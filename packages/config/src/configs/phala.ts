@@ -12,7 +12,7 @@ export const phalaConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: pha,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -22,7 +22,7 @@ export const phalaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: glmr,
-      balance: BalanceBuilder().assets().account(),
+      balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
         amount: 0.01,
@@ -31,7 +31,7 @@ export const phalaConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().X2(),
       fee: {
         asset: pha,
-        balance: BalanceBuilder().system().account(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],

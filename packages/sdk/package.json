@@ -8,6 +8,7 @@
     "link": "npm ln",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
     "test:acc": "jest --forceExit --testTimeout 300000 ./tests/acceptance",
     "prepack": "prettier --write build/index.d.ts"
   },
@@ -53,10 +54,10 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "^10.8.1",
-    "@polkadot/api-augment": "^10.8.1",
-    "@polkadot/types": "^10.8.1",
-    "@polkadot/util": "^12.2.2",
+    "@polkadot/api": "^10.9.1",
+    "@polkadot/api-augment": "^10.9.1",
+    "@polkadot/types": "^10.9.1",
+    "@polkadot/util": "^12.3.2",
     "ethers": "^5.7.2"
   }
 }

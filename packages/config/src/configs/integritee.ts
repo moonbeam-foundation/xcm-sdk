@@ -12,7 +12,7 @@ export const integriteeConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: teer,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

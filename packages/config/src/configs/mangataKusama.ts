@@ -12,7 +12,7 @@ export const mangataKusamaConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: mgx,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -22,7 +22,7 @@ export const mangataKusamaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: movr,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: 0.000008,
@@ -31,7 +31,7 @@ export const mangataKusamaConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: mgx,
-        balance: BalanceBuilder().tokens().accounts(),
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
     }),
   ],

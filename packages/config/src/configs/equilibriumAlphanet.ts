@@ -12,7 +12,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: eq,
-      balance: BalanceBuilder().system().accountEquilibrium(),
+      balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -22,7 +22,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: eqd,
-      balance: BalanceBuilder().system().accountEquilibrium(),
+      balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -31,12 +31,12 @@ export const equilibriumAlphanetConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
         asset: eq,
-        balance: BalanceBuilder().system().accountEquilibrium(),
+        balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       },
     }),
     new AssetConfig({
       asset: dev,
-      balance: BalanceBuilder().system().accountEquilibrium(),
+      balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: 0.00005,
@@ -45,7 +45,7 @@ export const equilibriumAlphanetConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
         asset: eq,
-        balance: BalanceBuilder().system().accountEquilibrium(),
+        balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       },
     }),
   ],

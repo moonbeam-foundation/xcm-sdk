@@ -3,6 +3,7 @@ import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
+import { Signer as EthersSigner } from 'ethers';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
 import { getBalance, getMin } from './getTransferData.utils';
@@ -10,12 +11,14 @@ import { getBalance, getMin } from './getTransferData.utils';
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
+  ethersSigner: EthersSigner;
   polkadot: PolkadotService;
 }
 
 export async function getDestinationData({
   transferConfig,
   destinationAddress,
+  ethersSigner,
   polkadot,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
   const {
@@ -27,11 +30,17 @@ export async function getDestinationData({
     decimals: await polkadot.getAssetDecimals(asset),
   });
 
-  const balance = await getBalance(destinationAddress, config, polkadot);
+  const balance = await getBalance({
+    address: destinationAddress,
+    config,
+    ethersSigner,
+    polkadot,
+  });
   const min = await getMin(config, polkadot);
 
   const balanceAmount = zeroAmount.copyWith({ amount: balance });
   const { existentialDeposit } = polkadot;
+
   const feeAmount = await getFee({ config: transferConfig, polkadot });
   const minAmount = zeroAmount.copyWith({ amount: min });
 

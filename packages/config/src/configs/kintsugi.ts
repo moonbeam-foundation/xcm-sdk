@@ -12,7 +12,7 @@ export const kintsugiConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: kint,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -22,7 +22,7 @@ export const kintsugiConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: kbtc,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -31,7 +31,7 @@ export const kintsugiConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
         asset: kint,
-        balance: BalanceBuilder().tokens().accounts(),
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
     }),
   ],

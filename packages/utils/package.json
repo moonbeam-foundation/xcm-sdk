@@ -8,6 +8,7 @@
     "link": "npm ln",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
     "test": "jest /src",
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- -u",
@@ -58,6 +59,6 @@
   },
   "peerDependencies": {
     "@polkadot/apps-config": "^0.132.1",
-    "@polkadot/api": "^10.8.1"
+    "@polkadot/api": "^10.9.1"
   }
 }

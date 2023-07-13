@@ -12,7 +12,7 @@ export const robonomicsConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: xrt,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

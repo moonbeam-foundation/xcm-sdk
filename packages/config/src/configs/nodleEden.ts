@@ -12,7 +12,7 @@ export const nodleEdenConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: nodl,
-      balance: BalanceBuilder().system().account(),
+      balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),

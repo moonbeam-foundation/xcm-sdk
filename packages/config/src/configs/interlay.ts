@@ -12,7 +12,7 @@ export const interlayConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: intr,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -22,7 +22,7 @@ export const interlayConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: ibtc,
-      balance: BalanceBuilder().tokens().accounts(),
+      balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
@@ -31,7 +31,7 @@ export const interlayConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
         asset: intr,
-        balance: BalanceBuilder().tokens().accounts(),
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
     }),
   ],
