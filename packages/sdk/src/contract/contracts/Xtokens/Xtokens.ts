@@ -45,7 +45,9 @@ export class Xtokens implements TransferContractInterface {
       // eslint-disable-next-line no-console
       console.error(error);
 
-      return 0n;
+      throw new Error(
+        "Can't get a fee. Make sure that you have enough balance!",
+      );
     }
   }
 
