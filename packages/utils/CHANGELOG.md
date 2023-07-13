@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 1.0.2
+
+### Patch Changes
+
+- [#112](https://github.com/PureStake/xcm-sdk/pull/112) [`697bdbb`](https://github.com/PureStake/xcm-sdk/commit/697bdbbf10e569499f9e10dff0bb3173de01d458) Thanks [@ekenigs](https://github.com/ekenigs)! - ERC20 Alan and DEV tokens from Moonbase Alpha to Beta
+
 ## 1.0.1
 
 ### Patch Changes
