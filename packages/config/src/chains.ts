@@ -751,6 +751,10 @@ export const moonbeam = new EvmParachain({
       id: '101170542313601871197860408087030232491',
     },
     {
+      asset: nodl,
+      id: '309163521958167876851250718453738106865',
+    },
+    {
       asset: para,
       id: '32615670524745285411807346420584982855',
     },
@@ -873,6 +877,23 @@ export const moonriver = new EvmParachain({
   rpc: 'https://rpc.api.moonriver.moonbeam.network',
   ss58Format: 1285,
   ws: 'wss://wss.api.moonriver.moonbeam.network',
+});
+
+export const nodle = new Parachain({
+  assetsData: [
+    {
+      asset: nodl,
+      id: 'NodleNative',
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21',
+  key: 'nodle',
+  name: 'Nodle',
+  parachainId: 2026,
+  ss58Format: 37,
+  ws: 'wss://nodle-parachain.api.onfinality.io/public-ws',
 });
 
 export const nodleEden = new Parachain({
@@ -1138,6 +1159,7 @@ export const chainsList: AnyChain[] = [
   moonbaseBeta,
   moonbeam,
   moonriver,
+  nodle,
   nodleEden,
   parallel,
   parallelHeiko,

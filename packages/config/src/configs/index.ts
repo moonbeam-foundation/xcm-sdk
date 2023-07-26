@@ -29,6 +29,7 @@ import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
+import { nodleConfig } from './nodle';
 import { nodleEdenConfig } from './nodleEden';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
@@ -70,6 +71,7 @@ export const chainsConfigList: ChainConfig[] = [
   moonbaseBetaConfig,
   moonbeamConfig,
   moonriverConfig,
+  nodleConfig,
   nodleEdenConfig,
   parallelConfig,
   parallelHeikoConfig,
