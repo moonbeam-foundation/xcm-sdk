@@ -4,7 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { ausd, kar, movr } from '../assets';
+import { aseed, kar, movr } from '../assets';
 import { karura, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -22,12 +22,12 @@ export const karuraConfig = new ChainConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
     new AssetConfig({
-      asset: ausd,
+      asset: aseed,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: ausd,
+        asset: aseed,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

@@ -1,6 +1,6 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
-  ausd,
+  aseed,
   bnc,
   crab,
   csm,
@@ -136,13 +136,13 @@ export const moonriverConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: ausd,
+      asset: aseed,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: karura,
       destinationFee: {
         amount: 0.256,
-        asset: ausd,
+        asset: aseed,
       },
       fee: {
         asset: movr,

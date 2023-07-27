@@ -7,9 +7,9 @@ import {
 import {
   aca,
   alan,
+  aseed,
   astr,
   auq,
-  ausd,
   betaDEV,
   bnc,
   cfg,
@@ -56,10 +56,10 @@ export const acala = new Parachain({
       metadataId: { NativeAssetId: { Token: aca.originSymbol } },
     },
     {
-      asset: ausd,
-      id: { Token: ausd.originSymbol },
-      metadataId: { NativeAssetId: { Token: ausd.originSymbol } },
-      minId: { NativeAssetId: { Token: ausd.originSymbol } },
+      asset: aseed,
+      id: { Token: 'AUSD' },
+      metadataId: { NativeAssetId: { Token: 'AUSD' } },
+      minId: { NativeAssetId: { Token: 'AUSD' } },
     },
     {
       asset: glmr,
@@ -443,7 +443,7 @@ export const karura = new Parachain({
       metadataId: { NativeAssetId: { Token: kar.originSymbol } },
     },
     {
-      asset: ausd,
+      asset: aseed,
       id: { Token: 'KUSD' },
       metadataId: { NativeAssetId: { Token: 'KUSD' } },
       minId: { NativeAssetId: { Token: 'KUSD' } },
@@ -710,7 +710,7 @@ export const moonbeam = new EvmParachain({
       id: '224077081838586484055667086558292981199',
     },
     {
-      asset: ausd,
+      asset: aseed,
       id: '110021739665376159354538090254163045594',
     },
     {
@@ -786,7 +786,7 @@ export const moonbeam = new EvmParachain({
 export const moonriver = new EvmParachain({
   assetsData: [
     {
-      asset: ausd,
+      asset: aseed,
       id: '214920334981412447805621250067209749032',
     },
     {

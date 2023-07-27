@@ -1,8 +1,8 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
   aca,
+  aseed,
   astr,
-  ausd,
   bnc,
   cfg,
   dot,
@@ -138,13 +138,13 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: ausd,
+      asset: aseed,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: acala,
       destinationFee: {
         amount: 0.256,
-        asset: ausd,
+        asset: aseed,
       },
       fee: {
         asset: glmr,

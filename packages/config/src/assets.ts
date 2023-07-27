@@ -20,9 +20,9 @@ export const auq = new Asset({
   originSymbol: 'AUQ',
 });
 
-export const ausd = new Asset({
-  key: 'ausd',
-  originSymbol: 'AUSD',
+export const aseed = new Asset({
+  key: 'aseed',
+  originSymbol: 'aSEED',
 });
 
 export const betaDEV = new Asset({
@@ -210,7 +210,7 @@ export const assetsList: Asset[] = [
   alan,
   astr,
   auq,
-  ausd,
+  aseed,
   bnc,
   cfg,
   crab,
