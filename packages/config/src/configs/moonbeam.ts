@@ -1,8 +1,8 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
   aca,
+  aseed,
   astr,
-  ausd,
   bnc,
   cfg,
   dot,
@@ -12,6 +12,7 @@ import {
   hdx,
   ibtc,
   intr,
+  nodl,
   para,
   pha,
   ring,
@@ -27,6 +28,7 @@ import {
   hydraDX,
   interlay,
   moonbeam,
+  nodle,
   parallel,
   phala,
   polkadot,
@@ -136,13 +138,13 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: ausd,
+      asset: aseed,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: acala,
       destinationFee: {
         amount: 0.256,
-        asset: ausd,
+        asset: aseed,
       },
       fee: {
         asset: glmr,
@@ -241,6 +243,20 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.748,
         asset: intr,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: nodl,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: nodle,
+      destinationFee: {
+        amount: 0.02,
+        asset: nodl,
       },
       fee: {
         asset: glmr,
