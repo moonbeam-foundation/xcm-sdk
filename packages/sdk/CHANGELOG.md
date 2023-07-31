@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.0.9
+
+### Patch Changes
+
+- [#116](https://github.com/PureStake/xcm-sdk/pull/116) [`8105b09`](https://github.com/PureStake/xcm-sdk/commit/8105b094737d75f11bf9baa9083d0986d78242c1) Thanks [@mmaurello](https://github.com/mmaurello)! - Nodle integration with moonbeam - change aUSD name
+
+- Updated dependencies [[`8105b09`](https://github.com/PureStake/xcm-sdk/commit/8105b094737d75f11bf9baa9083d0986d78242c1)]:
+  - @moonbeam-network/xcm-config@1.0.9
+
 ## 1.0.8
 
 ### Patch Changes
