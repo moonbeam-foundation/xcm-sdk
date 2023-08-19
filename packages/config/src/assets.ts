@@ -200,11 +200,6 @@ export const unit = new Asset({
   originSymbol: 'Unit',
 });
 
-export const usdc = new Asset({
-  key: 'usdc',
-  originSymbol: 'USDC',
-});
-
 export const usdt = new Asset({
   key: 'usdt',
   originSymbol: 'USDT',
@@ -228,6 +223,11 @@ export const weth = new Asset({
 export const wftm = new Asset({
   key: 'wftm',
   originSymbol: 'wFTM',
+});
+
+export const whusdc = new Asset({
+  key: 'whusdc',
+  originSymbol: 'whUSDC',
 });
 
 export const assetsList: Asset[] = [
@@ -270,12 +270,12 @@ export const assetsList: Asset[] = [
   tt1,
   tur,
   unit,
-  usdc,
   usdt,
   xrt,
   wbtc,
   weth,
   wftm,
+  whusdc,
 ];
 
 export const assetsMap = new Map<string, Asset>(

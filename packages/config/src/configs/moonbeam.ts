@@ -16,10 +16,10 @@ import {
   para,
   pha,
   ring,
-  usdc,
   usdt,
   wbtc,
   weth,
+  whusdc,
 } from '../assets';
 import {
   acala,
@@ -352,20 +352,6 @@ export const moonbeamConfig = new ChainConfig({
     //   },
     // }),
     new AssetConfig({
-      asset: usdc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
-      destinationFee: {
-        amount: 0.004,
-        asset: usdc,
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
       asset: wbtc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -387,6 +373,20 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.000002,
         asset: weth,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: whusdc,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDX,
+      destinationFee: {
+        amount: 0.004,
+        asset: whusdc,
       },
       fee: {
         asset: glmr,
