@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { glmr, hdx } from '../assets';
+import { glmr, hdx, usdc, wbtc, weth } from '../assets';
 import { hydraDX, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -29,6 +29,63 @@ export const hydraDxConfig = new ChainConfig({
         asset: glmr,
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+    }),
+    // TODO pending tests
+    // new AssetConfig({
+    //   asset: dai,
+    //   balance: BalanceBuilder().substrate().tokens().accounts(),
+    //   destination: moonbeam,
+    //   destinationFee: {
+    //     amount: 0.04,
+    //     asset: glmr,
+    //   },
+    //   extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+    //   fee: {
+    //     asset: hdx,
+    //     balance: BalanceBuilder().substrate().system().account(),
+    //   },
+    // }),
+    new AssetConfig({
+      asset: usdc,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr,
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: wbtc,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr,
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: weth,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr,
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
     }),
   ],
   chain: hydraDX,
