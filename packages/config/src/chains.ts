@@ -45,10 +45,10 @@ import {
   tt1,
   tur,
   unit,
+  usdc,
   usdt,
   wbtc,
   weth,
-  whusdc,
   xrt,
 } from './assets';
 
@@ -391,7 +391,7 @@ export const hydraDX = new Parachain({
       id: 18,
     },
     {
-      asset: whusdc,
+      asset: usdc,
       id: 21,
     },
     {
@@ -792,7 +792,7 @@ export const moonbeam = new EvmParachain({
       id: '125699734534028342599692732320197985871',
     },
     {
-      asset: whusdc,
+      asset: usdc,
       id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
       metadataId: 0, // no metadata for ERC20 tokens
     },
