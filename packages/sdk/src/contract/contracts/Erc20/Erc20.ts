@@ -25,4 +25,10 @@ export class Erc20 implements BalanceContractInterface {
 
     return balance.toBigInt();
   }
+
+  async getDecimals(): Promise<number> {
+    const decimals = await this.#contract.decimals();
+
+    return decimals;
+  }
 }

@@ -12,7 +12,7 @@ import { Signer as EthersSigner } from 'ethers';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { SourceChainTransferData } from '../sdk.interfaces';
-import { getBalance, getMin } from './getTransferData.utils';
+import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
@@ -38,12 +38,23 @@ export async function getSourceData({
   } = transferConfig;
   const zeroAmount = AssetAmount.fromAsset(asset, {
     amount: 0n,
-    decimals: await polkadot.getAssetDecimals(asset),
+    decimals: await getDecimals({
+      address: destinationAddress,
+      config,
+      ethersSigner,
+      polkadot,
+    }),
   });
   const zeroFeeAmount = config.fee?.asset
     ? AssetAmount.fromAsset(config.fee.asset, {
         amount: 0n,
-        decimals: await polkadot.getAssetDecimals(config.fee.asset),
+        decimals: await getDecimals({
+          address: destinationAddress,
+          asset: config.fee.asset,
+          config,
+          ethersSigner,
+          polkadot,
+        }),
       })
     : zeroAmount;
 

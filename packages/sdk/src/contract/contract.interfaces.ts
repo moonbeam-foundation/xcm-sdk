@@ -11,4 +11,5 @@ export interface TransferContractInterface extends BaseContractInterface {
 
 export interface BalanceContractInterface extends BaseContractInterface {
   getBalance(): Promise<bigint>;
+  getDecimals(): Promise<number>;
 }

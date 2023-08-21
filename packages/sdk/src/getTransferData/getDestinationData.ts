@@ -6,7 +6,7 @@ import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { Signer as EthersSigner } from 'ethers';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
-import { getBalance, getMin } from './getTransferData.utils';
+import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
@@ -25,9 +25,15 @@ export async function getDestinationData({
     asset,
     destination: { chain, config },
   } = transferConfig;
+
   const zeroAmount = AssetAmount.fromAsset(asset, {
     amount: 0n,
-    decimals: await polkadot.getAssetDecimals(asset),
+    decimals: await getDecimals({
+      address: destinationAddress,
+      config,
+      ethersSigner,
+      polkadot,
+    }),
   });
 
   const balance = await getBalance({

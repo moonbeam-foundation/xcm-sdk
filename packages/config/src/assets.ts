@@ -70,6 +70,11 @@ export const eqd = new Asset({
   originSymbol: 'EQD',
 });
 
+export const dai = new Asset({
+  key: 'dai',
+  originSymbol: 'DAI',
+});
+
 export const glmr = new Asset({
   key: 'glmr',
   originSymbol: 'GLMR',
@@ -195,9 +200,29 @@ export const unit = new Asset({
   originSymbol: 'Unit',
 });
 
+export const usdc = new Asset({
+  key: 'usdc',
+  originSymbol: 'USDC',
+});
+
 export const usdt = new Asset({
   key: 'usdt',
   originSymbol: 'USDT',
+});
+
+export const wbtc = new Asset({
+  key: 'wbtc',
+  originSymbol: 'WBTC',
+});
+
+export const weth = new Asset({
+  key: 'weth',
+  originSymbol: 'WETH',
+});
+
+export const wftm = new Asset({
+  key: 'wftm',
+  originSymbol: 'wFTM',
 });
 
 export const xrt = new Asset({
@@ -215,6 +240,7 @@ export const assetsList: Asset[] = [
   cfg,
   crab,
   csm,
+  dai,
   dev,
   dot,
   eq,
@@ -244,8 +270,12 @@ export const assetsList: Asset[] = [
   tt1,
   tur,
   unit,
+  usdc,
   usdt,
   xrt,
+  wbtc,
+  weth,
+  wftm,
 ];
 
 export const assetsMap = new Map<string, Asset>(

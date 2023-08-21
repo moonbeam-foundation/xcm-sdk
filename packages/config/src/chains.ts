@@ -15,6 +15,7 @@ import {
   cfg,
   crab,
   csm,
+  dai,
   dev,
   dot,
   eq,
@@ -44,7 +45,10 @@ import {
   tt1,
   tur,
   unit,
+  usdc,
   usdt,
+  wbtc,
+  weth,
   xrt,
 } from './assets';
 
@@ -381,6 +385,22 @@ export const hydraDX = new Parachain({
     {
       asset: glmr,
       id: 16,
+    },
+    {
+      asset: dai,
+      id: 18,
+    },
+    {
+      asset: usdc,
+      id: 21,
+    },
+    {
+      asset: wbtc,
+      id: 19,
+    },
+    {
+      asset: weth,
+      id: 20,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -721,6 +741,11 @@ export const moonbeam = new EvmParachain({
       asset: cfg,
       id: '91372035960551235635465443179559840483',
     },
+    // {
+    //   asset: dai,
+    //   id: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
+    //   metadataId: 0, // no metadata for ERC20 tokens
+    // },
     {
       asset: dot,
       id: '42259045809535163221576417993425387648',
@@ -767,8 +792,23 @@ export const moonbeam = new EvmParachain({
       id: '125699734534028342599692732320197985871',
     },
     {
+      asset: usdc,
+      id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
       asset: usdt,
       id: '311091173110107856861649819128533077277',
+    },
+    {
+      asset: wbtc,
+      id: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: weth,
+      id: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
+      metadataId: 0, // no metadata for ERC20 tokens
     },
   ],
   ecosystem: Ecosystem.Polkadot,
