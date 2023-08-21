@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.10
+
+### Patch Changes
+
+- [#118](https://github.com/PureStake/xcm-sdk/pull/118) [`911d03d`](https://github.com/PureStake/xcm-sdk/commit/911d03dd3e1e5e3e7abe5ea43f4d0cd7f5a73e83) Thanks [@mmaurello](https://github.com/mmaurello)! - Integrate Wormhole ERC20 tokens
+
 ## 1.0.9
 
 ### Patch Changes
