@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.11
+
+### Patch Changes
+
+- [#120](https://github.com/PureStake/xcm-sdk/pull/120) [`220878d`](https://github.com/PureStake/xcm-sdk/commit/220878d74d492f41c998372b7ed9a43d99e1f4da) Thanks [@ekenigs](https://github.com/ekenigs)! - Added DAI for HydraDX - Moonbeam
+
 ## 1.0.10
 
 ### Patch Changes
