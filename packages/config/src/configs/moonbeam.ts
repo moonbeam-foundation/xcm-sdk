@@ -5,6 +5,7 @@ import {
   astr,
   bnc,
   cfg,
+  dai,
   dot,
   eq,
   eqd,
@@ -336,21 +337,20 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    // TODO pending tests
-    // new AssetConfig({
-    //   asset: dai,
-    //   balance: BalanceBuilder().evm().erc20(),
-    //   contract: ContractBuilder().Xtokens().transfer(),
-    //   destination: hydraDX,
-    //   destinationFee: {
-    //     amount: 0.0002, // TODO
-    //     asset: glmr,
-    //   },
-    //   fee: {
-    //     asset: glmr,
-    //     balance: BalanceBuilder().substrate().system().account(),
-    //   },
-    // }),
+    new AssetConfig({
+      asset: dai,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDX,
+      destinationFee: {
+        amount: 0.0002, // TODO
+        asset: glmr,
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
     new AssetConfig({
       asset: usdc,
       balance: BalanceBuilder().evm().erc20(),
