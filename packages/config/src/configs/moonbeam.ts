@@ -343,8 +343,8 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: hydraDX,
       destinationFee: {
-        amount: 0.0002, // TODO
-        asset: glmr,
+        amount: 0.004,
+        asset: dai,
       },
       fee: {
         asset: glmr,
