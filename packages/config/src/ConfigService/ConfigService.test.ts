@@ -1,23 +1,20 @@
 import { Asset, Ecosystem, EvmParachain } from '@moonbeam-network/xcm-types';
 import { assetsList, dev, tt1, unit } from '../assets';
 import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
-import {
-  getAsset,
-  getChain,
-  getEcosystemAssets,
-  getSourceChains,
-} from './ConfigBuilder.utils';
+import { ConfigService } from './ConfigService';
 
-describe('config utils', () => {
+describe('config service', () => {
+  const configService = new ConfigService();
+
   describe('getEcosystemAssets', () => {
     it('should return all assets', () => {
-      const assets = getEcosystemAssets();
+      const assets = configService.getEcosystemAssets();
 
       expect(assets).toStrictEqual(assetsList);
     });
 
     it('should return assets for a given ecosystem', () => {
-      const assets = getEcosystemAssets(Ecosystem.AlphanetRelay);
+      const assets = configService.getEcosystemAssets(Ecosystem.AlphanetRelay);
 
       expect(assets.length).toBeLessThan(assetsList.length);
       expect(assets).toStrictEqual(expect.arrayContaining([dev, unit, tt1]));
@@ -26,20 +23,22 @@ describe('config utils', () => {
 
   describe('getAsset', () => {
     it('should get asset by key', () => {
-      expect(getAsset(dev.key)).toStrictEqual(dev);
+      expect(configService.getAsset(dev.key)).toStrictEqual(dev);
     });
 
     it('should get asset by asset', () => {
-      expect(getAsset(dev)).toStrictEqual(dev);
+      expect(configService.getAsset(dev)).toStrictEqual(dev);
     });
 
     it('should throw an error if asset not found', () => {
-      expect(() => getAsset('test')).toThrow(new Error('Asset test not found'));
+      expect(() => configService.getAsset('test')).toThrow(
+        new Error('Asset test not found'),
+      );
     });
 
     it('should throw an error if asset is not in the config', () => {
       expect(() =>
-        getAsset(
+        configService.getAsset(
           new Asset({
             key: 'test',
             originSymbol: 'test',
@@ -51,20 +50,26 @@ describe('config utils', () => {
 
   describe('getChain', () => {
     it('should get chain by key', () => {
-      expect(getChain(moonbaseAlpha.key)).toStrictEqual(moonbaseAlpha);
+      expect(configService.getChain(moonbaseAlpha.key)).toStrictEqual(
+        moonbaseAlpha,
+      );
     });
 
     it('should get chain by chain', () => {
-      expect(getChain(moonbaseAlpha)).toStrictEqual(moonbaseAlpha);
+      expect(configService.getChain(moonbaseAlpha)).toStrictEqual(
+        moonbaseAlpha,
+      );
     });
 
     it('should throw an error if chain not found', () => {
-      expect(() => getChain('test')).toThrow(new Error('Chain test not found'));
+      expect(() => configService.getChain('test')).toThrow(
+        new Error('Chain test not found'),
+      );
     });
 
     it('should throw an error if chain is not in the config', () => {
       expect(() =>
-        getChain(
+        configService.getChain(
           new EvmParachain({
             ecosystem: Ecosystem.AlphanetRelay,
             genesisHash: '',
@@ -84,7 +89,10 @@ describe('config utils', () => {
 
   describe('getSourceChains', () => {
     it('should get source chains for asset', () => {
-      const chains = getSourceChains(dev, Ecosystem.AlphanetRelay);
+      const chains = configService.getSourceChains(
+        dev,
+        Ecosystem.AlphanetRelay,
+      );
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([moonbaseAlpha, equilibriumAlphanet]),
