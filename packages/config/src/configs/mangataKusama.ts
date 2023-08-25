@@ -17,6 +17,7 @@ export const mangataKusamaConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: mgx,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
@@ -27,6 +28,7 @@ export const mangataKusamaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.000008,
         asset: movr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

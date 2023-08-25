@@ -18,8 +18,7 @@ export interface AssetConfigConstructorParams {
   min?: AssetMinConfigBuilder;
 }
 
-export interface DestinationFeeConfig {
-  asset: Asset;
+export interface DestinationFeeConfig extends FeeAssetConfig {
   amount: number | FeeConfigBuilder;
 }
 

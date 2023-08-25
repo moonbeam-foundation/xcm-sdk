@@ -4,7 +4,7 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
+import { FeeAssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
@@ -57,6 +57,18 @@ export async function getSourceData({
         }),
       })
     : zeroAmount;
+  const zeroDestinationFeeAmount = config.destinationFee?.asset
+    ? AssetAmount.fromAsset(config.destinationFee.asset, {
+        amount: 0n,
+        decimals: await getDecimals({
+          address: destinationAddress,
+          asset: config.destinationFee.asset,
+          config,
+          ethersSigner,
+          polkadot,
+        }),
+      })
+    : zeroAmount;
 
   const balance = await getBalance({
     address: sourceAddress,
@@ -64,12 +76,24 @@ export async function getSourceData({
     ethersSigner,
     polkadot,
   });
+
   const feeBalance = await getFeeBalances({
     address: sourceAddress,
     balance,
-    config,
+    feeConfig: config.fee,
     polkadot,
   });
+
+  const destinationFeeBalance =
+    config.asset === config.destinationFee.asset
+      ? balance
+      : await getFeeBalances({
+          address: sourceAddress,
+          balance,
+          feeConfig: config.destinationFee,
+          polkadot,
+        });
+
   const min = await getMin(config, polkadot);
 
   const extrinsic = config.extrinsic?.build({
@@ -104,6 +128,9 @@ export async function getSourceData({
   const { existentialDeposit } = polkadot;
   const feeAmount = zeroFeeAmount.copyWith({ amount: fee });
   const feeBalanceAmount = zeroFeeAmount.copyWith({ amount: feeBalance });
+  const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
+    amount: destinationFeeBalance,
+  });
   const minAmount = zeroAmount.copyWith({ amount: min });
   const maxAmount = getMax({
     balanceAmount,
@@ -115,6 +142,7 @@ export async function getSourceData({
   return {
     balance: balanceAmount,
     chain,
+    destinationFeeBalance: destinationFeeBalanceAmount,
     existentialDeposit,
     fee: feeAmount,
     feeBalance: feeBalanceAmount,
@@ -126,21 +154,21 @@ export async function getSourceData({
 export interface GetBalancesParams {
   address: string;
   balance: bigint;
-  config: AssetConfig;
+  feeConfig: FeeAssetConfig | undefined;
   polkadot: PolkadotService;
 }
 
 export async function getFeeBalances({
   address,
   balance,
-  config,
+  feeConfig,
   polkadot,
 }: GetBalancesParams) {
-  return config.fee
+  return feeConfig
     ? polkadot.query(
-        config.fee.balance.build({
+        feeConfig.balance.build({
           address,
-          asset: polkadot.chain.getBalanceAssetId(config.fee.asset),
+          asset: polkadot.chain.getBalanceAssetId(feeConfig.asset),
         }) as SubstrateQueryConfig,
       )
     : balance;

@@ -17,6 +17,7 @@ export const khalaConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: pha,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
     }),
@@ -27,6 +28,7 @@ export const khalaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0001,
         asset: movr,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().X2(),
       fee: {
