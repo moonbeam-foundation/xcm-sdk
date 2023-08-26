@@ -1,9 +1,9 @@
 /* eslint-disable sort-keys */
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
-import { ConfigService } from '../ConfigService';
+import { ConfigService, IConfigService } from '../ConfigService';
 import { TransferConfig } from './ConfigBuilder.interfaces';
 
-export function ConfigBuilder(service?: ConfigService) {
+export function ConfigBuilder(service?: IConfigService) {
   const config = service ?? new ConfigService();
   return {
     assets: (ecosystem?: Ecosystem) => {
