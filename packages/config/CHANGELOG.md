@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.0.12
+
+### Patch Changes
+
+- [#125](https://github.com/PureStake/xcm-sdk/pull/125) [`9d7146e`](https://github.com/PureStake/xcm-sdk/commit/9d7146e674688640476e33dac70210589446e727) Thanks [@jak-pan](https://github.com/jak-pan)! - Update HydraDX rpc endpoint in chains.ts
+
 ## 1.0.11
 
 ### Patch Changes

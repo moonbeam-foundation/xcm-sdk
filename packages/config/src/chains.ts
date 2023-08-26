@@ -410,7 +410,7 @@ export const hydraDX = new Parachain({
   name: 'HydraDX',
   parachainId: 2034,
   ss58Format: 63,
-  ws: 'wss://hydradx.api.onfinality.io/public-ws',
+  ws: 'wss://rpc.hydradx.cloud',
 });
 
 export const interlay = new Parachain({
