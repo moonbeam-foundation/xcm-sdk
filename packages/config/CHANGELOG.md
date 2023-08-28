@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.1.0
+
+### Minor Changes
+
+- [#127](https://github.com/PureStake/xcm-sdk/pull/127) [`876c5eb`](https://github.com/PureStake/xcm-sdk/commit/876c5eb937b1b0f44943a0fee8c0accb19f3747d) Thanks [@mmaurello](https://github.com/mmaurello)! - Return destination fee balance object for controlling enough balance
+
 ## 1.0.12
 
 ### Patch Changes
