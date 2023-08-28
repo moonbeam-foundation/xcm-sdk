@@ -84,9 +84,10 @@ export async function getSourceData({
     polkadot,
   });
 
-  const destinationFeeBalance =
-    config.asset === config.destinationFee.asset
-      ? balance
+  const destinationFeeBalance = config.asset.isEqual(
+    config.destinationFee.asset,
+  )
+    ? balance
       : await getFeeBalances({
           address: sourceAddress,
           balance,
