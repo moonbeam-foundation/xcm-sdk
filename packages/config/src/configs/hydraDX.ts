@@ -17,6 +17,7 @@ export const hydraDxConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
@@ -27,6 +28,7 @@ export const hydraDxConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
@@ -37,6 +39,7 @@ export const hydraDxConfig = new ChainConfig({
       destinationFee: {
         amount: 0.04,
         asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
@@ -51,6 +54,7 @@ export const hydraDxConfig = new ChainConfig({
       destinationFee: {
         amount: 0.04,
         asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
@@ -65,6 +69,7 @@ export const hydraDxConfig = new ChainConfig({
       destinationFee: {
         amount: 0.04,
         asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
@@ -79,6 +84,7 @@ export const hydraDxConfig = new ChainConfig({
       destinationFee: {
         amount: 0.04,
         asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {

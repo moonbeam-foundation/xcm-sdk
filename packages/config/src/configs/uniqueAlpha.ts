@@ -11,6 +11,7 @@ export const uniqueAlphaConfig = new ChainConfig({
     //   destinationFee: {
     //     amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
     //     asset: auq,
+    //     balance: BalanceBuilder().substrate().assets().account(),
     //   },
     //   extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     // }),

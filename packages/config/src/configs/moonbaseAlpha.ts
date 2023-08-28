@@ -37,6 +37,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 4,
         asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     new AssetConfig({
@@ -47,6 +48,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.00001,
         asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     new AssetConfig({
@@ -57,6 +59,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0002,
         asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     new AssetConfig({
@@ -67,6 +70,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0002,
         asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       fee: {
         asset: dev,
@@ -96,6 +100,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 14,
         asset: eq,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -110,6 +115,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 4,
         asset: eqd,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -124,6 +130,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.032,
         asset: lit,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -138,6 +145,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.02,
         asset: nodl,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -152,6 +160,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 4,
         asset: paring,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -166,6 +175,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.4,
         asset: soon,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -180,6 +190,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 5,
         asset: tt1,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -194,6 +205,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.2,
         asset: tur,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,
@@ -208,6 +220,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0506,
         asset: unit,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: dev,

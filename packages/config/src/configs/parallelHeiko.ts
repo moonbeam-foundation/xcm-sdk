@@ -17,6 +17,7 @@ export const parallelHeikoConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: hko,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder()
         .xTokens()
@@ -30,6 +31,7 @@ export const parallelHeikoConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0001,
         asset: movr,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

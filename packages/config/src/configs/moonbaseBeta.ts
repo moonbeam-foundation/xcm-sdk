@@ -16,6 +16,7 @@ export const moonbaseBetaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0002,
         asset: dev,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
@@ -30,6 +31,7 @@ export const moonbaseBetaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0002,
         asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {

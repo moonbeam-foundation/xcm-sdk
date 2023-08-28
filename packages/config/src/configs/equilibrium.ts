@@ -17,6 +17,7 @@ export const equilibriumConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: eq,
+        balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
     }),
@@ -27,6 +28,7 @@ export const equilibriumConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: eq,
+        balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
@@ -41,6 +43,7 @@ export const equilibriumConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: glmr,
+        balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
       fee: {
