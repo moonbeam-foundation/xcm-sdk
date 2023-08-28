@@ -88,12 +88,12 @@ export async function getSourceData({
     config.destinationFee.asset,
   )
     ? balance
-      : await getFeeBalances({
-          address: sourceAddress,
-          balance,
-          feeConfig: config.destinationFee,
-          polkadot,
-        });
+    : await getFeeBalances({
+        address: sourceAddress,
+        balance,
+        feeConfig: config.destinationFee,
+        polkadot,
+      });
 
   const min = await getMin(config, polkadot);
 
