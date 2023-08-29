@@ -18,6 +18,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: bnc,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
@@ -28,6 +29,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

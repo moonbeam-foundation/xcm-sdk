@@ -18,6 +18,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()

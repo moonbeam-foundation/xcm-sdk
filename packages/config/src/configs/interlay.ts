@@ -17,6 +17,7 @@ export const interlayConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: intr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
@@ -27,6 +28,7 @@ export const interlayConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: intr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {

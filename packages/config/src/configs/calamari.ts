@@ -18,6 +18,7 @@ export const calamariConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: kma,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
@@ -28,6 +29,7 @@ export const calamariConfig = new ChainConfig({
       destinationFee: {
         amount: 0.0001,
         asset: movr,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

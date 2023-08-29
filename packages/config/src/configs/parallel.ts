@@ -17,6 +17,7 @@ export const parallelConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: para,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder()
         .xTokens()
@@ -30,6 +31,7 @@ export const parallelConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: glmr,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {

@@ -17,6 +17,7 @@ export const litentryAlphanetConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: lit,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),

@@ -17,6 +17,7 @@ export const astarConfig = new ChainConfig({
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: astr,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
@@ -30,6 +31,7 @@ export const astarConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: glmr,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
