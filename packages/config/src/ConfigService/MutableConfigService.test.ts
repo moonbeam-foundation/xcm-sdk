@@ -74,6 +74,7 @@ describe('mutable config service', () => {
         destinationFee: {
           amount: 0.02,
           asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
@@ -100,6 +101,7 @@ describe('mutable config service', () => {
         destinationFee: {
           amount: 0.02,
           asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
@@ -126,6 +128,7 @@ describe('mutable config service', () => {
         destinationFee: {
           amount: 0.02,
           asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
@@ -148,6 +151,7 @@ describe('mutable config service', () => {
         destinationFee: {
           amount: 0.02,
           asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
