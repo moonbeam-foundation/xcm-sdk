@@ -6,6 +6,12 @@ import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 import { IConfigService } from './ConfigService.interfaces';
 
+export interface ConfigServiceOptions {
+  assets?: Map<string, Asset>;
+  chains?: Map<string, AnyChain>;
+  chainsConfig?: Map<string, ChainConfig>;
+}
+
 export class ConfigService implements IConfigService {
   protected assets: Map<string, Asset>;
 
@@ -13,10 +19,10 @@ export class ConfigService implements IConfigService {
 
   protected chainsConfig: Map<string, ChainConfig>;
 
-  constructor() {
-    this.assets = assetsMap;
-    this.chains = chainsMap;
-    this.chainsConfig = chainsConfigMap;
+  constructor(options?: ConfigServiceOptions) {
+    this.assets = options?.assets ?? assetsMap;
+    this.chains = options?.chains ?? chainsMap;
+    this.chainsConfig = options?.chainsConfig ?? chainsConfigMap;
   }
 
   getEcosystemAssets(ecosystem?: Ecosystem): Asset[] {
@@ -112,11 +118,5 @@ export class ConfigService implements IConfigService {
 
   updateChainConfig(chainConfig: ChainConfig): void {
     this.chainsConfig.set(chainConfig.chain.key, chainConfig);
-  }
-
-  clear(): void {
-    this.assets.clear();
-    this.chains.clear();
-    this.chainsConfig.clear();
   }
 }

@@ -201,18 +201,4 @@ describe('config service', () => {
       );
     });
   });
-
-  describe('clear', () => {
-    it('should wipe the config', () => {
-      configService.updateAsset(dev);
-      configService.updateChain(TEST_CHAIN);
-      configService.clear();
-      expect(() => configService.getAsset(dev.key)).toThrow(
-        new Error('Asset dev not found'),
-      );
-      expect(() => configService.getChain(TEST_CHAIN.key)).toThrow(
-        new Error('Chain test not found'),
-      );
-    });
-  });
 });
