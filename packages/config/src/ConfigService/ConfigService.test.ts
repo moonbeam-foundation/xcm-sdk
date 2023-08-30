@@ -1,7 +1,35 @@
-import { Asset, Ecosystem, EvmParachain } from '@moonbeam-network/xcm-types';
-import { assetsList, dev, tt1, unit } from '../assets';
-import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
+import {
+  BalanceBuilder,
+  ExtrinsicBuilder,
+} from '@moonbeam-network/xcm-builder';
+import {
+  Asset,
+  Ecosystem,
+  EvmParachain,
+  Parachain,
+} from '@moonbeam-network/xcm-types';
+import { assetsList, dev, glmr, tt1, unit } from '../assets';
+import {
+  equilibriumAlphanet,
+  hydraDX,
+  moonbaseAlpha,
+  moonbeam,
+} from '../chains';
 import { ConfigService } from './ConfigService';
+
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
+
+const TEST_CHAIN = new Parachain({
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash: '',
+  isTestChain: true,
+  key: 'test',
+  name: 'test',
+  parachainId: 9999,
+  ss58Format: 1999,
+  ws: '',
+});
 
 describe('config service', () => {
   const configService = new ConfigService();
@@ -96,6 +124,94 @@ describe('config service', () => {
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([moonbaseAlpha, equilibriumAlphanet]),
+      );
+    });
+  });
+
+  describe('updateAssets', () => {
+    it('should register new asset', () => {
+      const asset = new Asset({
+        key: 'test',
+        originSymbol: 'TEST',
+      });
+      configService.updateAsset(asset);
+      const registeredAsset = configService.getAsset(asset.key);
+      expect(asset).toStrictEqual(registeredAsset);
+    });
+  });
+
+  describe('updateChains', () => {
+    it('should register new chain', () => {
+      configService.updateChain(TEST_CHAIN);
+      const registeredChain = configService.getChain(TEST_CHAIN.key);
+      expect(TEST_CHAIN).toStrictEqual(registeredChain);
+    });
+  });
+
+  describe('updateChainConfig', () => {
+    it('should update existing chain config', () => {
+      const assetConfig = new AssetConfig({
+        asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        destination: moonbeam,
+        destinationFee: {
+          amount: 0.02,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
+        extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      });
+
+      const chainConfig = new ChainConfig({
+        assets: [assetConfig],
+        chain: hydraDX,
+      });
+
+      configService.updateChainConfig(chainConfig);
+      const updated = configService.getChainConfig(hydraDX);
+      expect(updated.getAssetsConfigs()).toStrictEqual(
+        chainConfig.getAssetsConfigs(),
+      );
+    });
+
+    it('should create new chain config', () => {
+      configService.updateChain(TEST_CHAIN);
+
+      const assetConfig = new AssetConfig({
+        asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        destination: moonbeam,
+        destinationFee: {
+          amount: 0.02,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
+        extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      });
+
+      const chainConfig = new ChainConfig({
+        assets: [assetConfig],
+        chain: TEST_CHAIN,
+      });
+
+      configService.updateChainConfig(chainConfig);
+      const updated = configService.getChainConfig('test');
+      expect(updated.getAssetsConfigs()).toStrictEqual(
+        chainConfig.getAssetsConfigs(),
+      );
+    });
+  });
+
+  describe('clear', () => {
+    it('should wipe the config', () => {
+      configService.updateAsset(dev);
+      configService.updateChain(TEST_CHAIN);
+      configService.clear();
+      expect(() => configService.getAsset(dev.key)).toThrow(
+        new Error('Asset dev not found'),
+      );
+      expect(() => configService.getChain(TEST_CHAIN.key)).toThrow(
+        new Error('Chain test not found'),
       );
     });
   });

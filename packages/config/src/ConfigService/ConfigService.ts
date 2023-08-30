@@ -101,4 +101,22 @@ export class ConfigService implements IConfigService {
 
     return chainConfig.getAssetDestinationConfig(asset, destination);
   }
+
+  updateAsset(asset: Asset): void {
+    this.assets.set(asset.key, asset);
+  }
+
+  updateChain(chain: AnyChain): void {
+    this.chains.set(chain.key, chain);
+  }
+
+  updateChainConfig(chainConfig: ChainConfig): void {
+    this.chainsConfig.set(chainConfig.chain.key, chainConfig);
+  }
+
+  clear(): void {
+    this.assets.clear();
+    this.chains.clear();
+    this.chainsConfig.clear();
+  }
 }

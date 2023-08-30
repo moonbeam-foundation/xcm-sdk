@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
 import { Ecosystem } from '@moonbeam-network/xcm-types';
-import { MutableConfigService } from '../ConfigService';
+import { ConfigService } from '../ConfigService';
 import { dev } from '../assets';
 import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
 import { equilibriumAlphanetConfig } from '../configs/equilibriumAlphanet';
@@ -36,7 +36,7 @@ describe('configBuilder', () => {
   });
 
   it('should return correct dev config using mutable service', () => {
-    const configService = new MutableConfigService();
+    const configService = new ConfigService();
     const config = ConfigBuilder(configService)
       .assets(Ecosystem.AlphanetRelay)
       .asset(dev)
