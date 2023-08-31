@@ -2,7 +2,6 @@ import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import { Contract, Signer } from 'ethers';
 import { PublicClient, WalletClient, createPublicClient, http } from 'viem';
 // TODO mjm implement correctly
-import { moonbaseAlpha } from 'viem/chains';
 import { BalanceContractInterface } from '../../contract.interfaces';
 import abi from './Erc20ABI.json';
 
@@ -15,6 +14,7 @@ export class Erc20 implements BalanceContractInterface {
 
   readonly #client: PublicClient;
 
+  // TODO mjm name signer?
   readonly #walletClient: WalletClient | undefined;
 
   constructor(config: ContractConfig, signer: Signer | WalletClient) {
@@ -24,15 +24,15 @@ export class Erc20 implements BalanceContractInterface {
 
     this.address = config.address;
     this.#config = config;
-    this.#contract =
-      signer instanceof Signer
-        ? new Contract(this.address, abi, signer)
-        : undefined;
+    if (signer instanceof Signer) {
+      this.#contract = new Contract(this.address, abi, signer);
+    } else {
+      this.#walletClient = signer;
+    }
     this.#client = createPublicClient({
-      chain: moonbaseAlpha,
+      chain: this.#walletClient?.chain,
       transport: http(),
     });
-    this.#walletClient = signer instanceof Signer ? undefined : signer;
   }
 
   async getBalance(): Promise<bigint> {

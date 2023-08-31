@@ -35,8 +35,8 @@ export class Xtokens implements TransferContractInterface {
         ? new Contract(this.address, abi, signer)
         : undefined;
     this.#client = createPublicClient({
-      // TODO
-      transport: http('https://rpc.api.moonbeam.network'),
+      chain: this.#walletClient?.chain,
+      transport: http(),
     });
   }
 
@@ -46,7 +46,7 @@ export class Xtokens implements TransferContractInterface {
     }
 
     const { request } = await this.#client.simulateContract({
-      // TODO compact this
+      // TODO mjm compact this
       abi,
       account: this.#signer.account,
       address: this.address,
