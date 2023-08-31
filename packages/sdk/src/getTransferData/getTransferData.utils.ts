@@ -3,13 +3,14 @@ import { AssetConfig } from '@moonbeam-network/xcm-config';
 import { Asset } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { Signer as EthersSigner } from 'ethers';
+import { WalletClient } from 'viem';
 import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 
 export interface GetFeeBalancesParams {
   address: string;
   config: AssetConfig;
-  ethersSigner: EthersSigner;
+  ethersSigner: EthersSigner | WalletClient;
   polkadot: PolkadotService;
   asset?: Asset;
 }

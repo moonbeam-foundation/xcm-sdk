@@ -9,6 +9,7 @@ import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { Signer as EthersSigner } from 'ethers';
+import { WalletClient } from 'viem';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { SourceChainTransferData } from '../sdk.interfaces';
@@ -18,7 +19,7 @@ export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  ethersSigner: EthersSigner;
+  ethersSigner: EthersSigner | WalletClient;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -107,6 +108,7 @@ export async function getSourceData({
     palletInstance: chain.getAssetPalletInstance(asset),
     source: chain,
   });
+
   const contract = config.contract?.build({
     address: destinationAddress,
     amount: balance,
@@ -179,7 +181,7 @@ export interface GetFeeParams {
   balance: bigint;
   contract?: ContractConfig;
   decimals: number;
-  ethersSigner?: EthersSigner;
+  ethersSigner?: EthersSigner | WalletClient;
   extrinsic?: ExtrinsicConfig;
   polkadot: PolkadotService;
   sourceAddress: string;
@@ -213,7 +215,7 @@ export async function getContractFee(
   balance: bigint,
   config: ContractConfig,
   decimals: number,
-  ethersSigner: EthersSigner,
+  ethersSigner: EthersSigner | WalletClient,
 ): Promise<bigint> {
   const contract = createContract(
     config,

@@ -4,6 +4,7 @@ import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { Signer as EthersSigner } from 'ethers';
+import { WalletClient } from 'viem';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
 import { getBalance, getDecimals, getMin } from './getTransferData.utils';
@@ -11,7 +12,7 @@ import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
-  ethersSigner: EthersSigner;
+  ethersSigner: EthersSigner | WalletClient;
   polkadot: PolkadotService;
 }
 
