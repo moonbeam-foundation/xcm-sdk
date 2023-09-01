@@ -1,5 +1,16 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.2.0
+
+### Minor Changes
+
+- [#124](https://github.com/PureStake/xcm-sdk/pull/124) [`bda7709`](https://github.com/PureStake/xcm-sdk/commit/bda77096dca9ac1f29a852d938acd9962d45ee80) Thanks [@nohaapav](https://github.com/nohaapav)! - Introduce config service to support mutability of static xcm config
+
+### Patch Changes
+
+- Updated dependencies [[`bda7709`](https://github.com/PureStake/xcm-sdk/commit/bda77096dca9ac1f29a852d938acd9962d45ee80)]:
+  - @moonbeam-network/xcm-config@1.2.0
+
 ## 1.1.0
 
 ### Minor Changes
