@@ -2,15 +2,14 @@ import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig } from '@moonbeam-network/xcm-config';
 import { Asset } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import { Signer as EthersSigner } from 'ethers';
-import { WalletClient } from 'viem';
 import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
+import { Signer } from '../sdk.interfaces';
 
 export interface GetFeeBalancesParams {
   address: string;
   config: AssetConfig;
-  ethersSigner: EthersSigner | WalletClient;
+  signer: Signer;
   polkadot: PolkadotService;
   asset?: Asset;
 }
@@ -18,7 +17,7 @@ export interface GetFeeBalancesParams {
 export async function getBalance({
   address,
   config,
-  ethersSigner,
+  signer,
   polkadot,
 }: GetFeeBalancesParams) {
   const cfg = config.balance.build({
@@ -30,10 +29,7 @@ export async function getBalance({
     return polkadot.query(cfg as SubstrateQueryConfig);
   }
 
-  const contract = createContract(
-    cfg,
-    ethersSigner,
-  ) as BalanceContractInterface;
+  const contract = createContract(cfg, signer) as BalanceContractInterface;
 
   return contract.getBalance();
 }
@@ -42,7 +38,7 @@ export async function getDecimals({
   address,
   asset,
   config,
-  ethersSigner,
+  signer,
   polkadot,
 }: GetFeeBalancesParams) {
   const cfg = config.balance.build({
@@ -54,10 +50,7 @@ export async function getDecimals({
     return polkadot.getAssetDecimals(asset || config.asset);
   }
 
-  const contract = createContract(
-    cfg,
-    ethersSigner,
-  ) as BalanceContractInterface;
+  const contract = createContract(cfg, signer) as BalanceContractInterface;
 
   return contract.getDecimals();
 }

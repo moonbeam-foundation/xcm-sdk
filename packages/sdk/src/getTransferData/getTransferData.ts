@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import type { TransactionResponse } from '@ethersproject/abstract-provider';
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
@@ -21,12 +22,12 @@ export interface GetTransferDataParams extends Partial<Signers> {
 
 export async function getTransferData({
   destinationAddress,
-  ethersSigner,
+  signer,
   polkadotSigner,
   sourceAddress,
   transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
-  if (!ethersSigner) {
+  if (!signer) {
     throw new Error('Ethers signer must be provided');
   }
 
@@ -37,8 +38,8 @@ export async function getTransferData({
 
   const destination = await getDestinationData({
     destinationAddress,
-    ethersSigner,
     polkadot: destPolkadot,
+    signer,
     transferConfig,
   });
 
@@ -50,8 +51,8 @@ export async function getTransferData({
   const source = await getSourceData({
     destinationAddress,
     destinationFee,
-    ethersSigner,
     polkadot: srcPolkadot,
+    signer,
     sourceAddress,
     transferConfig,
   });
@@ -82,8 +83,8 @@ export async function getTransferData({
     async swap() {
       return getTransferData({
         destinationAddress: sourceAddress,
-        ethersSigner,
         polkadotSigner,
+        signer,
         sourceAddress: destinationAddress,
         transferConfig: {
           ...transferConfig,
@@ -119,15 +120,15 @@ export async function getTransferData({
       });
 
       if (contract) {
-        if (!ethersSigner) {
+        if (!signer) {
           throw new Error('Ethers signer must be provided');
         }
 
-        return (
-          createContract(contract, ethersSigner) as TransferContractInterface
-        )
+        return (createContract(contract, signer) as TransferContractInterface)
           .transfer()
-          .then((tx) => tx.hash);
+          .then((tx) =>
+            typeof tx === 'object' ? (tx as TransactionResponse).hash : tx,
+          );
       }
 
       if (extrinsic) {

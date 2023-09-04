@@ -1,5 +1,5 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
-import { Contract, Signer } from 'ethers';
+import { Contract, Signer as EthersSigner } from 'ethers';
 import { PublicClient, WalletClient, WriteContractReturnType } from 'viem';
 
 export interface BaseContractInterface {
@@ -20,7 +20,7 @@ export type ContractClient = EthersClient | ViemClient;
 
 export interface EthersClient {
   contract: Contract;
-  signer: Signer;
+  signer: EthersSigner;
 }
 
 export interface ViemClient {

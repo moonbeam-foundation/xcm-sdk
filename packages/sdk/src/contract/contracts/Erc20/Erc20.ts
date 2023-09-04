@@ -1,7 +1,6 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import { Contract, Signer } from 'ethers';
 import { WalletClient, createPublicClient, http } from 'viem';
-// TODO mjm implement correctly
 import {
   BalanceContractInterface,
   ContractClient,
@@ -16,9 +15,6 @@ export class Erc20 implements BalanceContractInterface {
 
   readonly #client: ContractClient;
 
-  // TODO mjm name signer?
-  readonly #walletClient: WalletClient | undefined;
-
   constructor(config: ContractConfig, signer: Signer | WalletClient) {
     if (!config.address) {
       throw new Error('Contract address is required');
@@ -26,7 +22,6 @@ export class Erc20 implements BalanceContractInterface {
 
     this.address = config.address;
     this.#config = config;
-
     this.#client = isEthersSigner(signer)
       ? { contract: new Contract(this.address, abi, signer), signer }
       : {
@@ -47,9 +42,8 @@ export class Erc20 implements BalanceContractInterface {
     }
 
     return (await this.#client.publicClient.readContract({
-      // TODO mjm extract
       abi,
-      account: this.#walletClient?.account,
+      account: this.#client.walletClient.account,
       address: this.address as `0x${string}`,
       args: this.#config.args,
       functionName: 'balanceOf',
@@ -61,7 +55,7 @@ export class Erc20 implements BalanceContractInterface {
       ? await this.#client.contract.decimals()
       : this.#client.publicClient.readContract({
           abi,
-          account: this.#walletClient?.account,
+          account: this.#client.walletClient.account,
           address: this.address as `0x${string}`,
           args: [],
           functionName: 'decimals',

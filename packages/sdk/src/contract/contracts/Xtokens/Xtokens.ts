@@ -10,6 +10,7 @@ import {
 import {
   ContractClient,
   TransferContractInterface,
+  ViemClient,
 } from '../../contract.interfaces';
 import { isEthersClient, isEthersSigner } from '../../contract.utils';
 import abi from './XtokensABI.json';
@@ -41,7 +42,6 @@ export class Xtokens implements TransferContractInterface {
     }
 
     const { request } = await this.#client.publicClient.simulateContract({
-      // TODO mjm compact this
       abi,
       account: this.#client.walletClient.account,
       address: this.address,
@@ -49,6 +49,25 @@ export class Xtokens implements TransferContractInterface {
       functionName: this.#config.func,
     });
     return this.#client.walletClient.writeContract(request);
+  }
+
+  async getEthersContractEstimatedGas(contract: Contract): Promise<bigint> {
+    return (
+      await contract.estimateGas[this.#config.func](...this.#config.args)
+    ).toBigInt();
+  }
+
+  async getClientEstimatedGas(client: ViemClient): Promise<bigint> {
+    if (!client.walletClient.account) {
+      return 0n;
+    }
+    return client.publicClient.estimateContractGas({
+      abi,
+      account: client.walletClient.account,
+      address: this.address,
+      args: this.#config.args,
+      functionName: this.#config.func,
+    });
   }
 
   async getFee(amount: bigint): Promise<bigint> {
@@ -62,18 +81,8 @@ export class Xtokens implements TransferContractInterface {
      */
     try {
       const estimatedGas = isEthersClient(this.#client)
-        ? (
-            await this.#client.contract.estimateGas[this.#config.func](
-              ...this.#config.args,
-            )
-          ).toBigInt()
-        : await this.#client.publicClient.estimateContractGas({
-            abi,
-            account: this.#client.walletClient.account || '0x', // TODO mjm throw error here
-            address: this.address,
-            args: this.#config.args,
-            functionName: this.#config.func,
-          });
+        ? await this.getEthersContractEstimatedGas(this.#client.contract)
+        : await this.getClientEstimatedGas(this.#client);
       const gasPrice = await this.getGasPrice();
       return estimatedGas * gasPrice;
     } catch (error) {

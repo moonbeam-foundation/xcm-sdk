@@ -8,18 +8,16 @@ import { FeeAssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { Signer as EthersSigner } from 'ethers';
-import { WalletClient } from 'viem';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
-import { SourceChainTransferData } from '../sdk.interfaces';
+import { Signer, SourceChainTransferData } from '../sdk.interfaces';
 import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  ethersSigner: EthersSigner | WalletClient;
+  signer: Signer;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -28,7 +26,7 @@ export async function getSourceData({
   transferConfig,
   destinationAddress,
   destinationFee,
-  ethersSigner,
+  signer,
   polkadot,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
@@ -42,8 +40,8 @@ export async function getSourceData({
     decimals: await getDecimals({
       address: destinationAddress,
       config,
-      ethersSigner,
       polkadot,
+      signer,
     }),
   });
   const zeroFeeAmount = config.fee?.asset
@@ -53,8 +51,8 @@ export async function getSourceData({
           address: destinationAddress,
           asset: config.fee.asset,
           config,
-          ethersSigner,
           polkadot,
+          signer,
         }),
       })
     : zeroAmount;
@@ -65,8 +63,8 @@ export async function getSourceData({
           address: destinationAddress,
           asset: config.destinationFee.asset,
           config,
-          ethersSigner,
           polkadot,
+          signer,
         }),
       })
     : zeroAmount;
@@ -74,8 +72,8 @@ export async function getSourceData({
   const balance = await getBalance({
     address: sourceAddress,
     config,
-    ethersSigner,
     polkadot,
+    signer,
   });
 
   const feeBalance = await getFeeBalances({
@@ -121,9 +119,9 @@ export async function getSourceData({
     balance,
     contract,
     decimals: zeroFeeAmount.decimals,
-    ethersSigner,
     extrinsic,
     polkadot,
+    signer,
     sourceAddress,
   });
 
@@ -181,7 +179,7 @@ export interface GetFeeParams {
   balance: bigint;
   contract?: ContractConfig;
   decimals: number;
-  ethersSigner?: EthersSigner | WalletClient;
+  signer?: Signer;
   extrinsic?: ExtrinsicConfig;
   polkadot: PolkadotService;
   sourceAddress: string;
@@ -191,17 +189,17 @@ export async function getFee({
   balance,
   contract,
   decimals,
-  ethersSigner,
+  signer,
   extrinsic,
   polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<bigint> {
   if (contract) {
-    if (!ethersSigner) {
+    if (!signer) {
       throw new Error('Ethers signer must be provided');
     }
 
-    return getContractFee(balance, contract, decimals, ethersSigner);
+    return getContractFee(balance, contract, decimals, signer);
   }
 
   if (extrinsic) {
@@ -215,12 +213,9 @@ export async function getContractFee(
   balance: bigint,
   config: ContractConfig,
   decimals: number,
-  ethersSigner: EthersSigner | WalletClient,
+  signer: Signer,
 ): Promise<bigint> {
-  const contract = createContract(
-    config,
-    ethersSigner,
-  ) as TransferContractInterface;
+  const contract = createContract(config, signer) as TransferContractInterface;
   const fee = await contract.getFee(balance);
 
   return convertDecimals(fee, 18, decimals);

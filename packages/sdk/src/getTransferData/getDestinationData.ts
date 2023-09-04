@@ -3,23 +3,21 @@ import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import { Signer as EthersSigner } from 'ethers';
-import { WalletClient } from 'viem';
 import { PolkadotService } from '../polkadot';
-import { DestinationChainTransferData } from '../sdk.interfaces';
+import { DestinationChainTransferData, Signer } from '../sdk.interfaces';
 import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
-  ethersSigner: EthersSigner | WalletClient;
+  signer: Signer;
   polkadot: PolkadotService;
 }
 
 export async function getDestinationData({
   transferConfig,
   destinationAddress,
-  ethersSigner,
+  signer,
   polkadot,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
   const {
@@ -32,16 +30,16 @@ export async function getDestinationData({
     decimals: await getDecimals({
       address: destinationAddress,
       config,
-      ethersSigner,
       polkadot,
+      signer,
     }),
   });
 
   const balance = await getBalance({
     address: destinationAddress,
     config,
-    ethersSigner,
     polkadot,
+    signer,
   });
   const min = await getMin(config, polkadot);
 
