@@ -52,13 +52,13 @@
     "@moonbeam-network/xcm-types": "1.0.1",
     "@moonbeam-network/xcm-utils": "1.0.2",
     "big.js": "^6.2.1",
+    "ethers": "^5.7.2",
     "viem": "^1.6.0"
   },
   "peerDependencies": {
     "@polkadot/api": "^10.9.1",
     "@polkadot/api-augment": "^10.9.1",
     "@polkadot/types": "^10.9.1",
-    "@polkadot/util": "^12.3.2",
-    "ethers": "^5.7.2"
+    "@polkadot/util": "^12.3.2"
   }
 }
