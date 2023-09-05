@@ -52,6 +52,7 @@ export function Sdk(options?: SdkOptions) {
     async getTransferData({
       destinationAddress,
       destinationKeyOrChain,
+      ethersSigner,
       evmSigner,
       keyOrAsset,
       polkadotSigner,
@@ -60,7 +61,7 @@ export function Sdk(options?: SdkOptions) {
     }: SdkTransferParams): Promise<TransferData> {
       return gtd({
         destinationAddress,
-        evmSigner,
+        evmSigner: evmSigner ?? ethersSigner,
         polkadotSigner,
         sourceAddress,
         transferConfig: ConfigBuilder(configService)

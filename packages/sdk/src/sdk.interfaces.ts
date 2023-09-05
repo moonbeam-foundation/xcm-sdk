@@ -7,7 +7,8 @@ import { WalletClient } from 'viem';
 export type EvmSigner = EthersSigner | WalletClient;
 
 export interface Signers {
-  evmSigner: EvmSigner;
+  ethersSigner?: EthersSigner;
+  evmSigner?: EvmSigner;
   polkadotSigner: PolkadotSigner | IKeyringPair;
 }
 
