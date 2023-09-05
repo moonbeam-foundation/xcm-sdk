@@ -35,10 +35,11 @@ export function Sdk(options?: SdkOptions) {
                     ): Promise<TransferData> {
                       return gtd({
                         ...options,
-                        ...signers,
                         destinationAddress,
+                        evmSigner: signers?.evmSigner ?? signers?.ethersSigner,
                         sourceAddress,
                         transferConfig: destination(destKeyOrChain).build(),
+                        polkadotSigner: signers?.polkadotSigner,
                       });
                     },
                   };
