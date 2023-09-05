@@ -53,7 +53,7 @@
     "@moonbeam-network/xcm-utils": "1.0.2",
     "big.js": "^6.2.1",
     "ethers": "^5.7.2",
-    "viem": "^1.6.0"
+    "viem": "^1.10.3"
   },
   "peerDependencies": {
     "@polkadot/api": "^10.9.1",

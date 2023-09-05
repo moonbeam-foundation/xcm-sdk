@@ -4,20 +4,20 @@ import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { PolkadotService } from '../polkadot';
-import { DestinationChainTransferData, Signer } from '../sdk.interfaces';
+import { DestinationChainTransferData, EvmSigner } from '../sdk.interfaces';
 import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
-  signer: Signer;
+  evmSigner: EvmSigner;
   polkadot: PolkadotService;
 }
 
 export async function getDestinationData({
   transferConfig,
   destinationAddress,
-  signer,
+  evmSigner,
   polkadot,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
   const {
@@ -30,16 +30,16 @@ export async function getDestinationData({
     decimals: await getDecimals({
       address: destinationAddress,
       config,
+      evmSigner,
       polkadot,
-      signer,
     }),
   });
 
   const balance = await getBalance({
     address: destinationAddress,
     config,
+    evmSigner,
     polkadot,
-    signer,
   });
   const min = await getMin(config, polkadot);
 

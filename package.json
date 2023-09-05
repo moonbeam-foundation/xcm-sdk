@@ -38,8 +38,7 @@
     "@polkadot/api-augment": "^10.9.1",
     "@polkadot/types": "^10.9.1",
     "@polkadot/util": "^12.3.2",
-    "@polkadot/util-crypto": "^12.3.2",
-    "ethers": "^5.7.2"
+    "@polkadot/util-crypto": "^12.3.2"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
@@ -65,7 +64,8 @@
     "ts-node": "^10.9.1",
     "tsup": "^6.7.0",
     "turbo": "^1.9.9",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "viem": "^1.10.3"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix --max-warnings=0",

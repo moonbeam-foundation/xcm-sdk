@@ -22,13 +22,13 @@ export interface GetTransferDataParams extends Partial<Signers> {
 
 export async function getTransferData({
   destinationAddress,
-  signer,
+  evmSigner,
   polkadotSigner,
   sourceAddress,
   transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
-  if (!signer) {
-    throw new Error('Ethers signer must be provided');
+  if (!evmSigner) {
+    throw new Error('EVM Signer must be provided');
   }
 
   const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
@@ -38,8 +38,8 @@ export async function getTransferData({
 
   const destination = await getDestinationData({
     destinationAddress,
+    evmSigner,
     polkadot: destPolkadot,
-    signer,
     transferConfig,
   });
 
@@ -51,8 +51,8 @@ export async function getTransferData({
   const source = await getSourceData({
     destinationAddress,
     destinationFee,
+    evmSigner,
     polkadot: srcPolkadot,
-    signer,
     sourceAddress,
     transferConfig,
   });
@@ -83,8 +83,8 @@ export async function getTransferData({
     async swap() {
       return getTransferData({
         destinationAddress: sourceAddress,
+        evmSigner,
         polkadotSigner,
-        signer,
         sourceAddress: destinationAddress,
         transferConfig: {
           ...transferConfig,
@@ -120,11 +120,13 @@ export async function getTransferData({
       });
 
       if (contract) {
-        if (!signer) {
-          throw new Error('Ethers signer must be provided');
+        if (!evmSigner) {
+          throw new Error('EVM Signer must be provided');
         }
 
-        return (createContract(contract, signer) as TransferContractInterface)
+        return (
+          createContract(contract, evmSigner) as TransferContractInterface
+        )
           .transfer()
           .then((tx) =>
             typeof tx === 'object' ? (tx as TransactionResponse).hash : tx,

@@ -1,17 +1,17 @@
 import { Signer as EthersSigner } from 'ethers';
 import { WalletClient } from 'viem';
-import { Signer } from '../sdk.interfaces';
+import { EvmSigner } from '../sdk.interfaces';
 import {
   ContractClient,
   EthersClient,
   ViemClient,
 } from './contract.interfaces';
 
-export function isEthersSigner(signer: Signer): signer is EthersSigner {
+export function isEthersSigner(signer: EvmSigner): signer is EthersSigner {
   return 'provider' in signer;
 }
 
-export function isWalletClient(signer: Signer): signer is WalletClient {
+export function isWalletClient(signer: EvmSigner): signer is WalletClient {
   return 'chain' in signer;
 }
 

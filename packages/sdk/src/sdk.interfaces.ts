@@ -4,10 +4,10 @@ import type { IKeyringPair } from '@polkadot/types/types';
 import { Signer as EthersSigner } from 'ethers';
 import { WalletClient } from 'viem';
 
-export type Signer = EthersSigner | WalletClient;
+export type EvmSigner = EthersSigner | WalletClient;
 
 export interface Signers {
-  signer: Signer;
+  evmSigner: EvmSigner;
   polkadotSigner: PolkadotSigner | IKeyringPair;
 }
 
