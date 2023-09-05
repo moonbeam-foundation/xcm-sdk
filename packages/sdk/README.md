@@ -47,7 +47,7 @@ const dataViaAssetsMethod = await assets()
   .source('INSERT_SOURCE_CHAIN')
   .destination('INSERT_DESTINATION_CHAIN')
   .accounts('INSERT_SOURCE_ADDRESS', 'INSERT_DESTINATION_ADDRESS', {
-    signer?: 'INSERT_ETHERS_SIGNER',
+    evmSigner?: 'INSERT_EVM_SIGNER',
     polkadotSigner?: 'INSERT_POLKADOT_SIGNER',
   });
 
@@ -55,7 +55,7 @@ const dataViaAssetsMethod = await assets()
 const dataViaGetTransferDataMethod = await getTransferData({
   destinationAddress: 'INSERT_DESTINATION_ADDRESS',
   destinationKeyOrChain: 'INSERT_DESTINATION_CHAIN',
-  signer?: 'INSERT_ETHERS_SIGNER',
+  evmSigner?: 'INSERT_EVM_SIGNER',
   keyOrAsset: 'INSERT_ASSET',
   polkadotSigner?: 'INSERT_POLKADOT_SIGNER',
   sourceAddress: 'INSERT_SOURCE_ADDRESS',
