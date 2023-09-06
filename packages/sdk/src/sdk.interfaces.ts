@@ -7,6 +7,9 @@ import { WalletClient } from 'viem';
 export type EvmSigner = EthersSigner | WalletClient;
 
 export interface Signers {
+  /**
+   * @deprecated ethersSigner - is deprecated and will be removed in v2, use evmSigner instead
+   */
   ethersSigner?: EthersSigner;
   evmSigner?: EvmSigner;
   polkadotSigner: PolkadotSigner | IKeyringPair;
