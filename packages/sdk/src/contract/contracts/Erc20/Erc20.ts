@@ -15,7 +15,7 @@ export class Erc20 implements BalanceContractInterface {
 
   readonly #client: ContractClient;
 
-  constructor(config: ContractConfig, signer: Signer | WalletClient) {
+  constructor(config: ContractConfig, signer: EvmSigner) {
     if (!config.address) {
       throw new Error('Contract address is required');
     }
