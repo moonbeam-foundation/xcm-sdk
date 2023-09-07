@@ -1,19 +1,30 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Contract, Signer } from 'ethers';
-import { WalletClient, createPublicClient, http } from 'viem';
+import { Contract } from 'ethers';
 import {
-  BalanceContractInterface,
-  ContractClient,
-} from '../../contract.interfaces';
-import { isEthersClient, isEthersSigner } from '../../contract.utils';
+  GetContractReturnType,
+  PublicClient,
+  WalletClient,
+  createPublicClient,
+  getContract,
+  http,
+} from 'viem';
+import { EvmSigner } from '../../../sdk.interfaces';
+import { BalanceContractInterface } from '../../contract.interfaces';
+import { isEthersContract, isEthersSigner } from '../../contract.utils';
 import abi from './Erc20ABI.json';
+
+type Erc20Contract = GetContractReturnType<
+  typeof abi,
+  PublicClient,
+  WalletClient
+>;
 
 export class Erc20 implements BalanceContractInterface {
   readonly address: string;
 
   readonly #config: ContractConfig;
 
-  readonly #client: ContractClient;
+  readonly #contract: Contract | Erc20Contract;
 
   constructor(config: ContractConfig, signer: EvmSigner) {
     if (!config.address) {
@@ -22,44 +33,33 @@ export class Erc20 implements BalanceContractInterface {
 
     this.address = config.address;
     this.#config = config;
-    this.#client = isEthersSigner(signer)
-      ? { contract: new Contract(this.address, abi, signer), signer }
-      : {
+    this.#contract = isEthersSigner(signer)
+      ? new Contract(this.address, abi, signer)
+      : getContract({
+          abi,
+          address: this.address as `0x${string}`,
           publicClient: createPublicClient({
             chain: signer.chain,
             transport: http(),
           }),
           walletClient: signer,
-        };
+        });
   }
 
   async getBalance(): Promise<bigint> {
-    if (isEthersClient(this.#client)) {
-      const balance = await this.#client.contract.balanceOf(
-        ...this.#config.args,
-      );
+    if (isEthersContract(this.#contract)) {
+      const balance = await this.#contract.balanceOf(...this.#config.args);
       return balance.toBigInt();
     }
-
-    return (await this.#client.publicClient.readContract({
-      abi,
-      account: this.#client.walletClient.account,
-      address: this.address as `0x${string}`,
-      args: this.#config.args,
-      functionName: 'balanceOf',
-    })) as bigint;
+    return this.#contract.read.balanceOf(
+      this.#config.args,
+    ) as unknown as bigint;
   }
 
   async getDecimals(): Promise<number> {
-    const decimals = isEthersClient(this.#client)
-      ? await this.#client.contract.decimals()
-      : this.#client.publicClient.readContract({
-          abi,
-          account: this.#client.walletClient.account,
-          address: this.address as `0x${string}`,
-          args: [],
-          functionName: 'decimals',
-        });
+    const decimals = isEthersContract(this.#contract)
+      ? await this.#contract.decimals()
+      : this.#contract.read.decimals();
 
     return decimals;
   }

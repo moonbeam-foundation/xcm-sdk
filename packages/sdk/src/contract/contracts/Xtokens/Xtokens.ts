@@ -1,54 +1,59 @@
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Contract, Signer } from 'ethers';
+import { Contract } from 'ethers';
 import {
+  GetContractReturnType,
+  PublicClient,
   WalletClient,
   WriteContractReturnType,
   createPublicClient,
+  getContract,
   http,
 } from 'viem';
-import {
-  ContractClient,
-  TransferContractInterface,
-  ViemClient,
-} from '../../contract.interfaces';
-import { isEthersClient, isEthersSigner } from '../../contract.utils';
+import { EvmSigner } from '../../../sdk.interfaces';
+import { TransferContractInterface } from '../../contract.interfaces';
+import { isEthersContract, isEthersSigner } from '../../contract.utils';
 import abi from './XtokensABI.json';
+
+type XtokensContract = GetContractReturnType<
+  typeof abi,
+  PublicClient,
+  WalletClient
+>;
 
 export class Xtokens implements TransferContractInterface {
   readonly address = '0x0000000000000000000000000000000000000804';
 
   readonly #config: ContractConfig;
 
-  readonly #client: ContractClient;
+  readonly #contract: Contract | XtokensContract;
 
-  constructor(config: ContractConfig, signer: Signer | WalletClient) {
+  readonly #signer: EvmSigner;
+
+  constructor(config: ContractConfig, signer: EvmSigner) {
     this.#config = config;
 
-    this.#client = isEthersSigner(signer)
-      ? { contract: new Contract(this.address, abi, signer), signer }
-      : {
+    this.#signer = signer;
+
+    this.#contract = isEthersSigner(signer)
+      ? new Contract(this.address, abi, signer)
+      : getContract({
+          abi,
+          address: this.address,
           publicClient: createPublicClient({
             chain: signer.chain,
             transport: http(),
           }),
           walletClient: signer,
-        };
+        });
   }
 
   async transfer(): Promise<TransactionResponse | WriteContractReturnType> {
-    if (isEthersClient(this.#client)) {
-      return this.#client.contract[this.#config.func](...this.#config.args);
+    if (isEthersContract(this.#contract)) {
+      return this.#contract[this.#config.func](...this.#config.args);
     }
 
-    const { request } = await this.#client.publicClient.simulateContract({
-      abi,
-      account: this.#client.walletClient.account,
-      address: this.address,
-      args: this.#config.args,
-      functionName: this.#config.func,
-    });
-    return this.#client.walletClient.writeContract(request);
+    return this.#contract.write[this.#config.func](...this.#config.args);
   }
 
   async getEthersContractEstimatedGas(contract: Contract): Promise<bigint> {
@@ -57,17 +62,14 @@ export class Xtokens implements TransferContractInterface {
     ).toBigInt();
   }
 
-  async getClientEstimatedGas(client: ViemClient): Promise<bigint> {
-    if (!client.walletClient.account) {
+  async getViemContractEstimatedGas(
+    contract: XtokensContract,
+  ): Promise<bigint> {
+    if (!contract) {
       return 0n;
     }
-    return client.publicClient.estimateContractGas({
-      abi,
-      account: client.walletClient.account,
-      address: this.address,
-      args: this.#config.args,
-      functionName: this.#config.func,
-    });
+
+    return contract.estimateGas[this.#config.func](this.#config.args as any);
   }
 
   async getFee(amount: bigint): Promise<bigint> {
@@ -80,9 +82,9 @@ export class Xtokens implements TransferContractInterface {
      * Or if you try to send 0 as amount.
      */
     try {
-      const estimatedGas = isEthersClient(this.#client)
-        ? await this.getEthersContractEstimatedGas(this.#client.contract)
-        : await this.getClientEstimatedGas(this.#client);
+      const estimatedGas = isEthersContract(this.#contract)
+        ? await this.getEthersContractEstimatedGas(this.#contract)
+        : await this.getViemContractEstimatedGas(this.#contract);
       const gasPrice = await this.getGasPrice();
       return estimatedGas * gasPrice;
     } catch (error) {
@@ -96,15 +98,20 @@ export class Xtokens implements TransferContractInterface {
   }
 
   private async getGasPrice() {
-    if (isEthersClient(this.#client)) {
+    if (isEthersSigner(this.#signer)) {
       const { gasPrice, maxPriorityFeePerGas } =
-        await this.#client.signer.getFeeData();
+        await this.#signer.getFeeData();
 
       return (
         (gasPrice?.toBigInt() || 0n) + (maxPriorityFeePerGas?.toBigInt() || 0n)
       );
     }
 
-    return this.#client.publicClient.getGasPrice();
+    const publicClient = createPublicClient({
+      chain: this.#signer.chain,
+      transport: http(),
+    });
+
+    return publicClient.getGasPrice();
   }
 }
