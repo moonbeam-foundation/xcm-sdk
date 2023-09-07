@@ -53,7 +53,7 @@ export class Xtokens implements TransferContractInterface {
       return this.#contract[this.#config.func](...this.#config.args);
     }
 
-    return this.#contract.write[this.#config.func](...this.#config.args);
+    return this.#contract.write[this.#config.func](this.#config.args);
   }
 
   async getEthersContractEstimatedGas(contract: Contract): Promise<bigint> {
