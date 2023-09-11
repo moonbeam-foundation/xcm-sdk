@@ -98,7 +98,7 @@ exports[`polkadotXcm limitedReserveTransferAssets x1 should get correct argument
           "Concrete": {
             "interior": {
               "X1": {
-                "PalletInstance": 5,
+                "PalletInstance": 10,
               },
             },
             "parents": 0,

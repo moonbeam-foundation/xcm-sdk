@@ -145,6 +145,11 @@ export const nodl = new Asset({
   originSymbol: 'NODL',
 });
 
+export const otp = new Asset({
+  key: 'otp',
+  originSymbol: 'OTP',
+});
+
 export const para = new Asset({
   key: 'para',
   originSymbol: 'PARA',
@@ -259,6 +264,7 @@ export const assetsList: Asset[] = [
   mgx,
   movr,
   nodl,
+  otp,
   para,
   paring,
   pha,

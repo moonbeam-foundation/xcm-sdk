@@ -52,7 +52,7 @@ export function polkadotXcm() {
                           parents: 0,
                           interior: {
                             X1: {
-                              PalletInstance: 5,
+                              PalletInstance: params.palletInstance,
                             },
                           },
                         },
