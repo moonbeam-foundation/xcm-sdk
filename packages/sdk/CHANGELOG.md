@@ -1,5 +1,16 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.3.0
+
+### Minor Changes
+
+- [#131](https://github.com/PureStake/xcm-sdk/pull/131) [`63d81d6`](https://github.com/PureStake/xcm-sdk/commit/63d81d64578deb4b415138bfc7809de79a8c80de) Thanks [@mmaurello](https://github.com/mmaurello)! - Allow viem Wallet Client as signer
+
+### Patch Changes
+
+- Updated dependencies [[`63d81d6`](https://github.com/PureStake/xcm-sdk/commit/63d81d64578deb4b415138bfc7809de79a8c80de)]:
+  - @moonbeam-network/xcm-config@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes
