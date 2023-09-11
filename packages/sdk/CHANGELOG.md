@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.3.1
+
+### Patch Changes
+
+- [#132](https://github.com/PureStake/xcm-sdk/pull/132) [`69833f3`](https://github.com/PureStake/xcm-sdk/commit/69833f3ab36f6c58f16ec167b22fb6985fbe9582) Thanks [@mmaurello](https://github.com/mmaurello)! - OriginTrail integration with Moonabse
+
+- Updated dependencies [[`69833f3`](https://github.com/PureStake/xcm-sdk/commit/69833f3ab36f6c58f16ec167b22fb6985fbe9582)]:
+  - @moonbeam-network/xcm-builder@1.0.6
+  - @moonbeam-network/xcm-config@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes
