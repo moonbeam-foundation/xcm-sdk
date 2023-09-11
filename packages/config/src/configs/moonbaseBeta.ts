@@ -29,7 +29,7 @@ export const moonbaseBetaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.0002,
+        amount: 0.002,
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
       },

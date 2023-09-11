@@ -13,7 +13,7 @@ const provider = new ethers.providers.WebSocketProvider(moonbeam.ws, {
   chainId: moonbeam.id,
   name: moonbeam.name,
 });
-const ethersSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
+const evmSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
 
 // Polkadot Signer ===========================================================
 
@@ -65,7 +65,7 @@ export async function fromPolkadot() {
   console.log('\nTransfer from Polkadot to Moonbeam\n');
 
   const data = await Sdk().getTransferData({
-    destinationAddress: ethersSigner.address,
+    destinationAddress: evmSigner.address,
     destinationKeyOrChain: moonbeam,
     keyOrAsset: dot,
     polkadotSigner: pair,
@@ -93,8 +93,8 @@ export async function fromMoonbeam() {
     .asset(dot)
     .source(moonbeam)
     .destination(polkadot)
-    .accounts(ethersSigner.address, pair.address, {
-      ethersSigner,
+    .accounts(evmSigner.address, pair.address, {
+      evmSigner,
     });
 
   logBalances(data);
@@ -114,7 +114,7 @@ async function main() {
   console.warn = () => null;
   console.clear();
 
-  console.log(`\nMoonbeam address: ${ethersSigner.address}.`);
+  console.log(`\nMoonbeam address: ${evmSigner.address}.`);
   console.log(`Polkadot address: ${pair.address}.`);
 
   await fromPolkadot();
