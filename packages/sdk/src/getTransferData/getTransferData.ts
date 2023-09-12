@@ -27,10 +27,6 @@ export async function getTransferData({
   sourceAddress,
   transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
-  if (!evmSigner) {
-    throw new Error('EVM Signer must be provided');
-  }
-
   const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
     transferConfig.destination.chain,
     transferConfig.source.chain,
