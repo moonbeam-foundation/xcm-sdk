@@ -34,6 +34,7 @@ import {
   mgx,
   movr,
   nodl,
+  otp,
   para,
   paring,
   pha,
@@ -253,6 +254,7 @@ export const darwinia = new EvmParachain({
       // NOTE: no meta for native token
       asset: ring,
       metadataId: 0,
+      palletInstance: 5,
     },
     {
       // NOTE: no meta for movr
@@ -278,6 +280,7 @@ export const darwiniaCrab = new EvmParachain({
       // NOTE: no meta for native token
       asset: crab,
       metadataId: 0,
+      palletInstance: 5,
     },
     {
       // NOTE: no meta for movr
@@ -303,6 +306,7 @@ export const darwiniaPangoro = new EvmParachain({
       // NOTE: no meta for native token
       asset: paring,
       metadataId: 0,
+      palletInstance: 5,
     },
     {
       // NOTE: no meta for movr
@@ -656,6 +660,10 @@ export const moonbaseAlpha = new EvmParachain({
       id: '128910205779035707777113095265150484699',
     },
     {
+      asset: otp,
+      id: '238111524681612888331172110363070489924',
+    },
+    {
       asset: paring,
       id: '173481220575862801646329923366065693029',
     },
@@ -954,6 +962,25 @@ export const nodleEden = new Parachain({
   ws: 'wss://node-7047027111071080448.jm.onfinality.io/ws?apikey=c49e30e4-3601-48f4-9629-57fa13cb97c0',
 });
 
+export const originTrailAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: otp,
+      metadataId: 0,
+      palletInstance: 10,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0xe23ee00b26d1cdc7939d83dfe829c4f970cd26071f90d237cb2aded2b23214bf',
+  isTestChain: true,
+  key: 'origin-trail-alphanet',
+  name: 'OriginTrail Alphanet',
+  parachainId: 2043,
+  ss58Format: 101,
+  ws: 'wss://otp-lunaris-alpha-node-02.origin-trail.network',
+});
+
 export const parallel = new Parachain({
   assetsData: [
     {
@@ -1201,6 +1228,7 @@ export const chainsList: AnyChain[] = [
   moonriver,
   nodle,
   nodleEden,
+  originTrailAlphanet,
   parallel,
   parallelHeiko,
   phala,

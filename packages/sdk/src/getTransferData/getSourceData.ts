@@ -8,17 +8,16 @@ import { FeeAssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { Signer as EthersSigner } from 'ethers';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
-import { SourceChainTransferData } from '../sdk.interfaces';
+import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
 import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  ethersSigner: EthersSigner;
+  evmSigner: EvmSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -27,7 +26,7 @@ export async function getSourceData({
   transferConfig,
   destinationAddress,
   destinationFee,
-  ethersSigner,
+  evmSigner,
   polkadot,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
@@ -41,7 +40,7 @@ export async function getSourceData({
     decimals: await getDecimals({
       address: destinationAddress,
       config,
-      ethersSigner,
+      evmSigner,
       polkadot,
     }),
   });
@@ -52,7 +51,7 @@ export async function getSourceData({
           address: destinationAddress,
           asset: config.fee.asset,
           config,
-          ethersSigner,
+          evmSigner,
           polkadot,
         }),
       })
@@ -64,7 +63,7 @@ export async function getSourceData({
           address: destinationAddress,
           asset: config.destinationFee.asset,
           config,
-          ethersSigner,
+          evmSigner,
           polkadot,
         }),
       })
@@ -73,7 +72,7 @@ export async function getSourceData({
   const balance = await getBalance({
     address: sourceAddress,
     config,
-    ethersSigner,
+    evmSigner,
     polkadot,
   });
 
@@ -107,6 +106,7 @@ export async function getSourceData({
     palletInstance: chain.getAssetPalletInstance(asset),
     source: chain,
   });
+
   const contract = config.contract?.build({
     address: destinationAddress,
     amount: balance,
@@ -119,7 +119,7 @@ export async function getSourceData({
     balance,
     contract,
     decimals: zeroFeeAmount.decimals,
-    ethersSigner,
+    evmSigner,
     extrinsic,
     polkadot,
     sourceAddress,
@@ -179,7 +179,7 @@ export interface GetFeeParams {
   balance: bigint;
   contract?: ContractConfig;
   decimals: number;
-  ethersSigner?: EthersSigner;
+  evmSigner?: EvmSigner;
   extrinsic?: ExtrinsicConfig;
   polkadot: PolkadotService;
   sourceAddress: string;
@@ -189,17 +189,17 @@ export async function getFee({
   balance,
   contract,
   decimals,
-  ethersSigner,
+  evmSigner,
   extrinsic,
   polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<bigint> {
   if (contract) {
-    if (!ethersSigner) {
-      throw new Error('Ethers signer must be provided');
+    if (!evmSigner) {
+      throw new Error('EVM Signer must be provided');
     }
 
-    return getContractFee(balance, contract, decimals, ethersSigner);
+    return getContractFee(balance, contract, decimals, evmSigner);
   }
 
   if (extrinsic) {
@@ -213,11 +213,11 @@ export async function getContractFee(
   balance: bigint,
   config: ContractConfig,
   decimals: number,
-  ethersSigner: EthersSigner,
+  evmSigner: EvmSigner,
 ): Promise<bigint> {
   const contract = createContract(
     config,
-    ethersSigner,
+    evmSigner,
   ) as TransferContractInterface;
   const fee = await contract.getFee(balance);
 

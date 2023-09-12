@@ -1,5 +1,26 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.1
+
+### Patch Changes
+
+- [#132](https://github.com/PureStake/xcm-sdk/pull/132) [`69833f3`](https://github.com/PureStake/xcm-sdk/commit/69833f3ab36f6c58f16ec167b22fb6985fbe9582) Thanks [@mmaurello](https://github.com/mmaurello)! - OriginTrail integration with Moonabse
+
+- Updated dependencies [[`69833f3`](https://github.com/PureStake/xcm-sdk/commit/69833f3ab36f6c58f16ec167b22fb6985fbe9582)]:
+  - @moonbeam-network/xcm-builder@1.0.6
+
+## 1.3.0
+
+### Minor Changes
+
+- [#131](https://github.com/PureStake/xcm-sdk/pull/131) [`63d81d6`](https://github.com/PureStake/xcm-sdk/commit/63d81d64578deb4b415138bfc7809de79a8c80de) Thanks [@mmaurello](https://github.com/mmaurello)! - Allow viem Wallet Client as signer
+
+## 1.2.0
+
+### Minor Changes
+
+- [#124](https://github.com/PureStake/xcm-sdk/pull/124) [`bda7709`](https://github.com/PureStake/xcm-sdk/commit/bda77096dca9ac1f29a852d938acd9962d45ee80) Thanks [@nohaapav](https://github.com/nohaapav)! - Introduce config service to support mutability of static xcm config
+
 ## 1.1.0
 
 ### Minor Changes
