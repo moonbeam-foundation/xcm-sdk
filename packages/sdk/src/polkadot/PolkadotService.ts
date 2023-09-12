@@ -5,7 +5,6 @@ import {
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import {
-  assetsMap,
   darwiniaPangoro,
   eq,
   equilibriumAlphanet,
@@ -65,7 +64,7 @@ export class PolkadotService {
       throw new Error('No native symbol key found');
     }
 
-    const asset = assetsMap.get(key);
+    const asset = this.chain.assetsData.get(key)?.asset;
 
     if (!asset) {
       throw new Error(`No asset found for key "${key}" and symbol "${symbol}"`);
