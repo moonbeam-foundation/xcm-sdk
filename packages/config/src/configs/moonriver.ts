@@ -19,6 +19,9 @@ import {
   teer,
   tur,
   usdt,
+  vbnc,
+  vksm,
+  vmovr,
   xrt,
 } from '../assets';
 import {
@@ -423,6 +426,51 @@ export const moonriverConfig = new ChainConfig({
         amount: 0.000032,
         asset: xrt,
         balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vbnc,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostKusama,
+      destinationFee: {
+        amount: 0.0001,
+        asset: vbnc,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vksm,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostKusama,
+      destinationFee: {
+        amount: 0.0001,
+        asset: vksm,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vmovr,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostKusama,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: vmovr,
+        balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
         asset: movr,
