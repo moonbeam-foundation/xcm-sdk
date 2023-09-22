@@ -845,7 +845,6 @@ export const moonbeam = new EvmParachain({
     },
     {
       asset: vfil,
-      // id: '272547899416482196831721420898811311297',
       id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
       metadataId: 0, // no metadata for ERC20 tokens
     },
