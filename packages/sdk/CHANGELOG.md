@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.3.2
+
+### Patch Changes
+
+- [#137](https://github.com/PureStake/xcm-sdk/pull/137) [`3fd0cb4`](https://github.com/PureStake/xcm-sdk/commit/3fd0cb4cd23c04fcc8bcd3650d8964022193d6b4) Thanks [@mmaurello](https://github.com/mmaurello)! - Integrate Bifrost LSD assets
+
+- Updated dependencies [[`3fd0cb4`](https://github.com/PureStake/xcm-sdk/commit/3fd0cb4cd23c04fcc8bcd3650d8964022193d6b4)]:
+  - @moonbeam-network/xcm-config@1.3.2
+
 ## 1.3.1
 
 ### Patch Changes
