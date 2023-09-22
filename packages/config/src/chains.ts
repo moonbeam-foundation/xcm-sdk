@@ -48,6 +48,12 @@ import {
   unit,
   usdc,
   usdt,
+  vDOT,
+  vbnc,
+  vfil,
+  vglmr,
+  vksm,
+  vmovr,
   wbtc,
   weth,
   xrt,
@@ -152,6 +158,18 @@ export const bifrostKusama = new Parachain({
       asset: bnc,
       id: { Native: bnc.originSymbol },
     },
+    {
+      asset: vbnc,
+      id: { VToken: 'BNC' },
+    },
+    {
+      asset: vksm,
+      id: { VToken: 'KSM' },
+    },
+    {
+      asset: vmovr,
+      id: { VToken: 'MOVR' },
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -172,6 +190,18 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: bnc,
       id: { Native: bnc.originSymbol },
+    },
+    {
+      asset: vDOT,
+      id: { VToken2: 0 },
+    },
+    {
+      asset: vfil,
+      id: { VToken2: 4 },
+    },
+    {
+      asset: vglmr,
+      id: { VToken2: 1 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -809,6 +839,22 @@ export const moonbeam = new EvmParachain({
       id: '311091173110107856861649819128533077277',
     },
     {
+      asset: vDOT,
+      id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: vfil,
+      // id: '272547899416482196831721420898811311297',
+      id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: vglmr,
+      id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
       asset: wbtc,
       id: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
       metadataId: 0, // no metadata for ERC20 tokens
@@ -913,6 +959,21 @@ export const moonriver = new EvmParachain({
     {
       asset: xrt,
       id: '108036400430056508975016746969135344601',
+    },
+    {
+      asset: vbnc,
+      id: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
+      metadataId: 0,
+    },
+    {
+      asset: vksm,
+      id: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
+      metadataId: 0,
+    },
+    {
+      asset: vmovr,
+      id: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,

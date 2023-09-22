@@ -19,6 +19,9 @@ import {
   ring,
   usdc,
   usdt,
+  vDOT,
+  vfil,
+  vglmr,
   wbtc,
   weth,
 } from '../assets';
@@ -383,6 +386,51 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: usdc,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vDOT,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.0000001,
+        asset: vDOT,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vfil,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: vfil,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vglmr,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: vglmr,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
