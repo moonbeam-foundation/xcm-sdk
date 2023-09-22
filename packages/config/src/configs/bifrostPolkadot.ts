@@ -4,7 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { bnc, glmr, vDOT, vfil, vglmr } from '../assets';
+import { bnc, glmr, vdot, vfil, vglmr } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -39,7 +39,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
     new AssetConfig({
-      asset: vDOT,
+      asset: vdot,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {

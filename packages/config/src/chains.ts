@@ -48,8 +48,8 @@ import {
   unit,
   usdc,
   usdt,
-  vDOT,
   vbnc,
+  vdot,
   vfil,
   vglmr,
   vksm,
@@ -192,7 +192,7 @@ export const bifrostPolkadot = new Parachain({
       id: { Native: bnc.originSymbol },
     },
     {
-      asset: vDOT,
+      asset: vdot,
       id: { VToken2: 0 },
     },
     {
@@ -839,7 +839,7 @@ export const moonbeam = new EvmParachain({
       id: '311091173110107856861649819128533077277',
     },
     {
-      asset: vDOT,
+      asset: vdot,
       id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
       metadataId: 0, // no metadata for ERC20 tokens
     },

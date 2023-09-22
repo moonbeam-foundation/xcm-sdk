@@ -206,7 +206,7 @@ export const unit = new Asset({
 });
 
 export const usdc = new Asset({
-  key: 'usdc',
+  key: 'usdcwh',
   originSymbol: 'USDC.Wh',
 });
 
@@ -231,32 +231,32 @@ export const wftm = new Asset({
 });
 
 export const vbnc = new Asset({
-  key: 'xcvbnc',
+  key: 'vbnc',
   originSymbol: 'vBNC',
 });
 
-export const vDOT = new Asset({
-  key: 'xcvdot',
+export const vdot = new Asset({
+  key: 'vdot',
   originSymbol: 'vDOT',
 });
 
 export const vfil = new Asset({
-  key: 'xcvfil',
+  key: 'vfil',
   originSymbol: 'vFIL',
 });
 
 export const vglmr = new Asset({
-  key: 'xcvglmr',
+  key: 'vglmr',
   originSymbol: 'vGLMR',
 });
 
 export const vksm = new Asset({
-  key: 'xcvksm',
+  key: 'vksm',
   originSymbol: 'vKSM',
 });
 
 export const vmovr = new Asset({
-  key: 'xcvmovr',
+  key: 'vmovr',
   originSymbol: 'vMOVR',
 });
 
@@ -309,7 +309,7 @@ export const assetsList: Asset[] = [
   usdc,
   usdt,
   vbnc,
-  vDOT,
+  vdot,
   vfil,
   vglmr,
   vksm,
