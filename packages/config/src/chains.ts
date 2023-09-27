@@ -686,10 +686,6 @@ export const moonbaseAlpha = new EvmParachain({
       id: '65216491554813189869575508812319036608',
     },
     {
-      asset: nodl,
-      id: '128910205779035707777113095265150484699',
-    },
-    {
       asset: otp,
       id: '238111524681612888331172110363070489924',
     },
@@ -1008,24 +1004,6 @@ export const nodle = new Parachain({
   ws: 'wss://nodle-parachain.api.onfinality.io/public-ws',
 });
 
-export const nodleEden = new Parachain({
-  assetsData: [
-    {
-      asset: nodl,
-      id: 'NodleNative',
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
-  isTestChain: true,
-  key: 'nodle-eden',
-  name: 'Nodle Eden',
-  parachainId: 2036,
-  ss58Format: 37,
-  ws: 'wss://node-7047027111071080448.jm.onfinality.io/ws?apikey=c49e30e4-3601-48f4-9629-57fa13cb97c0',
-});
-
 export const originTrail = new Parachain({
   assetsData: [
     {
@@ -1309,7 +1287,6 @@ export const chainsList: AnyChain[] = [
   moonbeam,
   moonriver,
   nodle,
-  nodleEden,
   originTrail,
   originTrailAlphanet,
   parallel,

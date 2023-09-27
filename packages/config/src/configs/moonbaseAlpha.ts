@@ -5,7 +5,6 @@ import {
   eq,
   eqd,
   lit,
-  nodl,
   otp,
   paring,
   soon,
@@ -21,7 +20,6 @@ import {
   litentryAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
-  nodleEden,
   originTrailAlphanet,
   subsocialAlphanet,
   turingAlphanet,
@@ -132,21 +130,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.032,
         asset: lit,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: nodl,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: nodleEden,
-      destinationFee: {
-        amount: 0.02,
-        asset: nodl,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
