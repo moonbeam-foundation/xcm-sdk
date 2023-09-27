@@ -46,7 +46,8 @@ import {
   tt1,
   tur,
   unit,
-  usdc,
+  usdcAH,
+  usdcwh,
   usdt,
   vbnc,
   vdot,
@@ -425,7 +426,7 @@ export const hydraDX = new Parachain({
       id: 18,
     },
     {
-      asset: usdc,
+      asset: usdcwh,
       id: 21,
     },
     {
@@ -830,7 +831,12 @@ export const moonbeam = new EvmParachain({
       id: '125699734534028342599692732320197985871',
     },
     {
-      asset: usdc,
+      asset: usdcAH,
+      id: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
+      metadataId: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
+    },
+    {
+      asset: usdcwh,
       id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
       metadataId: 0, // no metadata for ERC20 tokens
     },
@@ -841,17 +847,17 @@ export const moonbeam = new EvmParachain({
     {
       asset: vdot,
       id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
-      metadataId: 0, // no metadata for ERC20 tokens
+      metadataId: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
     },
     {
       asset: vfil,
       id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
-      metadataId: 0, // no metadata for ERC20 tokens
+      metadataId: '272547899416482196831721420898811311297', // registered XC20 id for ERC20 tokens
     },
     {
       asset: vglmr,
       id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
-      metadataId: 0, // no metadata for ERC20 tokens
+      metadataId: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
     },
     {
       asset: wbtc,
@@ -962,17 +968,17 @@ export const moonriver = new EvmParachain({
     {
       asset: vbnc,
       id: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
-      metadataId: 0,
+      metadataId: '72145018963825376852137222787619937732',
     },
     {
       asset: vksm,
       id: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
-      metadataId: 0,
+      metadataId: '264344629840762281112027368930249420542',
     },
     {
       asset: vmovr,
       id: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
-      metadataId: 0,
+      metadataId: '203223821023327994093278529517083736593',
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -1130,6 +1136,11 @@ export const polkadotAssetHub = new Parachain({
       asset: dot,
       // NOTE: no meta for native token
       metadataId: 9999999,
+    },
+    {
+      asset: usdcAH,
+      id: 1337,
+      palletInstance: 50,
     },
   ],
   ecosystem: Ecosystem.Polkadot,

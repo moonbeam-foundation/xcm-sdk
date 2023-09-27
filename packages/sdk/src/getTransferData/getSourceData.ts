@@ -49,8 +49,7 @@ export async function getSourceData({
         amount: 0n,
         decimals: await getDecimals({
           address: destinationAddress,
-          asset: config.fee.asset,
-          config,
+          config: config.fee,
           evmSigner,
           polkadot,
         }),
@@ -61,8 +60,7 @@ export async function getSourceData({
         amount: 0n,
         decimals: await getDecimals({
           address: destinationAddress,
-          asset: config.destinationFee.asset,
-          config,
+          config: config.destinationFee,
           evmSigner,
           polkadot,
         }),
