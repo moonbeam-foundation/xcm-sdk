@@ -14,6 +14,7 @@ import {
   ibtc,
   intr,
   nodl,
+  otp,
   para,
   pha,
   ring,
@@ -36,6 +37,7 @@ import {
   interlay,
   moonbeam,
   nodle,
+  originTrail,
   parallel,
   phala,
   polkadot,
@@ -281,6 +283,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.02,
         asset: nodl,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: otp,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: originTrail,
+      destinationFee: {
+        amount: 0.004,
+        asset: otp,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

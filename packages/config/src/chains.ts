@@ -818,6 +818,10 @@ export const moonbeam = new EvmParachain({
       id: '309163521958167876851250718453738106865',
     },
     {
+      asset: otp,
+      id: '238111524681612888331172110363070489924',
+    },
+    {
       asset: para,
       id: '32615670524745285411807346420584982855',
     },
@@ -1020,6 +1024,24 @@ export const nodleEden = new Parachain({
   parachainId: 2036,
   ss58Format: 37,
   ws: 'wss://node-7047027111071080448.jm.onfinality.io/ws?apikey=c49e30e4-3601-48f4-9629-57fa13cb97c0',
+});
+
+export const originTrail = new Parachain({
+  assetsData: [
+    {
+      asset: otp,
+      metadataId: 0,
+      palletInstance: 10,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xe7e0962324a3b86c83404dbea483f25fb5dab4c224791c81b756cfc948006174',
+  key: 'origin-trail',
+  name: 'OriginTrail',
+  parachainId: 2043,
+  ss58Format: 101,
+  ws: 'wss://origintrail.api.onfinality.io/public-ws',
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -1288,6 +1310,7 @@ export const chainsList: AnyChain[] = [
   moonriver,
   nodle,
   nodleEden,
+  originTrail,
   originTrailAlphanet,
   parallel,
   parallelHeiko,
