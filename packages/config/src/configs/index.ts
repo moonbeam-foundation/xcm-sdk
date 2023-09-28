@@ -30,7 +30,7 @@ import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
 import { nodleConfig } from './nodle';
-import { nodleEdenConfig } from './nodleEden';
+import { originTrailConfig } from './originTrail';
 import { originTrailAlphanetConfig } from './originTrailAlphanet';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
@@ -73,7 +73,7 @@ export const chainsConfigList: ChainConfig[] = [
   moonbeamConfig,
   moonriverConfig,
   nodleConfig,
-  nodleEdenConfig,
+  originTrailConfig,
   originTrailAlphanetConfig,
   parallelConfig,
   parallelHeikoConfig,
