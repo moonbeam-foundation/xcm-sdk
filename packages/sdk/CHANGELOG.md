@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.3.3
+
+### Patch Changes
+
+- [#139](https://github.com/PureStake/xcm-sdk/pull/139) [`cbd30b1`](https://github.com/PureStake/xcm-sdk/commit/cbd30b1d4e37ff877e4e27121491ab086a985df0) Thanks [@mmaurello](https://github.com/mmaurello)! - OriginTrail integration with Moonbeam - remove Nodle Eden integration with Moonbase
+
+- Updated dependencies [[`cbd30b1`](https://github.com/PureStake/xcm-sdk/commit/cbd30b1d4e37ff877e4e27121491ab086a985df0)]:
+  - @moonbeam-network/xcm-config@1.3.3
+
 ## 1.3.2
 
 ### Patch Changes
