@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.3.4
+
+### Patch Changes
+
+- [#141](https://github.com/PureStake/xcm-sdk/pull/141) [`de2a0bb`](https://github.com/PureStake/xcm-sdk/commit/de2a0bba3a3af7fb1c67d23d4ead3915b9513f2f) Thanks [@mmaurello](https://github.com/mmaurello)! - change robonomics wss endpoint
+
+- Updated dependencies [[`de2a0bb`](https://github.com/PureStake/xcm-sdk/commit/de2a0bba3a3af7fb1c67d23d4ead3915b9513f2f)]:
+  - @moonbeam-network/xcm-config@1.3.4
+
 ## 1.3.3
 
 ### Patch Changes
