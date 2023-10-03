@@ -1157,7 +1157,7 @@ export const robonomics = new Parachain({
   name: 'Robonomics',
   parachainId: 2048,
   ss58Format: 32,
-  ws: 'wss://robonomics.api.onfinality.io/public-ws',
+  ws: 'wss://kusama.rpc.robonomics.network/',
 });
 
 export const shiden = new Parachain({
