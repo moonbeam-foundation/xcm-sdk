@@ -14,11 +14,15 @@ import {
   ibtc,
   intr,
   nodl,
+  otp,
   para,
   pha,
   ring,
   usdc,
   usdt,
+  vdot,
+  vfil,
+  vglmr,
   wbtc,
   weth,
 } from '../assets';
@@ -33,6 +37,7 @@ import {
   interlay,
   moonbeam,
   nodle,
+  originTrail,
   parallel,
   phala,
   polkadot,
@@ -286,6 +291,21 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: otp,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: originTrail,
+      destinationFee: {
+        amount: 0.004,
+        asset: otp,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: para,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -383,6 +403,51 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: usdc,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vdot,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.0000001,
+        asset: vdot,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vfil,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: vfil,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vglmr,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: vglmr,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {

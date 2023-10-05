@@ -1,5 +1,23 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.4
+
+### Patch Changes
+
+- [#141](https://github.com/PureStake/xcm-sdk/pull/141) [`de2a0bb`](https://github.com/PureStake/xcm-sdk/commit/de2a0bba3a3af7fb1c67d23d4ead3915b9513f2f) Thanks [@mmaurello](https://github.com/mmaurello)! - change robonomics wss endpoint
+
+## 1.3.3
+
+### Patch Changes
+
+- [#139](https://github.com/PureStake/xcm-sdk/pull/139) [`cbd30b1`](https://github.com/PureStake/xcm-sdk/commit/cbd30b1d4e37ff877e4e27121491ab086a985df0) Thanks [@mmaurello](https://github.com/mmaurello)! - OriginTrail integration with Moonbeam - remove Nodle Eden integration with Moonbase
+
+## 1.3.2
+
+### Patch Changes
+
+- [#137](https://github.com/PureStake/xcm-sdk/pull/137) [`3fd0cb4`](https://github.com/PureStake/xcm-sdk/commit/3fd0cb4cd23c04fcc8bcd3650d8964022193d6b4) Thanks [@mmaurello](https://github.com/mmaurello)! - Integrate Bifrost LSD assets
+
 ## 1.3.1
 
 ### Patch Changes

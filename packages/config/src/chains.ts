@@ -48,6 +48,12 @@ import {
   unit,
   usdc,
   usdt,
+  vbnc,
+  vdot,
+  vfil,
+  vglmr,
+  vksm,
+  vmovr,
   wbtc,
   weth,
   xrt,
@@ -152,6 +158,18 @@ export const bifrostKusama = new Parachain({
       asset: bnc,
       id: { Native: bnc.originSymbol },
     },
+    {
+      asset: vbnc,
+      id: { VToken: 'BNC' },
+    },
+    {
+      asset: vksm,
+      id: { VToken: 'KSM' },
+    },
+    {
+      asset: vmovr,
+      id: { VToken: 'MOVR' },
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -172,6 +190,18 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: bnc,
       id: { Native: bnc.originSymbol },
+    },
+    {
+      asset: vdot,
+      id: { VToken2: 0 },
+    },
+    {
+      asset: vfil,
+      id: { VToken2: 4 },
+    },
+    {
+      asset: vglmr,
+      id: { VToken2: 1 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -656,10 +686,6 @@ export const moonbaseAlpha = new EvmParachain({
       id: '65216491554813189869575508812319036608',
     },
     {
-      asset: nodl,
-      id: '128910205779035707777113095265150484699',
-    },
-    {
       asset: otp,
       id: '238111524681612888331172110363070489924',
     },
@@ -788,6 +814,10 @@ export const moonbeam = new EvmParachain({
       id: '309163521958167876851250718453738106865',
     },
     {
+      asset: otp,
+      id: '238111524681612888331172110363070489924',
+    },
+    {
       asset: para,
       id: '32615670524745285411807346420584982855',
     },
@@ -807,6 +837,21 @@ export const moonbeam = new EvmParachain({
     {
       asset: usdt,
       id: '311091173110107856861649819128533077277',
+    },
+    {
+      asset: vdot,
+      id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: vfil,
+      id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: vglmr,
+      id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
+      metadataId: 0, // no metadata for ERC20 tokens
     },
     {
       asset: wbtc,
@@ -914,6 +959,21 @@ export const moonriver = new EvmParachain({
       asset: xrt,
       id: '108036400430056508975016746969135344601',
     },
+    {
+      asset: vbnc,
+      id: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
+      metadataId: 0,
+    },
+    {
+      asset: vksm,
+      id: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
+      metadataId: 0,
+    },
+    {
+      asset: vmovr,
+      id: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
+      metadataId: 0,
+    },
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -944,22 +1004,22 @@ export const nodle = new Parachain({
   ws: 'wss://nodle-parachain.api.onfinality.io/public-ws',
 });
 
-export const nodleEden = new Parachain({
+export const originTrail = new Parachain({
   assetsData: [
     {
-      asset: nodl,
-      id: 'NodleNative',
+      asset: otp,
+      metadataId: 0,
+      palletInstance: 10,
     },
   ],
-  ecosystem: Ecosystem.AlphanetRelay,
+  ecosystem: Ecosystem.Polkadot,
   genesisHash:
-    '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
-  isTestChain: true,
-  key: 'nodle-eden',
-  name: 'Nodle Eden',
-  parachainId: 2036,
-  ss58Format: 37,
-  ws: 'wss://node-7047027111071080448.jm.onfinality.io/ws?apikey=c49e30e4-3601-48f4-9629-57fa13cb97c0',
+    '0xe7e0962324a3b86c83404dbea483f25fb5dab4c224791c81b756cfc948006174',
+  key: 'origin-trail',
+  name: 'OriginTrail',
+  parachainId: 2043,
+  ss58Format: 101,
+  ws: 'wss://origintrail.api.onfinality.io/public-ws',
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -1097,7 +1157,7 @@ export const robonomics = new Parachain({
   name: 'Robonomics',
   parachainId: 2048,
   ss58Format: 32,
-  ws: 'wss://robonomics.api.onfinality.io/public-ws',
+  ws: 'wss://kusama.rpc.robonomics.network/',
 });
 
 export const shiden = new Parachain({
@@ -1227,7 +1287,7 @@ export const chainsList: AnyChain[] = [
   moonbeam,
   moonriver,
   nodle,
-  nodleEden,
+  originTrail,
   originTrailAlphanet,
   parallel,
   parallelHeiko,
