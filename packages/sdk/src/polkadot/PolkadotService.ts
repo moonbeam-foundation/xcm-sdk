@@ -5,6 +5,7 @@ import {
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import {
+  IConfigService,
   darwiniaPangoro,
   eq,
   equilibriumAlphanet,
@@ -28,17 +29,38 @@ export class PolkadotService {
 
   readonly chain: AnyParachain;
 
-  constructor(api: ApiPromise, chain: AnyParachain) {
+  readonly configService: IConfigService;
+
+  constructor(
+    api: ApiPromise,
+    chain: AnyParachain,
+    configService: IConfigService,
+  ) {
     this.api = api;
     this.chain = chain;
+    this.configService = configService;
   }
 
-  static async create(chain: AnyParachain): Promise<PolkadotService> {
-    return new PolkadotService(await getPolkadotApi(chain.ws), chain);
+  static async create(
+    chain: AnyParachain,
+    configService: IConfigService,
+  ): Promise<PolkadotService> {
+    return new PolkadotService(
+      await getPolkadotApi(chain.ws),
+      chain,
+      configService,
+    );
   }
 
-  static async createMulti(chains: AnyParachain[]): Promise<PolkadotService[]> {
-    return Promise.all(chains.map(PolkadotService.create));
+  static async createMulti(
+    chains: AnyParachain[],
+    configService: IConfigService,
+  ): Promise<PolkadotService[]> {
+    return Promise.all(
+      chains.map((chain: AnyParachain) =>
+        PolkadotService.create(chain, configService),
+      ),
+    );
   }
 
   get decimals(): number {
@@ -64,7 +86,7 @@ export class PolkadotService {
       throw new Error('No native symbol key found');
     }
 
-    const asset = this.chain.assetsData.get(key)?.asset;
+    const asset = this.configService.getAsset(key);
 
     if (!asset) {
       throw new Error(`No asset found for key "${key}" and symbol "${symbol}"`);
