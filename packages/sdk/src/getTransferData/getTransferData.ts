@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import type { TransactionResponse } from '@ethersproject/abstract-provider';
-import { TransferConfig } from '@moonbeam-network/xcm-config';
+import { IConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
@@ -15,26 +15,24 @@ import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 
 export interface GetTransferDataParams extends Partial<Signers> {
+  configService: IConfigService;
   destinationAddress: string;
   sourceAddress: string;
   transferConfig: TransferConfig;
 }
 
 export async function getTransferData({
+  configService,
   destinationAddress,
   evmSigner,
   polkadotSigner,
   sourceAddress,
   transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
-  if (!evmSigner) {
-    throw new Error('EVM Signer must be provided');
-  }
-
-  const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
-    transferConfig.destination.chain,
-    transferConfig.source.chain,
-  ]);
+  const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti(
+    [transferConfig.destination.chain, transferConfig.source.chain],
+    configService,
+  );
 
   const destination = await getDestinationData({
     destinationAddress,
@@ -82,6 +80,7 @@ export async function getTransferData({
     source,
     async swap() {
       return getTransferData({
+        configService,
         destinationAddress: sourceAddress,
         evmSigner,
         polkadotSigner,

@@ -1,5 +1,9 @@
 /* eslint-disable sort-keys */
-import { ConfigBuilder, IConfigService } from '@moonbeam-network/xcm-config';
+import {
+  ConfigBuilder,
+  ConfigService,
+  IConfigService,
+} from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { getTransferData as gtd } from './getTransferData/getTransferData';
 import { Signers, TransferData } from './sdk.interfaces';
@@ -9,7 +13,8 @@ export interface SdkOptions extends Partial<Signers> {
 }
 
 export function Sdk(options?: SdkOptions) {
-  const configService = options?.configService;
+  const configService = options?.configService ?? new ConfigService();
+
   return {
     assets(ecosystem?: Ecosystem) {
       const { assets, asset } = ConfigBuilder(configService).assets(ecosystem);
@@ -35,6 +40,7 @@ export function Sdk(options?: SdkOptions) {
                     ): Promise<TransferData> {
                       return gtd({
                         ...options,
+                        configService,
                         destinationAddress,
                         evmSigner: signers?.evmSigner ?? signers?.ethersSigner,
                         sourceAddress,
@@ -61,6 +67,7 @@ export function Sdk(options?: SdkOptions) {
       sourceKeyOrChain,
     }: SdkTransferParams): Promise<TransferData> {
       return gtd({
+        configService,
         destinationAddress,
         evmSigner: evmSigner ?? ethersSigner,
         polkadotSigner,

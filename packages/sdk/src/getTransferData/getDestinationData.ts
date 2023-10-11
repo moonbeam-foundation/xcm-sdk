@@ -10,7 +10,7 @@ import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
-  evmSigner: EvmSigner;
+  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
