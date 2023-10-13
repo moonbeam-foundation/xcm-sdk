@@ -75,6 +75,11 @@ export const dai = new Asset({
   originSymbol: 'DAI',
 });
 
+export const fil = new Asset({
+  key: 'fil',
+  originSymbol: 'FIL',
+});
+
 export const glmr = new Asset({
   key: 'glmr',
   originSymbol: 'GLMR',
@@ -280,6 +285,7 @@ export const assetsList: Asset[] = [
   dot,
   eq,
   eqd,
+  fil,
   glmr,
   hdx,
   hko,

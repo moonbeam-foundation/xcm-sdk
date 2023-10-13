@@ -29,7 +29,7 @@ export function eqBalances() {
                   },
                   {
                     AccountKey20: {
-                      network: 'Any',
+                      network: null,
                       key: address,
                     },
                   },
@@ -60,7 +60,7 @@ export function eqBalances() {
                     },
                     {
                       AccountKey20: {
-                        network: 'Any',
+                        network: null,
                         key: address,
                       },
                     },
