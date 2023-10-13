@@ -9,6 +9,7 @@ import {
   dot,
   eq,
   eqd,
+  fil,
   glmr,
   hdx,
   ibtc,
@@ -478,6 +479,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.000002,
         asset: weth,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: fil,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: fil,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {

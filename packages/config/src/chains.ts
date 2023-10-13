@@ -20,6 +20,7 @@ import {
   dot,
   eq,
   eqd,
+  fil,
   glmr,
   hdx,
   hko,
@@ -190,6 +191,10 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: bnc,
       id: { Native: bnc.originSymbol },
+    },
+    {
+      asset: fil,
+      id: { Token2: 4 },
     },
     {
       asset: vdot,
@@ -791,6 +796,11 @@ export const moonbeam = new EvmParachain({
     {
       asset: eqd,
       id: '187224307232923873519830480073807488153',
+    },
+    {
+      asset: fil,
+      id: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
+      metadataId: 0, // no metadata for ERC20 tokens
     },
     {
       asset: glmr,

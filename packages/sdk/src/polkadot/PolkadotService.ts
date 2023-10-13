@@ -8,6 +8,7 @@ import {
   IConfigService,
   darwiniaPangoro,
   eq,
+  equilibrium,
   equilibriumAlphanet,
   paring,
 } from '@moonbeam-network/xcm-config';
@@ -71,9 +72,12 @@ export class PolkadotService {
     const symbol = this.api.registry.chainTokens.at(0);
     const key = symbol?.toString().toLowerCase();
 
-    // TODO: Remove this once Equilibrium Alphanet is updated
+    // TODO: Remove this once Equilibrium is updated
     // or find better way if issue appears on other chains
-    if (key === 'token' && this.chain.key === equilibriumAlphanet.key) {
+    if (
+      key === 'token' &&
+      [equilibriumAlphanet.key, equilibrium.key].includes(this.chain.key)
+    ) {
       return eq;
     }
 
