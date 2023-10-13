@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.5
+
+### Patch Changes
+
+- [#144](https://github.com/PureStake/xcm-sdk/pull/144) [`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135) Thanks [@mmaurello](https://github.com/mmaurello)! - FIL integration and EQ fix
+
+- Updated dependencies [[`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135)]:
+  - @moonbeam-network/xcm-builder@1.0.7
+
 ## 1.3.4
 
 ### Patch Changes

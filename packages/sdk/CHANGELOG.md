@@ -1,5 +1,19 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.0
+
+### Minor Changes
+
+- [#136](https://github.com/PureStake/xcm-sdk/pull/136) [`02dafc0`](https://github.com/PureStake/xcm-sdk/commit/02dafc0977874c081e41f4685d7da7bedb81b7af) Thanks [@nohaapav](https://github.com/nohaapav)! - Sopport optional EvmSigner, Fix: PolkadotService asset get (not reflecting config service)
+
+### Patch Changes
+
+- [#144](https://github.com/PureStake/xcm-sdk/pull/144) [`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135) Thanks [@mmaurello](https://github.com/mmaurello)! - FIL integration and EQ fix
+
+- Updated dependencies [[`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135)]:
+  - @moonbeam-network/xcm-builder@1.0.7
+  - @moonbeam-network/xcm-config@1.3.5
+
 ## 1.3.4
 
 ### Patch Changes
