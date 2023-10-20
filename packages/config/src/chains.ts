@@ -455,6 +455,10 @@ export const hydraDX = new Parachain({
 export const interlay = new Parachain({
   assetsData: [
     {
+      asset: glmr,
+      id: { ForeignAsset: 10 },
+    },
+    {
       asset: intr,
       decimals: 10,
       id: { Token: intr.originSymbol },

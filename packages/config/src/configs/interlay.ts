@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { ibtc, intr } from '../assets';
+import { glmr, ibtc, intr } from '../assets';
 import { interlay, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -35,6 +35,17 @@ export const interlayConfig = new ChainConfig({
         asset: intr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
+    }),
+    new AssetConfig({
+      asset: glmr,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.001,
+        asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
   ],
   chain: interlay,
