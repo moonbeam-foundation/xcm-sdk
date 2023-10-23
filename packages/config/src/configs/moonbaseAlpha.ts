@@ -1,12 +1,14 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
   alan,
+  atom,
   dev,
   eq,
   eqd,
   lit,
   otp,
   paring,
+  pica,
   soon,
   tt1,
   tur,
@@ -21,6 +23,7 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
+  picassoAlphanet,
   subsocialAlphanet,
   turingAlphanet,
 } from '../chains';
@@ -58,6 +61,17 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destination: moonbaseBeta,
       destinationFee: {
         amount: 0.0002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picassoAlphanet,
+      destinationFee: {
+        amount: 0.00000001,
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -160,6 +174,36 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 4,
         asset: paring,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: atom,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picassoAlphanet,
+      destinationFee: {
+        amount: 0.0001,
+        asset: atom,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: pica,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picassoAlphanet,
+      destinationFee: {
+        amount: 0.01,
+        asset: pica,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
