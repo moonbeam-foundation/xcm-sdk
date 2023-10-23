@@ -1,5 +1,16 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.6
+
+### Patch Changes
+
+- [#148](https://github.com/PureStake/xcm-sdk/pull/148) [`3f071c4`](https://github.com/PureStake/xcm-sdk/commit/3f071c42555e9694b090b2281eb9d67b695aa750) Thanks [@mmaurello](https://github.com/mmaurello)! - Picasso integration with Moonbase and dependency updates
+
+- [#147](https://github.com/PureStake/xcm-sdk/pull/147) [`ea6cd77`](https://github.com/PureStake/xcm-sdk/commit/ea6cd777314667029edcedff8fd3b1401a34e84d) Thanks [@mmaurello](https://github.com/mmaurello)! - Support GLMR transfers in interlay
+
+- Updated dependencies [[`3f071c4`](https://github.com/PureStake/xcm-sdk/commit/3f071c42555e9694b090b2281eb9d67b695aa750)]:
+  - @moonbeam-network/xcm-builder@1.0.8
+
 ## 1.3.5
 
 ### Patch Changes
