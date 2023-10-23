@@ -15,6 +15,11 @@ export const astr = new Asset({
   originSymbol: 'ASTR',
 });
 
+export const atom = new Asset({
+  key: 'atom',
+  originSymbol: 'ATOM',
+});
+
 export const auq = new Asset({
   key: 'auq',
   originSymbol: 'AUQ',
@@ -170,6 +175,11 @@ export const pha = new Asset({
   originSymbol: 'PHA',
 });
 
+export const pica = new Asset({
+  key: 'pica',
+  originSymbol: 'PICA',
+});
+
 export const ring = new Asset({
   key: 'ring',
   originSymbol: 'RING',
@@ -274,6 +284,7 @@ export const assetsList: Asset[] = [
   aca,
   alan,
   astr,
+  atom,
   auq,
   aseed,
   bnc,
@@ -304,6 +315,7 @@ export const assetsList: Asset[] = [
   para,
   paring,
   pha,
+  pica,
   ring,
   rmrk,
   sdn,

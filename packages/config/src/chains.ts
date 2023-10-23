@@ -9,6 +9,7 @@ import {
   alan,
   aseed,
   astr,
+  atom,
   auq,
   betaDEV,
   bnc,
@@ -39,6 +40,7 @@ import {
   para,
   paring,
   pha,
+  pica,
   ring,
   rmrk,
   sdn,
@@ -199,6 +201,7 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: vdot,
       id: { VToken2: 0 },
+      metadataId: { VToken2: 0 },
     },
     {
       asset: vfil,
@@ -673,6 +676,10 @@ export const moonbaseAlpha = new EvmParachain({
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      asset: atom,
+      id: '244316754493307480955066032215622931381',
+    },
+    {
       asset: auq,
       id: '69536036667157951501899290870203586130',
     },
@@ -701,6 +708,10 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: paring,
       id: '173481220575862801646329923366065693029',
+    },
+    {
+      asset: pica,
+      id: '22417088946346045371238623691600461855',
     },
     {
       asset: soon,
@@ -1122,6 +1133,32 @@ export const phala = new Parachain({
   ws: 'wss://api.phala.network/ws',
 });
 
+export const picassoAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: pica,
+      id: 1,
+    },
+    {
+      asset: atom,
+      id: 7,
+    },
+    {
+      asset: dev,
+      id: 10,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x3db2074093ab964732631d842b99d6612a6dc75a379738a660642b05ccad59c8',
+  isTestChain: true,
+  key: 'picasso-alphanet',
+  name: 'Picasso Alphanet',
+  parachainId: 2019,
+  ss58Format: 49,
+  ws: 'wss://boot-01.picasso2270.composablenodes.tech/',
+});
+
 export const polkadot = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1306,6 +1343,7 @@ export const chainsList: AnyChain[] = [
   parallel,
   parallelHeiko,
   phala,
+  picassoAlphanet,
   polkadot,
   robonomics,
   shiden,
