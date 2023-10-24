@@ -481,7 +481,7 @@ export const interlay = new Parachain({
   name: 'Interlay',
   parachainId: 2032,
   ss58Format: 2032,
-  ws: 'wss://interlay.api.onfinality.io/public-ws',
+  ws: 'wss://api.interlay.io/parachain',
 });
 
 export const integritee = new Parachain({
@@ -492,7 +492,7 @@ export const integritee = new Parachain({
   name: 'Integritee',
   parachainId: 2015,
   ss58Format: 13,
-  ws: 'wss://integritee-kusama.api.onfinality.io/public-ws',
+  ws: 'wss://kusama.api.integritee.network',
 });
 
 export const karura = new Parachain({
@@ -545,7 +545,7 @@ export const khala = new Parachain({
   name: 'Khala',
   parachainId: 2004,
   ss58Format: 30,
-  ws: 'wss://khala.api.onfinality.io/public-ws',
+  ws: 'wss://khala-api.phala.network/ws',
 });
 
 export const kintsugi = new Parachain({
@@ -1026,7 +1026,7 @@ export const nodle = new Parachain({
   name: 'Nodle',
   parachainId: 2026,
   ss58Format: 37,
-  ws: 'wss://nodle-parachain.api.onfinality.io/public-ws',
+  ws: 'wss://eden-rpc.dwellir.com',
 });
 
 export const originTrail = new Parachain({
@@ -1044,7 +1044,7 @@ export const originTrail = new Parachain({
   name: 'OriginTrail',
   parachainId: 2043,
   ss58Format: 101,
-  ws: 'wss://origintrail.api.onfinality.io/public-ws',
+  ws: 'wss://origintrail-rpc.dwellir.com',
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -1231,7 +1231,7 @@ export const shiden = new Parachain({
   name: 'Shiden',
   parachainId: 2007,
   ss58Format: 5,
-  ws: 'wss://shiden.api.onfinality.io/public-ws',
+  ws: 'wss://rpc.shiden.astar.network',
 });
 
 export const turing = new Parachain({
