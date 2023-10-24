@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.7
+
+### Patch Changes
+
+- [#149](https://github.com/PureStake/xcm-sdk/pull/149) [`6c208b7`](https://github.com/PureStake/xcm-sdk/commit/6c208b71d25b0fc44bca93ab3ef9cc1e253e57df) Thanks [@mmaurello](https://github.com/mmaurello)! - Change OnFinality endpoints
+
 ## 1.3.6
 
 ### Patch Changes
