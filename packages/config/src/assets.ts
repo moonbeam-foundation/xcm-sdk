@@ -280,6 +280,11 @@ export const xrt = new Asset({
   originSymbol: 'XRT',
 });
 
+export const ztg = new Asset({
+  key: 'ztg',
+  originSymbol: 'ZTG',
+});
+
 export const assetsList: Asset[] = [
   aca,
   alan,
@@ -336,6 +341,7 @@ export const assetsList: Asset[] = [
   wbtc,
   weth,
   wftm,
+  ztg,
 ];
 
 export const assetsMap = new Map<string, Asset>(
