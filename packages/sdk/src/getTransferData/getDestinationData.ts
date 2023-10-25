@@ -46,7 +46,12 @@ export async function getDestinationData({
   const balanceAmount = zeroAmount.copyWith({ amount: balance });
   const { existentialDeposit } = polkadot;
 
-  const feeAmount = await getFee({ config: transferConfig, polkadot });
+  const feeAmount = await getFee({
+    address: destinationAddress,
+    config: transferConfig,
+    evmSigner,
+    polkadot,
+  });
   const minAmount = zeroAmount.copyWith({ amount: min });
 
   return {
@@ -59,16 +64,26 @@ export async function getDestinationData({
 }
 
 export interface GetFeeParams {
+  address: string;
   config: TransferConfig;
+  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
 export async function getFee({
+  address,
   config,
+  evmSigner,
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
   const { amount, asset } = config.source.config.destinationFee;
-  const decimals = await polkadot.getAssetDecimals(asset);
+  const decimals = await getDecimals({
+    address,
+    asset,
+    config: config.destination.config,
+    evmSigner,
+    polkadot,
+  });
   const zeroAmount = AssetAmount.fromAsset(asset, {
     amount: 0n,
     decimals,
