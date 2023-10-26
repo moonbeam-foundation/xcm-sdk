@@ -219,7 +219,7 @@ export const bifrostPolkadot = new Parachain({
   name: 'Bifrost',
   parachainId: 2030,
   ss58Format: 6,
-  ws: 'wss://hk.p.bifrost-rpc.liebi.com/ws',
+  ws: 'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
 });
 
 export const calamari = new Parachain({
