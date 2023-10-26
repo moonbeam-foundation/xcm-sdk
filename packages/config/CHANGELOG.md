@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.8
+
+### Patch Changes
+
+- [#153](https://github.com/PureStake/xcm-sdk/pull/153) [`de87e3e`](https://github.com/PureStake/xcm-sdk/commit/de87e3e4b2817080dcb60495cbcc70a8bef47a69) Thanks [@mmaurello](https://github.com/mmaurello)! - Change how we get decimals from assets in destination and change vDOT transfers paying asset
+
 ## 1.3.7
 
 ### Patch Changes
