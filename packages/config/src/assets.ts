@@ -220,7 +220,7 @@ export const unit = new Asset({
   originSymbol: 'Unit',
 });
 
-export const usdc = new Asset({
+export const usdcwh = new Asset({
   key: 'usdcwh',
   originSymbol: 'USDC.Wh',
 });
@@ -329,7 +329,7 @@ export const assetsList: Asset[] = [
   tt1,
   tur,
   unit,
-  usdc,
+  usdcwh,
   usdt,
   usdtwh,
   vbnc,
