@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { dai, glmr, hdx, usdc, wbtc, weth } from '../assets';
+import { dai, glmr, hdx, usdc, usdtwh, wbtc, weth } from '../assets';
 import { hydraDX, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -49,6 +49,21 @@ export const hydraDxConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: usdc,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: usdtwh,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {

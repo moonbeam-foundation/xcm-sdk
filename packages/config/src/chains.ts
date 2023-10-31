@@ -51,6 +51,7 @@ import {
   unit,
   usdc,
   usdt,
+  usdtwh,
   vbnc,
   vdot,
   vfil,
@@ -435,6 +436,10 @@ export const hydraDX = new Parachain({
     {
       asset: usdc,
       id: 21,
+    },
+    {
+      asset: usdtwh,
+      id: 23,
     },
     {
       asset: wbtc,
@@ -860,6 +865,11 @@ export const moonbeam = new EvmParachain({
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      asset: usdtwh,
+      id: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
+      metadataId: 0,
+    },
+    {
       asset: usdt,
       id: '311091173110107856861649819128533077277',
     },
@@ -1279,18 +1289,6 @@ export const turingAlphanet = new Parachain({
   ws: 'wss://turing-moonbase.rpc.oak.tech/',
 });
 
-export const subsocialAlphanet = new Parachain({
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
-  isTestChain: true,
-  key: 'subsocial-alphanet',
-  name: 'Subsocial Alphanet',
-  parachainId: 2100,
-  ss58Format: 42,
-  ws: 'wss://alphasoon.f3joule.space',
-});
-
 export const uniqueAlpha = new Parachain({
   assetsData: [
     {
@@ -1350,7 +1348,6 @@ export const chainsList: AnyChain[] = [
   kusamaAssetHub,
   alphanetAssetHub,
   polkadotAssetHub,
-  subsocialAlphanet,
   turing,
   turingAlphanet,
   uniqueAlpha,

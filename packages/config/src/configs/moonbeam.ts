@@ -21,6 +21,7 @@ import {
   ring,
   usdc,
   usdt,
+  usdtwh,
   vdot,
   vfil,
   vglmr,
@@ -415,6 +416,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: usdc,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: usdtwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDX,
+      destinationFee: {
+        amount: 0.004,
+        asset: usdtwh,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {

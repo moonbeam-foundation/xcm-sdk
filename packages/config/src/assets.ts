@@ -230,6 +230,11 @@ export const usdt = new Asset({
   originSymbol: 'USDT',
 });
 
+export const usdtwh = new Asset({
+  key: 'usdtwh',
+  originSymbol: 'USDT.Wh',
+});
+
 export const wbtc = new Asset({
   key: 'wbtc',
   originSymbol: 'WBTC',
@@ -326,6 +331,7 @@ export const assetsList: Asset[] = [
   unit,
   usdc,
   usdt,
+  usdtwh,
   vbnc,
   vdot,
   vfil,
