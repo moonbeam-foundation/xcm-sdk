@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.10
+
+### Patch Changes
+
+- [#157](https://github.com/PureStake/xcm-sdk/pull/157) [`7103bb0`](https://github.com/PureStake/xcm-sdk/commit/7103bb0cacf9e448968cd9aafd0e512b82fa348b) Thanks [@mmaurello](https://github.com/mmaurello)! - Revert decimals change in destination fee
+
 ## 1.3.9
 
 ### Patch Changes
