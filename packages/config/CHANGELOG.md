@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.9
+
+### Patch Changes
+
+- [#155](https://github.com/PureStake/xcm-sdk/pull/155) [`a6f48df`](https://github.com/PureStake/xcm-sdk/commit/a6f48df94bd662c120676c8d72a697ef59181220) Thanks [@mmaurello](https://github.com/mmaurello)! - USDT Wormhole integration
+
 ## 1.3.8
 
 ### Patch Changes
