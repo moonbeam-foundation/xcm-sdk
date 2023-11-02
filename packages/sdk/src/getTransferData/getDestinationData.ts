@@ -71,19 +71,12 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
-  address,
   config,
-  evmSigner,
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
   const { amount, asset } = config.source.config.destinationFee;
-  const decimals = await getDecimals({
-    address,
-    asset,
-    config: config.destination.config,
-    evmSigner,
-    polkadot,
-  });
+  // TODO we have to consider correctly here when an asset is ERC20 to get it from contract
+  const decimals = await polkadot.getAssetDecimals(asset);
   const zeroAmount = AssetAmount.fromAsset(asset, {
     amount: 0n,
     decimals,
