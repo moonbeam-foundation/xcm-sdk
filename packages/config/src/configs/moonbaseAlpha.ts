@@ -9,7 +9,6 @@ import {
   otp,
   paring,
   pica,
-  soon,
   tt1,
   tur,
   unit,
@@ -24,7 +23,6 @@ import {
   moonbaseBeta,
   originTrailAlphanet,
   picassoAlphanet,
-  subsocialAlphanet,
   turingAlphanet,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -204,21 +202,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: pica,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: soon,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: subsocialAlphanet,
-      destinationFee: {
-        amount: 0.4,
-        asset: soon,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
