@@ -1,5 +1,6 @@
 import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig, FeeAssetConfig } from '@moonbeam-network/xcm-config';
+import { Asset } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
@@ -10,6 +11,7 @@ export interface GetFeeBalancesParams {
   config: AssetConfig | FeeAssetConfig;
   evmSigner?: EvmSigner;
   polkadot: PolkadotService;
+  asset?: Asset;
 }
 
 export async function getBalance({
@@ -38,17 +40,18 @@ export async function getBalance({
 
 export async function getDecimals({
   address,
+  asset,
   config,
   evmSigner,
   polkadot,
 }: GetFeeBalancesParams) {
   const cfg = config.balance.build({
     address,
-    asset: polkadot.chain.getBalanceAssetId(config.asset),
+    asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
   });
 
   if (cfg.type === CallType.Substrate) {
-    return polkadot.getAssetDecimals(config.asset);
+    return polkadot.getAssetDecimals(asset || config.asset);
   }
 
   if (!evmSigner) {

@@ -4,7 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { dot, usdcAH, usdt } from '../assets';
+import { dot, usdc, usdt } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -31,12 +31,12 @@ export const polkadotAssetHubConfig = new ChainConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
-      asset: usdcAH,
+      asset: usdc,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
         amount: 0.02,
-        asset: usdcAH,
+        asset: usdc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder()

@@ -19,7 +19,7 @@ import {
   para,
   pha,
   ring,
-  usdcAH,
+  usdc,
   usdcwh,
   usdt,
   usdtwh,
@@ -382,13 +382,13 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: usdcAH,
+      asset: usdc,
       balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadotAssetHub,
       destinationFee: {
-        amount: 0.7, // TODO
-        asset: dot,
+        amount: 0.7,
+        asset: usdc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

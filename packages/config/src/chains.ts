@@ -49,7 +49,7 @@ import {
   tt1,
   tur,
   unit,
-  usdcAH,
+  usdc,
   usdcwh,
   usdt,
   usdtwh,
@@ -862,7 +862,7 @@ export const moonbeam = new EvmParachain({
       id: '125699734534028342599692732320197985871',
     },
     {
-      asset: usdcAH,
+      asset: usdc,
       id: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
       metadataId: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
     },
@@ -1204,7 +1204,7 @@ export const polkadotAssetHub = new Parachain({
       metadataId: 9999999,
     },
     {
-      asset: usdcAH,
+      asset: usdc,
       id: 1337,
       palletInstance: 50,
     },

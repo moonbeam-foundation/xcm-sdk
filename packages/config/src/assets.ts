@@ -221,7 +221,7 @@ export const unit = new Asset({
 });
 
 // TODO mjm rename?
-export const usdcAH = new Asset({
+export const usdc = new Asset({
   key: 'usdc',
   originSymbol: 'USDC',
 });
@@ -340,7 +340,7 @@ export const assetsList: Asset[] = [
   tt1,
   tur,
   unit,
-  usdcAH,
+  usdc,
   usdcwh,
   usdt,
   usdtwh,
