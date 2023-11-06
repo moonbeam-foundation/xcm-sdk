@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.11
+
+### Patch Changes
+
+- [#152](https://github.com/PureStake/xcm-sdk/pull/152) [`5a50724`](https://github.com/PureStake/xcm-sdk/commit/5a5072453e65d0012ce9826fb1b3b10062141dca) Thanks [@mmaurello](https://github.com/mmaurello)! - Zeitgeist integration with Moonbeam
+
 ## 1.3.10
 
 ### Patch Changes
