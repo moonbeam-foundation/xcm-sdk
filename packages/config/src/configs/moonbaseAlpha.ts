@@ -1,14 +1,14 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
   alan,
+  atom,
   dev,
   eq,
   eqd,
   lit,
-  nodl,
   otp,
   paring,
-  soon,
+  pica,
   tt1,
   tur,
   unit,
@@ -21,9 +21,8 @@ import {
   litentryAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
-  nodleEden,
   originTrailAlphanet,
-  subsocialAlphanet,
+  picassoAlphanet,
   turingAlphanet,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -60,6 +59,17 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destination: moonbaseBeta,
       destinationFee: {
         amount: 0.0002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picassoAlphanet,
+      destinationFee: {
+        amount: 0.00000001,
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -140,21 +150,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: nodl,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: nodleEden,
-      destinationFee: {
-        amount: 0.02,
-        asset: nodl,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
       asset: otp,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -185,13 +180,28 @@ export const moonbaseAlphaConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: soon,
+      asset: atom,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: subsocialAlphanet,
+      destination: picassoAlphanet,
       destinationFee: {
-        amount: 0.4,
-        asset: soon,
+        amount: 0.0001,
+        asset: atom,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: pica,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picassoAlphanet,
+      destinationFee: {
+        amount: 0.01,
+        asset: pica,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

@@ -1,5 +1,20 @@
 # @moonbeam-network/xcm-builder
 
+## 1.0.8
+
+### Patch Changes
+
+- [#148](https://github.com/PureStake/xcm-sdk/pull/148) [`3f071c4`](https://github.com/PureStake/xcm-sdk/commit/3f071c42555e9694b090b2281eb9d67b695aa750) Thanks [@mmaurello](https://github.com/mmaurello)! - Picasso integration with Moonbase and dependency updates
+
+- Updated dependencies [[`3f071c4`](https://github.com/PureStake/xcm-sdk/commit/3f071c42555e9694b090b2281eb9d67b695aa750), [`cd5da97`](https://github.com/PureStake/xcm-sdk/commit/cd5da97e606e94f0ec0d2faa17ac44297c5ee98e)]:
+  - @moonbeam-network/xcm-utils@1.0.3
+
+## 1.0.7
+
+### Patch Changes
+
+- [#144](https://github.com/PureStake/xcm-sdk/pull/144) [`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135) Thanks [@mmaurello](https://github.com/mmaurello)! - FIL integration and EQ fix
+
 ## 1.0.6
 
 ### Patch Changes

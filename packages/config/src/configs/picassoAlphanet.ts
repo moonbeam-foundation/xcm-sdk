@@ -3,50 +3,54 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { glmr, ibtc, intr } from '../assets';
-import { interlay, moonbeam } from '../chains';
+import { atom, dev, pica } from '../assets';
+import { moonbaseAlpha, picassoAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const interlayConfig = new ChainConfig({
+export const picassoAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
-      asset: intr,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
+      asset: pica,
+      balance: BalanceBuilder().substrate().system().account(),
+      destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: intr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
+        asset: pica,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
     new AssetConfig({
-      asset: ibtc,
+      asset: atom,
       balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
+      destination: moonbaseAlpha,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: intr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
+        asset: pica,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       fee: {
-        asset: intr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
+        asset: pica,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     new AssetConfig({
-      asset: glmr,
+      asset: dev,
       balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
+      destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.001,
-        asset: glmr,
+        amount: 0.0001,
+        asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      fee: {
+        asset: pica,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
     }),
   ],
-  chain: interlay,
+  chain: picassoAlphanet,
 });

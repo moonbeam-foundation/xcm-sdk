@@ -15,6 +15,11 @@ export const astr = new Asset({
   originSymbol: 'ASTR',
 });
 
+export const atom = new Asset({
+  key: 'atom',
+  originSymbol: 'ATOM',
+});
+
 export const auq = new Asset({
   key: 'auq',
   originSymbol: 'AUQ',
@@ -73,6 +78,11 @@ export const eqd = new Asset({
 export const dai = new Asset({
   key: 'dai',
   originSymbol: 'DAI',
+});
+
+export const fil = new Asset({
+  key: 'fil',
+  originSymbol: 'FIL',
 });
 
 export const glmr = new Asset({
@@ -165,6 +175,11 @@ export const pha = new Asset({
   originSymbol: 'PHA',
 });
 
+export const pica = new Asset({
+  key: 'pica',
+  originSymbol: 'PICA',
+});
+
 export const ring = new Asset({
   key: 'ring',
   originSymbol: 'RING',
@@ -221,6 +236,11 @@ export const usdt = new Asset({
   originSymbol: 'USDT',
 });
 
+export const usdtwh = new Asset({
+  key: 'usdtwh',
+  originSymbol: 'USDT.Wh',
+});
+
 export const wbtc = new Asset({
   key: 'wbtc',
   originSymbol: 'WBTC',
@@ -271,10 +291,16 @@ export const xrt = new Asset({
   originSymbol: 'XRT',
 });
 
+export const ztg = new Asset({
+  key: 'ztg',
+  originSymbol: 'ZTG',
+});
+
 export const assetsList: Asset[] = [
   aca,
   alan,
   astr,
+  atom,
   auq,
   aseed,
   bnc,
@@ -286,6 +312,7 @@ export const assetsList: Asset[] = [
   dot,
   eq,
   eqd,
+  fil,
   glmr,
   hdx,
   hko,
@@ -304,6 +331,7 @@ export const assetsList: Asset[] = [
   para,
   paring,
   pha,
+  pica,
   ring,
   rmrk,
   sdn,
@@ -315,6 +343,7 @@ export const assetsList: Asset[] = [
   usdcAH,
   usdcwh,
   usdt,
+  usdtwh,
   vbnc,
   vdot,
   vfil,
@@ -325,6 +354,7 @@ export const assetsList: Asset[] = [
   wbtc,
   weth,
   wftm,
+  ztg,
 ];
 
 export const assetsMap = new Map<string, Asset>(

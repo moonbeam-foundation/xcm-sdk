@@ -3,27 +3,24 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { soon } from '../assets';
-import { moonbaseAlpha, subsocialAlphanet } from '../chains';
+import { ztg } from '../assets';
+import { moonbeam, zeitgeist } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const subsocialAlphanetConfig = new ChainConfig({
+export const zeitgeistConfig = new ChainConfig({
   assets: [
     new AssetConfig({
-      asset: soon,
+      asset: ztg,
       balance: BalanceBuilder().substrate().system().account(),
-      destination: moonbaseAlpha,
+      destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: soon,
+        asset: ztg,
         balance: BalanceBuilder().substrate().system().account(),
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .here(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
   ],
-  chain: subsocialAlphanet,
+  chain: zeitgeist,
 });

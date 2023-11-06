@@ -8,7 +8,7 @@ import { EvmSigner } from '../sdk.interfaces';
 export interface GetFeeBalancesParams {
   address: string;
   config: AssetConfig | FeeAssetConfig;
-  evmSigner: EvmSigner;
+  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
@@ -25,6 +25,10 @@ export async function getBalance({
 
   if (cfg.type === CallType.Substrate) {
     return polkadot.query(cfg as SubstrateQueryConfig);
+  }
+
+  if (!evmSigner) {
+    throw new Error('Evm signer must be provided');
   }
 
   const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
@@ -45,6 +49,10 @@ export async function getDecimals({
 
   if (cfg.type === CallType.Substrate) {
     return polkadot.getAssetDecimals(config.asset);
+  }
+
+  if (!evmSigner) {
+    throw new Error('Evm signer must be provided');
   }
 
   const contract = createContract(cfg, evmSigner) as BalanceContractInterface;

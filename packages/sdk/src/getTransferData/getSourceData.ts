@@ -17,7 +17,7 @@ export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  evmSigner: EvmSigner;
+  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
 }

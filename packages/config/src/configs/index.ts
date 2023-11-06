@@ -30,19 +30,20 @@ import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
 import { nodleConfig } from './nodle';
-import { nodleEdenConfig } from './nodleEden';
+import { originTrailConfig } from './originTrail';
 import { originTrailAlphanetConfig } from './originTrailAlphanet';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
 import { phalaConfig } from './phala';
+import { picassoAlphanetConfig } from './picassoAlphanet';
 import { polkadotConfig } from './polkadot';
 import { polkadotAssetHubConfig } from './polkadotAssetHub';
 import { robonomicsConfig } from './robonomics';
 import { shidenConfig } from './shiden';
-import { subsocialAlphanetConfig } from './subsocialAlphanet';
 import { turingConfig } from './turing';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
+import { zeitgeistConfig } from './zeitgeist';
 
 export const chainsConfigList: ChainConfig[] = [
   acalaConfig,
@@ -73,21 +74,22 @@ export const chainsConfigList: ChainConfig[] = [
   moonbeamConfig,
   moonriverConfig,
   nodleConfig,
-  nodleEdenConfig,
+  originTrailConfig,
   originTrailAlphanetConfig,
   parallelConfig,
   parallelHeikoConfig,
   phalaConfig,
+  picassoAlphanetConfig,
   polkadotConfig,
   robonomicsConfig,
   shidenConfig,
   alphanetAssetHubConfig,
   kusamaAssetHubConfig,
   polkadotAssetHubConfig,
-  subsocialAlphanetConfig,
   turingConfig,
   turingAlphanetConfig,
   uniqueAlphaConfig,
+  zeitgeistConfig,
 ];
 
 export const chainsConfigMap = new Map<string, ChainConfig>(

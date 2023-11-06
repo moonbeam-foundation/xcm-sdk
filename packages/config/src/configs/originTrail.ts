@@ -3,24 +3,27 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { nodl } from '../assets';
-import { moonbaseAlpha, nodleEden } from '../chains';
+import { otp } from '../assets';
+import { moonbeam, originTrail } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const nodleEdenConfig = new ChainConfig({
+export const originTrailConfig = new ChainConfig({
   assets: [
     new AssetConfig({
-      asset: nodl,
+      asset: otp,
       balance: BalanceBuilder().substrate().system().account(),
-      destination: moonbaseAlpha,
+      destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: nodl,
+        asset: otp,
         balance: BalanceBuilder().substrate().system().account(),
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
+        .X1(),
     }),
   ],
-  chain: nodleEden,
+  chain: originTrail,
 });

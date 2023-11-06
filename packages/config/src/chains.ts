@@ -9,6 +9,7 @@ import {
   alan,
   aseed,
   astr,
+  atom,
   auq,
   betaDEV,
   bnc,
@@ -20,6 +21,7 @@ import {
   dot,
   eq,
   eqd,
+  fil,
   glmr,
   hdx,
   hko,
@@ -38,6 +40,7 @@ import {
   para,
   paring,
   pha,
+  pica,
   ring,
   rmrk,
   sdn,
@@ -49,6 +52,7 @@ import {
   usdcAH,
   usdcwh,
   usdt,
+  usdtwh,
   vbnc,
   vdot,
   vfil,
@@ -58,6 +62,7 @@ import {
   wbtc,
   weth,
   xrt,
+  ztg,
 } from './assets';
 
 export const acala = new Parachain({
@@ -179,7 +184,7 @@ export const bifrostKusama = new Parachain({
   name: 'Bifrost',
   parachainId: 2001,
   ss58Format: 6,
-  ws: 'wss://bifrost-rpc.liebi.com/ws',
+  ws: 'wss://us.bifrost-rpc.liebi.com/ws',
 });
 
 export const bifrostPolkadot = new Parachain({
@@ -193,8 +198,13 @@ export const bifrostPolkadot = new Parachain({
       id: { Native: bnc.originSymbol },
     },
     {
+      asset: fil,
+      id: { Token2: 4 },
+    },
+    {
       asset: vdot,
       id: { VToken2: 0 },
+      metadataId: { VToken2: 0 },
     },
     {
       asset: vfil,
@@ -212,7 +222,7 @@ export const bifrostPolkadot = new Parachain({
   name: 'Bifrost',
   parachainId: 2030,
   ss58Format: 6,
-  ws: 'wss://hk.p.bifrost-rpc.liebi.com/ws',
+  ws: 'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
 });
 
 export const calamari = new Parachain({
@@ -430,6 +440,10 @@ export const hydraDX = new Parachain({
       id: 21,
     },
     {
+      asset: usdtwh,
+      id: 23,
+    },
+    {
       asset: wbtc,
       id: 19,
     },
@@ -451,6 +465,10 @@ export const hydraDX = new Parachain({
 export const interlay = new Parachain({
   assetsData: [
     {
+      asset: glmr,
+      id: { ForeignAsset: 10 },
+    },
+    {
       asset: intr,
       decimals: 10,
       id: { Token: intr.originSymbol },
@@ -470,7 +488,7 @@ export const interlay = new Parachain({
   name: 'Interlay',
   parachainId: 2032,
   ss58Format: 2032,
-  ws: 'wss://interlay.api.onfinality.io/public-ws',
+  ws: 'wss://api.interlay.io/parachain',
 });
 
 export const integritee = new Parachain({
@@ -481,7 +499,7 @@ export const integritee = new Parachain({
   name: 'Integritee',
   parachainId: 2015,
   ss58Format: 13,
-  ws: 'wss://integritee-kusama.api.onfinality.io/public-ws',
+  ws: 'wss://kusama.api.integritee.network',
 });
 
 export const karura = new Parachain({
@@ -534,7 +552,7 @@ export const khala = new Parachain({
   name: 'Khala',
   parachainId: 2004,
   ss58Format: 30,
-  ws: 'wss://khala.api.onfinality.io/public-ws',
+  ws: 'wss://khala-api.phala.network/ws',
 });
 
 export const kintsugi = new Parachain({
@@ -665,6 +683,10 @@ export const moonbaseAlpha = new EvmParachain({
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      asset: atom,
+      id: '244316754493307480955066032215622931381',
+    },
+    {
       asset: auq,
       id: '69536036667157951501899290870203586130',
     },
@@ -687,16 +709,16 @@ export const moonbaseAlpha = new EvmParachain({
       id: '65216491554813189869575508812319036608',
     },
     {
-      asset: nodl,
-      id: '128910205779035707777113095265150484699',
-    },
-    {
       asset: otp,
       id: '238111524681612888331172110363070489924',
     },
     {
       asset: paring,
       id: '173481220575862801646329923366065693029',
+    },
+    {
+      asset: pica,
+      id: '22417088946346045371238623691600461855',
     },
     {
       asset: soon,
@@ -798,6 +820,11 @@ export const moonbeam = new EvmParachain({
       id: '187224307232923873519830480073807488153',
     },
     {
+      asset: fil,
+      id: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
       asset: glmr,
       id: '0x0000000000000000000000000000000000000802',
       min: 0.1,
@@ -817,6 +844,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: nodl,
       id: '309163521958167876851250718453738106865',
+    },
+    {
+      asset: otp,
+      id: '238111524681612888331172110363070489924',
     },
     {
       asset: para,
@@ -839,6 +870,11 @@ export const moonbeam = new EvmParachain({
       asset: usdcwh,
       id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
       metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: usdtwh,
+      id: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
+      metadataId: 0,
     },
     {
       asset: usdt,
@@ -868,6 +904,10 @@ export const moonbeam = new EvmParachain({
       asset: weth,
       id: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
       metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: ztg,
+      id: '150874409661081770150564009349448205842',
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -1007,25 +1047,25 @@ export const nodle = new Parachain({
   name: 'Nodle',
   parachainId: 2026,
   ss58Format: 37,
-  ws: 'wss://nodle-parachain.api.onfinality.io/public-ws',
+  ws: 'wss://eden-rpc.dwellir.com',
 });
 
-export const nodleEden = new Parachain({
+export const originTrail = new Parachain({
   assetsData: [
     {
-      asset: nodl,
-      id: 'NodleNative',
+      asset: otp,
+      metadataId: 0,
+      palletInstance: 10,
     },
   ],
-  ecosystem: Ecosystem.AlphanetRelay,
+  ecosystem: Ecosystem.Polkadot,
   genesisHash:
-    '0x3e1f1e6e22ab28e0ee6dc39f3bb3ea6dd2e8501790df0541a7e1fbad44d612ec',
-  isTestChain: true,
-  key: 'nodle-eden',
-  name: 'Nodle Eden',
-  parachainId: 2036,
-  ss58Format: 37,
-  ws: 'wss://node-7047027111071080448.jm.onfinality.io/ws?apikey=c49e30e4-3601-48f4-9629-57fa13cb97c0',
+    '0xe7e0962324a3b86c83404dbea483f25fb5dab4c224791c81b756cfc948006174',
+  key: 'origin-trail',
+  name: 'OriginTrail',
+  parachainId: 2043,
+  ss58Format: 101,
+  ws: 'wss://origintrail-rpc.dwellir.com',
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -1114,6 +1154,32 @@ export const phala = new Parachain({
   ws: 'wss://api.phala.network/ws',
 });
 
+export const picassoAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: pica,
+      id: 1,
+    },
+    {
+      asset: atom,
+      id: 7,
+    },
+    {
+      asset: dev,
+      id: 10,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x3db2074093ab964732631d842b99d6612a6dc75a379738a660642b05ccad59c8',
+  isTestChain: true,
+  key: 'picasso-alphanet',
+  name: 'Picasso Alphanet',
+  parachainId: 2019,
+  ss58Format: 49,
+  ws: 'wss://boot-01.picasso2270.composablenodes.tech/',
+});
+
 export const polkadot = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1168,7 +1234,7 @@ export const robonomics = new Parachain({
   name: 'Robonomics',
   parachainId: 2048,
   ss58Format: 32,
-  ws: 'wss://robonomics.api.onfinality.io/public-ws',
+  ws: 'wss://kusama.rpc.robonomics.network/',
 });
 
 export const shiden = new Parachain({
@@ -1191,7 +1257,7 @@ export const shiden = new Parachain({
   name: 'Shiden',
   parachainId: 2007,
   ss58Format: 5,
-  ws: 'wss://shiden.api.onfinality.io/public-ws',
+  ws: 'wss://rpc.shiden.astar.network',
 });
 
 export const turing = new Parachain({
@@ -1239,18 +1305,6 @@ export const turingAlphanet = new Parachain({
   ws: 'wss://turing-moonbase.rpc.oak.tech/',
 });
 
-export const subsocialAlphanet = new Parachain({
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x01f15f9d48ea279640cb35267bfd33a88bb4c21ebb00b129e9bc2d2236aaafdb',
-  isTestChain: true,
-  key: 'subsocial-alphanet',
-  name: 'Subsocial Alphanet',
-  parachainId: 2100,
-  ss58Format: 42,
-  ws: 'wss://alphasoon.f3joule.space',
-});
-
 export const uniqueAlpha = new Parachain({
   assetsData: [
     {
@@ -1267,6 +1321,17 @@ export const uniqueAlpha = new Parachain({
   parachainId: 2095,
   ss58Format: 255,
   ws: 'wss://unique-alpha.unique.network',
+});
+
+export const zeitgeist = new Parachain({
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x1bf2a2ecb4a868de66ea8610f2ce7c8c43706561b6476031315f6640fe38e060',
+  key: 'zeitgeist',
+  name: 'Zeitgeist',
+  parachainId: 2092,
+  ss58Format: 73,
+  ws: 'wss://zeitgeist-rpc.dwellir.com',
 });
 
 export const chainsList: AnyChain[] = [
@@ -1298,21 +1363,22 @@ export const chainsList: AnyChain[] = [
   moonbeam,
   moonriver,
   nodle,
-  nodleEden,
+  originTrail,
   originTrailAlphanet,
   parallel,
   parallelHeiko,
   phala,
+  picassoAlphanet,
   polkadot,
   robonomics,
   shiden,
   kusamaAssetHub,
   alphanetAssetHub,
   polkadotAssetHub,
-  subsocialAlphanet,
   turing,
   turingAlphanet,
   uniqueAlpha,
+  zeitgeist,
 ];
 
 export const chainsMap = new Map<string, AnyChain>(

@@ -9,22 +9,26 @@ import {
   dot,
   eq,
   eqd,
+  fil,
   glmr,
   hdx,
   ibtc,
   intr,
   nodl,
+  otp,
   para,
   pha,
   ring,
   usdcAH,
   usdcwh,
   usdt,
+  usdtwh,
   vdot,
   vfil,
   vglmr,
   wbtc,
   weth,
+  ztg,
 } from '../assets';
 import {
   acala,
@@ -37,10 +41,12 @@ import {
   interlay,
   moonbeam,
   nodle,
+  originTrail,
   parallel,
   phala,
   polkadot,
   polkadotAssetHub,
+  zeitgeist,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -96,6 +102,17 @@ export const moonbeamConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: hydraDX,
+      destinationFee: {
+        amount: 0.05,
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: glmr,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: interlay,
       destinationFee: {
         amount: 0.05,
         asset: glmr,
@@ -290,6 +307,21 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: otp,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: originTrail,
+      destinationFee: {
+        amount: 0.004,
+        asset: otp,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: para,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -410,6 +442,21 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: usdtwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDX,
+      destinationFee: {
+        amount: 0.004,
+        asset: usdtwh,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: vdot,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -478,6 +525,36 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.000002,
         asset: weth,
         balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: fil,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: fil,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: ztg,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: zeitgeist,
+      destinationFee: {
+        amount: 0.01,
+        asset: ztg,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: glmr,

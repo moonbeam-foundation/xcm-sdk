@@ -5,9 +5,10 @@ import {
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import {
-  assetsMap,
+  IConfigService,
   darwiniaPangoro,
   eq,
+  equilibrium,
   equilibriumAlphanet,
   paring,
 } from '@moonbeam-network/xcm-config';
@@ -20,7 +21,7 @@ import {
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { Option, u128 } from '@polkadot/types';
+import { Option, u128, u8 } from '@polkadot/types';
 import { IKeyringPair } from '@polkadot/types/types';
 import { AssetMetadata } from './PolkadotService.interfaces';
 
@@ -29,17 +30,38 @@ export class PolkadotService {
 
   readonly chain: AnyParachain;
 
-  constructor(api: ApiPromise, chain: AnyParachain) {
+  readonly configService: IConfigService;
+
+  constructor(
+    api: ApiPromise,
+    chain: AnyParachain,
+    configService: IConfigService,
+  ) {
     this.api = api;
     this.chain = chain;
+    this.configService = configService;
   }
 
-  static async create(chain: AnyParachain): Promise<PolkadotService> {
-    return new PolkadotService(await getPolkadotApi(chain.ws), chain);
+  static async create(
+    chain: AnyParachain,
+    configService: IConfigService,
+  ): Promise<PolkadotService> {
+    return new PolkadotService(
+      await getPolkadotApi(chain.ws),
+      chain,
+      configService,
+    );
   }
 
-  static async createMulti(chains: AnyParachain[]): Promise<PolkadotService[]> {
-    return Promise.all(chains.map(PolkadotService.create));
+  static async createMulti(
+    chains: AnyParachain[],
+    configService: IConfigService,
+  ): Promise<PolkadotService[]> {
+    return Promise.all(
+      chains.map((chain: AnyParachain) =>
+        PolkadotService.create(chain, configService),
+      ),
+    );
   }
 
   get decimals(): number {
@@ -50,9 +72,12 @@ export class PolkadotService {
     const symbol = this.api.registry.chainTokens.at(0);
     const key = symbol?.toString().toLowerCase();
 
-    // TODO: Remove this once Equilibrium Alphanet is updated
+    // TODO: Remove this once Equilibrium is updated
     // or find better way if issue appears on other chains
-    if (key === 'token' && this.chain.key === equilibriumAlphanet.key) {
+    if (
+      key === 'token' &&
+      [equilibriumAlphanet.key, equilibrium.key].includes(this.chain.key)
+    ) {
       return eq;
     }
 
@@ -65,7 +90,7 @@ export class PolkadotService {
       throw new Error('No native symbol key found');
     }
 
-    const asset = assetsMap.get(key);
+    const asset = this.configService.getAsset(key);
 
     if (!asset) {
       throw new Error(`No asset found for key "${key}" and symbol "${symbol}"`);
@@ -110,10 +135,25 @@ export class PolkadotService {
     };
   }
 
+  async getAssetDecimalsFromQuery(
+    asset: ChainAssetId,
+  ): Promise<number | undefined> {
+    const fn = this.api.query.assetsRegistry?.assetDecimals;
+
+    if (!fn) {
+      return undefined;
+    }
+
+    const data = (await fn(asset)) as Option<u8>;
+
+    return data.unwrapOrDefault().toNumber();
+  }
+
   async getAssetDecimals(asset: Asset): Promise<number> {
+    const metaId = this.chain.getMetadataAssetId(asset);
     return (
-      (await this.getAssetMeta(this.chain.getMetadataAssetId(asset)))
-        ?.decimals ||
+      (await this.getAssetDecimalsFromQuery(metaId)) ||
+      (await this.getAssetMeta(metaId))?.decimals ||
       this.chain.getAssetDecimals(asset) ||
       this.decimals
     );

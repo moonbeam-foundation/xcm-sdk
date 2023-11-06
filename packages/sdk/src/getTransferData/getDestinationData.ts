@@ -10,7 +10,7 @@ import { getBalance, getDecimals, getMin } from './getTransferData.utils';
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
-  evmSigner: EvmSigner;
+  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
@@ -46,7 +46,12 @@ export async function getDestinationData({
   const balanceAmount = zeroAmount.copyWith({ amount: balance });
   const { existentialDeposit } = polkadot;
 
-  const feeAmount = await getFee({ config: transferConfig, polkadot });
+  const feeAmount = await getFee({
+    address: destinationAddress,
+    config: transferConfig,
+    evmSigner,
+    polkadot,
+  });
   const minAmount = zeroAmount.copyWith({ amount: min });
 
   return {
@@ -59,7 +64,9 @@ export async function getDestinationData({
 }
 
 export interface GetFeeParams {
+  address: string;
   config: TransferConfig;
+  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
@@ -68,6 +75,7 @@ export async function getFee({
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
   const { amount, asset } = config.source.config.destinationFee;
+  // TODO we have to consider correctly here when an asset is ERC20 to get it from contract
   const decimals = await polkadot.getAssetDecimals(asset);
   const zeroAmount = AssetAmount.fromAsset(asset, {
     amount: 0n,

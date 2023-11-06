@@ -1,5 +1,67 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.11
+
+### Patch Changes
+
+- [#152](https://github.com/PureStake/xcm-sdk/pull/152) [`5a50724`](https://github.com/PureStake/xcm-sdk/commit/5a5072453e65d0012ce9826fb1b3b10062141dca) Thanks [@mmaurello](https://github.com/mmaurello)! - Zeitgeist integration with Moonbeam
+
+## 1.3.10
+
+### Patch Changes
+
+- [#157](https://github.com/PureStake/xcm-sdk/pull/157) [`7103bb0`](https://github.com/PureStake/xcm-sdk/commit/7103bb0cacf9e448968cd9aafd0e512b82fa348b) Thanks [@mmaurello](https://github.com/mmaurello)! - Revert decimals change in destination fee
+
+## 1.3.9
+
+### Patch Changes
+
+- [#155](https://github.com/PureStake/xcm-sdk/pull/155) [`a6f48df`](https://github.com/PureStake/xcm-sdk/commit/a6f48df94bd662c120676c8d72a697ef59181220) Thanks [@mmaurello](https://github.com/mmaurello)! - USDT Wormhole integration
+
+## 1.3.8
+
+### Patch Changes
+
+- [#153](https://github.com/PureStake/xcm-sdk/pull/153) [`de87e3e`](https://github.com/PureStake/xcm-sdk/commit/de87e3e4b2817080dcb60495cbcc70a8bef47a69) Thanks [@mmaurello](https://github.com/mmaurello)! - Change how we get decimals from assets in destination and change vDOT transfers paying asset
+
+## 1.3.7
+
+### Patch Changes
+
+- [#149](https://github.com/PureStake/xcm-sdk/pull/149) [`6c208b7`](https://github.com/PureStake/xcm-sdk/commit/6c208b71d25b0fc44bca93ab3ef9cc1e253e57df) Thanks [@mmaurello](https://github.com/mmaurello)! - Change OnFinality endpoints
+
+## 1.3.6
+
+### Patch Changes
+
+- [#148](https://github.com/PureStake/xcm-sdk/pull/148) [`3f071c4`](https://github.com/PureStake/xcm-sdk/commit/3f071c42555e9694b090b2281eb9d67b695aa750) Thanks [@mmaurello](https://github.com/mmaurello)! - Picasso integration with Moonbase and dependency updates
+
+- [#147](https://github.com/PureStake/xcm-sdk/pull/147) [`ea6cd77`](https://github.com/PureStake/xcm-sdk/commit/ea6cd777314667029edcedff8fd3b1401a34e84d) Thanks [@mmaurello](https://github.com/mmaurello)! - Support GLMR transfers in interlay
+
+- Updated dependencies [[`3f071c4`](https://github.com/PureStake/xcm-sdk/commit/3f071c42555e9694b090b2281eb9d67b695aa750)]:
+  - @moonbeam-network/xcm-builder@1.0.8
+
+## 1.3.5
+
+### Patch Changes
+
+- [#144](https://github.com/PureStake/xcm-sdk/pull/144) [`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135) Thanks [@mmaurello](https://github.com/mmaurello)! - FIL integration and EQ fix
+
+- Updated dependencies [[`8c16492`](https://github.com/PureStake/xcm-sdk/commit/8c16492f2cceef0e1ebc8a9ba70452e644efd135)]:
+  - @moonbeam-network/xcm-builder@1.0.7
+
+## 1.3.4
+
+### Patch Changes
+
+- [#141](https://github.com/PureStake/xcm-sdk/pull/141) [`de2a0bb`](https://github.com/PureStake/xcm-sdk/commit/de2a0bba3a3af7fb1c67d23d4ead3915b9513f2f) Thanks [@mmaurello](https://github.com/mmaurello)! - change robonomics wss endpoint
+
+## 1.3.3
+
+### Patch Changes
+
+- [#139](https://github.com/PureStake/xcm-sdk/pull/139) [`cbd30b1`](https://github.com/PureStake/xcm-sdk/commit/cbd30b1d4e37ff877e4e27121491ab086a985df0) Thanks [@mmaurello](https://github.com/mmaurello)! - OriginTrail integration with Moonbeam - remove Nodle Eden integration with Moonbase
+
 ## 1.3.2
 
 ### Patch Changes

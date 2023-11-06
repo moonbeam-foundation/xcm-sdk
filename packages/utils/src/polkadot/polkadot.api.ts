@@ -18,6 +18,7 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
   const promise =
     cache.get(ws) ||
     ApiPromise.create({
+      noInitWarn: true,
       provider: new WsProvider(ws),
       typesBundle,
     });
