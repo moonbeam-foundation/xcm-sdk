@@ -183,7 +183,7 @@ export const bifrostKusama = new Parachain({
   name: 'Bifrost',
   parachainId: 2001,
   ss58Format: 6,
-  ws: 'wss://bifrost-rpc.liebi.com/ws',
+  ws: 'wss://us.bifrost-rpc.liebi.com/ws',
 });
 
 export const bifrostPolkadot = new Parachain({

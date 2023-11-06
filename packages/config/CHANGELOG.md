@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.10
+
+### Patch Changes
+
+- [#157](https://github.com/PureStake/xcm-sdk/pull/157) [`7103bb0`](https://github.com/PureStake/xcm-sdk/commit/7103bb0cacf9e448968cd9aafd0e512b82fa348b) Thanks [@mmaurello](https://github.com/mmaurello)! - Revert decimals change in destination fee
+
+## 1.3.9
+
+### Patch Changes
+
+- [#155](https://github.com/PureStake/xcm-sdk/pull/155) [`a6f48df`](https://github.com/PureStake/xcm-sdk/commit/a6f48df94bd662c120676c8d72a697ef59181220) Thanks [@mmaurello](https://github.com/mmaurello)! - USDT Wormhole integration
+
 ## 1.3.8
 
 ### Patch Changes
