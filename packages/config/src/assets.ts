@@ -220,7 +220,6 @@ export const unit = new Asset({
   originSymbol: 'Unit',
 });
 
-// TODO mjm rename?
 export const usdc = new Asset({
   key: 'usdc',
   originSymbol: 'USDC',
