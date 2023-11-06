@@ -61,6 +61,7 @@ import {
   wbtc,
   weth,
   xrt,
+  ztg,
 } from './assets';
 
 export const acala = new Parachain({
@@ -898,6 +899,10 @@ export const moonbeam = new EvmParachain({
       id: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
       metadataId: 0, // no metadata for ERC20 tokens
     },
+    {
+      asset: ztg,
+      id: '150874409661081770150564009349448205842',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1307,6 +1312,17 @@ export const uniqueAlpha = new Parachain({
   ws: 'wss://unique-alpha.unique.network',
 });
 
+export const zeitgeist = new Parachain({
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x1bf2a2ecb4a868de66ea8610f2ce7c8c43706561b6476031315f6640fe38e060',
+  key: 'zeitgeist',
+  name: 'Zeitgeist',
+  parachainId: 2092,
+  ss58Format: 73,
+  ws: 'wss://zeitgeist-rpc.dwellir.com',
+});
+
 export const chainsList: AnyChain[] = [
   acala,
   alphanetRelay,
@@ -1351,6 +1367,7 @@ export const chainsList: AnyChain[] = [
   turing,
   turingAlphanet,
   uniqueAlpha,
+  zeitgeist,
 ];
 
 export const chainsMap = new Map<string, AnyChain>(

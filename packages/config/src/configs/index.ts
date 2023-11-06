@@ -43,6 +43,7 @@ import { shidenConfig } from './shiden';
 import { turingConfig } from './turing';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
+import { zeitgeistConfig } from './zeitgeist';
 
 export const chainsConfigList: ChainConfig[] = [
   acalaConfig,
@@ -88,6 +89,7 @@ export const chainsConfigList: ChainConfig[] = [
   turingConfig,
   turingAlphanetConfig,
   uniqueAlphaConfig,
+  zeitgeistConfig,
 ];
 
 export const chainsConfigMap = new Map<string, ChainConfig>(
