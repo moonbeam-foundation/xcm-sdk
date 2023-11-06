@@ -1,5 +1,5 @@
 import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
-import { AssetConfig, FeeAssetConfig } from '@moonbeam-network/xcm-config';
+import { AssetConfig } from '@moonbeam-network/xcm-config';
 import { Asset } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { BalanceContractInterface, createContract } from '../contract';
@@ -8,7 +8,7 @@ import { EvmSigner } from '../sdk.interfaces';
 
 export interface GetFeeBalancesParams {
   address: string;
-  config: AssetConfig | FeeAssetConfig;
+  config: AssetConfig;
   evmSigner?: EvmSigner;
   polkadot: PolkadotService;
   asset?: Asset;
