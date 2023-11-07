@@ -24,7 +24,9 @@
     "moonriver",
     "xcm",
     "polkadot",
-    "sdk"
+    "sdk",
+    "substrate",
+    "cross-chain"
   ],
   "bugs": {
     "url": "https://github.com/PureStake/xcm-sdk/issues"
