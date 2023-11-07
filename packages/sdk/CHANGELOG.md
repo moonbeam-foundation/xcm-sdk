@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.7
+
+### Patch Changes
+
+- [#160](https://github.com/PureStake/xcm-sdk/pull/160) [`4035acc`](https://github.com/PureStake/xcm-sdk/commit/4035acc82dd22fa571cb1ea5c2822347d1a85b7c) Thanks [@mmaurello](https://github.com/mmaurello)! - USDC asset hub integration and vDOT paying for fees
+
+- Updated dependencies [[`4035acc`](https://github.com/PureStake/xcm-sdk/commit/4035acc82dd22fa571cb1ea5c2822347d1a85b7c)]:
+  - @moonbeam-network/xcm-config@1.3.12
+
 ## 1.4.6
 
 ### Patch Changes
