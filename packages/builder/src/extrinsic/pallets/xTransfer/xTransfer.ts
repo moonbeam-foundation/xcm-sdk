@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
+import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 
 const pallet = 'xTransfer';
@@ -34,11 +35,7 @@ export function xTransfer() {
                       {
                         Parachain: destination.parachainId,
                       },
-                      {
-                        AccountKey20: {
-                          key: address,
-                        },
-                      },
+                      getExtrinsicAccount(address),
                     ],
                   },
                 },
@@ -82,11 +79,7 @@ export function xTransfer() {
                       {
                         Parachain: destination.parachainId,
                       },
-                      {
-                        AccountKey20: {
-                          key: address,
-                        },
-                      },
+                      getExtrinsicAccount(address),
                     ],
                   },
                 },

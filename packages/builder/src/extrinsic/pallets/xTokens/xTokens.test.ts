@@ -1,4 +1,7 @@
-import { buildParamsMock } from '../../../../fixtures';
+import {
+  buildParachainParamsMock,
+  buildParamsMock,
+} from '../../../../fixtures';
 import { xTokens } from './xTokens';
 
 describe('xTokens', () => {
@@ -43,19 +46,49 @@ describe('xTokens', () => {
         expect(extrinsic.getArgs()).toMatchSnapshot();
       });
     });
+    describe('parachain', () => {
+      const extrinsic = xTokens()
+        .transferMultiAsset(100)
+        .X2()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
   });
 
   describe('transferMultiCurrencies', () => {
-    const extrinsic = xTokens()
-      .transferMultiCurrencies()
-      .build(buildParamsMock);
+    describe('x2', () => {
+      const extrinsic = xTokens()
+        .transferMultiCurrencies()
+        .build(buildParamsMock);
 
-    it('should be correct config', () => {
-      expect(extrinsic).toMatchSnapshot();
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
     });
 
-    it('should get correct arguments', () => {
-      expect(extrinsic.getArgs()).toMatchSnapshot();
+    describe('parachain', () => {
+      const extrinsic = xTokens()
+        .transferMultiCurrencies()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
     });
   });
 });

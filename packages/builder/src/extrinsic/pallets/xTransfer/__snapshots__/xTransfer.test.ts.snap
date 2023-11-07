@@ -31,6 +31,61 @@ exports[`xTransfer transfer here should get correct arguments 1`] = `
         {
           "AccountKey20": {
             "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
+          },
+        },
+      ],
+    },
+    "parents": 1,
+  },
+  {
+    "proofSize": 0,
+    "refTime": 5000000000,
+  },
+]
+`;
+
+exports[`xTransfer transfer parachain should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transfer",
+  "getArgs": [Function],
+  "module": "xTransfer",
+  "type": "Substrate",
+}
+`;
+
+exports[`xTransfer transfer parachain should get correct arguments 1`] = `
+[
+  {
+    "fun": {
+      "Fungible": 99000000000n,
+    },
+    "id": {
+      "Concrete": {
+        "interior": {
+          "X2": [
+            {
+              "Parachain": 2032,
+            },
+            {
+              "PalletInstance": 10,
+            },
+          ],
+        },
+        "parents": 1,
+      },
+    },
+  },
+  {
+    "interior": {
+      "X2": [
+        {
+          "Parachain": 2032,
+        },
+        {
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
           },
         },
       ],
@@ -84,6 +139,7 @@ exports[`xTransfer transfer x2 should get correct arguments 1`] = `
         {
           "AccountKey20": {
             "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            "network": "Any",
           },
         },
       ],

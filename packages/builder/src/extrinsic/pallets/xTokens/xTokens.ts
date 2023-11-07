@@ -3,7 +3,10 @@ import {
   ExtrinsicConfigBuilder,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
+import {
+  getExtrinsicAccount,
+  getExtrinsicArgumentVersion,
+} from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 import { getWeight } from './xTokens.utils';
 
@@ -30,12 +33,7 @@ export function xTokens() {
                       {
                         Parachain: destination.parachainId,
                       },
-                      {
-                        AccountKey20: {
-                          network: 'Any',
-                          key: address,
-                        },
-                      },
+                      getExtrinsicAccount(address),
                     ],
                   },
                 },
@@ -83,12 +81,7 @@ export function xTokens() {
                           {
                             Parachain: destination.parachainId,
                           },
-                          {
-                            AccountKey20: {
-                              network: 'Any',
-                              key: address,
-                            },
-                          },
+                          getExtrinsicAccount(address),
                         ],
                       },
                     },
@@ -137,12 +130,7 @@ export function xTokens() {
                           {
                             Parachain: destination.parachainId,
                           },
-                          {
-                            AccountKey20: {
-                              network: 'Any',
-                              key: address,
-                            },
-                          },
+                          getExtrinsicAccount(address),
                         ],
                       },
                     },
@@ -173,11 +161,7 @@ export function xTokens() {
                     {
                       Parachain: destination.parachainId,
                     },
-                    {
-                      AccountKey20: {
-                        key: address,
-                      },
-                    },
+                    getExtrinsicAccount(address),
                   ],
                 },
               },

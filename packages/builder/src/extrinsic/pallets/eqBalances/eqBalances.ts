@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
+import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 
 export enum EqBalancesFee {
@@ -27,12 +28,7 @@ export function eqBalances() {
                   {
                     Parachain: destination.parachainId,
                   },
-                  {
-                    AccountKey20: {
-                      network: null,
-                      key: address,
-                    },
-                  },
+                  getExtrinsicAccount(address),
                 ],
               },
             },
@@ -58,12 +54,7 @@ export function eqBalances() {
                     {
                       Parachain: destination.parachainId,
                     },
-                    {
-                      AccountKey20: {
-                        network: null,
-                        key: address,
-                      },
-                    },
+                    getExtrinsicAccount(address),
                   ],
                 },
               },

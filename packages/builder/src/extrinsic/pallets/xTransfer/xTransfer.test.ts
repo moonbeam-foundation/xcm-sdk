@@ -1,4 +1,7 @@
-import { buildParamsMock } from '../../../../fixtures';
+import {
+  buildParachainParamsMock,
+  buildParamsMock,
+} from '../../../../fixtures';
 import { xTransfer } from './xTransfer';
 
 describe('xTransfer', () => {
@@ -17,6 +20,21 @@ describe('xTransfer', () => {
 
     describe('x2', () => {
       const extrinsic = xTransfer().transfer().X2().build(buildParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+
+    describe('parachain', () => {
+      const extrinsic = xTransfer()
+        .transfer()
+        .X2()
+        .build(buildParachainParamsMock);
 
       it('should be correct config', () => {
         expect(extrinsic).toMatchSnapshot();

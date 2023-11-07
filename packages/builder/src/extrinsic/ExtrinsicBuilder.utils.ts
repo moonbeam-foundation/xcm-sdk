@@ -1,5 +1,7 @@
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import { getTypeDef } from '@polkadot/types';
+import { u8aToHex } from '@polkadot/util';
+import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from './ExtrinsicBuilder.interfaces';
 
 export function getExtrinsicArgumentVersion(
@@ -33,4 +35,22 @@ export function getExtrinsicArgumentVersion(
   }
 
   throw new Error("Can't find Xcm version");
+}
+
+export function getExtrinsicAccount(address: string) {
+  const isEthAddress = address.length === 42;
+
+  return isEthAddress
+    ? {
+        AccountKey20: {
+          key: address,
+          network: 'Any',
+        },
+      }
+    : {
+        AccountId32: {
+          id: u8aToHex(decodeAddress(address)),
+          network: null,
+        },
+      };
 }

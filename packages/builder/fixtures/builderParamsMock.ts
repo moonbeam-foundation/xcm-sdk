@@ -5,6 +5,18 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfigBuilderPrams } from '../src/extrinsic';
 
+export const interlayTestnetMock = new Parachain({
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x418ae94c9fce02b1ab3b5bc211cd2f2133426f2861d97482bbdfdac1bbb0fb92',
+  isTestChain: true,
+  key: 'interlay-testnet',
+  name: 'Interlay Testnet',
+  parachainId: 2032,
+  ss58Format: 2032,
+  ws: 'wss://interlay-moonbeam-alphanet.interlay.io/',
+});
+
 export const alphanetAssetHubMock = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -36,6 +48,17 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   amount: 99_000_000_000n,
   asset: 'USDT',
   destination: moonbaseAlphaMock,
+  fee: 5_000_000_000n,
+  feeAsset: 'RMRK',
+  palletInstance: 10,
+  source: alphanetAssetHubMock,
+};
+
+export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
+  address: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
+  amount: 99_000_000_000n,
+  asset: 'USDT',
+  destination: interlayTestnetMock,
   fee: 5_000_000_000n,
   feeAsset: 'RMRK',
   palletInstance: 10,
