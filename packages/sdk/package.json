@@ -22,7 +22,9 @@
   "keywords": [
     "moonbeam",
     "moonriver",
-    "xcm"
+    "xcm",
+    "polkadot",
+    "sdk"
   ],
   "bugs": {
     "url": "https://github.com/PureStake/xcm-sdk/issues"
