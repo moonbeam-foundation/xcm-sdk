@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.8
+
+### Patch Changes
+
+- [#163](https://github.com/PureStake/xcm-sdk/pull/163) [`790cb28`](https://github.com/PureStake/xcm-sdk/commit/790cb286983e47d947d4911e667d9eb6fdd57f84) Thanks [@Rihyx](https://github.com/Rihyx)! - Update keywords
+
 ## 1.4.7
 
 ### Patch Changes
