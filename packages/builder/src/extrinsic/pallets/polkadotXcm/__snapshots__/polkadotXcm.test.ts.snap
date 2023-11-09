@@ -54,6 +54,69 @@ exports[`polkadotXcm limitedReserveTransferAssets here should get correct argume
 ]
 `;
 
+exports[`polkadotXcm limitedReserveTransferAssets parachain should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "limitedReserveTransferAssets",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+  "type": "Substrate",
+}
+`;
+
+exports[`polkadotXcm limitedReserveTransferAssets parachain should get correct arguments 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 2032,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X2": [
+                {
+                  "PalletInstance": 10,
+                },
+                {
+                  "GeneralIndex": "USDT",
+                },
+              ],
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
 exports[`polkadotXcm limitedReserveTransferAssets x1 should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
@@ -165,6 +228,69 @@ exports[`polkadotXcm limitedReserveTransferAssets x2 should get correct argument
               ],
             },
             "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
+exports[`polkadotXcm limitedReserveWithdrawAssets parachain should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "limitedReserveWithdrawAssets",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+  "type": "Substrate",
+}
+`;
+
+exports[`polkadotXcm limitedReserveWithdrawAssets parachain should get correct arguments 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 2032,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X2": [
+                {
+                  "Parachain": 2032,
+                },
+                {
+                  "PalletInstance": 10,
+                },
+              ],
+            },
+            "parents": 1,
           },
         },
       },

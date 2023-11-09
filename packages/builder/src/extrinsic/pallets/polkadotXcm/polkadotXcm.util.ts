@@ -4,7 +4,10 @@ import {
   ExtrinsicConfigBuilderPrams,
   Parents,
 } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
+import {
+  getExtrinsicAccount,
+  getExtrinsicArgumentVersion,
+} from '../../ExtrinsicBuilder.utils';
 
 export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
   asset: any;
@@ -37,12 +40,7 @@ export function getPolkadotXcmExtrinsicArgs({
       [version]: {
         parents: 0,
         interior: {
-          X1: {
-            AccountKey20: {
-              network: 'Any',
-              key: address,
-            },
-          },
+          X1: getExtrinsicAccount(address),
         },
       },
     },
