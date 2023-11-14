@@ -20,8 +20,8 @@ export const shidenConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .limitedReserveTransferAssets()
+        .xTokens()
+        .transferMultiAsset(shiden.parachainId)
         .here(),
     }),
     new AssetConfig({
@@ -33,10 +33,7 @@ export const shidenConfig = new ChainConfig({
         asset: movr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .limitedReserveWithdrawAssets()
-        .X2(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: sdn,
         balance: BalanceBuilder().substrate().system().account(),

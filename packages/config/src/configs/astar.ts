@@ -20,8 +20,8 @@ export const astarConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .limitedReserveTransferAssets()
+        .xTokens()
+        .transferMultiAsset(astar.parachainId)
         .here(),
     }),
     new AssetConfig({
@@ -33,10 +33,7 @@ export const astarConfig = new ChainConfig({
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       fee: {
         asset: astr,
         balance: BalanceBuilder().substrate().system().account(),

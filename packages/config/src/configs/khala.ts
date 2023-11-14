@@ -26,7 +26,7 @@ export const khalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,
       destinationFee: {
-        amount: 0.0001,
+        amount: 0.001,
         asset: movr,
         balance: BalanceBuilder().substrate().assets().account(),
       },

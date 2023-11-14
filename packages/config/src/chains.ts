@@ -136,7 +136,6 @@ export const astar = new Parachain({
     {
       asset: glmr,
       id: 18446744073709551619n,
-      palletInstance: 10,
     },
     // NOTE: no meta for native token
     {
@@ -1242,7 +1241,6 @@ export const shiden = new Parachain({
     {
       asset: movr,
       id: 18446744073709551620n,
-      palletInstance: 10,
     },
     // NOTE: no meta for native token
     {
@@ -1257,7 +1255,7 @@ export const shiden = new Parachain({
   name: 'Shiden',
   parachainId: 2007,
   ss58Format: 5,
-  ws: 'wss://rpc.shiden.astar.network',
+  ws: 'wss://shiden-rpc.dwellir.com',
 });
 
 export const turing = new Parachain({

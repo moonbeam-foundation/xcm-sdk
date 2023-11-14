@@ -38,13 +38,12 @@ export function getExtrinsicArgumentVersion(
 }
 
 export function getExtrinsicAccount(address: string) {
-  const isEthAddress = address.length === 42;
+  const isEthAddress = address.length === 42 && address.startsWith('0x');
 
   return isEthAddress
     ? {
         AccountKey20: {
           key: address,
-          network: 'Any',
         },
       }
     : {

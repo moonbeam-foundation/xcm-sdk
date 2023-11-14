@@ -3,12 +3,9 @@ import {
   ExtrinsicConfigBuilder,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
-import {
-  getExtrinsicAccount,
-  getExtrinsicArgumentVersion,
-} from '../../ExtrinsicBuilder.utils';
+import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
-import { getWeight } from './xTokens.utils';
+import { getDestination, getWeight } from './xTokens.utils';
 
 const pallet = 'xTokens';
 
@@ -25,19 +22,7 @@ export function xTokens() {
             return [
               asset,
               amount,
-              {
-                [version]: {
-                  parents: 1,
-                  interior: {
-                    X2: [
-                      {
-                        Parachain: destination.parachainId,
-                      },
-                      getExtrinsicAccount(address),
-                    ],
-                  },
-                },
-              },
+              getDestination(version, address, destination),
               getWeight(source.weight, func),
             ];
           },
@@ -47,6 +32,34 @@ export function xTokens() {
       const funcName = 'transferMultiasset';
 
       return {
+        here: (): ExtrinsicConfigBuilder => ({
+          build: ({ address, amount, destination }) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func: funcName,
+              getArgs: (func) => {
+                const version = getExtrinsicArgumentVersion(func, 1);
+
+                return [
+                  {
+                    [version]: {
+                      id: {
+                        Concrete: {
+                          parents: 0,
+                          interior: 'Here',
+                        },
+                      },
+                      fun: {
+                        Fungible: amount,
+                      },
+                    },
+                  },
+                  getDestination(version, address, destination),
+                  'Unlimited',
+                ];
+              },
+            }),
+        }),
         X1: (): ExtrinsicConfigBuilder => ({
           build: ({ address, amount, destination }) =>
             new ExtrinsicConfig({
@@ -73,19 +86,7 @@ export function xTokens() {
                       },
                     },
                   },
-                  {
-                    [version]: {
-                      parents: 1,
-                      interior: {
-                        X2: [
-                          {
-                            Parachain: destination.parachainId,
-                          },
-                          getExtrinsicAccount(address),
-                        ],
-                      },
-                    },
-                  },
+                  getDestination(version, address, destination),
                   'Unlimited',
                 ];
               },
@@ -122,19 +123,7 @@ export function xTokens() {
                       },
                     },
                   },
-                  {
-                    [version]: {
-                      parents: 1,
-                      interior: {
-                        X2: [
-                          {
-                            Parachain: destination.parachainId,
-                          },
-                          getExtrinsicAccount(address),
-                        ],
-                      },
-                    },
-                  },
+                  getDestination(version, address, destination),
                   getWeight(source.weight, func),
                 ];
               },
@@ -153,19 +142,7 @@ export function xTokens() {
               [feeAsset, fee],
             ],
             1,
-            {
-              [XcmVersion.v3]: {
-                parents: 1,
-                interior: {
-                  X2: [
-                    {
-                      Parachain: destination.parachainId,
-                    },
-                    getExtrinsicAccount(address),
-                  ],
-                },
-              },
-            },
+            getDestination(XcmVersion.v3, address, destination),
             'Unlimited',
           ],
         }),
