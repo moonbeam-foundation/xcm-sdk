@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.13
+
+### Patch Changes
+
+- [#166](https://github.com/PureStake/xcm-sdk/pull/166) [`e4989bb`](https://github.com/PureStake/xcm-sdk/commit/e4989bb4eb525dc5d9515e2b08cb0820956d7826) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Astar and Shiden pallet and fix Any keyword error
+
+- Updated dependencies [[`e4989bb`](https://github.com/PureStake/xcm-sdk/commit/e4989bb4eb525dc5d9515e2b08cb0820956d7826), [`df29a0b`](https://github.com/PureStake/xcm-sdk/commit/df29a0b5b92fdbaa18e435b7aecef9e6d9c6087e)]:
+  - @moonbeam-network/xcm-builder@1.0.9
+
 ## 1.3.12
 
 ### Patch Changes
