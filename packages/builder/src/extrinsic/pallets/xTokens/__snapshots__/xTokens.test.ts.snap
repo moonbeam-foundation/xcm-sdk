@@ -23,7 +23,6 @@ exports[`xTokens transfer should get correct arguments 1`] = `
           {
             "AccountKey20": {
               "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-              "network": "Any",
             },
           },
         ],
@@ -128,7 +127,6 @@ exports[`xTokens transferMultiAsset x1 should get correct arguments 1`] = `
           {
             "AccountKey20": {
               "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-              "network": "Any",
             },
           },
         ],
@@ -183,7 +181,6 @@ exports[`xTokens transferMultiAsset x2 should get correct arguments 1`] = `
           {
             "AccountKey20": {
               "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-              "network": "Any",
             },
           },
         ],
@@ -271,7 +268,6 @@ exports[`xTokens transferMultiCurrencies x2 should get correct arguments 1`] = `
           {
             "AccountKey20": {
               "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-              "network": "Any",
             },
           },
         ],
