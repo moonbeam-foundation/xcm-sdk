@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.10
+
+### Patch Changes
+
+- [#168](https://github.com/PureStake/xcm-sdk/pull/168) [`c45489f`](https://github.com/PureStake/xcm-sdk/commit/c45489fed7512d1f71c3032ed9e10ae0467a9867) Thanks [@mmaurello](https://github.com/mmaurello)! - Picasso integration with Moonriver
+
+- Updated dependencies [[`c45489f`](https://github.com/PureStake/xcm-sdk/commit/c45489fed7512d1f71c3032ed9e10ae0467a9867)]:
+  - @moonbeam-network/xcm-config@1.3.14
+
 ## 1.4.9
 
 ### Patch Changes
