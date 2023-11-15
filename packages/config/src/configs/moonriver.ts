@@ -14,6 +14,7 @@ import {
   mgx,
   movr,
   pha,
+  pica,
   rmrk,
   sdn,
   teer,
@@ -39,6 +40,7 @@ import {
   mangataKusama,
   moonriver,
   parallelHeiko,
+  picasso,
   robonomics,
   shiden,
   turing,
@@ -143,6 +145,17 @@ export const moonriverConfig = new ChainConfig({
       destination: turing,
       destinationFee: {
         amount: 0.004,
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: movr,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picasso,
+      destinationFee: {
+        amount: 0.001,
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -335,6 +348,21 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.32,
         asset: pha,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: pica,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: picasso,
+      destinationFee: {
+        amount: 0.001,
+        asset: pica,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
