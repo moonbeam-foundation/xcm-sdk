@@ -20,8 +20,12 @@ export async function getBalance({
   evmSigner,
   polkadot,
 }: GetFeeBalancesParams) {
+  const addr = config.toEvmAddress
+    ? await config.toEvmAddress(polkadot.api, address)
+    : address;
+
   const cfg = config.balance.build({
-    address,
+    address: addr,
     asset: polkadot.chain.getBalanceAssetId(config.asset),
   });
 
@@ -45,8 +49,12 @@ export async function getDecimals({
   evmSigner,
   polkadot,
 }: GetFeeBalancesParams) {
+  const addr = config.toEvmAddress
+    ? await config.toEvmAddress(polkadot.api, address)
+    : address;
+
   const cfg = config.balance.build({
-    address,
+    address: addr,
     asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
   });
 

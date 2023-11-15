@@ -6,6 +6,7 @@ import {
   FeeConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
 
 export interface AssetConfigConstructorParams {
   asset: Asset;
@@ -16,6 +17,7 @@ export interface AssetConfigConstructorParams {
   extrinsic?: ExtrinsicConfigBuilder;
   fee?: FeeAssetConfig;
   min?: AssetMinConfigBuilder;
+  toEvmAddress?: (api: ApiPromise, address: string) => Promise<string>;
 }
 
 export interface DestinationFeeConfig extends FeeAssetConfig {
@@ -44,6 +46,8 @@ export class AssetConfig {
 
   readonly min?: AssetMinConfigBuilder;
 
+  readonly toEvmAddress?: (api: ApiPromise, address: string) => Promise<string>;
+
   constructor({
     asset,
     balance,
@@ -53,6 +57,7 @@ export class AssetConfig {
     extrinsic,
     fee,
     min,
+    toEvmAddress,
   }: AssetConfigConstructorParams) {
     this.asset = asset;
     this.balance = balance;
@@ -62,5 +67,6 @@ export class AssetConfig {
     this.extrinsic = extrinsic;
     this.fee = fee;
     this.min = min;
+    this.toEvmAddress = toEvmAddress;
   }
 }
