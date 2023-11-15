@@ -35,6 +35,7 @@ import { originTrailAlphanetConfig } from './originTrailAlphanet';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
 import { phalaConfig } from './phala';
+import { picassoConfig } from './picasso';
 import { picassoAlphanetConfig } from './picassoAlphanet';
 import { polkadotConfig } from './polkadot';
 import { polkadotAssetHubConfig } from './polkadotAssetHub';
@@ -79,6 +80,7 @@ export const chainsConfigList: ChainConfig[] = [
   parallelConfig,
   parallelHeikoConfig,
   phalaConfig,
+  picassoConfig,
   picassoAlphanetConfig,
   polkadotConfig,
   robonomicsConfig,

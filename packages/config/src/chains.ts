@@ -92,7 +92,7 @@ export const acala = new Parachain({
   name: 'Acala',
   parachainId: 2000,
   ss58Format: 10,
-  ws: 'wss://acala-rpc-0.aca-api.network',
+  ws: 'wss://acala-rpc.aca-api.network',
 });
 
 export const alphanetAssetHub = new Parachain({
@@ -981,6 +981,10 @@ export const moonriver = new EvmParachain({
       id: '189307976387032586987344677431204943363',
     },
     {
+      asset: pica,
+      id: '167283995827706324502761431814209211090',
+    },
+    {
       asset: rmrk,
       id: '182365888117048807484804376330534607370',
     },
@@ -1151,6 +1155,28 @@ export const phala = new Parachain({
   parachainId: 2035,
   ss58Format: 30,
   ws: 'wss://api.phala.network/ws',
+});
+
+export const picasso = new Parachain({
+  assetsData: [
+    {
+      asset: pica,
+      id: 1,
+    },
+    {
+      asset: movr,
+      id: 23,
+      min: 0.0041,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0x6811a339673c9daa897944dcdac99c6e2939cc88245ed21951a0a3c9a2be75bc',
+  key: 'picasso',
+  name: 'Picasso',
+  parachainId: 2087,
+  ss58Format: 49,
+  ws: 'wss://picasso-rpc.dwellir.com',
 });
 
 export const picassoAlphanet = new Parachain({
@@ -1366,6 +1392,7 @@ export const chainsList: AnyChain[] = [
   parallel,
   parallelHeiko,
   phala,
+  picasso,
   picassoAlphanet,
   polkadot,
   robonomics,
