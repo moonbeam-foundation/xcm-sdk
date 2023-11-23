@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.15
+
+### Patch Changes
+
+- [#170](https://github.com/PureStake/xcm-sdk/pull/170) [`ac043e2`](https://github.com/PureStake/xcm-sdk/commit/ac043e220535a049db9fc72533127c9b3619b0d3) Thanks [@mmaurello](https://github.com/mmaurello)! - Acala LDOT integration with Moonbeam
+
 ## 1.3.14
 
 ### Patch Changes
