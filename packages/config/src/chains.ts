@@ -32,6 +32,7 @@ import {
   kint,
   kma,
   ksm,
+  ldot,
   lit,
   mgx,
   movr,
@@ -83,6 +84,12 @@ export const acala = new Parachain({
       id: { ForeignAsset: 0 },
       metadataId: { ForeignAssetId: 0 },
       minId: { ForeignAssetId: 0 },
+    },
+    {
+      asset: ldot,
+      id: { Token: ldot.originSymbol },
+      metadataId: { NativeAssetId: { Token: ldot.originSymbol } },
+      minId: { NativeAssetId: { Token: ldot.originSymbol } },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -839,6 +846,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: intr,
       id: '101170542313601871197860408087030232491',
+    },
+    {
+      asset: ldot,
+      id: '225719522181998468294117309041779353812',
     },
     {
       asset: nodl,

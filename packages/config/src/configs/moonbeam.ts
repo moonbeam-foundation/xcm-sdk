@@ -14,6 +14,7 @@ import {
   hdx,
   ibtc,
   intr,
+  ldot,
   nodl,
   otp,
   para,
@@ -284,6 +285,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.748,
         asset: intr,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: ldot,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: acala,
+      destinationFee: {
+        amount: 0.001,
+        asset: ldot,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

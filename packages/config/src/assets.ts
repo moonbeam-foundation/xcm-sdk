@@ -135,6 +135,11 @@ export const ksm = new Asset({
   originSymbol: 'KSM',
 });
 
+export const ldot = new Asset({
+  key: 'ldot',
+  originSymbol: 'LDOT',
+});
+
 export const lit = new Asset({
   key: 'lit',
   originSymbol: 'LIT',
@@ -322,6 +327,7 @@ export const assetsList: Asset[] = [
   kint,
   kma,
   ksm,
+  ldot,
   lit,
   mgx,
   movr,
