@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.12
+
+### Patch Changes
+
+- [#172](https://github.com/PureStake/xcm-sdk/pull/172) [`701afd5`](https://github.com/PureStake/xcm-sdk/commit/701afd5ecca0b325e50537b0c142477f07947baa) Thanks [@mmaurello](https://github.com/mmaurello)! - Subsocial integration with Moonbeam
+
+- Updated dependencies [[`701afd5`](https://github.com/PureStake/xcm-sdk/commit/701afd5ecca0b325e50537b0c142477f07947baa)]:
+  - @moonbeam-network/xcm-config@1.3.16
+
 ## 1.4.11
 
 ### Patch Changes
