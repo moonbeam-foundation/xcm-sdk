@@ -20,6 +20,7 @@ import {
   para,
   pha,
   ring,
+  sub,
   usdc,
   usdcwh,
   usdt,
@@ -47,6 +48,7 @@ import {
   phala,
   polkadot,
   polkadotAssetHub,
+  subsocial,
   zeitgeist,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -570,6 +572,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.01,
         asset: ztg,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: sub,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: subsocial,
+      destinationFee: {
+        amount: 0.1,
+        asset: sub,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
