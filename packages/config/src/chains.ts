@@ -46,6 +46,7 @@ import {
   rmrk,
   sdn,
   soon,
+  sub,
   teer,
   tt1,
   tur,
@@ -872,6 +873,10 @@ export const moonbeam = new EvmParachain({
       id: '125699734534028342599692732320197985871',
     },
     {
+      asset: sub,
+      id: '89994634370519791027168048838578580624',
+    },
+    {
       asset: usdc,
       id: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
       metadataId: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
@@ -1295,6 +1300,17 @@ export const shiden = new Parachain({
   ws: 'wss://shiden-rpc.dwellir.com',
 });
 
+export const subsocial = new Parachain({
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f',
+  key: 'subsocial',
+  name: 'Subsocial',
+  parachainId: 2101,
+  ss58Format: 28,
+  ws: 'wss://para.subsocial.network',
+});
+
 export const turing = new Parachain({
   assetsData: [
     {
@@ -1411,6 +1427,7 @@ export const chainsList: AnyChain[] = [
   kusamaAssetHub,
   alphanetAssetHub,
   polkadotAssetHub,
+  subsocial,
   turing,
   turingAlphanet,
   uniqueAlpha,
