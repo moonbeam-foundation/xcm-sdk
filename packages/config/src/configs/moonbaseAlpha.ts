@@ -1,6 +1,7 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
   alan,
+  ampe,
   atom,
   dev,
   eq,
@@ -22,6 +23,7 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
+  pendulumAlphanet,
   picassoAlphanet,
   turingAlphanet,
 } from '../chains';
@@ -67,6 +69,17 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
+      destination: pendulumAlphanet,
+      destinationFee: {
+        amount: 0.0000001, // TODO
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: picassoAlphanet,
       destinationFee: {
         amount: 0.00000001,
@@ -104,6 +117,21 @@ export const moonbaseAlphaConfig = new ChainConfig({
     //     balance: BalanceBuilder().substrate().system().account(),
     //   },
     // }),
+    new AssetConfig({
+      asset: ampe,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: pendulumAlphanet,
+      destinationFee: {
+        amount: 0.1, // TODO
+        asset: ampe,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
     new AssetConfig({
       asset: eq,
       balance: BalanceBuilder().substrate().assets().account(),

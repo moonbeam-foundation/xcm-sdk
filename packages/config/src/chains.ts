@@ -7,6 +7,7 @@ import {
 import {
   aca,
   alan,
+  ampe,
   aseed,
   astr,
   atom,
@@ -690,6 +691,10 @@ export const moonbaseAlpha = new EvmParachain({
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      asset: ampe,
+      id: '170050401128744171791743427490841452054',
+    },
+    {
       asset: atom,
       id: '244316754493307480955066032215622931381',
     },
@@ -1150,6 +1155,30 @@ export const parallelHeiko = new Parachain({
   ws: 'wss://heiko-rpc.parallel.fi',
 });
 
+export const pendulumAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: ampe,
+      id: 'Native',
+      metadataId: 0,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: { XCM: 1 },
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x3db2074093ab964732631d842b99d6612a6dc75a379738a660642b05ccad59c8',
+  isTestChain: true,
+  key: 'pendulum-alphanet',
+  name: 'Foucoco',
+  parachainId: 2124,
+  ss58Format: 49,
+  ws: 'wss://moonbeam-00.pendulumchain.tech:443',
+});
+
 export const phala = new Parachain({
   assetsData: [
     {
@@ -1418,6 +1447,7 @@ export const chainsList: AnyChain[] = [
   originTrailAlphanet,
   parallel,
   parallelHeiko,
+  pendulumAlphanet,
   phala,
   picasso,
   picassoAlphanet,
