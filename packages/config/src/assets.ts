@@ -180,6 +180,11 @@ export const paring = new Asset({
   originSymbol: 'PARING',
 });
 
+export const pen = new Asset({
+  key: 'pen',
+  originSymbol: 'PEN',
+});
+
 export const pha = new Asset({
   key: 'pha',
   originSymbol: 'PHA',
@@ -346,6 +351,7 @@ export const assetsList: Asset[] = [
   otp,
   para,
   paring,
+  pen,
   pha,
   pica,
   ring,
