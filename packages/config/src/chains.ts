@@ -1170,12 +1170,12 @@ export const pendulumAlphanet = new Parachain({
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
-    '0x3db2074093ab964732631d842b99d6612a6dc75a379738a660642b05ccad59c8',
+    '0xe83b546ddeccf999d4b7fef4d83271034e82bb5db538e769c242c2731f61e8d6',
   isTestChain: true,
   key: 'pendulum-alphanet',
   name: 'Foucoco',
   parachainId: 2124,
-  ss58Format: 49,
+  ss58Format: 57,
   ws: 'wss://moonbeam-00.pendulumchain.tech:443',
 });
 
