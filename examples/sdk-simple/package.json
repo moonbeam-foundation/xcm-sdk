@@ -6,7 +6,7 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node --esm index.ts"
+    "start": "bun index.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,6 @@
     "@moonbeam-network/xcm-utils": "1.0.3"
   },
   "devDependencies": {
-    "ts-node": "^10.9.1"
+    "bun": "^1.0.20"
   }
 }
