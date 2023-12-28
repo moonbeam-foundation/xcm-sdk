@@ -71,7 +71,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: pendulumAlphanet,
       destinationFee: {
-        amount: 0.0000001, // TODO
+        amount: 0.0000001,
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -123,7 +123,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: pendulumAlphanet,
       destinationFee: {
-        amount: 0.1, // TODO
+        amount: 0.001,
         asset: ampe,
         balance: BalanceBuilder().substrate().assets().account(),
       },
