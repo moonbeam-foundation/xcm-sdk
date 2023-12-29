@@ -41,6 +41,7 @@ import {
   otp,
   para,
   paring,
+  pen,
   pha,
   pica,
   ring,
@@ -874,6 +875,10 @@ export const moonbeam = new EvmParachain({
       id: '132685552157663328694213725410064821485',
     },
     {
+      asset: pen,
+      id: '45647473099451451833602657905356404688',
+    },
+    {
       asset: ring,
       id: '125699734534028342599692732320197985871',
     },
@@ -1153,6 +1158,29 @@ export const parallelHeiko = new Parachain({
   parachainId: 2085,
   ss58Format: 110,
   ws: 'wss://heiko-rpc.parallel.fi',
+});
+
+export const pendulum = new Parachain({
+  assetsData: [
+    {
+      asset: pen,
+      id: 'Native',
+      metadataId: 0,
+    },
+    {
+      asset: glmr,
+      decimals: 18,
+      id: { XCM: 6 },
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x5d3c298622d5634ed019bf61ea4b71655030015bde9beb0d6a24743714462c86',
+  key: 'pendulum',
+  name: 'Pendulum',
+  parachainId: 2094,
+  ss58Format: 56,
+  ws: 'wss://rpc-pendulum.prd.pendulumchain.tech',
 });
 
 export const pendulumAlphanet = new Parachain({
@@ -1447,6 +1475,7 @@ export const chainsList: AnyChain[] = [
   originTrailAlphanet,
   parallel,
   parallelHeiko,
+  pendulum,
   pendulumAlphanet,
   phala,
   picasso,

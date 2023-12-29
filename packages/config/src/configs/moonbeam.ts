@@ -18,6 +18,7 @@ import {
   nodl,
   otp,
   para,
+  pen,
   pha,
   ring,
   sub,
@@ -45,6 +46,7 @@ import {
   nodle,
   originTrail,
   parallel,
+  pendulum,
   phala,
   polkadot,
   polkadotAssetHub,
@@ -140,6 +142,17 @@ export const moonbeamConfig = new ChainConfig({
       destination: phala,
       destinationFee: {
         amount: 0.0002,
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: glmr,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: pendulum,
+      destinationFee: {
+        amount: 0.0002, //
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -347,6 +360,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.064,
         asset: para,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: pen,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: pendulum,
+      destinationFee: {
+        amount: 0.01,
+        asset: pen,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
