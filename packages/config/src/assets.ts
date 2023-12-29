@@ -10,6 +10,11 @@ export const alan = new Asset({
   originSymbol: 'ALAN',
 });
 
+export const ampe = new Asset({
+  key: 'ampe',
+  originSymbol: 'AMPE',
+});
+
 export const astr = new Asset({
   key: 'astr',
   originSymbol: 'ASTR',
@@ -308,6 +313,7 @@ export const ztg = new Asset({
 export const assetsList: Asset[] = [
   aca,
   alan,
+  ampe,
   astr,
   atom,
   auq,

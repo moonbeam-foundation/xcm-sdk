@@ -6,9 +6,11 @@ import { decodeAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { ContractConfig } from '../../ContractConfig';
 
+const U_64_MAX = 18446744073709551615n;
+
 export function Xtokens() {
   return {
-    transfer: (weight = 4_000_000_000): ContractConfigBuilder => ({
+    transfer: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ address, amount, asset, destination }) =>
         new ContractConfig({
           args: [
@@ -21,9 +23,7 @@ export function Xtokens() {
           module: 'Xtokens',
         }),
     }),
-    transferMultiCurrencies: (
-      weight = 4_000_000_000,
-    ): ContractConfigBuilder => ({
+    transferMultiCurrencies: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ address, amount, asset, destination, fee, feeAsset }) =>
         new ContractConfig({
           args: [
