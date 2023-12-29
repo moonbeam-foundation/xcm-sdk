@@ -26,7 +26,7 @@ export const pendulumConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.01, // TODO
+        amount: 0.01,
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
