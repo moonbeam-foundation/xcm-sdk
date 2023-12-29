@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.13
+
+### Patch Changes
+
+- [#174](https://github.com/PureStake/xcm-sdk/pull/174) [`dec7174`](https://github.com/PureStake/xcm-sdk/commit/dec71741caeb770e555a11daafcfba2144c74533) Thanks [@mmaurello](https://github.com/mmaurello)! - Pendulum integration with Moonbase
+
+- Updated dependencies [[`dec7174`](https://github.com/PureStake/xcm-sdk/commit/dec71741caeb770e555a11daafcfba2144c74533)]:
+  - @moonbeam-network/xcm-builder@1.0.10
+  - @moonbeam-network/xcm-config@1.3.17
+
 ## 1.4.12
 
 ### Patch Changes
