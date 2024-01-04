@@ -58,10 +58,10 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "^10.10.1",
-    "@polkadot/api-augment": "^10.10.1",
-    "@polkadot/types": "^10.10.1",
-    "@polkadot/util": "^12.5.1",
+    "@polkadot/api": "^10.11.2",
+    "@polkadot/api-augment": "^10.11.2",
+    "@polkadot/types": "^10.11.2",
+    "@polkadot/util": "^12.6.2",
     "ethers": "^5.7.2",
     "viem": "^2.0.0"
   }
