@@ -38,11 +38,13 @@ export class Erc20 implements BalanceContractInterface {
       : getContract({
           abi,
           address: this.address as `0x${string}`,
-          publicClient: createPublicClient({
-            chain: signer.chain,
-            transport: http(),
-          }),
-          walletClient: signer,
+          client: {
+            public: createPublicClient({
+              chain: signer.chain,
+              transport: http(),
+            }),
+            wallet: signer,
+          },
         });
   }
 

@@ -40,11 +40,13 @@ export class Xtokens implements TransferContractInterface {
       : getContract({
           abi,
           address: this.address,
-          publicClient: createPublicClient({
-            chain: signer.chain,
-            transport: http(),
-          }),
-          walletClient: signer,
+          client: {
+            public: createPublicClient({
+              chain: signer.chain,
+              transport: http(),
+            }),
+            wallet: signer,
+          },
         });
   }
 
