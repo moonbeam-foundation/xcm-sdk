@@ -3,7 +3,6 @@ import { Contract } from 'ethers';
 import {
   GetContractReturnType,
   PublicClient,
-  WalletClient,
   createPublicClient,
   getContract,
   http,
@@ -13,11 +12,7 @@ import { BalanceContractInterface } from '../../contract.interfaces';
 import { isEthersContract, isEthersSigner } from '../../contract.utils';
 import abi from './Erc20ABI.json';
 
-type Erc20Contract = GetContractReturnType<
-  typeof abi,
-  PublicClient,
-  WalletClient
->;
+type Erc20Contract = GetContractReturnType<typeof abi, PublicClient>;
 
 export class Erc20 implements BalanceContractInterface {
   readonly address: string;
@@ -30,8 +25,8 @@ export class Erc20 implements BalanceContractInterface {
     if (!config.address) {
       throw new Error('Contract address is required');
     }
-
     this.address = config.address;
+
     this.#config = config;
     this.#contract = isEthersSigner(signer)
       ? new Contract(this.address, abi, signer)

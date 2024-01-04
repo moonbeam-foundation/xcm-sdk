@@ -4,7 +4,6 @@ import { Contract } from 'ethers';
 import {
   GetContractReturnType,
   PublicClient,
-  WalletClient,
   WriteContractReturnType,
   createPublicClient,
   getContract,
@@ -15,11 +14,7 @@ import { TransferContractInterface } from '../../contract.interfaces';
 import { isEthersContract, isEthersSigner } from '../../contract.utils';
 import abi from './XtokensABI.json';
 
-type XtokensContract = GetContractReturnType<
-  typeof abi,
-  PublicClient,
-  WalletClient
->;
+type XtokensContract = GetContractReturnType<typeof abi, PublicClient>;
 
 export class Xtokens implements TransferContractInterface {
   readonly address = '0x0000000000000000000000000000000000000804';
