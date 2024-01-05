@@ -1435,8 +1435,9 @@ export const zeitgeist = new Parachain({
   assetsData: [
     {
       asset: usdcwh,
-      decimals: 6,
+      decimals: 10,
       id: { ForeignAsset: 1 },
+      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
