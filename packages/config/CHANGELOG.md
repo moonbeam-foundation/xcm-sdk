@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.19
+
+### Patch Changes
+
+- [#180](https://github.com/PureStake/xcm-sdk/pull/180) [`b4d988f`](https://github.com/PureStake/xcm-sdk/commit/b4d988f5dc9d8c7dfd8067747234609e8701ef52) Thanks [@albertov19](https://github.com/albertov19)! - Updated Parallel WSS Endpoint
+
 ## 1.3.18
 
 ### Patch Changes
