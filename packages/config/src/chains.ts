@@ -1135,7 +1135,7 @@ export const parallel = new Parachain({
   name: 'Parallel',
   parachainId: 2012,
   ss58Format: 172,
-  ws: 'wss://rpc.parallel.fi',
+  ws: 'wss://polkadot-parallel-rpc.parallel.fi',
 });
 
 export const parallelHeiko = new Parachain({
