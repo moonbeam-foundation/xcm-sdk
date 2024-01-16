@@ -403,33 +403,6 @@ export const equilibrium = new Parachain({
   ws: 'wss://node.pol.equilibrium.io',
 });
 
-export const equilibriumAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: dev,
-      decimals: 9,
-      id: 1_735_159_154,
-    },
-    {
-      asset: eq,
-      id: 25_969,
-    },
-    {
-      asset: eqd,
-      id: 6_648_164,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x0ba4508078664cfd04f00bf17892dd1a0764ce61d90857f76c6a2ea61f008247',
-  isTestChain: true,
-  key: 'equilibrium-alphanet',
-  name: 'EquilibriumAlphanet',
-  parachainId: 2011,
-  ss58Format: 68,
-  ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
-});
-
 export const hydraDX = new Parachain({
   assetsData: [
     {
@@ -1455,7 +1428,6 @@ export const chainsList: AnyChain[] = [
   darwiniaCrab,
   darwiniaPangoro,
   equilibrium,
-  equilibriumAlphanet,
   hydraDX,
   integritee,
   interlay,
