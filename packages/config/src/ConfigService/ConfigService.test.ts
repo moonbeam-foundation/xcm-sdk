@@ -9,12 +9,7 @@ import {
   Parachain,
 } from '@moonbeam-network/xcm-types';
 import { assetsList, dev, glmr, tt1, unit } from '../assets';
-import {
-  equilibriumAlphanet,
-  hydraDX,
-  moonbaseAlpha,
-  moonbeam,
-} from '../chains';
+import { hydraDX, moonbaseAlpha, moonbeam, pendulumAlphanet } from '../chains';
 import { ConfigService } from './ConfigService';
 
 import { AssetConfig } from '../types/AssetConfig';
@@ -123,7 +118,7 @@ describe('config service', () => {
       );
 
       expect(chains).toStrictEqual(
-        expect.arrayContaining([moonbaseAlpha, equilibriumAlphanet]),
+        expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
       );
     });
   });

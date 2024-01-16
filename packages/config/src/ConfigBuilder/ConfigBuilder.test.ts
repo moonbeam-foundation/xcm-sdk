@@ -2,9 +2,9 @@
 import { Ecosystem } from '@moonbeam-network/xcm-types';
 import { ConfigService } from '../ConfigService';
 import { dev } from '../assets';
-import { equilibriumAlphanet, moonbaseAlpha } from '../chains';
-import { equilibriumAlphanetConfig } from '../configs/equilibriumAlphanet';
+import { moonbaseAlpha, pendulumAlphanet } from '../chains';
 import { moonbaseAlphaConfig } from '../configs/moonbaseAlpha';
+import { pendulumAlphanetConfig } from '../configs/pendulumAlphanet';
 import { ConfigBuilder } from './ConfigBuilder';
 
 describe('configBuilder', () => {
@@ -13,7 +13,7 @@ describe('configBuilder', () => {
       .assets(Ecosystem.AlphanetRelay)
       .asset(dev)
       .source(moonbaseAlpha)
-      .destination(equilibriumAlphanet)
+      .destination(pendulumAlphanet)
       .build();
 
     expect(config).toStrictEqual({
@@ -22,12 +22,12 @@ describe('configBuilder', () => {
         chain: moonbaseAlpha,
         config: moonbaseAlphaConfig.getAssetDestinationConfig(
           dev,
-          equilibriumAlphanet,
+          pendulumAlphanet,
         ),
       },
       destination: {
-        chain: equilibriumAlphanet,
-        config: equilibriumAlphanetConfig.getAssetDestinationConfig(
+        chain: pendulumAlphanet,
+        config: pendulumAlphanetConfig.getAssetDestinationConfig(
           dev,
           moonbaseAlpha,
         ),
@@ -41,7 +41,7 @@ describe('configBuilder', () => {
       .assets(Ecosystem.AlphanetRelay)
       .asset(dev)
       .source(moonbaseAlpha)
-      .destination(equilibriumAlphanet)
+      .destination(pendulumAlphanet)
       .build();
 
     expect(config).toStrictEqual({
@@ -50,12 +50,12 @@ describe('configBuilder', () => {
         chain: moonbaseAlpha,
         config: moonbaseAlphaConfig.getAssetDestinationConfig(
           dev,
-          equilibriumAlphanet,
+          pendulumAlphanet,
         ),
       },
       destination: {
-        chain: equilibriumAlphanet,
-        config: equilibriumAlphanetConfig.getAssetDestinationConfig(
+        chain: pendulumAlphanet,
+        config: pendulumAlphanetConfig.getAssetDestinationConfig(
           dev,
           moonbaseAlpha,
         ),
