@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.20
+
+### Patch Changes
+
+- [#182](https://github.com/PureStake/xcm-sdk/pull/182) [`6beaf73`](https://github.com/PureStake/xcm-sdk/commit/6beaf73e39d339f6221b7346758822f63bbf99e3) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove equilibrium alphanet config
+
 ## 1.3.19
 
 ### Patch Changes
