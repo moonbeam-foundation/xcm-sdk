@@ -47,7 +47,6 @@ import {
   ring,
   rmrk,
   sdn,
-  soon,
   sub,
   teer,
   tt1,
@@ -672,23 +671,15 @@ export const moonbaseAlpha = new EvmParachain({
       asset: atom,
       id: '244316754493307480955066032215622931381',
     },
-    {
-      asset: auq,
-      id: '69536036667157951501899290870203586130',
-    },
+    // {
+    //   asset: auq,
+    //   id: '69536036667157951501899290870203586130',
+    // },
     {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
       metadataId: 0,
       min: 0.01,
-    },
-    {
-      asset: eq,
-      id: '190590555344745888270686124937537713878',
-    },
-    {
-      asset: eqd,
-      id: '187224307232923873519830480073807488153',
     },
     {
       asset: lit,
@@ -705,10 +696,6 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: pica,
       id: '22417088946346045371238623691600461855',
-    },
-    {
-      asset: soon,
-      id: '205153165378836428058230526014907639736',
     },
     {
       asset: tt1,
