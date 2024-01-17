@@ -254,7 +254,7 @@ export const calamari = new Parachain({
   name: 'Calamari',
   parachainId: 2084,
   ss58Format: 78,
-  ws: 'wss://ws.calamari.systems',
+  ws: 'wss://calamari.systems',
 });
 
 export const centrifuge = new Parachain({
