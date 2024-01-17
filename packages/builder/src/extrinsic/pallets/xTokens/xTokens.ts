@@ -12,7 +12,7 @@ const pallet = 'xTokens';
 export function xTokens() {
   return {
     transfer: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, source }) =>
+      build: ({ address, amount, asset, destination }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'transfer',
@@ -23,7 +23,7 @@ export function xTokens() {
               asset,
               amount,
               getDestination(version, address, destination),
-              getWeight(source.weight, func),
+              getWeight(),
             ];
           },
         }),
@@ -55,7 +55,7 @@ export function xTokens() {
                     },
                   },
                   getDestination(version, address, destination),
-                  'Unlimited',
+                  getWeight(),
                 ];
               },
             }),
@@ -87,13 +87,13 @@ export function xTokens() {
                     },
                   },
                   getDestination(version, address, destination),
-                  'Unlimited',
+                  getWeight(),
                 ];
               },
             }),
         }),
         X2: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, asset, destination, source }) =>
+          build: ({ address, amount, asset, destination }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: funcName,
@@ -124,7 +124,7 @@ export function xTokens() {
                     },
                   },
                   getDestination(version, address, destination),
-                  getWeight(source.weight, func),
+                  getWeight(),
                 ];
               },
             }),
@@ -143,7 +143,7 @@ export function xTokens() {
             ],
             1,
             getDestination(XcmVersion.v3, address, destination),
-            'Unlimited',
+            getWeight(),
           ],
         }),
     }),
