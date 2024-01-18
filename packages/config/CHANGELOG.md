@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.22
+
+### Patch Changes
+
+- [#186](https://github.com/PureStake/xcm-sdk/pull/186) [`f72cf9b`](https://github.com/PureStake/xcm-sdk/commit/f72cf9b55e20c24294971a41ff7b3dc82d588126) Thanks [@albertov19](https://github.com/albertov19)! - Updated Calamari Endpoint
+
 ## 1.3.21
 
 ### Patch Changes
