@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.23
+
+### Patch Changes
+
+- [#188](https://github.com/PureStake/xcm-sdk/pull/188) [`1b09924`](https://github.com/PureStake/xcm-sdk/commit/1b0992493f5afac24e7cdbfd907303f7d450860c) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Litentry alphanet and change Parallel endpoint
+
 ## 1.3.22
 
 ### Patch Changes
