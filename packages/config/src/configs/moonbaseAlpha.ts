@@ -4,7 +4,6 @@ import {
   ampe,
   atom,
   dev,
-  lit,
   otp,
   paring,
   pica,
@@ -16,7 +15,6 @@ import {
   alphanetAssetHub,
   alphanetRelay,
   darwiniaPangoro,
-  litentryAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
@@ -111,21 +109,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.001,
         asset: ampe,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: lit,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: litentryAlphanet,
-      destinationFee: {
-        amount: 0.032,
-        asset: lit,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

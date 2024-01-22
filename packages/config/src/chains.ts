@@ -600,24 +600,6 @@ export const kusamaAssetHub = new Parachain({
   ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
 });
 
-export const litentryAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: lit,
-      id: 'SelfReserve',
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x4decfd421755d9008781d00ce40ea4cf47ec24a3717a34ca995126fc4a78c4f8',
-  isTestChain: true,
-  key: 'litentry-alphanet',
-  name: 'Litentry Alphanet',
-  parachainId: 2106,
-  ss58Format: 131,
-  ws: 'wss://moonbase-parachain-sg-0.litentry.io',
-});
-
 export const litmus = new Parachain({
   assetsData: [
     {
@@ -1422,7 +1404,6 @@ export const chainsList: AnyChain[] = [
   khala,
   kintsugi,
   kusama,
-  litentryAlphanet,
   litmus,
   mangataKusama,
   moonbaseAlpha,
