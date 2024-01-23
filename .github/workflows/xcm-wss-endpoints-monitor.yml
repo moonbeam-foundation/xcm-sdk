@@ -1,0 +1,12 @@
+name: XCM WS endpoints monitor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: hello world
+        run: echo "Hello World!"
