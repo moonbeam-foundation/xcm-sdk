@@ -2,11 +2,32 @@ name: XCM WS endpoints monitor
 
 on:
   workflow_dispatch:
+  schedule:
+    # Runs every 30 minutes
+    - cron: '*/30 * * * *'
 
 jobs:
   run_script:
     runs-on: ubuntu-latest
 
     steps:
-      - name: hello world
-        run: echo "Hello World!"
+      - name: 🤘 checkout
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Update npm
+        run: npm i -g npm@9
+
+      - name: ⬇️ install
+        run: npm ci --ignore-scripts
+
+      - name: 🛠️ Build
+        run: npm run build
+
+      - name: 💻 Run script
+        run: npx bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
