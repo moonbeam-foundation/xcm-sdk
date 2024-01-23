@@ -29,6 +29,5 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      # TODO remove --include-test-chains
       - name: 💻 Run script
-        run: npx bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }} --include-test-chains
+        run: npx bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
