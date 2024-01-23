@@ -23,11 +23,11 @@ jobs:
       - name: Update npm
         run: npm i -g npm@9
 
-      - name: 🛠️ Build
-        run: npm run build
-
       - name: ⬇️ install
         run: npm ci --ignore-scripts
+
+      - name: 🛠️ Build
+        run: npm run build
 
       # TODO remove --include-test-chains
       - name: 💻 Run script
