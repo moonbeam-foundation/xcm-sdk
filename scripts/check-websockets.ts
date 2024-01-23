@@ -1,9 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
+import { chainsList } from '@moonbeam-network/xcm-config';
 import { IncomingWebhook } from '@slack/webhook';
 import WebSocket from 'ws';
-// eslint-disable-next-line import/no-relative-packages
-import { chainsList } from '../packages/config/src';
 
 function procesArgs() {
   const args = process.argv;

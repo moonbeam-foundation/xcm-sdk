@@ -23,9 +23,12 @@ jobs:
       - name: Update npm
         run: npm i -g npm@9
 
+      - name: 🛠️ Build
+        run: npm run build
+
       - name: ⬇️ install
         run: npm ci --ignore-scripts
 
       # TODO remove --include-test-chains
-      - name: 💻 Run script with ts-node
+      - name: 💻 Run script
         run: npx bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }} --include-test-chains
