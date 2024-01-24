@@ -150,6 +150,11 @@ export const lit = new Asset({
   originSymbol: 'LIT',
 });
 
+export const manta = new Asset({
+  key: 'manta',
+  originSymbol: 'MANTA',
+});
+
 export const mgx = new Asset({
   key: 'mgx',
   originSymbol: 'MGX',
@@ -345,6 +350,7 @@ export const assetsList: Asset[] = [
   ksm,
   ldot,
   lit,
+  manta,
   mgx,
   movr,
   nodl,
