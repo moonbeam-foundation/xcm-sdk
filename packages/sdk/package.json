@@ -12,12 +12,12 @@
     "test:acc": "jest --forceExit --testTimeout 300000 ./tests/acceptance",
     "prepack": "prettier --write build/index.d.ts"
   },
-  "author": "PureStake",
+  "author": "moonbeam-foundation",
   "license": "MIT",
   "repository": {
     "directory": "packages/sdk",
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+    "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "keywords": [
     "moonbeam",
@@ -29,7 +29,7 @@
     "cross-chain"
   ],
   "bugs": {
-    "url": "https://github.com/PureStake/xcm-sdk/issues"
+    "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
   "files": [

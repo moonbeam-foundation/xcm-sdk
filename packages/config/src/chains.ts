@@ -35,6 +35,7 @@ import {
   ksm,
   ldot,
   lit,
+  manta,
   mgx,
   movr,
   nodl,
@@ -638,6 +639,27 @@ export const mangataKusama = new Parachain({
   ws: 'wss://kusama-archive.mangata.online',
 });
 
+export const mantaParachain = new Parachain({
+  assetsData: [
+    {
+      asset: manta,
+      id: { MantaCurrency: 1 },
+    },
+    {
+      asset: glmr,
+      id: { MantaCurrency: 10 },
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xf3c7ad88f6a80f366c4be216691411ef0622e8b809b1046ea297ef106058d4eb',
+  key: 'manta',
+  name: 'Manta',
+  parachainId: 2104,
+  ss58Format: 77,
+  ws: 'wss://ws.manta.systems',
+});
+
 export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
@@ -799,6 +821,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: ldot,
       id: '225719522181998468294117309041779353812',
+    },
+    {
+      asset: manta,
+      id: '166446646689194205559791995948102903873',
     },
     {
       asset: nodl,
@@ -1406,6 +1432,7 @@ export const chainsList: AnyChain[] = [
   kusama,
   litmus,
   mangataKusama,
+  mantaParachain,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
