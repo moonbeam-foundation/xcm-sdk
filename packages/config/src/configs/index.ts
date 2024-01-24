@@ -23,6 +23,7 @@ import { kusamaConfig } from './kusama';
 import { kusamaAssetHubConfig } from './kusamaAssetHub';
 import { litmusConfig } from './litmus';
 import { mangataKusamaConfig } from './mangataKusama';
+import { mantaParachainConfig } from './mantaParachain';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
@@ -69,6 +70,7 @@ export const chainsConfigList: ChainConfig[] = [
   kusamaConfig,
   litmusConfig,
   mangataKusamaConfig,
+  mantaParachainConfig,
   moonbaseAlphaConfig,
   moonbaseBetaConfig,
   moonbeamConfig,

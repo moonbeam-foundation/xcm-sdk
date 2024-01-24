@@ -15,6 +15,7 @@ import {
   ibtc,
   intr,
   ldot,
+  manta,
   nodl,
   otp,
   para,
@@ -42,6 +43,7 @@ import {
   equilibrium,
   hydraDX,
   interlay,
+  mantaParachain,
   moonbeam,
   nodle,
   originTrail,
@@ -120,6 +122,17 @@ export const moonbeamConfig = new ChainConfig({
       destination: interlay,
       destinationFee: {
         amount: 0.05,
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: glmr,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: mantaParachain,
+      destinationFee: {
+        amount: 0.1,
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -315,6 +328,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.001,
         asset: ldot,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: manta,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: mantaParachain,
+      destinationFee: {
+        amount: 0.000001,
+        asset: manta,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
