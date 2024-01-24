@@ -569,7 +569,7 @@ export const kusama = new Parachain({
   name: 'Kusama',
   parachainId: 0,
   ss58Format: 2,
-  ws: 'wss://kusama-rpc.polkadot.io',
+  ws: 'wss://kusama-rpc.dwellir.com',
 });
 
 export const kusamaAssetHub = new Parachain({
@@ -1228,7 +1228,7 @@ export const polkadot = new Parachain({
   name: 'Polkadot',
   parachainId: 0,
   ss58Format: 0,
-  ws: 'wss://rpc.polkadot.io',
+  ws: 'wss://polkadot-rpc.dwellir.com',
 });
 
 export const polkadotAssetHub = new Parachain({
