@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.20
+
+### Patch Changes
+
+- [#192](https://github.com/moonbeam-foundation/xcm-sdk/pull/192) [`0b3cb1d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0b3cb1db7897bec9bfd743fe3f8104e480500496) Thanks [@mmaurello](https://github.com/mmaurello)! - Manta - Moonbeam integration and change of repo url
+
+- Updated dependencies [[`c06ea35`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c06ea353d373b78e85e7e676ae06ac7834e66e69), [`0b3cb1d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0b3cb1db7897bec9bfd743fe3f8104e480500496)]:
+  - @moonbeam-network/xcm-config@1.3.24
+  - @moonbeam-network/xcm-builder@1.0.12
+  - @moonbeam-network/xcm-types@1.0.3
+  - @moonbeam-network/xcm-utils@1.0.4
+
 ## 1.4.19
 
 ### Patch Changes
