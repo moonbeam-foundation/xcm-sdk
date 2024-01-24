@@ -1,5 +1,44 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.19
+
+### Patch Changes
+
+- Updated dependencies [[`1b09924`](https://github.com/PureStake/xcm-sdk/commit/1b0992493f5afac24e7cdbfd907303f7d450860c)]:
+  - @moonbeam-network/xcm-config@1.3.23
+
+## 1.4.18
+
+### Patch Changes
+
+- Updated dependencies [[`f72cf9b`](https://github.com/PureStake/xcm-sdk/commit/f72cf9b55e20c24294971a41ff7b3dc82d588126)]:
+  - @moonbeam-network/xcm-config@1.3.22
+
+## 1.4.17
+
+### Patch Changes
+
+- Updated dependencies [[`88b6322`](https://github.com/PureStake/xcm-sdk/commit/88b6322327b30baa0fb2bf55f99497e2944c95ef)]:
+  - @moonbeam-network/xcm-builder@1.0.11
+  - @moonbeam-network/xcm-types@1.0.2
+  - @moonbeam-network/xcm-config@1.3.21
+
+## 1.4.16
+
+### Patch Changes
+
+- [#182](https://github.com/PureStake/xcm-sdk/pull/182) [`6beaf73`](https://github.com/PureStake/xcm-sdk/commit/6beaf73e39d339f6221b7346758822f63bbf99e3) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove equilibrium alphanet config
+
+- Updated dependencies [[`6beaf73`](https://github.com/PureStake/xcm-sdk/commit/6beaf73e39d339f6221b7346758822f63bbf99e3)]:
+  - @moonbeam-network/xcm-config@1.3.20
+
+## 1.4.15
+
+### Patch Changes
+
+- Updated dependencies [[`b4d988f`](https://github.com/PureStake/xcm-sdk/commit/b4d988f5dc9d8c7dfd8067747234609e8701ef52)]:
+  - @moonbeam-network/xcm-config@1.3.19
+
 ## 1.4.14
 
 ### Patch Changes

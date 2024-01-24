@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-builder
 
+## 1.0.11
+
+### Patch Changes
+
+- [#184](https://github.com/PureStake/xcm-sdk/pull/184) [`88b6322`](https://github.com/PureStake/xcm-sdk/commit/88b6322327b30baa0fb2bf55f99497e2944c95ef) Thanks [@mmaurello](https://github.com/mmaurello)! - Use unlimited weight in all transactions for the xTokens pallet
+
+- Updated dependencies [[`88b6322`](https://github.com/PureStake/xcm-sdk/commit/88b6322327b30baa0fb2bf55f99497e2944c95ef)]:
+  - @moonbeam-network/xcm-types@1.0.2
+
 ## 1.0.10
 
 ### Patch Changes

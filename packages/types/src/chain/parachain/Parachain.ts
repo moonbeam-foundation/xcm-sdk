@@ -23,7 +23,7 @@ export class Parachain extends Chain {
 
   readonly ss58Format: number;
 
-  readonly weight: number;
+  readonly weight: number | undefined;
 
   readonly ws: string;
 
@@ -46,7 +46,7 @@ export class Parachain extends Chain {
     this.genesisHash = genesisHash;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
-    this.weight = weight ?? 1_000_000_000;
+    this.weight = weight;
     this.ws = ws;
   }
 
