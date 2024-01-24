@@ -18,17 +18,17 @@
   "repository": {
     "directory": "packages/builder",
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+    "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "keywords": [
     "moonbeam",
     "moonriver",
     "xcm"
   ],
-  "author": "PureStake",
+  "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PureStake/xcm-sdk/issues"
+    "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
   "files": [
