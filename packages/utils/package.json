@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
@@ -15,12 +15,12 @@
     "test:ci": "npm test -- --ci",
     "prepack": "prettier --write build/index.d.ts"
   },
-  "author": "PureStake",
+  "author": "moonbeam-foundation",
   "license": "MIT",
   "repository": {
     "directory": "packages/utils",
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+    "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "keywords": [
     "moonbeam",
@@ -29,7 +29,7 @@
     "utils"
   ],
   "bugs": {
-    "url": "https://github.com/PureStake/xcm-sdk/issues"
+    "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
   "files": [

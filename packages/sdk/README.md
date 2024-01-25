@@ -6,13 +6,13 @@ The XCM SDK offers helper functions, that provide a very simple interface to exe
 
 ## v1 (current)
 
-- [readme](https://github.com/PureStake/xcm-sdk/tree/main)
+- [readme](https://github.com/moonbeam-foundation/xcm-sdk/tree/main)
 - [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/xcm-sdk/)
 - [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/reference/)
 
 ## v0 (previous)
 
-- [readme](https://github.com/PureStake/xcm-sdk/tree/v0)
+- [readme](https://github.com/moonbeam-foundation/xcm-sdk/tree/v0)
 - [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v0/xcm-sdk/)
 - [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v0/reference/)
 
@@ -71,10 +71,10 @@ const hash = await dataViaGetTransferDataMethod.transfer('INSERT_TRANSFER_AMOUNT
 
 # Examples
 
-- [sdk](https://github.com/PureStake/xcm-sdk/blob/main/examples/sdk-simple)
+- [sdk](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/examples/sdk-simple)
 
 ```bash
-git clone git@github.com:PureStake/xcm-sdk.git
+git clone git@github.com:moonbeam-foundation/xcm-sdk.git
 cd xcm-sdk
 npm i
 cd examples/sdk-simple
@@ -87,7 +87,7 @@ npm start
 # Contributing
 
 ```bash
-git clone git@github.com:PureStake/xcm-sdk.git
+git clone git@github.com:moonbeam-foundation/xcm-sdk.git
 npm i
 npm run dev
 ```

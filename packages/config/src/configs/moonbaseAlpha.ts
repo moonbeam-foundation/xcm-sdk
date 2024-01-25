@@ -4,9 +4,6 @@ import {
   ampe,
   atom,
   dev,
-  eq,
-  eqd,
-  lit,
   otp,
   paring,
   pica,
@@ -18,8 +15,6 @@ import {
   alphanetAssetHub,
   alphanetRelay,
   darwiniaPangoro,
-  equilibriumAlphanet,
-  litentryAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
@@ -32,17 +27,6 @@ import { ChainConfig } from '../types/ChainConfig';
 
 export const moonbaseAlphaConfig = new ChainConfig({
   assets: [
-    new AssetConfig({
-      asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: equilibriumAlphanet,
-      destinationFee: {
-        amount: 4,
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
     new AssetConfig({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
@@ -125,51 +109,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.001,
         asset: ampe,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: eq,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: equilibriumAlphanet,
-      destinationFee: {
-        amount: 14,
-        asset: eq,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: eqd,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: equilibriumAlphanet,
-      destinationFee: {
-        amount: 4,
-        asset: eqd,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: lit,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: litentryAlphanet,
-      destinationFee: {
-        amount: 0.032,
-        asset: lit,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

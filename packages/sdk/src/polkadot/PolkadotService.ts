@@ -9,7 +9,6 @@ import {
   darwiniaPangoro,
   eq,
   equilibrium,
-  equilibriumAlphanet,
   paring,
 } from '@moonbeam-network/xcm-config';
 import {
@@ -74,10 +73,7 @@ export class PolkadotService {
 
     // TODO: Remove this once Equilibrium is updated
     // or find better way if issue appears on other chains
-    if (
-      key === 'token' &&
-      [equilibriumAlphanet.key, equilibrium.key].includes(this.chain.key)
-    ) {
+    if (key === 'token' && [equilibrium.key].includes(this.chain.key)) {
       return eq;
     }
 

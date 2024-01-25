@@ -35,6 +35,7 @@ import {
   ksm,
   ldot,
   lit,
+  manta,
   mgx,
   movr,
   nodl,
@@ -47,7 +48,6 @@ import {
   ring,
   rmrk,
   sdn,
-  soon,
   sub,
   teer,
   tt1,
@@ -255,7 +255,7 @@ export const calamari = new Parachain({
   name: 'Calamari',
   parachainId: 2084,
   ss58Format: 78,
-  ws: 'wss://ws.calamari.systems',
+  ws: 'wss://calamari.systems',
 });
 
 export const centrifuge = new Parachain({
@@ -401,33 +401,6 @@ export const equilibrium = new Parachain({
   parachainId: 2011,
   ss58Format: 68,
   ws: 'wss://node.pol.equilibrium.io',
-});
-
-export const equilibriumAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: dev,
-      decimals: 9,
-      id: 1_735_159_154,
-    },
-    {
-      asset: eq,
-      id: 25_969,
-    },
-    {
-      asset: eqd,
-      id: 6_648_164,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x0ba4508078664cfd04f00bf17892dd1a0764ce61d90857f76c6a2ea61f008247',
-  isTestChain: true,
-  key: 'equilibrium-alphanet',
-  name: 'EquilibriumAlphanet',
-  parachainId: 2011,
-  ss58Format: 68,
-  ws: 'wss://devnet.equilab.io/alphanet/collator/api/wss',
 });
 
 export const hydraDX = new Parachain({
@@ -597,7 +570,7 @@ export const kusama = new Parachain({
   name: 'Kusama',
   parachainId: 0,
   ss58Format: 2,
-  ws: 'wss://kusama-rpc.polkadot.io',
+  ws: 'wss://kusama-rpc.dwellir.com',
 });
 
 export const kusamaAssetHub = new Parachain({
@@ -626,24 +599,6 @@ export const kusamaAssetHub = new Parachain({
   parachainId: 1000,
   ss58Format: 2,
   ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
-});
-
-export const litentryAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: lit,
-      id: 'SelfReserve',
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x4decfd421755d9008781d00ce40ea4cf47ec24a3717a34ca995126fc4a78c4f8',
-  isTestChain: true,
-  key: 'litentry-alphanet',
-  name: 'Litentry Alphanet',
-  parachainId: 2106,
-  ss58Format: 131,
-  ws: 'wss://moonbase-parachain-sg-0.litentry.io',
 });
 
 export const litmus = new Parachain({
@@ -684,6 +639,27 @@ export const mangataKusama = new Parachain({
   ws: 'wss://kusama-archive.mangata.online',
 });
 
+export const mantaParachain = new Parachain({
+  assetsData: [
+    {
+      asset: manta,
+      id: { MantaCurrency: 1 },
+    },
+    {
+      asset: glmr,
+      id: { MantaCurrency: 10 },
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xf3c7ad88f6a80f366c4be216691411ef0622e8b809b1046ea297ef106058d4eb',
+  key: 'manta',
+  name: 'Manta',
+  parachainId: 2104,
+  ss58Format: 77,
+  ws: 'wss://ws.manta.systems',
+});
+
 export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
@@ -699,23 +675,15 @@ export const moonbaseAlpha = new EvmParachain({
       asset: atom,
       id: '244316754493307480955066032215622931381',
     },
-    {
-      asset: auq,
-      id: '69536036667157951501899290870203586130',
-    },
+    // {
+    //   asset: auq,
+    //   id: '69536036667157951501899290870203586130',
+    // },
     {
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
       metadataId: 0,
       min: 0.01,
-    },
-    {
-      asset: eq,
-      id: '190590555344745888270686124937537713878',
-    },
-    {
-      asset: eqd,
-      id: '187224307232923873519830480073807488153',
     },
     {
       asset: lit,
@@ -732,10 +700,6 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: pica,
       id: '22417088946346045371238623691600461855',
-    },
-    {
-      asset: soon,
-      id: '205153165378836428058230526014907639736',
     },
     {
       asset: tt1,
@@ -857,6 +821,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: ldot,
       id: '225719522181998468294117309041779353812',
+    },
+    {
+      asset: manta,
+      id: '166446646689194205559791995948102903873',
     },
     {
       asset: nodl,
@@ -1135,7 +1103,7 @@ export const parallel = new Parachain({
   name: 'Parallel',
   parachainId: 2012,
   ss58Format: 172,
-  ws: 'wss://rpc.parallel.fi',
+  ws: 'wss://parallel-rpc.dwellir.com',
 });
 
 export const parallelHeiko = new Parachain({
@@ -1286,7 +1254,7 @@ export const polkadot = new Parachain({
   name: 'Polkadot',
   parachainId: 0,
   ss58Format: 0,
-  ws: 'wss://rpc.polkadot.io',
+  ws: 'wss://polkadot-rpc.dwellir.com',
 });
 
 export const polkadotAssetHub = new Parachain({
@@ -1455,7 +1423,6 @@ export const chainsList: AnyChain[] = [
   darwiniaCrab,
   darwiniaPangoro,
   equilibrium,
-  equilibriumAlphanet,
   hydraDX,
   integritee,
   interlay,
@@ -1463,9 +1430,9 @@ export const chainsList: AnyChain[] = [
   khala,
   kintsugi,
   kusama,
-  litentryAlphanet,
   litmus,
   mangataKusama,
+  mantaParachain,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,

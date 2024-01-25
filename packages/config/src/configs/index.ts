@@ -13,7 +13,6 @@ import { darwiniaConfig } from './darwinia';
 import { darwiniaCrabConfig } from './darwiniaCrab';
 import { darwiniaPangoroConfig } from './darwiniaPangoro';
 import { equilibriumConfig } from './equilibrium';
-import { equilibriumAlphanetConfig } from './equilibriumAlphanet';
 import { hydraDxConfig } from './hydraDX';
 import { integriteeConfig } from './integritee';
 import { interlayConfig } from './interlay';
@@ -22,9 +21,9 @@ import { khalaConfig } from './khala';
 import { kintsugiConfig } from './kintsugi';
 import { kusamaConfig } from './kusama';
 import { kusamaAssetHubConfig } from './kusamaAssetHub';
-import { litentryAlphanetConfig } from './litentryAlphanet';
 import { litmusConfig } from './litmus';
 import { mangataKusamaConfig } from './mangataKusama';
+import { mantaParachainConfig } from './mantaParachain';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
@@ -61,7 +60,6 @@ export const chainsConfigList: ChainConfig[] = [
   darwiniaConfig,
   darwiniaCrabConfig,
   darwiniaPangoroConfig,
-  equilibriumAlphanetConfig,
   equilibriumConfig,
   hydraDxConfig,
   integriteeConfig,
@@ -70,9 +68,9 @@ export const chainsConfigList: ChainConfig[] = [
   khalaConfig,
   kintsugiConfig,
   kusamaConfig,
-  litentryAlphanetConfig,
   litmusConfig,
   mangataKusamaConfig,
+  mantaParachainConfig,
   moonbaseAlphaConfig,
   moonbaseBetaConfig,
   moonbeamConfig,

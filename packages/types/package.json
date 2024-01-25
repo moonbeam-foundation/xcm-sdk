@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-types",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Moonbeam XCM Types",
   "scripts": {
     "build": "tsup",
@@ -17,17 +17,17 @@
   "repository": {
     "directory": "packages/types",
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+    "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "keywords": [
     "moonbeam",
     "moonriver",
     "xcm"
   ],
-  "author": "PureStake",
+  "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PureStake/xcm-sdk/issues"
+    "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
   "files": [
@@ -49,7 +49,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-utils": "1.x",
+    "@moonbeam-network/xcm-utils": "1.0.4",
     "big.js": "^6.2.1",
     "type-fest": "^3.8.0"
   }

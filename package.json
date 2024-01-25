@@ -1,15 +1,15 @@
 {
   "name": "xcm-sdk",
-  "author": "PureStake",
+  "author": "moonbeam-foundation",
   "license": "MIT",
   "private": true,
   "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
   "bugs": {
-    "url": "https://github.com/PureStake/xcm-sdk/issues"
+    "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PureStake/xcm-sdk.git"
+    "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "type": "module",
   "workspaces": [
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.27.1",
+    "@slack/webhook": "^7.0.2",
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",

@@ -30,7 +30,7 @@ exports[`xTokens transfer should get correct arguments 1`] = `
       "parents": 1,
     },
   },
-  1000000000,
+  "Unlimited",
 ]
 `;
 
@@ -85,7 +85,7 @@ exports[`xTokens transferMultiAsset parachain should get correct arguments 1`] =
       "parents": 1,
     },
   },
-  1000000000,
+  "Unlimited",
 ]
 `;
 
@@ -188,7 +188,7 @@ exports[`xTokens transferMultiAsset x2 should get correct arguments 1`] = `
       "parents": 1,
     },
   },
-  1000000000,
+  "Unlimited",
 ]
 `;
 
