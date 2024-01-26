@@ -532,7 +532,7 @@ export const khala = new Parachain({
   name: 'Khala',
   parachainId: 2004,
   ss58Format: 30,
-  ws: 'wss://khala-api.phala.network/ws',
+  ws: 'wss://khala-rpc.dwellir.com',
 });
 
 export const kintsugi = new Parachain({
@@ -1145,7 +1145,7 @@ export const pendulum = new Parachain({
   name: 'Pendulum',
   parachainId: 2094,
   ss58Format: 56,
-  ws: 'wss://rpc-pendulum.prd.pendulumchain.tech',
+  ws: 'wss://pendulum-rpc.dwellir.com',
 });
 
 export const pendulumAlphanet = new Parachain({
