@@ -25,6 +25,7 @@ export interface DestinationFeeConfig extends FeeAssetConfig {
 export interface FeeAssetConfig {
   asset: Asset;
   balance: BalanceConfigBuilder;
+  xcmDeliveryFeeAmount?: number;
 }
 
 export class AssetConfig {
