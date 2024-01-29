@@ -23,6 +23,11 @@ export const kusamaConfig = new ChainConfig({
         .xcmPallet()
         .limitedReserveTransferAssets(0)
         .here(),
+      fee: {
+        asset: ksm,
+        balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount: 0.0015,
+      },
     }),
   ],
   chain: kusama,
