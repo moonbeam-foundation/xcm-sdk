@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.21
+
+### Patch Changes
+
+- [#198](https://github.com/moonbeam-foundation/xcm-sdk/pull/198) [`7e356c4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7e356c4eb78cfec724e1929a589485bf47f1851a) Thanks [@mmaurello](https://github.com/mmaurello)! - Xcm Delivery fees for Kusama and Kusama Asset Hub
+
+- Updated dependencies [[`7e356c4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7e356c4eb78cfec724e1929a589485bf47f1851a), [`ce63c3e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ce63c3ec0d15b496103965a17a5d29099b355357)]:
+  - @moonbeam-network/xcm-config@1.3.25
+
 ## 1.4.20
 
 ### Patch Changes

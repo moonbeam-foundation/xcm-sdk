@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.25
+
+### Patch Changes
+
+- [#198](https://github.com/moonbeam-foundation/xcm-sdk/pull/198) [`7e356c4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7e356c4eb78cfec724e1929a589485bf47f1851a) Thanks [@mmaurello](https://github.com/mmaurello)! - Xcm Delivery fees for Kusama and Kusama Asset Hub
+
+- [#196](https://github.com/moonbeam-foundation/xcm-sdk/pull/196) [`ce63c3e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ce63c3ec0d15b496103965a17a5d29099b355357) Thanks [@mmaurello](https://github.com/mmaurello)! - Change endpoints for Khala and Pendulum
+
 ## 1.3.24
 
 ### Patch Changes
