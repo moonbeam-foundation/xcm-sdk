@@ -6,7 +6,7 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { FeeAssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
-import { convertDecimals } from '@moonbeam-network/xcm-utils';
+import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
@@ -121,6 +121,7 @@ export async function getSourceData({
     decimals: zeroFeeAmount.decimals,
     evmSigner,
     extrinsic,
+    feeConfig: config.fee,
     polkadot,
     sourceAddress,
   });
@@ -181,6 +182,7 @@ export interface GetFeeParams {
   decimals: number;
   evmSigner?: EvmSigner;
   extrinsic?: ExtrinsicConfig;
+  feeConfig?: FeeAssetConfig;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -191,6 +193,7 @@ export async function getFee({
   decimals,
   evmSigner,
   extrinsic,
+  feeConfig,
   polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<bigint> {
@@ -203,7 +206,16 @@ export async function getFee({
   }
 
   if (extrinsic) {
-    return getExtrinsicFee(balance, extrinsic, polkadot, sourceAddress);
+    const extrinsicFee = await getExtrinsicFee(
+      balance,
+      extrinsic,
+      polkadot,
+      sourceAddress,
+    );
+
+    const xcmDeliveryFee = getXcmDeliveryFee(decimals, feeConfig);
+
+    return extrinsicFee + xcmDeliveryFee;
   }
 
   throw new Error('Either contract or extrinsic must be provided');
@@ -244,6 +256,15 @@ export async function getExtrinsicFee(
 
     return 0n;
   }
+}
+
+function getXcmDeliveryFee(
+  decimals: number,
+  feeConfig?: FeeAssetConfig,
+): bigint {
+  return feeConfig?.xcmDeliveryFeeAmount
+    ? toBigInt(feeConfig.xcmDeliveryFeeAmount, decimals)
+    : 0n;
 }
 
 export interface GetMaxParams {
