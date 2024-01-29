@@ -27,6 +27,7 @@ export const kusamaAssetHubConfig = new ChainConfig({
       fee: {
         asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount: 0.00115,
       },
       min: AssetMinBuilder().assets().asset(),
     }),
@@ -46,6 +47,7 @@ export const kusamaAssetHubConfig = new ChainConfig({
       fee: {
         asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount: 0.00115,
       },
       min: AssetMinBuilder().assets().asset(),
     }),
