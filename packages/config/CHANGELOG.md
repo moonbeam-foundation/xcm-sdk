@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.26
+
+### Patch Changes
+
+- [#199](https://github.com/moonbeam-foundation/xcm-sdk/pull/199) [`6849ab3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6849ab3a5aa200d753849bc710d35fad4e2ac5fd) Thanks [@mmaurello](https://github.com/mmaurello)! - bump xcm delivery fees
+
 ## 1.3.25
 
 ### Patch Changes
