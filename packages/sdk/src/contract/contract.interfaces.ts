@@ -1,5 +1,4 @@
-import type { TransactionResponse } from '@ethersproject/abstract-provider';
-import { Contract, Signer as EthersSigner } from 'ethers';
+import { Contract, Signer as EthersSigner, TransactionResponse } from 'ethers';
 import { PublicClient, WalletClient, WriteContractReturnType } from 'viem';
 
 export interface BaseContractInterface {
