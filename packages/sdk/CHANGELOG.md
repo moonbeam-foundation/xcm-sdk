@@ -1,5 +1,16 @@
 # @moonbeam-network/xcm-sdk
 
+## 1.4.23
+
+### Patch Changes
+
+- [#179](https://github.com/moonbeam-foundation/xcm-sdk/pull/179) [`eb20aee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/eb20aee9d9c9052074501421d0d442bd13022424) Thanks [@mmaurello](https://github.com/mmaurello)! - USDC wh integration with Moonbeam
+
+- Updated dependencies [[`eb20aee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/eb20aee9d9c9052074501421d0d442bd13022424)]:
+  - @moonbeam-network/xcm-config@1.3.27
+  - @moonbeam-network/xcm-types@1.0.4
+  - @moonbeam-network/xcm-builder@1.0.13
+
 ## 1.4.22
 
 ### Patch Changes
