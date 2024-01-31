@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { usdcwh, ztg } from '../assets';
+import { glmr, usdcwh, ztg } from '../assets';
 import { moonbeam, zeitgeist } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -27,7 +27,22 @@ export const zeitgeistConfig = new ChainConfig({
       destination: moonbeam,
       destinationFee: {
         amount: 0.04,
+        asset: glmr,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
         asset: ztg,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: glmr,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.01,
+        asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

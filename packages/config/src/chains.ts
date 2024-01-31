@@ -1400,8 +1400,11 @@ export const zeitgeist = new Parachain({
   assetsData: [
     {
       asset: usdcwh,
-      decimals: 10,
       id: { ForeignAsset: 1 },
+    },
+    {
+      asset: glmr,
+      id: { ForeignAsset: 3 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -1411,6 +1414,7 @@ export const zeitgeist = new Parachain({
   name: 'Zeitgeist',
   parachainId: 2092,
   ss58Format: 73,
+  usesOwnDecimalsInternally: true,
   ws: 'wss://zeitgeist-rpc.dwellir.com',
 });
 

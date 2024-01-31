@@ -29,6 +29,7 @@ export async function getDestinationData({
     amount: 0n,
     decimals: await getDecimals({
       address: destinationAddress,
+      chain,
       config,
       evmSigner,
       polkadot,
@@ -37,7 +38,9 @@ export async function getDestinationData({
 
   const balance = await getBalance({
     address: destinationAddress,
+    chain,
     config,
+    decimals: zeroAmount.decimals,
     evmSigner,
     polkadot,
   });
@@ -53,7 +56,6 @@ export async function getDestinationData({
     polkadot,
   });
   const minAmount = zeroAmount.copyWith({ amount: min });
-
   return {
     balance: balanceAmount,
     chain,
