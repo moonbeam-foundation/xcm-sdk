@@ -1,6 +1,7 @@
 ---
 '@moonbeam-network/xcm-config': patch
+'@moonbeam-network/xcm-types': patch
 '@moonbeam-network/xcm-sdk': patch
 ---
 
-USDC from Wormhole in Zeitgeist
+USDC wh integration with Moonbeam
