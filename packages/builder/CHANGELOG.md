@@ -1,5 +1,12 @@
 # @moonbeam-network/xcm-builder
 
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`eb20aee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/eb20aee9d9c9052074501421d0d442bd13022424)]:
+  - @moonbeam-network/xcm-types@1.0.4
+
 ## 1.0.12
 
 ### Patch Changes
