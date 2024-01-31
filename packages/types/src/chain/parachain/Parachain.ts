@@ -10,7 +10,7 @@ export interface ParachainConstructorParams
   genesisHash: string;
   parachainId: number;
   ss58Format: number;
-  usesOwnDecimalsInternally?: boolean;
+  usesChainDecimals?: boolean;
   weight?: number;
   ws: string;
 }
@@ -24,7 +24,7 @@ export class Parachain extends Chain {
 
   readonly ss58Format: number;
 
-  readonly usesOwnDecimalsInternally: boolean;
+  readonly usesChainDecimals: boolean;
 
   readonly weight: number | undefined;
 
@@ -34,7 +34,7 @@ export class Parachain extends Chain {
     assetsData,
     genesisHash,
     parachainId,
-    usesOwnDecimalsInternally,
+    usesChainDecimals,
     ss58Format,
     weight,
     ws,
@@ -50,7 +50,7 @@ export class Parachain extends Chain {
     this.genesisHash = genesisHash;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
-    this.usesOwnDecimalsInternally = !!usesOwnDecimalsInternally;
+    this.usesChainDecimals = !!usesChainDecimals;
     this.weight = weight;
     this.ws = ws;
   }

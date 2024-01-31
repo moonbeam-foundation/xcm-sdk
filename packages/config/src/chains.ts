@@ -1414,7 +1414,7 @@ export const zeitgeist = new Parachain({
   name: 'Zeitgeist',
   parachainId: 2092,
   ss58Format: 73,
-  usesOwnDecimalsInternally: true,
+  usesChainDecimals: true,
   ws: 'wss://zeitgeist-rpc.dwellir.com',
 });
 

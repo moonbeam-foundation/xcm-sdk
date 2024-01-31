@@ -187,7 +187,6 @@ export async function getFeeBalance({
     return balance;
   }
 
-  const convertAmount = chain.usesOwnDecimalsInternally;
   const feeBalance = await polkadot.query(
     feeConfig.balance.build({
       address,
@@ -195,7 +194,7 @@ export async function getFeeBalance({
     }) as SubstrateQueryConfig,
   );
 
-  return convertAmount
+  return chain.usesChainDecimals
     ? convertDecimals(feeBalance, polkadot.decimals, decimals)
     : feeBalance;
 }
@@ -241,11 +240,9 @@ export async function getFee({
 
     const xcmDeliveryFee = getXcmDeliveryFee(decimals, feeConfig);
 
-    const convertAmount = chain.usesOwnDecimalsInternally;
-
     const totalFee = extrinsicFee + xcmDeliveryFee;
 
-    return convertAmount
+    return chain.usesChainDecimals
       ? convertDecimals(totalFee, polkadot.decimals, decimals)
       : totalFee;
   }

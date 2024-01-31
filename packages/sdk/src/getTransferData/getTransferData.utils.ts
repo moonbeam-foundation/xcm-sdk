@@ -32,9 +32,8 @@ export async function getBalance({
   });
 
   if (cfg.type === CallType.Substrate) {
-    const convertAmount = chain.usesOwnDecimalsInternally;
     const balance = await polkadot.query(cfg as SubstrateQueryConfig);
-    return convertAmount
+    return chain.usesChainDecimals
       ? convertDecimals(balance, polkadot.decimals, decimals)
       : balance;
   }
