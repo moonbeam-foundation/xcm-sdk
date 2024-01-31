@@ -454,13 +454,11 @@ export const interlay = new Parachain({
       asset: intr,
       decimals: 10,
       id: { Token: intr.originSymbol },
-      metadataId: 0,
     },
     {
       asset: ibtc,
       decimals: 8,
       id: { Token: ibtc.originSymbol },
-      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -549,7 +547,6 @@ export const kintsugi = new Parachain({
       asset: kbtc,
       decimals: 8,
       id: { Token: kbtc.originSymbol },
-      metadataId: 0,
     },
   ],
   ecosystem: Ecosystem.Kusama,
@@ -1400,6 +1397,16 @@ export const uniqueAlpha = new Parachain({
 });
 
 export const zeitgeist = new Parachain({
+  assetsData: [
+    {
+      asset: usdcwh,
+      id: { ForeignAsset: 1 },
+    },
+    {
+      asset: glmr,
+      id: { ForeignAsset: 3 },
+    },
+  ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x1bf2a2ecb4a868de66ea8610f2ce7c8c43706561b6476031315f6640fe38e060',
@@ -1407,6 +1414,7 @@ export const zeitgeist = new Parachain({
   name: 'Zeitgeist',
   parachainId: 2092,
   ss58Format: 73,
+  usesChainDecimals: true,
   ws: 'wss://zeitgeist-rpc.dwellir.com',
 });
 
