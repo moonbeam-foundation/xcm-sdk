@@ -441,7 +441,7 @@ export const hydraDX = new Parachain({
   name: 'HydraDX',
   parachainId: 2034,
   ss58Format: 63,
-  ws: 'wss://rpc.hydradx.cloud',
+  ws: 'wss://hydradx-rpc.dwellir.com',
 });
 
 export const interlay = new Parachain({
