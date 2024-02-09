@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-builder",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Moonbeam XCM builder",
   "scripts": {
     "build": "tsup",
@@ -50,7 +50,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-types": "1.0.3",
+    "@moonbeam-network/xcm-types": "1.0.4",
     "@moonbeam-network/xcm-utils": "1.0.4",
     "big.js": "^6.2.1",
     "type-fest": "^3.8.0"
