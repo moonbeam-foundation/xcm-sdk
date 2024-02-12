@@ -1,6 +1,5 @@
-import type { TransactionResponse } from '@ethersproject/abstract-provider';
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Contract } from 'ethers';
+import { Contract, TransactionResponse } from 'ethers';
 import {
   GetContractReturnType,
   PublicClient,
@@ -54,9 +53,7 @@ export class Xtokens implements TransferContractInterface {
   }
 
   async getEthersContractEstimatedGas(contract: Contract): Promise<bigint> {
-    return (
-      await contract.estimateGas[this.#config.func](...this.#config.args)
-    ).toBigInt();
+    return contract[this.#config.func].estimateGas(...this.#config.args);
   }
 
   async getViemContractEstimatedGas(
