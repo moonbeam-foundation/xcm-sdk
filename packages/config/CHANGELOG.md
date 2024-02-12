@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-config
 
+## 1.3.28
+
+### Patch Changes
+
+- [#204](https://github.com/moonbeam-foundation/xcm-sdk/pull/204) [`9cabffc`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9cabffca76dd14076362412633e72e2410fb380c) Thanks [@mmaurello](https://github.com/mmaurello)! - Change bifrost endpoints
+
+- [#202](https://github.com/moonbeam-foundation/xcm-sdk/pull/202) [`ec6f53a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ec6f53ade4d6ed62eee93f3747a22e19453cb745) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Hydra endpoint
+
 ## 1.3.27
 
 ### Patch Changes
