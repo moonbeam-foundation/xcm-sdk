@@ -57,11 +57,13 @@ import {
   usdcwh,
   usdt,
   usdtwh,
+  vastr,
   vbnc,
   vdot,
   vfil,
   vglmr,
   vksm,
+  vmanta,
   vmovr,
   wbtc,
   weth,
@@ -211,6 +213,10 @@ export const bifrostPolkadot = new Parachain({
       id: { Token2: 4 },
     },
     {
+      asset: vastr,
+      id: { VToken2: 3 },
+    },
+    {
       asset: vdot,
       id: { VToken2: 0 },
       metadataId: { VToken2: 0 },
@@ -222,6 +228,10 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: vglmr,
       id: { VToken2: 1 },
+    },
+    {
+      asset: vmanta,
+      id: { VToken2: 8 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -871,6 +881,11 @@ export const moonbeam = new EvmParachain({
       id: '311091173110107856861649819128533077277',
     },
     {
+      asset: vastr,
+      id: '0xFffFffff55C732C47639231a4C4373245763d26E',
+      metadataId: '114018676402354620972806895487280206446', // registered XC20 id for ERC20 tokens
+    },
+    {
       asset: vdot,
       id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
       metadataId: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
@@ -884,6 +899,11 @@ export const moonbeam = new EvmParachain({
       asset: vglmr,
       id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
       metadataId: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
+    },
+    {
+      asset: vmanta,
+      id: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
+      metadataId: '289989900872525819559124583375550296953', // registered XC20 id for ERC20 tokens
     },
     {
       asset: wbtc,

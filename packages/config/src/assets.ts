@@ -280,6 +280,11 @@ export const wftm = new Asset({
   originSymbol: 'wFTM',
 });
 
+export const vastr = new Asset({
+  key: 'vastr',
+  originSymbol: 'vASTR',
+});
+
 export const vbnc = new Asset({
   key: 'vbnc',
   originSymbol: 'vBNC',
@@ -303,6 +308,11 @@ export const vglmr = new Asset({
 export const vksm = new Asset({
   key: 'vksm',
   originSymbol: 'vKSM',
+});
+
+export const vmanta = new Asset({
+  key: 'vmanta',
+  originSymbol: 'vMANTA',
 });
 
 export const vmovr = new Asset({
@@ -373,11 +383,13 @@ export const assetsList: Asset[] = [
   usdcwh,
   usdt,
   usdtwh,
+  vastr,
   vbnc,
   vdot,
   vfil,
   vglmr,
   vksm,
+  vmanta,
   vmovr,
   xrt,
   wbtc,
