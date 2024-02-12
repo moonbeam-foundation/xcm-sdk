@@ -170,9 +170,8 @@ export async function getDestinationFeeWithSourceDecimals(
   sourcePolkadot: PolkadotService,
   destinationFee: AssetAmount,
 ): Promise<AssetAmount> {
-  const destinationFeeDecimals = await sourcePolkadot.getAssetDecimals(
-    destinationFee,
-  );
+  const destinationFeeDecimals =
+    await sourcePolkadot.getAssetDecimals(destinationFee);
   const destinationFeeAsset =
     destinationFee.decimals === destinationFeeDecimals
       ? destinationFee

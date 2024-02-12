@@ -93,12 +93,11 @@ export class Xtokens implements TransferContractInterface {
 
   private async getGasPrice() {
     if (isEthersSigner(this.#signer)) {
+      if (!this.#signer.provider) return 0n;
       const { gasPrice, maxPriorityFeePerGas } =
-        await this.#signer.getFeeData();
+        await this.#signer.provider.getFeeData();
 
-      return (
-        (gasPrice?.toBigInt() || 0n) + (maxPriorityFeePerGas?.toBigInt() || 0n)
-      );
+      return (gasPrice || 0n) + (maxPriorityFeePerGas || 0n);
     }
 
     const publicClient = createPublicClient({
