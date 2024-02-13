@@ -2,6 +2,8 @@
 '@moonbeam-network/xcm-config': major
 '@moonbeam-network/xcm-utils': major
 '@moonbeam-network/xcm-sdk': major
+'@moonbeam-network/xcm-builder': major
+'@moonbeam-network/xcm-types': major
 ---
 
 Upgrate Viem and ethers major versions
