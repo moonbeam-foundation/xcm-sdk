@@ -16,12 +16,6 @@ The XCM SDK offers helper functions, that provide a very simple interface to exe
 - [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/xcm-sdk/)
 - [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/reference/)
 
-## v0 (previous)
-
-- [readme](https://github.com/moonbeam-foundation/xcm-sdk/tree/v0)
-- [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v0/xcm-sdk/)
-- [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v0/reference/)
-
 # Installation
 
 ```bash
