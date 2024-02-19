@@ -564,7 +564,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: bifrostPolkadot,
       destinationFee: {
-        amount: 0.0000001, // TODO
+        amount: 0.00001,
         asset: vastr,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -625,7 +625,7 @@ export const moonbeamConfig = new ChainConfig({
       destination: bifrostPolkadot,
       destinationFee: {
         amount: 0.00000001,
-        asset: vmanta, // TODO
+        asset: vmanta,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
