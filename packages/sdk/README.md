@@ -4,17 +4,17 @@ The XCM SDK offers helper functions, that provide a very simple interface to exe
 
 # Documentation
 
-## v1 (current)
+## v2 (current)
 
 - [readme](https://github.com/moonbeam-foundation/xcm-sdk/tree/main)
+- [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/xcm-sdk/) (Updated docs coming soon...)
+- [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/reference/) (Updated docs coming soon...)
+
+## v1 (previous)
+
+- [readme](https://github.com/moonbeam-foundation/xcm-sdk/tree/v1)
 - [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/xcm-sdk/)
 - [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/reference/)
-
-## v0 (previous)
-
-- [readme](https://github.com/moonbeam-foundation/xcm-sdk/tree/v0)
-- [usage](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v0/xcm-sdk/)
-- [reference](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v0/reference/)
 
 # Installation
 
@@ -30,7 +30,7 @@ npm i @polkadot/api @polkadot/api-augment @polkadot/types @polkadot/util @polkad
 
 # Usage
 
-The following sections contain basic examples of how to work with the XCM SDK to build transfer data to transfer an asset from one chain to another and how to submit the transfer. For a detailed overview on how to use each method, including a reference to the parameters and returned data of each method exposed by the SDK, please refer to the [XCM SDK v1 docs](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/).
+The following sections contain basic examples of how to work with the XCM SDK to build transfer data to transfer an asset from one chain to another and how to submit the transfer. For a detailed overview on how to use each method, including a reference to the parameters and returned data of each method exposed by the SDK, please refer to the [XCM SDK docs](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/).
 
 ## Build XCM Transfer Data
 

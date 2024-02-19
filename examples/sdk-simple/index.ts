@@ -9,7 +9,7 @@ import { setTimeout } from 'node:timers/promises';
 // Moonbeam Signer ===========================================================
 
 const moonbeamPrivateKey = '';
-const provider = new ethers.providers.WebSocketProvider(moonbeam.ws, {
+const provider = new ethers.WebSocketProvider(moonbeam.ws, {
   chainId: moonbeam.id,
   name: moonbeam.name,
 });

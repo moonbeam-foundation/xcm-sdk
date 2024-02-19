@@ -1,10 +1,8 @@
-import type { TransactionResponse } from '@ethersproject/abstract-provider';
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Contract } from 'ethers';
+import { Contract, TransactionResponse } from 'ethers';
 import {
   GetContractReturnType,
   PublicClient,
-  WalletClient,
   WriteContractReturnType,
   createPublicClient,
   getContract,
@@ -15,11 +13,7 @@ import { TransferContractInterface } from '../../contract.interfaces';
 import { isEthersContract, isEthersSigner } from '../../contract.utils';
 import abi from './XtokensABI.json';
 
-type XtokensContract = GetContractReturnType<
-  typeof abi,
-  PublicClient,
-  WalletClient
->;
+type XtokensContract = GetContractReturnType<typeof abi, PublicClient>;
 
 export class Xtokens implements TransferContractInterface {
   readonly address = '0x0000000000000000000000000000000000000804';
@@ -40,11 +34,13 @@ export class Xtokens implements TransferContractInterface {
       : getContract({
           abi,
           address: this.address,
-          publicClient: createPublicClient({
-            chain: signer.chain,
-            transport: http(),
-          }),
-          walletClient: signer,
+          client: {
+            public: createPublicClient({
+              chain: signer.chain,
+              transport: http(),
+            }),
+            wallet: signer,
+          },
         });
   }
 
@@ -57,9 +53,7 @@ export class Xtokens implements TransferContractInterface {
   }
 
   async getEthersContractEstimatedGas(contract: Contract): Promise<bigint> {
-    return (
-      await contract.estimateGas[this.#config.func](...this.#config.args)
-    ).toBigInt();
+    return contract[this.#config.func].estimateGas(...this.#config.args);
   }
 
   async getViemContractEstimatedGas(
@@ -99,12 +93,11 @@ export class Xtokens implements TransferContractInterface {
 
   private async getGasPrice() {
     if (isEthersSigner(this.#signer)) {
+      if (!this.#signer.provider) return 0n;
       const { gasPrice, maxPriorityFeePerGas } =
-        await this.#signer.getFeeData();
+        await this.#signer.provider.getFeeData();
 
-      return (
-        (gasPrice?.toBigInt() || 0n) + (maxPriorityFeePerGas?.toBigInt() || 0n)
-      );
+      return (gasPrice || 0n) + (maxPriorityFeePerGas || 0n);
     }
 
     const publicClient = createPublicClient({

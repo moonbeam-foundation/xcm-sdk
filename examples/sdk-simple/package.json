@@ -12,11 +12,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "1.3.27",
-    "@moonbeam-network/xcm-sdk": "1.4.23",
-    "@moonbeam-network/xcm-utils": "1.0.4"
+    "@moonbeam-network/xcm-config": "2.0.0",
+    "@moonbeam-network/xcm-sdk": "2.0.0",
+    "@moonbeam-network/xcm-utils": "2.0.0"
   },
   "devDependencies": {
-    "bun": "^1.0.20"
+    "bun": "^1.0.21"
   }
 }

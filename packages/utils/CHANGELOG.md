@@ -1,5 +1,22 @@
 # @moonbeam-network/xcm-utils
 
+## 2.0.0
+
+### Major Changes
+
+- [#178](https://github.com/moonbeam-foundation/xcm-sdk/pull/178) [`5e77c1ed8aba82a3b12bf52393cef5b658351614`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5e77c1ed8aba82a3b12bf52393cef5b658351614) Thanks [@mmaurello](https://github.com/mmaurello)! - Upgrate Viem and ethers major versions
+
+  Breaking changes: we now require either `viem` V2 or `ethers` V6
+
+  To upgrade to this version just update the corresponding library. Here are the migration guides for both:
+
+  viem:
+  https://wagmi.sh/core/guides/migrate-from-v1-to-v2
+  https://wagmi.sh/react/guides/migrate-from-v1-to-v2
+
+  ethers:
+  https://docs.ethers.org/v6/migrating/
+
 ## 1.0.4
 
 ### Patch Changes
