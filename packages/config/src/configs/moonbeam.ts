@@ -27,9 +27,11 @@ import {
   usdcwh,
   usdt,
   usdtwh,
+  vastr,
   vdot,
   vfil,
   vglmr,
+  vmanta,
   wbtc,
   weth,
   ztg,
@@ -557,6 +559,21 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: vastr,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00001,
+        asset: vastr,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: vdot,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -594,6 +611,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.00000001,
         asset: vglmr,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: vmanta,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: vmanta,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {

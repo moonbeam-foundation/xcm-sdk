@@ -4,7 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { bnc, fil, glmr, vdot, vfil, vglmr } from '../assets';
+import { bnc, fil, glmr, vastr, vdot, vfil, vglmr, vmanta } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -55,6 +55,22 @@ export const bifrostPolkadotConfig = new ChainConfig({
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
     new AssetConfig({
+      asset: vastr,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.2,
+        asset: bnc,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: bnc,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+    }),
+    new AssetConfig({
       asset: vdot,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -88,6 +104,22 @@ export const bifrostPolkadotConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: vglmr,
+      balance: BalanceBuilder().substrate().tokens().accounts(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.2,
+        asset: bnc,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: bnc,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+    }),
+    new AssetConfig({
+      asset: vmanta,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
