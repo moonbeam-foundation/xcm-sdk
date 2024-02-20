@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.1
+
+### Patch Changes
+
+- [#207](https://github.com/moonbeam-foundation/xcm-sdk/pull/207) [`95609d2be326e73f9a62cffdc8bde042ebdd098a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/95609d2be326e73f9a62cffdc8bde042ebdd098a) Thanks [@mmaurello](https://github.com/mmaurello)! - vMANTA and vASTR transfers between Bifrost and Moonbeam
+
 ## 2.0.0
 
 ### Major Changes
