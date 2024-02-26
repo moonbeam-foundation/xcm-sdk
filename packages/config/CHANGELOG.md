@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.2
+
+### Patch Changes
+
+- [#209](https://github.com/moonbeam-foundation/xcm-sdk/pull/209) [`debc7c9dcba7b798291b2c1f282921c585122f59`](https://github.com/moonbeam-foundation/xcm-sdk/commit/debc7c9dcba7b798291b2c1f282921c585122f59) Thanks [@mmaurello](https://github.com/mmaurello)! - Add Polkadot and Polkadot Asset Hub delivery fees
+
 ## 2.0.1
 
 ### Patch Changes
