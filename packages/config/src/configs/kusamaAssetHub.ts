@@ -9,6 +9,8 @@ import { kusamaAssetHub, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
+const xcmDeliveryFeeAmount = 0.0015;
+
 export const kusamaAssetHubConfig = new ChainConfig({
   assets: [
     new AssetConfig({
@@ -27,7 +29,7 @@ export const kusamaAssetHubConfig = new ChainConfig({
       fee: {
         asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
-        xcmDeliveryFeeAmount: 0.0015,
+        xcmDeliveryFeeAmount,
       },
       min: AssetMinBuilder().assets().asset(),
     }),
@@ -47,7 +49,7 @@ export const kusamaAssetHubConfig = new ChainConfig({
       fee: {
         asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
-        xcmDeliveryFeeAmount: 0.0015,
+        xcmDeliveryFeeAmount,
       },
       min: AssetMinBuilder().assets().asset(),
     }),

@@ -9,6 +9,8 @@ import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
+const xcmDeliveryFeeAmount = 0.036;
+
 export const polkadotAssetHubConfig = new ChainConfig({
   assets: [
     new AssetConfig({
@@ -27,6 +29,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       fee: {
         asset: dot,
         balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
       },
       min: AssetMinBuilder().assets().asset(),
     }),
@@ -35,7 +38,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.02,
+        amount: 0.03,
         asset: usdc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -46,6 +49,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       fee: {
         asset: dot,
         balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
       },
       min: AssetMinBuilder().assets().asset(),
     }),
