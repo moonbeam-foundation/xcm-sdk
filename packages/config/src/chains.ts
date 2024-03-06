@@ -761,7 +761,7 @@ export const moonbaseBeta = new EvmParachain({
   parachainId: 888,
   rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
   ss58Format: 1287,
-  ws: 'wss://frag-moonbase-beta-rpc-ws.g.moonbase.moonbeam.network',
+  ws: 'wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network',
 });
 
 export const moonbeam = new EvmParachain({
