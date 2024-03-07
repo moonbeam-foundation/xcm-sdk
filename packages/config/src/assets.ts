@@ -200,6 +200,11 @@ export const pica = new Asset({
   originSymbol: 'PICA',
 });
 
+export const pink = new Asset({
+  key: 'pink',
+  originSymbol: 'PINK',
+});
+
 export const ring = new Asset({
   key: 'ring',
   originSymbol: 'RING',
@@ -370,6 +375,7 @@ export const assetsList: Asset[] = [
   pen,
   pha,
   pica,
+  pink,
   ring,
   rmrk,
   sdn,
