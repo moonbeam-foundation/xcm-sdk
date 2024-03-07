@@ -58,7 +58,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03, // TODO
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(), // TODO confirm
         asset: pink,
         balance: BalanceBuilder().substrate().assets().account(),
       },
