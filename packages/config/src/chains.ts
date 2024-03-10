@@ -1299,6 +1299,7 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: pink,
       id: 23,
+      palletInstance: 50,
     },
   ],
   ecosystem: Ecosystem.Polkadot,
