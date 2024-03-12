@@ -487,7 +487,7 @@ export const moonbeamConfig = new ChainConfig({
     new AssetConfig({
       asset: pink,
       balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: polkadotAssetHub,
       destinationFee: {
         amount: 0.7,
