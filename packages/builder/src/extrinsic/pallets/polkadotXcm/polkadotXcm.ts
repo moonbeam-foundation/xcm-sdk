@@ -71,7 +71,8 @@ export function polkadotXcm() {
               module: pallet,
               func,
               getArgs: (extrinsicFunction) => {
-                const isAssetDifferent = params.asset !== params.feeAsset;
+                const isAssetDifferent =
+                  !!params.feeAsset && params.asset !== params.feeAsset;
                 const asset = [
                   {
                     id: {
