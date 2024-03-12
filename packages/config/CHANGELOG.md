@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.3
+
+### Patch Changes
+
+- [#212](https://github.com/moonbeam-foundation/xcm-sdk/pull/212) [`7e24392a67733b91c1fc7cc23543c74a88f36ed2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7e24392a67733b91c1fc7cc23543c74a88f36ed2) Thanks [@mmaurello](https://github.com/mmaurello)! - PINK asset configuration
+
 ## 2.0.2
 
 ### Patch Changes
