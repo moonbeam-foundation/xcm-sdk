@@ -70,33 +70,61 @@ export function polkadotXcm() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
-                  ...params,
-                  func: extrinsicFunction,
-                  asset: [
-                    {
-                      id: {
-                        Concrete: {
-                          parents: 0,
-                          interior: {
-                            X2: [
-                              {
-                                PalletInstance: params.palletInstance,
-                              },
-                              {
-                                GeneralIndex: params.asset,
-                              },
-                            ],
-                          },
+              getArgs: (extrinsicFunction) => {
+                const isAssetDifferent = params.asset !== params.feeAsset;
+                const asset = [
+                  {
+                    id: {
+                      Concrete: {
+                        parents: 0,
+                        interior: {
+                          X2: [
+                            {
+                              PalletInstance: params.palletInstance,
+                            },
+                            {
+                              GeneralIndex: params.asset,
+                            },
+                          ],
                         },
                       },
-                      fun: {
-                        Fungible: params.amount,
+                    },
+                    fun: {
+                      Fungible: params.amount,
+                    },
+                  },
+                ];
+
+                if (isAssetDifferent) {
+                  asset.push({
+                    id: {
+                      Concrete: {
+                        parents: 0,
+                        interior: {
+                          X2: [
+                            {
+                              PalletInstance: params.palletInstance,
+                            },
+                            {
+                              GeneralIndex: params.feeAsset,
+                            },
+                          ],
+                        },
                       },
                     },
-                  ],
-                }),
+                    fun: {
+                      Fungible: params.fee,
+                    },
+                  });
+                }
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset,
+                  feeIndex: isAssetDifferent ? 1 : 0,
+                });
+              },
             }),
         }),
       };

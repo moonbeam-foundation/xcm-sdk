@@ -490,8 +490,8 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadotAssetHub,
       destinationFee: {
-        amount: 0.7, // TODO
-        asset: pink,
+        amount: 0.7,
+        asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

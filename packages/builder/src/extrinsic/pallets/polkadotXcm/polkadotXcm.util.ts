@@ -13,6 +13,7 @@ export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
   asset: any;
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
+  feeIndex?: number;
 }
 
 export function getPolkadotXcmExtrinsicArgs({
@@ -21,6 +22,7 @@ export function getPolkadotXcmExtrinsicArgs({
   destination,
   func,
   parents = 1,
+  feeIndex = 0,
 }: GetExtrinsicParams): any[] {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const version = getExtrinsicArgumentVersion(func);
@@ -47,7 +49,7 @@ export function getPolkadotXcmExtrinsicArgs({
     {
       [version]: asset,
     },
-    0,
+    feeIndex,
     'Unlimited',
   ];
 }
