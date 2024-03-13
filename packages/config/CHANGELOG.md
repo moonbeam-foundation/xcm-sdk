@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.4
+
+### Patch Changes
+
+- [#215](https://github.com/moonbeam-foundation/xcm-sdk/pull/215) [`90da2012b2a879659397d32b933d1bb6539f3eae`](https://github.com/moonbeam-foundation/xcm-sdk/commit/90da2012b2a879659397d32b933d1bb6539f3eae) Thanks [@ekenigs](https://github.com/ekenigs)! - Fixed destination fee on Moonbeam for PINK
+
+- [#214](https://github.com/moonbeam-foundation/xcm-sdk/pull/214) [`c5b5d890ddcbc199108328ff535e9a63e58becd4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c5b5d890ddcbc199108328ff535e9a63e58becd4) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dev dependencies
+
+- Updated dependencies [[`c5b5d890ddcbc199108328ff535e9a63e58becd4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c5b5d890ddcbc199108328ff535e9a63e58becd4)]:
+  - @moonbeam-network/xcm-builder@2.0.1
+  - @moonbeam-network/xcm-types@2.0.1
+
 ## 2.0.3
 
 ### Patch Changes
