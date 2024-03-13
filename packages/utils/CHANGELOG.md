@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 2.0.1
+
+### Patch Changes
+
+- [#214](https://github.com/moonbeam-foundation/xcm-sdk/pull/214) [`c5b5d890ddcbc199108328ff535e9a63e58becd4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c5b5d890ddcbc199108328ff535e9a63e58becd4) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dev dependencies
+
 ## 2.0.0
 
 ### Major Changes
