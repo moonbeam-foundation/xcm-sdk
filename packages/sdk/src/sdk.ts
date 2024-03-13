@@ -5,8 +5,10 @@ import {
   IConfigService,
 } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
+import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData as gtd } from './getTransferData/getTransferData';
-import { Signers, TransferData } from './sdk.interfaces';
+import { PolkadotService } from './polkadot';
+import { EvmSigner, Signers, TransferData } from './sdk.interfaces';
 
 export interface SdkOptions extends Partial<Signers> {
   configService?: IConfigService;
@@ -81,6 +83,42 @@ export function Sdk(options?: SdkOptions) {
       });
     },
   };
+}
+
+export async function getParachainBalances(
+  chain: AnyChain,
+  address: string,
+  evmSigner?: EvmSigner,
+): Promise<any> {
+  const configService = new ConfigService();
+  const chainsConfig = configService.getChainConfig(chain);
+  const assets = chainsConfig.getAssetsConfigs();
+
+  const polkadot = await PolkadotService.create(chain, configService);
+
+  // address,
+  // chain,
+  // assets,
+  // evmSigner,
+  // polkadot,
+  const balances = await getAssetsBalances({
+    chain,
+    assets,
+    address,
+    evmSigner,
+    polkadot,
+  });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ sdk.ts:112 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* balances = ');
+  console.log(balances);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
+  return [];
 }
 
 export interface SdkTransferParams extends Partial<Signers> {

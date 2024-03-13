@@ -4,7 +4,11 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { FeeAssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
+import {
+  AssetConfig,
+  FeeAssetConfig,
+  TransferConfig,
+} from '@moonbeam-network/xcm-config';
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
@@ -322,4 +326,58 @@ export function getMax({
   return balanceAmount.copyWith({
     amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
+}
+
+export interface GetAssetsBalancesParams {
+  address: string;
+  chain: AnyChain;
+  assets: AssetConfig[];
+  evmSigner?: EvmSigner;
+  polkadot: PolkadotService;
+}
+
+export async function getAssetsBalances({
+  address,
+  chain,
+  assets,
+  evmSigner,
+  polkadot,
+}: GetAssetsBalancesParams) {
+  const assetToTest = assets[0];
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:344 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* assetToTest = ');
+  console.log(assetToTest);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
+  const decimals = await getDecimals({
+    address,
+    asset: assetToTest.asset,
+    chain,
+    config: assetToTest,
+    evmSigner,
+    polkadot,
+  });
+
+  const balance = await getBalance({
+    address,
+    chain,
+    config: assets[0],
+    decimals,
+    evmSigner,
+    polkadot,
+  });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:375 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* balance = ');
+  console.log(balance);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
 }

@@ -18,14 +18,24 @@ export interface GetBalancesParams {
 
 export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'>;
 
-export async function getBalance({
-  address,
-  chain,
-  config,
-  decimals,
-  evmSigner,
-  polkadot,
-}: GetBalancesParams) {
+export async function getBalance(params: GetBalancesParams) {
+  const { address, chain, config, decimals, evmSigner, polkadot } = params;
+
+  //  address: "5CezZTdwzytCEAxMvXbXkxf9cxErweUWfGUH9aTHnZsmSyrG" my wallet
+  // chain is the chain object Polkadot or HydraDX from sdk
+  // polkadot is ApiPROvider polkadot
+
+  // pirnt  config object class name
+
+  // console.log(
+  //   '\x1b[34m████████████████████▓▓▒▒░ getTransferData.utils.ts:24 ░▒▒▓▓████████████████████\x1b[0m',
+  // );
+  // console.log('* params = ');
+  // console.log(params);
+  // console.log(
+  //   '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  // );
+
   const cfg = config.balance.build({
     address,
     asset: polkadot.chain.getBalanceAssetId(config.asset),
