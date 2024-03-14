@@ -100,6 +100,11 @@ describe('config service', () => {
             isTestChain: true,
             key: 'test',
             name: 'test',
+            nativeCurrency: {
+              decimals: 18,
+              name: 'TEST',
+              symbol: 'TEST',
+            },
             parachainId: 1000,
             rpc: '',
             ss58Format: 1287,

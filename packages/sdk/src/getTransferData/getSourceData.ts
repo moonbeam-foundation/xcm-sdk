@@ -340,7 +340,6 @@ export async function getAssetsBalances({
   address,
   chain,
   assets,
-  evmSigner,
   polkadot,
 }: GetAssetsBalancesParams) {
   const result = [];
@@ -358,40 +357,25 @@ export async function getAssetsBalances({
 
   // eslint-disable-next-line no-restricted-syntax
   for (const asset of uniqueAssets) {
-    try {
-      console.log(asset);
+    // eslint-disable-next-line no-await-in-loop
+    const decimals = await getDecimals({
+      address,
+      asset: asset.asset,
+      chain,
+      config: asset,
+      polkadot,
+    });
 
-      // eslint-disable-next-line no-await-in-loop
-      const decimals = await getDecimals({
-        address,
-        asset: asset.asset,
-        chain,
-        config: asset,
-        evmSigner,
-        polkadot,
-      });
+    // eslint-disable-next-line no-await-in-loop
+    const balance = await getBalance({
+      address,
+      chain,
+      config: asset,
+      decimals,
+      polkadot,
+    });
 
-      // eslint-disable-next-line no-await-in-loop
-      const balance = await getBalance({
-        address,
-        chain,
-        config: asset,
-        decimals,
-        evmSigner,
-        polkadot,
-      });
-
-      result.push({ balance, asset: asset.asset });
-    } catch (error) {
-      console.log(
-        '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:406 ░▒▒▓▓████████████████████\x1b[0m',
-      );
-      console.log('* error = ');
-      console.log(error);
-      console.log(
-        '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-      );
-    }
+    result.push({ asset: asset.asset, balance, decimals });
   }
   return result;
 }

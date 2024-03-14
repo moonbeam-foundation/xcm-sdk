@@ -8,7 +8,7 @@ import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData as gtd } from './getTransferData/getTransferData';
 import { PolkadotService } from './polkadot';
-import { EvmSigner, Signers, TransferData } from './sdk.interfaces';
+import { Signers, TransferData } from './sdk.interfaces';
 
 export interface SdkOptions extends Partial<Signers> {
   configService?: IConfigService;
@@ -88,7 +88,6 @@ export function Sdk(options?: SdkOptions) {
 export async function getParachainBalances(
   chain: AnyChain,
   address: string,
-  evmSigner?: EvmSigner,
 ): Promise<any> {
   const configService = new ConfigService();
   const chainsConfig = configService.getChainConfig(chain);
@@ -100,7 +99,6 @@ export async function getParachainBalances(
     chain,
     assets,
     address,
-    evmSigner,
     polkadot,
   });
 

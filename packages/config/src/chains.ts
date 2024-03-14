@@ -329,6 +329,11 @@ export const darwinia = new EvmParachain({
   id: 46,
   key: 'darwinia',
   name: 'Darwinia',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'RING',
+    symbol: 'RING',
+  },
   parachainId: 2046,
   rpc: 'https://rpc.darwinia.network',
   ss58Format: 18,
@@ -355,12 +360,18 @@ export const darwiniaCrab = new EvmParachain({
   id: 44,
   key: 'darwinia-crab',
   name: 'Darwinia Crab',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'CRAB',
+    symbol: 'CRAB',
+  },
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
   ws: 'wss://crab-parachain-rpc.darwinia.network',
 });
 
+// FIXME: do we need this chain? it looks dead to me -  https://pangoro.subscan.io/
 export const darwiniaPangoro = new EvmParachain({
   assetsData: [
     {
@@ -382,6 +393,11 @@ export const darwiniaPangoro = new EvmParachain({
   isTestChain: true,
   key: 'darwinia-pangoro',
   name: 'Pangoro',
+  nativeCurrency: {
+    decimals: 18,
+    name: '???',
+    symbol: '???',
+  },
   parachainId: 2105,
   rpc: 'https://pangoro-rpc.darwinia.network',
   ss58Format: 18,
@@ -729,6 +745,11 @@ export const moonbaseAlpha = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'DEV',
+    symbol: 'DEV',
+  },
   parachainId: 1000,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,
@@ -759,6 +780,11 @@ export const moonbaseBeta = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'DEV',
+    symbol: 'DEV',
+  },
   parachainId: 888,
   rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
   ss58Format: 1287,
@@ -931,6 +957,11 @@ export const moonbeam = new EvmParachain({
   id: 1284,
   key: 'moonbeam',
   name: 'Moonbeam',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Glimmer',
+    symbol: 'GLMR',
+  },
   parachainId: 2004,
   rpc: 'https://rpc.api.moonbeam.network',
   ss58Format: 1284,
@@ -1046,6 +1077,11 @@ export const moonriver = new EvmParachain({
   id: 1285,
   key: 'moonriver',
   name: 'Moonriver',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'MOVR',
+    symbol: 'MOVR',
+  },
   parachainId: 2023,
   rpc: 'https://rpc.api.moonriver.moonbeam.network',
   ss58Format: 1285,

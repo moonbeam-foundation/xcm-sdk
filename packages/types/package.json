@@ -51,6 +51,7 @@
   "dependencies": {
     "@moonbeam-network/xcm-utils": "2.0.1",
     "big.js": "^6.2.1",
-    "type-fest": "^3.8.0"
+    "type-fest": "^3.8.0",
+    "viem": "^2.8.6"
   }
 }
