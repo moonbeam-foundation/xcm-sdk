@@ -4,7 +4,12 @@ import {
   ConfigService,
   IConfigService,
 } from '@moonbeam-network/xcm-config';
-import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
+import {
+  AnyChain,
+  Asset,
+  AssetAmount,
+  Ecosystem,
+} from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData as gtd } from './getTransferData/getTransferData';
 import { PolkadotService } from './polkadot';
@@ -88,7 +93,7 @@ export function Sdk(options?: SdkOptions) {
 export async function getParachainBalances(
   chain: AnyChain,
   address: string,
-): Promise<any> {
+): Promise<AssetAmount[]> {
   const configService = new ConfigService();
   const chainsConfig = configService.getChainConfig(chain);
   const assets = chainsConfig.getAssetsConfigs();

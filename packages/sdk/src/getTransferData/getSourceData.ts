@@ -341,8 +341,8 @@ export async function getAssetsBalances({
   chain,
   assets,
   polkadot,
-}: GetAssetsBalancesParams) {
-  const result = [];
+}: GetAssetsBalancesParams): Promise<AssetAmount[]> {
+  const result: AssetAmount[] = [];
 
   const uniqueAssets = assets.reduce(
     (acc: AssetConfig[], asset: AssetConfig) => {
@@ -375,7 +375,13 @@ export async function getAssetsBalances({
       polkadot,
     });
 
-    result.push({ asset: asset.asset, balance, decimals });
+    const assetAmount = AssetAmount.fromAsset(asset.asset, {
+      amount: balance,
+      decimals,
+    });
+
+    result.push(assetAmount);
   }
+
   return result;
 }
