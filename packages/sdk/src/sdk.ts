@@ -96,11 +96,6 @@ export async function getParachainBalances(
 
   const polkadot = await PolkadotService.create(chain, configService);
 
-  // address,
-  // chain,
-  // assets,
-  // evmSigner,
-  // polkadot,
   const balances = await getAssetsBalances({
     chain,
     assets,
@@ -109,16 +104,7 @@ export async function getParachainBalances(
     polkadot,
   });
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ sdk.ts:112 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* balances = ');
-  console.log(balances);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
-
-  return [];
+  return balances;
 }
 
 export interface SdkTransferParams extends Partial<Signers> {

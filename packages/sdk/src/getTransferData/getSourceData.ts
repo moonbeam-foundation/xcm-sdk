@@ -343,41 +343,55 @@ export async function getAssetsBalances({
   evmSigner,
   polkadot,
 }: GetAssetsBalancesParams) {
-  const assetToTest = assets[0];
+  const result = [];
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:344 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* assetToTest = ');
-  console.log(assetToTest);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  const uniqueAssets = assets.reduce(
+    (acc: AssetConfig[], asset: AssetConfig) => {
+      if (!acc.some((a: AssetConfig) => a.asset.isEqual(asset.asset))) {
+        return [asset, ...acc];
+      }
+
+      return acc;
+    },
+    [],
   );
 
-  const decimals = await getDecimals({
-    address,
-    asset: assetToTest.asset,
-    chain,
-    config: assetToTest,
-    evmSigner,
-    polkadot,
-  });
+  // eslint-disable-next-line no-restricted-syntax
+  for (const asset of uniqueAssets) {
+    try {
+      console.log(asset);
 
-  const balance = await getBalance({
-    address,
-    chain,
-    config: assets[0],
-    decimals,
-    evmSigner,
-    polkadot,
-  });
+      // eslint-disable-next-line no-await-in-loop
+      const decimals = await getDecimals({
+        address,
+        asset: asset.asset,
+        chain,
+        config: asset,
+        evmSigner,
+        polkadot,
+      });
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:375 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* balance = ');
-  console.log(balance);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
+      // eslint-disable-next-line no-await-in-loop
+      const balance = await getBalance({
+        address,
+        chain,
+        config: asset,
+        decimals,
+        evmSigner,
+        polkadot,
+      });
+
+      result.push({ balance, asset: asset.asset });
+    } catch (error) {
+      console.log(
+        '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:406 ░▒▒▓▓████████████████████\x1b[0m',
+      );
+      console.log('* error = ');
+      console.log(error);
+      console.log(
+        '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+      );
+    }
+  }
+  return result;
 }

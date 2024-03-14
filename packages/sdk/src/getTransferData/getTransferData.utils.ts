@@ -18,24 +18,14 @@ export interface GetBalancesParams {
 
 export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'>;
 
-export async function getBalance(params: GetBalancesParams) {
-  const { address, chain, config, decimals, evmSigner, polkadot } = params;
-
-  //  address: "5CezZTdwzytCEAxMvXbXkxf9cxErweUWfGUH9aTHnZsmSyrG" my wallet
-  // chain is the chain object Polkadot or HydraDX from sdk
-  // polkadot is ApiPROvider polkadot
-
-  // pirnt  config object class name
-
-  // console.log(
-  //   '\x1b[34m████████████████████▓▓▒▒░ getTransferData.utils.ts:24 ░▒▒▓▓████████████████████\x1b[0m',
-  // );
-  // console.log('* params = ');
-  // console.log(params);
-  // console.log(
-  //   '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  // );
-
+export async function getBalance({
+  address,
+  chain,
+  config,
+  decimals,
+  evmSigner,
+  polkadot,
+}: GetBalancesParams) {
   const cfg = config.balance.build({
     address,
     asset: polkadot.chain.getBalanceAssetId(config.asset),
@@ -49,7 +39,9 @@ export async function getBalance(params: GetBalancesParams) {
   }
 
   if (!evmSigner) {
-    throw new Error('Evm signer must be provided');
+    throw new Error(
+      `getBalance: Evm signer must be provided. Asset: ${config.asset.key}`,
+    );
   }
 
   const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
@@ -74,7 +66,9 @@ export async function getDecimals({
   }
 
   if (!evmSigner) {
-    throw new Error('Evm signer must be provided');
+    throw new Error(
+      `getDecimals: Evm signer must be provided. Asset: ${asset?.key}`,
+    );
   }
 
   const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
