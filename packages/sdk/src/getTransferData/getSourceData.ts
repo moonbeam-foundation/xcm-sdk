@@ -342,8 +342,6 @@ export async function getAssetsBalances({
   assets,
   polkadot,
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
-  const result: AssetAmount[] = [];
-
   const uniqueAssets = assets.reduce(
     (acc: AssetConfig[], asset: AssetConfig) => {
       if (!acc.some((a: AssetConfig) => a.asset.isEqual(asset.asset))) {
@@ -355,33 +353,33 @@ export async function getAssetsBalances({
     [],
   );
 
-  // eslint-disable-next-line no-restricted-syntax
-  for (const asset of uniqueAssets) {
-    // eslint-disable-next-line no-await-in-loop
-    const decimals = await getDecimals({
-      address,
-      asset: asset.asset,
-      chain,
-      config: asset,
-      polkadot,
-    });
+  const balances = await Promise.all(
+    uniqueAssets.map(async (asset: AssetConfig) => {
+      const decimals = await getDecimals({
+        address,
+        asset: asset.asset,
+        chain,
+        config: asset,
+        polkadot,
+      });
 
-    // eslint-disable-next-line no-await-in-loop
-    const balance = await getBalance({
-      address,
-      chain,
-      config: asset,
-      decimals,
-      polkadot,
-    });
+      // eslint-disable-next-line no-await-in-loop
+      const balance = await getBalance({
+        address,
+        chain,
+        config: asset,
+        decimals,
+        polkadot,
+      });
 
-    const assetAmount = AssetAmount.fromAsset(asset.asset, {
-      amount: balance,
-      decimals,
-    });
+      const assetAmount = AssetAmount.fromAsset(asset.asset, {
+        amount: balance,
+        decimals,
+      });
 
-    result.push(assetAmount);
-  }
+      return assetAmount;
+    }),
+  );
 
-  return result;
+  return balances;
 }
