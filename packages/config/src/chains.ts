@@ -371,39 +371,6 @@ export const darwiniaCrab = new EvmParachain({
   ws: 'wss://crab-parachain-rpc.darwinia.network',
 });
 
-// FIXME: do we need this chain? it looks dead to me -  https://pangoro.subscan.io/
-export const darwiniaPangoro = new EvmParachain({
-  assetsData: [
-    {
-      // NOTE: no meta for native token
-      asset: paring,
-      metadataId: 0,
-      palletInstance: 5,
-    },
-    {
-      // NOTE: no meta for movr
-      asset: dev,
-      metadataId: 0,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
-  id: 45,
-  isTestChain: true,
-  key: 'darwinia-pangoro',
-  name: 'Pangoro',
-  nativeCurrency: {
-    decimals: 18,
-    name: '???',
-    symbol: '???',
-  },
-  parachainId: 2105,
-  rpc: 'https://pangoro-rpc.darwinia.network',
-  ss58Format: 18,
-  ws: 'wss://pangoro-rpc.darwinia.network',
-});
-
 export const equilibrium = new Parachain({
   assetsData: [
     {
@@ -1495,7 +1462,6 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   darwiniaCrab,
-  darwiniaPangoro,
   equilibrium,
   hydraDX,
   integritee,

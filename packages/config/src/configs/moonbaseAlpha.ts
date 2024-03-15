@@ -1,20 +1,8 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
-import {
-  alan,
-  ampe,
-  atom,
-  dev,
-  otp,
-  paring,
-  pica,
-  tt1,
-  tur,
-  unit,
-} from '../assets';
+import { alan, ampe, atom, dev, otp, pica, tt1, tur, unit } from '../assets';
 import {
   alphanetAssetHub,
   alphanetRelay,
-  darwiniaPangoro,
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
@@ -124,21 +112,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: otp,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: paring,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: darwiniaPangoro,
-      destinationFee: {
-        amount: 4,
-        asset: paring,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
