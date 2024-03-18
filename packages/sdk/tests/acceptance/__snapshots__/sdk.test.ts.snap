@@ -66,6 +66,39 @@ exports[`sdk getParachainBalances should get expected balances for HydraDX 1`] =
 ]
 `;
 
+exports[`sdk getParachainBalances should get expected balances for HydraDX Alphanet 1`] = `
+[
+  r {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+  r {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  r {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+  r {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+]
+`;
+
 exports[`sdk getParachainBalances should get expected balances for Moonbeam 1`] = `
 [
   r {

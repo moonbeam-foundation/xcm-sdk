@@ -1,5 +1,10 @@
 /* eslint-disable jest/no-commented-out-tests */
-import { centrifuge, hydraDX, moonbeam } from '@moonbeam-network/xcm-config';
+import {
+  centrifuge,
+  hydraDX,
+  hydraDxAlphanet,
+  moonbeam,
+} from '@moonbeam-network/xcm-config';
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
@@ -21,6 +26,15 @@ describe('sdk', () => {
     });
     it(`should get expected balances for ${centrifuge.name}`, async () => {
       const result = await getParachainBalances(centrifuge, centrifugeAddress);
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it(`should get expected balances for ${hydraDxAlphanet.name}`, async () => {
+      const result = await getParachainBalances(
+        hydraDxAlphanet,
+        hydraDXAddress,
+      );
 
       expect(result).toMatchSnapshot();
     });
