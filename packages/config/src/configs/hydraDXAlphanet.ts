@@ -9,7 +9,7 @@ import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
 // FIXME: has to be verified
-export const hydraDxConfig = new ChainConfig({
+export const hydraDxAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: hdx,
