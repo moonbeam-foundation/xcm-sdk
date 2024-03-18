@@ -1499,6 +1499,7 @@ export const chainsList: AnyChain[] = [
   darwiniaCrab,
   equilibrium,
   hydraDX,
+  hydraDxAlphanet,
   integritee,
   interlay,
   karura,
