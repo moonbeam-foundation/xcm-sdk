@@ -69,7 +69,7 @@ exports[`sdk getParachainBalances should get expected balances for HydraDX 1`] =
 exports[`sdk getParachainBalances should get expected balances for HydraDX Alphanet 1`] = `
 [
   r {
-    "amount": 0n,
+    "amount": 178046239082538836n,
     "decimals": 18,
     "key": "ftmwh",
     "originSymbol": "FTM.wh",
@@ -90,7 +90,7 @@ exports[`sdk getParachainBalances should get expected balances for HydraDX Alpha
     "symbol": "DEV",
   },
   r {
-    "amount": 0n,
+    "amount": 3000000000000n,
     "decimals": 12,
     "key": "hdx",
     "originSymbol": "HDX",
