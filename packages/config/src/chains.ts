@@ -23,6 +23,7 @@ import {
   eq,
   eqd,
   fil,
+  ftmwh,
   glmr,
   hdx,
   hko,
@@ -436,6 +437,40 @@ export const hydraDX = new Parachain({
   parachainId: 2034,
   ss58Format: 63,
   ws: 'wss://hydradx-rpc.dwellir.com',
+});
+
+export const hydraDxAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: hdx,
+      id: 0,
+    },
+    {
+      asset: usdcwh,
+      id: 1000001,
+    },
+    {
+      asset: ftmwh,
+      id: 1000002,
+    },
+    {
+      asset: usdtwh,
+      id: 2,
+    },
+    {
+      asset: dev,
+      id: 1,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
+  isTestChain: true,
+  key: 'hydra-dx-Alphanet',
+  name: 'HydraDX Alphanet',
+  parachainId: 2034,
+  ss58Format: 63,
+  ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
 });
 
 export const interlay = new Parachain({
