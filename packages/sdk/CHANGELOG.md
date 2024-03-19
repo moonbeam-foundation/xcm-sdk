@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.0.5
+
+### Patch Changes
+
+- [#218](https://github.com/moonbeam-foundation/xcm-sdk/pull/218) [`40ea2de16415e5e5fe340f9a7472680fd4e5ffaa`](https://github.com/moonbeam-foundation/xcm-sdk/commit/40ea2de16415e5e5fe340f9a7472680fd4e5ffaa) Thanks [@ekenigs](https://github.com/ekenigs)! - Fixed get decimals for HydraDX
+
 ## 2.0.4
 
 ### Patch Changes
