@@ -51,8 +51,7 @@
   "main": "./build/index.cjs",
   "dependencies": {
     "@moonbeam-network/xcm-builder": "2.0.1",
-    "@moonbeam-network/xcm-types": "2.0.1",
-    "viem": "^2.8.6"
+    "@moonbeam-network/xcm-types": "2.0.1"
   },
   "peerDependencies": {
     "@polkadot/types": "^10.10.1",
