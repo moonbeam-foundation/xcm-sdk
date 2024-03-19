@@ -102,6 +102,7 @@ export class PolkadotService {
   ): Promise<{ symbol: string; decimals: number } | undefined> {
     const fn =
       this.api.query.assets?.metadata ||
+      this.api.query.assetRegistry?.assets ||
       this.api.query.assetRegistry?.metadata ||
       this.api.query.assetRegistry?.currencyMetadatas ||
       this.api.query.assetRegistry?.assetMetadatas ||
@@ -136,6 +137,7 @@ export class PolkadotService {
 
   async getAssetDecimals(asset: Asset): Promise<number> {
     const metaId = this.chain.getMetadataAssetId(asset);
+
     return (
       this.chain.getAssetDecimals(asset) ||
       (await this.getAssetDecimalsFromQuery(metaId)) ||
