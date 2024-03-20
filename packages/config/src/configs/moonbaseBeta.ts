@@ -2,7 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { alan, betaDEV, dev } from '../assets';
+import { alan, betaDEV, dev, ftmwh, usdcwh } from '../assets';
 import { moonbaseAlpha, moonbaseBeta } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -26,6 +26,36 @@ export const moonbaseBetaConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: alan,
+      balance: BalanceBuilder().substrate().assets().account(),
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0.002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: betaDEV,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: usdcwh,
+      balance: BalanceBuilder().substrate().assets().account(),
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0.002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      fee: {
+        asset: betaDEV,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: ftmwh,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
