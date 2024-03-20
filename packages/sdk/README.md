@@ -134,7 +134,7 @@ npm run link
 In your project where you would like to test the changes:
 
 ```bash
-npm link @moonbeam-network/xcm-sdk 
+npm link @moonbeam-network/xcm-types @moonbeam-network/xcm-utils @moonbeam-network/xcm-builder @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
 ```
 
 If you need you can link other packages too.
