@@ -142,5 +142,5 @@ If you need you can link other packages too.
 After testing is done, unlink the SDK:
 
 ```bash
-npm unlink @moonbeam-network/xcm-sdk
+npm unlink @moonbeam-network/xcm-types @moonbeam-network/xcm-utils @moonbeam-network/xcm-builder @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
 ```
