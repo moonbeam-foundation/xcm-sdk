@@ -128,7 +128,7 @@ npm run build
 ```
 
 ```bash
-npm link
+npm run link
 ```
 
 In your project where you would like to test the changes:
