@@ -54,6 +54,17 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   source: alphanetAssetHubMock,
 };
 
+export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
+  address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  amount: 99_000_000_000n,
+  asset: 'USDT',
+  destination: moonbaseAlphaMock,
+  fee: 5_000_000_000n,
+  feeAsset: 'USDT',
+  palletInstance: 10,
+  source: alphanetAssetHubMock,
+};
+
 export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
   address: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
   amount: 99_000_000_000n,

@@ -1,6 +1,7 @@
 import {
   buildParachainParamsMock,
   buildParamsMock,
+  buildParamsSameAssetMock,
 } from '../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
 
@@ -37,17 +38,34 @@ describe('polkadotXcm', () => {
     });
 
     describe('x2', () => {
-      const extrinsic = polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2()
-        .build(buildParamsMock);
+      describe('the same asset', () => {
+        const extrinsic = polkadotXcm()
+          .limitedReserveTransferAssets()
+          .X2()
+          .build(buildParamsSameAssetMock);
 
-      it('should be correct config', () => {
-        expect(extrinsic).toMatchSnapshot();
+        it('should be correct config', () => {
+          expect(extrinsic).toMatchSnapshot();
+        });
+
+        it('should get correct arguments', () => {
+          expect(extrinsic.getArgs()).toMatchSnapshot();
+        });
       });
 
-      it('should get correct arguments', () => {
-        expect(extrinsic.getArgs()).toMatchSnapshot();
+      describe('different assets', () => {
+        const extrinsic = polkadotXcm()
+          .limitedReserveTransferAssets()
+          .X2()
+          .build(buildParamsMock);
+
+        it('should be correct config', () => {
+          expect(extrinsic).toMatchSnapshot();
+        });
+
+        it('should get correct arguments', () => {
+          expect(extrinsic.getArgs()).toMatchSnapshot();
+        });
       });
     });
 

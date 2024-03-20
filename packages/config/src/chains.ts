@@ -45,6 +45,7 @@ import {
   pen,
   pha,
   pica,
+  pink,
   ring,
   rmrk,
   sdn,
@@ -919,6 +920,10 @@ export const moonbeam = new EvmParachain({
       asset: ztg,
       id: '150874409661081770150564009349448205842',
     },
+    {
+      asset: pink,
+      id: '64174511183114006009298114091987195453',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1289,6 +1294,11 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: usdc,
       id: 1337,
+      palletInstance: 50,
+    },
+    {
+      asset: pink,
+      id: 23,
       palletInstance: 50,
     },
   ],

@@ -1,5 +1,36 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.0.6
+
+### Patch Changes
+
+- [#220](https://github.com/moonbeam-foundation/xcm-sdk/pull/220) [`bf0e917e64372b7a9bb7782ff8bc8ea69149bd36`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf0e917e64372b7a9bb7782ff8bc8ea69149bd36) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix decimal fetching for HydraDX
+
+## 2.0.5
+
+### Patch Changes
+
+- [#218](https://github.com/moonbeam-foundation/xcm-sdk/pull/218) [`40ea2de16415e5e5fe340f9a7472680fd4e5ffaa`](https://github.com/moonbeam-foundation/xcm-sdk/commit/40ea2de16415e5e5fe340f9a7472680fd4e5ffaa) Thanks [@ekenigs](https://github.com/ekenigs)! - Fixed get decimals for HydraDX
+
+## 2.0.4
+
+### Patch Changes
+
+- [#214](https://github.com/moonbeam-foundation/xcm-sdk/pull/214) [`c5b5d890ddcbc199108328ff535e9a63e58becd4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c5b5d890ddcbc199108328ff535e9a63e58becd4) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dev dependencies
+
+- Updated dependencies [[`90da2012b2a879659397d32b933d1bb6539f3eae`](https://github.com/moonbeam-foundation/xcm-sdk/commit/90da2012b2a879659397d32b933d1bb6539f3eae), [`c5b5d890ddcbc199108328ff535e9a63e58becd4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c5b5d890ddcbc199108328ff535e9a63e58becd4)]:
+  - @moonbeam-network/xcm-config@2.0.4
+  - @moonbeam-network/xcm-builder@2.0.1
+  - @moonbeam-network/xcm-types@2.0.1
+  - @moonbeam-network/xcm-utils@2.0.1
+
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`7e24392a67733b91c1fc7cc23543c74a88f36ed2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7e24392a67733b91c1fc7cc23543c74a88f36ed2)]:
+  - @moonbeam-network/xcm-config@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes

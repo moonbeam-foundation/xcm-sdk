@@ -108,3 +108,13 @@ cp .env.example .env
 
 npm run test:acc
 ```
+
+# Release
+
+To create a dev version go to GitHub actions and run `publish dev versions` workflow.
+
+To create a release version run:
+
+```bash
+npm run changeset
+```
