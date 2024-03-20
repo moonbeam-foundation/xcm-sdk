@@ -3,6 +3,7 @@ import {
   centrifuge,
   hydraDX,
   hydraDxAlphanet,
+  moonbaseBeta,
   moonbeam,
 } from '@moonbeam-network/xcm-config';
 import { getParachainBalances } from '../../src/sdk';
@@ -12,6 +13,7 @@ const hydraDXAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
 const centrifugeAddress = '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb';
 const moonbeamAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
+const moonbaseBetaAddress = '0x08480769599E23F626efff39B89F3137e9917a40';
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
@@ -52,6 +54,14 @@ describe('sdk', () => {
       const result = await getParachainBalances(
         hydraDxAlphanet,
         substrateAddress,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+    it(`should get expected balances for ${moonbaseBeta.name}`, async () => {
+      const result = await getParachainBalances(
+        moonbaseBeta,
+        moonbaseBetaAddress,
       );
 
       expect(result).toMatchSnapshot();
