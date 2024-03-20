@@ -779,6 +779,16 @@ export const moonbaseBeta = new EvmParachain({
       balanceId: '85534404031760856987006367174489651085',
       id: { ForeignAsset: '85534404031760856987006367174489651085' },
     },
+    {
+      asset: usdcwh,
+      balanceId: '319794858556516669238969276945382613133',
+      id: { ForeignAsset: '319794858556516669238969276945382613133' },
+    },
+    {
+      asset: ftmwh,
+      balanceId: '198801030527939140930753142903035039136',
+      id: { ForeignAsset: '198801030527939140930753142903035039136' },
+    },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
