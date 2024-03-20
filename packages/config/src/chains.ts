@@ -467,7 +467,7 @@ export const hydraDxAlphanet = new Parachain({
       id: 1,
     },
   ],
-  ecosystem: Ecosystem.Polkadot,
+  ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
   isTestChain: true,
