@@ -2,6 +2,12 @@ import { ApiPromise, WsProvider } from '@polkadot/api';
 import { typesBundle } from '@polkadot/apps-config';
 import LRU from 'lru-cache';
 
+export enum MRLTypes {
+  XcmVersionedMultiLocation = 'XcmVersionedMultiLocation',
+  XcmRoutingUserAction = 'XcmRoutingUserAction',
+  VersionedUserAction = 'VersionedUserAction',
+}
+
 const cache = new LRU<string, Promise<ApiPromise>>({
   max: 20,
   // eslint-disable-next-line sort-keys
@@ -20,6 +26,14 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
     ApiPromise.create({
       noInitWarn: true,
       provider: new WsProvider(ws),
+      types: {
+        [MRLTypes.XcmRoutingUserAction]: {
+          destination: MRLTypes.XcmVersionedMultiLocation,
+        },
+        [MRLTypes.VersionedUserAction]: {
+          _enum: { V1: MRLTypes.XcmRoutingUserAction },
+        },
+      },
       typesBundle,
     });
 
