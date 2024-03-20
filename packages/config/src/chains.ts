@@ -443,22 +443,27 @@ export const hydraDxAlphanet = new Parachain({
   assetsData: [
     {
       asset: hdx,
+      decimals: 12,
       id: 0,
     },
     {
       asset: usdcwh,
+      decimals: 6,
       id: 1000001,
     },
     {
       asset: ftmwh,
+      decimals: 18,
       id: 1000002,
     },
     {
       asset: usdtwh,
+      decimals: 6,
       id: 2,
     },
     {
       asset: dev,
+      decimals: 18,
       id: 1,
     },
   ],

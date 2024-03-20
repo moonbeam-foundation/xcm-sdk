@@ -11,6 +11,7 @@ import { getParachainBalances } from '../../src/sdk';
 const hydraDXAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
 const centrifugeAddress = '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb';
 const moonbeamAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
+const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
@@ -24,16 +25,33 @@ describe('sdk', () => {
 
       expect(result).toMatchSnapshot();
     });
+    it(`should get expected balances for ${hydraDX.name} for substrate address`, async () => {
+      const result = await getParachainBalances(hydraDX, substrateAddress);
+
+      expect(result).toMatchSnapshot();
+    });
     it(`should get expected balances for ${centrifuge.name}`, async () => {
       const result = await getParachainBalances(centrifuge, centrifugeAddress);
 
       expect(result).toMatchSnapshot();
     });
+    it(`should get expected balances for ${centrifuge.name}  for substrate address`, async () => {
+      const result = await getParachainBalances(centrifuge, substrateAddress);
 
+      expect(result).toMatchSnapshot();
+    });
     it(`should get expected balances for ${hydraDxAlphanet.name}`, async () => {
       const result = await getParachainBalances(
         hydraDxAlphanet,
         hydraDXAddress,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+    it(`should get expected balances for ${hydraDxAlphanet.name} for substrate address`, async () => {
+      const result = await getParachainBalances(
+        hydraDxAlphanet,
+        substrateAddress,
       );
 
       expect(result).toMatchSnapshot();
