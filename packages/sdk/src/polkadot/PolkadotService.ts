@@ -114,9 +114,13 @@ export class PolkadotService {
 
     const data = (await fn(asset)) as AssetMetadata | Option<AssetMetadata>;
     const unwrapped = 'unwrapOrDefault' in data ? data.unwrapOrDefault() : data;
+    const decimals =
+      'unwrapOrDefault' in unwrapped.decimals
+        ? unwrapped.decimals.unwrapOrDefault()
+        : unwrapped.decimals;
 
     return {
-      decimals: unwrapped.decimals.toNumber(),
+      decimals: decimals.toNumber(),
       symbol: unwrapped.symbol.toString(),
     };
   }
@@ -138,12 +142,17 @@ export class PolkadotService {
   async getAssetDecimals(asset: Asset): Promise<number> {
     const metaId = this.chain.getMetadataAssetId(asset);
 
-    return (
+    const decimals =
       this.chain.getAssetDecimals(asset) ||
       (await this.getAssetDecimalsFromQuery(metaId)) ||
       (await this.getAssetMeta(metaId))?.decimals ||
-      this.decimals
-    );
+      this.decimals; // TODO remove this and handle it separately only for native assets
+
+    if (!decimals) {
+      throw new Error(`No decimals found for asset ${asset.originSymbol}`);
+    }
+
+    return decimals;
   }
 
   async query(config: SubstrateQueryConfig): Promise<bigint> {
