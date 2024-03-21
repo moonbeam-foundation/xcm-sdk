@@ -264,7 +264,7 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Alph
     "symbol": "AMPE",
   },
   r {
-    "amount": 0n,
+    "amount": 10000000000000000n,
     "decimals": 18,
     "key": "alan",
     "originSymbol": "ALAN",

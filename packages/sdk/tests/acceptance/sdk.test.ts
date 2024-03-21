@@ -12,14 +12,14 @@ import { getParachainBalances } from '../../src/sdk';
 // E2E balance test wallet
 const hydraDXAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
 const centrifugeAddress = '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb';
-const moonbeamAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
+const moonEvmAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
 const moonbaseBetaAddress = '0x08480769599E23F626efff39B89F3137e9917a40';
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
     it(`should get expected balances for ${moonbeam.name}`, async () => {
-      const result = await getParachainBalances(moonbeam, moonbeamAddress);
+      const result = await getParachainBalances(moonbeam, moonEvmAddress);
 
       expect(result).toMatchSnapshot();
     });
@@ -68,7 +68,7 @@ describe('sdk', () => {
       expect(result).toMatchSnapshot();
     });
     it(`should get expected balances for ${moonbaseAlpha.name}`, async () => {
-      const result = await getParachainBalances(moonbaseAlpha, moonbeamAddress);
+      const result = await getParachainBalances(moonbaseAlpha, moonEvmAddress);
 
       expect(result).toMatchSnapshot();
     });
