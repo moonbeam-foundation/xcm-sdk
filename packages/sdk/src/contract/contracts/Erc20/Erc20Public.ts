@@ -28,7 +28,7 @@ export class Erc20Public implements BalanceContractInterface {
     const data = await this.#publicClient.readContract({
       abi,
       address: this.#config.address as `0x${string}`,
-      args: [this.address],
+      args: this.#config.args,
       functionName: 'balanceOf',
     });
 

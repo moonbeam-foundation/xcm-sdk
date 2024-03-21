@@ -45,7 +45,9 @@ export async function getBalance({
     chain as EvmParachain,
   ) as BalanceContractInterface;
 
-  return contract.getBalance();
+  const balance = await contract.getBalance();
+
+  return balance;
 }
 
 export async function getDecimals({
