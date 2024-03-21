@@ -754,7 +754,7 @@ export const moonbaseAlpha = new EvmParachain({
     },
     {
       asset: usdcwh,
-      id: '0xD909178CC99d318e4D46e7E66a972955859670E1',
+      id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,

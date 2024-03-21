@@ -208,6 +208,13 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Alph
     "symbol": "FTM.wh",
   },
   r {
+    "amount": 10000n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "unit",
