@@ -11,6 +11,7 @@ import {
   tt1,
   tur,
   unit,
+  usdcwh,
 } from '../assets';
 import {
   alphanetAssetHub,
@@ -208,12 +209,27 @@ export const moonbaseAlphaConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: usdcwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.1,
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: hydraDxAlphanet,
       destinationFee: {
-        amount: 0.1, // not sure
+        amount: 0.1,
         asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
       },
