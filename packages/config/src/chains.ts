@@ -744,6 +744,10 @@ export const moonbaseAlpha = new EvmParachain({
       asset: unit,
       id: '42259045809535163221576417993425387648',
     },
+    {
+      asset: ftmwh,
+      id: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
+    },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
