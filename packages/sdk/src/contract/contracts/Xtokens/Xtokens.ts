@@ -70,7 +70,6 @@ export class Xtokens implements TransferContractInterface {
     if (amount === 0n) {
       return 0n;
     }
-
     /**
      * Contract can throw an error if user balance is smaller than fee.
      * Or if you try to send 0 as amount.
@@ -84,6 +83,11 @@ export class Xtokens implements TransferContractInterface {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
+
+      // For transferMultiCurrencies we return 0 and handle it in UI
+      if (this.#config.args[0] instanceof Array) {
+        return 0n;
+      }
 
       throw new Error(
         "Can't get a fee. Make sure that you have enough balance!",
