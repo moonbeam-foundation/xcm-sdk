@@ -4,9 +4,17 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { FeeAssetConfig, TransferConfig } from '@moonbeam-network/xcm-config';
+import {
+  DestinationFeeConfig,
+  FeeAssetConfig,
+  TransferConfig,
+} from '@moonbeam-network/xcm-config';
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
-import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
+import {
+  convertDecimals,
+  toBigInt,
+  toDecimal,
+} from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
@@ -129,11 +137,17 @@ export async function getSourceData({
     fee: destinationFee.amount,
     feeAsset: chain.getAssetId(destinationFee),
   });
+  const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
+    amount: destinationFeeBalance,
+  });
+
   const fee = await getFee({
     balance,
     chain,
     contract,
     decimals: zeroFeeAmount.decimals,
+    destinationFeeBalanceAmount,
+    destinationFeeConfig: config.destinationFee,
     evmSigner,
     extrinsic,
     feeConfig: config.fee,
@@ -145,9 +159,7 @@ export async function getSourceData({
   const { existentialDeposit } = polkadot;
   const feeAmount = zeroFeeAmount.copyWith({ amount: fee });
   const feeBalanceAmount = zeroFeeAmount.copyWith({ amount: feeBalance });
-  const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
-    amount: destinationFeeBalance,
-  });
+
   const minAmount = zeroAmount.copyWith({ amount: min });
 
   const maxAmount = getMax({
@@ -207,6 +219,8 @@ export interface GetFeeParams {
   evmSigner?: EvmSigner;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
+  destinationFeeConfig?: DestinationFeeConfig;
+  destinationFeeBalanceAmount?: AssetAmount;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -216,6 +230,8 @@ export async function getFee({
   chain,
   contract,
   decimals,
+  destinationFeeConfig,
+  destinationFeeBalanceAmount,
   evmSigner,
   extrinsic,
   feeConfig,
@@ -225,6 +241,24 @@ export async function getFee({
   if (contract) {
     if (!evmSigner) {
       throw new Error('EVM Signer must be provided');
+    }
+
+    if (
+      destinationFeeConfig &&
+      destinationFeeBalanceAmount &&
+      typeof destinationFeeConfig.amount === 'number'
+    ) {
+      const destinationFeeBalance = Number(
+        toDecimal(
+          destinationFeeBalanceAmount.amount,
+          destinationFeeBalanceAmount.decimals,
+        ),
+      );
+      if (destinationFeeConfig.amount > destinationFeeBalance) {
+        throw new Error(
+          `Can't get a fee, make sure you have ${destinationFeeConfig?.amount} ${destinationFeeConfig?.asset.originSymbol} needed for fees in destination`,
+        );
+      }
     }
 
     return getContractFee(balance, contract, decimals, evmSigner);
