@@ -254,7 +254,10 @@ export async function getFee({
           destinationFeeBalanceAmount.decimals,
         ),
       );
-      if (destinationFeeConfig.amount > destinationFeeBalance) {
+      if (
+        destinationFeeBalance &&
+        destinationFeeConfig.amount > destinationFeeBalance
+      ) {
         throw new Error(
           `Can't get a fee, make sure you have ${destinationFeeConfig?.amount} ${destinationFeeConfig?.asset.originSymbol} needed for fees in destination`,
         );
