@@ -84,11 +84,6 @@ export class Xtokens implements TransferContractInterface {
       // eslint-disable-next-line no-console
       console.error(error);
 
-      // For transferMultiCurrencies we return 0 and handle it in UI
-      if (this.#config.args[0] instanceof Array) {
-        return 0n;
-      }
-
       throw new Error(
         "Can't get a fee. Make sure that you have enough balance!",
       );
