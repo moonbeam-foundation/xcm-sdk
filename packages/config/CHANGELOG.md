@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @moonbeam-network/xcm-builder@2.0.2
+  - @moonbeam-network/xcm-types@2.0.2
+
 ## 2.0.4
 
 ### Patch Changes
