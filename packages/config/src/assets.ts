@@ -335,14 +335,19 @@ export const ztg = new Asset({
   originSymbol: 'ZTG',
 });
 
+export const ftmwh = new Asset({
+  key: 'ftmwh',
+  originSymbol: 'FTM.wh',
+});
+
 export const assetsList: Asset[] = [
   aca,
   alan,
   ampe,
+  aseed,
   astr,
   atom,
   auq,
-  aseed,
   bnc,
   cfg,
   crab,
@@ -353,6 +358,7 @@ export const assetsList: Asset[] = [
   eq,
   eqd,
   fil,
+  ftmwh,
   glmr,
   hdx,
   hko,
@@ -397,10 +403,10 @@ export const assetsList: Asset[] = [
   vksm,
   vmanta,
   vmovr,
-  xrt,
   wbtc,
   weth,
   wftm,
+  xrt,
   ztg,
 ];
 

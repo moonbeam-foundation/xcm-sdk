@@ -118,3 +118,29 @@ To create a release version run:
 ```bash
 npm run changeset
 ```
+
+# Testing the change in the SDK locally
+
+Build the project:
+
+```bash
+npm run build
+```
+
+```bash
+npm run link
+```
+
+In your project where you would like to test the changes:
+
+```bash
+npm link @moonbeam-network/xcm-types @moonbeam-network/xcm-utils @moonbeam-network/xcm-builder @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
+```
+
+If you need you can link other packages too.
+
+After testing is done, unlink the SDK:
+
+```bash
+npm unlink @moonbeam-network/xcm-types @moonbeam-network/xcm-utils @moonbeam-network/xcm-builder @moonbeam-network/xcm-config @moonbeam-network/xcm-sdk
+```

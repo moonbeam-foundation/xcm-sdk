@@ -4,13 +4,7 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import {
-  IConfigService,
-  darwiniaPangoro,
-  eq,
-  equilibrium,
-  paring,
-} from '@moonbeam-network/xcm-config';
+import { IConfigService, eq, equilibrium } from '@moonbeam-network/xcm-config';
 import {
   AnyParachain,
   Asset,
@@ -75,11 +69,6 @@ export class PolkadotService {
     // or find better way if issue appears on other chains
     if (key === 'token' && [equilibrium.key].includes(this.chain.key)) {
       return eq;
-    }
-
-    // TODO: Remove this once Darwinia Pangoro is updated
-    if (key === 'oring' && this.chain.key === darwiniaPangoro.key) {
-      return paring;
     }
 
     if (!key) {

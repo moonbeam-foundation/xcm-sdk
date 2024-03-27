@@ -37,6 +37,11 @@ export const moonbaseAlphaMock = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'MOCK',
+    symbol: 'MOCK',
+  },
   parachainId: 1000,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,

@@ -1,8 +1,11 @@
 import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
 import { AssetConfig } from '@moonbeam-network/xcm-config';
-import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import { AnyChain, Asset, EvmParachain } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
-import { BalanceContractInterface, createContract } from '../contract';
+import {
+  BalanceContractInterface,
+  createContractWithoutSigner,
+} from '../contract';
 import { PolkadotService } from '../polkadot';
 import { EvmSigner } from '../sdk.interfaces';
 
@@ -23,7 +26,6 @@ export async function getBalance({
   chain,
   config,
   decimals,
-  evmSigner,
   polkadot,
 }: GetBalancesParams) {
   const cfg = config.balance.build({
@@ -38,21 +40,22 @@ export async function getBalance({
       : balance;
   }
 
-  if (!evmSigner) {
-    throw new Error('Evm signer must be provided');
-  }
+  const contract = createContractWithoutSigner(
+    cfg,
+    chain as EvmParachain,
+  ) as BalanceContractInterface;
 
-  const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
+  const balance = await contract.getBalance();
 
-  return contract.getBalance();
+  return balance;
 }
 
 export async function getDecimals({
   address,
   asset,
   config,
-  evmSigner,
   polkadot,
+  chain,
 }: GetDecimalsParams) {
   const cfg = config.balance.build({
     address,
@@ -63,11 +66,10 @@ export async function getDecimals({
     return polkadot.getAssetDecimals(asset || config.asset);
   }
 
-  if (!evmSigner) {
-    throw new Error('Evm signer must be provided');
-  }
-
-  const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
+  const contract = createContractWithoutSigner(
+    cfg,
+    chain as EvmParachain,
+  ) as BalanceContractInterface;
 
   return contract.getDecimals();
 }

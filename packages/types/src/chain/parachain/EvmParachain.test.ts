@@ -9,6 +9,11 @@ describe('evmParachain', () => {
     id: 1284,
     key: 'moonbeam',
     name: 'Moonbeam',
+    nativeCurrency: {
+      decimals: 18,
+      name: 'Glimmer',
+      symbol: 'GLMR',
+    },
     parachainId: 2004,
     rpc: 'https://rpc.api.moonbeam.network',
     ss58Format: 1284,
