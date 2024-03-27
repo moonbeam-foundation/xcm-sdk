@@ -70,7 +70,6 @@ export class Xtokens implements TransferContractInterface {
     if (amount === 0n) {
       return 0n;
     }
-
     /**
      * Contract can throw an error if user balance is smaller than fee.
      * Or if you try to send 0 as amount.
