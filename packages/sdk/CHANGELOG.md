@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.0.7
+
+### Patch Changes
+
+- [#223](https://github.com/moonbeam-foundation/xcm-sdk/pull/223) [`8a488f2823cd19dce651251e774998f4e97cc4bf`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8a488f2823cd19dce651251e774998f4e97cc4bf) Thanks [@mmaurello](https://github.com/mmaurello)! - Inform required amount in error message for multi assets
+
+- Updated dependencies [[`3ade51ff0ef5acc4a6f84391159d3652cd6ee792`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3ade51ff0ef5acc4a6f84391159d3652cd6ee792)]:
+  - @moonbeam-network/xcm-utils@2.0.2
+  - @moonbeam-network/xcm-builder@2.0.2
+  - @moonbeam-network/xcm-types@2.0.2
+  - @moonbeam-network/xcm-config@2.0.5
+
 ## 2.0.6
 
 ### Patch Changes
