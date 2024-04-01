@@ -1217,7 +1217,7 @@ export const phala = new Parachain({
   name: 'Phala',
   parachainId: 2035,
   ss58Format: 30,
-  ws: 'wss://api.phala.network/ws',
+  ws: 'wss://phala-rpc.dwellir.com',
 });
 
 export const picasso = new Parachain({
