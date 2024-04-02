@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.6
+
+### Patch Changes
+
+- [#224](https://github.com/moonbeam-foundation/xcm-sdk/pull/224) [`c4abfd2c0ac6c778c0b4fb3bcab57260b1799f4e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c4abfd2c0ac6c778c0b4fb3bcab57260b1799f4e) Thanks [@mmaurello](https://github.com/mmaurello)! - Change phala endpoint and improve error message for destination fees
+
 ## 2.0.5
 
 ### Patch Changes
