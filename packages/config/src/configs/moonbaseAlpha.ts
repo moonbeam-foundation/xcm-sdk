@@ -238,6 +238,17 @@ export const moonbaseAlphaConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.0002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
   ],
   chain: moonbaseAlpha,
 });
