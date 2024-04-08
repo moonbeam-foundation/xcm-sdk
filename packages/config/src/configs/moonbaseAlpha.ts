@@ -215,8 +215,8 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destination: hydraDxAlphanet,
       destinationFee: {
         amount: 0.1,
-        asset: hdx,
-        balance: BalanceBuilder().substrate().system().account(),
+        asset: usdcwh,
+        balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
         asset: dev,
@@ -229,9 +229,9 @@ export const moonbaseAlphaConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: hydraDxAlphanet,
       destinationFee: {
-        amount: 0.1,
-        asset: hdx,
-        balance: BalanceBuilder().substrate().system().account(),
+        amount: 0.01,
+        asset: ftmwh,
+        balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
         asset: dev,
@@ -245,6 +245,21 @@ export const moonbaseAlphaConfig = new ChainConfig({
       destination: hydraDxAlphanet,
       destinationFee: {
         amount: 0.0002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: hdx,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.5,
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      fee: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
       },

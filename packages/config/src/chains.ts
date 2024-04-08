@@ -747,6 +747,7 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: ftmwh,
       id: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
+      metadataId: 0, // no metadata for ERC20 tokens
     },
     {
       asset: hdx,
@@ -755,6 +756,7 @@ export const moonbaseAlpha = new EvmParachain({
     {
       asset: usdcwh,
       id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
+      metadataId: 0, // no metadata for ERC20 tokens
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,

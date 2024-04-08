@@ -1,5 +1,5 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { EvmParachain } from '@moonbeam-network/xcm-types';
+import { AnyChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { EvmSigner } from '../sdk.interfaces';
 import {
   BalanceContractInterface,
@@ -8,7 +8,7 @@ import {
 import { Erc20, Xtokens } from './contracts';
 import { Erc20Public } from './contracts/Erc20/Erc20Public';
 
-export function createContract(
+export function createContractWithSigner(
   config: ContractConfig,
   signer: EvmSigner,
 ): TransferContractInterface | BalanceContractInterface {
@@ -32,4 +32,14 @@ export function createContractWithoutSigner(
   }
 
   throw new Error(`Public Contract ${config.module} not found`);
+}
+
+export function createContract(
+  config: ContractConfig,
+  signer: EvmSigner | undefined,
+  chain?: AnyChain,
+): TransferContractInterface | BalanceContractInterface {
+  return signer
+    ? createContractWithSigner(config, signer)
+    : createContractWithoutSigner(config, chain as EvmParachain);
 }
