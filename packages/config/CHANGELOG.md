@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.7
+
+### Patch Changes
+
+- [#228](https://github.com/moonbeam-foundation/xcm-sdk/pull/228) [`297969fff04c86913888b0633c7240e18766be07`](https://github.com/moonbeam-foundation/xcm-sdk/commit/297969fff04c86913888b0633c7240e18766be07) Thanks [@mmaurello](https://github.com/mmaurello)! - change Pendulum endpoint
+
+- Updated dependencies []:
+  - @moonbeam-network/xcm-builder@2.0.3
+  - @moonbeam-network/xcm-types@2.0.3
+
 ## 2.0.6
 
 ### Patch Changes
