@@ -1237,7 +1237,7 @@ export const pendulum = new Parachain({
   name: 'Pendulum',
   parachainId: 2094,
   ss58Format: 56,
-  ws: 'wss://pendulum-rpc.dwellir.com',
+  ws: 'wss://rpc-pendulum.prd.pendulumchain.tech',
 });
 
 export const pendulumAlphanet = new Parachain({
