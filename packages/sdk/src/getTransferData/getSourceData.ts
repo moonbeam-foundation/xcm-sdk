@@ -260,7 +260,7 @@ export async function getFee({
         destinationFeeConfig.amount > destinationFeeBalance
       ) {
         throw new Error(
-          `Can't get a fee, make sure you have ${destinationFeeConfig?.amount} ${destinationFeeConfig?.asset.originSymbol} needed for fees in destination`,
+          `Can't get a fee, make sure you have ${destinationFeeConfig?.amount} ${destinationFeeConfig?.asset.originSymbol} in your source balance, needed for destination fees`,
         );
       }
     }
