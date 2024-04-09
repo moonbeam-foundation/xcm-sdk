@@ -4,6 +4,7 @@ import {
   aseed,
   astr,
   bnc,
+  bncs,
   cfg,
   dai,
   dot,
@@ -718,6 +719,21 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.1,
         asset: sub,
         balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: bncs,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: bncs,
+        balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
         asset: glmr,

@@ -14,6 +14,7 @@ import {
   auq,
   betaDEV,
   bnc,
+  bncs,
   cfg,
   crab,
   csm,
@@ -208,6 +209,10 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: bnc,
       id: { Native: bnc.originSymbol },
+    },
+    {
+      asset: bncs,
+      id: { Token2: 9 },
     },
     {
       asset: fil,
@@ -782,6 +787,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: bnc,
       id: '165823357460190568952172802245839421906',
+    },
+    {
+      asset: bncs,
+      id: '142155548796783636521833385094843759961',
     },
     {
       asset: cfg,
