@@ -63,6 +63,7 @@ export class Xtokens implements TransferContractInterface {
       return 0n;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return contract.estimateGas[this.#config.func](this.#config.args as any);
   }
 

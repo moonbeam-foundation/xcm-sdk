@@ -10,6 +10,7 @@ import {
 } from '../../ExtrinsicBuilder.utils';
 
 export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   asset: any;
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
@@ -23,6 +24,7 @@ export function getPolkadotXcmExtrinsicArgs({
   func,
   parents = 1,
   feeIndex = 0,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: GetExtrinsicParams): any[] {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const version = getExtrinsicArgumentVersion(func);

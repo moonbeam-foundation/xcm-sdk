@@ -8,6 +8,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from '@jest/globals';
 import { assetsList, dev, glmr, tt1, unit } from '../assets';
 import { hydraDX, moonbaseAlpha, moonbeam, pendulumAlphanet } from '../chains';
 import { ConfigService } from './ConfigService';

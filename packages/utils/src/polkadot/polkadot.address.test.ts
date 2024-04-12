@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { getSovereignAccountAddresses } from './polkadot.address';
 
 describe('utils - polkadot address', () => {

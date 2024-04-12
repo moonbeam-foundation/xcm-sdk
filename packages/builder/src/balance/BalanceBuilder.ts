@@ -108,7 +108,9 @@ function system() {
               balances = res;
             }
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             if (Array.isArray((res as any)?.v0?.balance)) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               balances = (res as any).v0.balance;
             }
 

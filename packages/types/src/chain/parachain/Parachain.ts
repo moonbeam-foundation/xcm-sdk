@@ -1,5 +1,5 @@
-import { SetOptional } from 'type-fest';
 import { Asset } from '../../asset';
+import { SetOptional } from '../../common.interfaces';
 import { Chain, ChainConstructorParams } from '../Chain';
 import { ChainType } from '../Chain.interfaces';
 import { ChainAssetId, ChainAssetsData } from './Parachain.interfaces';

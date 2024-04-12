@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { Ecosystem } from '../Chain.interfaces';
 import { EvmParachain } from './EvmParachain';
 

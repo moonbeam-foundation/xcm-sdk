@@ -9,6 +9,7 @@ export interface SubstrateCallConfigConstructorParams {
 export class SubstrateCallConfig {
   readonly api: ApiPromise;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly call: () => Promise<any>;
 
   readonly type = CallType.Substrate;
