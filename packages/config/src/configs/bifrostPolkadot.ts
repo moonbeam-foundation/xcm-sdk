@@ -139,7 +139,7 @@ export const bifrostPolkadotConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.2,
+        amount: 0.05,
         asset: bnc,
         balance: BalanceBuilder().substrate().system().account(),
       },
