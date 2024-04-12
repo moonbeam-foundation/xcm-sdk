@@ -6,6 +6,7 @@ import {
   bnc,
   cfg,
   dai,
+  ded,
   dot,
   eq,
   eqd,
@@ -492,6 +493,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.7,
         asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: ded,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.7, // TODO
+        asset: ded, // TODO
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
