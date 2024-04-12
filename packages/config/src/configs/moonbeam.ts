@@ -733,7 +733,7 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.00000001,
         asset: bncs,
-        balance: BalanceBuilder().evm().erc20(),
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: glmr,
