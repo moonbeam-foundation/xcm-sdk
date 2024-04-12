@@ -1,11 +1,11 @@
-name: build
+name: lint
 
 on: push
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  unit:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: 🤘 checkout
@@ -24,3 +24,6 @@ jobs:
 
       - name: 🧪 Run TypeCheck
         run: npm run typecheck
+
+      - name: 🧪 Run ESLint
+        run: npm run lint
