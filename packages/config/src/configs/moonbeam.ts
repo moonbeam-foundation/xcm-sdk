@@ -727,7 +727,7 @@ export const moonbeamConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: bncs,
-      balance: BalanceBuilder().evm().erc20(),
+      balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: bifrostPolkadot,
       destinationFee: {
