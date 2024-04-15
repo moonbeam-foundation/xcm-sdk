@@ -28,6 +28,9 @@ async function getHighestDevTag(pkgs: any[]) {
 }
 
 async function main() {
+  console.log(
+    `************************************ update-dev-versions script start! ************************************`,
+  );
   const files = await glob(`${process.env.PWD}/packages/**/package.json`, {
     ignore: '**/node_modules/**',
   });
@@ -44,18 +47,12 @@ async function main() {
   console.log(`highestCurrent = ${highestCurrent}`);
   console.log(`newVersion = ${nextVersionNumber}`);
 
-  await execPromise(`echo highestCurrent = ${highestCurrent}`);
-  await execPromise(`echo nextVersionNumber = ${nextVersionNumber}`);
-
   for (const pkg of pkgs) {
     const { name } = pkg;
     const { stdout } = await execPromise(`npm view ${name} dist-tags.dev`);
 
     const current = stdout.replace(/\n$/, '');
     const newVersion = current.replace(/\.\d+$/, `.${nextVersionNumber}`);
-
-    await execPromise(`echo name = ${name}`);
-    await execPromise(`echo newVersion = ${newVersion}`);
 
     pkg.version = newVersion;
 
