@@ -36,22 +36,22 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      - name: 🚀 Publish types
-        working-directory: ./packages/types
-        run: npm publish --tag dev
+      # - name: 🚀 Publish types
+      #   working-directory: ./packages/types
+      #   run: npm publish --tag dev
 
-      - name: 🚀 Publish utils
-        working-directory: ./packages/utils
-        run: npm publish --tag dev
+      # - name: 🚀 Publish utils
+      #   working-directory: ./packages/utils
+      #   run: npm publish --tag dev
 
-      - name: 🚀 Publish builder
-        working-directory: ./packages/builder
-        run: npm publish --tag dev
+      # - name: 🚀 Publish builder
+      #   working-directory: ./packages/builder
+      #   run: npm publish --tag dev
 
-      - name: 🚀 Publish config
-        working-directory: ./packages/config
-        run: npm publish --tag dev
+      # - name: 🚀 Publish config
+      #   working-directory: ./packages/config
+      #   run: npm publish --tag dev
 
-      - name: 🚀 Publish sdk
-        working-directory: ./packages/sdk
-        run: npm publish --tag dev
+      # - name: 🚀 Publish sdk
+      #   working-directory: ./packages/sdk
+      #   run: npm publish --tag dev
