@@ -85,6 +85,11 @@ export const dai = new Asset({
   originSymbol: 'DAI',
 });
 
+export const ded = new Asset({
+  key: 'ded',
+  originSymbol: 'DED',
+});
+
 export const fil = new Asset({
   key: 'fil',
   originSymbol: 'FIL',
@@ -348,6 +353,7 @@ export const assetsList: Asset[] = [
   crab,
   csm,
   dai,
+  ded,
   dev,
   dot,
   eq,

@@ -18,6 +18,7 @@ import {
   crab,
   csm,
   dai,
+  ded,
   dev,
   dot,
   eq,
@@ -793,6 +794,10 @@ export const moonbeam = new EvmParachain({
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      asset: ded,
+      id: '124463719055550872076363892993240202694',
+    },
+    {
       asset: dot,
       id: '42259045809535163221576417993425387648',
     },
@@ -1284,6 +1289,11 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: usdt,
       id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: ded,
+      id: 30,
       palletInstance: 50,
     },
     {
