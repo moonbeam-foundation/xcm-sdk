@@ -45,6 +45,11 @@ export const bnc = new Asset({
   originSymbol: 'BNC',
 });
 
+export const bncs = new Asset({
+  key: 'bncs',
+  originSymbol: 'BNCS',
+});
+
 export const cfg = new Asset({
   key: 'cfg',
   originSymbol: 'CFG',
@@ -83,6 +88,11 @@ export const eqd = new Asset({
 export const dai = new Asset({
   key: 'dai',
   originSymbol: 'DAI',
+});
+
+export const ded = new Asset({
+  key: 'ded',
+  originSymbol: 'DED',
 });
 
 export const fil = new Asset({
@@ -349,10 +359,12 @@ export const assetsList: Asset[] = [
   atom,
   auq,
   bnc,
+  bncs,
   cfg,
   crab,
   csm,
   dai,
+  ded,
   dev,
   dot,
   eq,

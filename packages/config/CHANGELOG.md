@@ -1,5 +1,19 @@
 # @moonbeam-network/xcm-config
 
+## 2.0.8
+
+### Patch Changes
+
+- [#229](https://github.com/moonbeam-foundation/xcm-sdk/pull/229) [`9df6359a17b077a1ce18deb751ca7e83738f461c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9df6359a17b077a1ce18deb751ca7e83738f461c) Thanks [@awesomepan](https://github.com/awesomepan)! - BNCS integration with Moonbeam
+
+- [#232](https://github.com/moonbeam-foundation/xcm-sdk/pull/232) [`ddd6079357896aeecc0fda6bc5ed7db41443077b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ddd6079357896aeecc0fda6bc5ed7db41443077b) Thanks [@mmaurello](https://github.com/mmaurello)! - DED integration between Polkadot AssetHub and Moonbeam
+
+- [#230](https://github.com/moonbeam-foundation/xcm-sdk/pull/230) [`ee5cd03dff5fef8f580800b91f9cd2aa66b793ed`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ee5cd03dff5fef8f580800b91f9cd2aa66b793ed) Thanks [@dependabot](https://github.com/apps/dependabot)! - Update follow-redirects
+
+- Updated dependencies [[`ee5cd03dff5fef8f580800b91f9cd2aa66b793ed`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ee5cd03dff5fef8f580800b91f9cd2aa66b793ed)]:
+  - @moonbeam-network/xcm-builder@2.0.4
+  - @moonbeam-network/xcm-types@2.0.4
+
 ## 2.0.7
 
 ### Patch Changes

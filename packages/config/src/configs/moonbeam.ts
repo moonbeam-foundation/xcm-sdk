@@ -4,8 +4,10 @@ import {
   aseed,
   astr,
   bnc,
+  bncs,
   cfg,
   dai,
+  ded,
   dot,
   eq,
   eqd,
@@ -500,6 +502,21 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: ded,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.2,
+        asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: hdx,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -717,6 +734,21 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.1,
         asset: sub,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: bncs,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: bifrostPolkadot,
+      destinationFee: {
+        amount: 0.0001,
+        asset: bncs,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

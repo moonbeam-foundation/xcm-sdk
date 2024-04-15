@@ -14,10 +14,12 @@ import {
   auq,
   betaDEV,
   bnc,
+  bncs,
   cfg,
   crab,
   csm,
   dai,
+  ded,
   dev,
   dot,
   eq,
@@ -209,6 +211,10 @@ export const bifrostPolkadot = new Parachain({
     {
       asset: bnc,
       id: { Native: bnc.originSymbol },
+    },
+    {
+      asset: bncs,
+      id: { Token2: 9 },
     },
     {
       asset: fil,
@@ -841,6 +847,10 @@ export const moonbeam = new EvmParachain({
       id: '165823357460190568952172802245839421906',
     },
     {
+      asset: bncs,
+      id: '142155548796783636521833385094843759961',
+    },
+    {
       asset: cfg,
       id: '91372035960551235635465443179559840483',
     },
@@ -848,6 +858,10 @@ export const moonbeam = new EvmParachain({
       asset: dai,
       id: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
       metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: ded,
+      id: '124463719055550872076363892993240202694',
     },
     {
       asset: dot,
@@ -1351,6 +1365,11 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: usdt,
       id: 1984,
+      palletInstance: 50,
+    },
+    {
+      asset: ded,
+      id: 30,
       palletInstance: 50,
     },
     {
