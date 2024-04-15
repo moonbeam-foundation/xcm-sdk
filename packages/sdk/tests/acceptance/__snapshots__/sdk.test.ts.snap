@@ -201,6 +201,13 @@ exports[`sdk getParachainBalances should get expected balances for HydraDX for s
 exports[`sdk getParachainBalances should get expected balances for Moonbase Alpha 1`] = `
 [
   r {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+  r {
     "amount": 1234567890000000000n,
     "decimals": 18,
     "key": "ftmwh",
@@ -297,14 +304,14 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Beta
     "symbol": "USDC.Wh",
   },
   r {
-    "amount": 12080000000000000000n,
+    "amount": 12180000000000000000n,
     "decimals": 18,
     "key": "alan",
     "originSymbol": "ALAN",
     "symbol": "ALAN",
   },
   r {
-    "amount": 9972701135728000000n,
+    "amount": 7972889614166000000n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",

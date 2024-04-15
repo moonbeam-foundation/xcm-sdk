@@ -19,10 +19,19 @@ jobs:
       - name: 🔐 Authenticate with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
+      - name: Update npm
+        run: npm i -g npm@latest
+      
+      - name: node/npm version
+        run: node --version && npm --version    
+
       - run: npm ci --ignore-scripts
 
       - name: ✌️ Update versions
         run: npx bun ./scripts/update-dev-versions.ts
+
+      - name: ✌️ Print versions
+        run: find ./packages -name 'package.json' -not -path '*/node_modules/*' -exec grep -H 'version' {} +
 
       - name: 🛠️ Build
         run: npm run build
