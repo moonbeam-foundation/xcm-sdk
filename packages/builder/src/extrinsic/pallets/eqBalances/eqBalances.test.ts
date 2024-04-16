@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, expect, it } from '@jest/globals';
 import {
   buildParachainParamsMock,
   buildParamsMock,

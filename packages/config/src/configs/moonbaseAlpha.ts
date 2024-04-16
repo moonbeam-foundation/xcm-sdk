@@ -4,17 +4,19 @@ import {
   ampe,
   atom,
   dev,
+  ftmwh,
+  hdx,
   otp,
-  paring,
   pica,
   tt1,
   tur,
   unit,
+  usdcwh,
 } from '../assets';
 import {
   alphanetAssetHub,
   alphanetRelay,
-  darwiniaPangoro,
+  hydraDxAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
@@ -132,21 +134,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: paring,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: darwiniaPangoro,
-      destinationFee: {
-        amount: 4,
-        asset: paring,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
       asset: atom,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -215,6 +202,62 @@ export const moonbaseAlphaConfig = new ChainConfig({
         amount: 0.0506,
         asset: unit,
         balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: usdcwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.1,
+        asset: usdcwh,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: ftmwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.01,
+        asset: ftmwh,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.0002,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: hdx,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: hydraDxAlphanet,
+      destinationFee: {
+        amount: 0.5,
+        asset: hdx,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       fee: {
         asset: dev,

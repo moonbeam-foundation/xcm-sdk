@@ -25,6 +25,7 @@ import {
   eq,
   eqd,
   fil,
+  ftmwh,
   glmr,
   hdx,
   hko,
@@ -335,6 +336,11 @@ export const darwinia = new EvmParachain({
   id: 46,
   key: 'darwinia',
   name: 'Darwinia',
+  nativeCurrency: {
+    decimals: 18,
+    name: ring.originSymbol,
+    symbol: ring.originSymbol,
+  },
   parachainId: 2046,
   rpc: 'https://rpc.darwinia.network',
   ss58Format: 18,
@@ -361,37 +367,15 @@ export const darwiniaCrab = new EvmParachain({
   id: 44,
   key: 'darwinia-crab',
   name: 'Darwinia Crab',
+  nativeCurrency: {
+    decimals: 18,
+    name: crab.originSymbol,
+    symbol: crab.originSymbol,
+  },
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
   ws: 'wss://crab-parachain-rpc.darwinia.network',
-});
-
-export const darwiniaPangoro = new EvmParachain({
-  assetsData: [
-    {
-      // NOTE: no meta for native token
-      asset: paring,
-      metadataId: 0,
-      palletInstance: 5,
-    },
-    {
-      // NOTE: no meta for movr
-      asset: dev,
-      metadataId: 0,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0xaaa8b33b723b30b44e45e4e6c01936cc92e7559b4184fb0cee2853d55610fcbf',
-  id: 45,
-  isTestChain: true,
-  key: 'darwinia-pangoro',
-  name: 'Pangoro',
-  parachainId: 2105,
-  rpc: 'https://pangoro-rpc.darwinia.network',
-  ss58Format: 18,
-  ws: 'wss://pangoro-rpc.darwinia.network',
 });
 
 export const equilibrium = new Parachain({
@@ -459,6 +443,45 @@ export const hydraDX = new Parachain({
   parachainId: 2034,
   ss58Format: 63,
   ws: 'wss://hydradx-rpc.dwellir.com',
+});
+
+export const hydraDxAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: hdx,
+      decimals: 12,
+      id: 0,
+    },
+    {
+      asset: usdcwh,
+      decimals: 6,
+      id: 1000001,
+    },
+    {
+      asset: ftmwh,
+      decimals: 18,
+      id: 1000002,
+    },
+    {
+      asset: usdtwh,
+      decimals: 6,
+      id: 2,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: 1,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
+  isTestChain: true,
+  key: 'hydra-dx-Alphanet',
+  name: 'HydraDX Alphanet',
+  parachainId: 2034,
+  ss58Format: 63,
+  ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
 });
 
 export const interlay = new Parachain({
@@ -727,6 +750,20 @@ export const moonbaseAlpha = new EvmParachain({
       asset: unit,
       id: '42259045809535163221576417993425387648',
     },
+    {
+      asset: ftmwh,
+      id: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
+    {
+      asset: hdx,
+      id: '69606720909260275826784788104880799692',
+    },
+    {
+      asset: usdcwh,
+      id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
+      metadataId: 0, // no metadata for ERC20 tokens
+    },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -735,6 +772,11 @@ export const moonbaseAlpha = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
+  nativeCurrency: {
+    decimals: 18,
+    name: dev.originSymbol,
+    symbol: dev.originSymbol,
+  },
   parachainId: 1000,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,
@@ -757,6 +799,16 @@ export const moonbaseBeta = new EvmParachain({
       balanceId: '85534404031760856987006367174489651085',
       id: { ForeignAsset: '85534404031760856987006367174489651085' },
     },
+    {
+      asset: usdcwh,
+      balanceId: '319794858556516669238969276945382613133',
+      id: { ForeignAsset: '319794858556516669238969276945382613133' },
+    },
+    {
+      asset: ftmwh,
+      balanceId: '198801030527939140930753142903035039136',
+      id: { ForeignAsset: '198801030527939140930753142903035039136' },
+    },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -765,6 +817,11 @@ export const moonbaseBeta = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
+  nativeCurrency: {
+    decimals: 18,
+    name: dev.originSymbol,
+    symbol: dev.originSymbol,
+  },
   parachainId: 888,
   rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
   ss58Format: 1287,
@@ -945,6 +1002,11 @@ export const moonbeam = new EvmParachain({
   id: 1284,
   key: 'moonbeam',
   name: 'Moonbeam',
+  nativeCurrency: {
+    decimals: 18,
+    name: glmr.originSymbol,
+    symbol: glmr.originSymbol,
+  },
   parachainId: 2004,
   rpc: 'https://rpc.api.moonbeam.network',
   ss58Format: 1284,
@@ -1060,6 +1122,11 @@ export const moonriver = new EvmParachain({
   id: 1285,
   key: 'moonriver',
   name: 'Moonriver',
+  nativeCurrency: {
+    decimals: 18,
+    name: movr.originSymbol,
+    symbol: movr.originSymbol,
+  },
   parachainId: 2023,
   rpc: 'https://rpc.api.moonriver.moonbeam.network',
   ss58Format: 1285,
@@ -1478,9 +1545,9 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   darwiniaCrab,
-  darwiniaPangoro,
   equilibrium,
   hydraDX,
+  hydraDxAlphanet,
   integritee,
   interlay,
   karura,

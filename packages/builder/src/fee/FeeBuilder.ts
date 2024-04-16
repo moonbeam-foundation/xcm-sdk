@@ -20,6 +20,7 @@ function assetManager() {
           call: async (): Promise<bigint> => {
             const type = (await api.query.assetManager.assetIdType(
               asset,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
             )) as unknown as Option<any>;
 
             if (type.isNone) {

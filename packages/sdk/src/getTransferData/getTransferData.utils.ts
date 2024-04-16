@@ -30,7 +30,6 @@ export async function getBalance({
     address,
     asset: polkadot.chain.getBalanceAssetId(config.asset),
   });
-
   if (cfg.type === CallType.Substrate) {
     const balance = await polkadot.query(cfg as SubstrateQueryConfig);
     return chain.usesChainDecimals
@@ -38,36 +37,38 @@ export async function getBalance({
       : balance;
   }
 
-  if (!evmSigner) {
-    throw new Error('Evm signer must be provided');
-  }
+  const contract = createContract(
+    cfg,
+    evmSigner,
+    chain,
+  ) as BalanceContractInterface;
 
-  const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
+  const balance = await contract.getBalance();
 
-  return contract.getBalance();
+  return balance;
 }
 
 export async function getDecimals({
   address,
   asset,
   config,
-  evmSigner,
   polkadot,
+  evmSigner,
+  chain,
 }: GetDecimalsParams) {
   const cfg = config.balance.build({
     address,
     asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
   });
-
   if (cfg.type === CallType.Substrate) {
     return polkadot.getAssetDecimals(asset || config.asset);
   }
 
-  if (!evmSigner) {
-    throw new Error('Evm signer must be provided');
-  }
-
-  const contract = createContract(cfg, evmSigner) as BalanceContractInterface;
+  const contract = createContract(
+    cfg,
+    evmSigner,
+    chain,
+  ) as BalanceContractInterface;
 
   return contract.getDecimals();
 }

@@ -4,7 +4,17 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { bnc, bncs, fil, glmr, vastr, vdot, vfil, vglmr, vmanta } from '../assets';
+import {
+  bnc,
+  bncs,
+  fil,
+  glmr,
+  vastr,
+  vdot,
+  vfil,
+  vglmr,
+  vmanta,
+} from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';

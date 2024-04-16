@@ -3,11 +3,13 @@ import { BaseConfig, BaseConfigConstructorParams } from '../types/BaseConfig';
 
 export interface ContractConfigConstructorParams
   extends Omit<BaseConfigConstructorParams, 'type'> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   args: any[];
   address?: string;
 }
 
 export class ContractConfig extends BaseConfig {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly args: any[];
 
   readonly address?: string;

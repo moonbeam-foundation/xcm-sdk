@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { buildParamsMock } from '../../../../fixtures';
 import { xcmPallet } from './xcmPallet';
 

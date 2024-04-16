@@ -22,6 +22,7 @@ function assetRegistry() {
           module: pallet,
           func: 'assetMetadatas',
           args: [asset],
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           transform: async (response: Option<any>): Promise<bigint> =>
             response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),
@@ -32,6 +33,7 @@ function assetRegistry() {
           module: pallet,
           func: 'currencyMetadatas',
           args: [asset],
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           transform: async (response: Option<any>): Promise<bigint> =>
             response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),

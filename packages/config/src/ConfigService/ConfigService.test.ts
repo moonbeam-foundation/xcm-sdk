@@ -8,6 +8,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from '@jest/globals';
 import { assetsList, dev, glmr, tt1, unit } from '../assets';
 import { hydraDX, moonbaseAlpha, moonbeam, pendulumAlphanet } from '../chains';
 import { ConfigService } from './ConfigService';
@@ -100,6 +101,11 @@ describe('config service', () => {
             isTestChain: true,
             key: 'test',
             name: 'test',
+            nativeCurrency: {
+              decimals: 18,
+              name: 'TEST',
+              symbol: 'TEST',
+            },
             parachainId: 1000,
             rpc: '',
             ss58Format: 1287,

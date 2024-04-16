@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
 import { Ecosystem } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from '@jest/globals';
 import { ConfigService } from '../ConfigService';
 import { dev } from '../assets';
 import { moonbaseAlpha, pendulumAlphanet } from '../chains';

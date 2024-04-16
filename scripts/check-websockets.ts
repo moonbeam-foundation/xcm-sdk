@@ -15,6 +15,7 @@ function procesArgs() {
 async function checkWebSocketEndpoints(
   endpoints: ChainEndpoint[],
 ): Promise<{ endpoint: ChainEndpoint; isAlive: boolean }[]> {
+  console.log('Checking WebSocket endpoints...');
   async function checkIsWebSocketAlive({
     chainKey,
     ws: endpoint,
@@ -24,7 +25,8 @@ async function checkWebSocketEndpoints(
 
       let isAlive = false;
 
-      ws.on('error', (error) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ws.on('error', (error: any) => {
         console.error(
           `WebSocket ${chainKey} connection to ${endpoint} failed. Error: ${error.message}`,
         );

@@ -5,6 +5,7 @@ import {
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import {
+  AssetConfig,
   DestinationFeeConfig,
   FeeAssetConfig,
   TransferConfig,
@@ -359,4 +360,60 @@ export function getMax({
   return balanceAmount.copyWith({
     amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
+}
+
+export interface GetAssetsBalancesParams {
+  address: string;
+  chain: AnyChain;
+  assets: AssetConfig[];
+  evmSigner?: EvmSigner;
+  polkadot: PolkadotService;
+}
+
+export async function getAssetsBalances({
+  address,
+  chain,
+  assets,
+  polkadot,
+}: GetAssetsBalancesParams): Promise<AssetAmount[]> {
+  const uniqueAssets = assets.reduce(
+    (acc: AssetConfig[], asset: AssetConfig) => {
+      if (!acc.some((a: AssetConfig) => a.asset.isEqual(asset.asset))) {
+        return [asset, ...acc];
+      }
+
+      return acc;
+    },
+    [],
+  );
+
+  const balances = await Promise.all(
+    uniqueAssets.map(async (asset: AssetConfig) => {
+      const decimals = await getDecimals({
+        address,
+        asset: asset.asset,
+        chain,
+        config: asset,
+        polkadot,
+      });
+
+      // eslint-disable-next-line no-await-in-loop
+      const balance = await getBalance({
+        address,
+        chain,
+        config: asset,
+        decimals,
+        polkadot,
+      });
+
+      const assetAmount = AssetAmount.fromAsset(asset.asset, {
+        amount: balance,
+        decimals,
+      });
+
+      return assetAmount;
+    }),
+  );
+
+  return balances;
 }

@@ -1,4 +1,5 @@
 import { TypeRegistry, U128 } from '@polkadot/types';
+import { describe, expect, it } from '@jest/globals';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import { BalanceBuilder } from './BalanceBuilder';
 

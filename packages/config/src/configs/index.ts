@@ -11,9 +11,9 @@ import { centrifugeConfig } from './centrifuge';
 import { crustShadowConfig } from './crustShadow';
 import { darwiniaConfig } from './darwinia';
 import { darwiniaCrabConfig } from './darwiniaCrab';
-import { darwiniaPangoroConfig } from './darwiniaPangoro';
 import { equilibriumConfig } from './equilibrium';
 import { hydraDxConfig } from './hydraDX';
+import { hydraDxAlphanetConfig } from './hydraDXAlphanet';
 import { integriteeConfig } from './integritee';
 import { interlayConfig } from './interlay';
 import { karuraConfig } from './karura';
@@ -59,9 +59,9 @@ export const chainsConfigList: ChainConfig[] = [
   crustShadowConfig,
   darwiniaConfig,
   darwiniaCrabConfig,
-  darwiniaPangoroConfig,
   equilibriumConfig,
   hydraDxConfig,
+  hydraDxAlphanetConfig,
   integriteeConfig,
   interlayConfig,
   karuraConfig,

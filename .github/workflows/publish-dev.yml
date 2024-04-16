@@ -8,21 +8,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🤘 checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⚙️ Setup Node.js environment
-        uses: actions/setup-node@v3.0.0
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 20.x
           cache: 'npm'
+
+      - uses: oven-sh/setup-bun@v1     
 
       - name: 🔐 Authenticate with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
+      - name: Update npm
+        run: npm i -g npm@latest
+      
+      - name: node/npm version
+        run: node --version && npm --version    
+
       - run: npm ci --ignore-scripts
 
-      - name: ✌️ Update versions
-        run: npx bun ./scripts/update-dev-versions.ts
+      - name: ✌️ Update versions (BUN)
+        run: bun ./scripts/update-dev-versions.ts
+
+      - name: ✌️ Print versions
+        run: find ./packages -name 'package.json' -not -path '*/node_modules/*' -exec grep -H 'version' {} +
 
       - name: 🛠️ Build
         run: npm run build
