@@ -324,6 +324,13 @@ exports[`sdk getParachainBalances should get expected balances for Moonbeam 1`] 
 [
   r {
     "amount": 0n,
+    "decimals": 12,
+    "key": "bncs",
+    "originSymbol": "BNCS",
+    "symbol": "BNCS",
+  },
+  r {
+    "amount": 0n,
     "decimals": 10,
     "key": "sub",
     "originSymbol": "SUB",
@@ -419,6 +426,13 @@ exports[`sdk getParachainBalances should get expected balances for Moonbeam 1`] 
     "key": "hdx",
     "originSymbol": "HDX",
     "symbol": "HDX",
+  },
+  r {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "ded",
+    "originSymbol": "DED",
+    "symbol": "DED",
   },
   r {
     "amount": 0n,
