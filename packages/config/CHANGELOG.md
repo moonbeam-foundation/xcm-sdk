@@ -1,5 +1,19 @@
 # @moonbeam-network/xcm-config
 
+## 2.1.0
+
+### Minor Changes
+
+- [#217](https://github.com/moonbeam-foundation/xcm-sdk/pull/217) [`db25ff4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/db25ff4745b1e6c1de8795981aa8fac9ae275dbc) Thanks [@Rihyx](https://github.com/Rihyx)! - Add function to get balances, get balances and decimals without signer, add HydraDX Alphanet
+
+### Patch Changes
+
+- [#235](https://github.com/moonbeam-foundation/xcm-sdk/pull/235) [`4e3a861`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4e3a861699a415058f0601ae431fb2dbd6269b17) Thanks [@Rihyx](https://github.com/Rihyx)! - update dev deps
+
+- Updated dependencies [[`4e3a861`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4e3a861699a415058f0601ae431fb2dbd6269b17), [`db25ff4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/db25ff4745b1e6c1de8795981aa8fac9ae275dbc)]:
+  - @moonbeam-network/xcm-builder@2.1.0
+  - @moonbeam-network/xcm-types@2.1.0
+
 ## 2.0.8
 
 ### Patch Changes
