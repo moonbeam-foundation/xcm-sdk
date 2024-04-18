@@ -3,7 +3,9 @@ import { typesBundle } from '@polkadot/apps-config';
 import LRU from 'lru-cache';
 
 export enum MRLTypes {
+  // TODO handle both types according to RT version
   XcmVersionedMultiLocation = 'XcmVersionedMultiLocation',
+  XcmVersionedLocation = 'XcmVersionedLocation',
   XcmRoutingUserAction = 'XcmRoutingUserAction',
   VersionedUserAction = 'VersionedUserAction',
 }
@@ -28,7 +30,7 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
       provider: new WsProvider(ws),
       types: {
         [MRLTypes.XcmRoutingUserAction]: {
-          destination: MRLTypes.XcmVersionedMultiLocation,
+          destination: MRLTypes.XcmVersionedLocation,
         },
         [MRLTypes.VersionedUserAction]: {
           _enum: { V1: MRLTypes.XcmRoutingUserAction },
