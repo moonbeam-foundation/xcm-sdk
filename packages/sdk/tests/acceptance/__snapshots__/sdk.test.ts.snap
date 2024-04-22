@@ -290,7 +290,7 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Alph
 exports[`sdk getParachainBalances should get expected balances for Moonbase Beta 1`] = `
 [
   r {
-    "amount": 959299531883970493n,
+    "amount": 100000000000000000n,
     "decimals": 18,
     "key": "ftmwh",
     "originSymbol": "FTM.wh",
@@ -304,14 +304,14 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Beta
     "symbol": "USDC.Wh",
   },
   r {
-    "amount": 12180000000000000000n,
+    "amount": 0n,
     "decimals": 18,
     "key": "alan",
     "originSymbol": "ALAN",
     "symbol": "ALAN",
   },
   r {
-    "amount": 7972889614166000000n,
+    "amount": 0n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",

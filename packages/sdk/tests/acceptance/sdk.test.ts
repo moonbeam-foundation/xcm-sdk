@@ -1,4 +1,5 @@
 /* eslint-disable jest/no-commented-out-tests */
+import { describe, expect, it } from '@jest/globals';
 import {
   centrifuge,
   hydraDX,
@@ -14,7 +15,7 @@ const hydraDXAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
 const centrifugeAddress = '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb';
 const moonEvmAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
-const moonbaseBetaAddress = '0x08480769599E23F626efff39B89F3137e9917a40';
+const moonbaseBetaAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
