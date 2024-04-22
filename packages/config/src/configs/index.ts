@@ -28,8 +28,8 @@ import { moonbaseAlphaConfig } from './moonbaseAlpha';
 import { moonbaseBetaConfig } from './moonbaseBeta';
 import { moonbeamConfig } from './moonbeam';
 import { moonriverConfig } from './moonriver';
+import { neurowebConfig } from './neuroweb';
 import { nodleConfig } from './nodle';
-import { originTrailConfig } from './originTrail';
 import { originTrailAlphanetConfig } from './originTrailAlphanet';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
@@ -75,8 +75,8 @@ export const chainsConfigList: ChainConfig[] = [
   moonbaseBetaConfig,
   moonbeamConfig,
   moonriverConfig,
+  neurowebConfig,
   nodleConfig,
-  originTrailConfig,
   originTrailAlphanetConfig,
   parallelConfig,
   parallelHeikoConfig,

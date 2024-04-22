@@ -3,20 +3,20 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { otp } from '../assets';
-import { moonbeam, originTrail } from '../chains';
+import { neuro } from '../assets';
+import { moonbeam, neuroweb } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-export const originTrailConfig = new ChainConfig({
+export const neurowebConfig = new ChainConfig({
   assets: [
     new AssetConfig({
-      asset: otp,
+      asset: neuro,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: otp,
+        asset: neuro,
         balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder()
@@ -25,5 +25,5 @@ export const originTrailConfig = new ChainConfig({
         .X1(),
     }),
   ],
-  chain: originTrail,
+  chain: neuroweb,
 });
