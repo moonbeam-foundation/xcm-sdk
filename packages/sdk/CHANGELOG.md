@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.1.1
+
+### Patch Changes
+
+- [#238](https://github.com/moonbeam-foundation/xcm-sdk/pull/238) [`949dad5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/949dad56a93facb93925af3475d22e2041de983a) Thanks [@mmaurello](https://github.com/mmaurello)! - Change OTP name for NEURO
+
+- Updated dependencies [[`949dad5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/949dad56a93facb93925af3475d22e2041de983a)]:
+  - @moonbeam-network/xcm-config@2.1.1
+
 ## 2.1.0
 
 ### Minor Changes
