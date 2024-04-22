@@ -304,14 +304,14 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Beta
     "symbol": "USDC.Wh",
   },
   r {
-    "amount": 0n,
+    "amount": 1100000000000000000n,
     "decimals": 18,
     "key": "alan",
     "originSymbol": "ALAN",
     "symbol": "ALAN",
   },
   r {
-    "amount": 0n,
+    "amount": 1100000000000000000n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",
