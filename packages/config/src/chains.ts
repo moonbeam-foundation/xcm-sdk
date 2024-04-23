@@ -41,6 +41,7 @@ import {
   manta,
   mgx,
   movr,
+  neuro,
   nodl,
   otp,
   para,
@@ -910,7 +911,7 @@ export const moonbeam = new EvmParachain({
       id: '309163521958167876851250718453738106865',
     },
     {
-      asset: otp,
+      asset: neuro,
       id: '238111524681612888331172110363070489924',
     },
     {
@@ -1147,13 +1148,13 @@ export const nodle = new Parachain({
   name: 'Nodle',
   parachainId: 2026,
   ss58Format: 37,
-  ws: 'wss://eden-rpc.dwellir.com',
+  ws: 'wss://nodle-rpc.dwellir.com',
 });
 
-export const originTrail = new Parachain({
+export const neuroweb = new Parachain({
   assetsData: [
     {
-      asset: otp,
+      asset: neuro,
       metadataId: 0,
       palletInstance: 10,
     },
@@ -1161,8 +1162,8 @@ export const originTrail = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xe7e0962324a3b86c83404dbea483f25fb5dab4c224791c81b756cfc948006174',
-  key: 'origin-trail',
-  name: 'OriginTrail',
+  key: 'neuroweb',
+  name: 'NeuroWeb',
   parachainId: 2043,
   ss58Format: 101,
   ws: 'wss://origintrail-rpc.dwellir.com',
@@ -1561,8 +1562,8 @@ export const chainsList: AnyChain[] = [
   moonbaseBeta,
   moonbeam,
   moonriver,
+  neuroweb,
   nodle,
-  originTrail,
   originTrailAlphanet,
   parallel,
   parallelHeiko,
