@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 2.0.6
+
+### Patch Changes
+
+- [#237](https://github.com/moonbeam-foundation/xcm-sdk/pull/237) [`0967f74`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0967f74c5a32af2df8c1c4213e0c8f3bef5427cb) Thanks [@mmaurello](https://github.com/mmaurello)! - Modify MRL types
+
 ## 2.0.5
 
 ### Patch Changes
