@@ -1596,6 +1596,7 @@ export const chainsList: AnyChain[] = [
   originTrailAlphanet,
   parallel,
   parallelHeiko,
+  peaqAlphanet,
   pendulum,
   pendulumAlphanet,
   phala,
