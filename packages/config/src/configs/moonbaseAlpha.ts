@@ -295,7 +295,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDxAlphanet,
+      destination: peaqAlphanet,
       destinationFee: {
         amount: 0.01,
         asset: ftmwh,
