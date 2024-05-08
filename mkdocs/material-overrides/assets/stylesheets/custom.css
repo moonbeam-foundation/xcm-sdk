@@ -1,0 +1,195 @@
+:root,
+[data-md-color-scheme='default'] {
+  /** Code highlighting color shades **/
+  /* Numbers */
+  --md-code-hl-number-color: #e1147b;
+  /* Python function names */
+  --md-code-hl-function-color: #42a2a1;
+  /* JavaScript booleans, Python variable names */
+  --md-code-hl-name-color: #9356e9;
+  /* Strings */
+  --md-code-hl-string-color: #e1147b;
+  /* Python print */
+  --md-code-hl-constant-color: #42a2a1;
+  /* Imports, const, let, var, async, await, function, etc. */
+  --md-code-hl-keyword-color: #42a2a1;
+  /* Comments */
+  --md-code-hl-comment-color: #9356e9;
+  /* Code highlighting */
+  --md-code-hl-color: #e1147b;
+  /* Backslashes */
+  --md-code-hl-special-color: #262626;
+
+  /** Footer color */
+  --md-footer-bg-color: #ffffff;
+  --md-footer-bg-color--dark: #ffffff;
+  --md-footer-fg-color: #000000;
+  --md-footer-fg-color--light: #000000;
+
+  /** Badge color */
+  --md-typeset-kbd-color: #e9e9e9;
+}
+
+:root,
+[data-md-color-scheme='slate'] {
+  /** Code highlighting color shades **/
+  /* Numbers */
+  --md-code-hl-number-color: #f089bd;
+  /* Python function names */
+  --md-code-hl-function-color: #53cbc9;
+  /* JavaScript booleans, Python variable names */
+  --md-code-hl-name-color: #7c71ff;
+  /* Strings */
+  --md-code-hl-string-color: #f089bd;
+  /* Python print */
+  --md-code-hl-constant-color: #53cbc9;
+  /* Imports, const, let, var, async, await, function, etc. */
+  --md-code-hl-keyword-color: #53cbc9;
+  /* Comments */
+  --md-code-hl-comment-color: #9c63ec;
+  /* Code highlighting */
+  --md-code-hl-color: #e1147b;
+  /* Backslashes */
+  --md-code-hl-special-color: #ffffff;
+
+  /** Footer color */
+  --md-footer-bg-color: #000000;
+  --md-footer-bg-color--dark: #000000;
+  --md-footer-fg-color: #ffffff;
+  --md-footer-fg-color--light: #ffffff;
+}
+
+/* Font size */
+.md-typeset {
+  font-size: 0.7rem;
+}
+
+.md-nav {
+  font-size: 0.6rem;
+}
+
+/* Page styling */
+.tutorial {
+  max-width: 36.8rem;
+}
+
+.md-sidebar__scrollwrap {
+  margin: 0;
+  margin-right: 4em;
+}
+
+/* Header styling */
+.md-social__link {
+  height: unset;
+  margin-left: 0.6rem;
+}
+
+.md-social__link svg {
+  max-height: 1.2rem;
+  max-width: 1.2rem;
+}
+
+@media screen and (min-width: 76.25em) {
+  [dir='ltr'] .md-header__source {
+    margin-left: 0;
+  }
+}
+
+/* Footer styling */
+.md-footer-copyright {
+  padding: 0.1em;
+  margin: auto;
+  font-size: 0.64rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+}
+
+/* Reference page styling */
+/* Grid styling */
+.grid > div:last-child {
+  max-height: 1000px;
+  overflow: auto;
+}
+
+.md-typeset .grid {
+  grid-gap: 2.5rem;
+}
+
+.md-typeset .grid > div:first-child > p:first-child {
+  margin-top: 0;
+}
+
+.grid .highlight span.filename {
+  margin-top: 0;
+}
+
+/* Type styling */
+.md-typeset kbd {
+  border-radius: 1em;
+  vertical-align: baseline;
+  box-shadow: none;
+}
+/* For links to definitions on reference pages */
+.md-typeset .twemoji {
+  vertical-align: middle;
+}
+
+/* Add arrows to left navigation sections */
+@media screen and (min-width: 76.25em) {
+  .md-nav__item--active .md-nav__link[href="../interfaces/"] .md-ellipsis:after,
+  .md-nav__item--active .md-nav__link[href="../methods/"] .md-ellipsis:after {
+      background-color: currentcolor;
+      content: "";
+      display: inline-block;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42Z"/></svg>'); /* Unicode character for a downward-pointing triangle */
+      -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42Z"/></svg>'); /* Unicode character for a downward-pointing triangle */
+      transition: transform .25s;
+      height: 24px;
+      width: 24px;
+      vertical-align: text-top;
+    }
+    .md-nav__item--active .md-nav__link.md-nav__link--active[href="./"] .md-ellipsis:after {
+      transform: rotate(90deg);
+      background-color: currentcolor;
+      content: "";
+      display: inline-block;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42Z"/></svg>'); /* Unicode character for a downward-pointing triangle */
+      -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42Z"/></svg>'); /* Unicode character for a downward-pointing triangle */
+      transition: transform .25s;
+      height: 24px;
+      width: 24px;
+      vertical-align: text-top;
+    }
+
+    [dir=ltr] .md-nav--integrated>.md-nav__list>.md-nav__item--active .md-nav--secondary {
+      border-left: .05rem solid var(--md-default-fg-color--lightest);
+    }
+
+    [dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner {
+      margin-left: 0;
+      margin-right: 0;
+    }
+}
+
+/* Disclaimer styling */
+.page-disclaimer {
+  font-size: x-small;
+  font-style: italic;
+  margin-top: 3em;
+}

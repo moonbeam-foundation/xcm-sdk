@@ -1,0 +1,71 @@
+site_name: XCM SDK Docs
+site_url: https://moonbeam-foundation.github.io/xcm-sdk/
+docs_dir: docs
+copyright: © 2024 Moonbeam Foundation. All Rights Reserved.
+repo_name: moonbeam-foundation/xcm-sdk
+repo_url: https://github.com/moonbeam-foundation/xcm-sdk
+theme:
+  name: material
+  custom_dir: material-overrides
+  favicon: assets/images/Moonbeam-Favicon-50.webp
+  logo: assets/images/Moonbeam-Favicon-50.webp
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Open Sans
+  palette:
+    # Palette toggle for light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: white
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - navigation.indexes
+    - navigation.tabs
+    - toc.follow
+    - toc.integrate
+extra_css:
+  - assets/stylesheets/custom.css
+plugins:
+  - search
+  - awesome-pages
+  - mike:
+      canonical_version: latest
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets:
+      base_path: docs/.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+extra:
+  generator: false
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/PfpUATX
+      name: Discord
+
