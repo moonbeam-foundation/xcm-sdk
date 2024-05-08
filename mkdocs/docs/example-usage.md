@@ -1,5 +1,5 @@
 ---
-title: Using the XCM SDK v1
+title: Using the XCM SDK v2
 description: Use the Moonbeam XCM SDK to easily transfer cross-chain assets between parachains or between a parachain and relay chain within the Polkadot/Kusama ecosystems.
 template: tutorial.html
 ---
@@ -35,13 +35,13 @@ You'll also need an Ethereum signer if you're interacting with an Ethereum-compa
 === "Ethers.js"
 
     ```bash
-    npm install ethers@5
+    npm install ethers@6
     ```
 
 === "viem"
 
     ```bash
-    npm install viem@1
+    npm install viem@2
     ```
 
 ## Create Signers {: #create-signers }
@@ -63,7 +63,7 @@ To create an Ethers signer, you can use the following code snippet:
 import { ethers } from 'ethers';
 
 const privateKey = 'INSERT_PRIVATE_KEY';
-const provider = new ethers.providers.WebSocketProvider('INSERT_WS_ENDPOINT', {
+const provider = new ethers.WebSocketProvider('INSERT_WS_ENDPOINT', {
   chainId: INSERT_CHAIN_ID,
   name: 'INSERT_CHAIN_NAME',
 });
@@ -78,7 +78,7 @@ For Moonbeam specifically, you can use the following configurations:
     import { ethers } from 'ethers';
 
     const privateKey = 'INSERT_PRIVATE_KEY';
-    const provider = new ethers.providers.WebSocketProvider(
+    const provider = new ethers.WebSocketProvider(
       '{{ networks.moonbeam.wss_url }}',
       {
         chainId: {{ networks.moonbeam.chain_id }},
@@ -94,7 +94,7 @@ For Moonbeam specifically, you can use the following configurations:
     import { ethers } from 'ethers';
 
     const privateKey = 'INSERT_PRIVATE_KEY';
-    const provider = new ethers.providers.WebSocketProvider(
+    const provider = new ethers.WebSocketProvider(
       '{{ networks.moonriver.wss_url }}',
       {
         chainId: {{ networks.moonriver.chain_id }},
@@ -110,7 +110,7 @@ For Moonbeam specifically, you can use the following configurations:
     import { ethers } from 'ethers';
 
     const privateKey = 'INSERT_PRIVATE_KEY';
-    const provider = new ethers.providers.WebSocketProvider(
+    const provider = new ethers.WebSocketProvider(
       '{{ networks.moonbase.wss_url }}',
       {
         chainId: {{ networks.moonbase.chain_id }},

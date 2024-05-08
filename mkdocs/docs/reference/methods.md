@@ -1,5 +1,5 @@
 ---
-title: XCM SDK Reference - Methods - v1
+title: XCM SDK Reference - Methods - v2
 description: A reference for the available methods in the Moonbeam XCM SDK that can be used to send XCM transfers between chains within the Polkadot/Kusama ecosystems.
 ---
 
