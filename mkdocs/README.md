@@ -2,13 +2,19 @@
 
 ## Publishing New Versions
 
-To add a new version, you’ll need to push the latest changes to the `main` branch and then in your terminal run:
+To add the very first version, you’ll need to push the latest changes to the `main` branch and then in your terminal run:
 
 ```bash
 mike deploy --push INSERT_NEW_VERSION latest
 ```
 
 Where the version should be formatted like `v0`, as we only need to worry about maintaining documentation for major version changes.
+
+For additional versions, you'll need to run:
+
+```bash
+mike deploy --push --update-aliases INSERT_NEW_VERSION latest
+```
 
 ## Publishing Changes to the Current Version
 

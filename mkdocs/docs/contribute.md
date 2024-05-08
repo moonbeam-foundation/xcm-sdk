@@ -27,7 +27,7 @@ The first step in adding support for a new asset is to define the asset in the [
 Follow these steps:
 
 1. Open the `xcm-sdk/packages/config/src/assets.ts` file
-2. Create a new variable for your asset. You'll need to create an `Asset` object, providing the `key` and `originSymbol` of the asset
+2. Create a new variable for your asset. You'll need to create an [Asset Object](./reference/interfaces.md#the-asset-object), providing the `key` and `originSymbol` of the asset
 
    ```ts
    export const INSERT_ASSET_NAME = new Asset({
@@ -58,7 +58,7 @@ To add a chain, take the following steps:
 
 1.  Open the `xcm-sdk/packages/config/src/chains.ts` file
 2.  Add your asset to the list of imported assets from the assets configuration file (`./assets.ts`)
-3.  Create a new variable for each chain if an entry doesn't already exist. You'll need to create a `Chain` object, providing metadata related to the chain
+3.  Create a new variable for each chain if an entry doesn't already exist. You'll need to create a [Chain Object](./reference/interfaces.md#the-chain-object), providing metadata related to the chain
 
     === "Parachain"
 
@@ -130,7 +130,7 @@ To designate a chain as a destination or source chain for an asset, you must spe
 
 To enable an asset to move between chains, follow these steps to configure the source and destination chains of an asset:
 
-1. In the `assetsData` array of the source chain, you'll need to create a `Parachain` or `EvmParachain` (for EVM-compatible chains) object for the asset, specifying how the asset is seen on that chain
+1. In the `assetsData` array of the source chain, you'll need to create a [Chain Asset Data Object](./reference/interfaces.md#the-chain-assets-data-object) for the asset, specifying how the asset is seen on that chain
 
    ```ts
    {
@@ -160,7 +160,7 @@ To enable an asset to move between chains, follow these steps to configure the s
    });
    ```
 
-2. In the destination chain's `assetsData` array, create a `Parachain` or `EvmParachain` (for EVM-compatible chains) object that defines the asset as seen on the destination chain. This will be different than the source chain's configurations, as every chain manages assets differently
+2. In the destination chain's `assetsData` array, create a [Chain Asset Data Object](./reference/interfaces.md#the-chain-assets-data-object) that defines the asset as seen on the destination chain. This will be different than the source chain's configurations, as every chain manages assets differently
 
    For example, to add support for USDT on Moonbeam, Moonbeam's chain configuration needs to include the configuration for USDT:
 
