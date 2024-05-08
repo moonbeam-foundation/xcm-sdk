@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.1.4
+
+### Patch Changes
+
+- [#245](https://github.com/moonbeam-foundation/xcm-sdk/pull/245) [`8d31dc2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8d31dc23a33428daa05953048d543d00810e0797) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix estimated gas value as temporary fix
+
 ## 2.1.3
 
 ### Patch Changes
