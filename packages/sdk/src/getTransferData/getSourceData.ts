@@ -9,7 +9,6 @@ import {
   DestinationFeeConfig,
   FeeAssetConfig,
   TransferConfig,
-  glmr,
 } from '@moonbeam-network/xcm-config';
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import {
@@ -133,12 +132,13 @@ export async function getSourceData({
 
   const contract = config.contract?.build({
     address: destinationAddress,
-    amount: asset === glmr ? 1n : balance, // Temporary fix for GLMR gas estimation, pending resolution with RT2900
+    amount: balance,
     asset: chain.getAssetId(asset),
     destination: destination.chain,
     fee: destinationFee.amount,
     feeAsset: chain.getAssetId(destinationFee),
   });
+
   const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
     amount: destinationFeeBalance,
   });
