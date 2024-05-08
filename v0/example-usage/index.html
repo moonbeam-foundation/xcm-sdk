@@ -1,0 +1,1745 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Use the Moonbeam XCM SDK to easily deposit and withdraw cross-chain assets to Moonbeam from Polkadot and other parachains in the ecosystem.">
+      
+      
+      
+        <link rel="canonical" href="https://moonbeam-foundation.github.io/xcm-sdk/latest/example-usage/">
+      
+      
+        <link rel="prev" href="../reference/methods/">
+      
+      
+        <link rel="next" href="../contribute/">
+      
+      
+      <link rel="icon" href="../assets/images/Moonbeam-Favicon-50.webp">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Using the XCM SDK v0 - XCM SDK Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-the-moonbeam-xcm-sdk" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+  
+  <header class="md-header" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Header">
+      <a href=".." title="XCM SDK Docs" class="md-header__button md-logo" aria-label="XCM SDK Docs" data-md-component="logo">
+        
+  <img src="../assets/images/Moonbeam-Favicon-50.webp" alt="logo">
+
+      </a>
+      <label class="md-header__button md-icon" for="__drawer">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      </label>
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <div class="md-header__topic">
+            <span class="md-ellipsis">
+              XCM SDK Docs
+            </span>
+          </div>
+          <div class="md-header__topic" data-md-component="header-topic">
+            <span class="md-ellipsis">
+              
+                Using the XCM SDK v0
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      
+        
+          <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+        
+      
+      
+        <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://discord.gg/PfpUATX" target="_blank" rel="noopener" title="Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+</div>
+      
+        <div class="md-header__source">
+          <a href="https://github.com/moonbeam-foundation/xcm-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    moonbeam-foundation/xcm-sdk
+  </div>
+</a>
+        </div>
+      
+    </nav>
+    
+  </header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../reference/interfaces/" class="md-tabs__link">
+          
+  
+    
+  
+  SDK Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Using the XCM SDK
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contribute/" class="md-tabs__link">
+        
+  
+    
+  
+  Contribute
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="XCM SDK Docs" class="md-nav__button md-logo" aria-label="XCM SDK Docs" data-md-component="logo">
+      
+  <img src="../assets/images/Moonbeam-Favicon-50.webp" alt="logo">
+
+    </a>
+    XCM SDK Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/moonbeam-foundation/xcm-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    moonbeam-foundation/xcm-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    SDK Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            SDK Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/interfaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Types and Interfaces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Using the XCM SDK
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Using the XCM SDK
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-signers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Signers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initializing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the SDK Interfaces
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the SDK Interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symbols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asset Symbols
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moonbeam Native Asset Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-chain-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moonbeam Native Chain Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-sdk-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the SDK Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the SDK Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deposit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deposit
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deposit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chains-deposit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from" class="md-nav__link">
+    <span class="md-ellipsis">
+      From
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-deposit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-deposit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-fee-deposit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Fee
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Withdraw
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Withdraw">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chains-withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to" class="md-nav__link">
+    <span class="md-ellipsis">
+      To
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-fee-withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Fee
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscribe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subscribe to Assets Balance Information
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdk-utils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utility Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deposit-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check if Transfer Data is for a Deposit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#withdraw-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check if Transfer Data is for a Withdrawal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decimals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convert Balance to Decimal or BigInt
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribute
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+<div class="tutorial">
+    
+                  
+
+  
+  
+
+
+<h1 id="using-the-moonbeam-xcm-sdk">Using the Moonbeam XCM SDK</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Moonbeam XCM SDK enables developers to easily deposit and withdraw assets to Moonbeam/Moonriver from the relay chain and other parachains in the Polkadot/Kusama ecosystem. With the SDK, you don't need to worry about determining the multilocation of the origin or destination assets or which extrinsics are used on which networks to send XCM transfers. To deposit or withdraw assets, you simply define the asset and origin chain you want to deposit from or withdraw back to, along with the sending account's signer, and the amount to send.</p>
+<p>The XCM SDK offers simple helper functions like <code>deposit</code> and <code>withdraw</code>, that provide a very simple interface to execute XCM transfers between chains in the Polkadot/Kusama ecosystem. In addition, the XCM config package allows any parachain project to add their information in a standard way, so they can be immediately supported by the XCM SDK.</p>
+<p>For an overview of the available methods and interfaces in the Moonbeam XCM SDK, please refer to the <a href="../reference/interfaces/" target="_blank">Reference</a> page.</p>
+<p>The examples in this guide are shown on Moonbeam, but can be adapted to be used on Moonriver or Moonbase Alpha.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>To get started with the XCM SDK, you'll first need to install the corresponding NPM package. Next, you'll also need to create signers to be used to sign transactions to transfer assets between Moonbeam and another chain within the Polkadot ecosystem. Lastly, you'll need to initialize the API which will provide you with asset and chain information and the necessary functions to deposit, withdraw, and subscribe to balance information.</p>
+<h3 id="installation">Installation</h3>
+<p>For the purposes of this guide you'll need to install two packages: the XCM SDK package, and the XCM config package.</p>
+<p>The XCM SDK package will enable you to easily deposit and withdraw assets, and subscribe to balance information for each of the supported assets.</p>
+<p>The XCM config package will be used to obtain origin asset and chain information for each of the supported assets. The config package also includes native asset and chain information for each of the Moonbeam-based networks, as well as some underlying functions of the SDK.</p>
+<p>To install the XCM SDK and XCM config packages, you can run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>npm<span class="w"> </span>install<span class="w"> </span>@moonbeam-network/xcm-sdk<span class="w"> </span>@moonbeam-network/xcm-config
+</span></code></pre></div>
+<p>You need to have peer dependencies, like <a href="https://docs.ethers.org/" target="_blank">Ethers.js</a> and the <a href="https://polkadot.js.org/docs/api/" target="_blank">Polkadot.js API</a> installed.</p>
+<p>You can install them by running the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>npm<span class="w"> </span>i<span class="w"> </span>@polkadot/api-augment<span class="w"> </span>@polkadot/types<span class="w"> </span>@polkadot/util<span class="w"> </span>@polkadot/util-crypto<span class="w"> </span>ethers
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>There is a <a href="https://github.com/polkadot-js/api/issues/4315" target="_blank">known issue</a> when using the Moonbeam XCM packages alongside Polkadot.js with Node.js (JavaScript) that will cause package conflict warnings to appear in the console. Using TypeScript is recommended.</p>
+<h3 creating-signers="creating-signers" id="creating-signers">Creating Signers</h3>
+<p>When interacting with the <code>deposit</code> and <code>withdraw</code> functions of the XCM SDK, you'll need to provide an <a href="https://docs.ethers.org/" target="_blank">Ethers.js</a> and <a href="https://polkadot.js.org/docs/api/" target="_blank">Polkadot.js</a> signer, which will be used to sign and send the transactions. The Ethers signer is used to sign transactions on Moonbeam, and the Polkadot signer will be used to sign transactions on the origin chain you're depositing assets from.</p>
+<p>You can pass, for example, a <a href="https://docs.ethers.org/v6/getting-started/#starting-connecting" target="_blank">MetaMask signer into Ethers</a> or another compatible wallet. Similarly with Polkadot, you can <a href="https://polkadot.js.org/docs/extension/" target="_blank">pass a compatible wallet to the signer using the <code>@polkadot/extension-dapp</code> library</a>.</p>
+<p>To create a signer for Ethers.js and Polkadot.js, you can refer to the following code snippets. In this example, you can use a Polkadot.js Keyring to sign transactions on the origin chain for deposits. Please note that this approach is not recommended for production applications. <strong>Never store your private key or mnemonic in a JavaScript or TypeScript file.</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Moonbeam</label><label for="__tabbed_1_2">Moonriver</label><label for="__tabbed_1_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ethers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;ethers&#39;</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Keyring</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@polkadot/api&#39;</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">// Set up Ethers provider and signer</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">providerRPC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nx">moonbeam</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;moonbeam&#39;</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nx">rpc</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;{{ networks.moonbeam.rpc_url }}&#39;</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="nx">networks</span><span class="p">.</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">chain_id</span><span class="w"> </span><span class="p">}},</span><span class="w"> </span><span class="c1">// {{ networks.moonbeam.hex_chain_id }} in hex,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">};</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">JsonRpcProvider</span><span class="p">(</span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">rpc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">chainId</span><span class="p">,</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">});</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="kd">const</span><span class="w"> </span><span class="nx">ethersSigner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">Wallet</span><span class="p">(</span><span class="s1">&#39;INSERT_PRIVATE_KEY&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">provider</span><span class="p">);</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1">// Set up Polkadot keyring</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="kd">const</span><span class="w"> </span><span class="nx">keyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Keyring</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sr25519&#39;</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadotKeyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keyring</span><span class="p">.</span><span class="nx">addFromUri</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ethers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;ethers&#39;</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Keyring</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@polkadot/api&#39;</span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">// Set up Ethers provider and signer</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">providerRPC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nx">moonriver</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;moonriver&#39;</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">rpc</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;{{ networks.moonriver.rpc_url }}&#39;</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="nx">networks</span><span class="p">.</span><span class="nx">moonriver</span><span class="p">.</span><span class="nx">chain_id</span><span class="w"> </span><span class="p">}},</span><span class="w"> </span><span class="c1">// {{ networks.moonriver.hex_chain_id }} in hex,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">};</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">JsonRpcProvider</span><span class="p">(</span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonriver</span><span class="p">.</span><span class="nx">rpc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonriver</span><span class="p">.</span><span class="nx">chainId</span><span class="p">,</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonriver</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">});</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="kd">const</span><span class="w"> </span><span class="nx">ethersSigner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">Wallet</span><span class="p">(</span><span class="s1">&#39;INSERT_PRIVATE_KEY&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">provider</span><span class="p">);</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1">// Set up Polkadot keyring</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="kd">const</span><span class="w"> </span><span class="nx">keyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Keyring</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sr25519&#39;</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadotKeyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keyring</span><span class="p">.</span><span class="nx">addFromUri</span><span class="p">(</span><span class="s1">&#39;INSERT_MNEMONIC&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ethers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;ethers&#39;</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Keyring</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@polkadot/api&#39;</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">// Set up Ethers provider and signer</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">providerRPC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nx">moonbase</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;moonbase-alpha&#39;</span><span class="p">,</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nx">rpc</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;{{ networks.moonbase.rpc_url }}&#39;</span><span class="p">,</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="nx">networks</span><span class="p">.</span><span class="nx">moonbase</span><span class="p">.</span><span class="nx">chain_id</span><span class="w"> </span><span class="p">}},</span><span class="w"> </span><span class="c1">// {{ networks.moonbase.hex_chain_id }} in hex,</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">};</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">JsonRpcProvider</span><span class="p">(</span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonbase</span><span class="p">.</span><span class="nx">rpc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonbase</span><span class="p">.</span><span class="nx">chainId</span><span class="p">,</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">providerRPC</span><span class="p">.</span><span class="nx">moonbase</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">});</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="kd">const</span><span class="w"> </span><span class="nx">ethersSigner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ethers</span><span class="p">.</span><span class="nx">Wallet</span><span class="p">(</span><span class="s1">&#39;INSERT_PRIVATE_KEY&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">provider</span><span class="p">);</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1">// Set up Polkadot keyring</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="kd">const</span><span class="w"> </span><span class="nx">keyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Keyring</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sr25519&#39;</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadotKeyring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keyring</span><span class="p">.</span><span class="nx">addFromUri</span><span class="p">(</span><span class="s1">&#39;INSERT_MNEMONIC&#39;</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="initializing">Initialization</h3>
+<p>To be able to deposit, withdraw, and subscribe to balance information for all of the supported assets, you'll need to start off by importing the <code>init</code> function from the XCM SDK and call it:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Moonbeam</label><label for="__tabbed_2_2">Moonriver</label><label for="__tabbed_2_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">moonbeam</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">init</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">moonriver</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">init</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">moonbase</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">init</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>If you intend to support a specific wallet, you can pass a signer into the <code>init</code> function right away. Otherwise, you'll be able to pass a signer directly when building the transfer data for a deposit or withdraw. To pass in a signer for <a href="https://docs.moonbeam.network/builders/build/eth-api/libraries/ethersjs" target="_blank">Ethers</a> and <a href="https://docs.moonbeam.network/builders/build/substrate-api/polkadot-js-api" target="_blank">Polkadot</a>, you can use the following snippet:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Moonbeam</label><label for="__tabbed_3_2">Moonriver</label><label for="__tabbed_3_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">moonbeam</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">init</span><span class="p">({</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nx">ethersSigner</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;INSERT_ETHERS_SIGNER&#39;</span><span class="p">,</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nx">polkadotSigner</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;INSERT_POLKADOT_SIGNER&#39;</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">moonriver</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">init</span><span class="p">({</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nx">ethersSigner</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;INSERT_ETHERS_SIGNER&#39;</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nx">polkadotSigner</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;INSERT_POLKADOT_SIGNER&#39;</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">moonbase</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">init</span><span class="p">({</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nx">ethersSigner</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;INSERT_ETHERS_SIGNER&#39;</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nx">polkadotSigner</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;INSERT_POLKADOT_SIGNER&#39;</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="using-the-api">Using the SDK Interfaces</h2>
+<p>The Moonbeam SDK provides an API which includes a series of <a href="../reference/interfaces/#core-sdk-interfaces" target="_blank">interfaces</a> to get asset information for each of the supported assets, chain information for the initialized network, and functions to enable deposits, withdrawals, and subscription to balance information.</p>
+<p>Make sure you have <a href="#initializing">initialized</a> the Moonbeam network you want to interact with first.</p>
+<h3 id="symbols">Asset Symbols</h3>
+<p>An asset symbol refers to the symbol of the asset on the origin chain. For example, <code>GLMR</code> is the native asset on Moonbeam.</p>
+<p>To get a list of the supported asset symbols for each network, you can access the <code>symbols</code> property:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Moonbeam</label><label for="__tabbed_4_2">Moonriver</label><label for="__tabbed_4_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">symbols</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">moonriver</span><span class="p">.</span><span class="nx">symbols</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nx">moonbase</span><span class="p">.</span><span class="nx">symbols</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>An example of the data contained in the <code>symbols</code> property is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">[</span><span class="s1">&#39;ACA&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ASTR&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;AUSD&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DOT&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;GLMR&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;IBTC&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INTR&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PARA&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PHA&#39;</span><span class="p">];</span>
+</span></code></pre></div>
+<h3 id="assets">Assets</h3>
+<p>To get a list of the supported assets along with their asset ID, precompiled contract address on Moonbeam, and their origin asset symbols, you can access the <code>assets</code> property:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Moonbeam</label><label for="__tabbed_5_2">Moonriver</label><label for="__tabbed_5_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">assets</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nx">moonriver</span><span class="p">.</span><span class="nx">assets</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nx">moonbase</span><span class="p">.</span><span class="nx">assets</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>An example of the data contained in the <code>assets</code> property is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nx">assets</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nx">ACA</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;224821240862170613278369189818311486111&#39;</span><span class="p">,</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0xffffffffa922fef94566104a6e5a35a4fcddaa9f&#39;</span><span class="p">,</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ACA&#39;</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="nx">ASTR</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;224077081838586484055667086558292981199&#39;</span><span class="p">,</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0xffffffffa893ad19e540e172c10d78d4d479b5cf&#39;</span><span class="p">,</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">    </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ASTR&#39;</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">  </span><span class="p">...</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Where the <code>id</code> refers to the asset ID, the <code>erc20id</code> refers to the asset's precompiled contract address, and the <code>originSymbol</code> refers to the asset's symbol on the origin chain.</p>
+<h3 id="native-assets">Moonbeam Native Asset Data</h3>
+<p>To get information about each of the Moonbeam network's native protocol asset, such as the <a href="https://docs.moonbeam.network/builders/pallets-precompiles/precompiles/erc20" target="_blank">precompile contract address</a> and the origin symbol, you can access the <code>moonAsset</code> property:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:3"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Moonbeam</label><label for="__tabbed_6_2">Moonriver</label><label for="__tabbed_6_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">moonAsset</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nx">moonriver</span><span class="p">.</span><span class="nx">moonAsset</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nx">moonbase</span><span class="p">.</span><span class="nx">moonAsset</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>An example of the data contained in the <code>moonAsset</code> property is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nx">moonAsset</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;{{ networks.moonbeam.precompiles.erc20 }}&#39;</span><span class="p">,</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">  </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GLMR&#39;</span><span class="p">,</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">  </span><span class="nx">isNative</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Where the <code>erc20Id</code> refers to the precompile contract address on Moonbeam, the <code>originSymbol</code> is the symbol for the native asset, and <code>isNative</code> is a boolean indicating whether the asset is a native asset.</p>
+<h3 id="native-chain-data">Moonbeam Native Chain Data</h3>
+<p>To get information about each of the Moonbeam network's chain information including the chain key, name, WSS endpoint, parachain ID, protocol asset symbols, chain ID, and units per second, you can access the <code>moonChain</code> property:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Moonbeam</label><label for="__tabbed_7_2">Moonriver</label><label for="__tabbed_7_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">moonChain</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nx">moonriver</span><span class="p">.</span><span class="nx">moonChain</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nx">moonbase</span><span class="p">.</span><span class="nx">moonChain</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>An example of the data contained in the <code>moonChain</code> property is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nx">moonChain</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Moonbeam&#39;</span><span class="p">,</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Moonbeam&#39;</span><span class="p">,</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">  </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://wss.api.moonbeam.network&#39;</span><span class="p">,</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">2004</span><span class="p">,</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">  </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">18</span><span class="p">,</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span><span class="nx">chainId</span><span class="o">:</span><span class="w"> </span><span class="mf">1284</span><span class="p">,</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">  </span><span class="nx">unitsPerSecond</span><span class="o">:</span><span class="w"> </span><span class="mi">10000000000000000000n</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Here, the units per second refer to units of token (in this case Wei) that is charged per second of execution of the XCM message. You can find more information in the <a href="https://docs.moonbeam.network/builders/interoperability/xcm/core-concepts/weights-fees/#moonbeam-reserve-assets" target="_blank">XCM fees page</a>.</p>
+<h2 id="using-the-sdk-methods">Using the SDK Methods</h2>
+<p>The Moonbeam SDK provides an API that includes <a href="../reference/methods/#core-sdk-methods" target="_blank">functions</a> which enable deposits, withdrawals, and subscription to balance information, in addition to a few utility functions.</p>
+<p>Make sure you have <a href="#initializing">initialized</a> the Moonbeam network you want to interact with first. You'll also need to make sure you've <a href="#creating-signers">created signers</a> in order to sign and send deposit and withdraw transfer data.</p>
+<h3 id="deposit">Deposit</h3>
+<p>To deposit an asset to Moonbeam from another network, you'll have to first build the transfer data using information from the origin chain before you can send it. You'll need to use a series of deposit methods to build the transfer data.</p>
+<p>The process for building and sending a deposit transfer data is as follows:</p>
+<ol>
+<li>Call the <code>deposit</code> function and pass in the <a href="#asset-symbols">asset symbol</a> or the <a href="#assets">asset object</a> for the asset to be deposited. This will return a <a href="#chains-deposit"><code>chains</code> array</a> containing the asset's origin network information and a <code>from</code> function which will be used to build the transfer data</li>
+<li>Call the <code>from</code> function and pass in the chain key or the chain object of the origin network. You can get the chain object from the <code>chains</code> array returned from the <code>deposit</code> function. You can get the chain key one of two ways: by accessing the key property of the chain object (<code>chain.key</code>) or by directly importing <code>ChainKey</code> from the XCM config package (as seen in the example below)</li>
+<li>Call <code>get</code> and pass in the address of the account on Moonbeam you want to deposit the funds to and a signer or Polkadot address depending on how your code is configured, please refer to the <a href="#get-deposit">Get</a> section for more information. For the purposes of this guide, you'll need to pass in a Polkadot.js <code>Keyring</code> to sign the transaction as created in the <a href="#creating-signers">Creating Signers</a> section. The <code>get</code> function returns a <code>send</code> function which already contains all the necessary info to perform the deposit, and it is used in the next step. In addition, other elements such as information about the origin chain asset and the <code>xc</code> representation of the asset on Moonbeam are returned and might be important for logging purposes</li>
+<li>The <code>send</code> function is used to send the built deposit transfer data along with the amount to send. You can optionally provide a callback function to handle the extrinsic events</li>
+</ol>
+<p>To obtain some of the data required to build the deposit transfer data, such as the asset symbol and chain key of the origin network, you can import <code>AssetSymbol</code> and <code>ChainKey</code> from the <code>@moonbeam-network/xcm-config</code> package.</p>
+<p>An example of the steps described above to deposit DOT from the Polkadot relay chain to xcDOT on Moonbeam is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">deposit</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">chains</span><span class="p">,</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="w">    </span><span class="sb">`\nYou can deposit </span><span class="si">${</span><span class="nx">dot</span><span class="si">}</span><span class="sb"> from these chains: `</span><span class="p">,</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="w">    </span><span class="nx">chains</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">chain</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">chain</span><span class="p">.</span><span class="nx">name</span><span class="p">),</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">asset</span><span class="p">,</span><span class="w"> </span><span class="nx">sourceBalance</span><span class="p">,</span><span class="w"> </span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span>
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="w">    </span><span class="s1">&#39;INSERT_MOONBEAM_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a><span class="w">    </span><span class="nx">polkadotKeyring</span><span class="p">,</span><span class="w"> </span><span class="c1">// See the Get section for other accepted arguments</span>
+</span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a><span class="w">    </span><span class="sb">`Your </span><span class="si">${</span><span class="nx">asset</span><span class="p">.</span><span class="nx">originSymbol</span><span class="si">}</span><span class="sb"> balance in </span><span class="si">${</span><span class="nx">source</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a><span class="w">      </span><span class="nx">sourceBalance</span><span class="p">,</span>
+</span><span id="__span-27-22"><a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a><span class="w">      </span><span class="nx">asset</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-27-23"><a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a><span class="w">    </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb">. Minimum transferable amount is: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-27-24"><a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a><span class="w">      </span><span class="nx">min</span><span class="p">,</span>
+</span><span id="__span-27-25"><a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a><span class="w">      </span><span class="nx">asset</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-27-26"><a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a><span class="w">    </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span><span id="__span-27-27"><a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-27-28"><a id="__codelineno-27-28" name="__codelineno-27-28" href="#__codelineno-27-28"></a>
+</span><span id="__span-27-29"><a id="__codelineno-27-29" name="__codelineno-27-29" href="#__codelineno-27-29"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;INSERT_AMOUNT&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">));</span>
+</span><span id="__span-27-30"><a id="__codelineno-27-30" name="__codelineno-27-30" href="#__codelineno-27-30"></a><span class="p">}</span>
+</span><span id="__span-27-31"><a id="__codelineno-27-31" name="__codelineno-27-31" href="#__codelineno-27-31"></a>
+</span><span id="__span-27-32"><a id="__codelineno-27-32" name="__codelineno-27-32" href="#__codelineno-27-32"></a><span class="nx">deposit</span><span class="p">();</span>
+</span></code></pre></div>
+<h4 id="chains-deposit">Chains</h4>
+<p>As previously mentioned, the <code>deposit</code> function returns a <code>chains</code> array and a <a href="#from"><code>from</code> function</a>. The <code>chains</code> array corresponds to the chains you can deposit the given asset from (for the asset that was initially passed into the <code>deposit</code> function). An example of the <code>chains</code> array is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nx">chains</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">    </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://rpc.polkadot.io&#39;</span><span class="p">,</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="nx">weight</span><span class="o">:</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">,</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">    </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="p">];</span>
+</span></code></pre></div>
+<h4 id="from">From</h4>
+<p>The <code>from</code> function requires a chain key to be passed into it for the origin chain in which the assets are sent from and returns a <code>get</code> function.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="p">...</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">);</span>
+</span></code></pre></div>
+<h4 id="get-deposit">Get</h4>
+<p>The <code>get</code> function requires that you pass in the receiving account on Moonbeam and a <a href="https://docs.moonbeam.network/builders/build/substrate-api/polkadot-js-api" target="_blank">Polkadot signer</a> or the sending account on Polkadot depending on how you set up your Polkadot signer, and it gets the data required for the deposit.</p>
+<p>If you have a Polkadot compatible signer, you can pass the signer into the <code>init</code> function, then in the <code>get</code> function you can pass the Polkadot address for the second argument:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="p">...</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span>
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="w">  </span><span class="s1">&#39;INSERT_MOONBEAM_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="w">  </span><span class="s1">&#39;INSERT_POLKADOT_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>If you have a Polkadot compatible signer but haven't passed it into the <code>init</code> function, then in the <code>get</code> function you can pass in the Polkadot address for the second argument and the Polkadot signer for the third argument:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="p">...</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span>
+</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">  </span><span class="s1">&#39;INSERT_MOONBEAM_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">  </span><span class="s1">&#39;INSERT_POLKADOT_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">polkadotSigner</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>If you have a Polkadot Keyring pair, as originally was set up in the <a href="#initializing">Initialization</a> section, you'll pass in the <code>polkadotKeyring</code> as the second parameter:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="p">...</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="w">  </span><span class="s1">&#39;INSERT_MOONBEAM_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a><span class="w">  </span><span class="nx">polkadotKeyring</span><span class="p">,</span>
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>An example of the response for calling <code>get</code> to send DOT from Polkadot to Moonbeam is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">{</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;42259045809535163221576417993425387648&#39;</span><span class="p">,</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">    </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0xffffffff1fcacbd218edc0eba20fc2308c778080&#39;</span><span class="p">,</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">    </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;DOT&#39;</span><span class="p">,</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">    </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="w">  </span><span class="nx">existentialDeposit</span><span class="o">:</span><span class="w"> </span><span class="mi">10000000000n</span><span class="p">,</span>
+</span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mi">33068783n</span><span class="p">,</span>
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="w">  </span><span class="nx">moonChainFee</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="w">    </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mi">33068783n</span><span class="p">,</span>
+</span><span id="__span-33-12"><a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="w">    </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+</span><span id="__span-33-13"><a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a><span class="w">    </span><span class="nx">symbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;DOT&#39;</span>
+</span><span id="__span-33-14"><a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-33-15"><a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a><span class="w">  </span><span class="kr">native</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-16"><a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;42259045809535163221576417993425387648&#39;</span><span class="p">,</span>
+</span><span id="__span-33-17"><a id="__codelineno-33-17" name="__codelineno-33-17" href="#__codelineno-33-17"></a><span class="w">    </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0xffffffff1fcacbd218edc0eba20fc2308c778080&#39;</span><span class="p">,</span>
+</span><span id="__span-33-18"><a id="__codelineno-33-18" name="__codelineno-33-18" href="#__codelineno-33-18"></a><span class="w">    </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;DOT&#39;</span><span class="p">,</span>
+</span><span id="__span-33-19"><a id="__codelineno-33-19" name="__codelineno-33-19" href="#__codelineno-33-19"></a><span class="w">    </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+</span><span id="__span-33-20"><a id="__codelineno-33-20" name="__codelineno-33-20" href="#__codelineno-33-20"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-33-21"><a id="__codelineno-33-21" name="__codelineno-33-21" href="#__codelineno-33-21"></a><span class="w">  </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-22"><a id="__codelineno-33-22" name="__codelineno-33-22" href="#__codelineno-33-22"></a><span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-33-23"><a id="__codelineno-33-23" name="__codelineno-33-23" href="#__codelineno-33-23"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-33-24"><a id="__codelineno-33-24" name="__codelineno-33-24" href="#__codelineno-33-24"></a><span class="w">    </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://rpc.polkadot.io&#39;</span><span class="p">,</span>
+</span><span id="__span-33-25"><a id="__codelineno-33-25" name="__codelineno-33-25" href="#__codelineno-33-25"></a><span class="w">    </span><span class="nx">weight</span><span class="o">:</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">,</span>
+</span><span id="__span-33-26"><a id="__codelineno-33-26" name="__codelineno-33-26" href="#__codelineno-33-26"></a><span class="w">    </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+</span><span id="__span-33-27"><a id="__codelineno-33-27" name="__codelineno-33-27" href="#__codelineno-33-27"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-33-28"><a id="__codelineno-33-28" name="__codelineno-33-28" href="#__codelineno-33-28"></a><span class="w">  </span><span class="nx">source</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-29"><a id="__codelineno-33-29" name="__codelineno-33-29" href="#__codelineno-33-29"></a><span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-33-30"><a id="__codelineno-33-30" name="__codelineno-33-30" href="#__codelineno-33-30"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-33-31"><a id="__codelineno-33-31" name="__codelineno-33-31" href="#__codelineno-33-31"></a><span class="w">    </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://rpc.polkadot.io&#39;</span><span class="p">,</span>
+</span><span id="__span-33-32"><a id="__codelineno-33-32" name="__codelineno-33-32" href="#__codelineno-33-32"></a><span class="w">    </span><span class="nx">weight</span><span class="o">:</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">,</span>
+</span><span id="__span-33-33"><a id="__codelineno-33-33" name="__codelineno-33-33" href="#__codelineno-33-33"></a><span class="w">    </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+</span><span id="__span-33-34"><a id="__codelineno-33-34" name="__codelineno-33-34" href="#__codelineno-33-34"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-33-35"><a id="__codelineno-33-35" name="__codelineno-33-35" href="#__codelineno-33-35"></a><span class="w">  </span><span class="nx">sourceBalance</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span>
+</span><span id="__span-33-36"><a id="__codelineno-33-36" name="__codelineno-33-36" href="#__codelineno-33-36"></a><span class="w">  </span><span class="nx">sourceFeeBalance</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-33-37"><a id="__codelineno-33-37" name="__codelineno-33-37" href="#__codelineno-33-37"></a><span class="w">  </span><span class="nx">sourceMinBalance</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span>
+</span><span id="__span-33-38"><a id="__codelineno-33-38" name="__codelineno-33-38" href="#__codelineno-33-38"></a><span class="w">  </span><span class="nx">getFee</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">AsyncFunction</span><span class="o">:</span><span class="w"> </span><span class="nx">getFee</span><span class="p">],</span>
+</span><span id="__span-33-39"><a id="__codelineno-33-39" name="__codelineno-33-39" href="#__codelineno-33-39"></a><span class="w">  </span><span class="nx">send</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">AsyncFunction</span><span class="o">:</span><span class="w"> </span><span class="nx">send</span><span class="p">]</span>
+</span><span id="__span-33-40"><a id="__codelineno-33-40" name="__codelineno-33-40" href="#__codelineno-33-40"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Where the returned values are as follows:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Value</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>asset</code></td>
+<td style="text-align: center;">the <a href="#assets">asset</a> to be transferred</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>existentialDeposit</code></td>
+<td style="text-align: center;">the <a href="https://support.polkadot.network/support/solutions/articles/65000168651-what-is-the-existential-deposit-#:~:text=On%20the%20Polkadot%20network%2C%20an,the%20Existential%20Deposit%20(ED)." target="_blank">existential deposit</a>, or the minimum amount an address must <br> hold to be considered active if one exists, otherwise <code>0n</code> is returned</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>min</code></td>
+<td style="text-align: center;">the minimum transferrable amount</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>moonChainFee</code></td>
+<td style="text-align: center;">the <a href="#assets">asset</a> and amount that is needed to pay for Moonbeam's XCM fees. <br> If different from the <code>asset</code> to be transferred, the fee will be sent in this <br> asset in addition to the <code>asset</code> to be transferred (as of <a href="https://github.com/moonbeam-foundation/xcm-sdk/releases/tag/v0.4.0" target="_blank">v0.4.0</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>native</code></td>
+<td style="text-align: center;">the native <a href="#assets">asset</a> of the source chain</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>origin</code></td>
+<td style="text-align: center;">the chain information for where the asset being transferred natively originates from</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>source</code></td>
+<td style="text-align: center;">the chain information for where the asset being transferred is sent from</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>sourceBalance</code></td>
+<td style="text-align: center;">the balance of the asset being transferred on the source chain</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>sourceFeeBalance</code></td>
+<td style="text-align: center;">the balance in the source chain's native asset to pay a fee for the asset <br> to be transferred if applicable, otherwise <code>undefined</code> is returned</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>sourceMinBalance</code></td>
+<td style="text-align: center;">the minimum balance of the asset being transferred on the source chain</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>getFee</code></td>
+<td style="text-align: center;">a function that <a href="#get-fee-deposit">estimates the fees</a> for withdrawing a given amount</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>send</code></td>
+<td style="text-align: center;">a function that <a href="#send-deposit">sends</a> the deposit transfer data</td>
+</tr>
+</tbody>
+</table>
+<h4 id="send-deposit">Send</h4>
+<p>When calling <code>send</code>, you will actually send the deposit transfer data that has been built using the <code>deposit</code>, <code>from</code>, and <code>get</code> functions. You simply have to pass in a specified amount to send and an optional callback for handling the extrinsic event. For example, entering <code>10000000000n</code> will send <code>1</code> DOT from Polkadot to Moonbeam, as DOT has 10 decimals.</p>
+<p>You can refer back to the example in the <a href="#deposit">Deposit</a> section to see how the <code>send</code> function is used.</p>
+<h4 id="get-fee-deposit">Get Fee</h4>
+<p>The <code>getFee</code> function estimates the fees for transferring a given amount of the asset specified in the <code>deposit</code> function. An example of getting the fee in Polkadot for transferring DOT to Moonbeam is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">toDecimal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-utils&#39;</span><span class="p">;</span>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="c1">// ...</span>
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>
+</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getDepositFee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>
+</span><span id="__span-34-11"><a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">asset</span><span class="p">,</span><span class="w"> </span><span class="nx">getFee</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span>
+</span><span id="__span-34-13"><a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="w">    </span><span class="s1">&#39;INSERT_MOONBEAM_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-34-14"><a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a><span class="w">    </span><span class="nx">polkadotKeyring</span><span class="p">,</span><span class="w"> </span><span class="c1">// See the Get section for other accepted arguments</span>
+</span><span id="__span-34-15"><a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-34-16"><a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a>
+</span><span id="__span-34-17"><a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">fee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getFee</span><span class="p">(</span><span class="s1">&#39;INSERT_AMOUNT&#39;</span><span class="p">);</span>
+</span><span id="__span-34-18"><a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-34-19"><a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a><span class="w">    </span><span class="sb">`Fee to deposit is estimated to be: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-34-20"><a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a><span class="w">      </span><span class="nx">fee</span><span class="p">,</span>
+</span><span id="__span-34-21"><a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a><span class="w">      </span><span class="nx">asset</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-34-22"><a id="__codelineno-34-22" name="__codelineno-34-22" href="#__codelineno-34-22"></a><span class="w">    </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">dot</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span><span id="__span-34-23"><a id="__codelineno-34-23" name="__codelineno-34-23" href="#__codelineno-34-23"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-34-24"><a id="__codelineno-34-24" name="__codelineno-34-24" href="#__codelineno-34-24"></a><span class="p">}</span>
+</span><span id="__span-34-25"><a id="__codelineno-34-25" name="__codelineno-34-25" href="#__codelineno-34-25"></a>
+</span><span id="__span-34-26"><a id="__codelineno-34-26" name="__codelineno-34-26" href="#__codelineno-34-26"></a><span class="nx">getDepositFee</span><span class="p">();</span>
+</span></code></pre></div>
+<h3 id="withdraw">Withdraw</h3>
+<p>To withdraw an asset from Moonbeam to send back to the origin network, you'll have to first build the transfer data using information from the origin chain before you can send it. To do so, you'll take the following steps:</p>
+<ol>
+<li>Call the <code>withdraw</code> function and pass in the <a href="#asset-symbols">asset symbol</a> or the <a href="#assets">asset object</a>. This will return a <a href="#chains-withdraw"><code>chains</code> array</a> containing the asset's origin network information and a <code>to</code> function which will be used to build the transfer data</li>
+<li>Call the <code>to</code> function and pass in the chain key of the origin network. You can get the chain object from the <code>chains</code> array returned from the <code>withdraw</code> function. You can get the chain key one of two ways: by accessing the key property of the chain object (<code>chain.key</code>) or by directly importing <code>ChainKey</code> from the XCM config package (as seen in the example below)</li>
+<li>Call <code>get</code> and pass in the address of the account on the origin network you want to withdraw the funds from and pass in the <a href="#creating-signers">Ethers signer</a> if you haven't already done so during <a href="#initializing">intialization</a>. This will return information about the origin (destination) chain asset, the <code>xc</code> representation of the asset on Moonbeam. This will return a <code>send</code> function which already contains all the necessary info to perform the withdrawal, and it is used in the next step. In addition, other elements, such as information about the asset, are returned and might be important for logging purposes</li>
+<li>The <code>send</code> function is used to send the built withdraw transfer data along with the amount to send. You can optionally provide a callback function to handle the extrinsic events</li>
+</ol>
+<p>To obtain some of the data required to build the withdraw transfer data, such as the asset symbol and chain key of the origin network, you can import <code>AssetSymbol</code> and <code>ChainKey</code> from the <code>@moonbeam-network/xcm-config</code> package.</p>
+<p>An example of the steps described above to withdraw xcDOT from Moonbeam to send back to DOT on Polkadot is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">withdraw</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">chains</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">    </span><span class="sb">`\nYou can withdraw </span><span class="si">${</span><span class="nx">dot</span><span class="si">}</span><span class="sb"> to these chains: `</span><span class="p">,</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">    </span><span class="nx">chains</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">chain</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">chain</span><span class="p">.</span><span class="nx">name</span><span class="p">),</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a>
+</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">asset</span><span class="p">,</span><span class="w"> </span><span class="nx">destination</span><span class="p">,</span><span class="w"> </span><span class="nx">destinationBalance</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">to</span><span class="p">(</span>
+</span><span id="__span-35-15"><a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="w">    </span><span class="nx">polkadot</span><span class="p">,</span>
+</span><span id="__span-35-16"><a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="w">  </span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;INSERT_POLKADOT_ADDRESS&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-17"><a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="w">    </span><span class="nx">ethersSigner</span><span class="o">:</span><span class="w"> </span><span class="nx">signer</span><span class="p">,</span><span class="w"> </span><span class="c1">// Only required if you didn&#39;t pass the signer in on initialization</span>
+</span><span id="__span-35-18"><a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-35-19"><a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a>
+</span><span id="__span-35-20"><a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-35-21"><a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a><span class="w">    </span><span class="sb">`Your </span><span class="si">${</span><span class="nx">asset</span><span class="p">.</span><span class="nx">originSymbol</span><span class="si">}</span><span class="sb"> balance in </span><span class="si">${</span><span class="nx">destination</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-35-22"><a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a><span class="w">      </span><span class="nx">destinationBalance</span><span class="p">,</span>
+</span><span id="__span-35-23"><a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a><span class="w">      </span><span class="nx">asset</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-35-24"><a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="w">    </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb">. Minimum transferable amount is: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-35-25"><a id="__codelineno-35-25" name="__codelineno-35-25" href="#__codelineno-35-25"></a><span class="w">      </span><span class="nx">min</span><span class="p">,</span>
+</span><span id="__span-35-26"><a id="__codelineno-35-26" name="__codelineno-35-26" href="#__codelineno-35-26"></a><span class="w">      </span><span class="nx">asset</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-35-27"><a id="__codelineno-35-27" name="__codelineno-35-27" href="#__codelineno-35-27"></a><span class="w">    </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span><span id="__span-35-28"><a id="__codelineno-35-28" name="__codelineno-35-28" href="#__codelineno-35-28"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-35-29"><a id="__codelineno-35-29" name="__codelineno-35-29" href="#__codelineno-35-29"></a>
+</span><span id="__span-35-30"><a id="__codelineno-35-30" name="__codelineno-35-30" href="#__codelineno-35-30"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;INSERT_AMOUNT&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">));</span>
+</span><span id="__span-35-31"><a id="__codelineno-35-31" name="__codelineno-35-31" href="#__codelineno-35-31"></a><span class="p">}</span>
+</span><span id="__span-35-32"><a id="__codelineno-35-32" name="__codelineno-35-32" href="#__codelineno-35-32"></a>
+</span><span id="__span-35-33"><a id="__codelineno-35-33" name="__codelineno-35-33" href="#__codelineno-35-33"></a><span class="nx">withdraw</span><span class="p">();</span>
+</span></code></pre></div>
+<h4 id="chains-withdraw">Chains</h4>
+<p>As previously mentioned, the <code>withdraw</code> function returns a <code>chains</code> array and a <code>to</code> function. The <code>chains</code> array corresponds to the chains you can withdraw the given asset from (for the asset that was initially passed into the <code>withdraw</code> function). An example of the <code>chains</code> array is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nx">chains</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">    </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://rpc.polkadot.io&#39;</span><span class="p">,</span>
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="w">    </span><span class="nx">weight</span><span class="o">:</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">,</span>
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="w">    </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="p">];</span>
+</span></code></pre></div>
+<h4 id="to">To</h4>
+<p>The <code>to</code> function requires a chain key to be passed into it for the origin chain in which the assets are being withdrawn back to and returns a <code>get</code> function.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="p">...</span>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="nx">to</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">);</span>
+</span></code></pre></div>
+<h4 id="get-withdraw">Get</h4>
+<p>The <code>get</code> function requires that you pass in the receiving account on the destination chain and the <a href="#creating-signers">Ethers signer</a> for the sending account on Moonbeam, and it gets the data required for the withdraw.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="p">...</span>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">to</span><span class="p">(</span>
+</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="w">    </span><span class="nx">polkadot</span><span class="p">,</span>
+</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="w">  </span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;INSERT_POLKADOT_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-38-12"><a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">ethersSigner</span><span class="o">:</span><span class="w"> </span><span class="nx">signer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Only required if you didn&#39;t pass the signer in on initialization</span>
+</span><span id="__span-38-13"><a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>An example of the response for calling <code>get</code> to send xcDOT from Moonbeam back to DOT on Polkadot is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="p">{</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;42259045809535163221576417993425387648&#39;</span><span class="p">,</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="w">    </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0xffffffff1fcacbd218edc0eba20fc2308c778080&#39;</span><span class="p">,</span>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="w">    </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;DOT&#39;</span><span class="p">,</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="w">    </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-39-8"><a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="w">  </span><span class="nx">destination</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-9"><a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-39-10"><a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-39-11"><a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="w">    </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://rpc.polkadot.io&#39;</span><span class="p">,</span>
+</span><span id="__span-39-12"><a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a><span class="w">    </span><span class="nx">weight</span><span class="o">:</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">,</span>
+</span><span id="__span-39-13"><a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a><span class="w">    </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+</span><span id="__span-39-14"><a id="__codelineno-39-14" name="__codelineno-39-14" href="#__codelineno-39-14"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-39-15"><a id="__codelineno-39-15" name="__codelineno-39-15" href="#__codelineno-39-15"></a><span class="w">  </span><span class="nx">destinationBalance</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span>
+</span><span id="__span-39-16"><a id="__codelineno-39-16" name="__codelineno-39-16" href="#__codelineno-39-16"></a><span class="w">  </span><span class="nx">destinationFee</span><span class="o">:</span><span class="w"> </span><span class="mi">520000000n</span><span class="p">,</span>
+</span><span id="__span-39-17"><a id="__codelineno-39-17" name="__codelineno-39-17" href="#__codelineno-39-17"></a><span class="w">  </span><span class="nx">existentialDeposit</span><span class="o">:</span><span class="w"> </span><span class="mi">10000000000n</span><span class="p">,</span>
+</span><span id="__span-39-18"><a id="__codelineno-39-18" name="__codelineno-39-18" href="#__codelineno-39-18"></a><span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mi">10520000000n</span><span class="p">,</span>
+</span><span id="__span-39-19"><a id="__codelineno-39-19" name="__codelineno-39-19" href="#__codelineno-39-19"></a><span class="w">  </span><span class="nx">minXcmFeeAsset</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-20"><a id="__codelineno-39-20" name="__codelineno-39-20" href="#__codelineno-39-20"></a><span class="w">    </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span>
+</span><span id="__span-39-21"><a id="__codelineno-39-21" name="__codelineno-39-21" href="#__codelineno-39-21"></a><span class="w">    </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+</span><span id="__span-39-22"><a id="__codelineno-39-22" name="__codelineno-39-22" href="#__codelineno-39-22"></a><span class="w">    </span><span class="nx">symbol</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;DOT&quot;</span><span class="p">,</span>
+</span><span id="__span-39-23"><a id="__codelineno-39-23" name="__codelineno-39-23" href="#__codelineno-39-23"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-39-24"><a id="__codelineno-39-24" name="__codelineno-39-24" href="#__codelineno-39-24"></a><span class="w">  </span><span class="kr">native</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-25"><a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;42259045809535163221576417993425387648&#39;</span><span class="p">,</span>
+</span><span id="__span-39-26"><a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a><span class="w">    </span><span class="nx">erc20Id</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;0xffffffff1fcacbd218edc0eba20fc2308c778080&#39;</span><span class="p">,</span>
+</span><span id="__span-39-27"><a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a><span class="w">    </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;DOT&#39;</span><span class="p">,</span>
+</span><span id="__span-39-28"><a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a><span class="w">    </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+</span><span id="__span-39-29"><a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-39-30"><a id="__codelineno-39-30" name="__codelineno-39-30" href="#__codelineno-39-30"></a><span class="w">  </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-31"><a id="__codelineno-39-31" name="__codelineno-39-31" href="#__codelineno-39-31"></a><span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-39-32"><a id="__codelineno-39-32" name="__codelineno-39-32" href="#__codelineno-39-32"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Polkadot&#39;</span><span class="p">,</span>
+</span><span id="__span-39-33"><a id="__codelineno-39-33" name="__codelineno-39-33" href="#__codelineno-39-33"></a><span class="w">    </span><span class="nx">ws</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wss://rpc.polkadot.io&#39;</span><span class="p">,</span>
+</span><span id="__span-39-34"><a id="__codelineno-39-34" name="__codelineno-39-34" href="#__codelineno-39-34"></a><span class="w">    </span><span class="nx">weight</span><span class="o">:</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">,</span>
+</span><span id="__span-39-35"><a id="__codelineno-39-35" name="__codelineno-39-35" href="#__codelineno-39-35"></a><span class="w">    </span><span class="nx">parachainId</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+</span><span id="__span-39-36"><a id="__codelineno-39-36" name="__codelineno-39-36" href="#__codelineno-39-36"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-39-37"><a id="__codelineno-39-37" name="__codelineno-39-37" href="#__codelineno-39-37"></a><span class="w">  </span><span class="nx">originXcmFeeAssetBalance</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-39-38"><a id="__codelineno-39-38" name="__codelineno-39-38" href="#__codelineno-39-38"></a><span class="w">  </span><span class="nx">getFee</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">AsyncFunction</span><span class="o">:</span><span class="w"> </span><span class="nx">getFee</span><span class="p">],</span>
+</span><span id="__span-39-39"><a id="__codelineno-39-39" name="__codelineno-39-39" href="#__codelineno-39-39"></a><span class="w">  </span><span class="nx">send</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">AsyncFunction</span><span class="o">:</span><span class="w"> </span><span class="nx">send</span><span class="p">]</span>
+</span><span id="__span-39-40"><a id="__codelineno-39-40" name="__codelineno-39-40" href="#__codelineno-39-40"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Where the returned values are as follows:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Value</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>asset</code></td>
+<td style="text-align: center;">the <a href="#assets">asset</a> to be transferred</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>destination</code></td>
+<td style="text-align: center;">the chain information for where the asset is being transferred to</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>destinationBalance</code></td>
+<td style="text-align: center;">the balance of the asset being transferred on the destination chain</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>destinationFee</code></td>
+<td style="text-align: center;">the fee for the asset to be transferred on the destination chain</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>existentialDeposit</code></td>
+<td style="text-align: center;">the <a href="https://support.polkadot.network/support/solutions/articles/65000168651-what-is-the-existential-deposit-#:~:text=On%20the%20Polkadot%20network%2C%20an,the%20Existential%20Deposit%20(ED)." target="_blank">existential deposit</a>, or the minimum amount an address must <br> hold to be considered active if one exists, otherwise <code>0n</code> is returned</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>min</code></td>
+<td style="text-align: center;">the minimum transferable amount of the asset being transferred</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>minXcmFeeAsset</code></td>
+<td style="text-align: center;">the minimum transferable amount of the asset that needs to be sent along to pay for the fees</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>native</code></td>
+<td style="text-align: center;">the native <a href="#assets">asset</a> of the source chain</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>origin</code></td>
+<td style="text-align: center;">the chain information for where the asset being transferred natively originates from</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>originXcmFeeAssetBalance</code></td>
+<td style="text-align: center;">the balance in the origin account of the asset that is sent along with the transfer to pay for the fees, if any</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>getFee</code></td>
+<td style="text-align: center;">a function that <a href="#get-fee-withdraw">estimates the fees</a> for depositing a given amount</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>send</code></td>
+<td style="text-align: center;">a function that <a href="#send-withdraw">sends</a> the withdraw transfer data</td>
+</tr>
+</tbody>
+</table>
+<h4 id="send-withdraw">Send</h4>
+<p>When calling <code>send</code>, you will actually send the withdraw transfer data that has been built using the <code>withdraw</code>, <code>to</code>, and <code>get</code> functions. You simply have to pass in a specified amount to send and an optional callback for handling the extrinsic event. For example, entering <code>10000000000n</code> will send <code>1</code> xcDOT on Moonbeam back to DOT on Polkadot.</p>
+<p>You can refer back to the example in the <a href="#withdraw">Withdraw</a> section to see how the <code>send</code> function is used.</p>
+<h4 id="get-fee-withdraw">Get Fee</h4>
+<p>The <code>getFee</code> function estimates the fees for transferring a given amount of the asset specified in the <code>withdraw</code> function. An example of getting the fee in GLMR for transferring xcDOT from Moonbeam back to DOT on Polkadot is as follows:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">,</span><span class="w"> </span><span class="nx">ChainKey</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-config&#39;</span><span class="p">;</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">toDecimal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-utils&#39;</span><span class="p">;</span>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="c1">// ...</span>
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getWithdrawFee</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AssetSymbol</span><span class="p">.</span><span class="nx">DOT</span><span class="p">;</span>
+</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">polkadot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChainKey</span><span class="p">.</span><span class="nx">Polkadot</span><span class="p">;</span>
+</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>
+</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">asset</span><span class="p">,</span><span class="w"> </span><span class="nx">getFee</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="kr">from</span><span class="p">(</span><span class="nx">polkadot</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span>
+</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a><span class="w">    </span><span class="s1">&#39;INSERT_POLKADOT_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-40-14"><a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">ethersSigner</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// Only required if you didn&#39;t pass the signer in on initialization</span>
+</span><span id="__span-40-15"><a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-40-16"><a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a>
+</span><span id="__span-40-17"><a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">fee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getFee</span><span class="p">(</span><span class="s1">&#39;INSERT_AMOUNT&#39;</span><span class="p">);</span>
+</span><span id="__span-40-18"><a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-40-19"><a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a><span class="w">    </span><span class="sb">`Fee to deposit is estimated to be: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-40-20"><a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a><span class="w">      </span><span class="nx">fee</span><span class="p">,</span>
+</span><span id="__span-40-21"><a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a><span class="w">      </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">moonChain</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-40-22"><a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a><span class="w">    </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">moonAsset</span><span class="p">.</span><span class="nx">originSymbol</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span><span id="__span-40-23"><a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-40-24"><a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a><span class="p">}</span>
+</span><span id="__span-40-25"><a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a>
+</span><span id="__span-40-26"><a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a><span class="nx">getWithdrawFee</span><span class="p">();</span>
+</span></code></pre></div>
+<h3 id="subscribe">Subscribe to Assets Balance Information</h3>
+<p>To subscribe to balance information and get a given account's latest balance for each of the supported assets, you can use the <code>subscribeToAssetsBalanceInfo</code> function and pass in the address you want to get the balance for and a callback function to handle the data:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Moonbeam</label><label for="__tabbed_8_2">Moonriver</label><label for="__tabbed_8_3">Moonbase Alpha</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">subscribeToAssetsBalanceInfo</span><span class="p">(</span><span class="s1">&#39;INSERT_ADDRESS&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">cb</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nx">moonriver</span><span class="p">.</span><span class="nx">subscribeToAssetsBalanceInfo</span><span class="p">(</span><span class="s1">&#39;INSERT_ADDRESS&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">cb</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-js highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nx">moonbase</span><span class="p">.</span><span class="nx">subscribeToAssetsBalanceInfo</span><span class="p">(</span><span class="s1">&#39;INSERT_ADDRESS&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">cb</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>The following example retrieves the balance information for a given account on Moonbeam and prints the balance for each of the supported assets to the console:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">subscribeToAssetsBalanceInfo</span><span class="p">(</span>
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="s1">&#39;INSERT_MOONBEAM_ADDRESS&#39;</span><span class="p">,</span>
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">  </span><span class="p">(</span><span class="nx">balances</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="w">    </span><span class="nx">balances</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(({</span><span class="w"> </span><span class="nx">asset</span><span class="p">,</span><span class="w"> </span><span class="nx">balance</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-44-5"><a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span><span id="__span-44-6"><a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="w">        </span><span class="sb">`</span><span class="si">${</span><span class="nx">balance</span><span class="p">.</span><span class="nx">symbol</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">toDecimal</span><span class="p">(</span>
+</span><span id="__span-44-7"><a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="w">          </span><span class="nx">balance</span><span class="p">.</span><span class="nx">balance</span><span class="p">,</span>
+</span><span id="__span-44-8"><a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="w">          </span><span class="nx">balance</span><span class="p">.</span><span class="nx">decimals</span><span class="p">,</span>
+</span><span id="__span-44-9"><a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="w">        </span><span class="p">).</span><span class="nx">toFixed</span><span class="p">()</span><span class="si">}</span><span class="sb"> (</span><span class="si">${</span><span class="nx">origin</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">asset</span><span class="p">.</span><span class="nx">originSymbol</span><span class="si">}</span><span class="sb">)`</span><span class="p">,</span>
+</span><span id="__span-44-10"><a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="w">      </span><span class="p">);</span>
+</span><span id="__span-44-11"><a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-44-12"><a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-44-13"><a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="p">);</span>
+</span><span id="__span-44-14"><a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a>
+</span><span id="__span-44-15"><a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a><span class="nx">unsubscribe</span><span class="p">();</span>
+</span></code></pre></div>
+<h3 id="sdk-utils">Utility Functions</h3>
+<p>There are utility functions in both the XCM SDK and the XCM Utilities packages. The XCM SDK provides the following SDK-related utility functions:</p>
+<ul>
+<li><a href="#deposit-check"><code>isXcmSdkDeposit</code></a></li>
+<li><a href="#withdraw-check"><code>isXcmSdkWithdraw</code></a></li>
+</ul>
+<p>And the XCM Utilities package provides the following generic utility functions:</p>
+<ul>
+<li><a href="#decimals"><code>toDecimal</code></a></li>
+<li><a href="#decimals"><code>toBigInt</code></a></li>
+<li><a href="#decimals"><code>hasDecimalOverflow</code></a></li>
+</ul>
+<h4 id="deposit-check">Check if Transfer Data is for a Deposit</h4>
+<p>To determine whether transfer data is for a deposit, you can pass in transfer data to the <code>isXcmSdkDeposit</code> function and a boolean will be returned. If <code>true</code> is returned the transfer data is for a deposit, and <code>false</code> is returned if it is not.</p>
+<p>The following are some examples:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="p">,</span><span class="w"> </span><span class="nx">isXcmSdkDeposit</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="p">...</span>
+</span><span id="__span-45-4"><a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
+</span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">deposit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">symbols</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+</span><span id="__span-45-6"><a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isXcmSdkDeposit</span><span class="p">(</span><span class="nx">deposit</span><span class="p">));</span><span class="w"> </span><span class="c1">// Returns true</span>
+</span></code></pre></div>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="p">,</span><span class="w"> </span><span class="nx">isXcmSdkDeposit</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
+</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="p">...</span>
+</span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>
+</span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">withdraw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">symbols</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+</span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isXcmSdkDeposit</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">));</span><span class="w"> </span><span class="c1">// Returns false</span>
+</span></code></pre></div>
+<h4 id="withdraw-check">Check if Transfer Data is for a Withdrawal</h4>
+<p>To determine whether transfer data is for a withdrawal, you can pass in transfer data to the <code>isXcmSdkWithdraw</code> function and a boolean will be returned. If <code>true</code> is returned the transfer data is for a withdrawal, and <code>false</code> is returned if it is not.</p>
+<p>The following are some examples:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="p">,</span><span class="w"> </span><span class="nx">isXcmSdkWithdraw</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="p">...</span>
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">withdraw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">symbols</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isXcmSdkWithdraw</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">));</span><span class="w"> </span><span class="c1">// Returns true</span>
+</span></code></pre></div>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">init</span><span class="p">,</span><span class="w"> </span><span class="nx">isXcmSdkWithdraw</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="p">...</span>
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">deposit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">moonbeam</span><span class="p">.</span><span class="nx">symbols</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span>
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isXcmSdkDeposit</span><span class="p">(</span><span class="nx">deposit</span><span class="p">));</span><span class="w"> </span><span class="c1">// Returns false</span>
+</span></code></pre></div>
+<h4 id="decimals">Convert Balance to Decimal or BigInt</h4>
+<p>To convert a balance to decimal format, you can use the <code>toDecimal</code> function, which returns a given number in decimal format based on the number of decimals provided. You can optionally pass in a value for a third argument to dictate the maximum number of decimal places used; otherwise, the default is <code>6</code>; and a fourth argument that dictates the <a href="https://mikemcl.github.io/big.js/#rm" target="_blank">rounding method</a> of the number.
+The <code>toDecimal</code> function returns a Big number type that you can convert to a number or string using its methods <code>toNumber</code>, <code>toFixed</code>, <code>toPrecision</code>, and <code>toExponential</code>. We recommend using them as a string, since big numbers or numbers with a lot of decimals can lose precision when using number types.</p>
+<p>To convert from decimal number back to BigInt, you can use the <code>toBigInt</code> function which returns a given number in BigInt format based on the number of decimals provided.</p>
+<p>For example, to convert a balance on Moonbeam from Wei to Glimmer you can use the following code:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">toDecimal</span><span class="p">,</span><span class="w"> </span><span class="nx">toBigInt</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-utils&#39;</span><span class="p">;</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">toDecimal</span><span class="p">(</span><span class="mi">3999947500000000000n</span><span class="p">,</span><span class="w"> </span><span class="mf">18</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">();</span>
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">balance</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns &#39;3.999947&#39;</span>
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>
+</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">big</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">toBigInt</span><span class="p">(</span><span class="s1">&#39;3.999947&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">18</span><span class="p">);</span>
+</span><span id="__span-49-7"><a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">big</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns 3999947000000000000n</span>
+</span></code></pre></div>
+<p>You can also use <code>hasDecimalOverflow</code> to make sure that a given number does not have more decimal places than allowed. This is helpful for form inputs.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+</div>
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div>
+        <img class="moonbeam-foundation-logo" src="../assets/images/moonbeam-foundation-logo-light.webp#only-light" alt="Moonbeam Foundation" width="192" height="75.65"/>
+        <img class="moonbeam-foundation-logo" src="../assets/images/moonbeam-foundation-logo-dark.webp#only-dark" alt="Moonbeam Foundation" width="192" height="75.65"/>
+    </div>
+      <div class="column">
+        <div class="md-footer-copyright">
+          
+          <div class="md-footer-copyright__highlight">
+            © 2024 Moonbeam Foundation. All Rights Reserved.
+          </div>
+          <div class="network-links">
+            <a href="https://moonbeam.foundation/privacy-policy/" target="_blank">Privacy policy</a>
+            <span> | </span>
+            <a href="https://moonbeam.network/terms-of-use/" target="_blank">Terms of use</a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "navigation.indexes", "navigation.tabs", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
