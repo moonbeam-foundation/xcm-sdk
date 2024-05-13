@@ -485,35 +485,6 @@ export const hydraDxAlphanet = new Parachain({
   ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
 });
 
-export const peaqAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: usdcwh,
-      decimals: 6,
-      id: 2816,
-    },
-    {
-      asset: dev,
-      decimals: 18,
-      id: 2560,
-    },
-    {
-      asset: ftmwh,
-      decimals: 18,
-      id: 1001,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
-  isTestChain: true,
-  key: 'peaq-Alphanet',
-  name: 'Peaq Alphanet',
-  parachainId: 3013,
-  ss58Format: 42,
-  ws: 'wss://archive-moonbeam.peaq.network',
-});
-
 export const interlay = new Parachain({
   assetsData: [
     {
@@ -1259,6 +1230,35 @@ export const parallelHeiko = new Parachain({
   parachainId: 2085,
   ss58Format: 110,
   ws: 'wss://heiko-rpc.parallel.fi',
+});
+
+export const peaqAlphanet = new Parachain({
+  assetsData: [
+    // {
+    //   asset: usdcwh,
+    //   decimals: 6,
+    //   id: 2816,
+    // },
+    // {
+    //   asset: dev,
+    //   decimals: 18,
+    //   id: 2560,
+    // },
+    {
+      asset: ftmwh,
+      decimals: 18,
+      id: 1001,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
+  isTestChain: true,
+  key: 'peaq-Alphanet',
+  name: 'Peaq Alphanet',
+  parachainId: 3013,
+  ss58Format: 42,
+  ws: 'wss://moonbeam.peaq.network',
 });
 
 export const pendulum = new Parachain({
