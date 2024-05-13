@@ -345,7 +345,7 @@ export const darwinia = new EvmParachain({
   parachainId: 2046,
   rpc: 'https://rpc.darwinia.network',
   ss58Format: 18,
-  ws: 'wss://parachain-rpc.darwinia.network',
+  ws: 'wss://rpc.darwinia.network',
 });
 
 export const darwiniaCrab = new EvmParachain({
@@ -376,7 +376,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: 'wss://crab-parachain-rpc.darwinia.network',
+  ws: 'wss://crab-rpc.darwinia.network',
 });
 
 export const equilibrium = new Parachain({

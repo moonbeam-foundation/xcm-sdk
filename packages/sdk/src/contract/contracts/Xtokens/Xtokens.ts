@@ -56,6 +56,7 @@ export class Xtokens implements TransferContractInterface {
     return contract[this.#config.func].estimateGas(...this.#config.args);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async getViemContractEstimatedGas(
     contract: XtokensContract,
   ): Promise<bigint> {
@@ -63,8 +64,12 @@ export class Xtokens implements TransferContractInterface {
       return 0n;
     }
 
+    // Temporary fix to Module(ModuleError { index: 51, error: [0, 0, 0, 0], message: None })
+    // To be reverted next week when Moonbeam is in RT2900
+    return 100000n;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return contract.estimateGas[this.#config.func](this.#config.args as any);
+    // return contract.estimateGas[this.#config.func](this.#config.args as any);
   }
 
   async getFee(amount: bigint): Promise<bigint> {

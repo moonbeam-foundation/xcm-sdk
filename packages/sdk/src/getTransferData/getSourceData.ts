@@ -138,6 +138,7 @@ export async function getSourceData({
     fee: destinationFee.amount,
     feeAsset: chain.getAssetId(destinationFee),
   });
+
   const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
     amount: destinationFeeBalance,
   });
