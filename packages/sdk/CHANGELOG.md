@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.1.5
+
+### Patch Changes
+
+- [#251](https://github.com/moonbeam-foundation/xcm-sdk/pull/251) [`a883833`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a8838332c1694abca40ad70e9ad9280d8b78da16) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove fixed gas estimation value
+
+- Updated dependencies [[`d8190e7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d8190e7d53b94ee6ed86c042e7268c40e5ca241f), [`5ee5a75`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5ee5a75d56829641d11b51ba8a5da286c79b056c)]:
+  - @moonbeam-network/xcm-config@2.1.3
+
 ## 2.1.4
 
 ### Patch Changes
