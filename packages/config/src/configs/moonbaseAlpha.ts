@@ -20,6 +20,7 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
+  peaqAlphanet,
   pendulumAlphanet,
   picassoAlphanet,
   turingAlphanet,
@@ -239,6 +240,21 @@ export const moonbaseAlphaConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: ftmwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqAlphanet,
+      destinationFee: {
+        amount: 0.01,
+        asset: ftmwh,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -258,6 +274,32 @@ export const moonbaseAlphaConfig = new ChainConfig({
         amount: 0.5,
         asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqAlphanet,
+      destinationFee: {
+        amount: 0.00000001,
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: ftmwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqAlphanet,
+      destinationFee: {
+        amount: 0.01,
+        asset: ftmwh,
+        balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
         asset: dev,
