@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-config
 
+## 2.1.3
+
+### Patch Changes
+
+- [#242](https://github.com/moonbeam-foundation/xcm-sdk/pull/242) [`d8190e7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d8190e7d53b94ee6ed86c042e7268c40e5ca241f) Thanks [@Rihyx](https://github.com/Rihyx)! - Add PEAQ Alphanet configuration
+
+- [#249](https://github.com/moonbeam-foundation/xcm-sdk/pull/249) [`5ee5a75`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5ee5a75d56829641d11b51ba8a5da286c79b056c) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Darwinia and Crab
+
 ## 2.1.2
 
 ### Patch Changes
