@@ -5,6 +5,11 @@ export const aca = new Asset({
   originSymbol: 'ACA',
 });
 
+export const agng = new Asset({
+  key: 'agng',
+  originSymbol: 'AGNG',
+});
+
 export const alan = new Asset({
   key: 'alan',
   originSymbol: 'ALAN',
@@ -358,6 +363,7 @@ export const ftmwh = new Asset({
 export const assetsList: Asset[] = [
   aca,
   alan,
+  agng,
   ampe,
   aseed,
   astr,

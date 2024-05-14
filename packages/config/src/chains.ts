@@ -6,6 +6,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import {
   aca,
+  agng,
   alan,
   ampe,
   aseed,
@@ -1234,16 +1235,15 @@ export const parallelHeiko = new Parachain({
 
 export const peaqAlphanet = new Parachain({
   assetsData: [
-    // {
-    //   asset: usdcwh,
-    //   decimals: 6,
-    //   id: 2816,
-    // },
-    // {
-    //   asset: dev,
-    //   decimals: 18,
-    //   id: 2560,
-    // },
+    {
+      asset: agng,
+      id: 0,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: 1000,
+    },
     {
       asset: ftmwh,
       decimals: 18,
