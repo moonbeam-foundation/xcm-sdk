@@ -1261,6 +1261,51 @@ export const peaqAlphanet = new Parachain({
   ws: 'wss://moonbeam.peaq.network',
 });
 
+// {
+//   asset: dev,
+//   id: '0x0000000000000000000000000000000000000802',
+//   metadataId: 0,
+//   min: 0.01,
+// },
+
+export const peaqEvmAlphanet = new EvmParachain({
+  assetsData: [
+    {
+      // FIXME: not sure
+      asset: agng,
+      // id: 0,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: '0xFfFfFffF000000000000000000000000000003e8',
+      metadataId: 0,
+    },
+    {
+      asset: ftmwh,
+      decimals: 18,
+      id: '0xFffFffFF000000000000000000000000000003E9',
+      metadataId: 0,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
+  id: 1287,
+  isTestChain: true,
+  key: 'peaq-evm-Alphanet',
+  name: 'Peaq EVM Alphanet',
+  nativeCurrency: {
+    decimals: 18,
+    name: agng.originSymbol,
+    symbol: agng.originSymbol,
+  },
+  parachainId: 3013,
+  rpc: 'https://moonbeam.PEAQ.network',
+  ss58Format: 42,
+  ws: 'wss://moonbeam.peaq.network',
+});
+
 export const pendulum = new Parachain({
   assetsData: [
     {
@@ -1597,6 +1642,7 @@ export const chainsList: AnyChain[] = [
   parallel,
   parallelHeiko,
   peaqAlphanet,
+  peaqEvmAlphanet,
   pendulum,
   pendulumAlphanet,
   phala,

@@ -7,6 +7,7 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
+  peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import { getParachainBalances } from '../../src/sdk';
 
@@ -70,6 +71,15 @@ describe('sdk', () => {
     });
     it(`should get expected balances for ${moonbaseAlpha.name}`, async () => {
       const result = await getParachainBalances(moonbaseAlpha, moonEvmAddress);
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it(`should get expected balances for ${peaqEvmAlphanet.name}`, async () => {
+      const result = await getParachainBalances(
+        peaqEvmAlphanet,
+        moonEvmAddress,
+      );
 
       expect(result).toMatchSnapshot();
     });
