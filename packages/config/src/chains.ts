@@ -1261,13 +1261,6 @@ export const peaqAlphanet = new Parachain({
   ws: 'wss://moonbeam.peaq.network',
 });
 
-// {
-//   asset: dev,
-//   id: '0x0000000000000000000000000000000000000802',
-//   metadataId: 0,
-//   min: 0.01,
-// },
-
 export const peaqEvmAlphanet = new EvmParachain({
   assetsData: [
     {
