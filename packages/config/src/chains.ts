@@ -1284,7 +1284,7 @@ export const peaqEvmAlphanet = new EvmParachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
-  id: 1287,
+  id: 9990,
   isTestChain: true,
   key: 'peaq-evm-Alphanet',
   name: 'Peaq EVM Alphanet',
