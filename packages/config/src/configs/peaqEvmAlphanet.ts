@@ -1,4 +1,4 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
+import { BalanceBuilder } from '@moonbeam-network/xcm-builder';
 import { dev, ftmwh } from '../assets';
 import { moonbaseAlpha, peaqEvmAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -9,7 +9,7 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
     new AssetConfig({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
+      // contract: ContractBuilder().Xtokens().transfer(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: 0.01,
@@ -24,7 +24,7 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
     new AssetConfig({
       asset: dev,
       balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
+      // contract: ContractBuilder().Xtokens().transfer(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: 0.01,
