@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.1.6
+
+### Patch Changes
+
+- [#252](https://github.com/moonbeam-foundation/xcm-sdk/pull/252) [`fb794eb`](https://github.com/moonbeam-foundation/xcm-sdk/commit/fb794eb82bcb32ca10bb97d9031d56616d2dc44f) Thanks [@Rihyx](https://github.com/Rihyx)! - Add Peaq EVM Alphanet
+
+- Updated dependencies [[`fb794eb`](https://github.com/moonbeam-foundation/xcm-sdk/commit/fb794eb82bcb32ca10bb97d9031d56616d2dc44f)]:
+  - @moonbeam-network/xcm-config@2.1.4
+
 ## 2.1.5
 
 ### Patch Changes
