@@ -8,6 +8,7 @@ export interface EvmParachainConstructorParams
   id: number;
   rpc: string;
   nativeCurrency: NativeCurrency;
+  isEvmSigner?: boolean;
 }
 
 type NativeCurrency = {
@@ -23,10 +24,13 @@ export class EvmParachain extends Parachain {
 
   readonly nativeCurrency: NativeCurrency;
 
+  readonly isEvmSigner: boolean;
+
   constructor({
     id,
     rpc,
     nativeCurrency,
+    isEvmSigner = false,
     ...others
   }: EvmParachainConstructorParams) {
     super({ type: ChainType.EvmParachain, ...others });
@@ -34,6 +38,7 @@ export class EvmParachain extends Parachain {
     this.id = id;
     this.rpc = rpc;
     this.nativeCurrency = nativeCurrency;
+    this.isEvmSigner = isEvmSigner;
   }
 
   getViemChain(): Chain {
