@@ -40,7 +40,6 @@ export async function getSourceData({
   transferConfig,
   destinationAddress,
   destinationFee,
-  evmSigner,
   polkadot,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
@@ -55,7 +54,6 @@ export async function getSourceData({
       address: destinationAddress,
       chain,
       config,
-      evmSigner,
       polkadot,
     }),
   });
@@ -67,7 +65,6 @@ export async function getSourceData({
           asset: config.fee.asset,
           chain,
           config,
-          evmSigner,
           polkadot,
         }),
       })
@@ -80,7 +77,6 @@ export async function getSourceData({
           asset: config.destinationFee.asset,
           chain,
           config,
-          evmSigner,
           polkadot,
         }),
       })
@@ -91,7 +87,6 @@ export async function getSourceData({
     chain,
     config,
     decimals: zeroAmount.decimals,
-    evmSigner,
     polkadot,
   });
 
@@ -150,7 +145,6 @@ export async function getSourceData({
     decimals: zeroFeeAmount.decimals,
     destinationFeeBalanceAmount,
     destinationFeeConfig: config.destinationFee,
-    evmSigner,
     extrinsic,
     feeConfig: config.fee,
     polkadot,

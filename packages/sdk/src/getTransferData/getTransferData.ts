@@ -21,6 +21,7 @@ export interface GetTransferDataParams extends Partial<Signers> {
   transferConfig: TransferConfig;
 }
 
+// TODO: make getTransferData work with EvmSigner and PolkadotSigner
 export async function getTransferData({
   configService,
   destinationAddress,
@@ -36,7 +37,6 @@ export async function getTransferData({
 
   const destination = await getDestinationData({
     destinationAddress,
-    evmSigner,
     polkadot: destPolkadot,
     transferConfig,
   });
@@ -49,7 +49,6 @@ export async function getTransferData({
   const source = await getSourceData({
     destinationAddress,
     destinationFee,
-    evmSigner,
     polkadot: srcPolkadot,
     sourceAddress,
     transferConfig,

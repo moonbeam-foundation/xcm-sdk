@@ -7,7 +7,6 @@ import {
   createContractWithoutSigner,
 } from '../contract';
 import { PolkadotService } from '../polkadot';
-import { EvmSigner } from '../sdk.interfaces';
 
 export interface GetBalancesParams {
   address: string;
@@ -15,7 +14,6 @@ export interface GetBalancesParams {
   chain: AnyChain;
   config: AssetConfig;
   decimals: number;
-  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
