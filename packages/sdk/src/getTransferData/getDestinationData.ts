@@ -31,7 +31,6 @@ export async function getDestinationData({
       address: destinationAddress,
       chain,
       config,
-      evmSigner,
       polkadot,
     }),
   });
@@ -41,7 +40,6 @@ export async function getDestinationData({
     chain,
     config,
     decimals: zeroAmount.decimals,
-    evmSigner,
     polkadot,
   });
   const min = await getMin(config, polkadot);
