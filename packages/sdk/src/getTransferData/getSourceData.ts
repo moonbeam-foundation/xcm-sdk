@@ -10,7 +10,11 @@ import {
   FeeAssetConfig,
   TransferConfig,
 } from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import {
+  AnyChain,
+  AssetAmount,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import {
   convertDecimals,
   toBigInt,
@@ -42,6 +46,7 @@ export async function getSourceData({
   destinationFee,
   polkadot,
   sourceAddress,
+  evmSigner,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   const {
     asset,
@@ -145,6 +150,7 @@ export async function getSourceData({
     decimals: zeroFeeAmount.decimals,
     destinationFeeBalanceAmount,
     destinationFeeConfig: config.destinationFee,
+    evmSigner,
     extrinsic,
     feeConfig: config.fee,
     polkadot,
@@ -260,7 +266,13 @@ export async function getFee({
       }
     }
 
-    return getContractFee(balance, contract, decimals, evmSigner);
+    return getContractFee({
+      balance,
+      chain: chain as EvmParachain,
+      config: contract,
+      decimals,
+      evmSigner,
+    });
   }
 
   if (extrinsic) {
@@ -283,15 +295,23 @@ export async function getFee({
   throw new Error('Either contract or extrinsic must be provided');
 }
 
-export async function getContractFee(
-  balance: bigint,
-  config: ContractConfig,
-  decimals: number,
-  evmSigner: EvmSigner,
-): Promise<bigint> {
+export async function getContractFee({
+  balance,
+  config,
+  decimals,
+  evmSigner,
+  chain,
+}: {
+  balance: bigint;
+  config: ContractConfig;
+  decimals: number;
+  evmSigner: EvmSigner;
+  chain: EvmParachain;
+}): Promise<bigint> {
   const contract = createContract(
     config,
     evmSigner,
+    chain,
   ) as TransferContractInterface;
   const fee = await contract.getFee(balance);
 

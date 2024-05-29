@@ -46,9 +46,19 @@ export async function getTransferData({
     destination.fee,
   );
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getTransferData.ts:49 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* transferConfig = ');
+  console.log(transferConfig);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
   const source = await getSourceData({
     destinationAddress,
     destinationFee,
+    evmSigner,
     polkadot: srcPolkadot,
     sourceAddress,
     transferConfig,
@@ -123,7 +133,11 @@ export async function getTransferData({
         }
 
         return (
-          createContract(contract, evmSigner) as TransferContractInterface
+          createContract(
+            contract,
+            evmSigner,
+            chain,
+          ) as TransferContractInterface
         )
           .transfer()
           .then((tx) =>
