@@ -9,11 +9,11 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
     new AssetConfig({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbaseAlpha,
       destinationFee: {
         amount: 0.01,
-        asset: ftmwh,
+        asset: dev,
         balance: BalanceBuilder().evm().erc20(),
       },
       // fee: {
