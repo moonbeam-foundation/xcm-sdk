@@ -47,6 +47,7 @@ import {
   otp,
   para,
   paring,
+  peaq,
   pen,
   pha,
   pica,
@@ -1261,6 +1262,61 @@ export const peaqAlphanet = new Parachain({
   ws: 'wss://moonbeam.peaq.network',
 });
 
+export const peaqChain = new Parachain({
+  assetsData: [
+    {
+      asset: peaq,
+      id: 0,
+    },
+    {
+      asset: dot,
+      id: 10,
+    },
+    {
+      asset: glmr,
+      decimals: 18,
+      id: 1000,
+    },
+    {
+      asset: usdcwh,
+      decimals: 6,
+      id: 1001,
+    },
+    {
+      asset: weth,
+      decimals: 18,
+      id: 1002,
+    },
+    {
+      asset: wbtc,
+      decimals: 8,
+      id: 1003,
+      metadataId: 0,
+    },
+    {
+      asset: dai,
+      decimals: 18,
+      id: 1004,
+      metadataId: 0,
+    },
+    {
+      asset: usdtwh,
+      decimals: 6,
+      id: 1005,
+      metadataId: 0,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
+  isTestChain: false,
+  key: 'peaq',
+  name: 'Peaq',
+  parachainId: 3338,
+  ss58Format: 42,
+  ws: 'wss:peaq-rpc.dwellir.com',
+});
+
 export const peaqEvmAlphanet = new EvmParachain({
   assetsData: [
     {
@@ -1292,6 +1348,63 @@ export const peaqEvmAlphanet = new EvmParachain({
   rpc: 'https://moonbeam.PEAQ.network',
   ss58Format: 42,
   ws: 'wss://moonbeam.peaq.network',
+});
+
+export const peaqEvm = new EvmParachain({
+  assetsData: [
+    {
+      asset: glmr,
+      decimals: 18,
+      id: '0xFfFfFffF000000000000000000000000000003e8',
+      metadataId: 0,
+    },
+    {
+      asset: usdcwh,
+      decimals: 6,
+      id: '0xFffFffFF000000000000000000000000000003E9',
+      metadataId: 0,
+    },
+    {
+      asset: weth,
+      decimals: 18,
+      id: '0xFFFfFfFf000000000000000000000000000003ea',
+      metadataId: 0,
+    },
+    {
+      asset: wbtc,
+      decimals: 8,
+      id: '0xfffFFFFF000000000000000000000000000003eb',
+      metadataId: 0,
+    },
+    {
+      asset: dai,
+      decimals: 18,
+      id: '0xfFffFFFF000000000000000000000000000003Ec',
+      metadataId: 0,
+    },
+    {
+      asset: usdtwh,
+      decimals: 6,
+      id: '0xfFffffFF000000000000000000000000000003Ed',
+      metadataId: 0,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
+  id: 3338,
+  isTestChain: false,
+  key: 'peaq-evm',
+  name: 'Peaq EVM',
+  nativeCurrency: {
+    decimals: 18,
+    name: peaq.originSymbol,
+    symbol: peaq.originSymbol,
+  },
+  parachainId: 3338,
+  rpc: 'peaq-rpc.dwellir.com',
+  ss58Format: 42,
+  ws: 'wss:peaq-rpc.dwellir.com',
 });
 
 export const pendulum = new Parachain({
@@ -1629,6 +1742,8 @@ export const chainsList: AnyChain[] = [
   originTrailAlphanet,
   parallel,
   parallelHeiko,
+  peaqChain,
+  peaqEvm,
   peaqAlphanet,
   peaqEvmAlphanet,
   pendulum,

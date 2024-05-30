@@ -205,6 +205,11 @@ export const paring = new Asset({
   originSymbol: 'PARING',
 });
 
+export const peaq = new Asset({
+  key: 'peaq',
+  originSymbol: 'PEAQ',
+});
+
 export const pen = new Asset({
   key: 'pen',
   originSymbol: 'PEN',
