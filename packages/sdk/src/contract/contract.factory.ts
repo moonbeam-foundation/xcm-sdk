@@ -10,35 +10,21 @@ import { Erc20Public } from './contracts/Erc20/Erc20Public';
 
 export function createContractWithSigner(
   config: ContractConfig,
-  chain: EvmParachain,
   signer: EvmSigner,
+  chain?: AnyChain,
 ): TransferContractInterface | BalanceContractInterface {
   if (config.module === 'Erc20') {
     return new Erc20(config, signer);
   }
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ contract.factory.ts:20 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* config.module = ');
-  console.log(config.module);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
-
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ contract.factory.ts:29 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* chain = ');
-  console.log(chain);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
-
   if (config.module === 'Xtokens') {
-    const address = chain?.contracts?.Xtokens;
+    if (chain && 'contracts' in chain) {
+      const address = chain?.contracts?.Xtokens;
 
-    return new Xtokens(config, signer, address);
+      return new Xtokens(config, signer, address);
+    }
+
+    return new Xtokens(config, signer);
   }
 
   throw new Error(`Contract ${config.module} not found`);
@@ -61,6 +47,6 @@ export function createContract(
   chain?: AnyChain,
 ): TransferContractInterface | BalanceContractInterface {
   return signer
-    ? createContractWithSigner(config, chain, signer)
+    ? createContractWithSigner(config, signer, chain)
     : createContractWithoutSigner(config, chain as EvmParachain);
 }

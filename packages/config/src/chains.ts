@@ -1267,6 +1267,10 @@ export const peaqAlphanet = new Parachain({
 export const peaqEvmAlphanet = new EvmParachain({
   assetsData: [
     {
+      asset: agng,
+      id: 0,
+    },
+    {
       asset: dev,
       decimals: 18,
       id: '0xFfFfFffF000000000000000000000000000003e8',

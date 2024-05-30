@@ -33,7 +33,7 @@ export class Xtokens implements TransferContractInterface {
 
     this.#signer = signer;
 
-    this.address = address || this.defaultMoonChainAddress;
+    this.address = address ?? this.defaultMoonChainAddress;
 
     this.#contract = isEthersSigner(signer)
       ? new Contract(this.address, abi, signer)
