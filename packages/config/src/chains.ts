@@ -1314,7 +1314,7 @@ export const peaqChain = new Parachain({
   name: 'Peaq',
   parachainId: 3338,
   ss58Format: 42,
-  ws: 'wss:peaq-rpc.dwellir.com',
+  ws: 'wss://peaq-rpc.dwellir.com',
 });
 
 export const peaqEvmAlphanet = new EvmParachain({
@@ -1402,9 +1402,9 @@ export const peaqEvm = new EvmParachain({
     symbol: peaq.originSymbol,
   },
   parachainId: 3338,
-  rpc: 'peaq-rpc.dwellir.com',
+  rpc: 'https://peaq-rpc.dwellir.com',
   ss58Format: 42,
-  ws: 'wss:peaq-rpc.dwellir.com',
+  ws: 'wss://peaq-rpc.dwellir.com',
 });
 
 export const pendulum = new Parachain({
