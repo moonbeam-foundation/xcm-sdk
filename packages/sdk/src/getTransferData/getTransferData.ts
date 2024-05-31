@@ -55,6 +55,15 @@ export async function getTransferData({
     '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
   );
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getTransferData.ts:58 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* sourceAddress = ');
+  console.log(sourceAddress);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
   const source = await getSourceData({
     destinationAddress,
     destinationFee,

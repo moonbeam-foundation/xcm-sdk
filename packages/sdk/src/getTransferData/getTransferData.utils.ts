@@ -1,4 +1,8 @@
-import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
+import {
+  CallType,
+  ContractConfig,
+  SubstrateQueryConfig,
+} from '@moonbeam-network/xcm-builder';
 import { AssetConfig } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, EvmParachain } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
@@ -17,7 +21,11 @@ export interface GetBalancesParams {
   polkadot: PolkadotService;
 }
 
-export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'>;
+// export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'>;
+
+export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'> & {
+  assetBuildedConfig?: SubstrateQueryConfig | ContractConfig;
+};
 
 export async function getBalance({
   address,
@@ -53,11 +61,15 @@ export async function getDecimals({
   config,
   polkadot,
   chain,
+  assetBuildedConfig,
 }: GetDecimalsParams) {
-  const cfg = config.balance.build({
-    address,
-    asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
-  });
+  const cfg =
+    assetBuildedConfig ||
+    config.balance.build({
+      address,
+      asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
+    });
+
   if (cfg.type === CallType.Substrate) {
     return polkadot.getAssetDecimals(asset || config.asset);
   }

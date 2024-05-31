@@ -18,24 +18,40 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
       },
       fee: {
         asset: agng,
-        balance: BalanceBuilder().substrate().system().account(),
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
-    new AssetConfig({
-      asset: dev,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: moonbaseAlpha,
-      destinationFee: {
-        amount: 0.01,
-        asset: dev,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      // fee: {
-      //   asset: dev,
-      //   balance: BalanceBuilder().substrate().system().account(),
-      // },
-    }),
+    // new AssetConfig({
+    //   asset: dev,
+    //   balance: BalanceBuilder().evm().erc20(),
+    //   contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    //   destination: moonbaseAlpha,
+    //   destinationFee: {
+    //     amount: 0.01,
+    //     asset: dev,
+    //     balance: BalanceBuilder().evm().erc20(),
+    //   },
+    //   // fee: {
+    //   //   asset: agng,
+    //   //   balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+    //   // },
+    // }),
+
+    // new AssetConfig({
+    //   asset: agng,
+    //   balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+    //   contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    //   destination: moonbaseAlpha,
+    //   destinationFee: {
+    //     amount: 0.01,
+    //     asset: dev,
+    //     balance: BalanceBuilder().evm().erc20(),
+    //   },
+    //   fee: {
+    //     asset: agng,
+    //     balance: BalanceBuilder().substrate().system().account(),
+    //   },
+    // }),
   ],
   chain: peaqEvmAlphanet,
 });

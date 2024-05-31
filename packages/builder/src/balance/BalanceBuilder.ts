@@ -8,6 +8,7 @@ import {
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
 import { isString } from '@polkadot/util';
+import { evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfig } from '../contract';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
@@ -41,6 +42,26 @@ export function substrate() {
 function erc20(): BalanceConfigBuilder {
   return {
     build: ({ address, asset }) => {
+      console.error(new Error('erc20 balance'));
+
+      // console.log(
+      //   '\x1b[34m████████████████████▓▓▒▒░ BalanceBuilder.ts:45 ░▒▒▓▓████████████████████\x1b[0m',
+      // );
+      // console.log('* address = ');
+      // console.log(address);
+      // console.log(
+      //   '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+      // );
+
+      // console.log(
+      //   '\x1b[34m████████████████████▓▓▒▒░ BalanceBuilder.ts:54 ░▒▒▓▓████████████████████\x1b[0m',
+      // );
+      // console.log('* asset = ');
+      // console.log(asset);
+      // console.log(
+      //   '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+      // );
+
       if (!asset || !isString(asset)) {
         throw new Error(`Invalid contract address: ${asset}`);
       }
@@ -127,6 +148,34 @@ function system() {
             return BigInt(balance[1].positive);
           },
         }),
+    }),
+    accountEvmTo32: (): BalanceConfigBuilder => ({
+      build: ({ address }) => {
+        console.log(
+          '\x1b[34m████████████████████▓▓▒▒░ BalanceBuilder.ts:134 ░▒▒▓▓████████████████████\x1b[0m',
+        );
+        console.log('* address = ');
+        console.log(address);
+        console.log(
+          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+        );
+        const substrateAddress = evmToAddress(address);
+
+        return new SubstrateQueryConfig({
+          module: 'system',
+          func: 'account',
+          args: [substrateAddress],
+          transform: async (
+            response: FrameSystemAccountInfo,
+          ): Promise<bigint> => {
+            const balance = response.data as PalletBalancesAccountData &
+              PalletBalancesAccountDataOld;
+            const frozen = balance.miscFrozen ?? balance.frozen;
+
+            return BigInt(balance.free.sub(frozen).toString());
+          },
+        });
+      },
     }),
   };
 }

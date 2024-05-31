@@ -53,6 +53,7 @@ export async function getSourceData({
     destination,
     source: { chain, config },
   } = transferConfig;
+
   const zeroAmount = AssetAmount.fromAsset(asset, {
     amount: 0n,
     decimals: await getDecimals({
@@ -62,18 +63,79 @@ export async function getSourceData({
       polkadot,
     }),
   });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:70 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* config.fee.asset = ');
+  console.log(config?.fee?.asset);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
+  // const cfg = config.balance.build({
+  //   address,
+  //   asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
+  // });
+
+  const feeAsset = polkadot.chain.getBalanceAssetId(
+    config?.fee?.asset || config.asset,
+  );
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:85 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* feeAsset = ');
+  console.log(feeAsset);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
+  const feeCfg = config.fee?.balance.build({
+    address: destinationAddress,
+    asset: feeAsset,
+  });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:86 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* feeCfg = ');
+  console.log(feeCfg);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
+  const feeDecimals = config.fee?.asset
+    ? await getDecimals({
+        address: destinationAddress,
+        asset: config.fee.asset,
+        assetBuildedConfig: feeCfg,
+        chain,
+        config,
+        polkadot,
+        // cfg: feeCfg,
+      })
+    : undefined;
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:108 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* feeDecimals = ');
+  console.log(feeDecimals);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
   const zeroFeeAmount = config.fee?.asset
     ? AssetAmount.fromAsset(config.fee.asset, {
         amount: 0n,
-        decimals: await getDecimals({
-          address: destinationAddress,
-          asset: config.fee.asset,
-          chain,
-          config,
-          polkadot,
-        }),
+        decimals: feeDecimals || 0,
       })
     : zeroAmount;
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:85 ░▒▒▓▓████████████████████\x1b[0m',
+  );
   const zeroDestinationFeeAmount = config.destinationFee?.asset
     ? AssetAmount.fromAsset(config.destinationFee.asset, {
         amount: 0n,
@@ -87,6 +149,9 @@ export async function getSourceData({
       })
     : zeroAmount;
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:101 ░▒▒▓▓████████████████████\x1b[0m',
+  );
   const balance = await getBalance({
     address: sourceAddress,
     chain,
@@ -94,6 +159,10 @@ export async function getSourceData({
     decimals: zeroAmount.decimals,
     polkadot,
   });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:112 ░▒▒▓▓████████████████████\x1b[0m',
+  );
 
   const feeBalance = await getFeeBalance({
     address: sourceAddress,
@@ -103,6 +172,10 @@ export async function getSourceData({
     feeConfig: config.fee,
     polkadot,
   });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:125 ░▒▒▓▓████████████████████\x1b[0m',
+  );
 
   const destinationFeeBalance = config.asset.isEqual(
     config.destinationFee.asset,
@@ -117,7 +190,15 @@ export async function getSourceData({
         polkadot,
       });
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:150 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+
   const min = await getMin(config, polkadot);
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:156 ░▒▒▓▓████████████████████\x1b[0m',
+  );
 
   const extrinsic = config.extrinsic?.build({
     address: destinationAddress,
@@ -130,6 +211,10 @@ export async function getSourceData({
     source: chain,
   });
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:171 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+
   const contract = config.contract?.build({
     address: destinationAddress,
     amount: balance,
@@ -139,9 +224,17 @@ export async function getSourceData({
     feeAsset: chain.getAssetId(destinationFee),
   });
 
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:184 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+
   const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
     amount: destinationFeeBalance,
   });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:192 ░▒▒▓▓████████████████████\x1b[0m',
+  );
 
   const fee = await getFee({
     balance,
@@ -156,6 +249,10 @@ export async function getSourceData({
     polkadot,
     sourceAddress,
   });
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ getSourceData.ts:210 ░▒▒▓▓████████████████████\x1b[0m',
+  );
 
   const balanceAmount = zeroAmount.copyWith({ amount: balance });
   const { existentialDeposit } = polkadot;
