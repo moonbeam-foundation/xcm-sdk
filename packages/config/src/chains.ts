@@ -1269,7 +1269,6 @@ export const peaqEvmAlphanet = new EvmParachain({
     {
       asset: agng,
       decimals: 18,
-      id: '0xFfFfFffF00000000000000000000000000000000', // this is fake
     },
     {
       asset: dev,
