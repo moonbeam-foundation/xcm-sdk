@@ -44,47 +44,11 @@ export function Xtokens() {
     }),
     transferWIthEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ address, amount, asset, destination }) => {
-        const substrateAddress = evmToAddress(address);
-
-        console.log(
-          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:49 ░▒▒▓▓████████████████████\x1b[0m',
-        );
-        console.log('* address = ');
-        console.log(address);
-        console.log(
-          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-        );
-        console.log(
-          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:47 ░▒▒▓▓████████████████████\x1b[0m',
-        );
-        console.log('* destination = ');
-        console.log(destination);
-        console.log(
-          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-        );
-
-        console.log(
-          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:57 ░▒▒▓▓████████████████████\x1b[0m',
-        );
-        console.log('* substrateAddress = ');
-        console.log(substrateAddress);
-        console.log(
-          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-        );
-
-        const multilocation = getDestinationMultilocation(
-          substrateAddress,
-          destination,
-        );
-
-        console.log(
-          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:80 ░▒▒▓▓████████████████████\x1b[0m',
-        );
-        console.log('* multilocation = ');
-        console.log(multilocation);
-        console.log(
-          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-        );
+        const multilocation =
+          getDestinationMultilocationForPrecompileDestination(
+            address,
+            destination,
+          );
 
         return new ContractConfig({
           args: [
@@ -133,6 +97,31 @@ type DestinationMultilocation = [
       ]
   ),
 ];
+
+function getDestinationMultilocationForPrecompileDestination(
+  address: string,
+  destination: AnyChain,
+): DestinationMultilocation {
+  /* 
+   01: AccountId32
+   03: AccountKey20
+   https://docs.moonbeam.network/builders/interoperability/xcm/xc20/xtokens/#building-the-precompile-multilocation
+   */
+  const accountType = '01';
+  const substrateAddress = evmToAddress(address);
+  const acc = `0x${accountType}${u8aToHex(
+    decodeAddress(substrateAddress),
+    -1,
+    false,
+  )}00`;
+
+  return [
+    1,
+    destination.parachainId
+      ? [`0x0000000${destination.parachainId.toString(16)}`, acc]
+      : [acc],
+  ];
+}
 
 function getDestinationMultilocation(
   address: string,
