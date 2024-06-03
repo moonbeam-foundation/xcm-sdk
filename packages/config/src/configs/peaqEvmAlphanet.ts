@@ -21,21 +21,21 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
-    // new AssetConfig({
-    //   asset: dev,
-    //   balance: BalanceBuilder().evm().erc20(),
-    //   contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-    //   destination: moonbaseAlpha,
-    //   destinationFee: {
-    //     amount: 0.01,
-    //     asset: dev,
-    //     balance: BalanceBuilder().evm().erc20(),
-    //   },
-    //   // fee: {
-    //   //   asset: agng,
-    //   //   balance: BalanceBuilder().substrate().system().accountEvmTo32(),
-    //   // },
-    // }),
+    new AssetConfig({
+      asset: dev,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      destination: moonbaseAlpha,
+      destinationFee: {
+        amount: 0.01,
+        asset: dev,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: agng,
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+      },
+    }),
 
     // new AssetConfig({
     //   asset: agng,

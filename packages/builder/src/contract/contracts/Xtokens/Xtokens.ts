@@ -42,7 +42,7 @@ export function Xtokens() {
           module: 'Xtokens',
         }),
     }),
-    transferWIthEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
+    transferWithEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ address, amount, asset, destination }) => {
         const multilocation =
           getDestinationMultilocationForPrecompileDestination(
