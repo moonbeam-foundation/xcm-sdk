@@ -44,7 +44,7 @@ export function createContractWithoutSigner(
 export function createContract(
   config: ContractConfig,
   signer: EvmSigner | undefined,
-  chain?: AnyChain,
+  chain: AnyChain,
 ): TransferContractInterface | BalanceContractInterface {
   return signer
     ? createContractWithSigner(config, signer, chain)
