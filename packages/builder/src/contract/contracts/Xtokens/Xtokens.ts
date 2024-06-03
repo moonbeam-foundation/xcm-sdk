@@ -2,7 +2,7 @@
 import { AnyChain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { isString, u8aToHex } from '@polkadot/util';
-import { decodeAddress } from '@polkadot/util-crypto';
+import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { ContractConfig } from '../../ContractConfig';
 
@@ -41,6 +41,62 @@ export function Xtokens() {
           func: 'transferMultiCurrencies',
           module: 'Xtokens',
         }),
+    }),
+    transferWIthEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
+      build: ({ address, amount, asset, destination }) => {
+        const substrateAddress = evmToAddress(address);
+
+        console.log(
+          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:49 ░▒▒▓▓████████████████████\x1b[0m',
+        );
+        console.log('* address = ');
+        console.log(address);
+        console.log(
+          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+        );
+        console.log(
+          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:47 ░▒▒▓▓████████████████████\x1b[0m',
+        );
+        console.log('* destination = ');
+        console.log(destination);
+        console.log(
+          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+        );
+
+        console.log(
+          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:57 ░▒▒▓▓████████████████████\x1b[0m',
+        );
+        console.log('* substrateAddress = ');
+        console.log(substrateAddress);
+        console.log(
+          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+        );
+
+        const multilocation = getDestinationMultilocation(
+          substrateAddress,
+          destination,
+        );
+
+        console.log(
+          '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:80 ░▒▒▓▓████████████████████\x1b[0m',
+        );
+        console.log('* multilocation = ');
+        console.log(multilocation);
+        console.log(
+          '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+        );
+
+        return new ContractConfig({
+          args: [
+            isString(asset) ? formatAssetIdToERC20(asset) : asset,
+            amount,
+            multilocation,
+            weight,
+          ],
+          func: 'transfer',
+          module: 'Xtokens',
+        });
+      },
     }),
   };
 }

@@ -74,6 +74,42 @@ export class Xtokens implements TransferContractInterface {
   }
 
   async getFee(amount: bigint): Promise<bigint> {
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:78 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* amount = ');
+    console.log(amount);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:86 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* this.#config: = ');
+    console.log(this.#config);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:95 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* this.#contract = ');
+    console.log(this.#contract);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:104 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* this.#signer = ');
+    console.log(this.#signer);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     if (amount === 0n) {
       return 0n;
     }
@@ -90,6 +126,15 @@ export class Xtokens implements TransferContractInterface {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
+
+      console.log(
+        '\x1b[34m████████████████████▓▓▒▒░ Xtokens.ts:102 ░▒▒▓▓████████████████████\x1b[0m',
+      );
+      console.log('* error = ');
+      console.log(error);
+      console.log(
+        '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+      );
 
       throw new Error(
         "Can't get a fee. Make sure that you have enough balance!",

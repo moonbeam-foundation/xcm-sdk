@@ -321,7 +321,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
     new AssetConfig({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().Xtokens().transferWIthEvmTo32(),
       destination: peaqEvmAlphanet,
       destinationFee: {
         amount: 0.01,
