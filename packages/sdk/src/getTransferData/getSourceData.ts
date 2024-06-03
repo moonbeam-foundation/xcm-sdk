@@ -83,7 +83,7 @@ export async function getSourceData({
     ? await getDecimals({
         address: destinationAddress,
         asset: config.fee.asset,
-        assetBuildedConfig: feeCfg,
+        assetBuiltConfig: feeCfg,
         chain,
         config,
         polkadot,

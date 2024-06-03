@@ -21,7 +21,6 @@ export interface GetTransferDataParams extends Partial<Signers> {
   transferConfig: TransferConfig;
 }
 
-// TODO: make getTransferData work with EvmSigner and PolkadotSigner
 export async function getTransferData({
   configService,
   destinationAddress,

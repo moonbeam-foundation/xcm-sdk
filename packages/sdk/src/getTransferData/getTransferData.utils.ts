@@ -21,10 +21,8 @@ export interface GetBalancesParams {
   polkadot: PolkadotService;
 }
 
-// export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'>;
-
 export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'> & {
-  assetBuildedConfig?: SubstrateQueryConfig | ContractConfig;
+  assetBuiltConfig?: SubstrateQueryConfig | ContractConfig;
 };
 
 export async function getBalance({
@@ -61,10 +59,10 @@ export async function getDecimals({
   config,
   polkadot,
   chain,
-  assetBuildedConfig,
+  assetBuiltConfig,
 }: GetDecimalsParams) {
   const cfg =
-    assetBuildedConfig ||
+    assetBuiltConfig ||
     config.balance.build({
       address,
       asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
