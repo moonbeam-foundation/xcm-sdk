@@ -772,6 +772,7 @@ export const moonbaseAlpha = new EvmParachain({
   genesisHash:
     '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
+  isEvmSigner: true,
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
@@ -1003,6 +1004,7 @@ export const moonbeam = new EvmParachain({
   genesisHash:
     '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
   id: 1284,
+  isEvmSigner: true,
   key: 'moonbeam',
   name: 'Moonbeam',
   nativeCurrency: {
@@ -1123,6 +1125,7 @@ export const moonriver = new EvmParachain({
   genesisHash:
     '0x401a1f9dca3da46f5c4091016c8a2f26dcea05865116b286f60f668207d1474b',
   id: 1285,
+  isEvmSigner: true,
   key: 'moonriver',
   name: 'Moonriver',
   nativeCurrency: {
@@ -1320,6 +1323,10 @@ export const peaqChain = new Parachain({
 export const peaqEvmAlphanet = new EvmParachain({
   assetsData: [
     {
+      asset: agng,
+      decimals: 18,
+    },
+    {
       asset: dev,
       decimals: 18,
       id: '0xFfFfFffF000000000000000000000000000003e8',
@@ -1332,10 +1339,14 @@ export const peaqEvmAlphanet = new EvmParachain({
       metadataId: 0,
     },
   ],
+  contracts: {
+    Xtokens: '0x0000000000000000000000000000000000000803',
+  },
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   id: 9990,
+  isEvmSigner: true,
   isTestChain: true,
   key: 'peaq-evm-Alphanet',
   name: 'Peaq EVM Alphanet',

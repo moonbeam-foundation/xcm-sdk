@@ -8,6 +8,7 @@ import {
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
 import { isString } from '@polkadot/util';
+import { evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfig } from '../contract';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
@@ -127,6 +128,26 @@ function system() {
             return BigInt(balance[1].positive);
           },
         }),
+    }),
+    accountEvmTo32: (): BalanceConfigBuilder => ({
+      build: ({ address }) => {
+        const substrateAddress = evmToAddress(address);
+
+        return new SubstrateQueryConfig({
+          module: 'system',
+          func: 'account',
+          args: [substrateAddress],
+          transform: async (
+            response: FrameSystemAccountInfo,
+          ): Promise<bigint> => {
+            const balance = response.data as PalletBalancesAccountData &
+              PalletBalancesAccountDataOld;
+            const frozen = balance.miscFrozen ?? balance.frozen;
+
+            return BigInt(balance.free.sub(frozen).toString());
+          },
+        });
+      },
     }),
   };
 }

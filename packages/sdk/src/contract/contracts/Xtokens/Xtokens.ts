@@ -1,6 +1,7 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import { Contract, TransactionResponse } from 'ethers';
 import {
+  Address,
   GetContractReturnType,
   PublicClient,
   WriteContractReturnType,
@@ -16,7 +17,10 @@ import abi from './XtokensABI.json';
 type XtokensContract = GetContractReturnType<typeof abi, PublicClient>;
 
 export class Xtokens implements TransferContractInterface {
-  readonly address = '0x0000000000000000000000000000000000000804';
+  readonly defaultMoonChainAddress =
+    '0x0000000000000000000000000000000000000804';
+
+  readonly address: Address;
 
   readonly #config: ContractConfig;
 
@@ -24,10 +28,12 @@ export class Xtokens implements TransferContractInterface {
 
   readonly #signer: EvmSigner;
 
-  constructor(config: ContractConfig, signer: EvmSigner) {
+  constructor(config: ContractConfig, signer: EvmSigner, address?: Address) {
     this.#config = config;
 
     this.#signer = signer;
+
+    this.address = address ?? this.defaultMoonChainAddress;
 
     this.#contract = isEthersSigner(signer)
       ? new Contract(this.address, abi, signer)
@@ -84,7 +90,6 @@ export class Xtokens implements TransferContractInterface {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
-
       throw new Error(
         "Can't get a fee. Make sure that you have enough balance!",
       );

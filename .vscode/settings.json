@@ -20,6 +20,7 @@
     "Litentry",
     "mangata",
     "mnemonic",
+    "multilocation",
     "nodle",
     "parachain",
     "parachains",
@@ -31,7 +32,8 @@
     "Robonomics",
     "Shiden",
     "Suri",
-    "TEER"
+    "TEER",
+    "Viem"
   ],
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.formatOnPaste": false,
