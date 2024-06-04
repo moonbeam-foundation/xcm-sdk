@@ -1,4 +1,8 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
+import {
+  AssetMinBuilder,
+  BalanceBuilder,
+  ContractBuilder,
+} from '@moonbeam-network/xcm-builder';
 import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { moonbeam, peaqEvm } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -20,6 +24,7 @@ export const peaqEvmConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: usdcwh,
@@ -35,6 +40,7 @@ export const peaqEvmConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: dai,
@@ -50,6 +56,7 @@ export const peaqEvmConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: wbtc,
@@ -65,6 +72,7 @@ export const peaqEvmConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: weth,
@@ -80,6 +88,7 @@ export const peaqEvmConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: usdtwh,
@@ -95,6 +104,7 @@ export const peaqEvmConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
   ],
   chain: peaqEvm,
