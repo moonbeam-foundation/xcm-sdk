@@ -1,10 +1,16 @@
-import { CallType, SubstrateQueryConfig } from '@moonbeam-network/xcm-builder';
+import {
+  CallType,
+  ContractConfig,
+  SubstrateQueryConfig,
+} from '@moonbeam-network/xcm-builder';
 import { AssetConfig } from '@moonbeam-network/xcm-config';
-import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import { AnyChain, Asset, EvmParachain } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
-import { BalanceContractInterface, createContract } from '../contract';
+import {
+  BalanceContractInterface,
+  createContractWithoutSigner,
+} from '../contract';
 import { PolkadotService } from '../polkadot';
-import { EvmSigner } from '../sdk.interfaces';
 
 export interface GetBalancesParams {
   address: string;
@@ -12,18 +18,18 @@ export interface GetBalancesParams {
   chain: AnyChain;
   config: AssetConfig;
   decimals: number;
-  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
 
-export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'>;
+export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'> & {
+  assetBuiltConfig?: SubstrateQueryConfig | ContractConfig;
+};
 
 export async function getBalance({
   address,
   chain,
   config,
   decimals,
-  evmSigner,
   polkadot,
 }: GetBalancesParams) {
   const cfg = config.balance.build({
@@ -37,10 +43,9 @@ export async function getBalance({
       : balance;
   }
 
-  const contract = createContract(
+  const contract = createContractWithoutSigner(
     cfg,
-    evmSigner,
-    chain,
+    chain as EvmParachain,
   ) as BalanceContractInterface;
 
   const balance = await contract.getBalance();
@@ -53,21 +58,23 @@ export async function getDecimals({
   asset,
   config,
   polkadot,
-  evmSigner,
   chain,
+  assetBuiltConfig,
 }: GetDecimalsParams) {
-  const cfg = config.balance.build({
-    address,
-    asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
-  });
+  const cfg =
+    assetBuiltConfig ||
+    config.balance.build({
+      address,
+      asset: polkadot.chain.getBalanceAssetId(asset || config.asset),
+    });
+
   if (cfg.type === CallType.Substrate) {
     return polkadot.getAssetDecimals(asset || config.asset);
   }
 
-  const contract = createContract(
+  const contract = createContractWithoutSigner(
     cfg,
-    evmSigner,
-    chain,
+    chain as EvmParachain,
   ) as BalanceContractInterface;
 
   return contract.getDecimals();

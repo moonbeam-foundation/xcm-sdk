@@ -2,7 +2,7 @@
 import { AnyChain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { isString, u8aToHex } from '@polkadot/util';
-import { decodeAddress } from '@polkadot/util-crypto';
+import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { ContractConfig } from '../../ContractConfig';
 
@@ -42,6 +42,26 @@ export function Xtokens() {
           module: 'Xtokens',
         }),
     }),
+    transferWithEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
+      build: ({ address, amount, asset, destination }) => {
+        const multilocation =
+          getDestinationMultilocationForPrecompileDestination(
+            address,
+            destination,
+          );
+
+        return new ContractConfig({
+          args: [
+            isString(asset) ? formatAssetIdToERC20(asset) : asset,
+            amount,
+            multilocation,
+            weight,
+          ],
+          func: 'transfer',
+          module: 'Xtokens',
+        });
+      },
+    }),
   };
 }
 
@@ -77,6 +97,31 @@ type DestinationMultilocation = [
       ]
   ),
 ];
+
+function getDestinationMultilocationForPrecompileDestination(
+  address: string,
+  destination: AnyChain,
+): DestinationMultilocation {
+  /* 
+   01: AccountId32
+   03: AccountKey20
+   https://docs.moonbeam.network/builders/interoperability/xcm/xc20/xtokens/#building-the-precompile-multilocation
+   */
+  const accountType = '01';
+  const substrateAddress = evmToAddress(address);
+  const acc = `0x${accountType}${u8aToHex(
+    decodeAddress(substrateAddress),
+    -1,
+    false,
+  )}00`;
+
+  return [
+    1,
+    destination.parachainId
+      ? [`0x0000000${destination.parachainId.toString(16)}`, acc]
+      : [acc],
+  ];
+}
 
 function getDestinationMultilocation(
   address: string,
