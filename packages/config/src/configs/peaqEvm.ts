@@ -9,7 +9,7 @@ export const peaqEvmConfig = new ChainConfig({
     new AssetConfig({
       asset: glmr,
       balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      contract: ContractBuilder().Xtokens().transfer(),
       destination: moonbeam,
       destinationFee: {
         amount: 0.01,
@@ -18,7 +18,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       fee: {
         asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(), // FIXME: use .accountEvmTo32()
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
     new AssetConfig({
@@ -33,7 +33,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       fee: {
         asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(), // FIXME: use .accountEvmTo32()
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
     new AssetConfig({
@@ -48,7 +48,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       fee: {
         asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(), // FIXME: use .accountEvmTo32()
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
     new AssetConfig({
@@ -63,7 +63,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       fee: {
         asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(), // FIXME: use .accountEvmTo32()
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
     new AssetConfig({
@@ -78,7 +78,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       fee: {
         asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(), // FIXME: use .accountEvmTo32()
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
     new AssetConfig({
@@ -93,7 +93,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       fee: {
         asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(), // FIXME: use .accountEvmTo32()
+        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
     }),
   ],
