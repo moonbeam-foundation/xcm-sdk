@@ -1,5 +1,19 @@
 # @moonbeam-network/xcm-builder
 
+## 2.2.0
+
+### Minor Changes
+
+- [#254](https://github.com/moonbeam-foundation/xcm-sdk/pull/254) [`6282815`](https://github.com/moonbeam-foundation/xcm-sdk/commit/62828150ee586049c81145e053e390fcb8027c2a) Thanks [@Rihyx](https://github.com/Rihyx)! - make Precompile XCM flow work for Peaq
+
+### Patch Changes
+
+- [#256](https://github.com/moonbeam-foundation/xcm-sdk/pull/256) [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependecies
+
+- Updated dependencies [[`6282815`](https://github.com/moonbeam-foundation/xcm-sdk/commit/62828150ee586049c81145e053e390fcb8027c2a), [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f)]:
+  - @moonbeam-network/xcm-types@2.2.0
+  - @moonbeam-network/xcm-utils@2.0.7
+
 ## 2.1.1
 
 ### Patch Changes
