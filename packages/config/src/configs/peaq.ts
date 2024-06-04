@@ -20,6 +20,7 @@ export const peaqConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: usdcwh,
