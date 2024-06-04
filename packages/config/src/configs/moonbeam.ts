@@ -417,7 +417,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: pendulum,
       destinationFee: {
-        amount: 0.01,
+        amount: 1,
         asset: pen,
         balance: BalanceBuilder().substrate().assets().account(),
       },
