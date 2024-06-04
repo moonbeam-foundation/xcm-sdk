@@ -1,4 +1,5 @@
 import {
+  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -19,6 +20,7 @@ export const peaqAlphanetConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: ftmwh,
@@ -34,6 +36,7 @@ export const peaqAlphanetConfig = new ChainConfig({
         asset: agng,
         balance: BalanceBuilder().substrate().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
   ],
   chain: peaqAlphanet,

@@ -779,7 +779,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.00000001, // TODO
+        amount: 0.00000001,
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -790,7 +790,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.00001,
         asset: usdcwh,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -805,7 +805,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.00001,
         asset: usdtwh,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -820,7 +820,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.00001, // TODO
         asset: dai,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -835,8 +835,23 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.000004, // TODO
+        amount: 0.000001,
         asset: weth,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: wbtc,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqChain,
+      destinationFee: {
+        amount: 0.000001,
+        asset: wbtc,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {

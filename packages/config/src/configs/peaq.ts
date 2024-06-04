@@ -43,7 +43,7 @@ export const peaqConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.04,
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -59,7 +59,7 @@ export const peaqConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.04,
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -75,7 +75,7 @@ export const peaqConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.04,
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -91,7 +91,7 @@ export const peaqConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04, // TODO
+        amount: 0.04,
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
