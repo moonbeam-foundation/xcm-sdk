@@ -593,42 +593,42 @@ exports[`sdk getParachainBalances should get expected balances for Moonbeam 1`] 
 
 exports[`sdk getParachainBalances should get expected balances for Peaq 1`] = `
 [
-  r {
+  e {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 18,
     "key": "glmr",
@@ -640,42 +640,42 @@ exports[`sdk getParachainBalances should get expected balances for Peaq 1`] = `
 
 exports[`sdk getParachainBalances should get expected balances for Peaq EVM 1`] = `
 [
-  r {
+  e {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  r {
+  e {
     "amount": 0n,
     "decimals": 18,
     "key": "glmr",
