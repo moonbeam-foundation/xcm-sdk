@@ -407,6 +407,7 @@ export const assetsList: Asset[] = [
   otp,
   para,
   paring,
+  peaq,
   pen,
   pha,
   pica,

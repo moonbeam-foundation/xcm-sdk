@@ -1,4 +1,5 @@
 import {
+  AssetMinBuilder,
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -7,7 +8,6 @@ import { moonbeam, peaqChain } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
-// ? not sure if need to add DOT, PEAQ
 export const peaqConfig = new ChainConfig({
   assets: [
     new AssetConfig({
@@ -35,13 +35,14 @@ export const peaqConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: dai,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.04, // TODO
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -50,13 +51,14 @@ export const peaqConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: wbtc,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.04, // TODO
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -65,13 +67,14 @@ export const peaqConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: weth,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.04, // TODO
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -80,13 +83,14 @@ export const peaqConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: usdtwh,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.04, // TODO
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -95,6 +99,7 @@ export const peaqConfig = new ChainConfig({
         asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
   ],
   chain: peaqChain,

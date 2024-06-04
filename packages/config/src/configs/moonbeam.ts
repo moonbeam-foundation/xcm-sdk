@@ -764,83 +764,8 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: peaqEvm,
       destinationFee: {
-        amount: 0.01,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
+        amount: 0.00000001, // TODO
         asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: dai,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: wbtc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: weth,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: usdtwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr, // FIXME: add proper fee asset
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
@@ -850,13 +775,13 @@ export const moonbeamConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: glmr,
-      balance: BalanceBuilder().evm().erc20(),
+      balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.01,
+        amount: 0.00000001, // TODO
         asset: glmr,
-        balance: BalanceBuilder().evm().erc20(),
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
     new AssetConfig({
@@ -865,53 +790,8 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.01,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: dai,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.01,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: wbtc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.01,
-        asset: glmr, // FIXME: add proper fee asset
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: weth,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.01,
-        asset: glmr, // FIXME: add proper fee asset
+        amount: 0.04, // TODO
+        asset: usdcwh,
         balance: BalanceBuilder().evm().erc20(),
       },
       fee: {
@@ -925,7 +805,112 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: peaqChain,
       destinationFee: {
-        amount: 0.01,
+        amount: 0.04, // TODO
+        asset: usdtwh,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dai,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqChain,
+      destinationFee: {
+        amount: 0.04, // TODO
+        asset: dai,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: weth,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqChain,
+      destinationFee: {
+        amount: 0.000004, // TODO
+        asset: weth,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: usdcwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      destination: peaqEvm,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr, // FIXME: add proper fee asset
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dai,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      destination: peaqEvm,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr, // FIXME: add proper fee asset
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: wbtc,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      destination: peaqEvm,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr, // FIXME: add proper fee asset
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: weth,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      destination: peaqEvm,
+      destinationFee: {
+        amount: 0.04,
+        asset: glmr, // FIXME: add proper fee asset
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: usdtwh,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      destination: peaqEvm,
+      destinationFee: {
+        amount: 0.04,
         asset: glmr, // FIXME: add proper fee asset
         balance: BalanceBuilder().evm().erc20(),
       },
