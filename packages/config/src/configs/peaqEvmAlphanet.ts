@@ -1,4 +1,8 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
+import {
+  AssetMinBuilder,
+  BalanceBuilder,
+  ContractBuilder,
+} from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
 import { moonbaseAlpha, peaqEvmAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -20,6 +24,7 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
         asset: agng,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
       asset: dev,
@@ -35,6 +40,7 @@ export const peaqEvmAlphanetConfig = new ChainConfig({
         asset: agng,
         balance: BalanceBuilder().substrate().system().accountEvmTo32(),
       },
+      min: AssetMinBuilder().assets().asset(),
     }),
 
     // new AssetConfig({

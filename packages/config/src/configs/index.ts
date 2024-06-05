@@ -33,7 +33,9 @@ import { nodleConfig } from './nodle';
 import { originTrailAlphanetConfig } from './originTrailAlphanet';
 import { parallelConfig } from './parallel';
 import { parallelHeikoConfig } from './parallelHeiko';
+import { peaqConfig } from './peaq';
 import { peaqAlphanetConfig } from './peaqAlphanet';
+import { peaqEvmConfig } from './peaqEvm';
 import { peaqEvmAlphanetConfig } from './peaqEvmAlphanet';
 import { pendulumConfig } from './pendulum';
 import { pendulumAlphanetConfig } from './pendulumAlphanet';
@@ -82,6 +84,8 @@ export const chainsConfigList: ChainConfig[] = [
   originTrailAlphanetConfig,
   parallelConfig,
   parallelHeikoConfig,
+  peaqConfig,
+  peaqEvmConfig,
   peaqAlphanetConfig,
   peaqEvmAlphanetConfig,
   pendulumConfig,
