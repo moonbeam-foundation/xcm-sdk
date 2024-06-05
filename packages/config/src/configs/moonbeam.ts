@@ -172,7 +172,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: pendulum,
       destinationFee: {
-        amount: 0.0002,
+        amount: 0.2,
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -419,7 +419,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: pendulum,
       destinationFee: {
-        amount: 0.01,
+        amount: 1.01,
         asset: pen,
         balance: BalanceBuilder().substrate().assets().account(),
       },
