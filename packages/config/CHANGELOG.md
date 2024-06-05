@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-config
 
+## 2.2.1
+
+### Patch Changes
+
+- [#258](https://github.com/moonbeam-foundation/xcm-sdk/pull/258) [`414e0cd`](https://github.com/moonbeam-foundation/xcm-sdk/commit/414e0cdb6639eadb6b97740ac88a74200e5cbdd3) Thanks [@mmaurello](https://github.com/mmaurello)! - Change PEN fees from Moonbeam to Pendulum
+
+- [#255](https://github.com/moonbeam-foundation/xcm-sdk/pull/255) [`306dfa4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/306dfa4f0f79e74c8639ced373bfa1b0f2220615) Thanks [@Rihyx](https://github.com/Rihyx)! - Add peaq prod chains
+
 ## 2.2.0
 
 ### Minor Changes
