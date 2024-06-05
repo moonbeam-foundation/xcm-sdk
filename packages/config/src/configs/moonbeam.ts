@@ -846,15 +846,11 @@ export const moonbeamConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: glmr,
-      balance: BalanceBuilder().evm().erc20(),
+      balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: peaqEvm,
       destinationFee: {
         amount: 0.00000001,
-        asset: glmr,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
       },
