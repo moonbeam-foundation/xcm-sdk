@@ -47,6 +47,7 @@ import { polkadotAssetHubConfig } from './polkadotAssetHub';
 import { robonomicsConfig } from './robonomics';
 import { shidenConfig } from './shiden';
 import { subsocialConfig } from './subsocial';
+import { tinkernetConfig } from './tinkernet';
 import { turingConfig } from './turing';
 import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
@@ -100,6 +101,7 @@ export const chainsConfigList: ChainConfig[] = [
   kusamaAssetHubConfig,
   polkadotAssetHubConfig,
   subsocialConfig,
+  tinkernetConfig,
   turingConfig,
   turingAlphanetConfig,
   uniqueAlphaConfig,

@@ -55,8 +55,10 @@ import {
   ring,
   rmrk,
   sdn,
+  stink,
   sub,
   teer,
+  tnkr,
   tt1,
   tur,
   unit,
@@ -999,6 +1001,10 @@ export const moonbeam = new EvmParachain({
       asset: pink,
       id: '64174511183114006009298114091987195453',
     },
+    {
+      asset: stink,
+      id: '112679793397406599376365943185137098326',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1092,6 +1098,10 @@ export const moonriver = new EvmParachain({
     {
       asset: teer,
       id: '105075627293246237499203909093923548958',
+    },
+    {
+      asset: tnkr,
+      id: '138512078356357941985706694377215053953',
     },
     {
       asset: tur,
@@ -1585,6 +1595,11 @@ export const polkadotAssetHub = new Parachain({
       id: 23,
       palletInstance: 50,
     },
+    {
+      asset: stink,
+      id: 42069,
+      palletInstance: 50,
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1645,6 +1660,23 @@ export const subsocial = new Parachain({
   parachainId: 2101,
   ss58Format: 28,
   ws: 'wss://para.subsocial.network',
+});
+
+export const tinkernet = new Parachain({
+  assetsData: [
+    {
+      asset: tnkr,
+      id: 0,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0xd42e9606a995dfe433dc7955dc2a70f495f350f373daa200098ae84437816ad2',
+  key: 'tinkernet',
+  name: 'InvArch Tinkernet',
+  parachainId: 2125,
+  ss58Format: 117,
+  ws: 'wss://tinkernet-rpc.dwellir.com',
 });
 
 export const turing = new Parachain({
@@ -1780,6 +1812,7 @@ export const chainsList: AnyChain[] = [
   alphanetAssetHub,
   polkadotAssetHub,
   subsocial,
+  tinkernet,
   turing,
   turingAlphanet,
   uniqueAlpha,

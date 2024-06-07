@@ -250,6 +250,11 @@ export const soon = new Asset({
   originSymbol: 'SOON',
 });
 
+export const stink = new Asset({
+  key: 'stink',
+  originSymbol: 'STINK',
+});
+
 export const sub = new Asset({
   key: 'sub',
   originSymbol: 'SUB',
@@ -258,6 +263,11 @@ export const sub = new Asset({
 export const teer = new Asset({
   key: 'teer',
   originSymbol: 'TEER',
+});
+
+export const tnkr = new Asset({
+  key: 'tnkr',
+  originSymbol: 'TNKR',
 });
 
 export const tt1 = new Asset({
@@ -416,8 +426,10 @@ export const assetsList: Asset[] = [
   rmrk,
   sdn,
   soon,
+  stink,
   sub,
   teer,
+  tnkr,
   tt1,
   tur,
   unit,
