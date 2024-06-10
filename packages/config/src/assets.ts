@@ -1,10 +1,5 @@
 import { Asset } from '@moonbeam-network/xcm-types';
 
-export const erin = new Asset({
-  key: 'erin',
-  originSymbol: 'ERN',
-});
-
 export const aca = new Asset({
   key: 'aca',
   originSymbol: 'ACA',
@@ -371,7 +366,6 @@ export const ftmwh = new Asset({
 });
 
 export const assetsList: Asset[] = [
-  erin,
   aca,
   alan,
   agng,
