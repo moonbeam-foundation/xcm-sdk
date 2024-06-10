@@ -20,10 +20,6 @@ export const tinkernetConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      // fee: {
-      //   asset: tnkr,
-      //   balance: BalanceBuilder().substrate().system().account(),
-      // },
     }),
   ],
   chain: tinkernet,
