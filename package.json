@@ -16,6 +16,7 @@
     "packages/*",
     "examples/*"
   ],
+  "packageManager": "npm@10.7.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -67,7 +68,7 @@
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
-    "turbo": "^1.13.3",
+    "turbo": "^2.0.3",
     "typescript": "^5.4.5",
     "viem": "^2.13.7"
   },
