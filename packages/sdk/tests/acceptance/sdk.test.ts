@@ -7,6 +7,9 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
+  peaqChain,
+  peaqEvm,
+  peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import { getParachainBalances } from '../../src/sdk';
 
@@ -16,6 +19,7 @@ const centrifugeAddress = '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb';
 const moonEvmAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
 const moonbaseBetaAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
+const peaqSubstrateAccount = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
@@ -70,6 +74,28 @@ describe('sdk', () => {
     });
     it(`should get expected balances for ${moonbaseAlpha.name}`, async () => {
       const result = await getParachainBalances(moonbaseAlpha, moonEvmAddress);
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it(`should get expected balances for ${peaqEvmAlphanet.name}`, async () => {
+      const result = await getParachainBalances(
+        peaqEvmAlphanet,
+        moonEvmAddress,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+    it(`should get expected balances for ${peaqChain.name}`, async () => {
+      const result = await getParachainBalances(
+        peaqChain,
+        peaqSubstrateAccount,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+    it(`should get expected balances for ${peaqEvm.name}`, async () => {
+      const result = await getParachainBalances(peaqEvm, moonEvmAddress);
 
       expect(result).toMatchSnapshot();
     });

@@ -1,5 +1,41 @@
 # @moonbeam-network/xcm-config
 
+## 2.2.1
+
+### Patch Changes
+
+- [#258](https://github.com/moonbeam-foundation/xcm-sdk/pull/258) [`414e0cd`](https://github.com/moonbeam-foundation/xcm-sdk/commit/414e0cdb6639eadb6b97740ac88a74200e5cbdd3) Thanks [@mmaurello](https://github.com/mmaurello)! - Change PEN fees from Moonbeam to Pendulum
+
+- [#255](https://github.com/moonbeam-foundation/xcm-sdk/pull/255) [`306dfa4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/306dfa4f0f79e74c8639ced373bfa1b0f2220615) Thanks [@Rihyx](https://github.com/Rihyx)! - Add peaq prod chains
+
+## 2.2.0
+
+### Minor Changes
+
+- [#254](https://github.com/moonbeam-foundation/xcm-sdk/pull/254) [`6282815`](https://github.com/moonbeam-foundation/xcm-sdk/commit/62828150ee586049c81145e053e390fcb8027c2a) Thanks [@Rihyx](https://github.com/Rihyx)! - make Precompile XCM flow work for Peaq
+
+### Patch Changes
+
+- [#256](https://github.com/moonbeam-foundation/xcm-sdk/pull/256) [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependecies
+
+- Updated dependencies [[`6282815`](https://github.com/moonbeam-foundation/xcm-sdk/commit/62828150ee586049c81145e053e390fcb8027c2a), [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f)]:
+  - @moonbeam-network/xcm-builder@2.2.0
+  - @moonbeam-network/xcm-types@2.2.0
+
+## 2.1.4
+
+### Patch Changes
+
+- [#252](https://github.com/moonbeam-foundation/xcm-sdk/pull/252) [`fb794eb`](https://github.com/moonbeam-foundation/xcm-sdk/commit/fb794eb82bcb32ca10bb97d9031d56616d2dc44f) Thanks [@Rihyx](https://github.com/Rihyx)! - Add Peaq EVM Alphanet
+
+## 2.1.3
+
+### Patch Changes
+
+- [#242](https://github.com/moonbeam-foundation/xcm-sdk/pull/242) [`d8190e7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d8190e7d53b94ee6ed86c042e7268c40e5ca241f) Thanks [@Rihyx](https://github.com/Rihyx)! - Add PEAQ Alphanet configuration
+
+- [#249](https://github.com/moonbeam-foundation/xcm-sdk/pull/249) [`5ee5a75`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5ee5a75d56829641d11b51ba8a5da286c79b056c) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Darwinia and Crab
+
 ## 2.1.2
 
 ### Patch Changes

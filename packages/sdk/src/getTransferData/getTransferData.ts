@@ -36,7 +36,6 @@ export async function getTransferData({
 
   const destination = await getDestinationData({
     destinationAddress,
-    evmSigner,
     polkadot: destPolkadot,
     transferConfig,
   });
@@ -124,7 +123,11 @@ export async function getTransferData({
         }
 
         return (
-          createContract(contract, evmSigner) as TransferContractInterface
+          createContract(
+            contract,
+            evmSigner,
+            chain,
+          ) as TransferContractInterface
         )
           .transfer()
           .then((tx) =>

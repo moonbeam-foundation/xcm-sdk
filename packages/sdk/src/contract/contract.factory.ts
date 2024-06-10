@@ -11,12 +11,19 @@ import { Erc20Public } from './contracts/Erc20/Erc20Public';
 export function createContractWithSigner(
   config: ContractConfig,
   signer: EvmSigner,
+  chain?: AnyChain,
 ): TransferContractInterface | BalanceContractInterface {
   if (config.module === 'Erc20') {
     return new Erc20(config, signer);
   }
 
   if (config.module === 'Xtokens') {
+    if (chain && 'contracts' in chain) {
+      const address = chain?.contracts?.Xtokens;
+
+      return new Xtokens(config, signer, address);
+    }
+
     return new Xtokens(config, signer);
   }
 
@@ -37,9 +44,9 @@ export function createContractWithoutSigner(
 export function createContract(
   config: ContractConfig,
   signer: EvmSigner | undefined,
-  chain?: AnyChain,
+  chain: AnyChain,
 ): TransferContractInterface | BalanceContractInterface {
   return signer
-    ? createContractWithSigner(config, signer)
+    ? createContractWithSigner(config, signer, chain)
     : createContractWithoutSigner(config, chain as EvmParachain);
 }

@@ -10,6 +10,11 @@ export const aca = new Asset({
   originSymbol: 'ACA',
 });
 
+export const agng = new Asset({
+  key: 'agng',
+  originSymbol: 'AGNG',
+});
+
 export const alan = new Asset({
   key: 'alan',
   originSymbol: 'ALAN',
@@ -205,6 +210,11 @@ export const paring = new Asset({
   originSymbol: 'PARING',
 });
 
+export const peaq = new Asset({
+  key: 'peaq',
+  originSymbol: 'PEAQ',
+});
+
 export const pen = new Asset({
   key: 'pen',
   originSymbol: 'PEN',
@@ -364,6 +374,7 @@ export const assetsList: Asset[] = [
   erin,
   aca,
   alan,
+  agng,
   ampe,
   aseed,
   astr,
@@ -402,6 +413,7 @@ export const assetsList: Asset[] = [
   otp,
   para,
   paring,
+  peaq,
   pen,
   pha,
   pica,

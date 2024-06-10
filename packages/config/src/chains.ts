@@ -6,6 +6,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import {
   aca,
+  agng,
   alan,
   ampe,
   aseed,
@@ -46,6 +47,7 @@ import {
   otp,
   para,
   paring,
+  peaq,
   pen,
   pha,
   pica,
@@ -145,7 +147,7 @@ export const alphanetRelay = new Parachain({
   name: 'Alphanet Relay',
   parachainId: 0,
   ss58Format: 42,
-  ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
+  ws: 'wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network',
 });
 
 export const astar = new Parachain({
@@ -345,7 +347,7 @@ export const darwinia = new EvmParachain({
   parachainId: 2046,
   rpc: 'https://rpc.darwinia.network',
   ss58Format: 18,
-  ws: 'wss://parachain-rpc.darwinia.network',
+  ws: 'wss://rpc.darwinia.network',
 });
 
 export const darwiniaCrab = new EvmParachain({
@@ -376,7 +378,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: 'wss://crab-parachain-rpc.darwinia.network',
+  ws: 'wss://crab-rpc.darwinia.network',
 });
 
 export const equilibrium = new Parachain({
@@ -770,6 +772,7 @@ export const moonbaseAlpha = new EvmParachain({
   genesisHash:
     '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
+  isEvmSigner: true,
   isTestChain: true,
   key: 'moonbase-alpha',
   name: 'Moonbase Alpha',
@@ -1001,6 +1004,7 @@ export const moonbeam = new EvmParachain({
   genesisHash:
     '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
   id: 1284,
+  isEvmSigner: true,
   key: 'moonbeam',
   name: 'Moonbeam',
   nativeCurrency: {
@@ -1121,6 +1125,7 @@ export const moonriver = new EvmParachain({
   genesisHash:
     '0x401a1f9dca3da46f5c4091016c8a2f26dcea05865116b286f60f668207d1474b',
   id: 1285,
+  isEvmSigner: true,
   key: 'moonriver',
   name: 'Moonriver',
   nativeCurrency: {
@@ -1230,6 +1235,198 @@ export const parallelHeiko = new Parachain({
   parachainId: 2085,
   ss58Format: 110,
   ws: 'wss://heiko-rpc.parallel.fi',
+});
+
+export const peaqAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: agng,
+      id: 0,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: 1000,
+    },
+    {
+      asset: ftmwh,
+      decimals: 18,
+      id: 1001,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
+  isTestChain: true,
+  key: 'peaq-Alphanet',
+  name: 'Peaq Alphanet',
+  parachainId: 3013,
+  ss58Format: 42,
+  ws: 'wss://moonbeam.peaq.network',
+});
+
+export const peaqChain = new Parachain({
+  assetsData: [
+    {
+      asset: peaq,
+      id: 0,
+    },
+    {
+      asset: dot,
+      id: 10,
+    },
+    {
+      asset: glmr,
+      decimals: 18,
+      id: 1000,
+    },
+    {
+      asset: usdcwh,
+      decimals: 6,
+      id: 1001,
+    },
+    {
+      asset: weth,
+      decimals: 18,
+      id: 1002,
+    },
+    {
+      asset: wbtc,
+      decimals: 8,
+      id: 1003,
+      metadataId: 0,
+    },
+    {
+      asset: dai,
+      decimals: 18,
+      id: 1004,
+      metadataId: 0,
+    },
+    {
+      asset: usdtwh,
+      decimals: 6,
+      id: 1005,
+      metadataId: 0,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
+  isTestChain: false,
+  key: 'peaq',
+  name: 'Peaq',
+  parachainId: 3338,
+  ss58Format: 42,
+  ws: 'wss://peaq-rpc.dwellir.com',
+});
+
+export const peaqEvmAlphanet = new EvmParachain({
+  assetsData: [
+    {
+      asset: agng,
+      decimals: 18,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: '0xFfFfFffF000000000000000000000000000003e8',
+      metadataId: 0,
+      minId: 1000,
+    },
+    {
+      asset: ftmwh,
+      decimals: 18,
+      id: '0xFffFffFF000000000000000000000000000003E9',
+      metadataId: 0,
+      minId: 1001,
+    },
+  ],
+  contracts: {
+    Xtokens: '0x0000000000000000000000000000000000000803',
+  },
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
+  id: 9990,
+  isEvmSigner: true,
+  isTestChain: true,
+  key: 'peaq-evm-Alphanet',
+  name: 'Peaq EVM Alphanet',
+  nativeCurrency: {
+    decimals: 18,
+    name: agng.originSymbol,
+    symbol: agng.originSymbol,
+  },
+  parachainId: 3013,
+  rpc: 'https://moonbeam.PEAQ.network',
+  ss58Format: 42,
+  ws: 'wss://moonbeam.peaq.network',
+});
+
+export const peaqEvm = new EvmParachain({
+  assetsData: [
+    {
+      asset: peaq,
+      decimals: 18,
+    },
+    {
+      asset: glmr,
+      decimals: 18,
+      id: '0xFfFfFffF000000000000000000000000000003e8',
+      metadataId: 0,
+      minId: 1000,
+    },
+    {
+      asset: usdcwh,
+      id: '0xFffFffFF000000000000000000000000000003E9',
+      metadataId: 1001,
+      minId: 1001,
+    },
+    {
+      asset: weth,
+      id: '0xFFFfFfFf000000000000000000000000000003ea',
+      metadataId: 1002,
+      minId: 1002,
+    },
+    {
+      asset: wbtc,
+      id: '0xfffFFFFF000000000000000000000000000003eb',
+      metadataId: 1003,
+      minId: 1003,
+    },
+    {
+      asset: dai,
+      id: '0xfFffFFFF000000000000000000000000000003Ec',
+      metadataId: 1004,
+      minId: 1004,
+    },
+    {
+      asset: usdtwh,
+      id: '0xfFffffFF000000000000000000000000000003Ed',
+      metadataId: 1005,
+      minId: 1005,
+    },
+  ],
+  contracts: {
+    Xtokens: '0x0000000000000000000000000000000000000803',
+  },
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
+  id: 3338,
+  isEvmSigner: true,
+  isTestChain: false,
+  key: 'peaq-evm',
+  name: 'Peaq EVM',
+  nativeCurrency: {
+    decimals: 18,
+    name: peaq.originSymbol,
+    symbol: peaq.originSymbol,
+  },
+  parachainId: 3338,
+  rpc: 'https://peaq-rpc.dwellir.com',
+  ss58Format: 42,
+  ws: 'wss://peaq-rpc.dwellir.com',
 });
 
 export const pendulum = new Parachain({
@@ -1567,6 +1764,10 @@ export const chainsList: AnyChain[] = [
   originTrailAlphanet,
   parallel,
   parallelHeiko,
+  peaqChain,
+  peaqEvm,
+  peaqAlphanet,
+  peaqEvmAlphanet,
   pendulum,
   pendulumAlphanet,
   phala,

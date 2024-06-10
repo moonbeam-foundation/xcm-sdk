@@ -1,11 +1,12 @@
 {
   "cSpell.words": [
     "Acala",
+    "aSEED",
     "Astar",
     "AUSD",
-    "aSEED",
     "Darwinia",
     "Derivated",
+    "ftmwh",
     "Heiko",
     "IBTC",
     "Integritee",
@@ -19,9 +20,11 @@
     "Litentry",
     "mangata",
     "mnemonic",
+    "multilocation",
     "nodle",
     "parachain",
     "parachains",
+    "peaq",
     "Phala",
     "Polkadot",
     "Precompile",
@@ -29,7 +32,8 @@
     "Robonomics",
     "Shiden",
     "Suri",
-    "TEER"
+    "TEER",
+    "Viem"
   ],
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.formatOnPaste": false,
