@@ -421,7 +421,6 @@ export const assetsList: Asset[] = [
   rmrk,
   sdn,
   soon,
-  stink,
   sub,
   teer,
   tnkr,
