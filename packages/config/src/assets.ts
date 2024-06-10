@@ -250,11 +250,6 @@ export const soon = new Asset({
   originSymbol: 'SOON',
 });
 
-export const stink = new Asset({
-  key: 'stink',
-  originSymbol: 'STINK',
-});
-
 export const sub = new Asset({
   key: 'sub',
   originSymbol: 'SUB',
