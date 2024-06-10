@@ -148,7 +148,7 @@ export const alphanetRelay = new Parachain({
   name: 'Alphanet Relay',
   parachainId: 0,
   ss58Format: 42,
-  ws: 'wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network',
+  ws: 'wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network',
 });
 
 export const astar = new Parachain({

@@ -1,6 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { typesBundle } from '@polkadot/apps-config';
-import LRU from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 
 export enum MRLTypes {
   // TODO handle both types according to RT version
@@ -10,7 +10,7 @@ export enum MRLTypes {
   VersionedUserAction = 'VersionedUserAction',
 }
 
-const cache = new LRU<string, Promise<ApiPromise>>({
+const cache = new LRUCache<string, Promise<ApiPromise>>({
   max: 20,
   // eslint-disable-next-line sort-keys
   dispose: async (promise: Promise<ApiPromise>) => {
