@@ -57,6 +57,7 @@ import {
   sdn,
   sub,
   teer,
+  tnkr,
   tt1,
   tur,
   unit,
@@ -1094,6 +1095,10 @@ export const moonriver = new EvmParachain({
       id: '105075627293246237499203909093923548958',
     },
     {
+      asset: tnkr,
+      id: '138512078356357941985706694377215053953',
+    },
+    {
       asset: tur,
       id: '133300872918374599700079037156071917454',
     },
@@ -1647,6 +1652,23 @@ export const subsocial = new Parachain({
   ws: 'wss://para.subsocial.network',
 });
 
+export const tinkernet = new Parachain({
+  assetsData: [
+    {
+      asset: tnkr,
+      id: 0,
+    },
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0xd42e9606a995dfe433dc7955dc2a70f495f350f373daa200098ae84437816ad2',
+  key: 'tinkernet',
+  name: 'InvArch Tinkernet',
+  parachainId: 2125,
+  ss58Format: 117,
+  ws: 'wss://tinkernet-rpc.dwellir.com',
+});
+
 export const turing = new Parachain({
   assetsData: [
     {
@@ -1780,6 +1802,7 @@ export const chainsList: AnyChain[] = [
   alphanetAssetHub,
   polkadotAssetHub,
   subsocial,
+  tinkernet,
   turing,
   turingAlphanet,
   uniqueAlpha,

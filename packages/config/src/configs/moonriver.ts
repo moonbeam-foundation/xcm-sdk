@@ -18,6 +18,7 @@ import {
   rmrk,
   sdn,
   teer,
+  tnkr,
   tur,
   usdt,
   vbnc,
@@ -43,6 +44,7 @@ import {
   picasso,
   robonomics,
   shiden,
+  tinkernet,
   turing,
 } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -408,6 +410,21 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: teer,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: tnkr,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: tinkernet,
+      destinationFee: {
+        amount: 0.4,
+        asset: tnkr,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

@@ -260,6 +260,11 @@ export const teer = new Asset({
   originSymbol: 'TEER',
 });
 
+export const tnkr = new Asset({
+  key: 'tnkr',
+  originSymbol: 'TNKR',
+});
+
 export const tt1 = new Asset({
   key: 'tt1',
   originSymbol: 'TT1',
@@ -418,6 +423,7 @@ export const assetsList: Asset[] = [
   soon,
   sub,
   teer,
+  tnkr,
   tt1,
   tur,
   unit,
