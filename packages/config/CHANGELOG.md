@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.2.3
+
+### Patch Changes
+
+- [#264](https://github.com/moonbeam-foundation/xcm-sdk/pull/264) [`dba3c33`](https://github.com/moonbeam-foundation/xcm-sdk/commit/dba3c3382c0e1ea0ac82371b32fa1aadafe58dc8) Thanks [@mmaurello](https://github.com/mmaurello)! - New endpoints for PEAQ
+
 ## 2.2.2
 
 ### Patch Changes
