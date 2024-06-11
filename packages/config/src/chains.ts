@@ -1317,7 +1317,7 @@ export const peaqChain = new Parachain({
   name: 'Peaq',
   parachainId: 3338,
   ss58Format: 42,
-  ws: 'wss://peaq-rpc.dwellir.com',
+  ws: 'wss://peaq.api.onfinality.io/public-ws',
 });
 
 export const peaqEvmAlphanet = new EvmParachain({
