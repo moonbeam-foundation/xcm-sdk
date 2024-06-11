@@ -1424,9 +1424,9 @@ export const peaqEvm = new EvmParachain({
     symbol: peaq.originSymbol,
   },
   parachainId: 3338,
-  rpc: 'https://peaq-rpc.dwellir.com',
+  rpc: 'https://peaq.api.onfinality.io/public',
   ss58Format: 42,
-  ws: 'wss://peaq-rpc.dwellir.com',
+  ws: 'wss://peaq.api.onfinality.io/public-ws',
 });
 
 export const pendulum = new Parachain({
