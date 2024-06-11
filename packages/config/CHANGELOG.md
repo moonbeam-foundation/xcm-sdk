@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-config
 
+## 2.2.2
+
+### Patch Changes
+
+- [#262](https://github.com/moonbeam-foundation/xcm-sdk/pull/262) [`2ee7f8e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2ee7f8e0af4edad1170f046b0eaa70ce49eaf65b) Thanks [@ekenigs](https://github.com/ekenigs)! - Updated Moonbase Relay WS URL
+
+- [#261](https://github.com/moonbeam-foundation/xcm-sdk/pull/261) [`ebab209`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ebab2092ef934ba21f8c93e7cdd93884c2715bee) Thanks [@mmaurello](https://github.com/mmaurello)! - Tinkernet integration
+
+- Updated dependencies [[`2ee7f8e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2ee7f8e0af4edad1170f046b0eaa70ce49eaf65b)]:
+  - @moonbeam-network/xcm-types@2.2.1
+  - @moonbeam-network/xcm-builder@2.2.1
+
 ## 2.2.1
 
 ### Patch Changes
