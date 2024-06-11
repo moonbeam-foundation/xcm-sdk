@@ -36,19 +36,20 @@
     "changeset:publish": "npm run build && changeset publish"
   },
   "dependencies": {
-    "@polkadot/api": "^10.10.1",
-    "@polkadot/api-augment": "^10.10.1",
-    "@polkadot/types": "^10.10.1",
-    "@polkadot/util": "^12.5.1",
-    "@polkadot/util-crypto": "^12.5.1"
+    "@polkadot/api": "^11.2.1",
+    "@polkadot/api-augment": "^11.2.1",
+    "@polkadot/apps-config": "^0.132.1",
+    "@polkadot/types": "^11.2.1",
+    "@polkadot/util": "^12.6.2",
+    "@polkadot/util-crypto": "^12.6.2"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.5",
     "@slack/webhook": "^7.0.2",
     "@types/jest": "^29.5.12",
-    "@typescript-eslint/eslint-plugin": "^7.12.0",
-    "@typescript-eslint/parser": "^7.12.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
     "bun": "^1.1.12",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
@@ -64,13 +65,13 @@
     "husky": "^9.0.11",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.5",
-    "prettier": "^3.3.1",
+    "prettier": "^3.3.2",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
     "turbo": "^2.0.3",
     "typescript": "^5.4.5",
-    "viem": "^2.13.7"
+    "viem": "^2.13.8"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix --max-warnings=0",
