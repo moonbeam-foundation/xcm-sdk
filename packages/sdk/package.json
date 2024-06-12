@@ -9,7 +9,7 @@
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "typecheck": "tsc --noEmit",
-    "test:acc": "jest --forceExit --testTimeout 300000 ./tests/acceptance",
+    "test:acc": "vitest --run --testTimeout 300000 ./tests/acceptance",
     "prepack": "prettier --write build/index.d.ts"
   },
   "author": "moonbeam-foundation",
@@ -64,5 +64,8 @@
     "@polkadot/util": "^12.6.2",
     "ethers": "^6.13.0",
     "viem": "^2.13.7"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
   }
 }

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { describe, expect, it } from '@jest/globals';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
+
 import {
   buildParachainParamsMock,
   buildParamsMock,

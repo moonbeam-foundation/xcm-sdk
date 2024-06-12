@@ -1,6 +1,8 @@
 /* eslint-disable sort-keys */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
+
 import { Ecosystem } from '@moonbeam-network/xcm-types';
-import { describe, expect, it } from '@jest/globals';
 import { ConfigService } from '../ConfigService';
 import { dev } from '../assets';
 import { moonbaseAlpha, pendulumAlphanet } from '../chains';

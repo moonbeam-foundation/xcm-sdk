@@ -1,5 +1,5 @@
-/* eslint-disable jest/no-commented-out-tests */
-import { describe, expect, it } from '@jest/globals';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
 import {
   centrifuge,
   hydraDX,
@@ -102,10 +102,6 @@ describe('sdk', () => {
   });
 });
 
-/* eslint-disable jest/max-expects */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable jest/no-standalone-expect */
-/* eslint-disable jest/require-hook */
 // import {
 //   AssetSymbol,
 //   ChainKey,

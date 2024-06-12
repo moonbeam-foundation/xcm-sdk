@@ -1,6 +1,5 @@
-/* eslint-disable jest/no-focused-tests */
-/* eslint-disable jest/max-expects */
-import { describe, expect, it } from '@jest/globals';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
 import Big from 'big.js';
 import {
   convertDecimals,

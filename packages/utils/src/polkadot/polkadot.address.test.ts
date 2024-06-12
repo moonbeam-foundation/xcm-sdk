@@ -1,4 +1,6 @@
-import { describe, expect, it } from '@jest/globals';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
+
 import { getSovereignAccountAddresses } from './polkadot.address';
 
 describe('utils - polkadot address', () => {

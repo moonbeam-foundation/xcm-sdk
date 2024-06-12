@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
+
 import { TypeRegistry, U128 } from '@polkadot/types';
-import { describe, expect, it } from '@jest/globals';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import { BalanceBuilder } from './BalanceBuilder';
 
