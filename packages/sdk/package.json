@@ -64,8 +64,5 @@
     "@polkadot/util": "^12.6.2",
     "ethers": "^6.13.0",
     "viem": "^2.13.7"
-  },
-  "devDependencies": {
-    "vitest": "^1.6.0"
   }
 }

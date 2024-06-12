@@ -54,8 +54,7 @@
     "lru-cache": "^10.2.2"
   },
   "devDependencies": {
-    "@types/big.js": "^6.2.2",
-    "vitest": "^1.6.0"
+    "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
     "@polkadot/api": "^11.2.1",

@@ -59,8 +59,5 @@
     "@polkadot/types": "^11.2.1",
     "@polkadot/util": "^12.6.2",
     "@polkadot/util-crypto": "^12.6.2"
-  },
-  "devDependencies": {
-    "vitest": "^1.6.0"
   }
 }

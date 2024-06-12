@@ -53,8 +53,5 @@
   },
   "peerDependencies": {
     "viem": "^2.13.7"
-  },
-  "devDependencies": {
-    "vitest": "^1.6.0"
   }
 }

@@ -1,8 +1,8 @@
 ---
-'@moonbeam-network/xcm-builder': patch
-'@moonbeam-network/xcm-config': patch
-'@moonbeam-network/xcm-utils': patch
-'@moonbeam-network/xcm-sdk': patch
+'@moonbeam-network/xcm-builder': minor
+'@moonbeam-network/xcm-config': minor
+'@moonbeam-network/xcm-utils': minor
+'@moonbeam-network/xcm-sdk': minor
 ---
 
-Updated PolkadotJS dependencies
+Updated PolkadotJS dependencies to v11
