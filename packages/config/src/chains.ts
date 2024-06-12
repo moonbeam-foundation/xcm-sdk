@@ -408,86 +408,6 @@ export const equilibrium = new Parachain({
   ws: 'wss://node.pol.equilibrium.io',
 });
 
-export const hydraDX = new Parachain({
-  assetsData: [
-    {
-      asset: hdx,
-      id: 0,
-    },
-    {
-      asset: glmr,
-      id: 16,
-    },
-    {
-      asset: dai,
-      id: 18,
-    },
-    {
-      asset: usdcwh,
-      id: 21,
-    },
-    {
-      asset: usdtwh,
-      id: 23,
-    },
-    {
-      asset: wbtc,
-      id: 19,
-    },
-    {
-      asset: weth,
-      id: 20,
-    },
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
-  key: 'hydra-dx',
-  name: 'HydraDX',
-  parachainId: 2034,
-  ss58Format: 63,
-  ws: 'wss://hydradx-rpc.dwellir.com',
-});
-
-export const hydraDxAlphanet = new Parachain({
-  assetsData: [
-    {
-      asset: hdx,
-      decimals: 12,
-      id: 0,
-    },
-    {
-      asset: usdcwh,
-      decimals: 6,
-      id: 1000001,
-    },
-    {
-      asset: ftmwh,
-      decimals: 18,
-      id: 1000002,
-    },
-    {
-      asset: usdtwh,
-      decimals: 6,
-      id: 2,
-    },
-    {
-      asset: dev,
-      decimals: 18,
-      id: 1,
-    },
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
-  isTestChain: true,
-  key: 'hydra-dx-Alphanet',
-  name: 'HydraDX Alphanet',
-  parachainId: 2034,
-  ss58Format: 63,
-  ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
-});
-
 export const interlay = new Parachain({
   assetsData: [
     {
@@ -770,6 +690,7 @@ export const moonbaseAlpha = new EvmParachain({
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: 'https://moonbase.moonscan.io',
   genesisHash:
     '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
@@ -1260,6 +1181,7 @@ export const peaqAlphanet = new Parachain({
     },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: `https://polkadot.js.org/apps/?rpc=${encodeURIComponent('wss://moonbeam.peaq.network')}#/explorer/query`,
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   isTestChain: true,
@@ -1315,6 +1237,7 @@ export const peaqChain = new Parachain({
     },
   ],
   ecosystem: Ecosystem.Polkadot,
+  explorer: `https://polkadot.js.org/apps/?rpc=${encodeURIComponent('wss://peaq.api.onfinality.io/public-ws')}#/explorer/query`,
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   isTestChain: false,
@@ -1350,6 +1273,7 @@ export const peaqEvmAlphanet = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: `https://polkadot.js.org/apps/?rpc=${encodeURIComponent('wss://moonbeam.peaq.network')}#/explorer/query`,
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   id: 9990,
@@ -1416,6 +1340,7 @@ export const peaqEvm = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.Polkadot,
+  explorer: `https://peaq.subscan.io`,
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   id: 3338,
@@ -1752,6 +1677,100 @@ export const zeitgeist = new Parachain({
   ss58Format: 73,
   usesChainDecimals: true,
   ws: 'wss://zeitgeist-rpc.dwellir.com',
+});
+
+export const hydraDX = new Parachain({
+  assetsData: [
+    {
+      asset: hdx,
+      id: 0,
+    },
+    {
+      asset: glmr,
+      id: 16,
+    },
+    {
+      asset: dai,
+      id: 18,
+    },
+    {
+      asset: usdcwh,
+      id: 21,
+    },
+    {
+      asset: usdtwh,
+      id: 23,
+    },
+    {
+      asset: wbtc,
+      id: 19,
+    },
+    {
+      asset: weth,
+      id: 20,
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  explorer: `https://hydradx.subscan.io/block`,
+  genesisHash:
+    '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
+  key: 'hydra-dx',
+  name: 'HydraDX',
+  parachainId: 2034,
+  ss58Format: 63,
+  whConfig: {
+    isAutomaticPossible: false,
+    redeemChainId: moonbeam.id,
+    redeemChainName: moonbeam.name,
+    whName: moonbeam.name,
+  },
+  ws: 'wss://hydradx-rpc.dwellir.com',
+});
+
+export const hydraDxAlphanet = new Parachain({
+  assetsData: [
+    {
+      asset: hdx,
+      decimals: 12,
+      id: 0,
+    },
+    {
+      asset: usdcwh,
+      decimals: 6,
+      id: 1000001,
+    },
+    {
+      asset: ftmwh,
+      decimals: 18,
+      id: 1000002,
+    },
+    {
+      asset: usdtwh,
+      decimals: 6,
+      id: 2,
+    },
+    {
+      asset: dev,
+      decimals: 18,
+      id: 1,
+    },
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  explorer: `https://polkadot.js.org/apps/?rpc=${encodeURIComponent('wss://hydradx-moonbase-rpc.play.hydration.cloud')}#/explorer/query`,
+  genesisHash:
+    '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
+  isTestChain: true,
+  key: 'hydra-dx-Alphanet',
+  name: 'HydraDX Alphanet',
+  parachainId: 2034,
+  ss58Format: 63,
+  whConfig: {
+    isAutomaticPossible: false,
+    redeemChainId: moonbaseAlpha.id,
+    redeemChainName: moonbaseAlpha.name,
+    whName: moonbeam.name,
+  },
+  ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
 });
 
 export const chainsList: AnyChain[] = [

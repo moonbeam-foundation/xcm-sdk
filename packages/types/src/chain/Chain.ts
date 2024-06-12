@@ -7,7 +7,16 @@ export interface ChainConstructorParams {
   key: string;
   name: string;
   type: ChainType;
+  explorer?: string;
+  whConfig?: WhConfig;
 }
+
+export type WhConfig = {
+  isAutomaticPossible: boolean;
+  redeemChainId?: number;
+  redeemChainName?: string;
+  whName: string;
+};
 
 export abstract class Chain {
   readonly ecosystem?: Ecosystem;
@@ -20,18 +29,26 @@ export abstract class Chain {
 
   readonly type: ChainType;
 
+  readonly explorer?: string;
+
+  readonly whConfig?: WhConfig;
+
   constructor({
     ecosystem,
     isTestChain = false,
     key,
     name,
     type,
+    explorer,
+    whConfig,
   }: ChainConstructorParams) {
     this.ecosystem = ecosystem;
     this.isTestChain = isTestChain;
     this.key = key;
     this.name = name;
     this.type = type;
+    this.explorer = explorer;
+    this.whConfig = whConfig;
   }
 
   isParachain(): this is Parachain {
