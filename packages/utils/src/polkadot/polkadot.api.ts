@@ -1,4 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
+import { typesBundle } from '@polkadot/apps-config';
 import { LRUCache } from 'lru-cache';
 
 export enum MRLTypes {
@@ -35,6 +36,7 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
           _enum: { V1: MRLTypes.XcmRoutingUserAction },
         },
       },
+      typesBundle,
     });
 
   cache.set(ws, promise);
