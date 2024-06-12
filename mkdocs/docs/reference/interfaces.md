@@ -44,7 +44,7 @@ Defines an asset's key and symbol used on the asset's origin chain.
 Defines properties related to an asset, including `Asset` properties, the decimals and symbol of the asset, and the amount an associated source or destination address has of the asset.
 
 !!! note
-A few utility methods are available for working with the `AssetAmount` class that converts the amount to various formats. Please refer to the [Methods for Asset Conversions](./methods.md#asset-conversions) section.
+A few utility methods are available for working with the `AssetAmount` class that converts the amount to various formats. Please refer to the [Methods for Asset Conversions](./methods.md#asset-utilities) section.
 
 **Attributes**
 
@@ -557,6 +557,39 @@ Defines the source chain data for the transfer.
 
 ---
 
+## SDK Options
+
+### The SDK Options Object
+
+<div class="grid" markdown>
+<div markdown>
+Defines options to initialize the SDK, including EVM and Polkadot signers and a custom configuration service.
+
+**Attributes**
+
+- `evmSigner` ++"EvmSigner"++ [:material-link-variant:](#the-evm-signer-type) - The signer for transfers involving EVM chains
+- `polkadotSigner` ++"Signer | IKeyringPair"++ [:material-link-variant:](#the-polkadot-signer-type) - The signer for transfers involving non-EVM chains
+- `configService` ++"IConfigService"++ [:material-link-variant:](#the-config-service-object) - The custom configuration service
+
+</div>
+
+```js title="Example"
+// The Sdk Options object
+{
+  evmSigner: INSERT_EVM_SIGNER,
+  polkadotSigner: INSERT_POLKADOT_SIGNER,
+  configService: {
+    assets: INSERT_ASSETS_MAPPING,
+    chains: INSERT_CHAINS_MAPPING,
+    chainsConfig: INSERT_CHAIN_CONFIG_MAPPING,
+  }
+}
+```
+
+</div>
+
+---
+
 ## Signers
 
 ### The EVM Signer Type
@@ -604,3 +637,197 @@ const pair = keyring.addFromUri('INSERT_MNEMONIC');
 </div>
 
 ---
+
+## Configurations
+
+The interfaces in this section are primarily used for defining your own custom configuration source and adding or updating new asset and chain configurations to the XCM SDK. To learn how to add new configurations, please refer to the [Contribute to the XCM SDK](./../contribute.md) guide.
+
+### The Config Service Object
+
+<div class="grid" markdown>
+<div markdown>
+Defines a custom configuration service. This overrides the asset and chain configurations in the [xcm-config package](https://github.com/moonbeam-foundation/xcm-sdk/tree/main/packages/config){target=\_blank}, which is exposed by default by the SDK.
+
+**Attributes**
+
+- `assets` ++"Map<string, Asset>"++ [:material-link-variant:](#the-asset-object) - A list of the supported assets mapping each asset key to its corresponding `Asset` object
+- `chains` ++"Map<string, AnyChain>"++ [:material-link-variant:](#the-chain-object) - A list of the supported assets mapping each chain key to its corresponding `Chain` object
+- `chainsConfig` ++"Map<string, ChainConfig>"++ [:material-link-variant:](#the-chain-config-object) - A list of the supported chain configurations mapping each chain key to its corresponding `ChainConfig` object
+
+</div>
+
+```js title="Example"
+import { Keyring } from '@polkadot/api';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
+
+await cryptoWaitReady();
+const keyring = new Keyring({ type: 'sr25519' });
+const pair = keyring.addFromUri('INSERT_MNEMONIC');
+```
+
+## </div>
+
+### The Chain Config Object
+
+<div class="grid" markdown>
+<div markdown>
+Defines a chain's configurations, including information for each chain's supported assets.
+
+**Attributes**
+
+- `assets` ++"AssetConfig[]"++ [:material-link-variant:](#the-asset-object) - The supported asset configurations
+- `chain` ++"AnyChain"++ [:material-link-variant:](#the-chain-object) - The chain's properties
+
+</div>
+
+```js title="Example"
+// The Chain Config object
+// For configuring the Polkadot Asset Hub
+{
+  assets: [
+    ...new AssetConfig({
+      asset: usdt,
+      balance: BalanceBuilder().substrate().assets().account(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
+        .X2(),
+      fee: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
+      },
+      min: AssetMinBuilder().assets().asset(),
+    }),
+    ...
+  ],
+  chain: new Parachain({
+    assetsData: [
+      {
+        asset: usdt,
+        id: 1984,
+        palletInstance: 50,
+      },
+      ...
+    ],
+    ecosystem: Ecosystem.Polkadot,
+    genesisHash:
+      '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
+    key: 'Polkadot-asset-hub',
+    name: 'Polkadot Asset Hub',
+    parachainId: 1000,
+    ss58Format: 42,
+    ws: 'wss://polkadot-asset-hub-rpc.polkadot.io',
+  })
+}
+```
+
+## </div>
+
+### The Asset Config Object
+
+<div class="grid" markdown>
+<div markdown>
+Defines an asset's configurations for a source chain and includes information about the destination chain, associated fees for transferring the asset from the source chain to the destination chain, and builder functions that define how to transfer the asset.
+
+**Attributes**
+
+- `asset` ++"Asset"++ [:material-link-variant:](#the-asset-object) - The asset's key and origin symbol
+- `balance` ++"BalanceConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/balance/BalanceBuilder.interfaces.ts){target=\_blank} - The query builder for retrieving the balance of an asset for a given account
+- `contract` ++"ContractConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/contract/ContractBuilder.interfaces.ts){target=\_blank} - The contract call builder for a cross-chain transfer. This is specific to EVM chains that use contracts to interact with Substrate pallets for cross-chain transfers, such as [Moonbeam's X-Tokens precompiled contract](https://docs.moonbeam.network/builders/interoperability/xcm/xc20/send-xc20s/xtokens-precompile/)
+- `destination` ++"AnyChain"++ [:material-link-variant:](#the-chain-object) - The destination chain information
+- `destinationFee` ++"DestinationFeeConfig"++ - The destination chain fees
+- `extrinsic` ++"ExtrinsicConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/extrinsic/ExtrinsicBuilder.interfaces.ts){target=\_blank} - The extrinsic builder for a cross-chain transfer
+- `fee` ++"FeeAssetConfig"++ [:material-link-variant:](#the-fee-asset-config) - The source chain fees
+- `min` ++"AssetMinConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/asset-min/AssetMinBuilder.interfaces.ts){target=\_blank} - The query builder for retrieving the minimum amount of an asset required to be left in an account
+
+</div>
+
+```js title="Example"
+// The Asset Config object
+// For configuring USDT to be sent from
+// the Polkadot Asset Hub to Moonbeam
+{
+  asset: usdt,
+  balance: BalanceBuilder().substrate().assets().account(),
+  destination: moonbeam,
+  destinationFee: {
+    amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+    asset: usdt,
+    balance: BalanceBuilder().substrate().assets().account(),
+  },
+  extrinsic: ExtrinsicBuilder()
+    .polkadotXcm()
+    .limitedReserveTransferAssets()
+    .X2(),
+  fee: {
+    asset: dot,
+    balance: BalanceBuilder().substrate().system().account(),
+    xcmDeliveryFeeAmount,
+  },
+  min: AssetMinBuilder().assets().asset(),
+}
+```
+
+## </div>
+
+### The Fee Asset Config
+
+<div class="grid" markdown>
+<div markdown>
+Defines the fees for a particular asset on the source chain.
+
+**Attributes**
+
+- `asset` ++"Asset"++ [:material-link-variant:](#the-asset-object) - The asset's key and origin symbol
+- `balance` ++"BalanceConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/balance/BalanceBuilder.interfaces.ts){target=\_blank} - The query builder for retrieving the balance of an asset for a given account
+- `xcmDeliveryFeeAmount` ++"number"++ - The delivery fee amount for the cross-chain transfer
+
+</div>
+
+```js title="Example"
+// The Fee Asset Config object
+// For configuring USDT to be sent from
+// the Polkadot Asset Hub to Moonbeam
+{
+  asset: dot,
+  balance: BalanceBuilder().substrate().system().account(),
+  xcmDeliveryFeeAmount: 0.036,
+}
+```
+
+## </div>
+
+### The Destination Fee Asset Config
+
+<div class="grid" markdown>
+<div markdown>
+Defines the fees for a particular asset on the destination chain.
+
+**Attributes**
+
+- `asset` ++"Asset"++ [:material-link-variant:](#the-asset-object) - The asset's key and origin symbol
+- `balance` ++"BalanceConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/balance/BalanceBuilder.interfaces.ts){target=\_blank} - The query builder for retrieving the balance of an asset for a given account
+- `xcmDeliveryFeeAmount` ++"number"++ - The delivery fee amount for the cross-chain transfer
+- `amount` ++"number | FeeConfigBuilder"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/@moonbeam-network/xcm-sdk@2.2.3/packages/builder/src/fee/FeeBuilder.interfaces.ts){target=\_blank} - The fee amount or the query builder for retrieving the fee amount for the execution of the cross-chain transfer
+
+</div>
+
+```js title="Example"
+// The Desintation Fee Asset Config object
+// For configuring USDT to be sent from
+// the Polkadot Asset Hub to Moonbeam
+{
+  asset: dot,
+  balance: BalanceBuilder().substrate().system().account(),
+  amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+}
+```
+
+## </div>

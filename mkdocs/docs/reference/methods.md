@@ -31,7 +31,7 @@ The following sections cover the available methods in the XCM SDK.
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 console.log(sdkInstance);
 ```
 
@@ -258,7 +258,7 @@ console.log(transferData);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const assets = sdkInstance.assets();
 console.log(assets);
 ```
@@ -308,7 +308,7 @@ When building transfer data with the `Sdk().assets()` function, you'll use multi
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const sourceData = sdkInstance.assets().asset('dot');
 console.log(sourceData);
 ```
@@ -393,7 +393,7 @@ console.log(sourceData);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const destinationData = sdkInstance.assets().asset('dot').source('polkadot');
 console.log(destinationData);
 ```
@@ -463,7 +463,7 @@ console.log(destinationData);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferDataWithoutAccounts = sdkInstance
   .assets()
   .asset('dot')
@@ -513,7 +513,7 @@ console.log(transferDataWithoutAccounts);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')
@@ -701,7 +701,7 @@ None.
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')
@@ -895,7 +895,7 @@ console.log(swapData);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')
@@ -944,7 +944,7 @@ console.log(transferTxHash);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')
@@ -978,7 +978,225 @@ console.log(estimate);
 
 ---
 
-## Asset Conversions
+## Asset Utilities
+
+The `AssetAmount` class contains the following utility functions.
+
+### The From Asset Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`fromAsset()` - Creates an [`AssetAmount`](./interfaces.md#the-asset-amount-object) instance from an [`Asset`](<(./interfaces.md#the-asset-object)>) and some additional parameters.
+
+!!! note
+To use the `fromAsset` method, you'll need to import it from the [xcm-types package](https://github.com/moonbeam-foundation/xcm-sdk/tree/main/packages/types){target=\_blank}. To install the xcm-types package, run the following:
+
+    ```bash
+    npm i @moonbeam-network/xcm-types
+    ```
+
+**Parameters**
+
+- `asset` ++"AssetAmount"++ [:material-link-variant:](./interfaces.md#the-asset-amount-object) - An `AssetAmount` instance to compare
+- `params` ++"AssetAmountParams"++ - Additional parameters needed to create the `AssetAmount` instance. The `AssetAmountParams` are as follows:
+  - `amount` ++"bigint"++ - Identifies a particular amount of the asset (i.e., balance, minimum, maximum, etc.)
+  - `decimals` ++"number"++ - The number of decimals the asset has
+  - `symbol` ++"string"++ - The symbol of the asset
+
+**Returns**
+
+**Returns**
+
+- ++"AssetAmount"++ [:material-link-variant:](./interfaces.md#the-asset-amount-object) - The new `AssetAmount` instance
+
+</div>
+<div markdown>
+
+```js title="Example Usage"
+import { Asset, AssetAmount } from '@moonbeam-network/xcm-types';
+
+const dot = new Asset({
+  key: 'dot',
+  originSymbol: 'DOT',
+});
+const zeroAmount = AssetAmount.fromAsset(dot, {
+  amount: 0n,
+  decimals: 10,
+});
+```
+
+```js title="Response"
+{
+  key: 'dot',
+  originSymbol: 'DOT',
+  amount: 0n,
+  decimals: 10,
+  symbol: 'DOT'
+}
+```
+
+</div>
+</div>
+
+---
+
+### The Is Same Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`isSame()` - Compares two instances of [`AssetAmount`](./interfaces.md#the-asset-amount-object) and checks whether they have the same `name`, `symbol`, and `decimals` properties. This method does not compare the `amount` properties.
+
+**Parameters**
+
+- `asset` ++"AssetAmount"++ [:material-link-variant:](./interfaces.md#the-asset-amount-object) - An `AssetAmount` instance to compare
+
+**Returns**
+
+- ++"boolean"++ - `true` if the `AssetAmount` instances are the same or `false` if they are different
+
+</div>
+<div markdown>
+
+```js title="Example Usage"
+import { Sdk } from '@moonbeam-network/xcm-sdk';
+
+const sdkInstance = Sdk();
+const transferData = await sdkInstance
+  .assets()
+  .asset('dot')
+  .source('polkadot')
+  .destination('moonbeam')
+  .accounts(
+    INSERT_POLKADOT_ADDRESS, // Source chain address
+    INSERT_MOONBEAM_ADDRESS, // Destination chain address
+    {
+      evmSigner: INSERT_EVM_SIGNER,
+      polkadotSigner: INSERT_POLKADOT_SIGNER,
+    },
+  );
+
+const isSame = transferData.max.isSame(transferData.min);
+console.log(isSame);
+```
+
+```js title="Response"
+true;
+```
+
+</div>
+</div>
+
+---
+
+### The Is Equal Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`isEqual()` - Compares two instances of [`AssetAmount`](./interfaces.md#the-asset-amount-object) and checks whether they have all of the same properties. This compares the `name`, `symbol`, `decimals`, and `amount` properties.
+
+**Parameters**
+
+- `asset` ++"AssetAmount"++ [:material-link-variant:](./interfaces.md#the-asset-amount-object) - An `AssetAmount` instance to compare
+
+**Returns**
+
+- ++"boolean"++ - `true` if the `AssetAmount` instances are the same or `false` if they are different
+
+</div>
+<div markdown>
+
+```js title="Example Usage"
+import { Sdk } from '@moonbeam-network/xcm-sdk';
+
+const sdkInstance = Sdk();
+const transferData = await sdkInstance
+  .assets()
+  .asset('dot')
+  .source('polkadot')
+  .destination('moonbeam')
+  .accounts(
+    INSERT_POLKADOT_ADDRESS, // Source chain address
+    INSERT_MOONBEAM_ADDRESS, // Destination chain address
+    {
+      evmSigner: INSERT_EVM_SIGNER,
+      polkadotSigner: INSERT_POLKADOT_SIGNER,
+    },
+  );
+
+const isEqual = transferData.max.isEqual(transferData.min);
+console.log(isEqual);
+```
+
+```js title="Response"
+false;
+```
+
+</div>
+</div>
+
+---
+
+### The Copy With Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`copyWith()` - Creates a new instance of [`AssetAmount`](./interfaces.md#the-asset-amount-object) with properties of the original instance and overrides properties that are passed as options.
+
+**Parameters**
+
+- `params` ++"Partial<AssetAmountConstructorParams>"++ - The properties to apply to the new `AssetAmount` instance. The `AssetAmountConstructorParams` are as follows:
+  - `amount` ++"bigint"++ - Identifies a particular amount of the asset (i.e., balance, minimum, maximum, etc.)
+  - `decimals` ++"number"++ - The number of decimals the asset has
+  - `symbol` ++"string"++ - The symbol of the asset
+
+**Returns**
+
+- ++"AssetAmount"++ [:material-link-variant:](./interfaces.md#the-asset-amount-object) - The new `AssetAmount` instance
+
+</div>
+<div markdown>
+
+```js title="Example Usage"
+import { Sdk } from '@moonbeam-network/xcm-sdk';
+
+const sdkInstance = Sdk();
+const transferData = await sdkInstance
+  .assets()
+  .asset('dot')
+  .source('polkadot')
+  .destination('moonbeam')
+  .accounts(
+    INSERT_POLKADOT_ADDRESS, // Source chain address
+    INSERT_MOONBEAM_ADDRESS, // Destination chain address
+    {
+      evmSigner: INSERT_EVM_SIGNER,
+      polkadotSigner: INSERT_POLKADOT_SIGNER,
+    },
+  );
+
+const estimate = transferData.getEstimate(1);
+const estimateCopy = estimate.copyWith({ amount: 2 });
+console.log(estimateCopy);
+```
+
+```js title="Response"
+{
+  key: 'dot',
+  originSymbol: 'DOT',
+  amount: 2n,
+  decimals: 10,
+  symbol: 'DOT'
+}
+```
+
+</div>
+</div>
+
+---
 
 ### The To Decimal Method
 
@@ -1011,7 +1229,7 @@ console.log(estimate);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')
@@ -1061,7 +1279,7 @@ None.
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')
@@ -1120,7 +1338,7 @@ console.log(fee);
 ```js title="Example Usage"
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const transferData = await sdkInstance
   .assets()
   .asset('dot')

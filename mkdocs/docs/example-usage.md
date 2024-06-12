@@ -250,7 +250,7 @@ To get a list of all of the assets supported by the XCM SDK, you can instantiate
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const assets = sdkInstance.assets();
 
 console.log('The supported assets are as follows:');
@@ -266,7 +266,7 @@ To get a list of the supported assets for a particular [ecosystem](./reference/i
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const assets = sdkInstance.assets('polkadot');
 
 console.log(
@@ -284,7 +284,7 @@ To get a list of the supported [source](./reference/methods.md#the-source-method
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 const assets = sdkInstance.assets('polkadot');
 
 assets.assets.forEach((asset) => {
@@ -312,7 +312,7 @@ To get started, you'll use the [`Sdk`](./reference/methods.md#initialize-the-sdk
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 ```
 
 You can choose either method, as both will return the data necessary to initiate an asset transfer between the source and destination chains. Using `assets` will provide additional data along the way, including the list of supported assets and, once an asset is selected, the supported source and destination chains that can send and receive it.
@@ -361,7 +361,7 @@ An example of the steps described above to build the transfer data to transfer D
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 
 const fromPolkadot = async () => {
   const { assets, asset } = sdkInstance.assets();
@@ -405,7 +405,7 @@ If you don't need any of the asset or chain information, you can use the `getTra
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const sdkInstance = new Sdk();
+const sdkInstance = Sdk();
 
 const fromPolkadot = async () => {
   const data = await sdkInstance.getTransferData({
@@ -573,7 +573,7 @@ As you may have noticed in the example response, the transfer data contains info
 
 ## Transfer an Asset {: #transfer-an-asset }
 
-Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](./reference/methods.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 DOT, you could use `1000000000n` or `'0.1'`. You can use [asset conversion methods](./reference/methods.md#asset-conversions){target=\_blank}, like [`toDecimal`](./reference/methods.md#the-to-decimal-method) to convert the asset to decimal format.
+Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](./reference/methods.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 DOT, you could use `1000000000n` or `'0.1'`. You can use [asset conversion methods](./reference/methods.md#asset-utilities){target=\_blank}, like [`toDecimal`](./reference/methods.md#the-to-decimal-method) to convert the asset to decimal format.
 
 For this example, you can transfer twice the minimum amount required of DOT:
 

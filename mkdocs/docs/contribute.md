@@ -202,14 +202,14 @@ Assuming that all of the required pallets and methods are already supported, you
    ```ts
    import { INSERT_REQUIRED_BUILDERS } from '@moonbeam-network/xcm-builder';
    import { INSERT_REQUIRED_ASSETS } from '../assets';
-   import { INSERT_REQUIRED_CHAINS } from '../chains';
+   import { INSERT_SOURCE_CHAIN, INSERT_DESTINATION_CHAIN } from '../chains';
    import { AssetConfig } from '../types/AssetConfig';
    import { ChainConfig } from '../types/ChainConfig';
 
    // The chain config name should be formatted as: 'chainName' + 'Config'
    export const INSERT_CHAIN_CONFIG_NAME = new ChainConfig({
      assets: [], // In the next step, you'll add asset configs here
-     chain: INSERT_CHAIN, // The source chain
+     chain: INSERT_SOURCE_CHAIN, // The source chain
    });
    ```
 
