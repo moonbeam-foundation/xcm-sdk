@@ -2,9 +2,11 @@
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div>
-        <img class="moonbeam-foundation-logo" src="{{ 'assets/images/moonbeam-foundation-logo-light.webp#only-light'| url }}" alt="Moonbeam Foundation" width="192" height="75.65"/>
-        <img class="moonbeam-foundation-logo" src="{{ 'assets/images/moonbeam-foundation-logo-dark.webp#only-dark'| url }}" alt="Moonbeam Foundation" width="192" height="75.65"/>
-    </div>
+        <img class="moonbeam-foundation-logo" src="{{ 'assets/images/moonbeam-foundation-light.webp#only-light'| url }}"
+          alt="Moonbeam Foundation" width="192" height="75.65" />
+        <img class="moonbeam-foundation-logo" src="{{ 'assets/images/moonbeam-foundation-dark.webp#only-dark'| url }}"
+          alt="Moonbeam Foundation" width="192" height="75.65" />
+      </div>
       <div class="column">
         <div class="md-footer-copyright">
           {% if config.copyright %}
@@ -16,8 +18,8 @@
             <span> | </span>
             <a href="https://moonbeam.network/terms-of-use/" target="_blank">Terms of use</a>
           </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
-  </div>
 </footer>

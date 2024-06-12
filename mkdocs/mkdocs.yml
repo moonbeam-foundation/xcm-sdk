@@ -7,12 +7,13 @@ repo_url: https://github.com/moonbeam-foundation/xcm-sdk
 theme:
   name: material
   custom_dir: material-overrides
-  favicon: assets/images/Moonbeam-Favicon-50.webp
-  logo: assets/images/Moonbeam-Favicon-50.webp
+  favicon: assets/images/logo.webp
+  logo: assets/images/logo.webp
+  logo_dark_mode: assets/images/logo-dark.webp
   icon:
     repo: fontawesome/brands/github
   font:
-    text: Open Sans
+    text: Banana Grotesk
   palette:
     # Palette toggle for light mode
     - media: '(prefers-color-scheme: light)'
