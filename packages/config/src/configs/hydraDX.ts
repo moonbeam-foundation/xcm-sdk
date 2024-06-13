@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, hdx, usdcwh, usdtwh, wbtc, weth } from '../assets';
-import { hydraDX, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { hydraDX, moonbeam } from '../xcmChains';
 
 export const hydraDxConfig = new ChainConfig({
   assets: [

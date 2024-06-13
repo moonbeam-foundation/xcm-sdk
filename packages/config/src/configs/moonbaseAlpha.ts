@@ -13,6 +13,8 @@ import {
   unit,
   usdcwh,
 } from '../assets';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 import {
   alphanetAssetHub,
   alphanetRelay,
@@ -25,9 +27,7 @@ import {
   pendulumAlphanet,
   picassoAlphanet,
   turingAlphanet,
-} from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+} from '../xcmChains';
 
 export const moonbaseAlphaConfig = new ChainConfig({
   assets: [

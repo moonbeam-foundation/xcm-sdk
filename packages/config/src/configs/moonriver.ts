@@ -26,6 +26,8 @@ import {
   vmovr,
   xrt,
 } from '../assets';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 import {
   bifrostKusama,
   calamari,
@@ -46,9 +48,7 @@ import {
   shiden,
   tinkernet,
   turing,
-} from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+} from '../xcmChains';
 
 export const moonriverConfig = new ChainConfig({
   assets: [

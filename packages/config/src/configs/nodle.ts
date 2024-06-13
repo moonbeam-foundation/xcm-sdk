@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { nodl } from '../assets';
-import { moonbeam, nodle } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, nodle } from '../xcmChains';
 
 export const nodleConfig = new ChainConfig({
   assets: [

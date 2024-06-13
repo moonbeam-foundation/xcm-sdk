@@ -3,9 +3,9 @@ import {
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { alan, betaDEV, dev, ftmwh, usdcwh } from '../assets';
-import { moonbaseAlpha, moonbaseBeta } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbaseAlpha, moonbaseBeta } from '../xcmChains';
 
 export const moonbaseBetaConfig = new ChainConfig({
   assets: [

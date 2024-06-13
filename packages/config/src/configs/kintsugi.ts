@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { kbtc, kint } from '../assets';
-import { kintsugi, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { kintsugi, moonriver } from '../xcmChains';
 
 export const kintsugiConfig = new ChainConfig({
   assets: [

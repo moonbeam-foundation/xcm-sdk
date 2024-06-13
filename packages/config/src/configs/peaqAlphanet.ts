@@ -4,9 +4,9 @@ import {
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
-import { moonbaseAlpha, peaqAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbaseAlpha, peaqAlphanet } from '../xcmChains';
 
 export const peaqAlphanetConfig = new ChainConfig({
   assets: [

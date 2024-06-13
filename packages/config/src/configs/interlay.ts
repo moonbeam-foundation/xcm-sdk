@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, ibtc, intr } from '../assets';
-import { interlay, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { interlay, moonbeam } from '../xcmChains';
 
 export const interlayConfig = new ChainConfig({
   assets: [

@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { bnc, movr, vbnc, vksm, vmovr } from '../assets';
-import { bifrostKusama, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { bifrostKusama, moonriver } from '../xcmChains';
 
 export const bifrostKusamaConfig = new ChainConfig({
   assets: [

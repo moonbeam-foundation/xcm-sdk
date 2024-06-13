@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { sub } from '../assets';
-import { moonbeam, subsocial } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, subsocial } from '../xcmChains';
 
 export const subsocialConfig = new ChainConfig({
   assets: [

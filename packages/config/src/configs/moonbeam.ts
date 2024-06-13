@@ -39,6 +39,8 @@ import {
   weth,
   ztg,
 } from '../assets';
+import { AssetConfig } from '../types/AssetConfig';
+import { ChainConfig } from '../types/ChainConfig';
 import {
   acala,
   astar,
@@ -61,9 +63,7 @@ import {
   polkadotAssetHub,
   subsocial,
   zeitgeist,
-} from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+} from '../xcmChains';
 
 export const moonbeamConfig = new ChainConfig({
   assets: [

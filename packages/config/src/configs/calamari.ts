@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { kma, movr } from '../assets';
-import { calamari, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { calamari, moonriver } from '../xcmChains';
 
 export const calamariConfig = new ChainConfig({
   assets: [

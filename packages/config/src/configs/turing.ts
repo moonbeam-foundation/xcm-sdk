@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { movr, tur } from '../assets';
-import { moonriver, turing } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonriver, turing } from '../xcmChains';
 
 export const turingConfig = new ChainConfig({
   assets: [

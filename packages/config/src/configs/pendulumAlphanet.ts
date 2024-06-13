@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ampe, dev } from '../assets';
-import { moonbaseAlpha, pendulumAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbaseAlpha, pendulumAlphanet } from '../xcmChains';
 
 export const pendulumAlphanetConfig = new ChainConfig({
   assets: [

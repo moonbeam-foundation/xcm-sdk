@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { cfg } from '../assets';
-import { centrifuge, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { centrifuge, moonbeam } from '../xcmChains';
 
 export const centrifugeConfig = new ChainConfig({
   assets: [

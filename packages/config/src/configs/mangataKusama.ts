@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { mgx, movr } from '../assets';
-import { mangataKusama, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { mangataKusama, moonriver } from '../xcmChains';
 
 export const mangataKusamaConfig = new ChainConfig({
   assets: [

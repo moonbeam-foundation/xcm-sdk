@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { astr, glmr } from '../assets';
-import { astar, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { astar, moonbeam } from '../xcmChains';
 
 export const astarConfig = new ChainConfig({
   assets: [

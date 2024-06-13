@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { csm, movr } from '../assets';
-import { crustShadow, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { crustShadow, moonriver } from '../xcmChains';
 
 export const crustShadowConfig = new ChainConfig({
   assets: [

@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dot } from '../assets';
-import { moonbeam, polkadot } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, polkadot } from '../xcmChains';
 
 export const polkadotConfig = new ChainConfig({
   assets: [

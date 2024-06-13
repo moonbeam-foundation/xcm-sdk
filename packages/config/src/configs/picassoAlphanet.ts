@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { atom, dev, pica } from '../assets';
-import { moonbaseAlpha, picassoAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbaseAlpha, picassoAlphanet } from '../xcmChains';
 
 export const picassoAlphanetConfig = new ChainConfig({
   assets: [

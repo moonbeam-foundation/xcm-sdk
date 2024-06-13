@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { crab } from '../assets';
-import { darwiniaCrab, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { darwiniaCrab, moonriver } from '../xcmChains';
 
 export const darwiniaCrabConfig = new ChainConfig({
   assets: [

@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, pha } from '../assets';
-import { moonbeam, phala } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, phala } from '../xcmChains';
 
 export const phalaConfig = new ChainConfig({
   assets: [

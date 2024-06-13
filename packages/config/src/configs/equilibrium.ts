@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { eq, eqd, glmr } from '../assets';
-import { equilibrium, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { equilibrium, moonbeam } from '../xcmChains';
 
 export const equilibriumConfig = new ChainConfig({
   assets: [

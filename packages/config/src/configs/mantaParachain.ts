@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, manta } from '../assets';
-import { mantaParachain, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { mantaParachain, moonbeam } from '../xcmChains';
 
 export const mantaParachainConfig = new ChainConfig({
   assets: [

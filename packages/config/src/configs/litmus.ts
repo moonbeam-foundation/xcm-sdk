@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { lit } from '../assets';
-import { litmus, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { litmus, moonriver } from '../xcmChains';
 
 export const litmusConfig = new ChainConfig({
   assets: [

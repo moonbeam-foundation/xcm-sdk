@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, para } from '../assets';
-import { moonbeam, parallel } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, parallel } from '../xcmChains';
 
 export const parallelConfig = new ChainConfig({
   assets: [

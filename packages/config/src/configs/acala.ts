@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { aca, aseed, glmr, ldot } from '../assets';
-import { acala, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { acala, moonbeam } from '../xcmChains';
 
 export const acalaConfig = new ChainConfig({
   assets: [

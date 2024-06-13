@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, usdcwh, ztg } from '../assets';
-import { moonbeam, zeitgeist } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, zeitgeist } from '../xcmChains';
 
 export const zeitgeistConfig = new ChainConfig({
   assets: [
