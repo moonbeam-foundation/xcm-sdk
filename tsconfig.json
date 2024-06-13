@@ -18,10 +18,5 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
-  "ts-node": {
-    "moduleTypes": {
-      "jest.config.ts": "cjs"
-    }
-  },
   "exclude": ["node_modules", "dist", "build"]
 }

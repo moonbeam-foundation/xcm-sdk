@@ -13,18 +13,6 @@
     "project": "./tsconfig.json"
   },
   "ignorePatterns": ["**/build"],
-  "overrides": [
-    {
-      "files": ["**/*.test.ts"],
-      "plugins": ["jest"],
-      "extends": ["plugin:jest/all"],
-      "rules": {
-        "jest/prefer-expect-assertions": "off",
-        "jest/no-hooks": "off",
-        "import/no-extraneous-dependencies": "off"
-      }
-    }
-  ],
   "rules": {
     "prettier/prettier": "error",
     "sort-keys": ["error"],

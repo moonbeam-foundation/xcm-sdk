@@ -8,10 +8,9 @@
     "link": "npm ln",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest /src",
-    "test:watch": "npm test -- --watch",
-    "test:update": "npm test -- -u",
-    "test:ci": "npm test -- --ci",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:update": "vitest -u",
     "prepack": "prettier --write build/index.d.ts"
   },
   "repository": {

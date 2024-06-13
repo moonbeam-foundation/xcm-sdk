@@ -1,4 +1,708 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`sdk > getParachainBalances > should get expected balances for Centrifuge  for substrate address 1`] = `
+[
+  s {
+    "amount": 570000000000000000n,
+    "decimals": 18,
+    "key": "cfg",
+    "originSymbol": "CFG",
+    "symbol": "CFG",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Centrifuge 1`] = `
+[
+  s {
+    "amount": 570000000000000000n,
+    "decimals": 18,
+    "key": "cfg",
+    "originSymbol": "CFG",
+    "symbol": "CFG",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for HydraDX 1`] = `
+[
+  s {
+    "amount": 37000000000000n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 120n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+  s {
+    "amount": 1000000000000n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for HydraDX Alphanet 1`] = `
+[
+  s {
+    "amount": 178046239082538836n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+  s {
+    "amount": 3000000000000n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for HydraDX Alphanet for substrate address 1`] = `
+[
+  s {
+    "amount": 178046239082538836n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+  s {
+    "amount": 3000000000000n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for HydraDX for substrate address 1`] = `
+[
+  s {
+    "amount": 37000000000000n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 120n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+  s {
+    "amount": 1000000000000n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Moonbase Alpha 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+  s {
+    "amount": 1234567890000000000n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+  s {
+    "amount": 10000n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "unit",
+    "originSymbol": "Unit",
+    "symbol": "Unit",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "tur",
+    "originSymbol": "TUR",
+    "symbol": "TUR",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "tt1",
+    "originSymbol": "TT1",
+    "symbol": "TT1",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "pica",
+    "originSymbol": "PICA",
+    "symbol": "PICA",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "atom",
+    "originSymbol": "ATOM",
+    "symbol": "ATOM",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "otp",
+    "originSymbol": "OTP",
+    "symbol": "OTP",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "ampe",
+    "originSymbol": "AMPE",
+    "symbol": "AMPE",
+  },
+  s {
+    "amount": 10000000000000000n,
+    "decimals": 18,
+    "key": "alan",
+    "originSymbol": "ALAN",
+    "symbol": "ALAN",
+  },
+  s {
+    "amount": 6543210000000000000n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Moonbase Beta 1`] = `
+[
+  s {
+    "amount": 100000000000000000n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 1100000000000000000n,
+    "decimals": 18,
+    "key": "alan",
+    "originSymbol": "ALAN",
+    "symbol": "ALAN",
+  },
+  s {
+    "amount": 1100000000000000000n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Moonbeam 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "bncs",
+    "originSymbol": "BNCS",
+    "symbol": "BNCS",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "sub",
+    "originSymbol": "SUB",
+    "symbol": "SUB",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "ztg",
+    "originSymbol": "ZTG",
+    "symbol": "ZTG",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "fil",
+    "originSymbol": "FIL",
+    "symbol": "FIL",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "vmanta",
+    "originSymbol": "vMANTA",
+    "symbol": "vMANTA",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "vglmr",
+    "originSymbol": "vGLMR",
+    "symbol": "vGLMR",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "vfil",
+    "originSymbol": "vFIL",
+    "symbol": "vFIL",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "vdot",
+    "originSymbol": "vDOT",
+    "symbol": "vDOT",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "vastr",
+    "originSymbol": "vASTR",
+    "symbol": "vASTR",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "hdx",
+    "originSymbol": "HDX",
+    "symbol": "HDX",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "ded",
+    "originSymbol": "DED",
+    "symbol": "DED",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "pink",
+    "originSymbol": "PINK",
+    "symbol": "PINK",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdc",
+    "originSymbol": "USDC",
+    "symbol": "USDC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdt",
+    "originSymbol": "USDT",
+    "symbol": "USDT",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "ring",
+    "originSymbol": "RING",
+    "symbol": "RING",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "pha",
+    "originSymbol": "PHA",
+    "symbol": "PHA",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "pen",
+    "originSymbol": "PEN",
+    "symbol": "PEN",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "para",
+    "originSymbol": "PARA",
+    "symbol": "PARA",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "neuro",
+    "originSymbol": "NEURO",
+    "symbol": "NEURO",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 11,
+    "key": "nodl",
+    "originSymbol": "NODL",
+    "symbol": "NODL",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "manta",
+    "originSymbol": "MANTA",
+    "symbol": "MANTA",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "ldot",
+    "originSymbol": "LDOT",
+    "symbol": "LDOT",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 10,
+    "key": "intr",
+    "originSymbol": "INTR",
+    "symbol": "INTR",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "ibtc",
+    "originSymbol": "IBTC",
+    "symbol": "IBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 9,
+    "key": "eqd",
+    "originSymbol": "EQD",
+    "symbol": "EQD",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 9,
+    "key": "eq",
+    "originSymbol": "EQ",
+    "symbol": "EQ",
+  },
+  s {
+    "amount": 330000000n,
+    "decimals": 10,
+    "key": "dot",
+    "originSymbol": "DOT",
+    "symbol": "DOT",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "cfg",
+    "originSymbol": "CFG",
+    "symbol": "CFG",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "bnc",
+    "originSymbol": "BNC",
+    "symbol": "BNC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "aseed",
+    "originSymbol": "aSEED",
+    "symbol": "aSEED",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "astr",
+    "originSymbol": "ASTR",
+    "symbol": "ASTR",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 12,
+    "key": "aca",
+    "originSymbol": "ACA",
+    "symbol": "ACA",
+  },
+  s {
+    "amount": 1330000000000000000n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Peaq 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Peaq EVM 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for Peaq EVM Alphanet 1`] = `
+[
+  s {
+    "amount": 330000000000000000n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+  s {
+    "amount": 123000000000000000n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+]
+`;
 
 exports[`sdk getParachainBalances should get expected balances for Centrifuge  for substrate address 1`] = `
 [

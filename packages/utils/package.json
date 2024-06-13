@@ -9,10 +9,9 @@
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "typecheck": "tsc --noEmit",
-    "test": "jest /src",
-    "test:watch": "npm test -- --watch",
-    "test:update": "npm test -- -u",
-    "test:ci": "npm test -- --ci",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:update": "vitest -u",
     "prepack": "prettier --write build/index.d.ts"
   },
   "author": "moonbeam-foundation",
@@ -58,8 +57,8 @@
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "^10.10.1",
-    "@polkadot/apps-config": "^0.132.1",
-    "@polkadot/util": "^12.5.1"
+    "@polkadot/api": "^11.2.1",
+    "@polkadot/apps-config": "^0.138.1",
+    "@polkadot/util": "^12.6.2"
   }
 }
