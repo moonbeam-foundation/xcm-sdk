@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-builder
 
+## 2.3.0
+
+### Minor Changes
+
+- [#267](https://github.com/moonbeam-foundation/xcm-sdk/pull/267) [`e214548`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e214548fb5be6b6c153b165960805e0f5279aa26) Thanks [@ekenigs](https://github.com/ekenigs)! - Updated PolkadotJS dependencies to v11
+
+### Patch Changes
+
+- Updated dependencies [[`e214548`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e214548fb5be6b6c153b165960805e0f5279aa26)]:
+  - @moonbeam-network/xcm-utils@2.1.0
+  - @moonbeam-network/xcm-types@2.2.2
+
 ## 2.2.1
 
 ### Patch Changes
