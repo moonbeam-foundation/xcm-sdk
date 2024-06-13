@@ -21,6 +21,7 @@ import {
   neuro,
   nodl,
   para,
+  peaq,
   pen,
   pha,
   pink,
@@ -854,6 +855,21 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.000001,
         asset: wbtc,
         balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: peaq,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqChain,
+      destinationFee: {
+        amount: 0.1,
+        asset: peaq,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       fee: {
         asset: glmr,

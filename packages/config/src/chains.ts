@@ -769,6 +769,10 @@ export const moonbaseAlpha = new EvmParachain({
       id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
       metadataId: 0, // no metadata for ERC20 tokens
     },
+    {
+      asset: agng,
+      id: '75066649112131892397889252914026143264',
+    },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -922,6 +926,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: para,
       id: '32615670524745285411807346420584982855',
+    },
+    {
+      asset: peaq,
+      id: '314077021455772878282433861213184736939',
     },
     {
       asset: pha,
@@ -1269,7 +1277,7 @@ export const peaqAlphanet = new Parachain({
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   isTestChain: true,
   key: 'peaq-Alphanet',
-  name: 'Peaq Alphanet',
+  name: 'peaq Alphanet',
   parachainId: 3013,
   ss58Format: 42,
   ws: 'wss://moonbeam.peaq.network',
@@ -1324,7 +1332,7 @@ export const peaqChain = new Parachain({
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   isTestChain: false,
   key: 'peaq',
-  name: 'Peaq',
+  name: 'peaq',
   parachainId: 3338,
   ss58Format: 42,
   ws: 'wss://peaq.api.onfinality.io/public-ws',
@@ -1361,7 +1369,7 @@ export const peaqEvmAlphanet = new EvmParachain({
   isEvmSigner: true,
   isTestChain: true,
   key: 'peaq-evm-Alphanet',
-  name: 'Peaq EVM Alphanet',
+  name: 'peaq EVM Alphanet',
   nativeCurrency: {
     decimals: 18,
     name: agng.originSymbol,
@@ -1427,7 +1435,7 @@ export const peaqEvm = new EvmParachain({
   isEvmSigner: true,
   isTestChain: false,
   key: 'peaq-evm',
-  name: 'Peaq EVM',
+  name: 'peaq EVM',
   nativeCurrency: {
     decimals: 18,
     name: peaq.originSymbol,

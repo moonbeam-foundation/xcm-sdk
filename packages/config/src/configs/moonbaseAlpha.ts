@@ -1,5 +1,6 @@
 import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
+  agng,
   alan,
   ampe,
   atom,
@@ -301,6 +302,21 @@ export const moonbaseAlphaConfig = new ChainConfig({
         amount: 0.01,
         asset: ftmwh,
         balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: dev,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: agng,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: peaqAlphanet,
+      destinationFee: {
+        amount: 0.01,
+        asset: agng,
+        balance: BalanceBuilder().substrate().system().account(),
       },
       fee: {
         asset: dev,
