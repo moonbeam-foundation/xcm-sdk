@@ -202,6 +202,13 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Alph
 [
   e {
     "amount": 0n,
+    "decimals": 18,
+    "key": "agng",
+    "originSymbol": "AGNG",
+    "symbol": "AGNG",
+  },
+  e {
+    "amount": 0n,
     "decimals": 12,
     "key": "hdx",
     "originSymbol": "HDX",
@@ -322,6 +329,13 @@ exports[`sdk getParachainBalances should get expected balances for Moonbase Beta
 
 exports[`sdk getParachainBalances should get expected balances for Moonbeam 1`] = `
 [
+  e {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "peaq",
+    "originSymbol": "PEAQ",
+    "symbol": "PEAQ",
+  },
   e {
     "amount": 0n,
     "decimals": 12,
@@ -591,7 +605,61 @@ exports[`sdk getParachainBalances should get expected balances for Moonbeam 1`] 
 ]
 `;
 
-exports[`sdk getParachainBalances should get expected balances for Peaq 1`] = `
+exports[`sdk getParachainBalances should get expected balances for peaq 1`] = `
+[
+  e {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  e {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  e {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  e {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  e {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  e {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+  e {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "peaq",
+    "originSymbol": "PEAQ",
+    "symbol": "PEAQ",
+  },
+]
+`;
+
+exports[`sdk getParachainBalances should get expected balances for peaq EVM 1`] = `
 [
   e {
     "amount": 0n,
@@ -638,54 +706,7 @@ exports[`sdk getParachainBalances should get expected balances for Peaq 1`] = `
 ]
 `;
 
-exports[`sdk getParachainBalances should get expected balances for Peaq EVM 1`] = `
-[
-  e {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdtwh",
-    "originSymbol": "USDT.Wh",
-    "symbol": "USDT.Wh",
-  },
-  e {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "weth",
-    "originSymbol": "WETH",
-    "symbol": "WETH",
-  },
-  e {
-    "amount": 0n,
-    "decimals": 8,
-    "key": "wbtc",
-    "originSymbol": "WBTC",
-    "symbol": "WBTC",
-  },
-  e {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "dai",
-    "originSymbol": "DAI",
-    "symbol": "DAI",
-  },
-  e {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdcwh",
-    "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
-  },
-  e {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "glmr",
-    "originSymbol": "GLMR",
-    "symbol": "GLMR",
-  },
-]
-`;
-
-exports[`sdk getParachainBalances should get expected balances for Peaq EVM Alphanet 1`] = `
+exports[`sdk getParachainBalances should get expected balances for peaq EVM Alphanet 1`] = `
 [
   e {
     "amount": 330000000000000000n,
