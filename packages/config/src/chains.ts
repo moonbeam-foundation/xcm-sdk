@@ -1189,6 +1189,12 @@ export const peaqAlphanet = new Parachain({
   name: 'Peaq Alphanet',
   parachainId: 3013,
   ss58Format: 42,
+  whConfig: {
+    isAutomaticPossible: false,
+    redeemChainId: moonbaseAlpha.id,
+    redeemChainName: moonbaseAlpha.name,
+    whName: moonbeam.name,
+  },
   ws: 'wss://moonbeam.peaq.network',
 });
 
@@ -1245,6 +1251,12 @@ export const peaqChain = new Parachain({
   name: 'Peaq',
   parachainId: 3338,
   ss58Format: 42,
+  whConfig: {
+    isAutomaticPossible: false,
+    redeemChainId: moonbeam.id,
+    redeemChainName: moonbeam.name,
+    whName: moonbeam.name,
+  },
   ws: 'wss://peaq.api.onfinality.io/public-ws',
 });
 
@@ -1289,6 +1301,12 @@ export const peaqEvmAlphanet = new EvmParachain({
   parachainId: 3013,
   rpc: 'https://moonbeam.PEAQ.network',
   ss58Format: 42,
+  whConfig: {
+    isAutomaticPossible: false,
+    redeemChainId: moonbaseAlpha.id,
+    redeemChainName: moonbaseAlpha.name,
+    whName: moonbeam.name,
+  },
   ws: 'wss://moonbeam.peaq.network',
 });
 
@@ -1356,6 +1374,12 @@ export const peaqEvm = new EvmParachain({
   parachainId: 3338,
   rpc: 'https://peaq.api.onfinality.io/public',
   ss58Format: 42,
+  whConfig: {
+    isAutomaticPossible: false,
+    redeemChainId: moonbeam.id,
+    redeemChainName: moonbeam.name,
+    whName: moonbeam.name,
+  },
   ws: 'wss://peaq.api.onfinality.io/public-ws',
 });
 
