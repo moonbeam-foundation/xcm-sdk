@@ -704,6 +704,152 @@ exports[`sdk > getParachainBalances > should get expected balances for Peaq EVM 
 ]
 `;
 
+exports[`sdk > getParachainBalances > should get expected balances for peaq 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+  s {
+    "amount": 1313000000000000000n,
+    "decimals": 18,
+    "key": "peaq",
+    "originSymbol": "PEAQ",
+    "symbol": "PEAQ",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for peaq Alphanet 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+  s {
+    "amount": 1223300000000000000n,
+    "decimals": 18,
+    "key": "agng",
+    "originSymbol": "AGNG",
+    "symbol": "AGNG",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for peaq EVM 1`] = `
+[
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdtwh",
+    "originSymbol": "USDT.Wh",
+    "symbol": "USDT.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "weth",
+    "originSymbol": "WETH",
+    "symbol": "WETH",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtc",
+    "originSymbol": "WBTC",
+    "symbol": "WBTC",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "dai",
+    "originSymbol": "DAI",
+    "symbol": "DAI",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 6,
+    "key": "usdcwh",
+    "originSymbol": "USDC.Wh",
+    "symbol": "USDC.Wh",
+  },
+  s {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "glmr",
+    "originSymbol": "GLMR",
+    "symbol": "GLMR",
+  },
+]
+`;
+
+exports[`sdk > getParachainBalances > should get expected balances for peaq EVM Alphanet 1`] = `
+[
+  s {
+    "amount": 330000000000000000n,
+    "decimals": 18,
+    "key": "dev",
+    "originSymbol": "DEV",
+    "symbol": "DEV",
+  },
+  s {
+    "amount": 123000000000000000n,
+    "decimals": 18,
+    "key": "ftmwh",
+    "originSymbol": "FTM.wh",
+    "symbol": "FTM.wh",
+  },
+]
+`;
+
 exports[`sdk getParachainBalances should get expected balances for Centrifuge  for substrate address 1`] = `
 [
   e {
