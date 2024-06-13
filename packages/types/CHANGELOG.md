@@ -1,5 +1,12 @@
 # @moonbeam-network/xcm-types
 
+## 2.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`e214548`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e214548fb5be6b6c153b165960805e0f5279aa26)]:
+  - @moonbeam-network/xcm-utils@2.1.0
+
 ## 2.2.1
 
 ### Patch Changes

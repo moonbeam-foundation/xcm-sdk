@@ -1,5 +1,21 @@
 # @moonbeam-network/xcm-config
 
+## 2.3.0
+
+### Minor Changes
+
+- [#267](https://github.com/moonbeam-foundation/xcm-sdk/pull/267) [`e214548`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e214548fb5be6b6c153b165960805e0f5279aa26) Thanks [@ekenigs](https://github.com/ekenigs)! - Updated PolkadotJS dependencies to v11
+
+### Patch Changes
+
+- [#270](https://github.com/moonbeam-foundation/xcm-sdk/pull/270) [`f7bb225`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f7bb2253c2a45f1ada589ce55abc0601dd416dd8) Thanks [@Rihyx](https://github.com/Rihyx)! - Rename Peaq to peaq
+
+- [#269](https://github.com/moonbeam-foundation/xcm-sdk/pull/269) [`c0fdc40`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c0fdc4096fa94393f0cf8da9edad4749ae824a0b) Thanks [@mmaurello](https://github.com/mmaurello)! - Peaq token transfers between peaq and Moonbeam
+
+- Updated dependencies [[`e214548`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e214548fb5be6b6c153b165960805e0f5279aa26)]:
+  - @moonbeam-network/xcm-builder@2.3.0
+  - @moonbeam-network/xcm-types@2.2.2
+
 ## 2.2.3
 
 ### Patch Changes
