@@ -1,5 +1,4 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { describe, expect, it } from 'vitest';
 import {
   centrifuge,
   hydraDX,
@@ -7,10 +6,12 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
+  peaqAlphanet,
   peaqChain,
   peaqEvm,
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
+import { describe, expect, it } from 'vitest';
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
@@ -82,6 +83,14 @@ describe('sdk', () => {
       const result = await getParachainBalances(
         peaqEvmAlphanet,
         moonEvmAddress,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+    it(`should get expected balances for ${peaqAlphanet.name}`, async () => {
+      const result = await getParachainBalances(
+        peaqAlphanet,
+        peaqSubstrateAccount,
       );
 
       expect(result).toMatchSnapshot();
