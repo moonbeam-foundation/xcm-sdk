@@ -7,6 +7,7 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
+  peaqAlphanet,
   peaqChain,
   peaqEvm,
   peaqEvmAlphanet,
@@ -82,6 +83,14 @@ describe('sdk', () => {
       const result = await getParachainBalances(
         peaqEvmAlphanet,
         moonEvmAddress,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+    it(`should get expected balances for ${peaqAlphanet.name}`, async () => {
+      const result = await getParachainBalances(
+        peaqAlphanet,
+        peaqSubstrateAccount,
       );
 
       expect(result).toMatchSnapshot();
