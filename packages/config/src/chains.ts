@@ -768,6 +768,10 @@ export const moonbaseAlpha = new EvmParachain({
       id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
       metadataId: 0, // no metadata for ERC20 tokens
     },
+    {
+      asset: agng,
+      id: '75066649112131892397889252914026143264',
+    },
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -921,6 +925,10 @@ export const moonbeam = new EvmParachain({
     {
       asset: para,
       id: '32615670524745285411807346420584982855',
+    },
+    {
+      asset: peaq,
+      id: '314077021455772878282433861213184736939',
     },
     {
       asset: pha,
