@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ded, dot, pink, usdc, usdt } from '../assets';
-import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, polkadotAssetHub } from '../xcmChains';
 
 const xcmDeliveryFeeAmount = 0.036;
 

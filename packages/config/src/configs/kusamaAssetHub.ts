@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ksm, rmrk, usdt } from '../assets';
-import { kusamaAssetHub, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { kusamaAssetHub, moonriver } from '../xcmChains';
 
 const xcmDeliveryFeeAmount = 0.0015;
 

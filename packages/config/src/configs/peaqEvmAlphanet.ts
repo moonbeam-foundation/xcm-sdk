@@ -4,9 +4,9 @@ import {
   ContractBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
-import { moonbaseAlpha, peaqEvmAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbaseAlpha, peaqEvmAlphanet } from '../xcmChains';
 
 export const peaqEvmAlphanetConfig = new ChainConfig({
   assets: [

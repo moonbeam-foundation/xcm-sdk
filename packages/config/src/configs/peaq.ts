@@ -4,9 +4,9 @@ import {
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
-import { moonbeam, peaqChain } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, peaqChain } from '../xcmChains';
 
 export const peaqConfig = new ChainConfig({
   assets: [

@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ring } from '../assets';
-import { darwinia, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { darwinia, moonbeam } from '../xcmChains';
 
 export const darwiniaConfig = new ChainConfig({
   assets: [

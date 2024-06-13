@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { otp } from '../assets';
-import { moonbaseAlpha, originTrailAlphanet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbaseAlpha, originTrailAlphanet } from '../xcmChains';
 
 export const originTrailAlphanetConfig = new ChainConfig({
   assets: [

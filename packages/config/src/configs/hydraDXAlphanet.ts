@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dev, ftmwh, hdx, usdcwh } from '../assets';
-import { hydraDxAlphanet, moonbaseAlpha } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { hydraDxAlphanet, moonbaseAlpha } from '../xcmChains';
 
 // FIXME: has to be verified
 export const hydraDxAlphanetConfig = new ChainConfig({

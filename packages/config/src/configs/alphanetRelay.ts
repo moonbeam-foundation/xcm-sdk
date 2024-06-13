@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { unit } from '../assets';
-import { alphanetRelay, moonbaseAlpha } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { alphanetRelay, moonbaseAlpha } from '../xcmChains';
 
 export const alphanetRelayConfig = new ChainConfig({
   assets: [

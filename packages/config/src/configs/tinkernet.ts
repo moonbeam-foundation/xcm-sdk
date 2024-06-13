@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { tnkr } from '../assets';
-import { moonriver, tinkernet } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonriver, tinkernet } from '../xcmChains';
 
 export const tinkernetConfig = new ChainConfig({
   assets: [

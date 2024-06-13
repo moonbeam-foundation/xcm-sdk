@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
@@ -8,9 +9,13 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { describe, expect, it } from '@jest/globals';
 import { assetsList, dev, glmr, tt1, unit } from '../assets';
-import { hydraDX, moonbaseAlpha, moonbeam, pendulumAlphanet } from '../chains';
+import {
+  hydraDX,
+  moonbaseAlpha,
+  moonbeam,
+  pendulumAlphanet,
+} from '../xcmChains';
 import { ConfigService } from './ConfigService';
 
 import { AssetConfig } from '../types/AssetConfig';

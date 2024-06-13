@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { hko, movr } from '../assets';
-import { moonriver, parallelHeiko } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonriver, parallelHeiko } from '../xcmChains';
 
 export const parallelHeikoConfig = new ChainConfig({
   assets: [

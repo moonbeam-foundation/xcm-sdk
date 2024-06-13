@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { movr, pha } from '../assets';
-import { khala, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { khala, moonriver } from '../xcmChains';
 
 export const khalaConfig = new ChainConfig({
   assets: [

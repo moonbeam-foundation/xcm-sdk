@@ -1,9 +1,9 @@
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
-import { chainsMap } from '../chains';
 import { chainsConfigMap } from '../configs';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { chainsMap } from '../xcmChains';
 import { IConfigService } from './ConfigService.interfaces';
 
 export interface ConfigServiceOptions {

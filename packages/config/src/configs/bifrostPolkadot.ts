@@ -15,9 +15,9 @@ import {
   vglmr,
   vmanta,
 } from '../assets';
-import { bifrostPolkadot, moonbeam } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { bifrostPolkadot, moonbeam } from '../xcmChains';
 
 export const bifrostPolkadotConfig = new ChainConfig({
   assets: [

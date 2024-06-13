@@ -4,9 +4,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { neuro } from '../assets';
-import { moonbeam, neuroweb } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { moonbeam, neuroweb } from '../xcmChains';
 
 export const neurowebConfig = new ChainConfig({
   assets: [

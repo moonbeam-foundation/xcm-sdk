@@ -5,9 +5,9 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { aseed, kar, movr } from '../assets';
-import { karura, moonriver } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
+import { karura, moonriver } from '../xcmChains';
 
 export const karuraConfig = new ChainConfig({
   assets: [
