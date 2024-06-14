@@ -25,7 +25,7 @@ const cache = new LRUCache<string, Promise<ApiPromise>>({
 export async function getPolkadotApi(
   ws: string | string[],
 ): Promise<ApiPromise> {
-  const key = Array.isArray(ws) ? ws.join() : ws;
+  const key = Array.isArray(ws) ? ws.join(';') : ws;
   const promise =
     cache.get(key) ||
     ApiPromise.create({
