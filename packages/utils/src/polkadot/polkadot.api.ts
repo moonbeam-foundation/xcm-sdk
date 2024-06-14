@@ -22,9 +22,12 @@ const cache = new LRUCache<string, Promise<ApiPromise>>({
   },
 });
 
-export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
+export async function getPolkadotApi(
+  ws: string | string[],
+): Promise<ApiPromise> {
+  const key = Array.isArray(ws) ? ws.join() : ws;
   const promise =
-    cache.get(ws) ||
+    cache.get(key) ||
     ApiPromise.create({
       noInitWarn: true,
       provider: new WsProvider(ws),
@@ -39,7 +42,7 @@ export async function getPolkadotApi(ws: string): Promise<ApiPromise> {
       typesBundle,
     });
 
-  cache.set(ws, promise);
+  cache.set(key, promise);
 
   const api = await promise;
 
