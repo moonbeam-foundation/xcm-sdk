@@ -41,7 +41,6 @@ export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -52,7 +51,6 @@ export async function getSourceData({
   destinationFee,
   polkadot,
   sourceAddress,
-  evmSigner,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   const {
     asset,
@@ -173,7 +171,6 @@ export async function getSourceData({
     decimals: zeroFeeAmount.decimals,
     destinationFeeBalanceAmount,
     destinationFeeConfig: config.destinationFee,
-    evmSigner,
     extrinsic,
     feeConfig: config.fee,
     polkadot,
@@ -259,7 +256,6 @@ export interface GetFeeParams {
   contract?: ContractConfig;
   chain: AnyChain;
   decimals: number;
-  evmSigner?: EvmSigner;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
   destinationFeeConfig?: DestinationFeeConfig;
@@ -275,17 +271,12 @@ export async function getFee({
   decimals,
   destinationFeeConfig,
   destinationFeeBalanceAmount,
-  evmSigner,
   extrinsic,
   feeConfig,
   polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<bigint> {
   if (contract) {
-    if (!evmSigner) {
-      throw new Error('EVM Signer must be provided');
-    }
-
     if (
       destinationFeeConfig &&
       destinationFeeBalanceAmount &&
@@ -312,7 +303,6 @@ export async function getFee({
       chain: chain as EvmParachain,
       config: contract,
       decimals,
-      evmSigner,
     });
   }
 
@@ -340,20 +330,14 @@ export async function getContractFee({
   balance,
   config,
   decimals,
-  evmSigner,
   chain,
 }: {
   balance: bigint;
   config: ContractConfig;
   decimals: number;
-  evmSigner: EvmSigner;
   chain: EvmParachain;
 }): Promise<bigint> {
-  const contract = createContract(
-    config,
-    evmSigner,
-    chain,
-  ) as TransferContractInterface;
+  const contract = createContract(config, chain) as TransferContractInterface;
   const fee = await contract.getFee(balance);
 
   return convertDecimals(fee, 18, decimals);

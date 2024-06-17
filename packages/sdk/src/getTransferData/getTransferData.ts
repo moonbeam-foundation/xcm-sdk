@@ -48,7 +48,6 @@ export async function getTransferData({
   const source = await getSourceData({
     destinationAddress,
     destinationFee,
-    evmSigner,
     polkadot: srcPolkadot,
     sourceAddress,
     transferConfig,

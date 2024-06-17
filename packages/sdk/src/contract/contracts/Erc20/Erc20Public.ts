@@ -1,7 +1,7 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Chain, PublicClient, createPublicClient, http } from 'viem';
+import { Address, Chain, PublicClient, createPublicClient, http } from 'viem';
 import { BalanceContractInterface } from '../../contract.interfaces';
-import abi from './Erc20ABI.json';
+import { ERC20_ABI } from './Erc20ABI';
 
 export class Erc20Public implements BalanceContractInterface {
   readonly address: string;
@@ -26,9 +26,9 @@ export class Erc20Public implements BalanceContractInterface {
 
   async getBalance(): Promise<bigint> {
     const data = await this.#publicClient.readContract({
-      abi,
+      abi: ERC20_ABI,
       address: this.#config.address as `0x${string}`,
-      args: this.#config.args,
+      args: [this.#config.args[0] as Address],
       functionName: 'balanceOf',
     });
 
@@ -37,7 +37,7 @@ export class Erc20Public implements BalanceContractInterface {
 
   async getDecimals(): Promise<number> {
     const data = await this.#publicClient.readContract({
-      abi,
+      abi: ERC20_ABI,
       address: this.#config.address as `0x${string}`,
       functionName: 'decimals',
     });
