@@ -36,7 +36,7 @@ export class AssetAmount extends Asset {
     this.amount = BigInt(amount);
     this.decimals = decimals;
     this.symbol = symbol || this.originSymbol;
-    if (address) this.address = address;
+    this.address = address;
   }
 
   static fromAsset(asset: Asset, params: AssetAmountParams) {

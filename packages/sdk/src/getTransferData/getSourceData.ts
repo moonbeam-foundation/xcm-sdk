@@ -466,8 +466,8 @@ export async function getAssetsBalances({
 
       const chainAsset = chain.assetsData.get(asset.asset.key);
       const addressFromId =
-        isEvm && chainAsset && chainAsset.id
-          ? formatAssetIdToERC20(String(chainAsset?.id))
+        isEvm && typeof chainAsset?.id === 'string'
+          ? formatAssetIdToERC20(chainAsset?.id)
           : undefined;
 
       const assetAmount = AssetAmount.fromAsset(asset.asset, {

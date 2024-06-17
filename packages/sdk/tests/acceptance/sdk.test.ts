@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest';
 import {
   centrifuge,
   hydraDX,
@@ -13,7 +14,6 @@ import {
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import { AnyChain } from '@moonbeam-network/xcm-types';
-import { describe, expect, it } from 'vitest';
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
