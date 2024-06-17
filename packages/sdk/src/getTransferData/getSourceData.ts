@@ -18,6 +18,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import {
   convertDecimals,
+  formatAssetIdToERC20,
   toBigInt,
   toDecimal,
 } from '@moonbeam-network/xcm-utils';
@@ -432,6 +433,7 @@ export async function getAssetsBalances({
   assets,
   polkadot,
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
+  const isEvm = chain.isEvmParachain();
   const uniqueAssets = assets.reduce(
     (acc: AssetConfig[], asset: AssetConfig) => {
       if (!acc.some((a: AssetConfig) => a.asset.isEqual(asset.asset))) {
@@ -462,7 +464,14 @@ export async function getAssetsBalances({
         polkadot,
       });
 
+      const chainAsset = chain.assetsData.get(asset.asset.key);
+      const addressFromId =
+        isEvm && chainAsset && chainAsset.id
+          ? formatAssetIdToERC20(String(chainAsset?.id))
+          : undefined;
+
       const assetAmount = AssetAmount.fromAsset(asset.asset, {
+        address: addressFromId,
         amount: balance,
         decimals,
       });

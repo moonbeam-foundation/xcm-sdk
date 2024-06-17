@@ -8,6 +8,7 @@ export interface AssetAmountParams {
   amount: bigint;
   decimals: number;
   symbol?: string;
+  address?: string;
 }
 
 export interface AssetAmountConstructorParams
@@ -21,10 +22,13 @@ export class AssetAmount extends Asset {
 
   readonly symbol: string;
 
+  readonly address?: string;
+
   constructor({
     amount,
     decimals,
     symbol,
+    address,
     ...other
   }: AssetAmountConstructorParams) {
     super(other);
@@ -32,6 +36,7 @@ export class AssetAmount extends Asset {
     this.amount = BigInt(amount);
     this.decimals = decimals;
     this.symbol = symbol || this.originSymbol;
+    if (address) this.address = address;
   }
 
   static fromAsset(asset: Asset, params: AssetAmountParams) {

@@ -43,7 +43,7 @@ const config: { chain: AnyChain; address: string }[] = [
   { chain: peaqEvm, address: moonEvmAddress },
 ];
 
-describe('sdk', () => {
+describe.only('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
     describe.each(config)(
       'on $chain.name for address: $address',
