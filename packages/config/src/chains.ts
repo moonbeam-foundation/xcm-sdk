@@ -704,15 +704,18 @@ export const mantaParachain = new Parachain({
 export const moonbaseAlpha = new EvmParachain({
   assetsData: [
     {
+      address: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
       asset: alan,
       id: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xfFfFfffF7fee8415e1c2AC3A15C48D3546B95e16',
       asset: ampe,
       id: '170050401128744171791743427490841452054',
     },
     {
+      address: '0xffffffffb7cdb201c395c238350568f17cfbd3b5', // Picasso Cosmos Hub
       asset: atom,
       id: '244316754493307480955066032215622931381',
     },
@@ -721,54 +724,66 @@ export const moonbaseAlpha = new EvmParachain({
     //   id: '69536036667157951501899290870203586130',
     // },
     {
+      address: '0x0000000000000000000000000000000000000802',
       asset: dev,
       id: '0x0000000000000000000000000000000000000802',
       metadataId: 0,
       min: 0.01,
     },
     {
+      address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
       asset: lit,
       id: '65216491554813189869575508812319036608',
     },
     {
+      address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
       asset: otp,
       id: '238111524681612888331172110363070489924',
     },
     {
+      address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
       asset: paring,
       id: '173481220575862801646329923366065693029',
     },
     {
+      address: '0xFFFfFFFF10DD5Fd142163a40Ce0dae8c56e2801f',
       asset: pica,
       id: '22417088946346045371238623691600461855',
     },
     {
+      address: '0xfFffFfFf75976211C786fe4d73d2477e222786Ac',
       asset: tt1,
       id: '156305701417244550631956600137082963628',
     },
     {
+      address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
       asset: tur,
       id: '133300872918374599700079037156071917454',
     },
     {
+      address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       asset: unit,
       id: '42259045809535163221576417993425387648',
     },
     {
+      address: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
       asset: ftmwh,
       id: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
       asset: hdx,
       id: '69606720909260275826784788104880799692',
     },
     {
+      address: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
       asset: usdcwh,
       id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20',
       asset: agng,
       id: '75066649112131892397889252914026143264',
     },
@@ -840,171 +855,210 @@ export const moonbaseBeta = new EvmParachain({
 export const moonbeam = new EvmParachain({
   assetsData: [
     {
+      address: '0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f',
       asset: aca,
       id: '224821240862170613278369189818311486111',
     },
     {
+      address: '0xFfFFFfffA893AD19e540E172C10d78D4d479B5Cf',
       asset: astr,
       id: '224077081838586484055667086558292981199',
     },
     {
+      address: '0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda',
       asset: aseed,
       id: '110021739665376159354538090254163045594',
     },
     {
+      address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
       asset: bnc,
       id: '165823357460190568952172802245839421906',
     },
     {
+      address: '0xfFfffffF6aF229AE7f0F4e0188157e189a487D59',
       asset: bncs,
       id: '142155548796783636521833385094843759961',
     },
     {
+      address: '0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3',
       asset: cfg,
       id: '91372035960551235635465443179559840483',
     },
     {
+      address: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
       asset: dai,
       id: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6',
       asset: ded,
       id: '124463719055550872076363892993240202694',
     },
     {
+      address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       asset: dot,
       id: '42259045809535163221576417993425387648',
     },
     {
+      address: '0xFffFFfFf8f6267e040D8a0638C576dfBa4F0F6D6',
       asset: eq,
       id: '190590555344745888270686124937537713878',
     },
     {
+      address: '0xFFffFfFF8cdA1707bAF23834d211B08726B1E499',
       asset: eqd,
       id: '187224307232923873519830480073807488153',
     },
     {
+      address: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
       asset: fil,
       id: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0x0000000000000000000000000000000000000802',
       asset: glmr,
       id: '0x0000000000000000000000000000000000000802',
       min: 0.1,
     },
     {
+      address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
       asset: hdx,
       id: '69606720909260275826784788104880799692',
     },
     {
+      address: '0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52',
       asset: ibtc,
       id: '120637696315203257380661607956669368914',
     },
     {
+      address: '0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab',
       asset: intr,
       id: '101170542313601871197860408087030232491',
     },
     {
+      address: '0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4',
       asset: ldot,
       id: '225719522181998468294117309041779353812',
     },
     {
+      address: '0xfFFffFFf7D3875460d4509eb8d0362c611B4E841',
       asset: manta,
       id: '166446646689194205559791995948102903873',
     },
     {
+      address: '0xfffffffFe896ba7Cb118b9Fa571c6dC0a99dEfF1',
       asset: nodl,
       id: '309163521958167876851250718453738106865',
     },
     {
+      address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
       asset: neuro,
       id: '238111524681612888331172110363070489924',
     },
     {
+      address: '0xFfFffFFF18898CB5Fe1E88E668152B4f4052A947',
       asset: para,
       id: '32615670524745285411807346420584982855',
     },
     {
+      address: '0xFffFFFFFEC4908b74688a01374f789B48E9a3eab',
       asset: peaq,
       id: '314077021455772878282433861213184736939',
     },
     {
+      address: '0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED',
       asset: pha,
       id: '132685552157663328694213725410064821485',
     },
     {
+      address: '0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0',
       asset: pen,
       id: '45647473099451451833602657905356404688',
     },
     {
+      address: '0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f',
       asset: ring,
       id: '125699734534028342599692732320197985871',
     },
     {
+      address: '0xfFfFffFf43B4560Bc0C451a3386E082bff50aC90',
       asset: sub,
       id: '89994634370519791027168048838578580624',
     },
     {
+      address: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
       asset: usdc,
       id: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
       metadataId: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
     },
     {
+      address: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
       asset: usdcwh,
       id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
       asset: usdtwh,
       id: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
       metadataId: 0,
     },
     {
+      address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
       asset: usdt,
       id: '311091173110107856861649819128533077277',
     },
     {
+      address: '0xFffFffff55C732C47639231a4C4373245763d26E',
       asset: vastr,
       id: '0xFffFffff55C732C47639231a4C4373245763d26E',
       metadataId: '114018676402354620972806895487280206446', // registered XC20 id for ERC20 tokens
     },
     {
+      address: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
       asset: vdot,
       id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
       metadataId: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
     },
     {
+      address: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
       asset: vfil,
       id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
       metadataId: '272547899416482196831721420898811311297', // registered XC20 id for ERC20 tokens
     },
     {
+      address: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
       asset: vglmr,
       id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
       metadataId: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
     },
     {
+      address: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
       asset: vmanta,
       id: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
       metadataId: '289989900872525819559124583375550296953', // registered XC20 id for ERC20 tokens
     },
     {
+      address: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
       asset: wbtc,
       id: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
       asset: weth,
       id: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
       metadataId: 0, // no metadata for ERC20 tokens
     },
     {
+      address: '0xFFFFfffF71815ab6142E0E20c7259126C6B40612',
       asset: ztg,
       id: '150874409661081770150564009349448205842',
     },
     {
+      address: '0xfFfFFfFf30478fAFBE935e466da114E14fB3563d',
       asset: pink,
       id: '64174511183114006009298114091987195453',
     },
@@ -1030,105 +1084,130 @@ export const moonbeam = new EvmParachain({
 export const moonriver = new EvmParachain({
   assetsData: [
     {
+      address: '0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228',
       asset: aseed,
       id: '214920334981412447805621250067209749032',
     },
     {
+      address: '0xFFfFFfFFF075423be54811EcB478e911F22dDe7D',
       asset: bnc,
       id: '319623561105283008236062145480775032445',
     },
     {
+      address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
       asset: crab,
       id: '173481220575862801646329923366065693029',
     },
     {
+      address: '0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7',
       asset: csm,
       id: '108457044225666871745333730479173774551',
     },
     {
+      address: '0xffffffFF394054BCDa1902B6A6436840435655a3',
       asset: hko,
       id: '76100021443485661246318545281171740067',
     },
     {
+      address: '0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5',
       asset: kar,
       id: '10810581592933651521121702237638664357',
     },
     {
+      address: '0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0',
       asset: kbtc,
       id: '328179947973504579459046439826496046832',
     },
     {
+      address: '0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2',
       asset: kint,
       id: '175400718394635817552109270754364440562',
     },
     {
+      address: '0xFFffFffFA083189f870640b141ae1E882c2b5bad',
       asset: kma,
       id: '213357169630950964874127107356898319277',
     },
     {
+      address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       asset: ksm,
       id: '42259045809535163221576417993425387648',
     },
     {
+      address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
       asset: lit,
       id: '65216491554813189869575508812319036608',
     },
     {
+      address: '0xffFfFffF58d867EEa1Ce5126A4769542116324e9',
       asset: mgx,
       id: '118095707745084482624853002839493125353',
     },
     {
+      address: '0x0000000000000000000000000000000000000802',
       asset: movr,
       id: '0x0000000000000000000000000000000000000802',
       min: 0.01,
     },
     {
+      address: '0xffFfFFff8E6b63d9e447B6d4C45BDA8AF9dc9603',
       asset: pha,
       id: '189307976387032586987344677431204943363',
     },
     {
+      address: '0xFffFfFFf7dD9B9C60ac83e49D7E3E1f7A1370aD2',
       asset: pica,
       id: '167283995827706324502761431814209211090',
     },
     {
+      address: '0xffffffFF893264794d9d57E1E0E21E0042aF5A0A',
       asset: rmrk,
       id: '182365888117048807484804376330534607370',
     },
     {
+      address: '0xFFFfffFF0Ca324C842330521525E7De111F38972',
       asset: sdn,
       id: '16797826370226091782818345603793389938',
     },
     {
+      address: '0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e',
       asset: teer,
       id: '105075627293246237499203909093923548958',
     },
     {
+      address: '0xfFFfFffF683474B842852111cc31d470bD8f5081',
       asset: tnkr,
       id: '138512078356357941985706694377215053953',
     },
     {
+      address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
       asset: tur,
       id: '133300872918374599700079037156071917454',
     },
     {
+      address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
       asset: usdt,
       id: '311091173110107856861649819128533077277',
     },
     {
+      address: '0xFffFFffF51470Dca3dbe535bD2880a9CcDBc6Bd9',
       asset: xrt,
       id: '108036400430056508975016746969135344601',
     },
     {
+      address: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
       asset: vbnc,
       id: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
       metadataId: '72145018963825376852137222787619937732',
     },
     {
+      address: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
       asset: vksm,
       id: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
       metadataId: '264344629840762281112027368930249420542',
     },
     {
+      address: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
       asset: vmovr,
       id: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
       metadataId: '203223821023327994093278529517083736593',
@@ -1340,6 +1419,7 @@ export const peaqEvmAlphanet = new EvmParachain({
       decimals: 18,
     },
     {
+      address: '0xFfFfFffF000000000000000000000000000003e8',
       asset: dev,
       decimals: 18,
       id: '0xFfFfFffF000000000000000000000000000003e8',
@@ -1347,6 +1427,7 @@ export const peaqEvmAlphanet = new EvmParachain({
       minId: 1000,
     },
     {
+      address: '0xFffFffFF000000000000000000000000000003E9',
       asset: ftmwh,
       decimals: 18,
       id: '0xFffFffFF000000000000000000000000000003E9',
@@ -1383,6 +1464,7 @@ export const peaqEvm = new EvmParachain({
       decimals: 18,
     },
     {
+      address: '0xFfFfFffF000000000000000000000000000003e8',
       asset: glmr,
       decimals: 18,
       id: '0xFfFfFffF000000000000000000000000000003e8',
@@ -1390,30 +1472,35 @@ export const peaqEvm = new EvmParachain({
       minId: 1000,
     },
     {
+      address: '0xFffFffFF000000000000000000000000000003E9',
       asset: usdcwh,
       id: '0xFffFffFF000000000000000000000000000003E9',
       metadataId: 1001,
       minId: 1001,
     },
     {
+      address: '0xFFFfFfFf000000000000000000000000000003ea',
       asset: weth,
       id: '0xFFFfFfFf000000000000000000000000000003ea',
       metadataId: 1002,
       minId: 1002,
     },
     {
+      address: '0xfffFFFFF000000000000000000000000000003eb',
       asset: wbtc,
       id: '0xfffFFFFF000000000000000000000000000003eb',
       metadataId: 1003,
       minId: 1003,
     },
     {
+      address: '0xfFffFFFF000000000000000000000000000003Ec',
       asset: dai,
       id: '0xfFffFFFF000000000000000000000000000003Ec',
       metadataId: 1004,
       minId: 1004,
     },
     {
+      address: '0xfFffffFF000000000000000000000000000003Ed',
       asset: usdtwh,
       id: '0xfFffffFF000000000000000000000000000003Ed',
       metadataId: 1005,
