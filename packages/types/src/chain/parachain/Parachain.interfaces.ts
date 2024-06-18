@@ -8,6 +8,7 @@ export type ChainAssetId =
 
 export interface ChainAssetsData {
   asset: Asset;
+  address?: string;
   balanceId?: ChainAssetId;
   decimals?: number;
   id?: ChainAssetId;
