@@ -26,7 +26,6 @@ import {
   BalanceContractInterface,
   TransferContractInterface,
   createContract,
-  createContractWithoutSigner,
 } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
@@ -227,10 +226,7 @@ export async function getFeeBalance({
   }) as SubstrateQueryConfig;
 
   if (cfg.type === CallType.Evm) {
-    const contract = createContractWithoutSigner(
-      cfg,
-      chain as EvmParachain,
-    ) as BalanceContractInterface;
+    const contract = createContract(chain, cfg) as BalanceContractInterface;
 
     const decimalsFromContract = await contract.getDecimals();
     const balanceFromContract = await contract.getBalance();
@@ -337,7 +333,7 @@ export async function getContractFee({
   decimals: number;
   chain: EvmParachain;
 }): Promise<bigint> {
-  const contract = createContract(config, chain) as TransferContractInterface;
+  const contract = createContract(chain, config) as TransferContractInterface;
   const fee = await contract.getFee(balance);
 
   return convertDecimals(fee, 18, decimals);

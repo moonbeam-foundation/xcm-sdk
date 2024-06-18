@@ -1,22 +1,20 @@
 import { CallType } from '../builder.interfaces';
 import { BaseConfig, BaseConfigConstructorParams } from '../types/BaseConfig';
 
-export interface ContractConfigConstructorParams<Args extends unknown[]>
+export interface ContractConfigConstructorParams
   extends Omit<BaseConfigConstructorParams, 'type'> {
-  args: Args;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  args: any[];
   address?: string;
 }
 
-export class ContractConfig<Args extends unknown[]> extends BaseConfig {
-  readonly args: Args;
+export class ContractConfig extends BaseConfig {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly args: any[];
 
   readonly address?: string;
 
-  constructor({
-    args,
-    address,
-    ...other
-  }: ContractConfigConstructorParams<Args>) {
+  constructor({ args, address, ...other }: ContractConfigConstructorParams) {
     super({ ...other, type: CallType.Evm });
 
     this.args = args;

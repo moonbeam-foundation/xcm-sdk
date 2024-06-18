@@ -123,9 +123,9 @@ export async function getTransferData({
 
         return (
           createContract(
+            chain,
             contract,
             evmSigner,
-            chain,
           ) as TransferContractInterface
         )
           .transfer()

@@ -15,4 +15,5 @@ export interface ChainAssetsData {
   minId?: ChainAssetId;
   palletInstance?: number;
   min?: number;
+  addrss?: string;
 }

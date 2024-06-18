@@ -1,52 +1,51 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import {
   Address,
-  GetContractReturnType,
+  HttpTransport,
   PublicClient,
   createPublicClient,
-  getContract,
   http,
 } from 'viem';
-import { EvmSigner } from '../../../sdk.interfaces';
+import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { BalanceContractInterface } from '../../contract.interfaces';
 import { ERC20_ABI } from './Erc20ABI';
 
-type Erc20Contract = GetContractReturnType<typeof ERC20_ABI, PublicClient>;
-
 export class Erc20 implements BalanceContractInterface {
-  readonly address: string;
+  readonly address: Address;
 
   readonly #config: ContractConfig;
 
-  readonly #contract: Erc20Contract;
+  readonly #client: PublicClient<HttpTransport>;
 
-  constructor(config: ContractConfig, signer: EvmSigner) {
+  constructor(config: ContractConfig, chain: EvmParachain) {
     if (!config.address) {
       throw new Error('Contract address is required');
     }
 
-    this.address = config.address;
+    this.address = config.address as Address;
     this.#config = config;
-    this.#contract = getContract({
-      abi: ERC20_ABI,
-      address: this.address as `0x${string}`,
-      client: {
-        public: createPublicClient({
-          chain: signer.chain,
-          transport: http(),
-        }),
-        wallet: signer,
-      },
+    this.#client = createPublicClient({
+      chain: chain.getViemChain(),
+      transport: http(),
     });
   }
 
   async getBalance(): Promise<bigint> {
     const address = this.#config.args[0] as Address;
 
-    return this.#contract.read.balanceOf([address]);
+    return this.#client.readContract({
+      abi: ERC20_ABI,
+      address: this.address,
+      args: [address],
+      functionName: 'balanceOf',
+    });
   }
 
   async getDecimals(): Promise<number> {
-    return this.#contract.read.decimals();
+    return this.#client.readContract({
+      abi: ERC20_ABI,
+      address: this.address,
+      functionName: 'decimals',
+    });
   }
 }
