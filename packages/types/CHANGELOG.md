@@ -1,5 +1,18 @@
 # @moonbeam-network/xcm-types
 
+## 2.2.3
+
+### Patch Changes
+
+- [#277](https://github.com/moonbeam-foundation/xcm-sdk/pull/277) [`49b762d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/49b762dbe5882233d0e20ef51d82f92b94888bbe) Thanks [@Rihyx](https://github.com/Rihyx)! - Add ERC20 token addresses
+
+- [#273](https://github.com/moonbeam-foundation/xcm-sdk/pull/273) [`d91de57`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d91de57c34e66356e3b08c13c7f316464b5be670) Thanks [@ekenigs](https://github.com/ekenigs)! - Multiple WS urls for PolkadotJS API
+
+- [#278](https://github.com/moonbeam-foundation/xcm-sdk/pull/278) [`b032066`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b032066a07428607b75e6cb6f2a5e9f1e5d78b4f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update Vime and fix vulnerability
+
+- Updated dependencies [[`d91de57`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d91de57c34e66356e3b08c13c7f316464b5be670), [`b032066`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b032066a07428607b75e6cb6f2a5e9f1e5d78b4f)]:
+  - @moonbeam-network/xcm-utils@2.1.1
+
 ## 2.2.2
 
 ### Patch Changes
