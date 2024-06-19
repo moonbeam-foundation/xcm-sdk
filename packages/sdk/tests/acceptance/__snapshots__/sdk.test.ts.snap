@@ -24,7 +24,7 @@ exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '5FtGz8bgoCQ6
 ]
 `;
 
-exports[`sdk > getParachainBalances > on 'HydraDX Alphanet' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
+exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
   a {
     "amount": 178046239082538836n,
@@ -57,7 +57,7 @@ exports[`sdk > getParachainBalances > on 'HydraDX Alphanet' for address: '5FtGz8
 ]
 `;
 
-exports[`sdk > getParachainBalances > on 'HydraDX Alphanet' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
+exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
 [
   a {
     "amount": 178046239082538836n,
@@ -90,7 +90,7 @@ exports[`sdk > getParachainBalances > on 'HydraDX Alphanet' for address: '7MR8Qx
 ]
 `;
 
-exports[`sdk > getParachainBalances > on 'HydraDX' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
+exports[`sdk > getParachainBalances > on 'Hydration' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
   a {
     "amount": 37000000000000n,
@@ -144,7 +144,7 @@ exports[`sdk > getParachainBalances > on 'HydraDX' for address: '5FtGz8bgoCQ6pNA
 ]
 `;
 
-exports[`sdk > getParachainBalances > on 'HydraDX' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
+exports[`sdk > getParachainBalances > on 'Hydration' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
 [
   a {
     "amount": 37000000000000n,

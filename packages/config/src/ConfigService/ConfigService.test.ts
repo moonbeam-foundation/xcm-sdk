@@ -12,7 +12,12 @@ import {
   Parachain,
 } from '@moonbeam-network/xcm-types';
 import { assetsList, dev, glmr, tt1, unit } from '../assets';
-import { hydraDX, moonbaseAlpha, moonbeam, pendulumAlphanet } from '../chains';
+import {
+  hydration,
+  moonbaseAlpha,
+  moonbeam,
+  pendulumAlphanet,
+} from '../chains';
 import { ConfigService } from './ConfigService';
 
 import { AssetConfig } from '../types/AssetConfig';
@@ -167,11 +172,11 @@ describe('config service', () => {
 
       const chainConfig = new ChainConfig({
         assets: [assetConfig],
-        chain: hydraDX,
+        chain: hydration,
       });
 
       configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainConfig(hydraDX);
+      const updated = configService.getChainConfig(hydration);
       expect(updated.getAssetsConfigs()).toStrictEqual(
         chainConfig.getAssetsConfigs(),
       );
