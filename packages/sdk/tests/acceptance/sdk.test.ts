@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 import {
@@ -7,98 +8,52 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
+  peaqAlphanet,
   peaqChain,
   peaqEvm,
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
+import { AnyChain } from '@moonbeam-network/xcm-types';
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
 const hydraDXAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
-const centrifugeAddress = '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb';
 const moonEvmAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
-const moonbaseBetaAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
-const peaqSubstrateAccount = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
+
+const config: { chain: AnyChain; address: string }[] = [
+  { chain: moonbeam, address: moonEvmAddress },
+  { chain: hydraDX, address: hydraDXAddress },
+  { chain: hydraDX, address: substrateAddress },
+  {
+    chain: centrifuge,
+    address: '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb',
+  },
+  { chain: centrifuge, address: substrateAddress },
+  { chain: hydraDxAlphanet, address: hydraDXAddress },
+  { chain: hydraDxAlphanet, address: substrateAddress },
+  {
+    chain: moonbaseBeta,
+    address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',
+  },
+  { chain: moonbaseAlpha, address: moonEvmAddress },
+  { chain: peaqEvmAlphanet, address: moonEvmAddress },
+  { chain: peaqAlphanet, address: substrateAddress },
+  { chain: peaqChain, address: substrateAddress },
+  { chain: peaqEvm, address: moonEvmAddress },
+];
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
-    it(`should get expected balances for ${moonbeam.name}`, async () => {
-      const result = await getParachainBalances(moonbeam, moonEvmAddress);
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${hydraDX.name}`, async () => {
-      const result = await getParachainBalances(hydraDX, hydraDXAddress);
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${hydraDX.name} for substrate address`, async () => {
-      const result = await getParachainBalances(hydraDX, substrateAddress);
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${centrifuge.name}`, async () => {
-      const result = await getParachainBalances(centrifuge, centrifugeAddress);
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${centrifuge.name}  for substrate address`, async () => {
-      const result = await getParachainBalances(centrifuge, substrateAddress);
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${hydraDxAlphanet.name}`, async () => {
-      const result = await getParachainBalances(
-        hydraDxAlphanet,
-        hydraDXAddress,
-      );
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${hydraDxAlphanet.name} for substrate address`, async () => {
-      const result = await getParachainBalances(
-        hydraDxAlphanet,
-        substrateAddress,
-      );
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${moonbaseBeta.name}`, async () => {
-      const result = await getParachainBalances(
-        moonbaseBeta,
-        moonbaseBetaAddress,
-      );
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${moonbaseAlpha.name}`, async () => {
-      const result = await getParachainBalances(moonbaseAlpha, moonEvmAddress);
-
-      expect(result).toMatchSnapshot();
-    });
-
-    it(`should get expected balances for ${peaqEvmAlphanet.name}`, async () => {
-      const result = await getParachainBalances(
-        peaqEvmAlphanet,
-        moonEvmAddress,
-      );
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${peaqChain.name}`, async () => {
-      const result = await getParachainBalances(
-        peaqChain,
-        peaqSubstrateAccount,
-      );
-
-      expect(result).toMatchSnapshot();
-    });
-    it(`should get expected balances for ${peaqEvm.name}`, async () => {
-      const result = await getParachainBalances(peaqEvm, moonEvmAddress);
-
-      expect(result).toMatchSnapshot();
-    });
+    describe.each(config)(
+      'on $chain.name for address: $address',
+      ({ chain, address }) => {
+        it(`should get expected balances`, async () => {
+          const result = await getParachainBalances(chain, address);
+          expect(result).toMatchSnapshot();
+        });
+      },
+    );
   });
 });
 

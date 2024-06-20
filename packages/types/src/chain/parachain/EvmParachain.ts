@@ -58,7 +58,7 @@ export class EvmParachain extends Parachain {
       rpcUrls: {
         default: {
           http: [this.rpc],
-          webSocket: [this.ws],
+          webSocket: Array.isArray(this.ws) ? this.ws : [this.ws],
         },
       },
     });

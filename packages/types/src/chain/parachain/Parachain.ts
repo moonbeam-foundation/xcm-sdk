@@ -12,7 +12,7 @@ export interface ParachainConstructorParams
   ss58Format: number;
   usesChainDecimals?: boolean;
   weight?: number;
-  ws: string;
+  ws: string | string[];
 }
 
 export class Parachain extends Chain {
@@ -28,7 +28,7 @@ export class Parachain extends Chain {
 
   readonly weight: number | undefined;
 
-  readonly ws: string;
+  readonly ws: string | string[];
 
   constructor({
     assetsData,
