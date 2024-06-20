@@ -1380,7 +1380,9 @@ export const peaqEvm = new EvmParachain({
   assetsData: [
     {
       asset: peaq,
-      decimals: 18,
+      // decimals: 18,
+      id: '0x0000000000000000000000000000000000000809',
+      metadataId: 0,
     },
     {
       asset: glmr,
