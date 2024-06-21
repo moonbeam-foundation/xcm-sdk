@@ -1263,7 +1263,7 @@ export const neuroweb = new Parachain({
   name: 'NeuroWeb',
   parachainId: 2043,
   ss58Format: 101,
-  ws: 'wss://origintrail-rpc.dwellir.com',
+  ws: 'wss://neuroweb-rpc.dwellir.com',
 });
 
 export const originTrailAlphanet = new Parachain({
