@@ -1,5 +1,29 @@
 # @moonbeam-network/xcm-config
 
+## 2.4.1
+
+### Patch Changes
+
+- [#281](https://github.com/moonbeam-foundation/xcm-sdk/pull/281) [`b33b190`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b33b1901720d928e2227a4f88a9347763eb98356) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Neuroweb ws endpoint and reduce USDT fees
+
+## 2.4.0
+
+### Minor Changes
+
+- [#279](https://github.com/moonbeam-foundation/xcm-sdk/pull/279) [`453c481`](https://github.com/moonbeam-foundation/xcm-sdk/commit/453c48145c636f7257f24442a9e9cb0d1a6ef913) Thanks [@mmaurello](https://github.com/mmaurello)! - Rename Hydra DX to Hydration
+
+## 2.3.1
+
+### Patch Changes
+
+- [#277](https://github.com/moonbeam-foundation/xcm-sdk/pull/277) [`49b762d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/49b762dbe5882233d0e20ef51d82f92b94888bbe) Thanks [@Rihyx](https://github.com/Rihyx)! - Add ERC20 token addresses
+
+- [#278](https://github.com/moonbeam-foundation/xcm-sdk/pull/278) [`b032066`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b032066a07428607b75e6cb6f2a5e9f1e5d78b4f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update Vime and fix vulnerability
+
+- Updated dependencies [[`49b762d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/49b762dbe5882233d0e20ef51d82f92b94888bbe), [`d91de57`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d91de57c34e66356e3b08c13c7f316464b5be670), [`b032066`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b032066a07428607b75e6cb6f2a5e9f1e5d78b4f)]:
+  - @moonbeam-network/xcm-types@2.2.3
+  - @moonbeam-network/xcm-builder@2.3.1
+
 ## 2.3.0
 
 ### Minor Changes

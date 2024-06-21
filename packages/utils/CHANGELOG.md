@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-utils
 
+## 2.1.1
+
+### Patch Changes
+
+- [#273](https://github.com/moonbeam-foundation/xcm-sdk/pull/273) [`d91de57`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d91de57c34e66356e3b08c13c7f316464b5be670) Thanks [@ekenigs](https://github.com/ekenigs)! - Multiple WS urls for PolkadotJS API
+
+- [#278](https://github.com/moonbeam-foundation/xcm-sdk/pull/278) [`b032066`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b032066a07428607b75e6cb6f2a5e9f1e5d78b4f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update Vime and fix vulnerability
+
 ## 2.1.0
 
 ### Minor Changes

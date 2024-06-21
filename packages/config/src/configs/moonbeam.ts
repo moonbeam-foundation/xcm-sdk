@@ -47,7 +47,7 @@ import {
   centrifuge,
   darwinia,
   equilibrium,
-  hydraDX,
+  hydration,
   interlay,
   mantaParachain,
   moonbeam,
@@ -116,7 +116,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.05,
         asset: glmr,
@@ -465,7 +465,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadotAssetHub,
       destinationFee: {
-        amount: 0.7,
+        amount: 0.2,
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -480,7 +480,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadotAssetHub,
       destinationFee: {
-        amount: 0.7,
+        amount: 0.2,
         asset: usdc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -495,7 +495,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: polkadotAssetHub,
       destinationFee: {
-        amount: 0.7,
+        amount: 0.2,
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -523,7 +523,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: hdx,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.6,
         asset: hdx,
@@ -538,7 +538,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: dai,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.004,
         asset: dai,
@@ -553,7 +553,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.004,
         asset: usdcwh,
@@ -583,7 +583,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: usdtwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.004,
         asset: usdtwh,
@@ -673,7 +673,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: wbtc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.0000001,
         asset: wbtc,
@@ -688,7 +688,7 @@ export const moonbeamConfig = new ChainConfig({
       asset: weth,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDX,
+      destination: hydration,
       destinationFee: {
         amount: 0.000002,
         asset: weth,

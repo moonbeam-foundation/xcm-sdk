@@ -17,7 +17,7 @@ import {
 import {
   alphanetAssetHub,
   alphanetRelay,
-  hydraDxAlphanet,
+  hydrationAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
@@ -215,7 +215,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDxAlphanet,
+      destination: hydrationAlphanet,
       destinationFee: {
         amount: 0.1,
         asset: usdcwh,
@@ -230,7 +230,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDxAlphanet,
+      destination: hydrationAlphanet,
       destinationFee: {
         amount: 0.01,
         asset: ftmwh,
@@ -260,7 +260,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDxAlphanet,
+      destination: hydrationAlphanet,
       destinationFee: {
         amount: 0.0002,
         asset: dev,
@@ -271,7 +271,7 @@ export const moonbaseAlphaConfig = new ChainConfig({
       asset: hdx,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydraDxAlphanet,
+      destination: hydrationAlphanet,
       destinationFee: {
         amount: 0.5,
         asset: hdx,
