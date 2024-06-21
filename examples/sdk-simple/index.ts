@@ -82,7 +82,7 @@ export async function fromPolkadot() {
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount);
+  const hash = await data.transfer(amount, { polkadotSigner: pair });
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }

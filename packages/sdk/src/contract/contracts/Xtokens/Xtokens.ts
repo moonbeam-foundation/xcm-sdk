@@ -1,6 +1,7 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
 import {
   Address,
+  Hash,
   PublicClient,
   WalletClient,
   createPublicClient,
@@ -32,7 +33,7 @@ export class Xtokens implements TransferContractInterface {
     });
   }
 
-  async transfer(): Promise<string> {
+  async transfer(): Promise<Hash> {
     const { request } = await this.#publicClient.simulateContract({
       abi: XTOKENS_ABI,
       account: this.#walletClient.account,
