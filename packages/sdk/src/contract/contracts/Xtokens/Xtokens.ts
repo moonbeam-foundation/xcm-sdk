@@ -1,19 +1,14 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { Contract, TransactionResponse } from 'ethers';
 import {
   Address,
-  GetContractReturnType,
   PublicClient,
-  WriteContractReturnType,
+  WalletClient,
   createPublicClient,
-  getContract,
   http,
 } from 'viem';
 import { EvmSigner } from '../../../sdk.interfaces';
 import { TransferContractInterface } from '../../contract.interfaces';
 import { XTOKENS_ABI } from './XtokensABI';
-
-type XtokensContract = GetContractReturnType<typeof XTOKENS_ABI, PublicClient>;
 
 export class Xtokens implements TransferContractInterface {
   readonly defaultMoonChainAddress =
@@ -23,36 +18,32 @@ export class Xtokens implements TransferContractInterface {
 
   readonly #config: ContractConfig;
 
-  readonly #contract: XtokensContract;
+  readonly #publicClient: PublicClient;
 
-  readonly #signer: EvmSigner;
+  readonly #walletClient: WalletClient;
 
   constructor(config: ContractConfig, signer: EvmSigner, address?: Address) {
     this.#config = config;
-
-    this.#signer = signer;
-
     this.address = address ?? this.defaultMoonChainAddress;
-
-    this.#contract = getContract({
-      abi: XTOKENS_ABI,
-      address: this.address,
-      client: {
-        public: createPublicClient({
-          chain: signer.chain,
-          transport: http(),
-        }),
-        wallet: signer,
-      },
+    this.#walletClient = signer;
+    this.#publicClient = createPublicClient({
+      chain: signer.chain,
+      transport: http(),
     });
   }
 
-  async transfer(): Promise<TransactionResponse | WriteContractReturnType> {
-    return this.#contract.write[this.#config.func](...this.#config.args);
-  }
+  async transfer(): Promise<string> {
+    const { request } = await this.#publicClient.simulateContract({
+      abi: XTOKENS_ABI,
+      account: this.#walletClient.account,
+      address: this.address,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      args: this.#config.args as any,
+      functionName: this.#config.func as 'transfer',
+    });
+    const hash = await this.#walletClient.writeContract(request);
 
-  async getEthersContractEstimatedGas(contract: Contract): Promise<bigint> {
-    return contract[this.#config.func].estimateGas(...this.#config.args);
+    return hash;
   }
 
   async getFee(amount: bigint): Promise<bigint> {
@@ -65,12 +56,18 @@ export class Xtokens implements TransferContractInterface {
      * Or if you try to send 0 as amount.
      */
     try {
-      const estimatedGas = await this.#contract.estimateGas[this.#config.func](
-        ...(this.#config.args as any),
-      );
+      const gas = await this.#publicClient.estimateContractGas({
+        abi: XTOKENS_ABI,
+        account: this.#walletClient.account,
+        address: this.address,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        args: this.#config.args as any,
+        functionName: this.#config.func as 'transfer',
+      });
+
       const gasPrice = await this.getGasPrice();
 
-      return estimatedGas * gasPrice;
+      return gas * gasPrice;
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
@@ -81,11 +78,6 @@ export class Xtokens implements TransferContractInterface {
   }
 
   private async getGasPrice() {
-    const publicClient = createPublicClient({
-      chain: this.#signer.chain,
-      transport: http(),
-    });
-
-    return publicClient.getGasPrice();
+    return this.#publicClient.getGasPrice();
   }
 }

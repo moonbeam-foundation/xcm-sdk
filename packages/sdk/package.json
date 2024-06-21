@@ -62,7 +62,6 @@
     "@polkadot/api-augment": "^11.2.1",
     "@polkadot/types": "^11.2.1",
     "@polkadot/util": "^12.6.2",
-    "ethers": "^6.13.0",
     "viem": "^2.13.7"
   }
 }

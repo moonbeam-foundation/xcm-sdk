@@ -7,7 +7,7 @@ export type EvmSigner = WalletClient;
 
 export interface Signers {
   evmSigner?: EvmSigner;
-  polkadotSigner: PolkadotSigner | IKeyringPair;
+  polkadotSigner?: PolkadotSigner | IKeyringPair;
 }
 
 export interface TransferData {
@@ -18,7 +18,7 @@ export interface TransferData {
   min: AssetAmount;
   source: SourceChainTransferData;
   swap(): Promise<TransferData | undefined>;
-  transfer(amount: bigint | number | string): Promise<string>;
+  transfer(amount: bigint | number | string, signers: Signers): Promise<string>;
 }
 
 export interface SourceChainTransferData extends ChainTransferData {

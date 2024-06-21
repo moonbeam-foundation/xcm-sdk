@@ -3,7 +3,6 @@ import { IConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { TransactionResponse } from 'ethers';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import {
@@ -90,7 +89,7 @@ export async function getTransferData({
         },
       });
     },
-    async transfer(amount): Promise<string> {
+    async transfer(amount, signers: Partial<Signers>): Promise<string> {
       const bigintAmount = toBigInt(amount, source.balance.decimals);
       const {
         asset,
@@ -117,29 +116,25 @@ export async function getTransferData({
       });
 
       if (contract) {
-        if (!evmSigner) {
+        const signer = evmSigner || signers.evmSigner;
+
+        if (!signer) {
           throw new Error('EVM Signer must be provided');
         }
 
         return (
-          createContract(
-            chain,
-            contract,
-            evmSigner,
-          ) as TransferContractInterface
-        )
-          .transfer()
-          .then((tx) =>
-            typeof tx === 'object' ? (tx as TransactionResponse).hash : tx,
-          );
+          createContract(chain, contract, signer) as TransferContractInterface
+        ).transfer();
       }
 
       if (extrinsic) {
-        if (!polkadotSigner) {
+        const signer = polkadotSigner || signers.polkadotSigner;
+
+        if (!signer) {
           throw new Error('Polkadot signer must be provided');
         }
 
-        return srcPolkadot.transfer(sourceAddress, extrinsic, polkadotSigner);
+        return srcPolkadot.transfer(sourceAddress, extrinsic, signer);
       }
 
       throw new Error('Either contract or extrinsic must be provided');
