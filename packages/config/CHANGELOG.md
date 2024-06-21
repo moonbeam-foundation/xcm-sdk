@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.4.1
+
+### Patch Changes
+
+- [#281](https://github.com/moonbeam-foundation/xcm-sdk/pull/281) [`b33b190`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b33b1901720d928e2227a4f88a9347763eb98356) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Neuroweb ws endpoint and reduce USDT fees
+
 ## 2.4.0
 
 ### Minor Changes
