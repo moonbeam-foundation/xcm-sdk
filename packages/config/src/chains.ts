@@ -409,7 +409,7 @@ export const equilibrium = new Parachain({
   ws: 'wss://node.pol.equilibrium.io',
 });
 
-export const hydraDX = new Parachain({
+export const hydration = new Parachain({
   assetsData: [
     {
       asset: hdx,
@@ -443,14 +443,14 @@ export const hydraDX = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
-  key: 'hydra-dx',
-  name: 'HydraDX',
+  key: 'hydration',
+  name: 'Hydration',
   parachainId: 2034,
   ss58Format: 63,
   ws: 'wss://hydradx-rpc.dwellir.com',
 });
 
-export const hydraDxAlphanet = new Parachain({
+export const hydrationAlphanet = new Parachain({
   assetsData: [
     {
       asset: hdx,
@@ -482,8 +482,8 @@ export const hydraDxAlphanet = new Parachain({
   genesisHash:
     '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
   isTestChain: true,
-  key: 'hydra-dx-Alphanet',
-  name: 'HydraDX Alphanet',
+  key: 'hydration-Alphanet',
+  name: 'Hydration Alphanet',
   parachainId: 2034,
   ss58Format: 63,
   ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
@@ -1268,7 +1268,7 @@ export const neuroweb = new Parachain({
   name: 'NeuroWeb',
   parachainId: 2043,
   ss58Format: 101,
-  ws: 'wss://origintrail-rpc.dwellir.com',
+  ws: 'wss://neuroweb-rpc.dwellir.com',
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -1871,8 +1871,8 @@ export const chainsList: AnyChain[] = [
   darwinia,
   darwiniaCrab,
   equilibrium,
-  hydraDX,
-  hydraDxAlphanet,
+  hydration,
+  hydrationAlphanet,
   integritee,
   interlay,
   karura,

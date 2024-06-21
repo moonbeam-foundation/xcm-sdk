@@ -1,10 +1,9 @@
 /* eslint-disable sort-keys */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { describe, expect, it } from 'vitest';
 import {
   centrifuge,
-  hydraDX,
-  hydraDxAlphanet,
+  hydration,
+  hydrationAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
@@ -14,24 +13,25 @@ import {
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import { AnyChain } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from 'vitest';
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
-const hydraDXAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
+const hydrationAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
 const moonEvmAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
 const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
 
 const config: { chain: AnyChain; address: string }[] = [
   { chain: moonbeam, address: moonEvmAddress },
-  { chain: hydraDX, address: hydraDXAddress },
-  { chain: hydraDX, address: substrateAddress },
+  { chain: hydration, address: hydrationAddress },
+  { chain: hydration, address: substrateAddress },
   {
     chain: centrifuge,
     address: '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb',
   },
   { chain: centrifuge, address: substrateAddress },
-  { chain: hydraDxAlphanet, address: hydraDXAddress },
-  { chain: hydraDxAlphanet, address: substrateAddress },
+  { chain: hydrationAlphanet, address: hydrationAddress },
+  { chain: hydrationAlphanet, address: substrateAddress },
   {
     chain: moonbaseBeta,
     address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',

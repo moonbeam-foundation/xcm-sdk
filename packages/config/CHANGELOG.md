@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-config
 
+## 2.4.1
+
+### Patch Changes
+
+- [#281](https://github.com/moonbeam-foundation/xcm-sdk/pull/281) [`b33b190`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b33b1901720d928e2227a4f88a9347763eb98356) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Neuroweb ws endpoint and reduce USDT fees
+
+## 2.4.0
+
+### Minor Changes
+
+- [#279](https://github.com/moonbeam-foundation/xcm-sdk/pull/279) [`453c481`](https://github.com/moonbeam-foundation/xcm-sdk/commit/453c48145c636f7257f24442a9e9cb0d1a6ef913) Thanks [@mmaurello](https://github.com/mmaurello)! - Rename Hydra DX to Hydration
+
 ## 2.3.1
 
 ### Patch Changes

@@ -4,12 +4,12 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dev, ftmwh, hdx, usdcwh } from '../assets';
-import { hydraDxAlphanet, moonbaseAlpha } from '../chains';
+import { hydrationAlphanet, moonbaseAlpha } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
 // FIXME: has to be verified
-export const hydraDxAlphanetConfig = new ChainConfig({
+export const hydrationAlphanetConfig = new ChainConfig({
   assets: [
     new AssetConfig({
       asset: hdx,
@@ -64,5 +64,5 @@ export const hydraDxAlphanetConfig = new ChainConfig({
       },
     }),
   ],
-  chain: hydraDxAlphanet,
+  chain: hydrationAlphanet,
 });
