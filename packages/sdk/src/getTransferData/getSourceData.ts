@@ -295,6 +295,7 @@ export async function getFee({
     }
 
     return getContractFee({
+      address: sourceAddress,
       balance,
       chain: chain as EvmParachain,
       config: contract,
@@ -323,18 +324,20 @@ export async function getFee({
 }
 
 export async function getContractFee({
+  address,
   balance,
   config,
   decimals,
   chain,
 }: {
+  address: string;
   balance: bigint;
   config: ContractConfig;
   decimals: number;
   chain: EvmParachain;
 }): Promise<bigint> {
   const contract = createContract(chain, config) as TransferContractInterface;
-  const fee = await contract.getFee(balance);
+  const fee = await contract.getFee(balance, address);
 
   return convertDecimals(fee, 18, decimals);
 }

@@ -123,8 +123,8 @@ export async function getTransferData({
         }
 
         return (
-          createContract(chain, contract, signer) as TransferContractInterface
-        ).transfer();
+          createContract(chain, contract) as TransferContractInterface
+        ).transfer(signer);
       }
 
       if (extrinsic) {

@@ -1,12 +1,6 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import {
-  Address,
-  Hash,
-  PublicClient,
-  WalletClient,
-  createPublicClient,
-  http,
-} from 'viem';
+import { Address, Hash, PublicClient, createPublicClient, http } from 'viem';
+import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { EvmSigner } from '../../../sdk.interfaces';
 import { TransferContractInterface } from '../../contract.interfaces';
 import { XTOKENS_ABI } from './XtokensABI';
@@ -15,39 +9,36 @@ export class Xtokens implements TransferContractInterface {
   readonly defaultMoonChainAddress =
     '0x0000000000000000000000000000000000000804';
 
-  readonly address: Address;
+  readonly address: string;
 
   readonly #config: ContractConfig;
 
   readonly #publicClient: PublicClient;
 
-  readonly #walletClient: WalletClient;
-
-  constructor(config: ContractConfig, signer: EvmSigner, address?: Address) {
+  constructor(config: ContractConfig, chain: EvmParachain, address?: string) {
     this.#config = config;
     this.address = address ?? this.defaultMoonChainAddress;
-    this.#walletClient = signer;
     this.#publicClient = createPublicClient({
-      chain: signer.chain,
+      chain: chain.getViemChain(),
       transport: http(),
     });
   }
 
-  async transfer(): Promise<Hash> {
+  async transfer(signer: EvmSigner): Promise<Hash> {
     const { request } = await this.#publicClient.simulateContract({
       abi: XTOKENS_ABI,
-      account: this.#walletClient.account,
-      address: this.address,
+      account: signer.account,
+      address: this.address as Address,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       args: this.#config.args as any,
       functionName: this.#config.func as 'transfer',
     });
-    const hash = await this.#walletClient.writeContract(request);
+    const hash = await signer.writeContract(request);
 
     return hash;
   }
 
-  async getFee(amount: bigint): Promise<bigint> {
+  async getFee(amount: bigint, address: string): Promise<bigint> {
     if (amount === 0n) {
       return 0n;
     }
@@ -59,8 +50,8 @@ export class Xtokens implements TransferContractInterface {
     try {
       const gas = await this.#publicClient.estimateContractGas({
         abi: XTOKENS_ABI,
-        account: this.#walletClient.account,
-        address: this.address,
+        account: address as Address,
+        address: this.address as Address,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         args: this.#config.args as any,
         functionName: this.#config.func as 'transfer',
