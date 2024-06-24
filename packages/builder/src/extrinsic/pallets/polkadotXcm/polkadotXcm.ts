@@ -1,7 +1,10 @@
 /* eslint-disable sort-keys */
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
-import { getPolkadotXcmExtrinsicArgs } from './polkadotXcm.util';
+import {
+  getPolkadotXcmExtrinsicArgs,
+  shouldFeeAssetPrecedeAsset,
+} from './polkadotXcm.util';
 
 const pallet = 'polkadotXcm';
 
@@ -73,7 +76,7 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const isAssetDifferent =
                   !!params.feeAsset && params.asset !== params.feeAsset;
-                const asset = [
+                const assets = [
                   {
                     id: {
                       Concrete: {
@@ -96,8 +99,11 @@ export function polkadotXcm() {
                   },
                 ];
 
+                const shouldFeeAssetPrecede =
+                  shouldFeeAssetPrecedeAsset(params);
+
                 if (isAssetDifferent) {
-                  asset.push({
+                  const feeAsset = {
                     id: {
                       Concrete: {
                         parents: 0,
@@ -116,14 +122,20 @@ export function polkadotXcm() {
                     fun: {
                       Fungible: params.fee,
                     },
-                  });
+                  };
+
+                  if (shouldFeeAssetPrecede) {
+                    assets.unshift(feeAsset);
+                  } else {
+                    assets.push(feeAsset);
+                  }
                 }
 
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset,
-                  feeIndex: isAssetDifferent ? 1 : 0,
+                  asset: assets,
+                  feeIndex: isAssetDifferent && !shouldFeeAssetPrecede ? 1 : 0,
                 });
               },
             }),

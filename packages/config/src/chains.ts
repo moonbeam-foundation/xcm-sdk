@@ -55,6 +55,7 @@ import {
   ring,
   rmrk,
   sdn,
+  stink,
   sub,
   teer,
   tnkr,
@@ -1062,6 +1063,10 @@ export const moonbeam = new EvmParachain({
       asset: pink,
       id: '64174511183114006009298114091987195453',
     },
+    {
+      asset: stink,
+      id: '112679793397406599376365943185137098326',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1683,6 +1688,11 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: pink,
       id: 23,
+      palletInstance: 50,
+    },
+    {
+      asset: stink,
+      id: 42069,
       palletInstance: 50,
     },
   ],

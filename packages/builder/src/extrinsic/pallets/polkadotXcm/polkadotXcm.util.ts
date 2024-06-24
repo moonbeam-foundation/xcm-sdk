@@ -55,3 +55,17 @@ export function getPolkadotXcmExtrinsicArgs({
     'Unlimited',
   ];
 }
+
+export function shouldFeeAssetPrecedeAsset({
+  asset,
+  feeAsset,
+}: ExtrinsicConfigBuilderPrams): boolean {
+  const assetIdNumber = Number(asset);
+  const feeAssetIdNumber = Number(feeAsset);
+
+  if (Number.isNaN(assetIdNumber) || Number.isNaN(feeAssetIdNumber)) {
+    return false;
+  }
+
+  return assetIdNumber > feeAssetIdNumber;
+}

@@ -26,6 +26,7 @@ import {
   pha,
   pink,
   ring,
+  stink,
   sub,
   usdc,
   usdcwh,
@@ -506,6 +507,21 @@ export const moonbeamConfig = new ChainConfig({
     }),
     new AssetConfig({
       asset: ded,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.2,
+        asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: stink,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: polkadotAssetHub,
