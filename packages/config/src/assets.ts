@@ -20,6 +20,11 @@ export const ampe = new Asset({
   originSymbol: 'AMPE',
 });
 
+export const apillon = new Asset({
+  key: 'apillon',
+  originSymbol: 'NCTR',
+});
+
 export const astr = new Asset({
   key: 'astr',
   originSymbol: 'ASTR',
@@ -250,6 +255,11 @@ export const soon = new Asset({
   originSymbol: 'SOON',
 });
 
+export const stink = new Asset({
+  key: 'stink',
+  originSymbol: 'STINK',
+});
+
 export const sub = new Asset({
   key: 'sub',
   originSymbol: 'SUB',
@@ -407,6 +417,7 @@ export const assetsList: Asset[] = [
   manta,
   mgx,
   movr,
+  apillon,
   nodl,
   neuro,
   otp,
@@ -421,6 +432,7 @@ export const assetsList: Asset[] = [
   rmrk,
   sdn,
   soon,
+  stink,
   sub,
   teer,
   tnkr,

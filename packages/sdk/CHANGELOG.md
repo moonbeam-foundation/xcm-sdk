@@ -1,5 +1,22 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies [[`3d203d4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3d203d4d4afb9d04f92788034b0b3955efa72f8f)]:
+  - @moonbeam-network/xcm-config@2.4.3
+
+## 2.4.2
+
+### Patch Changes
+
+- [#266](https://github.com/moonbeam-foundation/xcm-sdk/pull/266) [`bf53165`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf53165ae59458b5f4524b5e8f3563dcd50fcfd4) Thanks [@mmaurello](https://github.com/mmaurello)! - STINK integration with Moonbeam
+
+- Updated dependencies [[`bf53165`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf53165ae59458b5f4524b5e8f3563dcd50fcfd4)]:
+  - @moonbeam-network/xcm-builder@2.3.2
+  - @moonbeam-network/xcm-config@2.4.2
+
 ## 2.4.1
 
 ### Patch Changes
