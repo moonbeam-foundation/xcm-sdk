@@ -19,8 +19,7 @@ export function createContract(
   }
 
   if (config.module === 'Xtokens') {
-    const address =
-      'contracts' in chain ? chain?.contracts?.Xtokens : undefined;
+    const address = chain?.contracts?.Xtokens;
 
     return new Xtokens(config, chain, address);
   }
