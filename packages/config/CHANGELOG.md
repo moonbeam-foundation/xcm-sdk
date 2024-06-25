@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.4.3
+
+### Patch Changes
+
+- [#285](https://github.com/moonbeam-foundation/xcm-sdk/pull/285) [`3d203d4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3d203d4d4afb9d04f92788034b0b3955efa72f8f) Thanks [@mmaurello](https://github.com/mmaurello)! - Apillon NCTR integration with Moonbeam
+
 ## 2.4.2
 
 ### Patch Changes
