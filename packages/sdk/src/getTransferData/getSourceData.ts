@@ -26,7 +26,6 @@ import {
   BalanceContractInterface,
   TransferContractInterface,
   createContract,
-  createContractWithoutSigner,
 } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
@@ -41,7 +40,6 @@ export interface GetSourceDataParams {
   transferConfig: TransferConfig;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  evmSigner?: EvmSigner;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -52,7 +50,6 @@ export async function getSourceData({
   destinationFee,
   polkadot,
   sourceAddress,
-  evmSigner,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   const {
     asset,
@@ -173,7 +170,6 @@ export async function getSourceData({
     decimals: zeroFeeAmount.decimals,
     destinationFeeBalanceAmount,
     destinationFeeConfig: config.destinationFee,
-    evmSigner,
     extrinsic,
     feeConfig: config.fee,
     polkadot,
@@ -230,10 +226,7 @@ export async function getFeeBalance({
   }) as SubstrateQueryConfig;
 
   if (cfg.type === CallType.Evm) {
-    const contract = createContractWithoutSigner(
-      cfg,
-      chain as EvmParachain,
-    ) as BalanceContractInterface;
+    const contract = createContract(chain, cfg) as BalanceContractInterface;
 
     const decimalsFromContract = await contract.getDecimals();
     const balanceFromContract = await contract.getBalance();
@@ -259,7 +252,6 @@ export interface GetFeeParams {
   contract?: ContractConfig;
   chain: AnyChain;
   decimals: number;
-  evmSigner?: EvmSigner;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
   destinationFeeConfig?: DestinationFeeConfig;
@@ -275,17 +267,12 @@ export async function getFee({
   decimals,
   destinationFeeConfig,
   destinationFeeBalanceAmount,
-  evmSigner,
   extrinsic,
   feeConfig,
   polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<bigint> {
   if (contract) {
-    if (!evmSigner) {
-      throw new Error('EVM Signer must be provided');
-    }
-
     if (
       destinationFeeConfig &&
       destinationFeeBalanceAmount &&
@@ -308,11 +295,11 @@ export async function getFee({
     }
 
     return getContractFee({
+      address: sourceAddress,
       balance,
       chain: chain as EvmParachain,
       config: contract,
       decimals,
-      evmSigner,
     });
   }
 
@@ -337,24 +324,20 @@ export async function getFee({
 }
 
 export async function getContractFee({
+  address,
   balance,
   config,
   decimals,
-  evmSigner,
   chain,
 }: {
+  address: string;
   balance: bigint;
   config: ContractConfig;
   decimals: number;
-  evmSigner: EvmSigner;
   chain: EvmParachain;
 }): Promise<bigint> {
-  const contract = createContract(
-    config,
-    evmSigner,
-    chain,
-  ) as TransferContractInterface;
-  const fee = await contract.getFee(balance);
+  const contract = createContract(chain, config) as TransferContractInterface;
+  const fee = await contract.getFee(balance, address);
 
   return convertDecimals(fee, 18, decimals);
 }

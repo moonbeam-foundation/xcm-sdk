@@ -43,16 +43,13 @@ export function Sdk(options?: SdkOptions) {
                     async accounts(
                       sourceAddress: string,
                       destinationAddress: string,
-                      signers?: Partial<Signers>,
                     ): Promise<TransferData> {
                       return gtd({
                         ...options,
                         configService,
                         destinationAddress,
-                        evmSigner: signers?.evmSigner ?? signers?.ethersSigner,
                         sourceAddress,
                         transferConfig: destination(destKeyOrChain).build(),
-                        polkadotSigner: signers?.polkadotSigner,
                       });
                     },
                   };
@@ -66,7 +63,6 @@ export function Sdk(options?: SdkOptions) {
     async getTransferData({
       destinationAddress,
       destinationKeyOrChain,
-      ethersSigner,
       evmSigner,
       keyOrAsset,
       polkadotSigner,
@@ -76,7 +72,7 @@ export function Sdk(options?: SdkOptions) {
       return gtd({
         configService,
         destinationAddress,
-        evmSigner: evmSigner ?? ethersSigner,
+        evmSigner,
         polkadotSigner,
         sourceAddress,
         transferConfig: ConfigBuilder(configService)

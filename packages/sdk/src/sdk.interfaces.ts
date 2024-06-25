@@ -1,18 +1,13 @@
 import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
 import type { IKeyringPair } from '@polkadot/types/types';
-import { Signer as EthersSigner } from 'ethers';
 import { WalletClient } from 'viem';
 
-export type EvmSigner = EthersSigner | WalletClient;
+export type EvmSigner = WalletClient;
 
 export interface Signers {
-  /**
-   * @deprecated ethersSigner - is deprecated and will be removed in v2, use evmSigner instead
-   */
-  ethersSigner?: EthersSigner;
   evmSigner?: EvmSigner;
-  polkadotSigner: PolkadotSigner | IKeyringPair;
+  polkadotSigner?: PolkadotSigner | IKeyringPair;
 }
 
 export interface TransferData {
@@ -23,7 +18,10 @@ export interface TransferData {
   min: AssetAmount;
   source: SourceChainTransferData;
   swap(): Promise<TransferData | undefined>;
-  transfer(amount: bigint | number | string): Promise<string>;
+  transfer(
+    amount: bigint | number | string,
+    signers?: Signers,
+  ): Promise<string>;
 }
 
 export interface SourceChainTransferData extends ChainTransferData {

@@ -3,17 +3,19 @@ import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
 import { Sdk, TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { ethers } from 'ethers';
 import { setTimeout } from 'node:timers/promises';
+import { Address, createWalletClient, http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 
 // Moonbeam Signer ===========================================================
 
 const moonbeamPrivateKey = '';
-const provider = new ethers.WebSocketProvider(moonbeam.ws, {
-  chainId: moonbeam.id,
-  name: moonbeam.name,
+const account = privateKeyToAccount(moonbeamPrivateKey as Address);
+const walletClient = createWalletClient({
+  account,
+  chain: moonbeam.getViemChain(),
+  transport: http(),
 });
-const evmSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
 
 // Polkadot Signer ===========================================================
 
@@ -65,7 +67,7 @@ export async function fromPolkadot() {
   console.log('\nTransfer from Polkadot to Moonbeam\n');
 
   const data = await Sdk().getTransferData({
-    destinationAddress: evmSigner.address,
+    destinationAddress: account.address,
     destinationKeyOrChain: moonbeam,
     keyOrAsset: dot,
     polkadotSigner: pair,
@@ -80,7 +82,7 @@ export async function fromPolkadot() {
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount);
+  const hash = await data.transfer(amount, { polkadotSigner: pair });
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }
@@ -93,9 +95,7 @@ export async function fromMoonbeam() {
     .asset(dot)
     .source(moonbeam)
     .destination(polkadot)
-    .accounts(evmSigner.address, pair.address, {
-      evmSigner,
-    });
+    .accounts(account.address, pair.address);
 
   logBalances(data);
   logTxDetails(data);
@@ -104,7 +104,9 @@ export async function fromMoonbeam() {
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount);
+  const hash = await data.transfer(amount, {
+    evmSigner: walletClient,
+  });
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }
@@ -114,7 +116,7 @@ async function main() {
   console.warn = () => null;
   console.clear();
 
-  console.log(`\nMoonbeam address: ${evmSigner.address}.`);
+  console.log(`\nMoonbeam address: ${account.address}.`);
   console.log(`Polkadot address: ${pair.address}.`);
 
   await fromPolkadot();
