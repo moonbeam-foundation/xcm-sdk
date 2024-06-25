@@ -9,6 +9,7 @@ import {
   agng,
   alan,
   ampe,
+  apillon,
   aseed,
   astr,
   atom,
@@ -1067,6 +1068,10 @@ export const moonbeam = new EvmParachain({
       asset: stink,
       id: '112679793397406599376365943185137098326',
     },
+    {
+      asset: apillon,
+      id: '184218609779515850660274730699350567246',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1693,6 +1698,11 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: stink,
       id: 42069,
+      palletInstance: 50,
+    },
+    {
+      asset: apillon,
+      id: 1024,
       palletInstance: 50,
     },
   ],
