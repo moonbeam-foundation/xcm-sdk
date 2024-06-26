@@ -1,0 +1,136 @@
+/* Background image on home page */
+[data-md-color-scheme='slate'] .md-main {
+  /* Set gradient background */
+  background: linear-gradient(#000, #291E3A);
+  /* For older browsers */
+  background: -webkit-linear-gradient(#000, #291E3A);
+  background: -moz-linear-gradient(#000, #291E3A);
+  background: -o-linear-gradient(#000, #291E3A);
+}
+
+/* Background image on home page */
+[data-md-color-scheme='default'] .md-main {
+  /* Set gradient background */
+  background: linear-gradient(#958fdc, #fff);
+  /* For older browsers */
+  background: -webkit-linear-gradient(#958fdc, #fff);
+  background: -moz-linear-gradient(#958fdc, #fff);
+  background: -o-linear-gradient(#958fdc, #fff);
+}
+
+/* Styles for the hero section */
+.hero {
+  text-align: center;
+  padding: 10px 0;
+  color: var(--md-default-fg-color);
+}
+
+.hero-content {
+  width: fit-content;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 3em;
+  background: var(--md-home-hero-bg-color);
+}
+
+.hero h1 {
+  font-size: 36px;
+  color: var(--md-default-fg-color);
+}
+
+.hero p {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.md-typeset .hero-content hr {
+  border-color: #958fdc;
+  width: 70%;
+  margin: auto;
+}
+
+.hero p.note {
+  font-size: 15px;
+}
+
+/* Styles for the featured content section */
+.featured-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.feature {
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0px 0px 1px var(--md-default-fg-color);
+  border-radius: var(--border-radius);
+  width: 30%;
+  margin: 1em;
+}
+
+.feature a {
+  margin-top: auto;
+}
+
+.feature img {
+  width: 60px;
+  max-width: 100%;
+  height: auto;
+}
+
+.feature h2 {
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--md-default-fg-color);
+}
+
+.feature p {
+  font-size: 16px;
+  color: var(--md-default-fg-color);
+}
+
+.md-clipboard {
+  top: 2em;
+}
+
+.install {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.md-typeset pre>code {
+  display: flex;
+  height: 4em;
+  padding: 0;
+}
+
+.md-typeset pre {
+  margin: 0;
+}
+
+@media screen and (max-width: 76.234375em) {
+  .code {
+    display: none
+  }
+}
+
+@media screen and (max-width: 56em) {
+  .feature {
+    width: 46%;
+  }
+}
+
+@media screen and (max-width: 45.125em) {
+  .feature {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 38.125em) {
+  .feature {
+    width: 100%;
+  }
+}
