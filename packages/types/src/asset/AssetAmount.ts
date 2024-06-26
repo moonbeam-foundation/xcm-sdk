@@ -1,44 +1,23 @@
 import { toDecimal } from '@moonbeam-network/xcm-utils';
 import Big, { RoundingMode } from 'big.js';
-import { Asset, AssetConstructorParams } from './Asset';
+import { ChainAsset, ChainAssetConstructorParams } from './ChainAsset';
 
 Big.NE = -18;
 
-export interface AssetAmountParams {
+export interface AssetAmountConstructorParams
+  extends ChainAssetConstructorParams {
   amount: bigint;
   decimals: number;
   symbol?: string;
 }
 
-export interface AssetAmountConstructorParams
-  extends AssetConstructorParams,
-    AssetAmountParams {}
-
-export class AssetAmount extends Asset {
+export class AssetAmount extends ChainAsset {
   readonly amount: bigint;
 
-  readonly decimals: number;
-
-  readonly symbol: string;
-
-  constructor({
-    amount,
-    decimals,
-    symbol,
-    ...other
-  }: AssetAmountConstructorParams) {
+  constructor({ amount, ...other }: AssetAmountConstructorParams) {
     super(other);
 
-    this.amount = BigInt(amount);
-    this.decimals = decimals;
-    this.symbol = symbol || this.originSymbol;
-  }
-
-  static fromAsset(asset: Asset, params: AssetAmountParams) {
-    return new AssetAmount({
-      ...asset,
-      ...params,
-    });
+    this.amount = amount;
   }
 
   isSame(asset: AssetAmount): boolean {

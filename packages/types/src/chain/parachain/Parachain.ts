@@ -1,12 +1,11 @@
-import { Asset } from '../../asset';
+import { Asset, ChainAsset, ChainAssetId } from '../../asset';
 import { SetOptional } from '../../common.interfaces';
 import { Chain, ChainConstructorParams } from '../Chain';
 import { ChainType } from '../Chain.interfaces';
-import { ChainAssetId, ChainAssetsData } from './Parachain.interfaces';
 
 export interface ParachainConstructorParams
   extends SetOptional<ChainConstructorParams, 'type'> {
-  assetsData?: Map<string, ChainAssetsData> | ChainAssetsData[];
+  assets?: Map<string, ChainAsset> | ChainAsset[];
   genesisHash: string;
   parachainId: number;
   ss58Format: number;
@@ -16,7 +15,7 @@ export interface ParachainConstructorParams
 }
 
 export class Parachain extends Chain {
-  readonly assetsData: Map<string, ChainAssetsData>;
+  readonly assets: Map<string, ChainAsset>;
 
   readonly genesisHash: string;
 
@@ -31,7 +30,7 @@ export class Parachain extends Chain {
   readonly ws: string | string[];
 
   constructor({
-    assetsData,
+    assets,
     genesisHash,
     parachainId,
     usesChainDecimals,
@@ -43,10 +42,10 @@ export class Parachain extends Chain {
   }: ParachainConstructorParams) {
     super({ type, ...others });
 
-    this.assetsData =
-      assetsData instanceof Map
-        ? assetsData
-        : new Map(assetsData?.map((data) => [data.asset.key, data]));
+    this.assets =
+      assets instanceof Map
+        ? assets
+        : new Map(assets?.map((data) => [data.key, data]));
     this.genesisHash = genesisHash;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
@@ -56,30 +55,26 @@ export class Parachain extends Chain {
   }
 
   getAssetId(asset: Asset): ChainAssetId {
-    return this.assetsData.get(asset.key)?.id ?? asset.originSymbol;
+    return this.assets.get(asset.key)?.ids?.id ?? asset.originSymbol;
   }
 
   getBalanceAssetId(asset: Asset): ChainAssetId {
-    return this.assetsData.get(asset.key)?.balanceId ?? this.getAssetId(asset);
+    return this.assets.get(asset.key)?.ids?.balanceId ?? this.getAssetId(asset);
   }
 
   getMinAssetId(asset: Asset): ChainAssetId {
-    return this.assetsData.get(asset.key)?.minId ?? this.getAssetId(asset);
-  }
-
-  getMetadataAssetId(asset: Asset): ChainAssetId {
-    return this.assetsData.get(asset.key)?.metadataId ?? this.getAssetId(asset);
+    return this.assets.get(asset.key)?.ids?.minId ?? this.getAssetId(asset);
   }
 
   getAssetPalletInstance(asset: Asset): number | undefined {
-    return this.assetsData.get(asset.key)?.palletInstance;
+    return this.assets.get(asset.key)?.ids?.palletInstance;
   }
 
   getAssetDecimals(asset: Asset): number | undefined {
-    return this.assetsData.get(asset.key)?.decimals;
+    return this.assets.get(asset.key)?.decimals;
   }
 
   getAssetMin(asset: Asset): number {
-    return this.assetsData.get(asset.key)?.min ?? 0;
+    return this.assets.get(asset.key)?.min ?? 0;
   }
 }

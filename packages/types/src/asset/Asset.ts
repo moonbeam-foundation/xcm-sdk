@@ -1,3 +1,6 @@
+import { Omit } from 'viem/chains';
+import { ChainAsset, ChainAssetConstructorParams } from './ChainAsset';
+
 export interface AssetConstructorParams {
   key: string;
   originSymbol: string;
@@ -11,6 +14,16 @@ export class Asset {
   constructor({ key, originSymbol }: AssetConstructorParams) {
     this.key = key;
     this.originSymbol = originSymbol;
+  }
+
+  toChainAsset(
+    params: Omit<ChainAssetConstructorParams, keyof AssetConstructorParams>,
+  ): ChainAsset {
+    return new ChainAsset({
+      key: this.key,
+      originSymbol: this.originSymbol,
+      ...params,
+    });
   }
 
   isEqual(asset: Asset): boolean {
