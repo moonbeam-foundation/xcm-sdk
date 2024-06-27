@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Omit } from 'viem/chains';
 import { ChainAsset, ChainAssetConstructorParams } from './ChainAsset';
 

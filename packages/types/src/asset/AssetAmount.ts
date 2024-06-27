@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { toDecimal } from '@moonbeam-network/xcm-utils';
 import Big, { RoundingMode } from 'big.js';
 import { ChainAsset, ChainAssetConstructorParams } from './ChainAsset';

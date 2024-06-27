@@ -82,7 +82,7 @@ import {
 } from './assets';
 
 export const acala = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: aca,
       id: { Token: aca.originSymbol },
@@ -118,7 +118,7 @@ export const acala = new Parachain({
 });
 
 export const alphanetAssetHub = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: tt1,
       id: 2,
@@ -154,7 +154,7 @@ export const alphanetRelay = new Parachain({
 });
 
 export const astar = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: glmr,
       id: 18446744073709551619n,
@@ -176,7 +176,7 @@ export const astar = new Parachain({
 });
 
 export const bifrostKusama = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       id: { Token: movr.originSymbol },
@@ -209,7 +209,7 @@ export const bifrostKusama = new Parachain({
 });
 
 export const bifrostPolkadot = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: glmr,
       id: { Token2: 1 },
@@ -259,7 +259,7 @@ export const bifrostPolkadot = new Parachain({
 });
 
 export const calamari = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       balanceId: 11,
@@ -283,7 +283,7 @@ export const calamari = new Parachain({
 });
 
 export const centrifuge = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: cfg,
       id: 'Native',
@@ -300,7 +300,7 @@ export const centrifuge = new Parachain({
 });
 
 export const crustShadow = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       balanceId: 232263652204149413431520870009560565298n,
@@ -323,7 +323,7 @@ export const crustShadow = new Parachain({
 });
 
 export const darwinia = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       // NOTE: no meta for native token
       asset: ring,
@@ -354,7 +354,7 @@ export const darwinia = new EvmParachain({
 });
 
 export const darwiniaCrab = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       // NOTE: no meta for native token
       asset: crab,
@@ -385,7 +385,7 @@ export const darwiniaCrab = new EvmParachain({
 });
 
 export const equilibrium = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: glmr,
       decimals: 9,
@@ -411,7 +411,7 @@ export const equilibrium = new Parachain({
 });
 
 export const hydration = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: hdx,
       id: 0,
@@ -452,7 +452,7 @@ export const hydration = new Parachain({
 });
 
 export const hydrationAlphanet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: hdx,
       decimals: 12,
@@ -491,7 +491,7 @@ export const hydrationAlphanet = new Parachain({
 });
 
 export const interlay = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: glmr,
       id: { ForeignAsset: 10 },
@@ -529,7 +529,7 @@ export const integritee = new Parachain({
 });
 
 export const karura = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       id: { ForeignAsset: 3 },
@@ -559,7 +559,7 @@ export const karura = new Parachain({
 });
 
 export const khala = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       id: 6,
@@ -583,7 +583,7 @@ export const khala = new Parachain({
 
 export const kintsugi = new Parachain({
   // no meta for native tokens
-  assetsData: [
+  assets: [
     {
       asset: kint,
       id: { Token: kint.originSymbol },
@@ -617,7 +617,7 @@ export const kusama = new Parachain({
 });
 
 export const kusamaAssetHub = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: usdt,
       id: 1984,
@@ -645,7 +645,7 @@ export const kusamaAssetHub = new Parachain({
 });
 
 export const litmus = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: lit,
       id: 'SelfReserve',
@@ -662,7 +662,7 @@ export const litmus = new Parachain({
 });
 
 export const mangataKusama = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: mgx,
       id: 0,
@@ -683,7 +683,7 @@ export const mangataKusama = new Parachain({
 });
 
 export const mantaParachain = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: manta,
       id: { MantaCurrency: 1 },
@@ -704,7 +704,7 @@ export const mantaParachain = new Parachain({
 });
 
 export const moonbaseAlpha = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       address: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
       asset: alan,
@@ -810,7 +810,7 @@ export const moonbaseAlpha = new EvmParachain({
 });
 
 export const moonbaseBeta = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       asset: betaDEV,
       metadataId: 0, // no metadata for native tokens
@@ -855,7 +855,7 @@ export const moonbaseBeta = new EvmParachain({
 });
 
 export const moonbeam = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       address: '0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f',
       asset: aca,
@@ -1092,7 +1092,7 @@ export const moonbeam = new EvmParachain({
 });
 
 export const moonriver = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       address: '0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228',
       asset: aseed,
@@ -1242,7 +1242,7 @@ export const moonriver = new EvmParachain({
 });
 
 export const nodle = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: nodl,
       id: 'NodleNative',
@@ -1259,7 +1259,7 @@ export const nodle = new Parachain({
 });
 
 export const neuroweb = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: neuro,
       metadataId: 0,
@@ -1277,7 +1277,7 @@ export const neuroweb = new Parachain({
 });
 
 export const originTrailAlphanet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: otp,
       metadataId: 0,
@@ -1296,7 +1296,7 @@ export const originTrailAlphanet = new Parachain({
 });
 
 export const parallel = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: glmr,
       id: 114,
@@ -1318,7 +1318,7 @@ export const parallel = new Parachain({
 });
 
 export const parallelHeiko = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       id: 113,
@@ -1340,7 +1340,7 @@ export const parallelHeiko = new Parachain({
 });
 
 export const peaqAlphanet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: agng,
       id: 0,
@@ -1368,7 +1368,7 @@ export const peaqAlphanet = new Parachain({
 });
 
 export const peaqChain = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: peaq,
       id: 0,
@@ -1423,7 +1423,7 @@ export const peaqChain = new Parachain({
 });
 
 export const peaqEvmAlphanet = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       asset: agng,
       decimals: 18,
@@ -1468,7 +1468,7 @@ export const peaqEvmAlphanet = new EvmParachain({
 });
 
 export const peaqEvm = new EvmParachain({
-  assetsData: [
+  assets: [
     {
       asset: peaq,
       decimals: 18,
@@ -1540,7 +1540,7 @@ export const peaqEvm = new EvmParachain({
 });
 
 export const pendulum = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: pen,
       id: 'Native',
@@ -1563,7 +1563,7 @@ export const pendulum = new Parachain({
 });
 
 export const pendulumAlphanet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: ampe,
       id: 'Native',
@@ -1587,7 +1587,7 @@ export const pendulumAlphanet = new Parachain({
 });
 
 export const phala = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: glmr,
       id: 1,
@@ -1610,7 +1610,7 @@ export const phala = new Parachain({
 });
 
 export const picasso = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: pica,
       id: 1,
@@ -1632,7 +1632,7 @@ export const picasso = new Parachain({
 });
 
 export const picassoAlphanet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: pica,
       id: 1,
@@ -1669,7 +1669,7 @@ export const polkadot = new Parachain({
 });
 
 export const polkadotAssetHub = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: usdt,
       id: 1984,
@@ -1717,7 +1717,7 @@ export const polkadotAssetHub = new Parachain({
 });
 
 export const robonomics = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: xrt,
       // NOTE: no meta for native token
@@ -1735,7 +1735,7 @@ export const robonomics = new Parachain({
 });
 
 export const shiden = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: movr,
       id: 18446744073709551620n,
@@ -1768,7 +1768,7 @@ export const subsocial = new Parachain({
 });
 
 export const tinkernet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: tnkr,
       id: 0,
@@ -1785,7 +1785,7 @@ export const tinkernet = new Parachain({
 });
 
 export const turing = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: tur,
       // NOTE: no meta for native token
@@ -1807,7 +1807,7 @@ export const turing = new Parachain({
 });
 
 export const turingAlphanet = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: tur,
       // NOTE: no meta for native token
@@ -1830,7 +1830,7 @@ export const turingAlphanet = new Parachain({
 });
 
 export const uniqueAlpha = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: auq,
       id: { NativeAssetId: 'Here' },
@@ -1848,7 +1848,7 @@ export const uniqueAlpha = new Parachain({
 });
 
 export const zeitgeist = new Parachain({
-  assetsData: [
+  assets: [
     {
       asset: usdcwh,
       id: { ForeignAsset: 1 },

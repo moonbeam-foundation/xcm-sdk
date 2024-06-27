@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Asset, AssetConstructorParams } from './Asset';
 import { AssetAmount, AssetAmountConstructorParams } from './AssetAmount';
 
@@ -58,12 +59,12 @@ export class ChainAsset extends Asset {
     >,
   ): AssetAmount {
     return new AssetAmount({
-      key: this.key,
-      originSymbol: this.originSymbol,
       address: this.address,
       decimals: this.decimals,
       ids: this.ids,
+      key: this.key,
       min: this.min,
+      originSymbol: this.originSymbol,
       symbol: this.symbol,
       ...params,
     });
