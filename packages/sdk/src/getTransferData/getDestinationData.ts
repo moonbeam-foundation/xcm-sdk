@@ -21,65 +21,54 @@ export async function getDestinationData({
   const {
     destination: { chain, config },
   } = transferConfig;
-  const asset = chain.getChainAsset(transferConfig.asset);
-
   const balance = await getBalance({
     address: destinationAddress,
     chain,
     config,
-    decimals: zeroAmount.decimals,
     polkadot,
   });
   const min = await getMin(config, polkadot);
-
-  const balanceAmount = zeroAmount.copyWith({ amount: balance });
-  const { existentialDeposit } = polkadot;
-
-  const feeAmount = await getFee({
+  const fee = await getFee({
     address: destinationAddress,
-    config: transferConfig,
+    transferConfig,
     polkadot,
   });
-  const minAmount = zeroAmount.copyWith({ amount: min });
+
   return {
-    balance: balanceAmount,
+    balance,
     chain,
-    existentialDeposit,
-    fee: feeAmount,
-    min: minAmount,
+    existentialDeposit: polkadot.existentialDeposit,
+    fee,
+    min,
   };
 }
 
 export interface GetFeeParams {
   address: string;
-  config: TransferConfig;
+  transferConfig: TransferConfig;
   polkadot: PolkadotService;
 }
 
 export async function getFee({
-  config,
+  transferConfig,
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
-  const { amount, asset } = config.source.config.destinationFee;
-  // TODO we have to consider correctly here when an asset is ERC20 to get it from contract
-  const decimals = await polkadot.getAssetDecimals(asset);
-  const zeroAmount = AssetAmount.fromAsset(asset, {
-    amount: 0n,
-    decimals,
-  });
+  // TODO: we have to consider correctly here when an asset is ERC20 to get it from contract
+  const { amount, asset } = transferConfig.source.config.destinationFee;
+  const chainAsset = transferConfig.destination.chain.getChainAsset(asset);
 
   if (Number.isFinite(amount)) {
-    return zeroAmount.copyWith({
-      amount: toBigInt(amount as number, decimals),
+    return chainAsset.toAssetAmount({
+      amount: amount as number,
     });
   }
 
   const cfg = (amount as FeeConfigBuilder).build({
     api: polkadot.api,
-    asset: polkadot.chain.getAssetId(asset),
+    asset: chainAsset.getAssetId(),
   });
 
-  return zeroAmount.copyWith({
+  return chainAsset.toAssetAmount({
     amount: await cfg.call(),
   });
 }

@@ -47,16 +47,23 @@ export async function getBalance({
   return asset.toAssetAmount({ amount: balance });
 }
 
-export async function getMin(config: AssetConfig, polkadot: PolkadotService) {
+export async function getMin(
+  config: AssetConfig,
+  polkadot: PolkadotService,
+): Promise<AssetAmount> {
   const asset = polkadot.chain.getChainAsset(config.asset);
 
   if (config.min) {
-    return polkadot.query(config.min.build({ asset: asset.getMinAssetId() }));
+    const min = await polkadot.query(
+      config.min.build({ asset: asset.getMinAssetId() }),
+    );
+
+    return asset.toAssetAmount({ amount: min });
   }
 
   if (asset.min) {
     return asset.toAssetAmount({ amount: asset.min });
   }
 
-  return 0n;
+  return asset.toAssetAmount({ amount: 0n });
 }

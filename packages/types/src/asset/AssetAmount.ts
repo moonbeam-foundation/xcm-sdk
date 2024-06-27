@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { toDecimal } from '@moonbeam-network/xcm-utils';
+import { toBigInt, toDecimal } from '@moonbeam-network/xcm-utils';
 import Big, { RoundingMode } from 'big.js';
 import { ChainAsset, ChainAssetConstructorParams } from './ChainAsset';
 
@@ -7,7 +7,7 @@ Big.NE = -18;
 
 export interface AssetAmountConstructorParams
   extends ChainAssetConstructorParams {
-  amount: bigint;
+  amount: number | bigint;
   decimals: number;
   symbol?: string;
 }
@@ -18,7 +18,7 @@ export class AssetAmount extends ChainAsset {
   constructor({ amount, ...other }: AssetAmountConstructorParams) {
     super(other);
 
-    this.amount = amount;
+    this.amount = toBigInt(amount, other.decimals);
   }
 
   isSame(asset: AssetAmount): boolean {
