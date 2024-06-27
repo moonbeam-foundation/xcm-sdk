@@ -29,12 +29,7 @@ import {
 } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
-import {
-  GetBalancesParams,
-  getBalance,
-  getDecimals,
-  getMin,
-} from './getTransferData.utils';
+import { GetBalancesParams, getBalance, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;

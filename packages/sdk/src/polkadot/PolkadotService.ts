@@ -97,64 +97,6 @@ export class PolkadotService {
     });
   }
 
-  async getAssetMeta(
-    asset: ChainAssetId,
-  ): Promise<{ symbol: string; decimals: number } | undefined> {
-    const fn =
-      this.api.query.assets?.metadata ||
-      this.api.query.assetRegistry?.assets ||
-      this.api.query.assetRegistry?.metadata ||
-      this.api.query.assetRegistry?.currencyMetadatas ||
-      this.api.query.assetRegistry?.assetMetadatas ||
-      this.api.query.assetRegistry?.assetMetadataMap;
-
-    if (!fn) {
-      return undefined;
-    }
-
-    const data = (await fn(asset)) as AssetMetadata | Option<AssetMetadata>;
-    const unwrapped = 'unwrapOrDefault' in data ? data.unwrapOrDefault() : data;
-    const decimals =
-      'unwrapOrDefault' in unwrapped.decimals
-        ? unwrapped.decimals.unwrapOrDefault()
-        : unwrapped.decimals;
-
-    return {
-      decimals: decimals.toNumber(),
-      symbol: unwrapped.symbol.toString(),
-    };
-  }
-
-  async getAssetDecimalsFromQuery(
-    asset: ChainAssetId,
-  ): Promise<number | undefined> {
-    const fn = this.api.query.assetsRegistry?.assetDecimals;
-
-    if (!fn) {
-      return undefined;
-    }
-
-    const data = (await fn(asset)) as Option<u8>;
-
-    return data.unwrapOrDefault().toNumber();
-  }
-
-  async getAssetDecimals(asset: Asset): Promise<number> {
-    const metaId = this.chain.getMetadataAssetId(asset);
-
-    const decimals =
-      this.chain.getAssetDecimals(asset) ||
-      (await this.getAssetDecimalsFromQuery(metaId)) ||
-      (await this.getAssetMeta(metaId))?.decimals ||
-      this.decimals; // TODO remove this and handle it separately only for native assets
-
-    if (!decimals) {
-      throw new Error(`No decimals found for asset ${asset.originSymbol}`);
-    }
-
-    return decimals;
-  }
-
   async query(config: SubstrateQueryConfig): Promise<bigint> {
     const response = await this.api.query[config.module][config.func](
       ...config.args,

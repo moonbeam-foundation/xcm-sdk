@@ -1,4 +1,4 @@
-import { Asset, ChainAsset, ChainAssetId } from '../../asset';
+import { Asset, ChainAsset } from '../../asset';
 import { SetOptional } from '../../common.interfaces';
 import { Chain, ChainConstructorParams } from '../Chain';
 import { ChainType } from '../Chain.interfaces';
@@ -54,27 +54,15 @@ export class Parachain extends Chain {
     this.ws = ws;
   }
 
-  getAssetId(asset: Asset): ChainAssetId {
-    return this.assets.get(asset.key)?.ids?.id ?? asset.originSymbol;
-  }
+  getChainAsset(asset: Asset): ChainAsset {
+    const chainAsset = this.assets.get(asset.key);
 
-  getBalanceAssetId(asset: Asset): ChainAssetId {
-    return this.assets.get(asset.key)?.ids?.balanceId ?? this.getAssetId(asset);
-  }
+    if (!chainAsset) {
+      throw new Error(
+        `No ChainAsset found ${asset.originSymbol} (${asset.key}) for chain ${this.name} (${this.key})`,
+      );
+    }
 
-  getMinAssetId(asset: Asset): ChainAssetId {
-    return this.assets.get(asset.key)?.ids?.minId ?? this.getAssetId(asset);
-  }
-
-  getAssetPalletInstance(asset: Asset): number | undefined {
-    return this.assets.get(asset.key)?.ids?.palletInstance;
-  }
-
-  getAssetDecimals(asset: Asset): number | undefined {
-    return this.assets.get(asset.key)?.decimals;
-  }
-
-  getAssetMin(asset: Asset): number {
-    return this.assets.get(asset.key)?.min ?? 0;
+    return chainAsset;
   }
 }

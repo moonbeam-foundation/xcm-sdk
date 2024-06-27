@@ -1,4 +1,5 @@
 /* eslint-disable import/no-cycle */
+import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { Asset, AssetConstructorParams } from './Asset';
 import { AssetAmount, AssetAmountConstructorParams } from './AssetAmount';
 
@@ -6,7 +7,7 @@ export interface ChainAssetConstructorParams extends AssetConstructorParams {
   address?: string;
   decimals: number;
   ids?: ChainAssetIds;
-  min?: number;
+  min?: number | bigint;
   symbol?: string;
 }
 
@@ -31,7 +32,7 @@ export class ChainAsset extends Asset {
 
   readonly ids?: ChainAssetIds;
 
-  readonly min?: number;
+  readonly min?: bigint;
 
   readonly symbol?: string;
 
@@ -48,7 +49,7 @@ export class ChainAsset extends Asset {
     this.address = address;
     this.decimals = decimals;
     this.ids = ids;
-    this.min = min;
+    this.min = min ? toBigInt(min, decimals) : undefined;
     this.symbol = symbol;
   }
 
@@ -68,5 +69,25 @@ export class ChainAsset extends Asset {
       symbol: this.symbol,
       ...params,
     });
+  }
+
+  getAssetId(): ChainAssetId {
+    return this.ids?.id ?? this.originSymbol;
+  }
+
+  getBalanceAssetId(): ChainAssetId {
+    return this.ids?.balanceId ?? this.getAssetId();
+  }
+
+  getMinAssetId(): ChainAssetId {
+    return this.ids?.minId ?? this.getAssetId();
+  }
+
+  getAssetPalletInstance(): number | undefined {
+    return this.ids?.palletInstance;
+  }
+
+  getAssetMin(): bigint {
+    return this.min ?? 0n;
   }
 }
