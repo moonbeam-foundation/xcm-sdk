@@ -83,29 +83,37 @@ import {
 
 export const acala = new Parachain({
   assets: [
-    {
-      asset: aca,
-      id: { Token: aca.originSymbol },
-      metadataId: { NativeAssetId: { Token: aca.originSymbol } },
-    },
-    {
-      asset: aseed,
-      id: { Token: 'AUSD' },
-      metadataId: { NativeAssetId: { Token: 'AUSD' } },
-      minId: { NativeAssetId: { Token: 'AUSD' } },
-    },
-    {
-      asset: glmr,
-      id: { ForeignAsset: 0 },
-      metadataId: { ForeignAssetId: 0 },
-      minId: { ForeignAssetId: 0 },
-    },
-    {
-      asset: ldot,
-      id: { Token: ldot.originSymbol },
-      metadataId: { NativeAssetId: { Token: ldot.originSymbol } },
-      minId: { NativeAssetId: { Token: ldot.originSymbol } },
-    },
+    aca.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: aca.originSymbol },
+        metadataId: { NativeAssetId: { Token: aca.originSymbol } },
+      },
+    }),
+    aseed.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: 'AUSD' },
+        metadataId: { NativeAssetId: { Token: 'AUSD' } },
+        minId: { NativeAssetId: { Token: 'AUSD' } },
+      },
+    }),
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { ForeignAsset: 0 },
+        metadataId: { ForeignAssetId: 0 },
+        minId: { ForeignAssetId: 0 },
+      },
+    }),
+    ldot.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: ldot.originSymbol },
+        metadataId: { NativeAssetId: { Token: ldot.originSymbol } },
+        minId: { NativeAssetId: { Token: ldot.originSymbol } },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -119,16 +127,20 @@ export const acala = new Parachain({
 
 export const alphanetAssetHub = new Parachain({
   assets: [
-    {
-      asset: tt1,
-      id: 2,
-      palletInstance: 50,
-    },
+    tt1.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 2,
+        palletInstance: 50,
+      },
+    }),
     // NOTE: no meta for native token
-    {
-      asset: unit,
-      metadataId: 0,
-    },
+    unit.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -155,15 +167,19 @@ export const alphanetRelay = new Parachain({
 
 export const astar = new Parachain({
   assets: [
-    {
-      asset: glmr,
-      id: 18446744073709551619n,
-    },
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 18446744073709551619n,
+      },
+    }),
     // NOTE: no meta for native token
-    {
-      asset: astr,
-      metadataId: 0,
-    },
+    astr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -177,26 +193,36 @@ export const astar = new Parachain({
 
 export const bifrostKusama = new Parachain({
   assets: [
-    {
-      asset: movr,
-      id: { Token: movr.originSymbol },
-    },
-    {
-      asset: bnc,
-      id: { Native: bnc.originSymbol },
-    },
-    {
-      asset: vbnc,
-      id: { VToken: 'BNC' },
-    },
-    {
-      asset: vksm,
-      id: { VToken: 'KSM' },
-    },
-    {
-      asset: vmovr,
-      id: { VToken: 'MOVR' },
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: movr.originSymbol },
+      },
+    }),
+    bnc.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Native: bnc.originSymbol },
+      },
+    }),
+    vbnc.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken: 'BNC' },
+      },
+    }),
+    vksm.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken: 'KSM' },
+      },
+    }),
+    vmovr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken: 'MOVR' },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -210,43 +236,61 @@ export const bifrostKusama = new Parachain({
 
 export const bifrostPolkadot = new Parachain({
   assets: [
-    {
-      asset: glmr,
-      id: { Token2: 1 },
-    },
-    {
-      asset: bnc,
-      id: { Native: bnc.originSymbol },
-    },
-    {
-      asset: bncs,
-      id: { Token2: 9 },
-    },
-    {
-      asset: fil,
-      id: { Token2: 4 },
-    },
-    {
-      asset: vastr,
-      id: { VToken2: 3 },
-    },
-    {
-      asset: vdot,
-      id: { VToken2: 0 },
-      metadataId: { VToken2: 0 },
-    },
-    {
-      asset: vfil,
-      id: { VToken2: 4 },
-    },
-    {
-      asset: vglmr,
-      id: { VToken2: 1 },
-    },
-    {
-      asset: vmanta,
-      id: { VToken2: 8 },
-    },
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token2: 1 },
+      },
+    }),
+    bnc.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Native: bnc.originSymbol },
+      },
+    }),
+    bncs.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token2: 9 },
+      },
+    }),
+    fil.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token2: 4 },
+      },
+    }),
+    vastr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken2: 3 },
+      },
+    }),
+    vdot.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken2: 0 },
+        metadataId: { VToken2: 0 },
+      },
+    }),
+    vfil.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken2: 4 },
+      },
+    }),
+    vglmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken2: 1 },
+      },
+    }),
+    vmanta.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { VToken2: 8 },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -260,17 +304,21 @@ export const bifrostPolkadot = new Parachain({
 
 export const calamari = new Parachain({
   assets: [
-    {
-      asset: movr,
-      balanceId: 11,
-      id: { MantaCurrency: 11 },
-    },
-    {
-      asset: kma,
-      id: { MantaCurrency: 1 },
-      // NOTE: no meta for native token
-      metadataId: 0,
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        balanceId: 11,
+        id: { MantaCurrency: 11 },
+      },
+    }),
+    kma.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { MantaCurrency: 1 },
+        // NOTE: no meta for native token
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -284,10 +332,12 @@ export const calamari = new Parachain({
 
 export const centrifuge = new Parachain({
   assets: [
-    {
-      asset: cfg,
-      id: 'Native',
-    },
+    cfg.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 'Native',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -301,16 +351,20 @@ export const centrifuge = new Parachain({
 
 export const crustShadow = new Parachain({
   assets: [
-    {
-      asset: movr,
-      balanceId: 232263652204149413431520870009560565298n,
-      id: { OtherReserve: 232263652204149413431520870009560565298n },
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        balanceId: 232263652204149413431520870009560565298n,
+        id: { OtherReserve: 232263652204149413431520870009560565298n },
+      },
+    }),
     // NOTE: no meta for native token
-    {
-      asset: csm,
-      metadataId: 0,
-    },
+    csm.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -324,17 +378,21 @@ export const crustShadow = new Parachain({
 
 export const darwinia = new EvmParachain({
   assets: [
-    {
-      // NOTE: no meta for native token
-      asset: ring,
-      metadataId: 0,
-      palletInstance: 5,
-    },
-    {
-      // NOTE: no meta for movr
-      asset: glmr,
-      metadataId: 0,
-    },
+    ring.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        // NOTE: no meta for native token
+        metadataId: 0,
+        palletInstance: 5,
+      },
+    }),
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        // NOTE: no meta for movr
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -355,17 +413,21 @@ export const darwinia = new EvmParachain({
 
 export const darwiniaCrab = new EvmParachain({
   assets: [
-    {
-      // NOTE: no meta for native token
-      asset: crab,
-      metadataId: 0,
-      palletInstance: 5,
-    },
-    {
-      // NOTE: no meta for movr
-      asset: movr,
-      metadataId: 0,
-    },
+    crab.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        // NOTE: no meta for native token
+        metadataId: 0,
+        palletInstance: 5,
+      },
+    }),
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        // NOTE: no meta for movr
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -386,19 +448,24 @@ export const darwiniaCrab = new EvmParachain({
 
 export const equilibrium = new Parachain({
   assets: [
-    {
-      asset: glmr,
+    glmr.toChainAsset({
       decimals: 9,
-      id: 1_735_159_154,
-    },
-    {
-      asset: eq,
-      id: 25_969,
-    },
-    {
-      asset: eqd,
-      id: 6_648_164,
-    },
+      ids: {
+        id: 1_735_159_154,
+      },
+    }),
+    eq.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 25_969,
+      },
+    }),
+    eqd.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 6_648_164,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -412,34 +479,48 @@ export const equilibrium = new Parachain({
 
 export const hydration = new Parachain({
   assets: [
-    {
-      asset: hdx,
-      id: 0,
-    },
-    {
-      asset: glmr,
-      id: 16,
-    },
-    {
-      asset: dai,
-      id: 18,
-    },
-    {
-      asset: usdcwh,
-      id: 21,
-    },
-    {
-      asset: usdtwh,
-      id: 23,
-    },
-    {
-      asset: wbtc,
-      id: 19,
-    },
-    {
-      asset: weth,
-      id: 20,
-    },
+    hdx.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 0,
+      },
+    }),
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 16,
+      },
+    }),
+    dai.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 18,
+      },
+    }),
+    usdcwh.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 21,
+      },
+    }),
+    usdtwh.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 23,
+      },
+    }),
+    wbtc.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 19,
+      },
+    }),
+    weth.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 20,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -453,31 +534,36 @@ export const hydration = new Parachain({
 
 export const hydrationAlphanet = new Parachain({
   assets: [
-    {
-      asset: hdx,
+    hdx.toChainAsset({
       decimals: 12,
-      id: 0,
-    },
-    {
-      asset: usdcwh,
+      ids: {
+        id: 0,
+      },
+    }),
+    usdcwh.toChainAsset({
       decimals: 6,
-      id: 1000001,
-    },
-    {
-      asset: ftmwh,
+      ids: {
+        id: 1000001,
+      },
+    }),
+    ftmwh.toChainAsset({
       decimals: 18,
-      id: 1000002,
-    },
-    {
-      asset: usdtwh,
+      ids: {
+        id: 1000002,
+      },
+    }),
+    usdtwh.toChainAsset({
       decimals: 6,
-      id: 2,
-    },
-    {
-      asset: dev,
+      ids: {
+        id: 2,
+      },
+    }),
+    dev.toChainAsset({
       decimals: 18,
-      id: 1,
-    },
+      ids: {
+        id: 1,
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -492,20 +578,24 @@ export const hydrationAlphanet = new Parachain({
 
 export const interlay = new Parachain({
   assets: [
-    {
-      asset: glmr,
-      id: { ForeignAsset: 10 },
-    },
-    {
-      asset: intr,
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { ForeignAsset: 10 },
+      },
+    }),
+    intr.toChainAsset({
       decimals: 10,
-      id: { Token: intr.originSymbol },
-    },
-    {
-      asset: ibtc,
+      ids: {
+        id: { Token: intr.originSymbol },
+      },
+    }),
+    ibtc.toChainAsset({
       decimals: 8,
-      id: { Token: ibtc.originSymbol },
-    },
+      ids: {
+        id: { Token: ibtc.originSymbol },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -530,23 +620,29 @@ export const integritee = new Parachain({
 
 export const karura = new Parachain({
   assets: [
-    {
-      asset: movr,
-      id: { ForeignAsset: 3 },
-      metadataId: { ForeignAssetId: 3 },
-      minId: { ForeignAssetId: 3 },
-    },
-    {
-      asset: kar,
-      id: { Token: kar.originSymbol },
-      metadataId: { NativeAssetId: { Token: kar.originSymbol } },
-    },
-    {
-      asset: aseed,
-      id: { Token: 'KUSD' },
-      metadataId: { NativeAssetId: { Token: 'KUSD' } },
-      minId: { NativeAssetId: { Token: 'KUSD' } },
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { ForeignAsset: 3 },
+        metadataId: { ForeignAssetId: 3 },
+        minId: { ForeignAssetId: 3 },
+      },
+    }),
+    kar.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: kar.originSymbol },
+        metadataId: { NativeAssetId: { Token: kar.originSymbol } },
+      },
+    }),
+    aseed.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: 'KUSD' },
+        metadataId: { NativeAssetId: { Token: 'KUSD' } },
+        minId: { NativeAssetId: { Token: 'KUSD' } },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -560,16 +656,20 @@ export const karura = new Parachain({
 
 export const khala = new Parachain({
   assets: [
-    {
-      asset: movr,
-      id: 6,
-      palletInstance: 10,
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 6,
+        palletInstance: 10,
+      },
+    }),
     // NOTE: no meta for native token
-    {
-      asset: pha,
-      metadataId: 99999999,
-    },
+    pha.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 99999999,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -584,16 +684,19 @@ export const khala = new Parachain({
 export const kintsugi = new Parachain({
   // no meta for native tokens
   assets: [
-    {
-      asset: kint,
-      id: { Token: kint.originSymbol },
-      metadataId: 0,
-    },
-    {
-      asset: kbtc,
+    kint.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { Token: kint.originSymbol },
+        metadataId: 0,
+      },
+    }),
+    kbtc.toChainAsset({
       decimals: 8,
-      id: { Token: kbtc.originSymbol },
-    },
+      ids: {
+        id: { Token: kbtc.originSymbol },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -618,21 +721,27 @@ export const kusama = new Parachain({
 
 export const kusamaAssetHub = new Parachain({
   assets: [
-    {
-      asset: usdt,
-      id: 1984,
-      palletInstance: 50,
-    },
-    {
-      asset: rmrk,
-      id: 8,
-      palletInstance: 50,
-    },
-    {
-      asset: ksm,
-      // NOTE: no meta for native token
-      metadataId: 9999999,
-    },
+    usdt.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1984,
+        palletInstance: 50,
+      },
+    }),
+    rmrk.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 8,
+        palletInstance: 50,
+      },
+    }),
+    ksm.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        // NOTE: no meta for native token
+        metadataId: 9999999,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -646,10 +755,12 @@ export const kusamaAssetHub = new Parachain({
 
 export const litmus = new Parachain({
   assets: [
-    {
-      asset: lit,
-      id: 'SelfReserve',
-    },
+    lit.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 'SelfReserve',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -663,14 +774,18 @@ export const litmus = new Parachain({
 
 export const mangataKusama = new Parachain({
   assets: [
-    {
-      asset: mgx,
-      id: 0,
-    },
-    {
-      asset: movr,
-      id: 39,
-    },
+    mgx.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 0,
+      },
+    }),
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 39,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -684,14 +799,18 @@ export const mangataKusama = new Parachain({
 
 export const mantaParachain = new Parachain({
   assets: [
-    {
-      asset: manta,
-      id: { MantaCurrency: 1 },
-    },
-    {
-      asset: glmr,
-      id: { MantaCurrency: 10 },
-    },
+    manta.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { MantaCurrency: 1 },
+      },
+    }),
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { MantaCurrency: 10 },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -705,90 +824,114 @@ export const mantaParachain = new Parachain({
 
 export const moonbaseAlpha = new EvmParachain({
   assets: [
-    {
+    alan.toChainAsset({
       address: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
-      asset: alan,
-      id: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
+        metadataId: 0, // no metadata for ERC20 tokens
+      },
+    }),
+    ampe.toChainAsset({
       address: '0xfFfFfffF7fee8415e1c2AC3A15C48D3546B95e16',
-      asset: ampe,
-      id: '170050401128744171791743427490841452054',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '170050401128744171791743427490841452054',
+      },
+    }),
+    atom.toChainAsset({
       address: '0xffffffffb7cdb201c395c238350568f17cfbd3b5', // Picasso Cosmos Hub
-      asset: atom,
-      id: '244316754493307480955066032215622931381',
-    },
-    // {
-    //   asset: auq,
-    //   id: '69536036667157951501899290870203586130',
-    // },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '244316754493307480955066032215622931381',
+      },
+    }),
+    dev.toChainAsset({
       address: '0x0000000000000000000000000000000000000802',
-      asset: dev,
-      id: '0x0000000000000000000000000000000000000802',
-      metadataId: 0,
+      decimals: 0, // todo
       min: 0.01,
-    },
-    {
+      ids: {
+        id: '0x0000000000000000000000000000000000000802',
+        metadataId: 0,
+      },
+    }),
+    lit.toChainAsset({
       address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
-      asset: lit,
-      id: '65216491554813189869575508812319036608',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '65216491554813189869575508812319036608',
+      },
+    }),
+    otp.toChainAsset({
       address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
-      asset: otp,
-      id: '238111524681612888331172110363070489924',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '238111524681612888331172110363070489924',
+      },
+    }),
+    paring.toChainAsset({
       address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
-      asset: paring,
-      id: '173481220575862801646329923366065693029',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '173481220575862801646329923366065693029',
+      },
+    }),
+    pica.toChainAsset({
       address: '0xFFFfFFFF10DD5Fd142163a40Ce0dae8c56e2801f',
-      asset: pica,
-      id: '22417088946346045371238623691600461855',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '22417088946346045371238623691600461855',
+      },
+    }),
+    tt1.toChainAsset({
       address: '0xfFffFfFf75976211C786fe4d73d2477e222786Ac',
-      asset: tt1,
-      id: '156305701417244550631956600137082963628',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '156305701417244550631956600137082963628',
+      },
+    }),
+    tur.toChainAsset({
       address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
-      asset: tur,
-      id: '133300872918374599700079037156071917454',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '133300872918374599700079037156071917454',
+      },
+    }),
+    unit.toChainAsset({
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
-      asset: unit,
-      id: '42259045809535163221576417993425387648',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '42259045809535163221576417993425387648',
+      },
+    }),
+    ftmwh.toChainAsset({
       address: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
-      asset: ftmwh,
-      id: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
+      },
+    }),
+    hdx.toChainAsset({
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
-      asset: hdx,
-      id: '69606720909260275826784788104880799692',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '69606720909260275826784788104880799692',
+      },
+    }),
+    usdcwh.toChainAsset({
       address: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
-      asset: usdcwh,
-      id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
+      },
+    }),
+    agng.toChainAsset({
       address: '0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20',
-      asset: agng,
-      id: '75066649112131892397889252914026143264',
-    },
+      decimals: 0, // todo
+      ids: {
+        id: '75066649112131892397889252914026143264',
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -811,30 +954,37 @@ export const moonbaseAlpha = new EvmParachain({
 
 export const moonbaseBeta = new EvmParachain({
   assets: [
-    {
-      asset: betaDEV,
-      metadataId: 0, // no metadata for native tokens
-    },
-    {
-      asset: dev,
-      balanceId: '222902676330054289648817870329963141953',
-      id: { ForeignAsset: '222902676330054289648817870329963141953' },
-    },
-    {
-      asset: alan,
-      balanceId: '85534404031760856987006367174489651085',
-      id: { ForeignAsset: '85534404031760856987006367174489651085' },
-    },
-    {
-      asset: usdcwh,
-      balanceId: '319794858556516669238969276945382613133',
-      id: { ForeignAsset: '319794858556516669238969276945382613133' },
-    },
-    {
-      asset: ftmwh,
-      balanceId: '198801030527939140930753142903035039136',
-      id: { ForeignAsset: '198801030527939140930753142903035039136' },
-    },
+    betaDEV.toChainAsset({
+      decimals: 0, // todo
+    }),
+    dev.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        balanceId: '222902676330054289648817870329963141953',
+        id: { ForeignAsset: '222902676330054289648817870329963141953' },
+      },
+    }),
+    alan.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        balanceId: '85534404031760856987006367174489651085',
+        id: { ForeignAsset: '85534404031760856987006367174489651085' },
+      },
+    }),
+    usdcwh.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        balanceId: '319794858556516669238969276945382613133',
+        id: { ForeignAsset: '319794858556516669238969276945382613133' },
+      },
+    }),
+    ftmwh.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        balanceId: '198801030527939140930753142903035039136',
+        id: { ForeignAsset: '198801030527939140930753142903035039136' },
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -856,222 +1006,303 @@ export const moonbaseBeta = new EvmParachain({
 
 export const moonbeam = new EvmParachain({
   assets: [
-    {
+    aca.toChainAsset({
       address: '0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f',
-      asset: aca,
-      id: '224821240862170613278369189818311486111',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '224821240862170613278369189818311486111',
+      },
+    }),
+    astr.toChainAsset({
       address: '0xFfFFFfffA893AD19e540E172C10d78D4d479B5Cf',
-      asset: astr,
-      id: '224077081838586484055667086558292981199',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '224077081838586484055667086558292981199',
+      },
+    }),
+    aseed.toChainAsset({
       address: '0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda',
-      asset: aseed,
-      id: '110021739665376159354538090254163045594',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '110021739665376159354538090254163045594',
+      },
+    }),
+    bnc.toChainAsset({
       address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
-      asset: bnc,
-      id: '165823357460190568952172802245839421906',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '165823357460190568952172802245839421906',
+      },
+    }),
+    bncs.toChainAsset({
       address: '0xfFfffffF6aF229AE7f0F4e0188157e189a487D59',
-      asset: bncs,
-      id: '142155548796783636521833385094843759961',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '142155548796783636521833385094843759961',
+      },
+    }),
+    cfg.toChainAsset({
       address: '0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3',
-      asset: cfg,
-      id: '91372035960551235635465443179559840483',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '91372035960551235635465443179559840483',
+      },
+    }),
+    dai.toChainAsset({
       address: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
-      asset: dai,
-      id: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
+        metadataId: 0, // no metadata for ERC20 tokens
+      },
+    }),
+    ded.toChainAsset({
       address: '0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6',
-      asset: ded,
-      id: '124463719055550872076363892993240202694',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '124463719055550872076363892993240202694',
+      },
+    }),
+    dot.toChainAsset({
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
-      asset: dot,
-      id: '42259045809535163221576417993425387648',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '42259045809535163221576417993425387648',
+      },
+    }),
+    eq.toChainAsset({
       address: '0xFffFFfFf8f6267e040D8a0638C576dfBa4F0F6D6',
-      asset: eq,
-      id: '190590555344745888270686124937537713878',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '190590555344745888270686124937537713878',
+      },
+    }),
+    eqd.toChainAsset({
       address: '0xFFffFfFF8cdA1707bAF23834d211B08726B1E499',
-      asset: eqd,
-      id: '187224307232923873519830480073807488153',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '187224307232923873519830480073807488153',
+      },
+    }),
+    fil.toChainAsset({
       address: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
-      asset: fil,
-      id: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
+      },
+    }),
+    glmr.toChainAsset({
       address: '0x0000000000000000000000000000000000000802',
-      asset: glmr,
-      id: '0x0000000000000000000000000000000000000802',
+      decimals: 0, // todo
       min: 0.1,
-    },
-    {
+      ids: {
+        id: '0x0000000000000000000000000000000000000802',
+      },
+    }),
+    hdx.toChainAsset({
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
-      asset: hdx,
-      id: '69606720909260275826784788104880799692',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '69606720909260275826784788104880799692',
+      },
+    }),
+    ibtc.toChainAsset({
       address: '0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52',
-      asset: ibtc,
-      id: '120637696315203257380661607956669368914',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '120637696315203257380661607956669368914',
+      },
+    }),
+    intr.toChainAsset({
       address: '0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab',
-      asset: intr,
-      id: '101170542313601871197860408087030232491',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '101170542313601871197860408087030232491',
+      },
+    }),
+    ldot.toChainAsset({
       address: '0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4',
-      asset: ldot,
-      id: '225719522181998468294117309041779353812',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '225719522181998468294117309041779353812',
+      },
+    }),
+    manta.toChainAsset({
       address: '0xfFFffFFf7D3875460d4509eb8d0362c611B4E841',
-      asset: manta,
-      id: '166446646689194205559791995948102903873',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '166446646689194205559791995948102903873',
+      },
+    }),
+    nodl.toChainAsset({
       address: '0xfffffffFe896ba7Cb118b9Fa571c6dC0a99dEfF1',
-      asset: nodl,
-      id: '309163521958167876851250718453738106865',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '309163521958167876851250718453738106865',
+      },
+    }),
+    neuro.toChainAsset({
       address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
-      asset: neuro,
-      id: '238111524681612888331172110363070489924',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '238111524681612888331172110363070489924',
+      },
+    }),
+    para.toChainAsset({
       address: '0xFfFffFFF18898CB5Fe1E88E668152B4f4052A947',
-      asset: para,
-      id: '32615670524745285411807346420584982855',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '32615670524745285411807346420584982855',
+      },
+    }),
+    peaq.toChainAsset({
       address: '0xFffFFFFFEC4908b74688a01374f789B48E9a3eab',
-      asset: peaq,
-      id: '314077021455772878282433861213184736939',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '314077021455772878282433861213184736939',
+      },
+    }),
+    pha.toChainAsset({
       address: '0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED',
-      asset: pha,
-      id: '132685552157663328694213725410064821485',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '132685552157663328694213725410064821485',
+      },
+    }),
+    pen.toChainAsset({
       address: '0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0',
-      asset: pen,
-      id: '45647473099451451833602657905356404688',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '45647473099451451833602657905356404688',
+      },
+    }),
+    ring.toChainAsset({
       address: '0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f',
-      asset: ring,
-      id: '125699734534028342599692732320197985871',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '125699734534028342599692732320197985871',
+      },
+    }),
+    sub.toChainAsset({
       address: '0xfFfFffFf43B4560Bc0C451a3386E082bff50aC90',
-      asset: sub,
-      id: '89994634370519791027168048838578580624',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '89994634370519791027168048838578580624',
+      },
+    }),
+    usdc.toChainAsset({
       address: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
-      asset: usdc,
-      id: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
-      metadataId: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
+        metadataId: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
+      },
+    }),
+    usdcwh.toChainAsset({
       address: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
-      asset: usdcwh,
-      id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
+        metadataId: 0, // no metadata for ERC20 tokens
+      },
+    }),
+    usdtwh.toChainAsset({
       address: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
-      asset: usdtwh,
-      id: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
-      metadataId: 0,
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
+        metadataId: 0,
+      },
+    }),
+    usdt.toChainAsset({
+      decimals: 0, // todo
       address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
-      asset: usdt,
-      id: '311091173110107856861649819128533077277',
-    },
-    {
+      ids: {
+        id: '311091173110107856861649819128533077277',
+      },
+    }),
+    vastr.toChainAsset({
       address: '0xFffFffff55C732C47639231a4C4373245763d26E',
-      asset: vastr,
-      id: '0xFffFffff55C732C47639231a4C4373245763d26E',
-      metadataId: '114018676402354620972806895487280206446', // registered XC20 id for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFffFffff55C732C47639231a4C4373245763d26E',
+        metadataId: '114018676402354620972806895487280206446', // registered XC20 id for ERC20 tokens
+      },
+    }),
+    vdot.toChainAsset({
       address: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
-      asset: vdot,
-      id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
-      metadataId: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
+        metadataId: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
+      },
+    }),
+    vfil.toChainAsset({
       address: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
-      asset: vfil,
-      id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
-      metadataId: '272547899416482196831721420898811311297', // registered XC20 id for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
+        metadataId: '272547899416482196831721420898811311297', // registered XC20 id for ERC20 tokens
+      },
+    }),
+    vglmr.toChainAsset({
       address: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
-      asset: vglmr,
-      id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
-      metadataId: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
+        metadataId: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
+      },
+    }),
+    vmanta.toChainAsset({
       address: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
-      asset: vmanta,
-      id: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
-      metadataId: '289989900872525819559124583375550296953', // registered XC20 id for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
+        metadataId: '289989900872525819559124583375550296953', // registered XC20 id for ERC20 tokens
+      },
+    }),
+    wbtc.toChainAsset({
       address: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
-      asset: wbtc,
-      id: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
+        metadataId: 0, // no metadata for ERC20 tokens
+      },
+    }),
+    weth.toChainAsset({
       address: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
-      asset: weth,
-      id: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
-      metadataId: 0, // no metadata for ERC20 tokens
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
+        metadataId: 0, // no metadata for ERC20 tokens
+      },
+    }),
+    ztg.toChainAsset({
       address: '0xFFFFfffF71815ab6142E0E20c7259126C6B40612',
-      asset: ztg,
-      id: '150874409661081770150564009349448205842',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '150874409661081770150564009349448205842',
+      },
+    }),
+    pink.toChainAsset({
       address: '0xfFfFFfFf30478fAFBE935e466da114E14fB3563d',
-      asset: pink,
-      id: '64174511183114006009298114091987195453',
-    },
-    {
-      asset: stink,
-      id: '112679793397406599376365943185137098326',
-    },
-    {
-      asset: apillon,
-      id: '184218609779515850660274730699350567246',
-    },
+      decimals: 0, // todo
+      ids: {
+        id: '64174511183114006009298114091987195453',
+      },
+    }),
+    stink.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: '112679793397406599376365943185137098326',
+      },
+    }),
+    apillon.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: '184218609779515850660274730699350567246',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1093,135 +1324,185 @@ export const moonbeam = new EvmParachain({
 
 export const moonriver = new EvmParachain({
   assets: [
-    {
+    aseed.toChainAsset({
       address: '0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228',
-      asset: aseed,
-      id: '214920334981412447805621250067209749032',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '214920334981412447805621250067209749032',
+      },
+    }),
+    bnc.toChainAsset({
       address: '0xFFfFFfFFF075423be54811EcB478e911F22dDe7D',
-      asset: bnc,
-      id: '319623561105283008236062145480775032445',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '319623561105283008236062145480775032445',
+      },
+    }),
+    crab.toChainAsset({
       address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
-      asset: crab,
-      id: '173481220575862801646329923366065693029',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '173481220575862801646329923366065693029',
+      },
+    }),
+    csm.toChainAsset({
       address: '0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7',
-      asset: csm,
-      id: '108457044225666871745333730479173774551',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '108457044225666871745333730479173774551',
+      },
+    }),
+    hko.toChainAsset({
       address: '0xffffffFF394054BCDa1902B6A6436840435655a3',
-      asset: hko,
-      id: '76100021443485661246318545281171740067',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '76100021443485661246318545281171740067',
+      },
+    }),
+    kar.toChainAsset({
       address: '0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5',
-      asset: kar,
-      id: '10810581592933651521121702237638664357',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '10810581592933651521121702237638664357',
+      },
+    }),
+    kbtc.toChainAsset({
       address: '0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0',
-      asset: kbtc,
-      id: '328179947973504579459046439826496046832',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '328179947973504579459046439826496046832',
+      },
+    }),
+    kint.toChainAsset({
       address: '0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2',
-      asset: kint,
-      id: '175400718394635817552109270754364440562',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '175400718394635817552109270754364440562',
+      },
+    }),
+    kma.toChainAsset({
       address: '0xFFffFffFA083189f870640b141ae1E882c2b5bad',
-      asset: kma,
-      id: '213357169630950964874127107356898319277',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '213357169630950964874127107356898319277',
+      },
+    }),
+    ksm.toChainAsset({
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
-      asset: ksm,
-      id: '42259045809535163221576417993425387648',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '42259045809535163221576417993425387648',
+      },
+    }),
+    lit.toChainAsset({
       address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
-      asset: lit,
-      id: '65216491554813189869575508812319036608',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '65216491554813189869575508812319036608',
+      },
+    }),
+    mgx.toChainAsset({
       address: '0xffFfFffF58d867EEa1Ce5126A4769542116324e9',
-      asset: mgx,
-      id: '118095707745084482624853002839493125353',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '118095707745084482624853002839493125353',
+      },
+    }),
+    movr.toChainAsset({
       address: '0x0000000000000000000000000000000000000802',
-      asset: movr,
-      id: '0x0000000000000000000000000000000000000802',
+      decimals: 0, // todo
       min: 0.01,
-    },
-    {
+      ids: {
+        id: '0x0000000000000000000000000000000000000802',
+      },
+    }),
+    pha.toChainAsset({
       address: '0xffFfFFff8E6b63d9e447B6d4C45BDA8AF9dc9603',
-      asset: pha,
-      id: '189307976387032586987344677431204943363',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '189307976387032586987344677431204943363',
+      },
+    }),
+    pica.toChainAsset({
       address: '0xFffFfFFf7dD9B9C60ac83e49D7E3E1f7A1370aD2',
-      asset: pica,
-      id: '167283995827706324502761431814209211090',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '167283995827706324502761431814209211090',
+      },
+    }),
+    rmrk.toChainAsset({
       address: '0xffffffFF893264794d9d57E1E0E21E0042aF5A0A',
-      asset: rmrk,
-      id: '182365888117048807484804376330534607370',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '182365888117048807484804376330534607370',
+      },
+    }),
+    sdn.toChainAsset({
       address: '0xFFFfffFF0Ca324C842330521525E7De111F38972',
-      asset: sdn,
-      id: '16797826370226091782818345603793389938',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '16797826370226091782818345603793389938',
+      },
+    }),
+    teer.toChainAsset({
       address: '0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e',
-      asset: teer,
-      id: '105075627293246237499203909093923548958',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '105075627293246237499203909093923548958',
+      },
+    }),
+    tnkr.toChainAsset({
       address: '0xfFFfFffF683474B842852111cc31d470bD8f5081',
-      asset: tnkr,
-      id: '138512078356357941985706694377215053953',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '138512078356357941985706694377215053953',
+      },
+    }),
+    tur.toChainAsset({
       address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
-      asset: tur,
-      id: '133300872918374599700079037156071917454',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '133300872918374599700079037156071917454',
+      },
+    }),
+    usdt.toChainAsset({
       address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
-      asset: usdt,
-      id: '311091173110107856861649819128533077277',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '311091173110107856861649819128533077277',
+      },
+    }),
+    xrt.toChainAsset({
       address: '0xFffFFffF51470Dca3dbe535bD2880a9CcDBc6Bd9',
-      asset: xrt,
-      id: '108036400430056508975016746969135344601',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '108036400430056508975016746969135344601',
+      },
+    }),
+    vbnc.toChainAsset({
       address: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
-      asset: vbnc,
-      id: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
-      metadataId: '72145018963825376852137222787619937732',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
+        metadataId: '72145018963825376852137222787619937732',
+      },
+    }),
+    vksm.toChainAsset({
       address: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
-      asset: vksm,
-      id: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
-      metadataId: '264344629840762281112027368930249420542',
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
+        metadataId: '264344629840762281112027368930249420542',
+      },
+    }),
+    vmovr.toChainAsset({
       address: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
-      asset: vmovr,
-      id: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
-      metadataId: '203223821023327994093278529517083736593',
-    },
+      decimals: 0, // todo
+      ids: {
+        id: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
+        metadataId: '203223821023327994093278529517083736593',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1243,10 +1524,12 @@ export const moonriver = new EvmParachain({
 
 export const nodle = new Parachain({
   assets: [
-    {
-      asset: nodl,
-      id: 'NodleNative',
-    },
+    nodl.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 'NodleNative',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1260,11 +1543,13 @@ export const nodle = new Parachain({
 
 export const neuroweb = new Parachain({
   assets: [
-    {
-      asset: neuro,
-      metadataId: 0,
-      palletInstance: 10,
-    },
+    neuro.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 0,
+        palletInstance: 10,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1278,11 +1563,13 @@ export const neuroweb = new Parachain({
 
 export const originTrailAlphanet = new Parachain({
   assets: [
-    {
-      asset: otp,
-      metadataId: 0,
-      palletInstance: 10,
-    },
+    otp.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 0,
+        palletInstance: 10,
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -1297,15 +1584,19 @@ export const originTrailAlphanet = new Parachain({
 
 export const parallel = new Parachain({
   assets: [
-    {
-      asset: glmr,
-      id: 114,
-    },
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 114,
+      },
+    }),
     // NOTE: no meta for native token
-    {
-      asset: para,
-      metadataId: 0,
-    },
+    para.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1319,15 +1610,15 @@ export const parallel = new Parachain({
 
 export const parallelHeiko = new Parachain({
   assets: [
-    {
-      asset: movr,
-      id: 113,
-    },
-    // NOTE: no meta for native token
-    {
-      asset: hko,
-      metadataId: 0,
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 113,
+      },
+    }),
+    hko.toChainAsset({
+      decimals: 0, // todo
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1341,20 +1632,24 @@ export const parallelHeiko = new Parachain({
 
 export const peaqAlphanet = new Parachain({
   assets: [
-    {
-      asset: agng,
-      id: 0,
-    },
-    {
-      asset: dev,
+    agng.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 0,
+      },
+    }),
+    dev.toChainAsset({
       decimals: 18,
-      id: 1000,
-    },
-    {
-      asset: ftmwh,
+      ids: {
+        id: 1000,
+      },
+    }),
+    ftmwh.toChainAsset({
       decimals: 18,
-      id: 1001,
-    },
+      ids: {
+        id: 1001,
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -1369,47 +1664,57 @@ export const peaqAlphanet = new Parachain({
 
 export const peaqChain = new Parachain({
   assets: [
-    {
-      asset: peaq,
-      id: 0,
-    },
-    {
-      asset: dot,
-      id: 10,
-    },
-    {
-      asset: glmr,
+    peaq.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 0,
+      },
+    }),
+    dot.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 10,
+      },
+    }),
+    glmr.toChainAsset({
       decimals: 18,
-      id: 1000,
-    },
-    {
-      asset: usdcwh,
+      ids: {
+        id: 1000,
+      },
+    }),
+    usdcwh.toChainAsset({
       decimals: 6,
-      id: 1001,
-    },
-    {
-      asset: weth,
+      ids: {
+        id: 1001,
+      },
+    }),
+    weth.toChainAsset({
       decimals: 18,
-      id: 1002,
-    },
-    {
-      asset: wbtc,
+      ids: {
+        id: 1002,
+      },
+    }),
+    wbtc.toChainAsset({
       decimals: 8,
-      id: 1003,
-      metadataId: 0,
-    },
-    {
-      asset: dai,
+      ids: {
+        id: 1003,
+        metadataId: 0,
+      },
+    }),
+    dai.toChainAsset({
       decimals: 18,
-      id: 1004,
-      metadataId: 0,
-    },
-    {
-      asset: usdtwh,
+      ids: {
+        id: 1004,
+        metadataId: 0,
+      },
+    }),
+    usdtwh.toChainAsset({
       decimals: 6,
-      id: 1005,
-      metadataId: 0,
-    },
+      ids: {
+        id: 1005,
+        metadataId: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1424,26 +1729,28 @@ export const peaqChain = new Parachain({
 
 export const peaqEvmAlphanet = new EvmParachain({
   assets: [
-    {
-      asset: agng,
+    agng.toChainAsset({
       decimals: 18,
-    },
-    {
+      ids: {},
+    }),
+    dev.toChainAsset({
       address: '0xFfFfFffF000000000000000000000000000003e8',
-      asset: dev,
       decimals: 18,
-      id: '0xFfFfFffF000000000000000000000000000003e8',
-      metadataId: 0,
-      minId: 1000,
-    },
-    {
+      ids: {
+        id: '0xFfFfFffF000000000000000000000000000003e8',
+        metadataId: 0,
+        minId: 1000,
+      },
+    }),
+    ftmwh.toChainAsset({
       address: '0xFffFffFF000000000000000000000000000003E9',
-      asset: ftmwh,
       decimals: 18,
-      id: '0xFffFffFF000000000000000000000000000003E9',
-      metadataId: 0,
-      minId: 1001,
-    },
+      ids: {
+        id: '0xFffFffFF000000000000000000000000000003E9',
+        metadataId: 0,
+        minId: 1001,
+      },
+    }),
   ],
   contracts: {
     Xtokens: '0x0000000000000000000000000000000000000803',
@@ -1469,53 +1776,63 @@ export const peaqEvmAlphanet = new EvmParachain({
 
 export const peaqEvm = new EvmParachain({
   assets: [
-    {
-      asset: peaq,
+    peaq.toChainAsset({
       decimals: 18,
-    },
-    {
+    }),
+    glmr.toChainAsset({
       address: '0xFfFfFffF000000000000000000000000000003e8',
-      asset: glmr,
       decimals: 18,
-      id: '0xFfFfFffF000000000000000000000000000003e8',
-      metadataId: 0,
-      minId: 1000,
-    },
-    {
+      ids: {
+        id: '0xFfFfFffF000000000000000000000000000003e8',
+        metadataId: 0,
+        minId: 1000,
+      },
+    }),
+    usdcwh.toChainAsset({
       address: '0xFffFffFF000000000000000000000000000003E9',
-      asset: usdcwh,
-      id: '0xFffFffFF000000000000000000000000000003E9',
-      metadataId: 1001,
-      minId: 1001,
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFffFffFF000000000000000000000000000003E9',
+        metadataId: 1001,
+        minId: 1001,
+      },
+    }),
+    weth.toChainAsset({
       address: '0xFFFfFfFf000000000000000000000000000003ea',
-      asset: weth,
-      id: '0xFFFfFfFf000000000000000000000000000003ea',
-      metadataId: 1002,
-      minId: 1002,
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xFFFfFfFf000000000000000000000000000003ea',
+        metadataId: 1002,
+        minId: 1002,
+      },
+    }),
+    wbtc.toChainAsset({
       address: '0xfffFFFFF000000000000000000000000000003eb',
-      asset: wbtc,
-      id: '0xfffFFFFF000000000000000000000000000003eb',
-      metadataId: 1003,
-      minId: 1003,
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xfffFFFFF000000000000000000000000000003eb',
+        metadataId: 1003,
+        minId: 1003,
+      },
+    }),
+    dai.toChainAsset({
       address: '0xfFffFFFF000000000000000000000000000003Ec',
-      asset: dai,
-      id: '0xfFffFFFF000000000000000000000000000003Ec',
-      metadataId: 1004,
-      minId: 1004,
-    },
-    {
+      decimals: 0, // todo
+      ids: {
+        id: '0xfFffFFFF000000000000000000000000000003Ec',
+        metadataId: 1004,
+        minId: 1004,
+      },
+    }),
+    usdtwh.toChainAsset({
       address: '0xfFffffFF000000000000000000000000000003Ed',
-      asset: usdtwh,
-      id: '0xfFffffFF000000000000000000000000000003Ed',
-      metadataId: 1005,
-      minId: 1005,
-    },
+      decimals: 0, // todo
+      ids: {
+        id: '0xfFffffFF000000000000000000000000000003Ed',
+        metadataId: 1005,
+        minId: 1005,
+      },
+    }),
   ],
   contracts: {
     Xtokens: '0x0000000000000000000000000000000000000803',
@@ -1541,16 +1858,19 @@ export const peaqEvm = new EvmParachain({
 
 export const pendulum = new Parachain({
   assets: [
-    {
-      asset: pen,
-      id: 'Native',
-      metadataId: 0,
-    },
-    {
-      asset: glmr,
+    pen.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 'Native',
+        metadataId: 0,
+      },
+    }),
+    glmr.toChainAsset({
       decimals: 18,
-      id: { XCM: 6 },
-    },
+      ids: {
+        id: { XCM: 6 },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1564,16 +1884,19 @@ export const pendulum = new Parachain({
 
 export const pendulumAlphanet = new Parachain({
   assets: [
-    {
-      asset: ampe,
-      id: 'Native',
-      metadataId: 0,
-    },
-    {
-      asset: dev,
+    ampe.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 'Native',
+        metadataId: 0,
+      },
+    }),
+    dev.toChainAsset({
       decimals: 18,
-      id: { XCM: 1 },
-    },
+      ids: {
+        id: { XCM: 1 },
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -1588,16 +1911,16 @@ export const pendulumAlphanet = new Parachain({
 
 export const phala = new Parachain({
   assets: [
-    {
-      asset: glmr,
-      id: 1,
-      palletInstance: 10,
-    },
-    // NOTE: no meta for native token
-    {
-      asset: pha,
-      metadataId: 99999999,
-    },
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1,
+        palletInstance: 10,
+      },
+    }),
+    pha.toChainAsset({
+      decimals: 0, // todo
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1611,15 +1934,19 @@ export const phala = new Parachain({
 
 export const picasso = new Parachain({
   assets: [
-    {
-      asset: pica,
-      id: 1,
-    },
-    {
-      asset: movr,
-      id: 23,
+    pica.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1,
+      },
+    }),
+    movr.toChainAsset({
+      decimals: 0, // todo
       min: 0.0041,
-    },
+      ids: {
+        id: 23,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1633,18 +1960,24 @@ export const picasso = new Parachain({
 
 export const picassoAlphanet = new Parachain({
   assets: [
-    {
-      asset: pica,
-      id: 1,
-    },
-    {
-      asset: atom,
-      id: 7,
-    },
-    {
-      asset: dev,
-      id: 10,
-    },
+    pica.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1,
+      },
+    }),
+    atom.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 7,
+      },
+    }),
+    dev.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 10,
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -1670,41 +2003,51 @@ export const polkadot = new Parachain({
 
 export const polkadotAssetHub = new Parachain({
   assets: [
-    {
-      asset: usdt,
-      id: 1984,
-      palletInstance: 50,
-    },
-    {
-      asset: ded,
-      id: 30,
-      palletInstance: 50,
-    },
-    {
-      asset: dot,
-      // NOTE: no meta for native token
-      metadataId: 9999999,
-    },
-    {
-      asset: usdc,
-      id: 1337,
-      palletInstance: 50,
-    },
-    {
-      asset: pink,
-      id: 23,
-      palletInstance: 50,
-    },
-    {
-      asset: stink,
-      id: 42069,
-      palletInstance: 50,
-    },
-    {
-      asset: apillon,
-      id: 1024,
-      palletInstance: 50,
-    },
+    usdt.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1984,
+        palletInstance: 50,
+      },
+    }),
+    ded.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 30,
+        palletInstance: 50,
+      },
+    }),
+    dot.toChainAsset({
+      decimals: 0, // todo
+    }),
+    usdc.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1337,
+        palletInstance: 50,
+      },
+    }),
+    pink.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 23,
+        palletInstance: 50,
+      },
+    }),
+    stink.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 42069,
+        palletInstance: 50,
+      },
+    }),
+    apillon.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1024,
+        palletInstance: 50,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1718,11 +2061,9 @@ export const polkadotAssetHub = new Parachain({
 
 export const robonomics = new Parachain({
   assets: [
-    {
-      asset: xrt,
-      // NOTE: no meta for native token
-      metadataId: 0,
-    },
+    xrt.toChainAsset({
+      decimals: 0, // todo
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1736,15 +2077,15 @@ export const robonomics = new Parachain({
 
 export const shiden = new Parachain({
   assets: [
-    {
-      asset: movr,
-      id: 18446744073709551620n,
-    },
-    // NOTE: no meta for native token
-    {
-      asset: sdn,
-      metadataId: 0,
-    },
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 18446744073709551620n,
+      },
+    }),
+    sdn.toChainAsset({
+      decimals: 0, // todo
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1769,10 +2110,12 @@ export const subsocial = new Parachain({
 
 export const tinkernet = new Parachain({
   assets: [
-    {
-      asset: tnkr,
-      id: 0,
-    },
+    tnkr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 0,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1786,15 +2129,15 @@ export const tinkernet = new Parachain({
 
 export const turing = new Parachain({
   assets: [
-    {
-      asset: tur,
-      // NOTE: no meta for native token
-      metadataId: 0,
-    },
-    {
-      asset: movr,
-      id: 9,
-    },
+    tur.toChainAsset({
+      decimals: 0, // todo
+    }),
+    movr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 9,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
@@ -1808,15 +2151,15 @@ export const turing = new Parachain({
 
 export const turingAlphanet = new Parachain({
   assets: [
-    {
-      asset: tur,
-      // NOTE: no meta for native token
-      metadataId: 0,
-    },
-    {
-      asset: dev,
-      id: 1,
-    },
+    tur.toChainAsset({
+      decimals: 0, // todo
+    }),
+    dev.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: 1,
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -1831,10 +2174,12 @@ export const turingAlphanet = new Parachain({
 
 export const uniqueAlpha = new Parachain({
   assets: [
-    {
-      asset: auq,
-      id: { NativeAssetId: 'Here' },
-    },
+    auq.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { NativeAssetId: 'Here' },
+      },
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
@@ -1849,14 +2194,18 @@ export const uniqueAlpha = new Parachain({
 
 export const zeitgeist = new Parachain({
   assets: [
-    {
-      asset: usdcwh,
-      id: { ForeignAsset: 1 },
-    },
-    {
-      asset: glmr,
-      id: { ForeignAsset: 3 },
-    },
+    usdcwh.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { ForeignAsset: 1 },
+      },
+    }),
+    glmr.toChainAsset({
+      decimals: 0, // todo
+      ids: {
+        id: { ForeignAsset: 3 },
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
