@@ -134,12 +134,8 @@ export const alphanetAssetHub = new Parachain({
         palletInstance: 50,
       },
     }),
-    // NOTE: no meta for native token
     unit.toChainAsset({
       decimals: 0, // todo
-      ids: {
-        metadataId: 0,
-      },
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,

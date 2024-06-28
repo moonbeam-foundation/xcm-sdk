@@ -20,10 +20,12 @@ export async function getDestinationData({
   const {
     destination: { chain, config },
   } = transferConfig;
+  const asset = chain.getChainAsset(config.asset);
   const balance = await getBalance({
     address: destinationAddress,
+    asset,
+    builder: config.balance,
     chain,
-    config,
     polkadot,
   });
   const min = await getMin(config, polkadot);

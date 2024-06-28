@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import {
-  CallType,
-  ContractConfig,
-  ExtrinsicConfig,
-  SubstrateQueryConfig,
-} from '@moonbeam-network/xcm-builder';
+import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import {
   AssetConfig,
   DestinationFeeConfig,
@@ -14,6 +9,7 @@ import {
 import {
   AnyChain,
   AssetAmount,
+  ChainAsset,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import {
@@ -22,14 +18,10 @@ import {
   toDecimal,
 } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import {
-  BalanceContractInterface,
-  TransferContractInterface,
-  createContract,
-} from '../contract';
+import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
-import { GetBalancesParams, getBalance, getMin } from './getTransferData.utils';
+import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   transferConfig: TransferConfig;
@@ -53,70 +45,61 @@ export async function getSourceData({
   const asset = chain.getChainAsset(transferConfig.asset);
   const feeAsset = config.fee ? chain.getChainAsset(config.fee.asset) : asset;
 
-  const feeBalanceConfig = config.fee?.balance.build({
-    address: destinationAddress,
-    asset: feeAsset.getBalanceAssetId(),
-  });
-
   const balance = await getBalance({
     address: sourceAddress,
+    asset,
+    builder: config.balance,
     chain,
-    config,
     polkadot,
   });
-
-  const feeBalance = await getFeeBalance({
-    address: sourceAddress,
-    balance,
-    chain,
-    feeConfig: config.fee,
-    polkadot,
-  });
-
-  const destinationFeeBalance = config.asset.isEqual(
-    config.destinationFee.asset,
-  )
-    ? balance
-    : await getFeeBalance({
+  const feeBalance = config.fee
+    ? await getBalance({
         address: sourceAddress,
-        balance,
+        asset: feeAsset,
+        builder: config.fee.balance,
         chain,
-        decimals: zeroDestinationFeeAmount.decimals,
-        feeConfig: config.destinationFee,
         polkadot,
-      });
+      })
+    : balance;
+  const destinationFeeBalance = config.destinationFee.asset.isEqual(asset)
+    ? balance
+    : config.destinationFee.asset.isEqual(feeAsset)
+      ? feeBalance
+      : await getBalance({
+          address: sourceAddress,
+          asset: chain.getChainAsset(config.destinationFee.asset),
+          builder: config.destinationFee.balance,
+          chain,
+          polkadot,
+        });
 
   const min = await getMin(config, polkadot);
+  const { existentialDeposit } = polkadot;
 
   const extrinsic = config.extrinsic?.build({
     address: destinationAddress,
-    amount: balance,
-    asset: chain.getAssetId(asset),
+    amount: balance.amount,
+    asset: asset.getAssetId(),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: chain.getAssetId(destinationFee),
-    palletInstance: chain.getAssetPalletInstance(asset),
+    feeAsset: destinationFee.getAssetId(),
+    palletInstance: asset.getAssetPalletInstance(),
     source: chain,
   });
 
   const contract = config.contract?.build({
     address: destinationAddress,
-    amount: balance,
-    asset: chain.getAssetId(asset),
+    amount: balance.amount,
+    asset: asset.getAssetId(),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: chain.getAssetId(destinationFee),
-  });
-
-  const destinationFeeBalanceAmount = zeroDestinationFeeAmount.copyWith({
-    amount: destinationFeeBalance,
+    feeAsset: feeAsset.getAssetId(),
   });
 
   const fee = await getFee({
     balance,
     chain,
-    contract,
-    decimals: zeroFeeAmount.decimals,
+    contractConfig: contract,
     destinationFeeBalanceAmount,
     destinationFeeConfig: config.destinationFee,
     extrinsic,
@@ -125,14 +108,7 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const balanceAmount = zeroAmount.copyWith({ amount: balance });
-  const { existentialDeposit } = polkadot;
-  const feeAmount = zeroFeeAmount.copyWith({ amount: fee });
-  const feeBalanceAmount = zeroFeeAmount.copyWith({ amount: feeBalance });
-
-  const minAmount = zeroAmount.copyWith({ amount: min });
-
-  const maxAmount = getMax({
+  const max = getMax({
     balanceAmount,
     existentialDeposit,
     feeAmount,
@@ -140,64 +116,23 @@ export async function getSourceData({
   });
 
   return {
-    balance: balanceAmount,
+    balance,
     chain,
-    destinationFeeBalance: destinationFeeBalanceAmount,
+    destinationFeeBalance,
     existentialDeposit,
     fee: feeAmount,
-    feeBalance: feeBalanceAmount,
-    max: maxAmount,
-    min: minAmount,
+    feeBalance,
+    max,
+    min,
   };
 }
 
-export interface GetFeeBalanceParams
-  extends Omit<GetBalancesParams, 'config' | 'evmSigner'> {
-  feeConfig: FeeAssetConfig | undefined;
-}
-
-export async function getFeeBalance({
-  address,
-  chain,
-  feeConfig,
-  polkadot,
-}: GetFeeBalanceParams) {
-  const cfg = feeConfig.balance.build({
-    address,
-    asset: polkadot.chain.getBalanceAssetId(feeConfig.asset),
-  }) as SubstrateQueryConfig;
-
-  if (cfg.type === CallType.Evm) {
-    const contract = createContract(chain, cfg) as BalanceContractInterface;
-
-    const decimalsFromContract = await contract.getDecimals();
-    const balanceFromContract = await contract.getBalance();
-
-    return chain.usesChainDecimals
-      ? convertDecimals(
-          balanceFromContract,
-          polkadot.decimals,
-          decimalsFromContract,
-        )
-      : balanceFromContract;
-  }
-
-  const feeBalance = await polkadot.query(cfg);
-
-  return chain.usesChainDecimals
-    ? convertDecimals(feeBalance, polkadot.decimals, decimals)
-    : feeBalance;
-}
-
 export interface GetFeeParams {
-  balance: bigint;
-  contract?: ContractConfig;
+  balance: AssetAmount;
+  contractConfig?: ContractConfig;
   chain: AnyChain;
-  decimals: number;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
-  destinationFeeConfig?: DestinationFeeConfig;
-  destinationFeeBalanceAmount?: AssetAmount;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -205,87 +140,45 @@ export interface GetFeeParams {
 export async function getFee({
   balance,
   chain,
-  contract,
-  decimals,
-  destinationFeeConfig,
-  destinationFeeBalanceAmount,
+  contractConfig,
   extrinsic,
   feeConfig,
   polkadot,
   sourceAddress,
-}: GetFeeParams): Promise<bigint> {
-  if (contract) {
-    if (
-      destinationFeeConfig &&
-      destinationFeeBalanceAmount &&
-      typeof destinationFeeConfig.amount === 'number'
-    ) {
-      const destinationFeeBalance = Number(
-        toDecimal(
-          destinationFeeBalanceAmount.amount,
-          destinationFeeBalanceAmount.decimals,
-        ),
-      );
-      if (
-        destinationFeeBalance &&
-        destinationFeeConfig.amount > destinationFeeBalance
-      ) {
-        throw new Error(
-          `Can't get a fee, make sure you have ${destinationFeeConfig?.amount} ${destinationFeeConfig?.asset.originSymbol} in your source balance, needed for destination fees`,
-        );
-      }
-    }
-
-    return getContractFee({
-      address: sourceAddress,
-      balance,
-      chain: chain as EvmParachain,
-      config: contract,
-      decimals,
-    });
+}: GetFeeParams): Promise<AssetAmount> {
+  if (!contractConfig && !extrinsic) {
+    throw new Error('Either contract or extrinsic must be provided');
   }
 
-  if (extrinsic) {
-    const extrinsicFee = await getExtrinsicFee(
-      balance,
-      extrinsic,
-      polkadot,
-      sourceAddress,
-    );
+  if (contractConfig) {
+    const contract = createContract(
+      chain,
+      contractConfig,
+    ) as TransferContractInterface;
+    const fee = await contract.getFee(balance.amount, sourceAddress);
 
-    const xcmDeliveryFee = getXcmDeliveryFee(decimals, feeConfig);
-
-    const totalFee = extrinsicFee + xcmDeliveryFee;
-
-    return chain.usesChainDecimals
-      ? convertDecimals(totalFee, polkadot.decimals, decimals)
-      : totalFee;
+    return balance.copyWith({ amount: fee });
   }
 
-  throw new Error('Either contract or extrinsic must be provided');
-}
+  const fee = await getExtrinsicFee(
+    balance,
+    extrinsic,
+    polkadot,
+    sourceAddress,
+  );
 
-export async function getContractFee({
-  address,
-  balance,
-  config,
-  decimals,
-  chain,
-}: {
-  address: string;
-  balance: bigint;
-  config: ContractConfig;
-  decimals: number;
-  chain: EvmParachain;
-}): Promise<bigint> {
-  const contract = createContract(chain, config) as TransferContractInterface;
-  const fee = await contract.getFee(balance, address);
+  const extra = feeConfig?.extra
+    ? toBigInt(feeConfig.extra, balance.decimals)
+    : 0n;
+  const totalFee = fee + extra;
 
-  return convertDecimals(fee, 18, decimals);
+  return chain.usesChainDecimals
+    ? convertDecimals(totalFee, polkadot.decimals, balance.decimals)
+    : totalFee;
 }
 
 export async function getExtrinsicFee(
-  balance: bigint,
+  balance: AssetAmount,
   extrinsic: ExtrinsicConfig,
   polkadot: PolkadotService,
   sourceAddress: string,
@@ -304,15 +197,6 @@ export async function getExtrinsicFee(
 
     return 0n;
   }
-}
-
-function getXcmDeliveryFee(
-  decimals: number,
-  feeConfig?: FeeAssetConfig,
-): bigint {
-  return feeConfig?.xcmDeliveryFeeAmount
-    ? toBigInt(feeConfig.xcmDeliveryFeeAmount, decimals)
-    : 0n;
 }
 
 export interface GetMaxParams {

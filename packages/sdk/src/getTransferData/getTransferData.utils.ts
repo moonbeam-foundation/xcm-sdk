@@ -1,29 +1,30 @@
 import {
+  BalanceConfigBuilder,
   CallType,
-  ContractConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import { AssetConfig } from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { AnyChain, AssetAmount, ChainAsset } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 
 export interface GetBalancesParams {
   address: string;
+  asset: ChainAsset;
+  builder: BalanceConfigBuilder;
   chain: AnyChain;
-  config: AssetConfig;
   polkadot: PolkadotService;
 }
 
 export async function getBalance({
   address,
+  asset,
+  builder,
   chain,
-  config,
   polkadot,
 }: GetBalancesParams): Promise<AssetAmount> {
-  const asset = chain.getChainAsset(config.asset);
-  const cfg = config.balance.build({
+  const cfg = builder.build({
     address,
     asset: asset.getBalanceAssetId(),
   });
