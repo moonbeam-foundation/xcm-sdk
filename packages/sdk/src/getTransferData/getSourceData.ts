@@ -47,66 +47,21 @@ export async function getSourceData({
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   const {
-    asset,
     destination,
     source: { chain, config },
   } = transferConfig;
+  const asset = chain.getChainAsset(transferConfig.asset);
+  const feeAsset = config.fee ? chain.getChainAsset(config.fee.asset) : asset;
 
-  const zeroAmount = AssetAmount.fromAsset(asset, {
-    amount: 0n,
-    decimals: await getDecimals({
-      address: destinationAddress,
-      chain,
-      config,
-      polkadot,
-    }),
-  });
-
-  const feeAsset = polkadot.chain.getBalanceAssetId(
-    config?.fee?.asset || config.asset,
-  );
-
-  const feeCfg = config.fee?.balance.build({
+  const feeBalanceConfig = config.fee?.balance.build({
     address: destinationAddress,
-    asset: feeAsset,
+    asset: feeAsset.getBalanceAssetId(),
   });
-
-  const feeDecimals = config.fee?.asset
-    ? await getDecimals({
-        address: destinationAddress,
-        asset: config.fee.asset,
-        assetBuiltConfig: feeCfg,
-        chain,
-        config,
-        polkadot,
-      })
-    : undefined;
-
-  const zeroFeeAmount = config.fee?.asset
-    ? AssetAmount.fromAsset(config.fee.asset, {
-        amount: 0n,
-        decimals: feeDecimals || 0,
-      })
-    : zeroAmount;
-
-  const zeroDestinationFeeAmount = config.destinationFee?.asset
-    ? AssetAmount.fromAsset(config.destinationFee.asset, {
-        amount: 0n,
-        decimals: await getDecimals({
-          address: destinationAddress,
-          asset: config.destinationFee.asset,
-          chain,
-          config,
-          polkadot,
-        }),
-      })
-    : zeroAmount;
 
   const balance = await getBalance({
     address: sourceAddress,
     chain,
     config,
-    decimals: zeroAmount.decimals,
     polkadot,
   });
 
@@ -114,7 +69,6 @@ export async function getSourceData({
     address: sourceAddress,
     balance,
     chain,
-    decimals: zeroFeeAmount.decimals,
     feeConfig: config.fee,
     polkadot,
   });
@@ -199,22 +153,15 @@ export async function getSourceData({
 
 export interface GetFeeBalanceParams
   extends Omit<GetBalancesParams, 'config' | 'evmSigner'> {
-  balance: bigint;
   feeConfig: FeeAssetConfig | undefined;
 }
 
 export async function getFeeBalance({
   address,
-  balance,
   chain,
-  decimals,
   feeConfig,
   polkadot,
 }: GetFeeBalanceParams) {
-  if (!feeConfig) {
-    return balance;
-  }
-
   const cfg = feeConfig.balance.build({
     address,
     asset: polkadot.chain.getBalanceAssetId(feeConfig.asset),

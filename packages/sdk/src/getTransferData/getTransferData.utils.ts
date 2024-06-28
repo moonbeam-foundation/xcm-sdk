@@ -16,10 +16,6 @@ export interface GetBalancesParams {
   polkadot: PolkadotService;
 }
 
-export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'> & {
-  assetBuiltConfig?: SubstrateQueryConfig | ContractConfig;
-};
-
 export async function getBalance({
   address,
   chain,

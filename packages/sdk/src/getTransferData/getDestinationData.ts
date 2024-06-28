@@ -2,7 +2,6 @@
 import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
-import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
 import { getBalance, getMin } from './getTransferData.utils';
