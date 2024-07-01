@@ -15,7 +15,6 @@ export interface ChainAssetIds {
   balanceId?: ChainAssetId;
   id?: ChainAssetId;
   minId?: ChainAssetId;
-  metadataId?: ChainAssetId;
   palletInstance?: number;
 }
 
