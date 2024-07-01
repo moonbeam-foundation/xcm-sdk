@@ -2,21 +2,11 @@
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import {
   AssetConfig,
-  DestinationFeeConfig,
   FeeAssetConfig,
   TransferConfig,
 } from '@moonbeam-network/xcm-config';
-import {
-  AnyChain,
-  AssetAmount,
-  ChainAsset,
-  EvmParachain,
-} from '@moonbeam-network/xcm-types';
-import {
-  convertDecimals,
-  toBigInt,
-  toDecimal,
-} from '@moonbeam-network/xcm-utils';
+import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
@@ -100,8 +90,6 @@ export async function getSourceData({
     balance,
     chain,
     contractConfig: contract,
-    destinationFeeBalanceAmount,
-    destinationFeeConfig: config.destinationFee,
     extrinsic,
     feeConfig: config.fee,
     polkadot,
@@ -109,10 +97,10 @@ export async function getSourceData({
   });
 
   const max = getMax({
-    balanceAmount,
+    balance,
     existentialDeposit,
-    feeAmount,
-    minAmount,
+    fee,
+    min,
   });
 
   return {
@@ -120,7 +108,7 @@ export async function getSourceData({
     chain,
     destinationFeeBalance,
     existentialDeposit,
-    fee: feeAmount,
+    fee,
     feeBalance,
     max,
     min,
@@ -162,7 +150,7 @@ export async function getFee({
 
   const fee = await getExtrinsicFee(
     balance,
-    extrinsic,
+    extrinsic as ExtrinsicConfig,
     polkadot,
     sourceAddress,
   );
@@ -172,9 +160,11 @@ export async function getFee({
     : 0n;
   const totalFee = fee + extra;
 
-  return chain.usesChainDecimals
+  const converted = chain.usesChainDecimals
     ? convertDecimals(totalFee, polkadot.decimals, balance.decimals)
     : totalFee;
+
+  return balance.copyWith({ amount: converted });
 }
 
 export async function getExtrinsicFee(
@@ -200,29 +190,27 @@ export async function getExtrinsicFee(
 }
 
 export interface GetMaxParams {
-  balanceAmount: AssetAmount;
+  balance: AssetAmount;
   existentialDeposit: AssetAmount;
-  feeAmount: AssetAmount;
-  minAmount: AssetAmount;
+  fee: AssetAmount;
+  min: AssetAmount;
 }
 
 export function getMax({
-  balanceAmount,
+  balance,
   existentialDeposit,
-  feeAmount,
-  minAmount,
+  fee,
+  min,
 }: GetMaxParams): AssetAmount {
-  const result = balanceAmount
+  const result = balance
     .toBig()
-    .minus(minAmount.toBig())
+    .minus(min.toBig())
     .minus(
-      balanceAmount.isSame(existentialDeposit)
-        ? existentialDeposit.toBig()
-        : Big(0),
+      balance.isSame(existentialDeposit) ? existentialDeposit.toBig() : Big(0),
     )
-    .minus(balanceAmount.isSame(feeAmount) ? feeAmount.toBig() : Big(0));
+    .minus(balance.isSame(fee) ? fee.toBig() : Big(0));
 
-  return balanceAmount.copyWith({
+  return balance.copyWith({
     amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
 }
@@ -253,30 +241,15 @@ export async function getAssetsBalances({
   );
 
   const balances = await Promise.all(
-    uniqueAssets.map(async (asset: AssetConfig) => {
-      const decimals = await getDecimals({
-        address,
-        asset: asset.asset,
-        chain,
-        config: asset,
-        polkadot,
-      });
-
+    uniqueAssets.map(async (config: AssetConfig) => {
       // eslint-disable-next-line no-await-in-loop
-      const balance = await getBalance({
+      return getBalance({
         address,
+        asset: chain.getChainAsset(config.asset),
+        builder: config.balance,
         chain,
-        config: asset,
-        decimals,
         polkadot,
       });
-
-      const assetAmount = AssetAmount.fromAsset(asset.asset, {
-        amount: balance,
-        decimals,
-      });
-
-      return assetAmount;
     }),
   );
 
