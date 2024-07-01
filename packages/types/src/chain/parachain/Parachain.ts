@@ -54,12 +54,13 @@ export class Parachain extends Chain {
     this.ws = ws;
   }
 
-  getChainAsset(asset: Asset): ChainAsset {
-    const chainAsset = this.assets.get(asset.key);
+  getChainAsset(keyOrAsset: string | Asset): ChainAsset {
+    const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
+    const chainAsset = this.assets.get(key);
 
     if (!chainAsset) {
       throw new Error(
-        `No ChainAsset found ${asset.originSymbol} (${asset.key}) for chain ${this.name} (${this.key})`,
+        `No ChainAsset found by the key ${key} for chain ${this.name} (${this.key})`,
       );
     }
 
