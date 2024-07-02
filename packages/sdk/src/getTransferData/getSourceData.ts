@@ -51,6 +51,7 @@ export async function getSourceData({
         polkadot,
       })
     : balance;
+  // eslint-disable-next-line no-nested-ternary
   const destinationFeeBalance = config.destinationFee.asset.isEqual(asset)
     ? balance
     : config.destinationFee.asset.isEqual(feeAsset)
@@ -80,10 +81,10 @@ export async function getSourceData({
   const contract = config.contract?.build({
     address: destinationAddress,
     amount: balance.amount,
-    asset: asset.getAssetId(),
+    asset: asset.address || asset.getAssetId(),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: feeAsset.getAssetId(),
+    feeAsset: feeAsset.address || feeAsset.getAssetId(),
   });
 
   const fee = await getFee({
@@ -241,16 +242,16 @@ export async function getAssetsBalances({
   );
 
   const balances = await Promise.all(
-    uniqueAssets.map(async (config: AssetConfig) => {
+    uniqueAssets.map(async (config: AssetConfig) =>
       // eslint-disable-next-line no-await-in-loop
-      return getBalance({
+      getBalance({
         address,
         asset: chain.getChainAsset(config.asset),
         builder: config.balance,
         chain,
         polkadot,
-      });
-    }),
+      }),
+    ),
   );
 
   return balances;

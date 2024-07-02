@@ -1145,8 +1145,8 @@ export const moonbeam = new EvmParachain({
       decimals: 6,
     }),
     usdt.toChainAsset({
-      decimals: 6,
       address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
+      decimals: 6,
       ids: {
         id: '311091173110107856861649819128533077277',
       },
@@ -1824,10 +1824,10 @@ export const picasso = new Parachain({
     }),
     movr.toChainAsset({
       decimals: 18,
-      min: 0.0041,
       ids: {
         id: 23,
       },
+      min: 0.0041,
     }),
   ],
   ecosystem: Ecosystem.Kusama,

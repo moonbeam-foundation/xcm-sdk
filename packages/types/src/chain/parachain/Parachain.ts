@@ -1,4 +1,4 @@
-import { Asset, ChainAsset } from '../../asset';
+import { Asset, AssetAmount, ChainAsset } from '../../asset';
 import { SetOptional } from '../../common.interfaces';
 import { Chain, ChainConstructorParams } from '../Chain';
 import { ChainType } from '../Chain.interfaces';
@@ -54,7 +54,7 @@ export class Parachain extends Chain {
     this.ws = ws;
   }
 
-  getChainAsset(keyOrAsset: string | Asset): ChainAsset {
+  getChainAsset(keyOrAsset: string | Asset | AssetAmount): ChainAsset {
     const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
     const chainAsset = this.assets.get(key);
 

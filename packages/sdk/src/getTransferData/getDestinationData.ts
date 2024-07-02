@@ -31,8 +31,8 @@ export async function getDestinationData({
   const min = await getMin(config, polkadot);
   const fee = await getFee({
     address: destinationAddress,
-    transferConfig,
     polkadot,
+    transferConfig,
   });
 
   return {
