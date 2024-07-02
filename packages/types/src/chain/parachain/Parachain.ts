@@ -26,7 +26,6 @@ export class Parachain extends Chain {
   readonly ws: string | string[];
 
   constructor({
-    assets,
     genesisHash,
     parachainId,
     usesChainDecimals,

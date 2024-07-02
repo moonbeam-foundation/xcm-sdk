@@ -3,7 +3,7 @@ import { ChainType, Ecosystem } from './Chain.interfaces';
 import type { EvmParachain, Parachain } from './parachain';
 
 export interface ChainConstructorParams {
-  assets?: Map<string, ChainAsset> | ChainAsset[];
+  assets: Map<string, ChainAsset> | ChainAsset[];
   ecosystem?: Ecosystem;
   isTestChain?: boolean;
   key: string;
