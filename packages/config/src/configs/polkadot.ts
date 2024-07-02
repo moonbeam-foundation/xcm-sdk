@@ -26,7 +26,7 @@ export const polkadotConfig = new ChainConfig({
       fee: {
         asset: dot,
         balance: BalanceBuilder().substrate().system().account(),
-        xcmDeliveryFeeAmount: 0.047,
+        extra: 0.047,
       },
     }),
   ],

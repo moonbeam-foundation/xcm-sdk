@@ -7,11 +7,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import {
   Asset,
+  ChainAsset,
   Ecosystem,
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { assetsList, dev, glmr, tt1, unit } from '../assets';
+import { assetsList, dev, dot, glmr, tt1, unit } from '../assets';
 import {
   hydration,
   moonbaseAlpha,
@@ -24,11 +25,13 @@ import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
 
 const TEST_CHAIN = new Parachain({
+  assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   ecosystem: Ecosystem.Polkadot,
   genesisHash: '',
   isTestChain: true,
   key: 'test',
   name: 'test',
+  nativeAsset: dot,
   parachainId: 9999,
   ss58Format: 1999,
   ws: '',
@@ -102,17 +105,14 @@ describe('config service', () => {
       expect(() =>
         configService.getChain(
           new EvmParachain({
+            assets: [],
             ecosystem: Ecosystem.AlphanetRelay,
             genesisHash: '',
             id: 1287,
             isTestChain: true,
             key: 'test',
             name: 'test',
-            nativeCurrency: {
-              decimals: 18,
-              name: 'TEST',
-              symbol: 'TEST',
-            },
+            nativeAsset: unit,
             parachainId: 1000,
             rpc: '',
             ss58Format: 1287,

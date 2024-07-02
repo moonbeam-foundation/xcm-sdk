@@ -26,7 +26,7 @@ export const kusamaConfig = new ChainConfig({
       fee: {
         asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
-        xcmDeliveryFeeAmount: 0.002,
+        extra: 0.002,
       },
     }),
   ],

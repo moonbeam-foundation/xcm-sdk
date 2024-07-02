@@ -94,7 +94,7 @@ export async function getParachainBalances(
   const chainsConfig = configService.getChainConfig(chain);
   const assets = chainsConfig.getAssetsConfigs();
 
-  const polkadot = await PolkadotService.create(chain, configService);
+  const polkadot = await PolkadotService.create(chain);
 
   const balances = await getAssetsBalances({
     chain,

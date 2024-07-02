@@ -40,12 +40,4 @@ export class Erc20 implements BalanceContractInterface {
       functionName: 'balanceOf',
     });
   }
-
-  async getDecimals(): Promise<number> {
-    return this.#client.readContract({
-      abi: ERC20_ABI,
-      address: this.address,
-      functionName: 'decimals',
-    });
-  }
 }
