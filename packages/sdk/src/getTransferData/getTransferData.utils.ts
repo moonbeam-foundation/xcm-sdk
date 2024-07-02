@@ -28,6 +28,7 @@ export async function getBalance({
     address,
     asset: asset.getBalanceAssetId(),
   });
+  const amount = AssetAmount.fromChainAsset(asset, { amount: 0n });
 
   if (cfg.type === CallType.Substrate) {
     const balance = await polkadot.query(cfg as SubstrateQueryConfig);
@@ -35,32 +36,35 @@ export async function getBalance({
       ? convertDecimals(balance, polkadot.decimals, asset.decimals)
       : balance;
 
-    return asset.toAssetAmount({ amount: converted });
+    return amount.copyWith({ amount: converted });
   }
 
   const contract = createContract(chain, cfg) as BalanceContractInterface;
   const balance = await contract.getBalance();
 
-  return asset.toAssetAmount({ amount: balance });
+  return amount.copyWith({ amount: balance });
 }
 
 export async function getMin(
   config: AssetConfig,
   polkadot: PolkadotService,
 ): Promise<AssetAmount> {
-  const asset = polkadot.chain.getChainAsset(config.asset);
+  const asset = AssetAmount.fromChainAsset(
+    polkadot.chain.getChainAsset(config.asset),
+    { amount: 0n },
+  );
 
   if (config.min) {
     const min = await polkadot.query(
       config.min.build({ asset: asset.getMinAssetId() }),
     );
 
-    return asset.toAssetAmount({ amount: min });
+    return asset.copyWith({ amount: min });
   }
 
   if (asset.min) {
-    return asset.toAssetAmount({ amount: asset.min });
+    return asset.copyWith({ amount: asset.min });
   }
 
-  return asset.toAssetAmount({ amount: 0n });
+  return asset.copyWith({ amount: 0n });
 }

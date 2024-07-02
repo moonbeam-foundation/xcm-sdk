@@ -1,5 +1,6 @@
 import {
   AnyChain,
+  ChainAsset,
   Ecosystem,
   EvmParachain,
   Parachain,
@@ -83,27 +84,27 @@ import {
 
 export const acala = new Parachain({
   assets: [
-    aca.toChainAsset({
+    ChainAsset.fromAsset(aca, {
       decimals: 12,
       ids: {
         id: { Token: aca.originSymbol },
       },
     }),
-    aseed.toChainAsset({
+    ChainAsset.fromAsset(aseed, {
       decimals: 12,
       ids: {
         id: { Token: 'AUSD' },
         minId: { NativeAssetId: { Token: 'AUSD' } },
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { ForeignAsset: 0 },
         minId: { ForeignAssetId: 0 },
       },
     }),
-    ldot.toChainAsset({
+    ChainAsset.fromAsset(ldot, {
       decimals: 10,
       ids: {
         id: { Token: ldot.originSymbol },
@@ -123,14 +124,14 @@ export const acala = new Parachain({
 
 export const alphanetAssetHub = new Parachain({
   assets: [
-    tt1.toChainAsset({
+    ChainAsset.fromAsset(tt1, {
       decimals: 18,
       ids: {
         id: 2,
         palletInstance: 50,
       },
     }),
-    unit.toChainAsset({
+    ChainAsset.fromAsset(unit, {
       decimals: 12,
     }),
   ],
@@ -147,7 +148,7 @@ export const alphanetAssetHub = new Parachain({
 
 export const alphanetRelay = new Parachain({
   assets: [
-    unit.toChainAsset({
+    ChainAsset.fromAsset(unit, {
       decimals: 12,
     }),
   ],
@@ -164,13 +165,13 @@ export const alphanetRelay = new Parachain({
 
 export const astar = new Parachain({
   assets: [
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: 18446744073709551619n,
       },
     }),
-    astr.toChainAsset({
+    ChainAsset.fromAsset(astr, {
       decimals: 18,
     }),
   ],
@@ -186,31 +187,31 @@ export const astar = new Parachain({
 
 export const bifrostKusama = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: { Token: movr.originSymbol },
       },
     }),
-    bnc.toChainAsset({
+    ChainAsset.fromAsset(bnc, {
       decimals: 12,
       ids: {
         id: { Native: bnc.originSymbol },
       },
     }),
-    vbnc.toChainAsset({
+    ChainAsset.fromAsset(vbnc, {
       decimals: 12,
       ids: {
         id: { VToken: 'BNC' },
       },
     }),
-    vksm.toChainAsset({
+    ChainAsset.fromAsset(vksm, {
       decimals: 12,
       ids: {
         id: { VToken: 'KSM' },
       },
     }),
-    vmovr.toChainAsset({
+    ChainAsset.fromAsset(vmovr, {
       decimals: 18,
       ids: {
         id: { VToken: 'MOVR' },
@@ -229,55 +230,55 @@ export const bifrostKusama = new Parachain({
 
 export const bifrostPolkadot = new Parachain({
   assets: [
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { Token2: 1 },
       },
     }),
-    bnc.toChainAsset({
+    ChainAsset.fromAsset(bnc, {
       decimals: 12,
       ids: {
         id: { Native: bnc.originSymbol },
       },
     }),
-    bncs.toChainAsset({
+    ChainAsset.fromAsset(bncs, {
       decimals: 12,
       ids: {
         id: { Token2: 9 },
       },
     }),
-    fil.toChainAsset({
+    ChainAsset.fromAsset(fil, {
       decimals: 18,
       ids: {
         id: { Token2: 4 },
       },
     }),
-    vastr.toChainAsset({
+    ChainAsset.fromAsset(vastr, {
       decimals: 18,
       ids: {
         id: { VToken2: 3 },
       },
     }),
-    vdot.toChainAsset({
+    ChainAsset.fromAsset(vdot, {
       decimals: 10,
       ids: {
         id: { VToken2: 0 },
       },
     }),
-    vfil.toChainAsset({
+    ChainAsset.fromAsset(vfil, {
       decimals: 18,
       ids: {
         id: { VToken2: 4 },
       },
     }),
-    vglmr.toChainAsset({
+    ChainAsset.fromAsset(vglmr, {
       decimals: 18,
       ids: {
         id: { VToken2: 1 },
       },
     }),
-    vmanta.toChainAsset({
+    ChainAsset.fromAsset(vmanta, {
       decimals: 18,
       ids: {
         id: { VToken2: 8 },
@@ -296,14 +297,14 @@ export const bifrostPolkadot = new Parachain({
 
 export const calamari = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         balanceId: 11,
         id: { MantaCurrency: 11 },
       },
     }),
-    kma.toChainAsset({
+    ChainAsset.fromAsset(kma, {
       decimals: 12,
       ids: {
         id: { MantaCurrency: 1 },
@@ -322,7 +323,7 @@ export const calamari = new Parachain({
 
 export const centrifuge = new Parachain({
   assets: [
-    cfg.toChainAsset({
+    ChainAsset.fromAsset(cfg, {
       decimals: 18,
       ids: {
         id: 'Native',
@@ -341,14 +342,14 @@ export const centrifuge = new Parachain({
 
 export const crustShadow = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         balanceId: 232263652204149413431520870009560565298n,
         id: { OtherReserve: 232263652204149413431520870009560565298n },
       },
     }),
-    csm.toChainAsset({
+    ChainAsset.fromAsset(csm, {
       decimals: 12,
     }),
   ],
@@ -364,13 +365,13 @@ export const crustShadow = new Parachain({
 
 export const darwinia = new EvmParachain({
   assets: [
-    ring.toChainAsset({
+    ChainAsset.fromAsset(ring, {
       decimals: 18,
       ids: {
         palletInstance: 5,
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
     }),
   ],
@@ -393,13 +394,13 @@ export const darwinia = new EvmParachain({
 
 export const darwiniaCrab = new EvmParachain({
   assets: [
-    crab.toChainAsset({
+    ChainAsset.fromAsset(crab, {
       decimals: 18,
       ids: {
         palletInstance: 5,
       },
     }),
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
     }),
   ],
@@ -422,19 +423,19 @@ export const darwiniaCrab = new EvmParachain({
 
 export const equilibrium = new Parachain({
   assets: [
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 9,
       ids: {
         id: 1_735_159_154,
       },
     }),
-    eq.toChainAsset({
+    ChainAsset.fromAsset(eq, {
       decimals: 9,
       ids: {
         id: 25_969,
       },
     }),
-    eqd.toChainAsset({
+    ChainAsset.fromAsset(eqd, {
       decimals: 9,
       ids: {
         id: 6_648_164,
@@ -453,43 +454,43 @@ export const equilibrium = new Parachain({
 
 export const hydration = new Parachain({
   assets: [
-    hdx.toChainAsset({
+    ChainAsset.fromAsset(hdx, {
       decimals: 12,
       ids: {
         id: 0,
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: 16,
       },
     }),
-    dai.toChainAsset({
+    ChainAsset.fromAsset(dai, {
       decimals: 18,
       ids: {
         id: 18,
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       decimals: 6,
       ids: {
         id: 21,
       },
     }),
-    usdtwh.toChainAsset({
+    ChainAsset.fromAsset(usdtwh, {
       decimals: 6,
       ids: {
         id: 23,
       },
     }),
-    wbtc.toChainAsset({
+    ChainAsset.fromAsset(wbtc, {
       decimals: 8,
       ids: {
         id: 19,
       },
     }),
-    weth.toChainAsset({
+    ChainAsset.fromAsset(weth, {
       decimals: 18,
       ids: {
         id: 20,
@@ -508,31 +509,31 @@ export const hydration = new Parachain({
 
 export const hydrationAlphanet = new Parachain({
   assets: [
-    hdx.toChainAsset({
+    ChainAsset.fromAsset(hdx, {
       decimals: 12,
       ids: {
         id: 0,
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       decimals: 6,
       ids: {
         id: 1000001,
       },
     }),
-    ftmwh.toChainAsset({
+    ChainAsset.fromAsset(ftmwh, {
       decimals: 18,
       ids: {
         id: 1000002,
       },
     }),
-    usdtwh.toChainAsset({
+    ChainAsset.fromAsset(usdtwh, {
       decimals: 6,
       ids: {
         id: 2,
       },
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       decimals: 18,
       ids: {
         id: 1,
@@ -552,19 +553,19 @@ export const hydrationAlphanet = new Parachain({
 
 export const interlay = new Parachain({
   assets: [
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { ForeignAsset: 10 },
       },
     }),
-    intr.toChainAsset({
+    ChainAsset.fromAsset(intr, {
       decimals: 10,
       ids: {
         id: { Token: intr.originSymbol },
       },
     }),
-    ibtc.toChainAsset({
+    ChainAsset.fromAsset(ibtc, {
       decimals: 8,
       ids: {
         id: { Token: ibtc.originSymbol },
@@ -582,7 +583,7 @@ export const interlay = new Parachain({
 });
 
 export const integritee = new Parachain({
-  assets: [teer.toChainAsset({ decimals: 12 })],
+  assets: [ChainAsset.fromAsset(teer, { decimals: 12 })],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
@@ -595,20 +596,20 @@ export const integritee = new Parachain({
 
 export const karura = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: { ForeignAsset: 3 },
         minId: { ForeignAssetId: 3 },
       },
     }),
-    kar.toChainAsset({
+    ChainAsset.fromAsset(kar, {
       decimals: 12,
       ids: {
         id: { Token: kar.originSymbol },
       },
     }),
-    aseed.toChainAsset({
+    ChainAsset.fromAsset(aseed, {
       decimals: 12,
       ids: {
         id: { Token: 'KUSD' },
@@ -628,14 +629,14 @@ export const karura = new Parachain({
 
 export const khala = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: 6,
         palletInstance: 10,
       },
     }),
-    pha.toChainAsset({
+    ChainAsset.fromAsset(pha, {
       decimals: 12,
     }),
   ],
@@ -651,13 +652,13 @@ export const khala = new Parachain({
 
 export const kintsugi = new Parachain({
   assets: [
-    kint.toChainAsset({
+    ChainAsset.fromAsset(kint, {
       decimals: 12,
       ids: {
         id: { Token: kint.originSymbol },
       },
     }),
-    kbtc.toChainAsset({
+    ChainAsset.fromAsset(kbtc, {
       decimals: 8,
       ids: {
         id: { Token: kbtc.originSymbol },
@@ -675,7 +676,7 @@ export const kintsugi = new Parachain({
 });
 
 export const kusama = new Parachain({
-  assets: [ksm.toChainAsset({ decimals: 12 })],
+  assets: [ChainAsset.fromAsset(ksm, { decimals: 12 })],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe',
@@ -688,21 +689,21 @@ export const kusama = new Parachain({
 
 export const kusamaAssetHub = new Parachain({
   assets: [
-    usdt.toChainAsset({
+    ChainAsset.fromAsset(usdt, {
       decimals: 6,
       ids: {
         id: 1984,
         palletInstance: 50,
       },
     }),
-    rmrk.toChainAsset({
+    ChainAsset.fromAsset(rmrk, {
       decimals: 10,
       ids: {
         id: 8,
         palletInstance: 50,
       },
     }),
-    ksm.toChainAsset({
+    ChainAsset.fromAsset(ksm, {
       decimals: 12,
     }),
   ],
@@ -718,7 +719,7 @@ export const kusamaAssetHub = new Parachain({
 
 export const litmus = new Parachain({
   assets: [
-    lit.toChainAsset({
+    ChainAsset.fromAsset(lit, {
       decimals: 12,
       ids: {
         id: 'SelfReserve',
@@ -737,13 +738,13 @@ export const litmus = new Parachain({
 
 export const mangataKusama = new Parachain({
   assets: [
-    mgx.toChainAsset({
+    ChainAsset.fromAsset(mgx, {
       decimals: 18,
       ids: {
         id: 0,
       },
     }),
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: 39,
@@ -762,13 +763,13 @@ export const mangataKusama = new Parachain({
 
 export const mantaParachain = new Parachain({
   assets: [
-    manta.toChainAsset({
+    ChainAsset.fromAsset(manta, {
       decimals: 18,
       ids: {
         id: { MantaCurrency: 1 },
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { MantaCurrency: 10 },
@@ -787,94 +788,94 @@ export const mantaParachain = new Parachain({
 
 export const moonbaseAlpha = new EvmParachain({
   assets: [
-    alan.toChainAsset({
+    ChainAsset.fromAsset(alan, {
       address: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
       decimals: 18,
     }),
-    ampe.toChainAsset({
+    ChainAsset.fromAsset(ampe, {
       address: '0xfFfFfffF7fee8415e1c2AC3A15C48D3546B95e16',
       decimals: 12,
       ids: {
         id: '170050401128744171791743427490841452054',
       },
     }),
-    atom.toChainAsset({
+    ChainAsset.fromAsset(atom, {
       address: '0xffffffffb7cdb201c395c238350568f17cfbd3b5', // Picasso Cosmos Hub
       decimals: 6,
       ids: {
         id: '244316754493307480955066032215622931381',
       },
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.01,
     }),
-    lit.toChainAsset({
+    ChainAsset.fromAsset(lit, {
       address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
       },
     }),
-    otp.toChainAsset({
+    ChainAsset.fromAsset(otp, {
       address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
       decimals: 12,
       ids: {
         id: '238111524681612888331172110363070489924',
       },
     }),
-    paring.toChainAsset({
+    ChainAsset.fromAsset(paring, {
       address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
       decimals: 18,
       ids: {
         id: '173481220575862801646329923366065693029',
       },
     }),
-    pica.toChainAsset({
+    ChainAsset.fromAsset(pica, {
       address: '0xFFFfFFFF10DD5Fd142163a40Ce0dae8c56e2801f',
       decimals: 6,
       ids: {
         id: '22417088946346045371238623691600461855',
       },
     }),
-    tt1.toChainAsset({
+    ChainAsset.fromAsset(tt1, {
       address: '0xfFffFfFf75976211C786fe4d73d2477e222786Ac',
       decimals: 18,
       ids: {
         id: '156305701417244550631956600137082963628',
       },
     }),
-    tur.toChainAsset({
+    ChainAsset.fromAsset(tur, {
       address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
       decimals: 10,
       ids: {
         id: '133300872918374599700079037156071917454',
       },
     }),
-    unit.toChainAsset({
+    ChainAsset.fromAsset(unit, {
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 12,
       ids: {
         id: '42259045809535163221576417993425387648',
       },
     }),
-    ftmwh.toChainAsset({
+    ChainAsset.fromAsset(ftmwh, {
       address: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
       decimals: 18,
     }),
-    hdx.toChainAsset({
+    ChainAsset.fromAsset(hdx, {
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
       decimals: 12,
       ids: {
         id: '69606720909260275826784788104880799692',
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       address: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
       decimals: 6,
     }),
-    agng.toChainAsset({
+    ChainAsset.fromAsset(agng, {
       address: '0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20',
       decimals: 18,
       ids: {
@@ -903,31 +904,31 @@ export const moonbaseAlpha = new EvmParachain({
 
 export const moonbaseBeta = new EvmParachain({
   assets: [
-    betaDEV.toChainAsset({
+    ChainAsset.fromAsset(betaDEV, {
       decimals: 18,
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       decimals: 18,
       ids: {
         balanceId: '222902676330054289648817870329963141953',
         id: { ForeignAsset: '222902676330054289648817870329963141953' },
       },
     }),
-    alan.toChainAsset({
+    ChainAsset.fromAsset(alan, {
       decimals: 18,
       ids: {
         balanceId: '85534404031760856987006367174489651085',
         id: { ForeignAsset: '85534404031760856987006367174489651085' },
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       decimals: 6,
       ids: {
         balanceId: '319794858556516669238969276945382613133',
         id: { ForeignAsset: '319794858556516669238969276945382613133' },
       },
     }),
-    ftmwh.toChainAsset({
+    ChainAsset.fromAsset(ftmwh, {
       decimals: 18,
       ids: {
         balanceId: '198801030527939140930753142903035039136',
@@ -955,267 +956,267 @@ export const moonbaseBeta = new EvmParachain({
 
 export const moonbeam = new EvmParachain({
   assets: [
-    aca.toChainAsset({
+    ChainAsset.fromAsset(aca, {
       address: '0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f',
       decimals: 12,
       ids: {
         id: '224821240862170613278369189818311486111',
       },
     }),
-    astr.toChainAsset({
+    ChainAsset.fromAsset(astr, {
       address: '0xFfFFFfffA893AD19e540E172C10d78D4d479B5Cf',
       decimals: 18,
       ids: {
         id: '224077081838586484055667086558292981199',
       },
     }),
-    aseed.toChainAsset({
+    ChainAsset.fromAsset(aseed, {
       address: '0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda',
       decimals: 12,
       ids: {
         id: '110021739665376159354538090254163045594',
       },
     }),
-    bnc.toChainAsset({
+    ChainAsset.fromAsset(bnc, {
       address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
       decimals: 12,
       ids: {
         id: '165823357460190568952172802245839421906',
       },
     }),
-    bncs.toChainAsset({
+    ChainAsset.fromAsset(bncs, {
       address: '0xfFfffffF6aF229AE7f0F4e0188157e189a487D59',
       decimals: 12,
       ids: {
         id: '142155548796783636521833385094843759961',
       },
     }),
-    cfg.toChainAsset({
+    ChainAsset.fromAsset(cfg, {
       address: '0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3',
       decimals: 18,
       ids: {
         id: '91372035960551235635465443179559840483',
       },
     }),
-    dai.toChainAsset({
+    ChainAsset.fromAsset(dai, {
       address: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
       decimals: 18,
     }),
-    ded.toChainAsset({
+    ChainAsset.fromAsset(ded, {
       address: '0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6',
       decimals: 10,
       ids: {
         id: '124463719055550872076363892993240202694',
       },
     }),
-    dot.toChainAsset({
+    ChainAsset.fromAsset(dot, {
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 10,
       ids: {
         id: '42259045809535163221576417993425387648',
       },
     }),
-    eq.toChainAsset({
+    ChainAsset.fromAsset(eq, {
       address: '0xFffFFfFf8f6267e040D8a0638C576dfBa4F0F6D6',
       decimals: 9,
       ids: {
         id: '190590555344745888270686124937537713878',
       },
     }),
-    eqd.toChainAsset({
+    ChainAsset.fromAsset(eqd, {
       address: '0xFFffFfFF8cdA1707bAF23834d211B08726B1E499',
       decimals: 9,
       ids: {
         id: '187224307232923873519830480073807488153',
       },
     }),
-    fil.toChainAsset({
+    ChainAsset.fromAsset(fil, {
       address: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
       decimals: 18,
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.1,
     }),
-    hdx.toChainAsset({
+    ChainAsset.fromAsset(hdx, {
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
       decimals: 12,
       ids: {
         id: '69606720909260275826784788104880799692',
       },
     }),
-    ibtc.toChainAsset({
+    ChainAsset.fromAsset(ibtc, {
       address: '0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52',
       decimals: 8,
       ids: {
         id: '120637696315203257380661607956669368914',
       },
     }),
-    intr.toChainAsset({
+    ChainAsset.fromAsset(intr, {
       address: '0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab',
       decimals: 10,
       ids: {
         id: '101170542313601871197860408087030232491',
       },
     }),
-    ldot.toChainAsset({
+    ChainAsset.fromAsset(ldot, {
       address: '0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4',
       decimals: 10,
       ids: {
         id: '225719522181998468294117309041779353812',
       },
     }),
-    manta.toChainAsset({
+    ChainAsset.fromAsset(manta, {
       address: '0xfFFffFFf7D3875460d4509eb8d0362c611B4E841',
       decimals: 18,
       ids: {
         id: '166446646689194205559791995948102903873',
       },
     }),
-    nodl.toChainAsset({
+    ChainAsset.fromAsset(nodl, {
       address: '0xfffffffFe896ba7Cb118b9Fa571c6dC0a99dEfF1',
       decimals: 11,
       ids: {
         id: '309163521958167876851250718453738106865',
       },
     }),
-    neuro.toChainAsset({
+    ChainAsset.fromAsset(neuro, {
       address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
       decimals: 12,
       ids: {
         id: '238111524681612888331172110363070489924',
       },
     }),
-    para.toChainAsset({
+    ChainAsset.fromAsset(para, {
       address: '0xFfFffFFF18898CB5Fe1E88E668152B4f4052A947',
       decimals: 18,
       ids: {
         id: '32615670524745285411807346420584982855',
       },
     }),
-    peaq.toChainAsset({
+    ChainAsset.fromAsset(peaq, {
       address: '0xFffFFFFFEC4908b74688a01374f789B48E9a3eab',
       decimals: 18,
       ids: {
         id: '314077021455772878282433861213184736939',
       },
     }),
-    pha.toChainAsset({
+    ChainAsset.fromAsset(pha, {
       address: '0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED',
       decimals: 12,
       ids: {
         id: '132685552157663328694213725410064821485',
       },
     }),
-    pen.toChainAsset({
+    ChainAsset.fromAsset(pen, {
       address: '0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0',
       decimals: 12,
       ids: {
         id: '45647473099451451833602657905356404688',
       },
     }),
-    ring.toChainAsset({
+    ChainAsset.fromAsset(ring, {
       address: '0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f',
       decimals: 18,
       ids: {
         id: '125699734534028342599692732320197985871',
       },
     }),
-    sub.toChainAsset({
+    ChainAsset.fromAsset(sub, {
       address: '0xfFfFffFf43B4560Bc0C451a3386E082bff50aC90',
       decimals: 10,
       ids: {
         id: '89994634370519791027168048838578580624',
       },
     }),
-    usdc.toChainAsset({
+    ChainAsset.fromAsset(usdc, {
       address: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
       decimals: 6,
       ids: {
         id: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       address: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
       decimals: 6,
     }),
-    usdtwh.toChainAsset({
+    ChainAsset.fromAsset(usdtwh, {
       address: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
       decimals: 6,
     }),
-    usdt.toChainAsset({
+    ChainAsset.fromAsset(usdt, {
       address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
       decimals: 6,
       ids: {
         id: '311091173110107856861649819128533077277',
       },
     }),
-    vastr.toChainAsset({
+    ChainAsset.fromAsset(vastr, {
       address: '0xFffFffff55C732C47639231a4C4373245763d26E',
       decimals: 18,
       ids: {
         id: '114018676402354620972806895487280206446', // registered XC20 id for ERC20 tokens
       },
     }),
-    vdot.toChainAsset({
+    ChainAsset.fromAsset(vdot, {
       address: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
       decimals: 10,
       ids: {
         id: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
       },
     }),
-    vfil.toChainAsset({
+    ChainAsset.fromAsset(vfil, {
       address: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
       decimals: 18,
       ids: {
         id: '272547899416482196831721420898811311297', // registered XC20 id for ERC20 tokens
       },
     }),
-    vglmr.toChainAsset({
+    ChainAsset.fromAsset(vglmr, {
       address: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
       decimals: 18,
       ids: {
         id: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
       },
     }),
-    vmanta.toChainAsset({
+    ChainAsset.fromAsset(vmanta, {
       address: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
       decimals: 18,
       ids: {
         id: '289989900872525819559124583375550296953', // registered XC20 id for ERC20 tokens
       },
     }),
-    wbtc.toChainAsset({
+    ChainAsset.fromAsset(wbtc, {
       address: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
       decimals: 8,
     }),
-    weth.toChainAsset({
+    ChainAsset.fromAsset(weth, {
       address: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
       decimals: 18,
     }),
-    ztg.toChainAsset({
+    ChainAsset.fromAsset(ztg, {
       address: '0xFFFFfffF71815ab6142E0E20c7259126C6B40612',
       decimals: 10,
       ids: {
         id: '150874409661081770150564009349448205842',
       },
     }),
-    pink.toChainAsset({
+    ChainAsset.fromAsset(pink, {
       address: '0xfFfFFfFf30478fAFBE935e466da114E14fB3563d',
       decimals: 10,
       ids: {
         id: '64174511183114006009298114091987195453',
       },
     }),
-    stink.toChainAsset({
+    ChainAsset.fromAsset(stink, {
       address: '0xffffffff54c556bd1d0f64ec6c78f1b477525e56',
       decimals: 10,
       ids: {
         id: '112679793397406599376365943185137098326',
       },
     }),
-    apillon.toChainAsset({
+    ChainAsset.fromAsset(apillon, {
       address: '0xffffffff8a9736b44ebf188972725bed67bf694e',
       decimals: 18,
       ids: {
@@ -1243,173 +1244,173 @@ export const moonbeam = new EvmParachain({
 
 export const moonriver = new EvmParachain({
   assets: [
-    aseed.toChainAsset({
+    ChainAsset.fromAsset(aseed, {
       address: '0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228',
       decimals: 12,
       ids: {
         id: '214920334981412447805621250067209749032',
       },
     }),
-    bnc.toChainAsset({
+    ChainAsset.fromAsset(bnc, {
       address: '0xFFfFFfFFF075423be54811EcB478e911F22dDe7D',
       decimals: 12,
       ids: {
         id: '319623561105283008236062145480775032445',
       },
     }),
-    crab.toChainAsset({
+    ChainAsset.fromAsset(crab, {
       address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
       decimals: 18,
       ids: {
         id: '173481220575862801646329923366065693029',
       },
     }),
-    csm.toChainAsset({
+    ChainAsset.fromAsset(csm, {
       address: '0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7',
       decimals: 12,
       ids: {
         id: '108457044225666871745333730479173774551',
       },
     }),
-    hko.toChainAsset({
+    ChainAsset.fromAsset(hko, {
       address: '0xffffffFF394054BCDa1902B6A6436840435655a3',
       decimals: 12,
       ids: {
         id: '76100021443485661246318545281171740067',
       },
     }),
-    kar.toChainAsset({
+    ChainAsset.fromAsset(kar, {
       address: '0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5',
       decimals: 12,
       ids: {
         id: '10810581592933651521121702237638664357',
       },
     }),
-    kbtc.toChainAsset({
+    ChainAsset.fromAsset(kbtc, {
       address: '0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0',
       decimals: 0, // todo
       ids: {
         id: '328179947973504579459046439826496046832',
       },
     }),
-    kint.toChainAsset({
+    ChainAsset.fromAsset(kint, {
       address: '0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2',
       decimals: 12,
       ids: {
         id: '175400718394635817552109270754364440562',
       },
     }),
-    kma.toChainAsset({
+    ChainAsset.fromAsset(kma, {
       address: '0xFFffFffFA083189f870640b141ae1E882c2b5bad',
       decimals: 12,
       ids: {
         id: '213357169630950964874127107356898319277',
       },
     }),
-    ksm.toChainAsset({
+    ChainAsset.fromAsset(ksm, {
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 12,
       ids: {
         id: '42259045809535163221576417993425387648',
       },
     }),
-    lit.toChainAsset({
+    ChainAsset.fromAsset(lit, {
       address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
       },
     }),
-    mgx.toChainAsset({
+    ChainAsset.fromAsset(mgx, {
       address: '0xffFfFffF58d867EEa1Ce5126A4769542116324e9',
       decimals: 18,
       ids: {
         id: '118095707745084482624853002839493125353',
       },
     }),
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.01,
     }),
-    pha.toChainAsset({
+    ChainAsset.fromAsset(pha, {
       address: '0xffFfFFff8E6b63d9e447B6d4C45BDA8AF9dc9603',
       decimals: 12,
       ids: {
         id: '189307976387032586987344677431204943363',
       },
     }),
-    pica.toChainAsset({
+    ChainAsset.fromAsset(pica, {
       address: '0xFffFfFFf7dD9B9C60ac83e49D7E3E1f7A1370aD2',
       decimals: 12,
       ids: {
         id: '167283995827706324502761431814209211090',
       },
     }),
-    rmrk.toChainAsset({
+    ChainAsset.fromAsset(rmrk, {
       address: '0xffffffFF893264794d9d57E1E0E21E0042aF5A0A',
       decimals: 10,
       ids: {
         id: '182365888117048807484804376330534607370',
       },
     }),
-    sdn.toChainAsset({
+    ChainAsset.fromAsset(sdn, {
       address: '0xFFFfffFF0Ca324C842330521525E7De111F38972',
       decimals: 18,
       ids: {
         id: '16797826370226091782818345603793389938',
       },
     }),
-    teer.toChainAsset({
+    ChainAsset.fromAsset(teer, {
       address: '0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e',
       decimals: 12,
       ids: {
         id: '105075627293246237499203909093923548958',
       },
     }),
-    tnkr.toChainAsset({
+    ChainAsset.fromAsset(tnkr, {
       address: '0xfFFfFffF683474B842852111cc31d470bD8f5081',
       decimals: 12,
       ids: {
         id: '138512078356357941985706694377215053953',
       },
     }),
-    tur.toChainAsset({
+    ChainAsset.fromAsset(tur, {
       address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
       decimals: 10,
       ids: {
         id: '133300872918374599700079037156071917454',
       },
     }),
-    usdt.toChainAsset({
+    ChainAsset.fromAsset(usdt, {
       address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
       decimals: 6,
       ids: {
         id: '311091173110107856861649819128533077277',
       },
     }),
-    xrt.toChainAsset({
+    ChainAsset.fromAsset(xrt, {
       address: '0xFffFFffF51470Dca3dbe535bD2880a9CcDBc6Bd9',
       decimals: 9,
       ids: {
         id: '108036400430056508975016746969135344601',
       },
     }),
-    vbnc.toChainAsset({
+    ChainAsset.fromAsset(vbnc, {
       address: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
       decimals: 12,
       ids: {
         id: '72145018963825376852137222787619937732',
       },
     }),
-    vksm.toChainAsset({
+    ChainAsset.fromAsset(vksm, {
       address: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
       decimals: 12,
       ids: {
         id: '264344629840762281112027368930249420542',
       },
     }),
-    vmovr.toChainAsset({
+    ChainAsset.fromAsset(vmovr, {
       address: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
       decimals: 18,
       ids: {
@@ -1437,7 +1438,7 @@ export const moonriver = new EvmParachain({
 
 export const nodle = new Parachain({
   assets: [
-    nodl.toChainAsset({
+    ChainAsset.fromAsset(nodl, {
       decimals: 11,
       ids: {
         id: 'NodleNative',
@@ -1456,7 +1457,7 @@ export const nodle = new Parachain({
 
 export const neuroweb = new Parachain({
   assets: [
-    neuro.toChainAsset({
+    ChainAsset.fromAsset(neuro, {
       decimals: 12,
       ids: {
         palletInstance: 10,
@@ -1475,7 +1476,7 @@ export const neuroweb = new Parachain({
 
 export const originTrailAlphanet = new Parachain({
   assets: [
-    otp.toChainAsset({
+    ChainAsset.fromAsset(otp, {
       decimals: 12,
       ids: {
         palletInstance: 10,
@@ -1495,13 +1496,13 @@ export const originTrailAlphanet = new Parachain({
 
 export const parallel = new Parachain({
   assets: [
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: 114,
       },
     }),
-    para.toChainAsset({
+    ChainAsset.fromAsset(para, {
       decimals: 12,
     }),
   ],
@@ -1517,13 +1518,13 @@ export const parallel = new Parachain({
 
 export const parallelHeiko = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: 113,
       },
     }),
-    hko.toChainAsset({
+    ChainAsset.fromAsset(hko, {
       decimals: 12,
     }),
   ],
@@ -1539,16 +1540,16 @@ export const parallelHeiko = new Parachain({
 
 export const peaqAlphanet = new Parachain({
   assets: [
-    agng.toChainAsset({
+    ChainAsset.fromAsset(agng, {
       decimals: 18,
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       decimals: 18,
       ids: {
         id: 1000,
       },
     }),
-    ftmwh.toChainAsset({
+    ChainAsset.fromAsset(ftmwh, {
       decimals: 18,
       ids: {
         id: 1001,
@@ -1568,46 +1569,46 @@ export const peaqAlphanet = new Parachain({
 
 export const peaqChain = new Parachain({
   assets: [
-    peaq.toChainAsset({
+    ChainAsset.fromAsset(peaq, {
       decimals: 18,
     }),
-    dot.toChainAsset({
+    ChainAsset.fromAsset(dot, {
       decimals: 10,
       ids: {
         id: 10,
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: 1000,
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       decimals: 6,
       ids: {
         id: 1001,
       },
     }),
-    weth.toChainAsset({
+    ChainAsset.fromAsset(weth, {
       decimals: 18,
       ids: {
         id: 1002,
       },
     }),
-    wbtc.toChainAsset({
+    ChainAsset.fromAsset(wbtc, {
       decimals: 8,
       ids: {
         id: 1003,
       },
     }),
-    dai.toChainAsset({
+    ChainAsset.fromAsset(dai, {
       decimals: 18,
       ids: {
         id: 1004,
       },
     }),
-    usdtwh.toChainAsset({
+    ChainAsset.fromAsset(usdtwh, {
       decimals: 6,
       ids: {
         id: 1005,
@@ -1627,17 +1628,17 @@ export const peaqChain = new Parachain({
 
 export const peaqEvmAlphanet = new EvmParachain({
   assets: [
-    agng.toChainAsset({
+    ChainAsset.fromAsset(agng, {
       decimals: 18,
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       address: '0xFfFfFffF000000000000000000000000000003e8',
       decimals: 18,
       ids: {
         minId: 1000,
       },
     }),
-    ftmwh.toChainAsset({
+    ChainAsset.fromAsset(ftmwh, {
       address: '0xFffFffFF000000000000000000000000000003E9',
       decimals: 18,
       ids: {
@@ -1670,24 +1671,24 @@ export const peaqEvmAlphanet = new EvmParachain({
 
 export const peaqEvm = new EvmParachain({
   assets: [
-    peaq.toChainAsset({
+    ChainAsset.fromAsset(peaq, {
       decimals: 18,
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       address: '0xFfFfFffF000000000000000000000000000003e8',
       decimals: 18,
       ids: {
         minId: 1000,
       },
     }),
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       address: '0xFffFffFF000000000000000000000000000003E9',
       decimals: 0, // todo
       ids: {
         minId: 1001,
       },
     }),
-    weth.toChainAsset({
+    ChainAsset.fromAsset(weth, {
       address: '0xFFFfFfFf000000000000000000000000000003ea',
       decimals: 0, // todo
       ids: {
@@ -1695,7 +1696,7 @@ export const peaqEvm = new EvmParachain({
         minId: 1002,
       },
     }),
-    wbtc.toChainAsset({
+    ChainAsset.fromAsset(wbtc, {
       address: '0xfffFFFFF000000000000000000000000000003eb',
       decimals: 0, // todo
       ids: {
@@ -1703,14 +1704,14 @@ export const peaqEvm = new EvmParachain({
         minId: 1003,
       },
     }),
-    dai.toChainAsset({
+    ChainAsset.fromAsset(dai, {
       address: '0xfFffFFFF000000000000000000000000000003Ec',
       decimals: 0, // todo
       ids: {
         minId: 1004,
       },
     }),
-    usdtwh.toChainAsset({
+    ChainAsset.fromAsset(usdtwh, {
       address: '0xfFffffFF000000000000000000000000000003Ed',
       decimals: 0, // todo
       ids: {
@@ -1742,13 +1743,13 @@ export const peaqEvm = new EvmParachain({
 
 export const pendulum = new Parachain({
   assets: [
-    pen.toChainAsset({
+    ChainAsset.fromAsset(pen, {
       decimals: 12,
       ids: {
         id: 'Native',
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { XCM: 6 },
@@ -1767,13 +1768,13 @@ export const pendulum = new Parachain({
 
 export const pendulumAlphanet = new Parachain({
   assets: [
-    ampe.toChainAsset({
+    ChainAsset.fromAsset(ampe, {
       decimals: 12,
       ids: {
         id: 'Native',
       },
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       decimals: 18,
       ids: {
         id: { XCM: 1 },
@@ -1793,14 +1794,14 @@ export const pendulumAlphanet = new Parachain({
 
 export const phala = new Parachain({
   assets: [
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: 1,
         palletInstance: 10,
       },
     }),
-    pha.toChainAsset({
+    ChainAsset.fromAsset(pha, {
       decimals: 12,
     }),
   ],
@@ -1816,13 +1817,13 @@ export const phala = new Parachain({
 
 export const picasso = new Parachain({
   assets: [
-    pica.toChainAsset({
+    ChainAsset.fromAsset(pica, {
       decimals: 12,
       ids: {
         id: 1,
       },
     }),
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: 23,
@@ -1842,19 +1843,19 @@ export const picasso = new Parachain({
 
 export const picassoAlphanet = new Parachain({
   assets: [
-    pica.toChainAsset({
+    ChainAsset.fromAsset(pica, {
       decimals: 12,
       ids: {
         id: 1,
       },
     }),
-    atom.toChainAsset({
+    ChainAsset.fromAsset(atom, {
       decimals: 6,
       ids: {
         id: 7,
       },
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       decimals: 18,
       ids: {
         id: 10,
@@ -1873,7 +1874,7 @@ export const picassoAlphanet = new Parachain({
 });
 
 export const polkadot = new Parachain({
-  assets: [dot.toChainAsset({ decimals: 10 })],
+  assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3',
@@ -1886,45 +1887,45 @@ export const polkadot = new Parachain({
 
 export const polkadotAssetHub = new Parachain({
   assets: [
-    usdt.toChainAsset({
+    ChainAsset.fromAsset(usdt, {
       decimals: 6,
       ids: {
         id: 1984,
         palletInstance: 50,
       },
     }),
-    ded.toChainAsset({
+    ChainAsset.fromAsset(ded, {
       decimals: 10,
       ids: {
         id: 30,
         palletInstance: 50,
       },
     }),
-    dot.toChainAsset({
+    ChainAsset.fromAsset(dot, {
       decimals: 10,
     }),
-    usdc.toChainAsset({
+    ChainAsset.fromAsset(usdc, {
       decimals: 6,
       ids: {
         id: 1337,
         palletInstance: 50,
       },
     }),
-    pink.toChainAsset({
+    ChainAsset.fromAsset(pink, {
       decimals: 10,
       ids: {
         id: 23,
         palletInstance: 50,
       },
     }),
-    stink.toChainAsset({
+    ChainAsset.fromAsset(stink, {
       decimals: 10,
       ids: {
         id: 42069,
         palletInstance: 50,
       },
     }),
-    apillon.toChainAsset({
+    ChainAsset.fromAsset(apillon, {
       decimals: 18,
       ids: {
         id: 1024,
@@ -1944,7 +1945,7 @@ export const polkadotAssetHub = new Parachain({
 
 export const robonomics = new Parachain({
   assets: [
-    xrt.toChainAsset({
+    ChainAsset.fromAsset(xrt, {
       decimals: 9,
     }),
   ],
@@ -1960,13 +1961,13 @@ export const robonomics = new Parachain({
 
 export const shiden = new Parachain({
   assets: [
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: 18446744073709551620n,
       },
     }),
-    sdn.toChainAsset({
+    ChainAsset.fromAsset(sdn, {
       decimals: 18,
     }),
   ],
@@ -1981,7 +1982,7 @@ export const shiden = new Parachain({
 });
 
 export const subsocial = new Parachain({
-  assets: [sub.toChainAsset({ decimals: 10 })],
+  assets: [ChainAsset.fromAsset(sub, { decimals: 10 })],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f',
@@ -1994,7 +1995,7 @@ export const subsocial = new Parachain({
 
 export const tinkernet = new Parachain({
   assets: [
-    tnkr.toChainAsset({
+    ChainAsset.fromAsset(tnkr, {
       decimals: 12,
     }),
   ],
@@ -2010,10 +2011,10 @@ export const tinkernet = new Parachain({
 
 export const turing = new Parachain({
   assets: [
-    tur.toChainAsset({
+    ChainAsset.fromAsset(tur, {
       decimals: 10,
     }),
-    movr.toChainAsset({
+    ChainAsset.fromAsset(movr, {
       decimals: 18,
       ids: {
         id: 9,
@@ -2032,10 +2033,10 @@ export const turing = new Parachain({
 
 export const turingAlphanet = new Parachain({
   assets: [
-    tur.toChainAsset({
+    ChainAsset.fromAsset(tur, {
       decimals: 10,
     }),
-    dev.toChainAsset({
+    ChainAsset.fromAsset(dev, {
       decimals: 18,
       ids: {
         id: 1,
@@ -2055,7 +2056,7 @@ export const turingAlphanet = new Parachain({
 
 export const uniqueAlpha = new Parachain({
   assets: [
-    auq.toChainAsset({
+    ChainAsset.fromAsset(auq, {
       decimals: 0, // TODO: unknown for now
       ids: {
         id: { NativeAssetId: 'Here' },
@@ -2075,13 +2076,13 @@ export const uniqueAlpha = new Parachain({
 
 export const zeitgeist = new Parachain({
   assets: [
-    usdcwh.toChainAsset({
+    ChainAsset.fromAsset(usdcwh, {
       decimals: 6,
       ids: {
         id: { ForeignAsset: 1 },
       },
     }),
-    glmr.toChainAsset({
+    ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { ForeignAsset: 3 },

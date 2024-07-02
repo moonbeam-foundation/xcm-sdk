@@ -1,7 +1,5 @@
-/* eslint-disable import/no-cycle */
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { Asset, AssetConstructorParams } from './Asset';
-import { AssetAmount, AssetAmountConstructorParams } from './AssetAmount';
 
 export interface ChainAssetConstructorParams extends AssetConstructorParams {
   address?: string;
@@ -52,20 +50,12 @@ export class ChainAsset extends Asset {
     this.symbol = symbol;
   }
 
-  toAssetAmount(
-    params: Omit<
-      AssetAmountConstructorParams,
-      keyof ChainAssetConstructorParams
-    >,
-  ): AssetAmount {
-    return new AssetAmount({
-      address: this.address,
-      decimals: this.decimals,
-      ids: this.ids,
-      key: this.key,
-      min: this.min,
-      originSymbol: this.originSymbol,
-      symbol: this.symbol,
+  static fromAsset(
+    asset: Asset,
+    params: Omit<ChainAssetConstructorParams, keyof AssetConstructorParams>,
+  ): ChainAsset {
+    return new ChainAsset({
+      ...asset,
       ...params,
     });
   }

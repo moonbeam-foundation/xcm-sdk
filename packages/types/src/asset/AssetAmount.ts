@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import {
   convertDecimals,
   toBigInt,
@@ -23,6 +22,19 @@ export class AssetAmount extends ChainAsset {
     super(other);
 
     this.amount = toBigInt(amount, other.decimals);
+  }
+
+  static fromChainAsset(
+    asset: ChainAsset,
+    params: Omit<
+      AssetAmountConstructorParams,
+      keyof ChainAssetConstructorParams
+    >,
+  ): AssetAmount {
+    return new AssetAmount({
+      ...asset,
+      ...params,
+    });
   }
 
   isSame(asset: AssetAmount): boolean {

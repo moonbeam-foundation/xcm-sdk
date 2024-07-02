@@ -64,7 +64,7 @@ export class PolkadotService {
     const amount =
       existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n;
 
-    return this.asset.toAssetAmount({ amount });
+    return AssetAmount.fromChainAsset(this.asset, { amount });
   }
 
   async query(config: SubstrateQueryConfig): Promise<bigint> {
