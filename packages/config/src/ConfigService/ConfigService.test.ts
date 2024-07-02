@@ -105,6 +105,7 @@ describe('config service', () => {
       expect(() =>
         configService.getChain(
           new EvmParachain({
+            assets: [],
             ecosystem: Ecosystem.AlphanetRelay,
             genesisHash: '',
             id: 1287,
