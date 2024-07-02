@@ -55,21 +55,26 @@ export async function getFee({
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
   // TODO: we have to consider correctly here when an asset is ERC20 to get it from contract
-  const { amount, asset } = transferConfig.source.config.destinationFee;
-  const chainAsset = transferConfig.destination.chain.getChainAsset(asset);
+  const { amount } = transferConfig.source.config.destinationFee;
+  const asset = AssetAmount.fromChainAsset(
+    transferConfig.destination.chain.getChainAsset(
+      transferConfig.source.config.destinationFee.asset,
+    ),
+    { amount: 0n },
+  );
 
   if (Number.isFinite(amount)) {
-    return chainAsset.toAssetAmount({
+    return asset.copyWith({
       amount: amount as number,
     });
   }
 
   const cfg = (amount as FeeConfigBuilder).build({
     api: polkadot.api,
-    asset: chainAsset.getAssetId(),
+    asset: asset.getAssetId(),
   });
 
-  return chainAsset.toAssetAmount({
+  return asset.copyWith({
     amount: await cfg.call(),
   });
 }
