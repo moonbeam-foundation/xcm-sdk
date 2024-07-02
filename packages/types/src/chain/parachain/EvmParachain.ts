@@ -7,16 +7,9 @@ export interface EvmParachainConstructorParams
   extends Omit<ParachainConstructorParams, 'type'> {
   id: number;
   rpc: string;
-  nativeCurrency: NativeCurrency;
   isEvmSigner?: boolean;
   contracts?: Contracts;
 }
-
-type NativeCurrency = {
-  decimals: number;
-  name: string;
-  symbol: string;
-};
 
 type Contracts = {
   Xtokens?: Address;
@@ -27,8 +20,6 @@ export class EvmParachain extends Parachain {
 
   readonly rpc: string;
 
-  readonly nativeCurrency: NativeCurrency;
-
   readonly isEvmSigner: boolean;
 
   readonly contracts?: Contracts;
@@ -36,7 +27,6 @@ export class EvmParachain extends Parachain {
   constructor({
     id,
     rpc,
-    nativeCurrency,
     isEvmSigner = false,
     contracts,
     ...others
@@ -46,7 +36,6 @@ export class EvmParachain extends Parachain {
     this.contracts = contracts;
     this.id = id;
     this.rpc = rpc;
-    this.nativeCurrency = nativeCurrency;
     this.isEvmSigner = isEvmSigner;
   }
 
@@ -54,7 +43,11 @@ export class EvmParachain extends Parachain {
     return defineChain({
       id: this.id,
       name: this.name,
-      nativeCurrency: this.nativeCurrency,
+      nativeCurrency: {
+        decimals: this.nativeAsset.decimals,
+        name: this.nativeAsset.originSymbol,
+        symbol: this.nativeAsset.originSymbol,
+      },
       rpcUrls: {
         default: {
           http: [this.rpc],
