@@ -31,7 +31,7 @@ export class ChainAsset extends Asset {
 
   readonly min?: bigint;
 
-  readonly symbol?: string;
+  readonly #symbol?: string;
 
   constructor({
     address,
@@ -47,7 +47,7 @@ export class ChainAsset extends Asset {
     this.decimals = decimals;
     this.ids = ids;
     this.min = min ? toBigInt(min, decimals) : undefined;
-    this.symbol = symbol;
+    this.#symbol = symbol;
   }
 
   static fromAsset(
@@ -58,6 +58,10 @@ export class ChainAsset extends Asset {
       ...asset,
       ...params,
     });
+  }
+
+  get symbol(): string {
+    return this.#symbol || this.originSymbol;
   }
 
   getAssetId(): ChainAssetId {
