@@ -1,7 +1,7 @@
 <footer class="md-footer">
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div>
+      <div class="logo">
         <img class="moonbeam-foundation-logo" src="{{ 'assets/images/moonbeam-foundation-light.webp#only-light'| url }}"
           alt="Moonbeam Foundation" width="192" height="75.65" />
         <img class="moonbeam-foundation-logo" src="{{ 'assets/images/moonbeam-foundation-dark.webp#only-dark'| url }}"
@@ -10,6 +10,9 @@
       <div class="column">
         <div class="md-footer-copyright">
           {% if config.copyright %}
+          <div class="made-with-love">
+            <span>Made with 💜 by the Moonbeam team.</span>
+          </div>
           <div class="md-footer-copyright__highlight">
             {{ config.copyright }}
           </div>
