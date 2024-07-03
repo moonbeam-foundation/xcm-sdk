@@ -26,6 +26,8 @@ mike deploy --push INSERT_VERSION
 
 If using the latest version, you can cross-reference the live website, or the `gh-pages` branch to get the version that needs to be provided to the above command.
 
+Please note that modifying a previous version is possible, but should not be done unless necessary. It will require you to roll back changes to that version. For example, if the current version is v2 and you make a change and want to apply it to v0, the rest of the pages must be on v0, otherwise, the v2 changes will be applied to v0.
+
 ## Setting a Default Version
 
 After setting the `latest` alias as the default version, and when publishing a new version, always update the alias to point to the latest version by running:
