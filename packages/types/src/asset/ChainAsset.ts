@@ -60,6 +60,14 @@ export class ChainAsset extends Asset {
     });
   }
 
+  copyWith(params: Partial<ChainAssetConstructorParams>): ChainAsset {
+    return new ChainAsset({
+      ...this,
+      symbol: this.#symbol,
+      ...params,
+    });
+  }
+
   get symbol(): string {
     return this.#symbol || this.originSymbol;
   }

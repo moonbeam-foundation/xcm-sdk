@@ -45,7 +45,7 @@ export class AssetAmount extends ChainAsset {
     return this.isSame(asset) && this.amount === asset.amount;
   }
 
-  copyWith(params: Partial<AssetAmountConstructorParams>) {
+  copyWith(params: Partial<AssetAmountConstructorParams>): AssetAmount {
     return new AssetAmount({
       ...this,
       ...params,
