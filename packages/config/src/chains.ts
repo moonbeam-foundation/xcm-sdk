@@ -1693,7 +1693,6 @@ export const peaqEvm = new EvmParachain({
       address: '0xFFFfFfFf000000000000000000000000000003ea',
       decimals: 0, // todo
       ids: {
-        id: '0xFFFfFfFf000000000000000000000000000003ea',
         minId: 1002,
       },
     }),
@@ -1701,7 +1700,6 @@ export const peaqEvm = new EvmParachain({
       address: '0xfffFFFFF000000000000000000000000000003eb',
       decimals: 0, // todo
       ids: {
-        id: '0xfffFFFFF000000000000000000000000000003eb',
         minId: 1003,
       },
     }),
