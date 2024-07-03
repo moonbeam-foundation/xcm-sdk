@@ -744,8 +744,8 @@
 <p>To create an EVM signer and a Polkadot signer, you can refer to the following sections.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-</div>
 <p><strong>Never store your private key or mnemonic in a JavaScript or TypeScript file.</strong></p>
+</div>
 <h3 id="create-a-evm-signer">Create an EVM Signer</h3>
 <p>To create an Ethers signer, you can use the following code snippet:</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ethers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;ethers&#39;</span><span class="p">;</span>
@@ -891,8 +891,8 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>To configure your project for Moonbeam or Moonriver, you will need to have your own endpoint and API key, which you can get from one of the supported <a href="https://docs.moonbeam.network/builders/get-started/endpoints" target="_blank">Endpoint Providers</a>.</p>
+</div>
 <h3 id="create-a-polkadot-signer">Create a Polkadot Signer</h3>
 <p>In this example, you can use a <a href="https://polkadot.js.org/docs/api/start/keyring/" target="_blank">Polkadot.js Keyring</a> to sign transactions. Please note that this approach is not recommended for production applications.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Keyring</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@polkadot/api&#39;</span><span class="p">;</span>
@@ -913,8 +913,8 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>In the above <code>INSERT_PRIVATE_KEY</code> field, you can specify a seed phrase instead of a private key.</p>
+</div>
 <h2 id="asset-chain-data">Get Asset and Chain Data</h2>
 <p>You can use any of the following code examples to retrieve information on the supported assets and the chains that support these assets.</p>
 <h3 id="get-list-of-supported-assets">Get List of Supported Assets</h3>
@@ -1042,8 +1042,8 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on each of the <code>Sdk().assets()</code> builder functions, including the parameters and returned data, please refer to the <a href="../reference/methods/#build-the-transfer-data-starting-with-assets" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <p>If you don't need any of the asset or chain information, you can use the <code>getTransferData</code> function:</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Sdk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@moonbeam-network/xcm-sdk&#39;</span><span class="p">;</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
@@ -1065,8 +1065,8 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on the <code>Sdk().getTransferData()</code> function, including the parameters and returned data, please refer to the <a href="../reference/methods/#the-get-transfer-data-method" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <p>As previously mentioned, the same output will be generated regardless of which method you use to build the transfer data.</p>
 <details class="code">
 <summary>Example response</summary>
@@ -1224,8 +1224,8 @@
 <p>As the above snippet shows, the <code>transfer</code> function returns a transaction hash on the source chain.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on the parameters and returned data for <code>transfer</code>, please refer to the <a href="../reference/methods/#the-transfer-method" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <h2 id="swap-an-asset">Swap an Asset</h2>
 <p>To swap an asset, you can use the same transfer data and call <code>data.swap()</code> to switch the source and destination chain information. You can call the <code>transfer</code> function to execute the swap from there.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="p">...</span>
@@ -1375,8 +1375,8 @@
 </details>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on the parameters and returned data for <code>swap</code>, please refer to the <a href="../reference/methods/#the-swap-method" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <h2 id="get-estimate">Get an Estimate of the Asset to Be Received on the Destination Chain</h2>
 <p>When you send an XCM message, you typically pay fees on the destination chain to execute the XCM instructions. Before you transfer the asset, you can use the <a href="../reference/methods/#the-get-estimate-method"><code>getEstimate</code></a> function to calculate an estimated amount of the asset that will be received on the destination chain minus any fees.</p>
 <p>The <code>getEstimate</code> function is tied to a specific transfer request as it is based on the asset being transferred and the destination chain fees, so you'll need to create the <a href="#build-xcm-transfer-data">transfer data</a> first.</p>
@@ -1409,8 +1409,8 @@
 </details>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on the parameters and returned data for <code>getEstimate</code>, please refer to the <a href="../reference/methods/#the-get-estimate-method" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <h2 id="transfer-min-max-amounts">Get Transfer Minimum and Maximum Amounts</h2>
 <p>You can use <a href="#build-xcm-transfer-data">transfer data</a> to retrieve the minimum and maximum amount of an asset that can be transferred. To do so, you'll access the <code>min</code> and <code>max</code> properties of the asset being transferred:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Minimum</label><label for="__tabbed_5_2">Maximum</label></div>
@@ -1458,8 +1458,8 @@
 </details>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on assets and asset amounts, please refer to the <a href="../reference/interfaces/#assets" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <h2 id="get-transfer-fees">Get Transfer Fees</h2>
 <p>The <a href="#build-xcm-transfer-data">transfer data</a> provides information on transfer fees for the source and destination chains. You can retrieve the fees using the following snippet:</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">...</span>
@@ -1502,8 +1502,8 @@
 </details>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>For more information on assets and asset amounts, including fees, please refer to the <a href="../reference/interfaces/#assets" target="_blank">XCM SDK Reference</a>.</p>
+</div>
 <div class="page-disclaimer"> 
 The information presented herein has been provided by third parties and is made available solely for general information purposes. Moonbeam does not endorse any project listed and described on the Moonbeam Doc Website (https://docs.moonbeam.network/). Moonbeam Foundation does not warrant the accuracy, completeness or usefulness of this information. Any reliance you place on such information is strictly at your own risk. Moonbeam Foundation disclaims all liability and responsibility arising from any reliance placed on this information by you or by anyone who may be informed of any of its contents. All statements and/or opinions expressed in these materials are solely the responsibility of the person or entity providing those materials and do not necessarily represent the opinion of Moonbeam Foundation. The information should not be construed as professional or financial advice of any kind. Advice from a suitably qualified professional should always be sought in relation to any particular matter or circumstance. The information herein may link to or integrate with other websites operated or content provided by third parties, and such other websites may link to this website. Moonbeam Foundation has no control over any such other websites or their content and will have no liability arising out of or related to such websites or their content. The existence of any such link does not constitute an endorsement of such websites, the content of the websites, or the operators of the websites. These links are being provided to you only as a convenience and you release and hold Moonbeam Foundation harmless from any and all liability arising from your use of this information or the information provided by any third-party website or service.
 </div>
@@ -1537,7 +1537,7 @@ The information presented herein has been provided by third parties and is made 
         <footer class="md-footer">
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div>
+      <div class="logo">
         <img class="moonbeam-foundation-logo" src="../assets/images/moonbeam-foundation-light.webp#only-light"
           alt="Moonbeam Foundation" width="192" height="75.65" />
         <img class="moonbeam-foundation-logo" src="../assets/images/moonbeam-foundation-dark.webp#only-dark"
@@ -1546,6 +1546,9 @@ The information presented herein has been provided by third parties and is made 
       <div class="column">
         <div class="md-footer-copyright">
           
+          <div class="made-with-love">
+            <span>Made with 💜 by the Moonbeam team.</span>
+          </div>
           <div class="md-footer-copyright__highlight">
             © 2024 Moonbeam Foundation. All Rights Reserved.
           </div>

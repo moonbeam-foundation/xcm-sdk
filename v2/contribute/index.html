@@ -648,8 +648,8 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>Assets are listed in alphabetical order. Please make sure you follow this order when adding new assets.</p>
+</div>
 <h2 id="add-a-chain">Add a Chain</h2>
 <p>The next step to support an asset integration is to add chain information for the chains in which your asset can be sent to and from to the <a href="https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/chains.ts" target="_blank">chains configuration file</a>.</p>
 <p>To add a chain, take the following steps:</p>
@@ -719,8 +719,8 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.</p>
+</div>
 <p>Now that you've added the chain, you can continue to the next section to add the assets that this chain supports.</p>
 <h2 id="configure-a-chains-assets">Configure a Chain's Assets</h2>
 <p>To designate a chain as a destination or source chain for an asset, you must specify the asset within the <code>assetsData</code> array of the chain's configuration. This array outlines the supported assets on the chain, and the asset information within it determines how the asset is identified or targeted on that specific chain. For example, when adding a chain's native asset, you'll need to define how the chain sees its own asset, and when adding the asset to a destination chain, you'll need to define how the destination chain sees the asset.</p>
@@ -825,8 +825,8 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.</p>
+</div>
 <p>For example, to add support to transfer USDT from the Polkadot Asset Hub to Moonbeam, the Polkadot Asset Hub configuration file is as follows:</p>
 <div class="language-ts highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nx">AssetMinBuilder</span><span class="p">,</span>
@@ -968,7 +968,7 @@
         <footer class="md-footer">
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div>
+      <div class="logo">
         <img class="moonbeam-foundation-logo" src="../assets/images/moonbeam-foundation-light.webp#only-light"
           alt="Moonbeam Foundation" width="192" height="75.65" />
         <img class="moonbeam-foundation-logo" src="../assets/images/moonbeam-foundation-dark.webp#only-dark"
@@ -977,6 +977,9 @@
       <div class="column">
         <div class="md-footer-copyright">
           
+          <div class="made-with-love">
+            <span>Made with 💜 by the Moonbeam team.</span>
+          </div>
           <div class="md-footer-copyright__highlight">
             © 2024 Moonbeam Foundation. All Rights Reserved.
           </div>

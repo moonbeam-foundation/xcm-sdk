@@ -225,6 +225,14 @@ body {
 }
 
 /* Footer styling */
+.md-footer-meta__inner {
+  gap: 1em;
+}
+
+.md-footer-meta__inner .logo {
+  align-content: center;
+}
+
 .md-footer-copyright {
   padding: 0.1em;
   margin: auto;
@@ -243,6 +251,18 @@ body {
   padding: 1em;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 35.2em) {
+  .md-footer-meta__inner {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .md-footer-copyright {
+    text-align: center;
+  }
+}
+
 
 /* Reference page styling */
 /* Grid styling */
