@@ -665,7 +665,7 @@ const keyring = new Keyring({ type: 'sr25519' });
 const pair = keyring.addFromUri('INSERT_MNEMONIC');
 ```
 
-## </div>
+</div>
 
 ### The Chain Config Object
 
@@ -728,7 +728,7 @@ Defines a chain's configurations, including information for each chain's support
 }
 ```
 
-## </div>
+</div>
 
 ### The Asset Config Object
 
@@ -775,7 +775,7 @@ Defines an asset's configurations for a source chain and includes information ab
 }
 ```
 
-## </div>
+</div>
 
 ### The Fee Asset Config
 
@@ -802,7 +802,7 @@ Defines the fees for a particular asset on the source chain.
 }
 ```
 
-## </div>
+</div>
 
 ### The Destination Fee Asset Config
 
@@ -830,4 +830,4 @@ Defines the fees for a particular asset on the destination chain.
 }
 ```
 
-## </div>
+</div>
