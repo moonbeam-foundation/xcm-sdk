@@ -44,7 +44,7 @@ Defines an asset's key and symbol used on the asset's origin chain.
 Defines properties related to an asset, including `Asset` properties, the decimals and symbol of the asset, and the amount an associated source or destination address has of the asset.
 
 !!! note
-    A few utility methods are available for working with the `AssetAmount` class that converts the amount to various formats. Please refer to the [Methods for Asset Conversions](./methods.md#asset-utilities) section.
+A few utility methods are available for working with the `AssetAmount` class that converts the amount to various formats. Please refer to the [Methods for Asset Conversions](./methods.md#asset-utilities) section.
 
 **Attributes**
 
@@ -667,6 +667,8 @@ const pair = keyring.addFromUri('INSERT_MNEMONIC');
 
 </div>
 
+---
+
 ### The Chain Config Object
 
 <div class="grid" markdown>
@@ -730,6 +732,8 @@ Defines a chain's configurations, including information for each chain's support
 
 </div>
 
+---
+
 ### The Asset Config Object
 
 <div class="grid" markdown>
@@ -776,6 +780,8 @@ Defines an asset's configurations for a source chain and includes information ab
 ```
 
 </div>
+
+---
 
 ### The Fee Asset Config
 
