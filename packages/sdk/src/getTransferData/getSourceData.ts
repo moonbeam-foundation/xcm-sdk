@@ -88,10 +88,10 @@ export async function getSourceData({
   });
 
   const fee = await getFee({
-    balance,
     chain,
-    contractConfig: contract,
+    contract,
     extrinsic,
+    feeBalance,
     feeConfig: config.fee,
     polkadot,
     sourceAddress,
@@ -117,8 +117,8 @@ export async function getSourceData({
 }
 
 export interface GetFeeParams {
-  balance: AssetAmount;
-  contractConfig?: ContractConfig;
+  feeBalance: AssetAmount;
+  contract?: ContractConfig;
   chain: AnyChain;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
@@ -127,9 +127,9 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
-  balance,
+  feeBalance,
   chain,
-  contractConfig,
+  contract: contractConfig,
   extrinsic,
   feeConfig,
   polkadot,
@@ -144,28 +144,28 @@ export async function getFee({
       chain,
       contractConfig,
     ) as TransferContractInterface;
-    const fee = await contract.getFee(balance.amount, sourceAddress);
+    const fee = await contract.getFee(feeBalance.amount, sourceAddress);
 
-    return balance.copyWith({ amount: fee });
+    return feeBalance.copyWith({ amount: fee });
   }
 
   const fee = await getExtrinsicFee(
-    balance,
+    feeBalance,
     extrinsic as ExtrinsicConfig,
     polkadot,
     sourceAddress,
   );
 
   const extra = feeConfig?.extra
-    ? toBigInt(feeConfig.extra, balance.decimals)
+    ? toBigInt(feeConfig.extra, feeBalance.decimals)
     : 0n;
   const totalFee = fee + extra;
 
   const converted = chain.usesChainDecimals
-    ? convertDecimals(totalFee, polkadot.decimals, balance.decimals)
+    ? convertDecimals(totalFee, polkadot.decimals, feeBalance.decimals)
     : totalFee;
 
-  return balance.copyWith({ amount: converted });
+  return feeBalance.copyWith({ amount: converted });
 }
 
 export async function getExtrinsicFee(
