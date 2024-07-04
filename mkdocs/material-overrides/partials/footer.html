@@ -10,16 +10,20 @@
       <div class="column">
         <div class="md-footer-copyright">
           {% if config.copyright %}
-          <div class="made-with-love">
-            <span>Made with 💜 by the Moonbeam team.</span>
-          </div>
-          <div class="md-footer-copyright__highlight">
-            {{ config.copyright }}
-          </div>
           <div class="network-links">
             <a href="https://moonbeam.foundation/privacy-policy/" target="_blank">Privacy policy</a>
             <span> | </span>
             <a href="https://moonbeam.network/terms-of-use/" target="_blank">Terms of use</a>
+          </div>
+          <div class="made-with-love">
+            <span>
+              Made with 💜 by 
+              <a href="https://opslayer.com" target="_blank">OpsLayer</a> and 
+              <a href="https://papermoon.io" target="_blank">PaperMoon</a>
+            </span>
+          </div>
+          <div class="md-footer-copyright__highlight">
+            {{ config.copyright }}
           </div>
           {% endif %}
         </div>
