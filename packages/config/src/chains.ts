@@ -206,19 +206,19 @@ export const bifrostKusama = new Parachain({
     ChainAsset.fromAsset(vbnc, {
       decimals: 12,
       ids: {
-        id: { VToken: 'BNC' },
+        id: { VToken: bnc.originSymbol },
       },
     }),
     ChainAsset.fromAsset(vksm, {
       decimals: 12,
       ids: {
-        id: { VToken: 'KSM' },
+        id: { VToken: ksm.originSymbol },
       },
     }),
     ChainAsset.fromAsset(vmovr, {
       decimals: 18,
       ids: {
-        id: { VToken: 'MOVR' },
+        id: { VToken: movr.originSymbol },
       },
     }),
   ],
@@ -1290,7 +1290,7 @@ export const moonriver = new EvmParachain({
     }),
     ChainAsset.fromAsset(kbtc, {
       address: '0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0',
-      decimals: 0, // todo
+      decimals: 8,
       ids: {
         id: '328179947973504579459046439826496046832',
       },
@@ -1545,6 +1545,9 @@ export const peaqAlphanet = new Parachain({
   assets: [
     ChainAsset.fromAsset(agng, {
       decimals: 18,
+      ids: {
+        id: 0,
+      },
     }),
     ChainAsset.fromAsset(dev, {
       decimals: 18,
@@ -1575,6 +1578,9 @@ export const peaqChain = new Parachain({
   assets: [
     ChainAsset.fromAsset(peaq, {
       decimals: 18,
+      ids: {
+        id: 0,
+      },
     }),
     ChainAsset.fromAsset(dot, {
       decimals: 10,
@@ -1684,35 +1690,35 @@ export const peaqEvm = new EvmParachain({
     }),
     ChainAsset.fromAsset(usdcwh, {
       address: '0xFffFffFF000000000000000000000000000003E9',
-      decimals: 0, // todo
+      decimals: 6,
       ids: {
         minId: 1001,
       },
     }),
     ChainAsset.fromAsset(weth, {
       address: '0xFFFfFfFf000000000000000000000000000003ea',
-      decimals: 0, // todo
+      decimals: 18,
       ids: {
         minId: 1002,
       },
     }),
     ChainAsset.fromAsset(wbtc, {
       address: '0xfffFFFFF000000000000000000000000000003eb',
-      decimals: 0, // todo
+      decimals: 8,
       ids: {
         minId: 1003,
       },
     }),
     ChainAsset.fromAsset(dai, {
       address: '0xfFffFFFF000000000000000000000000000003Ec',
-      decimals: 0, // todo
+      decimals: 18,
       ids: {
         minId: 1004,
       },
     }),
     ChainAsset.fromAsset(usdtwh, {
       address: '0xfFffffFF000000000000000000000000000003Ed',
-      decimals: 0, // todo
+      decimals: 6,
       ids: {
         minId: 1005,
       },
@@ -2002,6 +2008,9 @@ export const tinkernet = new Parachain({
   assets: [
     ChainAsset.fromAsset(tnkr, {
       decimals: 12,
+      ids: {
+        id: 0,
+      },
     }),
   ],
   ecosystem: Ecosystem.Kusama,
