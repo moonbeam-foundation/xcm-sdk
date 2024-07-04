@@ -4,7 +4,7 @@ The XCM SDK offers helper functions, that provide a very simple interface to exe
 
 # Documentation
 
-You can find the documentation at [https://moonbeam-foundation.github.io/xcm-sdk-mkdocs/latest/reference/interfaces/](https://moonbeam-foundation.github.io/xcm-sdk-mkdocs/latest/reference/interfaces/).
+You can find the documentation at [https://moonbeam-foundation.github.io/xcm-sdk/latest/](https://moonbeam-foundation.github.io/xcm-sdk/latest/).
 
 # Installation
 
