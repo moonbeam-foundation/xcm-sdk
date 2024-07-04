@@ -120,11 +120,6 @@ export const hdx = new Asset({
   originSymbol: 'HDX',
 });
 
-export const hko = new Asset({
-  key: 'hko',
-  originSymbol: 'HKO',
-});
-
 export const ibtc = new Asset({
   key: 'ibtc',
   originSymbol: 'IBTC',
@@ -404,7 +399,6 @@ export const assetsList: Asset[] = [
   ftmwh,
   glmr,
   hdx,
-  hko,
   ibtc,
   intr,
   kar,
