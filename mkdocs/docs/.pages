@@ -1,0 +1,5 @@
+nav:
+ - 'index.md'
+ - 'SDK Reference': 'reference'
+ - 'Using the XCM SDK': 'example-usage.md'
+ - 'Contribute': 'contribute.md'
