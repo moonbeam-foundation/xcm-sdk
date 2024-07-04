@@ -4,12 +4,7 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { equilibrium } from '@moonbeam-network/xcm-config';
-import {
-  AnyParachain,
-  AssetAmount,
-  ChainAsset,
-} from '@moonbeam-network/xcm-types';
+import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
@@ -40,23 +35,6 @@ export class PolkadotService {
     return this.api.registry.chainDecimals.at(0) || 12;
   }
 
-  get asset(): ChainAsset {
-    const symbol = this.api.registry.chainTokens.at(0);
-    const key = symbol?.toString().toLowerCase();
-
-    if (!key) {
-      throw new Error('No native symbol key found');
-    }
-
-    // TODO: Remove this once Equilibrium is updated
-    // or find better way if issue appears on other chains
-    if (key === 'token' && [equilibrium.key].includes(this.chain.key)) {
-      return this.chain.getChainAsset(key);
-    }
-
-    return this.chain.getChainAsset(key);
-  }
-
   get existentialDeposit(): AssetAmount {
     const existentialDeposit = this.api.consts.balances?.existentialDeposit;
     const eqExistentialDeposit = this.api.consts.eqBalances
@@ -64,7 +42,7 @@ export class PolkadotService {
     const amount =
       existentialDeposit?.toBigInt() || eqExistentialDeposit?.toBigInt() || 0n;
 
-    return AssetAmount.fromChainAsset(this.asset, { amount });
+    return AssetAmount.fromChainAsset(this.chain.nativeAsset, { amount });
   }
 
   async query(config: SubstrateQueryConfig): Promise<bigint> {
