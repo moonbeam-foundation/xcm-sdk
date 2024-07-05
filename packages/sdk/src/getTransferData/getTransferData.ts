@@ -2,6 +2,7 @@
 import { IConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
+import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import {
@@ -38,9 +39,14 @@ export async function getTransferData({
     transferConfig,
   });
 
-  const destinationFee = destination.fee.convertDecimals(
-    transferConfig.source.chain.getChainAsset(destination.fee).decimals,
+  // Here we need to convert the fee on the destination chain to an asset on source chain.
+  const destinationFeeAsset = transferConfig.source.chain.getChainAsset(
+    destination.fee,
   );
+  const destinationFee = AssetAmount.fromChainAsset(destinationFeeAsset, {
+    amount: destination.fee.convertDecimals(destinationFeeAsset.decimals)
+      .amount,
+  });
 
   const source = await getSourceData({
     destinationAddress,

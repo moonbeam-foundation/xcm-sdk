@@ -31,28 +31,28 @@ export function evm() {
   };
 }
 
-export function substrate() {
-  return {
-    assets,
-    system,
-    tokens,
-  };
-}
-
 function erc20(): BalanceConfigBuilder {
   return {
-    build: ({ address, asset }) => {
-      if (!asset || !isString(asset)) {
-        throw new Error(`Invalid contract address: ${asset}`);
+    build: ({ address, constractAddress }) => {
+      if (!constractAddress || !isString(constractAddress)) {
+        throw new Error(`Invalid contract address: ${constractAddress}`);
       }
 
       return new ContractConfig({
-        address: asset,
+        address: constractAddress,
         args: [address],
         func: 'balanceOf',
         module: 'Erc20',
       });
     },
+  };
+}
+
+export function substrate() {
+  return {
+    assets,
+    system,
+    tokens,
   };
 }
 

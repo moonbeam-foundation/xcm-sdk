@@ -88,6 +88,7 @@ export async function getSourceData({
   });
 
   const fee = await getFee({
+    balance,
     chain,
     contract,
     extrinsic,
@@ -117,6 +118,7 @@ export async function getSourceData({
 }
 
 export interface GetFeeParams {
+  balance: AssetAmount;
   feeBalance: AssetAmount;
   contract?: ContractConfig;
   chain: AnyChain;
@@ -127,6 +129,7 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
+  balance,
   feeBalance,
   chain,
   contract: contractConfig,
@@ -144,13 +147,13 @@ export async function getFee({
       chain,
       contractConfig,
     ) as TransferContractInterface;
-    const fee = await contract.getFee(feeBalance.amount, sourceAddress);
+    const fee = await contract.getFee(balance.amount, sourceAddress);
 
     return feeBalance.copyWith({ amount: fee });
   }
 
   const fee = await getExtrinsicFee(
-    feeBalance,
+    balance,
     extrinsic as ExtrinsicConfig,
     polkadot,
     sourceAddress,
