@@ -31,7 +31,6 @@ import {
   ftmwh,
   glmr,
   hdx,
-  hko,
   ibtc,
   intr,
   kar,
@@ -1274,13 +1273,6 @@ export const moonriver = new EvmParachain({
         id: '108457044225666871745333730479173774551',
       },
     }),
-    ChainAsset.fromAsset(hko, {
-      address: '0xffffffFF394054BCDa1902B6A6436840435655a3',
-      decimals: 12,
-      ids: {
-        id: '76100021443485661246318545281171740067',
-      },
-    }),
     ChainAsset.fromAsset(kar, {
       address: '0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5',
       decimals: 12,
@@ -1516,29 +1508,6 @@ export const parallel = new Parachain({
   parachainId: 2012,
   ss58Format: 172,
   ws: 'wss://parallel-rpc.dwellir.com',
-});
-
-export const parallelHeiko = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 113,
-      },
-    }),
-    ChainAsset.fromAsset(hko, {
-      decimals: 12,
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x64a1c658a48b2e70a7fb1ad4c39eea35022568c20fc44a6e2e3d0a57aee6053b',
-  key: 'parallel-heiko',
-  name: 'Parallel Heiko',
-  nativeAsset: hko,
-  parachainId: 2085,
-  ss58Format: 110,
-  ws: 'wss://heiko-rpc.parallel.fi',
 });
 
 export const peaqAlphanet = new Parachain({
@@ -2153,7 +2122,6 @@ export const chainsList: AnyChain[] = [
   nodle,
   originTrailAlphanet,
   parallel,
-  parallelHeiko,
   peaqChain,
   peaqEvm,
   peaqAlphanet,

@@ -4,7 +4,6 @@ import {
   bnc,
   crab,
   csm,
-  hko,
   kar,
   kbtc,
   kint,
@@ -40,7 +39,6 @@ import {
   litmus,
   mangataKusama,
   moonriver,
-  parallelHeiko,
   picasso,
   robonomics,
   shiden,
@@ -114,17 +112,6 @@ export const moonriverConfig = new ChainConfig({
       destination: mangataKusama,
       destinationFee: {
         amount: 0.002,
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: movr,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallelHeiko,
-      destinationFee: {
-        amount: 0.00000000192,
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -215,21 +202,6 @@ export const moonriverConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: csm,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: hko,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallelHeiko,
-      destinationFee: {
-        amount: 0.0192,
-        asset: hko,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

@@ -1,0 +1,49 @@
+{% extends "main.html" %}
+
+{% block htmltitle %}
+<title>XCM SDK Docs</title>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="assets/stylesheets/home.css">
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Documentation for the XCM SDK</h1>
+      <p>Dive into our comprehensive XCM SDK documentation to streamline your development journey, enabling you to
+        effortlessly integrate cross-chain functionality into your projects within the Polkadot ecosystem.</p>
+      <div class="code">
+        <pre>
+            <code>
+              <span class="install">npm install @moonbeam-foundation/xcm-sdk</span>
+            </code>
+          </pre>
+      </div>
+    </div>
+  </div>
+  <div class="featured-content">
+    <a class="feature" href="reference/interfaces">
+      <img src="assets/images/learn.webp" alt="Feature 1">
+      <h2>SDK Reference</h2>
+      <p>Explore the comprehensive array of interfaces and methods designed for facilitating XCM transfers across chains
+        within the Polkadot and Kusama ecosystems. </p>
+    </a>
+    <a class="feature" href="example-usage">
+      <img src="assets/images/code.webp" alt="Feature 2">
+      <h2>Get Coding</h2>
+      <p>Dive in and start coding with our guide on using the SDK to transfer assets seamlessly between parachains or
+        from a parachain to the relay chain.</p>
+    </a>
+    <a class="feature" href="contribute">
+      <img src="assets/images/contribute.webp" alt="Feature 3">
+      <h2>Contribute</h2>
+      <p>Seeking to enhance the SDK's capabilities with support for a new chain or asset? Uncover the process for
+        contributing to the SDK.</p>
+    </a>
+  </div>
+</div>
+{% endblock %}
