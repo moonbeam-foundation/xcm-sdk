@@ -450,8 +450,8 @@ export const hydration = new Parachain({
   ws: [
     'wss://hydradx-rpc.dwellir.com',
     'wss://rpc.hydradx.cloud',
-    // 'wss://rpc.helikon.io/hydradx',
-    // 'wss://hydradx.paras.dotters.network',
+    'wss://rpc.helikon.io/hydradx',
+    'wss://hydradx.paras.dotters.network',
   ],
 });
 
