@@ -91,6 +91,7 @@ export async function getSourceData({
     balance,
     chain,
     contract,
+    destinationFee,
     extrinsic,
     feeBalance,
     feeConfig: config.fee,
@@ -122,6 +123,7 @@ export interface GetFeeParams {
   feeBalance: AssetAmount;
   contract?: ContractConfig;
   chain: AnyChain;
+  destinationFee: AssetAmount;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
   polkadot: PolkadotService;
@@ -133,6 +135,7 @@ export async function getFee({
   feeBalance,
   chain,
   contract: contractConfig,
+  destinationFee,
   extrinsic,
   feeConfig,
   polkadot,
@@ -147,9 +150,20 @@ export async function getFee({
       chain,
       contractConfig,
     ) as TransferContractInterface;
-    const fee = await contract.getFee(balance.amount, sourceAddress);
+    try {
+      const fee = await contract.getFee(balance.amount, sourceAddress);
 
-    return feeBalance.copyWith({ amount: fee });
+      return feeBalance.copyWith({ amount: fee });
+    } catch (error) {
+      /**
+       * Contract can throw an error if user balance is smaller than fee.
+       * Or if you try to send 0 as amount.
+       */
+      throw new Error(
+        `Can't get a fee, make sure you have ${destinationFee.toDecimal()} ${destinationFee.getSymbol()} in your source balance, needed for destination fees`,
+        { cause: error },
+      );
+    }
   }
 
   const fee = await getExtrinsicFee(

@@ -43,30 +43,18 @@ export class Xtokens implements TransferContractInterface {
       return 0n;
     }
 
-    /**
-     * Contract can throw an error if user balance is smaller than fee.
-     * Or if you try to send 0 as amount.
-     */
-    try {
-      const gas = await this.#publicClient.estimateContractGas({
-        abi: XTOKENS_ABI,
-        account: address as Address,
-        address: this.address as Address,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        args: this.#config.args as any,
-        functionName: this.#config.func as 'transfer',
-      });
+    const gas = await this.#publicClient.estimateContractGas({
+      abi: XTOKENS_ABI,
+      account: address as Address,
+      address: this.address as Address,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      args: this.#config.args as any,
+      functionName: this.#config.func as 'transfer',
+    });
 
-      const gasPrice = await this.getGasPrice();
+    const gasPrice = await this.getGasPrice();
 
-      return gas * gasPrice;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      throw new Error(
-        "Can't get a fee. Make sure that you have enough balance!",
-      );
-    }
+    return gas * gasPrice;
   }
 
   private async getGasPrice() {
