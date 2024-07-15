@@ -447,7 +447,12 @@ export const hydration = new Parachain({
   name: 'Hydration',
   parachainId: 2034,
   ss58Format: 63,
-  ws: 'wss://hydradx-rpc.dwellir.com',
+  ws: [
+    'wss://hydradx-rpc.dwellir.com',
+    'wss://rpc.hydradx.cloud',
+    'wss://rpc.helikon.io/hydradx',
+    'wss://hydradx.paras.dotters.network',
+  ],
 });
 
 export const hydrationAlphanet = new Parachain({
