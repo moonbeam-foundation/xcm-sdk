@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-config
 
+## 2.4.4
+
+### Patch Changes
+
+- [#294](https://github.com/moonbeam-foundation/xcm-sdk/pull/294) [`9be56f4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9be56f4c5bd39ecd2c4d95120f4d369ad7888c7d) Thanks [@Rihyx](https://github.com/Rihyx)! - Add Hydration RPCs
+
+- [#291](https://github.com/moonbeam-foundation/xcm-sdk/pull/291) [`e3f6652`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e3f6652054f7e668a8a21dc2948f97e5a63b2651) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove all Parallel Heiko configuration
+
 ## 2.4.3
 
 ### Patch Changes
