@@ -1846,7 +1846,7 @@ export const zeitgeist = new Parachain({
   ws: [
     'wss://main.rpc.zeitgeist.pm/ws',
     'wss://zeitgeist-rpc.dwellir.com',
-    'wss://zeitgeist.api.onfinality.io',
+    'wss://zeitgeist.api.onfinality.io/public-ws',
   ],
 });
 
