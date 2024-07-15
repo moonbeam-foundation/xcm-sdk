@@ -1,5 +1,27 @@
 # @moonbeam-network/xcm-config
 
+## 2.4.5
+
+### Patch Changes
+
+- [#297](https://github.com/moonbeam-foundation/xcm-sdk/pull/297) [`b6f7fef`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6f7fef640aa442b1e99ce930a25fd0dd94cd8bf) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix script to check WS endpoints
+
+- [#298](https://github.com/moonbeam-foundation/xcm-sdk/pull/298) [`308260e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/308260e1f87b683effe9c04d1d61422d51b37eaf) Thanks [@Rihyx](https://github.com/Rihyx)! - Update minor and patch dependencies
+
+- [#299](https://github.com/moonbeam-foundation/xcm-sdk/pull/299) [`a98f1c0`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a98f1c0dc8619fb297bdc6257d9eb258b21ddabd) Thanks [@Rihyx](https://github.com/Rihyx)! - change Zeitgeist RPCs to an Array and add 2 more endpoints
+
+- Updated dependencies [[`b6f7fef`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6f7fef640aa442b1e99ce930a25fd0dd94cd8bf), [`308260e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/308260e1f87b683effe9c04d1d61422d51b37eaf)]:
+  - @moonbeam-network/xcm-builder@2.3.3
+  - @moonbeam-network/xcm-types@2.2.4
+
+## 2.4.4
+
+### Patch Changes
+
+- [#294](https://github.com/moonbeam-foundation/xcm-sdk/pull/294) [`9be56f4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9be56f4c5bd39ecd2c4d95120f4d369ad7888c7d) Thanks [@Rihyx](https://github.com/Rihyx)! - Add Hydration RPCs
+
+- [#291](https://github.com/moonbeam-foundation/xcm-sdk/pull/291) [`e3f6652`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e3f6652054f7e668a8a21dc2948f97e5a63b2651) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove all Parallel Heiko configuration
+
 ## 2.4.3
 
 ### Patch Changes

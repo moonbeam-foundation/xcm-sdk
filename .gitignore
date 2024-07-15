@@ -114,3 +114,6 @@ dist
 
 # IntelliJ Idea
 .idea
+
+# Docs - Site directory
+mkdocs/site

@@ -4,99 +4,128 @@ import { chainsList } from '@moonbeam-network/xcm-config';
 import { IncomingWebhook } from '@slack/webhook';
 import WebSocket from 'ws';
 
-function procesArgs() {
-  const args = process.argv;
-  const incudeTestChains = args.some((arg) => arg === '--include-test-chains');
-  const slackWebhookArg = args.find((arg) => arg.startsWith('--slack-wh='));
-  const webhookUrl = slackWebhookArg ? slackWebhookArg.split('=')[1] : '';
-  return { incudeTestChains, webhookUrl };
-}
-
-async function checkWebSocketEndpoints(
-  endpoints: ChainEndpoint[],
-): Promise<{ endpoint: ChainEndpoint; isAlive: boolean }[]> {
-  console.log('Checking WebSocket endpoints...');
-  async function checkIsWebSocketAlive({
-    chainKey,
-    ws: endpoint,
-  }: ChainEndpoint): Promise<boolean> {
-    return new Promise((resolve) => {
-      const ws = new WebSocket(endpoint);
-
-      let isAlive = false;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ws.on('error', (error: any) => {
-        console.error(
-          `WebSocket ${chainKey} connection to ${endpoint} failed. Error: ${error.message}`,
-        );
-        resolve(false);
-      });
-
-      ws.on('open', () => {
-        console.log(
-          `WebSocket ${chainKey} connection to ${endpoint} successful.`,
-        );
-        isAlive = true;
-        ws.terminate();
-      });
-
-      ws.on('close', () => {
-        resolve(isAlive);
-      });
-    });
-  }
-
-  return Promise.all(
-    endpoints.map(async (endpoint) => {
-      const isAlive = await checkIsWebSocketAlive(endpoint);
-
-      return { endpoint, isAlive };
-    }),
-  );
-}
-
-const { incudeTestChains, webhookUrl } = procesArgs();
-
-const webhook = new IncomingWebhook(webhookUrl);
-
 interface ChainEndpoint {
   chainKey: string;
   ws: string;
 }
 
-const filteredChainList = incudeTestChains
-  ? chainsList
-  : chainsList.filter((chain) => !chain.isTestChain);
-
-const websocketEndpoints = filteredChainList.map(({ key, ws }) => ({
-  chainKey: key,
-  ws,
-}));
-
-if (incudeTestChains) {
-  console.log('Checking the endpoints of all chains, including test chains...');
+function processArgs() {
+  const args = process.argv;
+  const includeTestChains = args.some((arg) => arg === '--include-test-chains');
+  const slackWebhookArg = args.find((arg) => arg.startsWith('--slack-wh='));
+  const webhookUrl = slackWebhookArg ? slackWebhookArg.split('=')[1] : '';
+  return { includeTestChains, webhookUrl };
 }
 
-checkWebSocketEndpoints(websocketEndpoints).then(async (results) => {
-  let output = '';
+function checkIsWebSocketAlive({
+  chainKey,
+  ws: endpoint,
+}: ChainEndpoint): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    const ws = new WebSocket(endpoint);
 
-  results.forEach(({ isAlive, endpoint: { chainKey, ws } }) => {
-    if (!isAlive) {
-      output += `\n${chainKey}: \`${ws}\`,`;
+    ws.on('error', (error: Error) => {
+      console.error(
+        `WebSocket ${chainKey} connection to ${endpoint} failed`,
+        error,
+      );
+      ws.close();
+      reject(error);
+    });
+
+    ws.on('open', () => {
+      console.log(
+        `WebSocket ${chainKey} connection to ${endpoint} successful.`,
+      );
+      ws.close();
+      resolve(true);
+    });
+  });
+}
+
+async function checkWebSocketEndpoints(endpoints: ChainEndpoint[]): Promise<{
+  successfulEndpoints: { endpoint: ChainEndpoint; isAlive: boolean }[];
+  failedEndpoints: { endpoint: ChainEndpoint; error: string }[];
+}> {
+  console.log('Checking WebSocket endpoints...');
+  const successfulEndpoints: { endpoint: ChainEndpoint; isAlive: boolean }[] =
+    [];
+  const failedEndpoints: { endpoint: ChainEndpoint; error: string }[] = [];
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const endpoint of endpoints) {
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      const isAlive = await checkIsWebSocketAlive(endpoint);
+      successfulEndpoints.push({ endpoint, isAlive });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      failedEndpoints.push({ endpoint, error: errorMessage });
+      console.error(`Error checking ${endpoint.chainKey}: ${errorMessage}`);
     }
+  }
+
+  console.log('Finished checking all endpoints.');
+  return { failedEndpoints, successfulEndpoints };
+}
+
+function getChainsAndEndpoints(includeTestChains: boolean) {
+  const filteredChainList = includeTestChains
+    ? chainsList
+    : chainsList.filter((chain) => !chain.isTestChain);
+
+  const websocketEndpoints = filteredChainList.flatMap(({ key, ws }) => {
+    if (Array.isArray(ws)) {
+      return ws.map((endpoint) => ({
+        chainKey: key,
+        ws: endpoint,
+      }));
+    }
+    return { chainKey: key, ws };
   });
 
-  if (output) {
-    const text = `The following websocket endpoints from the XCM integrations in the dapp are not working, please review them: ${output}`;
+  return websocketEndpoints;
+}
 
+async function main() {
+  console.log('Starting main function...');
+  const { includeTestChains, webhookUrl } = processArgs();
+
+  const websocketEndpoints = getChainsAndEndpoints(includeTestChains);
+
+  if (includeTestChains) {
+    console.log(
+      'Checking the endpoints of all chains, including test chains...',
+    );
+  }
+
+  console.log('About to check WebSocket endpoints...');
+  const { successfulEndpoints, failedEndpoints } =
+    await checkWebSocketEndpoints(websocketEndpoints);
+  console.log('Finished checking WebSocket endpoints.');
+
+  console.log('\nSummary:');
+  console.log(`Working endpoints: ${successfulEndpoints.length}`);
+  console.log(`Non-working endpoints: ${failedEndpoints.length}`);
+
+  if (failedEndpoints.length > 0) {
+    const errors = failedEndpoints
+      .map(({ endpoint }) => `${endpoint.chainKey}: ${endpoint.ws}`)
+      .join('\n');
+    const text = `The following websocket endpoints from the XCM integrations in the dapp are not working, please review them: \`\`\`${errors}\`\`\``;
     console.log(text);
     if (webhookUrl) {
-      await webhook.send({
-        text,
-      });
+      const webhook = new IncomingWebhook(webhookUrl);
+      await webhook.send({ text });
     } else {
       console.warn('Slack webhook not detected, notification not sent');
     }
+  } else {
+    console.log('All checked endpoints are working.');
   }
+}
+
+main().catch((error) => {
+  console.error('An error occurred in the main function:', error);
 });

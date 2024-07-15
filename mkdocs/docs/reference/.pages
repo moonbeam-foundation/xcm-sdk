@@ -1,0 +1,3 @@
+nav:
+ - 'Types and Interfaces': 'interfaces.md'
+ - 'Methods': 'methods.md'

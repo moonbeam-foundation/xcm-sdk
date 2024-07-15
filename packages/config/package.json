@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-config",
-  "version": "2.4.3",
+  "version": "2.4.5",
   "description": "All necessary configuration to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
   "scripts": {
     "build": "tsup",
@@ -49,12 +49,12 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "@moonbeam-network/xcm-builder": "2.3.2",
-    "@moonbeam-network/xcm-types": "2.2.3"
+    "@moonbeam-network/xcm-builder": "2.3.3",
+    "@moonbeam-network/xcm-types": "2.2.4"
   },
   "peerDependencies": {
-    "@polkadot/types": "^12.1.1",
-    "@polkadot/util": "^12.6.2",
-    "@polkadot/util-crypto": "^12.6.2"
+    "@polkadot/types": "^12.2.1",
+    "@polkadot/util": "^13.0.2",
+    "@polkadot/util-crypto": "^13.0.2"
   }
 }
