@@ -1615,6 +1615,7 @@ export const peaqEvmAlphanet = new EvmParachain({
       address: '0xFfFfFffF000000000000000000000000000003e8',
       decimals: 18,
       ids: {
+        id: '0xFfFfFffF000000000000000000000000000003e8',
         minId: 1000,
       },
     }),
@@ -1654,6 +1655,7 @@ export const peaqEvm = new EvmParachain({
       address: '0xFfFfFffF000000000000000000000000000003e8',
       decimals: 18,
       ids: {
+        id: '0xFfFfFffF000000000000000000000000000003e8',
         minId: 1000,
       },
     }),
@@ -1661,6 +1663,7 @@ export const peaqEvm = new EvmParachain({
       address: '0xFffFffFF000000000000000000000000000003E9',
       decimals: 6,
       ids: {
+        id: '0xFffFffFF000000000000000000000000000003E9',
         minId: 1001,
       },
     }),
@@ -1668,6 +1671,7 @@ export const peaqEvm = new EvmParachain({
       address: '0xFFFfFfFf000000000000000000000000000003ea',
       decimals: 18,
       ids: {
+        id: '0xFFFfFfFf000000000000000000000000000003ea',
         minId: 1002,
       },
     }),
@@ -1675,6 +1679,7 @@ export const peaqEvm = new EvmParachain({
       address: '0xfffFFFFF000000000000000000000000000003eb',
       decimals: 8,
       ids: {
+        id: '0xfffFFFFF000000000000000000000000000003eb',
         minId: 1003,
       },
     }),
@@ -1682,6 +1687,7 @@ export const peaqEvm = new EvmParachain({
       address: '0xfFffFFFF000000000000000000000000000003Ec',
       decimals: 18,
       ids: {
+        id: '0xfFffFFFF000000000000000000000000000003Ec',
         minId: 1004,
       },
     }),
@@ -1689,6 +1695,7 @@ export const peaqEvm = new EvmParachain({
       address: '0xfFffffFF000000000000000000000000000003Ed',
       decimals: 6,
       ids: {
+        id: '0xfFffffFF000000000000000000000000000003Ed',
         minId: 1005,
       },
     }),

@@ -84,7 +84,7 @@ export async function getSourceData({
     asset: asset.address || asset.getAssetId(),
     destination: destination.chain,
     fee: destinationFee.amount,
-    feeAsset: feeAsset.address || feeAsset.getAssetId(),
+    feeAsset: destinationFee.address || destinationFee.getAssetId(),
   });
 
   const fee = await getFee({
