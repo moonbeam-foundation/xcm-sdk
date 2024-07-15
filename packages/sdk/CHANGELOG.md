@@ -1,5 +1,21 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.4.5
+
+### Patch Changes
+
+- [#297](https://github.com/moonbeam-foundation/xcm-sdk/pull/297) [`b6f7fef`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6f7fef640aa442b1e99ce930a25fd0dd94cd8bf) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix script to check WS endpoints
+
+- [#298](https://github.com/moonbeam-foundation/xcm-sdk/pull/298) [`308260e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/308260e1f87b683effe9c04d1d61422d51b37eaf) Thanks [@Rihyx](https://github.com/Rihyx)! - Update minor and patch dependencies
+
+- [#295](https://github.com/moonbeam-foundation/xcm-sdk/pull/295) [`0750524`](https://github.com/moonbeam-foundation/xcm-sdk/commit/075052401d3657476d32246e8ba57d6038504582) Thanks [@Rihyx](https://github.com/Rihyx)! - fix acceptance tests
+
+- Updated dependencies [[`b6f7fef`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6f7fef640aa442b1e99ce930a25fd0dd94cd8bf), [`308260e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/308260e1f87b683effe9c04d1d61422d51b37eaf), [`a98f1c0`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a98f1c0dc8619fb297bdc6257d9eb258b21ddabd)]:
+  - @moonbeam-network/xcm-builder@2.3.3
+  - @moonbeam-network/xcm-config@2.4.5
+  - @moonbeam-network/xcm-types@2.2.4
+  - @moonbeam-network/xcm-utils@2.1.2
+
 ## 2.4.4
 
 ### Patch Changes
