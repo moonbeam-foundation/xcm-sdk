@@ -33,13 +33,13 @@ export function evm() {
 
 function erc20(): BalanceConfigBuilder {
   return {
-    build: ({ address, constractAddress }) => {
-      if (!constractAddress || !isString(constractAddress)) {
-        throw new Error(`Invalid contract address: ${constractAddress}`);
+    build: ({ address, contractAddress }) => {
+      if (!contractAddress || !isString(contractAddress)) {
+        throw new Error(`Invalid contract address: ${contractAddress}`);
       }
 
       return new ContractConfig({
-        address: constractAddress,
+        address: contractAddress,
         args: [address],
         func: 'balanceOf',
         module: 'Erc20',

@@ -27,7 +27,7 @@ export async function getBalance({
   const cfg = builder.build({
     address,
     asset: asset.getBalanceAssetId(),
-    constractAddress: asset.address,
+    contractAddress: asset.address,
   });
   const amount = AssetAmount.fromChainAsset(asset, { amount: 0n });
 
