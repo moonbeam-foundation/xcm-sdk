@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
-  "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
+  "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
   "files": [
     "build"
   ],
@@ -52,6 +52,6 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "viem": "^2.13.7"
+    "viem": "^2.17.4"
   }
 }
