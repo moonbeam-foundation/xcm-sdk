@@ -3,7 +3,7 @@
   "author": "moonbeam-foundation",
   "license": "MIT",
   "private": true,
-  "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
+  "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
