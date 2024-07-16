@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
-  "homepage": "https://docs.moonbeam.network/builders/xcm/xcm-sdk/xcm-sdk/",
+  "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
   "files": [
     "build"
   ],
