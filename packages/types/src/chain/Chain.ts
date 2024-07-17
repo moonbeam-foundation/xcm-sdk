@@ -1,6 +1,5 @@
 import { Asset, AssetAmount, ChainAsset } from '../asset';
-import { ChainType, Ecosystem } from './Chain.interfaces';
-import type { EvmParachain, Parachain } from './parachain';
+import { Ecosystem } from './Chain.interfaces';
 
 export interface ChainConstructorParams {
   assets: Map<string, ChainAsset> | ChainAsset[];
@@ -10,7 +9,6 @@ export interface ChainConstructorParams {
   key: string;
   name: string;
   nativeAsset: Asset;
-  type: ChainType;
 }
 
 export abstract class Chain {
@@ -28,8 +26,6 @@ export abstract class Chain {
 
   readonly #nativeAsset: Asset;
 
-  readonly type: ChainType;
-
   constructor({
     assets,
     ecosystem,
@@ -38,7 +34,6 @@ export abstract class Chain {
     key,
     name,
     nativeAsset,
-    type,
   }: ChainConstructorParams) {
     this.assets =
       assets instanceof Map
@@ -50,7 +45,6 @@ export abstract class Chain {
     this.key = key;
     this.name = name;
     this.#nativeAsset = nativeAsset;
-    this.type = type;
   }
 
   get nativeAsset(): ChainAsset {
@@ -68,13 +62,5 @@ export abstract class Chain {
     }
 
     return chainAsset;
-  }
-
-  isParachain(): this is Parachain {
-    return this.type === ChainType.Parachain;
-  }
-
-  isEvmParachain(): this is EvmParachain {
-    return this.type === ChainType.EvmParachain;
   }
 }

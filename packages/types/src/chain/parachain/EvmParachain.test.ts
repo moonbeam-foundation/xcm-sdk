@@ -3,20 +3,18 @@ import { describe, expect, it } from 'vitest';
 
 import { Ecosystem } from '../Chain.interfaces';
 import { EvmParachain } from './EvmParachain';
+import { Asset } from '../../asset';
 
 describe('evmParachain', () => {
   const parachain = new EvmParachain({
+    assets: [],
     ecosystem: Ecosystem.Polkadot,
     genesisHash:
       '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
     id: 1284,
     key: 'moonbeam',
     name: 'Moonbeam',
-    nativeCurrency: {
-      decimals: 18,
-      name: 'Glimmer',
-      symbol: 'GLMR',
-    },
+    nativeAsset: new Asset({ key: 'glmr', originSymbol: 'GLMR' }),
     parachainId: 2004,
     rpc: 'https://rpc.api.moonbeam.network',
     ss58Format: 1284,
