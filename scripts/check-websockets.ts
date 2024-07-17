@@ -114,7 +114,7 @@ async function sendNotification(
   chainsToReview: string[],
   webhookUrl: string | undefined,
 ) {
-  const text = `All the websocket endpoints available to the XCM integrations in the dapp for \`\`\`${chainsToReview.join(', ')}\`\`\` are not working, please review them`;
+  const text = `All the websocket endpoints available to the XCM integrations in the dapp for \`${chainsToReview.join(', ')}\` are not working, please review them`;
   console.log(text);
 
   if (webhookUrl) {
