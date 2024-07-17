@@ -5,6 +5,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
+import { getPolkadotAppsUrl } from '@moonbeam-network/xcm-utils';
 import {
   aca,
   agng,
@@ -499,6 +500,7 @@ export const hydration = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
+  explorer: 'https://hydradx.subscan.io',
   genesisHash:
     '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
   key: 'hydration',
@@ -548,6 +550,9 @@ export const hydrationAlphanet = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: getPolkadotAppsUrl(
+    'wss://hydradx-moonbase-rpc.play.hydration.cloud',
+  ),
   genesisHash:
     '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
   isTestChain: true,
@@ -1537,6 +1542,7 @@ export const peaqAlphanet = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   isTestChain: true,
@@ -1600,6 +1606,7 @@ export const peaqChain = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
+  explorer: getPolkadotAppsUrl('wss://peaq.api.onfinality.io/public-ws'),
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   isTestChain: false,
@@ -1637,6 +1644,7 @@ export const peaqEvmAlphanet = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   id: 9990,
@@ -1709,6 +1717,7 @@ export const peaqEvm = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.Polkadot,
+  explorer: `https://peaq.subscan.io`,
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   id: 3338,

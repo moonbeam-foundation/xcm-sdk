@@ -5,6 +5,7 @@ import type { EvmParachain, Parachain } from './parachain';
 export interface ChainConstructorParams {
   assets: Map<string, ChainAsset> | ChainAsset[];
   ecosystem?: Ecosystem;
+  explorer?: string;
   isTestChain?: boolean;
   key: string;
   name: string;
@@ -16,6 +17,8 @@ export abstract class Chain {
   readonly assets: Map<string, ChainAsset>;
 
   readonly ecosystem?: Ecosystem;
+
+  readonly explorer?: string;
 
   readonly isTestChain: boolean;
 
@@ -30,6 +33,7 @@ export abstract class Chain {
   constructor({
     assets,
     ecosystem,
+    explorer,
     isTestChain = false,
     key,
     name,
@@ -41,6 +45,7 @@ export abstract class Chain {
         ? assets
         : new Map(assets?.map((data) => [data.key, data]));
     this.ecosystem = ecosystem;
+    this.explorer = explorer;
     this.isTestChain = isTestChain;
     this.key = key;
     this.name = name;
