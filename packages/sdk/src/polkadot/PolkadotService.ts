@@ -4,7 +4,7 @@ import {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { IConfigService, eq, equilibrium } from '@moonbeam-network/xcm-config';
+import { IConfigService } from '@moonbeam-network/xcm-config';
 import {
   AnyParachain,
   Asset,
@@ -64,12 +64,6 @@ export class PolkadotService {
   get asset(): Asset {
     const symbol = this.api.registry.chainTokens.at(0);
     const key = symbol?.toString().toLowerCase();
-
-    // TODO: Remove this once Equilibrium is updated
-    // or find better way if issue appears on other chains
-    if (key === 'token' && [equilibrium.key].includes(this.chain.key)) {
-      return eq;
-    }
 
     if (!key) {
       throw new Error('No native symbol key found');

@@ -10,8 +10,6 @@ import {
   dai,
   ded,
   dot,
-  eq,
-  eqd,
   fil,
   glmr,
   hdx,
@@ -48,7 +46,6 @@ import {
   bifrostPolkadot,
   centrifuge,
   darwinia,
-  equilibrium,
   hydration,
   interlay,
   mantaParachain,
@@ -274,36 +271,6 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.052,
         asset: dot,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: eq,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: equilibrium,
-      destinationFee: {
-        amount: 400,
-        asset: eq,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: eqd,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: equilibrium,
-      destinationFee: {
-        amount: 0.15,
-        asset: eqd,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
