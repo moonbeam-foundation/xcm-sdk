@@ -83,15 +83,12 @@ function filterChainList(includeTestChains: boolean): AnyChain[] {
 function getChainsAndEndpoints(includeTestChains: boolean) {
   const filteredChainList = filterChainList(includeTestChains);
 
-  const websocketEndpoints = filteredChainList.flatMap(({ key, ws }) => {
-    if (Array.isArray(ws)) {
-      return ws.map((endpoint) => ({
-        chainKey: key,
-        ws: endpoint,
-      }));
-    }
-    return { chainKey: key, ws };
-  });
+  const websocketEndpoints = filteredChainList.flatMap(({ key, ws }) =>
+    ws.map((endpoint) => ({
+      chainKey: key,
+      ws: endpoint,
+    })),
+  );
 
   return websocketEndpoints;
 }
