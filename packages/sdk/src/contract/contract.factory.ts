@@ -1,5 +1,5 @@
 import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { AnyChain } from '@moonbeam-network/xcm-types';
+import { AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
   BalanceContractInterface,
   TransferContractInterface,
@@ -7,11 +7,11 @@ import {
 import { Erc20, Xtokens } from './contracts';
 
 export function createContract(
-  chain: AnyChain,
+  chain: AnyParachain,
   config: ContractConfig,
 ): TransferContractInterface | BalanceContractInterface {
-  if (!chain.isEvmParachain()) {
-    throw new Error('Chain is not an EVM parachain');
+  if (!EvmParachain.is(chain)) {
+    throw new Error('Chain is not an EvmParachain');
   }
 
   if (config.module === 'Erc20') {

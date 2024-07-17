@@ -5,7 +5,7 @@ import { Ecosystem } from '../Chain.interfaces';
 import { EvmParachain } from './EvmParachain';
 import { Asset } from '../../asset';
 
-describe('evmParachain', () => {
+describe('EvmParachain', () => {
   const parachain = new EvmParachain({
     assets: [],
     ecosystem: Ecosystem.Polkadot,
@@ -21,15 +21,9 @@ describe('evmParachain', () => {
     ws: 'wss://wss.api.moonbeam.network',
   });
 
-  describe('isEvmParachain', () => {
+  describe('is', () => {
     it('should return true', () => {
-      expect(parachain.isEvmParachain()).toBe(true);
-    });
-  });
-
-  describe('isParachain', () => {
-    it('should return false', () => {
-      expect(parachain.isParachain()).toBe(false);
+      expect(EvmParachain.is(parachain)).toBe(true);
     });
   });
 });

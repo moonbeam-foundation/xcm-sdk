@@ -5,7 +5,7 @@ import { Ecosystem } from '../Chain.interfaces';
 import { Parachain } from './Parachain';
 import { Asset } from '../../asset';
 
-describe('parachain', () => {
+describe('Parachain', () => {
   const parachain = new Parachain({
     assets: [],
     ecosystem: Ecosystem.Polkadot,
@@ -19,15 +19,9 @@ describe('parachain', () => {
     ws: 'wss://rpc.polkadot.io',
   });
 
-  describe('isParachain', () => {
+  describe('is', () => {
     it('should return true', () => {
-      expect(parachain.isParachain()).toBe(true);
-    });
-  });
-
-  describe('isEvmParachain', () => {
-    it('should return false', () => {
-      expect(parachain.isEvmParachain()).toBe(false);
+      expect(Parachain.is(parachain)).toBe(true);
     });
   });
 });
