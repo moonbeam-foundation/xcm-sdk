@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { IConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
-import { AssetAmount } from '@moonbeam-network/xcm-types';
-import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
+import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
+import { AssetAmount } from '@moonbeam-network/xcm-types';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import {
@@ -28,10 +28,10 @@ export async function getTransferData({
   sourceAddress,
   transferConfig,
 }: GetTransferDataParams): Promise<TransferData> {
-  const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti(
-    [transferConfig.destination.chain, transferConfig.source.chain],
-    configService,
-  );
+  const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
+    transferConfig.destination.chain,
+    transferConfig.source.chain,
+  ]);
 
   const destination = await getDestinationData({
     destinationAddress,
@@ -39,10 +39,14 @@ export async function getTransferData({
     transferConfig,
   });
 
-  const destinationFee = await getDestinationFeeWithSourceDecimals(
-    srcPolkadot,
+  // Here we need to convert the fee on the destination chain to an asset on source chain.
+  const destinationFeeAsset = transferConfig.source.chain.getChainAsset(
     destination.fee,
   );
+  const destinationFee = AssetAmount.fromChainAsset(destinationFeeAsset, {
+    amount: destination.fee.convertDecimals(destinationFeeAsset.decimals)
+      .amount,
+  });
 
   const source = await getSourceData({
     destinationAddress,
@@ -92,26 +96,27 @@ export async function getTransferData({
     async transfer(amount, signers: Partial<Signers>): Promise<string> {
       const bigintAmount = toBigInt(amount, source.balance.decimals);
       const {
-        asset,
         source: { chain, config },
       } = transferConfig;
+      const asset = chain.getChainAsset(transferConfig.asset);
+      const feeAsset = chain.getChainAsset(destinationFee.key);
 
       const contract = config.contract?.build({
         address: destinationAddress,
         amount: bigintAmount,
-        asset: chain.getAssetId(asset),
+        asset: asset.address || asset.getAssetId(),
         destination: destination.chain,
         fee: destinationFee.amount,
-        feeAsset: chain.getAssetId(destinationFee),
+        feeAsset: feeAsset.address || feeAsset.getAssetId(),
       });
       const extrinsic = config.extrinsic?.build({
         address: destinationAddress,
         amount: bigintAmount,
-        asset: chain.getAssetId(asset),
+        asset: asset.getAssetId(),
         destination: destination.chain,
         fee: destinationFee.amount,
-        feeAsset: chain.getAssetId(destinationFee),
-        palletInstance: chain.getAssetPalletInstance(asset),
+        feeAsset: feeAsset.getAssetId(),
+        palletInstance: asset.getAssetPalletInstance(),
         source: chain,
       });
 
@@ -161,25 +166,4 @@ function getMin({
   return balance.copyWith({
     amount: BigInt(result.toFixed()),
   });
-}
-
-export async function getDestinationFeeWithSourceDecimals(
-  sourcePolkadot: PolkadotService,
-  destinationFee: AssetAmount,
-): Promise<AssetAmount> {
-  const destinationFeeDecimals =
-    await sourcePolkadot.getAssetDecimals(destinationFee);
-  const destinationFeeAsset =
-    destinationFee.decimals === destinationFeeDecimals
-      ? destinationFee
-      : destinationFee.copyWith({
-          amount: convertDecimals(
-            destinationFee.amount,
-            destinationFee.decimals,
-            destinationFeeDecimals,
-          ),
-          decimals: destinationFeeDecimals,
-        });
-
-  return destinationFeeAsset;
 }

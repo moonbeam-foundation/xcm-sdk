@@ -53,7 +53,7 @@ You can pass, for example, a [browser extension wallet as a signer into Ethers](
 To create an EVM signer and a Polkadot signer, you can refer to the following sections.
 
 !!! warning
-    **Never store your private key or mnemonic in a JavaScript or TypeScript file.**
+**Never store your private key or mnemonic in a JavaScript or TypeScript file.**
 
 ### Create an EVM Signer {: #create-a-evm-signer }
 
@@ -212,7 +212,7 @@ If you want to pass in a browser extension wallet to viem, you can use the follo
     ```
 
 !!! note
-    --8<-- 'text/endpoint-setup.md'
+--8<-- 'text/endpoint-setup.md'
 
 ### Create a Polkadot Signer {: #create-a-polkadot-signer }
 
@@ -237,7 +237,7 @@ createPolkadotSigner();
 ```
 
 !!! note
-    In the above `INSERT_PRIVATE_KEY` field, you can specify a seed phrase instead of a private key.
+In the above `INSERT_PRIVATE_KEY` field, you can specify a seed phrase instead of a private key.
 
 ## Get Asset and Chain Data {: #asset-chain-data }
 
@@ -398,7 +398,7 @@ fromPolkadot();
 ```
 
 !!! note
-    For more information on each of the `Sdk().assets()` builder functions, including the parameters and returned data, please refer to the [XCM SDK Reference](./reference/methods.md#build-the-transfer-data-starting-with-assets){target=\_blank}.
+For more information on each of the `Sdk().assets()` builder functions, including the parameters and returned data, please refer to the [XCM SDK Reference](./reference/methods.md#build-the-transfer-data-starting-with-assets){target=\_blank}.
 
 If you don't need any of the asset or chain information, you can use the `getTransferData` function:
 
@@ -423,7 +423,7 @@ fromPolkadot();
 ```
 
 !!! note
-    For more information on the `Sdk().getTransferData()` function, including the parameters and returned data, please refer to the [XCM SDK Reference](./reference/methods.md#the-get-transfer-data-method){target=\_blank}.
+For more information on the `Sdk().getTransferData()` function, including the parameters and returned data, please refer to the [XCM SDK Reference](./reference/methods.md#the-get-transfer-data-method){target=\_blank}.
 
 As previously mentioned, the same output will be generated regardless of which method you use to build the transfer data.
 
@@ -589,7 +589,7 @@ console.log(`${data.source.chain.name} tx hash: ${hash}`);
 As the above snippet shows, the `transfer` function returns a transaction hash on the source chain.
 
 !!! note
-    For more information on the parameters and returned data for `transfer`, please refer to the [XCM SDK Reference](./reference/methods.md#the-transfer-method){target=\_blank}.
+For more information on the parameters and returned data for `transfer`, please refer to the [XCM SDK Reference](./reference/methods.md#the-transfer-method){target=\_blank}.
 
 ## Swap an Asset {: #swap-an-asset}
 
@@ -745,7 +745,7 @@ The `swap` function returns the transfer data with the original source chain and
     ```
 
 !!! note
-    For more information on the parameters and returned data for `swap`, please refer to the [XCM SDK Reference](./reference/methods.md#the-swap-method){target=\_blank}.
+For more information on the parameters and returned data for `swap`, please refer to the [XCM SDK Reference](./reference/methods.md#the-swap-method){target=\_blank}.
 
 ## Get an Estimate of the Asset to Be Received on the Destination Chain {: #get-estimate }
 
@@ -786,7 +786,7 @@ The `getEstimate` function returns the estimated amount along with information o
     ```
 
 !!! note
-    For more information on the parameters and returned data for `getEstimate`, please refer to the [XCM SDK Reference](./reference/methods.md#the-get-estimate-method){target=\_blank}.
+For more information on the parameters and returned data for `getEstimate`, please refer to the [XCM SDK Reference](./reference/methods.md#the-get-estimate-method){target=\_blank}.
 
 ## Get Transfer Minimum and Maximum Amounts {: #transfer-min-max-amounts }
 
@@ -838,7 +838,7 @@ The `min` and `max` properties return the minimum and maximum amount of the asse
     ```
 
 !!! note
-    For more information on assets and asset amounts, please refer to the [XCM SDK Reference](./reference/interfaces.md#assets){target=\_blank}.
+For more information on assets and asset amounts, please refer to the [XCM SDK Reference](./reference/interfaces.md#assets){target=\_blank}.
 
 ## Get Transfer Fees {: #get-transfer-fees }
 
@@ -887,6 +887,6 @@ The `fee` property returns the fees to be paid along with information on the ass
     ```
 
 !!! note
-    For more information on assets and asset amounts, including fees, please refer to the [XCM SDK Reference](./reference/interfaces.md#assets){target=\_blank}.
+For more information on assets and asset amounts, including fees, please refer to the [XCM SDK Reference](./reference/interfaces.md#assets){target=\_blank}.
 
 --8<-- 'text/third-party-content.md'

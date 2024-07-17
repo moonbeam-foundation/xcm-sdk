@@ -2,10 +2,9 @@
 import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
-import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
-import { getBalance, getDecimals, getMin } from './getTransferData.utils';
+import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
   transferConfig: TransferConfig;
@@ -19,77 +18,63 @@ export async function getDestinationData({
   polkadot,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
   const {
-    asset,
     destination: { chain, config },
   } = transferConfig;
-
-  const zeroAmount = AssetAmount.fromAsset(asset, {
-    amount: 0n,
-    decimals: await getDecimals({
-      address: destinationAddress,
-      chain,
-      config,
-      polkadot,
-    }),
-  });
-
+  const asset = chain.getChainAsset(config.asset);
   const balance = await getBalance({
     address: destinationAddress,
+    asset,
+    builder: config.balance,
     chain,
-    config,
-    decimals: zeroAmount.decimals,
     polkadot,
   });
   const min = await getMin(config, polkadot);
-
-  const balanceAmount = zeroAmount.copyWith({ amount: balance });
-  const { existentialDeposit } = polkadot;
-
-  const feeAmount = await getFee({
+  const fee = await getFee({
     address: destinationAddress,
-    config: transferConfig,
     polkadot,
+    transferConfig,
   });
-  const minAmount = zeroAmount.copyWith({ amount: min });
+
   return {
-    balance: balanceAmount,
+    balance,
     chain,
-    existentialDeposit,
-    fee: feeAmount,
-    min: minAmount,
+    existentialDeposit: polkadot.existentialDeposit,
+    fee,
+    min,
   };
 }
 
 export interface GetFeeParams {
   address: string;
-  config: TransferConfig;
+  transferConfig: TransferConfig;
   polkadot: PolkadotService;
 }
 
 export async function getFee({
-  config,
+  transferConfig,
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
-  const { amount, asset } = config.source.config.destinationFee;
-  // TODO we have to consider correctly here when an asset is ERC20 to get it from contract
-  const decimals = await polkadot.getAssetDecimals(asset);
-  const zeroAmount = AssetAmount.fromAsset(asset, {
-    amount: 0n,
-    decimals,
-  });
+  // TODO: we have to consider correctly here when an asset is ERC20 to get it from contract
+  const { amount } = transferConfig.source.config.destinationFee;
+  const asset = AssetAmount.fromChainAsset(
+    transferConfig.destination.chain.getChainAsset(
+      transferConfig.source.config.destinationFee.asset,
+    ),
+    { amount: 0n },
+  );
 
   if (Number.isFinite(amount)) {
-    return zeroAmount.copyWith({
-      amount: toBigInt(amount as number, decimals),
+    return asset.copyWith({
+      amount: amount as number,
     });
   }
 
   const cfg = (amount as FeeConfigBuilder).build({
     api: polkadot.api,
-    asset: polkadot.chain.getAssetId(asset),
+    asset: asset.getAssetId(),
   });
 
-  return zeroAmount.copyWith({
+  return asset.copyWith({
     amount: await cfg.call(),
   });
 }

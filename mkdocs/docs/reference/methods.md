@@ -990,7 +990,7 @@ The `AssetAmount` class contains the following utility functions.
 `fromAsset()` - Creates an [`AssetAmount`](./interfaces.md#the-asset-amount-object) instance from an [`Asset`](./interfaces.md#the-asset-object) and some additional parameters.
 
 !!! note
-    To use the `fromAsset` method, you'll need to import it from the [xcm-types package](https://github.com/moonbeam-foundation/xcm-sdk/tree/main/packages/types){target=\_blank}. To install the xcm-types package, run the following:
+To use the `fromAsset` method, you'll need to import it from the [xcm-types package](https://github.com/moonbeam-foundation/xcm-sdk/tree/main/packages/types){target=\_blank}. To install the xcm-types package, run the following:
 
     ```bash
     npm i @moonbeam-network/xcm-types
