@@ -1305,7 +1305,6 @@ export const nodle = new Parachain({
   ss58Format: 37,
   ws: [
     'wss://nodle-rpc.dwellir.com',
-    'wss://nodle-rpc.dwellir.com',
     'wss://nodle-parachain.api.onfinality.io/public-ws',
   ],
 });
