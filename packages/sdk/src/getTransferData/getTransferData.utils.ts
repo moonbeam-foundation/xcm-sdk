@@ -3,7 +3,7 @@ import {
   CallType,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '@moonbeam-network/xcm-config';
+import { AssetTransferConfig } from '@moonbeam-network/xcm-config';
 import { AnyChain, AssetAmount, ChainAsset } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import { BalanceContractInterface, createContract } from '../contract';
@@ -47,7 +47,7 @@ export async function getBalance({
 }
 
 export async function getMin(
-  config: AssetConfig,
+  config: AssetTransferConfig,
   polkadot: PolkadotService,
 ): Promise<AssetAmount> {
   const asset = AssetAmount.fromChainAsset(
