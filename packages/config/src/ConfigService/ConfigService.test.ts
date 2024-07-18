@@ -21,8 +21,8 @@ import {
 } from '../chains';
 import { ConfigService } from './ConfigService';
 
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
 const TEST_CHAIN = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
@@ -158,7 +158,7 @@ describe('config service', () => {
 
   describe('updateChainConfig', () => {
     it('should update existing chain config', () => {
-      const assetConfig = new AssetConfig({
+      const assetConfig = new AssetTransferConfig({
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destination: moonbeam,
@@ -170,7 +170,7 @@ describe('config service', () => {
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
 
-      const chainConfig = new ChainConfig({
+      const chainConfig = new ChainRoutesConfig({
         assets: [assetConfig],
         chain: hydration,
       });
@@ -185,7 +185,7 @@ describe('config service', () => {
     it('should create new chain config', () => {
       configService.updateChain(TEST_CHAIN);
 
-      const assetConfig = new AssetConfig({
+      const assetConfig = new AssetTransferConfig({
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destination: moonbeam,
@@ -197,7 +197,7 @@ describe('config service', () => {
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
 
-      const chainConfig = new ChainConfig({
+      const chainConfig = new ChainRoutesConfig({
         assets: [assetConfig],
         chain: TEST_CHAIN,
       });

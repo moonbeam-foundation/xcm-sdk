@@ -5,13 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { dev, ftmwh, hdx, usdcwh } from '../assets';
 import { hydrationAlphanet, moonbaseAlpha } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
 // FIXME: has to be verified
-export const hydrationAlphanetConfig = new ChainConfig({
+export const hydrationAlphanetConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: hdx,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
@@ -22,7 +22,7 @@ export const hydrationAlphanetConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dev,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
@@ -33,7 +33,7 @@ export const hydrationAlphanetConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdcwh,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
@@ -48,7 +48,7 @@ export const hydrationAlphanetConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ftmwh,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,

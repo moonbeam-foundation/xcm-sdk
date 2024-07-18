@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { teer } from '../assets';
 import { integritee, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const integriteeConfig = new ChainConfig({
+export const integriteeConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: teer,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,

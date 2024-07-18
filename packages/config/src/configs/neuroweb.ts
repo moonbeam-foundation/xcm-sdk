@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { neuro } from '../assets';
 import { moonbeam, neuroweb } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const neurowebConfig = new ChainConfig({
+export const neurowebConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: neuro,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,

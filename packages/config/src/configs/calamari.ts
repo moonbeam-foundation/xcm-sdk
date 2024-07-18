@@ -6,12 +6,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { kma, movr } from '../assets';
 import { calamari, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const calamariConfig = new ChainConfig({
+export const calamariConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: kma,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -22,7 +22,7 @@ export const calamariConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: movr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,

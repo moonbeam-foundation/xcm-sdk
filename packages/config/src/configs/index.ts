@@ -1,4 +1,4 @@
-import { ChainConfig } from '../types/ChainConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
 import { acalaConfig } from './acala';
 import { alphanetAssetHubConfig } from './alphanetAssetHub';
@@ -52,7 +52,7 @@ import { turingAlphanetConfig } from './turingAlphanet';
 import { uniqueAlphaConfig } from './uniqueAlpha';
 import { zeitgeistConfig } from './zeitgeist';
 
-export const chainsConfigList: ChainConfig[] = [
+export const chainsConfigList: ChainRoutesConfig[] = [
   acalaConfig,
   alphanetRelayConfig,
   astarConfig,
@@ -106,6 +106,6 @@ export const chainsConfigList: ChainConfig[] = [
   zeitgeistConfig,
 ];
 
-export const chainsConfigMap = new Map<string, ChainConfig>(
+export const chainsConfigMap = new Map<string, ChainRoutesConfig>(
   chainsConfigList.map((config) => [config.chain.key, config]),
 );

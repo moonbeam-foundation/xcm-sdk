@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { mgx, movr } from '../assets';
 import { mangataKusama, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const mangataKusamaConfig = new ChainConfig({
+export const mangataKusamaConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: mgx,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -21,7 +21,7 @@ export const mangataKusamaConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: movr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,

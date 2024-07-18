@@ -6,12 +6,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { aca, aseed, glmr, ldot } from '../assets';
 import { acala, moonbeam } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const acalaConfig = new ChainConfig({
+export const acalaConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: aca,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -22,7 +22,7 @@ export const acalaConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: aseed,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -38,7 +38,7 @@ export const acalaConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -54,7 +54,7 @@ export const acalaConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ldot,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,

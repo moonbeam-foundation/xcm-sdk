@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { ampe, dev } from '../assets';
 import { moonbaseAlpha, pendulumAlphanet } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const pendulumAlphanetConfig = new ChainConfig({
+export const pendulumAlphanetConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ampe,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
@@ -21,7 +21,7 @@ export const pendulumAlphanetConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dev,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,

@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { eq, eqd, glmr } from '../assets';
 import { equilibrium, moonbeam } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const equilibriumConfig = new ChainConfig({
+export const equilibriumConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: eq,
       balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       destination: moonbeam,
@@ -21,7 +21,7 @@ export const equilibriumConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().eqBalances().transferXcm(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: eqd,
       balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       destination: moonbeam,
@@ -36,7 +36,7 @@ export const equilibriumConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().accountEquilibrium(),
       destination: moonbeam,

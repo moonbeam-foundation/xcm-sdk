@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { glmr, para } from '../assets';
 import { moonbeam, parallel } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const parallelConfig = new ChainConfig({
+export const parallelConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: para,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -24,7 +24,7 @@ export const parallelConfig = new ChainConfig({
         .transferMultiAsset(parallel.parachainId)
         .X2(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,

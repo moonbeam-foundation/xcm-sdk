@@ -1,5 +1,5 @@
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
-import { AssetConfig } from '../types/AssetConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
 
 export interface IConfigService {
   getEcosystemAssets(ecosystem?: Ecosystem): Asset[];
@@ -16,5 +16,5 @@ export interface IConfigService {
     asset: Asset,
     source: AnyChain,
     destination: AnyChain,
-  ): AssetConfig;
+  ): AssetTransferConfig;
 }

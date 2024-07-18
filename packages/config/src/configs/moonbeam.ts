@@ -65,12 +65,12 @@ import {
   subsocial,
   zeitgeist,
 } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const moonbeamConfig = new ChainConfig({
+export const moonbeamConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -81,7 +81,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -92,7 +92,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -103,7 +103,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -114,7 +114,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -125,7 +125,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -136,7 +136,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -147,7 +147,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -158,7 +158,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -169,7 +169,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -180,7 +180,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -191,7 +191,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: aca,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -206,7 +206,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: astr,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -221,7 +221,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: aseed,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -236,7 +236,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: bnc,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -251,7 +251,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: cfg,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -266,7 +266,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dot,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -281,7 +281,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: eq,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -296,7 +296,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: eqd,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -311,7 +311,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ibtc,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -326,7 +326,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: intr,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -341,7 +341,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ldot,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -356,7 +356,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: manta,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -371,7 +371,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: nodl,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -386,7 +386,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: neuro,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -401,7 +401,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: para,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -416,7 +416,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: pen,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -431,7 +431,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: pha,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -446,7 +446,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ring,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -461,7 +461,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdt,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -476,7 +476,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -491,7 +491,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: pink,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -506,7 +506,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ded,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -521,7 +521,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: stink,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -536,7 +536,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: apillon,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -551,7 +551,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: hdx,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -566,7 +566,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dai,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -581,7 +581,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -596,7 +596,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -611,7 +611,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdtwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -626,7 +626,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vastr,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -641,7 +641,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vdot,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -656,7 +656,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vfil,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -671,7 +671,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vglmr,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -686,7 +686,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vmanta,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -701,7 +701,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: wbtc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -716,7 +716,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: weth,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -731,7 +731,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: fil,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -746,7 +746,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ztg,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -761,7 +761,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: sub,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -776,7 +776,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: bncs,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -791,7 +791,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -802,7 +802,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -817,7 +817,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdtwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -832,7 +832,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dai,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -847,7 +847,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: weth,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -862,7 +862,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: wbtc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -877,7 +877,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: peaq,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -892,7 +892,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -903,7 +903,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -918,7 +918,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdtwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -933,7 +933,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dai,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -948,7 +948,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: weth,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -963,7 +963,7 @@ export const moonbeamConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: wbtc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),

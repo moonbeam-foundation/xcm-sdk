@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { movr, sdn } from '../assets';
 import { moonriver, shiden } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const shidenConfig = new ChainConfig({
+export const shidenConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: sdn,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -24,7 +24,7 @@ export const shidenConfig = new ChainConfig({
         .transferMultiAsset(shiden.parachainId)
         .here(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: movr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,

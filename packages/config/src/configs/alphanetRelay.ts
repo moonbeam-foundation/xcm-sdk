@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { unit } from '../assets';
 import { alphanetRelay, moonbaseAlpha } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const alphanetRelayConfig = new ChainConfig({
+export const alphanetRelayConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: unit,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,

@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { glmr, ibtc, intr } from '../assets';
 import { interlay, moonbeam } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const interlayConfig = new ChainConfig({
+export const interlayConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: intr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -21,7 +21,7 @@ export const interlayConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ibtc,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -36,7 +36,7 @@ export const interlayConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,

@@ -7,7 +7,7 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
 
-export interface AssetConfigConstructorParams {
+export interface AssetTransferConfigConstructorParams {
   asset: Asset;
   balance: BalanceConfigBuilder;
   contract?: ContractConfigBuilder;
@@ -29,7 +29,7 @@ export interface FeeAssetConfig {
   extra?: number;
 }
 
-export class AssetConfig {
+export class AssetTransferConfig {
   readonly asset: Asset;
 
   readonly balance: BalanceConfigBuilder;
@@ -55,7 +55,7 @@ export class AssetConfig {
     extrinsic,
     fee,
     min,
-  }: AssetConfigConstructorParams) {
+  }: AssetTransferConfigConstructorParams) {
     this.asset = asset;
     this.balance = balance;
     this.contract = contract;

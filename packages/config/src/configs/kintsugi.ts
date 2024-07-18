@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { kbtc, kint } from '../assets';
 import { kintsugi, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const kintsugiConfig = new ChainConfig({
+export const kintsugiConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: kint,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -21,7 +21,7 @@ export const kintsugiConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: kbtc,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,

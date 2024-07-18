@@ -1,17 +1,17 @@
 import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
-import { AssetConfig } from './AssetConfig';
+import { AssetTransferConfig } from './AssetTransferConfig';
 
-export interface ChainConfigConstructorParams {
-  assets: AssetConfig[];
+export interface ChainRoutesConfigConstructorParams {
+  assets: AssetTransferConfig[];
   chain: AnyChain;
 }
 
-export class ChainConfig {
-  readonly #assets: Map<string, AssetConfig> = new Map();
+export class ChainRoutesConfig {
+  readonly #assets: Map<string, AssetTransferConfig> = new Map();
 
   readonly chain: AnyChain;
 
-  constructor({ assets, chain }: ChainConfigConstructorParams) {
+  constructor({ assets, chain }: ChainRoutesConfigConstructorParams) {
     this.chain = chain;
     this.#assets = new Map(
       assets.map((asset) => [
@@ -21,11 +21,11 @@ export class ChainConfig {
     );
   }
 
-  getAssetsConfigs(): AssetConfig[] {
+  getAssetsConfigs(): AssetTransferConfig[] {
     return Array.from(this.#assets.values());
   }
 
-  getAssetConfigs(asset: Asset): AssetConfig[] {
+  getAssetConfigs(asset: Asset): AssetTransferConfig[] {
     return this.getAssetsConfigs().filter(
       (assetConfig) => assetConfig.asset.key === asset.key,
     );
@@ -37,7 +37,10 @@ export class ChainConfig {
     );
   }
 
-  getAssetDestinationConfig(asset: Asset, destination: AnyChain): AssetConfig {
+  getAssetDestinationConfig(
+    asset: Asset,
+    destination: AnyChain,
+  ): AssetTransferConfig {
     const assetConfig = this.#assets.get(`${asset.key}-${destination.key}`);
 
     if (!assetConfig) {

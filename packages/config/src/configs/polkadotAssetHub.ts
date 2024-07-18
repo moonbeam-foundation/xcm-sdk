@@ -6,14 +6,14 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { apillon, ded, dot, pink, stink, usdc, usdt } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
 const extra = 0.036;
 
-export const polkadotAssetHubConfig = new ChainConfig({
+export const polkadotAssetHubConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdt,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -33,7 +33,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdc,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -53,7 +53,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: pink,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -73,7 +73,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: ded,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -93,7 +93,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: stink,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -113,7 +113,7 @@ export const polkadotAssetHubConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: apillon,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
