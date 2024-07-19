@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.1
+
+### Patch Changes
+
+- [#310](https://github.com/moonbeam-foundation/xcm-sdk/pull/310) [`301964f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/301964fc10d5bd1ffe7bd5e327309948de584b94) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove duplicated nodle endpoint
+
 ## 2.5.0
 
 ### Minor Changes
