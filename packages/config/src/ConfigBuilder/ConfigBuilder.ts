@@ -1,5 +1,5 @@
 /* eslint-disable sort-keys */
-import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
+import { AnyAsset, AnyChain, Ecosystem } from '@moonbeam-network/xcm-types';
 import { ConfigService, IConfigService } from '../ConfigService';
 import { TransferConfig } from './ConfigBuilder.interfaces';
 
@@ -11,7 +11,7 @@ export function ConfigBuilder(service?: IConfigService) {
 
       return {
         assets,
-        asset: (keyOrAsset: string | Asset) => {
+        asset: (keyOrAsset: string | AnyAsset) => {
           const asset = config.getAsset(keyOrAsset);
           const sourceChains = config.getSourceChains(asset, ecosystem);
 

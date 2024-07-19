@@ -1,3 +1,4 @@
 export * from './Asset';
-export * from './ChainAsset';
+export * from './Asset.interfaces';
 export * from './AssetAmount';
+export * from './ChainAsset';

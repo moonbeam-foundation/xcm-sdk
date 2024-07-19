@@ -36,6 +36,7 @@
   "exports": "./build/index.mjs",
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
-  "dependencies": {},
-  "peerDependencies": {}
+  "dependencies": {
+    "@moonbeam-network/xcm-types": "2.2.5"
+  }
 }

@@ -5,6 +5,7 @@ import {
   IConfigService,
 } from '@moonbeam-network/xcm-config';
 import {
+  AnyAsset,
   AnyChain,
   Asset,
   AssetAmount,
@@ -28,7 +29,7 @@ export function Sdk(options?: SdkOptions) {
 
       return {
         assets,
-        asset(keyOrAsset: string | Asset) {
+        asset(keyOrAsset: string | AnyAsset) {
           const { sourceChains, source } = asset(keyOrAsset);
 
           return {
