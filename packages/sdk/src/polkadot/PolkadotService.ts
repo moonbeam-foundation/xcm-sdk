@@ -1,15 +1,15 @@
 import '@polkadot/api-augment';
 
-import {
+import type {
   ExtrinsicConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { type AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
-import { ApiPromise } from '@polkadot/api';
+import type { ApiPromise } from '@polkadot/api';
 import type { Signer as PolkadotSigner } from '@polkadot/api/types';
-import { u128 } from '@polkadot/types';
-import { IKeyringPair } from '@polkadot/types/types';
+import type { u128 } from '@polkadot/types';
+import type { IKeyringPair } from '@polkadot/types/types';
 
 export class PolkadotService {
   readonly api: ApiPromise;

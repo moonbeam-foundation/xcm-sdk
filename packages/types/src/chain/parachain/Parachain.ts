@@ -6,7 +6,7 @@ export interface ParachainConstructorParams extends ChainConstructorParams {
   ss58Format: number;
   usesChainDecimals?: boolean;
   weight?: number;
-  ws: string | string[];
+  ws: string[];
 }
 
 export class Parachain extends Chain {
@@ -20,7 +20,7 @@ export class Parachain extends Chain {
 
   readonly weight: number | undefined;
 
-  readonly ws: string | string[];
+  readonly ws: string[];
 
   static is(obj: unknown): obj is Parachain {
     return obj instanceof Parachain;

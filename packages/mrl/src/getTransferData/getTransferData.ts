@@ -1,3 +1,5 @@
+// TODO: remove
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export interface GetTransferDataParams {
   destinationAddress: string;
   sourceAddress: string;

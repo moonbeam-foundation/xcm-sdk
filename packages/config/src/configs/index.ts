@@ -11,7 +11,6 @@ import { centrifugeConfig } from './centrifuge';
 import { crustShadowConfig } from './crustShadow';
 import { darwiniaConfig } from './darwinia';
 import { darwiniaCrabConfig } from './darwiniaCrab';
-import { equilibriumConfig } from './equilibrium';
 import { hydrationConfig } from './hydration';
 import { hydrationAlphanetConfig } from './hydrationAlphanet';
 import { integriteeConfig } from './integritee';
@@ -63,7 +62,6 @@ export const chainsConfigList: ChainRoutesConfig[] = [
   crustShadowConfig,
   darwiniaConfig,
   darwiniaCrabConfig,
-  equilibriumConfig,
   hydrationConfig,
   hydrationAlphanetConfig,
   integriteeConfig,

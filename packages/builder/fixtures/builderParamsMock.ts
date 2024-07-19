@@ -19,7 +19,7 @@ export const interlayTestnetMock = new Parachain({
   nativeAsset: test,
   parachainId: 2032,
   ss58Format: 2032,
-  ws: 'wss://interlay-moonbeam-alphanet.interlay.io/',
+  ws: ['wss://interlay-moonbeam-alphanet.interlay.io/'],
 });
 
 export const alphanetAssetHubMock = new Parachain({
@@ -33,7 +33,7 @@ export const alphanetAssetHubMock = new Parachain({
   nativeAsset: test,
   parachainId: 1001,
   ss58Format: 42,
-  ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
+  ws: ['wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/'],
 });
 
 export const moonbaseAlphaMock = new EvmParachain({
@@ -49,7 +49,7 @@ export const moonbaseAlphaMock = new EvmParachain({
   parachainId: 1000,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,
-  ws: 'wss://wss.api.moonbase.moonbeam.network',
+  ws: ['wss://wss.api.moonbase.moonbeam.network'],
 });
 
 export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
