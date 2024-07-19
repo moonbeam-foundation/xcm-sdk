@@ -31,7 +31,7 @@ const TEST_CHAIN = new Parachain({
   name: 'test',
   parachainId: 9999,
   ss58Format: 1999,
-  ws: '',
+  ws: [''],
 });
 
 describe('config service', () => {
@@ -116,7 +116,7 @@ describe('config service', () => {
             parachainId: 1000,
             rpc: '',
             ss58Format: 1287,
-            ws: '',
+            ws: [''],
           }),
         ),
       ).toThrow(new Error('Chain test not found'));

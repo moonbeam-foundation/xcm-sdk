@@ -113,7 +113,11 @@ export const acala = new Parachain({
   name: 'Acala',
   parachainId: 2000,
   ss58Format: 10,
-  ws: 'wss://acala-rpc.aca-api.network',
+  ws: [
+    'wss://acala-rpc.aca-api.network',
+    'wss://acala-rpc.dwellir.com',
+    'wss://acala-polkadot.api.onfinality.io/public-ws',
+  ],
 });
 
 export const alphanetAssetHub = new Parachain({
@@ -137,7 +141,7 @@ export const alphanetAssetHub = new Parachain({
   name: 'Alphanet Asset Hub',
   parachainId: 1001,
   ss58Format: 42,
-  ws: 'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/',
+  ws: ['wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/'],
 });
 
 export const alphanetRelay = new Parachain({
@@ -149,7 +153,7 @@ export const alphanetRelay = new Parachain({
   name: 'Alphanet Relay',
   parachainId: 0,
   ss58Format: 42,
-  ws: 'wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network',
+  ws: ['wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network'],
 });
 
 export const astar = new Parachain({
@@ -171,7 +175,11 @@ export const astar = new Parachain({
   name: 'Astar',
   parachainId: 2006,
   ss58Format: 5,
-  ws: 'wss://rpc.astar.network',
+  ws: [
+    'wss://rpc.astar.network',
+    'wss://astar-rpc.dwellir.com',
+    'wss://astar.api.onfinality.io/public-ws',
+  ],
 });
 
 export const bifrostKusama = new Parachain({
@@ -204,7 +212,12 @@ export const bifrostKusama = new Parachain({
   name: 'Bifrost',
   parachainId: 2001,
   ss58Format: 6,
-  ws: 'wss://bifrost-rpc.dwellir.com',
+  ws: [
+    'wss://bifrost-rpc.dwellir.com',
+    'wss://us.bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-parachain.api.onfinality.io/public-ws',
+  ],
 });
 
 export const bifrostPolkadot = new Parachain({
@@ -254,7 +267,12 @@ export const bifrostPolkadot = new Parachain({
   name: 'Bifrost',
   parachainId: 2030,
   ss58Format: 6,
-  ws: 'wss://bifrost-polkadot-rpc.dwellir.com',
+  ws: [
+    'wss://bifrost-polkadot-rpc.dwellir.com',
+    'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
+    'wss://hk.p.bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-polkadot.api.onfinality.io/public-ws',
+  ],
 });
 
 export const calamari = new Parachain({
@@ -278,7 +296,10 @@ export const calamari = new Parachain({
   name: 'Calamari',
   parachainId: 2084,
   ss58Format: 78,
-  ws: 'wss://calamari.systems',
+  ws: [
+    'wss://calamari.systems',
+    // "wss://calamari-rpc.dwellir.com"
+  ],
 });
 
 export const centrifuge = new Parachain({
@@ -295,7 +316,11 @@ export const centrifuge = new Parachain({
   name: 'Centrifuge',
   parachainId: 2031,
   ss58Format: 36,
-  ws: 'wss://fullnode.centrifuge.io',
+  ws: [
+    'wss://fullnode.centrifuge.io',
+    'wss://centrifuge-rpc.dwellir.com',
+    'wss://centrifuge-parachain.api.onfinality.io/public-ws',
+  ],
 });
 
 export const crustShadow = new Parachain({
@@ -318,7 +343,11 @@ export const crustShadow = new Parachain({
   name: 'Crust Shadow',
   parachainId: 2012,
   ss58Format: 66,
-  ws: 'wss://rpc2-shadow.crust.network',
+  ws: [
+    'wss://rpc2-shadow.crust.network',
+    'wss://rpc-shadow.crust.network/',
+    'wss://rpc-shadow.crustnetwork.app',
+  ],
 });
 
 export const darwinia = new EvmParachain({
@@ -349,7 +378,7 @@ export const darwinia = new EvmParachain({
   parachainId: 2046,
   rpc: 'https://rpc.darwinia.network',
   ss58Format: 18,
-  ws: 'wss://rpc.darwinia.network',
+  ws: ['wss://rpc.darwinia.network', 'wss://darwinia-rpc.dwellir.com'],
 });
 
 export const darwiniaCrab = new EvmParachain({
@@ -380,33 +409,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: 'wss://crab-rpc.darwinia.network',
-});
-
-export const equilibrium = new Parachain({
-  assetsData: [
-    {
-      asset: glmr,
-      decimals: 9,
-      id: 1_735_159_154,
-    },
-    {
-      asset: eq,
-      id: 25_969,
-    },
-    {
-      asset: eqd,
-      id: 6_648_164,
-    },
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x89d3ec46d2fb43ef5a9713833373d5ea666b092fa8fd68fbc34596036571b907',
-  key: 'equilibrium',
-  name: 'Equilibrium',
-  parachainId: 2011,
-  ss58Format: 68,
-  ws: 'wss://node.pol.equilibrium.io',
+  ws: ['wss://crab-rpc.darwinia.network', 'wss://darwiniacrab-rpc.dwellir.com'],
 });
 
 export const hydration = new Parachain({
@@ -491,7 +494,7 @@ export const hydrationAlphanet = new Parachain({
   name: 'Hydration Alphanet',
   parachainId: 2034,
   ss58Format: 63,
-  ws: 'wss://hydradx-moonbase-rpc.play.hydration.cloud',
+  ws: ['wss://hydradx-moonbase-rpc.play.hydration.cloud'],
 });
 
 export const interlay = new Parachain({
@@ -518,7 +521,7 @@ export const interlay = new Parachain({
   name: 'Interlay',
   parachainId: 2032,
   ss58Format: 2032,
-  ws: 'wss://api.interlay.io/parachain',
+  ws: ['wss://api.interlay.io/parachain', 'wss://interlay-rpc.dwellir.com'],
 });
 
 export const integritee = new Parachain({
@@ -529,7 +532,10 @@ export const integritee = new Parachain({
   name: 'Integritee',
   parachainId: 2015,
   ss58Format: 13,
-  ws: 'wss://kusama.api.integritee.network',
+  ws: [
+    'wss://kusama.api.integritee.network',
+    'wss://integritee-kusama.api.onfinality.io/public-ws',
+  ],
 });
 
 export const karura = new Parachain({
@@ -559,7 +565,11 @@ export const karura = new Parachain({
   name: 'Karura',
   parachainId: 2000,
   ss58Format: 8,
-  ws: 'wss://karura-rpc-0.aca-api.network',
+  ws: [
+    'wss://karura-rpc-0.aca-api.network',
+    'wss://karura-rpc.dwellir.com',
+    'wss://karura.api.onfinality.io/public-ws',
+  ],
 });
 
 export const khala = new Parachain({
@@ -582,7 +592,11 @@ export const khala = new Parachain({
   name: 'Khala',
   parachainId: 2004,
   ss58Format: 30,
-  ws: 'wss://khala-rpc.dwellir.com',
+  ws: [
+    'wss://khala-rpc.dwellir.com',
+    'wss://khala-api.phala.network/ws',
+    'wss://khala.api.onfinality.io/public-ws',
+  ],
 });
 
 export const kintsugi = new Parachain({
@@ -606,7 +620,11 @@ export const kintsugi = new Parachain({
   name: 'Kintsugi',
   parachainId: 2092,
   ss58Format: 2092,
-  ws: 'wss://api-kusama.interlay.io/parachain',
+  ws: [
+    'wss://api-kusama.interlay.io/parachain',
+    'wss://kintsugi-rpc.dwellir.com',
+    'wss://kintsugi.api.onfinality.io/public-ws',
+  ],
 });
 
 export const kusama = new Parachain({
@@ -617,7 +635,11 @@ export const kusama = new Parachain({
   name: 'Kusama',
   parachainId: 0,
   ss58Format: 2,
-  ws: 'wss://kusama-rpc.dwellir.com',
+  ws: [
+    'wss://kusama-rpc.dwellir.com',
+    'wss://kusama.api.onfinality.io/public-ws',
+    'wss://kusama-rpc.polkadot.io',
+  ],
 });
 
 export const kusamaAssetHub = new Parachain({
@@ -645,7 +667,10 @@ export const kusamaAssetHub = new Parachain({
   name: 'Kusama Asset Hub',
   parachainId: 1000,
   ss58Format: 2,
-  ws: 'wss://kusama-asset-hub-rpc.polkadot.io',
+  ws: [
+    'wss://asset-hub-kusama-rpc.dwellir.com',
+    'wss://kusama-asset-hub-rpc.polkadot.io',
+  ],
 });
 
 export const litmus = new Parachain({
@@ -662,7 +687,7 @@ export const litmus = new Parachain({
   name: 'Litmus',
   parachainId: 2106,
   ss58Format: 131,
-  ws: 'wss://rpc.litmus-parachain.litentry.io',
+  ws: ['wss://rpc.litmus-parachain.litentry.io'],
 });
 
 export const mangataKusama = new Parachain({
@@ -683,7 +708,10 @@ export const mangataKusama = new Parachain({
   name: 'Mangata',
   parachainId: 2110,
   ss58Format: 42,
-  ws: 'wss://kusama-archive.mangata.online',
+  ws: [
+    'wss://kusama-archive.mangata.online',
+    'wss://kusama-rpc.mangata.online',
+  ],
 });
 
 export const mantaParachain = new Parachain({
@@ -704,7 +732,7 @@ export const mantaParachain = new Parachain({
   name: 'Manta',
   parachainId: 2104,
   ss58Format: 77,
-  ws: 'wss://ws.manta.systems',
+  ws: ['wss://ws.manta.systems'],
 });
 
 export const moonbaseAlpha = new EvmParachain({
@@ -810,7 +838,7 @@ export const moonbaseAlpha = new EvmParachain({
   parachainId: 1000,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,
-  ws: 'wss://wss.api.moonbase.moonbeam.network',
+  ws: ['wss://wss.api.moonbase.moonbeam.network'],
 });
 
 export const moonbaseBeta = new EvmParachain({
@@ -855,7 +883,7 @@ export const moonbaseBeta = new EvmParachain({
   parachainId: 888,
   rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
   ss58Format: 1287,
-  ws: 'wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network',
+  ws: ['wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network'],
 });
 
 export const moonbeam = new EvmParachain({
@@ -1092,7 +1120,7 @@ export const moonbeam = new EvmParachain({
   parachainId: 2004,
   rpc: 'https://rpc.api.moonbeam.network',
   ss58Format: 1284,
-  ws: 'wss://wss.api.moonbeam.network',
+  ws: ['wss://wss.api.moonbeam.network'],
 });
 
 export const moonriver = new EvmParachain({
@@ -1237,24 +1265,7 @@ export const moonriver = new EvmParachain({
   parachainId: 2023,
   rpc: 'https://rpc.api.moonriver.moonbeam.network',
   ss58Format: 1285,
-  ws: 'wss://wss.api.moonriver.moonbeam.network',
-});
-
-export const nodle = new Parachain({
-  assetsData: [
-    {
-      asset: nodl,
-      id: 'NodleNative',
-    },
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21',
-  key: 'nodle',
-  name: 'Nodle',
-  parachainId: 2026,
-  ss58Format: 37,
-  ws: 'wss://nodle-rpc.dwellir.com',
+  ws: ['wss://wss.api.moonriver.moonbeam.network'],
 });
 
 export const neuroweb = new Parachain({
@@ -1272,7 +1283,31 @@ export const neuroweb = new Parachain({
   name: 'NeuroWeb',
   parachainId: 2043,
   ss58Format: 101,
-  ws: 'wss://neuroweb-rpc.dwellir.com',
+  ws: [
+    'wss://neuroweb-rpc.dwellir.com',
+    'wss://parachain-rpc.origin-trail.network',
+  ],
+});
+
+export const nodle = new Parachain({
+  assetsData: [
+    {
+      asset: nodl,
+      id: 'NodleNative',
+    },
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0x97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21',
+  key: 'nodle',
+  name: 'Nodle',
+  parachainId: 2026,
+  ss58Format: 37,
+  ws: [
+    'wss://nodle-rpc.dwellir.com',
+    'wss://nodle-rpc.dwellir.com',
+    'wss://nodle-parachain.api.onfinality.io/public-ws',
+  ],
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -1291,7 +1326,7 @@ export const originTrailAlphanet = new Parachain({
   name: 'OriginTrail Alphanet',
   parachainId: 2043,
   ss58Format: 101,
-  ws: 'wss://otp-lunaris-alpha-node-02.origin-trail.network',
+  ws: ['wss://otp-lunaris-alpha-node-02.origin-trail.network'],
 });
 
 export const parallel = new Parachain({
@@ -1313,7 +1348,7 @@ export const parallel = new Parachain({
   name: 'Parallel',
   parachainId: 2012,
   ss58Format: 172,
-  ws: 'wss://parallel-rpc.dwellir.com',
+  ws: ['wss://parallel-rpc.dwellir.com'],
 });
 
 export const peaqAlphanet = new Parachain({
@@ -1341,7 +1376,7 @@ export const peaqAlphanet = new Parachain({
   name: 'peaq Alphanet',
   parachainId: 3013,
   ss58Format: 42,
-  ws: 'wss://moonbeam.peaq.network',
+  ws: ['wss://moonbeam.peaq.network'],
 });
 
 export const peaqChain = new Parachain({
@@ -1396,7 +1431,7 @@ export const peaqChain = new Parachain({
   name: 'peaq',
   parachainId: 3338,
   ss58Format: 42,
-  ws: 'wss://peaq.api.onfinality.io/public-ws',
+  ws: ['wss://peaq.api.onfinality.io/public-ws'],
 });
 
 export const peaqEvmAlphanet = new EvmParachain({
@@ -1441,7 +1476,7 @@ export const peaqEvmAlphanet = new EvmParachain({
   parachainId: 3013,
   rpc: 'https://moonbeam.PEAQ.network',
   ss58Format: 42,
-  ws: 'wss://moonbeam.peaq.network',
+  ws: ['wss://moonbeam.peaq.network'],
 });
 
 export const peaqEvm = new EvmParachain({
@@ -1513,7 +1548,7 @@ export const peaqEvm = new EvmParachain({
   parachainId: 3338,
   rpc: 'https://peaq.api.onfinality.io/public',
   ss58Format: 42,
-  ws: 'wss://peaq.api.onfinality.io/public-ws',
+  ws: ['wss://peaq.api.onfinality.io/public-ws'],
 });
 
 export const pendulum = new Parachain({
@@ -1536,7 +1571,7 @@ export const pendulum = new Parachain({
   name: 'Pendulum',
   parachainId: 2094,
   ss58Format: 56,
-  ws: 'wss://rpc-pendulum.prd.pendulumchain.tech',
+  ws: ['wss://rpc-pendulum.prd.pendulumchain.tech'],
 });
 
 export const pendulumAlphanet = new Parachain({
@@ -1560,7 +1595,7 @@ export const pendulumAlphanet = new Parachain({
   name: 'Foucoco',
   parachainId: 2124,
   ss58Format: 57,
-  ws: 'wss://moonbeam-00.pendulumchain.tech:443',
+  ws: ['wss://moonbeam-00.pendulumchain.tech:443'],
 });
 
 export const phala = new Parachain({
@@ -1583,7 +1618,12 @@ export const phala = new Parachain({
   name: 'Phala',
   parachainId: 2035,
   ss58Format: 30,
-  ws: 'wss://phala-rpc.dwellir.com',
+  ws: [
+    'wss://phala-rpc.dwellir.com',
+    'wss://api.phala.network/ws',
+    'wss://phala.api.onfinality.io/public-ws',
+    'wss://rpc.helikon.io/phala',
+  ],
 });
 
 export const picasso = new Parachain({
@@ -1605,7 +1645,11 @@ export const picasso = new Parachain({
   name: 'Picasso',
   parachainId: 2087,
   ss58Format: 49,
-  ws: 'wss://picasso-rpc.dwellir.com',
+  ws: [
+    'wss://picasso-rpc.dwellir.com',
+    'wss://rpc.composablenodes.tech',
+    'wss://picasso-rpc.composable.finance',
+  ],
 });
 
 export const picassoAlphanet = new Parachain({
@@ -1631,7 +1675,7 @@ export const picassoAlphanet = new Parachain({
   name: 'Picasso Alphanet',
   parachainId: 2019,
   ss58Format: 49,
-  ws: 'wss://boot-01.picasso2270.composablenodes.tech/',
+  ws: ['wss://boot-01.picasso2270.composablenodes.tech/'],
 });
 
 export const polkadot = new Parachain({
@@ -1642,7 +1686,11 @@ export const polkadot = new Parachain({
   name: 'Polkadot',
   parachainId: 0,
   ss58Format: 0,
-  ws: 'wss://polkadot-rpc.dwellir.com',
+  ws: [
+    'wss://polkadot-rpc.dwellir.com',
+    'wss://polkadot.api.onfinality.io/public-ws',
+    'wss://rpc.polkadot.io/',
+  ],
 });
 
 export const polkadotAssetHub = new Parachain({
@@ -1690,7 +1738,11 @@ export const polkadotAssetHub = new Parachain({
   name: 'Polkadot Asset Hub',
   parachainId: 1000,
   ss58Format: 42,
-  ws: 'wss://polkadot-asset-hub-rpc.polkadot.io',
+  ws: [
+    'wss://asset-hub-polkadot-rpc.dwellir.com',
+    'wss://polkadot-asset-hub-rpc.polkadot.io',
+    'wss://statemint.api.onfinality.io/public-ws',
+  ],
 });
 
 export const robonomics = new Parachain({
@@ -1708,7 +1760,10 @@ export const robonomics = new Parachain({
   name: 'Robonomics',
   parachainId: 2048,
   ss58Format: 32,
-  ws: 'wss://kusama.rpc.robonomics.network/',
+  ws: [
+    'wss://kusama.rpc.robonomics.network/',
+    'wss://robonomics-rpc.dwellir.com',
+  ],
 });
 
 export const shiden = new Parachain({
@@ -1730,7 +1785,11 @@ export const shiden = new Parachain({
   name: 'Shiden',
   parachainId: 2007,
   ss58Format: 5,
-  ws: 'wss://shiden-rpc.dwellir.com',
+  ws: [
+    'wss://shiden-rpc.dwellir.com',
+    'wss://rpc.shiden.astar.network',
+    'wss://shiden.api.onfinality.io/public-ws',
+  ],
 });
 
 export const subsocial = new Parachain({
@@ -1741,7 +1800,7 @@ export const subsocial = new Parachain({
   name: 'Subsocial',
   parachainId: 2101,
   ss58Format: 28,
-  ws: 'wss://para.subsocial.network',
+  ws: ['wss://para.subsocial.network', 'wss://subsocial-rpc.dwellir.com'],
 });
 
 export const tinkernet = new Parachain({
@@ -1758,7 +1817,7 @@ export const tinkernet = new Parachain({
   name: 'InvArch Tinkernet',
   parachainId: 2125,
   ss58Format: 117,
-  ws: 'wss://tinkernet-rpc.dwellir.com',
+  ws: ['wss://tinkernet-rpc.dwellir.com'],
 });
 
 export const turing = new Parachain({
@@ -1780,7 +1839,7 @@ export const turing = new Parachain({
   name: 'Turing',
   parachainId: 2114,
   ss58Format: 51,
-  ws: 'wss://rpc.turing.oak.tech',
+  ws: ['wss://rpc.turing.oak.tech', 'wss://turing-rpc.dwellir.com'],
 });
 
 export const turingAlphanet = new Parachain({
@@ -1803,7 +1862,7 @@ export const turingAlphanet = new Parachain({
   name: 'Turing Alphanet',
   parachainId: 2114,
   ss58Format: 51,
-  ws: 'wss://turing-moonbase.rpc.oak.tech/',
+  ws: ['wss://turing-moonbase.rpc.oak.tech/'],
 });
 
 export const uniqueAlpha = new Parachain({
@@ -1821,7 +1880,7 @@ export const uniqueAlpha = new Parachain({
   name: 'Unique Alphanet',
   parachainId: 2095,
   ss58Format: 255,
-  ws: 'wss://unique-alpha.unique.network',
+  ws: ['wss://unique-alpha.unique.network'],
 });
 
 export const zeitgeist = new Parachain({
@@ -1861,7 +1920,6 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   darwiniaCrab,
-  equilibrium,
   hydration,
   hydrationAlphanet,
   integritee,
