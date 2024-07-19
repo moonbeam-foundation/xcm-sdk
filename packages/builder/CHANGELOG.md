@@ -1,5 +1,16 @@
 # @moonbeam-network/xcm-builder
 
+## 2.4.0
+
+### Minor Changes
+
+- [#304](https://github.com/moonbeam-foundation/xcm-sdk/pull/304) [`77dbaf1`](https://github.com/moonbeam-foundation/xcm-sdk/commit/77dbaf12622f3f58172d83e3f3c9e7b08cd44682) Thanks [@mmaurello](https://github.com/mmaurello)! - Add WS endpoints, change monitoring script and remove equilibrium
+
+### Patch Changes
+
+- Updated dependencies [[`77dbaf1`](https://github.com/moonbeam-foundation/xcm-sdk/commit/77dbaf12622f3f58172d83e3f3c9e7b08cd44682)]:
+  - @moonbeam-network/xcm-types@2.3.0
+
 ## 2.3.4
 
 ### Patch Changes
