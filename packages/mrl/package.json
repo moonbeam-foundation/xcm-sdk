@@ -1,0 +1,41 @@
+{
+  "name": "@moonbeam-network/mrl",
+  "version": "2.2.5",
+  "description": "Moonbeam Routed Liquidity",
+  "scripts": {
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
+    "link": "npm ln",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:update": "vitest -u",
+    "prepack": "prettier --write build/index.d.ts"
+  },
+  "repository": {
+    "directory": "packages/mrl",
+    "type": "git",
+    "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
+  },
+  "keywords": [
+    "moonbeam",
+    "moonriver",
+    "mrl"
+  ],
+  "author": "moonbeam-foundation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
+  },
+  "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
+  "files": [
+    "build"
+  ],
+  "type": "module",
+  "exports": "./build/index.mjs",
+  "types": "./build/index.d.ts",
+  "main": "./build/index.mjs",
+  "dependencies": {},
+  "peerDependencies": {}
+}
