@@ -554,20 +554,6 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "symbol": "IBTC",
   },
   a {
-    "amount": 0n,
-    "decimals": 9,
-    "key": "eqd",
-    "originSymbol": "EQD",
-    "symbol": "EQD",
-  },
-  a {
-    "amount": 0n,
-    "decimals": 9,
-    "key": "eq",
-    "originSymbol": "EQ",
-    "symbol": "EQ",
-  },
-  a {
     "amount": 330000000n,
     "decimals": 10,
     "key": "dot",
