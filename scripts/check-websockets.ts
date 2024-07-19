@@ -25,6 +25,7 @@ function checkIsWebSocketAlive({
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(endpoint);
 
+    console.log(`Connecting to ${chainKey} endpoint ${endpoint}`);
     ws.on('error', (error: Error) => {
       console.error(
         `${chainKey} WebSocket connection to ${endpoint} failed`,
@@ -40,6 +41,15 @@ function checkIsWebSocketAlive({
       );
       ws.close();
       resolve(true);
+    });
+
+    ws.on('close', (code: number, reason: string) => {
+      if (code !== 1000) {
+        console.log(
+          `${chainKey} WebSocket connection to ${endpoint} closed with code ${code} and reason: ${reason}`,
+        );
+        resolve(false);
+      }
     });
   });
 }
@@ -109,9 +119,12 @@ function countChainKeys(endpoints: ChainEndpoint[]): Record<string, number> {
 
 async function sendNotification(
   chainsToReview: string[],
+  failingEndpoints: ChainEndpoint[],
   webhookUrl: string | undefined,
 ) {
-  const text = `All the websocket endpoints available to the XCM integrations in the dapp for \`${chainsToReview.join(', ')}\` are not working, please review them`;
+  const text = `All the websocket endpoints available to the XCM integrations in the dapp for \`${chainsToReview.join(', ')}\` are not working, please review them\nFailing endpoints: \n${failingEndpoints
+    .map((endpoint) => `${endpoint.chainKey}: ${endpoint.ws}`)
+    .join('\n')}`;
   console.log(text);
 
   if (webhookUrl) {
@@ -155,7 +168,7 @@ async function main() {
     });
 
     if (chainsToReview.length) {
-      await sendNotification(chainsToReview, webhookUrl);
+      await sendNotification(chainsToReview, failingEndpoints, webhookUrl);
     }
   } else {
     console.log('All checked endpoints are working.');
