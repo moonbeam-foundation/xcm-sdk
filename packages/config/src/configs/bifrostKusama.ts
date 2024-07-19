@@ -6,12 +6,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { bnc, movr, vbnc, vksm, vmovr } from '../assets';
 import { bifrostKusama, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const bifrostKusamaConfig = new ChainConfig({
+export const bifrostKusamaConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: bnc,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -22,7 +22,7 @@ export const bifrostKusamaConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: movr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -38,7 +38,7 @@ export const bifrostKusamaConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vbnc,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -54,7 +54,7 @@ export const bifrostKusamaConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vksm,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -70,7 +70,7 @@ export const bifrostKusamaConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: vmovr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import {
-  AssetConfig,
+  AssetTransferConfig,
   FeeAssetConfig,
   TransferConfig,
 } from '@moonbeam-network/xcm-config';
@@ -236,7 +236,7 @@ export function getMax({
 export interface GetAssetsBalancesParams {
   address: string;
   chain: AnyChain;
-  assets: AssetConfig[];
+  assets: AssetTransferConfig[];
   evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
@@ -248,8 +248,8 @@ export async function getAssetsBalances({
   polkadot,
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
   const uniqueAssets = assets.reduce(
-    (acc: AssetConfig[], asset: AssetConfig) => {
-      if (!acc.some((a: AssetConfig) => a.asset.isEqual(asset.asset))) {
+    (acc: AssetTransferConfig[], asset: AssetTransferConfig) => {
+      if (!acc.some((a: AssetTransferConfig) => a.asset.isEqual(asset.asset))) {
         return [asset, ...acc];
       }
 
@@ -259,7 +259,7 @@ export async function getAssetsBalances({
   );
 
   const balances = await Promise.all(
-    uniqueAssets.map(async (config: AssetConfig) =>
+    uniqueAssets.map(async (config: AssetTransferConfig) =>
       // eslint-disable-next-line no-await-in-loop
       getBalance({
         address,

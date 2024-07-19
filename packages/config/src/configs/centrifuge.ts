@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { cfg } from '../assets';
 import { centrifuge, moonbeam } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const centrifugeConfig = new ChainConfig({
+export const centrifugeConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: cfg,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,

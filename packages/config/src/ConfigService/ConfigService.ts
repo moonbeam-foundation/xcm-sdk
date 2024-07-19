@@ -2,14 +2,14 @@ import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
 import { chainsConfigMap } from '../configs';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 import { IConfigService } from './ConfigService.interfaces';
 
 export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;
   chains?: Map<string, AnyChain>;
-  chainsConfig?: Map<string, ChainConfig>;
+  chainsConfig?: Map<string, ChainRoutesConfig>;
 }
 
 export class ConfigService implements IConfigService {
@@ -17,7 +17,7 @@ export class ConfigService implements IConfigService {
 
   protected chains: Map<string, AnyChain>;
 
-  protected chainsConfig: Map<string, ChainConfig>;
+  protected chainsConfig: Map<string, ChainRoutesConfig>;
 
   constructor(options?: ConfigServiceOptions) {
     this.assets = options?.assets ?? assetsMap;
@@ -63,7 +63,7 @@ export class ConfigService implements IConfigService {
     return chain;
   }
 
-  getChainConfig(keyOrAsset: string | AnyChain): ChainConfig {
+  getChainConfig(keyOrAsset: string | AnyChain): ChainRoutesConfig {
     const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
     const chainConfig = this.chainsConfig.get(key);
 
@@ -98,7 +98,7 @@ export class ConfigService implements IConfigService {
     asset: Asset,
     source: AnyChain,
     destination: AnyChain,
-  ): AssetConfig {
+  ): AssetTransferConfig {
     const chainConfig = this.chainsConfig.get(source.key);
 
     if (!chainConfig) {
@@ -116,7 +116,7 @@ export class ConfigService implements IConfigService {
     this.chains.set(chain.key, chain);
   }
 
-  updateChainConfig(chainConfig: ChainConfig): void {
+  updateChainConfig(chainConfig: ChainRoutesConfig): void {
     this.chainsConfig.set(chainConfig.chain.key, chainConfig);
   }
 }

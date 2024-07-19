@@ -34,20 +34,9 @@
     "build"
   ],
   "type": "module",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.mjs"
-      },
-      "require": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.cjs"
-      }
-    }
-  },
+  "exports": "./build/index.mjs",
   "types": "./build/index.d.ts",
-  "main": "./build/index.cjs",
+  "main": "./build/index.mjs",
   "dependencies": {
     "@moonbeam-network/xcm-builder": "2.3.4",
     "@moonbeam-network/xcm-types": "2.2.5",

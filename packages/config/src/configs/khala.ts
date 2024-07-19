@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { movr, pha } from '../assets';
 import { khala, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const khalaConfig = new ChainConfig({
+export const khalaConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: pha,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -21,7 +21,7 @@ export const khalaConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: movr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,

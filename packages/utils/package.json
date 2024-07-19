@@ -35,20 +35,9 @@
     "build"
   ],
   "type": "module",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.mjs"
-      },
-      "require": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.cjs"
-      }
-    }
-  },
+  "exports": "./build/index.mjs",
   "types": "./build/index.d.ts",
-  "main": "./build/index.cjs",
+  "main": "./build/index.mjs",
   "dependencies": {
     "big.js": "^6.2.1",
     "lru-cache": "^10.2.2"

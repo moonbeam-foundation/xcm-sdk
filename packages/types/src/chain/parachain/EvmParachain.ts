@@ -1,10 +1,10 @@
-import { Address, defineChain } from 'viem';
+import { Address } from 'viem';
 import { Chain } from 'viem/chains';
-import { ChainType } from '../Chain.interfaces';
 import { Parachain, ParachainConstructorParams } from './Parachain';
+import { getViemChain } from '../Chain.utils';
 
 export interface EvmParachainConstructorParams
-  extends Omit<ParachainConstructorParams, 'type'> {
+  extends ParachainConstructorParams {
   id: number;
   rpc: string;
   isEvmSigner?: boolean;
@@ -24,6 +24,10 @@ export class EvmParachain extends Parachain {
 
   readonly contracts?: Contracts;
 
+  static is(obj: unknown): obj is EvmParachain {
+    return obj instanceof EvmParachain;
+  }
+
   constructor({
     id,
     rpc,
@@ -31,7 +35,7 @@ export class EvmParachain extends Parachain {
     contracts,
     ...others
   }: EvmParachainConstructorParams) {
-    super({ type: ChainType.EvmParachain, ...others });
+    super(others);
 
     this.contracts = contracts;
     this.id = id;
@@ -40,20 +44,6 @@ export class EvmParachain extends Parachain {
   }
 
   getViemChain(): Chain {
-    return defineChain({
-      id: this.id,
-      name: this.name,
-      nativeCurrency: {
-        decimals: this.nativeAsset.decimals,
-        name: this.nativeAsset.originSymbol,
-        symbol: this.nativeAsset.originSymbol,
-      },
-      rpcUrls: {
-        default: {
-          http: [this.rpc],
-          webSocket: Array.isArray(this.ws) ? this.ws : [this.ws],
-        },
-      },
-    });
+    return getViemChain(this);
   }
 }

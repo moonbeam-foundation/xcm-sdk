@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { moonbeam, peaqEvm } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const peaqEvmConfig = new ChainConfig({
+export const peaqEvmConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -26,7 +26,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -42,7 +42,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: dai,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -58,7 +58,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: wbtc,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -74,7 +74,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: weth,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -90,7 +90,7 @@ export const peaqEvmConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: usdtwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),

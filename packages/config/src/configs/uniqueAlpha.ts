@@ -1,8 +1,8 @@
 import { uniqueAlpha } from '../chains';
-import { ChainConfig } from '../types/ChainConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
 // NOTE: Disabling because ws endpoint is not working
-export const uniqueAlphaConfig = new ChainConfig({
+export const uniqueAlphaConfig = new ChainRoutesConfig({
   assets: [
     // new AssetConfig({
     //   asset: auq,

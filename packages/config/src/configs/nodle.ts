@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { nodl } from '../assets';
 import { moonbeam, nodle } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const nodleConfig = new ChainConfig({
+export const nodleConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: nodl,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,

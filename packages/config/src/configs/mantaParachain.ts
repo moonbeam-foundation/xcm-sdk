@@ -6,12 +6,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { glmr, manta } from '../assets';
 import { mantaParachain, moonbeam } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const mantaParachainConfig = new ChainConfig({
+export const mantaParachainConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: manta,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -22,7 +22,7 @@ export const mantaParachainConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: glmr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,

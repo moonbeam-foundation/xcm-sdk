@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { AnyChain } from '@moonbeam-network/xcm-types';
+import { AnyChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { isString, u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
@@ -132,7 +132,7 @@ function getDestinationMultilocation(
    03: AccountKey20
    https://docs.moonbeam.network/builders/interoperability/xcm/xc20/xtokens/#building-the-precompile-multilocation
    */
-  const accountType = destination.isEvmParachain() ? '03' : '01';
+  const accountType = EvmParachain.is(destination) ? '03' : '01';
   const acc = `0x${accountType}${u8aToHex(
     decodeAddress(address),
     -1,

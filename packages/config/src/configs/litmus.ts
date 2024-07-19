@@ -5,12 +5,12 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { lit } from '../assets';
 import { litmus, moonriver } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { AssetTransferConfig } from '../types/AssetTransferConfig';
+import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 
-export const litmusConfig = new ChainConfig({
+export const litmusConfig = new ChainRoutesConfig({
   assets: [
-    new AssetConfig({
+    new AssetTransferConfig({
       asset: lit,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,

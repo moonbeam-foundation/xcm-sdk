@@ -1,9 +1,6 @@
-import { SetOptional } from '../../common.interfaces';
 import { Chain, ChainConstructorParams } from '../Chain';
-import { ChainType } from '../Chain.interfaces';
 
-export interface ParachainConstructorParams
-  extends SetOptional<ChainConstructorParams, 'type'> {
+export interface ParachainConstructorParams extends ChainConstructorParams {
   genesisHash: string;
   parachainId: number;
   ss58Format: number;
@@ -25,6 +22,10 @@ export class Parachain extends Chain {
 
   readonly ws: string | string[];
 
+  static is(obj: unknown): obj is Parachain {
+    return obj instanceof Parachain;
+  }
+
   constructor({
     genesisHash,
     parachainId,
@@ -32,10 +33,9 @@ export class Parachain extends Chain {
     ss58Format,
     weight,
     ws,
-    type = ChainType.Parachain,
     ...others
   }: ParachainConstructorParams) {
-    super({ type, ...others });
+    super(others);
 
     this.genesisHash = genesisHash;
     this.parachainId = parachainId;
