@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.5.1
+
+### Patch Changes
+
+- [#307](https://github.com/moonbeam-foundation/xcm-sdk/pull/307) [`537f2b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/537f2b40b4aeec6fbecb94157db21e904e56f7fa) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix snapshots
+
 ## 2.5.0
 
 ### Minor Changes
