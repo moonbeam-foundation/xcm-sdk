@@ -3,6 +3,7 @@ import {
   ConfigBuilder,
   ConfigService,
   IConfigService,
+  routesMap,
 } from '@moonbeam-network/xcm-config';
 import {
   AnyAsset,
@@ -16,12 +17,14 @@ import { getTransferData as gtd } from './getTransferData/getTransferData';
 import { PolkadotService } from './polkadot';
 import { Signers, TransferData } from './sdk.interfaces';
 
+const DEFAULT_SERVICE = new ConfigService({ routes: routesMap });
+
 export interface SdkOptions extends Partial<Signers> {
   configService?: IConfigService;
 }
 
 export function Sdk(options?: SdkOptions) {
-  const configService = options?.configService ?? new ConfigService();
+  const configService = options?.configService ?? DEFAULT_SERVICE;
 
   return {
     assets(ecosystem?: Ecosystem) {
@@ -90,9 +93,9 @@ export function Sdk(options?: SdkOptions) {
 export async function getParachainBalances(
   chain: AnyChain,
   address: string,
+  service: ConfigService = DEFAULT_SERVICE,
 ): Promise<AssetAmount[]> {
-  const configService = new ConfigService();
-  const chainsConfig = configService.getChainConfig(chain);
+  const chainsConfig = service.getChainConfig(chain);
   const assets = chainsConfig.getAssetsConfigs();
 
   const polkadot = await PolkadotService.create(chain);

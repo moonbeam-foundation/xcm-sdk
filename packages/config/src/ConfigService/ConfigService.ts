@@ -1,7 +1,6 @@
 import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
-import { chainsConfigMap } from '../configs';
 import { AssetTransferConfig } from '../types/AssetTransferConfig';
 import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
 import { IConfigService } from './ConfigService.interfaces';
@@ -9,7 +8,7 @@ import { IConfigService } from './ConfigService.interfaces';
 export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;
   chains?: Map<string, AnyChain>;
-  chainsConfig?: Map<string, ChainRoutesConfig>;
+  routes: Map<string, ChainRoutesConfig>;
 }
 
 export class ConfigService implements IConfigService {
@@ -17,12 +16,12 @@ export class ConfigService implements IConfigService {
 
   protected chains: Map<string, AnyChain>;
 
-  protected chainsConfig: Map<string, ChainRoutesConfig>;
+  protected routes: Map<string, ChainRoutesConfig>;
 
-  constructor(options?: ConfigServiceOptions) {
-    this.assets = options?.assets ?? assetsMap;
-    this.chains = options?.chains ?? chainsMap;
-    this.chainsConfig = options?.chainsConfig ?? chainsConfigMap;
+  constructor(options: ConfigServiceOptions) {
+    this.assets = options.assets ?? assetsMap;
+    this.chains = options.chains ?? chainsMap;
+    this.routes = options.routes;
   }
 
   getEcosystemAssets(ecosystem?: Ecosystem): Asset[] {
@@ -32,7 +31,7 @@ export class ConfigService implements IConfigService {
 
     return Array.from(
       new Set(
-        Array.from(this.chainsConfig.values())
+        Array.from(this.routes.values())
           .filter((chainConfig) => chainConfig.chain.ecosystem === ecosystem)
           .map((chainConfig) => chainConfig.getAssetsConfigs())
           .flat(2)
@@ -65,7 +64,7 @@ export class ConfigService implements IConfigService {
 
   getChainConfig(keyOrAsset: string | AnyChain): ChainRoutesConfig {
     const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
-    const chainConfig = this.chainsConfig.get(key);
+    const chainConfig = this.routes.get(key);
 
     if (!chainConfig) {
       throw new Error(`Chain config for ${key} not found`);
@@ -75,7 +74,7 @@ export class ConfigService implements IConfigService {
   }
 
   getSourceChains(asset: Asset, ecosystem: Ecosystem | undefined): AnyChain[] {
-    return Array.from(this.chainsConfig.values())
+    return Array.from(this.routes.values())
       .filter((chainConfig) => chainConfig.getAssetConfigs(asset).length)
       .filter(
         (chainConfig) =>
@@ -85,7 +84,7 @@ export class ConfigService implements IConfigService {
   }
 
   getDestinationChains(asset: Asset, source: AnyChain): AnyChain[] {
-    const chainConfig = this.chainsConfig.get(source.key);
+    const chainConfig = this.routes.get(source.key);
 
     if (!chainConfig) {
       throw new Error(`Config for chain ${source.key} not found`);
@@ -99,7 +98,7 @@ export class ConfigService implements IConfigService {
     source: AnyChain,
     destination: AnyChain,
   ): AssetTransferConfig {
-    const chainConfig = this.chainsConfig.get(source.key);
+    const chainConfig = this.routes.get(source.key);
 
     if (!chainConfig) {
       throw new Error(`Config for chain ${source.key} not found`);
@@ -117,6 +116,6 @@ export class ConfigService implements IConfigService {
   }
 
   updateChainConfig(chainConfig: ChainRoutesConfig): void {
-    this.chainsConfig.set(chainConfig.chain.key, chainConfig);
+    this.routes.set(chainConfig.chain.key, chainConfig);
   }
 }

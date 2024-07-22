@@ -2,24 +2,26 @@
 import { AnyAsset, AnyChain, Ecosystem } from '@moonbeam-network/xcm-types';
 import { ConfigService, IConfigService } from '../ConfigService';
 import { TransferConfig } from './ConfigBuilder.interfaces';
+import { routesMap } from '../xcm-configs';
 
-export function ConfigBuilder(service?: IConfigService) {
-  const config = service ?? new ConfigService();
+const DEFAULT_SERVICE = new ConfigService({ routes: routesMap });
+
+export function ConfigBuilder(service: IConfigService = DEFAULT_SERVICE) {
   return {
     assets: (ecosystem?: Ecosystem) => {
-      const assets = config.getEcosystemAssets(ecosystem);
+      const assets = service.getEcosystemAssets(ecosystem);
 
       return {
         assets,
         asset: (keyOrAsset: string | AnyAsset) => {
-          const asset = config.getAsset(keyOrAsset);
-          const sourceChains = config.getSourceChains(asset, ecosystem);
+          const asset = service.getAsset(keyOrAsset);
+          const sourceChains = service.getSourceChains(asset, ecosystem);
 
           return {
             sourceChains,
             source: (keyOrChain: string | AnyChain) => {
-              const source = config.getChain(keyOrChain);
-              const destinationChains = config.getDestinationChains(
+              const source = service.getChain(keyOrChain);
+              const destinationChains = service.getDestinationChains(
                 asset,
                 source,
               );
@@ -30,13 +32,13 @@ export function ConfigBuilder(service?: IConfigService) {
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   keyOrChain: string | AnyChain,
                 ) => {
-                  const destination = config.getChain(keyOrChain);
-                  const sourceConfig = config.getAssetDestinationConfig(
+                  const destination = service.getChain(keyOrChain);
+                  const sourceConfig = service.getAssetDestinationConfig(
                     asset,
                     source,
                     destination,
                   );
-                  const destinationConfig = config.getAssetDestinationConfig(
+                  const destinationConfig = service.getAssetDestinationConfig(
                     asset,
                     destination,
                     source,

@@ -6,9 +6,10 @@ import { Ecosystem } from '@moonbeam-network/xcm-types';
 import { ConfigService } from '../ConfigService';
 import { dev } from '../assets';
 import { moonbaseAlpha, pendulumAlphanet } from '../chains';
-import { moonbaseAlphaConfig } from '../configs/moonbaseAlpha';
-import { pendulumAlphanetConfig } from '../configs/pendulumAlphanet';
+import { moonbaseAlphaConfig } from '../xcm-configs/moonbaseAlpha';
+import { pendulumAlphanetConfig } from '../xcm-configs/pendulumAlphanet';
 import { ConfigBuilder } from './ConfigBuilder';
+import { routesMap } from '../xcm-configs';
 
 describe('configBuilder', () => {
   it('should return correct dev config', () => {
@@ -39,7 +40,7 @@ describe('configBuilder', () => {
   });
 
   it('should return correct dev config using mutable service', () => {
-    const configService = new ConfigService();
+    const configService = new ConfigService({ routes: routesMap });
     const config = ConfigBuilder(configService)
       .assets(Ecosystem.AlphanetRelay)
       .asset(dev)
