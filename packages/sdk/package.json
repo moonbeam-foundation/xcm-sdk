@@ -63,6 +63,6 @@
     "@polkadot/types": "^12.2.1",
     "@polkadot/util": "^13.0.2",
     "ethers": "^6.13.1",
-    "viem": "^2.17.4"
+    "viem": "^2.17.9"
   }
 }
