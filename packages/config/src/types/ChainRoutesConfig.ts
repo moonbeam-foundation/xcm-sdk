@@ -7,7 +7,7 @@ export interface ChainRoutesConfigConstructorParams {
 }
 
 export class ChainRoutesConfig {
-  readonly #assets: Map<string, AssetTransferConfig> = new Map();
+  readonly #assets: Map<string, AssetTransferConfig>;
 
   readonly chain: AnyChain;
 

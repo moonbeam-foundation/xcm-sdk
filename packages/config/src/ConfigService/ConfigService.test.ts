@@ -23,6 +23,7 @@ import { ConfigService } from './ConfigService';
 
 import { AssetTransferConfig } from '../types/AssetTransferConfig';
 import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { routesMap } from '../xcm-configs';
 
 const TEST_CHAIN = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
@@ -38,7 +39,7 @@ const TEST_CHAIN = new Parachain({
 });
 
 describe('config service', () => {
-  const configService = new ConfigService();
+  const configService = new ConfigService({ routes: routesMap });
 
   describe('getEcosystemAssets', () => {
     it('should return all assets', () => {
@@ -125,10 +126,10 @@ describe('config service', () => {
 
   describe('getSourceChains', () => {
     it('should get source chains for asset', () => {
-      const chains = configService.getSourceChains(
-        dev,
-        Ecosystem.AlphanetRelay,
-      );
+      const chains = configService.getSourceChains({
+        asset: dev,
+        ecosystem: Ecosystem.AlphanetRelay,
+      });
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),

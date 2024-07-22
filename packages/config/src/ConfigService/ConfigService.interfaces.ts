@@ -8,9 +8,9 @@ export interface IConfigService {
 
   getChain(keyOrAsset: string | AnyChain): AnyChain;
 
-  getSourceChains(asset: Asset, ecosystem: Ecosystem | undefined): AnyChain[];
+  getSourceChains(params: { asset?: Asset; ecosystem?: Ecosystem }): AnyChain[];
 
-  getDestinationChains(asset: Asset, source: AnyChain): AnyChain[];
+  getDestinationChains(params: { asset?: Asset; source: AnyChain }): AnyChain[];
 
   getAssetDestinationConfig(
     asset: Asset,

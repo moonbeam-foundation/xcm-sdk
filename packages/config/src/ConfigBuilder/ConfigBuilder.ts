@@ -15,16 +15,16 @@ export function ConfigBuilder(service: IConfigService = DEFAULT_SERVICE) {
         assets,
         asset: (keyOrAsset: string | AnyAsset) => {
           const asset = service.getAsset(keyOrAsset);
-          const sourceChains = service.getSourceChains(asset, ecosystem);
+          const sourceChains = service.getSourceChains({ asset, ecosystem });
 
           return {
             sourceChains,
             source: (keyOrChain: string | AnyChain) => {
               const source = service.getChain(keyOrChain);
-              const destinationChains = service.getDestinationChains(
+              const destinationChains = service.getDestinationChains({
                 asset,
                 source,
-              );
+              });
 
               return {
                 destinationChains,

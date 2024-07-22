@@ -1,4 +1,9 @@
-import { AnyChain, Asset, Ecosystem } from '@moonbeam-network/xcm-types';
+import {
+  AnyAsset,
+  AnyChain,
+  Asset,
+  Ecosystem,
+} from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
 import { AssetTransferConfig } from '../types/AssetTransferConfig';
@@ -41,7 +46,7 @@ export class ConfigService implements IConfigService {
   }
 
   getAsset(keyOrAsset: string | Asset): Asset {
-    const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
+    const key = ConfigService.#getKey(keyOrAsset);
     const asset = this.assets.get(key);
 
     if (!asset) {
@@ -52,7 +57,7 @@ export class ConfigService implements IConfigService {
   }
 
   getChain(keyOrAsset: string | AnyChain): AnyChain {
-    const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
+    const key = ConfigService.#getKey(keyOrAsset);
     const chain = this.chains.get(key);
 
     if (!chain) {
@@ -63,7 +68,7 @@ export class ConfigService implements IConfigService {
   }
 
   getChainConfig(keyOrAsset: string | AnyChain): ChainRoutesConfig {
-    const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
+    const key = ConfigService.#getKey(keyOrAsset);
     const chainConfig = this.routes.get(key);
 
     if (!chainConfig) {
@@ -73,24 +78,44 @@ export class ConfigService implements IConfigService {
     return chainConfig;
   }
 
-  getSourceChains(asset: Asset, ecosystem: Ecosystem | undefined): AnyChain[] {
-    return Array.from(this.routes.values())
-      .filter((chainConfig) => chainConfig.getAssetConfigs(asset).length)
-      .filter(
-        (chainConfig) =>
-          !ecosystem || chainConfig.chain.ecosystem === ecosystem,
-      )
-      .map((chainConfig) => chainConfig.chain);
-  }
+  getSourceChains({
+    asset,
+    ecosystem,
+  }: {
+    asset?: Asset;
+    ecosystem?: Ecosystem;
+  }): AnyChain[] {
+    const configs = Array.from(this.routes.values()).filter(
+      (cfg) => !ecosystem || cfg.chain.ecosystem === ecosystem,
+    );
 
-  getDestinationChains(asset: Asset, source: AnyChain): AnyChain[] {
-    const chainConfig = this.routes.get(source.key);
-
-    if (!chainConfig) {
-      throw new Error(`Config for chain ${source.key} not found`);
+    if (!asset) {
+      return configs.map((cfg) => cfg.chain);
     }
 
-    return chainConfig.getAssetDestinations(asset);
+    return configs
+      .filter((cfg) => cfg.getAssetConfigs(asset).length)
+      .map((cfg) => cfg.chain);
+  }
+
+  getDestinationChains({
+    asset,
+    source,
+  }: {
+    asset?: Asset;
+    source: AnyChain;
+  }): AnyChain[] {
+    const config = this.routes.get(source.key);
+
+    if (!config) {
+      throw new Error(`Chain routes config for chain ${source.key} not found`);
+    }
+
+    if (asset) {
+      return config.getAssetDestinations(asset);
+    }
+
+    return config.getAssetsConfigs().map((cfg) => cfg.destination);
   }
 
   getAssetDestinationConfig(
@@ -117,5 +142,13 @@ export class ConfigService implements IConfigService {
 
   updateChainConfig(chainConfig: ChainRoutesConfig): void {
     this.routes.set(chainConfig.chain.key, chainConfig);
+  }
+
+  static #getKey(keyOrModel: string | AnyAsset | AnyChain): string {
+    if (typeof keyOrModel === 'string') {
+      return keyOrModel;
+    }
+
+    return keyOrModel.key;
   }
 }
