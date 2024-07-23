@@ -2,7 +2,6 @@
 import {
   ConfigBuilder,
   ConfigService,
-  IConfigService,
   routesMap,
 } from '@moonbeam-network/xcm-config';
 import {
@@ -20,7 +19,7 @@ import { Signers, TransferData } from './sdk.interfaces';
 const DEFAULT_SERVICE = new ConfigService({ routes: routesMap });
 
 export interface SdkOptions extends Partial<Signers> {
-  configService?: IConfigService;
+  configService?: ConfigService;
 }
 
 export function Sdk(options?: SdkOptions) {
@@ -95,7 +94,7 @@ export async function getParachainBalances(
   address: string,
   service: ConfigService = DEFAULT_SERVICE,
 ): Promise<AssetAmount[]> {
-  const chainsConfig = service.getChainConfig(chain);
+  const chainsConfig = service.getChainRoutesConfig(chain);
   const assets = chainsConfig.getAssetsConfigs();
 
   const polkadot = await PolkadotService.create(chain);

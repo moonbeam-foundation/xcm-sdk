@@ -1,5 +1,6 @@
-import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import { AnyAsset, AnyChain, Asset } from '@moonbeam-network/xcm-types';
 import { AssetTransferConfig } from './AssetTransferConfig';
+import { getKey } from '../config.utils';
 
 export interface ChainRoutesConfigConstructorParams {
   assets: AssetTransferConfig[];
@@ -25,30 +26,40 @@ export class ChainRoutesConfig {
     return Array.from(this.#assets.values());
   }
 
-  getAssetConfigs(asset: Asset): AssetTransferConfig[] {
-    return this.getAssetsConfigs().filter(
-      (assetConfig) => assetConfig.asset.key === asset.key,
-    );
+  getAssetConfigs(keyOrAsset: string | AnyAsset): AssetTransferConfig[] {
+    const key = getKey(keyOrAsset);
+
+    return this.getAssetsConfigs().filter((cfg) => cfg.asset.key === key);
   }
 
-  getAssetDestinations(asset: Asset): AnyChain[] {
-    return this.getAssetConfigs(asset).map(
+  getAssetDestinations(keyOrAsset: string | AnyAsset): AnyChain[] {
+    return this.getAssetConfigs(keyOrAsset).map(
       (assetConfig) => assetConfig.destination,
     );
   }
 
-  getAssetDestinationConfig(
-    asset: Asset,
-    destination: AnyChain,
-  ): AssetTransferConfig {
-    const assetConfig = this.#assets.get(`${asset.key}-${destination.key}`);
+  getDestinationAssets(keyOrChain: string | AnyChain): Asset[] {
+    const key = getKey(keyOrChain);
 
-    if (!assetConfig) {
+    return this.getAssetsConfigs()
+      .filter((cfg) => cfg.destination.key === key)
+      .map((cfg) => cfg.asset);
+  }
+
+  getAssetDestinationConfig(
+    asset: string | AnyAsset,
+    destination: string | AnyChain,
+  ): AssetTransferConfig {
+    const assetKey = getKey(asset);
+    const destKey = getKey(destination);
+    const config = this.#assets.get(`${assetKey}-${destKey}`);
+
+    if (!config) {
       throw new Error(
-        `AssetConfig for ${asset.key} and destination ${destination.key} not found`,
+        `AssetConfig for ${assetKey} and destination ${destKey} not found`,
       );
     }
 
-    return assetConfig;
+    return config;
   }
 }

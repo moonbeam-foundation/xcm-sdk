@@ -8,7 +8,7 @@ import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
 import { AssetTransferConfig } from '../types/AssetTransferConfig';
 import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
-import { IConfigService } from './ConfigService.interfaces';
+import { getKey } from '../config.utils';
 
 export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;
@@ -16,7 +16,7 @@ export interface ConfigServiceOptions {
   routes: Map<string, ChainRoutesConfig>;
 }
 
-export class ConfigService implements IConfigService {
+export class ConfigService {
   protected assets: Map<string, Asset>;
 
   protected chains: Map<string, AnyChain>;
@@ -27,6 +27,17 @@ export class ConfigService implements IConfigService {
     this.assets = options.assets ?? assetsMap;
     this.chains = options.chains ?? chainsMap;
     this.routes = options.routes;
+  }
+
+  getAsset(keyOrAsset: string | Asset): Asset {
+    const key = getKey(keyOrAsset);
+    const asset = this.assets.get(key);
+
+    if (!asset) {
+      throw new Error(`Asset ${key} not found`);
+    }
+
+    return asset;
   }
 
   getEcosystemAssets(ecosystem?: Ecosystem): Asset[] {
@@ -45,19 +56,8 @@ export class ConfigService implements IConfigService {
     ).sort((a, b) => a.key.localeCompare(b.key));
   }
 
-  getAsset(keyOrAsset: string | Asset): Asset {
-    const key = ConfigService.#getKey(keyOrAsset);
-    const asset = this.assets.get(key);
-
-    if (!asset) {
-      throw new Error(`Asset ${key} not found`);
-    }
-
-    return asset;
-  }
-
-  getChain(keyOrAsset: string | AnyChain): AnyChain {
-    const key = ConfigService.#getKey(keyOrAsset);
+  getChain(keyOrChain: string | AnyChain): AnyChain {
+    const key = getKey(keyOrChain);
     const chain = this.chains.get(key);
 
     if (!chain) {
@@ -67,22 +67,22 @@ export class ConfigService implements IConfigService {
     return chain;
   }
 
-  getChainConfig(keyOrAsset: string | AnyChain): ChainRoutesConfig {
-    const key = ConfigService.#getKey(keyOrAsset);
-    const chainConfig = this.routes.get(key);
+  getChainRoutesConfig(keyOrChain: string | AnyChain): ChainRoutesConfig {
+    const key = getKey(keyOrChain);
+    const config = this.routes.get(key);
 
-    if (!chainConfig) {
+    if (!config) {
       throw new Error(`Chain config for ${key} not found`);
     }
 
-    return chainConfig;
+    return config;
   }
 
   getSourceChains({
     asset,
     ecosystem,
   }: {
-    asset?: Asset;
+    asset?: string | Asset;
     ecosystem?: Ecosystem;
   }): AnyChain[] {
     const configs = Array.from(this.routes.values()).filter(
@@ -102,34 +102,44 @@ export class ConfigService implements IConfigService {
     asset,
     source,
   }: {
-    asset?: Asset;
-    source: AnyChain;
+    asset?: string | AnyAsset;
+    source: string | AnyChain;
   }): AnyChain[] {
-    const config = this.routes.get(source.key);
-
-    if (!config) {
-      throw new Error(`Chain routes config for chain ${source.key} not found`);
-    }
+    const config = this.getChainRoutesConfig(source);
 
     if (asset) {
       return config.getAssetDestinations(asset);
     }
 
-    return config.getAssetsConfigs().map((cfg) => cfg.destination);
+    return Array.from(
+      new Set(config.getAssetsConfigs().map((cfg) => cfg.destination)),
+    );
   }
 
-  getAssetDestinationConfig(
-    asset: Asset,
-    source: AnyChain,
-    destination: AnyChain,
-  ): AssetTransferConfig {
-    const chainConfig = this.routes.get(source.key);
+  getAssetDestinationConfig({
+    asset,
+    source,
+    destination,
+  }: {
+    asset: string | AnyAsset;
+    source: string | AnyChain;
+    destination: string | AnyChain;
+  }): AssetTransferConfig {
+    const config = this.getChainRoutesConfig(source);
 
-    if (!chainConfig) {
-      throw new Error(`Config for chain ${source.key} not found`);
-    }
+    return config.getAssetDestinationConfig(asset, destination);
+  }
 
-    return chainConfig.getAssetDestinationConfig(asset, destination);
+  getRouteAssets({
+    source,
+    destination,
+  }: {
+    source: string | AnyChain;
+    destination: string | AnyChain;
+  }): Asset[] {
+    const config = this.getChainRoutesConfig(source);
+
+    return config.getDestinationAssets(destination);
   }
 
   updateAsset(asset: Asset): void {
@@ -142,13 +152,5 @@ export class ConfigService implements IConfigService {
 
   updateChainConfig(chainConfig: ChainRoutesConfig): void {
     this.routes.set(chainConfig.chain.key, chainConfig);
-  }
-
-  static #getKey(keyOrModel: string | AnyAsset | AnyChain): string {
-    if (typeof keyOrModel === 'string') {
-      return keyOrModel;
-    }
-
-    return keyOrModel.key;
   }
 }

@@ -1,12 +1,12 @@
 /* eslint-disable sort-keys */
 import { AnyAsset, AnyChain, Ecosystem } from '@moonbeam-network/xcm-types';
-import { ConfigService, IConfigService } from '../ConfigService';
+import { ConfigService } from '../ConfigService';
 import { TransferConfig } from './ConfigBuilder.interfaces';
 import { routesMap } from '../xcm-configs';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: routesMap });
 
-export function ConfigBuilder(service: IConfigService = DEFAULT_SERVICE) {
+export function ConfigBuilder(service: ConfigService = DEFAULT_SERVICE) {
   return {
     assets: (ecosystem?: Ecosystem) => {
       const assets = service.getEcosystemAssets(ecosystem);
@@ -33,16 +33,16 @@ export function ConfigBuilder(service: IConfigService = DEFAULT_SERVICE) {
                   keyOrChain: string | AnyChain,
                 ) => {
                   const destination = service.getChain(keyOrChain);
-                  const sourceConfig = service.getAssetDestinationConfig(
+                  const sourceConfig = service.getAssetDestinationConfig({
                     asset,
                     source,
                     destination,
-                  );
-                  const destinationConfig = service.getAssetDestinationConfig(
+                  });
+                  const destinationConfig = service.getAssetDestinationConfig({
                     asset,
-                    destination,
-                    source,
-                  );
+                    source: destination,
+                    destination: source,
+                  });
 
                   return {
                     build: (): TransferConfig => ({

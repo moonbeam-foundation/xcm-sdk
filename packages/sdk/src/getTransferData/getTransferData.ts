@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { IConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
+import { ConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
@@ -14,7 +14,7 @@ import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 
 export interface GetTransferDataParams extends Partial<Signers> {
-  configService: IConfigService;
+  configService: ConfigService;
   destinationAddress: string;
   sourceAddress: string;
   transferConfig: TransferConfig;
