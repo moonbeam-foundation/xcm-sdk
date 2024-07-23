@@ -16,12 +16,13 @@ import {
   vmanta,
 } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const bifrostPolkadotConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const bifrostPolkadotRoutes = new ChainRoutes({
+  chain: bifrostPolkadot,
+  routes: [
+    new AssetRoute({
       asset: bnc,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -32,7 +33,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: fil,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -48,7 +49,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -64,7 +65,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: vastr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -80,7 +81,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: vdot,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -96,7 +97,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: vfil,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -112,7 +113,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: vglmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -128,7 +129,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: vmanta,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -144,7 +145,7 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: bncs,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -161,5 +162,4 @@ export const bifrostPolkadotConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     }),
   ],
-  chain: bifrostPolkadot,
 });

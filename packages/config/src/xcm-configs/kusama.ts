@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { ksm } from '../assets';
 import { kusama, moonriver } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const kusamaConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const kusamaRoutes = new ChainRoutes({
+  chain: kusama,
+  routes: [
+    new AssetRoute({
       asset: ksm,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -30,5 +31,4 @@ export const kusamaConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: kusama,
 });

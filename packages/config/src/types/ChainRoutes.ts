@@ -1,20 +1,20 @@
 import { AnyAsset, AnyChain, Asset } from '@moonbeam-network/xcm-types';
-import { AssetTransferConfig } from './AssetTransferConfig';
 import { getKey } from '../config.utils';
+import { AssetRoute } from './AssetRoute';
 
-export interface ChainRoutesConfigConstructorParams {
-  assets: AssetTransferConfig[];
+export interface ChainRoutesConstructorParams {
+  routes: AssetRoute[];
   chain: AnyChain;
 }
 
-export class ChainRoutesConfig {
-  readonly #assets: Map<string, AssetTransferConfig>;
+export class ChainRoutes {
+  readonly #routes: Map<string, AssetRoute>;
 
   readonly chain: AnyChain;
 
-  constructor({ assets, chain }: ChainRoutesConfigConstructorParams) {
+  constructor({ routes: assets, chain }: ChainRoutesConstructorParams) {
     this.chain = chain;
-    this.#assets = new Map(
+    this.#routes = new Map(
       assets.map((asset) => [
         `${asset.asset.key}-${asset.destination.key}`,
         asset,
@@ -22,18 +22,18 @@ export class ChainRoutesConfig {
     );
   }
 
-  getAssetsConfigs(): AssetTransferConfig[] {
-    return Array.from(this.#assets.values());
+  getRoutes(): AssetRoute[] {
+    return Array.from(this.#routes.values());
   }
 
-  getAssetConfigs(keyOrAsset: string | AnyAsset): AssetTransferConfig[] {
+  getAssetRoutes(keyOrAsset: string | AnyAsset): AssetRoute[] {
     const key = getKey(keyOrAsset);
 
-    return this.getAssetsConfigs().filter((cfg) => cfg.asset.key === key);
+    return this.getRoutes().filter((cfg) => cfg.asset.key === key);
   }
 
   getAssetDestinations(keyOrAsset: string | AnyAsset): AnyChain[] {
-    return this.getAssetConfigs(keyOrAsset).map(
+    return this.getAssetRoutes(keyOrAsset).map(
       (assetConfig) => assetConfig.destination,
     );
   }
@@ -41,18 +41,18 @@ export class ChainRoutesConfig {
   getDestinationAssets(keyOrChain: string | AnyChain): Asset[] {
     const key = getKey(keyOrChain);
 
-    return this.getAssetsConfigs()
+    return this.getRoutes()
       .filter((cfg) => cfg.destination.key === key)
       .map((cfg) => cfg.asset);
   }
 
-  getAssetDestinationConfig(
+  getAssetRoute(
     asset: string | AnyAsset,
     destination: string | AnyChain,
-  ): AssetTransferConfig {
+  ): AssetRoute {
     const assetKey = getKey(asset);
     const destKey = getKey(destination);
-    const config = this.#assets.get(`${assetKey}-${destKey}`);
+    const config = this.#routes.get(`${assetKey}-${destKey}`);
 
     if (!config) {
       throw new Error(

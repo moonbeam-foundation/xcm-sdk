@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, hdx, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { hydration, moonbeam } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const hydrationConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const hydrationRoutes = new ChainRoutes({
+  chain: hydration,
+  routes: [
+    new AssetRoute({
       asset: hdx,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -21,7 +22,7 @@ export const hydrationConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -32,7 +33,7 @@ export const hydrationConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dai,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -47,7 +48,7 @@ export const hydrationConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdcwh,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -62,7 +63,7 @@ export const hydrationConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdtwh,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -77,7 +78,7 @@ export const hydrationConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: wbtc,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -92,7 +93,7 @@ export const hydrationConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: weth,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -108,5 +109,4 @@ export const hydrationConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: hydration,
 });

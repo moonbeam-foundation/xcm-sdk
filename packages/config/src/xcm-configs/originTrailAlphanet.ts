@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { otp } from '../assets';
 import { moonbaseAlpha, originTrailAlphanet } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const originTrailAlphanetConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const originTrailAlphanetRoutes = new ChainRoutes({
+  chain: originTrailAlphanet,
+  routes: [
+    new AssetRoute({
       asset: otp,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
@@ -25,5 +26,4 @@ export const originTrailAlphanetConfig = new ChainRoutesConfig({
         .X1(),
     }),
   ],
-  chain: originTrailAlphanet,
 });

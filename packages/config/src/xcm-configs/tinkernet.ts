@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { tnkr } from '../assets';
 import { moonriver, tinkernet } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const tinkernetConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const tinkernetRoutes = new ChainRoutes({
+  chain: tinkernet,
+  routes: [
+    new AssetRoute({
       asset: tnkr,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -22,5 +23,4 @@ export const tinkernetConfig = new ChainRoutesConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
   ],
-  chain: tinkernet,
 });

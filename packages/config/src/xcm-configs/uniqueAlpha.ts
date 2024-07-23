@@ -1,9 +1,10 @@
 import { uniqueAlpha } from '../chains';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { ChainRoutes } from '../types/ChainRoutes';
 
 // NOTE: Disabling because ws endpoint is not working
-export const uniqueAlphaConfig = new ChainRoutesConfig({
-  assets: [
+export const uniqueAlphaRoutes = new ChainRoutes({
+  chain: uniqueAlpha,
+  routes: [
     // new AssetConfig({
     //   asset: auq,
     //   balance: BalanceBuilder().substrate().assets().account(),
@@ -16,5 +17,4 @@ export const uniqueAlphaConfig = new ChainRoutesConfig({
     //   extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     // }),
   ],
-  chain: uniqueAlpha,
 });

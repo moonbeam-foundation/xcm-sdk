@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { crab } from '../assets';
 import { darwiniaCrab, moonriver } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const darwiniaCrabConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const darwiniaCrabRoutes = new ChainRoutes({
+  chain: darwiniaCrab,
+  routes: [
+    new AssetRoute({
       asset: crab,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -25,5 +26,4 @@ export const darwiniaCrabConfig = new ChainRoutesConfig({
         .X1(),
     }),
   ],
-  chain: darwiniaCrab,
 });

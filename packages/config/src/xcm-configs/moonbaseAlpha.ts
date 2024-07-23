@@ -27,12 +27,13 @@ import {
   picassoAlphanet,
   turingAlphanet,
 } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const moonbaseAlphaConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const moonbaseAlphaRoutes = new ChainRoutes({
+  chain: moonbaseAlpha,
+  routes: [
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -43,7 +44,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -54,7 +55,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -65,7 +66,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -76,7 +77,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: alan,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -106,7 +107,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
     //     balance: BalanceBuilder().substrate().system().account(),
     //   },
     // }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ampe,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -121,7 +122,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: otp,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -136,7 +137,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: atom,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -151,7 +152,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: pica,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -166,7 +167,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: tt1,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -181,7 +182,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: tur,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -196,7 +197,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: unit,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -211,7 +212,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdcwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -226,7 +227,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -241,7 +242,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -256,7 +257,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -267,7 +268,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: hdx,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -282,7 +283,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -293,7 +294,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -308,7 +309,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: agng,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -323,7 +324,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().system().account(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -334,7 +335,7 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
@@ -350,5 +351,4 @@ export const moonbaseAlphaConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: moonbaseAlpha,
 });

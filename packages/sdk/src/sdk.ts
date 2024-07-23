@@ -94,14 +94,11 @@ export async function getParachainBalances(
   address: string,
   service: ConfigService = DEFAULT_SERVICE,
 ): Promise<AssetAmount[]> {
-  const chainsConfig = service.getChainRoutesConfig(chain);
-  const assets = chainsConfig.getAssetsConfigs();
-
+  const routes = service.getChainRoutes(chain).getRoutes();
   const polkadot = await PolkadotService.create(chain);
-
   const balances = await getAssetsBalances({
     chain,
-    assets,
+    routes,
     address,
     polkadot,
   });

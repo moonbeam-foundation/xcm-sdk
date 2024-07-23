@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import {
-  AssetTransferConfig,
+  AssetRoute,
   FeeAssetConfig,
   TransferConfig,
 } from '@moonbeam-network/xcm-config';
@@ -236,7 +236,7 @@ export function getMax({
 export interface GetAssetsBalancesParams {
   address: string;
   chain: AnyChain;
-  assets: AssetTransferConfig[];
+  routes: AssetRoute[];
   evmSigner?: EvmSigner;
   polkadot: PolkadotService;
 }
@@ -244,27 +244,24 @@ export interface GetAssetsBalancesParams {
 export async function getAssetsBalances({
   address,
   chain,
-  assets,
+  routes,
   polkadot,
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
-  const uniqueAssets = assets.reduce(
-    (acc: AssetTransferConfig[], asset: AssetTransferConfig) => {
-      if (!acc.some((a: AssetTransferConfig) => a.asset.isEqual(asset.asset))) {
-        return [asset, ...acc];
-      }
+  const uniqueRoutes = routes.reduce((acc: AssetRoute[], route: AssetRoute) => {
+    if (!acc.some((a: AssetRoute) => a.asset.isEqual(route.asset))) {
+      return [route, ...acc];
+    }
 
-      return acc;
-    },
-    [],
-  );
+    return acc;
+  }, []);
 
   const balances = await Promise.all(
-    uniqueAssets.map(async (config: AssetTransferConfig) =>
+    uniqueRoutes.map(async (route: AssetRoute) =>
       // eslint-disable-next-line no-await-in-loop
       getBalance({
         address,
-        asset: chain.getChainAsset(config.asset),
-        builder: config.balance,
+        asset: chain.getChainAsset(route.asset),
+        builder: route.balance,
         chain,
         polkadot,
       }),

@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { movr, pica } from '../assets';
 import { moonriver, picasso } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const picassoConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const picassoRoutes = new ChainRoutes({
+  chain: picasso,
+  routes: [
+    new AssetRoute({
       asset: pica,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -21,7 +22,7 @@ export const picassoConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: movr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -37,5 +38,4 @@ export const picassoConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: picasso,
 });

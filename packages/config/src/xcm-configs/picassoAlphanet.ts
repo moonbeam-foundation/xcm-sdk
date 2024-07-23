@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { atom, dev, pica } from '../assets';
 import { moonbaseAlpha, picassoAlphanet } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const picassoAlphanetConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const picassoAlphanetRoutes = new ChainRoutes({
+  chain: picassoAlphanet,
+  routes: [
+    new AssetRoute({
       asset: pica,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
@@ -21,7 +22,7 @@ export const picassoAlphanetConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: atom,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
@@ -36,7 +37,7 @@ export const picassoAlphanetConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
@@ -52,5 +53,4 @@ export const picassoAlphanetConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: picassoAlphanet,
 });

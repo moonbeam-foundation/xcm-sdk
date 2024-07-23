@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { ring } from '../assets';
 import { darwinia, moonbeam } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const darwiniaConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const darwiniaRoutes = new ChainRoutes({
+  chain: darwinia,
+  routes: [
+    new AssetRoute({
       asset: ring,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -25,5 +26,4 @@ export const darwiniaConfig = new ChainRoutesConfig({
         .X1(),
     }),
   ],
-  chain: darwinia,
 });

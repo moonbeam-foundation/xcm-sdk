@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { glmr, usdcwh, ztg } from '../assets';
 import { moonbeam, zeitgeist } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const zeitgeistConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const zeitgeistRoutes = new ChainRoutes({
+  chain: zeitgeist,
+  routes: [
+    new AssetRoute({
       asset: ztg,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -21,7 +22,7 @@ export const zeitgeistConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdcwh,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -36,7 +37,7 @@ export const zeitgeistConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -48,5 +49,4 @@ export const zeitgeistConfig = new ChainRoutesConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
   ],
-  chain: zeitgeist,
 });

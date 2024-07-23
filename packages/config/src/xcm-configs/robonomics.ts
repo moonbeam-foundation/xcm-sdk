@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { xrt } from '../assets';
 import { moonriver, robonomics } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const robonomicsConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const robonomicsRoutes = new ChainRoutes({
+  chain: robonomics,
+  routes: [
+    new AssetRoute({
       asset: xrt,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -25,5 +26,4 @@ export const robonomicsConfig = new ChainRoutesConfig({
         .here(),
     }),
   ],
-  chain: robonomics,
 });

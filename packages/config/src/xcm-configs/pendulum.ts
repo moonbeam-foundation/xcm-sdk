@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { glmr, pen } from '../assets';
 import { moonbeam, pendulum } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const pendulumConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const pendulumRoutes = new ChainRoutes({
+  chain: pendulum,
+  routes: [
+    new AssetRoute({
       asset: pen,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -21,7 +22,7 @@ export const pendulumConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
@@ -37,5 +38,4 @@ export const pendulumConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: pendulum,
 });

@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { dot } from '../assets';
 import { moonbeam, polkadot } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const polkadotConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const polkadotRoutes = new ChainRoutes({
+  chain: polkadot,
+  routes: [
+    new AssetRoute({
       asset: dot,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -30,5 +31,4 @@ export const polkadotConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: polkadot,
 });

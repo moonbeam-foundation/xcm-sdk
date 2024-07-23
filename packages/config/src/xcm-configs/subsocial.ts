@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { sub } from '../assets';
 import { moonbeam, subsocial } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const subsocialConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const subsocialRoutes = new ChainRoutes({
+  chain: subsocial,
+  routes: [
+    new AssetRoute({
       asset: sub,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -25,5 +26,4 @@ export const subsocialConfig = new ChainRoutesConfig({
         .here(),
     }),
   ],
-  chain: subsocial,
 });

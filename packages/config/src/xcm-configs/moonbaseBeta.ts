@@ -4,12 +4,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { alan, betaDEV, dev, ftmwh, usdcwh } from '../assets';
 import { moonbaseAlpha, moonbaseBeta } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const moonbaseBetaConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const moonbaseBetaRoutes = new ChainRoutes({
+  chain: moonbaseBeta,
+  routes: [
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
@@ -24,7 +25,7 @@ export const moonbaseBetaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: alan,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
@@ -39,7 +40,7 @@ export const moonbaseBetaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdcwh,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
@@ -54,7 +55,7 @@ export const moonbaseBetaConfig = new ChainRoutesConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ftmwh,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
@@ -70,5 +71,4 @@ export const moonbaseBetaConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: moonbaseBeta,
 });

@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { astr, glmr } from '../assets';
 import { astar, moonbeam } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const astarConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const astarRoutes = new ChainRoutes({
+  chain: astar,
+  routes: [
+    new AssetRoute({
       asset: astr,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -24,7 +25,7 @@ export const astarConfig = new ChainRoutesConfig({
         .transferMultiAsset(astar.parachainId)
         .here(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -40,5 +41,4 @@ export const astarConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: astar,
 });

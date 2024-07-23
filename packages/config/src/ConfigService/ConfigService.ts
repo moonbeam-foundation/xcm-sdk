@@ -6,14 +6,14 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 import { getKey } from '../config.utils';
 
 export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;
   chains?: Map<string, AnyChain>;
-  routes: Map<string, ChainRoutesConfig>;
+  routes: Map<string, ChainRoutes>;
 }
 
 export class ConfigService {
@@ -21,7 +21,7 @@ export class ConfigService {
 
   protected chains: Map<string, AnyChain>;
 
-  protected routes: Map<string, ChainRoutesConfig>;
+  protected routes: Map<string, ChainRoutes>;
 
   constructor(options: ConfigServiceOptions) {
     this.assets = options.assets ?? assetsMap;
@@ -48,10 +48,10 @@ export class ConfigService {
     return Array.from(
       new Set(
         Array.from(this.routes.values())
-          .filter((chainConfig) => chainConfig.chain.ecosystem === ecosystem)
-          .map((chainConfig) => chainConfig.getAssetsConfigs())
+          .filter((routes) => routes.chain.ecosystem === ecosystem)
+          .map((routes) => routes.getRoutes())
           .flat(2)
-          .map((assetConfig) => assetConfig.asset),
+          .map((route) => route.asset),
       ),
     ).sort((a, b) => a.key.localeCompare(b.key));
   }
@@ -67,7 +67,7 @@ export class ConfigService {
     return chain;
   }
 
-  getChainRoutesConfig(keyOrChain: string | AnyChain): ChainRoutesConfig {
+  getChainRoutes(keyOrChain: string | AnyChain): ChainRoutes {
     const key = getKey(keyOrChain);
     const config = this.routes.get(key);
 
@@ -85,17 +85,17 @@ export class ConfigService {
     asset?: string | Asset;
     ecosystem?: Ecosystem;
   }): AnyChain[] {
-    const configs = Array.from(this.routes.values()).filter(
-      (cfg) => !ecosystem || cfg.chain.ecosystem === ecosystem,
+    const routes = Array.from(this.routes.values()).filter(
+      (chainRoutes) => !ecosystem || chainRoutes.chain.ecosystem === ecosystem,
     );
 
     if (!asset) {
-      return configs.map((cfg) => cfg.chain);
+      return routes.map((route) => route.chain);
     }
 
-    return configs
-      .filter((cfg) => cfg.getAssetConfigs(asset).length)
-      .map((cfg) => cfg.chain);
+    return routes
+      .filter((route) => route.getAssetRoutes(asset).length)
+      .map((route) => route.chain);
   }
 
   getDestinationChains({
@@ -105,18 +105,18 @@ export class ConfigService {
     asset?: string | AnyAsset;
     source: string | AnyChain;
   }): AnyChain[] {
-    const config = this.getChainRoutesConfig(source);
+    const config = this.getChainRoutes(source);
 
     if (asset) {
       return config.getAssetDestinations(asset);
     }
 
     return Array.from(
-      new Set(config.getAssetsConfigs().map((cfg) => cfg.destination)),
+      new Set(config.getRoutes().map((routes) => routes.destination)),
     );
   }
 
-  getAssetDestinationConfig({
+  getAssetRoute({
     asset,
     source,
     destination,
@@ -124,10 +124,10 @@ export class ConfigService {
     asset: string | AnyAsset;
     source: string | AnyChain;
     destination: string | AnyChain;
-  }): AssetTransferConfig {
-    const config = this.getChainRoutesConfig(source);
+  }): AssetRoute {
+    const routes = this.getChainRoutes(source);
 
-    return config.getAssetDestinationConfig(asset, destination);
+    return routes.getAssetRoute(asset, destination);
   }
 
   getRouteAssets({
@@ -137,9 +137,9 @@ export class ConfigService {
     source: string | AnyChain;
     destination: string | AnyChain;
   }): Asset[] {
-    const config = this.getChainRoutesConfig(source);
+    const routes = this.getChainRoutes(source);
 
-    return config.getDestinationAssets(destination);
+    return routes.getDestinationAssets(destination);
   }
 
   updateAsset(asset: Asset): void {
@@ -150,7 +150,7 @@ export class ConfigService {
     this.chains.set(chain.key, chain);
   }
 
-  updateChainConfig(chainConfig: ChainRoutesConfig): void {
+  updateChainConfig(chainConfig: ChainRoutes): void {
     this.routes.set(chainConfig.chain.key, chainConfig);
   }
 }

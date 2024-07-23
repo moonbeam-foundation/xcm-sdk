@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
 import { moonbaseAlpha, peaqEvmAlphanet } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const peaqEvmAlphanetConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const peaqEvmAlphanetRoutes = new ChainRoutes({
+  chain: peaqEvmAlphanet,
+  routes: [
+    new AssetRoute({
       asset: ftmwh,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -26,7 +27,7 @@ export const peaqEvmAlphanetConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dev,
       balance: BalanceBuilder().evm().erc20(),
       contract: ContractBuilder().Xtokens().transfer(),
@@ -43,5 +44,4 @@ export const peaqEvmAlphanetConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: peaqEvmAlphanet,
 });

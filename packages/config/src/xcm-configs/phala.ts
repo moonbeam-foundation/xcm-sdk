@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { glmr, pha } from '../assets';
 import { moonbeam, phala } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const phalaConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const phalaRoutes = new ChainRoutes({
+  chain: phala,
+  routes: [
+    new AssetRoute({
       asset: pha,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -21,7 +22,7 @@ export const phalaConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -37,5 +38,4 @@ export const phalaConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: phala,
 });

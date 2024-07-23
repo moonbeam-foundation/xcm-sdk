@@ -6,14 +6,15 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { apillon, ded, dot, pink, stink, usdc, usdt } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
 const extra = 0.036;
 
-export const polkadotAssetHubConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const polkadotAssetHubRoutes = new ChainRoutes({
+  chain: polkadotAssetHub,
+  routes: [
+    new AssetRoute({
       asset: usdt,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -33,7 +34,7 @@ export const polkadotAssetHubConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdc,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -53,7 +54,7 @@ export const polkadotAssetHubConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: pink,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -73,7 +74,7 @@ export const polkadotAssetHubConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: ded,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -93,7 +94,7 @@ export const polkadotAssetHubConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: stink,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -113,7 +114,7 @@ export const polkadotAssetHubConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: apillon,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -134,5 +135,4 @@ export const polkadotAssetHubConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: polkadotAssetHub,
 });

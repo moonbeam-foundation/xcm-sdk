@@ -33,12 +33,12 @@ export function ConfigBuilder(service: ConfigService = DEFAULT_SERVICE) {
                   keyOrChain: string | AnyChain,
                 ) => {
                   const destination = service.getChain(keyOrChain);
-                  const sourceConfig = service.getAssetDestinationConfig({
+                  const sourceConfig = service.getAssetRoute({
                     asset,
                     source,
                     destination,
                   });
-                  const destinationConfig = service.getAssetDestinationConfig({
+                  const destinationConfig = service.getAssetRoute({
                     asset,
                     source: destination,
                     destination: source,

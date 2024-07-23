@@ -6,12 +6,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
 import { alphanetAssetHub, moonbaseAlpha } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const alphanetAssetHubConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const alphanetAssetHubRoutes = new ChainRoutes({
+  chain: alphanetAssetHub,
+  routes: [
+    new AssetRoute({
       asset: tt1,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
@@ -31,5 +32,4 @@ export const alphanetAssetHubConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: alphanetAssetHub,
 });

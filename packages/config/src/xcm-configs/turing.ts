@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { movr, tur } from '../assets';
 import { moonriver, turing } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const turingConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const turingRoutes = new ChainRoutes({
+  chain: turing,
+  routes: [
+    new AssetRoute({
       asset: tur,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -24,7 +25,7 @@ export const turingConfig = new ChainRoutesConfig({
         .transferMultiAsset(turing.parachainId)
         .X1(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: movr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -40,5 +41,4 @@ export const turingConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: turing,
 });

@@ -5,12 +5,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { csm, movr } from '../assets';
 import { crustShadow, moonriver } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const crustShadowConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const crustShadowRoutes = new ChainRoutes({
+  chain: crustShadow,
+  routes: [
+    new AssetRoute({
       asset: csm,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -24,7 +25,7 @@ export const crustShadowConfig = new ChainRoutesConfig({
         .limitedReserveTransferAssets()
         .here(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: movr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,
@@ -40,5 +41,4 @@ export const crustShadowConfig = new ChainRoutesConfig({
       },
     }),
   ],
-  chain: crustShadow,
 });

@@ -6,12 +6,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { moonbeam, peaqChain } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const peaqConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const peaqRoutes = new ChainRoutes({
+  chain: peaqChain,
+  routes: [
+    new AssetRoute({
       asset: peaq,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
@@ -22,7 +23,7 @@ export const peaqConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: glmr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -34,7 +35,7 @@ export const peaqConfig = new ChainRoutesConfig({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdcwh,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -50,7 +51,7 @@ export const peaqConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: dai,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -66,7 +67,7 @@ export const peaqConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: wbtc,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -82,7 +83,7 @@ export const peaqConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: weth,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -98,7 +99,7 @@ export const peaqConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdtwh,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
@@ -115,5 +116,4 @@ export const peaqConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: peaqChain,
 });

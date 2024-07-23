@@ -28,7 +28,7 @@ export function Mrl(options?: MrlOptions) {
           return {
             assets,
             setAsset(asset: string | AnyAsset) {
-              const config = service.getAssetDestinationConfig({
+              const route = service.getAssetRoute({
                 asset,
                 source,
                 destination,
@@ -40,7 +40,7 @@ export function Mrl(options?: MrlOptions) {
                   destinationAddress: string,
                 ) {
                   return getTransferData({
-                    config,
+                    route,
                     destinationAddress,
                     sourceAddress,
                   });

@@ -6,12 +6,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { kma, movr } from '../assets';
 import { calamari, moonriver } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const calamariConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const calamariRoutes = new ChainRoutes({
+  chain: calamari,
+  routes: [
+    new AssetRoute({
       asset: kma,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -22,7 +23,7 @@ export const calamariConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: movr,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,
@@ -39,5 +40,4 @@ export const calamariConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: calamari,
 });

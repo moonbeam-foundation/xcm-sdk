@@ -6,12 +6,13 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { aseed, kar, movr } from '../assets';
 import { karura, moonriver } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const karuraConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const karuraRoutes = new ChainRoutes({
+  chain: karura,
+  routes: [
+    new AssetRoute({
       asset: kar,
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
@@ -22,7 +23,7 @@ export const karuraConfig = new ChainRoutesConfig({
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: aseed,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -38,7 +39,7 @@ export const karuraConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: movr,
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
@@ -55,5 +56,4 @@ export const karuraConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     }),
   ],
-  chain: karura,
 });

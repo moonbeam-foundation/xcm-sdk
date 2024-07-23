@@ -25,8 +25,8 @@ import {
 } from '../chains';
 import { ConfigService } from './ConfigService';
 
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 import { routesMap } from '../xcm-configs';
 
 const TEST_CHAIN = new Parachain({
@@ -203,7 +203,7 @@ describe('config service', () => {
 
   describe('updateChainConfig', () => {
     it('should update existing chain config', () => {
-      const assetConfig = new AssetTransferConfig({
+      const assetConfig = new AssetRoute({
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destination: moonbeam,
@@ -215,22 +215,20 @@ describe('config service', () => {
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
 
-      const chainConfig = new ChainRoutesConfig({
-        assets: [assetConfig],
+      const chainConfig = new ChainRoutes({
+        routes: [assetConfig],
         chain: hydration,
       });
 
       configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainRoutesConfig(hydration);
-      expect(updated.getAssetsConfigs()).toStrictEqual(
-        chainConfig.getAssetsConfigs(),
-      );
+      const updated = configService.getChainRoutes(hydration);
+      expect(updated.getRoutes()).toStrictEqual(chainConfig.getRoutes());
     });
 
     it('should create new chain config', () => {
       configService.updateChain(TEST_CHAIN);
 
-      const assetConfig = new AssetTransferConfig({
+      const assetConfig = new AssetRoute({
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destination: moonbeam,
@@ -242,16 +240,14 @@ describe('config service', () => {
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
 
-      const chainConfig = new ChainRoutesConfig({
-        assets: [assetConfig],
+      const chainConfig = new ChainRoutes({
+        routes: [assetConfig],
         chain: TEST_CHAIN,
       });
 
       configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainRoutesConfig('test');
-      expect(updated.getAssetsConfigs()).toStrictEqual(
-        chainConfig.getAssetsConfigs(),
-      );
+      const updated = configService.getChainRoutes('test');
+      expect(updated.getRoutes()).toStrictEqual(chainConfig.getRoutes());
     });
   });
 });

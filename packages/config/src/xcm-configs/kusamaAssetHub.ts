@@ -6,14 +6,15 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { ksm, rmrk, usdt } from '../assets';
 import { kusamaAssetHub, moonriver } from '../chains';
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
 
 const extra = 0.0015;
 
-export const kusamaAssetHubConfig = new ChainRoutesConfig({
-  assets: [
-    new AssetTransferConfig({
+export const kusamaAssetHubRoutes = new ChainRoutes({
+  chain: kusamaAssetHub,
+  routes: [
+    new AssetRoute({
       asset: rmrk,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,
@@ -33,7 +34,7 @@ export const kusamaAssetHubConfig = new ChainRoutesConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
-    new AssetTransferConfig({
+    new AssetRoute({
       asset: usdt,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonriver,
@@ -54,5 +55,4 @@ export const kusamaAssetHubConfig = new ChainRoutesConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
   ],
-  chain: kusamaAssetHub,
 });

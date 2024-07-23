@@ -6,8 +6,8 @@ import { Ecosystem } from '@moonbeam-network/xcm-types';
 import { ConfigService } from '../ConfigService';
 import { dev } from '../assets';
 import { moonbaseAlpha, pendulumAlphanet } from '../chains';
-import { moonbaseAlphaConfig } from '../xcm-configs/moonbaseAlpha';
-import { pendulumAlphanetConfig } from '../xcm-configs/pendulumAlphanet';
+import { moonbaseAlphaRoutes } from '../xcm-configs/moonbaseAlpha';
+import { pendulumAlphanetRoutes } from '../xcm-configs/pendulumAlphanet';
 import { ConfigBuilder } from './ConfigBuilder';
 import { routesMap } from '../xcm-configs';
 
@@ -24,17 +24,11 @@ describe('configBuilder', () => {
       asset: dev,
       source: {
         chain: moonbaseAlpha,
-        config: moonbaseAlphaConfig.getAssetDestinationConfig(
-          dev,
-          pendulumAlphanet,
-        ),
+        config: moonbaseAlphaRoutes.getAssetRoute(dev, pendulumAlphanet),
       },
       destination: {
         chain: pendulumAlphanet,
-        config: pendulumAlphanetConfig.getAssetDestinationConfig(
-          dev,
-          moonbaseAlpha,
-        ),
+        config: pendulumAlphanetRoutes.getAssetRoute(dev, moonbaseAlpha),
       },
     });
   });
@@ -52,17 +46,11 @@ describe('configBuilder', () => {
       asset: dev,
       source: {
         chain: moonbaseAlpha,
-        config: moonbaseAlphaConfig.getAssetDestinationConfig(
-          dev,
-          pendulumAlphanet,
-        ),
+        config: moonbaseAlphaRoutes.getAssetRoute(dev, pendulumAlphanet),
       },
       destination: {
         chain: pendulumAlphanet,
-        config: pendulumAlphanetConfig.getAssetDestinationConfig(
-          dev,
-          moonbaseAlpha,
-        ),
+        config: pendulumAlphanetRoutes.getAssetRoute(dev, moonbaseAlpha),
       },
     });
   });
