@@ -17,7 +17,7 @@ jobs:
           node-version: 20.x
           cache: 'npm'
 
-      - run: npm install
+      - run: npm ci --ignore-scripts
 
       - name: 🛠️ Build
         run: npm run build

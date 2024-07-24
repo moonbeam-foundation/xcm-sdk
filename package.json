@@ -70,11 +70,6 @@
     "viem": "^2.17.9",
     "vitest": "^2.0.4"
   },
-  "overrides": {
-    "vite": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
-  },
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix --max-warnings=0",
     "*.{json,md}": "prettier --write"
