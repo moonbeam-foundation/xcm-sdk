@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
-import {
-  AssetRoute,
-  FeeAssetConfig,
-  TransferConfig,
-} from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import { AssetRoute, FeeAssetConfig } from '@moonbeam-network/xcm-config';
+import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import { TransferContractInterface, createContract } from '../contract';
@@ -14,87 +10,84 @@ import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
 import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
-  transferConfig: TransferConfig;
+  route: AssetRoute;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  polkadot: PolkadotService;
+  source: AnyParachain;
   sourceAddress: string;
 }
 
 export async function getSourceData({
-  transferConfig,
+  route,
   destinationAddress,
   destinationFee,
-  polkadot,
+  source,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
-  const {
-    destination,
-    source: { chain, config },
-  } = transferConfig;
-  const asset = chain.getChainAsset(transferConfig.asset);
-  const feeAsset = config.fee ? chain.getChainAsset(config.fee.asset) : asset;
+  const polkadot = await PolkadotService.create(source);
+  const asset = source.getChainAsset(route.asset);
+  const feeAsset = route.fee ? source.getChainAsset(route.fee.asset) : asset;
 
   const balance = await getBalance({
     address: sourceAddress,
     asset,
-    builder: config.balance,
-    chain,
+    builder: route.balance,
+    chain: source,
     polkadot,
   });
-  const feeBalance = config.fee
+  const feeBalance = route.fee
     ? await getBalance({
         address: sourceAddress,
         asset: feeAsset,
-        builder: config.fee.balance,
-        chain,
+        builder: route.fee.balance,
+        chain: source,
         polkadot,
       })
     : balance;
   // eslint-disable-next-line no-nested-ternary
-  const destinationFeeBalance = config.destinationFee.asset.isEqual(asset)
+  const destinationFeeBalance = route.destinationFee.asset.isEqual(asset)
     ? balance
-    : config.destinationFee.asset.isEqual(feeAsset)
+    : route.destinationFee.asset.isEqual(feeAsset)
       ? feeBalance
       : await getBalance({
           address: sourceAddress,
-          asset: chain.getChainAsset(config.destinationFee.asset),
-          builder: config.destinationFee.balance,
-          chain,
+          asset: source.getChainAsset(route.destinationFee.asset),
+          builder: route.destinationFee.balance,
+          chain: source,
           polkadot,
         });
 
-  const min = await getMin(config, polkadot);
+  const min = await getMin(route, polkadot);
   const { existentialDeposit } = polkadot;
 
-  const extrinsic = config.extrinsic?.build({
+  const extrinsic = route.extrinsic?.build({
     address: destinationAddress,
     amount: balance.amount,
     asset: asset.getAssetId(),
-    destination: destination.chain,
+    destination: route.destination,
     fee: destinationFee.amount,
     feeAsset: destinationFee.getAssetId(),
     palletInstance: asset.getAssetPalletInstance(),
-    source: chain,
+    source,
   });
 
-  const contract = config.contract?.build({
+  const contract = route.contract?.build({
     address: destinationAddress,
     amount: balance.amount,
     asset: asset.address || asset.getAssetId(),
-    destination: destination.chain,
+    destination: route.destination,
     fee: destinationFee.amount,
     feeAsset: destinationFee.address || destinationFee.getAssetId(),
   });
 
   const fee = await getFee({
     balance,
-    chain,
+    chain: source,
     contract,
     destinationFee,
     extrinsic,
     feeBalance,
-    feeConfig: config.fee,
+    feeConfig: route.fee,
     polkadot,
     sourceAddress,
   });
@@ -108,7 +101,6 @@ export async function getSourceData({
 
   return {
     balance,
-    chain,
     destinationFeeBalance,
     existentialDeposit,
     fee,
@@ -122,7 +114,7 @@ export interface GetFeeParams {
   balance: AssetAmount;
   feeBalance: AssetAmount;
   contract?: ContractConfig;
-  chain: AnyChain;
+  chain: AnyParachain;
   destinationFee: AssetAmount;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeAssetConfig;
@@ -235,7 +227,7 @@ export function getMax({
 
 export interface GetAssetsBalancesParams {
   address: string;
-  chain: AnyChain;
+  chain: AnyParachain;
   routes: AssetRoute[];
   evmSigner?: EvmSigner;
   polkadot: PolkadotService;

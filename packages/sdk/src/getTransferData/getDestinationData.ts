@@ -1,43 +1,37 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
-import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
+import { AssetRoute } from '@moonbeam-network/xcm-config';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
 import { getBalance, getMin } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
-  transferConfig: TransferConfig;
+  route: AssetRoute;
   destinationAddress: string;
-  polkadot: PolkadotService;
 }
 
 export async function getDestinationData({
-  transferConfig,
+  route,
   destinationAddress,
-  polkadot,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
-  const {
-    destination: { chain, config },
-  } = transferConfig;
-  const asset = chain.getChainAsset(config.asset);
+  const polkadot = await PolkadotService.create(route.destination);
+  const asset = route.destination.getChainAsset(route.asset);
   const balance = await getBalance({
     address: destinationAddress,
     asset,
-    builder: config.balance,
-    chain,
+    builder: route.balance,
+    chain: route.destination,
     polkadot,
   });
-  const min = await getMin(config, polkadot);
+  const min = await getMin(route, polkadot);
   const fee = await getFee({
-    address: destinationAddress,
+    route,
     polkadot,
-    transferConfig,
   });
 
   return {
     balance,
-    chain,
     existentialDeposit: polkadot.existentialDeposit,
     fee,
     min,
@@ -45,21 +39,18 @@ export async function getDestinationData({
 }
 
 export interface GetFeeParams {
-  address: string;
-  transferConfig: TransferConfig;
+  route: AssetRoute;
   polkadot: PolkadotService;
 }
 
 export async function getFee({
-  transferConfig,
+  route,
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
   // TODO: we have to consider correctly here when an asset is ERC20 to get it from contract
-  const { amount } = transferConfig.source.config.destinationFee;
+  const { amount, asset: feeAsset } = route.destinationFee;
   const asset = AssetAmount.fromChainAsset(
-    transferConfig.destination.chain.getChainAsset(
-      transferConfig.source.config.destinationFee.asset,
-    ),
+    route.destination.getChainAsset(feeAsset),
     { amount: 0n },
   );
 
