@@ -16,8 +16,9 @@
     "packages/*",
     "examples/*"
   ],
-  "packageManager": "npm@10.7.0",
+  "packageManager": "pnpm@9.6.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "link": "turbo run link",
@@ -32,9 +33,10 @@
     "test:acc:u": "turbo run test:acc -- -u",
     "prepare": "husky install",
     "sync-deps": "syncpack fix-mismatches",
+    "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",
     "changeset": "changeset",
-    "changeset:version": "changeset version && npm i --package-lock-only",
-    "changeset:publish": "npm run build && changeset publish"
+    "changeset:version": "changeset version && pnpm install --lockfile-only",
+    "changeset:publish": "pnpm run build && pnpm publish -r"
   },
   "dependencies": {
     "@polkadot/api": "^12.2.1",

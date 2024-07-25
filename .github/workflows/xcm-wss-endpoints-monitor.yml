@@ -14,21 +14,20 @@ jobs:
       - name: 🤘 checkout
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js environment
+      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v1
+
+      - name: ⚙ Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          cache: 'npm'
-      - uses: oven-sh/setup-bun@v1         
-
-      - name: Update npm
-        run: npm i -g npm@9
+          cache: 'pnpm'
 
       - name: ⬇️ install
-        run: npm ci --ignore-scripts
+        run: pnpm install --ignore-scripts
 
       - name: 🛠️ Build
-        run: npm run build
+        run: pnpm run build
 
       - name: 💻 Run script
-        run:  bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
+        run: bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
