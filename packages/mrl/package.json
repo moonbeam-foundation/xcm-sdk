@@ -35,6 +35,6 @@
   "main": "./build/index.mjs",
   "dependencies": {
     "@moonbeam-network/xcm-config": "2.5.1",
-    "@moonbeam-network/xcm-types": "2.2.5"
+    "@moonbeam-network/xcm-types": "2.3.0"
   }
 }
