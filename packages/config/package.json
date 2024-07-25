@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "pnpm run build -- --watch",
-    "link": "npm ln",
+    "link": "pnpm ln",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "pnpm run lint -- --fix",
     "typecheck": "tsc --noEmit",
