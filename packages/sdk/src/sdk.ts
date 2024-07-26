@@ -2,15 +2,16 @@
 import { ConfigService, routesMap } from '@moonbeam-network/xcm-config';
 import {
   AnyAsset,
-  AnyChain,
-  Asset,
+  AnyParachain,
   AssetAmount,
   Ecosystem,
+  EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData } from './getTransferData/getTransferData';
 import { PolkadotService } from './polkadot';
-import { Signers, TransferData } from './sdk.interfaces';
+import { TransferData } from './sdk.interfaces';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: routesMap });
 
@@ -30,7 +31,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 
       return {
         sources,
-        setSource(source: string | AnyChain) {
+        setSource(source: string | AnyParachain) {
           const destinations = service.getDestinationChains({
             asset,
             source,
@@ -38,7 +39,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 
           return {
             destinations,
-            setDestination(destination: string | AnyChain) {
+            setDestination(destination: string | AnyParachain) {
               const route = service.getAssetRoute({
                 asset,
                 source,
@@ -50,9 +51,29 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                   sourceAddress: string,
                   destinationAddress: string,
                 ): Promise<TransferData> {
+                  const sourceChain = service.getChain(source);
+
+                  if (
+                    !Parachain.is(sourceChain) &&
+                    !EvmParachain.is(sourceChain)
+                  ) {
+                    throw new Error(
+                      `Source chain should be a Prachain or EvmParachain`,
+                    );
+                  }
+
+                  if (
+                    !Parachain.is(route.destination) &&
+                    !EvmParachain.is(route.destination)
+                  ) {
+                    throw new Error(
+                      `Destination chain should be a Prachain or EvmParachain`,
+                    );
+                  }
+
                   return getTransferData({
                     route,
-                    source: service.getChain(source),
+                    source: sourceChain,
                     sourceAddress,
                     destinationAddress,
                   });
@@ -67,7 +88,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 }
 
 export async function getParachainBalances(
-  chain: AnyChain,
+  chain: AnyParachain,
   address: string,
   service: ConfigService = DEFAULT_SERVICE,
 ): Promise<AssetAmount[]> {
@@ -81,12 +102,4 @@ export async function getParachainBalances(
   });
 
   return balances;
-}
-
-export interface SdkTransferParams extends Partial<Signers> {
-  destinationAddress: string;
-  destinationKeyOrChain: string | AnyChain;
-  keyOrAsset: string | Asset;
-  sourceAddress: string;
-  sourceKeyOrChain: string | AnyChain;
 }

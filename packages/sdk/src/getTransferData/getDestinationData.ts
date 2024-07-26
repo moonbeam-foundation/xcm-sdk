@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
-import { AssetAmount } from '@moonbeam-network/xcm-types';
+import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { AssetRoute } from '@moonbeam-network/xcm-config';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
@@ -15,13 +15,15 @@ export async function getDestinationData({
   route,
   destinationAddress,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
-  const polkadot = await PolkadotService.create(route.destination);
+  const polkadot = await PolkadotService.create(
+    route.destination as AnyParachain,
+  );
   const asset = route.destination.getChainAsset(route.asset);
   const balance = await getBalance({
     address: destinationAddress,
     asset,
     builder: route.balance,
-    chain: route.destination,
+    chain: route.destination as AnyParachain,
     polkadot,
   });
   const min = await getMin(route, polkadot);

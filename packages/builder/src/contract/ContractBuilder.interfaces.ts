@@ -1,4 +1,4 @@
-import { AnyChain, ChainAssetId } from '@moonbeam-network/xcm-types';
+import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ContractConfig } from './ContractConfig';
 
 export interface ContractConfigBuilder {
@@ -9,7 +9,7 @@ export interface ContractConfigBuilderPrams {
   address: string;
   amount: bigint;
   asset: ChainAssetId;
-  destination: AnyChain;
+  destination: AnyParachain;
   fee: bigint;
   feeAsset: ChainAssetId;
 }

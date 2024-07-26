@@ -4,7 +4,11 @@ import {
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import { AssetRoute } from '@moonbeam-network/xcm-config';
-import { AnyChain, AssetAmount, ChainAsset } from '@moonbeam-network/xcm-types';
+import {
+  AnyParachain,
+  AssetAmount,
+  ChainAsset,
+} from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
@@ -13,7 +17,7 @@ export interface GetBalancesParams {
   address: string;
   asset: ChainAsset;
   builder: BalanceConfigBuilder;
-  chain: AnyChain;
+  chain: AnyParachain;
   polkadot: PolkadotService;
 }
 

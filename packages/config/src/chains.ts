@@ -2,6 +2,7 @@ import {
   AnyChain,
   ChainAsset,
   Ecosystem,
+  EvmChain,
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
@@ -29,6 +30,7 @@ import {
   eq,
   eqd,
   fil,
+  ftm,
   ftmwh,
   glmr,
   hdx,
@@ -449,6 +451,22 @@ export const darwiniaCrab = new EvmParachain({
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
   ws: ['wss://crab-rpc.darwinia.network', 'wss://darwiniacrab-rpc.dwellir.com'],
+});
+
+export const fantomTestnet = new EvmChain({
+  assets: [
+    ChainAsset.fromAsset(ftm, {
+      decimals: 18,
+    }),
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  explorer: 'https://testnet.ftmscan.com',
+  id: 4_002,
+  isTestChain: true,
+  key: 'fantom-testnet',
+  name: 'Fantom Testnet',
+  nativeAsset: ftm,
+  rpc: 'https://rpc.testnet.fantom.network',
 });
 
 export const hydration = new Parachain({
@@ -2170,6 +2188,7 @@ export const zeitgeist = new Parachain({
 
 export const chainsList: AnyChain[] = [
   acala,
+  alphanetAssetHub,
   alphanetRelay,
   astar,
   bifrostKusama,
@@ -2179,6 +2198,7 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   darwiniaCrab,
+  fantomTestnet,
   hydration,
   hydrationAlphanet,
   integritee,
@@ -2187,6 +2207,7 @@ export const chainsList: AnyChain[] = [
   khala,
   kintsugi,
   kusama,
+  kusamaAssetHub,
   litmus,
   mangataKusama,
   mantaParachain,
@@ -2198,9 +2219,9 @@ export const chainsList: AnyChain[] = [
   nodle,
   originTrailAlphanet,
   parallel,
+  peaqAlphanet,
   peaqChain,
   peaqEvm,
-  peaqAlphanet,
   peaqEvmAlphanet,
   pendulum,
   pendulumAlphanet,
@@ -2208,11 +2229,9 @@ export const chainsList: AnyChain[] = [
   picasso,
   picassoAlphanet,
   polkadot,
+  polkadotAssetHub,
   robonomics,
   shiden,
-  kusamaAssetHub,
-  alphanetAssetHub,
-  polkadotAssetHub,
   subsocial,
   tinkernet,
   turing,

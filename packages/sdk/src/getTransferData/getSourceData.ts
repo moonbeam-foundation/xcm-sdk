@@ -64,7 +64,7 @@ export async function getSourceData({
     address: destinationAddress,
     amount: balance.amount,
     asset: asset.getAssetId(),
-    destination: route.destination,
+    destination: route.destination as AnyParachain,
     fee: destinationFee.amount,
     feeAsset: destinationFee.getAssetId(),
     palletInstance: asset.getAssetPalletInstance(),
@@ -75,7 +75,7 @@ export async function getSourceData({
     address: destinationAddress,
     amount: balance.amount,
     asset: asset.address || asset.getAssetId(),
-    destination: route.destination,
+    destination: route.destination as AnyParachain,
     fee: destinationFee.amount,
     feeAsset: destinationFee.address || destinationFee.getAssetId(),
   });
