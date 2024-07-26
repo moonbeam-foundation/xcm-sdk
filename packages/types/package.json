@@ -4,10 +4,9 @@
   "description": "Moonbeam XCM Types",
   "scripts": {
     "build": "tsup",
-    "dev": "npm run build -- --watch",
-    "link": "npm ln",
+    "dev": "pnpm run build -- --watch",
     "lint": "eslint ./src --ext .js,.ts",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "pnpm run lint -- --fix",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:update": "vitest -u",
@@ -42,5 +41,8 @@
   },
   "peerDependencies": {
     "viem": "^2.17.9"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.2.2"
   }
 }

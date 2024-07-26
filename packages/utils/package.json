@@ -4,10 +4,9 @@
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
-    "dev": "npm run build -- --watch",
-    "link": "npm ln",
+    "dev": "pnpm run build -- --watch",
     "lint": "eslint . --ext .js,.ts",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "pnpm run lint -- --fix",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
