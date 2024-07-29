@@ -83,7 +83,7 @@ export async function getTransferData({
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.address || asset.getAssetId(),
-        destination: route.destination,
+        destination: route.destination as AnyParachain,
         fee: destinationFee.amount,
         feeAsset: feeAsset.address || feeAsset.getAssetId(),
       });
@@ -91,7 +91,7 @@ export async function getTransferData({
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.getAssetId(),
-        destination: route.destination,
+        destination: route.destination as AnyParachain,
         fee: destinationFee.amount,
         feeAsset: feeAsset.getAssetId(),
         palletInstance: asset.getAssetPalletInstance(),
