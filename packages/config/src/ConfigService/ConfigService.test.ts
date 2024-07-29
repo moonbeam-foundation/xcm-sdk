@@ -31,7 +31,7 @@ import { xcmRoutesMap } from '../xcm-configs';
 
 const TEST_CHAIN = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
-  eosystem: Ecosystem.Polkadot,
+  ecosystem: Ecosystem.Polkadot,
   genesisHash: '',
   isTestChain: true,
   key: 'test',
