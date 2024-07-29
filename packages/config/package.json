@@ -33,7 +33,33 @@
     "build"
   ],
   "type": "module",
-  "exports": "./build/index.mjs",
+  "exports": {
+    ".": {
+      "imports": "./build/index.mjs",
+      "default": "./build/index.mjs",
+      "types": "./build/index.d.ts"
+    },
+    "./mrl": {
+      "imports": "./build/mrl-configs.mjs",
+      "default": "./build/mrl-configs.mjs",
+      "types": "./build/mrl-configs.d.ts"
+    },
+    "./xcm": {
+      "imports": "./build/xcm-configs.mjs",
+      "default": "./build/xcm-configs.mjs",
+      "types": "./build/xcm-configs.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "mrl": [
+        "mrl-configs.d.ts"
+      ],
+      "xcm": [
+        "xcm-configs.d.ts"
+      ]
+    }
+  },
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {

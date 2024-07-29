@@ -4,7 +4,7 @@ import {
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ftmwh, hdx } from '../assets';
-import { hydrationAlphanet, moonbaseAlpha } from '../chains';
+import { fantomTestnet, hydrationAlphanet } from '../chains';
 import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -13,14 +13,15 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
   routes: [
     new AssetRoute({
       asset: ftmwh,
-      balance: BalanceBuilder().substrate().system().account(),
-      destination: moonbaseAlpha,
+      balance: BalanceBuilder().substrate().system().account(), // TODO:
+      destination: fantomTestnet,
       destinationFee: {
+        // TODO:
         amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
         asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(), // TODO:
     }),
   ],
 });

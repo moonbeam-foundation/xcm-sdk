@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
-import { ConfigService, routesMap } from '@moonbeam-network/xcm-config';
+import { ConfigService } from '@moonbeam-network/xcm-config';
+import { routesMap } from '@moonbeam-network/xcm-config/xcm';
 import {
   AnyAsset,
   AnyParachain,

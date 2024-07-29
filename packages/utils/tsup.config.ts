@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { defineConfig } from 'tsup';
 // eslint-disable-next-line import/no-relative-packages
-import config from '../../tsup.config';
+import { baseConfig } from '../../tsup.config';
 
 // eslint-disable-next-line import/no-default-export
-export default config;
+export default defineConfig(baseConfig);
