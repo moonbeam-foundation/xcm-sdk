@@ -1,6 +1,4 @@
-/* eslint-disable sort-keys */
-import { ConfigService } from '@moonbeam-network/xcm-config';
-import { routesMap } from '@moonbeam-network/xcm-config/xcm';
+import { ConfigService, xcmRoutesMap } from '@moonbeam-network/xcm-config';
 import {
   AnyAsset,
   AnyParachain,
@@ -14,7 +12,7 @@ import { getTransferData } from './getTransferData/getTransferData';
 import { PolkadotService } from './polkadot';
 import { TransferData } from './sdk.interfaces';
 
-const DEFAULT_SERVICE = new ConfigService({ routes: routesMap });
+const DEFAULT_SERVICE = new ConfigService({ routes: xcmRoutesMap });
 
 export interface SdkOptions {
   configService?: ConfigService;

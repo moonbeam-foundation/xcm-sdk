@@ -51,7 +51,7 @@ import { turingAlphanetRoutes } from './turingAlphanet';
 import { uniqueAlphaRoutes } from './uniqueAlpha';
 import { zeitgeistRoutes } from './zeitgeist';
 
-export const routesList: ChainRoutes[] = [
+export const xcmRoutesList: ChainRoutes[] = [
   acalaRoutes,
   alphanetRelayRoutes,
   astarRoutes,
@@ -104,6 +104,6 @@ export const routesList: ChainRoutes[] = [
   zeitgeistRoutes,
 ];
 
-export const routesMap = new Map<string, ChainRoutes>(
-  routesList.map((config) => [config.chain.key, config]),
+export const xcmRoutesMap = new Map<string, ChainRoutes>(
+  xcmRoutesList.map((config) => [config.chain.key, config]),
 );
