@@ -1,13 +1,12 @@
 {
   "name": "@moonbeam-network/mrl",
-  "version": "2.2.5",
+  "version": "0.0.1",
   "description": "Moonbeam Routed Liquidity",
   "scripts": {
     "build": "tsup",
-    "dev": "npm run build -- --watch",
-    "link": "npm ln",
+    "dev": "pnpm run build -- --watch",
     "lint": "eslint ./src --ext .js,.ts",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "pnpm run lint -- --fix",
     "prepack": "prettier --write build/index.d.ts"
   },
   "repository": {
@@ -34,6 +33,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
-    "@moonbeam-network/xcm-types": "2.2.5"
+    "@moonbeam-network/xcm-config": "2.5.1",
+    "@moonbeam-network/xcm-types": "2.3.0"
   }
 }

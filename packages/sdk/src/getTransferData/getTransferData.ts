@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { IConfigService, TransferConfig } from '@moonbeam-network/xcm-config';
+import { AssetRoute } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { AssetAmount } from '@moonbeam-network/xcm-types';
+import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { TransferContractInterface, createContract } from '../contract';
-import { PolkadotService } from '../polkadot';
 import {
   DestinationChainTransferData,
   Signers,
@@ -12,61 +11,54 @@ import {
 } from '../sdk.interfaces';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
+import { PolkadotService } from '../polkadot';
 
-export interface GetTransferDataParams extends Partial<Signers> {
-  configService: IConfigService;
-  destinationAddress: string;
+export interface GetTransferDataParams {
+  route: AssetRoute;
+  source: AnyParachain;
   sourceAddress: string;
-  transferConfig: TransferConfig;
+  destinationAddress: string;
 }
 
 export async function getTransferData({
-  configService,
-  destinationAddress,
-  evmSigner,
-  polkadotSigner,
+  route,
+  source,
   sourceAddress,
-  transferConfig,
+  destinationAddress,
 }: GetTransferDataParams): Promise<TransferData> {
-  const [destPolkadot, srcPolkadot] = await PolkadotService.createMulti([
-    transferConfig.destination.chain,
-    transferConfig.source.chain,
-  ]);
-
-  const destination = await getDestinationData({
+  const destinationData = await getDestinationData({
+    route,
     destinationAddress,
-    polkadot: destPolkadot,
-    transferConfig,
   });
 
   // Here we need to convert the fee on the destination chain to an asset on source chain.
-  const destinationFeeAsset = transferConfig.source.chain.getChainAsset(
-    destination.fee,
-  );
+  const destinationFeeAsset = source.getChainAsset(destinationData.fee);
   const destinationFee = AssetAmount.fromChainAsset(destinationFeeAsset, {
-    amount: destination.fee.convertDecimals(destinationFeeAsset.decimals)
+    amount: destinationData.fee.convertDecimals(destinationFeeAsset.decimals)
       .amount,
   });
 
-  const source = await getSourceData({
+  const sourceData = await getSourceData({
+    route,
     destinationAddress,
     destinationFee,
-    polkadot: srcPolkadot,
+    source,
     sourceAddress,
-    transferConfig,
   });
 
   return {
-    destination,
+    destination: destinationData,
     getEstimate(amount: number | string) {
       const bigAmount = Big(
-        toBigInt(amount, source.balance.decimals).toString(),
+        toBigInt(amount, sourceData.balance.decimals).toString(),
       );
       const result = bigAmount.minus(
-        source.balance.isSame(destinationFee) ? destinationFee.toBig() : Big(0),
+        sourceData.balance.isSame(destinationFee)
+          ? destinationFee.toBig()
+          : Big(0),
       );
 
-      return source.balance.copyWith({
+      return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
@@ -76,70 +68,54 @@ export async function getTransferData({
      * and our configuration need destination config.
      */
     isSwapPossible: true,
-    max: source.max,
-    min: getMin(destination),
-    source,
-    async swap() {
-      return getTransferData({
-        configService,
-        destinationAddress: sourceAddress,
-        evmSigner,
-        polkadotSigner,
-        sourceAddress: destinationAddress,
-        transferConfig: {
-          ...transferConfig,
-          destination: transferConfig.source,
-          source: transferConfig.destination,
-        },
-      });
-    },
-    async transfer(amount, signers: Partial<Signers>): Promise<string> {
-      const bigintAmount = toBigInt(amount, source.balance.decimals);
-      const {
-        source: { chain, config },
-      } = transferConfig;
-      const asset = chain.getChainAsset(transferConfig.asset);
-      const feeAsset = chain.getChainAsset(destinationFee.key);
+    max: sourceData.max,
+    min: getMin(destinationData),
+    source: sourceData,
+    async transfer(
+      amount,
+      { evmSigner, polkadotSigner }: Partial<Signers>,
+    ): Promise<string> {
+      const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
+      const asset = source.getChainAsset(route.asset);
+      const feeAsset = source.getChainAsset(destinationFee);
 
-      const contract = config.contract?.build({
+      const contract = route.contract?.build({
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.address || asset.getAssetId(),
-        destination: destination.chain,
+        destination: route.destination,
         fee: destinationFee.amount,
         feeAsset: feeAsset.address || feeAsset.getAssetId(),
       });
-      const extrinsic = config.extrinsic?.build({
+      const extrinsic = route.extrinsic?.build({
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.getAssetId(),
-        destination: destination.chain,
+        destination: route.destination,
         fee: destinationFee.amount,
         feeAsset: feeAsset.getAssetId(),
         palletInstance: asset.getAssetPalletInstance(),
-        source: chain,
+        source,
       });
 
       if (contract) {
-        const signer = evmSigner || signers.evmSigner;
-
-        if (!signer) {
+        if (!evmSigner) {
           throw new Error('EVM Signer must be provided');
         }
 
         return (
-          createContract(chain, contract) as TransferContractInterface
-        ).transfer(signer);
+          createContract(source, contract) as TransferContractInterface
+        ).transfer(evmSigner);
       }
 
       if (extrinsic) {
-        const signer = polkadotSigner || signers.polkadotSigner;
-
-        if (!signer) {
+        if (!polkadotSigner) {
           throw new Error('Polkadot signer must be provided');
         }
 
-        return srcPolkadot.transfer(sourceAddress, extrinsic, signer);
+        const polkadot = await PolkadotService.create(source);
+
+        return polkadot.transfer(sourceAddress, extrinsic, polkadotSigner);
       }
 
       throw new Error('Either contract or extrinsic must be provided');

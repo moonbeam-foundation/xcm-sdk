@@ -12,17 +12,22 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { assetsList, dev, dot, glmr, tt1, unit } from '../assets';
+import { alan, assetsList, dev, dot, glmr, tt1, unit } from '../assets';
 import {
+  alphanetRelay,
   hydration,
   moonbaseAlpha,
+  moonbaseBeta,
   moonbeam,
+  moonriver,
   pendulumAlphanet,
+  turing,
 } from '../chains';
 import { ConfigService } from './ConfigService';
 
-import { AssetTransferConfig } from '../types/AssetTransferConfig';
-import { ChainRoutesConfig } from '../types/ChainRoutesConfig';
+import { AssetRoute } from '../types/AssetRoute';
+import { ChainRoutes } from '../types/ChainRoutes';
+import { routesMap } from '../xcm-configs';
 
 const TEST_CHAIN = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
@@ -38,7 +43,7 @@ const TEST_CHAIN = new Parachain({
 });
 
 describe('config service', () => {
-  const configService = new ConfigService();
+  const configService = new ConfigService({ routes: routesMap });
 
   describe('getEcosystemAssets', () => {
     it('should return all assets', () => {
@@ -124,15 +129,55 @@ describe('config service', () => {
   });
 
   describe('getSourceChains', () => {
-    it('should get source chains for asset', () => {
-      const chains = configService.getSourceChains(
-        dev,
-        Ecosystem.AlphanetRelay,
-      );
+    it('should get source chains', () => {
+      const chains = configService.getSourceChains({
+        ecosystem: Ecosystem.AlphanetRelay,
+      });
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
       );
+    });
+
+    it('should get source chains for asset', () => {
+      const chains = configService.getSourceChains({
+        asset: dev,
+        ecosystem: Ecosystem.AlphanetRelay,
+      });
+
+      expect(chains).toStrictEqual(
+        expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
+      );
+    });
+  });
+
+  describe('getDestinationChains', () => {
+    it('should get destination chains', () => {
+      const chains = configService.getDestinationChains({
+        source: turing,
+      });
+
+      expect(chains).toStrictEqual(expect.arrayContaining([moonriver]));
+    });
+
+    it('should get destination chains for asset', () => {
+      const chains = configService.getDestinationChains({
+        asset: unit,
+        source: moonbaseAlpha,
+      });
+
+      expect(chains).toStrictEqual(expect.arrayContaining([alphanetRelay]));
+    });
+  });
+
+  describe('getRouteAssets', () => {
+    it('should get route assets', () => {
+      const assets = configService.getRouteAssets({
+        source: moonbaseAlpha,
+        destination: moonbaseBeta,
+      });
+
+      expect(assets).toStrictEqual(expect.arrayContaining([dev, alan]));
     });
   });
 
@@ -158,7 +203,7 @@ describe('config service', () => {
 
   describe('updateChainConfig', () => {
     it('should update existing chain config', () => {
-      const assetConfig = new AssetTransferConfig({
+      const assetConfig = new AssetRoute({
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destination: moonbeam,
@@ -170,22 +215,20 @@ describe('config service', () => {
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
 
-      const chainConfig = new ChainRoutesConfig({
-        assets: [assetConfig],
+      const chainConfig = new ChainRoutes({
+        routes: [assetConfig],
         chain: hydration,
       });
 
       configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainConfig(hydration);
-      expect(updated.getAssetsConfigs()).toStrictEqual(
-        chainConfig.getAssetsConfigs(),
-      );
+      const updated = configService.getChainRoutes(hydration);
+      expect(updated.getRoutes()).toStrictEqual(chainConfig.getRoutes());
     });
 
     it('should create new chain config', () => {
       configService.updateChain(TEST_CHAIN);
 
-      const assetConfig = new AssetTransferConfig({
+      const assetConfig = new AssetRoute({
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destination: moonbeam,
@@ -197,16 +240,14 @@ describe('config service', () => {
         extrinsic: ExtrinsicBuilder().xTokens().transfer(),
       });
 
-      const chainConfig = new ChainRoutesConfig({
-        assets: [assetConfig],
+      const chainConfig = new ChainRoutes({
+        routes: [assetConfig],
         chain: TEST_CHAIN,
       });
 
       configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainConfig('test');
-      expect(updated.getAssetsConfigs()).toStrictEqual(
-        chainConfig.getAssetsConfigs(),
-      );
+      const updated = configService.getChainRoutes('test');
+      expect(updated.getRoutes()).toStrictEqual(chainConfig.getRoutes());
     });
   });
 });

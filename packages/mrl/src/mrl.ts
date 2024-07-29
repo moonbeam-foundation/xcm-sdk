@@ -1,29 +1,46 @@
-//  TODO:  remove
-/* eslint-disable sort-keys */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { AnyAsset, AnyChain } from '@moonbeam-network/xcm-types';
+import { AnyAsset, AnyChain, Ecosystem } from '@moonbeam-network/xcm-types';
+import { ConfigService } from '@moonbeam-network/xcm-config';
 import { getTransferData } from './getTransferData/getTransferData';
 
+// TODO: create config
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DEFAULT_SERVICE = new ConfigService({ routes: {} as any });
+
 export interface MrlOptions {
-  environment?: 'testnet' | 'mainnet';
+  configService?: ConfigService;
+  ecosystem?: Ecosystem;
 }
 
-export function Mrl(options: MrlOptions) {
+export function Mrl(options?: MrlOptions) {
+  const service = options?.configService ?? DEFAULT_SERVICE;
+  const sources = service.getSourceChains({ ecosystem: options?.ecosystem });
+
   return {
-    sources: [],
+    sources,
     setSource(source: string | AnyChain) {
+      const destinations = service.getDestinationChains({ source });
+
       return {
-        destinations: [],
+        destinations,
         setDestination(destination: string | AnyChain) {
+          const assets = service.getRouteAssets({ source, destination });
+
           return {
-            assets: [],
+            assets,
             setAsset(asset: string | AnyAsset) {
+              const route = service.getAssetRoute({
+                asset,
+                source,
+                destination,
+              });
+
               return {
                 setAddresses(
                   sourceAddress: string,
                   destinationAddress: string,
                 ) {
                   return getTransferData({
+                    route,
                     destinationAddress,
                     sourceAddress,
                   });
