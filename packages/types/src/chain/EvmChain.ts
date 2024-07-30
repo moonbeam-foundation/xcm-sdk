@@ -1,4 +1,4 @@
-import { Chain as ViemChain } from 'viem';
+import type { Chain as ViemChain } from 'viem';
 import { Chain, ChainConstructorParams } from './Chain';
 import { getViemChain } from './Chain.utils';
 
