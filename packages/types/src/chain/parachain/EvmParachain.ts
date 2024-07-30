@@ -1,5 +1,5 @@
-import { Address } from 'viem';
-import { Chain } from 'viem/chains';
+import type { Address } from 'viem';
+import type { Chain } from 'viem/chains';
 import { Parachain, ParachainConstructorParams } from './Parachain';
 import { getViemChain } from '../Chain.utils';
 
