@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 import {
   ExtrinsicConfigBuilder,
   Parents,

@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';

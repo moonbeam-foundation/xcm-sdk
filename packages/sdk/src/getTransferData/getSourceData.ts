@@ -61,6 +61,7 @@ export async function getSourceData({
   const { existentialDeposit } = polkadot;
 
   const extrinsic = route.extrinsic?.build({
+    api: polkadot.api,
     address: destinationAddress,
     amount: balance.amount,
     asset: asset.getAssetId(),

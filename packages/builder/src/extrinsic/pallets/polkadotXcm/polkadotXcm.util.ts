@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import {
   ExtrinsicConfigBuilderPrams,

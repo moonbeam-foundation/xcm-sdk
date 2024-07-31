@@ -78,6 +78,7 @@ export async function getTransferData({
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = source.getChainAsset(route.asset);
       const feeAsset = source.getChainAsset(destinationFee);
+      const polkadot = await PolkadotService.create(source);
 
       const contract = route.contract?.build({
         address: destinationAddress,
@@ -88,6 +89,7 @@ export async function getTransferData({
         feeAsset: feeAsset.address || feeAsset.getAssetId(),
       });
       const extrinsic = route.extrinsic?.build({
+        api: polkadot.api,
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.getAssetId(),
@@ -112,8 +114,6 @@ export async function getTransferData({
         if (!polkadotSigner) {
           throw new Error('Polkadot signer must be provided');
         }
-
-        const polkadot = await PolkadotService.create(source);
 
         return polkadot.transfer(sourceAddress, extrinsic, polkadotSigner);
       }

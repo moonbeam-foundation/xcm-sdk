@@ -1,4 +1,5 @@
 import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
 import { ExtrinsicConfig } from './ExtrinsicConfig';
 
 export interface ExtrinsicConfigBuilder {
@@ -7,6 +8,7 @@ export interface ExtrinsicConfigBuilder {
 
 export interface ExtrinsicConfigBuilderPrams {
   address: string;
+  api: ApiPromise;
   amount: bigint;
   asset: ChainAssetId;
   destination: AnyParachain;
