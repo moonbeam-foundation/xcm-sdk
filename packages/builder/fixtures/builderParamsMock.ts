@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Asset,
   Ecosystem,
@@ -53,6 +54,7 @@ export const moonbaseAlphaMock = new EvmParachain({
 });
 
 export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
+  api: {} as any,
   address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   amount: 99_000_000_000n,
   asset: 'USDT',
@@ -64,6 +66,7 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
 };
 
 export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
+  api: {} as any,
   address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   amount: 99_000_000_000n,
   asset: 'USDT',
@@ -75,6 +78,7 @@ export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
 };
 
 export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
+  api: {} as any,
   address: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
   amount: 99_000_000_000n,
   asset: 'USDT',
