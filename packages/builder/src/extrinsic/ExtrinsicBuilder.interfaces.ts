@@ -27,8 +27,10 @@ export type MrlExtrinsicConfigBuilder =
 
 export interface MrlExtrinsicConfigBuilderPrams
   extends ExtrinsicConfigBuilderPrams {
-  moonChain: EvmParachain;
+  moonApi: ApiPromise;
   moonAsset: ChainAsset;
+  moonChain: EvmParachain;
+  moonGasLimit: bigint;
 }
 
 export enum XcmVersion {

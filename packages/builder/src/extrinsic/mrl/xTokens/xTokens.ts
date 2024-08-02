@@ -4,26 +4,26 @@ import { ExtrinsicBuilder } from '../../ExtrinsicBuilder';
 import { MrlExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
 
+// TODO: Can we move them somewhere?
 const BUY_EXECUTION_FEE = 100_000_000_000_000_000n;
 const CROSS_CHAIN_FEE = 100_000_000_000_000_000n;
+export const BATCH_CONTRACT_ADDRESS =
+  '0x0000000000000000000000000000000000000808';
 
 export function xTokens() {
   return {
     transfer: (): MrlExtrinsicConfigBuilder => ({
       build: (params) => {
         const {
-          destinationAddress: address,
-          sourceApi: api,
-          moonChain,
+          destinationAddress,
+          moonApi,
           moonAsset,
+          moonChain,
+          moonGasLimit,
+          sourceApi,
         } = params;
-        const { transfer } = api.tx.xTokens;
+        const { transfer } = sourceApi.tx.xTokens;
         const builder = ExtrinsicBuilder().xTokens().transfer();
-        const { address20 } = getMultilocationDerivedAddresses({
-          address,
-          paraId: moonChain.parachainId,
-          isParents: true,
-        });
 
         const asset = transfer(builder.build(params).getArgs(transfer));
         /*
@@ -41,7 +41,35 @@ export function xTokens() {
             })
             .getArgs(transfer),
         );
-        const send = api.tx.polkadotXcm.send(
+
+        const batchAll = encodeFunctionData({
+          abi: BatchContractABI,
+          functionName: 'batchAll',
+          args: [
+            [tokenAddress, bridgeContractAddress], // Addresses to call
+            [0n, 0n], // Value to send for each call
+            [approveTx, transferTx], // Call data for each call
+            [], // Gas limit for each call
+          ],
+        });
+
+        const transact = moonApi.tx.ethereumXcm.transact({
+          V2: {
+            gasLimit: moonGasLimit,
+            action: {
+              Call: BATCH_CONTRACT_ADDRESS,
+            },
+            value: 0,
+            input: batchAll,
+          },
+        });
+
+        const { address20 } = getMultilocationDerivedAddresses({
+          address: destinationAddress,
+          paraId: moonChain.parachainId,
+          isParents: true,
+        });
+        const send = sourceApi.tx.polkadotXcm.send(
           {
             V3: {
               parents: 1,
