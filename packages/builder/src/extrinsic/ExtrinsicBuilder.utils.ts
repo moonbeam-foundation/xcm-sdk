@@ -22,19 +22,27 @@ export function getExtrinsicArgumentVersion(
     ? raw.sub.map((x) => x.name)
     : [raw.sub.name];
 
-  if (versions.includes(XcmVersion.v1)) {
-    return XcmVersion.v1;
+  if (versions.includes(XcmVersion.v5)) {
+    return XcmVersion.v5;
   }
 
-  if (versions.includes(XcmVersion.v2)) {
-    return XcmVersion.v2;
+  if (versions.includes(XcmVersion.v4)) {
+    return XcmVersion.v4;
   }
 
   if (versions.includes(XcmVersion.v3)) {
     return XcmVersion.v3;
   }
 
-  throw new Error("Can't find Xcm version");
+  if (versions.includes(XcmVersion.v2)) {
+    return XcmVersion.v2;
+  }
+
+  if (versions.includes(XcmVersion.v1)) {
+    return XcmVersion.v1;
+  }
+
+  throw new Error("Can't find XCM version");
 }
 
 export function getExtrinsicAccount(address: string) {

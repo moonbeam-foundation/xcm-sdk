@@ -13,13 +13,13 @@ const pallet = 'eqBalances';
 export function eqBalances() {
   return {
     xcmTransfer: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination }) =>
+      build: ({ destinationAddress, asset, destination }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'xcmTransfer',
           getArgs: () => [
-            asset,
-            amount,
+            asset.getAssetId(),
+            asset.amount,
             {
               parents: 1,
               interior: {
@@ -27,7 +27,7 @@ export function eqBalances() {
                   {
                     Parachain: destination.parachainId,
                   },
-                  getExtrinsicAccount(address),
+                  getExtrinsicAccount(destinationAddress),
                 ],
               },
             },
@@ -36,16 +36,20 @@ export function eqBalances() {
         }),
     }),
     transferXcm: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee, feeAsset }) =>
+      build: ({ destinationAddress: address, asset, destination, fee }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'transferXcm',
           getArgs: () => {
-            const amountWithoutFee = amount - fee > 0n ? amount - fee : 0n;
+            const amountWithoutFee =
+              asset.amount - fee.amount > 0n ? asset.amount - fee.amount : 0n;
 
             return [
-              [asset, asset === feeAsset ? amountWithoutFee : amount],
-              [feeAsset, fee],
+              [
+                asset.getAssetId(),
+                asset.isSame(fee) ? amountWithoutFee : asset.amount,
+              ],
+              [fee.getAssetId(), fee.amount],
               {
                 parents: 1,
                 interior: {

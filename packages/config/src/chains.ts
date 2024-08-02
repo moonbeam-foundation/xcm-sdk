@@ -873,6 +873,9 @@ export const moonbaseAlpha = new EvmParachain({
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.01,
+      ids: {
+        palletInstance: 3,
+      },
     }),
     ChainAsset.fromAsset(lit, {
       address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
@@ -1093,6 +1096,9 @@ export const moonbeam = new EvmParachain({
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.1,
+      ids: {
+        palletInstance: 10,
+      },
     }),
     ChainAsset.fromAsset(hdx, {
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',

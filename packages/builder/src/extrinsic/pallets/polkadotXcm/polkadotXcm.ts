@@ -31,7 +31,7 @@ export function polkadotXcm() {
                         },
                       },
                       fun: {
-                        Fungible: params.amount,
+                        Fungible: params.asset.amount,
                       },
                     },
                   ],
@@ -54,13 +54,14 @@ export function polkadotXcm() {
                           parents: 0,
                           interior: {
                             X1: {
-                              PalletInstance: params.palletInstance,
+                              PalletInstance:
+                                params.asset.getAssetPalletInstance(),
                             },
                           },
                         },
                       },
                       fun: {
-                        Fungible: params.amount,
+                        Fungible: params.asset.amount,
                       },
                     },
                   ],
@@ -73,8 +74,8 @@ export function polkadotXcm() {
               module: pallet,
               func,
               getArgs: (extrinsicFunction) => {
-                const isAssetDifferent =
-                  !!params.feeAsset && params.asset !== params.feeAsset;
+                const isAssetDifferent = !params.asset.isSame(params.fee);
+
                 const assets = [
                   {
                     id: {
@@ -83,17 +84,18 @@ export function polkadotXcm() {
                         interior: {
                           X2: [
                             {
-                              PalletInstance: params.palletInstance,
+                              PalletInstance:
+                                params.asset.getAssetPalletInstance(),
                             },
                             {
-                              GeneralIndex: params.asset,
+                              GeneralIndex: params.asset.getAssetId(),
                             },
                           ],
                         },
                       },
                     },
                     fun: {
-                      Fungible: params.amount,
+                      Fungible: params.asset.amount,
                     },
                   },
                 ];
@@ -109,17 +111,18 @@ export function polkadotXcm() {
                         interior: {
                           X2: [
                             {
-                              PalletInstance: params.palletInstance,
+                              PalletInstance:
+                                params.fee.getAssetPalletInstance(),
                             },
                             {
-                              GeneralIndex: params.feeAsset,
+                              GeneralIndex: params.fee.getAssetId(),
                             },
                           ],
                         },
                       },
                     },
                     fun: {
-                      Fungible: params.fee,
+                      Fungible: params.fee.amount,
                     },
                   };
 
@@ -165,14 +168,15 @@ export function polkadotXcm() {
                                 Parachain: params.destination.parachainId,
                               },
                               {
-                                PalletInstance: params.palletInstance,
+                                PalletInstance:
+                                  params.asset.getAssetPalletInstance(),
                               },
                             ],
                           },
                         },
                       },
                       fun: {
-                        Fungible: params.amount,
+                        Fungible: params.asset.amount,
                       },
                     },
                   ],

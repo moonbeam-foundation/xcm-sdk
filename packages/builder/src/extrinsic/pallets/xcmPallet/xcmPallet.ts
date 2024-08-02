@@ -32,7 +32,7 @@ export function xcmPallet() {
                         },
                       },
                       fun: {
-                        Fungible: params.amount,
+                        Fungible: params.asset.amount,
                       },
                     },
                   ],

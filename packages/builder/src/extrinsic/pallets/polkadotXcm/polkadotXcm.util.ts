@@ -18,7 +18,7 @@ export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
 
 export function getPolkadotXcmExtrinsicArgs({
   asset,
-  address,
+  destinationAddress,
   destination,
   func,
   parents = 1,
@@ -43,7 +43,7 @@ export function getPolkadotXcmExtrinsicArgs({
       [version]: {
         parents: 0,
         interior: {
-          X1: getExtrinsicAccount(address),
+          X1: getExtrinsicAccount(destinationAddress),
         },
       },
     },
@@ -57,10 +57,10 @@ export function getPolkadotXcmExtrinsicArgs({
 
 export function shouldFeeAssetPrecedeAsset({
   asset,
-  feeAsset,
+  fee,
 }: ExtrinsicConfigBuilderPrams): boolean {
-  const assetIdNumber = Number(asset);
-  const feeAssetIdNumber = Number(feeAsset);
+  const assetIdNumber = Number(asset.getAssetId());
+  const feeAssetIdNumber = Number(fee.getAssetId());
 
   if (Number.isNaN(assetIdNumber) || Number.isNaN(feeAssetIdNumber)) {
     return false;

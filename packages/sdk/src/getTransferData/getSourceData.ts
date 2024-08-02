@@ -24,7 +24,11 @@ export async function getSourceData({
   source,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
-  const polkadot = await PolkadotService.create(source);
+  const [sourcePolkadot, destinationPolkadot] =
+    await PolkadotService.createMulti([
+      source,
+      route.destination as AnyParachain,
+    ]);
   const asset = source.getChainAsset(route.asset);
   const feeAsset = route.fee ? source.getChainAsset(route.fee.asset) : asset;
 
@@ -33,7 +37,7 @@ export async function getSourceData({
     asset,
     builder: route.balance,
     chain: source,
-    polkadot,
+    polkadot: sourcePolkadot,
   });
   const feeBalance = route.fee
     ? await getBalance({
@@ -41,7 +45,7 @@ export async function getSourceData({
         asset: feeAsset,
         builder: route.fee.balance,
         chain: source,
-        polkadot,
+        polkadot: sourcePolkadot,
       })
     : balance;
   // eslint-disable-next-line no-nested-ternary
@@ -54,22 +58,21 @@ export async function getSourceData({
           asset: source.getChainAsset(route.destinationFee.asset),
           builder: route.destinationFee.balance,
           chain: source,
-          polkadot,
+          polkadot: sourcePolkadot,
         });
 
-  const min = await getMin(route, polkadot);
-  const { existentialDeposit } = polkadot;
+  const min = await getMin(route, sourcePolkadot);
+  const { existentialDeposit } = sourcePolkadot;
 
   const extrinsic = route.extrinsic?.build({
-    api: polkadot.api,
-    address: destinationAddress,
-    amount: balance.amount,
-    asset: asset.getAssetId(),
+    asset: balance,
     destination: route.destination as AnyParachain,
-    fee: destinationFee.amount,
-    feeAsset: destinationFee.getAssetId(),
-    palletInstance: asset.getAssetPalletInstance(),
+    destinationAddress,
+    destinationApi: destinationPolkadot.api,
+    fee: destinationFee,
     source,
+    sourceAddress,
+    sourceApi: sourcePolkadot.api,
   });
 
   const contract = route.contract?.build({
@@ -89,7 +92,7 @@ export async function getSourceData({
     extrinsic,
     feeBalance,
     feeConfig: route.fee,
-    polkadot,
+    polkadot: sourcePolkadot,
     sourceAddress,
   });
 
