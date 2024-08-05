@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { xTokens } from './mrl/xTokens/xTokens';
+import { xTokens } from './mrl/wormhole/xTokens/xTokens';
 
 export function MrlExtrinsicBuilder() {
   return {
-    xTokens,
+    wormhole() {
+      return {
+        xTokens,
+      };
+    },
   };
 }

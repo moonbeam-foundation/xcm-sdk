@@ -44,7 +44,9 @@
     "@polkadot/apps-config": "^0.142.1",
     "@polkadot/types": "^12.2.3",
     "@polkadot/util": "^13.0.2",
-    "@polkadot/util-crypto": "^13.0.2"
+    "@polkadot/util-crypto": "^13.0.2",
+    "@wormhole-foundation/sdk-connect": "^0.8.2",
+    "@wormhole-foundation/sdk-evm": "^0.8.2"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
