@@ -5,6 +5,7 @@ import {
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
+import type { HexString } from '@polkadot/util/types';
 import { ExtrinsicConfig } from './ExtrinsicConfig';
 
 export interface ExtrinsicConfigBuilder<Params = ExtrinsicConfigBuilderPrams> {
@@ -31,6 +32,13 @@ export interface MrlExtrinsicConfigBuilderPrams
   moonAsset: ChainAsset;
   moonChain: EvmParachain;
   moonGasLimit: bigint;
+  transact?: {
+    call: HexString;
+    txWeight: {
+      refTime: bigint;
+      proofSize: bigint;
+    };
+  };
 }
 
 export enum XcmVersion {
