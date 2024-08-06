@@ -37,6 +37,7 @@ export abstract class Chain {
     key,
     name,
     nativeAsset,
+    wh,
   }: ChainConstructorParams) {
     this.assets =
       assets instanceof Map
@@ -48,6 +49,7 @@ export abstract class Chain {
     this.key = key;
     this.name = name;
     this.#nativeAsset = nativeAsset;
+    this.wh = wh;
   }
 
   get nativeAsset(): ChainAsset {

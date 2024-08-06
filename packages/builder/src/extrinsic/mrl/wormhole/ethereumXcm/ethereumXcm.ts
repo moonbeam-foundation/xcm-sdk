@@ -27,7 +27,9 @@ export function ethereumXcm() {
         moonGasLimit,
       }) => {
         if (!destination.wh?.name) {
-          throw new Error('Destination chain does not have a wormhole name');
+          throw new Error(
+            `Destination chain ${destination.name} does not have a wormhole name`,
+          );
         }
 
         const wh = new Wormhole(moonChain.isTestChain ? 'Testnet' : 'Mainnet', [
@@ -42,7 +44,17 @@ export function ethereumXcm() {
         ) as Address;
 
         const tokenAddressOnMoonChain = moonChain.getChainAsset(asset)
-          .address as Address;
+          .address as Address | undefined;
+
+        if (!tokenAddressOnMoonChain) {
+          throw new Error(
+            `Asset ${asset.symbol} does not have a token address on chain ${moonChain.name}`,
+          );
+        }
+
+        const destinationAddress32bytes = convertAddressTo32Bytes(
+          destinationAddress,
+        ) as Address;
         const tokenAmountOnMoonChain = asset.convertDecimals(
           moonChain.getChainAsset(asset).decimals,
         ).amount;
@@ -61,7 +73,7 @@ export function ethereumXcm() {
                 tokenAmountOnMoonChain,
                 0,
                 whDestinationChain,
-                destinationAddress,
+                destinationAddress32bytes,
                 0,
               ],
             })
@@ -72,7 +84,7 @@ export function ethereumXcm() {
                 tokenAddressOnMoonChain,
                 tokenAmountOnMoonChain,
                 whDestinationChain,
-                convertAddressTo32Bytes(destinationAddress) as Address,
+                destinationAddress32bytes,
                 0n,
                 0,
               ],

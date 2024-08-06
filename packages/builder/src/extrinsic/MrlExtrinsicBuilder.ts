@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { xTokens } from './mrl/wormhole/xTokens/xTokens';
+import { polkadotXcm } from './mrl/wormhole/polkadotXcm/polkadotXcm';
 
 export function MrlExtrinsicBuilder() {
   return {
     wormhole() {
       return {
-        xTokens,
+        polkadotXcm,
       };
     },
   };

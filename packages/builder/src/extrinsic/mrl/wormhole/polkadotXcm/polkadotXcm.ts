@@ -10,9 +10,9 @@ const CROSS_CHAIN_FEE = 100_000_000_000_000_000n;
 export const BATCH_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000808';
 
-export function xTokens() {
+export function polkadotXcm() {
   return {
-    transfer: (): MrlExtrinsicConfigBuilder => ({
+    send: (): MrlExtrinsicConfigBuilder => ({
       build: (params) => {
         const {
           destination,
