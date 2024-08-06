@@ -233,6 +233,9 @@ importers:
       big.js:
         specifier: ^6.2.1
         version: 6.2.1
+      viem:
+        specifier: ^2.18.5
+        version: 2.18.7(bufferutil@4.0.8)(typescript@5.5.4)(utf-8-validate@5.0.10)
     devDependencies:
       '@types/big.js':
         specifier: ^6.2.2
@@ -240,9 +243,6 @@ importers:
       '@wormhole-foundation/sdk-connect':
         specifier: ^0.8.2
         version: 0.8.2
-      viem:
-        specifier: ^2.18.5
-        version: 2.18.7(bufferutil@4.0.8)(typescript@5.5.4)(utf-8-validate@5.0.10)
 
   packages/utils:
     dependencies:
