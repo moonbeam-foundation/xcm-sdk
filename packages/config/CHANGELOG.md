@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.3
+
+### Patch Changes
+
+- [#318](https://github.com/moonbeam-foundation/xcm-sdk/pull/318) [`a2a1889`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a2a18893dd7c75c0f6a35a498281152d68962c87) Thanks [@mmaurello](https://github.com/mmaurello)! - WIFD integration with Moonbeam
+
 ## 2.5.2
 
 ### Patch Changes
