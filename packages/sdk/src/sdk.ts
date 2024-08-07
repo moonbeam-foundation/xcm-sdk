@@ -57,7 +57,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                     !EvmParachain.is(sourceChain)
                   ) {
                     throw new Error(
-                      `Source chain should be a Prachain or EvmParachain`,
+                      `Source chain should be a Parachain or EvmParachain`,
                     );
                   }
 
@@ -66,7 +66,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                     !EvmParachain.is(route.destination)
                   ) {
                     throw new Error(
-                      `Destination chain should be a Prachain or EvmParachain`,
+                      `Destination chain should be a Parachain or EvmParachain`,
                     );
                   }
 

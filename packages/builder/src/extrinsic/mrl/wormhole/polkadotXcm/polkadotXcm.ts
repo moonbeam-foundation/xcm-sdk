@@ -34,13 +34,15 @@ export function polkadotXcm() {
         const { transfer } = sourceApi.tx.xTokens;
         const builder = ExtrinsicBuilder().xTokens().transfer();
 
-        const assetTx = transfer(builder.build(params).getArgs(transfer));
+        const assetTransferTx = transfer(
+          builder.build(params).getArgs(transfer),
+        );
         /*
          * TODO: Can we move it to AssetRoute and receive it in build params?
          * In the future we could also check if wallet already has necessary DEV/GLMR to pay execution fees on Moonbase/Moonbeam.
          * Also we need to move fees to AssetRoute.
          */
-        const executionAssetTx = transfer(
+        const feeAssetTransferTx = transfer(
           builder
             .build({
               ...params,
@@ -136,7 +138,7 @@ export function polkadotXcm() {
         return new ExtrinsicConfig({
           module: 'utility',
           func: 'batchAll',
-          getArgs: () => [assetTx, executionAssetTx, send],
+          getArgs: () => [assetTransferTx, feeAssetTransferTx, send],
         });
       },
     }),
