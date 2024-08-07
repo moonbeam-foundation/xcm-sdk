@@ -117,3 +117,6 @@ dist
 
 # Docs - Site directory
 mkdocs/site
+
+# pre-commit
+.husky

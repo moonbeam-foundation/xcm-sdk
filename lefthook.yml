@@ -1,0 +1,8 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: '*.{ts,js,}'
+      run: pnpm eslint --fix {staged_files} && git update-index --again
+    spell:
+      run: pnpm run spell
