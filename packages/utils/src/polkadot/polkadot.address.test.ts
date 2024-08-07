@@ -31,7 +31,7 @@ describe('utils - polkadot address', () => {
 
   describe('getMultilocationDerivedAddresses', () => {
     describe('should get correct addresses for paraId 2034 and address 5E6kHM4zFdH5KEJE3YEzX5QuqoETVKUQadeY8LVmeh2HyHGt', async () => {
-      it('and paranets false', async () => {
+      it('and parents false', async () => {
         expect(
           getMultilocationDerivedAddresses({
             paraId: 2034,
@@ -44,7 +44,7 @@ describe('utils - polkadot address', () => {
         });
       });
 
-      it('and paranets true', async () => {
+      it('and parents true', async () => {
         expect(
           getMultilocationDerivedAddresses({
             paraId: 2034,
@@ -61,7 +61,7 @@ describe('utils - polkadot address', () => {
   });
 
   describe('should get correct addresses for paraId 3019 and address 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY', async () => {
-    it('and paranets false', async () => {
+    it('and parents false', async () => {
       expect(
         getMultilocationDerivedAddresses({
           paraId: 3019,
@@ -74,7 +74,7 @@ describe('utils - polkadot address', () => {
       });
     });
 
-    it('and paranets true', async () => {
+    it('and parents true', async () => {
       expect(
         getMultilocationDerivedAddresses({
           paraId: 3019,

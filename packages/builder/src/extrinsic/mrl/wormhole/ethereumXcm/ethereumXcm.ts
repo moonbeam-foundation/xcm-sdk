@@ -7,7 +7,7 @@ import { ExtrinsicConfig } from '../../../ExtrinsicConfig';
 import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
 import { ERC20_ABI } from './Erc20Abi';
 import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';
-import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBrigdeRelayerAbi';
+import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
 
 export const BATCH_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000808';

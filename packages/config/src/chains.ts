@@ -1546,6 +1546,7 @@ export const originTrailAlphanet = new Parachain({
   nativeAsset: otp,
   parachainId: 2043,
   ss58Format: 101,
+  /* cspell:disable-next-line */
   ws: ['wss://otp-lunaris-alpha-node-02.origin-trail.network'],
 });
 
