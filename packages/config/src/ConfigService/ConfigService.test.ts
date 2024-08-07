@@ -27,7 +27,7 @@ import { ConfigService } from './ConfigService';
 
 import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
-import { routesMap } from '../xcm-configs';
+import { xcmRoutesMap } from '../xcm-configs';
 
 const TEST_CHAIN = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
@@ -43,7 +43,7 @@ const TEST_CHAIN = new Parachain({
 });
 
 describe('config service', () => {
-  const configService = new ConfigService({ routes: routesMap });
+  const configService = new ConfigService({ routes: xcmRoutesMap });
 
   describe('getEcosystemAssets', () => {
     it('should return all assets', () => {

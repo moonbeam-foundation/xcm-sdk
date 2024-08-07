@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../ExtrinsicConfig';
@@ -12,7 +11,7 @@ export function xTransfer() {
 
       return {
         here: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, destination }) =>
+          build: ({ destinationAddress: address, asset, destination }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: method,
@@ -25,7 +24,7 @@ export function xTransfer() {
                     },
                   },
                   fun: {
-                    Fungible: amount,
+                    Fungible: asset.amount,
                   },
                 },
                 {
@@ -47,7 +46,7 @@ export function xTransfer() {
             }),
         }),
         X2: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, destination, palletInstance }) =>
+          build: ({ destinationAddress, asset, destination }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: method,
@@ -62,14 +61,14 @@ export function xTransfer() {
                             Parachain: destination.parachainId,
                           },
                           {
-                            PalletInstance: palletInstance,
+                            PalletInstance: asset.getAssetPalletInstance(),
                           },
                         ],
                       },
                     },
                   },
                   fun: {
-                    Fungible: amount || 1n,
+                    Fungible: asset.amount || 1n,
                   },
                 },
                 {
@@ -79,7 +78,7 @@ export function xTransfer() {
                       {
                         Parachain: destination.parachainId,
                       },
-                      getExtrinsicAccount(address),
+                      getExtrinsicAccount(destinationAddress),
                     ],
                   },
                 },

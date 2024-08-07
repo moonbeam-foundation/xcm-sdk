@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 import {
   ExtrinsicConfigBuilder,
   Parents,
@@ -33,7 +32,7 @@ export function xcmPallet() {
                         },
                       },
                       fun: {
-                        Fungible: params.amount,
+                        Fungible: params.asset.amount,
                       },
                     },
                   ],

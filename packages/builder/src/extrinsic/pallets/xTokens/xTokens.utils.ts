@@ -1,4 +1,4 @@
-import { AnyChain } from '@moonbeam-network/xcm-types';
+import { AnyParachain } from '@moonbeam-network/xcm-types';
 import { XcmVersion } from '../../ExtrinsicBuilder.interfaces';
 import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { XTokensWeightLimit } from './xTokens.interfaces';
@@ -13,7 +13,7 @@ export function getWeight(): XTokensWeightLimit {
 export function getDestination(
   version: XcmVersion,
   address: string,
-  destination: AnyChain,
+  destination: AnyParachain,
 ) {
   return {
     [version]: {

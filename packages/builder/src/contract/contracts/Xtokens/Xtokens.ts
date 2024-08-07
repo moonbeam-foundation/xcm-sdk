@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { AnyChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import { AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { isString, u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
@@ -100,7 +100,7 @@ type DestinationMultilocation = [
 
 function getDestinationMultilocationForPrecompileDestination(
   address: string,
-  destination: AnyChain,
+  destination: AnyParachain,
 ): DestinationMultilocation {
   /* 
    01: AccountId32
@@ -125,7 +125,7 @@ function getDestinationMultilocationForPrecompileDestination(
 
 function getDestinationMultilocation(
   address: string,
-  destination: AnyChain,
+  destination: AnyParachain,
 ): DestinationMultilocation {
   /* 
    01: AccountId32

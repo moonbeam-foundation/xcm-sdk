@@ -76,26 +76,33 @@ export async function getTransferData({
       { evmSigner, polkadotSigner }: Partial<Signers>,
     ): Promise<string> {
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
-      const asset = source.getChainAsset(route.asset);
-      const feeAsset = source.getChainAsset(destinationFee);
+      const asset = AssetAmount.fromChainAsset(
+        source.getChainAsset(route.asset),
+        { amount: bigintAmount },
+      );
+      const [sourcePolkadot, destinationPolkadot] =
+        await PolkadotService.createMulti([
+          source,
+          route.destination as AnyParachain,
+        ]);
 
       const contract = route.contract?.build({
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.address || asset.getAssetId(),
-        destination: route.destination,
+        destination: route.destination as AnyParachain,
         fee: destinationFee.amount,
-        feeAsset: feeAsset.address || feeAsset.getAssetId(),
+        feeAsset: destinationFee.address || destinationFee.getAssetId(),
       });
       const extrinsic = route.extrinsic?.build({
-        address: destinationAddress,
-        amount: bigintAmount,
-        asset: asset.getAssetId(),
-        destination: route.destination,
-        fee: destinationFee.amount,
-        feeAsset: feeAsset.getAssetId(),
-        palletInstance: asset.getAssetPalletInstance(),
+        asset,
+        destination: route.destination as AnyParachain,
+        destinationAddress,
+        destinationApi: destinationPolkadot.api,
+        fee: destinationFee,
         source,
+        sourceAddress,
+        sourceApi: sourcePolkadot.api,
       });
 
       if (contract) {
@@ -113,9 +120,11 @@ export async function getTransferData({
           throw new Error('Polkadot signer must be provided');
         }
 
-        const polkadot = await PolkadotService.create(source);
-
-        return polkadot.transfer(sourceAddress, extrinsic, polkadotSigner);
+        return sourcePolkadot.transfer(
+          sourceAddress,
+          extrinsic,
+          polkadotSigner,
+        );
       }
 
       throw new Error('Either contract or extrinsic must be provided');

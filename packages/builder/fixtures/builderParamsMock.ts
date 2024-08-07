@@ -1,15 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { vi } from 'vitest';
 import {
   Asset,
+  AssetAmount,
+  ChainAsset,
   Ecosystem,
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { ExtrinsicConfigBuilderPrams } from '../src/extrinsic';
+import {
+  ExtrinsicConfigBuilderPrams,
+  MrlExtrinsicConfigBuilderPrams,
+} from '../src/extrinsic';
 
-const test = new Asset({ key: 'test', originSymbol: 'TEST' });
+export const apiMock = {
+  tx: {
+    polkadotXcm: { send: vi.fn(() => 'polkadotXcm.send => RESULT') },
+    xTokens: { transfer: vi.fn(() => 'xTokens.transfer => RESULT') },
+  },
+} as any;
+
+const test = new Asset({ key: 'usdt', originSymbol: 'USDT' });
+const testChainAsset = ChainAsset.fromAsset(test, {
+  address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+  decimals: 18,
+  ids: { palletInstance: 10 },
+});
+const testAssetAmount = AssetAmount.fromChainAsset(testChainAsset, {
+  amount: 99_000_000_000n,
+});
+
+const test2 = new Asset({ key: 'rmrk', originSymbol: 'RMRK' });
+const testChainAsset2 = ChainAsset.fromAsset(test2, {
+  address: '0x2A1A1e691d79Bf461ac08a20cE3DF6E385b82444',
+  decimals: 18,
+  ids: { palletInstance: 18 },
+});
+const testAssetAmount2 = AssetAmount.fromChainAsset(testChainAsset2, {
+  amount: 5_000_000_000n,
+});
 
 export const interlayTestnetMock = new Parachain({
-  assets: [],
+  assets: [testChainAsset, testChainAsset2],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x418ae94c9fce02b1ab3b5bc211cd2f2133426f2861d97482bbdfdac1bbb0fb92',
@@ -23,7 +56,7 @@ export const interlayTestnetMock = new Parachain({
 });
 
 export const alphanetAssetHubMock = new Parachain({
-  assets: [],
+  assets: [testChainAsset, testChainAsset2],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
@@ -37,7 +70,7 @@ export const alphanetAssetHubMock = new Parachain({
 });
 
 export const moonbaseAlphaMock = new EvmParachain({
-  assets: [],
+  assets: [testChainAsset, testChainAsset2],
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
@@ -49,38 +82,54 @@ export const moonbaseAlphaMock = new EvmParachain({
   parachainId: 1000,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,
+  wh: { name: 'Moonbeam' },
   ws: ['wss://wss.api.moonbase.moonbeam.network'],
 });
 
 export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
-  address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
-  amount: 99_000_000_000n,
-  asset: 'USDT',
+  asset: testAssetAmount,
   destination: moonbaseAlphaMock,
-  fee: 5_000_000_000n,
-  feeAsset: 'RMRK',
-  palletInstance: 10,
+  destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  destinationApi: apiMock,
+  fee: testAssetAmount2,
   source: alphanetAssetHubMock,
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY,',
+  sourceApi: apiMock,
 };
 
 export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
-  address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
-  amount: 99_000_000_000n,
-  asset: 'USDT',
+  asset: testAssetAmount,
   destination: moonbaseAlphaMock,
-  fee: 5_000_000_000n,
-  feeAsset: 'USDT',
-  palletInstance: 10,
+  destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  destinationApi: apiMock,
+  fee: testAssetAmount,
   source: alphanetAssetHubMock,
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY,',
+  sourceApi: apiMock,
 };
 
 export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
-  address: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
-  amount: 99_000_000_000n,
-  asset: 'USDT',
+  asset: testAssetAmount,
   destination: interlayTestnetMock,
-  fee: 5_000_000_000n,
-  feeAsset: 'RMRK',
-  palletInstance: 10,
+  destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
+  destinationApi: apiMock,
+  fee: testAssetAmount2,
   source: alphanetAssetHubMock,
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY,',
+  sourceApi: apiMock,
+};
+
+export const mrlBuildParamsMock: MrlExtrinsicConfigBuilderPrams = {
+  ...buildParamsMock,
+  moonApi: {} as any,
+  moonAsset: testAssetAmount,
+  moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
+  transact: {
+    call: '0x4d79207465787420737472696e67',
+    txWeight: {
+      refTime: 24_902_375_000n,
+      proofSize: 62_193n,
+    },
+  },
 };

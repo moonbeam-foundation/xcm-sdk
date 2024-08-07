@@ -1,14 +1,13 @@
-/* eslint-disable sort-keys */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { defineConfig } from 'tsup';
+import { Options } from 'tsup';
 
-// eslint-disable-next-line import/no-default-export
-export default defineConfig(({ watch }) => ({
+export const baseConfig: Options = {
   entry: ['src/index.ts'],
   format: 'esm',
   outDir: 'build',
   target: 'es2022',
-  minify: !watch,
+  minify: true,
+  splitting: false,
   sourcemap: true,
   clean: true,
   dts: true,
@@ -19,4 +18,4 @@ export default defineConfig(({ watch }) => ({
       js: `.${ext}`,
     };
   },
-}));
+};

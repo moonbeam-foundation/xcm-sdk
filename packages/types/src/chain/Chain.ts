@@ -1,5 +1,5 @@
 import { Asset, AssetAmount, ChainAsset } from '../asset';
-import { Ecosystem } from './Chain.interfaces';
+import { Ecosystem, WormholeConfig } from './Chain.interfaces';
 
 export interface ChainConstructorParams {
   assets: Map<string, ChainAsset> | ChainAsset[];
@@ -9,6 +9,7 @@ export interface ChainConstructorParams {
   key: string;
   name: string;
   nativeAsset: Asset;
+  wh?: WormholeConfig;
 }
 
 export abstract class Chain {
@@ -26,6 +27,8 @@ export abstract class Chain {
 
   readonly #nativeAsset: Asset;
 
+  readonly wh?: WormholeConfig;
+
   constructor({
     assets,
     ecosystem,
@@ -34,6 +37,7 @@ export abstract class Chain {
     key,
     name,
     nativeAsset,
+    wh,
   }: ChainConstructorParams) {
     this.assets =
       assets instanceof Map
@@ -45,6 +49,7 @@ export abstract class Chain {
     this.key = key;
     this.name = name;
     this.#nativeAsset = nativeAsset;
+    this.wh = wh;
   }
 
   get nativeAsset(): ChainAsset {

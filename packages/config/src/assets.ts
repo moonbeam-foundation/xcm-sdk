@@ -25,6 +25,11 @@ export const apillon = new Asset({
   originSymbol: 'NCTR',
 });
 
+export const aseed = new Asset({
+  key: 'aseed',
+  originSymbol: 'aSEED',
+});
+
 export const astr = new Asset({
   key: 'astr',
   originSymbol: 'ASTR',
@@ -38,11 +43,6 @@ export const atom = new Asset({
 export const auq = new Asset({
   key: 'auq',
   originSymbol: 'AUQ',
-});
-
-export const aseed = new Asset({
-  key: 'aseed',
-  originSymbol: 'aSEED',
 });
 
 export const betaDEV = new Asset({
@@ -75,6 +75,16 @@ export const csm = new Asset({
   originSymbol: 'CSM',
 });
 
+export const dai = new Asset({
+  key: 'dai',
+  originSymbol: 'DAI',
+});
+
+export const ded = new Asset({
+  key: 'ded',
+  originSymbol: 'DED',
+});
+
 export const dev = new Asset({
   key: 'dev',
   originSymbol: 'DEV',
@@ -95,19 +105,19 @@ export const eqd = new Asset({
   originSymbol: 'EQD',
 });
 
-export const dai = new Asset({
-  key: 'dai',
-  originSymbol: 'DAI',
-});
-
-export const ded = new Asset({
-  key: 'ded',
-  originSymbol: 'DED',
-});
-
 export const fil = new Asset({
   key: 'fil',
   originSymbol: 'FIL',
+});
+
+export const ftm = new Asset({
+  key: 'ftm',
+  originSymbol: 'FTM',
+});
+
+export const ftmwh = new Asset({
+  key: 'ftmwh',
+  originSymbol: 'FTM.wh',
 });
 
 export const glmr = new Asset({
@@ -180,14 +190,14 @@ export const movr = new Asset({
   originSymbol: 'MOVR',
 });
 
-export const nodl = new Asset({
-  key: 'nodl',
-  originSymbol: 'NODL',
-});
-
 export const neuro = new Asset({
   key: 'neuro',
   originSymbol: 'NEURO',
+});
+
+export const nodl = new Asset({
+  key: 'nodl',
+  originSymbol: 'NODL',
 });
 
 export const otp = new Asset({
@@ -305,21 +315,6 @@ export const usdtwh = new Asset({
   originSymbol: 'USDT.Wh',
 });
 
-export const wbtc = new Asset({
-  key: 'wbtc',
-  originSymbol: 'WBTC',
-});
-
-export const weth = new Asset({
-  key: 'weth',
-  originSymbol: 'WETH',
-});
-
-export const wftm = new Asset({
-  key: 'wftm',
-  originSymbol: 'wFTM',
-});
-
 export const vastr = new Asset({
   key: 'vastr',
   originSymbol: 'vASTR',
@@ -360,6 +355,21 @@ export const vmovr = new Asset({
   originSymbol: 'vMOVR',
 });
 
+export const wbtc = new Asset({
+  key: 'wbtc',
+  originSymbol: 'WBTC',
+});
+
+export const weth = new Asset({
+  key: 'weth',
+  originSymbol: 'WETH',
+});
+
+export const wftm = new Asset({
+  key: 'wftm',
+  originSymbol: 'wFTM',
+});
+
 export const xrt = new Asset({
   key: 'xrt',
   originSymbol: 'XRT',
@@ -370,20 +380,17 @@ export const ztg = new Asset({
   originSymbol: 'ZTG',
 });
 
-export const ftmwh = new Asset({
-  key: 'ftmwh',
-  originSymbol: 'FTM.wh',
-});
-
 export const assetsList: Asset[] = [
   aca,
-  alan,
   agng,
+  alan,
   ampe,
+  apillon,
   aseed,
   astr,
   atom,
   auq,
+  betaDEV,
   bnc,
   bncs,
   cfg,
@@ -396,6 +403,7 @@ export const assetsList: Asset[] = [
   eq,
   eqd,
   fil,
+  ftm,
   ftmwh,
   glmr,
   hdx,
@@ -411,9 +419,8 @@ export const assetsList: Asset[] = [
   manta,
   mgx,
   movr,
-  apillon,
-  nodl,
   neuro,
+  nodl,
   otp,
   para,
   paring,

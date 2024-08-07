@@ -2,6 +2,7 @@ import {
   AnyChain,
   ChainAsset,
   Ecosystem,
+  EvmChain,
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
@@ -29,6 +30,7 @@ import {
   eq,
   eqd,
   fil,
+  ftm,
   ftmwh,
   glmr,
   hdx,
@@ -451,6 +453,22 @@ export const darwiniaCrab = new EvmParachain({
   ws: ['wss://crab-rpc.darwinia.network', 'wss://darwiniacrab-rpc.dwellir.com'],
 });
 
+export const fantomTestnet = new EvmChain({
+  assets: [
+    ChainAsset.fromAsset(ftm, {
+      decimals: 18,
+    }),
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  explorer: 'https://testnet.ftmscan.com',
+  id: 4_002,
+  isTestChain: true,
+  key: 'fantom-testnet',
+  name: 'Fantom Testnet',
+  nativeAsset: ftm,
+  rpc: 'https://rpc.testnet.fantom.network',
+});
+
 export const hydration = new Parachain({
   assets: [
     ChainAsset.fromAsset(hdx, {
@@ -561,6 +579,22 @@ export const hydrationAlphanet = new Parachain({
   ws: ['wss://hydradx-moonbase-rpc.play.hydration.cloud'],
 });
 
+export const integritee = new Parachain({
+  assets: [ChainAsset.fromAsset(teer, { decimals: 12 })],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
+  key: 'integritee',
+  name: 'Integritee',
+  nativeAsset: teer,
+  parachainId: 2015,
+  ss58Format: 13,
+  ws: [
+    'wss://kusama.api.integritee.network',
+    'wss://integritee-kusama.api.onfinality.io/public-ws',
+  ],
+});
+
 export const interlay = new Parachain({
   assets: [
     ChainAsset.fromAsset(glmr, {
@@ -591,22 +625,6 @@ export const interlay = new Parachain({
   parachainId: 2032,
   ss58Format: 2032,
   ws: ['wss://api.interlay.io/parachain', 'wss://interlay-rpc.dwellir.com'],
-});
-
-export const integritee = new Parachain({
-  assets: [ChainAsset.fromAsset(teer, { decimals: 12 })],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
-  key: 'integritee',
-  name: 'Integritee',
-  nativeAsset: teer,
-  parachainId: 2015,
-  ss58Format: 13,
-  ws: [
-    'wss://kusama.api.integritee.network',
-    'wss://integritee-kusama.api.onfinality.io/public-ws',
-  ],
 });
 
 export const karura = new Parachain({
@@ -855,6 +873,9 @@ export const moonbaseAlpha = new EvmParachain({
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.01,
+      ids: {
+        palletInstance: 3,
+      },
     }),
     ChainAsset.fromAsset(lit, {
       address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
@@ -1075,6 +1096,9 @@ export const moonbeam = new EvmParachain({
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.1,
+      ids: {
+        palletInstance: 10,
+      },
     }),
     ChainAsset.fromAsset(hdx, {
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
@@ -1646,47 +1670,6 @@ export const peaqChain = new Parachain({
   ws: ['wss://peaq.api.onfinality.io/public-ws'],
 });
 
-export const peaqEvmAlphanet = new EvmParachain({
-  assets: [
-    ChainAsset.fromAsset(agng, {
-      decimals: 18,
-    }),
-    ChainAsset.fromAsset(dev, {
-      address: '0xFfFfFffF000000000000000000000000000003e8',
-      decimals: 18,
-      ids: {
-        id: '0xFfFfFffF000000000000000000000000000003e8',
-        minId: 1000,
-      },
-    }),
-    ChainAsset.fromAsset(ftmwh, {
-      address: '0xFffFffFF000000000000000000000000000003E9',
-      decimals: 18,
-      ids: {
-        id: '0xFffFffFF000000000000000000000000000003E9',
-        minId: 1001,
-      },
-    }),
-  ],
-  contracts: {
-    Xtokens: '0x0000000000000000000000000000000000000803',
-  },
-  ecosystem: Ecosystem.AlphanetRelay,
-  explorer: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
-  genesisHash:
-    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
-  id: 9990,
-  isEvmSigner: true,
-  isTestChain: true,
-  key: 'peaq-evm-Alphanet',
-  name: 'peaq EVM Alphanet',
-  nativeAsset: agng,
-  parachainId: 3013,
-  rpc: 'https://moonbeam.PEAQ.network',
-  ss58Format: 42,
-  ws: ['wss://moonbeam.peaq.network'],
-});
-
 export const peaqEvm = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(peaq, {
@@ -1758,6 +1741,47 @@ export const peaqEvm = new EvmParachain({
   rpc: 'https://peaq.api.onfinality.io/public',
   ss58Format: 42,
   ws: ['wss://peaq.api.onfinality.io/public-ws'],
+});
+
+export const peaqEvmAlphanet = new EvmParachain({
+  assets: [
+    ChainAsset.fromAsset(agng, {
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(dev, {
+      address: '0xFfFfFffF000000000000000000000000000003e8',
+      decimals: 18,
+      ids: {
+        id: '0xFfFfFffF000000000000000000000000000003e8',
+        minId: 1000,
+      },
+    }),
+    ChainAsset.fromAsset(ftmwh, {
+      address: '0xFffFffFF000000000000000000000000000003E9',
+      decimals: 18,
+      ids: {
+        id: '0xFffFffFF000000000000000000000000000003E9',
+        minId: 1001,
+      },
+    }),
+  ],
+  contracts: {
+    Xtokens: '0x0000000000000000000000000000000000000803',
+  },
+  ecosystem: Ecosystem.AlphanetRelay,
+  explorer: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
+  genesisHash:
+    '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
+  id: 9990,
+  isEvmSigner: true,
+  isTestChain: true,
+  key: 'peaq-evm-Alphanet',
+  name: 'peaq EVM Alphanet',
+  nativeAsset: agng,
+  parachainId: 3013,
+  rpc: 'https://moonbeam.PEAQ.network',
+  ss58Format: 42,
+  ws: ['wss://moonbeam.peaq.network'],
 });
 
 export const pendulum = new Parachain({
@@ -2170,6 +2194,7 @@ export const zeitgeist = new Parachain({
 
 export const chainsList: AnyChain[] = [
   acala,
+  alphanetAssetHub,
   alphanetRelay,
   astar,
   bifrostKusama,
@@ -2179,6 +2204,7 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   darwiniaCrab,
+  fantomTestnet,
   hydration,
   hydrationAlphanet,
   integritee,
@@ -2187,6 +2213,7 @@ export const chainsList: AnyChain[] = [
   khala,
   kintsugi,
   kusama,
+  kusamaAssetHub,
   litmus,
   mangataKusama,
   mantaParachain,
@@ -2198,9 +2225,9 @@ export const chainsList: AnyChain[] = [
   nodle,
   originTrailAlphanet,
   parallel,
+  peaqAlphanet,
   peaqChain,
   peaqEvm,
-  peaqAlphanet,
   peaqEvmAlphanet,
   pendulum,
   pendulumAlphanet,
@@ -2208,11 +2235,9 @@ export const chainsList: AnyChain[] = [
   picasso,
   picassoAlphanet,
   polkadot,
+  polkadotAssetHub,
   robonomics,
   shiden,
-  kusamaAssetHub,
-  alphanetAssetHub,
-  polkadotAssetHub,
   subsocial,
   tinkernet,
   turing,

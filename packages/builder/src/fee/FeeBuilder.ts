@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { Option, u128 } from '@polkadot/types';

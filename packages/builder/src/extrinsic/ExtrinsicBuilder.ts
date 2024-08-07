@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { eqBalances } from './pallets/eqBalances';
