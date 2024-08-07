@@ -360,6 +360,11 @@ export const vmovr = new Asset({
   originSymbol: 'vMOVR',
 });
 
+export const wifd = new Asset({
+  key: 'wifd',
+  originSymbol: 'WIFD',
+});
+
 export const xrt = new Asset({
   key: 'xrt',
   originSymbol: 'XRT',
@@ -448,6 +453,7 @@ export const assetsList: Asset[] = [
   wbtc,
   weth,
   wftm,
+  wifd,
   xrt,
   ztg,
 ];

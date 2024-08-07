@@ -76,6 +76,7 @@ import {
   vmovr,
   wbtc,
   weth,
+  wifd,
   xrt,
   ztg,
 } from './assets';
@@ -1104,6 +1105,10 @@ export const moonbeam = new EvmParachain({
       asset: apillon,
       id: '184218609779515850660274730699350567246',
     },
+    {
+      asset: wifd,
+      id: '61295607754960722617854661686514597014',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1727,6 +1732,11 @@ export const polkadotAssetHub = new Parachain({
     {
       asset: apillon,
       id: 1024,
+      palletInstance: 50,
+    },
+    {
+      asset: wifd,
+      id: 17,
       palletInstance: 50,
     },
   ],
