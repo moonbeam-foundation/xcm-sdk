@@ -25,13 +25,13 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",
+    "spell": "cspell --quiet -c cspell.config.cjs 'packages/**/src/**'",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "test:update": "turbo run test:update",
     "test:ci": "turbo run test:ci",
     "test:acc": "turbo run test:acc",
     "test:acc:u": "turbo run test:acc -- -u",
-    "prepare": "husky install",
     "sync-deps": "syncpack fix-mismatches",
     "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",
     "changeset": "changeset",
@@ -55,6 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "bun": "^1.1.21",
+    "cspell": "^8.13.1",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -65,17 +66,12 @@
     "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-prettier": "^5.2.1",
     "glob": "^11.0.0",
-    "husky": "^9.1.4",
-    "lint-staged": "^15.2.7",
+    "lefthook": "^1.7.11",
     "prettier": "^3.3.3",
     "tsup": "^8.2.3",
     "turbo": "^2.0.9",
     "typescript": "^5.5.4",
     "viem": "^2.18.5",
     "vitest": "^2.0.4"
-  },
-  "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix --max-warnings=0",
-    "*.{json,md}": "prettier --write"
   }
 }

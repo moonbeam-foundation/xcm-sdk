@@ -82,6 +82,12 @@ pnpm install
 pnpm run dev
 ```
 
+Optionally, you can install the `pre-commit` hook to run the linter and tests before committing:
+
+```bash
+pnpm lefthook install
+```
+
 # Tests
 
 ## Unit tests
