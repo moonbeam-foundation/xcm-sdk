@@ -1,5 +1,6 @@
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
+import assert from 'assert';
 import { ExtrinsicBuilder } from '../../../ExtrinsicBuilder';
 import { MrlExtrinsicConfigBuilder } from '../../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../../ExtrinsicConfig';
@@ -22,14 +23,11 @@ export function polkadotXcm() {
           sourceApi,
           transact,
         } = params;
-
-        if (!destination.wh?.name) {
-          throw new Error('Destination chain does not have a wormhole name');
-        }
-
-        if (!transact) {
-          throw new Error('Transact params are required');
-        }
+        assert(transact, 'Transact param is required');
+        assert(
+          destination.wh?.name,
+          `Destination chain ${destination.name} does not have a wormhole name`,
+        );
 
         const { transfer } = sourceApi.tx.xTokens;
         const builder = ExtrinsicBuilder().xTokens().transfer();

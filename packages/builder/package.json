@@ -39,6 +39,7 @@
   "dependencies": {
     "@moonbeam-network/xcm-types": "2.3.1",
     "@moonbeam-network/xcm-utils": "2.1.4",
+    "assert": "^2.1.0",
     "big.js": "^6.2.1"
   },
   "peerDependencies": {

@@ -2,6 +2,7 @@ import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
 import { Address, encodeFunctionData } from 'viem';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmPlatform } from '@wormhole-foundation/sdk-evm';
+import assert from 'assert';
 import { MrlExtrinsicConfigBuilder } from '../../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../../ExtrinsicConfig';
 import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
@@ -26,11 +27,10 @@ export function ethereumXcm() {
         moonChain,
         moonGasLimit,
       }) => {
-        if (!destination.wh?.name) {
-          throw new Error(
-            `Destination chain ${destination.name} does not have a wormhole name`,
-          );
-        }
+        assert(
+          destination.wh?.name,
+          `Destination chain ${destination.name} does not have a wormhole name`,
+        );
 
         const wh = new Wormhole(moonChain.isTestChain ? 'Testnet' : 'Mainnet', [
           EvmPlatform,
@@ -46,11 +46,10 @@ export function ethereumXcm() {
         const tokenAddressOnMoonChain = moonChain.getChainAsset(asset)
           .address as Address | undefined;
 
-        if (!tokenAddressOnMoonChain) {
-          throw new Error(
-            `Asset ${asset.symbol} does not have a token address on chain ${moonChain.name}`,
-          );
-        }
+        assert(
+          tokenAddressOnMoonChain,
+          `Asset ${asset.symbol} does not have a token address on chain ${moonChain.name}`,
+        );
 
         const destinationAddress32bytes = convertAddressTo32Bytes(
           destinationAddress,

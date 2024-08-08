@@ -133,3 +133,18 @@ export const mrlBuildParamsMock: MrlExtrinsicConfigBuilderPrams = {
     },
   },
 };
+
+export const mrlBuildParamsMock2: MrlExtrinsicConfigBuilderPrams = {
+  ...buildParachainParamsMock,
+  moonApi: {} as any,
+  moonAsset: testAssetAmount,
+  moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
+  transact: {
+    call: '0x4d79207465787420737472696e67',
+    txWeight: {
+      refTime: 24_902_375_000n,
+      proofSize: 62_193n,
+    },
+  },
+};
