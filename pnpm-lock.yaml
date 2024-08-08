@@ -109,10 +109,10 @@ importers:
   examples/sdk-simple:
     dependencies:
       '@moonbeam-network/xcm-config':
-        specifier: 2.5.2
+        specifier: 2.5.3
         version: link:../../packages/config
       '@moonbeam-network/xcm-sdk':
-        specifier: 2.5.3
+        specifier: 2.5.4
         version: link:../../packages/sdk
       '@moonbeam-network/xcm-utils':
         specifier: 2.1.4
@@ -182,7 +182,7 @@ importers:
   packages/mrl:
     dependencies:
       '@moonbeam-network/xcm-config':
-        specifier: 2.5.2
+        specifier: 2.5.3
         version: link:../config
       '@moonbeam-network/xcm-types':
         specifier: 2.3.1
@@ -194,7 +194,7 @@ importers:
         specifier: 2.4.1
         version: link:../builder
       '@moonbeam-network/xcm-config':
-        specifier: 2.5.2
+        specifier: 2.5.3
         version: link:../config
       '@moonbeam-network/xcm-types':
         specifier: 2.3.1
