@@ -38,6 +38,7 @@ import {
   vmanta,
   wbtc,
   weth,
+  wifd,
   ztg,
 } from '../assets';
 import {
@@ -929,6 +930,21 @@ export const moonbeamRoutes = new ChainRoutes({
         amount: 0.000001,
         asset: wbtc,
         balance: BalanceBuilder().evm().erc20(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetRoute({
+      asset: wifd,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.2,
+        asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {
         asset: glmr,

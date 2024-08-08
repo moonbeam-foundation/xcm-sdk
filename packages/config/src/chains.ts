@@ -80,6 +80,7 @@ import {
   vmovr,
   wbtc,
   weth,
+  wifd,
   xrt,
   ztg,
 } from './assets';
@@ -1284,6 +1285,13 @@ export const moonbeam = new EvmParachain({
         id: '184218609779515850660274730699350567246',
       },
     }),
+    ChainAsset.fromAsset(wifd, {
+      address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      decimals: 18,
+      ids: {
+        id: '61295607754960722617854661686514597014',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1992,6 +2000,13 @@ export const polkadotAssetHub = new Parachain({
       decimals: 18,
       ids: {
         id: 1024,
+        palletInstance: 50,
+      },
+    }),
+    ChainAsset.fromAsset(wifd, {
+      decimals: 10,
+      ids: {
+        id: 17,
         palletInstance: 50,
       },
     }),

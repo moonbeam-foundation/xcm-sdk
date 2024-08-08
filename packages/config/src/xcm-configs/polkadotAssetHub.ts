@@ -4,7 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { apillon, ded, dot, pink, stink, usdc, usdt } from '../assets';
+import { apillon, ded, dot, pink, stink, usdc, usdt, wifd } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -116,6 +116,26 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
     }),
     new AssetRoute({
       asset: apillon,
+      balance: BalanceBuilder().substrate().assets().account(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: 0.03,
+        asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
+        .X2(),
+      fee: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().system().account(),
+        extra,
+      },
+      min: AssetMinBuilder().assets().asset(),
+    }),
+    new AssetRoute({
+      asset: wifd,
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
