@@ -28,9 +28,7 @@ describe('ethereumXcm', () => {
           .transact({ isAutomatic: true })
           .build(mrlBuildParamsMock2)
           .getArgs({} as any),
-      ).toThrow(
-        'Destination chain Interlay Testnet does not have a wormhole name',
-      );
+      ).toThrow('Chain Interlay Testnet does not have a wormhole name');
     });
   });
 });
