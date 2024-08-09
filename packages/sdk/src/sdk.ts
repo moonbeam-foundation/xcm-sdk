@@ -7,7 +7,6 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import assert from 'assert';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData } from './getTransferData/getTransferData';
 import { PolkadotService } from './polkadot';
@@ -53,15 +52,23 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                 ): Promise<TransferData> {
                   const sourceChain = service.getChain(source);
 
-                  assert(
-                    Parachain.is(sourceChain) || EvmParachain.is(sourceChain),
-                    'Source chain should be a Parachain or EvmParachain',
-                  );
-                  assert(
-                    Parachain.is(route.destination) ||
-                      EvmParachain.is(route.destination),
-                    'Destination chain should be a Parachain or EvmParachain',
-                  );
+                  if (
+                    !Parachain.is(sourceChain) &&
+                    !EvmParachain.is(sourceChain)
+                  ) {
+                    throw new Error(
+                      `Source chain should be a Parachain or EvmParachain`,
+                    );
+                  }
+
+                  if (
+                    !Parachain.is(route.destination) &&
+                    !EvmParachain.is(route.destination)
+                  ) {
+                    throw new Error(
+                      `Destination chain should be a Parachain or EvmParachain`,
+                    );
+                  }
 
                   return getTransferData({
                     route,
