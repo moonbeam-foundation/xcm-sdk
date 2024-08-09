@@ -1,3 +1,4 @@
+import type { Chain as WhChain } from '@wormhole-foundation/sdk-connect';
 import { Asset, AssetAmount, ChainAsset } from '../asset';
 import { Ecosystem, WormholeConfig } from './Chain.interfaces';
 
@@ -67,5 +68,13 @@ export abstract class Chain {
     }
 
     return chainAsset;
+  }
+
+  getWormholeName(): WhChain {
+    if (!this.wh?.name) {
+      throw new Error(`Chain ${this.name} does not have a wormhole name`);
+    }
+
+    return this.wh.name;
   }
 }
