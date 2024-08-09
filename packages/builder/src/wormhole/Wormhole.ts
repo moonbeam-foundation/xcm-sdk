@@ -45,7 +45,7 @@ export function WormholeBuilder() {
             isAutomatic,
             payload,
           ],
-          func: 'transfer',
+          func: 'tokenTransfer',
         });
       },
     }),
