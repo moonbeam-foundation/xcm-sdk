@@ -57,6 +57,10 @@ export abstract class Chain {
     return this.getChainAsset(this.#nativeAsset);
   }
 
+  isEqual<T extends Chain>(chain: T): boolean {
+    return this.key === chain.key;
+  }
+
   getChainAsset(keyOrAsset: string | Asset | AssetAmount): ChainAsset {
     const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
     const chainAsset = this.assets.get(key);
