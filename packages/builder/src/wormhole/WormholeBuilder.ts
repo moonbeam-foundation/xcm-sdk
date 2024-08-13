@@ -2,6 +2,7 @@
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { stringToU8a } from '@polkadot/util';
+import { evmToAddress } from '@polkadot/util-crypto/address';
 import {
   WormholeConfigBuilder,
   WormholeConfigBuilderPrams,
@@ -9,7 +10,9 @@ import {
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
-import { evmToAddress } from '@polkadot/util-crypto/address';
+
+export const GMP_CONTRACT_ADDRESS =
+  '0x0000000000000000000000000000000000000816';
 
 export function WormholeBuilder() {
   return {
@@ -26,22 +29,23 @@ export function WormholeBuilder() {
         source,
         sourceAddress,
       }) => {
-        const wh = wormholeFactory(source);
-        const whSource = wh.getChain(source.getWormholeName());
-        const whDestination = wh.getChain(destination.getWormholeName());
-
         if (!asset.address) {
-          throw new Error('Asset address is required');
+          throw new Error(`Asset ${asset.key} has no address`);
         }
 
+        const isDestinationMoonChain = destination.isEqual(moonChain);
+
+        const wh = wormholeFactory(source);
+        const whSource = wh.getChain(source.getWormholeName());
+        const whMoonChain = wh.getChain(moonChain.getWormholeName());
         const whAsset = Wormhole.tokenId(whSource.chain, asset.address);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
           sourceAddress,
         );
-        const whDestinationAddress = Wormhole.chainAddress(
-          whDestination.chain,
-          destinationAddress,
+        const whMoonChainAddress = Wormhole.chainAddress(
+          whMoonChain.chain,
+          isDestinationMoonChain ? destinationAddress : GMP_CONTRACT_ADDRESS,
         );
 
         return new WormholeConfig({
@@ -49,9 +53,11 @@ export function WormholeBuilder() {
             whAsset,
             asset.amount,
             whSourceAddress,
-            whDestinationAddress,
+            whMoonChainAddress,
             isAutomatic,
-            getPayload({ destination, destinationAddress, moonChain }),
+            isDestinationMoonChain
+              ? undefined
+              : getPayload({ destination, destinationAddress }),
           ],
           func: 'tokenTransfer',
         });
@@ -63,16 +69,10 @@ export function WormholeBuilder() {
 export function getPayload({
   destination,
   destinationAddress,
-  moonChain,
-}: Pick<
-  WormholeConfigBuilderPrams,
-  'destination' | 'destinationAddress' | 'moonChain'
->): Uint8Array | undefined {
-  if (destination.isEqual(moonChain)) {
-    return undefined;
-  }
-
-  if (!Parachain.is(destination) || !EvmParachain.is(destination)) {
+}: Pick<WormholeConfigBuilderPrams, 'destination' | 'destinationAddress'>):
+  | Uint8Array
+  | undefined {
+  if (!Parachain.is(destination) && !EvmParachain.is(destination)) {
     throw new Error(
       `Destination ${destination.name} is not a Parachain or EvmParachain`,
     );

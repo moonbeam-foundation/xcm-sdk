@@ -6,6 +6,7 @@ import {
   AssetAmount,
   ChainAsset,
   Ecosystem,
+  EvmChain,
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
@@ -13,6 +14,7 @@ import {
   ExtrinsicConfigBuilderPrams,
   MrlExtrinsicConfigBuilderPrams,
 } from '../src/extrinsic';
+import { WormholeConfigBuilderPrams } from '../src/wormhole';
 
 export const apiMock = {
   tx: {
@@ -86,6 +88,21 @@ export const moonbaseAlphaMock = new EvmParachain({
   ws: ['wss://wss.api.moonbase.moonbeam.network'],
 });
 
+export const fantomTestnet = new EvmChain({
+  assets: [testChainAsset, testChainAsset2],
+  ecosystem: Ecosystem.AlphanetRelay,
+  explorer: 'https://testnet.ftmscan.com',
+  id: 4_002,
+  isTestChain: true,
+  key: 'fantom-testnet',
+  name: 'Fantom Testnet',
+  nativeAsset: test,
+  rpc: 'https://rpc.testnet.fantom.network',
+  wh: {
+    name: 'Fantom',
+  },
+});
+
 export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
@@ -148,3 +165,22 @@ export const mrlBuildParamsMock2: MrlExtrinsicConfigBuilderPrams = {
     },
   },
 };
+
+export const wormholeConfigBuilderPrams: WormholeConfigBuilderPrams = {
+  asset: testAssetAmount,
+  destination: alphanetAssetHubMock,
+  destinationAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
+  moonChain: moonbaseAlphaMock,
+  source: fantomTestnet,
+  sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+};
+
+export const wormholeToMoonchainConfigBuilderPrams: WormholeConfigBuilderPrams =
+  {
+    asset: testAssetAmount,
+    destination: moonbaseAlphaMock,
+    destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+    moonChain: moonbaseAlphaMock,
+    source: fantomTestnet,
+    sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  };
