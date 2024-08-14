@@ -451,6 +451,13 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
   a {
     "amount": 0n,
     "decimals": 10,
+    "key": "wifd",
+    "originSymbol": "WIFD",
+    "symbol": "WIFD",
+  },
+  a {
+    "amount": 0n,
+    "decimals": 10,
     "key": "stink",
     "originSymbol": "STINK",
     "symbol": "STINK",
