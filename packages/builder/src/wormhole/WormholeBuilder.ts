@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
-import { stringToU8a } from '@polkadot/util';
+import { stringify, stringToU8a } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import {
   WormholeConfigBuilder,
@@ -82,8 +82,9 @@ export function getPayload({
   const isPeaqEvm =
     destination.key === 'peaq-evm-Alphanet' || destination.key === 'peaq-evm';
 
+  // TODO: this is not working I will need to use API to create type
   return stringToU8a(
-    JSON.stringify({
+    stringify({
       destination: {
         V3: {
           parents: 1,
