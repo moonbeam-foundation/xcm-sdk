@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.5.5
+
+### Patch Changes
+
+- [#322](https://github.com/moonbeam-foundation/xcm-sdk/pull/322) [`70085b8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/70085b814801967cd7ccce3a26ed681e45da9677) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix axios vulnerability
+
+- Updated dependencies [[`70085b8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/70085b814801967cd7ccce3a26ed681e45da9677)]:
+  - @moonbeam-network/xcm-builder@2.4.2
+  - @moonbeam-network/xcm-config@2.5.4
+  - @moonbeam-network/xcm-types@2.3.2
+  - @moonbeam-network/xcm-utils@2.1.5
+
 ## 2.5.4
 
 ### Patch Changes

@@ -109,13 +109,13 @@ importers:
   examples/sdk-simple:
     dependencies:
       '@moonbeam-network/xcm-config':
-        specifier: 2.5.3
+        specifier: 2.5.4
         version: link:../../packages/config
       '@moonbeam-network/xcm-sdk':
-        specifier: 2.5.4
+        specifier: 2.5.5
         version: link:../../packages/sdk
       '@moonbeam-network/xcm-utils':
-        specifier: 2.1.4
+        specifier: 2.1.5
         version: link:../../packages/utils
     devDependencies:
       bun:
@@ -125,10 +125,10 @@ importers:
   packages/builder:
     dependencies:
       '@moonbeam-network/xcm-types':
-        specifier: 2.3.1
+        specifier: 2.3.2
         version: link:../types
       '@moonbeam-network/xcm-utils':
-        specifier: 2.1.4
+        specifier: 2.1.5
         version: link:../utils
       '@polkadot/api':
         specifier: ^12.2.3
@@ -161,13 +161,13 @@ importers:
   packages/config:
     dependencies:
       '@moonbeam-network/xcm-builder':
-        specifier: 2.4.1
+        specifier: 2.4.2
         version: link:../builder
       '@moonbeam-network/xcm-types':
-        specifier: 2.3.1
+        specifier: 2.3.2
         version: link:../types
       '@moonbeam-network/xcm-utils':
-        specifier: 2.1.4
+        specifier: 2.1.5
         version: link:../utils
       '@polkadot/types':
         specifier: ^12.2.3
@@ -182,25 +182,25 @@ importers:
   packages/mrl:
     dependencies:
       '@moonbeam-network/xcm-config':
-        specifier: 2.5.3
+        specifier: 2.5.4
         version: link:../config
       '@moonbeam-network/xcm-types':
-        specifier: 2.3.1
+        specifier: 2.3.2
         version: link:../types
 
   packages/sdk:
     dependencies:
       '@moonbeam-network/xcm-builder':
-        specifier: 2.4.1
+        specifier: 2.4.2
         version: link:../builder
       '@moonbeam-network/xcm-config':
-        specifier: 2.5.3
+        specifier: 2.5.4
         version: link:../config
       '@moonbeam-network/xcm-types':
-        specifier: 2.3.1
+        specifier: 2.3.2
         version: link:../types
       '@moonbeam-network/xcm-utils':
-        specifier: 2.1.4
+        specifier: 2.1.5
         version: link:../utils
       '@polkadot/api':
         specifier: ^12.2.3
@@ -228,7 +228,7 @@ importers:
   packages/types:
     dependencies:
       '@moonbeam-network/xcm-utils':
-        specifier: 2.1.4
+        specifier: 2.1.5
         version: link:../utils
       big.js:
         specifier: ^6.2.1
