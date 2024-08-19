@@ -3,6 +3,7 @@ import {
   AssetAmount,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
 import { WormholeConfig } from './WormholeConfig';
 
 export interface WormholeConfigBuilder {
@@ -13,6 +14,7 @@ export interface WormholeConfigBuilderPrams {
   asset: AssetAmount;
   destination: AnyChain;
   destinationAddress: string;
+  moonApi: ApiPromise;
   moonChain: EvmParachain;
   source: AnyChain;
   sourceAddress: string;
