@@ -3,7 +3,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { ethereumXcm } from './ethereumXcm';
-import { mrlBuildParamsMock } from '../../../../../fixtures';
+import {
+  mrlBuildParamsMock,
+  mrlBuildParamsMock2,
+} from '../../../../../fixtures';
 
 describe('ethereumXcm', () => {
   describe('transact', () => {
@@ -17,6 +20,15 @@ describe('ethereumXcm', () => {
 
     it('should get correct arguments', () => {
       expect(extrinsic.getArgs({} as any)).toMatchSnapshot();
+    });
+
+    it('should throw and error because destination has no wh name', () => {
+      expect(() =>
+        ethereumXcm()
+          .transact({ isAutomatic: true })
+          .build(mrlBuildParamsMock2)
+          .getArgs({} as any),
+      ).toThrow('Chain Interlay Testnet does not have a wormhole name');
     });
   });
 });

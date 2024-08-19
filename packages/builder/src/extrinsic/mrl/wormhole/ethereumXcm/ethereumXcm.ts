@@ -1,13 +1,12 @@
 import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
 import { Address, encodeFunctionData } from 'viem';
-import { Wormhole } from '@wormhole-foundation/sdk-connect';
-import { EvmPlatform } from '@wormhole-foundation/sdk-evm';
 import { MrlExtrinsicConfigBuilder } from '../../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../../ExtrinsicConfig';
 import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
 import { ERC20_ABI } from './Erc20Abi';
 import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';
 import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
+import { wormholeFactory } from '../../../../wormhole';
 
 export const BATCH_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000808';
@@ -26,16 +25,8 @@ export function ethereumXcm() {
         moonChain,
         moonGasLimit,
       }) => {
-        if (!destination.wh?.name) {
-          throw new Error(
-            `Destination chain ${destination.name} does not have a wormhole name`,
-          );
-        }
-
-        const wh = new Wormhole(moonChain.isTestChain ? 'Testnet' : 'Mainnet', [
-          EvmPlatform,
-        ]);
-        const whDestinationChain = wh.getChain(destination.wh.name).config
+        const wh = wormholeFactory(moonChain);
+        const whDestination = wh.getChain(destination.getWormholeName()).config
           .chainId;
         const whContractAddress = (
           isAutomatic
@@ -72,7 +63,7 @@ export function ethereumXcm() {
                 tokenAddressOnMoonChain,
                 tokenAmountOnMoonChain,
                 0,
-                whDestinationChain,
+                whDestination,
                 destinationAddress32bytes,
                 0,
               ],
@@ -83,7 +74,7 @@ export function ethereumXcm() {
               args: [
                 tokenAddressOnMoonChain,
                 tokenAmountOnMoonChain,
-                whDestinationChain,
+                whDestination,
                 destinationAddress32bytes,
                 0n,
                 0,

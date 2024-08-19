@@ -1,3 +1,4 @@
+import type { Chain as WhChain } from '@wormhole-foundation/sdk-connect';
 import { Asset, AssetAmount, ChainAsset } from '../asset';
 import { Ecosystem, WormholeConfig } from './Chain.interfaces';
 
@@ -56,6 +57,10 @@ export abstract class Chain {
     return this.getChainAsset(this.#nativeAsset);
   }
 
+  isEqual<T extends Chain>(chain: T): boolean {
+    return this.key === chain.key;
+  }
+
   getChainAsset(keyOrAsset: string | Asset | AssetAmount): ChainAsset {
     const key = typeof keyOrAsset === 'string' ? keyOrAsset : keyOrAsset.key;
     const chainAsset = this.assets.get(key);
@@ -67,5 +72,13 @@ export abstract class Chain {
     }
 
     return chainAsset;
+  }
+
+  getWormholeName(): WhChain {
+    if (!this.wh?.name) {
+      throw new Error(`Chain ${this.name} does not have a wormhole name`);
+    }
+
+    return this.wh.name;
   }
 }
