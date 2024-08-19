@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
-import { stringify, stringToU8a } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import {
   WormholeConfigBuilder,
@@ -25,6 +24,7 @@ export function WormholeBuilder() {
         asset,
         destination,
         destinationAddress,
+        moonApi,
         moonChain,
         source,
         sourceAddress,
@@ -57,7 +57,7 @@ export function WormholeBuilder() {
             isAutomatic,
             isDestinationMoonChain
               ? undefined
-              : getPayload({ destination, destinationAddress }),
+              : getPayload({ destination, destinationAddress, moonApi }),
           ],
           func: 'tokenTransfer',
         });
@@ -66,12 +66,18 @@ export function WormholeBuilder() {
   };
 }
 
+/*
+ * Extrinsic to GMP precompile
+ * https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/
+ */
 export function getPayload({
+  moonApi,
   destination,
   destinationAddress,
-}: Pick<WormholeConfigBuilderPrams, 'destination' | 'destinationAddress'>):
-  | Uint8Array
-  | undefined {
+}: Pick<
+  WormholeConfigBuilderPrams,
+  'destination' | 'destinationAddress' | 'moonApi'
+>): Uint8Array | undefined {
   if (!Parachain.is(destination) && !EvmParachain.is(destination)) {
     throw new Error(
       `Destination ${destination.name} is not a Parachain or EvmParachain`,
@@ -82,26 +88,27 @@ export function getPayload({
   const isPeaqEvm =
     destination.key === 'peaq-evm-Alphanet' || destination.key === 'peaq-evm';
 
-  // TODO: this is not working I will need to use API to create type
-  return stringToU8a(
-    stringify({
-      destination: {
-        V3: {
-          parents: 1,
-          interior: {
-            X2: [
-              {
-                Parachain: destination.parachainId,
-              },
-              getExtrinsicAccount(
-                isPeaqEvm
-                  ? evmToAddress(destinationAddress)
-                  : destinationAddress,
-              ),
-            ],
+  const multilocation = moonApi.createType('XcmVersionedLocation', {
+    V3: {
+      parents: 1,
+      interior: {
+        X2: [
+          {
+            Parachain: destination.parachainId,
           },
-        },
+          getExtrinsicAccount(
+            isPeaqEvm ? evmToAddress(destinationAddress) : destinationAddress,
+          ),
+        ],
       },
-    }),
-  );
+    },
+  });
+  const action = moonApi.createType('XcmRoutingUserAction', {
+    destination: multilocation,
+  });
+  const versioned = moonApi.createType('VersionedUserAction', {
+    V1: action,
+  });
+
+  return versioned.toU8a();
 }
