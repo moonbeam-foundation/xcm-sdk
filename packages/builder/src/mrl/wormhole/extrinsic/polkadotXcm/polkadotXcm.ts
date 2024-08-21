@@ -56,7 +56,7 @@ export function polkadotXcm() {
               destinationAddress,
               destinationApi,
               fee,
-              // TODO: This is a workaround. xTokens.transfer dosen't need source chain but the interfaces requires it.
+              // TODO: This is a workaround. xTokens.transfer doesn't need source chain but the interfaces requires it.
               // In this case we know that a source chain is not a Parachain.
               source: source as AnyParachain,
               sourceAddress,

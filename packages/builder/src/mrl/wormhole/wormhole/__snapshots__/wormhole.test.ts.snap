@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`wormholeBuilder > tokenTransfer with isAutomatic=false > should be correct config to moon chain 1`] = `
+exports[`wormhole > tokenTransfer with isAutomatic=false > should be correct config to moon chain 1`] = `
 WormholeConfig {
   "args": [
     {
@@ -32,7 +32,7 @@ WormholeConfig {
 }
 `;
 
-exports[`wormholeBuilder > tokenTransfer with isAutomatic=true > should be correct config 1`] = `
+exports[`wormhole > tokenTransfer with isAutomatic=true > should be correct config 1`] = `
 WormholeConfig {
   "args": [
     {
