@@ -1,6 +1,6 @@
 {
-  "name": "sdk-simple",
-  "version": "3.0.0",
+  "name": "mrl-simple",
+  "version": "1.0.0",
   "private": true,
   "description": "",
   "type": "module",
@@ -12,9 +12,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "2.5.4",
-    "@moonbeam-network/xcm-sdk": "2.5.5",
-    "@moonbeam-network/xcm-utils": "2.1.5"
+    "@moonbeam-network/mrl": "workspace:^",
+    "@moonbeam-network/xcm-config": "workspace:^",
+    "@moonbeam-network/xcm-utils": "workspace:^"
   },
   "devDependencies": {
     "bun": "^1.1.21"

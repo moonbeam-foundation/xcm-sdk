@@ -62,12 +62,6 @@ export async function getTransferData({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
-    /**
-     * Right now it will be always true
-     * because all current asset can be sent both directions
-     * and our configuration need destination config.
-     */
-    isSwapPossible: true,
     max: sourceData.max,
     min: getMin(destinationData),
     source: sourceData,

@@ -4,6 +4,7 @@ import {
   ContractConfigBuilder,
   ExtrinsicConfigBuilder,
   FeeConfigBuilder,
+  MrlConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
 
@@ -16,6 +17,7 @@ export interface AssetRouteConstructorParams {
   extrinsic?: ExtrinsicConfigBuilder;
   fee?: FeeAssetConfig;
   min?: AssetMinConfigBuilder;
+  mrl?: MrlConfigBuilder;
 }
 
 export interface DestinationFeeConfig extends FeeAssetConfig {
@@ -46,6 +48,8 @@ export class AssetRoute {
 
   readonly min?: AssetMinConfigBuilder;
 
+  readonly mrl?: MrlConfigBuilder;
+
   constructor({
     asset,
     balance,
@@ -55,6 +59,7 @@ export class AssetRoute {
     extrinsic,
     fee,
     min,
+    mrl,
   }: AssetRouteConstructorParams) {
     this.asset = asset;
     this.balance = balance;
@@ -64,5 +69,6 @@ export class AssetRoute {
     this.extrinsic = extrinsic;
     this.fee = fee;
     this.min = min;
+    this.mrl = mrl;
   }
 }

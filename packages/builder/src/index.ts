@@ -6,5 +6,6 @@ export * from './builder.interfaces';
 export * from './contract';
 export * from './extrinsic';
 export * from './fee';
+export * from './mrl';
 export * from './types/BaseConfig';
 export * from './types/substrate/SubstrateQueryConfig';
