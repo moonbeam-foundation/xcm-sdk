@@ -231,7 +231,7 @@ export const moonriverRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: kintsugi,
       destinationFee: {
-        amount: 0.00000428,
+        amount: 0.0000011,
         asset: kbtc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
