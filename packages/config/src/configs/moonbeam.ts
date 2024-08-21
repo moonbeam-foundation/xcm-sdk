@@ -274,7 +274,7 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: interlay,
       destinationFee: {
-        amount: 0.0002476,
+        amount: 0.00000064,
         asset: ibtc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
