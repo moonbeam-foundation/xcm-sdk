@@ -1,6 +1,7 @@
 import { AssetRoute } from '@moonbeam-network/xcm-config';
 import { AnyChain } from '@moonbeam-network/xcm-types';
 import { TransferData } from '../mrl.interfaces';
+import { getDestinationData } from './getDestinationData';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -17,5 +18,11 @@ export async function getTransferData({
   sourceAddress,
   destinationAddress,
 }: GetTransferDataParams): Promise<TransferData> {
-  return {};
+  const destinationData = await getDestinationData({
+    route,
+    destinationAddress,
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return { destination: destinationData } as any;
 }

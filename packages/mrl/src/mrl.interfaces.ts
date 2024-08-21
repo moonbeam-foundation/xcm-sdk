@@ -9,27 +9,26 @@ export interface Signers {
 }
 
 export interface TransferData {
-  destination: DestinationChainTransferData;
+  destination: DestinationTransferData;
   getEstimate(amount: number | string): AssetAmount;
   max: AssetAmount;
   min: AssetAmount;
-  source: SourceChainTransferData;
+  source: SourceTransferData;
   transfer(amount: bigint | number | string, signers: Signers): Promise<string>;
 }
 
-export interface SourceChainTransferData extends ChainTransferData {
+export interface SourceTransferData extends ChainTransferData {
   chain: AnyChain;
   destinationFeeBalance: AssetAmount;
   feeBalance: AssetAmount;
   max: AssetAmount;
 }
 
-export interface DestinationChainTransferData extends ChainTransferData {}
+export interface DestinationTransferData extends ChainTransferData {}
 
 export interface ChainTransferData {
   chain: AnyChain;
   balance: AssetAmount;
-  existentialDeposit: AssetAmount;
   fee: AssetAmount;
   min: AssetAmount;
 }
