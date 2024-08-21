@@ -57,8 +57,8 @@
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "^12.2.3",
-    "@polkadot/apps-config": "^0.142.1",
+    "@polkadot/api": "^12.4.2",
+    "@polkadot/apps-config": "^0.143.1",
     "@polkadot/util": "^13.0.2"
   }
 }
