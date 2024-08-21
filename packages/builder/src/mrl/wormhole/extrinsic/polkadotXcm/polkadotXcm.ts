@@ -1,8 +1,8 @@
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
-import { ExtrinsicBuilder } from '../../../ExtrinsicBuilder';
-import { MrlExtrinsicConfigBuilder } from '../../../ExtrinsicBuilder.interfaces';
-import { ExtrinsicConfig } from '../../../ExtrinsicConfig';
+import { ExtrinsicBuilder } from '../../../../extrinsic/ExtrinsicBuilder';
+import { ExtrinsicConfig } from '../../../../extrinsic/ExtrinsicConfig';
+import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
 
 // TODO: Can we move them somewhere?
 const BUY_EXECUTION_FEE = 100_000_000_000_000_000n;
@@ -12,7 +12,7 @@ export const BATCH_CONTRACT_ADDRESS =
 
 export function polkadotXcm() {
   return {
-    send: (): MrlExtrinsicConfigBuilder => ({
+    send: (): MrlConfigBuilder => ({
       build: (params) => {
         const {
           destination,

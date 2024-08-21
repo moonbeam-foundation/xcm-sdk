@@ -4,16 +4,19 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { apiMock, mrlBuildParamsMock } from '../../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
-import { XcmVersion } from '../../../ExtrinsicBuilder.interfaces';
+import { XcmVersion } from '../../../../extrinsic/ExtrinsicBuilder.interfaces';
 
-vi.mock(import('../../../ExtrinsicBuilder.utils'), async (importOriginal) => {
-  const mod = await importOriginal();
+vi.mock(
+  import('../../../../extrinsic/ExtrinsicBuilder.utils'),
+  async (importOriginal) => {
+    const mod = await importOriginal();
 
-  return {
-    getExtrinsicArgumentVersion: vi.fn(() => XcmVersion.v4),
-    getExtrinsicAccount: mod.getExtrinsicAccount,
-  };
-});
+    return {
+      getExtrinsicArgumentVersion: vi.fn(() => XcmVersion.v4),
+      getExtrinsicAccount: mod.getExtrinsicAccount,
+    };
+  },
+);
 
 describe('polkadotXcm', () => {
   describe('send', () => {

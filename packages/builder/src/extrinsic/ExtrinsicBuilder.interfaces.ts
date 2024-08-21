@@ -1,45 +1,7 @@
-import {
-  AnyParachain,
-  AssetAmount,
-  ChainAsset,
-  EvmParachain,
-} from '@moonbeam-network/xcm-types';
-import type { ApiPromise } from '@polkadot/api';
-import type { HexString } from '@polkadot/util/types';
-import { ExtrinsicConfig } from './ExtrinsicConfig';
+import type { ExtrinsicConfig } from './ExtrinsicConfig';
+import type { ConfigBuilder } from '../builder.interfaces';
 
-export interface ExtrinsicConfigBuilder<Params = ExtrinsicConfigBuilderPrams> {
-  build: (params: Params) => ExtrinsicConfig;
-}
-
-export interface ExtrinsicConfigBuilderPrams {
-  asset: AssetAmount;
-  destination: AnyParachain;
-  destinationAddress: string;
-  destinationApi: ApiPromise;
-  fee: AssetAmount;
-  source: AnyParachain;
-  sourceAddress: string;
-  sourceApi: ApiPromise;
-}
-
-export type MrlExtrinsicConfigBuilder =
-  ExtrinsicConfigBuilder<MrlExtrinsicConfigBuilderPrams>;
-
-export interface MrlExtrinsicConfigBuilderPrams
-  extends ExtrinsicConfigBuilderPrams {
-  moonApi: ApiPromise;
-  moonAsset: ChainAsset;
-  moonChain: EvmParachain;
-  moonGasLimit: bigint;
-  transact?: {
-    call: HexString;
-    txWeight: {
-      refTime: bigint;
-      proofSize: bigint;
-    };
-  };
-}
+export type ExtrinsicConfigBuilder = ConfigBuilder<ExtrinsicConfig>;
 
 export enum XcmVersion {
   v1 = 'V1',

@@ -2,18 +2,15 @@
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
-import {
-  WormholeConfigBuilder,
-  WormholeConfigBuilderPrams,
-} from './WormholeBuilder.interfaces';
+import { WormholeConfigBuilder } from './WormholeBuilder.interfaces';
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
-import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
+import { getExtrinsicAccount } from '../../../extrinsic/ExtrinsicBuilder.utils';
 
 export const GMP_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000816';
 
-export function WormholeBuilder() {
+export function WormholeSdkBuilder() {
   return {
     tokenTransfer: ({
       isAutomatic,
