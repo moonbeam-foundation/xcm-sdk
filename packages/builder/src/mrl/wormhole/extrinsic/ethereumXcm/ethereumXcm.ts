@@ -6,7 +6,7 @@ import { ERC20_ABI } from './Erc20Abi';
 import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';
 import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
 import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
-import { wormholeFactory } from '../../WormholeSdk';
+import { wormholeFactory } from '../../wormhole';
 
 export const BATCH_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000808';

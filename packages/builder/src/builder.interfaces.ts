@@ -1,4 +1,8 @@
-import type { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
+import type {
+  AnyParachain,
+  AssetAmount,
+  Chain,
+} from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 
 export enum CallType {
@@ -6,20 +10,17 @@ export enum CallType {
   Substrate = 'Substrate',
 }
 
-export interface ConfigBuilder<
-  Config,
-  Params extends BuilderPrams = BuilderPrams,
-> {
+export interface ConfigBuilder<Config, Params = BuilderPrams> {
   build: (params: Params) => Config;
 }
 
-export interface BuilderPrams {
+export interface BuilderPrams<IChain extends Chain = AnyParachain> {
   asset: AssetAmount;
-  destination: AnyParachain;
+  destination: IChain;
   destinationAddress: string;
   destinationApi: ApiPromise;
   fee: AssetAmount;
-  source: AnyParachain;
+  source: IChain;
   sourceAddress: string;
   sourceApi: ApiPromise;
 }

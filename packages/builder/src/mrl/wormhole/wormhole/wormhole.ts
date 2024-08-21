@@ -2,21 +2,21 @@
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
-import { WormholeConfigBuilder } from './WormholeBuilder.interfaces';
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 import { getExtrinsicAccount } from '../../../extrinsic/ExtrinsicBuilder.utils';
+import { MrlBuilderPrams, MrlConfigBuilder } from '../../MrlBuilder.interfaces';
 
 export const GMP_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000816';
 
-export function WormholeSdkBuilder() {
+export function wormhole() {
   return {
     tokenTransfer: ({
       isAutomatic,
     }: {
       isAutomatic: boolean;
-    }): WormholeConfigBuilder => ({
+    }): MrlConfigBuilder => ({
       build: ({
         asset,
         destination,
@@ -71,10 +71,9 @@ export function getPayload({
   moonApi,
   destination,
   destinationAddress,
-}: Pick<
-  WormholeConfigBuilderPrams,
-  'destination' | 'destinationAddress' | 'moonApi'
->): Uint8Array | undefined {
+}: Pick<MrlBuilderPrams, 'destination' | 'destinationAddress' | 'moonApi'>):
+  | Uint8Array
+  | undefined {
   if (!Parachain.is(destination) && !EvmParachain.is(destination)) {
     throw new Error(
       `Destination ${destination.name} is not a Parachain or EvmParachain`,

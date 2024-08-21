@@ -1,8 +1,12 @@
-import type { ChainAsset, EvmParachain } from '@moonbeam-network/xcm-types';
+import type {
+  AnyChain,
+  ChainAsset,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { HexString } from '@polkadot/util/types';
 import type { BuilderPrams, ConfigBuilder } from '../builder.interfaces';
-import type { WormholeConfig } from './wormhole/WormholeSdk';
+import type { WormholeConfig } from './wormhole/wormhole';
 import type { ExtrinsicConfig } from '../extrinsic';
 
 export type MrlConfigBuilder = ConfigBuilder<
@@ -10,7 +14,7 @@ export type MrlConfigBuilder = ConfigBuilder<
   MrlBuilderPrams
 >;
 
-export interface MrlBuilderPrams extends BuilderPrams {
+export interface MrlBuilderPrams extends BuilderPrams<AnyChain> {
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   moonChain: EvmParachain;

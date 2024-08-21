@@ -1,5 +1,10 @@
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
-import { AssetAmount } from '@moonbeam-network/xcm-types';
+import {
+  AnyParachain,
+  AssetAmount,
+  EvmParachain,
+  Parachain,
+} from '@moonbeam-network/xcm-types';
 import { ExtrinsicBuilder } from '../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../extrinsic/ExtrinsicConfig';
 import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
@@ -13,18 +18,27 @@ export const BATCH_CONTRACT_ADDRESS =
 export function polkadotXcm() {
   return {
     send: (): MrlConfigBuilder => ({
-      build: (params) => {
-        const {
-          destination,
-          destinationAddress,
-          moonAsset,
-          moonChain,
-          sourceApi,
-          transact,
-        } = params;
-
+      build: ({
+        asset,
+        destination,
+        destinationAddress,
+        destinationApi,
+        fee,
+        moonAsset,
+        moonChain,
+        source,
+        sourceAddress,
+        sourceApi,
+        transact,
+      }) => {
         if (!destination.wh?.name) {
           throw new Error('Destination chain does not have a wormhole name');
+        }
+
+        if (!Parachain.is(destination) && !EvmParachain.is(destination)) {
+          throw new Error(
+            `Destination ${destination.name} is not a Parachain or EvmParachain`,
+          );
         }
 
         if (!transact) {
@@ -35,7 +49,20 @@ export function polkadotXcm() {
         const builder = ExtrinsicBuilder().xTokens().transfer();
 
         const assetTransferTx = transfer(
-          builder.build(params).getArgs(transfer),
+          builder
+            .build({
+              asset,
+              destination,
+              destinationAddress,
+              destinationApi,
+              fee,
+              // TODO: This is a workaround. xTokens.transfer dosen't need source chain but the interfaces requires it.
+              // In this case we know that a source chain is not a Parachain.
+              source: source as AnyParachain,
+              sourceAddress,
+              sourceApi,
+            })
+            .getArgs(transfer),
         );
         /*
          * TODO: Can we move it to AssetRoute and receive it in build params?
@@ -45,10 +72,16 @@ export function polkadotXcm() {
         const feeAssetTransferTx = transfer(
           builder
             .build({
-              ...params,
               asset: AssetAmount.fromChainAsset(moonAsset, {
                 amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
               }),
+              destination,
+              destinationAddress,
+              destinationApi,
+              fee,
+              source: source as AnyParachain,
+              sourceAddress,
+              sourceApi,
             })
             .getArgs(transfer),
         );

@@ -6,16 +6,16 @@ import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import {
   wormholeConfigBuilderPrams,
   wormholeToMoonchainConfigBuilderPrams,
-} from '../../../fixtures';
-import { wormholeSdk } from './WormholeSdkBuilder';
+} from '../../../../fixtures';
+import { wormhole } from './wormhole';
 
-describe('wormholeSdk', async () => {
+describe('wormhole', async () => {
   const moonApi = await getPolkadotApi(
     'wss://wss.api.moonbase.moonbeam.network',
   );
 
   describe('tokenTransfer with isAutomatic=true', () => {
-    const transfer = wormholeSdk().tokenTransfer({ isAutomatic: true });
+    const transfer = wormhole().tokenTransfer({ isAutomatic: true });
 
     it('should be correct config', () => {
       expect(
@@ -25,7 +25,7 @@ describe('wormholeSdk', async () => {
   });
 
   describe('tokenTransfer with isAutomatic=false', () => {
-    const transfer = wormholeSdk().tokenTransfer({ isAutomatic: false });
+    const transfer = wormhole().tokenTransfer({ isAutomatic: false });
 
     it('should be correct config to moon chain', () => {
       expect(
