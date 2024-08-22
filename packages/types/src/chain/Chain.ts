@@ -1,6 +1,6 @@
 import type { Chain as WhChain } from '@wormhole-foundation/sdk-connect';
-import { Asset, AssetAmount, ChainAsset } from '../asset';
-import { Ecosystem, WormholeConfig } from './Chain.interfaces';
+import type { Asset, AssetAmount, ChainAsset } from '../asset';
+import type { Ecosystem, WormholeConfig } from './Chain.interfaces';
 
 export interface ChainConstructorParams {
   assets: Map<string, ChainAsset> | ChainAsset[];

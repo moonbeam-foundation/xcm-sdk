@@ -1,23 +1,30 @@
-import { AnyAsset, AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import type { AnyAsset, AnyChain, Asset } from '@moonbeam-network/xcm-types';
+// import type { OmitDeep } from 'type-fest';
 import { getKey } from '../config.utils';
-import { AssetRoute } from './AssetRoute';
+import { AssetRoute, AssetRouteConstructorParams } from './AssetRoute';
 
 export interface ChainRoutesConstructorParams {
-  routes: AssetRoute[];
   chain: AnyChain;
+  // routes: OmitDeep<AssetRouteConstructorParams, 'source.chain'>[];
+  routes: AssetRouteConstructorParams[];
 }
 
 export class ChainRoutes {
-  readonly #routes: Map<string, AssetRoute>;
-
   readonly chain: AnyChain;
 
-  constructor({ routes: assets, chain }: ChainRoutesConstructorParams) {
+  readonly #routes: Map<string, AssetRoute>;
+
+  constructor({ chain, routes }: ChainRoutesConstructorParams) {
     this.chain = chain;
     this.#routes = new Map(
-      assets.map((asset) => [
-        `${asset.asset.key}-${asset.destination.key}`,
-        asset,
+      routes.map(({ asset, source, destination, transfer }) => [
+        `${asset.key}-${destination.chain.key}`,
+        new AssetRoute({
+          asset,
+          source: { ...source, chain },
+          destination,
+          transfer,
+        }),
       ]),
     );
   }
@@ -34,7 +41,7 @@ export class ChainRoutes {
 
   getAssetDestinations(keyOrAsset: string | AnyAsset): AnyChain[] {
     return this.getAssetRoutes(keyOrAsset).map(
-      (assetConfig) => assetConfig.destination,
+      (assetConfig) => assetConfig.destination.chain,
     );
   }
 
@@ -42,7 +49,7 @@ export class ChainRoutes {
     const key = getKey(keyOrChain);
 
     return this.getRoutes()
-      .filter((cfg) => cfg.destination.key === key)
+      .filter((cfg) => cfg.destination.chain.key === key)
       .map((cfg) => cfg.asset);
   }
 
@@ -52,14 +59,14 @@ export class ChainRoutes {
   ): AssetRoute {
     const assetKey = getKey(asset);
     const destKey = getKey(destination);
-    const config = this.#routes.get(`${assetKey}-${destKey}`);
+    const route = this.#routes.get(`${assetKey}-${destKey}`);
 
-    if (!config) {
+    if (!route) {
       throw new Error(
-        `AssetConfig for ${assetKey} and destination ${destKey} not found`,
+        `AssetRoute for asset ${assetKey} and destination ${destKey} not found`,
       );
     }
 
-    return config;
+    return route;
   }
 }
