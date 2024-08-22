@@ -34,6 +34,7 @@ export const karuraRoutes = new ChainRoutes({
           asset: kar,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonriver,
@@ -44,7 +45,6 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     },
     {
       asset: movr,
@@ -54,6 +54,7 @@ export const karuraRoutes = new ChainRoutes({
           asset: kar,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonriver,
@@ -64,7 +65,6 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     },
   ],
 });

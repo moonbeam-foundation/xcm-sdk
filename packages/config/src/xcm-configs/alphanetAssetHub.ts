@@ -19,6 +19,7 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
           asset: unit,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbaseAlpha,
@@ -32,7 +33,6 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });

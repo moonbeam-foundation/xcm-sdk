@@ -34,6 +34,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       destination: {
         chain: moonriver,
@@ -44,7 +45,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     },
     {
       asset: vbnc,
@@ -54,6 +54,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       destination: {
         chain: moonriver,
@@ -64,7 +65,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     },
     {
       asset: vksm,
@@ -74,6 +74,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       destination: {
         chain: moonriver,
@@ -84,7 +85,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     },
     {
       asset: vmovr,
@@ -94,6 +94,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       destination: {
         chain: moonriver,
@@ -104,7 +105,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
     },
   ],
 });

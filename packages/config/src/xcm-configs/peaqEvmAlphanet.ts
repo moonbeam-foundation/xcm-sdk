@@ -18,6 +18,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
           asset: agng,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
@@ -28,7 +29,6 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: dev,
@@ -38,6 +38,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
           asset: agng,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
@@ -48,7 +49,6 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });

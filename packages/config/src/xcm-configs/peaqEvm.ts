@@ -18,6 +18,7 @@ export const peaqEvmRoutes = new ChainRoutes({
           asset: peaq,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
@@ -28,7 +29,6 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: usdcwh,
@@ -38,6 +38,7 @@ export const peaqEvmRoutes = new ChainRoutes({
           asset: peaq,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
@@ -48,7 +49,6 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: dai,
@@ -58,6 +58,7 @@ export const peaqEvmRoutes = new ChainRoutes({
           asset: peaq,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
@@ -68,7 +69,6 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: wbtc,
@@ -78,6 +78,7 @@ export const peaqEvmRoutes = new ChainRoutes({
           asset: peaq,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
@@ -88,7 +89,6 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: weth,
@@ -98,6 +98,7 @@ export const peaqEvmRoutes = new ChainRoutes({
           asset: peaq,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
@@ -108,7 +109,6 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: usdtwh,
@@ -118,6 +118,7 @@ export const peaqEvmRoutes = new ChainRoutes({
           asset: peaq,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
@@ -128,7 +129,6 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().evm().erc20(),
         },
       },
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });

@@ -22,6 +22,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonriver,
@@ -35,7 +36,6 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: usdt,
@@ -46,6 +46,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonriver,
@@ -59,7 +60,6 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });

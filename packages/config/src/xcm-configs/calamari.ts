@@ -34,6 +34,7 @@ export const calamariRoutes = new ChainRoutes({
           asset: kma,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonriver,
@@ -44,7 +45,6 @@ export const calamariRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });

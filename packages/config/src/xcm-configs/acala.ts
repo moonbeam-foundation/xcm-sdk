@@ -34,6 +34,7 @@ export const acalaRoutes = new ChainRoutes({
           asset: aca,
           balance: BalanceBuilder().substrate().system().account(),
         },
+    },
       },
       destination: {
         chain: moonbeam,
@@ -45,7 +46,6 @@ export const acalaRoutes = new ChainRoutes({
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
-    },
     {
       asset: glmr,
       source: {
@@ -54,6 +54,7 @@ export const acalaRoutes = new ChainRoutes({
           asset: aca,
           balance: BalanceBuilder().substrate().system().account(),
         },
+      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonbeam,
@@ -64,7 +65,6 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     },
     {
       asset: ldot,
@@ -74,6 +74,7 @@ export const acalaRoutes = new ChainRoutes({
           asset: aca,
           balance: BalanceBuilder().substrate().system().account(),
         },
+      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonbeam,
@@ -84,7 +85,6 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     },
   ],
 });

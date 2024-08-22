@@ -34,6 +34,7 @@ export const mantaParachainRoutes = new ChainRoutes({
           asset: manta,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -44,7 +45,6 @@ export const mantaParachainRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });

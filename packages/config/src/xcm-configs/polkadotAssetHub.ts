@@ -22,6 +22,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -35,7 +36,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: usdc,
@@ -46,6 +46,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -59,7 +60,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: pink,
@@ -70,6 +70,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -83,7 +84,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: ded,
@@ -94,6 +94,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -107,7 +108,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: stink,
@@ -118,6 +118,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -131,7 +132,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: apillon,
@@ -142,6 +142,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -155,7 +156,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
     {
       asset: wifd,
@@ -166,6 +166,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       destination: {
         chain: moonbeam,
@@ -179,7 +180,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      min: AssetMinBuilder().assets().asset(),
     },
   ],
 });
