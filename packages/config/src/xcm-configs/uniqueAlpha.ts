@@ -8,11 +8,13 @@ export const uniqueAlphaRoutes = new ChainRoutes({
     // new AssetConfig({
     //   asset: auq,
     //   balance: BalanceBuilder().substrate().assets().account(),
-    //   destination: moonbaseAlpha,
-    //   destinationFee: {
+    //   destination: {
+    //   chain: moonbaseAlpha,
+    //   fee:{
     //     amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
     //     asset: auq,
     //     balance: BalanceBuilder().substrate().assets().account(),
+    //   }
     //   },
     //   extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     // }),
