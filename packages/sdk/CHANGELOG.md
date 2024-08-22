@@ -1,5 +1,19 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.5.6
+
+### Patch Changes
+
+- [#324](https://github.com/moonbeam-foundation/xcm-sdk/pull/324) [`22603d0`](https://github.com/moonbeam-foundation/xcm-sdk/commit/22603d0c527ee8579310b76d0a9443412f5b2818) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix acceptance tests and make them run on every push
+
+- [#329](https://github.com/moonbeam-foundation/xcm-sdk/pull/329) [`bfe9f64`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bfe9f6481f078c2022d70d6c1bc096f87b724477) Thanks [@mmaurello](https://github.com/mmaurello)! - Allow signed transaction in signAndSend to make ledger signing work
+
+- Updated dependencies [[`bfe9f64`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bfe9f6481f078c2022d70d6c1bc096f87b724477), [`9e014a6`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9e014a66b20264f9ced0b037846c8f7b1b2647bd)]:
+  - @moonbeam-network/xcm-config@2.5.5
+  - @moonbeam-network/xcm-utils@2.1.6
+  - @moonbeam-network/xcm-builder@2.4.3
+  - @moonbeam-network/xcm-types@2.3.3
+
 ## 2.5.5
 
 ### Patch Changes
