@@ -37,10 +37,10 @@
     "changeset:publish": "npm run build && changeset publish"
   },
   "dependencies": {
-    "@polkadot/api": "^12.2.3",
-    "@polkadot/api-augment": "^12.2.3",
-    "@polkadot/apps-config": "^0.142.1",
-    "@polkadot/types": "^12.2.3",
+    "@polkadot/api": "^12.4.2",
+    "@polkadot/api-augment": "^12.4.2",
+    "@polkadot/apps-config": "^0.143.2",
+    "@polkadot/types": "^12.4.2",
     "@polkadot/util": "^13.0.2",
     "@polkadot/util-crypto": "^13.0.2"
   },
