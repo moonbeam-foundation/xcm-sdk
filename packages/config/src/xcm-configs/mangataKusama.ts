@@ -23,7 +23,7 @@ export const mangataKusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: movr,
@@ -42,7 +42,7 @@ export const mangataKusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

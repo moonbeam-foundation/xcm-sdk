@@ -24,7 +24,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: dev,
@@ -39,7 +39,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: usdcwh,
@@ -58,7 +58,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: ftmwh,
@@ -77,7 +77,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
   ],
 });

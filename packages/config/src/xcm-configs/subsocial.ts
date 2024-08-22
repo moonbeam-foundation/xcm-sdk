@@ -23,7 +23,7 @@ export const subsocialRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
+      transfer: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .here(),

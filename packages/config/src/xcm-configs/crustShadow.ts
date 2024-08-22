@@ -23,7 +23,7 @@ export const crustShadowRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
+      transfer: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .here(),
@@ -45,7 +45,7 @@ export const crustShadowRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

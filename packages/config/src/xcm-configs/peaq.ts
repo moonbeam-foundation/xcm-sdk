@@ -24,7 +24,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: glmr,
@@ -39,7 +39,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
       min: AssetMinBuilder().assets().asset(),
     },
     {
@@ -59,7 +59,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       min: AssetMinBuilder().assets().asset(),
     },
     {
@@ -79,7 +79,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       min: AssetMinBuilder().assets().asset(),
     },
     {
@@ -99,7 +99,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       min: AssetMinBuilder().assets().asset(),
     },
     {
@@ -119,7 +119,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       min: AssetMinBuilder().assets().asset(),
     },
     {
@@ -139,7 +139,7 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
       min: AssetMinBuilder().assets().asset(),
     },
   ],

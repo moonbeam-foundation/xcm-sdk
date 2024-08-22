@@ -23,7 +23,7 @@ export const alphanetRelayRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
+      transfer: ExtrinsicBuilder()
         .xcmPallet()
         .limitedReserveTransferAssets(0)
         .here(),

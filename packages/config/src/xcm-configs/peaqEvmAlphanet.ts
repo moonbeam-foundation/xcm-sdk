@@ -19,7 +19,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
       },
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbaseAlpha,
         fee: {
@@ -39,7 +39,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: moonbaseAlpha,
         fee: {

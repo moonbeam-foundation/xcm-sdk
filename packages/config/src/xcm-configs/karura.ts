@@ -24,7 +24,7 @@ export const karuraRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: aseed,
@@ -43,7 +43,7 @@ export const karuraRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     },
     {
@@ -63,7 +63,7 @@ export const karuraRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
       min: AssetMinBuilder().assetRegistry().assetMetadatas(),
     },
   ],

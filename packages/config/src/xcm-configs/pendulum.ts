@@ -23,7 +23,7 @@ export const pendulumRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: glmr,
@@ -42,7 +42,7 @@ export const pendulumRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

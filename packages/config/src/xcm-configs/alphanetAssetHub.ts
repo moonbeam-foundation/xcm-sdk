@@ -28,7 +28,7 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
+      transfer: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),

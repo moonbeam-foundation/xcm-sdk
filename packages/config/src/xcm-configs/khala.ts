@@ -23,7 +23,7 @@ export const khalaRouts = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
+      transfer: ExtrinsicBuilder().xTransfer().transfer().here(),
     },
     {
       asset: movr,
@@ -42,7 +42,7 @@ export const khalaRouts = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTransfer().transfer().X2(),
+      transfer: ExtrinsicBuilder().xTransfer().transfer().X2(),
     },
   ],
 });

@@ -23,7 +23,7 @@ export const zeitgeistRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: usdcwh,
@@ -42,7 +42,7 @@ export const zeitgeistRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: glmr,
@@ -57,7 +57,7 @@ export const zeitgeistRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

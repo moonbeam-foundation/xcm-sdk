@@ -23,7 +23,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: atom,
@@ -42,7 +42,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: dev,
@@ -61,7 +61,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

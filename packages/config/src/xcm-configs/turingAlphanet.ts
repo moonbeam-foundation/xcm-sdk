@@ -23,7 +23,7 @@ export const turingAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
+      transfer: ExtrinsicBuilder()
         .xTokens()
         .transferMultiAsset(turingAlphanet.parachainId)
         .X1(),
@@ -45,7 +45,7 @@ export const turingAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      transfer: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });
