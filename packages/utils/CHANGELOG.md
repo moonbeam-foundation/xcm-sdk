@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 2.1.6
+
+### Patch Changes
+
+- [#329](https://github.com/moonbeam-foundation/xcm-sdk/pull/329) [`bfe9f64`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bfe9f6481f078c2022d70d6c1bc096f87b724477) Thanks [@mmaurello](https://github.com/mmaurello)! - Allow signed transaction in signAndSend to make ledger signing work
+
 ## 2.1.5
 
 ### Patch Changes
