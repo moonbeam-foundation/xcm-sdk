@@ -4,7 +4,17 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { bnc, bncs, glmr, vastr, vdot, vfil, vglmr, vmanta } from '../assets';
+import {
+  bnc,
+  bncs,
+  fil,
+  glmr,
+  vastr,
+  vdot,
+  vfil,
+  vglmr,
+  vmanta,
+} from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -18,6 +28,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: bnc,
@@ -38,6 +49,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: bnc,
@@ -58,6 +70,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: glmr,

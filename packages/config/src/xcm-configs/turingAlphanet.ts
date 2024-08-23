@@ -39,6 +39,7 @@ export const turingAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.04,
           asset: dev,

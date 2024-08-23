@@ -230,6 +230,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: acala,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.032,
           asset: aca,
@@ -249,6 +250,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: astar,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.032,
           asset: astr,
@@ -268,6 +270,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: acala,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.256,
           asset: aseed,
@@ -287,6 +290,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.256,
           asset: bnc,
@@ -382,6 +386,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: acala,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.001,
           asset: ldot,
@@ -876,6 +881,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00000001,
           asset: fil,
@@ -948,6 +954,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.00000001,
           asset: glmr,

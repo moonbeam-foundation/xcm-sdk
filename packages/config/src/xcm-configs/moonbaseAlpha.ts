@@ -216,6 +216,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: alphanetAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 5,
           asset: tt1,
@@ -254,6 +255,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: alphanetRelay,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.0506,
           asset: unit,

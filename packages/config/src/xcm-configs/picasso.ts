@@ -36,6 +36,7 @@ export const picassoRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonriver,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.0001,
           asset: movr,

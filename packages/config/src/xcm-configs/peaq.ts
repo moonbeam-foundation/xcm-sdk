@@ -34,6 +34,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: glmr,

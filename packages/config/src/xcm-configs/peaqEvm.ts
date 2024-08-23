@@ -23,6 +23,7 @@ export const peaqEvmRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: glmr,

@@ -20,6 +20,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.0002,
           asset: dev,

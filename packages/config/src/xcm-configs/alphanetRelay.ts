@@ -17,6 +17,7 @@ export const alphanetRelayRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: unit,

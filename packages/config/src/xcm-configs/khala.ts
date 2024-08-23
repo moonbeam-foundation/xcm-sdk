@@ -36,6 +36,7 @@ export const khalaRouts = new ChainRoutes({
       },
       destination: {
         chain: moonriver,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.001,
           asset: movr,

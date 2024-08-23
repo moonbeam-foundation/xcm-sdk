@@ -36,6 +36,7 @@ export const mangataKusamaRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonriver,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.000008,
           asset: movr,

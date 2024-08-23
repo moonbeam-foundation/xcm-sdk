@@ -51,6 +51,7 @@ export const interlayRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.001,
           asset: glmr,

@@ -18,6 +18,7 @@ export const acalaRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: aca,
@@ -34,10 +35,11 @@ export const acalaRoutes = new ChainRoutes({
           asset: aca,
           balance: BalanceBuilder().substrate().system().account(),
         },
-    },
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: aseed,
@@ -45,7 +47,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       transfer: ExtrinsicBuilder().xTokens().transfer(),
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
+    },
     {
       asset: glmr,
       source: {
@@ -54,10 +56,11 @@ export const acalaRoutes = new ChainRoutes({
           asset: aca,
           balance: BalanceBuilder().substrate().system().account(),
         },
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: glmr,
@@ -74,10 +77,11 @@ export const acalaRoutes = new ChainRoutes({
           asset: aca,
           balance: BalanceBuilder().substrate().system().account(),
         },
-      min: AssetMinBuilder().assetRegistry().assetMetadatas(),
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.005,
           asset: ldot,

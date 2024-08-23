@@ -34,6 +34,7 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: dev,

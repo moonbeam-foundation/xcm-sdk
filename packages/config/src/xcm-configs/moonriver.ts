@@ -216,6 +216,7 @@ export const moonriverRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostKusama,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.0256,
           asset: bnc,
@@ -577,6 +578,7 @@ export const moonriverRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostKusama,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.0001,
           asset: vbnc,
@@ -596,6 +598,7 @@ export const moonriverRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostKusama,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.0001,
           asset: vksm,
@@ -615,6 +618,7 @@ export const moonriverRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostKusama,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00000001,
           asset: vmovr,

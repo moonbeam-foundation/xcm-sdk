@@ -1,12 +1,18 @@
 import type { AnyAsset, AnyChain, Asset } from '@moonbeam-network/xcm-types';
-// import type { OmitDeep } from 'type-fest';
 import { getKey } from '../config.utils';
-import { AssetRoute, AssetRouteConstructorParams } from './AssetRoute';
+import {
+  AssetRoute,
+  AssetRouteConstructorParams,
+  SourceConfig,
+} from './AssetRoute';
 
 export interface ChainRoutesConstructorParams {
   chain: AnyChain;
-  // routes: OmitDeep<AssetRouteConstructorParams, 'source.chain'>[];
-  routes: AssetRouteConstructorParams[];
+  routes: RoutesParam[];
+}
+
+interface RoutesParam extends Omit<AssetRouteConstructorParams, 'source'> {
+  source: Omit<SourceConfig, 'chain'>;
 }
 
 export class ChainRoutes {
