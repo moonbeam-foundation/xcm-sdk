@@ -24,7 +24,7 @@ export const kintsugiRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: kbtc,
@@ -44,7 +44,7 @@ export const kintsugiRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
   ],
 });

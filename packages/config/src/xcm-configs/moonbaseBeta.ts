@@ -27,7 +27,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: alan,
@@ -47,7 +47,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: usdcwh,
@@ -67,7 +67,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: ftmwh,
@@ -87,7 +87,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
   ],
 });

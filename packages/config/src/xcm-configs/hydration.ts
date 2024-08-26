@@ -24,7 +24,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: glmr,
@@ -40,7 +40,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
       asset: dai,
@@ -60,7 +60,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: usdcwh,
@@ -80,7 +80,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: usdtwh,
@@ -100,7 +100,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: wbtc,
@@ -120,7 +120,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
       asset: weth,
@@ -140,7 +140,7 @@ export const hydrationRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
   ],
 });

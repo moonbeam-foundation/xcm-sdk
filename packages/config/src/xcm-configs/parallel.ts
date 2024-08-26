@@ -24,7 +24,7 @@ export const parallelRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder()
+      extrinsic: ExtrinsicBuilder()
         .xTokens()
         .transferMultiAsset(parallel.parachainId)
         .X2(),
@@ -47,7 +47,7 @@ export const parallelRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

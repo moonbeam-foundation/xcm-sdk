@@ -25,7 +25,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(), // TODO:
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(), // TODO:
     },
   ],
 });

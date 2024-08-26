@@ -24,7 +24,7 @@ export const astarRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      transfer: ExtrinsicBuilder()
+      extrinsic: ExtrinsicBuilder()
         .xTokens()
         .transferMultiAsset(astar.parachainId)
         .here(),
@@ -47,7 +47,7 @@ export const astarRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },
-      transfer: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
   ],
 });

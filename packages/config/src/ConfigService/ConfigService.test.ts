@@ -219,7 +219,7 @@ describe('config service', () => {
                 balance: BalanceBuilder().substrate().tokens().accounts(),
               },
             },
-            transfer: ExtrinsicBuilder().xTokens().transfer(),
+            extrinsic: ExtrinsicBuilder().xTokens().transfer(),
           },
         ],
       });

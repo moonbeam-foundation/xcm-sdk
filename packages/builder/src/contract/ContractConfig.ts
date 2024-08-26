@@ -14,6 +14,10 @@ export class ContractConfig extends BaseConfig {
 
   readonly address?: string;
 
+  static is(obj: unknown): obj is ContractConfig {
+    return obj instanceof ContractConfig;
+  }
+
   constructor({ args, address, ...other }: ContractConfigConstructorParams) {
     super({ ...other, type: CallType.Evm });
 

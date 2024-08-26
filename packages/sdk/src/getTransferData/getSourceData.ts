@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
-import { AssetRoute, FeeAssetConfig } from '@moonbeam-network/xcm-config';
+import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
@@ -13,7 +13,6 @@ export interface GetSourceDataParams {
   route: AssetRoute;
   destinationAddress: string;
   destinationFee: AssetAmount;
-  source: AnyParachain;
   sourceAddress: string;
 }
 
@@ -21,42 +20,42 @@ export async function getSourceData({
   route,
   destinationAddress,
   destinationFee,
-  source,
   sourceAddress,
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
+  const source = route.source.chain as AnyParachain;
+  const destination = route.destination.chain as AnyParachain;
   const [sourcePolkadot, destinationPolkadot] =
-    await PolkadotService.createMulti([
-      source,
-      route.destination as AnyParachain,
-    ]);
+    await PolkadotService.createMulti([source, destination]);
   const asset = source.getChainAsset(route.asset);
-  const feeAsset = route.fee ? source.getChainAsset(route.fee.asset) : asset;
+  const feeAsset = route.source.fee
+    ? source.getChainAsset(route.source.fee.asset)
+    : asset;
 
   const balance = await getBalance({
     address: sourceAddress,
     asset,
-    builder: route.balance,
+    builder: route.source.balance,
     chain: source,
     polkadot: sourcePolkadot,
   });
-  const feeBalance = route.fee
+  const feeBalance = route.source.fee
     ? await getBalance({
         address: sourceAddress,
         asset: feeAsset,
-        builder: route.fee.balance,
+        builder: route.source.fee.balance,
         chain: source,
         polkadot: sourcePolkadot,
       })
     : balance;
   // eslint-disable-next-line no-nested-ternary
-  const destinationFeeBalance = route.destinationFee.asset.isEqual(asset)
+  const destinationFeeBalance = route.destination.fee.asset.isEqual(asset)
     ? balance
-    : route.destinationFee.asset.isEqual(feeAsset)
+    : route.destination.fee.asset.isEqual(feeAsset)
       ? feeBalance
       : await getBalance({
           address: sourceAddress,
-          asset: source.getChainAsset(route.destinationFee.asset),
-          builder: route.destinationFee.balance,
+          asset: source.getChainAsset(route.destination.fee.asset),
+          builder: route.destination.fee.balance,
           chain: source,
           polkadot: sourcePolkadot,
         });
@@ -66,7 +65,7 @@ export async function getSourceData({
 
   const extrinsic = route.extrinsic?.build({
     asset: balance,
-    destination: route.destination as AnyParachain,
+    destination: route.destination.chain as AnyParachain,
     destinationAddress,
     destinationApi: destinationPolkadot.api,
     fee: destinationFee,
@@ -79,7 +78,7 @@ export async function getSourceData({
     address: destinationAddress,
     amount: balance.amount,
     asset: asset.address || asset.getAssetId(),
-    destination: route.destination as AnyParachain,
+    destination: route.destination.chain as AnyParachain,
     fee: destinationFee.amount,
     feeAsset: destinationFee.address || destinationFee.getAssetId(),
   });
@@ -91,7 +90,7 @@ export async function getSourceData({
     destinationFee,
     extrinsic,
     feeBalance,
-    feeConfig: route.fee,
+    feeConfig: route.source.fee,
     polkadot: sourcePolkadot,
     sourceAddress,
   });
@@ -121,7 +120,7 @@ export interface GetFeeParams {
   chain: AnyParachain;
   destinationFee: AssetAmount;
   extrinsic?: ExtrinsicConfig;
-  feeConfig?: FeeAssetConfig;
+  feeConfig?: FeeConfig;
   polkadot: PolkadotService;
   sourceAddress: string;
 }
@@ -257,7 +256,7 @@ export async function getAssetsBalances({
       getBalance({
         address,
         asset: chain.getChainAsset(route.asset),
-        builder: route.balance,
+        builder: route.source.balance,
         chain,
         polkadot,
       }),

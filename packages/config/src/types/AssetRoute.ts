@@ -11,7 +11,8 @@ export interface AssetRouteConstructorParams {
   asset: Asset;
   source: SourceConfig;
   destination: DestinationConfig;
-  transfer: ContractConfigBuilder | ExtrinsicConfigBuilder;
+  contract?: ContractConfigBuilder;
+  extrinsic?: ExtrinsicConfigBuilder;
 }
 
 export interface SourceConfig {
@@ -22,7 +23,7 @@ export interface SourceConfig {
 }
 
 export interface DestinationConfig extends Omit<SourceConfig, 'fee'> {
-  fee?: DestinationFeeConfig;
+  fee: DestinationFeeConfig;
 }
 
 export interface FeeConfig {
@@ -44,17 +45,21 @@ export class AssetRoute {
 
   readonly destination: DestinationConfig;
 
-  readonly transfer: ContractConfigBuilder | ExtrinsicConfigBuilder;
+  readonly contract?: ContractConfigBuilder;
+
+  readonly extrinsic?: ExtrinsicConfigBuilder;
 
   constructor({
     asset,
     source,
     destination,
-    transfer,
+    contract,
+    extrinsic,
   }: AssetRouteConstructorParams) {
     this.asset = asset;
     this.source = source;
     this.destination = destination;
-    this.transfer = transfer;
+    this.contract = contract;
+    this.extrinsic = extrinsic;
   }
 }
