@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { glmr, intr } from '../assets';
+import { glmr, ibtc, intr } from '../assets';
 import { interlay, moonbeam } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -17,6 +17,7 @@ export const interlayRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: intr,
@@ -36,6 +37,7 @@ export const interlayRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: intr,

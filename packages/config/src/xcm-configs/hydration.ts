@@ -17,6 +17,7 @@ export const hydrationRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: hdx,
@@ -52,6 +53,7 @@ export const hydrationRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -71,6 +73,7 @@ export const hydrationRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -90,6 +93,7 @@ export const hydrationRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -109,6 +113,7 @@ export const hydrationRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -128,6 +133,7 @@ export const hydrationRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,

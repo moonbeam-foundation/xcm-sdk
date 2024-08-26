@@ -18,6 +18,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: peaq,
@@ -55,6 +56,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -75,6 +77,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -95,6 +98,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -115,6 +119,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -135,6 +140,7 @@ export const peaqRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,

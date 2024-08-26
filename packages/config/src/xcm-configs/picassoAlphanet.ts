@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { dev, pica } from '../assets';
+import { atom, dev, pica } from '../assets';
 import { moonbaseAlpha, picassoAlphanet } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -17,6 +17,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: pica,
@@ -36,6 +37,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: pica,

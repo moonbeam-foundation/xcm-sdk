@@ -18,6 +18,7 @@ export const karuraRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonriver,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: kar,
@@ -38,6 +39,7 @@ export const karuraRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonriver,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: aseed,

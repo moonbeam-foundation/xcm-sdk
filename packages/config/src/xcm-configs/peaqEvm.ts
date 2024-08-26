@@ -3,7 +3,7 @@ import {
   BalanceBuilder,
   ContractBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { dai, glmr, peaq, usdtwh, wbtc, weth } from '../assets';
+import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { moonbeam, peaqEvm } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -44,6 +44,7 @@ export const peaqEvmRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -64,6 +65,7 @@ export const peaqEvmRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -84,6 +86,7 @@ export const peaqEvmRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -104,6 +107,7 @@ export const peaqEvmRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,
@@ -124,6 +128,7 @@ export const peaqEvmRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: glmr,

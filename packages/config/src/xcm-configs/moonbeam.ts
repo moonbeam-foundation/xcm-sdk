@@ -76,6 +76,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: acala,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.01,
           asset: glmr,
@@ -91,6 +92,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: astar,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.0002,
           asset: glmr,
@@ -106,6 +108,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.000001,
           asset: glmr,
@@ -121,6 +124,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.05,
           asset: glmr,
@@ -136,6 +140,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: interlay,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.05,
           asset: glmr,
@@ -151,6 +156,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: mantaParachain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.1,
           asset: glmr,
@@ -166,6 +172,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: parallel,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.000000032,
           asset: glmr,
@@ -181,6 +188,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: phala,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.0002,
           asset: glmr,
@@ -196,6 +204,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: pendulum,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.2,
           asset: glmr,
@@ -211,6 +220,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: zeitgeist,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.3,
           asset: glmr,
@@ -310,6 +320,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: centrifuge,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: cfg,
@@ -329,6 +340,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: polkadot,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.052,
           asset: dot,
@@ -348,6 +360,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: interlay,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00000064,
           asset: ibtc,
@@ -367,6 +380,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: interlay,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.748,
           asset: intr,
@@ -406,6 +420,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: mantaParachain,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.000001,
           asset: manta,
@@ -424,6 +439,7 @@ export const moonbeamRoutes = new ChainRoutes({
       },
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
+        balance: BalanceBuilder().substrate().system().account(),
         chain: nodle,
         fee: {
           amount: 0.02,
@@ -444,6 +460,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: neuroweb,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.004,
           asset: neuro,
@@ -463,6 +480,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: parallel,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.064,
           asset: para,
@@ -482,6 +500,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: pendulum,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 1.01,
           asset: pen,
@@ -501,6 +520,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: phala,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.32,
           asset: pha,
@@ -520,6 +540,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: darwinia,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 4,
           asset: ring,
@@ -539,6 +560,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdt,
@@ -558,6 +580,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdc,
@@ -577,6 +600,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdt,
@@ -596,6 +620,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdt,
@@ -615,6 +640,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdt,
@@ -634,6 +660,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdt,
@@ -653,6 +680,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.6,
           asset: hdx,
@@ -672,6 +700,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.004,
           asset: dai,
@@ -691,6 +720,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.004,
           asset: usdcwh,
@@ -710,6 +740,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: zeitgeist,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.101,
           asset: usdcwh,
@@ -729,6 +760,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.004,
           asset: usdtwh,
@@ -748,6 +780,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00001,
           asset: vastr,
@@ -766,6 +799,7 @@ export const moonbeamRoutes = new ChainRoutes({
       },
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         chain: bifrostPolkadot,
         fee: {
           amount: 0.0000001,
@@ -786,6 +820,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00000001,
           asset: vfil,
@@ -805,6 +840,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00000001,
           asset: vglmr,
@@ -824,6 +860,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.00000001,
           asset: vmanta,
@@ -843,6 +880,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.0000001,
           asset: wbtc,
@@ -862,6 +900,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.000002,
           asset: weth,
@@ -901,6 +940,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: zeitgeist,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
           asset: ztg,
@@ -920,6 +960,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: subsocial,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.1,
           asset: sub,
@@ -939,6 +980,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.0001,
           asset: bncs,
@@ -974,6 +1016,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.00001,
           asset: usdcwh,
@@ -993,6 +1036,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.00001,
           asset: usdtwh,
@@ -1012,6 +1056,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.00001,
           asset: dai,
@@ -1031,6 +1076,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.000001,
           asset: weth,
@@ -1050,6 +1096,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.000001,
           asset: wbtc,
@@ -1069,6 +1116,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transfer(),
       destination: {
         chain: peaqChain,
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.1,
           asset: peaq,
@@ -1084,6 +1132,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: {
         chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.00000001,
           asset: glmr,
@@ -1103,6 +1152,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: {
         chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.00001,
           asset: usdcwh,
@@ -1122,6 +1172,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: {
         chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.00001,
           asset: usdtwh,
@@ -1141,6 +1192,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: {
         chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.00001,
           asset: dai,
@@ -1160,6 +1212,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: {
         chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.000001,
           asset: weth,
@@ -1179,6 +1232,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferWithEvmTo32(),
       destination: {
         chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.000001,
           asset: wbtc,
@@ -1198,6 +1252,7 @@ export const moonbeamRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.2,
           asset: usdt,

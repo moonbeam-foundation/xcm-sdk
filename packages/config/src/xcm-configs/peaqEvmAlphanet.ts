@@ -23,6 +23,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
       transfer: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.01,
           asset: dev,

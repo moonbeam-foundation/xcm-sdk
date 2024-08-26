@@ -18,6 +18,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: hdx,
@@ -53,6 +54,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: dev,
@@ -72,6 +74,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: dev,

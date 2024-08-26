@@ -18,6 +18,7 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: agng,
@@ -55,6 +56,7 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       },
       destination: {
         chain: moonbaseAlpha,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.04,
           asset: dev,
