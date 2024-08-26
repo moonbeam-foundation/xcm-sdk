@@ -25,7 +25,6 @@ import {
 } from '../chains';
 import { ConfigService } from './ConfigService';
 
-import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
 import { xcmRoutesMap } from '../xcm-configs';
 
@@ -201,53 +200,35 @@ describe('config service', () => {
     });
   });
 
-  describe('updateChainConfig', () => {
+  describe('updateChainRoute', () => {
     it('should update existing chain config', () => {
-      const assetConfig = new AssetRoute({
-        asset: glmr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        destination: moonbeam,
-        destinationFee: {
-          amount: 0.02,
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
-        extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      });
-
-      const chainConfig = new ChainRoutes({
-        routes: [assetConfig],
+      const routes = new ChainRoutes({
         chain: hydration,
+        routes: [
+          {
+            asset: glmr,
+            source: {
+              balance: BalanceBuilder().substrate().tokens().accounts(),
+            },
+            destination: {
+              chain: moonbeam,
+              balance: BalanceBuilder().substrate().tokens().accounts(),
+              fee: {
+                amount: 0.02,
+                asset: glmr,
+                balance: BalanceBuilder().substrate().tokens().accounts(),
+              },
+            },
+            transfer: ExtrinsicBuilder().xTokens().transfer(),
+          },
+        ],
       });
 
-      configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainRoutes(hydration);
-      expect(updated.getRoutes()).toStrictEqual(chainConfig.getRoutes());
-    });
+      configService.updateChainRoute(routes);
 
-    it('should create new chain config', () => {
-      configService.updateChain(TEST_CHAIN);
-
-      const assetConfig = new AssetRoute({
-        asset: glmr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        destination: moonbeam,
-        destinationFee: {
-          amount: 0.02,
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
-        extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      });
-
-      const chainConfig = new ChainRoutes({
-        routes: [assetConfig],
-        chain: TEST_CHAIN,
-      });
-
-      configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainRoutes('test');
-      expect(updated.getRoutes()).toStrictEqual(chainConfig.getRoutes());
+      expect(configService.getChainRoutes(hydration).getRoutes()).toStrictEqual(
+        routes.getRoutes(),
+      );
     });
   });
 });

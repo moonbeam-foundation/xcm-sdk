@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { kint } from '../assets';
+import { kbtc, kint } from '../assets';
 import { kintsugi, moonriver } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 

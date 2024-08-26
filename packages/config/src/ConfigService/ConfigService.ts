@@ -69,13 +69,13 @@ export class ConfigService {
 
   getChainRoutes(keyOrChain: string | AnyChain): ChainRoutes {
     const key = getKey(keyOrChain);
-    const config = this.routes.get(key);
+    const route = this.routes.get(key);
 
-    if (!config) {
-      throw new Error(`Chain config for ${key} not found`);
+    if (!route) {
+      throw new Error(`ChainRoute for ${key} not found`);
     }
 
-    return config;
+    return route;
   }
 
   getSourceChains({
@@ -152,7 +152,7 @@ export class ConfigService {
     this.chains.set(chain.key, chain);
   }
 
-  updateChainConfig(chainConfig: ChainRoutes): void {
-    this.routes.set(chainConfig.chain.key, chainConfig);
+  updateChainRoute(route: ChainRoutes): void {
+    this.routes.set(route.chain.key, route);
   }
 }
