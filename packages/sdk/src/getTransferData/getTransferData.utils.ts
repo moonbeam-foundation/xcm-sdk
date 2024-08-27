@@ -59,9 +59,9 @@ export async function getMin(
     { amount: 0n },
   );
 
-  if (route.min) {
+  if (route.source.min) {
     const min = await polkadot.query(
-      route.min.build({ asset: asset.getMinAssetId() }),
+      route.source.min.build({ asset: asset.getMinAssetId() }),
     );
 
     return asset.copyWith({ amount: min });

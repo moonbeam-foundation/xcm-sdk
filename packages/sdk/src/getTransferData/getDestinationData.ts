@@ -15,15 +15,14 @@ export async function getDestinationData({
   route,
   destinationAddress,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
-  const polkadot = await PolkadotService.create(
-    route.destination as AnyParachain,
-  );
-  const asset = route.destination.getChainAsset(route.asset);
+  const destination = route.destination.chain as AnyParachain;
+  const polkadot = await PolkadotService.create(destination);
+  const asset = route.destination.chain.getChainAsset(route.asset);
   const balance = await getBalance({
     address: destinationAddress,
     asset,
-    builder: route.balance,
-    chain: route.destination as AnyParachain,
+    builder: route.destination.balance,
+    chain: destination,
     polkadot,
   });
   const min = await getMin(route, polkadot);
@@ -50,10 +49,12 @@ export async function getFee({
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
   // TODO: we have to consider correctly here when an asset is ERC20 to get it from contract
-  const { amount, asset: feeAsset } = route.destinationFee;
+  const { amount, asset: feeAsset } = route.destination.fee;
   const asset = AssetAmount.fromChainAsset(
-    route.destination.getChainAsset(feeAsset),
-    { amount: 0n },
+    route.destination.chain.getChainAsset(feeAsset),
+    {
+      amount: 0n,
+    },
   );
 
   if (Number.isFinite(amount)) {

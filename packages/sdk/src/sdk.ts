@@ -72,7 +72,6 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 
                   return getTransferData({
                     route,
-                    source: sourceChain,
                     sourceAddress,
                     destinationAddress,
                   });
