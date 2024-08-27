@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 2.4.5
+
+### Patch Changes
+
+- [#333](https://github.com/moonbeam-foundation/xcm-sdk/pull/333) [`ede2f6e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ede2f6e379cec3767be264deb1869cf4da4fdd54) Thanks [@mmaurello](https://github.com/mmaurello)! - Add reserved balance to transferrable balance
+
 ## 2.4.4
 
 ### Patch Changes
