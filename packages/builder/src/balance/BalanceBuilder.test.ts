@@ -54,7 +54,23 @@ describe('balanceBuilder', () => {
       it('should transform correctly with frozen balance', async () => {
         await expect(
           config.transform({
-            data: { free: balanceOf(999), frozen: balanceOf(99) },
+            data: {
+              free: balanceOf(999),
+              frozen: balanceOf(99),
+              reserved: balanceOf(0),
+            },
+          }),
+        ).resolves.toMatchSnapshot();
+      });
+
+      it('should transform correctly with reserved balance', async () => {
+        await expect(
+          config.transform({
+            data: {
+              free: balanceOf(999),
+              frozen: balanceOf(99),
+              reserved: balanceOf(99),
+            },
           }),
         ).resolves.toMatchSnapshot();
       });
@@ -62,7 +78,11 @@ describe('balanceBuilder', () => {
       it('should transform correctly with miscFrozen balance', async () => {
         await expect(
           config.transform({
-            data: { free: balanceOf(999), miscFrozen: balanceOf(99) },
+            data: {
+              free: balanceOf(999),
+              miscFrozen: balanceOf(99),
+              reserved: balanceOf(0),
+            },
           }),
         ).resolves.toMatchSnapshot();
       });
@@ -164,7 +184,11 @@ describe('balanceBuilder', () => {
 
       it('should transform correctly', async () => {
         await expect(
-          config.transform({ free: balanceOf(999), frozen: balanceOf(99) }),
+          config.transform({
+            free: balanceOf(999),
+            frozen: balanceOf(99),
+            reserved: balanceOf(0),
+          }),
         ).resolves.toMatchSnapshot();
       });
     });

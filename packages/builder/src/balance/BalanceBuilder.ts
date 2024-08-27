@@ -82,13 +82,7 @@ function system() {
           args: [address],
           transform: async (
             response: FrameSystemAccountInfo,
-          ): Promise<bigint> => {
-            const balance = response.data as PalletBalancesAccountData &
-              PalletBalancesAccountDataOld;
-            const frozen = balance.miscFrozen ?? balance.frozen;
-
-            return BigInt(balance.free.sub(frozen).toString());
-          },
+          ): Promise<bigint> => calculateSystemAccountBalance(response),
         }),
     }),
     accountEquilibrium: (): BalanceConfigBuilder => ({
@@ -139,13 +133,7 @@ function system() {
           args: [substrateAddress],
           transform: async (
             response: FrameSystemAccountInfo,
-          ): Promise<bigint> => {
-            const balance = response.data as PalletBalancesAccountData &
-              PalletBalancesAccountDataOld;
-            const frozen = balance.miscFrozen ?? balance.frozen;
-
-            return BigInt(balance.free.sub(frozen).toString());
-          },
+          ): Promise<bigint> => calculateSystemAccountBalance(response),
         });
       },
     }),
@@ -168,4 +156,15 @@ function tokens() {
         }),
     }),
   };
+}
+
+export async function calculateSystemAccountBalance(
+  response: FrameSystemAccountInfo,
+): Promise<bigint> {
+  const balance = response.data as PalletBalancesAccountData &
+    PalletBalancesAccountDataOld;
+
+  const frozen = balance.miscFrozen ?? balance.frozen;
+
+  return BigInt(balance.free.sub(frozen).add(balance.reserved).toString());
 }
