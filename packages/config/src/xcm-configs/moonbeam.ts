@@ -63,893 +63,1202 @@ import {
   subsocial,
   zeitgeist,
 } from '../chains';
-import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 export const moonbeamRoutes = new ChainRoutes({
   chain: moonbeam,
   routes: [
-    new AssetRoute({
+    {
       asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: acala,
-      destinationFee: {
-        amount: 0.01,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: acala,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.01,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: astar,
-      destinationFee: {
-        amount: 0.0002,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: astar,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.0002,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.000001,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.000001,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.05,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.05,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: interlay,
-      destinationFee: {
-        amount: 0.05,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: interlay,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.05,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: mantaParachain,
-      destinationFee: {
-        amount: 0.1,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: mantaParachain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.1,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallel,
-      destinationFee: {
-        amount: 0.000000032,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: parallel,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.000000032,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: phala,
-      destinationFee: {
-        amount: 0.0002,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: phala,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.0002,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: pendulum,
-      destinationFee: {
-        amount: 0.2,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: pendulum,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.2,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: zeitgeist,
-      destinationFee: {
-        amount: 0.3,
-        asset: glmr,
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
+      destination: {
+        chain: zeitgeist,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.3,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: aca,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: acala,
-      destinationFee: {
-        amount: 0.032,
-        asset: aca,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: acala,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.032,
+          asset: aca,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: astr,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: astar,
-      destinationFee: {
-        amount: 0.032,
-        asset: astr,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: astar,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.032,
+          asset: astr,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: aseed,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: acala,
-      destinationFee: {
-        amount: 0.256,
-        asset: aseed,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: acala,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.256,
+          asset: aseed,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: bnc,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.256,
-        asset: bnc,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: bifrostPolkadot,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.256,
+          asset: bnc,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: cfg,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: centrifuge,
-      destinationFee: {
-        amount: 0.01,
-        asset: cfg,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: centrifuge,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.01,
+          asset: cfg,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: dot,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: polkadot,
-      destinationFee: {
-        amount: 0.052,
-        asset: dot,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: polkadot,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.052,
+          asset: dot,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ibtc,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: interlay,
-      destinationFee: {
-        amount: 0.0002476,
-        asset: ibtc,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: interlay,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00000064,
+          asset: ibtc,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: intr,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: interlay,
-      destinationFee: {
-        amount: 0.748,
-        asset: intr,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: interlay,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.748,
+          asset: intr,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ldot,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: acala,
-      destinationFee: {
-        amount: 0.001,
-        asset: ldot,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: acala,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.001,
+          asset: ldot,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: manta,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: mantaParachain,
-      destinationFee: {
-        amount: 0.000001,
-        asset: manta,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: mantaParachain,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.000001,
+          asset: manta,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: nodl,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: nodle,
-      destinationFee: {
-        amount: 0.02,
-        asset: nodl,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
         balance: BalanceBuilder().substrate().system().account(),
+        chain: nodle,
+        fee: {
+          amount: 0.02,
+          asset: nodl,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: neuro,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: neuroweb,
-      destinationFee: {
-        amount: 0.004,
-        asset: neuro,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: neuroweb,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.004,
+          asset: neuro,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: para,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallel,
-      destinationFee: {
-        amount: 0.064,
-        asset: para,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: parallel,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.064,
+          asset: para,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: pen,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: pendulum,
-      destinationFee: {
-        amount: 1.01,
-        asset: pen,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: pendulum,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 1.01,
+          asset: pen,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: pha,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: phala,
-      destinationFee: {
-        amount: 0.32,
-        asset: pha,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: phala,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.32,
+          asset: pha,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ring,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: darwinia,
-      destinationFee: {
-        amount: 4,
-        asset: ring,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: darwinia,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 4,
+          asset: ring,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdt,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdt,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdc,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdc,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: pink,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdt,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: ded,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdt,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: stink,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdt,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: apillon,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdt,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: hdx,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.6,
-        asset: hdx,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: hydration,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.6,
+          asset: hdx,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: dai,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.004,
-        asset: dai,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.004,
+          asset: dai,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.004,
-        asset: usdcwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.004,
+          asset: usdcwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: zeitgeist,
-      destinationFee: {
-        amount: 0.101,
-        asset: usdcwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: zeitgeist,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.101,
+          asset: usdcwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdtwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.004,
-        asset: usdtwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.004,
+          asset: usdtwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: vastr,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.00001,
-        asset: vastr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00001,
+          asset: vastr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: vdot,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.0000001,
-        asset: vdot,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        chain: bifrostPolkadot,
+        fee: {
+          amount: 0.0000001,
+          asset: vdot,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: vfil,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: vfil,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00000001,
+          asset: vfil,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: vglmr,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: vglmr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00000001,
+          asset: vglmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: vmanta,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: vmanta,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00000001,
+          asset: vmanta,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: wbtc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.0000001,
-        asset: wbtc,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.0000001,
+          asset: wbtc,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: weth,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydration,
-      destinationFee: {
-        amount: 0.000002,
-        asset: weth,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.000002,
+          asset: weth,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: fil,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: fil,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00000001,
+          asset: fil,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ztg,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: zeitgeist,
-      destinationFee: {
-        amount: 0.01,
-        asset: ztg,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: zeitgeist,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.01,
+          asset: ztg,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: sub,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: subsocial,
-      destinationFee: {
-        amount: 0.1,
-        asset: sub,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: subsocial,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.1,
+          asset: sub,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: bncs,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: bifrostPolkadot,
-      destinationFee: {
-        amount: 0.0001,
-        asset: bncs,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: bifrostPolkadot,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.0001,
+          asset: bncs,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.00000001,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.00001,
-        asset: usdcwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.00001,
+          asset: usdcwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdtwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.00001,
-        asset: usdtwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.00001,
+          asset: usdtwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: dai,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.00001,
-        asset: dai,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.00001,
+          asset: dai,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: weth,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.000001,
-        asset: weth,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.000001,
+          asset: weth,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: wbtc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.000001,
-        asset: wbtc,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.000001,
+          asset: wbtc,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: peaq,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqChain,
-      destinationFee: {
-        amount: 0.1,
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.00001,
-        asset: usdcwh,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: usdtwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.00001,
-        asset: usdtwh,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: dai,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.00001,
-        asset: dai,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: weth,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.000001,
-        asset: weth,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: wbtc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvm,
-      destinationFee: {
-        amount: 0.000001,
-        asset: wbtc,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
-      asset: wifd,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.2,
-        asset: usdt,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: glmr,
+      destination: {
+        chain: peaqChain,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.1,
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
+      destination: {
+        chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.00000001,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: usdcwh,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.00001,
+          asset: usdcwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: usdtwh,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.00001,
+          asset: usdtwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: dai,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.00001,
+          asset: dai,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: weth,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.000001,
+          asset: weth,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: wbtc,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: peaqEvm,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.000001,
+          asset: wbtc,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: wifd,
+      source: {
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.2,
+          asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
   ],
 });

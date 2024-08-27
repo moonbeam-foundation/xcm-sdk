@@ -5,107 +5,136 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { moonbeam, peaqEvm } from '../chains';
-import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 export const peaqEvmRoutes = new ChainRoutes({
   chain: peaqEvm,
   routes: [
-    new AssetRoute({
+    {
       asset: glmr,
-      balance: BalanceBuilder().evm().erc20(),
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+        },
+        min: AssetMinBuilder().assets().asset(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.01,
+          asset: glmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.01,
-        asset: glmr,
-        balance: BalanceBuilder().evm().erc20(),
-      },
-      fee: {
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
-      },
-      min: AssetMinBuilder().assets().asset(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+        },
+        min: AssetMinBuilder().assets().asset(),
       },
-      fee: {
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.04,
+          asset: glmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-      min: AssetMinBuilder().assets().asset(),
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: dai,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+        },
+        min: AssetMinBuilder().assets().asset(),
       },
-      fee: {
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.04,
+          asset: glmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-      min: AssetMinBuilder().assets().asset(),
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: wbtc,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+        },
+        min: AssetMinBuilder().assets().asset(),
       },
-      fee: {
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.04,
+          asset: glmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-      min: AssetMinBuilder().assets().asset(),
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: weth,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+        },
+        min: AssetMinBuilder().assets().asset(),
       },
-      fee: {
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.04,
+          asset: glmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-      min: AssetMinBuilder().assets().asset(),
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
       asset: usdtwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.04,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+        },
+        min: AssetMinBuilder().assets().asset(),
       },
-      fee: {
-        asset: peaq,
-        balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.04,
+          asset: glmr,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-      min: AssetMinBuilder().assets().asset(),
-    }),
+      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
   ],
 });

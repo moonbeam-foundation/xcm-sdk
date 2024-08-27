@@ -27,328 +27,439 @@ import {
   picassoAlphanet,
   turingAlphanet,
 } from '../chains';
-import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 export const moonbaseAlphaRoutes = new ChainRoutes({
   chain: moonbaseAlpha,
   routes: [
-    new AssetRoute({
+    {
       asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: turingAlphanet,
-      destinationFee: {
-        amount: 0.00001,
-        asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: turingAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00001,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: moonbaseBeta,
-      destinationFee: {
-        amount: 0.0002,
-        asset: dev,
+    },
+    {
+      asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: moonbaseBeta,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.0002,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: pendulumAlphanet,
-      destinationFee: {
-        amount: 0.0000001,
-        asset: dev,
+    },
+    {
+      asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: pendulumAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.0000001,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: picassoAlphanet,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: dev,
+    },
+    {
+      asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
+      destination: {
+        chain: picassoAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.00000001,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: alan,
-      balance: BalanceBuilder().evm().erc20(),
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: moonbaseBeta,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.0002,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
-      destination: moonbaseBeta,
-      destinationFee: {
-        amount: 0.0002,
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
+    },
     // NOTE: Disabling because ws endpoint is not working
     // new AssetConfig({
     //   asset: auq,
     //   balance: BalanceBuilder().substrate().assets().account(),
     //   contract: ContractBuilder().Xtokens().transfer(),
-    //   destination: uniqueAlpha,
-    //   destinationFee: {
+    //   destination: {
+    //   chain: uniqueAlpha,
+    //   fee:{
     //     amount: 0,
     //     asset: auq,
+    //   }
     //   },
     //   fee: {
     //     asset: dev,
     //     balance: BalanceBuilder().substrate().system().account(),
     //   },
     // }),
-    new AssetRoute({
+    {
       asset: ampe,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: pendulumAlphanet,
-      destinationFee: {
-        amount: 0.001,
-        asset: ampe,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
+      destination: {
+        chain: pendulumAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.001,
+          asset: ampe,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: otp,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: originTrailAlphanet,
-      destinationFee: {
-        amount: 0.004,
-        asset: otp,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
+      destination: {
+        chain: originTrailAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.004,
+          asset: otp,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: atom,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: picassoAlphanet,
-      destinationFee: {
-        amount: 0.0001,
-        asset: atom,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: picassoAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.0001,
+          asset: atom,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: pica,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: picassoAlphanet,
-      destinationFee: {
-        amount: 0.01,
-        asset: pica,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
+      destination: {
+        chain: picassoAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.01,
+          asset: pica,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: tt1,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: alphanetAssetHub,
-      destinationFee: {
-        amount: 5,
-        asset: tt1,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: alphanetAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 5,
+          asset: tt1,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: tur,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: turingAlphanet,
-      destinationFee: {
-        amount: 0.2,
-        asset: tur,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
+      destination: {
+        chain: turingAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.2,
+          asset: tur,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: unit,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: alphanetRelay,
-      destinationFee: {
-        amount: 0.0506,
-        asset: unit,
+      source: {
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
+      destination: {
+        chain: alphanetRelay,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.0506,
+          asset: unit,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: usdcwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydrationAlphanet,
-      destinationFee: {
-        amount: 0.1,
-        asset: usdcwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydrationAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.1,
+          asset: usdcwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ftmwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydrationAlphanet,
-      destinationFee: {
-        amount: 0.01,
-        asset: ftmwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: hydrationAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.01,
+          asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ftmwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqAlphanet,
-      destinationFee: {
-        amount: 0.01,
-        asset: ftmwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqAlphanet,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.01,
+          asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydrationAlphanet,
-      destinationFee: {
-        amount: 0.0002,
-        asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
+      destination: {
+        chain: hydrationAlphanet,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.0002,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: hdx,
-      balance: BalanceBuilder().substrate().assets().account(),
+      source: {
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: hydrationAlphanet,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.5,
+          asset: hdx,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: hydrationAlphanet,
-      destinationFee: {
-        amount: 0.5,
-        asset: hdx,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
+    },
+    {
       asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqAlphanet,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
+      destination: {
+        chain: peaqAlphanet,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.00000001,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: ftmwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqAlphanet,
-      destinationFee: {
-        amount: 0.01,
-        asset: ftmwh,
+      source: {
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        chain: peaqAlphanet,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.01,
+          asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
-    }),
-    new AssetRoute({
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
       asset: agng,
-      balance: BalanceBuilder().substrate().assets().account(),
+      source: {
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: peaqAlphanet,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.01,
+          asset: agng,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       contract: ContractBuilder().Xtokens().transfer(),
-      destination: peaqAlphanet,
-      destinationFee: {
-        amount: 0.01,
-        asset: agng,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetRoute({
+    },
+    {
       asset: dev,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvmAlphanet,
-      destinationFee: {
-        amount: 0.00000001,
-        asset: dev,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
-    }),
-    new AssetRoute({
-      asset: ftmwh,
-      balance: BalanceBuilder().evm().erc20(),
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
-      destination: peaqEvmAlphanet,
-      destinationFee: {
-        amount: 0.01,
-        asset: ftmwh,
+      destination: {
+        chain: peaqEvmAlphanet,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.00000001,
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-      fee: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
+    {
+      asset: ftmwh,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
-    }),
+      destination: {
+        chain: peaqEvmAlphanet,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.01,
+          asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+    },
   ],
 });

@@ -10,11 +10,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import {
-  ExtrinsicConfigBuilderPrams,
-  MrlExtrinsicConfigBuilderPrams,
-} from '../src/extrinsic';
-import { WormholeConfigBuilderPrams } from '../src/wormhole';
+import { MrlBuilderPrams, BuilderPrams } from '../src';
 
 export const apiMock = {
   tx: {
@@ -103,7 +99,7 @@ export const fantomTestnet = new EvmChain({
   },
 });
 
-export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
+export const buildParamsMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
@@ -114,7 +110,7 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
+export const buildParamsSameAssetMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
@@ -125,7 +121,7 @@ export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
+export const buildParachainParamsMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: interlayTestnetMock,
   destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
@@ -136,7 +132,7 @@ export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const mrlBuildParamsMock: MrlExtrinsicConfigBuilderPrams = {
+export const mrlBuildParamsMock: MrlBuilderPrams = {
   ...buildParamsMock,
   moonApi: {} as any,
   moonAsset: testAssetAmount,
@@ -151,7 +147,7 @@ export const mrlBuildParamsMock: MrlExtrinsicConfigBuilderPrams = {
   },
 };
 
-export const mrlBuildParamsMock2: MrlExtrinsicConfigBuilderPrams = {
+export const mrlBuildParamsMock2: MrlBuilderPrams = {
   ...buildParachainParamsMock,
   moonApi: {} as any,
   moonAsset: testAssetAmount,

@@ -15,14 +15,12 @@ import { PolkadotService } from '../polkadot';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
-  source: AnyParachain;
   sourceAddress: string;
   destinationAddress: string;
 }
 
 export async function getTransferData({
   route,
-  source,
   sourceAddress,
   destinationAddress,
 }: GetTransferDataParams): Promise<TransferData> {
@@ -32,7 +30,9 @@ export async function getTransferData({
   });
 
   // Here we need to convert the fee on the destination chain to an asset on source chain.
-  const destinationFeeAsset = source.getChainAsset(destinationData.fee);
+  const destinationFeeAsset = route.source.chain.getChainAsset(
+    destinationData.fee,
+  );
   const destinationFee = AssetAmount.fromChainAsset(destinationFeeAsset, {
     amount: destinationData.fee.convertDecimals(destinationFeeAsset.decimals)
       .amount,
@@ -42,7 +42,6 @@ export async function getTransferData({
     route,
     destinationAddress,
     destinationFee,
-    source,
     sourceAddress,
   });
 
@@ -69,28 +68,27 @@ export async function getTransferData({
       amount,
       { evmSigner, polkadotSigner }: Partial<Signers>,
     ): Promise<string> {
+      const source = route.source.chain as AnyParachain;
+      const destination = route.destination.chain as AnyParachain;
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = AssetAmount.fromChainAsset(
-        source.getChainAsset(route.asset),
+        route.source.chain.getChainAsset(route.asset),
         { amount: bigintAmount },
       );
       const [sourcePolkadot, destinationPolkadot] =
-        await PolkadotService.createMulti([
-          source,
-          route.destination as AnyParachain,
-        ]);
+        await PolkadotService.createMulti([source, destination]);
 
       const contract = route.contract?.build({
         address: destinationAddress,
         amount: bigintAmount,
         asset: asset.address || asset.getAssetId(),
-        destination: route.destination as AnyParachain,
+        destination,
         fee: destinationFee.amount,
         feeAsset: destinationFee.address || destinationFee.getAssetId(),
       });
       const extrinsic = route.extrinsic?.build({
         asset,
-        destination: route.destination as AnyParachain,
+        destination,
         destinationAddress,
         destinationApi: destinationPolkadot.api,
         fee: destinationFee,

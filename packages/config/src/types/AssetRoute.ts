@@ -1,4 +1,4 @@
-import {
+import type {
   AssetMinConfigBuilder,
   BalanceConfigBuilder,
   ContractConfigBuilder,
@@ -6,69 +6,66 @@ import {
   FeeConfigBuilder,
   MrlConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import type { AnyChain, Asset } from '@moonbeam-network/xcm-types';
 
 export interface AssetRouteConstructorParams {
   asset: Asset;
-  balance: BalanceConfigBuilder;
+  source: SourceConfig;
+  destination: DestinationConfig;
   contract?: ContractConfigBuilder;
-  destination: AnyChain;
-  destinationFee: DestinationFeeConfig;
   extrinsic?: ExtrinsicConfigBuilder;
-  fee?: FeeAssetConfig;
-  min?: AssetMinConfigBuilder;
   mrl?: MrlConfigBuilder;
 }
 
-export interface DestinationFeeConfig extends FeeAssetConfig {
-  amount: number | FeeConfigBuilder;
+export interface SourceConfig {
+  chain: AnyChain;
+  balance: BalanceConfigBuilder;
+  fee?: FeeConfig;
+  min?: AssetMinConfigBuilder;
 }
 
-export interface FeeAssetConfig {
+export interface DestinationConfig extends Omit<SourceConfig, 'fee'> {
+  fee: DestinationFeeConfig;
+}
+
+export interface FeeConfig {
   asset: Asset;
   balance: BalanceConfigBuilder;
-  // Sometimes we need to add some extra amount ("XCM Delivery Fee") to a fee that is returned by "paymentInfo" for extrinsic to not fail.
+  // NOTE: Sometimes we need to add some extra amount ("XCM Delivery Fee") to a fee
+  // that is returned by "paymentInfo" for extrinsic to not fail.
   extra?: number;
+}
+
+export interface DestinationFeeConfig extends FeeConfig {
+  amount: number | FeeConfigBuilder;
 }
 
 export class AssetRoute {
   readonly asset: Asset;
 
-  readonly balance: BalanceConfigBuilder;
+  readonly source: SourceConfig;
+
+  readonly destination: DestinationConfig;
 
   readonly contract?: ContractConfigBuilder;
 
-  readonly destination: AnyChain;
-
-  readonly destinationFee: DestinationFeeConfig;
-
   readonly extrinsic?: ExtrinsicConfigBuilder;
-
-  readonly fee?: FeeAssetConfig;
-
-  readonly min?: AssetMinConfigBuilder;
 
   readonly mrl?: MrlConfigBuilder;
 
   constructor({
     asset,
-    balance,
-    contract,
+    source,
     destination,
-    destinationFee,
+    contract,
     extrinsic,
-    fee,
-    min,
     mrl,
   }: AssetRouteConstructorParams) {
     this.asset = asset;
-    this.balance = balance;
-    this.contract = contract;
+    this.source = source;
     this.destination = destination;
-    this.destinationFee = destinationFee;
+    this.contract = contract;
     this.extrinsic = extrinsic;
-    this.fee = fee;
-    this.min = min;
     this.mrl = mrl;
   }
 }

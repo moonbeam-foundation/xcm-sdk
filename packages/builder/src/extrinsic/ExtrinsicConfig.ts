@@ -12,6 +12,10 @@ export class ExtrinsicConfig extends BaseConfig {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getArgs: (func?: SubmittableExtrinsicFunction<'promise'>) => any[];
 
+  static is(obj: unknown): obj is ExtrinsicConfig {
+    return obj instanceof ExtrinsicConfig;
+  }
+
   constructor({ getArgs, ...other }: ExtrinsicConfigConstructorParams) {
     super({ ...other, type: CallType.Substrate });
 

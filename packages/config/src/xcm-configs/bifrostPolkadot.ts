@@ -16,150 +16,194 @@ import {
   vmanta,
 } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
-import { AssetRoute } from '../types/AssetRoute';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 export const bifrostPolkadotRoutes = new ChainRoutes({
   chain: bifrostPolkadot,
   routes: [
-    new AssetRoute({
+    {
       asset: bnc,
-      balance: BalanceBuilder().substrate().system().account(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: bnc,
+      source: {
         balance: BalanceBuilder().substrate().system().account(),
       },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: fil,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: glmr,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.01,
-        asset: glmr,
+      source: {
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.01,
+          asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: vastr,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.2,
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.2,
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: vdot,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.01,
-        asset: vdot,
+      source: {
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.01,
+          asset: vdot,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: vfil,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.2,
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.2,
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: vglmr,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.2,
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.2,
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: vmanta,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.2,
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.2,
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
-    new AssetRoute({
+    },
+    {
       asset: bncs,
-      balance: BalanceBuilder().substrate().tokens().accounts(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: 0.05,
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.05,
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-      fee: {
-        asset: bnc,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-      min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-    }),
+    },
   ],
 });
