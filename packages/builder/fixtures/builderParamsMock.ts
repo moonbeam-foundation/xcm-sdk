@@ -10,7 +10,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { MrlBuilderPrams, BuilderPrams } from '../src';
+import { MrlBuilderParams, BuilderPrams } from '../src';
 
 export const apiMock = {
   tx: {
@@ -132,9 +132,9 @@ export const buildParachainParamsMock: BuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const mrlBuildParamsMock: MrlBuilderPrams = {
+export const mrlBuildParamsMock: MrlBuilderParams = {
   ...buildParamsMock,
-  moonApi: {} as any,
+  moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
   moonGasLimit: 999_999n,
@@ -147,9 +147,9 @@ export const mrlBuildParamsMock: MrlBuilderPrams = {
   },
 };
 
-export const mrlBuildParamsMock2: MrlBuilderPrams = {
+export const mrlBuildParamsMock2: MrlBuilderParams = {
   ...buildParachainParamsMock,
-  moonApi: {} as any,
+  moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
   moonGasLimit: 999_999n,
@@ -162,23 +162,32 @@ export const mrlBuildParamsMock2: MrlBuilderPrams = {
   },
 };
 
-export const wormholeConfigBuilderPrams: WormholeConfigBuilderPrams = {
+export const wormholeConfigBuilderPrams: MrlBuilderParams = {
   asset: testAssetAmount,
   destination: alphanetAssetHubMock,
   destinationAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
-  moonApi: {} as any,
+  destinationApi: apiMock,
+  fee: testAssetAmount,
+  moonApi: apiMock,
+  moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
   source: fantomTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  sourceApi: apiMock,
 };
 
-export const wormholeToMoonchainConfigBuilderPrams: WormholeConfigBuilderPrams =
-  {
-    asset: testAssetAmount,
-    destination: moonbaseAlphaMock,
-    destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
-    moonApi: {} as any,
-    moonChain: moonbaseAlphaMock,
-    source: fantomTestnet,
-    sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
-  };
+export const wormholeToMoonchainConfigBuilderPrams: MrlBuilderParams = {
+  asset: testAssetAmount,
+  destination: moonbaseAlphaMock,
+  destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+  destinationApi: apiMock,
+  fee: testAssetAmount,
+  moonApi: apiMock,
+  moonAsset: testAssetAmount,
+  moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
+  source: fantomTestnet,
+  sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  sourceApi: apiMock,
+};

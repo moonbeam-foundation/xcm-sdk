@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { apiMock, mrlBuildParamsMock } from '../../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
 import { XcmVersion } from '../../../../extrinsic/ExtrinsicBuilder.interfaces';
+import { ExtrinsicConfig } from '../../../../extrinsic';
 
 vi.mock(
   import('../../../../extrinsic/ExtrinsicBuilder.utils'),
@@ -20,7 +21,9 @@ vi.mock(
 
 describe('polkadotXcm', () => {
   describe('send', () => {
-    const extrinsic = polkadotXcm().send().build(mrlBuildParamsMock);
+    const extrinsic = polkadotXcm()
+      .send()
+      .build(mrlBuildParamsMock) as ExtrinsicConfig;
 
     it('should be correct config', () => {
       expect(extrinsic).toMatchSnapshot();

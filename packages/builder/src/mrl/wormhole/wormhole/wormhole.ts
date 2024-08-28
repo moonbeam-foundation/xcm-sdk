@@ -5,7 +5,10 @@ import { evmToAddress } from '@polkadot/util-crypto/address';
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 import { getExtrinsicAccount } from '../../../extrinsic/ExtrinsicBuilder.utils';
-import { MrlBuilderPrams, MrlConfigBuilder } from '../../MrlBuilder.interfaces';
+import {
+  MrlBuilderParams,
+  MrlConfigBuilder,
+} from '../../MrlBuilder.interfaces';
 
 export const GMP_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000816';
@@ -71,7 +74,7 @@ export function getPayload({
   moonApi,
   destination,
   destinationAddress,
-}: Pick<MrlBuilderPrams, 'destination' | 'destinationAddress' | 'moonApi'>):
+}: Pick<MrlBuilderParams, 'destination' | 'destinationAddress' | 'moonApi'>):
   | Uint8Array
   | undefined {
   if (!Parachain.is(destination) && !EvmParachain.is(destination)) {

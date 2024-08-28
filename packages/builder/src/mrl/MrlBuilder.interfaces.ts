@@ -11,10 +11,10 @@ import type { ExtrinsicConfig } from '../extrinsic';
 
 export type MrlConfigBuilder = ConfigBuilder<
   ExtrinsicConfig | WormholeConfig,
-  MrlBuilderPrams
+  MrlBuilderParams
 >;
 
-export interface MrlBuilderPrams extends BuilderPrams<AnyChain> {
+export interface MrlBuilderParams extends BuilderPrams<AnyChain> {
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   moonChain: EvmParachain;
