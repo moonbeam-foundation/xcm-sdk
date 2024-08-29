@@ -1,9 +1,11 @@
-import { ChainAssetId } from '@moonbeam-network/xcm-types';
-import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
+import type { ChainAssetId } from '@moonbeam-network/xcm-types';
+import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
+import type { ConfigBuilder } from '../builder.interfaces';
 
-export interface AssetMinConfigBuilder {
-  build: (params: AssetMinConfigBuilderPrams) => SubstrateQueryConfig;
-}
+export type AssetMinConfigBuilder = ConfigBuilder<
+  SubstrateQueryConfig,
+  AssetMinConfigBuilderPrams
+>;
 
 export interface AssetMinConfigBuilderPrams {
   asset: ChainAssetId;

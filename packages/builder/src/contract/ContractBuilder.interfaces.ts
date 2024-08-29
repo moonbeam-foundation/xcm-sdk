@@ -1,15 +1,4 @@
-import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
-import { ContractConfig } from '../types/ContractConfig';
+import type { ContractConfig } from '../types/ContractConfig';
+import type { ConfigBuilder } from '../builder.interfaces';
 
-export interface ContractConfigBuilder {
-  build: (params: ContractConfigBuilderPrams) => ContractConfig;
-}
-
-export interface ContractConfigBuilderPrams {
-  address: string;
-  amount: bigint;
-  asset: ChainAssetId;
-  destination: AnyParachain;
-  fee: bigint;
-  feeAsset: ChainAssetId;
-}
+export type ContractConfigBuilder = ConfigBuilder<ContractConfig>;
