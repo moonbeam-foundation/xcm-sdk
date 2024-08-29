@@ -10,13 +10,12 @@ export async function getDestinationData({
   route,
   destinationAddress,
 }: GetDestinationDataParams): Promise<DestinationTransferData> {
-  const asset = route.destination.getChainAsset(route.asset);
+  const asset = route.destination.chain.getChainAsset(route.asset);
   const balance = await getBalance({
     address: destinationAddress,
     asset,
-    builder: route.balance,
-    chain: route.destination as AnyParachain,
-    polkadot,
+    builder: route.destination.balance,
+    chain: route.destination.chain,
   });
   const min = await getMin(route, polkadot);
   const fee = await getFee({

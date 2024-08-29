@@ -1,6 +1,6 @@
 import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
 import { Address, encodeFunctionData } from 'viem';
-import { ExtrinsicConfig } from '../../../../extrinsic/ExtrinsicConfig';
+import { ExtrinsicConfig } from '../../../../types/substrate/ExtrinsicConfig';
 import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
 import { ERC20_ABI } from './Erc20Abi';
 import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';

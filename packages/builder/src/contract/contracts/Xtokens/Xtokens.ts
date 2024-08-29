@@ -4,7 +4,7 @@ import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { isString, u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
-import { ContractConfig } from '../../ContractConfig';
+import { ContractConfig } from '../../../types/ContractConfig';
 
 const U_64_MAX = 18446744073709551615n;
 

@@ -5,11 +5,6 @@ import type {
 } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 
-export enum CallType {
-  Evm = 'Evm',
-  Substrate = 'Substrate',
-}
-
 export interface ConfigBuilder<Config, Params = BuilderPrams> {
   build: (params: Params) => Config;
 }

@@ -1,3 +1,3 @@
 export * from './ExtrinsicBuilder';
 export * from './ExtrinsicBuilder.interfaces';
-export * from './ExtrinsicConfig';
+export * from '../types/substrate/ExtrinsicConfig';

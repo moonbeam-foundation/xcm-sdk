@@ -1,5 +1,5 @@
 import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
-import { ContractConfig } from './ContractConfig';
+import { ContractConfig } from '../types/ContractConfig';
 
 export interface ContractConfigBuilder {
   build: (params: ContractConfigBuilderPrams) => ContractConfig;

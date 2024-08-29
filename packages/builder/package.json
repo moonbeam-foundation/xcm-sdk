@@ -37,8 +37,8 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
-    "@moonbeam-network/xcm-types": "2.3.2",
-    "@moonbeam-network/xcm-utils": "2.1.5",
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@moonbeam-network/xcm-utils": "workspace:*",
     "big.js": "^6.2.1"
   },
   "peerDependencies": {

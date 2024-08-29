@@ -1,4 +1,4 @@
-import type { ExtrinsicConfig } from './ExtrinsicConfig';
+import type { ExtrinsicConfig } from '../types/substrate/ExtrinsicConfig';
 import type { ConfigBuilder } from '../builder.interfaces';
 
 export type ExtrinsicConfigBuilder = ConfigBuilder<ExtrinsicConfig>;

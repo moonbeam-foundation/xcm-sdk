@@ -1,6 +1,5 @@
 import {
   BalanceConfigBuilder,
-  CallType,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import { AssetRoute } from '@moonbeam-network/xcm-config';
@@ -28,15 +27,15 @@ export async function getBalance({
   chain,
   polkadot,
 }: GetBalancesParams): Promise<AssetAmount> {
-  const cfg = builder.build({
+  const config = builder.build({
     address,
     asset: asset.getBalanceAssetId(),
     contractAddress: asset.address,
   });
   const amount = AssetAmount.fromChainAsset(asset, { amount: 0n });
 
-  if (cfg.type === CallType.Substrate) {
-    const balance = await polkadot.query(cfg as SubstrateQueryConfig);
+  if (SubstrateQueryConfig.is(config)) {
+    const balance = await polkadot.query(config as SubstrateQueryConfig);
     const converted = chain.usesChainDecimals
       ? convertDecimals(balance, polkadot.decimals, asset.decimals)
       : balance;
@@ -44,7 +43,7 @@ export async function getBalance({
     return amount.copyWith({ amount: converted });
   }
 
-  const contract = createContract(chain, cfg) as BalanceContractInterface;
+  const contract = createContract(chain, config) as BalanceContractInterface;
   const balance = await contract.getBalance();
 
   return amount.copyWith({ amount: balance });

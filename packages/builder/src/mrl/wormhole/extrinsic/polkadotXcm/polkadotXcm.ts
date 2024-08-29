@@ -6,7 +6,7 @@ import {
   Parachain,
 } from '@moonbeam-network/xcm-types';
 import { ExtrinsicBuilder } from '../../../../extrinsic/ExtrinsicBuilder';
-import { ExtrinsicConfig } from '../../../../extrinsic/ExtrinsicConfig';
+import { ExtrinsicConfig } from '../../../../types/substrate/ExtrinsicConfig';
 import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
 
 // TODO: Can we move them somewhere?

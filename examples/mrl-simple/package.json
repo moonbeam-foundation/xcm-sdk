@@ -12,9 +12,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@moonbeam-network/mrl": "workspace:^",
-    "@moonbeam-network/xcm-config": "workspace:^",
-    "@moonbeam-network/xcm-utils": "workspace:^"
+    "@moonbeam-network/mrl": "workspace:*",
+    "@moonbeam-network/xcm-config": "workspace:*",
+    "@moonbeam-network/xcm-utils": "workspace:*"
   },
   "devDependencies": {
     "bun": "^1.1.21"

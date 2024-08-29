@@ -1,15 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import { CallType } from '../builder.interfaces';
-import { BaseConfig, BaseConfigConstructorParams } from '../types/BaseConfig';
+import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
 
 export interface ExtrinsicConfigConstructorParams
   extends Omit<BaseConfigConstructorParams, 'type'> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getArgs: (func?: SubmittableExtrinsicFunction<'promise'>) => any[];
 }
 
 export class ExtrinsicConfig extends BaseConfig {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getArgs: (func?: SubmittableExtrinsicFunction<'promise'>) => any[];
 
   static is(obj: unknown): obj is ExtrinsicConfig {
@@ -17,7 +15,7 @@ export class ExtrinsicConfig extends BaseConfig {
   }
 
   constructor({ getArgs, ...other }: ExtrinsicConfigConstructorParams) {
-    super({ ...other, type: CallType.Substrate });
+    super({ ...other });
 
     this.getArgs = getArgs;
   }
