@@ -23,6 +23,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -30,7 +33,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -48,6 +50,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -55,7 +60,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: 0.03,
           asset: usdc,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -73,6 +77,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -80,7 +87,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: 0.03,
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -98,6 +104,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -105,7 +114,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: 0.03,
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -123,6 +131,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -130,7 +141,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: 0.03,
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -148,6 +158,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -155,7 +168,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: 0.03,
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -173,6 +185,9 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -180,7 +195,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: 0.03,
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()

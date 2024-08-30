@@ -14,6 +14,9 @@ export const litmusRoutes = new ChainRoutes({
       asset: lit,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -21,7 +24,6 @@ export const litmusRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: lit,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

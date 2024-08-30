@@ -6,7 +6,7 @@ import type {
   FeeConfigBuilder,
   MrlConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
-import type { AnyChain, Asset } from '@moonbeam-network/xcm-types';
+import type { AnyChain, Asset, SetOptional } from '@moonbeam-network/xcm-types';
 
 export interface AssetRouteConstructorParams {
   asset: Asset;
@@ -21,6 +21,9 @@ export interface SourceConfig {
   chain: AnyChain;
   balance: BalanceConfigBuilder;
   fee?: FeeConfig;
+  destinationFee?: {
+    balance: BalanceConfigBuilder;
+  };
   min?: AssetMinConfigBuilder;
 }
 
@@ -36,7 +39,8 @@ export interface FeeConfig {
   extra?: number;
 }
 
-export interface DestinationFeeConfig extends FeeConfig {
+export interface DestinationFeeConfig
+  extends SetOptional<FeeConfig, 'balance'> {
   amount: number | FeeConfigBuilder;
 }
 

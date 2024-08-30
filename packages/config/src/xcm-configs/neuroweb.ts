@@ -14,6 +14,9 @@ export const neurowebRoutes = new ChainRoutes({
       asset: neuro,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -21,7 +24,6 @@ export const neurowebRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: neuro,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()

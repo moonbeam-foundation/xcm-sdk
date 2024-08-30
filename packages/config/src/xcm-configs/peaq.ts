@@ -15,6 +15,9 @@ export const peaqRoutes = new ChainRoutes({
       asset: peaq,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -22,7 +25,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: peaq,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -32,6 +34,9 @@ export const peaqRoutes = new ChainRoutes({
       source: {
         balance: BalanceBuilder().substrate().assets().account(),
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -39,7 +44,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: glmr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -53,6 +57,9 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -60,7 +67,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -74,6 +80,9 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -81,7 +90,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -95,6 +103,9 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -102,7 +113,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -116,6 +126,9 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -123,7 +136,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -137,6 +149,9 @@ export const peaqRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -144,7 +159,6 @@ export const peaqRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

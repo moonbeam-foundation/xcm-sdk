@@ -14,6 +14,9 @@ export const originTrailAlphanetRoutes = new ChainRoutes({
       asset: otp,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -21,7 +24,6 @@ export const originTrailAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: otp,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()

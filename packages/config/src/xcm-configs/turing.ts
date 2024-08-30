@@ -14,6 +14,9 @@ export const turingRoutes = new ChainRoutes({
       asset: tur,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -21,7 +24,6 @@ export const turingRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: tur,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -37,6 +39,9 @@ export const turingRoutes = new ChainRoutes({
           asset: tur,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -44,7 +49,6 @@ export const turingRoutes = new ChainRoutes({
         fee: {
           amount: 0.00001,
           asset: movr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

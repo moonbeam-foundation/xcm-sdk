@@ -14,6 +14,9 @@ export const shidenRoutes = new ChainRoutes({
       asset: sdn,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -21,7 +24,6 @@ export const shidenRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: sdn,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -37,6 +39,9 @@ export const shidenRoutes = new ChainRoutes({
           asset: sdn,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -44,7 +49,6 @@ export const shidenRoutes = new ChainRoutes({
         fee: {
           amount: 0.0001,
           asset: movr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

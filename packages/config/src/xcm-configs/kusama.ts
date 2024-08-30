@@ -19,6 +19,9 @@ export const kusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
           extra: 0.002,
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -26,7 +29,6 @@ export const kusamaRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: ksm,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()

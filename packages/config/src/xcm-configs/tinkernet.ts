@@ -14,6 +14,9 @@ export const tinkernetRoutes = new ChainRoutes({
       asset: tnkr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -21,7 +24,6 @@ export const tinkernetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: tnkr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),

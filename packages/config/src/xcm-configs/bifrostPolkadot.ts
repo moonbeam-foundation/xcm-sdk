@@ -25,6 +25,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       asset: bnc,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -32,7 +35,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -46,6 +48,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -53,7 +58,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -67,6 +71,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -74,7 +81,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -88,6 +94,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -95,7 +104,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -109,6 +117,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -116,7 +127,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: vdot,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -130,6 +140,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -137,7 +150,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -151,6 +163,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -158,7 +173,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -172,6 +186,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -179,7 +196,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -193,6 +209,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -200,7 +219,6 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         fee: {
           amount: 0.05,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

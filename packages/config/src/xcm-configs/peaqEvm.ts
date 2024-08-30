@@ -19,6 +19,9 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -26,7 +29,6 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: glmr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -40,6 +42,9 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -47,7 +52,6 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -61,6 +65,9 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -68,7 +75,6 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -82,6 +88,9 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -89,7 +98,6 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -103,6 +111,9 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -110,7 +121,6 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
@@ -124,6 +134,9 @@ export const peaqEvmRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -131,7 +144,6 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),

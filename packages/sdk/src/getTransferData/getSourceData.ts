@@ -47,18 +47,28 @@ export async function getSourceData({
         polkadot: sourcePolkadot,
       })
     : balance;
-  // eslint-disable-next-line no-nested-ternary
-  const destinationFeeBalance = route.destination.fee.asset.isEqual(asset)
-    ? balance
-    : route.destination.fee.asset.isEqual(feeAsset)
-      ? feeBalance
-      : await getBalance({
-          address: sourceAddress,
-          asset: source.getChainAsset(route.destination.fee.asset),
-          builder: route.destination.fee.balance,
-          chain: source,
-          polkadot: sourcePolkadot,
-        });
+
+  let destinationFeeBalance: AssetAmount;
+
+  if (route.destination.fee.asset.isEqual(asset)) {
+    destinationFeeBalance = balance;
+  } else if (route.destination.fee.asset.isEqual(feeAsset)) {
+    destinationFeeBalance = feeBalance;
+  } else {
+    if (!route.source.destinationFee?.balance) {
+      throw new Error(
+        `BalanceBuilder must be defined for source.destinationFee.balance for AssetRoute`,
+      );
+    }
+
+    destinationFeeBalance = await getBalance({
+      address: sourceAddress,
+      asset: source.getChainAsset(route.destination.fee.asset),
+      builder: route.source.destinationFee?.balance,
+      chain: source,
+      polkadot: sourcePolkadot,
+    });
+  }
 
   const min = await getMin(route, sourcePolkadot);
   const { existentialDeposit } = sourcePolkadot;
@@ -75,12 +85,14 @@ export async function getSourceData({
   });
 
   const contract = route.contract?.build({
-    address: destinationAddress,
-    amount: balance.amount,
-    asset: asset.address || asset.getAssetId(),
+    asset: balance,
     destination: route.destination.chain as AnyParachain,
-    fee: destinationFee.amount,
-    feeAsset: destinationFee.address || destinationFee.getAssetId(),
+    destinationAddress,
+    destinationApi: destinationPolkadot.api,
+    fee: destinationFee,
+    source,
+    sourceAddress,
+    sourceApi: sourcePolkadot.api,
   });
 
   const fee = await getFee({
