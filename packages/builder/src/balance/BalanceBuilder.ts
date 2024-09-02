@@ -164,7 +164,10 @@ export async function calculateSystemAccountBalance(
   const balance = response.data as PalletBalancesAccountData &
     PalletBalancesAccountDataOld;
 
+  const free = BigInt(balance.free.toString());
   const frozen = balance.miscFrozen ?? balance.frozen;
+  const frozenMinusReserved = BigInt(frozen.sub(balance.reserved).toString());
+  const locked = frozenMinusReserved < 0n ? 0n : frozenMinusReserved;
 
-  return BigInt(balance.free.sub(frozen).add(balance.reserved).toString());
+  return free - locked;
 }
