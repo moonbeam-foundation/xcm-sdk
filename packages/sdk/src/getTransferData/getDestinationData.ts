@@ -2,7 +2,10 @@
 import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
 import { TransferConfig } from '@moonbeam-network/xcm-config';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
-import { toBigInt } from '@moonbeam-network/xcm-utils';
+import {
+  getSovereignAccountAddresses,
+  toBigInt,
+} from '@moonbeam-network/xcm-utils';
 import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
 import { getBalance, getDecimals, getMin } from './getTransferData.utils';
@@ -35,11 +38,13 @@ export async function getDestinationData({
 
   const balance = await getBalance({
     address: destinationAddress,
+    asset: config.asset,
+    balanceBuilder: config.balance,
     chain,
-    config,
     decimals: zeroAmount.decimals,
     polkadot,
   });
+
   const min = await getMin(config, polkadot);
 
   const balanceAmount = zeroAmount.copyWith({ amount: balance });
@@ -51,12 +56,18 @@ export async function getDestinationData({
     polkadot,
   });
   const minAmount = zeroAmount.copyWith({ amount: min });
+
   return {
     balance: balanceAmount,
     chain,
     existentialDeposit,
     fee: feeAmount,
     min: minAmount,
+    sovereignAccountBalances: await getSovereignAccountBalances({
+      decimals: zeroAmount.decimals,
+      polkadot,
+      transferConfig,
+    }),
   };
 }
 
@@ -92,4 +103,52 @@ export async function getFee({
   return zeroAmount.copyWith({
     amount: await cfg.call(),
   });
+}
+
+interface GetSovereignAccountBalancesProps {
+  transferConfig: TransferConfig;
+  decimals: number;
+  polkadot: PolkadotService;
+}
+
+async function getSovereignAccountBalances({
+  transferConfig,
+  decimals,
+  polkadot,
+}: GetSovereignAccountBalancesProps) {
+  const {
+    destination: { chain, config },
+    source: { config: sourceConfig },
+  } = transferConfig;
+  const sovereignAccountAddresses = getSovereignAccountAddresses(
+    transferConfig.source.chain.parachainId,
+  );
+  // console.log('sovereignAccountAddresses', sovereignAccountAddresses);
+
+  const destinationFeeAssetBalance =
+    sourceConfig.destinationFee?.destinationBalance;
+
+  const sovereignAccountBalance = await getBalance({
+    address: sovereignAccountAddresses.generic,
+    asset: config.asset,
+    balanceBuilder: config.balance,
+    chain,
+    decimals,
+    polkadot,
+  });
+
+  const sovereignAccountFeeAssetBalance = destinationFeeAssetBalance
+    ? await getBalance({
+        address: sovereignAccountAddresses.generic,
+        asset: sourceConfig.destinationFee.asset,
+        balanceBuilder: destinationFeeAssetBalance,
+        chain,
+        decimals, // TODO this is not correct but it doesn't affect us
+        polkadot,
+      })
+    : undefined;
+  return {
+    feeAssetBalance: sovereignAccountFeeAssetBalance,
+    transferAssetBalance: sovereignAccountBalance,
+  };
 }

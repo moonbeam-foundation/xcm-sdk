@@ -1,9 +1,10 @@
 import {
+  BalanceConfigBuilder,
   CallType,
   ContractConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig } from '@moonbeam-network/xcm-config';
+import { AssetConfig, FeeAssetConfig } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, EvmParachain } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import {
@@ -11,31 +12,42 @@ import {
   createContractWithoutSigner,
 } from '../contract';
 import { PolkadotService } from '../polkadot';
+import {
+  DestinationChainTransferData,
+  SourceChainTransferData,
+} from '../sdk.interfaces';
 
-export interface GetBalancesParams {
+export interface BaseParams {
   address: string;
-  asset?: Asset;
   chain: AnyChain;
-  config: AssetConfig;
-  decimals: number;
   polkadot: PolkadotService;
 }
 
-export type GetDecimalsParams = Omit<GetBalancesParams, 'decimals'> & {
+export interface GetBalancesParams extends BaseParams {
+  asset: Asset;
+  balanceBuilder: BalanceConfigBuilder;
+  decimals: number;
+}
+
+export interface GetDecimalsParams extends BaseParams {
+  asset?: Asset;
+  config: AssetConfig | FeeAssetConfig;
   assetBuiltConfig?: SubstrateQueryConfig | ContractConfig;
-};
+}
 
 export async function getBalance({
   address,
   chain,
-  config,
+  balanceBuilder,
+  asset,
   decimals,
   polkadot,
 }: GetBalancesParams) {
-  const cfg = config.balance.build({
+  const cfg = balanceBuilder.build({
     address,
-    asset: polkadot.chain.getBalanceAssetId(config.asset),
+    asset: polkadot.chain.getBalanceAssetId(asset),
   });
+  // console.log('cfg', cfg);
   if (cfg.type === CallType.Substrate) {
     const balance = await polkadot.query(cfg as SubstrateQueryConfig);
     return chain.usesChainDecimals
@@ -96,4 +108,34 @@ export async function getMin(config: AssetConfig, polkadot: PolkadotService) {
   }
 
   return 0n;
+}
+
+interface ValidateSovereignAccountBalancesProps {
+  amount: bigint;
+  destination: DestinationChainTransferData;
+  source: SourceChainTransferData;
+}
+
+export function validateSovereignAccountBalances({
+  amount,
+  source,
+  destination,
+}: ValidateSovereignAccountBalancesProps): void {
+  const { sovereignAccountBalances } = destination;
+  if (!sovereignAccountBalances) return;
+  // console.log('validating', destination.sovereignAccountBalances);
+  if (amount > sovereignAccountBalances.transferAssetBalance) {
+    throw new Error(
+      'Moonbeam Sovereign account in Polkadot Asset Hub does not have enough balance for this transaction',
+    );
+  }
+  if (
+    sovereignAccountBalances.feeAssetBalance &&
+    source.destinationFeeBalance.amount >
+      sovereignAccountBalances.feeAssetBalance
+  ) {
+    throw new Error(
+      'Moonbeam Sovereign account in Polkadot Asset Hub does not have enough balance to pay for fees for this transaction',
+    );
+  }
 }

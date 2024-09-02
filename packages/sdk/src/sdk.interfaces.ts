@@ -32,7 +32,14 @@ export interface SourceChainTransferData extends ChainTransferData {
   max: AssetAmount;
 }
 
-export interface DestinationChainTransferData extends ChainTransferData {}
+export interface SovereignAccountBalance {
+  feeAssetBalance: bigint | undefined;
+  transferAssetBalance: bigint;
+}
+
+export interface DestinationChainTransferData extends ChainTransferData {
+  sovereignAccountBalances: SovereignAccountBalance;
+}
 
 export interface ChainTransferData {
   balance: AssetAmount;

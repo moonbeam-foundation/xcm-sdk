@@ -31,7 +31,7 @@ import {
 import { PolkadotService } from '../polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
 import {
-  GetBalancesParams,
+  BaseParams,
   getBalance,
   getDecimals,
   getMin,
@@ -112,8 +112,9 @@ export async function getSourceData({
 
   const balance = await getBalance({
     address: sourceAddress,
+    asset: config.asset,
+    balanceBuilder: config.balance,
     chain,
-    config,
     decimals: zeroAmount.decimals,
     polkadot,
   });
@@ -206,10 +207,11 @@ export async function getSourceData({
   };
 }
 
-export interface GetFeeBalanceParams
-  extends Omit<GetBalancesParams, 'config' | 'evmSigner'> {
+// TODO mjm review this
+export interface GetFeeBalanceParams extends BaseParams {
   balance: bigint;
   feeConfig: FeeAssetConfig | undefined;
+  decimals: number;
 }
 
 export async function getFeeBalance({
@@ -456,8 +458,9 @@ export async function getAssetsBalances({
       // eslint-disable-next-line no-await-in-loop
       const balance = await getBalance({
         address,
+        asset: asset.asset,
+        balanceBuilder: asset.balance,
         chain,
-        config: asset,
         decimals,
         polkadot,
       });
