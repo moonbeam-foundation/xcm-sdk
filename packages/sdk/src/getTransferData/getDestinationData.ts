@@ -1,8 +1,11 @@
-import { AnyParachain } from '@moonbeam-network/xcm-types';
 import { AssetRoute } from '@moonbeam-network/xcm-config';
-import { PolkadotService } from '../polkadot';
 import { DestinationChainTransferData } from '../sdk.interfaces';
-import { getBalance, getDestinationFee, getMin } from './getTransferData.utils';
+import {
+  getBalance,
+  getDestinationFee,
+  getExistentialDeposit,
+  getMin,
+} from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
   route: AssetRoute;
@@ -13,9 +16,8 @@ export async function getDestinationData({
   route,
   destinationAddress,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
-  const destination = route.destination.chain as AnyParachain;
-  const polkadot = await PolkadotService.create(destination);
-  const asset = route.destination.chain.getChainAsset(route.asset);
+  const destination = route.destination.chain;
+  const asset = destination.getChainAsset(route.asset);
   const balance = await getBalance({
     address: destinationAddress,
     asset,
@@ -29,13 +31,15 @@ export async function getDestinationData({
   });
   const fee = await getDestinationFee({
     asset: route.destination.fee.asset,
-    chain: route.destination.chain,
+    chain: destination,
     fee: route.destination.fee.amount,
   });
+  const existentialDeposit = await getExistentialDeposit(destination);
 
   return {
+    chain: destination,
     balance,
-    existentialDeposit: polkadot.existentialDeposit,
+    existentialDeposit,
     fee,
     min,
   };

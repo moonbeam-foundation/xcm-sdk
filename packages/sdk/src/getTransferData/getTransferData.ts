@@ -12,6 +12,7 @@ import {
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 import { PolkadotService } from '../polkadot';
+import { convertToChainDecimals } from './getTransferData.utils';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -30,12 +31,9 @@ export async function getTransferData({
   });
 
   // Here we need to convert the fee on the destination chain to an asset on source chain.
-  const destinationFeeAsset = route.source.chain.getChainAsset(
-    destinationData.fee,
-  );
-  const destinationFee = AssetAmount.fromChainAsset(destinationFeeAsset, {
-    amount: destinationData.fee.convertDecimals(destinationFeeAsset.decimals)
-      .amount,
+  const destinationFee = convertToChainDecimals({
+    asset: destinationData.fee,
+    chain: route.source.chain,
   });
 
   const sourceData = await getSourceData({

@@ -35,6 +35,8 @@
   "dependencies": {
     "@moonbeam-network/xcm-config": "workspace:*",
     "@moonbeam-network/xcm-sdk": "workspace:*",
-    "@moonbeam-network/xcm-types": "workspace:*"
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@moonbeam-network/xcm-utils": "workspace:^",
+    "big.js": "^6.2.1"
   }
 }

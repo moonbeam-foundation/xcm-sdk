@@ -206,6 +206,12 @@ importers:
       '@moonbeam-network/xcm-types':
         specifier: workspace:*
         version: link:../types
+      '@moonbeam-network/xcm-utils':
+        specifier: workspace:^
+        version: link:../utils
+      big.js:
+        specifier: ^6.2.1
+        version: 6.2.1
 
   packages/sdk:
     dependencies:

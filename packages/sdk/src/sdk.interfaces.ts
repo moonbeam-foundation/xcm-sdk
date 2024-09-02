@@ -1,4 +1,4 @@
-import type { AssetAmount } from '@moonbeam-network/xcm-types';
+import type { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
 import type { IKeyringPair } from '@polkadot/types/types';
 import type { WalletClient } from 'viem';
@@ -29,7 +29,8 @@ export interface DestinationChainTransferData extends ChainTransferData {}
 
 export interface ChainTransferData {
   balance: AssetAmount;
-  existentialDeposit: AssetAmount;
+  chain: AnyChain;
+  existentialDeposit?: AssetAmount;
   fee: AssetAmount;
   min: AssetAmount;
 }

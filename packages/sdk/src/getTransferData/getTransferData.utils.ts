@@ -121,3 +121,31 @@ export async function getDestinationFee({
 
   return zero;
 }
+
+export interface ConvertToChainDecimalsParams {
+  asset: AssetAmount;
+  chain: AnyChain;
+}
+
+export function convertToChainDecimals({
+  asset,
+  chain,
+}: ConvertToChainDecimalsParams): AssetAmount {
+  const targetAsset = chain.getChainAsset(asset);
+
+  return AssetAmount.fromChainAsset(targetAsset, {
+    amount: asset.convertDecimals(targetAsset.decimals).amount,
+  });
+}
+
+export async function getExistentialDeposit(
+  chain: AnyChain,
+): Promise<AssetAmount | undefined> {
+  if (Parachain.is(chain) || EvmParachain.is(chain)) {
+    const polkadot = await PolkadotService.create(chain);
+
+    return polkadot.existentialDeposit;
+  }
+
+  return undefined;
+}
