@@ -79,12 +79,14 @@ export async function getTransferData({
         await PolkadotService.createMulti([source, destination]);
 
       const contract = route.contract?.build({
-        address: destinationAddress,
-        amount: bigintAmount,
-        asset: asset.address || asset.getAssetId(),
+        asset,
         destination,
-        fee: destinationFee.amount,
-        feeAsset: destinationFee.address || destinationFee.getAssetId(),
+        destinationAddress,
+        destinationApi: destinationPolkadot.api,
+        fee: destinationFee,
+        source,
+        sourceAddress,
+        sourceApi: sourcePolkadot.api,
       });
       const extrinsic = route.extrinsic?.build({
         asset,
