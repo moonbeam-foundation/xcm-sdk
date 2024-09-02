@@ -1,12 +1,16 @@
 import {
+  AssetMinConfigBuilder,
   BalanceConfigBuilder,
+  FeeConfigBuilder,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { AssetRoute } from '@moonbeam-network/xcm-config';
 import {
-  AnyParachain,
+  AnyChain,
+  Asset,
   AssetAmount,
   ChainAsset,
+  EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
 import { BalanceContractInterface, createContract } from '../contract';
@@ -16,8 +20,7 @@ export interface GetBalancesParams {
   address: string;
   asset: ChainAsset;
   builder: BalanceConfigBuilder;
-  chain: AnyParachain;
-  polkadot: PolkadotService;
+  chain: AnyChain;
 }
 
 export async function getBalance({
@@ -25,7 +28,6 @@ export async function getBalance({
   asset,
   builder,
   chain,
-  polkadot,
 }: GetBalancesParams): Promise<AssetAmount> {
   const config = builder.build({
     address,
@@ -34,8 +36,12 @@ export async function getBalance({
   });
   const amount = AssetAmount.fromChainAsset(asset, { amount: 0n });
 
-  if (SubstrateQueryConfig.is(config)) {
-    const balance = await polkadot.query(config as SubstrateQueryConfig);
+  if (
+    SubstrateQueryConfig.is(config) &&
+    (Parachain.is(chain) || EvmParachain.is(chain))
+  ) {
+    const polkadot = await PolkadotService.create(chain);
+    const balance = await polkadot.query(config);
     const converted = chain.usesChainDecimals
       ? convertDecimals(balance, polkadot.decimals, asset.decimals)
       : balance;
@@ -49,26 +55,69 @@ export async function getBalance({
   return amount.copyWith({ amount: balance });
 }
 
-export async function getMin(
-  route: AssetRoute,
-  polkadot: PolkadotService,
-): Promise<AssetAmount> {
-  const asset = AssetAmount.fromChainAsset(
-    polkadot.chain.getChainAsset(route.asset),
-    { amount: 0n },
-  );
+export interface GetMinParams {
+  asset: Asset;
+  builder?: AssetMinConfigBuilder;
+  chain: AnyChain;
+}
 
-  if (route.source.min) {
+export async function getMin({
+  asset,
+  builder,
+  chain,
+}: GetMinParams): Promise<AssetAmount> {
+  const zero = AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+    amount: 0n,
+  });
+
+  if (builder && (Parachain.is(chain) || EvmParachain.is(chain))) {
+    const polkadot = await PolkadotService.create(chain);
     const min = await polkadot.query(
-      route.source.min.build({ asset: asset.getMinAssetId() }),
+      builder.build({ asset: zero.getMinAssetId() }),
     );
 
-    return asset.copyWith({ amount: min });
+    return zero.copyWith({ amount: min });
   }
 
-  if (asset.min) {
-    return asset.copyWith({ amount: asset.min });
+  if (zero.min) {
+    return zero.copyWith({ amount: zero.min });
   }
 
-  return asset.copyWith({ amount: 0n });
+  return zero;
+}
+
+export interface GetDestinationFeeParams {
+  asset: Asset;
+  chain: AnyChain;
+  fee: number | FeeConfigBuilder;
+}
+
+export async function getDestinationFee({
+  asset,
+  chain,
+  fee,
+}: GetDestinationFeeParams): Promise<AssetAmount> {
+  const zero = AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+    amount: 0n,
+  });
+
+  if (Number.isFinite(fee)) {
+    return zero.copyWith({
+      amount: fee as number,
+    });
+  }
+
+  if (Parachain.is(chain) || EvmParachain.is(chain)) {
+    const polkadot = await PolkadotService.create(chain);
+    const cfg = (fee as FeeConfigBuilder).build({
+      api: polkadot.api,
+      asset: zero.getAssetId(),
+    });
+
+    return zero.copyWith({
+      amount: await cfg.call(),
+    });
+  }
+
+  return zero;
 }

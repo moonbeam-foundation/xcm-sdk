@@ -9,7 +9,6 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData } from './getTransferData/getTransferData';
-import { PolkadotService } from './polkadot';
 import { TransferData } from './sdk.interfaces';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: xcmRoutesMap });
@@ -91,12 +90,10 @@ export async function getParachainBalances(
   service: ConfigService = DEFAULT_SERVICE,
 ): Promise<AssetAmount[]> {
   const routes = service.getChainRoutes(chain).getRoutes();
-  const polkadot = await PolkadotService.create(chain);
   const balances = await getAssetsBalances({
     chain,
     routes,
     address,
-    polkadot,
   });
 
   return balances;

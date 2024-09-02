@@ -36,7 +36,6 @@ export async function getSourceData({
     asset,
     builder: route.source.balance,
     chain: source,
-    polkadot: sourcePolkadot,
   });
   const feeBalance = route.source.fee
     ? await getBalance({
@@ -44,7 +43,6 @@ export async function getSourceData({
         asset: feeAsset,
         builder: route.source.fee.balance,
         chain: source,
-        polkadot: sourcePolkadot,
       })
     : balance;
 
@@ -66,11 +64,10 @@ export async function getSourceData({
       asset: source.getChainAsset(route.destination.fee.asset),
       builder: route.source.destinationFee?.balance,
       chain: source,
-      polkadot: sourcePolkadot,
     });
   }
 
-  const min = await getMin(route, sourcePolkadot);
+  const min = await getMin({ asset, builder: route.source.min, chain: source });
   const { existentialDeposit } = sourcePolkadot;
 
   const extrinsic = route.extrinsic?.build({
@@ -245,14 +242,12 @@ export interface GetAssetsBalancesParams {
   chain: AnyParachain;
   routes: AssetRoute[];
   evmSigner?: EvmSigner;
-  polkadot: PolkadotService;
 }
 
 export async function getAssetsBalances({
   address,
   chain,
   routes,
-  polkadot,
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
   const uniqueRoutes = routes.reduce((acc: AssetRoute[], route: AssetRoute) => {
     if (!acc.some((a: AssetRoute) => a.asset.isEqual(route.asset))) {
@@ -270,7 +265,6 @@ export async function getAssetsBalances({
         asset: chain.getChainAsset(route.asset),
         builder: route.source.balance,
         chain,
-        polkadot,
       }),
     ),
   );
