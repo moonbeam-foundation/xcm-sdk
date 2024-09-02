@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 2.4.6
+
+### Patch Changes
+
+- [#335](https://github.com/moonbeam-foundation/xcm-sdk/pull/335) [`6f6cfa5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6f6cfa5e9d0020d443f975768b0b53bea30cd342) Thanks [@mmaurello](https://github.com/mmaurello)! - Apply correct transferrable balance formula
+
 ## 2.4.5
 
 ### Patch Changes
