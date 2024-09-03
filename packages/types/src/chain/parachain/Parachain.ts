@@ -82,4 +82,8 @@ export class Parachain extends Chain {
   getAssetMin(asset: Asset): number {
     return this.assetsData.get(asset.key)?.min ?? 0;
   }
+
+  isRelay(): boolean {
+    return this.parachainId === 0;
+  }
 }

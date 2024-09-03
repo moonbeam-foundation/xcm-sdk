@@ -128,18 +128,23 @@ async function getSovereignAccountBalances({
   const destinationFeeAssetBalance =
     sourceConfig.destinationFee?.destinationBalance;
 
+  const sovereignAccountAddress = chain.isRelay()
+    ? sovereignAccountAddresses.relay
+    : sovereignAccountAddresses.generic;
+
   const sovereignAccountBalance = await getBalance({
-    address: sovereignAccountAddresses.generic,
+    address: sovereignAccountAddress,
     asset: config.asset,
     balanceBuilder: config.balance,
     chain,
     decimals,
     polkadot,
   });
+  // console.log('sovereignAccountBalance', sovereignAccountBalance);
 
   const sovereignAccountFeeAssetBalance = destinationFeeAssetBalance
     ? await getBalance({
-        address: sovereignAccountAddresses.generic,
+        address: sovereignAccountAddress,
         asset: sourceConfig.destinationFee.asset,
         balanceBuilder: destinationFeeAssetBalance,
         chain,
