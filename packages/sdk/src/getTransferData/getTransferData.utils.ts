@@ -126,7 +126,7 @@ export function validateSovereignAccountBalances({
   // console.log('validating', destination.sovereignAccountBalances);
   if (amount > sovereignAccountBalances.transferAssetBalance) {
     throw new Error(
-      'Moonbeam Sovereign account in Polkadot Asset Hub does not have enough balance for this transaction',
+      `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance for this transaction`,
     );
   }
   if (
@@ -135,7 +135,7 @@ export function validateSovereignAccountBalances({
       sovereignAccountBalances.feeAssetBalance
   ) {
     throw new Error(
-      'Moonbeam Sovereign account in Polkadot Asset Hub does not have enough balance to pay for fees for this transaction',
+      `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance to pay for fees for this transaction`,
     );
   }
 }
