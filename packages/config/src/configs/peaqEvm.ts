@@ -32,7 +32,7 @@ export const peaqEvmConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.08,
         asset: glmr,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -48,7 +48,7 @@ export const peaqEvmConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.1,
         asset: glmr,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -64,7 +64,7 @@ export const peaqEvmConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.08,
         asset: glmr,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -80,7 +80,7 @@ export const peaqEvmConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.08,
         asset: glmr,
         balance: BalanceBuilder().evm().erc20(),
       },
@@ -96,7 +96,7 @@ export const peaqEvmConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.08,
         asset: glmr,
         balance: BalanceBuilder().evm().erc20(),
       },
