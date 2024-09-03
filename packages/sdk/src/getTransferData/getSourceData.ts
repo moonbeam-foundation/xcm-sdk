@@ -208,7 +208,6 @@ export async function getSourceData({
   };
 }
 
-// TODO mjm review this
 export interface GetFeeBalanceParams extends BaseParams {
   balance: bigint;
   feeConfig: FeeAssetConfig | undefined;
