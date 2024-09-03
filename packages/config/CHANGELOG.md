@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.10
+
+### Patch Changes
+
+- [#340](https://github.com/moonbeam-foundation/xcm-sdk/pull/340) [`8747171`](https://github.com/moonbeam-foundation/xcm-sdk/commit/87471713dfda8345a0cbc902fc3d8b28a5e78cee) Thanks [@mmaurello](https://github.com/mmaurello)! - Increase GLMR sent along for fees
+
 ## 2.5.9
 
 ### Patch Changes
