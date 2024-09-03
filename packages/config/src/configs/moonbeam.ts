@@ -4,6 +4,7 @@ import {
   apillon,
   aseed,
   astr,
+  axlusdc,
   bnc,
   bncs,
   cfg,
@@ -948,6 +949,17 @@ export const moonbeamConfig = new ChainConfig({
       fee: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: axlusdc,
+      balance: BalanceBuilder().evm().erc20(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: pendulum,
+      destinationFee: {
+        amount: 0.02,
+        asset: axlusdc,
+        balance: BalanceBuilder().evm().erc20(),
       },
     }),
   ],
