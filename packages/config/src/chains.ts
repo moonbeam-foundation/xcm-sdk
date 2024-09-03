@@ -14,6 +14,7 @@ import {
   astr,
   atom,
   auq,
+  axlusdc,
   betaDEV,
   bnc,
   bncs,
@@ -905,6 +906,12 @@ export const moonbeam = new EvmParachain({
       id: '110021739665376159354538090254163045594',
     },
     {
+      address: '0xCa01a1D0993565291051daFF390892518ACfAD3A',
+      asset: axlusdc,
+      id: '0xCa01a1D0993565291051daFF390892518ACfAD3A',
+      metadataId: 0,
+    },
+    {
       address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
       asset: bnc,
       id: '165823357460190568952172802245839421906',
@@ -1566,6 +1573,10 @@ export const pendulum = new Parachain({
       asset: glmr,
       decimals: 18,
       id: { XCM: 6 },
+    },
+    {
+      asset: axlusdc,
+      id: { XCM: 12 },
     },
   ],
   ecosystem: Ecosystem.Polkadot,
