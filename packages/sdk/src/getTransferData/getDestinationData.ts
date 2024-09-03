@@ -123,7 +123,6 @@ async function getSovereignAccountBalances({
   const sovereignAccountAddresses = getSovereignAccountAddresses(
     transferConfig.source.chain.parachainId,
   );
-  // console.log('sovereignAccountAddresses', sovereignAccountAddresses);
 
   const destinationFeeAssetBalance =
     sourceConfig.destinationFee?.destinationBalance;

@@ -4,7 +4,11 @@ import {
   ContractConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import { AssetConfig, FeeAssetConfig } from '@moonbeam-network/xcm-config';
+import {
+  AssetConfig,
+  FeeAssetConfig,
+  polkadotAssetHub,
+} from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, EvmParachain } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import {
@@ -47,7 +51,6 @@ export async function getBalance({
     address,
     asset: polkadot.chain.getBalanceAssetId(asset),
   });
-  // console.log('cfg', cfg);
   if (cfg.type === CallType.Substrate) {
     const balance = await polkadot.query(cfg as SubstrateQueryConfig);
     return chain.usesChainDecimals
@@ -123,7 +126,12 @@ export function validateSovereignAccountBalances({
 }: ValidateSovereignAccountBalancesProps): void {
   const { sovereignAccountBalances } = destination;
   if (!sovereignAccountBalances) return;
-  // console.log('sovereignAccountBalances', sovereignAccountBalances);
+
+  if (destination.chain.key !== polkadotAssetHub.key) {
+    // currently we want this only for this chain
+    return;
+  }
+
   if (amount > sovereignAccountBalances.transferAssetBalance) {
     throw new Error(
       `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance for this transaction`,
