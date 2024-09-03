@@ -140,7 +140,6 @@ async function getSovereignAccountBalances({
     decimals,
     polkadot,
   });
-  // console.log('sovereignAccountBalance', sovereignAccountBalance);
 
   const sovereignAccountFeeAssetBalance = destinationFeeAssetBalance
     ? await getBalance({

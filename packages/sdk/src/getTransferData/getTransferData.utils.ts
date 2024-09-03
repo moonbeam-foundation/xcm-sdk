@@ -123,7 +123,7 @@ export function validateSovereignAccountBalances({
 }: ValidateSovereignAccountBalancesProps): void {
   const { sovereignAccountBalances } = destination;
   if (!sovereignAccountBalances) return;
-  // console.log('validating', destination.sovereignAccountBalances);
+  // console.log('sovereignAccountBalances', sovereignAccountBalances);
   if (amount > sovereignAccountBalances.transferAssetBalance) {
     throw new Error(
       `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance for this transaction`,
@@ -131,8 +131,7 @@ export function validateSovereignAccountBalances({
   }
   if (
     sovereignAccountBalances.feeAssetBalance &&
-    source.destinationFeeBalance.amount >
-      sovereignAccountBalances.feeAssetBalance
+    source.destinationFee.amount > sovereignAccountBalances.feeAssetBalance
   ) {
     throw new Error(
       `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance to pay for fees for this transaction`,

@@ -198,6 +198,7 @@ export async function getSourceData({
   return {
     balance: balanceAmount,
     chain,
+    destinationFee,
     destinationFeeBalance: destinationFeeBalanceAmount,
     existentialDeposit,
     fee: feeAmount,
