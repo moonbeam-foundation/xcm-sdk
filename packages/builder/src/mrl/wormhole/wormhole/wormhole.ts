@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
-import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
+import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
@@ -77,7 +77,7 @@ export function getPayload({
 }: Pick<MrlBuilderParams, 'destination' | 'destinationAddress' | 'moonApi'>):
   | Uint8Array
   | undefined {
-  if (!Parachain.is(destination) && !EvmParachain.is(destination)) {
+  if (!EvmParachain.isAnyParachain(destination)) {
     throw new Error(
       `Destination ${destination.name} is not a Parachain or EvmParachain`,
     );

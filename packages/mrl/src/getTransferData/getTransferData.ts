@@ -8,6 +8,7 @@ import { toBigInt } from '@moonbeam-network/xcm-utils';
 import { AssetAmount } from '@moonbeam-network/xcm-types';
 import Big from 'big.js';
 import { TransferData } from '../mrl.interfaces';
+import { getSourceData } from './getSourceData';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -20,6 +21,12 @@ export async function getTransferData({
   sourceAddress,
   destinationAddress,
 }: GetTransferDataParams): Promise<TransferData> {
+  if (!route.mrl) {
+    throw new Error(
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+    );
+  }
+
   const destinationData = await getDestinationData({
     route,
     destinationAddress,

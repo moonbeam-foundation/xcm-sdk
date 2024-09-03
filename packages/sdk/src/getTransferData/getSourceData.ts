@@ -3,11 +3,16 @@ import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
-import Big from 'big.js';
 import { TransferContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
-import { getBalance, getMin } from './getTransferData.utils';
+import {
+  getBalance,
+  getDestinationFeeBalance,
+  getExistentialDeposit,
+  getMax,
+  getMin,
+} from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   route: AssetRoute;
@@ -45,30 +50,15 @@ export async function getSourceData({
         chain: source,
       })
     : balance;
+  const destinationFeeBalance = await getDestinationFeeBalance({
+    balance,
+    feeBalance,
+    route,
+    sourceAddress,
+  });
 
-  let destinationFeeBalance: AssetAmount;
-
-  if (route.destination.fee.asset.isEqual(asset)) {
-    destinationFeeBalance = balance;
-  } else if (route.destination.fee.asset.isEqual(feeAsset)) {
-    destinationFeeBalance = feeBalance;
-  } else {
-    if (!route.source.destinationFee?.balance) {
-      throw new Error(
-        `BalanceBuilder must be defined for source.destinationFee.balance for AssetRoute`,
-      );
-    }
-
-    destinationFeeBalance = await getBalance({
-      address: sourceAddress,
-      asset: source.getChainAsset(route.destination.fee.asset),
-      builder: route.source.destinationFee?.balance,
-      chain: source,
-    });
-  }
-
+  const existentialDeposit = await getExistentialDeposit(destination);
   const min = await getMin({ asset, builder: route.source.min, chain: source });
-  const { existentialDeposit } = sourcePolkadot;
 
   const extrinsic = route.extrinsic?.build({
     asset: balance,
@@ -210,32 +200,6 @@ export async function getExtrinsicFee(
 
     return 0n;
   }
-}
-
-export interface GetMaxParams {
-  balance: AssetAmount;
-  existentialDeposit: AssetAmount;
-  fee: AssetAmount;
-  min: AssetAmount;
-}
-
-export function getMax({
-  balance,
-  existentialDeposit,
-  fee,
-  min,
-}: GetMaxParams): AssetAmount {
-  const result = balance
-    .toBig()
-    .minus(min.toBig())
-    .minus(
-      balance.isSame(existentialDeposit) ? existentialDeposit.toBig() : Big(0),
-    )
-    .minus(balance.isSame(fee) ? fee.toBig() : Big(0));
-
-  return balance.copyWith({
-    amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
-  });
 }
 
 export interface GetAssetsBalancesParams {

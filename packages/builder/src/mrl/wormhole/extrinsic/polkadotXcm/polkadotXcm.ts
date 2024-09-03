@@ -3,7 +3,6 @@ import {
   AnyParachain,
   AssetAmount,
   EvmParachain,
-  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { ExtrinsicBuilder } from '../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../types/substrate/ExtrinsicConfig';
@@ -35,7 +34,7 @@ export function polkadotXcm() {
           throw new Error('Destination chain does not have a wormhole name');
         }
 
-        if (!Parachain.is(destination) && !EvmParachain.is(destination)) {
+        if (!EvmParachain.isAnyParachain(destination)) {
           throw new Error(
             `Destination ${destination.name} is not a Parachain or EvmParachain`,
           );
@@ -43,6 +42,10 @@ export function polkadotXcm() {
 
         if (!transact) {
           throw new Error('Transact params are required');
+        }
+
+        if (!sourceApi) {
+          throw new Error('Source API needs to be defined');
         }
 
         const { transfer } = sourceApi.tx.xTokens;

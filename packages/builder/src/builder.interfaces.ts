@@ -13,9 +13,9 @@ export interface BuilderPrams<IChain extends Chain = AnyParachain> {
   asset: AssetAmount;
   destination: IChain;
   destinationAddress: string;
-  destinationApi: ApiPromise;
+  destinationApi?: ApiPromise;
   fee: AssetAmount;
   source: IChain;
   sourceAddress: string;
-  sourceApi: ApiPromise;
+  sourceApi?: ApiPromise;
 }

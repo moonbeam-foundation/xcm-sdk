@@ -5,7 +5,6 @@ import {
   AssetAmount,
   Ecosystem,
   EvmParachain,
-  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData } from './getTransferData/getTransferData';
@@ -51,19 +50,13 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                 ): Promise<TransferData> {
                   const sourceChain = service.getChain(source);
 
-                  if (
-                    !Parachain.is(sourceChain) &&
-                    !EvmParachain.is(sourceChain)
-                  ) {
+                  if (!EvmParachain.isAnyParachain(sourceChain)) {
                     throw new Error(
                       `Source chain should be a Parachain or EvmParachain`,
                     );
                   }
 
-                  if (
-                    !Parachain.is(route.destination) &&
-                    !EvmParachain.is(route.destination)
-                  ) {
+                  if (!EvmParachain.isAnyParachain(route.destination)) {
                     throw new Error(
                       `Destination chain should be a Parachain or EvmParachain`,
                     );

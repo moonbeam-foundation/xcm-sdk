@@ -1,4 +1,10 @@
-import { AnyAsset, AnyChain } from '@moonbeam-network/xcm-types';
+import {
+  AnyAsset,
+  AnyChain,
+  Ecosystem,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
+import { moonbaseAlpha, moonbeam, moonriver } from './chains';
 
 export function getKey(keyOrModel: string | AnyAsset | AnyChain): string {
   if (typeof keyOrModel === 'string') {
@@ -6,4 +12,17 @@ export function getKey(keyOrModel: string | AnyAsset | AnyChain): string {
   }
 
   return keyOrModel.key;
+}
+
+export function getMoonChain(chain: AnyChain): EvmParachain {
+  switch (chain.ecosystem) {
+    case Ecosystem.AlphanetRelay:
+      return moonbaseAlpha;
+
+    case Ecosystem.Kusama:
+      return moonriver;
+
+    default:
+      return moonbeam;
+  }
 }

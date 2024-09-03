@@ -37,11 +37,8 @@ export function Mrl(options?: MrlOptions) {
                   sourceAddress: string,
                   destinationAddress: string,
                 ) {
-                  const sourceChain = service.getChain(source);
-
                   return getTransferData({
                     route,
-                    source: sourceChain,
                     sourceAddress,
                     destinationAddress,
                   });

@@ -10,9 +10,10 @@ import {
   AssetAmount,
   ChainAsset,
   EvmParachain,
-  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { convertDecimals } from '@moonbeam-network/xcm-utils';
+import { AssetRoute } from '@moonbeam-network/xcm-config';
+import Big from 'big.js';
 import { BalanceContractInterface, createContract } from '../contract';
 import { PolkadotService } from '../polkadot';
 
@@ -36,10 +37,7 @@ export async function getBalance({
   });
   const amount = AssetAmount.fromChainAsset(asset, { amount: 0n });
 
-  if (
-    SubstrateQueryConfig.is(config) &&
-    (Parachain.is(chain) || EvmParachain.is(chain))
-  ) {
+  if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(chain)) {
     const polkadot = await PolkadotService.create(chain);
     const balance = await polkadot.query(config);
     const converted = chain.usesChainDecimals
@@ -70,7 +68,7 @@ export async function getMin({
     amount: 0n,
   });
 
-  if (builder && (Parachain.is(chain) || EvmParachain.is(chain))) {
+  if (builder && EvmParachain.isAnyParachain(chain)) {
     const polkadot = await PolkadotService.create(chain);
     const min = await polkadot.query(
       builder.build({ asset: zero.getMinAssetId() }),
@@ -84,6 +82,34 @@ export async function getMin({
   }
 
   return zero;
+}
+
+export interface GetMaxParams {
+  balance: AssetAmount;
+  existentialDeposit?: AssetAmount;
+  fee: AssetAmount;
+  min: AssetAmount;
+}
+
+export function getMax({
+  balance,
+  existentialDeposit,
+  fee,
+  min,
+}: GetMaxParams): AssetAmount {
+  const result = balance
+    .toBig()
+    .minus(min.toBig())
+    .minus(
+      existentialDeposit && balance.isSame(existentialDeposit)
+        ? existentialDeposit.toBig()
+        : Big(0),
+    )
+    .minus(balance.isSame(fee) ? fee.toBig() : Big(0));
+
+  return balance.copyWith({
+    amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
+  });
 }
 
 export interface GetDestinationFeeParams {
@@ -107,7 +133,7 @@ export async function getDestinationFee({
     });
   }
 
-  if (Parachain.is(chain) || EvmParachain.is(chain)) {
+  if (EvmParachain.isAnyParachain(chain)) {
     const polkadot = await PolkadotService.create(chain);
     const cfg = (fee as FeeConfigBuilder).build({
       api: polkadot.api,
@@ -141,11 +167,46 @@ export function convertToChainDecimals({
 export async function getExistentialDeposit(
   chain: AnyChain,
 ): Promise<AssetAmount | undefined> {
-  if (Parachain.is(chain) || EvmParachain.is(chain)) {
+  if (EvmParachain.isAnyParachain(chain)) {
     const polkadot = await PolkadotService.create(chain);
 
     return polkadot.existentialDeposit;
   }
 
   return undefined;
+}
+
+export interface GetDestinationFeeBalanceParams {
+  balance: AssetAmount;
+  feeBalance: AssetAmount;
+  route: AssetRoute;
+  sourceAddress: string;
+}
+
+export async function getDestinationFeeBalance({
+  balance,
+  feeBalance,
+  route,
+  sourceAddress,
+}: GetDestinationFeeBalanceParams): Promise<AssetAmount> {
+  if (route.destination.fee.asset.isEqual(balance)) {
+    return balance;
+  }
+
+  if (route.destination.fee.asset.isEqual(feeBalance)) {
+    return feeBalance;
+  }
+
+  if (!route.source.destinationFee?.balance) {
+    throw new Error(
+      `BalanceBuilder must be defined for source.destinationFee.balance for AssetRoute`,
+    );
+  }
+
+  return getBalance({
+    address: sourceAddress,
+    asset: route.source.chain.getChainAsset(route.destination.fee.asset),
+    builder: route.source.destinationFee?.balance,
+    chain: route.source.chain,
+  });
 }
