@@ -26,7 +26,7 @@ export const zeitgeistConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.04,
+        amount: 0.08,
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
