@@ -124,7 +124,7 @@ export function validateSovereignAccountBalances({
   source,
   destination,
 }: ValidateSovereignAccountBalancesProps): void {
-  const { sovereignAccountBalances } = destination;
+  const { feeAssetBalance, transferAssetBalance } = destination.sovereignAccountBalances;
   if (!sovereignAccountBalances) return;
 
   if (destination.chain.key !== polkadotAssetHub.key) {
