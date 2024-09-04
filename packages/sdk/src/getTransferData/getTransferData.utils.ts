@@ -124,23 +124,22 @@ export function validateSovereignAccountBalances({
   source,
   destination,
 }: ValidateSovereignAccountBalancesProps): void {
-  const { feeAssetBalance, transferAssetBalance } = destination.sovereignAccountBalances;
-  if (!sovereignAccountBalances) return;
-
-  if (destination.chain.key !== polkadotAssetHub.key) {
+  if (
+    destination.chain.key !== polkadotAssetHub.key ||
     // currently we want this only for this chain
+    !destination.sovereignAccountBalances
+  ) {
     return;
   }
+  const { feeAssetBalance, transferAssetBalance } =
+    destination.sovereignAccountBalances;
 
-  if (amount > sovereignAccountBalances.transferAssetBalance) {
+  if (amount > transferAssetBalance) {
     throw new Error(
       `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance for this transaction`,
     );
   }
-  if (
-    sovereignAccountBalances.feeAssetBalance &&
-    source.destinationFee.amount > sovereignAccountBalances.feeAssetBalance
-  ) {
+  if (feeAssetBalance && source.destinationFee.amount > feeAssetBalance) {
     throw new Error(
       `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance to pay for fees for this transaction`,
     );

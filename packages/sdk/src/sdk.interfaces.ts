@@ -39,7 +39,7 @@ export interface SovereignAccountBalance {
 }
 
 export interface DestinationChainTransferData extends ChainTransferData {
-  sovereignAccountBalances: SovereignAccountBalance;
+  sovereignAccountBalances?: SovereignAccountBalance;
 }
 
 export interface ChainTransferData {

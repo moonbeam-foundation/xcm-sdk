@@ -63,11 +63,13 @@ export async function getDestinationData({
     existentialDeposit,
     fee: feeAmount,
     min: minAmount,
-    sovereignAccountBalances: await getSovereignAccountBalances({
-      decimals: zeroAmount.decimals,
-      polkadot,
-      transferConfig,
-    }),
+    sovereignAccountBalances: chain.checkSovereignAccountBalances
+      ? await getSovereignAccountBalances({
+          decimals: zeroAmount.decimals,
+          polkadot,
+          transferConfig,
+        })
+      : undefined,
   };
 }
 
