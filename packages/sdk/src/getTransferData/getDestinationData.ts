@@ -148,7 +148,7 @@ async function getSovereignAccountBalances({
         asset: sourceConfig.destinationFee.asset,
         balanceBuilder: destinationFeeAssetBalance,
         chain,
-        decimals, // TODO this is not correct but it doesn't affect us
+        decimals, // TODO this is not correct but will only affect us if a chain has both checkSovereignAccountBalances and usesChainDecimals flags
         polkadot,
       })
     : undefined;

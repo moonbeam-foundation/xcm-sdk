@@ -54,7 +54,6 @@ export async function getTransferData({
     sourceAddress,
     transferConfig,
   });
-  // console.log('sovereignAccountBalances', destination.sovereignAccountBalances);
 
   return {
     destination,
