@@ -471,7 +471,7 @@ export const moonbeamConfig = new ChainConfig({
       destination: polkadotAssetHub,
       destinationFee: {
         amount: 0.2,
-        asset: dot,
+        asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
         destinationBalance: BalanceBuilder().substrate().system().account(),
       },
