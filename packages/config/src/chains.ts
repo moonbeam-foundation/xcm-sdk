@@ -150,6 +150,7 @@ export const alphanetRelay = new Parachain({
   ecosystem: Ecosystem.AlphanetRelay,
   genesisHash:
     '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
+  isRelay: true,
   isTestChain: true,
   key: 'alphanet-relay',
   name: 'Alphanet Relay',
@@ -633,6 +634,7 @@ export const kusama = new Parachain({
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe',
+  isRelay: true,
   key: 'kusama',
   name: 'Kusama',
   parachainId: 0,
@@ -1697,6 +1699,7 @@ export const polkadot = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3',
+  isRelay: true,
   key: 'polkadot',
   name: 'Polkadot',
   parachainId: 0,

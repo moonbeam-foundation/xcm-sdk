@@ -127,7 +127,7 @@ async function getSovereignAccountBalances({
   const destinationFeeAssetBalance =
     sourceConfig.destinationFee?.destinationBalance;
 
-  const sovereignAccountAddress = chain.isRelay()
+  const sovereignAccountAddress = chain.isRelay
     ? sovereignAccountAddresses.relay
     : sovereignAccountAddresses.generic;
 

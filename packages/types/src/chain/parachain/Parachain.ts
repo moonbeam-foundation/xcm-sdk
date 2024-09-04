@@ -8,6 +8,7 @@ export interface ParachainConstructorParams
   extends SetOptional<ChainConstructorParams, 'type'> {
   assetsData?: Map<string, ChainAssetsData> | ChainAssetsData[];
   genesisHash: string;
+  isRelay?: boolean;
   parachainId: number;
   ss58Format: number;
   usesChainDecimals?: boolean;
@@ -19,6 +20,8 @@ export class Parachain extends Chain {
   readonly assetsData: Map<string, ChainAssetsData>;
 
   readonly genesisHash: string;
+
+  readonly isRelay: boolean;
 
   readonly parachainId: number;
 
@@ -33,6 +36,7 @@ export class Parachain extends Chain {
   constructor({
     assetsData,
     genesisHash,
+    isRelay,
     parachainId,
     usesChainDecimals,
     ss58Format,
@@ -48,6 +52,7 @@ export class Parachain extends Chain {
         ? assetsData
         : new Map(assetsData?.map((data) => [data.asset.key, data]));
     this.genesisHash = genesisHash;
+    this.isRelay = !!isRelay;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
     this.usesChainDecimals = !!usesChainDecimals;
@@ -81,9 +86,5 @@ export class Parachain extends Chain {
 
   getAssetMin(asset: Asset): number {
     return this.assetsData.get(asset.key)?.min ?? 0;
-  }
-
-  isRelay(): boolean {
-    return this.parachainId === 0;
   }
 }
