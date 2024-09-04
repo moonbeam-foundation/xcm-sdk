@@ -14,7 +14,7 @@ export interface AssetRouteConstructorParams {
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
   extrinsic?: ExtrinsicConfigBuilder;
-  mrl?: MrlConfigBuilder;
+  mrl?: MrlConfig;
 }
 
 export interface SourceConfig {
@@ -39,6 +39,11 @@ export interface FeeConfig {
   extra?: number;
 }
 
+export interface MrlConfig {
+  isAutomatic: boolean;
+  transfer: MrlConfigBuilder;
+}
+
 export interface DestinationFeeConfig
   extends SetOptional<FeeConfig, 'balance'> {
   amount: number | FeeConfigBuilder;
@@ -55,7 +60,7 @@ export class AssetRoute {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
-  readonly mrl?: MrlConfigBuilder;
+  readonly mrl?: MrlConfig;
 
   constructor({
     asset,

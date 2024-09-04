@@ -15,21 +15,29 @@ describe('wormhole', async () => {
   );
 
   describe('tokenTransfer with isAutomatic=true', () => {
-    const transfer = wormhole().tokenTransfer({ isAutomatic: true });
+    const transfer = wormhole().tokenTransfer();
 
     it('should be correct config', () => {
       expect(
-        transfer.build({ ...wormholeConfigBuilderPrams, moonApi }),
+        transfer.build({
+          ...wormholeConfigBuilderPrams,
+          moonApi,
+          isAutomatic: true,
+        }),
       ).toMatchSnapshot();
     });
   });
 
   describe('tokenTransfer with isAutomatic=false', () => {
-    const transfer = wormhole().tokenTransfer({ isAutomatic: false });
+    const transfer = wormhole().tokenTransfer();
 
     it('should be correct config to moon chain', () => {
       expect(
-        transfer.build({ ...wormholeToMoonchainConfigBuilderPrams, moonApi }),
+        transfer.build({
+          ...wormholeToMoonchainConfigBuilderPrams,
+          moonApi,
+          isAutomatic: false,
+        }),
       ).toMatchSnapshot();
     });
   });

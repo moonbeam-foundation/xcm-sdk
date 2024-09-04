@@ -134,6 +134,7 @@ export const buildParachainParamsMock: BuilderPrams = {
 
 export const mrlBuildParamsMock: MrlBuilderParams = {
   ...buildParamsMock,
+  isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
@@ -149,6 +150,7 @@ export const mrlBuildParamsMock: MrlBuilderParams = {
 
 export const mrlBuildParamsMock2: MrlBuilderParams = {
   ...buildParachainParamsMock,
+  isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
@@ -168,6 +170,7 @@ export const wormholeConfigBuilderPrams: MrlBuilderParams = {
   destinationAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   destinationApi: apiMock,
   fee: testAssetAmount,
+  isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
@@ -183,6 +186,7 @@ export const wormholeToMoonchainConfigBuilderPrams: MrlBuilderParams = {
   destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   destinationApi: apiMock,
   fee: testAssetAmount,
+  isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,

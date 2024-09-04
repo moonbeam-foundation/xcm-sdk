@@ -8,13 +8,15 @@ import type { HexString } from '@polkadot/util/types';
 import type { BuilderPrams, ConfigBuilder } from '../builder.interfaces';
 import type { WormholeConfig } from './wormhole/wormhole';
 import type { ExtrinsicConfig } from '../extrinsic';
+import type { ContractConfig } from '../contract';
 
 export type MrlConfigBuilder = ConfigBuilder<
-  ExtrinsicConfig | WormholeConfig,
+  ContractConfig | ExtrinsicConfig | WormholeConfig,
   MrlBuilderParams
 >;
 
 export interface MrlBuilderParams extends BuilderPrams<AnyChain> {
+  isAutomatic: boolean;
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   moonChain: EvmParachain;

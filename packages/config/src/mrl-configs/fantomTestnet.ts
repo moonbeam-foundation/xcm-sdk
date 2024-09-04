@@ -25,10 +25,10 @@ export const fantomTestnetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      mrl: MrlBuilder()
-        .wormhole()
-        .wormhole()
-        .tokenTransfer({ isAutomatic: true }),
+      mrl: {
+        isAutomatic: true,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+      },
     },
   ],
 });

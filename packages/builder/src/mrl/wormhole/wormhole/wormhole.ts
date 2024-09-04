@@ -15,15 +15,12 @@ export const GMP_CONTRACT_ADDRESS =
 
 export function wormhole() {
   return {
-    tokenTransfer: ({
-      isAutomatic,
-    }: {
-      isAutomatic: boolean;
-    }): MrlConfigBuilder => ({
+    tokenTransfer: (): MrlConfigBuilder => ({
       build: ({
         asset,
         destination,
         destinationAddress,
+        isAutomatic,
         moonApi,
         moonChain,
         source,

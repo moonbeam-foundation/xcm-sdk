@@ -12,7 +12,7 @@ import { ExtrinsicConfig } from '../../../../extrinsic';
 describe('ethereumXcm', () => {
   describe('transact', () => {
     const extrinsic = ethereumXcm()
-      .transact({ isAutomatic: true })
+      .transact()
       .build(mrlBuildParamsMock) as ExtrinsicConfig;
 
     it('should be correct config', () => {
@@ -26,9 +26,7 @@ describe('ethereumXcm', () => {
     it('should throw and error because destination has no wh name', () => {
       expect(() =>
         (
-          ethereumXcm()
-            .transact({ isAutomatic: true })
-            .build(mrlBuildParamsMock2) as ExtrinsicConfig
+          ethereumXcm().transact().build(mrlBuildParamsMock2) as ExtrinsicConfig
         ).getArgs({} as any),
       ).toThrow('Chain Interlay Testnet does not have a wormhole name');
     });

@@ -94,7 +94,7 @@ export async function getSourceData({
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,
-    moonGasLimit: {} as any,
+    moonGasLimit: {},
     // transact?: {
     //   call: HexString;
     //   txWeight: {
