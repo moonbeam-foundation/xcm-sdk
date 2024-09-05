@@ -5,14 +5,18 @@ import { u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { ContractConfig } from '../../../types/ContractConfig';
+import { XTOKENS_ABI } from './XtokensABI';
 
 const U_64_MAX = 18446744073709551615n;
+const XTOKENS_COTRACT_ADDRESS = '0x0000000000000000000000000000000000000804';
 
 export function Xtokens() {
   return {
     transfer: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ destinationAddress, asset, destination }) =>
         new ContractConfig({
+          address: XTOKENS_COTRACT_ADDRESS,
+          abi: XTOKENS_ABI,
           args: [
             asset.address
               ? formatAssetIdToERC20(asset.address)
@@ -28,6 +32,8 @@ export function Xtokens() {
     transferMultiCurrencies: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ asset, destination, destinationAddress, fee }) =>
         new ContractConfig({
+          address: XTOKENS_COTRACT_ADDRESS,
+          abi: XTOKENS_ABI,
           args: [
             [
               [
@@ -60,6 +66,8 @@ export function Xtokens() {
           );
 
         return new ContractConfig({
+          address: XTOKENS_COTRACT_ADDRESS,
+          abi: XTOKENS_ABI,
           args: [
             asset.address
               ? formatAssetIdToERC20(asset.address)

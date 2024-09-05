@@ -4,6 +4,7 @@ import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
 import { ContractConfig } from '../../../../contract';
 import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
 import { wormholeFactory } from '../../wormhole';
+import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';
 
 export function TokenBridge() {
   const module = 'TokenBridge';
@@ -33,6 +34,7 @@ export function TokenBridge() {
 
         return new ContractConfig({
           address: wh.getChain('Moonbeam').config.contracts.tokenBridge,
+          abi: TOKEN_BRIDGE_ABI,
           args: [
             tokenAddressOnMoonChain,
             tokenAmountOnMoonChain,

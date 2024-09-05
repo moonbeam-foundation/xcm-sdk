@@ -1,6 +1,7 @@
 import {
   AssetMinConfigBuilder,
   BalanceConfigBuilder,
+  ContractConfig,
   FeeConfigBuilder,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
@@ -47,7 +48,11 @@ export async function getBalance({
     return amount.copyWith({ amount: converted });
   }
 
-  const contract = createContract(chain, config) as BalanceContractInterface;
+  // TODO: Improve this, I think we should remove contracts from the SDK package
+  const contract = createContract(
+    chain,
+    config as ContractConfig,
+  ) as BalanceContractInterface;
   const balance = await contract.getBalance();
 
   return amount.copyWith({ amount: balance });

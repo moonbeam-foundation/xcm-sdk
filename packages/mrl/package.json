@@ -33,6 +33,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
+    "@moonbeam-network/xcm-builder": "workspace:*",
     "@moonbeam-network/xcm-config": "workspace:*",
     "@moonbeam-network/xcm-sdk": "workspace:*",
     "@moonbeam-network/xcm-types": "workspace:*",

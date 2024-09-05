@@ -16,6 +16,7 @@ import {
   PalletBalancesAccountDataOld,
   TokensPalletAccountData,
 } from './BalanceBuilder.interfaces';
+import { ERC20_ABI } from './Erc20Abi';
 
 export function BalanceBuilder() {
   return {
@@ -39,6 +40,7 @@ function erc20(): BalanceConfigBuilder {
 
       return new ContractConfig({
         address: contractAddress,
+        abi: ERC20_ABI,
         args: [address],
         func: 'balanceOf',
         module: 'Erc20',

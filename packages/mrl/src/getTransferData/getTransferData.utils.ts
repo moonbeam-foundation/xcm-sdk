@@ -1,26 +1,28 @@
 import { moonbaseAlpha, moonbeam } from '@moonbeam-network/xcm-config';
-import { AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
+import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
-import { createPublicClient, http } from 'viem';
+import {
+  BATCH_CONTRACT_ADDRESS,
+  ContractConfig,
+  MrlBuilder,
+  MrlBuilderParams,
+} from '@moonbeam-network/xcm-builder';
+import { Address, createPublicClient, encodeFunctionData, http } from 'viem';
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
-  [moonbeam.key]: 328613n,
+  [moonbeam.key]: 657226n,
   [moonbaseAlpha.key]: 1271922n,
 };
 
-export interface GetMoonGasLimitParams {
-  isAutomatic: boolean;
-  moonChain: EvmParachain;
-  source: AnyParachain;
-  sourceAddress: string;
-}
+export async function getMoonGasLimit(
+  params: MrlBuilderParams,
+): Promise<bigint> {
+  const { asset, isAutomatic, moonChain, source, sourceAddress } = params;
 
-export async function getMoonGasLimit({
-  isAutomatic,
-  moonChain,
-  source,
-  sourceAddress,
-}: GetMoonGasLimitParams): Promise<bigint> {
+  if (!EvmParachain.isAnyParachain(source)) {
+    throw new Error('Source chain must be Parachain or EvmParachain');
+  }
+
   const client = createPublicClient({
     chain: moonChain.getViemChain(),
     transport: http(),
@@ -34,13 +36,36 @@ export async function getMoonGasLimit({
   // TODO: we have a problem to calculate the gasEstimation for automatic:
   // it requires the computedOriginAccount to have the balance for the call
   // which we don't have when we make the call. We hardcode it for now
-  const gasEstimation = isAutomatic
-    ? MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION[moonChain.key]
-    : await client.estimateGas({
-        account: address20,
-        to: BATCH_CONTRACT_ADDRESS,
-        data: emptyBatchAll,
-      });
+  if (isAutomatic) {
+    return MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION[moonChain.key];
+  }
+
+  const contract = MrlBuilder()
+    .wormhole()
+    .contract()
+    .TokenBridge()
+    .transferTokens()
+    .build({
+      ...params,
+      asset: asset.copyWith({ amount: 0n }),
+    }) as ContractConfig;
+
+  const batchAll = encodeFunctionData({
+    abi: BATCH_CONTRACT_ABI,
+    functionName: 'batchAll',
+    args: [
+      [tokenAddressOnMoonChain, contract.address as Address],
+      [0n, 0n], // Value to send for each call
+      [approveTx, contract.encodeFunctionData()], // Call data for each call
+      [], // Gas limit for each call
+    ],
+  });
+
+  const gasEstimation = await client.estimateGas({
+    account: address20,
+    to: BATCH_CONTRACT_ADDRESS,
+    data: batchAll,
+  });
 
   return (gasEstimation * 110n) / 100n;
 }

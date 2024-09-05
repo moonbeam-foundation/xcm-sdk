@@ -106,4 +106,4 @@ export const TOKEN_BRIDGE_RELAYER_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
-];
+] as const;
