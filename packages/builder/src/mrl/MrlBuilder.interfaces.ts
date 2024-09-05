@@ -20,12 +20,14 @@ export interface MrlBuilderParams extends BuilderPrams<AnyChain> {
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   moonChain: EvmParachain;
-  moonGasLimit: bigint;
-  transact?: {
-    call: HexString;
-    txWeight: {
-      refTime: bigint;
-      proofSize: bigint;
-    };
+  moonGasLimit?: bigint;
+  transact?: Transact;
+}
+
+export interface Transact {
+  call: HexString;
+  txWeight: {
+    refTime: bigint;
+    proofSize: bigint;
   };
 }

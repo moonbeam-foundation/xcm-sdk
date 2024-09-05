@@ -5,13 +5,17 @@ import { ERC20_ABI } from '../../../../balance/Erc20Abi';
 import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
 import { BATCH_CONTRACT_ADDRESS } from '../../../MrlBuilder.constants';
 import { contract as ContractBuilder } from '../../contract';
-import { ContractConfig } from '../../../..';
+import type { ContractConfig } from '../../../../types/ContractConfig';
 
 export function ethereumXcm() {
   return {
     transact: (): MrlConfigBuilder => ({
       build: (params) => {
         const { asset, isAutomatic, moonChain, moonGasLimit } = params;
+
+        if (!moonGasLimit) {
+          throw new Error('moonGasLimit must be defined');
+        }
 
         const tokenAddressOnMoonChain = moonChain.getChainAsset(asset)
           .address as Address | undefined;

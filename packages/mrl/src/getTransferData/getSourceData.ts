@@ -23,6 +23,8 @@ import {
   getPolkadotApi,
   toBigInt,
 } from '@moonbeam-network/xcm-utils';
+import { MrlBuilderParams } from '@moonbeam-network/xcm-builder';
+import { getTransact } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   route: AssetRoute;
@@ -82,26 +84,26 @@ export async function getSourceData({
       : undefined,
     getPolkadotApi(moonChain.ws),
   ]);
-  const extrinsic = route.mrl.build({
+
+  const params: MrlBuilderParams = {
     asset: balance,
     destination: route.destination.chain,
     destinationAddress,
     destinationApi,
     fee: destinationFee,
-    source,
-    sourceAddress,
-    sourceApi,
+    isAutomatic: route.mrl.isAutomatic,
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,
-    moonGasLimit: {},
-    // transact?: {
-    //   call: HexString;
-    //   txWeight: {
-    //     refTime: bigint;
-    //     proofSize: bigint;
-    //   };
-    // };
+    source,
+    sourceAddress,
+    sourceApi,
+  };
+  const transfer = route.mrl.transfer.build({
+    ...params,
+    transact: EvmParachain.isAnyParachain(source)
+      ? await getTransact(params)
+      : undefined,
   });
 
   const fee = await getFee({

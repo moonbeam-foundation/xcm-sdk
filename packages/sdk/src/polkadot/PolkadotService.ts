@@ -7,9 +7,14 @@ import type {
 import { type AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
-import type { Signer as PolkadotSigner } from '@polkadot/api/types';
+import type {
+  Signer as PolkadotSigner,
+  SubmittableExtrinsic,
+} from '@polkadot/api/types';
 import type { u128 } from '@polkadot/types';
-import type { IKeyringPair } from '@polkadot/types/types';
+import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
+import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces';
+import type { HexString } from '@polkadot/util/types';
 
 export class PolkadotService {
   readonly api: ApiPromise;
@@ -53,12 +58,30 @@ export class PolkadotService {
     return config.transform(response);
   }
 
-  async getFee(account: string, config: ExtrinsicConfig): Promise<bigint> {
+  getExtrinsic(
+    config: ExtrinsicConfig,
+  ): SubmittableExtrinsic<'promise', ISubmittableResult> {
     const fn = this.api.tx[config.module][config.func];
     const args = config.getArgs(fn);
 
-    const extrinsic = fn(...args);
-    const info = await extrinsic.paymentInfo(account, { nonce: -1 });
+    return fn(...args);
+  }
+
+  getExtrinsicCallHash(config: ExtrinsicConfig): HexString {
+    return this.getExtrinsic(config).method.toHex();
+  }
+
+  async getPaymentInfo(
+    account: string,
+    config: ExtrinsicConfig,
+  ): Promise<RuntimeDispatchInfo> {
+    const extrinsic = this.getExtrinsic(config);
+
+    return extrinsic.paymentInfo(account, { nonce: -1 });
+  }
+
+  async getFee(account: string, config: ExtrinsicConfig): Promise<bigint> {
+    const info = await this.getPaymentInfo(account, config);
 
     return info.partialFee.toBigInt();
   }
@@ -68,10 +91,7 @@ export class PolkadotService {
     config: ExtrinsicConfig,
     signer: PolkadotSigner | IKeyringPair,
   ): Promise<string> {
-    const fn = this.api.tx[config.module][config.func];
-    const args = config.getArgs(fn);
-
-    const extrinsic = fn(...args);
+    const extrinsic = this.getExtrinsic(config);
     const hash = await extrinsic.signAndSend(
       this.#isSigner(signer) ? account : signer,
       {
