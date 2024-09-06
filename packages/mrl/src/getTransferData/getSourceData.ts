@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import {
-  AssetRoute,
-  FeeConfig,
-  getMoonChain,
-} from '@moonbeam-network/xcm-config';
-import {
+  getAssetMin,
   getBalance,
   getContractFee,
   getDestinationFeeBalance,
   getExistentialDeposit,
   getExtrinsicFee,
   getMax,
-  getMin,
   SourceChainTransferData,
 } from '@moonbeam-network/xcm-sdk';
 import {
@@ -21,14 +17,12 @@ import {
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
-import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import {
   ContractConfig,
   ExtrinsicConfig,
-  MrlBuilderParams,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
-import { getTransact } from './getTransferData.utils';
+import { buildTransfer } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   route: AssetRoute;
@@ -78,36 +72,18 @@ export async function getSourceData({
   });
 
   const existentialDeposit = await getExistentialDeposit(destination);
-  const min = await getMin({ asset, builder: route.source.min, chain: source });
+  const min = await getAssetMin({
+    asset,
+    builder: route.source.min,
+    chain: source,
+  });
 
-  const moonChain = getMoonChain(source);
-  const [sourceApi, destinationApi, moonApi] = await Promise.all([
-    EvmParachain.isAnyParachain(source) ? getPolkadotApi(source.ws) : undefined,
-    EvmParachain.isAnyParachain(destination)
-      ? getPolkadotApi(destination.ws)
-      : undefined,
-    getPolkadotApi(moonChain.ws),
-  ]);
-
-  const params: MrlBuilderParams = {
+  const transfer = await buildTransfer({
     asset: balance,
-    destination: route.destination.chain,
     destinationAddress,
-    destinationApi,
-    fee: destinationFee,
-    isAutomatic: route.mrl.isAutomatic,
-    moonApi,
-    moonAsset: moonChain.nativeAsset,
-    moonChain,
-    source,
+    destinationFee,
+    route,
     sourceAddress,
-    sourceApi,
-  };
-  const transfer = route.mrl.transfer.build({
-    ...params,
-    transact: EvmParachain.isAnyParachain(source)
-      ? await getTransact(params)
-      : undefined,
   });
 
   const fee = await getFee({

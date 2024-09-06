@@ -1,7 +1,15 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { moonbaseAlpha, moonbeam } from '@moonbeam-network/xcm-config';
-import { EvmParachain } from '@moonbeam-network/xcm-types';
-import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
+import {
+  AssetRoute,
+  getMoonChain,
+  moonbaseAlpha,
+  moonbeam,
+} from '@moonbeam-network/xcm-config';
+import { AssetAmount, EvmParachain } from '@moonbeam-network/xcm-types';
+import {
+  getMultilocationDerivedAddresses,
+  getPolkadotApi,
+} from '@moonbeam-network/xcm-utils';
 import {
   BATCH_CONTRACT_ABI,
   BATCH_CONTRACT_ADDRESS,
@@ -19,6 +27,62 @@ const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 657226n,
   [moonbaseAlpha.key]: 1271922n,
 };
+
+export interface BuildTransferParams {
+  asset: AssetAmount;
+  destinationAddress: string;
+  destinationFee: AssetAmount;
+  route: AssetRoute;
+  sourceAddress: string;
+}
+
+export async function buildTransfer({
+  asset,
+  destinationAddress,
+  destinationFee,
+  route,
+  sourceAddress,
+}: BuildTransferParams) {
+  if (!route.mrl) {
+    throw new Error(
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+    );
+  }
+
+  const source = route.source.chain;
+  const destination = route.destination.chain;
+
+  const moonChain = getMoonChain(source);
+  const [sourceApi, destinationApi, moonApi] = await Promise.all([
+    EvmParachain.isAnyParachain(source) ? getPolkadotApi(source.ws) : undefined,
+    EvmParachain.isAnyParachain(destination)
+      ? getPolkadotApi(destination.ws)
+      : undefined,
+    getPolkadotApi(moonChain.ws),
+  ]);
+
+  const params: MrlBuilderParams = {
+    asset,
+    destination,
+    destinationAddress,
+    destinationApi,
+    fee: destinationFee,
+    isAutomatic: route.mrl.isAutomatic,
+    moonApi,
+    moonAsset: moonChain.nativeAsset,
+    moonChain,
+    source,
+    sourceAddress,
+    sourceApi,
+  };
+
+  return route.mrl.transfer.build({
+    ...params,
+    transact: EvmParachain.isAnyParachain(source)
+      ? await getTransact(params)
+      : undefined,
+  });
+}
 
 export async function getTransact(params: MrlBuilderParams): Promise<Transact> {
   const { sourceAddress, source, moonChain } = params;

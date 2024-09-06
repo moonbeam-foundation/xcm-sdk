@@ -1,14 +1,23 @@
 import { AssetRoute } from '@moonbeam-network/xcm-config';
 import {
   convertToChainDecimals,
+  EvmService,
   getDestinationData,
+  getMin,
+  PolkadotService,
   Signers,
 } from '@moonbeam-network/xcm-sdk';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import { AssetAmount } from '@moonbeam-network/xcm-types';
+import {
+  AssetAmount,
+  EvmChain,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import Big from 'big.js';
+import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { TransferData } from '../mrl.interfaces';
 import { getSourceData } from './getSourceData';
+import { buildTransfer } from './getTransferData.utils';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -69,57 +78,45 @@ export async function getTransferData({
       { evmSigner, polkadotSigner }: Partial<Signers>,
     ): Promise<string> {
       const source = route.source.chain;
-      const destination = route.destination.chain;
+
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = AssetAmount.fromChainAsset(
         route.source.chain.getChainAsset(route.asset),
         { amount: bigintAmount },
       );
-      const [sourcePolkadot, destinationPolkadot] =
-        await PolkadotService.createMulti([source, destination]);
 
-      const contract = route.contract?.build({
+      const transfer = await buildTransfer({
         asset,
-        destination,
         destinationAddress,
-        destinationApi: destinationPolkadot.api,
-        fee: destinationFee,
-        source,
+        destinationFee,
+        route,
         sourceAddress,
-        sourceApi: sourcePolkadot.api,
-      });
-      const extrinsic = route.extrinsic?.build({
-        asset,
-        destination,
-        destinationAddress,
-        destinationApi: destinationPolkadot.api,
-        fee: destinationFee,
-        source,
-        sourceAddress,
-        sourceApi: sourcePolkadot.api,
       });
 
-      if (contract) {
+      if (
+        ContractConfig.is(transfer) &&
+        (EvmChain.is(source) || EvmParachain.is(source))
+      ) {
         if (!evmSigner) {
           throw new Error('EVM Signer must be provided');
         }
 
-        return (
-          createContract(source, contract) as TransferContractInterface
-        ).transfer(evmSigner);
+        const evm = EvmService.create(source);
+
+        return evm.transfer(evmSigner, transfer);
       }
 
-      if (extrinsic) {
+      if (ExtrinsicConfig.is(transfer) && EvmParachain.isAnyParachain(source)) {
         if (!polkadotSigner) {
           throw new Error('Polkadot signer must be provided');
         }
 
-        return sourcePolkadot.transfer(
-          sourceAddress,
-          extrinsic,
-          polkadotSigner,
-        );
+        const polkadot = await PolkadotService.create(source);
+
+        return polkadot.transfer(sourceAddress, transfer, polkadotSigner);
       }
+
+      // TODO: Wormhole transfer!
 
       throw new Error('Either contract or extrinsic must be provided');
     },
