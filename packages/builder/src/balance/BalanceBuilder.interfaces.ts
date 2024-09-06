@@ -1,18 +1,17 @@
-import type { ChainAssetId } from '@moonbeam-network/xcm-types';
 import type { Struct, u128 } from '@polkadot/types';
+import type { ChainAsset } from '@moonbeam-network/xcm-types';
 import type { ContractConfig } from '../contract';
 import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import type { ConfigBuilder } from '../builder.interfaces';
 
 export type BalanceConfigBuilder = ConfigBuilder<
   ContractConfig | SubstrateQueryConfig,
-  BalanceConfigBuilderPrams
+  BalanceBuilderPrams
 >;
 
-export interface BalanceConfigBuilderPrams {
+export interface BalanceBuilderPrams {
   address: string;
-  asset: ChainAssetId;
-  contractAddress?: string;
+  asset: ChainAsset;
 }
 
 export interface PalletBalancesAccountDataOld extends Struct {

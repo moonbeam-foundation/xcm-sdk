@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "transferXcm",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
@@ -42,7 +41,6 @@ ExtrinsicConfig {
   "func": "transferXcm",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
@@ -80,7 +78,6 @@ ExtrinsicConfig {
   "func": "xcmTransfer",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
@@ -112,7 +109,6 @@ ExtrinsicConfig {
   "func": "xcmTransfer",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 

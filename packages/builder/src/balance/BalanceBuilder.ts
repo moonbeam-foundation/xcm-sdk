@@ -6,7 +6,6 @@ import {
   PalletAssetsAssetAccount,
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
-import { isString } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfig } from '../contract';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
@@ -33,13 +32,13 @@ export function evm() {
 
 function erc20(): BalanceConfigBuilder {
   return {
-    build: ({ address, contractAddress }) => {
-      if (!contractAddress || !isString(contractAddress)) {
-        throw new Error(`Invalid contract address: ${contractAddress}`);
+    build: ({ asset, address }) => {
+      if (!asset.address) {
+        throw new Error(`Asset ${asset.key} has no address`);
       }
 
       return new ContractConfig({
-        address: contractAddress,
+        address: asset.address,
         abi: ERC20_ABI,
         args: [address],
         func: 'balanceOf',
@@ -64,7 +63,7 @@ function assets() {
         new SubstrateQueryConfig({
           module: 'assets',
           func: 'account',
-          args: [asset, address],
+          args: [asset.getBalanceAssetId(), address],
           transform: async (
             response: Option<PalletAssetsAssetAccount>,
           ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
@@ -120,7 +119,9 @@ function system() {
               throw new Error("Can't get balance from Equilibrium chain");
             }
 
-            const balance = balances.find(([assetId]) => assetId === asset);
+            const balance = balances.find(
+              ([assetId]) => assetId === asset.getBalanceAssetId(),
+            );
 
             if (!balance) {
               return 0n;
@@ -160,7 +161,7 @@ function tokens() {
         new SubstrateQueryConfig({
           module: 'tokens',
           func: 'accounts',
-          args: [address, asset],
+          args: [address, asset.getBalanceAssetId()],
           transform: async ({
             free,
             frozen,

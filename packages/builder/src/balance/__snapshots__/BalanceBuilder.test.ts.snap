@@ -3,13 +3,12 @@
 exports[`balanceBuilder > assets > account > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ASSET>",
-    "<ACCOUNT>",
+    "USDT",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "assets",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -18,12 +17,11 @@ exports[`balanceBuilder > assets > account > should transform correctly 1`] = `9
 exports[`balanceBuilder > system > account > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ACCOUNT>",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "system",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -34,12 +32,11 @@ exports[`balanceBuilder > system > account > should transform correctly with mis
 exports[`balanceBuilder > system > accountEquilibrium > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ACCOUNT>",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "system",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -52,13 +49,12 @@ exports[`balanceBuilder > system > accountEquilibrium > should transform v0 corr
 exports[`balanceBuilder > tokens > accounts > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ACCOUNT>",
-    "<ASSET>",
+    "<ADDRESS>",
+    "USDT",
   ],
   "func": "accounts",
   "module": "tokens",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 

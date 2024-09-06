@@ -2,21 +2,25 @@ import {
   AssetMinConfigBuilder,
   BalanceConfigBuilder,
   ContractConfig,
+  ExtrinsicConfig,
   FeeConfigBuilder,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import {
   AnyChain,
+  AnyParachain,
   Asset,
   AssetAmount,
   ChainAsset,
+  EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
-import { convertDecimals } from '@moonbeam-network/xcm-utils';
-import { AssetRoute } from '@moonbeam-network/xcm-config';
+import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
+import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import Big from 'big.js';
-import { BalanceContractInterface, createContract } from '../contract';
-import { PolkadotService } from '../polkadot';
+import { PolkadotService } from '../services/polkadot';
+import { DestinationChainTransferData } from '../sdk.interfaces';
+import { EvmService } from '../services/evm/EvmService';
 
 export interface GetBalancesParams {
   address: string;
@@ -33,8 +37,7 @@ export async function getBalance({
 }: GetBalancesParams): Promise<AssetAmount> {
   const config = builder.build({
     address,
-    asset: asset.getBalanceAssetId(),
-    contractAddress: asset.address,
+    asset,
   });
   const amount = AssetAmount.fromChainAsset(asset, { amount: 0n });
 
@@ -48,14 +51,19 @@ export async function getBalance({
     return amount.copyWith({ amount: converted });
   }
 
-  // TODO: Improve this, I think we should remove contracts from the SDK package
-  const contract = createContract(
-    chain,
-    config as ContractConfig,
-  ) as BalanceContractInterface;
-  const balance = await contract.getBalance();
+  if (
+    ContractConfig.is(config) &&
+    (EvmChain.is(chain) || EvmParachain.is(chain))
+  ) {
+    const evm = EvmService.create(chain);
+    const balance = await evm.getBalance(address, config);
 
-  return amount.copyWith({ amount: balance });
+    return amount.copyWith({ amount: balance });
+  }
+
+  throw new Error(
+    `Can't get balance for ${address} on chain ${chain.name} and asset ${asset.symbol}`,
+  );
 }
 
 export interface GetMinParams {
@@ -64,7 +72,7 @@ export interface GetMinParams {
   chain: AnyChain;
 }
 
-export async function getMin({
+export async function getAssetMin({
   asset,
   builder,
   chain,
@@ -87,6 +95,28 @@ export async function getMin({
   }
 
   return zero;
+}
+
+export function getMin({
+  balance,
+  existentialDeposit,
+  fee,
+  min,
+}: DestinationChainTransferData) {
+  const result = Big(0)
+    .plus(balance.isSame(fee) ? fee.toBig() : Big(0))
+    .plus(
+      existentialDeposit &&
+        balance.isSame(existentialDeposit) &&
+        balance.toBig().lt(existentialDeposit.toBig())
+        ? existentialDeposit.toBig()
+        : Big(0),
+    )
+    .plus(balance.toBig().lt(min.toBig()) ? min.toBig() : Big(0));
+
+  return balance.copyWith({
+    amount: BigInt(result.toFixed()),
+  });
 }
 
 export interface GetMaxParams {
@@ -214,4 +244,85 @@ export async function getDestinationFeeBalance({
     builder: route.source.destinationFee?.balance,
     chain: route.source.chain,
   });
+}
+
+export interface GetExtrinsicFeeParams {
+  address: string;
+  balance: AssetAmount;
+  chain: AnyParachain;
+  extrinsic: ExtrinsicConfig;
+  feeBalance: AssetAmount;
+  feeConfig?: FeeConfig;
+}
+
+export async function getExtrinsicFee({
+  address,
+  balance,
+  chain,
+  extrinsic,
+  feeBalance,
+  feeConfig,
+}: GetExtrinsicFeeParams): Promise<AssetAmount> {
+  /**
+   * If account has no balance (account doesn't exist),
+   * we can't get the fee from some chains.
+   * Example: Phala - PHA
+   */
+  try {
+    const polkadot = await PolkadotService.create(chain);
+    const fee = await polkadot.getFee(address, extrinsic);
+    const extra = feeConfig?.extra
+      ? toBigInt(feeConfig.extra, feeBalance.decimals)
+      : 0n;
+    const totalFee = fee + extra;
+
+    const converted = chain.usesChainDecimals
+      ? convertDecimals(totalFee, polkadot.decimals, feeBalance.decimals)
+      : totalFee;
+
+    return feeBalance.copyWith({ amount: converted });
+  } catch (error) {
+    if (balance.amount) {
+      throw error;
+    }
+
+    return feeBalance.copyWith({ amount: 0n });
+  }
+}
+
+export interface GetContractFeeParams {
+  address: string;
+  chain: EvmChain | EvmParachain;
+  contract: ContractConfig;
+  destinationFee: AssetAmount;
+  feeBalance: AssetAmount;
+  feeConfig?: FeeConfig;
+}
+
+export async function getContractFee({
+  address,
+  chain,
+  contract,
+  destinationFee,
+  feeBalance,
+  feeConfig,
+}: GetContractFeeParams): Promise<AssetAmount> {
+  try {
+    const evm = EvmService.create(chain);
+    const fee = await evm.getFee(address, contract);
+    const extra = feeConfig?.extra
+      ? toBigInt(feeConfig.extra, feeBalance.decimals)
+      : 0n;
+
+    return feeBalance.copyWith({ amount: fee + extra });
+  } catch (error) {
+    /**
+     * Contract can throw an error if user balance is smaller than fee.
+     * Or if you try to send 0 as amount.
+     */
+    throw new Error(
+      `Can't get a fee, make sure you have ${destinationFee.toDecimal()} ${destinationFee.getSymbol()} in your source balance, needed for destination fees`,
+      { cause: error },
+    );
+  }
 }

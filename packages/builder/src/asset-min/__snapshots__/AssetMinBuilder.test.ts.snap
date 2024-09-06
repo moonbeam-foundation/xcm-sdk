@@ -8,7 +8,6 @@ SubstrateQueryConfig {
   "func": "assetMetadatas",
   "module": "assetRegistry",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -22,7 +21,6 @@ SubstrateQueryConfig {
   "func": "currencyMetadatas",
   "module": "assetRegistry",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -36,7 +34,6 @@ SubstrateQueryConfig {
   "func": "asset",
   "module": "assets",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 

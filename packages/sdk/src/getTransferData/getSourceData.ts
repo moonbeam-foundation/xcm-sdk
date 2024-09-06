@@ -1,17 +1,22 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
-import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
-import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
-import { TransferContractInterface, createContract } from '../contract';
-import { PolkadotService } from '../polkadot';
+import {
+  AnyParachain,
+  AssetAmount,
+  EvmChain,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
+import { PolkadotService } from '../services/polkadot';
 import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
 import {
   getBalance,
+  getContractFee,
   getDestinationFeeBalance,
   getExistentialDeposit,
+  getExtrinsicFee,
   getMax,
-  getMin,
+  getAssetMin,
 } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
@@ -58,7 +63,11 @@ export async function getSourceData({
   });
 
   const existentialDeposit = await getExistentialDeposit(destination);
-  const min = await getMin({ asset, builder: route.source.min, chain: source });
+  const min = await getAssetMin({
+    asset,
+    builder: route.source.min,
+    chain: source,
+  });
 
   const extrinsic = route.extrinsic?.build({
     asset: balance,
@@ -90,7 +99,6 @@ export async function getSourceData({
     extrinsic,
     feeBalance,
     feeConfig: route.source.fee,
-    polkadot: sourcePolkadot,
     sourceAddress,
   });
 
@@ -121,7 +129,6 @@ export interface GetFeeParams {
   destinationFee: AssetAmount;
   extrinsic?: ExtrinsicConfig;
   feeConfig?: FeeConfig;
-  polkadot: PolkadotService;
   sourceAddress: string;
 }
 
@@ -129,77 +136,35 @@ export async function getFee({
   balance,
   feeBalance,
   chain,
-  contract: contractConfig,
+  contract,
   destinationFee,
   extrinsic,
   feeConfig,
-  polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<AssetAmount> {
-  if (!contractConfig && !extrinsic) {
+  if (!contract && !extrinsic) {
     throw new Error('Either contract or extrinsic must be provided');
   }
 
-  if (contractConfig) {
-    const contract = createContract(
-      chain,
-      contractConfig,
-    ) as TransferContractInterface;
-    try {
-      const fee = await contract.getFee(balance.amount, sourceAddress);
-
-      return feeBalance.copyWith({ amount: fee });
-    } catch (error) {
-      /**
-       * Contract can throw an error if user balance is smaller than fee.
-       * Or if you try to send 0 as amount.
-       */
-      throw new Error(
-        `Can't get a fee, make sure you have ${destinationFee.toDecimal()} ${destinationFee.getSymbol()} in your source balance, needed for destination fees`,
-        { cause: error },
-      );
-    }
+  if (contract) {
+    return getContractFee({
+      address: sourceAddress,
+      chain: chain as EvmChain | EvmParachain,
+      contract,
+      destinationFee,
+      feeBalance,
+      feeConfig,
+    });
   }
 
-  const fee = await getExtrinsicFee(
+  return getExtrinsicFee({
+    address: sourceAddress,
     balance,
-    extrinsic as ExtrinsicConfig,
-    polkadot,
-    sourceAddress,
-  );
-
-  const extra = feeConfig?.extra
-    ? toBigInt(feeConfig.extra, feeBalance.decimals)
-    : 0n;
-  const totalFee = fee + extra;
-
-  const converted = chain.usesChainDecimals
-    ? convertDecimals(totalFee, polkadot.decimals, feeBalance.decimals)
-    : totalFee;
-
-  return feeBalance.copyWith({ amount: converted });
-}
-
-export async function getExtrinsicFee(
-  balance: AssetAmount,
-  extrinsic: ExtrinsicConfig,
-  polkadot: PolkadotService,
-  sourceAddress: string,
-): Promise<bigint> {
-  /**
-   * If account has no balance (account doesn't exist),
-   * we can't get the fee from some chains.
-   * Example: Phala - PHA
-   */
-  try {
-    return await polkadot.getFee(sourceAddress, extrinsic);
-  } catch (error) {
-    if (balance) {
-      throw error;
-    }
-
-    return 0n;
-  }
+    chain,
+    extrinsic: extrinsic as ExtrinsicConfig,
+    feeBalance,
+    feeConfig,
+  });
 }
 
 export interface GetAssetsBalancesParams {

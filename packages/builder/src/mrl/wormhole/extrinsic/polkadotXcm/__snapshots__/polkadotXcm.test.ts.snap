@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "batchAll",
   "getArgs": [Function],
   "module": "utility",
-  "type": "Substrate",
 }
 `;
 

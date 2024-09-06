@@ -19,23 +19,23 @@ export const apiMock = {
   },
 } as any;
 
-const test = new Asset({ key: 'usdt', originSymbol: 'USDT' });
-const testChainAsset = ChainAsset.fromAsset(test, {
+export const test = new Asset({ key: 'usdt', originSymbol: 'USDT' });
+export const testChainAsset = ChainAsset.fromAsset(test, {
   address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   decimals: 18,
   ids: { palletInstance: 10 },
 });
-const testAssetAmount = AssetAmount.fromChainAsset(testChainAsset, {
+export const testAssetAmount = AssetAmount.fromChainAsset(testChainAsset, {
   amount: 99_000_000_000n,
 });
 
-const test2 = new Asset({ key: 'rmrk', originSymbol: 'RMRK' });
-const testChainAsset2 = ChainAsset.fromAsset(test2, {
+export const test2 = new Asset({ key: 'rmrk', originSymbol: 'RMRK' });
+export const testChainAsset2 = ChainAsset.fromAsset(test2, {
   address: '0x2A1A1e691d79Bf461ac08a20cE3DF6E385b82444',
   decimals: 18,
   ids: { palletInstance: 18 },
 });
-const testAssetAmount2 = AssetAmount.fromChainAsset(testChainAsset2, {
+export const testAssetAmount2 = AssetAmount.fromChainAsset(testChainAsset2, {
   amount: 5_000_000_000n,
 });
 

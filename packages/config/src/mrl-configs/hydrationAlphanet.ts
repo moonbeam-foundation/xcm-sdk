@@ -25,7 +25,10 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      mrl: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(), // TODO:
+      mrl: {
+        isAutomatic: true,
+        transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(), // TODO:
+      },
     },
   ],
 });

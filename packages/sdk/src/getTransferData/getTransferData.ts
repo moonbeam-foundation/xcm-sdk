@@ -2,17 +2,17 @@
 import { AssetRoute } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
-import { TransferContractInterface, createContract } from '../contract';
 import {
-  DestinationChainTransferData,
-  Signers,
-  TransferData,
-} from '../sdk.interfaces';
+  AnyParachain,
+  AssetAmount,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
+import { Signers, TransferData } from '../sdk.interfaces';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
-import { PolkadotService } from '../polkadot';
-import { convertToChainDecimals } from './getTransferData.utils';
+import { PolkadotService } from '../services/polkadot';
+import { convertToChainDecimals, getMin } from './getTransferData.utils';
+import { EvmService } from '../services/evm/EvmService';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -102,9 +102,9 @@ export async function getTransferData({
           throw new Error('EVM Signer must be provided');
         }
 
-        return (
-          createContract(source, contract) as TransferContractInterface
-        ).transfer(evmSigner);
+        const evm = EvmService.create(source as EvmParachain);
+
+        return evm.transfer(evmSigner, contract);
       }
 
       if (extrinsic) {
@@ -122,25 +122,4 @@ export async function getTransferData({
       throw new Error('Either contract or extrinsic must be provided');
     },
   };
-}
-
-function getMin({
-  balance,
-  existentialDeposit,
-  fee,
-  min,
-}: DestinationChainTransferData) {
-  const result = Big(0)
-    .plus(balance.isSame(fee) ? fee.toBig() : Big(0))
-    .plus(
-      balance.isSame(existentialDeposit) &&
-        balance.toBig().lt(existentialDeposit.toBig())
-        ? existentialDeposit.toBig()
-        : Big(0),
-    )
-    .plus(balance.toBig().lt(min.toBig()) ? min.toBig() : Big(0));
-
-  return balance.copyWith({
-    amount: BigInt(result.toFixed()),
-  });
 }

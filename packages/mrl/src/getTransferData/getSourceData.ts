@@ -6,24 +6,28 @@ import {
 } from '@moonbeam-network/xcm-config';
 import {
   getBalance,
+  getContractFee,
   getDestinationFeeBalance,
   getExistentialDeposit,
+  getExtrinsicFee,
   getMax,
   getMin,
-  PolkadotService,
   SourceChainTransferData,
 } from '@moonbeam-network/xcm-sdk';
 import {
+  AnyChain,
   AnyParachain,
   AssetAmount,
+  EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import {
-  convertDecimals,
-  getPolkadotApi,
-  toBigInt,
-} from '@moonbeam-network/xcm-utils';
-import { MrlBuilderParams } from '@moonbeam-network/xcm-builder';
+  ContractConfig,
+  ExtrinsicConfig,
+  MrlBuilderParams,
+  WormholeConfig,
+} from '@moonbeam-network/xcm-builder';
 import { getTransact } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
@@ -109,12 +113,10 @@ export async function getSourceData({
   const fee = await getFee({
     balance,
     chain: source,
-    contract,
     destinationFee,
-    extrinsic,
+    transfer,
     feeBalance,
     feeConfig: route.source.fee,
-    polkadot: sourcePolkadot,
     sourceAddress,
   });
 
@@ -139,89 +141,42 @@ export async function getSourceData({
 
 export interface GetFeeParams {
   balance: AssetAmount;
-  feeBalance: AssetAmount;
-  contract?: ContractConfig;
-  chain: AnyParachain;
+  chain: AnyChain;
   destinationFee: AssetAmount;
-  extrinsic?: ExtrinsicConfig;
+  feeBalance: AssetAmount;
   feeConfig?: FeeConfig;
-  polkadot: PolkadotService;
   sourceAddress: string;
+  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
 export async function getFee({
   balance,
   feeBalance,
   chain,
-  contract: contractConfig,
   destinationFee,
-  extrinsic,
+  transfer,
   feeConfig,
-  polkadot,
   sourceAddress,
 }: GetFeeParams): Promise<AssetAmount> {
-  if (!contractConfig && !extrinsic) {
-    throw new Error('Either contract or extrinsic must be provided');
+  // TODO: What do we do if transfer is WormholeConfig?
+
+  if (ContractConfig.is(transfer)) {
+    return getContractFee({
+      address: sourceAddress,
+      chain: chain as EvmChain | EvmParachain,
+      contract: transfer,
+      destinationFee,
+      feeBalance,
+      feeConfig,
+    });
   }
 
-  if (contractConfig) {
-    const contract = createContract(
-      chain,
-      contractConfig,
-    ) as TransferContractInterface;
-    try {
-      const fee = await contract.getFee(balance.amount, sourceAddress);
-
-      return feeBalance.copyWith({ amount: fee });
-    } catch (error) {
-      /**
-       * Contract can throw an error if user balance is smaller than fee.
-       * Or if you try to send 0 as amount.
-       */
-      throw new Error(
-        `Can't get a fee, make sure you have ${destinationFee.toDecimal()} ${destinationFee.getSymbol()} in your source balance, needed for destination fees`,
-        { cause: error },
-      );
-    }
-  }
-
-  const fee = await getExtrinsicFee(
+  return getExtrinsicFee({
+    address: sourceAddress,
     balance,
-    extrinsic as ExtrinsicConfig,
-    polkadot,
-    sourceAddress,
-  );
-
-  const extra = feeConfig?.extra
-    ? toBigInt(feeConfig.extra, feeBalance.decimals)
-    : 0n;
-  const totalFee = fee + extra;
-
-  const converted = chain.usesChainDecimals
-    ? convertDecimals(totalFee, polkadot.decimals, feeBalance.decimals)
-    : totalFee;
-
-  return feeBalance.copyWith({ amount: converted });
-}
-
-export async function getExtrinsicFee(
-  balance: AssetAmount,
-  extrinsic: ExtrinsicConfig,
-  polkadot: PolkadotService,
-  sourceAddress: string,
-): Promise<bigint> {
-  /**
-   * If account has no balance (account doesn't exist),
-   * we can't get the fee from some chains.
-   * Example: Phala - PHA
-   */
-  try {
-    return await polkadot.getFee(sourceAddress, extrinsic);
-  } catch (error) {
-    if (balance) {
-      throw error;
-    }
-
-    return 0n;
-  }
+    chain: chain as AnyParachain,
+    extrinsic: transfer as ExtrinsicConfig,
+    feeBalance,
+    feeConfig,
+  });
 }

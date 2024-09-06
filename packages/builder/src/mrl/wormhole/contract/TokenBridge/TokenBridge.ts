@@ -32,8 +32,15 @@ export function TokenBridge() {
           moonChain.getChainAsset(asset).decimals,
         ).amount;
 
+        const contractAddress =
+          wh.getChain('Moonbeam').config.contracts.tokenBridge;
+
+        if (!contractAddress) {
+          throw new Error(`Wormhole address not found for ${moonChain.name}`);
+        }
+
         return new ContractConfig({
-          address: wh.getChain('Moonbeam').config.contracts.tokenBridge,
+          address: contractAddress,
           abi: TOKEN_BRIDGE_ABI,
           args: [
             tokenAddressOnMoonChain,

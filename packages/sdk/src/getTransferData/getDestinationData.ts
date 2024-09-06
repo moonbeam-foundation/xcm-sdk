@@ -4,7 +4,7 @@ import {
   getBalance,
   getDestinationFee,
   getExistentialDeposit,
-  getMin,
+  getAssetMin,
 } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
@@ -24,7 +24,7 @@ export async function getDestinationData({
     builder: route.destination.balance,
     chain: destination,
   });
-  const min = await getMin({
+  const min = await getAssetMin({
     asset,
     builder: route.destination.min,
     chain: destination,

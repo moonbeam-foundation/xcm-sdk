@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -58,7 +57,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -141,7 +139,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -198,7 +195,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -280,7 +276,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -342,7 +337,6 @@ ExtrinsicConfig {
   "func": "limitedReserveWithdrawAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -405,7 +399,6 @@ ExtrinsicConfig {
   "func": "limitedReserveWithdrawAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 

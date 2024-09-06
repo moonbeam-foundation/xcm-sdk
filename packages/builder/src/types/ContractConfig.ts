@@ -4,13 +4,13 @@ import { BaseConfig, BaseConfigConstructorParams } from './BaseConfig';
 
 export interface ContractConfigConstructorParams
   extends BaseConfigConstructorParams {
-  address?: string;
+  address: string;
   abi: Abi;
   args: any[];
 }
 
 export class ContractConfig extends BaseConfig {
-  readonly address?: string;
+  readonly address: string;
 
   readonly abi: Abi;
 
