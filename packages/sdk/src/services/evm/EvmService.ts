@@ -41,16 +41,16 @@ export class EvmService {
   }
 
   async getBalance(address: string, contract: ContractConfig): Promise<bigint> {
-    const balance = this.client.readContract({
+    const balance = await this.client.readContract({
       abi: contract.abi,
       address: contract.address as Address,
       args: [address],
       functionName: 'balanceOf',
     });
 
-    if (!balance || typeof balance !== 'bigint') {
+    if (typeof balance !== 'bigint') {
       throw new Error(
-        `Could not get balance for ${address}) from contract ${contract.address}`,
+        `Could not get balance on ${this.chain.name} for ${address} from contract ${contract.address}`,
       );
     }
 
