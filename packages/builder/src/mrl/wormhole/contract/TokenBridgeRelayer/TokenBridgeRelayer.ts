@@ -45,9 +45,9 @@ export function TokenBridgeRelayer() {
           args: [
             tokenAddressOnMoonChain,
             tokenAmountOnMoonChain,
+            0,
             whDestination,
             destinationAddress32bytes,
-            0n,
             0,
           ],
           func: 'transferTokensWithRelay',

@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "transact",
   "getArgs": [Function],
   "module": "ethereumXcm",
-  "type": "Substrate",
 }
 `;
 
