@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.11
+
+### Patch Changes
+
+- [#342](https://github.com/moonbeam-foundation/xcm-sdk/pull/342) [`8add299`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8add299dc2edc34a8812c8f846ac314c03caa6d7) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Litmus configuration
+
 ## 2.5.10
 
 ### Patch Changes
