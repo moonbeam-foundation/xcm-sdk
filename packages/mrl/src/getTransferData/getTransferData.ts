@@ -14,7 +14,11 @@ import {
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import Big from 'big.js';
-import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
+import {
+  ContractConfig,
+  ExtrinsicConfig,
+  WormholeConfig,
+} from '@moonbeam-network/xcm-builder';
 import { TransferData } from '../mrl.interfaces';
 import { getSourceData } from './getSourceData';
 import { buildTransfer } from './getTransferData.utils';
@@ -116,7 +120,18 @@ export async function getTransferData({
         return polkadot.transfer(sourceAddress, transfer, polkadotSigner);
       }
 
-      // TODO: Wormhole transfer!
+      if (
+        WormholeConfig.is(transfer) &&
+        (EvmChain.is(source) || EvmParachain.is(source))
+      ) {
+        if (!evmSigner) {
+          throw new Error('EVM Signer must be provided');
+        }
+
+        const evm = EvmService.create(source);
+
+        return evm.transfer(evmSigner, transfer);
+      }
 
       throw new Error('Either contract or extrinsic must be provided');
     },

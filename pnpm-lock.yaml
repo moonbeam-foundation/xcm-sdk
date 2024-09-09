@@ -224,6 +224,12 @@ importers:
       '@polkadot/util':
         specifier: ^13.0.2
         version: 13.0.2
+      '@wormhole-foundation/sdk-connect':
+        specifier: ^0.8.2
+        version: 0.8.2
+      '@wormhole-foundation/sdk-evm':
+        specifier: ^0.8.2
+        version: 0.8.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       big.js:
         specifier: ^6.2.1
         version: 6.2.1
@@ -2299,7 +2305,6 @@ packages:
 
   bun@1.1.27:
     resolution: {integrity: sha512-FLnMaOuVVuhjPIfmlRtAE42B2x+oSWO6jW8MZ/Ss179qokN//nzIhuj/07bdA016U6d11HyLvvGb6eaH0HKhBQ==}
-    cpu: [arm64, x64]
     os: [darwin, linux, win32]
     hasBin: true
 
