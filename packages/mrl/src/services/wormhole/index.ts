@@ -1,1 +1,1 @@
-export * from './WormholeServic';
+export * from './WormholeService';

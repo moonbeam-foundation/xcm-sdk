@@ -48,6 +48,7 @@
     "neuroweb",
     "nodl",
     "nodle",
+    "parallelizable",
     "onfinality",
     "parachain",
     "parachains",
@@ -78,8 +79,10 @@
     "vksm",
     "vmanta",
     "vmovr",
+    "wagmi",
     "wftm",
     "wifd",
+    "xfer",
     "xtokens"
   ],
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",

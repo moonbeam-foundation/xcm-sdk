@@ -14,7 +14,10 @@ export interface TransferData {
   max: AssetAmount;
   min: AssetAmount;
   source: SourceTransferData;
-  transfer(amount: bigint | number | string, signers: Signers): Promise<string>;
+  transfer(
+    amount: bigint | number | string,
+    signers: Signers,
+  ): Promise<string[]>;
 }
 
 export interface SourceTransferData extends ChainTransferData {

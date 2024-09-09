@@ -22,6 +22,7 @@ import {
 import { TransferData } from '../mrl.interfaces';
 import { getSourceData } from './getSourceData';
 import { buildTransfer } from './getTransferData.utils';
+import { WormholeService } from '../services/wormhole';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -80,7 +81,7 @@ export async function getTransferData({
     async transfer(
       amount,
       { evmSigner, polkadotSigner }: Partial<Signers>,
-    ): Promise<string> {
+    ): Promise<string[]> {
       const source = route.source.chain;
 
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
@@ -106,8 +107,9 @@ export async function getTransferData({
         }
 
         const evm = EvmService.create(source);
+        const hash = await evm.transfer(evmSigner, transfer);
 
-        return evm.transfer(evmSigner, transfer);
+        return [hash];
       }
 
       if (ExtrinsicConfig.is(transfer) && EvmParachain.isAnyParachain(source)) {
@@ -116,8 +118,13 @@ export async function getTransferData({
         }
 
         const polkadot = await PolkadotService.create(source);
+        const hash = await polkadot.transfer(
+          sourceAddress,
+          transfer,
+          polkadotSigner,
+        );
 
-        return polkadot.transfer(sourceAddress, transfer, polkadotSigner);
+        return [hash];
       }
 
       if (
@@ -128,9 +135,9 @@ export async function getTransferData({
           throw new Error('EVM Signer must be provided');
         }
 
-        const evm = EvmService.create(source);
+        const wh = WormholeService.create(source);
 
-        return evm.transfer(evmSigner, transfer);
+        return wh.transfer(evmSigner, transfer);
       }
 
       throw new Error('Either contract or extrinsic must be provided');

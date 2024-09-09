@@ -7,6 +7,7 @@
     "dev": "pnpm run build -- --watch",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "pnpm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
     "prepack": "prettier --write build/index.d.ts"
   },
   "repository": {
