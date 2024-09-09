@@ -20,7 +20,6 @@ import { khalaConfig } from './khala';
 import { kintsugiConfig } from './kintsugi';
 import { kusamaConfig } from './kusama';
 import { kusamaAssetHubConfig } from './kusamaAssetHub';
-import { litmusConfig } from './litmus';
 import { mangataKusamaConfig } from './mangataKusama';
 import { mantaParachainConfig } from './mantaParachain';
 import { moonbaseAlphaConfig } from './moonbaseAlpha';
@@ -70,7 +69,6 @@ export const chainsConfigList: ChainConfig[] = [
   khalaConfig,
   kintsugiConfig,
   kusamaConfig,
-  litmusConfig,
   mangataKusamaConfig,
   mantaParachainConfig,
   moonbaseAlphaConfig,
