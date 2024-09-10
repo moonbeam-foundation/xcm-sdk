@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
-import { Option } from '@polkadot/types';
-import {
+import type { Option } from '@polkadot/types';
+import type {
   FrameSystemAccountInfo,
   PalletAssetsAssetAccount,
   PalletBalancesAccountData,
@@ -9,7 +7,7 @@ import {
 import { evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfig } from '../contract';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
-import {
+import type {
   BalanceConfigBuilder,
   EquilibriumSystemBalanceData,
   PalletBalancesAccountDataOld,
@@ -103,9 +101,9 @@ function system() {
               balances = res;
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
             if (Array.isArray((res as any)?.v0?.balance)) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
               balances = (res as any).v0.balance;
             }
 

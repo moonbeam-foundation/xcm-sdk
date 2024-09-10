@@ -1,5 +1,5 @@
-import { Chain, defineChain } from 'viem';
-import { ChainAsset } from '../asset';
+import { type Chain, defineChain } from 'viem';
+import type { ChainAsset } from '../asset';
 
 export interface GetViemChainParams {
   id: number;

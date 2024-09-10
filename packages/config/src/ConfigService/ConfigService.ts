@@ -1,4 +1,4 @@
-import {
+import type {
   AnyAsset,
   AnyChain,
   Asset,
@@ -6,9 +6,9 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
-import { AssetRoute } from '../types/AssetRoute';
-import { ChainRoutes } from '../types/ChainRoutes';
 import { getKey } from '../config.utils';
+import type { AssetRoute } from '../types/AssetRoute';
+import type { ChainRoutes } from '../types/ChainRoutes';
 
 export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;

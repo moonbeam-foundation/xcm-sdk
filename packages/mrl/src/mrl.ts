@@ -1,5 +1,9 @@
-import { AnyAsset, AnyChain, Ecosystem } from '@moonbeam-network/xcm-types';
 import { ConfigService, mrlRoutesMap } from '@moonbeam-network/xcm-config';
+import type {
+  AnyAsset,
+  AnyChain,
+  Ecosystem,
+} from '@moonbeam-network/xcm-types';
 import { getTransferData } from './getTransferData/getTransferData';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: mrlRoutesMap });

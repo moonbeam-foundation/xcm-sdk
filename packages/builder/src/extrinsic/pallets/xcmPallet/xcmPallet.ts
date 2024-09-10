@@ -1,8 +1,8 @@
-import {
+import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
+import type {
   ExtrinsicConfigBuilder,
   Parents,
 } from '../../ExtrinsicBuilder.interfaces';
-import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import { getPolkadotXcmExtrinsicArgs } from '../polkadotXcm/polkadotXcm.util';
 
 const pallet = 'xcmPallet';

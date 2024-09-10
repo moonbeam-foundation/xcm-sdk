@@ -1,6 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { describe, expect, it } from 'vitest';
 import Big from 'big.js';
+import { describe, expect, it } from 'vitest';
 import {
   convertDecimals,
   hasDecimalOverflow,

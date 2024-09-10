@@ -1,5 +1,5 @@
 import type { Chain as ViemChain } from 'viem';
-import { Chain, ChainConstructorParams } from './Chain';
+import { Chain, type ChainConstructorParams } from './Chain';
 import { getViemChain } from './Chain.utils';
 
 export interface EvmChainConstructorParams extends ChainConstructorParams {

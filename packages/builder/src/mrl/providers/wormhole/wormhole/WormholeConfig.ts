@@ -1,6 +1,5 @@
 import type { Network, Wormhole } from '@wormhole-foundation/sdk-connect';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type WormholeTransferFunctions = 'tokenTransfer';
 export type Args = Parameters<Wormhole<Network>[WormholeTransferFunctions]>;
 

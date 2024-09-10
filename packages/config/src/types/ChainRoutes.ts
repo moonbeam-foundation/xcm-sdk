@@ -2,8 +2,8 @@ import type { AnyAsset, AnyChain, Asset } from '@moonbeam-network/xcm-types';
 import { getKey } from '../config.utils';
 import {
   AssetRoute,
-  AssetRouteConstructorParams,
-  SourceConfig,
+  type AssetRouteConstructorParams,
+  type SourceConfig,
 } from './AssetRoute';
 
 export interface ChainRoutesConstructorParams {

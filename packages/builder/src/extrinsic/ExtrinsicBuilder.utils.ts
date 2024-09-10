@@ -1,4 +1,4 @@
-import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
+import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import { getTypeDef } from '@polkadot/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
@@ -6,7 +6,7 @@ import { XcmVersion } from './ExtrinsicBuilder.interfaces';
 
 export function getExtrinsicArgumentVersion(
   func?: SubmittableExtrinsicFunction<'promise'>,
-  index: number = 0,
+  index = 0,
 ): XcmVersion {
   if (!func) return XcmVersion.v1;
 

@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
-import { ethereumXcm } from './ethereumXcm';
 import {
   mrlBuildParamsMock,
   mrlBuildParamsMock2,
 } from '../../../../../../fixtures';
-import { ExtrinsicConfig } from '../../../../../extrinsic';
+import type { ExtrinsicConfig } from '../../../../../extrinsic';
+import { ethereumXcm } from './ethereumXcm';
 
 describe('ethereumXcm', () => {
   describe('transact', () => {

@@ -1,5 +1,5 @@
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import { Asset, AssetConstructorParams } from './Asset';
+import { Asset, type AssetConstructorParams } from './Asset';
 
 export interface ChainAssetConstructorParams extends AssetConstructorParams {
   address?: string;

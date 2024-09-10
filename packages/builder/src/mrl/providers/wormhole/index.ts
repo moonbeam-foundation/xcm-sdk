@@ -1,5 +1,5 @@
-import { extrinsic } from './extrinsic';
 import { contract } from './contract';
+import { extrinsic } from './extrinsic';
 import { wormhole as whBuilder } from './wormhole';
 
 export * from './wormhole/wormholeFactory';

@@ -1,7 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
 import { chainsList } from '@moonbeam-network/xcm-config';
-import { AnyChain } from '@moonbeam-network/xcm-types';
+import {
+  type AnyParachain,
+  EvmParachain,
+  Parachain,
+} from '@moonbeam-network/xcm-types';
 import { IncomingWebhook } from '@slack/webhook';
 import WebSocket from 'ws';
 
@@ -62,10 +64,8 @@ async function checkWebSocketEndpoints(endpoints: ChainEndpoint[]): Promise<{
   const successfulEndpoints: ChainEndpoint[] = [];
   const failingEndpoints: ChainEndpoint[] = [];
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const endpoint of endpoints) {
     try {
-      // eslint-disable-next-line no-await-in-loop
       const isAlive = await checkIsWebSocketAlive(endpoint);
       if (isAlive) {
         successfulEndpoints.push(endpoint);
@@ -84,10 +84,12 @@ async function checkWebSocketEndpoints(endpoints: ChainEndpoint[]): Promise<{
   return { failingEndpoints, successfulEndpoints };
 }
 
-function filterChainList(includeTestChains: boolean): AnyChain[] {
-  return includeTestChains
-    ? chainsList
-    : chainsList.filter((chain) => !chain.isTestChain);
+function filterChainList(includeTestChains: boolean): AnyParachain[] {
+  return (
+    includeTestChains
+      ? chainsList
+      : chainsList.filter((chain) => !chain.isTestChain)
+  ).filter((chain) => Parachain.is(chain) || EvmParachain.is(chain));
 }
 
 function getChainsAndEndpoints(includeTestChains: boolean) {

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -13,7 +12,7 @@ import {
   peaqEvm,
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
-import { AnyParachain } from '@moonbeam-network/xcm-types';
+import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
@@ -48,7 +47,7 @@ describe('sdk', () => {
     describe.each(config)(
       'on $chain.name for address: $address',
       ({ chain, address }) => {
-        it(`should get expected balances`, async () => {
+        it('should get expected balances', async () => {
           const result = await getParachainBalances(chain, address);
           expect(result).toMatchSnapshot();
         });

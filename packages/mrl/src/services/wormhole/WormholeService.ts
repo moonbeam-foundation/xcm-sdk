@@ -1,11 +1,14 @@
-import { WormholeConfig, wormholeFactory } from '@moonbeam-network/xcm-builder';
 import {
-  Wormhole,
+  type WormholeConfig,
+  wormholeFactory,
+} from '@moonbeam-network/xcm-builder';
+import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
+import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import {
   TokenTransfer,
-  TransferQuote,
+  type TransferQuote,
+  type Wormhole,
 } from '@wormhole-foundation/sdk-connect';
-import { EvmSigner } from '@moonbeam-network/xcm-sdk';
-import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { WormholeWagmiSigner } from './WormholeWagmiSigner';
 
 export class WormholeService {

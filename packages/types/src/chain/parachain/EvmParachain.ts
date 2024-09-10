@@ -1,7 +1,7 @@
 import type { Address } from 'viem';
 import type { Chain } from 'viem/chains';
-import { Parachain, ParachainConstructorParams } from './Parachain';
 import { getViemChain } from '../Chain.utils';
+import { Parachain, type ParachainConstructorParams } from './Parachain';
 
 export interface EvmParachainConstructorParams
   extends ParachainConstructorParams {

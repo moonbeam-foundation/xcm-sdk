@@ -8,7 +8,7 @@ import {
 } from '@moonbeam-network/xcm-config';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { Address, createWalletClient, http } from 'viem';
+import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
 // disable unnecessary warning logs

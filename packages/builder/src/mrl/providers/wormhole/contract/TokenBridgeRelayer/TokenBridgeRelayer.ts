@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { Address } from 'viem';
 import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
+import type { Address } from 'viem';
 import { ContractConfig } from '../../../../../contract';
-import { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { wormholeFactory } from '../../wormhole';
 import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
 

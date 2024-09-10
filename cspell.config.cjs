@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const vscodeConfig = require('./.vscode/settings.json');
 
 module.exports = {

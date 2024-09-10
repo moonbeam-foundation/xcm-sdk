@@ -12,8 +12,8 @@ import type {
   SubmittableExtrinsic,
 } from '@polkadot/api/types';
 import type { u128 } from '@polkadot/types';
-import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces';
+import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
 import type { HexString } from '@polkadot/util/types';
 
 export class PolkadotService {
@@ -104,7 +104,6 @@ export class PolkadotService {
     return hash.toString();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   #isSigner(signer: PolkadotSigner | IKeyringPair): signer is PolkadotSigner {
     return 'signPayload' in signer;
   }

@@ -1,6 +1,6 @@
-import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
+import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
+import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 
 export enum EqBalancesFee {
   SovereignAccWillPay = 'SovereignAccWillPay',

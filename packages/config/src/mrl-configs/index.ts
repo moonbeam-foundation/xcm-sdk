@@ -1,5 +1,4 @@
-import { ChainRoutes } from '../types/ChainRoutes';
-
+import type { ChainRoutes } from '../types/ChainRoutes';
 import { fantomTestnetRoutes } from './fantomTestnet';
 import { hydrationAlphanetRoutes } from './hydrationAlphanet';
 

@@ -1,22 +1,24 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { ContractConfig, ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
-import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
-import {
+import type {
+  ContractConfig,
+  ExtrinsicConfig,
+} from '@moonbeam-network/xcm-builder';
+import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
+import type {
   AnyParachain,
   AssetAmount,
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import type { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
 import { PolkadotService } from '../services/polkadot';
-import { EvmSigner, SourceChainTransferData } from '../sdk.interfaces';
 import {
+  getAssetMin,
   getBalance,
   getContractFee,
   getDestinationFeeBalance,
   getExistentialDeposit,
   getExtrinsicFee,
   getMax,
-  getAssetMin,
 } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
@@ -181,6 +183,7 @@ export async function getAssetsBalances({
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
   const uniqueRoutes = routes.reduce((acc: AssetRoute[], route: AssetRoute) => {
     if (!acc.some((a: AssetRoute) => a.asset.isEqual(route.asset))) {
+      // biome-ignore lint/performance/noAccumulatingSpread: I think this is fine here
       return [route, ...acc];
     }
 
@@ -189,7 +192,6 @@ export async function getAssetsBalances({
 
   const balances = await Promise.all(
     uniqueRoutes.map(async (route: AssetRoute) =>
-      // eslint-disable-next-line no-await-in-loop
       getBalance({
         address,
         asset: chain.getChainAsset(route.asset),

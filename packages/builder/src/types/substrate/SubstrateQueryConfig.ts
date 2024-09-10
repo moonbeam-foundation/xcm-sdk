@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
+import { BaseConfig, type BaseConfigConstructorParams } from '../BaseConfig';
 
 export interface QueryConfigConstructorParams
   extends BaseConfigConstructorParams {
   args?: unknown[];
+  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
   transform: (data: any) => Promise<bigint>;
 }
 

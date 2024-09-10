@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
+import { Asset } from '../../asset';
 import { Ecosystem } from '../Chain.interfaces';
 import { Parachain } from './Parachain';
-import { Asset } from '../../asset';
 
 describe('Parachain', () => {
   const parachain = new Parachain({
@@ -16,7 +15,7 @@ describe('Parachain', () => {
     nativeAsset: new Asset({ key: 'glmr', originSymbol: 'GLMR' }),
     parachainId: 0,
     ss58Format: 42,
-    ws: 'wss://rpc.polkadot.io',
+    ws: ['wss://rpc.polkadot.io'],
   });
 
   describe('is', () => {

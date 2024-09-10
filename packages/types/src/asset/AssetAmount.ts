@@ -3,8 +3,8 @@ import {
   toBigInt,
   toDecimal,
 } from '@moonbeam-network/xcm-utils';
-import Big, { RoundingMode } from 'big.js';
-import { ChainAsset, ChainAssetConstructorParams } from './ChainAsset';
+import Big, { type RoundingMode } from 'big.js';
+import { ChainAsset, type ChainAssetConstructorParams } from './ChainAsset';
 
 Big.NE = -18;
 

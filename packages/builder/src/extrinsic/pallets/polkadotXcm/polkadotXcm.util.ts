@@ -1,13 +1,13 @@
-import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import { Parents } from '../../ExtrinsicBuilder.interfaces';
+import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
+import type { BuilderPrams } from '../../../builder.interfaces';
+import type { Parents } from '../../ExtrinsicBuilder.interfaces';
 import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
 } from '../../ExtrinsicBuilder.utils';
-import { BuilderPrams } from '../../../builder.interfaces';
 
 export interface GetExtrinsicParams extends BuilderPrams {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
   asset: any;
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
@@ -21,9 +21,8 @@ export function getPolkadotXcmExtrinsicArgs({
   func,
   parents = 1,
   feeIndex = 0,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
 }: GetExtrinsicParams): any[] {
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const version = getExtrinsicArgumentVersion(func);
 
   return [

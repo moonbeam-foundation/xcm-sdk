@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
+import { Asset } from '../../asset';
 import { Ecosystem } from '../Chain.interfaces';
 import { EvmParachain } from './EvmParachain';
-import { Asset } from '../../asset';
 
 describe('EvmParachain', () => {
   const parachain = new EvmParachain({
