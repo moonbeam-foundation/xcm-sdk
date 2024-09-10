@@ -42,12 +42,12 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "^12.2.3",
-    "@polkadot/api-augment": "^12.2.3",
-    "@polkadot/types": "^12.2.3",
+    "@polkadot/api": "^12.4.2",
+    "@polkadot/api-augment": "^12.4.2",
+    "@polkadot/types": "^12.4.2",
     "@polkadot/util": "^13.0.2",
     "@wormhole-foundation/sdk-connect": "^0.8.2",
     "@wormhole-foundation/sdk-evm": "^0.8.2",
-    "viem": "^2.18.5"
+    "viem": "^2.20.0"
   }
 }
