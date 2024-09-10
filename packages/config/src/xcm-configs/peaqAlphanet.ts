@@ -15,6 +15,9 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       asset: agng,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -22,7 +25,6 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: agng,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -32,6 +34,9 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       source: {
         balance: BalanceBuilder().substrate().assets().account(),
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -39,7 +44,6 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: dev,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -53,6 +57,9 @@ export const peaqAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -60,7 +67,6 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: dev,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

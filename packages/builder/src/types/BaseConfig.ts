@@ -1,9 +1,6 @@
-import { CallType } from '../builder.interfaces';
-
 export interface BaseConfigConstructorParams {
   module: string;
   func: string;
-  type: CallType;
 }
 
 export class BaseConfig {
@@ -11,11 +8,8 @@ export class BaseConfig {
 
   readonly func: string;
 
-  readonly type: CallType;
-
-  constructor({ module, func, type }: BaseConfigConstructorParams) {
+  constructor({ module, func }: BaseConfigConstructorParams) {
     this.module = module;
     this.func = func;
-    this.type = type;
   }
 }

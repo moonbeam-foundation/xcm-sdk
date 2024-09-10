@@ -10,11 +10,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import {
-  ExtrinsicConfigBuilderPrams,
-  MrlExtrinsicConfigBuilderPrams,
-} from '../src/extrinsic';
-import { WormholeConfigBuilderPrams } from '../src/wormhole';
+import { MrlBuilderParams, BuilderPrams } from '../src';
 
 export const apiMock = {
   tx: {
@@ -23,23 +19,23 @@ export const apiMock = {
   },
 } as any;
 
-const test = new Asset({ key: 'usdt', originSymbol: 'USDT' });
-const testChainAsset = ChainAsset.fromAsset(test, {
+export const test = new Asset({ key: 'usdt', originSymbol: 'USDT' });
+export const testChainAsset = ChainAsset.fromAsset(test, {
   address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   decimals: 18,
   ids: { palletInstance: 10 },
 });
-const testAssetAmount = AssetAmount.fromChainAsset(testChainAsset, {
+export const testAssetAmount = AssetAmount.fromChainAsset(testChainAsset, {
   amount: 99_000_000_000n,
 });
 
-const test2 = new Asset({ key: 'rmrk', originSymbol: 'RMRK' });
-const testChainAsset2 = ChainAsset.fromAsset(test2, {
+export const test2 = new Asset({ key: 'rmrk', originSymbol: 'RMRK' });
+export const testChainAsset2 = ChainAsset.fromAsset(test2, {
   address: '0x2A1A1e691d79Bf461ac08a20cE3DF6E385b82444',
   decimals: 18,
   ids: { palletInstance: 18 },
 });
-const testAssetAmount2 = AssetAmount.fromChainAsset(testChainAsset2, {
+export const testAssetAmount2 = AssetAmount.fromChainAsset(testChainAsset2, {
   amount: 5_000_000_000n,
 });
 
@@ -103,7 +99,7 @@ export const fantomTestnet = new EvmChain({
   },
 });
 
-export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
+export const buildParamsMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
@@ -114,7 +110,7 @@ export const buildParamsMock: ExtrinsicConfigBuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
+export const buildParamsSameAssetMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
@@ -125,7 +121,7 @@ export const buildParamsSameAssetMock: ExtrinsicConfigBuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
+export const buildParachainParamsMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: interlayTestnetMock,
   destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
@@ -136,9 +132,10 @@ export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const mrlBuildParamsMock: MrlExtrinsicConfigBuilderPrams = {
+export const mrlBuildParamsMock: MrlBuilderParams = {
   ...buildParamsMock,
-  moonApi: {} as any,
+  isAutomatic: true,
+  moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
   moonGasLimit: 999_999n,
@@ -151,9 +148,10 @@ export const mrlBuildParamsMock: MrlExtrinsicConfigBuilderPrams = {
   },
 };
 
-export const mrlBuildParamsMock2: MrlExtrinsicConfigBuilderPrams = {
+export const mrlBuildParamsMock2: MrlBuilderParams = {
   ...buildParachainParamsMock,
-  moonApi: {} as any,
+  isAutomatic: true,
+  moonApi: apiMock,
   moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
   moonGasLimit: 999_999n,
@@ -166,23 +164,34 @@ export const mrlBuildParamsMock2: MrlExtrinsicConfigBuilderPrams = {
   },
 };
 
-export const wormholeConfigBuilderPrams: WormholeConfigBuilderPrams = {
+export const wormholeConfigBuilderPrams: MrlBuilderParams = {
   asset: testAssetAmount,
   destination: alphanetAssetHubMock,
   destinationAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
-  moonApi: {} as any,
+  destinationApi: apiMock,
+  fee: testAssetAmount,
+  isAutomatic: true,
+  moonApi: apiMock,
+  moonAsset: testAssetAmount,
   moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
   source: fantomTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  sourceApi: apiMock,
 };
 
-export const wormholeToMoonchainConfigBuilderPrams: WormholeConfigBuilderPrams =
-  {
-    asset: testAssetAmount,
-    destination: moonbaseAlphaMock,
-    destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
-    moonApi: {} as any,
-    moonChain: moonbaseAlphaMock,
-    source: fantomTestnet,
-    sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
-  };
+export const wormholeToMoonchainConfigBuilderPrams: MrlBuilderParams = {
+  asset: testAssetAmount,
+  destination: moonbaseAlphaMock,
+  destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+  destinationApi: apiMock,
+  fee: testAssetAmount,
+  isAutomatic: true,
+  moonApi: apiMock,
+  moonAsset: testAssetAmount,
+  moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
+  source: fantomTestnet,
+  sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  sourceApi: apiMock,
+};

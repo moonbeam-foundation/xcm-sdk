@@ -54,6 +54,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: bifrostKusama,
@@ -61,7 +64,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0008544,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -70,6 +72,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: calamari,
@@ -77,7 +82,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.001,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -86,6 +90,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: crustShadow,
@@ -93,7 +100,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0002,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -102,6 +108,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: karura,
@@ -109,7 +118,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.001,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -118,6 +126,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: khala,
@@ -125,7 +136,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0002,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -134,6 +144,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: mangataKusama,
@@ -141,7 +154,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.002,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -150,6 +162,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: shiden,
@@ -157,7 +172,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0002,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -166,6 +180,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: turing,
@@ -173,7 +190,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.004,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -182,6 +198,9 @@ export const moonriverRoutes = new ChainRoutes({
       asset: movr,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: picasso,
@@ -189,7 +208,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.001,
           asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -202,6 +220,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: karura,
@@ -209,7 +230,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.256,
           asset: aseed,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -222,6 +242,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: bifrostKusama,
@@ -229,7 +252,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0256,
           asset: bnc,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -242,6 +264,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: darwiniaCrab,
@@ -249,7 +274,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 4,
           asset: crab,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -262,6 +286,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: crustShadow,
@@ -269,7 +296,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.004,
           asset: csm,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -282,6 +308,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: karura,
@@ -289,7 +318,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.032,
           asset: kar,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -302,6 +330,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: kintsugi,
@@ -309,7 +340,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0000011,
           asset: kbtc,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -322,6 +352,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: kintsugi,
@@ -329,7 +362,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.00084,
           asset: kint,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -342,6 +374,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: calamari,
@@ -349,7 +384,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.000004,
           asset: kma,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -362,6 +396,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: kusama,
@@ -369,7 +406,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.00168,
           asset: ksm,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -382,6 +418,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: litmus,
@@ -389,7 +428,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0032,
           asset: lit,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -402,6 +440,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: mangataKusama,
@@ -409,7 +450,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 5.5,
           asset: mgx,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -422,6 +462,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: khala,
@@ -429,7 +472,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.32,
           asset: pha,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -442,6 +484,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: picasso,
@@ -449,7 +494,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.001,
           asset: pica,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -462,6 +506,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: kusamaAssetHub,
@@ -469,7 +516,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0000504,
           asset: rmrk,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -482,6 +528,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: shiden,
@@ -489,7 +538,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.032,
           asset: sdn,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -502,6 +550,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: integritee,
@@ -509,7 +560,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.004,
           asset: teer,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -522,6 +572,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: tinkernet,
@@ -529,7 +582,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.4,
           asset: tnkr,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -542,6 +594,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: turing,
@@ -549,7 +604,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: tur,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -562,6 +616,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: kusamaAssetHub,
@@ -569,7 +626,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.00504,
           asset: usdt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -582,6 +638,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: robonomics,
@@ -589,7 +648,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.000032,
           asset: xrt,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -602,6 +660,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: bifrostKusama,
@@ -609,7 +670,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0001,
           asset: vbnc,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -622,6 +682,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: bifrostKusama,
@@ -629,7 +692,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.0001,
           asset: vksm,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
@@ -642,6 +704,9 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         chain: bifrostKusama,
@@ -649,7 +714,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.00000001,
           asset: vmovr,
-          balance: BalanceBuilder().evm().erc20(),
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),

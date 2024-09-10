@@ -1,22 +1,28 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
-import { isString, u8aToHex } from '@polkadot/util';
+import { u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
-import { ContractConfig } from '../../ContractConfig';
+import { ContractConfig } from '../../../types/ContractConfig';
+import { XTOKENS_ABI } from './XtokensABI';
 
 const U_64_MAX = 18446744073709551615n;
+const XTOKENS_CONTRACT_ADDRESS = '0x0000000000000000000000000000000000000804';
 
 export function Xtokens() {
   return {
     transfer: (weight = U_64_MAX): ContractConfigBuilder => ({
-      build: ({ address, amount, asset, destination }) =>
+      build: ({ destinationAddress, asset, destination }) =>
         new ContractConfig({
+          address: XTOKENS_CONTRACT_ADDRESS,
+          abi: XTOKENS_ABI,
           args: [
-            isString(asset) ? formatAssetIdToERC20(asset) : asset,
-            amount,
-            getDestinationMultilocation(address, destination),
+            asset.address
+              ? formatAssetIdToERC20(asset.address)
+              : asset.getAssetId(),
+            asset.amount,
+            getDestinationMultilocation(destinationAddress, destination),
             weight,
           ],
           func: 'transfer',
@@ -24,18 +30,27 @@ export function Xtokens() {
         }),
     }),
     transferMultiCurrencies: (weight = U_64_MAX): ContractConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee, feeAsset }) =>
+      build: ({ asset, destination, destinationAddress, fee }) =>
         new ContractConfig({
+          address: XTOKENS_CONTRACT_ADDRESS,
+          abi: XTOKENS_ABI,
           args: [
             [
-              [isString(asset) ? formatAssetIdToERC20(asset) : asset, amount],
               [
-                isString(feeAsset) ? formatAssetIdToERC20(feeAsset) : feeAsset,
+                asset.address
+                  ? formatAssetIdToERC20(asset.address)
+                  : asset.getAssetId(),
+                asset.amount,
+              ],
+              [
+                fee.address
+                  ? formatAssetIdToERC20(fee.address)
+                  : fee.getAssetId(),
                 fee,
               ],
             ],
             1, // index of the fee asset
-            getDestinationMultilocation(address, destination),
+            getDestinationMultilocation(destinationAddress, destination),
             weight,
           ],
           func: 'transferMultiCurrencies',
@@ -43,17 +58,21 @@ export function Xtokens() {
         }),
     }),
     transferWithEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
-      build: ({ address, amount, asset, destination }) => {
+      build: ({ destinationAddress, asset, destination }) => {
         const multilocation =
           getDestinationMultilocationForPrecompileDestination(
-            address,
+            destinationAddress,
             destination,
           );
 
         return new ContractConfig({
+          address: XTOKENS_CONTRACT_ADDRESS,
+          abi: XTOKENS_ABI,
           args: [
-            isString(asset) ? formatAssetIdToERC20(asset) : asset,
-            amount,
+            asset.address
+              ? formatAssetIdToERC20(asset.address)
+              : asset.getAssetId(),
+            asset.amount,
             multilocation,
             weight,
           ],

@@ -33,15 +33,15 @@ export function Mrl(options?: MrlOptions) {
               });
 
               return {
-                setAddresses(
-                  sourceAddress: string,
-                  destinationAddress: string,
-                ) {
-                  const sourceChain = service.getChain(source);
-
+                setAddresses({
+                  sourceAddress,
+                  destinationAddress,
+                }: {
+                  sourceAddress: string;
+                  destinationAddress: string;
+                }) {
                   return getTransferData({
                     route,
-                    source: sourceChain,
                     sourceAddress,
                     destinationAddress,
                   });

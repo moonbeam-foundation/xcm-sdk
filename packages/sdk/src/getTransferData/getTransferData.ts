@@ -2,16 +2,17 @@
 import { AssetRoute } from '@moonbeam-network/xcm-config';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
-import { TransferContractInterface, createContract } from '../contract';
 import {
-  DestinationChainTransferData,
-  Signers,
-  TransferData,
-} from '../sdk.interfaces';
+  AnyParachain,
+  AssetAmount,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
+import { Signers, TransferData } from '../sdk.interfaces';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
-import { PolkadotService } from '../polkadot';
+import { PolkadotService } from '../services/polkadot';
+import { convertToChainDecimals, getMin } from './getTransferData.utils';
+import { EvmService } from '../services/evm/EvmService';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -30,12 +31,9 @@ export async function getTransferData({
   });
 
   // Here we need to convert the fee on the destination chain to an asset on source chain.
-  const destinationFeeAsset = route.source.chain.getChainAsset(
-    destinationData.fee,
-  );
-  const destinationFee = AssetAmount.fromChainAsset(destinationFeeAsset, {
-    amount: destinationData.fee.convertDecimals(destinationFeeAsset.decimals)
-      .amount,
+  const destinationFee = convertToChainDecimals({
+    asset: destinationData.fee,
+    chain: route.source.chain,
   });
 
   const sourceData = await getSourceData({
@@ -61,12 +59,6 @@ export async function getTransferData({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
-    /**
-     * Right now it will be always true
-     * because all current asset can be sent both directions
-     * and our configuration need destination config.
-     */
-    isSwapPossible: true,
     max: sourceData.max,
     min: getMin(destinationData),
     source: sourceData,
@@ -85,12 +77,14 @@ export async function getTransferData({
         await PolkadotService.createMulti([source, destination]);
 
       const contract = route.contract?.build({
-        address: destinationAddress,
-        amount: bigintAmount,
-        asset: asset.address || asset.getAssetId(),
+        asset,
         destination,
-        fee: destinationFee.amount,
-        feeAsset: destinationFee.address || destinationFee.getAssetId(),
+        destinationAddress,
+        destinationApi: destinationPolkadot.api,
+        fee: destinationFee,
+        source,
+        sourceAddress,
+        sourceApi: sourcePolkadot.api,
       });
       const extrinsic = route.extrinsic?.build({
         asset,
@@ -108,9 +102,9 @@ export async function getTransferData({
           throw new Error('EVM Signer must be provided');
         }
 
-        return (
-          createContract(source, contract) as TransferContractInterface
-        ).transfer(evmSigner);
+        const evm = EvmService.create(source as EvmParachain);
+
+        return evm.transfer(evmSigner, contract);
       }
 
       if (extrinsic) {
@@ -128,25 +122,4 @@ export async function getTransferData({
       throw new Error('Either contract or extrinsic must be provided');
     },
   };
-}
-
-function getMin({
-  balance,
-  existentialDeposit,
-  fee,
-  min,
-}: DestinationChainTransferData) {
-  const result = Big(0)
-    .plus(balance.isSame(fee) ? fee.toBig() : Big(0))
-    .plus(
-      balance.isSame(existentialDeposit) &&
-        balance.toBig().lt(existentialDeposit.toBig())
-        ? existentialDeposit.toBig()
-        : Big(0),
-    )
-    .plus(balance.toBig().lt(min.toBig()) ? min.toBig() : Big(0));
-
-  return balance.copyWith({
-    amount: BigInt(result.toFixed()),
-  });
 }

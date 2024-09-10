@@ -7,6 +7,7 @@
     "dev": "pnpm run build -- --watch",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "pnpm run lint -- --fix",
+    "typecheck": "tsc --noEmit",
     "prepack": "prettier --write build/index.d.ts"
   },
   "repository": {
@@ -33,7 +34,20 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "2.5.4",
-    "@moonbeam-network/xcm-types": "2.3.2"
+    "@moonbeam-network/xcm-builder": "workspace:*",
+    "@moonbeam-network/xcm-config": "workspace:*",
+    "@moonbeam-network/xcm-sdk": "workspace:*",
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@moonbeam-network/xcm-utils": "workspace:^",
+    "big.js": "^6.2.1"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "^12.2.3",
+    "@polkadot/api-augment": "^12.2.3",
+    "@polkadot/types": "^12.2.3",
+    "@polkadot/util": "^13.0.2",
+    "@wormhole-foundation/sdk-connect": "^0.8.2",
+    "@wormhole-foundation/sdk-evm": "^0.8.2",
+    "viem": "^2.18.5"
   }
 }

@@ -15,6 +15,9 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
       asset: hdx,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -22,7 +25,6 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: hdx,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -31,6 +33,9 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
       asset: dev,
       source: {
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -38,7 +43,6 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: dev,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -51,6 +55,9 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -58,7 +65,6 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: dev,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -71,6 +77,9 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -78,7 +87,6 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: dev,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

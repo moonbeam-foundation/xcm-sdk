@@ -1,7 +1,7 @@
 import {
   BalanceBuilder,
-  ExtrinsicBuilder,
   FeeBuilder,
+  MrlBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ftmwh, hdx } from '../assets';
 import { fantomTestnet, hydrationAlphanet } from '../chains';
@@ -25,7 +25,10 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(), // TODO:
+      mrl: {
+        isAutomatic: true,
+        transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(), // TODO:
+      },
     },
   ],
 });

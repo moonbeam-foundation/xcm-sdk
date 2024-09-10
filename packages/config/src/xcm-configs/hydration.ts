@@ -14,6 +14,9 @@ export const hydrationRoutes = new ChainRoutes({
       asset: hdx,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -21,7 +24,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: hdx,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -30,6 +32,9 @@ export const hydrationRoutes = new ChainRoutes({
       asset: glmr,
       source: {
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -37,7 +42,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -50,6 +54,9 @@ export const hydrationRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -57,7 +64,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -70,6 +76,9 @@ export const hydrationRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -77,7 +86,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -90,6 +98,9 @@ export const hydrationRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -97,7 +108,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -110,6 +120,9 @@ export const hydrationRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -117,7 +130,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -130,6 +142,9 @@ export const hydrationRoutes = new ChainRoutes({
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonbeam,
@@ -137,7 +152,6 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: 0.04,
           asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

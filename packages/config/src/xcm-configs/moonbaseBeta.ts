@@ -17,6 +17,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: betaDEV,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -24,7 +27,6 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: 0.0002,
           asset: dev,
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -37,6 +39,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: betaDEV,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -44,7 +49,6 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: 0.002,
           asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -57,6 +61,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: betaDEV,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -64,7 +71,6 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: 0.002,
           asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -77,6 +83,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: betaDEV,
           balance: BalanceBuilder().substrate().system().account(),
         },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonbaseAlpha,
@@ -84,7 +93,6 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: 0.002,
           asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

@@ -18,7 +18,7 @@ describe('EvmParachain', () => {
     parachainId: 2004,
     rpc: 'https://rpc.api.moonbeam.network',
     ss58Format: 1284,
-    ws: 'wss://wss.api.moonbeam.network',
+    ws: ['wss://wss.api.moonbeam.network'],
   });
 
   describe('is', () => {

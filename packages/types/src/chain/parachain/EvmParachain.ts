@@ -28,6 +28,10 @@ export class EvmParachain extends Parachain {
     return obj instanceof EvmParachain;
   }
 
+  static isAnyParachain(obj: unknown): obj is EvmParachain | Parachain {
+    return obj instanceof EvmParachain || obj instanceof Parachain;
+  }
+
   constructor({
     id,
     rpc,

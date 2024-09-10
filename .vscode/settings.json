@@ -51,6 +51,7 @@
     "onfinality",
     "parachain",
     "parachains",
+    "parallelizable",
     "peaq",
     "pendulumchain",
     "phala",
@@ -78,8 +79,10 @@
     "vksm",
     "vmanta",
     "vmovr",
+    "wagmi",
     "wftm",
     "wifd",
+    "xfer",
     "xtokens"
   ],
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",

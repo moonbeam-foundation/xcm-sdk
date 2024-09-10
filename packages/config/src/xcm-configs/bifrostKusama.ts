@@ -15,6 +15,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
       asset: bnc,
       source: {
         balance: BalanceBuilder().substrate().system().account(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -22,7 +25,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -36,6 +38,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -43,7 +48,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         fee: {
           amount: 0.0001,
           asset: movr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
@@ -57,6 +61,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -64,7 +71,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -78,6 +84,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -85,7 +94,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
@@ -99,6 +107,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         chain: moonriver,
@@ -106,7 +117,6 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),

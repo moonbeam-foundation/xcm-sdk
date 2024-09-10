@@ -1,14 +1,12 @@
 import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import {
-  ExtrinsicConfigBuilderPrams,
-  Parents,
-} from '../../ExtrinsicBuilder.interfaces';
+import { Parents } from '../../ExtrinsicBuilder.interfaces';
 import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
 } from '../../ExtrinsicBuilder.utils';
+import { BuilderPrams } from '../../../builder.interfaces';
 
-export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
+export interface GetExtrinsicParams extends BuilderPrams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   asset: any;
   func?: SubmittableExtrinsicFunction<'promise'>;
@@ -58,7 +56,7 @@ export function getPolkadotXcmExtrinsicArgs({
 export function shouldFeeAssetPrecedeAsset({
   asset,
   fee,
-}: ExtrinsicConfigBuilderPrams): boolean {
+}: BuilderPrams): boolean {
   const assetIdNumber = Number(asset.getAssetId());
   const feeAssetIdNumber = Number(fee.getAssetId());
 
