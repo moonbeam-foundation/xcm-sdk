@@ -541,14 +541,17 @@ exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143
 exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
   n {
-    "address": "0xffffffff2e1d1ac9ea1686255befe995b31abc96",
+    "address": "0xCa01a1D0993565291051daFF390892518ACfAD3A",
     "amount": 0n,
     "decimals": 6,
+    "ids": undefined,
     "key": "axlusdc",
+    "min": undefined,
     "originSymbol": "axlUSDC",
-    "symbol": "axlUSDC",
+    "symbol": undefined,
   },
-  a {
+  n {
+    "address": "0xffffffff2e1d1ac9ea1686255befe995b31abc96",
     "amount": 0n,
     "decimals": 18,
     "ids": {
