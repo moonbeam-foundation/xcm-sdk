@@ -44,10 +44,13 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
               });
 
               return {
-                setAddresses(
-                  sourceAddress: string,
-                  destinationAddress: string,
-                ): Promise<TransferData> {
+                setAddresses({
+                  sourceAddress,
+                  destinationAddress,
+                }: {
+                  sourceAddress: string;
+                  destinationAddress: string;
+                }): Promise<TransferData> {
                   const sourceChain = service.getChain(source);
 
                   if (!EvmParachain.isAnyParachain(sourceChain)) {

@@ -57,7 +57,10 @@ async function main() {
     .setSource(fantomTestnet)
     .setDestination(peaqChain)
     .setAsset(ftmwh)
-    .setAddresses(account.address, pair.address);
+    .setAddresses({
+      sourceAddress: account.address,
+      destinationAddress: pair.address,
+    });
 
   console.log(data);
 }

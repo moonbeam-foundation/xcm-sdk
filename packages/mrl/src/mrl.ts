@@ -33,10 +33,13 @@ export function Mrl(options?: MrlOptions) {
               });
 
               return {
-                setAddresses(
-                  sourceAddress: string,
-                  destinationAddress: string,
-                ) {
+                setAddresses({
+                  sourceAddress,
+                  destinationAddress,
+                }: {
+                  sourceAddress: string;
+                  destinationAddress: string;
+                }) {
                   return getTransferData({
                     route,
                     sourceAddress,
