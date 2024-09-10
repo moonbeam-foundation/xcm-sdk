@@ -29,6 +29,8 @@ exports[`balanceBuilder > system > account > should transform correctly with fro
 
 exports[`balanceBuilder > system > account > should transform correctly with miscFrozen balance 1`] = `900n`;
 
+exports[`balanceBuilder > system > account > should transform correctly with reserved balance 1`] = `999n`;
+
 exports[`balanceBuilder > system > accountEquilibrium > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [

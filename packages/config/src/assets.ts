@@ -45,6 +45,11 @@ export const auq = new Asset({
   originSymbol: 'AUQ',
 });
 
+export const axlusdc = new Asset({
+  key: 'axlusdc',
+  originSymbol: 'axlUSDC',
+});
+
 export const betaDEV = new Asset({
   key: 'beta-dev',
   originSymbol: 'betaDEV',
@@ -395,6 +400,7 @@ export const assetsList: Asset[] = [
   astr,
   atom,
   auq,
+  axlusdc,
   betaDEV,
   bnc,
   bncs,

@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { glmr, pen } from '../assets';
+import { axlusdc, glmr, pen } from '../assets';
 import { moonbeam, pendulum } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -45,6 +45,28 @@ export const pendulumRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: 0.01,
+          asset: glmr,
+        },
+      },
+      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+    },
+    {
+      asset: axlusdc,
+      source: {
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: pen,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
+      },
+      destination: {
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: 0.08,
           asset: glmr,
         },
       },

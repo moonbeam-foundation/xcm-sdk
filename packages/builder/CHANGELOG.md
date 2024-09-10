@@ -1,5 +1,35 @@
 # @moonbeam-network/xcm-builder
 
+## 2.4.6
+
+### Patch Changes
+
+- [#335](https://github.com/moonbeam-foundation/xcm-sdk/pull/335) [`6f6cfa5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6f6cfa5e9d0020d443f975768b0b53bea30cd342) Thanks [@mmaurello](https://github.com/mmaurello)! - Apply correct transferrable balance formula
+
+## 2.4.5
+
+### Patch Changes
+
+- [#333](https://github.com/moonbeam-foundation/xcm-sdk/pull/333) [`ede2f6e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ede2f6e379cec3767be264deb1869cf4da4fdd54) Thanks [@mmaurello](https://github.com/mmaurello)! - Add reserved balance to transferrable balance
+
+## 2.4.4
+
+### Patch Changes
+
+- [#330](https://github.com/moonbeam-foundation/xcm-sdk/pull/330) [`69e849b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/69e849bb35ca23be6210dddc395a52fdf8158ca1) Thanks [@ekenigs](https://github.com/ekenigs)! - Updated dependencies
+
+- Updated dependencies [[`69e849b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/69e849bb35ca23be6210dddc395a52fdf8158ca1)]:
+  - @moonbeam-network/xcm-types@2.3.4
+  - @moonbeam-network/xcm-utils@2.1.7
+
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies [[`bfe9f64`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bfe9f6481f078c2022d70d6c1bc096f87b724477)]:
+  - @moonbeam-network/xcm-utils@2.1.6
+  - @moonbeam-network/xcm-types@2.3.3
+
 ## 2.4.2
 
 ### Patch Changes

@@ -20,7 +20,6 @@ import { khalaRouts } from './khala';
 import { kintsugiRoutes } from './kintsugi';
 import { kusamaRoutes } from './kusama';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
-import { litmusRoutes } from './litmus';
 import { mangataKusamaRoutes } from './mangataKusama';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
@@ -70,7 +69,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   khalaRouts,
   kintsugiRoutes,
   kusamaRoutes,
-  litmusRoutes,
   mangataKusamaRoutes,
   mantaParachainRoutes,
   moonbaseAlphaRoutes,

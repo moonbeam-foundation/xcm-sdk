@@ -39,10 +39,10 @@
     "changeset:publish": "pnpm run build && pnpm publish -r"
   },
   "dependencies": {
-    "@polkadot/api": "^12.2.3",
-    "@polkadot/api-augment": "^12.2.3",
-    "@polkadot/apps-config": "^0.142.1",
-    "@polkadot/types": "^12.2.3",
+    "@polkadot/api": "^12.4.2",
+    "@polkadot/api-augment": "^12.4.2",
+    "@polkadot/apps-config": "^0.143.2",
+    "@polkadot/types": "^12.4.2",
     "@polkadot/util": "^13.0.2",
     "@polkadot/util-crypto": "^13.0.2",
     "@wormhole-foundation/sdk-connect": "^0.8.2",
@@ -51,11 +51,11 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.7",
-    "@slack/webhook": "^7.0.2",
+    "@slack/webhook": "^7.0.3",
     "@types/big.js": "^6.2.2",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "bun": "^1.1.21",
+    "bun": "^1.1.25",
     "cspell": "^8.13.1",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
@@ -64,15 +64,15 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-jest": "^28.8.0",
     "eslint-plugin-prettier": "^5.2.1",
     "glob": "^11.0.0",
     "lefthook": "^1.7.11",
     "prettier": "^3.3.3",
-    "tsup": "^8.2.3",
-    "turbo": "^2.0.9",
+    "tsup": "^8.2.4",
+    "turbo": "^2.0.14",
     "typescript": "^5.5.4",
-    "viem": "^2.18.5",
-    "vitest": "^2.0.4"
+    "viem": "^2.20.0",
+    "vitest": "^2.0.5"
   }
 }

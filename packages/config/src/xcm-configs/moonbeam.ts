@@ -4,6 +4,7 @@ import {
   apillon,
   aseed,
   astr,
+  axlusdc,
   bnc,
   bncs,
   cfg,
@@ -1383,6 +1384,24 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+    },
+    {
+      asset: axlusdc,
+      source: {
+        balance: BalanceBuilder().evm().erc20(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        chain: pendulum,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.04,
+          asset: glmr,
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
     },
   ],
 });

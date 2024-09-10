@@ -97,6 +97,7 @@ export class PolkadotService {
       {
         nonce: -1,
         signer: this.#isSigner(signer) ? signer : undefined,
+        withSignedTransaction: true,
       },
     );
 

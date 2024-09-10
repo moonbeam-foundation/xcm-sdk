@@ -1,5 +1,5 @@
 import {
-  AnyChain,
+  type AnyChain,
   ChainAsset,
   Ecosystem,
   EvmChain,
@@ -17,6 +17,7 @@ import {
   astr,
   atom,
   auq,
+  axlusdc,
   betaDEV,
   bnc,
   bncs,
@@ -775,26 +776,6 @@ export const kusamaAssetHub = new Parachain({
   ],
 });
 
-export const litmus = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(lit, {
-      decimals: 12,
-      ids: {
-        id: 'SelfReserve',
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xda5831fbc8570e3c6336d0d72b8c08f8738beefec812df21ef2afc2982ede09c',
-  key: 'litmus',
-  name: 'Litmus',
-  nativeAsset: lit,
-  parachainId: 2106,
-  ss58Format: 131,
-  ws: ['wss://rpc.litmus-parachain.litentry.io'],
-});
-
 export const mangataKusama = new Parachain({
   assets: [
     ChainAsset.fromAsset(mgx, {
@@ -1035,6 +1016,10 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '110021739665376159354538090254163045594',
       },
+    }),
+    ChainAsset.fromAsset(axlusdc, {
+      address: '0xCa01a1D0993565291051daFF390892518ACfAD3A',
+      decimals: 6,
     }),
     ChainAsset.fromAsset(bnc, {
       address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
@@ -1737,7 +1722,7 @@ export const peaqEvm = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.Polkadot,
-  explorer: `https://peaq.subscan.io`,
+  explorer: 'https://peaq.subscan.io',
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   id: 3338,
@@ -1795,6 +1780,12 @@ export const peaqEvmAlphanet = new EvmParachain({
 
 export const pendulum = new Parachain({
   assets: [
+    ChainAsset.fromAsset(axlusdc, {
+      decimals: 6,
+      ids: {
+        id: { XCM: 12 },
+      },
+    }),
     ChainAsset.fromAsset(pen, {
       decimals: 12,
       ids: {
@@ -2230,7 +2221,6 @@ export const chainsList: AnyChain[] = [
   kintsugi,
   kusama,
   kusamaAssetHub,
-  litmus,
   mangataKusama,
   mantaParachain,
   moonbaseAlpha,

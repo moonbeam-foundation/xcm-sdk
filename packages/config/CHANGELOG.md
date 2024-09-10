@@ -1,5 +1,59 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.11
+
+### Patch Changes
+
+- [#342](https://github.com/moonbeam-foundation/xcm-sdk/pull/342) [`8add299`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8add299dc2edc34a8812c8f846ac314c03caa6d7) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Litmus configuration
+
+## 2.5.10
+
+### Patch Changes
+
+- [#340](https://github.com/moonbeam-foundation/xcm-sdk/pull/340) [`8747171`](https://github.com/moonbeam-foundation/xcm-sdk/commit/87471713dfda8345a0cbc902fc3d8b28a5e78cee) Thanks [@mmaurello](https://github.com/mmaurello)! - Increase GLMR sent along for fees
+
+## 2.5.9
+
+### Patch Changes
+
+- [#337](https://github.com/moonbeam-foundation/xcm-sdk/pull/337) [`4533a06`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4533a065fc6a38912293cc5ff05ad5663ecc5e37) Thanks [@mmaurello](https://github.com/mmaurello)! - Integrate axlUSDC Pendulum - Moonbeam
+
+## 2.5.8
+
+### Patch Changes
+
+- Updated dependencies [[`6f6cfa5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6f6cfa5e9d0020d443f975768b0b53bea30cd342)]:
+  - @moonbeam-network/xcm-builder@2.4.6
+
+## 2.5.7
+
+### Patch Changes
+
+- Updated dependencies [[`ede2f6e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ede2f6e379cec3767be264deb1869cf4da4fdd54)]:
+  - @moonbeam-network/xcm-builder@2.4.5
+
+## 2.5.6
+
+### Patch Changes
+
+- [#330](https://github.com/moonbeam-foundation/xcm-sdk/pull/330) [`69e849b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/69e849bb35ca23be6210dddc395a52fdf8158ca1) Thanks [@ekenigs](https://github.com/ekenigs)! - Updated dependencies
+
+- Updated dependencies [[`69e849b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/69e849bb35ca23be6210dddc395a52fdf8158ca1)]:
+  - @moonbeam-network/xcm-builder@2.4.4
+  - @moonbeam-network/xcm-types@2.3.4
+
+## 2.5.5
+
+### Patch Changes
+
+- [#329](https://github.com/moonbeam-foundation/xcm-sdk/pull/329) [`bfe9f64`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bfe9f6481f078c2022d70d6c1bc096f87b724477) Thanks [@mmaurello](https://github.com/mmaurello)! - Allow signed transaction in signAndSend to make ledger signing work
+
+- [#328](https://github.com/moonbeam-foundation/xcm-sdk/pull/328) [`9e014a6`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9e014a66b20264f9ced0b037846c8f7b1b2647bd) Thanks [@mmaurello](https://github.com/mmaurello)! - Adjust kbtc and ibtc fees
+
+- Updated dependencies []:
+  - @moonbeam-network/xcm-builder@2.4.3
+  - @moonbeam-network/xcm-types@2.3.3
+
 ## 2.5.4
 
 ### Patch Changes

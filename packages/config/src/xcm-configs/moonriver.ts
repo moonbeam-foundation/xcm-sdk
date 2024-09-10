@@ -9,7 +9,6 @@ import {
   kint,
   kma,
   ksm,
-  lit,
   mgx,
   movr,
   pha,
@@ -36,7 +35,6 @@ import {
   kintsugi,
   kusama,
   kusamaAssetHub,
-  litmus,
   mangataKusama,
   moonriver,
   picasso,
@@ -406,28 +404,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.00168,
           asset: ksm,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      asset: lit,
-      source: {
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        chain: litmus,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.0032,
-          asset: lit,
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
