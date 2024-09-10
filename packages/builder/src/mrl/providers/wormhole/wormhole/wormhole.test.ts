@@ -6,7 +6,7 @@ import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import {
   wormholeConfigBuilderPrams,
   wormholeToMoonchainConfigBuilderPrams,
-} from '../../../../fixtures';
+} from '../../../../../fixtures';
 import { wormhole } from './wormhole';
 
 describe('wormhole', async () => {

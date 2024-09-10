@@ -6,8 +6,8 @@ import { ethereumXcm } from './ethereumXcm';
 import {
   mrlBuildParamsMock,
   mrlBuildParamsMock2,
-} from '../../../../../fixtures';
-import { ExtrinsicConfig } from '../../../../extrinsic';
+} from '../../../../../../fixtures';
+import { ExtrinsicConfig } from '../../../../../extrinsic';
 
 describe('ethereumXcm', () => {
   describe('transact', () => {

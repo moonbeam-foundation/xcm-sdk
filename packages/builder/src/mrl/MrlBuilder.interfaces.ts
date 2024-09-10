@@ -6,7 +6,7 @@ import type {
 import type { ApiPromise } from '@polkadot/api';
 import type { HexString } from '@polkadot/util/types';
 import type { BuilderPrams, ConfigBuilder } from '../builder.interfaces';
-import type { WormholeConfig } from './wormhole/wormhole';
+import type { WormholeConfig } from './providers/wormhole/wormhole';
 import type { ExtrinsicConfig } from '../extrinsic';
 import type { ContractConfig } from '../contract';
 

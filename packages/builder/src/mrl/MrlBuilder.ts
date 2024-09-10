@@ -1,4 +1,4 @@
-import { wormhole } from './wormhole';
+import { wormhole } from './providers/wormhole';
 
 export function MrlBuilder() {
   return {

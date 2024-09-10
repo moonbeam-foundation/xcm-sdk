@@ -2,13 +2,13 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it, vi } from 'vitest';
 
-import { apiMock, mrlBuildParamsMock } from '../../../../../fixtures';
+import { apiMock, mrlBuildParamsMock } from '../../../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
-import { XcmVersion } from '../../../../extrinsic/ExtrinsicBuilder.interfaces';
-import { ExtrinsicConfig } from '../../../../extrinsic';
+import { XcmVersion } from '../../../../../extrinsic/ExtrinsicBuilder.interfaces';
+import { ExtrinsicConfig } from '../../../../../extrinsic';
 
 vi.mock(
-  import('../../../../extrinsic/ExtrinsicBuilder.utils'),
+  import('../../../../../extrinsic/ExtrinsicBuilder.utils'),
   async (importOriginal) => {
     const mod = await importOriginal();
 

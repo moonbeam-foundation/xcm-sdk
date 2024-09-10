@@ -4,11 +4,11 @@ import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
-import { getExtrinsicAccount } from '../../../extrinsic/ExtrinsicBuilder.utils';
+import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
 import {
   MrlBuilderParams,
   MrlConfigBuilder,
-} from '../../MrlBuilder.interfaces';
+} from '../../../MrlBuilder.interfaces';
 
 export const GMP_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000816';

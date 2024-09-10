@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Address } from 'viem';
 import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
-import { ContractConfig } from '../../../../contract';
-import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
+import { ContractConfig } from '../../../../../contract';
+import { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { wormholeFactory } from '../../wormhole';
-import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';
+import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
 
-const module = 'TokenBridge';
+const module = 'TokenBridgeRelayer';
 
-export function TokenBridge() {
+export function TokenBridgeRelayer() {
   return {
-    transferTokens: (): MrlConfigBuilder => ({
+    transferTokensWithRelay: (): MrlConfigBuilder => ({
       build: ({ asset, destination, destinationAddress, moonChain }) => {
         const wh = wormholeFactory(moonChain);
         const whDestination = wh.getChain(destination.getWormholeName()).config
@@ -33,7 +33,7 @@ export function TokenBridge() {
         ).amount;
 
         const contractAddress =
-          wh.getChain('Moonbeam').config.contracts.tokenBridge;
+          wh.getChain('Moonbeam').config.contracts.tokenBridgeRelayer;
 
         if (!contractAddress) {
           throw new Error(`Wormhole address not found for ${moonChain.name}`);
@@ -41,16 +41,16 @@ export function TokenBridge() {
 
         return new ContractConfig({
           address: contractAddress,
-          abi: TOKEN_BRIDGE_ABI,
+          abi: TOKEN_BRIDGE_RELAYER_ABI,
           args: [
             tokenAddressOnMoonChain,
             tokenAmountOnMoonChain,
+            0,
             whDestination,
             destinationAddress32bytes,
-            0n,
             0,
           ],
-          func: 'transferTokens',
+          func: 'transferTokensWithRelay',
           module,
         });
       },
