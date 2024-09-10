@@ -21,7 +21,7 @@ export const kusamaConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder()
         .xcmPallet()
-        .limitedReserveTransferAssets(0)
+        .transferAssetsUsingTypeAndThen()
         .here(),
       fee: {
         asset: ksm,
