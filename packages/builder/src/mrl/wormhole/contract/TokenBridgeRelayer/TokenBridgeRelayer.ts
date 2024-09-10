@@ -6,9 +6,9 @@ import { MrlConfigBuilder } from '../../../MrlBuilder.interfaces';
 import { wormholeFactory } from '../../wormhole';
 import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
 
-export function TokenBridgeRelayer() {
-  const module = 'TokenBridgeRelayer';
+const module = 'TokenBridgeRelayer';
 
+export function TokenBridgeRelayer() {
   return {
     transferTokensWithRelay: (): MrlConfigBuilder => ({
       build: ({ asset, destination, destinationAddress, moonChain }) => {
