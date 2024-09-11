@@ -2,7 +2,7 @@ import { type AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
-import { ContractConfig } from '../../../types/ContractConfig';
+import { ContractConfig } from '../../../types/evm/ContractConfig';
 import type { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { XTOKENS_ABI } from './XtokensABI';
 

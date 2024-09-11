@@ -1,15 +1,17 @@
 import type { Network, Wormhole } from '@wormhole-foundation/sdk-connect';
 
 export type WormholeTransferFunctions = 'tokenTransfer';
-export type Args = Parameters<Wormhole<Network>[WormholeTransferFunctions]>;
+export type WormholeFunctionArgs = Parameters<
+  Wormhole<Network>[WormholeTransferFunctions]
+>;
 
 export interface WormholeConfigConstructorParams {
-  args: Args;
+  args: WormholeFunctionArgs;
   func: WormholeTransferFunctions;
 }
 
 export class WormholeConfig {
-  readonly args: Args;
+  readonly args: WormholeFunctionArgs;
 
   readonly func: WormholeTransferFunctions;
 

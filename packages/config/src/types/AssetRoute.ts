@@ -42,6 +42,11 @@ export interface FeeConfig {
 export interface MrlConfig {
   isAutomatic: boolean;
   transfer: MrlConfigBuilder;
+  moonChainFee: {
+    asset: Asset;
+    amount: number | FeeConfigBuilder;
+    balance: BalanceConfigBuilder;
+  };
 }
 
 export interface DestinationFeeConfig
