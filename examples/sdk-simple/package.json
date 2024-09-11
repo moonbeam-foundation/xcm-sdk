@@ -2,15 +2,12 @@
   "name": "sdk-simple",
   "version": "3.0.0",
   "private": true,
-  "description": "",
+  "license": "UNLICENSED",
   "type": "module",
   "main": "index.ts",
   "scripts": {
     "start": "bun index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@moonbeam-network/xcm-config": "workspace:*",
     "@moonbeam-network/xcm-sdk": "workspace:*",
