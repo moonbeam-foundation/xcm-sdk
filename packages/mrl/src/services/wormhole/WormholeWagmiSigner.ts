@@ -1,22 +1,20 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
 import { wormholeFactory } from '@moonbeam-network/xcm-builder';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
-import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
-import { Wormhole } from '@wormhole-foundation/sdk-connect';
+import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import type {
   Chain,
   Network,
   SignAndSendSigner,
   SignedTx,
   UnsignedTransaction,
+  Wormhole,
 } from '@wormhole-foundation/sdk-connect';
 import {
-  Address,
-  HttpTransport,
-  PublicClient,
-  createPublicClient,
   http,
+  type Address,
+  type HttpTransport,
+  type PublicClient,
+  createPublicClient,
 } from 'viem';
 
 export class WormholeWagmiSigner<
@@ -43,8 +41,7 @@ export class WormholeWagmiSigner<
   }
 
   chain(): C {
-    // TODO: fix types
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: need to fix types
     return this.#wh.getChain(this.#chain.getWormholeName()) as any as C;
   }
 

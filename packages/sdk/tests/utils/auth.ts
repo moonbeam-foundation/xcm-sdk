@@ -1,10 +1,8 @@
 // import { MoonChain } from '@moonbeam-network/xcm-config';
 // import { Keyring } from '@polkadot/api';
 // import { assert } from '@polkadot/util';
-// // eslint-disable-next-line import/no-extraneous-dependencies
-// import { KeyringPair } from '@polkadot/keyring/types';
-// // eslint-disable-next-line import/no-extraneous-dependencies
-// import { cryptoWaitReady } from '@polkadot/util-crypto';
+// // import { KeyringPair } from '@polkadot/keyring/types';
+// // import { cryptoWaitReady } from '@polkadot/util-crypto';
 // import { ethers, Wallet } from 'ethers';
 
 // const keyring = new Keyring({ type: 'sr25519' });

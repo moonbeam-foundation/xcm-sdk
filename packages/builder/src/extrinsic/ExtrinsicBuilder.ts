@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 import { eqBalances } from './pallets/eqBalances';
 import { polkadotXcm } from './pallets/polkadotXcm';
 import { xTokens } from './pallets/xTokens';

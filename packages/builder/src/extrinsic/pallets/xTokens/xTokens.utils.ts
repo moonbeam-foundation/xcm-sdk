@@ -1,7 +1,7 @@
-import { AnyParachain } from '@moonbeam-network/xcm-types';
-import { XcmVersion } from '../../ExtrinsicBuilder.interfaces';
+import type { AnyParachain } from '@moonbeam-network/xcm-types';
+import type { XcmVersion } from '../../ExtrinsicBuilder.interfaces';
 import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
-import { XTokensWeightLimit } from './xTokens.interfaces';
+import type { XTokensWeightLimit } from './xTokens.interfaces';
 
 /**
  * It is safer to always use unlimited
@@ -18,7 +18,6 @@ export function getDestination(
   return {
     [version]: {
       parents: 1,
-      // eslint-disable-next-line sort-keys
       interior: {
         X2: [
           {

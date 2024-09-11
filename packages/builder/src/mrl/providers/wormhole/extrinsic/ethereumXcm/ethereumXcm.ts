@@ -1,11 +1,11 @@
-import { Address, encodeFunctionData } from 'viem';
-import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
+import { type Address, encodeFunctionData } from 'viem';
 import { ERC20_ABI } from '../../../../../balance/Erc20Abi';
-import { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
-import { BATCH_CONTRACT_ADDRESS } from '../../../../MrlBuilder.constants';
-import { contract as ContractBuilder } from '../../contract';
 import type { ContractConfig } from '../../../../../types/ContractConfig';
+import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
+import { BATCH_CONTRACT_ADDRESS } from '../../../../MrlBuilder.constants';
+import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import { contract as ContractBuilder } from '../../contract';
+import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
 
 export function ethereumXcm() {
   return {

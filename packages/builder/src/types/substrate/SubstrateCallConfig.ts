@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApiPromise } from '@polkadot/api';
+import type { ApiPromise } from '@polkadot/api';
 
 export interface SubstrateCallConfigConstructorParams {
   api: ApiPromise;
@@ -9,6 +8,7 @@ export interface SubstrateCallConfigConstructorParams {
 export class SubstrateCallConfig {
   readonly api: ApiPromise;
 
+  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
   readonly call: () => Promise<any>;
 
   static is(obj: unknown): obj is SubstrateCallConfig {

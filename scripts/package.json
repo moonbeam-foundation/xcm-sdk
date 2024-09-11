@@ -1,0 +1,14 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "scripts": {},
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "",
+  "dependencies": {
+    "@moonbeam-network/xcm-config": "workspace:*",
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@types/ws": "^8.5.12",
+    "ws": "^8.18.0"
+  }
+}

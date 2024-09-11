@@ -1,27 +1,31 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
-  AssetRoute,
+  BATCH_CONTRACT_ABI,
+  BATCH_CONTRACT_ADDRESS,
+  type ContractConfig,
+  ERC20_ABI,
+  type ExtrinsicConfig,
+  MrlBuilder,
+  type MrlBuilderParams,
+  type Transact,
+} from '@moonbeam-network/xcm-builder';
+import {
+  type AssetRoute,
   getMoonChain,
   moonbaseAlpha,
   moonbeam,
 } from '@moonbeam-network/xcm-config';
-import { AssetAmount, EvmParachain } from '@moonbeam-network/xcm-types';
+import { PolkadotService } from '@moonbeam-network/xcm-sdk';
+import { type AssetAmount, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
   getMultilocationDerivedAddresses,
   getPolkadotApi,
 } from '@moonbeam-network/xcm-utils';
 import {
-  BATCH_CONTRACT_ABI,
-  BATCH_CONTRACT_ADDRESS,
-  ContractConfig,
-  ERC20_ABI,
-  ExtrinsicConfig,
-  MrlBuilder,
-  MrlBuilderParams,
-  Transact,
-} from '@moonbeam-network/xcm-builder';
-import { Address, createPublicClient, encodeFunctionData, http } from 'viem';
-import { PolkadotService } from '@moonbeam-network/xcm-sdk';
+  http,
+  type Address,
+  createPublicClient,
+  encodeFunctionData,
+} from 'viem';
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 657226n,

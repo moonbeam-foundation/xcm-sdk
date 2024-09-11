@@ -1,26 +1,26 @@
 import {
-  AssetMinConfigBuilder,
-  BalanceConfigBuilder,
+  type AssetMinConfigBuilder,
+  type BalanceConfigBuilder,
   ContractConfig,
-  ExtrinsicConfig,
-  FeeConfigBuilder,
+  type ExtrinsicConfig,
+  type FeeConfigBuilder,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
+import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import {
-  AnyChain,
-  AnyParachain,
-  Asset,
+  type AnyChain,
+  type AnyParachain,
+  type Asset,
   AssetAmount,
-  ChainAsset,
+  type ChainAsset,
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
-import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import Big from 'big.js';
-import { PolkadotService } from '../services/polkadot';
-import { DestinationChainTransferData } from '../sdk.interfaces';
+import type { DestinationChainTransferData } from '../sdk.interfaces';
 import { EvmService } from '../services/evm/EvmService';
+import { PolkadotService } from '../services/polkadot';
 
 export interface GetBalancesParams {
   address: string;
@@ -234,7 +234,7 @@ export async function getDestinationFeeBalance({
 
   if (!route.source.destinationFee?.balance) {
     throw new Error(
-      `BalanceBuilder must be defined for source.destinationFee.balance for AssetRoute`,
+      'BalanceBuilder must be defined for source.destinationFee.balance for AssetRoute',
     );
   }
 

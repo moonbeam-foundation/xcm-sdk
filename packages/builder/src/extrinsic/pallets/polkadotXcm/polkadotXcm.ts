@@ -1,5 +1,5 @@
-import { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
+import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import {
   getPolkadotXcmExtrinsicArgs,
   shouldFeeAssetPrecedeAsset,

@@ -1,10 +1,10 @@
-import { AssetRoute } from '@moonbeam-network/xcm-config';
-import { DestinationChainTransferData } from '../sdk.interfaces';
+import type { AssetRoute } from '@moonbeam-network/xcm-config';
+import type { DestinationChainTransferData } from '../sdk.interfaces';
 import {
+  getAssetMin,
   getBalance,
   getDestinationFee,
   getExistentialDeposit,
-  getAssetMin,
 } from './getTransferData.utils';
 
 export interface GetDestinationDataParams {

@@ -1,14 +1,14 @@
-import { ContractConfig } from '@moonbeam-network/xcm-builder';
-import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import type { ContractConfig } from '@moonbeam-network/xcm-builder';
+import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
-  Address,
-  Hash,
-  HttpTransport,
-  PublicClient,
-  createPublicClient,
   http,
+  type Address,
+  type Hash,
+  type HttpTransport,
+  type PublicClient,
+  createPublicClient,
 } from 'viem';
-import { EvmSigner } from '../../sdk.interfaces';
+import type { EvmSigner } from '../../sdk.interfaces';
 
 export class EvmService {
   readonly chain: EvmChain | EvmParachain;

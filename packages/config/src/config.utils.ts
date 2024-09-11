@@ -1,8 +1,8 @@
 import {
-  AnyAsset,
-  AnyChain,
+  type AnyAsset,
+  type AnyChain,
   Ecosystem,
-  EvmParachain,
+  type EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { moonbaseAlpha, moonbeam, moonriver } from './chains';
 

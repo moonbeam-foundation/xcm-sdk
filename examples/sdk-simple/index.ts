@@ -1,10 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
-import { Sdk, TransferData } from '@moonbeam-network/xcm-sdk';
+import { Sdk, type TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { setTimeout } from 'node:timers/promises';
-import { Address, createWalletClient, http } from 'viem';
+import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
 // Moonbeam Signer ===========================================================

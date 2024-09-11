@@ -5,8 +5,6 @@
   "scripts": {
     "build": "tsup",
     "dev": "pnpm run build -- --watch",
-    "lint": "eslint ./src --ext .js,.ts",
-    "lint:fix": "pnpm run lint -- --fix",
     "typecheck": "tsc --noEmit",
     "test:acc": "vitest --run --testTimeout 300000 ./tests/acceptance",
     "prepack": "prettier --write build/index.d.ts"
@@ -31,9 +29,7 @@
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": "./build/index.mjs",
   "types": "./build/index.d.ts",

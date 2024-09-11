@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { vi } from 'vitest';
 import {
   Asset,
   AssetAmount,
@@ -10,13 +7,15 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { MrlBuilderParams, BuilderPrams } from '../src';
+import { vi } from 'vitest';
+import type { BuilderPrams, MrlBuilderParams } from '../src';
 
 export const apiMock = {
   tx: {
     polkadotXcm: { send: vi.fn(() => 'polkadotXcm.send => RESULT') },
     xTokens: { transfer: vi.fn(() => 'xTokens.transfer => RESULT') },
   },
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 } as any;
 
 export const test = new Asset({ key: 'usdt', originSymbol: 'USDT' });

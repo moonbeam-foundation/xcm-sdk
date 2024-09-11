@@ -1,28 +1,28 @@
-import { AssetRoute } from '@moonbeam-network/xcm-config';
-import {
-  convertToChainDecimals,
-  EvmService,
-  getDestinationData,
-  getMin,
-  PolkadotService,
-  Signers,
-} from '@moonbeam-network/xcm-sdk';
-import { toBigInt } from '@moonbeam-network/xcm-utils';
-import {
-  AssetAmount,
-  EvmChain,
-  EvmParachain,
-} from '@moonbeam-network/xcm-types';
-import Big from 'big.js';
 import {
   ContractConfig,
   ExtrinsicConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
-import { TransferData } from '../mrl.interfaces';
+import type { AssetRoute } from '@moonbeam-network/xcm-config';
+import {
+  EvmService,
+  PolkadotService,
+  type Signers,
+  convertToChainDecimals,
+  getDestinationData,
+  getMin,
+} from '@moonbeam-network/xcm-sdk';
+import {
+  AssetAmount,
+  EvmChain,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
+import { toBigInt } from '@moonbeam-network/xcm-utils';
+import Big from 'big.js';
+import type { TransferData } from '../mrl.interfaces';
+import { WormholeService } from '../services/wormhole';
 import { getSourceData } from './getSourceData';
 import { buildTransfer } from './getTransferData.utils';
-import { WormholeService } from '../services/wormhole';
 
 export interface GetTransferDataParams {
   route: AssetRoute;

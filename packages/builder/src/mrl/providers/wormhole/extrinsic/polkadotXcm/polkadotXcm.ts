@@ -1,12 +1,12 @@
-import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import {
-  AnyParachain,
+  type AnyParachain,
   AssetAmount,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 
 // TODO: Can we move them somewhere?
 const BUY_EXECUTION_FEE = 100_000_000_000_000_000n;

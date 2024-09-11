@@ -1,14 +1,14 @@
 import { ConfigService, xcmRoutesMap } from '@moonbeam-network/xcm-config';
 import {
-  AnyAsset,
-  AnyParachain,
-  AssetAmount,
-  Ecosystem,
+  type AnyAsset,
+  type AnyParachain,
+  type AssetAmount,
+  type Ecosystem,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData } from './getTransferData/getTransferData';
-import { TransferData } from './sdk.interfaces';
+import type { TransferData } from './sdk.interfaces';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: xcmRoutesMap });
 
@@ -55,13 +55,13 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 
                   if (!EvmParachain.isAnyParachain(sourceChain)) {
                     throw new Error(
-                      `Source chain should be a Parachain or EvmParachain`,
+                      'Source chain should be a Parachain or EvmParachain',
                     );
                   }
 
                   if (!EvmParachain.isAnyParachain(route.destination)) {
                     throw new Error(
-                      `Destination chain should be a Parachain or EvmParachain`,
+                      'Destination chain should be a Parachain or EvmParachain',
                     );
                   }
 

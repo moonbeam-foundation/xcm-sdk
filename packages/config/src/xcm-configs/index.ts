@@ -1,4 +1,4 @@
-import { ChainRoutes } from '../types/ChainRoutes';
+import type { ChainRoutes } from '../types/ChainRoutes';
 
 import { acalaRoutes } from './acala';
 import { alphanetAssetHubRoutes } from './alphanetAssetHub';

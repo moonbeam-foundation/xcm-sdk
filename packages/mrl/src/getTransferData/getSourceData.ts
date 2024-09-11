@@ -1,6 +1,11 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import {
+  ContractConfig,
+  type ExtrinsicConfig,
+  type WormholeConfig,
+} from '@moonbeam-network/xcm-builder';
+import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
+import {
+  type SourceChainTransferData,
   getAssetMin,
   getBalance,
   getContractFee,
@@ -8,20 +13,14 @@ import {
   getExistentialDeposit,
   getExtrinsicFee,
   getMax,
-  SourceChainTransferData,
 } from '@moonbeam-network/xcm-sdk';
-import {
+import type {
   AnyChain,
   AnyParachain,
   AssetAmount,
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
-import {
-  ContractConfig,
-  ExtrinsicConfig,
-  WormholeConfig,
-} from '@moonbeam-network/xcm-builder';
 import { buildTransfer } from './getTransferData.utils';
 
 export interface GetSourceDataParams {

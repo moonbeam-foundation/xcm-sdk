@@ -1,9 +1,9 @@
+import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import {
-  ExtrinsicConfigBuilder,
+  type ExtrinsicConfigBuilder,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
 import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
-import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import { getDestination, getWeight } from './xTokens.utils';
 
 const pallet = 'xTokens';

@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { AssetRoute } from '@moonbeam-network/xcm-config';
+import type { AssetRoute } from '@moonbeam-network/xcm-config';
+import {
+  type AnyParachain,
+  AssetAmount,
+  type EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import {
-  AnyParachain,
-  AssetAmount,
-  EvmParachain,
-} from '@moonbeam-network/xcm-types';
-import { Signers, TransferData } from '../sdk.interfaces';
+import type { Signers, TransferData } from '../sdk.interfaces';
+import { EvmService } from '../services/evm/EvmService';
+import { PolkadotService } from '../services/polkadot';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
-import { PolkadotService } from '../services/polkadot';
 import { convertToChainDecimals, getMin } from './getTransferData.utils';
-import { EvmService } from '../services/evm/EvmService';
 
 export interface GetTransferDataParams {
   route: AssetRoute;

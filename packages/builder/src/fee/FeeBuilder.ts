@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
-import { Option, u128 } from '@polkadot/types';
+import type { Option, u128 } from '@polkadot/types';
 import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
-import { FeeConfigBuilder } from './FeeBuilder.interfaces';
+import type { FeeConfigBuilder } from './FeeBuilder.interfaces';
 
 export function FeeBuilder() {
   return {
@@ -19,7 +17,7 @@ function assetManager() {
           call: async (): Promise<bigint> => {
             const type = (await api.query.assetManager.assetIdType(
               asset,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
             )) as unknown as Option<any>;
 
             if (type.isNone) {

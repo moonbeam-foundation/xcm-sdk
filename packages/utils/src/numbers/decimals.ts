@@ -1,4 +1,4 @@
-import Big, { RoundingMode } from 'big.js';
+import Big, { type RoundingMode } from 'big.js';
 
 Big.NE = -18;
 

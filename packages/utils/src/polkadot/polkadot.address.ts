@@ -1,13 +1,13 @@
 import {
   bnToU8a,
-  u8aToHex,
-  stringToU8a,
-  hexToU8a,
   compactToU8a,
+  hexToU8a,
+  stringToU8a,
+  u8aToHex,
 } from '@polkadot/util';
 import { blake2AsU8a, decodeAddress } from '@polkadot/util-crypto';
 
-/*
+/**
  * reference: https://github.com/Moonsong-Labs/xcm-tools/blob/main/scripts/calculate-sovereign-account.ts
  */
 
@@ -28,7 +28,7 @@ export function getSovereignAccountAddresses(paraId: number) {
   };
 }
 
-/*
+/**
  * reference: https://github.com/Moonsong-Labs/xcm-tools/blob/main/scripts/calculate-multilocation-derivative-account.ts
  */
 
@@ -51,7 +51,6 @@ export function getMultilocationDerivedAddresses({
   // Describe Family
   // https://github.com/paritytech/polkadot/blob/master/xcm/xcm-builder/src/location_conversion.rs#L96-L118
   const family =
-    // eslint-disable-next-line no-nested-ternary
     parents === 0 && paraId
       ? 'ChildChain'
       : parents === 1 && !paraId

@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it, vi } from 'vitest';
 
 import { apiMock, mrlBuildParamsMock } from '../../../../../../fixtures';
-import { polkadotXcm } from './polkadotXcm';
+import type { ExtrinsicConfig } from '../../../../../extrinsic';
 import { XcmVersion } from '../../../../../extrinsic/ExtrinsicBuilder.interfaces';
-import { ExtrinsicConfig } from '../../../../../extrinsic';
+import { polkadotXcm } from './polkadotXcm';
 
 vi.mock(
   import('../../../../../extrinsic/ExtrinsicBuilder.utils'),

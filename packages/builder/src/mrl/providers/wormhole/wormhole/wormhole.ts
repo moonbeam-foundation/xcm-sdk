@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
-import { WormholeConfig } from './WormholeConfig';
-import { wormholeFactory } from './wormholeFactory';
+import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
-import {
+import type {
   MrlBuilderParams,
   MrlConfigBuilder,
 } from '../../../MrlBuilder.interfaces';
+import { WormholeConfig } from './WormholeConfig';
+import { wormholeFactory } from './wormholeFactory';
 
 export const GMP_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000816';
