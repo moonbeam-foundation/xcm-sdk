@@ -33,7 +33,7 @@ export const polkadotRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .xcmPallet()
-        .limitedReserveTransferAssets(0)
+        .transferAssetsUsingTypeAndThen()
         .here(),
     },
   ],

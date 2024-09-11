@@ -1,8 +1,10 @@
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
-import type {
-  ExtrinsicConfigBuilder,
-  Parents,
+import {
+  type ExtrinsicConfigBuilder,
+  type Parents,
+  XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
+import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
 import { getPolkadotXcmExtrinsicArgs } from '../polkadotXcm/polkadotXcm.util';
 
 const pallet = 'xcmPallet';
@@ -37,6 +39,77 @@ export function xcmPallet() {
                     },
                   ],
                 }),
+            }),
+        }),
+      };
+    },
+    transferAssetsUsingTypeAndThen: () => {
+      const func = 'transferAssetsUsingTypeAndThen';
+
+      return {
+        here: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: () => {
+                const version = XcmVersion.v4;
+                return [
+                  {
+                    [version]: {
+                      parents: 0,
+                      interior: {
+                        X1: [
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                        ],
+                      },
+                    },
+                  },
+                  {
+                    [version]: [
+                      {
+                        id: {
+                          parents: 0,
+                          interior: 'Here',
+                        },
+                        fun: {
+                          Fungible: params.asset.amount,
+                        },
+                      },
+                    ],
+                  },
+                  'LocalReserve',
+                  {
+                    [version]: {
+                      parents: 0,
+                      interior: 'Here',
+                    },
+                  },
+                  'LocalReserve',
+                  {
+                    [version]: [
+                      {
+                        DepositAsset: {
+                          assets: {
+                            Wild: { AllCounted: 1 },
+                          },
+                          beneficiary: {
+                            parents: 0,
+                            interior: {
+                              X1: [
+                                getExtrinsicAccount(params.destinationAddress),
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  'Unlimited',
+                ];
+              },
             }),
         }),
       };

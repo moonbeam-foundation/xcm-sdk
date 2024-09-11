@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.12
+
+### Patch Changes
+
+- [#345](https://github.com/moonbeam-foundation/xcm-sdk/pull/345) [`6fe69b2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6fe69b230b4d44c717d9ec7ff73bbc6282b1385e) Thanks [@mmaurello](https://github.com/mmaurello)! - Add transferAssetsUsingTypeAndThen function to xcmPallet and implement it to relay chains
+
+- Updated dependencies [[`6fe69b2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6fe69b230b4d44c717d9ec7ff73bbc6282b1385e)]:
+  - @moonbeam-network/xcm-builder@2.4.7
+
 ## 2.5.11
 
 ### Patch Changes
