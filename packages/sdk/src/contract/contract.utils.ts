@@ -13,5 +13,5 @@ export function isWalletClient(signer: EvmSigner): signer is WalletClient {
 export function isEthersContract(
   contract: Contract | GetContractReturnType<Abi | readonly unknown[]>,
 ): contract is Contract {
-  return 'signer' in contract;
+  return !('abi' in contract);
 }
