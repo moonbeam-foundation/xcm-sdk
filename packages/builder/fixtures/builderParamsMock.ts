@@ -123,7 +123,8 @@ export const buildParamsSameAssetMock: BuilderPrams = {
 export const buildParachainParamsMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: interlayTestnetMock,
-  destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u', // cspell:disable-line
+  /* cspell:disable-next-line */
+  destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
   destinationApi: apiMock,
   fee: testAssetAmount2,
   source: alphanetAssetHubMock,
