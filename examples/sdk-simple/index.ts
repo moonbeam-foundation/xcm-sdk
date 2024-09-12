@@ -1,19 +1,40 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
-import { Sdk, TransferData } from '@moonbeam-network/xcm-sdk';
+import { EvmSigner, Sdk, TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { ethers } from 'ethers';
 import { setTimeout } from 'node:timers/promises';
-
+import { createWalletClient, http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { moonbeam as moonbeamViem } from 'viem/chains';
 // Moonbeam Signer ===========================================================
 
-const moonbeamPrivateKey = '';
-const provider = new ethers.WebSocketProvider(moonbeam.ws, {
+const moonbeamPrivateKey = '0x...';
+const provider = new ethers.WebSocketProvider(moonbeam.ws[0], {
   chainId: moonbeam.id,
   name: moonbeam.name,
 });
-const evmSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
+
+// Using ethers
+// *****WARNING: IN THE UPCOMING VERSION OF THIS SDK, ethers SUPPORT WILL BE REMOVED, PLEASE SWITCH TO viem WHEN POSSIBLE
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ethersSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
+
+// Using viem
+const account = privateKeyToAccount(moonbeamPrivateKey);
+const viemSigner = createWalletClient({
+  account,
+  chain: moonbeamViem,
+  transport: http('https://rpc.api.moonbeam.network'),
+});
+
+// ethers
+// const evmSigner: EvmSigner = ethersSigner
+// const address = ethersSigner.address
+// viem
+const evmSigner: EvmSigner = viemSigner;
+const { address } = account;
 
 // Polkadot Signer ===========================================================
 
@@ -65,7 +86,7 @@ export async function fromPolkadot() {
   console.log('\nTransfer from Polkadot to Moonbeam\n');
 
   const data = await Sdk().getTransferData({
-    destinationAddress: evmSigner.address,
+    destinationAddress: address,
     destinationKeyOrChain: moonbeam,
     keyOrAsset: dot,
     polkadotSigner: pair,
@@ -93,7 +114,7 @@ export async function fromMoonbeam() {
     .asset(dot)
     .source(moonbeam)
     .destination(polkadot)
-    .accounts(evmSigner.address, pair.address, {
+    .accounts(address, pair.address, {
       evmSigner,
     });
 
@@ -114,7 +135,7 @@ async function main() {
   console.warn = () => null;
   console.clear();
 
-  console.log(`\nMoonbeam address: ${evmSigner.address}.`);
+  console.log(`\nMoonbeam address: ${address}.`);
   console.log(`Polkadot address: ${pair.address}.`);
 
   await fromPolkadot();
