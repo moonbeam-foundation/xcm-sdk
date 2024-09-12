@@ -6,4 +6,4 @@ pre-commit:
       run: pnpm biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
     spell:
-      run: pnpm run spell
+      run: pnpm cspell --no-summary --no-progress --no-must-find-files --files {staged_files}
