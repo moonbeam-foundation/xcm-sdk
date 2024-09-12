@@ -17,6 +17,7 @@ const provider = new ethers.WebSocketProvider(moonbeam.ws[0], {
 });
 
 // Using ethers
+// *****WARNING: IN THE UPCOMING VERSION OF THIS SDK, ethers SUPPORT WILL BE REMOVED, PLEASE SWITCH TO viem WHEN POSSIBLE
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ethersSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
 
