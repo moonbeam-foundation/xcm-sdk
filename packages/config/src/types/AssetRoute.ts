@@ -42,15 +42,15 @@ export interface FeeConfig {
 export interface MrlConfig {
   isAutomatic: boolean;
   transfer: MrlConfigBuilder;
-  moonChainFee: {
-    asset: Asset;
-    amount: number | FeeConfigBuilder;
-    balance: BalanceConfigBuilder;
-  };
+  moonChainFee: MoonChainFeeConfig;
 }
 
 export interface DestinationFeeConfig
   extends SetOptional<FeeConfig, 'balance'> {
+  amount: number | FeeConfigBuilder;
+}
+
+export interface MoonChainFeeConfig extends FeeConfig {
   amount: number | FeeConfigBuilder;
 }
 

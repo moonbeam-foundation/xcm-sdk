@@ -13,6 +13,7 @@ export interface TransferData {
   getEstimate(amount: number | string): AssetAmount;
   max: AssetAmount;
   min: AssetAmount;
+  moonChain: MoonChainTransferData;
   source: SourceTransferData;
   transfer(
     amount: bigint | number | string,
@@ -28,6 +29,8 @@ export interface SourceTransferData extends ChainTransferData {
 }
 
 export interface DestinationTransferData extends ChainTransferData {}
+
+export type MoonChainTransferData = Omit<ChainTransferData, 'min'>;
 
 export interface ChainTransferData {
   chain: AnyChain;

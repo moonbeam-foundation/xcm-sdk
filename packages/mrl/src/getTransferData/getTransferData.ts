@@ -21,6 +21,7 @@ import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import type { TransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
+import { getMoonChainData } from './getMoonChainData';
 import { getSourceData } from './getSourceData';
 import { buildTransfer } from './getTransferData.utils';
 
@@ -59,6 +60,12 @@ export async function getTransferData({
     sourceAddress,
   });
 
+  const moonChainData = await getMoonChainData({
+    destinationData,
+    route,
+    sourceAddress,
+  });
+
   return {
     destination: destinationData,
     getEstimate(amount: number | string) {
@@ -77,6 +84,7 @@ export async function getTransferData({
     },
     max: sourceData.max,
     min: getMin(destinationData),
+    moonChain: moonChainData,
     source: sourceData,
     async transfer(
       amount,
