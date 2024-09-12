@@ -105,7 +105,7 @@ export const buildParamsMock: BuilderPrams = {
   destinationApi: apiMock,
   fee: testAssetAmount2,
   source: alphanetAssetHubMock,
-  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY,',
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   sourceApi: apiMock,
 };
 
@@ -116,18 +116,18 @@ export const buildParamsSameAssetMock: BuilderPrams = {
   destinationApi: apiMock,
   fee: testAssetAmount,
   source: alphanetAssetHubMock,
-  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY,',
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   sourceApi: apiMock,
 };
 
 export const buildParachainParamsMock: BuilderPrams = {
   asset: testAssetAmount,
   destination: interlayTestnetMock,
-  destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u',
+  destinationAddress: 'wd84XqsQ4LVzhmTBVd4s5ApGt9sBnnk8K7Q5PhBwwhxwqgm1u', // cspell:disable-line
   destinationApi: apiMock,
   fee: testAssetAmount2,
   source: alphanetAssetHubMock,
-  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY,',
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   sourceApi: apiMock,
 };
 
