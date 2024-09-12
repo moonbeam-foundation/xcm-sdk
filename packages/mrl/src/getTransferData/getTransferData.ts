@@ -10,7 +10,6 @@ import {
   type Signers,
   convertToChainDecimals,
   getDestinationData,
-  getMin,
 } from '@moonbeam-network/xcm-sdk';
 import {
   AssetAmount,
@@ -23,7 +22,11 @@ import type { TransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
 import { getMoonChainData } from './getMoonChainData';
 import { getSourceData } from './getSourceData';
-import { buildTransfer } from './getTransferData.utils';
+import {
+  buildTransfer,
+  getMoonChainFeeValueOnSource,
+  getMrlMin,
+} from './getTransferData.utils';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -69,21 +72,32 @@ export async function getTransferData({
   return {
     destination: destinationData,
     getEstimate(amount: number | string) {
+      const isSameAssetPayingDestinationFee =
+        sourceData.balance.isSame(destinationFee);
       const bigAmount = Big(
         toBigInt(amount, sourceData.balance.decimals).toString(),
       );
-      const result = bigAmount.minus(
-        sourceData.balance.isSame(destinationFee)
-          ? destinationFee.toBig()
-          : Big(0),
-      );
+      const fee = getMoonChainFeeValueOnSource({
+        destinationData,
+        moonChainData,
+        sourceData,
+      });
+      const result = bigAmount
+        .minus(
+          isSameAssetPayingDestinationFee ? destinationFee.toBig() : Big(0),
+        )
+        .minus(fee);
 
       return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
     max: sourceData.max,
-    min: getMin(destinationData),
+    min: getMrlMin({
+      destinationData,
+      moonChainData,
+      sourceData,
+    }),
     moonChain: moonChainData,
     source: sourceData,
     async transfer(
