@@ -11,14 +11,15 @@ export const robonomicsRoutes = new ChainRoutes({
   chain: robonomics,
   routes: [
     {
-      asset: xrt,
       source: {
+        asset: xrt,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: xrt,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

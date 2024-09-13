@@ -11,14 +11,15 @@ export const darwiniaRoutes = new ChainRoutes({
   chain: darwinia,
   routes: [
     {
-      asset: ring,
       source: {
+        asset: ring,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: ring,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

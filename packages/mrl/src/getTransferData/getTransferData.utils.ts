@@ -103,7 +103,7 @@ export async function buildTransfer({
 }: BuildTransferParams) {
   if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 

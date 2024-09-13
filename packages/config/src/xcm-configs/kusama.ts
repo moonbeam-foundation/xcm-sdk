@@ -11,8 +11,8 @@ export const kusamaRoutes = new ChainRoutes({
   chain: kusama,
   routes: [
     {
-      asset: ksm,
       source: {
+        asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
           asset: ksm,
@@ -24,6 +24,7 @@ export const kusamaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ksm,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

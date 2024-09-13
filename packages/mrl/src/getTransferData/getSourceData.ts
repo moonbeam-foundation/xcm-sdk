@@ -38,13 +38,13 @@ export async function getSourceData({
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 
   const source = route.source.chain;
   const destination = route.destination.chain;
-  const asset = source.getChainAsset(route.asset);
+  const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
     : asset;

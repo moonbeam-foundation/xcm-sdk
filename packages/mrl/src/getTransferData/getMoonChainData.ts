@@ -20,12 +20,12 @@ export async function getMoonChainData({
 }: GetMoonChainDataParams): Promise<MoonChainTransferData> {
   if (!route.mrl) {
     throw new Error(
-      `MRL config is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MRL config is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 
   const moonChain = getMoonChain(route.source.chain);
-  const asset = moonChain.getChainAsset(route.asset);
+  const asset = moonChain.getChainAsset(route.source.asset);
   const isDestinationMoonChain = route.destination.chain.isEqual(moonChain);
 
   if (isDestinationMoonChain) {

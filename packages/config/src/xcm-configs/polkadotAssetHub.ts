@@ -14,8 +14,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
   chain: polkadotAssetHub,
   routes: [
     {
-      asset: usdt,
       source: {
+        asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -28,6 +28,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdt,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -41,8 +42,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: usdc,
       source: {
+        asset: usdc,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -55,6 +56,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdc,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -68,8 +70,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: pink,
       source: {
+        asset: pink,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -82,6 +84,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: pink,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -95,8 +98,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: ded,
       source: {
+        asset: ded,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -109,6 +112,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ded,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -122,8 +126,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: stink,
       source: {
+        asset: stink,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -136,6 +140,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: stink,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -149,8 +154,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: apillon,
       source: {
+        asset: apillon,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -163,6 +168,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: apillon,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -176,8 +182,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: wifd,
       source: {
+        asset: wifd,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dot,
@@ -190,6 +196,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: wifd,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

@@ -11,8 +11,8 @@ export const polkadotRoutes = new ChainRoutes({
   chain: polkadot,
   routes: [
     {
-      asset: dot,
       source: {
+        asset: dot,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
           asset: dot,
@@ -24,6 +24,7 @@ export const polkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dot,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

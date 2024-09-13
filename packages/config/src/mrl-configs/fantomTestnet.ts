@@ -1,5 +1,5 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
-import { dev, ftmwh } from '../assets';
+import { dev, ftm, ftmwh } from '../assets';
 import { fantomTestnet, peaqAlphanet } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -7,14 +7,16 @@ export const fantomTestnetRoutes = new ChainRoutes({
   chain: fantomTestnet,
   routes: [
     {
-      asset: ftmwh,
       source: {
+        asset: ftm,
         balance: BalanceBuilder().evm().native(),
         destinationFee: {
+          asset: ftm,
           balance: BalanceBuilder().evm().native(),
         },
       },
       destination: {
+        asset: ftmwh,
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

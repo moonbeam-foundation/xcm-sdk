@@ -17,7 +17,7 @@ export async function getDestinationData({
   destinationAddress,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
   const destination = route.destination.chain;
-  const asset = destination.getChainAsset(route.asset);
+  const asset = destination.getChainAsset(route.destination.asset);
   const balance = await getBalance({
     address: destinationAddress,
     asset,

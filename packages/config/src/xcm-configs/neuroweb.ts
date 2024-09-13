@@ -11,14 +11,15 @@ export const neurowebRoutes = new ChainRoutes({
   chain: neuroweb,
   routes: [
     {
-      asset: neuro,
       source: {
+        asset: neuro,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: neuro,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

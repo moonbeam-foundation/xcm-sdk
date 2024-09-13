@@ -11,14 +11,15 @@ export const subsocialRoutes = new ChainRoutes({
   chain: subsocial,
   routes: [
     {
-      asset: sub,
       source: {
+        asset: sub,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: sub,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

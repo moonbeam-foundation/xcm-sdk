@@ -12,14 +12,15 @@ export const peaqRoutes = new ChainRoutes({
   chain: peaqChain,
   routes: [
     {
-      asset: peaq,
       source: {
+        asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: peaq,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -30,8 +31,8 @@ export const peaqRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
         min: AssetMinBuilder().assets().asset(),
         destinationFee: {
@@ -39,6 +40,7 @@ export const peaqRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -49,8 +51,8 @@ export const peaqRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: usdcwh,
       source: {
+        asset: usdcwh,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: peaq,
@@ -62,6 +64,7 @@ export const peaqRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdcwh,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -72,8 +75,8 @@ export const peaqRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: dai,
       source: {
+        asset: dai,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: peaq,
@@ -85,6 +88,7 @@ export const peaqRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dai,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -95,8 +99,8 @@ export const peaqRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: wbtc,
       source: {
+        asset: wbtc,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: peaq,
@@ -108,6 +112,7 @@ export const peaqRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: wbtc,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -118,8 +123,8 @@ export const peaqRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: weth,
       source: {
+        asset: weth,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: peaq,
@@ -131,6 +136,7 @@ export const peaqRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: weth,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -141,8 +147,8 @@ export const peaqRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: usdtwh,
       source: {
+        asset: usdtwh,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: peaq,
@@ -154,6 +160,7 @@ export const peaqRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdtwh,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

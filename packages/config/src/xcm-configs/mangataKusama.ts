@@ -11,14 +11,15 @@ export const mangataKusamaRoutes = new ChainRoutes({
   chain: mangataKusama,
   routes: [
     {
-      asset: mgx,
       source: {
+        asset: mgx,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       destination: {
+        asset: mgx,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const mangataKusamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: mgx,
@@ -41,6 +42,7 @@ export const mangataKusamaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

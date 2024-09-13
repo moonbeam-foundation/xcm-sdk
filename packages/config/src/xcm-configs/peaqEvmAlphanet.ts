@@ -11,8 +11,8 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
   chain: peaqEvmAlphanet,
   routes: [
     {
-      asset: ftmwh,
       source: {
+        asset: ftmwh,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: agng,
@@ -24,6 +24,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ftmwh,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -34,8 +35,8 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: agng,
@@ -47,6 +48,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dev,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

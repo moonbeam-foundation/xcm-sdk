@@ -11,14 +11,15 @@ export const nodleRoutes = new ChainRoutes({
   chain: nodle,
   routes: [
     {
-      asset: nodl,
       source: {
+        asset: nodl,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: nodl,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

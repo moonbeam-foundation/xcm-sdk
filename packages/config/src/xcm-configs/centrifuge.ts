@@ -11,14 +11,15 @@ export const centrifugeRoutes = new ChainRoutes({
   chain: centrifuge,
   routes: [
     {
-      asset: cfg,
       source: {
+        asset: cfg,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: cfg,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

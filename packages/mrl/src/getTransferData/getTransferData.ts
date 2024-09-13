@@ -41,7 +41,7 @@ export async function getTransferData({
 }: GetTransferDataParams): Promise<TransferData> {
   if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 
@@ -54,6 +54,7 @@ export async function getTransferData({
   const destinationFee = convertToChainDecimals({
     asset: destinationData.fee,
     chain: route.source.chain,
+    targetAsset: route.source.destinationFee?.asset,
   });
 
   const sourceData = await getSourceData({
@@ -108,7 +109,7 @@ export async function getTransferData({
 
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = AssetAmount.fromChainAsset(
-        route.source.chain.getChainAsset(route.asset),
+        route.source.chain.getChainAsset(route.source.asset),
         { amount: bigintAmount },
       );
 

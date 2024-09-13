@@ -11,14 +11,15 @@ export const zeitgeistRoutes = new ChainRoutes({
   chain: zeitgeist,
   routes: [
     {
-      asset: ztg,
       source: {
+        asset: ztg,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: ztg,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const zeitgeistRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: usdcwh,
       source: {
+        asset: usdcwh,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: ztg,
@@ -41,6 +42,7 @@ export const zeitgeistRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdcwh,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -51,14 +53,15 @@ export const zeitgeistRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

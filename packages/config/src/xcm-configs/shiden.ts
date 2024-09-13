@@ -11,14 +11,15 @@ export const shidenRoutes = new ChainRoutes({
   chain: shiden,
   routes: [
     {
-      asset: sdn,
       source: {
+        asset: sdn,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: sdn,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -32,8 +33,8 @@ export const shidenRoutes = new ChainRoutes({
         .here(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: sdn,
@@ -44,6 +45,7 @@ export const shidenRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

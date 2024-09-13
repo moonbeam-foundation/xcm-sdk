@@ -23,14 +23,14 @@ export class ChainRoutes {
   constructor({ chain, routes }: ChainRoutesConstructorParams) {
     this.chain = chain;
     this.#routes = new Map(
-      routes.map(({ asset, source, destination, contract, extrinsic }) => [
-        `${asset.key}-${destination.chain.key}`,
+      routes.map(({ source, destination, contract, extrinsic, mrl }) => [
+        `${source.asset.key}-${destination.chain.key}`,
         new AssetRoute({
-          asset,
           source: { ...source, chain },
           destination,
           contract,
           extrinsic,
+          mrl,
         }),
       ]),
     );
@@ -43,7 +43,7 @@ export class ChainRoutes {
   getAssetRoutes(keyOrAsset: string | AnyAsset): AssetRoute[] {
     const key = getKey(keyOrAsset);
 
-    return this.getRoutes().filter((cfg) => cfg.asset.key === key);
+    return this.getRoutes().filter((route) => route.source.asset.key === key);
   }
 
   getAssetDestinations(keyOrAsset: string | AnyAsset): AnyChain[] {
@@ -56,8 +56,8 @@ export class ChainRoutes {
     const key = getKey(keyOrChain);
 
     return this.getRoutes()
-      .filter((cfg) => cfg.destination.chain.key === key)
-      .map((cfg) => cfg.asset);
+      .filter((route) => route.destination.chain.key === key)
+      .map((route) => route.source.asset);
   }
 
   getAssetRoute(

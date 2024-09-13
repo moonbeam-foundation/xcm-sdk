@@ -9,7 +9,6 @@ import type {
 import type { AnyChain, Asset, SetOptional } from '@moonbeam-network/xcm-types';
 
 export interface AssetRouteConstructorParams {
-  asset: Asset;
   source: SourceConfig;
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
@@ -18,10 +17,12 @@ export interface AssetRouteConstructorParams {
 }
 
 export interface SourceConfig {
+  asset: Asset;
   chain: AnyChain;
   balance: BalanceConfigBuilder;
   fee?: FeeConfig;
   destinationFee?: {
+    asset?: Asset;
     balance: BalanceConfigBuilder;
   };
   min?: AssetMinConfigBuilder;
@@ -55,8 +56,6 @@ export interface MoonChainFeeConfig extends FeeConfig {
 }
 
 export class AssetRoute {
-  readonly asset: Asset;
-
   readonly source: SourceConfig;
 
   readonly destination: DestinationConfig;
@@ -68,14 +67,12 @@ export class AssetRoute {
   readonly mrl?: MrlConfig;
 
   constructor({
-    asset,
     source,
     destination,
     contract,
     extrinsic,
     mrl,
   }: AssetRouteConstructorParams) {
-    this.asset = asset;
     this.source = source;
     this.destination = destination;
     this.contract = contract;

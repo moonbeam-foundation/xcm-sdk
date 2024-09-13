@@ -11,14 +11,15 @@ export const crustShadowRoutes = new ChainRoutes({
   chain: crustShadow,
   routes: [
     {
-      asset: csm,
       source: {
+        asset: csm,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: csm,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -32,8 +33,8 @@ export const crustShadowRoutes = new ChainRoutes({
         .here(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: csm,
@@ -44,6 +45,7 @@ export const crustShadowRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

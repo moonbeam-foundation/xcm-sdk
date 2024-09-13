@@ -11,14 +11,15 @@ export const parallelRoutes = new ChainRoutes({
   chain: parallel,
   routes: [
     {
-      asset: para,
       source: {
+        asset: para,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: para,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -32,8 +33,8 @@ export const parallelRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: para,
@@ -44,6 +45,7 @@ export const parallelRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

@@ -205,11 +205,12 @@ describe('config service', () => {
         chain: hydration,
         routes: [
           {
-            asset: glmr,
             source: {
+              asset: glmr,
               balance: BalanceBuilder().substrate().tokens().accounts(),
             },
             destination: {
+              asset: glmr,
               chain: moonbeam,
               balance: BalanceBuilder().substrate().tokens().accounts(),
               fee: {

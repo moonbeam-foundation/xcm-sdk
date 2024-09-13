@@ -11,14 +11,15 @@ export const kintsugiRoutes = new ChainRoutes({
   chain: kintsugi,
   routes: [
     {
-      asset: kint,
       source: {
+        asset: kint,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       destination: {
+        asset: kint,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const kintsugiRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: kbtc,
       source: {
+        asset: kbtc,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: kint,
@@ -41,6 +42,7 @@ export const kintsugiRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: kbtc,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

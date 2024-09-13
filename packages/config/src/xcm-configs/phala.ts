@@ -11,14 +11,15 @@ export const phalaRoutes = new ChainRoutes({
   chain: phala,
   routes: [
     {
-      asset: pha,
       source: {
+        asset: pha,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: pha,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const phalaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTransfer().transfer().here(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: pha,
@@ -41,6 +42,7 @@ export const phalaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

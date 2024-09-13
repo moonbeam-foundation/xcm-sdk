@@ -33,6 +33,7 @@ export async function getTransferData({
   const destinationFee = convertToChainDecimals({
     asset: destinationData.fee,
     chain: route.source.chain,
+    targetAsset: route.source.destinationFee?.asset,
   });
 
   const sourceData = await getSourceData({
@@ -69,7 +70,7 @@ export async function getTransferData({
       const destination = route.destination.chain as AnyParachain;
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = AssetAmount.fromChainAsset(
-        route.source.chain.getChainAsset(route.asset),
+        route.source.chain.getChainAsset(route.source.asset),
         { amount: bigintAmount },
       );
       const [sourcePolkadot, destinationPolkadot] =
