@@ -50,11 +50,11 @@ export async function getTransferData({
     destinationAddress,
   });
 
-  // Here we need to convert the fee on the destination chain to an asset on source chain.
+  // NOTE: Here we need to convert the fee on the destination chain
+  // to an asset on source chain.
   const destinationFee = convertToChainDecimals({
     asset: destinationData.fee,
-    chain: route.source.chain,
-    targetAsset: route.source.destinationFee?.asset,
+    target: route.getDestinationFeeAssetOnSource(),
   });
 
   const sourceData = await getSourceData({

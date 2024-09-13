@@ -5,7 +5,7 @@ export const baseConfig: Options = {
   format: 'esm',
   outDir: 'build',
   target: 'es2022',
-  minify: true,
+  minify: false,
   splitting: false,
   sourcemap: true,
   clean: true,

@@ -64,7 +64,7 @@ export function getMoonChainFeeValueOnSource({
     isSameAssetPayingMoonChainFee
     ? convertToChainDecimals({
         asset: moonChainData.fee,
-        chain: sourceData.chain,
+        target: sourceData.chain.getChainAsset(moonChainData.fee),
       }).toBig()
     : Big(0);
 }

@@ -469,6 +469,9 @@ export const fantomTestnet = new EvmChain({
   name: 'Fantom Testnet',
   nativeAsset: ftm,
   rpc: 'https://rpc.testnet.fantom.network',
+  wh: {
+    name: 'Fantom',
+  },
 });
 
 export const hydration = new Parachain({
@@ -944,6 +947,9 @@ export const moonbaseAlpha = new EvmParachain({
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   ss58Format: 1287,
   ws: ['wss://wss.api.moonbase.moonbeam.network'],
+  wh: {
+    name: 'Moonbeam',
+  },
 });
 
 export const moonbaseBeta = new EvmParachain({

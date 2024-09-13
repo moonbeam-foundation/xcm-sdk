@@ -6,7 +6,12 @@ import type {
   FeeConfigBuilder,
   MrlConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
-import type { AnyChain, Asset, SetOptional } from '@moonbeam-network/xcm-types';
+import type {
+  AnyChain,
+  Asset,
+  ChainAsset,
+  SetOptional,
+} from '@moonbeam-network/xcm-types';
 
 export interface AssetRouteConstructorParams {
   source: SourceConfig;
@@ -78,5 +83,11 @@ export class AssetRoute {
     this.contract = contract;
     this.extrinsic = extrinsic;
     this.mrl = mrl;
+  }
+
+  getDestinationFeeAssetOnSource(): ChainAsset {
+    return this.source.chain.getChainAsset(
+      this.source.destinationFee?.asset || this.destination.fee.asset,
+    );
   }
 }

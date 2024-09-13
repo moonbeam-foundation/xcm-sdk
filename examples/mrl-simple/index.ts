@@ -1,9 +1,5 @@
 import { Mrl } from '@moonbeam-network/mrl';
-import {
-  fantomTestnet,
-  ftmwh,
-  peaqAlphanet,
-} from '@moonbeam-network/xcm-config';
+import { fantomTestnet, ftm, peaqAlphanet } from '@moonbeam-network/xcm-config';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { http, type Address, createWalletClient } from 'viem';
@@ -54,7 +50,7 @@ async function main() {
   const data = await Mrl()
     .setSource(fantomTestnet)
     .setDestination(peaqAlphanet)
-    .setAsset(ftmwh)
+    .setAsset(ftm)
     .setAddresses({
       sourceAddress: account.address,
       destinationAddress: pair.address,

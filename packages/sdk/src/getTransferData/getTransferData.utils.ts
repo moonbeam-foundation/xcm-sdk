@@ -192,19 +192,15 @@ export async function getDestinationFee({
 
 export interface ConvertToChainDecimalsParams {
   asset: AssetAmount;
-  chain: AnyChain;
-  targetAsset?: Asset;
+  target: ChainAsset;
 }
 
 export function convertToChainDecimals({
   asset,
-  chain,
-  targetAsset,
+  target,
 }: ConvertToChainDecimalsParams): AssetAmount {
-  const chainAsset = chain.getChainAsset(targetAsset ?? asset);
-
-  return AssetAmount.fromChainAsset(chainAsset, {
-    amount: asset.convertDecimals(chainAsset.decimals).amount,
+  return AssetAmount.fromChainAsset(target, {
+    amount: asset.convertDecimals(target.decimals).amount,
   });
 }
 
@@ -249,7 +245,7 @@ export async function getDestinationFeeBalance({
 
   return getBalance({
     address: sourceAddress,
-    asset: route.source.chain.getChainAsset(route.destination.fee.asset),
+    asset: route.getDestinationFeeAssetOnSource(),
     builder: route.source.destinationFee?.balance,
     chain: route.source.chain,
   });

@@ -25,16 +25,18 @@ export function wormhole() {
         source,
         sourceAddress,
       }) => {
-        if (!asset.address) {
+        const isNativeAsset = asset.isSame(source.nativeAsset);
+        const isDestinationMoonChain = destination.isEqual(moonChain);
+        const tokenAddress = isNativeAsset ? 'native' : asset.address;
+
+        if (!tokenAddress) {
           throw new Error(`Asset ${asset.key} has no address`);
         }
-
-        const isDestinationMoonChain = destination.isEqual(moonChain);
 
         const wh = wormholeFactory(source);
         const whSource = wh.getChain(source.getWormholeName());
         const whMoonChain = wh.getChain(moonChain.getWormholeName());
-        const whAsset = Wormhole.tokenId(whSource.chain, asset.address);
+        const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
           sourceAddress,
