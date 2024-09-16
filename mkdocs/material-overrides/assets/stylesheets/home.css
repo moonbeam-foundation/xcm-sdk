@@ -1,15 +1,15 @@
 /* Background image on home page */
-[data-md-color-scheme='slate'] .md-main {
+[data-md-color-scheme="slate"] .md-main {
   /* Set gradient background */
-  background: linear-gradient(#000, #291E3A);
+  background: linear-gradient(#000, #291e3a);
   /* For older browsers */
-  background: -webkit-linear-gradient(#000, #291E3A);
-  background: -moz-linear-gradient(#000, #291E3A);
-  background: -o-linear-gradient(#000, #291E3A);
+  background: -webkit-linear-gradient(#000, #291e3a);
+  background: -moz-linear-gradient(#000, #291e3a);
+  background: -o-linear-gradient(#000, #291e3a);
 }
 
 /* Background image on home page */
-[data-md-color-scheme='default'] .md-main {
+[data-md-color-scheme="default"] .md-main {
   /* Set gradient background */
   background: linear-gradient(#958fdc, #fff);
   /* For older browsers */
@@ -101,7 +101,7 @@
   justify-content: center;
 }
 
-.md-typeset pre>code {
+.md-typeset pre > code {
   display: flex;
   height: 4em;
   padding: 0;
@@ -113,7 +113,7 @@
 
 @media screen and (max-width: 76.234375em) {
   .code {
-    display: none
+    display: none;
   }
 }
 
