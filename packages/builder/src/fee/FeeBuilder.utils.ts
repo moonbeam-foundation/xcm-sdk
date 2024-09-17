@@ -1,8 +1,9 @@
 import { ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ApiPromise } from '@polkadot/api';
-import { Option, Result, Vec } from '@polkadot/types';
-import { Error as PolkadotError } from '@polkadot/types/interfaces';
+import { Option, Result, u128, Vec } from '@polkadot/types';
+import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
 import { XcmVersionedAssetId } from '@polkadot/types/lookup';
+import { AnyJson } from '@polkadot/types/types';
 import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
 const DEFAULT_AMOUNT = 10 * 18;
@@ -105,7 +106,7 @@ export async function getVersionedAssetId(
     PolkadotError
   > = await api.call.xcmPaymentApi.queryAcceptablePaymentAssets(3);
   const acceptablePaymentAssets = acceptablePaymentAssetsResult.isOk
-    ? acceptablePaymentAssetsResult.asOk.map((value) => value.asV3.toHuman())
+    ? acceptablePaymentAssetsResult.asOk.map((value) => value.asV3)
     : [];
 
   // console.log('acceptablePaymentAssets', acceptablePaymentAssets);
@@ -150,4 +151,36 @@ export async function getVersionedAssetId(
       ...assetType.unwrap().asXcm.toJSON(),
     },
   };
+}
+
+export async function getFeeForXcmInstructionsAndAsset(
+  api: ApiPromise,
+  instructions: AnyJson,
+  versionedAssetId: any, // TODO mjm
+) {
+  const xcmToWeightResult: Result<Weight, PolkadotError> =
+    await api.call.xcmPaymentApi.queryXcmWeight({
+      V3: instructions,
+    });
+  console.log('xcmToWeightResult', xcmToWeightResult.toHuman());
+  if (!xcmToWeightResult.isOk) {
+    throw new Error(
+      'There was an error trying to get the weight for the xcm instructions (queryXcmWeight)',
+    );
+  }
+  const xcmToWeight = xcmToWeightResult.asOk;
+
+  const weightToForeingAssets: Result<u128, PolkadotError> =
+    await api.call.xcmPaymentApi.queryWeightToAssetFee(xcmToWeight, {
+      V3: {
+        ...versionedAssetId,
+      },
+    });
+  if (!xcmToWeightResult.isOk) {
+    throw new Error(
+      'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
+    );
+  }
+  console.log('weightToForeingAssets', weightToForeingAssets.toHuman());
+  return weightToForeingAssets.asOk.toBigInt();
 }
