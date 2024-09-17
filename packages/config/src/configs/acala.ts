@@ -43,7 +43,7 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.01,
+        amount: FeeBuilder().xcmPaymentFee().xcmPaymentFee(),
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

@@ -67,6 +67,7 @@ export interface GetFeeParams {
 }
 
 export async function getFee({
+  address,
   config,
   polkadot,
 }: GetFeeParams): Promise<AssetAmount> {
@@ -85,8 +86,10 @@ export async function getFee({
   }
 
   const cfg = (amount as FeeConfigBuilder).build({
+    address,
     api: polkadot.api,
     asset: polkadot.chain.getAssetId(asset),
+    transferAsset: polkadot.chain.getAssetId(config.asset),
   });
 
   return zeroAmount.copyWith({
