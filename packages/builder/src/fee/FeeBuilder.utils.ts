@@ -97,7 +97,7 @@ export async function getAssetIdType(
   return type;
 }
 
-function getConcreteAssetId(): object {
+function getConcreteNativeAssetId(): object {
   return {
     Concrete: {
       interior: {
@@ -140,7 +140,7 @@ export async function getVersionedAssetId(
   asset: ChainAssetId,
 ): Promise<object> {
   if (asset === moonChainNativeAssetId) {
-    return getConcreteAssetId();
+    return getConcreteNativeAssetId();
   }
 
   if (isHexString(asset)) {
