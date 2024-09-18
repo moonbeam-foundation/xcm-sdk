@@ -15,7 +15,9 @@ export const hydrationConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().xcmPaymentApi().feeForDifferentReserveAsset(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -37,7 +39,9 @@ export const hydrationConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().xcmPaymentApi().feeForSameReserveMultiAsset(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

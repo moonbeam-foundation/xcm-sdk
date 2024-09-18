@@ -5,7 +5,8 @@ import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
 import { AnyJson } from '@polkadot/types/types';
 import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
-const DEFAULT_AMOUNT = 10 * 18;
+// TODO mjm find another solution with the asset decimal?
+const DEFAULT_AMOUNT = 10 ** 6;
 
 const moonChainNativeAssetId = '0x0000000000000000000000000000000000000802';
 
@@ -20,16 +21,14 @@ export function getWithdrawAssetInstruction(assetTypes: object[]) {
   };
 }
 
-export function getReserveAssetDepositedInstruction(assetType: object) {
+export function getReserveAssetDepositedInstruction(assetTypes: object[]) {
   return {
-    ReserveAssetDeposited: [
-      {
-        fun: {
-          Fungible: DEFAULT_AMOUNT,
-        },
-        id: { ...assetType },
+    ReserveAssetDeposited: assetTypes.map((assetType) => ({
+      fun: {
+        Fungible: DEFAULT_AMOUNT,
       },
-    ],
+      id: { ...assetType },
+    })),
   };
 }
 
@@ -159,13 +158,14 @@ export async function getVersionedAssetId(
 export async function getFeeForXcmInstructionsAndAsset(
   api: ApiPromise,
   instructions: AnyJson,
-  versionedAssetId: object, // TODO mjm
+  versionedAssetId: object,
 ) {
   const xcmToWeightResult = await api.call.xcmPaymentApi.queryXcmWeight<
     Result<Weight, PolkadotError>
   >({
     V3: instructions,
   });
+  console.log('xcmToWeightResult', xcmToWeightResult.toHuman());
   if (!xcmToWeightResult.isOk) {
     throw new Error(
       'There was an error trying to get the weight for the xcm instructions (queryXcmWeight)',
@@ -186,5 +186,6 @@ export async function getFeeForXcmInstructionsAndAsset(
       'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
     );
   }
+  console.log('weightToForeingAssets', weightToForeingAssets.toHuman());
   return weightToForeingAssets.asOk.toBigInt();
 }
