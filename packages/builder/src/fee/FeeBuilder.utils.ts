@@ -1,8 +1,7 @@
 import { ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ApiPromise } from '@polkadot/api';
-import { Option, Result, u128, Vec } from '@polkadot/types';
+import { Option, Result, u128 } from '@polkadot/types';
 import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
-import { XcmVersionedAssetId } from '@polkadot/types/lookup';
 import { AnyJson } from '@polkadot/types/types';
 import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
@@ -41,6 +40,8 @@ export function getClearOriginInstruction() {
 }
 
 export function getBuyExecutionInstruction(assetType: object) {
+  // TODO should verify that asset is in acceptable payment assets
+  // api.call.xcmPaymentApi.queryAcceptablePaymentAssets(xcmVersion)
   return {
     BuyExecution: {
       fees: {
@@ -97,58 +98,57 @@ export async function getAssetIdType(
   return type;
 }
 
-// TODO mjm rename
+function getConcreteAssetId(): object {
+  return {
+    Concrete: {
+      interior: {
+        X1: {
+          PalletInstance: '10',
+        },
+      },
+      parents: '0',
+    },
+  };
+}
+
+function isHexString(asset: ChainAssetId): boolean {
+  return typeof asset === 'string' && asset.startsWith('0x');
+}
+
+function getConcreteAssetIdWithAccountKey20(asset: ChainAssetId): object {
+  return {
+    Concrete: {
+      interior: {
+        X2: [
+          {
+            PalletInstance: '110',
+          },
+          {
+            AccountKey20: {
+              key: asset,
+              network: null,
+            },
+          },
+        ],
+      },
+      parents: '0',
+    },
+  };
+}
+
 export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAssetId,
-) {
-  const acceptablePaymentAssetsResult =
-    await api.call.xcmPaymentApi.queryAcceptablePaymentAssets<
-      Result<Vec<XcmVersionedAssetId>, PolkadotError>
-    >(3);
-  const acceptablePaymentAssets = acceptablePaymentAssetsResult.isOk
-    ? acceptablePaymentAssetsResult.asOk.map((value) => value.asV3)
-    : [];
-  console.log(
-    'acceptablePaymentAssets',
-    acceptablePaymentAssets.map((value) => value.toHuman()),
-  );
-  // TODO mjm verify that the assets Id are in the acceptablePaymentAssets
-
+): Promise<object> {
   if (asset === moonChainNativeAssetId) {
-    return {
-      Concrete: {
-        interior: {
-          X1: {
-            PalletInstance: 10,
-          },
-        },
-        parents: 0,
-      },
-    };
+    return getConcreteAssetId();
   }
-  if (typeof asset === 'string' && asset.startsWith('0x')) {
-    return {
-      Concrete: {
-        interior: {
-          X2: [
-            {
-              PalletInstance: 110,
-            },
-            {
-              AccountKey20: {
-                key: asset,
-                network: null,
-              },
-            },
-          ],
-        },
-        parents: 0,
-      },
-    };
-  }
-  const assetType = await getAssetIdType(api, asset);
 
+  if (isHexString(asset)) {
+    return getConcreteAssetIdWithAccountKey20(asset);
+  }
+
+  const assetType = await getAssetIdType(api, asset);
   return {
     Concrete: {
       ...assetType.unwrap().asXcm.toJSON(),
@@ -166,7 +166,6 @@ export async function getFeeForXcmInstructionsAndAsset(
   >({
     V3: instructions,
   });
-  console.log('xcmToWeightResult', xcmToWeightResult.toHuman());
   if (!xcmToWeightResult.isOk) {
     throw new Error(
       'There was an error trying to get the weight for the xcm instructions (queryXcmWeight)',
@@ -187,6 +186,5 @@ export async function getFeeForXcmInstructionsAndAsset(
       'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
     );
   }
-  console.log('weightToForeingAssets', weightToForeingAssets.toHuman());
   return weightToForeingAssets.asOk.toBigInt();
 }

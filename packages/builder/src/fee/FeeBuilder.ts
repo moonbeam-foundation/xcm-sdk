@@ -10,6 +10,7 @@ import {
   getClearOriginInstruction,
   getDepositAssetInstruction,
   getFeeForXcmInstructionsAndAsset,
+  getReserveAssetDepositedInstruction,
   getVersionedAssetId,
   getWithdrawAssetInstruction,
 } from './FeeBuilder.utils';
@@ -47,33 +48,7 @@ function assetManager() {
 
 function xcmPaymentApi() {
   return {
-    // TODO mjm rename all this
-    xcmPaymentFee: (): FeeConfigBuilder => ({
-      build: ({ address, api, asset }) =>
-        new SubstrateCallConfig({
-          api,
-          call: async (): Promise<bigint> => {
-            // TODO mjm rename assetId?
-            const versionedAssetId = await getVersionedAssetId(api, asset);
-            console.log('versionedAssetId', versionedAssetId);
-            const assets = [versionedAssetId];
-
-            const instructions = [
-              getWithdrawAssetInstruction(assets),
-              getClearOriginInstruction(),
-              getBuyExecutionInstruction(versionedAssetId),
-              getDepositAssetInstruction(address, assets),
-            ];
-
-            return getFeeForXcmInstructionsAndAsset(
-              api,
-              instructions,
-              versionedAssetId,
-            );
-          },
-        }),
-    }),
-    xcmPaymentFeeNonReserve: (): FeeConfigBuilder => ({
+    feeForSameReserveAsset: (): FeeConfigBuilder => ({
       build: ({ address, api, asset }) =>
         new SubstrateCallConfig({
           api,
@@ -96,7 +71,29 @@ function xcmPaymentApi() {
           },
         }),
     }),
-    xcmPaymentFeeDoubleAsset: (): FeeConfigBuilder => ({
+    feeForDifferentReserveAsset: (): FeeConfigBuilder => ({
+      build: ({ address, api, asset }) =>
+        new SubstrateCallConfig({
+          api,
+          call: async (): Promise<bigint> => {
+            const versionedAssetId = await getVersionedAssetId(api, asset);
+
+            const instructions = [
+              getReserveAssetDepositedInstruction(versionedAssetId),
+              getClearOriginInstruction(),
+              getBuyExecutionInstruction(versionedAssetId),
+              getDepositAssetInstruction(address, [versionedAssetId]),
+            ];
+
+            return getFeeForXcmInstructionsAndAsset(
+              api,
+              instructions,
+              versionedAssetId,
+            );
+          },
+        }),
+    }),
+    feeForSameReserveMultiAsset: (): FeeConfigBuilder => ({
       build: ({ address, api, asset, transferAsset }) =>
         new SubstrateCallConfig({
           api,
