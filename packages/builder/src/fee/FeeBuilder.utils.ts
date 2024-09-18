@@ -10,7 +10,7 @@ const DEFAULT_AMOUNT = 10 * 18;
 
 const moonChainNativeAssetId = '0x0000000000000000000000000000000000000802';
 
-export function getWithdrawAssetInstruction(assetTypes: any[]) {
+export function getWithdrawAssetInstruction(assetTypes: object[]) {
   return {
     WithdrawAsset: assetTypes.map((assetType) => ({
       fun: {
@@ -21,12 +21,12 @@ export function getWithdrawAssetInstruction(assetTypes: any[]) {
   };
 }
 
-export function getReserveAssetDepositedInstruction(assetType) {
+export function getReserveAssetDepositedInstruction(assetType: object) {
   return {
     ReserveAssetDeposited: [
       {
         fun: {
-          Fungible: '1',
+          Fungible: DEFAULT_AMOUNT,
         },
         id: { ...assetType },
       },
@@ -40,7 +40,7 @@ export function getClearOriginInstruction() {
   };
 }
 
-export function getBuyExecutionInstruction(assetType) {
+export function getBuyExecutionInstruction(assetType: object) {
   return {
     BuyExecution: {
       fees: {
@@ -58,12 +58,12 @@ export function getBuyExecutionInstruction(assetType) {
   };
 }
 
-export function getDepositAssetInstruction(address: string) {
+export function getDepositAssetInstruction(address: string, assets: object[]) {
   return {
     DepositAsset: {
       assets: {
         Wild: {
-          AllCounted: 1,
+          AllCounted: assets.length,
         },
       },
       beneficiary: {
@@ -86,9 +86,10 @@ export async function getAssetIdType(
   api: ApiPromise,
   asset: ChainAssetId,
 ): Promise<Option<MoonbeamRuntimeXcmConfigAssetType>> {
-  const type = (await api.query.assetManager.assetIdType(
-    asset,
-  )) as unknown as Option<MoonbeamRuntimeXcmConfigAssetType>;
+  const type =
+    await api.query.assetManager.assetIdType<
+      Option<MoonbeamRuntimeXcmConfigAssetType>
+    >(asset);
 
   if (type.isNone || !type.unwrap().isXcm) {
     throw new Error(`No asset type found for asset ${asset}`);
@@ -101,15 +102,17 @@ export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAssetId,
 ) {
-  const acceptablePaymentAssetsResult: Result<
-    Vec<XcmVersionedAssetId>,
-    PolkadotError
-  > = await api.call.xcmPaymentApi.queryAcceptablePaymentAssets(3);
+  const acceptablePaymentAssetsResult =
+    await api.call.xcmPaymentApi.queryAcceptablePaymentAssets<
+      Result<Vec<XcmVersionedAssetId>, PolkadotError>
+    >(3);
   const acceptablePaymentAssets = acceptablePaymentAssetsResult.isOk
     ? acceptablePaymentAssetsResult.asOk.map((value) => value.asV3)
     : [];
-
-  // console.log('acceptablePaymentAssets', acceptablePaymentAssets);
+  console.log(
+    'acceptablePaymentAssets',
+    acceptablePaymentAssets.map((value) => value.toHuman()),
+  );
   // TODO mjm verify that the assets Id are in the acceptablePaymentAssets
 
   if (asset === moonChainNativeAssetId) {
@@ -156,12 +159,13 @@ export async function getVersionedAssetId(
 export async function getFeeForXcmInstructionsAndAsset(
   api: ApiPromise,
   instructions: AnyJson,
-  versionedAssetId: any, // TODO mjm
+  versionedAssetId: object, // TODO mjm
 ) {
-  const xcmToWeightResult: Result<Weight, PolkadotError> =
-    await api.call.xcmPaymentApi.queryXcmWeight({
-      V3: instructions,
-    });
+  const xcmToWeightResult = await api.call.xcmPaymentApi.queryXcmWeight<
+    Result<Weight, PolkadotError>
+  >({
+    V3: instructions,
+  });
   console.log('xcmToWeightResult', xcmToWeightResult.toHuman());
   if (!xcmToWeightResult.isOk) {
     throw new Error(
@@ -170,8 +174,10 @@ export async function getFeeForXcmInstructionsAndAsset(
   }
   const xcmToWeight = xcmToWeightResult.asOk;
 
-  const weightToForeingAssets: Result<u128, PolkadotError> =
-    await api.call.xcmPaymentApi.queryWeightToAssetFee(xcmToWeight, {
+  const weightToForeingAssets =
+    await api.call.xcmPaymentApi.queryWeightToAssetFee<
+      Result<u128, PolkadotError>
+    >(xcmToWeight, {
       V3: {
         ...versionedAssetId,
       },

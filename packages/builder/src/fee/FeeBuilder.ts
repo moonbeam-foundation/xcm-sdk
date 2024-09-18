@@ -56,12 +56,13 @@ function xcmPaymentApi() {
             // TODO mjm rename assetId?
             const versionedAssetId = await getVersionedAssetId(api, asset);
             console.log('versionedAssetId', versionedAssetId);
+            const assets = [versionedAssetId];
 
             const instructions = [
-              getWithdrawAssetInstruction([versionedAssetId]),
+              getWithdrawAssetInstruction(assets),
               getClearOriginInstruction(),
               getBuyExecutionInstruction(versionedAssetId),
-              getDepositAssetInstruction(address),
+              getDepositAssetInstruction(address, assets),
             ];
 
             return getFeeForXcmInstructionsAndAsset(
@@ -78,12 +79,13 @@ function xcmPaymentApi() {
           api,
           call: async (): Promise<bigint> => {
             const versionedAssetId = await getVersionedAssetId(api, asset);
+            const assets = [versionedAssetId];
 
             const instructions = [
-              getWithdrawAssetInstruction([versionedAssetId]),
+              getWithdrawAssetInstruction(assets),
               getClearOriginInstruction(),
               getBuyExecutionInstruction(versionedAssetId),
-              getDepositAssetInstruction(address),
+              getDepositAssetInstruction(address, assets),
             ];
 
             return getFeeForXcmInstructionsAndAsset(
@@ -105,14 +107,13 @@ function xcmPaymentApi() {
               transferAsset,
             );
 
+            const assets = [versionedAssetId, versionedTransferAssetId];
+
             const instructions = [
-              getWithdrawAssetInstruction([
-                versionedAssetId,
-                versionedTransferAssetId,
-              ]),
+              getWithdrawAssetInstruction(assets),
               getClearOriginInstruction(),
               getBuyExecutionInstruction(versionedAssetId),
-              getDepositAssetInstruction(address),
+              getDepositAssetInstruction(address, assets),
             ];
 
             return getFeeForXcmInstructionsAndAsset(
