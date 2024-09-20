@@ -22,7 +22,7 @@ export function FeeBuilder() {
     xcmPaymentApi,
   };
 }
-// TODO mjm remove this if unused
+// TODO remove after it's unused
 function assetManager() {
   return {
     assetTypeUnitsPerSecond: (weight = 1_000_000_000): FeeConfigBuilder => ({
@@ -84,7 +84,6 @@ function xcmPaymentApi() {
               getSetTopicInstruction(),
             ];
 
-            console.log('instructions', instructions);
             return getFeeForXcmInstructionsAndAsset(
               api,
               instructions,

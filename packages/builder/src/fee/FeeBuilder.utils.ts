@@ -7,7 +7,6 @@ import { AnyJson } from '@polkadot/types/types';
 import { XcmVersion } from '../extrinsic';
 import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
-// TODO mjm find another solution with the asset decimal?
 const DEFAULT_AMOUNT = 10 ** 6;
 const DEFALUT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
@@ -128,21 +127,6 @@ export function getSetTopicInstruction() {
   };
 }
 
-export async function getAssetIdType(
-  api: ApiPromise,
-  asset: ChainAssetId,
-): Promise<Option<MoonbeamRuntimeXcmConfigAssetType>> {
-  const type =
-    await api.query.assetManager.assetIdType<
-      Option<MoonbeamRuntimeXcmConfigAssetType>
-    >(asset);
-
-  if (type.isNone || !type.unwrap().isXcm) {
-    throw new Error(`No asset type found for asset ${asset}`);
-  }
-  return type;
-}
-
 function applyConcreteWrapper(id: object) {
   return {
     Concrete: { ...id },
@@ -191,6 +175,21 @@ function getConcreteAssetIdWithAccountKey20(
   return isXcmV4() ? id : applyConcreteWrapper(id);
 }
 
+export async function getAssetIdType(
+  api: ApiPromise,
+  asset: ChainAssetId,
+): Promise<Option<MoonbeamRuntimeXcmConfigAssetType>> {
+  const type =
+    await api.query.assetManager.assetIdType<
+      Option<MoonbeamRuntimeXcmConfigAssetType>
+    >(asset);
+
+  if (type.isNone || !type.unwrap().isXcm) {
+    throw new Error(`No asset type found for asset ${asset}`);
+  }
+  return type;
+}
+
 export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAssetId,
@@ -224,14 +223,12 @@ export async function getFeeForXcmInstructionsAndAsset(
   >({
     [XCM_VERSION]: instructions,
   });
-  console.log('xcmToWeightResult', xcmToWeightResult.toHuman());
   if (!xcmToWeightResult.isOk) {
     throw new Error(
       'There was an error trying to get the weight for the xcm instructions (queryXcmWeight)',
     );
   }
   const xcmToWeight = xcmToWeightResult.asOk;
-  console.log('versionedAssetId', versionedAssetId);
 
   const weightToForeingAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
@@ -246,6 +243,5 @@ export async function getFeeForXcmInstructionsAndAsset(
       'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
     );
   }
-  console.log('weightToForeingAssets', weightToForeingAssets.toHuman());
   return weightToForeingAssets.asOk.toBigInt();
 }
