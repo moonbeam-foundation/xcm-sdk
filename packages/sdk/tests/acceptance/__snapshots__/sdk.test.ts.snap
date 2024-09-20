@@ -297,20 +297,6 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
 exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
   a {
-    "amount": 100000000000000000n,
-    "decimals": 18,
-    "key": "ftmwh",
-    "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
-  },
-  a {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdcwh",
-    "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
-  },
-  a {
     "amount": 1100000000000000000n,
     "decimals": 18,
     "key": "alan",
