@@ -59,10 +59,6 @@ export class Parachain extends Chain {
     return this.assetsData.get(asset.key)?.id ?? asset.originSymbol;
   }
 
-  getAssetRegisteredId(asset: Asset): string | undefined {
-    return this.assetsData.get(asset.key)?.registeredAssetId;
-  }
-
   getBalanceAssetId(asset: Asset): ChainAssetId {
     return this.assetsData.get(asset.key)?.balanceId ?? this.getAssetId(asset);
   }
