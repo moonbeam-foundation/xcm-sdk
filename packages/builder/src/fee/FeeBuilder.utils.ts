@@ -3,6 +3,7 @@ import { ApiPromise } from '@polkadot/api';
 import { Option, Result, u128 } from '@polkadot/types';
 import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
 import { AnyJson } from '@polkadot/types/types';
+import { XcmVersion } from '../extrinsic';
 import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
 // TODO mjm find another solution with the asset decimal?
@@ -10,6 +11,11 @@ const DEFAULT_AMOUNT = 10 ** 6;
 
 const moonChainNativeAssetId = '0x0000000000000000000000000000000000000802';
 
+const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
+
+function isXcmV4() {
+  return XCM_VERSION === XcmVersion.v4;
+}
 export function getWithdrawAssetInstruction(assetTypes: object[]) {
   return {
     WithdrawAsset: assetTypes.map((assetType) => ({
@@ -59,6 +65,13 @@ export function getBuyExecutionInstruction(assetType: object) {
 }
 
 export function getDepositAssetInstruction(address: string, assets: object[]) {
+  const accountKey = {
+    AccountKey20: {
+      key: address,
+      network: null,
+    },
+  };
+
   return {
     DepositAsset: {
       assets: {
@@ -68,12 +81,7 @@ export function getDepositAssetInstruction(address: string, assets: object[]) {
       },
       beneficiary: {
         interior: {
-          X1: {
-            AccountKey20: {
-              key: address,
-              network: null,
-            },
-          },
+          X1: isXcmV4() ? [accountKey] : accountKey,
         },
         max_assets: 0,
         parents: 0,
@@ -97,17 +105,25 @@ export async function getAssetIdType(
   return type;
 }
 
-function getConcreteNativeAssetId(): object {
+function applyConcreteWrapper(id: object) {
   return {
-    Concrete: {
-      interior: {
-        X1: {
-          PalletInstance: '10',
-        },
-      },
-      parents: '0',
-    },
+    Concrete: { ...id },
   };
+}
+
+// TODO this is for Moonbeam
+function getNativeAssetId(): object {
+  const palletInstance = {
+    PalletInstance: '10',
+  };
+  const id = {
+    interior: {
+      X1: isXcmV4() ? [palletInstance] : palletInstance,
+    },
+    parents: '0',
+  };
+
+  return isXcmV4() ? id : applyConcreteWrapper(id);
 }
 
 function isHexString(asset: ChainAssetId): boolean {
@@ -115,24 +131,23 @@ function isHexString(asset: ChainAssetId): boolean {
 }
 
 function getConcreteAssetIdWithAccountKey20(asset: ChainAssetId): object {
-  return {
-    Concrete: {
-      interior: {
-        X2: [
-          {
-            PalletInstance: '110',
+  const id = {
+    interior: {
+      X2: [
+        {
+          PalletInstance: '110',
+        },
+        {
+          AccountKey20: {
+            key: asset,
+            network: null,
           },
-          {
-            AccountKey20: {
-              key: asset,
-              network: null,
-            },
-          },
-        ],
-      },
-      parents: '0',
+        },
+      ],
     },
+    parents: '0',
   };
+  return isXcmV4() ? id : applyConcreteWrapper(id);
 }
 
 export async function getVersionedAssetId(
@@ -140,7 +155,7 @@ export async function getVersionedAssetId(
   asset: ChainAssetId,
 ): Promise<object> {
   if (asset === moonChainNativeAssetId) {
-    return getConcreteNativeAssetId();
+    return getNativeAssetId();
   }
 
   if (isHexString(asset)) {
@@ -148,11 +163,9 @@ export async function getVersionedAssetId(
   }
 
   const assetType = await getAssetIdType(api, asset);
-  return {
-    Concrete: {
-      ...assetType.unwrap().asXcm.toJSON(),
-    },
-  };
+  const assetTypeObject = assetType.unwrap().asXcm.toJSON();
+
+  return isXcmV4() ? assetTypeObject : applyConcreteWrapper(assetTypeObject);
 }
 
 export async function getFeeForXcmInstructionsAndAsset(
@@ -163,7 +176,7 @@ export async function getFeeForXcmInstructionsAndAsset(
   const xcmToWeightResult = await api.call.xcmPaymentApi.queryXcmWeight<
     Result<Weight, PolkadotError>
   >({
-    V3: instructions,
+    [XCM_VERSION]: instructions,
   });
   console.log('xcmToWeightResult', xcmToWeightResult.toHuman());
   if (!xcmToWeightResult.isOk) {
@@ -172,16 +185,17 @@ export async function getFeeForXcmInstructionsAndAsset(
     );
   }
   const xcmToWeight = xcmToWeightResult.asOk;
+  console.log('versionedAssetId', versionedAssetId);
 
   const weightToForeingAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
       Result<u128, PolkadotError>
     >(xcmToWeight, {
-      V3: {
+      [XCM_VERSION]: {
         ...versionedAssetId,
       },
     });
-  if (!xcmToWeightResult.isOk) {
+  if (!weightToForeingAssets.isOk) {
     throw new Error(
       'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
     );
