@@ -16,7 +16,9 @@ export const hydrationAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -27,7 +29,9 @@ export const hydrationAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.01,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -38,7 +42,9 @@ export const hydrationAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.04,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -53,7 +59,9 @@ export const hydrationAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.04,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

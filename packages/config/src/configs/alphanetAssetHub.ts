@@ -16,7 +16,9 @@ export const alphanetAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: tt1,
         balance: BalanceBuilder().substrate().assets().account(),
       },

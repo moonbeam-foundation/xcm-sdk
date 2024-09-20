@@ -15,7 +15,9 @@ export const polkadotConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: dot,
         balance: BalanceBuilder().substrate().system().account(),
       },

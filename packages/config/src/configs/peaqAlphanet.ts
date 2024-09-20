@@ -16,7 +16,9 @@ export const peaqAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: agng,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -27,7 +29,9 @@ export const peaqAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.01,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: dev,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -39,7 +43,9 @@ export const peaqAlphanetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbaseAlpha,
       destinationFee: {
-        amount: 0.04,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: dev,
         balance: BalanceBuilder().substrate().assets().account(),
       },

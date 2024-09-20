@@ -1,4 +1,5 @@
-import { ChainAssetId } from '@moonbeam-network/xcm-types';
+/* eslint-disable sort-keys */
+import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
 import { ApiPromise } from '@polkadot/api';
 import { Option, Result, u128 } from '@polkadot/types';
 import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
@@ -8,21 +9,52 @@ import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
 // TODO mjm find another solution with the asset decimal?
 const DEFAULT_AMOUNT = 10 ** 6;
+const DEFALUT_HEX_STRING =
+  '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
 
 const moonChainNativeAssetId = '0x0000000000000000000000000000000000000802';
+
+const moonChainBalancesPalletInstance: Record<string, string> = {
+  moonbeam: '10',
+  moonriver: '10',
+  'moonbase-alpha': '3',
+};
+const moonChainERC20PalletPalletInstance: Record<string, string> = {
+  moonbeam: '110',
+  moonriver: '110',
+  'moonbase-alpha': '48',
+};
 
 const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
 
 function isXcmV4() {
   return XCM_VERSION === XcmVersion.v4;
 }
+
+function normalizeX1(assetType: Record<string, AnyJson>) {
+  if (!isXcmV4) {
+    return assetType;
+  }
+  const normalizedAssetType = { ...assetType };
+  if (
+    normalizedAssetType.interior &&
+    typeof normalizedAssetType.interior === 'object' &&
+    'x1' in normalizedAssetType.interior
+  ) {
+    if (!Array.isArray(normalizedAssetType.interior.x1)) {
+      normalizedAssetType.interior.x1 = [normalizedAssetType.interior.x1];
+    }
+  }
+  return normalizedAssetType;
+}
+
 export function getWithdrawAssetInstruction(assetTypes: object[]) {
   return {
     WithdrawAsset: assetTypes.map((assetType) => ({
+      id: { ...assetType },
       fun: {
         Fungible: DEFAULT_AMOUNT,
       },
-      id: { ...assetType },
     })),
   };
 }
@@ -30,10 +62,10 @@ export function getWithdrawAssetInstruction(assetTypes: object[]) {
 export function getReserveAssetDepositedInstruction(assetTypes: object[]) {
   return {
     ReserveAssetDeposited: assetTypes.map((assetType) => ({
+      id: { ...assetType },
       fun: {
         Fungible: DEFAULT_AMOUNT,
       },
-      id: { ...assetType },
     })),
   };
 }
@@ -50,11 +82,11 @@ export function getBuyExecutionInstruction(assetType: object) {
   return {
     BuyExecution: {
       fees: {
-        fun: {
-          Fungible: DEFAULT_AMOUNT,
-        },
         id: {
           ...assetType,
+        },
+        fun: {
+          Fungible: DEFAULT_AMOUNT,
         },
       },
       weight_limit: {
@@ -83,10 +115,16 @@ export function getDepositAssetInstruction(address: string, assets: object[]) {
         interior: {
           X1: isXcmV4() ? [accountKey] : accountKey,
         },
-        max_assets: 0,
         parents: 0,
       },
+      max_assets: 0,
     },
+  };
+}
+
+export function getSetTopicInstruction() {
+  return {
+    SetTopic: DEFALUT_HEX_STRING,
   };
 }
 
@@ -112,9 +150,9 @@ function applyConcreteWrapper(id: object) {
 }
 
 // TODO this is for Moonbeam
-function getNativeAssetId(): object {
+function getNativeAssetId(chainKey: string): object {
   const palletInstance = {
-    PalletInstance: '10',
+    PalletInstance: moonChainBalancesPalletInstance[chainKey],
   };
   const id = {
     interior: {
@@ -130,12 +168,15 @@ function isHexString(asset: ChainAssetId): boolean {
   return typeof asset === 'string' && asset.startsWith('0x');
 }
 
-function getConcreteAssetIdWithAccountKey20(asset: ChainAssetId): object {
+function getConcreteAssetIdWithAccountKey20(
+  asset: ChainAssetId,
+  chainKey: string,
+): object {
   const id = {
     interior: {
       X2: [
         {
-          PalletInstance: '110',
+          PalletInstance: moonChainERC20PalletPalletInstance[chainKey],
         },
         {
           AccountKey20: {
@@ -153,19 +194,24 @@ function getConcreteAssetIdWithAccountKey20(asset: ChainAssetId): object {
 export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAssetId,
+  chain: AnyParachain,
 ): Promise<object> {
   if (asset === moonChainNativeAssetId) {
-    return getNativeAssetId();
+    return getNativeAssetId(chain.key);
   }
 
   if (isHexString(asset)) {
-    return getConcreteAssetIdWithAccountKey20(asset);
+    return getConcreteAssetIdWithAccountKey20(asset, chain.key);
   }
 
   const assetType = await getAssetIdType(api, asset);
   const assetTypeObject = assetType.unwrap().asXcm.toJSON();
 
-  return isXcmV4() ? assetTypeObject : applyConcreteWrapper(assetTypeObject);
+  const normalizedAssetTypeObject = normalizeX1(assetTypeObject);
+
+  return isXcmV4()
+    ? normalizedAssetTypeObject
+    : applyConcreteWrapper(normalizedAssetTypeObject);
 }
 
 export async function getFeeForXcmInstructionsAndAsset(
