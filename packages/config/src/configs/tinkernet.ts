@@ -15,7 +15,9 @@ export const tinkernetConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+        }),
         asset: tnkr,
         balance: BalanceBuilder().substrate().system().account(),
       },

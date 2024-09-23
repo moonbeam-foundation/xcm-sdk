@@ -15,7 +15,9 @@ export const kusamaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+        }),
         asset: ksm,
         balance: BalanceBuilder().substrate().system().account(),
       },

@@ -411,7 +411,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: ['wss://crab-rpc.darwinia.network', 'wss://darwiniacrab-rpc.dwellir.com'],
+  ws: ['wss://darwiniacrab-rpc.dwellir.com', 'wss://crab-rpc.darwinia.network'],
 });
 
 export const hydration = new Parachain({

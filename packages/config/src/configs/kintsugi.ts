@@ -15,7 +15,9 @@ export const kintsugiConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: kint,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -26,7 +28,10 @@ export const kintsugiConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
         asset: kint,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
