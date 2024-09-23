@@ -47,7 +47,6 @@ import { subsocialConfig } from './subsocial';
 import { tinkernetConfig } from './tinkernet';
 import { turingConfig } from './turing';
 import { turingAlphanetConfig } from './turingAlphanet';
-import { uniqueAlphaConfig } from './uniqueAlpha';
 import { zeitgeistConfig } from './zeitgeist';
 
 export const chainsConfigList: ChainConfig[] = [
@@ -98,7 +97,6 @@ export const chainsConfigList: ChainConfig[] = [
   tinkernetConfig,
   turingConfig,
   turingAlphanetConfig,
-  uniqueAlphaConfig,
   zeitgeistConfig,
 ];
 
