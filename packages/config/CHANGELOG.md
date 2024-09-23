@@ -1,5 +1,26 @@
 # @moonbeam-network/xcm-config
 
+## 2.5.12
+
+### Patch Changes
+
+- [#345](https://github.com/moonbeam-foundation/xcm-sdk/pull/345) [`6fe69b2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6fe69b230b4d44c717d9ec7ff73bbc6282b1385e) Thanks [@mmaurello](https://github.com/mmaurello)! - Add transferAssetsUsingTypeAndThen function to xcmPallet and implement it to relay chains
+
+- Updated dependencies [[`6fe69b2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6fe69b230b4d44c717d9ec7ff73bbc6282b1385e)]:
+  - @moonbeam-network/xcm-builder@2.4.7
+
+## 2.5.11
+
+### Patch Changes
+
+- [#342](https://github.com/moonbeam-foundation/xcm-sdk/pull/342) [`8add299`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8add299dc2edc34a8812c8f846ac314c03caa6d7) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Litmus configuration
+
+## 2.5.10
+
+### Patch Changes
+
+- [#340](https://github.com/moonbeam-foundation/xcm-sdk/pull/340) [`8747171`](https://github.com/moonbeam-foundation/xcm-sdk/commit/87471713dfda8345a0cbc902fc3d8b28a5e78cee) Thanks [@mmaurello](https://github.com/mmaurello)! - Increase GLMR sent along for fees
+
 ## 2.5.9
 
 ### Patch Changes

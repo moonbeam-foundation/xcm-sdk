@@ -1,5 +1,33 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.5.14
+
+### Patch Changes
+
+- [#348](https://github.com/moonbeam-foundation/xcm-sdk/pull/348) [`61e7143`](https://github.com/moonbeam-foundation/xcm-sdk/commit/61e71430e7826e8450da2bf93e92a3269470b310) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Ethers contract identification
+
+## 2.5.13
+
+### Patch Changes
+
+- Updated dependencies [[`6fe69b2`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6fe69b230b4d44c717d9ec7ff73bbc6282b1385e)]:
+  - @moonbeam-network/xcm-builder@2.4.7
+  - @moonbeam-network/xcm-config@2.5.12
+
+## 2.5.12
+
+### Patch Changes
+
+- Updated dependencies [[`8add299`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8add299dc2edc34a8812c8f846ac314c03caa6d7)]:
+  - @moonbeam-network/xcm-config@2.5.11
+
+## 2.5.11
+
+### Patch Changes
+
+- Updated dependencies [[`8747171`](https://github.com/moonbeam-foundation/xcm-sdk/commit/87471713dfda8345a0cbc902fc3d8b28a5e78cee)]:
+  - @moonbeam-network/xcm-config@2.5.10
+
 ## 2.5.10
 
 ### Patch Changes

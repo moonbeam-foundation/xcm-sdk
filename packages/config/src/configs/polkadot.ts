@@ -21,7 +21,7 @@ export const polkadotConfig = new ChainConfig({
       },
       extrinsic: ExtrinsicBuilder()
         .xcmPallet()
-        .limitedReserveTransferAssets(0)
+        .transferAssetsUsingTypeAndThen()
         .here(),
       fee: {
         asset: dot,

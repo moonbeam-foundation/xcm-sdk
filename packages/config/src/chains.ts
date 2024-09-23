@@ -677,23 +677,6 @@ export const kusamaAssetHub = new Parachain({
   ],
 });
 
-export const litmus = new Parachain({
-  assetsData: [
-    {
-      asset: lit,
-      id: 'SelfReserve',
-    },
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xda5831fbc8570e3c6336d0d72b8c08f8738beefec812df21ef2afc2982ede09c',
-  key: 'litmus',
-  name: 'Litmus',
-  parachainId: 2106,
-  ss58Format: 131,
-  ws: ['wss://rpc.litmus-parachain.litentry.io'],
-});
-
 export const mangataKusama = new Parachain({
   assetsData: [
     {
@@ -1952,7 +1935,6 @@ export const chainsList: AnyChain[] = [
   khala,
   kintsugi,
   kusama,
-  litmus,
   mangataKusama,
   mantaParachain,
   moonbaseAlpha,
