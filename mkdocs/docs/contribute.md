@@ -48,7 +48,7 @@ Follow these steps:
 3. Add your asset to the `assetsList` array at the end of the file
 
 !!! note
-    Assets are listed in alphabetical order. Please make sure you follow this order when adding new assets.
+Assets are listed in alphabetical order. Please make sure you follow this order when adding new assets.
 
 ## Add a Chain
 
@@ -120,7 +120,7 @@ To add a chain, take the following steps:
 4.  Add the newly created chain to the `chainsList` array at the end of the file
 
 !!! note
-    Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.
+Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.
 
 Now that you've added the chain, you can continue to the next section to add the assets that this chain supports.
 
@@ -242,7 +242,7 @@ Assuming that all of the required pallets and methods are already supported, you
 4. Add the newly created chain configurations to the `chainsConfigList` in the `xcm-sdk/blob/main/packages/config/src/configs/index.ts` file
 
 !!! note
-    Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.
+Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.
 
 For example, to add support to transfer USDT from the Polkadot Asset Hub to Moonbeam, the Polkadot Asset Hub configuration file is as follows:
 
@@ -267,7 +267,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
