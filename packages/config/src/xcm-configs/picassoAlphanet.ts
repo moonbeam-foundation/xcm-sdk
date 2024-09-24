@@ -11,14 +11,15 @@ export const picassoAlphanetRoutes = new ChainRoutes({
   chain: picassoAlphanet,
   routes: [
     {
-      asset: pica,
       source: {
+        asset: pica,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: pica,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const picassoAlphanetRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: atom,
       source: {
+        asset: atom,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: pica,
@@ -41,6 +42,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: atom,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -51,8 +53,8 @@ export const picassoAlphanetRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: pica,
@@ -63,6 +65,7 @@ export const picassoAlphanetRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dev,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

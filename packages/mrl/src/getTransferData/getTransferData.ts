@@ -10,7 +10,6 @@ import {
   type Signers,
   convertToChainDecimals,
   getDestinationData,
-  getMin,
 } from '@moonbeam-network/xcm-sdk';
 import {
   AssetAmount,
@@ -21,8 +20,13 @@ import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import type { TransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
+import { getMoonChainData } from './getMoonChainData';
 import { getSourceData } from './getSourceData';
-import { buildTransfer } from './getTransferData.utils';
+import {
+  buildTransfer,
+  getMoonChainFeeValueOnSource,
+  getMrlMin,
+} from './getTransferData.utils';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -37,7 +41,7 @@ export async function getTransferData({
 }: GetTransferDataParams): Promise<TransferData> {
   if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 
@@ -46,10 +50,11 @@ export async function getTransferData({
     destinationAddress,
   });
 
-  // Here we need to convert the fee on the destination chain to an asset on source chain.
+  // NOTE: Here we need to convert the fee on the destination chain
+  // to an asset on source chain.
   const destinationFee = convertToChainDecimals({
     asset: destinationData.fee,
-    chain: route.source.chain,
+    target: route.getDestinationFeeAssetOnSource(),
   });
 
   const sourceData = await getSourceData({
@@ -59,24 +64,42 @@ export async function getTransferData({
     sourceAddress,
   });
 
+  const moonChainData = await getMoonChainData({
+    destinationData,
+    route,
+    sourceAddress,
+  });
+
   return {
     destination: destinationData,
     getEstimate(amount: number | string) {
+      const isSameAssetPayingDestinationFee =
+        sourceData.balance.isSame(destinationFee);
       const bigAmount = Big(
         toBigInt(amount, sourceData.balance.decimals).toString(),
       );
-      const result = bigAmount.minus(
-        sourceData.balance.isSame(destinationFee)
-          ? destinationFee.toBig()
-          : Big(0),
-      );
+      const fee = getMoonChainFeeValueOnSource({
+        destinationData,
+        moonChainData,
+        sourceData,
+      });
+      const result = bigAmount
+        .minus(
+          isSameAssetPayingDestinationFee ? destinationFee.toBig() : Big(0),
+        )
+        .minus(fee);
 
       return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
     max: sourceData.max,
-    min: getMin(destinationData),
+    min: getMrlMin({
+      destinationData,
+      moonChainData,
+      sourceData,
+    }),
+    moonChain: moonChainData,
     source: sourceData,
     async transfer(
       amount,
@@ -86,7 +109,7 @@ export async function getTransferData({
 
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = AssetAmount.fromChainAsset(
-        route.source.chain.getChainAsset(route.asset),
+        route.source.chain.getChainAsset(route.source.asset),
         { amount: bigintAmount },
       );
 

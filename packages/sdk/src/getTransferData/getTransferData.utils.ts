@@ -2,6 +2,7 @@ import {
   type AssetMinConfigBuilder,
   type BalanceConfigBuilder,
   ContractConfig,
+  EvmQueryConfig,
   type ExtrinsicConfig,
   type FeeConfigBuilder,
   SubstrateQueryConfig,
@@ -51,14 +52,20 @@ export async function getBalance({
     return amount.copyWith({ amount: converted });
   }
 
-  if (
-    ContractConfig.is(config) &&
-    (EvmChain.is(chain) || EvmParachain.is(chain))
-  ) {
+  if (EvmChain.is(chain) || EvmParachain.is(chain)) {
     const evm = EvmService.create(chain);
-    const balance = await evm.getBalance(address, config);
 
-    return amount.copyWith({ amount: balance });
+    if (ContractConfig.is(config)) {
+      const balance = await evm.getBalance(address, config);
+
+      return amount.copyWith({ amount: balance });
+    }
+
+    if (EvmQueryConfig.is(config)) {
+      const balance = await evm.query(config);
+
+      return amount.copyWith({ amount: balance });
+    }
   }
 
   throw new Error(
@@ -185,17 +192,15 @@ export async function getDestinationFee({
 
 export interface ConvertToChainDecimalsParams {
   asset: AssetAmount;
-  chain: AnyChain;
+  target: ChainAsset;
 }
 
 export function convertToChainDecimals({
   asset,
-  chain,
+  target,
 }: ConvertToChainDecimalsParams): AssetAmount {
-  const targetAsset = chain.getChainAsset(asset);
-
-  return AssetAmount.fromChainAsset(targetAsset, {
-    amount: asset.convertDecimals(targetAsset.decimals).amount,
+  return AssetAmount.fromChainAsset(target, {
+    amount: asset.convertDecimals(target.decimals).amount,
   });
 }
 
@@ -240,7 +245,7 @@ export async function getDestinationFeeBalance({
 
   return getBalance({
     address: sourceAddress,
-    asset: route.source.chain.getChainAsset(route.destination.fee.asset),
+    asset: route.getDestinationFeeAssetOnSource(),
     builder: route.source.destinationFee?.balance,
     chain: route.source.chain,
   });

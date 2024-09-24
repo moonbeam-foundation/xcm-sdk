@@ -11,14 +11,15 @@ export const astarRoutes = new ChainRoutes({
   chain: astar,
   routes: [
     {
-      asset: astr,
       source: {
+        asset: astr,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: astr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -32,8 +33,8 @@ export const astarRoutes = new ChainRoutes({
         .here(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: astr,
@@ -44,6 +45,7 @@ export const astarRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

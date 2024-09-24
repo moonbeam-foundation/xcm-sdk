@@ -11,14 +11,15 @@ export const integriteeRoutes = new ChainRoutes({
   chain: integritee,
   routes: [
     {
-      asset: teer,
       source: {
+        asset: teer,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: teer,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

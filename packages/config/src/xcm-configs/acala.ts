@@ -12,14 +12,15 @@ export const acalaRoutes = new ChainRoutes({
   chain: acala,
   routes: [
     {
-      asset: aca,
       source: {
+        asset: aca,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: aca,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -30,8 +31,8 @@ export const acalaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: aseed,
       source: {
+        asset: aseed,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: aca,
@@ -43,6 +44,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: aseed,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -53,8 +55,8 @@ export const acalaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: aca,
@@ -66,6 +68,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -76,8 +79,8 @@ export const acalaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: ldot,
       source: {
+        asset: ldot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: aca,
@@ -89,6 +92,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ldot,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

@@ -14,8 +14,8 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
   chain: kusamaAssetHub,
   routes: [
     {
-      asset: rmrk,
       source: {
+        asset: rmrk,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: ksm,
@@ -28,6 +28,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: rmrk,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -41,8 +42,8 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         .X2(),
     },
     {
-      asset: usdt,
       source: {
+        asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: ksm,
@@ -55,6 +56,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdt,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

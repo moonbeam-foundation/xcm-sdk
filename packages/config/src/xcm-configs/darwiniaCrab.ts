@@ -11,14 +11,15 @@ export const darwiniaCrabRoutes = new ChainRoutes({
   chain: darwiniaCrab,
   routes: [
     {
-      asset: crab,
       source: {
+        asset: crab,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: crab,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

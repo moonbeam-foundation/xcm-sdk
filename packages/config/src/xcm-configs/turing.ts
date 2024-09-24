@@ -11,14 +11,15 @@ export const turingRoutes = new ChainRoutes({
   chain: turing,
   routes: [
     {
-      asset: tur,
       source: {
+        asset: tur,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: tur,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -32,8 +33,8 @@ export const turingRoutes = new ChainRoutes({
         .X1(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: tur,
@@ -44,6 +45,7 @@ export const turingRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

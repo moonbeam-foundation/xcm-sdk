@@ -33,14 +33,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
   chain: moonbaseAlpha,
   routes: [
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: turingAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -51,14 +52,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: moonbaseBeta,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -69,14 +71,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: pendulumAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -87,14 +90,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: picassoAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -105,8 +109,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: alan,
       source: {
+        asset: alan,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
@@ -117,6 +121,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: alan,
         chain: moonbaseBeta,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -144,8 +149,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     //   },
     // }),
     {
-      asset: ampe,
       source: {
+        asset: ampe,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -156,6 +161,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ampe,
         chain: pendulumAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -166,8 +172,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: otp,
       source: {
+        asset: otp,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -178,6 +184,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: otp,
         chain: originTrailAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -188,8 +195,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: atom,
       source: {
+        asset: atom,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -200,6 +207,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: atom,
         chain: picassoAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -210,8 +218,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: pica,
       source: {
+        asset: pica,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -222,6 +230,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: pica,
         chain: picassoAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -232,8 +241,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: tt1,
       source: {
+        asset: tt1,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -244,6 +253,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: tt1,
         chain: alphanetAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -254,8 +264,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: tur,
       source: {
+        asset: tur,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -266,6 +276,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: tur,
         chain: turingAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -276,8 +287,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: unit,
       source: {
+        asset: unit,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -288,6 +299,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: unit,
         chain: alphanetRelay,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -298,8 +310,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: usdcwh,
       source: {
+        asset: usdcwh,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
@@ -310,6 +322,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdcwh,
         chain: hydrationAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -320,8 +333,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: ftmwh,
       source: {
+        asset: ftmwh,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
@@ -332,6 +345,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ftmwh,
         chain: hydrationAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -342,8 +356,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: ftmwh,
       source: {
+        asset: ftmwh,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
@@ -354,6 +368,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ftmwh,
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -364,14 +379,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: hydrationAlphanet,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
@@ -382,8 +398,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: hdx,
       source: {
+        asset: hdx,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -394,6 +410,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: hdx,
         chain: hydrationAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -404,14 +421,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -422,8 +440,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: ftmwh,
       source: {
+        asset: ftmwh,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
@@ -434,6 +452,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ftmwh,
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -444,8 +463,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: agng,
       source: {
+        asset: agng,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: dev,
@@ -456,6 +475,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: agng,
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -466,14 +486,15 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: dev,
         chain: peaqEvmAlphanet,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -484,8 +505,8 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
     },
     {
-      asset: ftmwh,
       source: {
+        asset: ftmwh,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
@@ -496,6 +517,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ftmwh,
         chain: peaqEvmAlphanet,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

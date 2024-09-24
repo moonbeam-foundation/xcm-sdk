@@ -88,7 +88,7 @@ export function polkadotXcm() {
         );
 
         const { address20 } = getMultilocationDerivedAddresses({
-          address: destinationAddress,
+          address: sourceAddress,
           paraId: moonChain.parachainId,
           isParents: true,
         });

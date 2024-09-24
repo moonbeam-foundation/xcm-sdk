@@ -12,14 +12,15 @@ export const calamariRoutes = new ChainRoutes({
   chain: calamari,
   routes: [
     {
-      asset: kma,
       source: {
+        asset: kma,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: kma,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -30,8 +31,8 @@ export const calamariRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: kma,
@@ -43,6 +44,7 @@ export const calamariRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

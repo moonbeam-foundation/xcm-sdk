@@ -1,7 +1,7 @@
 import {
   ContractConfig,
   type ExtrinsicConfig,
-  type WormholeConfig,
+  WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
 import {
@@ -21,6 +21,7 @@ import type {
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import { WormholeService } from '../services/wormhole';
 import { buildTransfer } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
@@ -38,13 +39,13 @@ export async function getSourceData({
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 
   const source = route.source.chain;
   const destination = route.destination.chain;
-  const asset = source.getChainAsset(route.asset);
+  const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
     : asset;
@@ -133,7 +134,16 @@ export async function getFee({
   feeConfig,
   sourceAddress,
 }: GetFeeParams): Promise<AssetAmount> {
-  // TODO: What do we do if transfer is WormholeConfig?
+  if (WormholeConfig.is(transfer)) {
+    const wh = WormholeService.create(chain as EvmChain | EvmParachain);
+    const fee = await wh.getFee(transfer);
+
+    console.log('fee', fee);
+
+    // TODO: finish
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    return {} as any;
+  }
 
   if (ContractConfig.is(transfer)) {
     return getContractFee({

@@ -12,8 +12,8 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
   chain: alphanetAssetHub,
   routes: [
     {
-      asset: tt1,
       source: {
+        asset: tt1,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: unit,
@@ -25,6 +25,7 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: tt1,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

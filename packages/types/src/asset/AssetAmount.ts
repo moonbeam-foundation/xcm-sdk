@@ -37,7 +37,7 @@ export class AssetAmount extends ChainAsset {
     });
   }
 
-  isSame(asset: AssetAmount): boolean {
+  isSame(asset: ChainAsset | AssetAmount): boolean {
     return super.isEqual(asset) && this.decimals === asset.decimals;
   }
 

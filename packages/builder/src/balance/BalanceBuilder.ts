@@ -5,7 +5,9 @@ import type {
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
 import { evmToAddress } from '@polkadot/util-crypto';
+import type { Address } from 'viem';
 import { ContractConfig } from '../contract';
+import { EvmQueryConfig } from '../types/evm/EvmQueryConfig';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import type {
   BalanceConfigBuilder,
@@ -25,6 +27,7 @@ export function BalanceBuilder() {
 export function evm() {
   return {
     erc20,
+    native,
   };
 }
 
@@ -46,6 +49,16 @@ function erc20(): BalanceConfigBuilder {
   };
 }
 
+function native(): BalanceConfigBuilder {
+  return {
+    build: ({ address }) => {
+      return new EvmQueryConfig({
+        func: 'getBalance',
+        args: [{ address: address as Address }],
+      });
+    },
+  };
+}
 export function substrate() {
   return {
     assets,

@@ -22,14 +22,15 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
   chain: bifrostPolkadot,
   routes: [
     {
-      asset: bnc,
       source: {
+        asset: bnc,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: bnc,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -40,8 +41,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: fil,
       source: {
+        asset: fil,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -53,6 +54,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: fil,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -63,8 +65,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -76,6 +78,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -86,8 +89,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: vastr,
       source: {
+        asset: vastr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -99,6 +102,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vastr,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -109,8 +113,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: vdot,
       source: {
+        asset: vdot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -122,6 +126,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vdot,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -132,8 +137,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: vfil,
       source: {
+        asset: vfil,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -145,6 +150,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vfil,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -155,8 +161,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: vglmr,
       source: {
+        asset: vglmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -168,6 +174,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vglmr,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -178,8 +185,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: vmanta,
       source: {
+        asset: vmanta,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -191,6 +198,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vmanta,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -201,8 +209,8 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: bncs,
       source: {
+        asset: bncs,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -214,6 +222,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: bncs,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

@@ -1,6 +1,6 @@
 import { type Address, encodeFunctionData } from 'viem';
 import { ERC20_ABI } from '../../../../../balance/Erc20Abi';
-import type { ContractConfig } from '../../../../../types/ContractConfig';
+import type { ContractConfig } from '../../../../../types/evm/ContractConfig';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
 import { BATCH_CONTRACT_ADDRESS } from '../../../../MrlBuilder.constants';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';

@@ -10,6 +10,7 @@ module.exports = {
     '**/*Abi.ts',
     '**/*.ts.snap',
     '**/*.sol',
+    'pnpm-lock.yaml',
   ],
   words: vscodeConfig['cSpell.words'],
 };

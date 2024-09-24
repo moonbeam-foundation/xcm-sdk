@@ -14,23 +14,77 @@ import {
   moonbaseAlpha,
   moonbeam,
 } from '@moonbeam-network/xcm-config';
-import { PolkadotService } from '@moonbeam-network/xcm-sdk';
+import {
+  type DestinationChainTransferData,
+  PolkadotService,
+  type SourceChainTransferData,
+  convertToChainDecimals,
+  getMin,
+} from '@moonbeam-network/xcm-sdk';
 import { type AssetAmount, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
   getMultilocationDerivedAddresses,
   getPolkadotApi,
 } from '@moonbeam-network/xcm-utils';
+import Big from 'big.js';
 import {
   http,
   type Address,
   createPublicClient,
   encodeFunctionData,
 } from 'viem';
+import type { MoonChainTransferData } from '../mrl.interfaces';
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 657226n,
   [moonbaseAlpha.key]: 1271922n,
 };
+
+export interface DataParams {
+  destinationData: DestinationChainTransferData;
+  moonChainData: MoonChainTransferData;
+  sourceData: SourceChainTransferData;
+}
+
+export function getMoonChainFeeValueOnSource({
+  destinationData,
+  moonChainData,
+  sourceData,
+}: DataParams): Big {
+  const isSourceParachain = EvmParachain.isAnyParachain(sourceData.chain);
+  const isDestinationMoonChain = destinationData.chain.isEqual(
+    moonChainData.chain,
+  );
+  const isSameAssetPayingMoonChainFee = sourceData.balance.isSame(
+    moonChainData.fee,
+  );
+
+  return !isDestinationMoonChain &&
+    isSourceParachain &&
+    isSameAssetPayingMoonChainFee
+    ? convertToChainDecimals({
+        asset: moonChainData.fee,
+        target: sourceData.chain.getChainAsset(moonChainData.fee),
+      }).toBig()
+    : Big(0);
+}
+
+export function getMrlMin({
+  destinationData,
+  moonChainData,
+  sourceData,
+}: DataParams): AssetAmount {
+  const min = getMin(destinationData);
+  const fee = getMoonChainFeeValueOnSource({
+    destinationData,
+    moonChainData,
+    sourceData,
+  });
+
+  return min.copyWith({
+    amount: BigInt(min.toBig().add(fee).toFixed()),
+  });
+}
 
 export interface BuildTransferParams {
   asset: AssetAmount;
@@ -49,7 +103,7 @@ export async function buildTransfer({
 }: BuildTransferParams) {
   if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 

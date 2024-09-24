@@ -8,6 +8,7 @@
     "aseed",
     "astar",
     "ausd",
+    "axlusdc",
     "biomejs",
     "bncs",
     "composablenodes",
@@ -90,14 +91,14 @@
     "xfer",
     "xtokens"
   ],
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "typescript.preferences.importModuleSpecifier": "relative",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   }
 }

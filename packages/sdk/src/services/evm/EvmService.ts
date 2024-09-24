@@ -1,4 +1,7 @@
-import type { ContractConfig } from '@moonbeam-network/xcm-builder';
+import type {
+  ContractConfig,
+  EvmQueryConfig,
+} from '@moonbeam-network/xcm-builder';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
   http,
@@ -25,6 +28,10 @@ export class EvmService {
       chain: chain.getViemChain(),
       transport: http(),
     });
+  }
+
+  async query(query: EvmQueryConfig) {
+    return this.client[query.func](...query.args);
   }
 
   async getFee(address: string, contract: ContractConfig): Promise<bigint> {

@@ -11,14 +11,15 @@ export const picassoRoutes = new ChainRoutes({
   chain: picasso,
   routes: [
     {
-      asset: pica,
       source: {
+        asset: pica,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: pica,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const picassoRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: pica,
@@ -41,6 +42,7 @@ export const picassoRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

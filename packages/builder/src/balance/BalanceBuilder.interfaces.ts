@@ -2,10 +2,11 @@ import type { ChainAsset } from '@moonbeam-network/xcm-types';
 import type { Struct, u128 } from '@polkadot/types';
 import type { ConfigBuilder } from '../builder.interfaces';
 import type { ContractConfig } from '../contract';
+import type { EvmQueryConfig } from '../types/evm/EvmQueryConfig';
 import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 
 export type BalanceConfigBuilder = ConfigBuilder<
-  ContractConfig | SubstrateQueryConfig,
+  ContractConfig | SubstrateQueryConfig | EvmQueryConfig,
   BalanceBuilderPrams
 >;
 

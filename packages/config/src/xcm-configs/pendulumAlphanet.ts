@@ -11,14 +11,15 @@ export const pendulumAlphanetRoutes = new ChainRoutes({
   chain: pendulumAlphanet,
   routes: [
     {
-      asset: ampe,
       source: {
+        asset: ampe,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: ampe,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const pendulumAlphanetRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: ampe,
@@ -41,6 +42,7 @@ export const pendulumAlphanetRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dev,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

@@ -51,7 +51,7 @@ export class ConfigService {
           .filter((routes) => routes.chain.ecosystem === ecosystem)
           .map((routes) => routes.getRoutes())
           .flat(2)
-          .map((route) => route.asset),
+          .map((route) => route.source.asset),
       ),
     ).sort((a, b) => a.key.localeCompare(b.key));
   }

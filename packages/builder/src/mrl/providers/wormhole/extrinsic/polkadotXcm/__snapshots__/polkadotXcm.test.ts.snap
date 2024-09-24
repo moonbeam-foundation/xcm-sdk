@@ -97,7 +97,7 @@ exports[`polkadotXcm > send > should get correct arguments 2`] = `
                 "interior": {
                   "X1": {
                     "AccountKey20": {
-                      "key": "0x00add9a9a17514029de846b1c01bfab05ceb6321",
+                      "key": "0x88275533b5d43292c86d05985c3a6e226fee2bae",
                     },
                   },
                 },

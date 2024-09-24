@@ -11,14 +11,15 @@ export const turingAlphanetRoutes = new ChainRoutes({
   chain: turingAlphanet,
   routes: [
     {
-      asset: tur,
       source: {
+        asset: tur,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: tur,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -32,8 +33,8 @@ export const turingAlphanetRoutes = new ChainRoutes({
         .X1(),
     },
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: tur,
@@ -44,6 +45,7 @@ export const turingAlphanetRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dev,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

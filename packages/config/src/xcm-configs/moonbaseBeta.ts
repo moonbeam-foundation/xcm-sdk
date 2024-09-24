@@ -10,8 +10,8 @@ export const moonbaseBetaRoutes = new ChainRoutes({
   chain: moonbaseBeta,
   routes: [
     {
-      asset: dev,
       source: {
+        asset: dev,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: betaDEV,
@@ -22,6 +22,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dev,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -32,8 +33,8 @@ export const moonbaseBetaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: alan,
       source: {
+        asset: alan,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: betaDEV,
@@ -44,6 +45,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: alan,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -54,8 +56,8 @@ export const moonbaseBetaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: usdcwh,
       source: {
+        asset: usdcwh,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: betaDEV,
@@ -66,6 +68,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdcwh,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -76,8 +79,8 @@ export const moonbaseBetaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: ftmwh,
       source: {
+        asset: ftmwh,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: betaDEV,
@@ -88,6 +91,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ftmwh,
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

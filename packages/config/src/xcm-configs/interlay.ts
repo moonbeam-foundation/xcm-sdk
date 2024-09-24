@@ -11,14 +11,15 @@ export const interlayRoutes = new ChainRoutes({
   chain: interlay,
   routes: [
     {
-      asset: intr,
       source: {
+        asset: intr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       destination: {
+        asset: intr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,8 +30,8 @@ export const interlayRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: ibtc,
       source: {
+        asset: ibtc,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: intr,
@@ -41,6 +42,7 @@ export const interlayRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: ibtc,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -51,14 +53,15 @@ export const interlayRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

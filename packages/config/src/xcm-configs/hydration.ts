@@ -11,14 +11,15 @@ export const hydrationRoutes = new ChainRoutes({
   chain: hydration,
   routes: [
     {
-      asset: hdx,
       source: {
+        asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: hdx,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -29,14 +30,15 @@ export const hydrationRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -47,8 +49,8 @@ export const hydrationRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: dai,
       source: {
+        asset: dai,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: hdx,
@@ -59,6 +61,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: dai,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -69,8 +72,8 @@ export const hydrationRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: usdcwh,
       source: {
+        asset: usdcwh,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: hdx,
@@ -81,6 +84,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdcwh,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -91,8 +95,8 @@ export const hydrationRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: usdtwh,
       source: {
+        asset: usdtwh,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: hdx,
@@ -103,6 +107,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: usdtwh,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -113,8 +118,8 @@ export const hydrationRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: wbtc,
       source: {
+        asset: wbtc,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: hdx,
@@ -125,6 +130,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: wbtc,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -135,8 +141,8 @@ export const hydrationRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: weth,
       source: {
+        asset: weth,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: hdx,
@@ -147,6 +153,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: weth,
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

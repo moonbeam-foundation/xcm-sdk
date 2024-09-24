@@ -1,5 +1,5 @@
 import { type Abi, encodeFunctionData } from 'viem';
-import { BaseConfig, type BaseConfigConstructorParams } from './BaseConfig';
+import { BaseConfig, type BaseConfigConstructorParams } from '../BaseConfig';
 
 export interface ContractConfigConstructorParams
   extends BaseConfigConstructorParams {

@@ -12,14 +12,15 @@ export const karuraRoutes = new ChainRoutes({
   chain: karura,
   routes: [
     {
-      asset: kar,
       source: {
+        asset: kar,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: kar,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -30,8 +31,8 @@ export const karuraRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: aseed,
       source: {
+        asset: aseed,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: kar,
@@ -43,6 +44,7 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: aseed,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -53,8 +55,8 @@ export const karuraRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: kar,
@@ -66,6 +68,7 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {

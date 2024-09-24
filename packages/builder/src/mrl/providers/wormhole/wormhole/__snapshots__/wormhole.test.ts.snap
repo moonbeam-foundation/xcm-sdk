@@ -4,10 +4,7 @@ exports[`wormhole > tokenTransfer with isAutomatic=false > should be correct con
 WormholeConfig {
   "args": [
     {
-      "address": EvmAddress {
-        "address": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
-        "type": "Native",
-      },
+      "address": "native",
       "chain": "Fantom",
     },
     99000000000n,
@@ -36,10 +33,7 @@ exports[`wormhole > tokenTransfer with isAutomatic=true > should be correct conf
 WormholeConfig {
   "args": [
     {
-      "address": EvmAddress {
-        "address": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
-        "type": "Native",
-      },
+      "address": "native",
       "chain": "Fantom",
     },
     99000000000n,

@@ -1,11 +1,5 @@
 import { Mrl } from '@moonbeam-network/mrl';
-import {
-  fantomTestnet,
-  ftmwh,
-  moonbeam,
-  peaqChain,
-  polkadot,
-} from '@moonbeam-network/xcm-config';
+import { fantomTestnet, ftm, peaqAlphanet } from '@moonbeam-network/xcm-config';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { http, type Address, createWalletClient } from 'viem';
@@ -28,7 +22,7 @@ if (!EVM_PRIVATE_KEY || !POLKADOT_PRIVATE_KEY) {
 const account = privateKeyToAccount(EVM_PRIVATE_KEY as Address);
 const walletClient = createWalletClient({
   account,
-  chain: moonbeam.getViemChain(),
+  chain: fantomTestnet.getViemChain(),
   transport: http(),
 });
 
@@ -38,7 +32,7 @@ console.log(`\nEVM address: ${account.address}`);
 
 await cryptoWaitReady();
 const keyring = new Keyring({
-  ss58Format: polkadot.ss58Format,
+  ss58Format: peaqAlphanet.ss58Format,
   type: 'sr25519',
 });
 const pair = keyring.createFromUri(POLKADOT_PRIVATE_KEY);
@@ -55,8 +49,8 @@ main()
 async function main() {
   const data = await Mrl()
     .setSource(fantomTestnet)
-    .setDestination(peaqChain)
-    .setAsset(ftmwh)
+    .setDestination(peaqAlphanet)
+    .setAsset(ftm)
     .setAddresses({
       sourceAddress: account.address,
       destinationAddress: pair.address,

@@ -1,33 +1,37 @@
-import {
-  BalanceBuilder,
-  FeeBuilder,
-  MrlBuilder,
-} from '@moonbeam-network/xcm-builder';
-import { ftmwh, hdx } from '../assets';
-import { fantomTestnet, hydrationAlphanet } from '../chains';
+import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
+import { dev, ftm, ftmwh } from '../assets';
+import { fantomTestnet, peaqAlphanet } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 export const fantomTestnetRoutes = new ChainRoutes({
   chain: fantomTestnet,
   routes: [
     {
-      asset: ftmwh,
       source: {
-        balance: BalanceBuilder().substrate().system().account(), // TODO:
+        asset: ftm,
+        balance: BalanceBuilder().evm().native(),
+        destinationFee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
       },
       destination: {
-        chain: hydrationAlphanet,
-        balance: BalanceBuilder().substrate().system().account(), // TODO:
+        asset: ftmwh,
+        chain: peaqAlphanet,
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          // TODO:
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
-          asset: hdx,
-          balance: BalanceBuilder().substrate().system().account(),
+          asset: ftmwh,
+          amount: 0.01,
         },
       },
       mrl: {
-        isAutomatic: true,
+        isAutomatic: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChainFee: {
+          asset: dev,
+          amount: 0.1,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
     },
   ],

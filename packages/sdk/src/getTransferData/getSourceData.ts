@@ -38,7 +38,7 @@ export async function getSourceData({
   const destination = route.destination.chain as AnyParachain;
   const [sourcePolkadot, destinationPolkadot] =
     await PolkadotService.createMulti([source, destination]);
-  const asset = source.getChainAsset(route.asset);
+  const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
     : asset;
@@ -182,7 +182,9 @@ export async function getAssetsBalances({
   routes,
 }: GetAssetsBalancesParams): Promise<AssetAmount[]> {
   const uniqueRoutes = routes.reduce((acc: AssetRoute[], route: AssetRoute) => {
-    if (!acc.some((a: AssetRoute) => a.asset.isEqual(route.asset))) {
+    if (
+      !acc.some((a: AssetRoute) => a.source.asset.isEqual(route.source.asset))
+    ) {
       // biome-ignore lint/performance/noAccumulatingSpread: I think this is fine here
       return [route, ...acc];
     }
@@ -194,7 +196,7 @@ export async function getAssetsBalances({
     uniqueRoutes.map(async (route: AssetRoute) =>
       getBalance({
         address,
-        asset: chain.getChainAsset(route.asset),
+        asset: chain.getChainAsset(route.source.asset),
         builder: route.source.balance,
         chain,
       }),

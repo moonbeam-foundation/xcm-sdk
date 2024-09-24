@@ -12,14 +12,15 @@ export const bifrostKusamaRoutes = new ChainRoutes({
   chain: bifrostKusama,
   routes: [
     {
-      asset: bnc,
       source: {
+        asset: bnc,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: bnc,
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -30,8 +31,8 @@ export const bifrostKusamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: movr,
       source: {
+        asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -43,6 +44,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: movr,
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -53,8 +55,8 @@ export const bifrostKusamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: vbnc,
       source: {
+        asset: vbnc,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -66,6 +68,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vbnc,
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -76,8 +79,8 @@ export const bifrostKusamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: vksm,
       source: {
+        asset: vksm,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -89,6 +92,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vksm,
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -99,8 +103,8 @@ export const bifrostKusamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
     {
-      asset: vmovr,
       source: {
+        asset: vmovr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           asset: bnc,
@@ -112,6 +116,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: vmovr,
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

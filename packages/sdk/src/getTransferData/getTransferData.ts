@@ -29,10 +29,11 @@ export async function getTransferData({
     destinationAddress,
   });
 
-  // Here we need to convert the fee on the destination chain to an asset on source chain.
+  // NOTE: Here we need to convert the fee on the destination chain
+  // to an asset on source chain.
   const destinationFee = convertToChainDecimals({
     asset: destinationData.fee,
-    chain: route.source.chain,
+    target: route.getDestinationFeeAssetOnSource(),
   });
 
   const sourceData = await getSourceData({
@@ -69,7 +70,7 @@ export async function getTransferData({
       const destination = route.destination.chain as AnyParachain;
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       const asset = AssetAmount.fromChainAsset(
-        route.source.chain.getChainAsset(route.asset),
+        route.source.chain.getChainAsset(route.source.asset),
         { amount: bigintAmount },
       );
       const [sourcePolkadot, destinationPolkadot] =

@@ -12,14 +12,15 @@ export const mantaParachainRoutes = new ChainRoutes({
   chain: mantaParachain,
   routes: [
     {
-      asset: manta,
       source: {
+        asset: manta,
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
       destination: {
+        asset: manta,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -30,8 +31,8 @@ export const mantaParachainRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
     },
     {
-      asset: glmr,
       source: {
+        asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: manta,
@@ -43,6 +44,7 @@ export const mantaParachainRoutes = new ChainRoutes({
         },
       },
       destination: {
+        asset: glmr,
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
