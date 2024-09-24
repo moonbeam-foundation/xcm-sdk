@@ -26,13 +26,13 @@ function xcmPaymentApi() {
       isAssetReserveChain,
       shouldTransferAssetPrecedeAsset = false,
     }: XcmPaymentFeeProps): FeeConfigBuilder => ({
-      build: ({ address, api, asset, chain, transferAsset }) =>
+      build: ({ address, api, feeAsset, chain, transferAsset }) =>
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
             const versionedAssetId = await getVersionedAssetId(
               api,
-              asset,
+              feeAsset,
               chain,
             );
             const versionedTransferAssetId = await getVersionedAssetId(
@@ -45,7 +45,7 @@ function xcmPaymentApi() {
               : [versionedAssetId, versionedTransferAssetId];
 
             const assets =
-              asset === transferAsset ? [versionedAssetId] : versionedAssets;
+              feeAsset === transferAsset ? [versionedAssetId] : versionedAssets;
 
             const instructions = [
               isAssetReserveChain

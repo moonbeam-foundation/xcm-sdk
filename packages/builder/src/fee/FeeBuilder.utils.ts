@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys */
 import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
+import { isHexString } from '@moonbeam-network/xcm-utils';
 import { ApiPromise } from '@polkadot/api';
 import { Option, Result, u128 } from '@polkadot/types';
 import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
@@ -11,14 +12,14 @@ const DEFAULT_AMOUNT = 10 ** 6;
 const DEFALUT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
 
-const moonChainNativeAssetId = '0x0000000000000000000000000000000000000802';
+const MOON_CHAIN_NATIVE_ASSET_ID = '0x0000000000000000000000000000000000000802';
 
-const moonChainBalancesPalletInstance: Record<string, string> = {
+const MOON_CHAIN_BALANCES_PALLET_INSTANCE: Record<string, string> = {
   moonbeam: '10',
   moonriver: '10',
   'moonbase-alpha': '3',
 };
-const moonChainERC20PalletPalletInstance: Record<string, string> = {
+const MOON_CHIAN_ERC20_PALLET_INSTANCE: Record<string, string> = {
   moonbeam: '110',
   moonriver: '110',
   'moonbase-alpha': '48',
@@ -31,7 +32,7 @@ function isXcmV4() {
 }
 
 function normalizeX1(assetType: Record<string, AnyJson>) {
-  if (!isXcmV4) {
+  if (!isXcmV4()) {
     return assetType;
   }
   const normalizedAssetType = { ...assetType };
@@ -136,7 +137,7 @@ function applyConcreteWrapper(id: object) {
 // TODO this is for Moonbeam
 function getNativeAssetId(chainKey: string): object {
   const palletInstance = {
-    PalletInstance: moonChainBalancesPalletInstance[chainKey],
+    PalletInstance: MOON_CHAIN_BALANCES_PALLET_INSTANCE[chainKey],
   };
   const id = {
     interior: {
@@ -148,10 +149,6 @@ function getNativeAssetId(chainKey: string): object {
   return isXcmV4() ? id : applyConcreteWrapper(id);
 }
 
-function isHexString(asset: ChainAssetId): boolean {
-  return typeof asset === 'string' && asset.startsWith('0x');
-}
-
 function getConcreteAssetIdWithAccountKey20(
   asset: ChainAssetId,
   chainKey: string,
@@ -160,7 +157,7 @@ function getConcreteAssetIdWithAccountKey20(
     interior: {
       X2: [
         {
-          PalletInstance: moonChainERC20PalletPalletInstance[chainKey],
+          PalletInstance: MOON_CHIAN_ERC20_PALLET_INSTANCE[chainKey],
         },
         {
           AccountKey20: {
@@ -195,7 +192,7 @@ export async function getVersionedAssetId(
   asset: ChainAssetId,
   chain: AnyParachain,
 ): Promise<object> {
-  if (asset === moonChainNativeAssetId) {
+  if (asset === MOON_CHAIN_NATIVE_ASSET_ID) {
     return getNativeAssetId(chain.key);
   }
 

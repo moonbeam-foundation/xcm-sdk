@@ -10,8 +10,8 @@ export interface FeeConfigBuilder {
 
 export interface FeeConfigBuilderPrams {
   address: string;
-  asset: ChainAssetId;
   api: ApiPromise;
+  feeAsset: ChainAssetId;
   transferAsset: ChainAssetId;
   chain: AnyParachain;
 }

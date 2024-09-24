@@ -88,8 +88,8 @@ export async function getFee({
   const cfg = (amount as FeeConfigBuilder).build({
     address,
     api: polkadot.api,
-    asset: polkadot.chain.getRegisteredAssetIdOrAddress(asset),
     chain: polkadot.chain,
+    feeAsset: polkadot.chain.getRegisteredAssetIdOrAddress(asset),
     transferAsset: polkadot.chain.getRegisteredAssetIdOrAddress(config.asset),
   });
 
