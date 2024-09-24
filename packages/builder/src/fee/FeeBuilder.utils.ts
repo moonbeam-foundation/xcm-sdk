@@ -131,7 +131,13 @@ function applyConcreteWrapper(id: object) {
 
 // TODO this is for Moonbeam, when applying to all we have to
 // configure the multilocation of the native asset in the chain
-function getNativeAssetId(palletInstanceNumber: number): object {
+function getNativeAssetId(palletInstanceNumber: number | undefined): object {
+  if (!palletInstanceNumber) {
+    throw new Error(
+      'No pallet instance configured for the native asset for XcmPaymentApi fee calculation',
+    );
+  }
+
   const palletInstance = {
     PalletInstance: palletInstanceNumber,
   };
@@ -147,8 +153,14 @@ function getNativeAssetId(palletInstanceNumber: number): object {
 
 function getConcreteAssetIdWithAccountKey20(
   asset: ChainAssetId,
-  palletInstance: number,
+  palletInstance: number | undefined,
 ): object {
+  if (!palletInstance) {
+    throw new Error(
+      `No pallet instance configured for the asset ${asset} for XcmPaymentApi fee calculation`,
+    );
+  }
+
   const id = {
     interior: {
       X2: [
@@ -191,12 +203,6 @@ export async function getVersionedAssetId(
   const chainAsset = chain.getChainAsset(asset);
   const assetId = chainAsset.getAssetId();
   const palletInstance = chainAsset.getAssetPalletInstance();
-
-  if (!palletInstance) {
-    throw new Error(
-      `No pallet instance configured for the asset ${assetId} for XcmPaymentApi fee calculation`,
-    );
-  }
 
   if (assetId === MOON_CHAIN_NATIVE_ASSET_ID) {
     return getNativeAssetId(palletInstance);
