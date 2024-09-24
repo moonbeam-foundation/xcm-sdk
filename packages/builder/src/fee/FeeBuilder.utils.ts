@@ -15,7 +15,7 @@ import { XcmVersion } from '../extrinsic';
 import type { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
 const DEFAULT_AMOUNT = 10 ** 6;
-const DEFALUT_HEX_STRING =
+const DEFAULT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
 
 const MOON_CHAIN_NATIVE_ASSET_ID = '0x0000000000000000000000000000000000000802';
@@ -119,7 +119,7 @@ export function getDepositAssetInstruction(address: string, assets: object[]) {
 
 export function getSetTopicInstruction() {
   return {
-    SetTopic: DEFALUT_HEX_STRING,
+    SetTopic: DEFAULT_HEX_STRING,
   };
 }
 
