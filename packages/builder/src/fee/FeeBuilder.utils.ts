@@ -233,7 +233,7 @@ export async function getFeeForXcmInstructionsAndAsset(
   }
   const xcmToWeight = xcmToWeightResult.asOk;
 
-  const weightToForeingAssets =
+  const weightToForeignAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
       Result<u128, PolkadotError>
     >(xcmToWeight, {
@@ -241,10 +241,10 @@ export async function getFeeForXcmInstructionsAndAsset(
         ...versionedAssetId,
       },
     });
-  if (!weightToForeingAssets.isOk) {
+  if (!weightToForeignAssets.isOk) {
     throw new Error(
-      'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
+      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets)',
     );
   }
-  return weightToForeingAssets.asOk.toBigInt();
+  return weightToForeignAssets.asOk.toBigInt();
 }
