@@ -1,4 +1,4 @@
-import { Chain, type ChainConstructorParams } from '../Chain';
+import { Chain, type ChainConstructorParams } from "../Chain";
 
 export interface ParachainConstructorParams extends ChainConstructorParams {
   genesisHash: string;

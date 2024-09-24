@@ -1,5 +1,18 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.6.0
+
+### Minor Changes
+
+- [#351](https://github.com/moonbeam-foundation/xcm-sdk/pull/351) [`2a7ed04`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2a7ed04887ee41e5a6c010f213265028a953a769) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement XcmPaymentApi to calculate fees for routes going to Moonbeam / Moonriver / Moonbase-Alpha
+
+### Patch Changes
+
+- Updated dependencies [[`2a7ed04`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2a7ed04887ee41e5a6c010f213265028a953a769)]:
+  - @moonbeam-network/xcm-builder@2.5.0
+  - @moonbeam-network/xcm-config@2.6.0
+  - @moonbeam-network/xcm-types@2.4.0
+
 ## 2.5.14
 
 ### Patch Changes

@@ -32,7 +32,9 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: rmrk,
         },
       },
@@ -60,7 +62,9 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: usdt,
         },
       },

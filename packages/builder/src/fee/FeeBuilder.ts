@@ -1,38 +1,77 @@
-import type { Option, u128 } from '@polkadot/types';
+/* eslint-disable sort-keys */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+
 import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
-import type { FeeConfigBuilder } from './FeeBuilder.interfaces';
+import type {
+  FeeConfigBuilder,
+  FeeConfigBuilderPrams,
+  XcmPaymentFeeProps,
+} from './FeeBuilder.interfaces';
+import {
+  getBuyExecutionInstruction,
+  getClearOriginInstruction,
+  getDepositAssetInstruction,
+  getFeeForXcmInstructionsAndAsset,
+  getReserveAssetDepositedInstruction,
+  getSetTopicInstruction,
+  getVersionedAssetId,
+  getWithdrawAssetInstruction,
+} from './FeeBuilder.utils';
 
 export function FeeBuilder() {
   return {
-    assetManager,
+    xcmPaymentApi,
   };
 }
 
-function assetManager() {
+function xcmPaymentApi() {
   return {
-    assetTypeUnitsPerSecond: (weight = 1_000_000_000): FeeConfigBuilder => ({
-      build: ({ api, asset }) =>
+    xcmPaymentFee: ({
+      isAssetReserveChain,
+      shouldTransferAssetPrecedeAsset = false,
+    }: XcmPaymentFeeProps): FeeConfigBuilder => ({
+      build: ({
+        address,
+        api,
+        feeAsset,
+        chain,
+        transferAsset,
+      }: FeeConfigBuilderPrams) =>
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
-            const type = (await api.query.assetManager.assetIdType(
-              asset,
-              // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
-            )) as unknown as Option<any>;
+            const versionedAssetId = await getVersionedAssetId(
+              api,
+              feeAsset,
+              chain,
+            );
+            const versionedTransferAssetId = await getVersionedAssetId(
+              api,
+              transferAsset,
+              chain,
+            );
+            const versionedAssets = shouldTransferAssetPrecedeAsset
+              ? [versionedTransferAssetId, versionedAssetId]
+              : [versionedAssetId, versionedTransferAssetId];
 
-            if (type.isNone) {
-              throw new Error(`No asset type found for asset ${asset}`);
-            }
+            const assets =
+              feeAsset === transferAsset ? [versionedAssetId] : versionedAssets;
 
-            const unwrappedType = type.unwrap();
+            const instructions = [
+              isAssetReserveChain
+                ? getWithdrawAssetInstruction(assets)
+                : getReserveAssetDepositedInstruction(assets),
+              getClearOriginInstruction(),
+              getBuyExecutionInstruction(versionedAssetId),
+              getDepositAssetInstruction(address, assets),
+              getSetTopicInstruction(),
+            ];
 
-            const res = (await api.query.assetManager.assetTypeUnitsPerSecond(
-              unwrappedType,
-            )) as unknown as Option<u128>;
-
-            const unitsPerSecond = res.unwrapOrDefault().toBigInt();
-
-            return (BigInt(weight) * unitsPerSecond) / BigInt(10 ** 12);
+            return getFeeForXcmInstructionsAndAsset(
+              api,
+              instructions,
+              versionedAssetId,
+            );
           },
         }),
     }),

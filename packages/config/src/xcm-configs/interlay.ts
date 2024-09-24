@@ -23,7 +23,9 @@ export const interlayRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: intr,
         },
       },
@@ -46,7 +48,9 @@ export const interlayRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: intr,
         },
       },
@@ -65,7 +69,9 @@ export const interlayRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.001,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

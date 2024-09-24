@@ -34,7 +34,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -58,7 +60,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -82,7 +86,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -106,7 +112,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -130,7 +138,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: vdot,
         },
       },
@@ -154,7 +164,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -178,7 +190,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -202,7 +216,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -226,7 +242,9 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.05,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },

@@ -47,7 +47,6 @@ import { subsocialRoutes } from './subsocial';
 import { tinkernetRoutes } from './tinkernet';
 import { turingRoutes } from './turing';
 import { turingAlphanetRoutes } from './turingAlphanet';
-import { uniqueAlphaRoutes } from './uniqueAlpha';
 import { zeitgeistRoutes } from './zeitgeist';
 
 export const xcmRoutesList: ChainRoutes[] = [
@@ -98,7 +97,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   tinkernetRoutes,
   turingRoutes,
   turingAlphanetRoutes,
-  uniqueAlphaRoutes,
   zeitgeistRoutes,
 ];
 

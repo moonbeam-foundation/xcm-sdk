@@ -24,7 +24,9 @@ export const acalaRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: aca,
         },
       },
@@ -48,7 +50,9 @@ export const acalaRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: aseed,
         },
       },
@@ -72,7 +76,9 @@ export const acalaRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -96,7 +102,9 @@ export const acalaRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.005,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: ldot,
         },
       },
