@@ -18,7 +18,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -38,7 +40,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdc,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -58,7 +62,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -78,7 +84,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -98,7 +106,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -118,7 +128,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -138,7 +150,9 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.03,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },

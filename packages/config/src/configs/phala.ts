@@ -15,7 +15,9 @@ export const phalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: pha,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -26,7 +28,9 @@ export const phalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.01,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
       },

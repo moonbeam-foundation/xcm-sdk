@@ -16,7 +16,9 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: aca,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -27,7 +29,9 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: aseed,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -43,7 +47,9 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.01,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -59,7 +65,9 @@ export const acalaConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.005,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: ldot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

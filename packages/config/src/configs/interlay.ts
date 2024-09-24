@@ -15,7 +15,9 @@ export const interlayConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: intr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -26,7 +28,10 @@ export const interlayConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
         asset: intr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -41,7 +46,9 @@ export const interlayConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonbeam,
       destinationFee: {
-        amount: 0.001,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

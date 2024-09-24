@@ -15,7 +15,9 @@ export const centrifugeConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: cfg,
         balance: BalanceBuilder().substrate().system().account(),
       },

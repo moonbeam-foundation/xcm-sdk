@@ -15,7 +15,9 @@ export const turingConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+        }),
         asset: tur,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -29,7 +31,9 @@ export const turingConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: 0.00001,
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: true,
+        }),
         asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

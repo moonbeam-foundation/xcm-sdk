@@ -16,7 +16,9 @@ export const karuraConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().system().account(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: kar,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -27,7 +29,9 @@ export const karuraConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: aseed,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },
@@ -43,7 +47,9 @@ export const karuraConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().tokens().accounts(),
       destination: moonriver,
       destinationFee: {
-        amount: 0.0001,
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: true }),
         asset: movr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
       },

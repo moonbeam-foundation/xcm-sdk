@@ -411,7 +411,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: ['wss://crab-rpc.darwinia.network', 'wss://darwiniacrab-rpc.dwellir.com'],
+  ws: ['wss://darwiniacrab-rpc.dwellir.com', 'wss://crab-rpc.darwinia.network'],
 });
 
 export const hydration = new Parachain({
@@ -939,7 +939,7 @@ export const moonbeam = new EvmParachain({
       address: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
       asset: fil,
       id: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
-      metadataId: 0, // no metadata for ERC20 tokens
+      metadataId: '144012926827374458669278577633504620722',
     },
     {
       address: '0x0000000000000000000000000000000000000802',

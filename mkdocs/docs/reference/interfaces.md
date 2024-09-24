@@ -44,7 +44,7 @@ Defines an asset's key and symbol used on the asset's origin chain.
 Defines properties related to an asset, including `Asset` properties, the decimals and symbol of the asset, and the amount an associated source or destination address has of the asset.
 
 !!! note
-    A few utility methods are available for working with the `AssetAmount` class that converts the amount to various formats. Please refer to the [Methods for Asset Conversions](./methods.md#asset-utilities) section.
+A few utility methods are available for working with the `AssetAmount` class that converts the amount to various formats. Please refer to the [Methods for Asset Conversions](./methods.md#asset-utilities) section.
 
 **Attributes**
 
@@ -692,7 +692,9 @@ Defines a chain's configurations, including information for each chain's support
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -762,7 +764,9 @@ Defines an asset's configurations for a source chain and includes information ab
   balance: BalanceBuilder().substrate().assets().account(),
   destination: moonbeam,
   destinationFee: {
-    amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+    amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
     asset: usdt,
     balance: BalanceBuilder().substrate().assets().account(),
   },
@@ -832,7 +836,9 @@ Defines the fees for a particular asset on the destination chain.
 {
   asset: dot,
   balance: BalanceBuilder().substrate().system().account(),
-  amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+  amount: amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
 }
 ```
 
