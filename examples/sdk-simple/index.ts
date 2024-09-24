@@ -1,13 +1,13 @@
-import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
-import { Sdk, type TransferData } from '@moonbeam-network/xcm-sdk';
-import { Keyring } from '@polkadot/api';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { http, type Address, createWalletClient } from 'viem';
-import { privateKeyToAccount } from 'viem/accounts';
+import { dot, moonbeam, polkadot } from "@moonbeam-network/xcm-config";
+import { Sdk, type TransferData } from "@moonbeam-network/xcm-sdk";
+import { Keyring } from "@polkadot/api";
+import { cryptoWaitReady } from "@polkadot/util-crypto";
+import { http, type Address, createWalletClient } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
 
 // Moonbeam Signer ===========================================================
 
-const moonbeamPrivateKey = '';
+const moonbeamPrivateKey = "";
 const account = privateKeyToAccount(moonbeamPrivateKey as Address);
 const walletClient = createWalletClient({
   account,
@@ -17,12 +17,12 @@ const walletClient = createWalletClient({
 
 // Polkadot Signer ===========================================================
 
-const polkadotPrivateKey = '';
+const polkadotPrivateKey = "";
 
 await cryptoWaitReady();
 const keyring = new Keyring({
   ss58Format: polkadot.ss58Format,
-  type: 'sr25519',
+  type: "sr25519",
 });
 const pair = keyring.createFromUri(polkadotPrivateKey);
 
@@ -32,14 +32,14 @@ export function logBalances(data: TransferData): void {
   console.log(
     `Balance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${
       data.source.balance.symbol
-    }`,
+    }`
   );
   console.log(
     `Balance on ${
       data.destination.chain.name
     } ${data.destination.balance.toDecimal()} ${
       data.destination.balance.symbol
-    }`,
+    }`
   );
 }
 
@@ -57,12 +57,12 @@ export function logTxDetails(data: TransferData): void {
       data.source.chain.name
     } and ${data.destination.fee.toDecimal()} ${
       data.destination.fee.symbol
-    } fee on ${data.destination.chain.name}.`,
+    } fee on ${data.destination.chain.name}.`
   );
 }
 
 export async function fromPolkadot() {
-  console.log('\nTransfer from Polkadot to Moonbeam\n');
+  console.log("\nTransfer from Polkadot to Moonbeam\n");
 
   const data = await Sdk().getTransferData({
     destinationAddress: account.address,
@@ -86,7 +86,7 @@ export async function fromPolkadot() {
 }
 
 export async function fromMoonbeam() {
-  console.log('\nTransfer from Moonbeam to Polkadot\n');
+  console.log("\nTransfer from Moonbeam to Polkadot\n");
 
   const data = await Sdk()
     .assets()
@@ -118,12 +118,12 @@ async function main() {
   console.log(`Polkadot address: ${pair.address}.`);
 
   await fromPolkadot();
-  console.log('\nWaiting 30 seconds...');
+  console.log("\nWaiting 30 seconds...");
   await setTimeout(30000);
   await fromMoonbeam();
 }
 
 main()
-  .then(() => console.log('done!'))
+  .then(() => console.log("done!"))
   .catch(console.error)
   .finally(() => process.exit());
