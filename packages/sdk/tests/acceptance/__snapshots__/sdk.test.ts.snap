@@ -475,7 +475,6 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
 
 exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-<<<<<<< HEAD
   _AssetAmount {
     "address": undefined,
     "amount": 100000000000000000n,
@@ -508,9 +507,6 @@ exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143
   },
   _AssetAmount {
     "address": undefined,
-=======
-  a {
->>>>>>> 2d805511875ba787ef3b63cd6e6901f5cde59b5d
     "amount": 1100000000000000000n,
     "decimals": 18,
     "ids": {
@@ -618,7 +614,9 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "address": "0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2",
     "amount": 0n,
     "decimals": 18,
-    "ids": undefined,
+    "ids": {
+      "id": "144012926827374458669278577633504620722",
+    },
     "key": "fil",
     "min": undefined,
     "originSymbol": "FIL",
