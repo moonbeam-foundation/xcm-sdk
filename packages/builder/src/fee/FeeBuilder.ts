@@ -28,7 +28,7 @@ function xcmPaymentApi() {
   return {
     xcmPaymentFee: ({
       isAssetReserveChain,
-      shouldTransferAssetPrecedeAsset = false,
+      shouldTransferAssetPrecedeFeeAsset = false,
     }: XcmPaymentFeeProps): FeeConfigBuilder => ({
       build: ({
         address,
@@ -50,7 +50,7 @@ function xcmPaymentApi() {
               transferAsset,
               chain,
             );
-            const versionedAssets = shouldTransferAssetPrecedeAsset
+            const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedAssetId]
               : [versionedAssetId, versionedTransferAssetId];
 

@@ -20,7 +20,7 @@ export interface FeeConfigBuilderPrams {
 
 export interface XcmPaymentFeeProps {
   isAssetReserveChain: boolean;
-  shouldTransferAssetPrecedeAsset?: boolean;
+  shouldTransferAssetPrecedeFeeAsset?: boolean;
 }
 
 export interface MoonbeamRuntimeXcmConfigAssetType extends Enum {
