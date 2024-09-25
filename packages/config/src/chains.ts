@@ -527,6 +527,13 @@ export const interlay = new Parachain({
 });
 
 export const integritee = new Parachain({
+  assetsData: [
+    {
+      asset: teer,
+      id: teer.originSymbol,
+      metadataId: 0,
+    },
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
