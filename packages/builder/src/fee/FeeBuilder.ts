@@ -33,7 +33,7 @@ function xcmPaymentApi() {
       build: ({
         address,
         api,
-        feeAsset,
+        asset,
         chain,
         transferAsset,
       }: FeeConfigBuilderPrams) =>
@@ -42,7 +42,7 @@ function xcmPaymentApi() {
           call: async (): Promise<bigint> => {
             const versionedAssetId = await getVersionedAssetId(
               api,
-              feeAsset,
+              asset,
               chain,
             );
             const versionedTransferAssetId = await getVersionedAssetId(
@@ -55,7 +55,7 @@ function xcmPaymentApi() {
               : [versionedAssetId, versionedTransferAssetId];
 
             const assets =
-              feeAsset === transferAsset ? [versionedAssetId] : versionedAssets;
+              asset === transferAsset ? [versionedAssetId] : versionedAssets;
 
             const instructions = [
               isAssetReserveChain

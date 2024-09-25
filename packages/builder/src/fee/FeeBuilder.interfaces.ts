@@ -1,4 +1,4 @@
-import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
+import type { AnyParachain, ChainAsset } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { Enum } from '@polkadot/types';
 import type { StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
@@ -13,9 +13,9 @@ export type FeeConfigBuilder = ConfigBuilder<
 export interface FeeConfigBuilderPrams {
   address: string;
   api: ApiPromise;
+  asset: ChainAsset;
   chain: AnyParachain;
-  feeAsset: Asset;
-  transferAsset: Asset;
+  transferAsset: ChainAsset;
 }
 
 export interface XcmPaymentFeeProps {

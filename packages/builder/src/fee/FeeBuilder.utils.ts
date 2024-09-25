@@ -1,6 +1,6 @@
 import type {
   AnyParachain,
-  Asset,
+  ChainAsset,
   ChainAssetId,
 } from '@moonbeam-network/xcm-types';
 import { isHexString } from '@moonbeam-network/xcm-utils';
@@ -17,8 +17,6 @@ import type { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces'
 const DEFAULT_AMOUNT = 10 ** 6;
 const DEFAULT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
-
-const MOON_CHAIN_NATIVE_ASSET_ID = '0x0000000000000000000000000000000000000802';
 
 const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
 
@@ -197,14 +195,13 @@ export async function getAssetIdType(
 
 export async function getVersionedAssetId(
   api: ApiPromise,
-  asset: Asset,
+  asset: ChainAsset,
   chain: AnyParachain,
 ): Promise<object> {
-  const chainAsset = chain.getChainAsset(asset);
-  const assetId = chainAsset.getAssetId();
-  const palletInstance = chainAsset.getAssetPalletInstance();
+  const assetId = asset.getAssetId();
+  const palletInstance = asset.getAssetPalletInstance();
 
-  if (assetId === MOON_CHAIN_NATIVE_ASSET_ID) {
+  if (assetId === chain.nativeAsset.address) {
     return getNativeAssetId(palletInstance);
   }
 
