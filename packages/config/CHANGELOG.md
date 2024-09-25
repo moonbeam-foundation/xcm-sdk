@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.6.2
+
+### Patch Changes
+
+- [#356](https://github.com/moonbeam-foundation/xcm-sdk/pull/356) [`3f22072`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3f22072c837a55e9109ad042efa555a46802e6e6) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix TEER configuration in Integritee
+
 ## 2.6.1
 
 ### Patch Changes
