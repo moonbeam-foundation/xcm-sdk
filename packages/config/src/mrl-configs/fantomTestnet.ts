@@ -25,6 +25,37 @@ export const fantomTestnetRoutes = new ChainRoutes({
         },
       },
       mrl: {
+        isAutomatic: false, // TODO should be isAutomaticPossible
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: ftmwh,
+          fee: {
+            asset: dev,
+            amount: 0.1,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
+        asset: ftm,
+        balance: BalanceBuilder().evm().native(),
+        destinationFee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: ftmwh,
+        chain: moonbaseAlpha,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: ftmwh,
+          amount: 0.01,
+        },
+      },
+      mrl: {
         isAutomatic: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
