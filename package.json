@@ -43,7 +43,8 @@
     "@polkadot/util": "^13.0.2",
     "@polkadot/util-crypto": "^13.0.2",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
-    "@wormhole-foundation/sdk-evm": "^0.10.7"
+    "@wormhole-foundation/sdk-evm": "^0.10.7",
+    "@wormhole-foundation/sdk-evm-tokenbridge": "^0.10.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.1",
