@@ -62,9 +62,10 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder()
-          .xcmPaymentApi()
-          .xcmPaymentFee({ isAssetReserveChain: false }),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -84,9 +85,10 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder()
-          .xcmPaymentApi()
-          .xcmPaymentFee({ isAssetReserveChain: false }),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -128,9 +130,10 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder()
-          .xcmPaymentApi()
-          .xcmPaymentFee({ isAssetReserveChain: false }),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -150,9 +153,10 @@ export const polkadotAssetHubConfig = new ChainConfig({
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder()
-          .xcmPaymentApi()
-          .xcmPaymentFee({ isAssetReserveChain: false }),
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
