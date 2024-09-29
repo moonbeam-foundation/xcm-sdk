@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.6.3
+
+### Patch Changes
+
+- [#359](https://github.com/moonbeam-foundation/xcm-sdk/pull/359) [`5d308c3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d308c3455126b5dfedb93c38a0afb18344a183e) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Asset Hub memecoins asset ordering in fee calculation
+
 ## 2.6.2
 
 ### Patch Changes
