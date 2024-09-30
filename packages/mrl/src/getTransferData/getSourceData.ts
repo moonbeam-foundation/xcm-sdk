@@ -44,7 +44,6 @@ export async function getSourceData({
   }
 
   const source = route.source.chain;
-  const destination = route.destination.chain;
   const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
@@ -71,7 +70,7 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const existentialDeposit = await getExistentialDeposit(destination);
+  const existentialDeposit = await getExistentialDeposit(source);
   const min = await getAssetMin({
     asset,
     builder: route.source.min,

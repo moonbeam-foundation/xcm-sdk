@@ -2,6 +2,7 @@ import {
   type WormholeConfig,
   wormholeFactory,
 } from '@moonbeam-network/xcm-builder';
+import '@wormhole-foundation/sdk-evm-tokenbridge';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
