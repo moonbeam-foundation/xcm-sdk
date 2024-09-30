@@ -94,7 +94,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeAsset: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
           }),
           asset: usdt,
         },
@@ -125,7 +125,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeAsset: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
           }),
           asset: usdt,
         },
@@ -186,7 +186,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeAsset: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
           }),
           asset: usdt,
         },
@@ -217,7 +217,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeAsset: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
           }),
           asset: usdt,
         },
