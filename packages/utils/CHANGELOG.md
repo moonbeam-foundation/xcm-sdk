@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 2.2.0
+
+### Minor Changes
+
+- [#353](https://github.com/moonbeam-foundation/xcm-sdk/pull/353) [`4be5659`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4be5659c05fe2487dd6f440c833fdf7cdc369917) Thanks [@mmaurello](https://github.com/mmaurello)! - Release minor version for xcm-utils with isHexString
+
 ## 2.1.7
 
 ### Patch Changes
