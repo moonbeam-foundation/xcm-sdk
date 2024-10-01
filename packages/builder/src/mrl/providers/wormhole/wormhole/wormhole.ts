@@ -26,7 +26,8 @@ export function wormhole() {
         sourceAddress,
       }) => {
         const isNativeAsset = asset.isSame(source.nativeAsset);
-        const isDestinationMoonChain = destination.isEqual(moonChain);
+        const isSourceOrDestinationMoonChain =
+          destination.isEqual(moonChain) || source.isEqual(moonChain);
         const tokenAddress = isNativeAsset ? 'native' : asset.address;
 
         if (!tokenAddress) {
@@ -35,15 +36,17 @@ export function wormhole() {
 
         const wh = wormholeFactory(source);
         const whSource = wh.getChain(source.getWormholeName());
-        const whMoonChain = wh.getChain(moonChain.getWormholeName());
+        const whDestination = wh.getChain(destination.getWormholeName());
         const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
           sourceAddress,
         );
-        const whMoonChainAddress = Wormhole.chainAddress(
-          whMoonChain.chain,
-          isDestinationMoonChain ? destinationAddress : GMP_CONTRACT_ADDRESS,
+        const whDestinationAddress = Wormhole.chainAddress(
+          whDestination.chain,
+          isSourceOrDestinationMoonChain
+            ? destinationAddress
+            : GMP_CONTRACT_ADDRESS,
         );
 
         return new WormholeConfig({
@@ -51,9 +54,9 @@ export function wormhole() {
             whAsset,
             asset.amount,
             whSourceAddress,
-            whMoonChainAddress,
+            whDestinationAddress,
             isAutomatic,
-            isDestinationMoonChain
+            isSourceOrDestinationMoonChain
               ? undefined
               : getPayload({ destination, destinationAddress, moonApi }),
           ],
