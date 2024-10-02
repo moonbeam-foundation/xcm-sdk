@@ -23,7 +23,9 @@ export const mangataKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: mgx,
         },
       },
@@ -46,7 +48,9 @@ export const mangataKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.000008,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: movr,
         },
       },

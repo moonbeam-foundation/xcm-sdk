@@ -1,5 +1,37 @@
 # @moonbeam-network/xcm-config
 
+## 2.6.3
+
+### Patch Changes
+
+- [#359](https://github.com/moonbeam-foundation/xcm-sdk/pull/359) [`5d308c3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d308c3455126b5dfedb93c38a0afb18344a183e) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Asset Hub memecoins asset ordering in fee calculation
+
+## 2.6.2
+
+### Patch Changes
+
+- [#356](https://github.com/moonbeam-foundation/xcm-sdk/pull/356) [`3f22072`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3f22072c837a55e9109ad042efa555a46802e6e6) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix TEER configuration in Integritee
+
+## 2.6.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @moonbeam-network/xcm-builder@2.5.1
+  - @moonbeam-network/xcm-types@2.4.1
+
+## 2.6.0
+
+### Minor Changes
+
+- [#351](https://github.com/moonbeam-foundation/xcm-sdk/pull/351) [`2a7ed04`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2a7ed04887ee41e5a6c010f213265028a953a769) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement XcmPaymentApi to calculate fees for routes going to Moonbeam / Moonriver / Moonbase-Alpha
+
+### Patch Changes
+
+- Updated dependencies [[`2a7ed04`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2a7ed04887ee41e5a6c010f213265028a953a769)]:
+  - @moonbeam-network/xcm-builder@2.5.0
+  - @moonbeam-network/xcm-types@2.4.0
+
 ## 2.5.12
 
 ### Patch Changes

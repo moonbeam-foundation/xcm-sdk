@@ -37,9 +37,11 @@ export async function getMoonChainData({
   }
 
   const fee = await getDestinationFee({
-    asset,
+    address: sourceAddress, // TODO not correct
+    asset: route.destination.fee.asset,
     chain: moonChain,
     fee: route.mrl.moonChain.fee.amount,
+    transferAsset: route.source.asset,
   });
 
   let address = sourceAddress;

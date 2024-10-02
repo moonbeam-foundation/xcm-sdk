@@ -23,7 +23,9 @@ export const shidenRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: sdn,
         },
       },
@@ -49,7 +51,9 @@ export const shidenRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.0001,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: movr,
         },
       },

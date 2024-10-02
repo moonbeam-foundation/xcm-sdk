@@ -131,23 +131,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },
-    // NOTE: Disabling because ws endpoint is not working
-    // new AssetConfig({
-    //   asset: auq,
-    //   balance: BalanceBuilder().substrate().assets().account(),
-    //   contract: ContractBuilder().Xtokens().transfer(),
-    //   destination: {
-    //   chain: uniqueAlpha,
-    //   fee:{
-    //     amount: 0,
-    //     asset: auq,
-    //   }
-    //   },
-    //   fee: {
-    //     asset: dev,
-    //     balance: BalanceBuilder().substrate().system().account(),
-    //   },
-    // }),
     {
       source: {
         asset: ampe,
