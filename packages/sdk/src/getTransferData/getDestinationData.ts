@@ -32,7 +32,7 @@ export async function getDestinationData({
   const fee = await getDestinationFee({
     address: destinationAddress,
     asset: route.destination.fee.asset,
-    chain: destination,
+    destination,
     fee: route.destination.fee.amount,
     transferAsset: route.source.asset,
   });

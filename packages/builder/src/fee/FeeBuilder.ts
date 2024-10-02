@@ -34,35 +34,35 @@ function xcmPaymentApi() {
         address,
         api,
         asset,
-        chain,
-        transferAsset,
+        destination,
+        feeAsset,
       }: FeeConfigBuilderPrams) =>
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
-            const versionedAssetId = await getVersionedAssetId(
+            const versionedFeeAssetId = await getVersionedAssetId(
               api,
-              asset,
-              chain,
+              feeAsset,
+              destination,
             );
             const versionedTransferAssetId = await getVersionedAssetId(
               api,
-              transferAsset,
-              chain,
+              asset,
+              destination,
             );
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
-              ? [versionedTransferAssetId, versionedAssetId]
-              : [versionedAssetId, versionedTransferAssetId];
+              ? [versionedTransferAssetId, versionedFeeAssetId]
+              : [versionedFeeAssetId, versionedTransferAssetId];
 
             const assets =
-              asset === transferAsset ? [versionedAssetId] : versionedAssets;
+              feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
 
             const instructions = [
               isAssetReserveChain
                 ? getWithdrawAssetInstruction(assets)
                 : getReserveAssetDepositedInstruction(assets),
               getClearOriginInstruction(),
-              getBuyExecutionInstruction(versionedAssetId),
+              getBuyExecutionInstruction(versionedFeeAssetId),
               getDepositAssetInstruction(address, assets),
               getSetTopicInstruction(),
             ];
@@ -70,7 +70,7 @@ function xcmPaymentApi() {
             return getFeeForXcmInstructionsAndAsset(
               api,
               instructions,
-              versionedAssetId,
+              versionedFeeAssetId,
             );
           },
         }),

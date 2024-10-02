@@ -14,8 +14,8 @@ export interface FeeConfigBuilderPrams {
   address: string;
   api: ApiPromise;
   asset: ChainAsset;
-  chain: AnyParachain;
-  transferAsset: ChainAsset;
+  destination: AnyParachain;
+  feeAsset: ChainAsset;
 }
 
 export interface XcmPaymentFeeProps {
