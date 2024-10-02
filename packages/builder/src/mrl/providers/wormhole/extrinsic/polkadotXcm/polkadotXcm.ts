@@ -1,8 +1,4 @@
-import {
-  type AnyParachain,
-  AssetAmount,
-  EvmParachain,
-} from '@moonbeam-network/xcm-types';
+import { type AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
@@ -23,6 +19,7 @@ export function polkadotXcm() {
         fee,
         moonAsset,
         moonChain,
+        moonApi,
         source,
         sourceAddress,
         sourceApi,
@@ -30,12 +27,6 @@ export function polkadotXcm() {
       }) => {
         if (!destination.wh?.name) {
           throw new Error('Destination chain does not have a wormhole name');
-        }
-
-        if (!EvmParachain.isAnyParachain(destination)) {
-          throw new Error(
-            `Destination ${destination.name} is not a Parachain or EvmParachain`,
-          );
         }
 
         if (!transact) {
@@ -46,16 +37,23 @@ export function polkadotXcm() {
           throw new Error('Source API needs to be defined');
         }
 
+        const { address20: computedOriginAccount } =
+          getMultilocationDerivedAddresses({
+            address: sourceAddress,
+            paraId: moonChain.parachainId,
+            isParents: true,
+          });
+
         const { transfer } = sourceApi.tx.xTokens;
         const builder = ExtrinsicBuilder().xTokens().transfer();
 
         const assetTransferTx = transfer(
-          builder
+          ...builder
             .build({
               asset,
-              destination,
-              destinationAddress,
-              destinationApi,
+              destination: moonChain,
+              destinationAddress: computedOriginAccount,
+              destinationApi: moonApi,
               fee,
               // TODO: This is a workaround. xTokens.transfer doesn't need source chain but the interfaces requires it.
               // In this case we know that a source chain is not a Parachain.
@@ -71,14 +69,14 @@ export function polkadotXcm() {
          * Also we need to move fees to AssetRoute.
          */
         const feeAssetTransferTx = transfer(
-          builder
+          ...builder
             .build({
               asset: AssetAmount.fromChainAsset(moonAsset, {
                 amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
               }),
-              destination,
+              destination: moonChain,
               destinationAddress,
-              destinationApi,
+              destinationApi: moonApi,
               fee,
               source: source as AnyParachain,
               sourceAddress,
@@ -86,12 +84,6 @@ export function polkadotXcm() {
             })
             .getArgs(transfer),
         );
-
-        const { address20 } = getMultilocationDerivedAddresses({
-          address: sourceAddress,
-          paraId: moonChain.parachainId,
-          isParents: true,
-        });
 
         const send = sourceApi.tx.polkadotXcm.send(
           {
@@ -158,7 +150,7 @@ export function polkadotXcm() {
                       beneficiary: {
                         parents: 0,
                         interior: {
-                          X1: { AccountKey20: { key: address20 } },
+                          X1: { AccountKey20: { key: computedOriginAccount } },
                         },
                       },
                     },
@@ -169,10 +161,11 @@ export function polkadotXcm() {
           },
         );
 
+        // TODO add here ability to only send the remote execution (only `send`)
         return new ExtrinsicConfig({
           module: 'utility',
           func: 'batchAll',
-          getArgs: () => [assetTransferTx, feeAssetTransferTx, send],
+          getArgs: () => [[assetTransferTx, feeAssetTransferTx, send]],
         });
       },
     }),
