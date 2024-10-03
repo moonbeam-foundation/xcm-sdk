@@ -71,11 +71,14 @@ export function polkadotXcm() {
         const feeAssetTransferTx = transfer(
           ...builder
             .build({
-              asset: AssetAmount.fromChainAsset(moonAsset, {
-                amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
-              }),
+              asset: AssetAmount.fromChainAsset(
+                source.getChainAsset(moonAsset),
+                {
+                  amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
+                },
+              ),
               destination: moonChain,
-              destinationAddress,
+              destinationAddress: computedOriginAccount,
               destinationApi: moonApi,
               fee,
               source: source as AnyParachain,

@@ -36,7 +36,7 @@ import {
 import type { MoonChainTransferData } from '../mrl.interfaces';
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
-  [moonbeam.key]: 657226n,
+  [moonbeam.key]: 1273110n,
   [moonbaseAlpha.key]: 1271922n,
 };
 
@@ -58,7 +58,6 @@ export function getMoonChainFeeValueOnSource({
   const isSameAssetPayingMoonChainFee = sourceData.balance.isSame(
     moonChainData.fee,
   );
-
   return !isDestinationMoonChain &&
     isSourceParachain &&
     isSameAssetPayingMoonChainFee
@@ -125,7 +124,7 @@ export async function buildTransfer({
     destinationAddress,
     destinationApi,
     fee: destinationFee,
-    isAutomatic: route.mrl.isAutomatic,
+    isAutomatic: route.mrl.isAutomatic, // TODO
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,
