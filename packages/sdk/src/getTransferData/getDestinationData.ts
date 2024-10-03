@@ -31,10 +31,10 @@ export async function getDestinationData({
   });
   const fee = await getDestinationFee({
     address: destinationAddress,
-    asset: route.destination.fee.asset,
+    feeAsset: route.destination.fee.asset,
     destination,
     fee: route.destination.fee.amount,
-    transferAsset: route.source.asset,
+    asset: route.source.asset,
   });
   const existentialDeposit = await getExistentialDeposit(destination);
 
