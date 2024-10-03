@@ -155,17 +155,21 @@ export function getMax({
 }
 
 export interface GetDestinationFeeParams {
+  address: string;
   asset: Asset;
-  chain: AnyChain;
+  destination: AnyChain;
   fee: number | FeeConfigBuilder;
+  transferAsset: Asset;
 }
 
 export async function getDestinationFee({
+  address,
   asset,
-  chain,
+  destination,
   fee,
+  transferAsset,
 }: GetDestinationFeeParams): Promise<AssetAmount> {
-  const zero = AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+  const zero = AssetAmount.fromChainAsset(destination.getChainAsset(asset), {
     amount: 0n,
   });
 
@@ -175,11 +179,14 @@ export async function getDestinationFee({
     });
   }
 
-  if (EvmParachain.isAnyParachain(chain)) {
-    const polkadot = await PolkadotService.create(chain);
+  if (EvmParachain.isAnyParachain(destination)) {
+    const polkadot = await PolkadotService.create(destination);
     const cfg = (fee as FeeConfigBuilder).build({
+      address,
       api: polkadot.api,
-      asset: zero.getAssetId(),
+      asset: destination.getChainAsset(transferAsset),
+      feeAsset: destination.getChainAsset(asset),
+      destination,
     });
 
     return zero.copyWith({

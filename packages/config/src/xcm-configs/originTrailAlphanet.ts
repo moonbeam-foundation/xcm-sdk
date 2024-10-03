@@ -23,7 +23,9 @@ export const originTrailAlphanetRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: otp,
         },
       },

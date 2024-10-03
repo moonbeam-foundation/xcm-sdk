@@ -26,7 +26,7 @@ export async function getMoonChainData({
 
   const moonChain = getMoonChain(route.source.chain);
   const asset = moonChain.getChainAsset(route.mrl.moonChain.asset);
-  const feeAsset = moonChain.getChainAsset(route.mrl.moonChain.fee.asset);
+  // const feeAsset = moonChain.getChainAsset(route.mrl.moonChain.fee.asset);
   const isDestinationMoonChain = route.destination.chain.isEqual(moonChain);
 
   if (isDestinationMoonChain) {
@@ -38,9 +38,11 @@ export async function getMoonChainData({
   }
 
   const fee = await getDestinationFee({
-    asset: feeAsset,
-    chain: moonChain,
+    address: sourceAddress, // TODO not correct
+    asset: route.mrl.moonChain.fee.asset,
+    destination: moonChain,
     fee: route.mrl.moonChain.fee.amount,
+    transferAsset: route.source.asset,
   });
 
   let address = sourceAddress;

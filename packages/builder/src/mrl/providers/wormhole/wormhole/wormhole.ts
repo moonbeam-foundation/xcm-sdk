@@ -1,4 +1,4 @@
-import { EvmParachain } from '@moonbeam-network/xcm-types';
+import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
@@ -26,8 +26,8 @@ export function wormhole() {
         sourceAddress,
       }) => {
         const isNativeAsset = asset.isSame(source.nativeAsset);
-        const isSourceOrDestinationMoonChain =
-          destination.isEqual(moonChain) || source.isEqual(moonChain);
+        const isDestinationMoonChain = destination.isEqual(moonChain);
+        const isDestinationEvmChain = EvmChain.is(destination);
         const tokenAddress = isNativeAsset ? 'native' : asset.address;
 
         if (!tokenAddress) {
@@ -36,7 +36,9 @@ export function wormhole() {
 
         const wh = wormholeFactory(source);
         const whSource = wh.getChain(source.getWormholeName());
-        const whDestination = wh.getChain(destination.getWormholeName());
+        const whDestination = isDestinationEvmChain
+          ? wh.getChain(destination.getWormholeName())
+          : wh.getChain(moonChain.getWormholeName());
         const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
@@ -44,7 +46,7 @@ export function wormhole() {
         );
         const whDestinationAddress = Wormhole.chainAddress(
           whDestination.chain,
-          isSourceOrDestinationMoonChain
+          isDestinationMoonChain || isDestinationEvmChain
             ? destinationAddress
             : GMP_CONTRACT_ADDRESS,
         );
@@ -56,7 +58,7 @@ export function wormhole() {
             whSourceAddress,
             whDestinationAddress,
             isAutomatic,
-            isSourceOrDestinationMoonChain
+            isDestinationMoonChain || isDestinationEvmChain
               ? undefined
               : getPayload({ destination, destinationAddress, moonApi }),
           ],

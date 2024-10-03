@@ -23,7 +23,9 @@ export const zeitgeistRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: ztg,
         },
       },
@@ -46,7 +48,9 @@ export const zeitgeistRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.08,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -65,7 +69,9 @@ export const zeitgeistRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

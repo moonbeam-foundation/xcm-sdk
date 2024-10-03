@@ -11,6 +11,7 @@ module.exports = {
     '**/*.ts.snap',
     '**/*.sol',
     'pnpm-lock.yaml',
+    'CHANGELOG.md',
   ],
   words: vscodeConfig['cSpell.words'],
 };

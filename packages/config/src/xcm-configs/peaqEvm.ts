@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ContractBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, peaq, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { moonbeam, peaqEvm } from '../chains';
@@ -28,7 +29,9 @@ export const peaqEvmRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -52,7 +55,9 @@ export const peaqEvmRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.08,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -76,7 +81,9 @@ export const peaqEvmRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.08,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -100,7 +107,9 @@ export const peaqEvmRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.08,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -124,7 +133,9 @@ export const peaqEvmRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.08,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -148,7 +159,9 @@ export const peaqEvmRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.08,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

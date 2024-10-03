@@ -691,7 +691,9 @@ Defines a chain's configurations, including information for each chain's support
       balance: BalanceBuilder().substrate().assets().account(),
       destination: moonbeam,
       destinationFee: {
-        amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+        amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -761,7 +763,9 @@ Defines an asset's configurations for a source chain and includes information ab
   balance: BalanceBuilder().substrate().assets().account(),
   destination: moonbeam,
   destinationFee: {
-    amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+    amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
     asset: usdt,
     balance: BalanceBuilder().substrate().assets().account(),
   },
@@ -825,13 +829,15 @@ Defines the fees for a particular asset on the destination chain.
 </div>
 
 ```js title="Example"
-// The Desintation Fee Asset Config object
+// The Destination Fee Asset Config object
 // For configuring USDT to be sent from
 // the Polkadot Asset Hub to Moonbeam
 {
   asset: dot,
   balance: BalanceBuilder().substrate().system().account(),
-  amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+  amount: amount: FeeBuilder()
+          .xcmPaymentApi()
+          .xcmPaymentFee({ isAssetReserveChain: false }),
 }
 ```
 

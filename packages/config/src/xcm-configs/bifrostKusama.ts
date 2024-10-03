@@ -24,7 +24,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -48,7 +50,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.0001,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: movr,
         },
       },
@@ -72,7 +76,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -96,7 +102,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },
@@ -120,7 +128,9 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.2,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: bnc,
         },
       },

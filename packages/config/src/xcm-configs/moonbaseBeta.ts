@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { alan, betaDEV, dev, ftmwh, usdcwh } from '../assets';
 import { moonbaseAlpha, moonbaseBeta } from '../chains';
@@ -26,7 +27,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.0002,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
@@ -49,7 +52,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.002,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
@@ -72,7 +77,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.002,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
@@ -95,7 +102,9 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.002,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dev,
         },
       },

@@ -452,7 +452,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: ['wss://crab-rpc.darwinia.network', 'wss://darwiniacrab-rpc.dwellir.com'],
+  ws: ['wss://darwiniacrab-rpc.dwellir.com', 'wss://crab-rpc.darwinia.network'],
 });
 
 export const fantomTestnet = new EvmChain({
@@ -590,7 +590,14 @@ export const hydrationAlphanet = new Parachain({
 });
 
 export const integritee = new Parachain({
-  assets: [ChainAsset.fromAsset(teer, { decimals: 12 })],
+  assets: [
+    ChainAsset.fromAsset(teer, {
+      decimals: 12,
+      ids: {
+        id: teer.originSymbol,
+      },
+    }),
+  ],
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
@@ -1088,6 +1095,9 @@ export const moonbeam = new EvmParachain({
     ChainAsset.fromAsset(fil, {
       address: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
       decimals: 18,
+      ids: {
+        id: '144012926827374458669278577633504620722',
+      },
     }),
     ChainAsset.fromAsset(glmr, {
       address: '0x0000000000000000000000000000000000000802',

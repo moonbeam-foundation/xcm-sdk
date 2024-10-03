@@ -24,7 +24,9 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: FeeBuilder().assetManager().assetTypeUnitsPerSecond(),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: agng,
         },
       },
@@ -44,7 +46,9 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
@@ -68,7 +72,9 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.04,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
