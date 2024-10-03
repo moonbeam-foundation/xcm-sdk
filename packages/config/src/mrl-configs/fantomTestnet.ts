@@ -56,7 +56,7 @@ export const fantomTestnetRoutes = new ChainRoutes({
         },
       },
       mrl: {
-        isAutomatic: false,
+        isAutomatic: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,

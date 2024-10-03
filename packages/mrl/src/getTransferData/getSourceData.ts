@@ -14,12 +14,12 @@ import {
   getExtrinsicFee,
   getMax,
 } from '@moonbeam-network/xcm-sdk';
-import type {
-  AnyChain,
-  AnyParachain,
+import {
+  type AnyChain,
+  type AnyParachain,
   AssetAmount,
-  EvmChain,
-  EvmParachain,
+  type EvmChain,
+  type EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { WormholeService } from '../services/wormhole';
 import { buildTransfer } from './getTransferData.utils';
@@ -137,11 +137,13 @@ export async function getFee({
     const wh = WormholeService.create(chain as EvmChain | EvmParachain);
     const fee = await wh.getFee(transfer);
 
-    console.log('fee', fee);
+    console.log('fee in getFee.WormholeConfig', fee);
 
-    // TODO: finish
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    return {} as any;
+    // TODO technically this is not the fee on source chain, it's relayer fee
+    // source fee should be the fee paid to send the message in polkadot to eth or to sign the transaction in eth to polkadot
+    return AssetAmount.fromChainAsset(chain.getChainAsset(balance), {
+      amount: fee.relayFee?.amount || 0n,
+    });
   }
 
   if (ContractConfig.is(transfer)) {

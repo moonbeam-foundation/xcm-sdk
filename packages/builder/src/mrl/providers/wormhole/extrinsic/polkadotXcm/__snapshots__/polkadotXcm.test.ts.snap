@@ -10,9 +10,11 @@ ExtrinsicConfig {
 
 exports[`polkadotXcm > send > should get correct arguments 1`] = `
 [
-  "xTokens.transfer => RESULT",
-  "xTokens.transfer => RESULT",
-  "polkadotXcm.send => RESULT",
+  [
+    "xTokens.transfer => RESULT",
+    "xTokens.transfer => RESULT",
+    "polkadotXcm.send => RESULT",
+  ],
 ]
 `;
 

@@ -1,4 +1,4 @@
-import { EvmParachain } from '@moonbeam-network/xcm-types';
+import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
@@ -27,6 +27,7 @@ export function wormhole() {
       }) => {
         const isNativeAsset = asset.isSame(source.nativeAsset);
         const isDestinationMoonChain = destination.isEqual(moonChain);
+        const isDestinationEvmChain = EvmChain.is(destination);
         const tokenAddress = isNativeAsset ? 'native' : asset.address;
 
         if (!tokenAddress) {
@@ -35,15 +36,19 @@ export function wormhole() {
 
         const wh = wormholeFactory(source);
         const whSource = wh.getChain(source.getWormholeName());
-        const whMoonChain = wh.getChain(moonChain.getWormholeName());
+        const whDestination = isDestinationEvmChain
+          ? wh.getChain(destination.getWormholeName())
+          : wh.getChain(moonChain.getWormholeName());
         const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
           sourceAddress,
         );
-        const whMoonChainAddress = Wormhole.chainAddress(
-          whMoonChain.chain,
-          isDestinationMoonChain ? destinationAddress : GMP_CONTRACT_ADDRESS,
+        const whDestinationAddress = Wormhole.chainAddress(
+          whDestination.chain,
+          isDestinationMoonChain || isDestinationEvmChain
+            ? destinationAddress
+            : GMP_CONTRACT_ADDRESS,
         );
 
         return new WormholeConfig({
@@ -51,9 +56,9 @@ export function wormhole() {
             whAsset,
             asset.amount,
             whSourceAddress,
-            whMoonChainAddress,
+            whDestinationAddress,
             isAutomatic,
-            isDestinationMoonChain
+            isDestinationMoonChain || isDestinationEvmChain
               ? undefined
               : getPayload({ destination, destinationAddress, moonApi }),
           ],

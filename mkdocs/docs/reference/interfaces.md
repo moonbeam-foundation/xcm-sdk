@@ -829,7 +829,7 @@ Defines the fees for a particular asset on the destination chain.
 </div>
 
 ```js title="Example"
-// The Desintation Fee Asset Config object
+// The Destination Fee Asset Config object
 // For configuring USDT to be sent from
 // the Polkadot Asset Hub to Moonbeam
 {
