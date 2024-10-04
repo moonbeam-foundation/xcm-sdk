@@ -124,7 +124,7 @@ export async function buildTransfer({
     destinationAddress,
     destinationApi,
     fee: destinationFee,
-    isAutomatic: route.mrl.isAutomatic, // TODO
+    isAutomatic: route.mrl.isAutomaticPossible, // TODO
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,

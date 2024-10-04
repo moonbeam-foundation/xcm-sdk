@@ -460,9 +460,13 @@ export const fantomTestnet = new EvmChain({
     ChainAsset.fromAsset(ftm, {
       decimals: 18,
     }),
-    // TODO should be WGLMR
+    // TODO should be WGLMR ?
     ChainAsset.fromAsset(dev, {
       address: '0x41E3CFDFC255A4bF3C8D3560Bc8D3D9b5080338e',
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(agng, {
+      address: '0xBb4D53C75654D28f69470546414401A2b31b586c',
       decimals: 18,
     }),
   ],

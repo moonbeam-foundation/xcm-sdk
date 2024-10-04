@@ -46,7 +46,7 @@ export interface FeeConfig {
 }
 
 export interface MrlConfig {
-  isAutomatic: boolean;
+  isAutomaticPossible: boolean;
   transfer: MrlConfigBuilder;
   moonChain: MoonChainConfig;
 }

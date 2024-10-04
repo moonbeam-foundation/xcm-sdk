@@ -2,7 +2,9 @@ import { type AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
+import { MrlBuilder } from '../../../../MrlBuilder';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import type { WormholeConfig } from '../../wormhole';
 
 // TODO: Can we move them somewhere?
 const BUY_EXECUTION_FEE = 100_000_000_000_000_000n;
@@ -11,20 +13,20 @@ const CROSS_CHAIN_FEE = 100_000_000_000_000_000n;
 export function polkadotXcm() {
   return {
     send: (): MrlConfigBuilder => ({
-      build: ({
-        asset,
-        destination,
-        destinationAddress,
-        destinationApi,
-        fee,
-        moonAsset,
-        moonChain,
-        moonApi,
-        source,
-        sourceAddress,
-        sourceApi,
-        transact,
-      }) => {
+      build: (params) => {
+        const {
+          asset,
+          destination,
+          fee,
+          moonAsset,
+          moonChain,
+          moonApi,
+          source,
+          sourceAddress,
+          sourceApi,
+          transact,
+        } = params;
+
         if (!destination.wh?.name) {
           throw new Error('Destination chain does not have a wormhole name');
         }
@@ -165,11 +167,19 @@ export function polkadotXcm() {
         );
 
         // TODO add here ability to only send the remote execution (only `send`)
-        return new ExtrinsicConfig({
+        const extrinsic = new ExtrinsicConfig({
           module: 'utility',
           func: 'batchAll',
           getArgs: () => [[assetTransferTx, feeAssetTransferTx, send]],
         });
+
+        const wormholeConfig = MrlBuilder()
+          .wormhole()
+          .wormhole()
+          .tokenTransfer()
+          .build(params) as WormholeConfig; // TODO make wormhole build to return this?
+
+        return { extrinsic, wormholeConfig };
       },
     }),
   };

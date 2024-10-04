@@ -11,9 +11,15 @@ import type { ExtrinsicConfig } from '../extrinsic';
 import type { WormholeConfig } from './providers/wormhole/wormhole';
 
 export type MrlConfigBuilder = ConfigBuilder<
-  ContractConfig | ExtrinsicConfig | WormholeConfig,
+  ContractConfig | ExtrinsicConfig | ExtrinsicWormholeConfig | WormholeConfig,
   MrlBuilderParams
 >;
+
+// TODO mjm improve this
+export interface ExtrinsicWormholeConfig {
+  extrinsic: ExtrinsicConfig;
+  wormholeConfig: WormholeConfig;
+}
 
 export interface MrlBuilderParams extends BuilderPrams<AnyChain> {
   isAutomatic: boolean;

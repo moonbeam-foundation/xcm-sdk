@@ -1,3 +1,4 @@
+import type { SourceChainTransferData } from '@moonbeam-network/xcm-sdk';
 import type { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
 import type { IKeyringPair } from '@polkadot/types/types';
@@ -21,8 +22,10 @@ export interface TransferData {
   ): Promise<string[]>;
 }
 
-export interface SourceTransferData extends ChainTransferData {
+// TODO mjm is this needed?
+export interface SourceTransferData extends SourceChainTransferData {
   destinationFeeBalance: AssetAmount;
+  relayFee?: AssetAmount;
   feeBalance: AssetAmount;
   max: AssetAmount;
 }
