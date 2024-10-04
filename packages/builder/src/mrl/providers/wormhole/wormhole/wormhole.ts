@@ -3,6 +3,7 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
+import { Provider } from '../../../MrlBuilder.constants';
 import type {
   MrlBuilderParams,
   MrlConfigBuilder,
@@ -16,8 +17,10 @@ export const GMP_CONTRACT_ADDRESS =
 export function wormhole() {
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
+      provider: Provider.WORMHOLE,
       build: (params): WormholeConfig => {
-        const args = generateWormholeArgs(params);
+        // TODO not needed to be extracted anymore
+        const args = getWormholeArgs(params);
 
         return new WormholeConfig({
           args,
@@ -28,7 +31,7 @@ export function wormhole() {
   };
 }
 
-export function generateWormholeArgs({
+export function getWormholeArgs({
   asset,
   destination,
   destinationAddress,

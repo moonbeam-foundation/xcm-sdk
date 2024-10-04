@@ -93,19 +93,35 @@ export interface BuildTransferParams {
   sourceAddress: string;
 }
 
-export async function buildTransfer({
+export async function buildTransfer(params: BuildTransferParams) {
+  // TODO mjm unify with check below
+  if (!params.route.mrl) {
+    throw new Error(
+      `MrlConfigBuilder is not defined for source chain ${params.route.source.chain.name} and asset ${params.route.source.asset.originSymbol}`,
+    );
+  }
+  const builderParams = await getMrlBuilderParams(params);
+
+  return params.route.mrl.transfer.build({
+    ...builderParams,
+    transact: EvmParachain.isAnyParachain(params.route.source.chain) // TODO deconstruct?
+      ? await getTransact(builderParams)
+      : undefined,
+  });
+}
+
+export async function getMrlBuilderParams({
   asset,
   destinationAddress,
   destinationFee,
   route,
   sourceAddress,
-}: BuildTransferParams) {
+}: BuildTransferParams): Promise<MrlBuilderParams> {
   if (!route.mrl) {
     throw new Error(
       `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
-
   const source = route.source.chain;
   const destination = route.destination.chain;
 
@@ -118,7 +134,7 @@ export async function buildTransfer({
     getPolkadotApi(moonChain.ws),
   ]);
 
-  const params: MrlBuilderParams = {
+  return {
     asset,
     destination,
     destinationAddress,
@@ -132,13 +148,6 @@ export async function buildTransfer({
     sourceAddress,
     sourceApi,
   };
-
-  return route.mrl.transfer.build({
-    ...params,
-    transact: EvmParachain.isAnyParachain(source)
-      ? await getTransact(params)
-      : undefined,
-  });
 }
 
 export async function getTransact(params: MrlBuilderParams): Promise<Transact> {

@@ -1,7 +1,8 @@
 import {
   ContractConfig,
-  ExtrinsicConfig,
-  type ExtrinsicWormholeConfig,
+  type ExtrinsicConfig,
+  MrlBuilder,
+  Provider,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
@@ -23,7 +24,11 @@ import {
 } from '@moonbeam-network/xcm-types';
 import type { SourceTransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
-import { buildTransfer } from './getTransferData.utils';
+import {
+  type BuildTransferParams,
+  buildTransfer,
+  getMrlBuilderParams,
+} from './getTransferData.utils';
 
 export interface GetSourceDataParams {
   route: AssetRoute;
@@ -97,9 +102,13 @@ export async function getSourceData({
   });
 
   const relayFee = await getRelayFee({
-    balance,
     chain: source,
     transfer,
+    asset: balance,
+    destinationAddress,
+    destinationFee,
+    route,
+    sourceAddress,
   });
 
   const max = getMax({
@@ -129,21 +138,12 @@ export interface GetFeeParams {
   feeBalance: AssetAmount;
   feeConfig?: FeeConfig;
   sourceAddress: string;
-  transfer:
-    | ContractConfig
-    | ExtrinsicConfig
-    | ExtrinsicWormholeConfig
-    | WormholeConfig;
+  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
-export interface GetRelayFeeParams {
-  balance: AssetAmount;
+export interface GetRelayFeeParams extends BuildTransferParams {
   chain: AnyChain;
-  transfer:
-    | ContractConfig
-    | ExtrinsicConfig
-    | ExtrinsicWormholeConfig
-    | WormholeConfig;
+  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
 export async function getFee({
@@ -173,37 +173,56 @@ export async function getFee({
     });
   }
 
-  const extrinsic = ExtrinsicConfig.is(transfer)
-    ? transfer
-    : transfer.extrinsic;
-
   return getExtrinsicFee({
     address: sourceAddress,
     balance,
     chain: chain as AnyParachain,
-    extrinsic,
+    extrinsic: transfer,
     feeBalance,
     feeConfig,
   });
 }
 
 export async function getRelayFee({
-  balance,
+  asset,
   chain,
+  destinationAddress,
+  destinationFee,
+  route,
+  sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
-  if (ExtrinsicConfig.is(transfer) || ContractConfig.is(transfer)) {
-    return undefined;
+  if (WormholeConfig.is(transfer)) {
+    const wh = WormholeService.create(chain as EvmChain | EvmParachain);
+    const fee = await wh.getFee(transfer);
+
+    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+      amount: fee.relayFee?.amount || 0n,
+    });
   }
 
-  const wormholeConfig = WormholeConfig.is(transfer)
-    ? transfer
-    : transfer.wormholeConfig;
+  if (route?.mrl?.transfer.provider === Provider.WORMHOLE) {
+    const builderParams = await getMrlBuilderParams({
+      asset,
+      destinationAddress,
+      destinationFee,
+      route,
+      sourceAddress,
+    });
 
-  const wh = WormholeService.create(chain as EvmChain | EvmParachain);
-  const fee = await wh.getFee(wormholeConfig);
+    const wormholeConfig = MrlBuilder()
+      .wormhole()
+      .wormhole()
+      .tokenTransfer()
+      .build(builderParams) as WormholeConfig; // TODO specify in the build function?
 
-  return AssetAmount.fromChainAsset(chain.getChainAsset(balance), {
-    amount: fee.relayFee?.amount || 0n,
-  });
+    const wh = WormholeService.create(chain as EvmChain | EvmParachain);
+    const fee = await wh.getFee(wormholeConfig);
+
+    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+      amount: fee.relayFee?.amount || 0n,
+    });
+  }
+
+  return;
 }

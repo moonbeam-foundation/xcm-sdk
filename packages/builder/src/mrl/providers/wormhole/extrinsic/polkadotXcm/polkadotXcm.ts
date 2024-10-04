@@ -3,6 +3,7 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
 import { MrlBuilder } from '../../../../MrlBuilder';
+import { Provider } from '../../../../MrlBuilder.constants';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import type { WormholeConfig } from '../../wormhole';
 
@@ -13,6 +14,7 @@ const CROSS_CHAIN_FEE = 100_000_000_000_000_000n;
 export function polkadotXcm() {
   return {
     send: (): MrlConfigBuilder => ({
+      provider: Provider.WORMHOLE,
       build: (params) => {
         const {
           asset,
@@ -167,19 +169,11 @@ export function polkadotXcm() {
         );
 
         // TODO add here ability to only send the remote execution (only `send`)
-        const extrinsic = new ExtrinsicConfig({
+        return new ExtrinsicConfig({
           module: 'utility',
           func: 'batchAll',
           getArgs: () => [[assetTransferTx, feeAssetTransferTx, send]],
         });
-
-        const wormholeConfig = MrlBuilder()
-          .wormhole()
-          .wormhole()
-          .tokenTransfer()
-          .build(params) as WormholeConfig; // TODO make wormhole build to return this?
-
-        return { extrinsic, wormholeConfig };
       },
     }),
   };
