@@ -2,10 +2,8 @@ import { type AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import { MrlBuilder } from '../../../../MrlBuilder';
 import { Provider } from '../../../../MrlBuilder.constants';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
-import type { WormholeConfig } from '../../wormhole';
 
 // TODO: Can we move them somewhere?
 const BUY_EXECUTION_FEE = 100_000_000_000_000_000n;
@@ -15,20 +13,18 @@ export function polkadotXcm() {
   return {
     send: (): MrlConfigBuilder => ({
       provider: Provider.WORMHOLE,
-      build: (params) => {
-        const {
-          asset,
-          destination,
-          fee,
-          moonAsset,
-          moonChain,
-          moonApi,
-          source,
-          sourceAddress,
-          sourceApi,
-          transact,
-        } = params;
-
+      build: ({
+        asset,
+        destination,
+        fee,
+        moonAsset,
+        moonChain,
+        moonApi,
+        source,
+        sourceAddress,
+        sourceApi,
+        transact,
+      }) => {
         if (!destination.wh?.name) {
           throw new Error('Destination chain does not have a wormhole name');
         }
