@@ -1,4 +1,5 @@
 import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
@@ -16,12 +17,7 @@ export function wormhole() {
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
       build: (params): WormholeConfig => {
-        const isDestinationEvmChain = EvmChain.is(params.destination);
-
-        // TODO unify this, this is just as demonstration
-        const args = isDestinationEvmChain
-          ? generateDemoArgs(params)
-          : generateWormholeArgs(params);
+        const args = generateWormholeArgs(params);
 
         return new WormholeConfig({
           args,
@@ -47,17 +43,30 @@ export function generateWormholeArgs({
   const isDestinationEvmChain = EvmChain.is(destination);
   const tokenAddress = isNativeAsset ? 'native' : asset.address;
 
+  const { address20: computedOriginAccount } = getMultilocationDerivedAddresses(
+    {
+      address: sourceAddress,
+      paraId: moonChain.parachainId,
+      isParents: true,
+    },
+  );
+
   if (!tokenAddress) {
     throw new Error(`Asset ${asset.key} has no address`);
   }
 
   const wh = wormholeFactory(source);
-  const whSource = wh.getChain(source.getWormholeName());
+  const whSource = isDestinationEvmChain
+    ? wh.getChain(moonChain.getWormholeName())
+    : wh.getChain(source.getWormholeName());
   const whDestination = isDestinationEvmChain
     ? wh.getChain(destination.getWormholeName())
     : wh.getChain(moonChain.getWormholeName());
   const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
-  const whSourceAddress = Wormhole.chainAddress(whSource.chain, sourceAddress);
+  const whSourceAddress = Wormhole.chainAddress(
+    whSource.chain,
+    isDestinationEvmChain ? computedOriginAccount : sourceAddress,
+  );
   const whDestinationAddress = Wormhole.chainAddress(
     whDestination.chain,
     isDestinationMoonChain || isDestinationEvmChain
@@ -121,48 +130,4 @@ export function getPayload({
   });
 
   return versioned.toU8a();
-}
-
-// TODO remove this, this is just as demonstration
-function generateDemoArgs({
-  asset,
-  destination,
-  destinationAddress,
-  isAutomatic,
-  moonChain,
-  source,
-}: MrlBuilderParams): WormholeFunctionArgs {
-  const isNativeAsset = asset.isSame(moonChain.nativeAsset);
-  const isDestinationEvmChain = EvmChain.is(destination);
-  const tokenAddress = isNativeAsset
-    ? 'native'
-    : moonChain.getChainAsset(asset).address;
-
-  if (!tokenAddress) {
-    throw new Error(`Asset ${asset.key} has no address`);
-  }
-
-  const wh = wormholeFactory(source);
-  const whSource = wh.getChain(moonChain.getWormholeName());
-  const whDestination = isDestinationEvmChain
-    ? wh.getChain(destination.getWormholeName())
-    : wh.getChain(moonChain.getWormholeName());
-  const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
-  const whSourceAddress = Wormhole.chainAddress(
-    whSource.chain,
-    destinationAddress,
-  ); // really it is computedOriginAccount
-  const whDestinationAddress = Wormhole.chainAddress(
-    whDestination.chain,
-    destinationAddress,
-  );
-
-  return [
-    whAsset,
-    asset.amount,
-    whSourceAddress,
-    whDestinationAddress,
-    isAutomatic,
-    undefined,
-  ];
 }
