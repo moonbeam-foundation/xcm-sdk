@@ -15,7 +15,7 @@ export type MrlConfigBuilder = ConfigBuilder<
   MrlBuilderParams
 >;
 
-// TODO mjm improve this
+// TODO review this
 export interface ExtrinsicWormholeConfig {
   extrinsic: ExtrinsicConfig;
   wormholeConfig: WormholeConfig;

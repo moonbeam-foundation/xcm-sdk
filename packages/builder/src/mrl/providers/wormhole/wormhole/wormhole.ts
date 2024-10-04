@@ -32,7 +32,6 @@ export function wormhole() {
   };
 }
 
-// TODO mjm move from here?
 export function generateWormholeArgs({
   asset,
   destination,
@@ -133,9 +132,7 @@ function generateDemoArgs({
   moonChain,
   source,
 }: MrlBuilderParams): WormholeFunctionArgs {
-  console.log('moonchain', moonChain);
   const isNativeAsset = asset.isSame(moonChain.nativeAsset);
-  // const isDestinationMoonChain = destination.isEqual(moonChain);
   const isDestinationEvmChain = EvmChain.is(destination);
   const tokenAddress = isNativeAsset
     ? 'native'
