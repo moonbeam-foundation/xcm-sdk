@@ -14,8 +14,6 @@ export function polkadotXcm() {
       build: ({
         asset,
         destination,
-        destinationAddress,
-        destinationApi,
         fee,
         moonAsset,
         moonChain,

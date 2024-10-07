@@ -1,4 +1,5 @@
 import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
@@ -24,25 +25,38 @@ export function wormhole() {
         moonChain,
         source,
         sourceAddress,
-      }) => {
+      }): WormholeConfig => {
         const isNativeAsset = asset.isSame(source.nativeAsset);
         const isDestinationMoonChain = destination.isEqual(moonChain);
         const isDestinationEvmChain = EvmChain.is(destination);
-        const tokenAddress = isNativeAsset ? 'native' : asset.address;
+        const tokenAddress = isNativeAsset
+          ? 'native'
+          : isDestinationEvmChain
+            ? moonChain.getChainAsset(asset).address
+            : asset.address;
+
+        const { address20: computedOriginAccount } =
+          getMultilocationDerivedAddresses({
+            address: sourceAddress,
+            paraId: moonChain.parachainId,
+            isParents: true,
+          });
 
         if (!tokenAddress) {
           throw new Error(`Asset ${asset.key} has no address`);
         }
 
         const wh = wormholeFactory(source);
-        const whSource = wh.getChain(source.getWormholeName());
+        const whSource = isDestinationEvmChain
+          ? wh.getChain(moonChain.getWormholeName())
+          : wh.getChain(source.getWormholeName());
         const whDestination = isDestinationEvmChain
           ? wh.getChain(destination.getWormholeName())
           : wh.getChain(moonChain.getWormholeName());
         const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
-          sourceAddress,
+          isDestinationEvmChain ? computedOriginAccount : sourceAddress,
         );
         const whDestinationAddress = Wormhole.chainAddress(
           whDestination.chain,
