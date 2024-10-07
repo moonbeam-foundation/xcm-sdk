@@ -1,12 +1,12 @@
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import type { BuilderPrams } from '../../../builder.interfaces';
+import type { BuilderParams } from '../../../builder.interfaces';
 import type { Parents } from '../../ExtrinsicBuilder.interfaces';
 import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
 } from '../../ExtrinsicBuilder.utils';
 
-export interface GetExtrinsicParams extends BuilderPrams {
+export interface GetExtrinsicParams extends BuilderParams {
   // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
   asset: any;
   func?: SubmittableExtrinsicFunction<'promise'>;
@@ -55,7 +55,7 @@ export function getPolkadotXcmExtrinsicArgs({
 export function shouldFeeAssetPrecedeAsset({
   asset,
   fee,
-}: BuilderPrams): boolean {
+}: BuilderParams): boolean {
   const assetIdNumber = Number(asset.getAssetId());
   const feeAssetIdNumber = Number(fee.getAssetId());
 

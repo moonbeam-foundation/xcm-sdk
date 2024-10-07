@@ -7,10 +7,10 @@ import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConf
 
 export type BalanceConfigBuilder = ConfigBuilder<
   ContractConfig | SubstrateQueryConfig | EvmQueryConfig,
-  BalanceBuilderPrams
+  BalanceBuilderParams
 >;
 
-export interface BalanceBuilderPrams {
+export interface BalanceBuilderParams {
   address: string;
   asset: ChainAsset;
 }
