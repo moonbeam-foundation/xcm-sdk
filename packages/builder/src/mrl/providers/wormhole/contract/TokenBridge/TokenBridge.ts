@@ -1,7 +1,6 @@
 import { convertAddressTo32Bytes } from '@moonbeam-network/xcm-utils';
 import type { Address } from 'viem';
 import { ContractConfig } from '../../../../../contract';
-import { Provider } from '../../../../MrlBuilder.constants';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { wormholeFactory } from '../../wormhole';
 import { TOKEN_BRIDGE_ABI } from './TokenBridgeAbi';
@@ -11,7 +10,6 @@ const module = 'TokenBridge';
 export function TokenBridge() {
   return {
     transferTokens: (): MrlConfigBuilder => ({
-      provider: Provider.WORMHOLE,
       build: ({ asset, destination, destinationAddress, moonChain }) => {
         const wh = wormholeFactory(moonChain);
         const whDestination = wh.getChain(destination.getWormholeName()).config

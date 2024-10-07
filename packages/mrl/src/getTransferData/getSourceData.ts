@@ -2,7 +2,6 @@ import {
   ContractConfig,
   type ExtrinsicConfig,
   MrlBuilder,
-  Provider,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
@@ -202,25 +201,22 @@ export async function getRelayFee({
     return getWormholeFee({ asset, chain, config: transfer });
   }
 
-  if (route?.mrl?.transfer.provider === Provider.WORMHOLE) {
-    const builderParams = await getMrlBuilderParams({
-      asset,
-      destinationAddress,
-      destinationFee,
-      route,
-      sourceAddress,
-    });
+  // TODO this is only valid for Wormhole Provider
+  const builderParams = await getMrlBuilderParams({
+    asset,
+    destinationAddress,
+    destinationFee,
+    route,
+    sourceAddress,
+  });
 
-    const wormholeConfig = MrlBuilder()
-      .wormhole()
-      .wormhole()
-      .tokenTransfer()
-      .build(builderParams);
+  const wormholeConfig = MrlBuilder()
+    .wormhole()
+    .wormhole()
+    .tokenTransfer()
+    .build(builderParams);
 
-    return getWormholeFee({ asset, chain, config: wormholeConfig });
-  }
-
-  return;
+  return getWormholeFee({ asset, chain, config: wormholeConfig });
 }
 
 async function getWormholeFee({

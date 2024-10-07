@@ -2,7 +2,6 @@ import { type AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import { Provider } from '../../../../MrlBuilder.constants';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 
 // TODO: Can we move them somewhere?
@@ -12,7 +11,6 @@ const CROSS_CHAIN_FEE = 100_000_000_000_000_000n;
 export function polkadotXcm() {
   return {
     send: (): MrlConfigBuilder => ({
-      provider: Provider.WORMHOLE,
       build: ({
         asset,
         destination,

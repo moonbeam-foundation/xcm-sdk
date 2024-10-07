@@ -1,6 +1,2 @@
 export const BATCH_CONTRACT_ADDRESS =
   '0x0000000000000000000000000000000000000808';
-
-export enum Provider {
-  WORMHOLE = 'Wormhole',
-}

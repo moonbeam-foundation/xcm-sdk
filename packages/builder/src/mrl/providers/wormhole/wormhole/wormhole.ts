@@ -3,12 +3,11 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
 import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
-import { Provider } from '../../../MrlBuilder.constants';
 import type {
   MrlBuilderParams,
   MrlConfigBuilder,
 } from '../../../MrlBuilder.interfaces';
-import { WormholeConfig, type WormholeFunctionArgs } from './WormholeConfig';
+import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 
 export const GMP_CONTRACT_ADDRESS =
@@ -17,7 +16,6 @@ export const GMP_CONTRACT_ADDRESS =
 export function wormhole() {
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
-      provider: Provider.WORMHOLE,
       build: ({
         asset,
         destination,
@@ -31,7 +29,11 @@ export function wormhole() {
         const isNativeAsset = asset.isSame(source.nativeAsset);
         const isDestinationMoonChain = destination.isEqual(moonChain);
         const isDestinationEvmChain = EvmChain.is(destination);
-        const tokenAddress = isNativeAsset ? 'native' : asset.address;
+        const tokenAddress = isNativeAsset
+          ? 'native'
+          : isDestinationEvmChain
+            ? moonChain.getChainAsset(asset).address
+            : asset.address;
 
         const { address20: computedOriginAccount } =
           getMultilocationDerivedAddresses({

@@ -14,6 +14,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
         },
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         asset: ftm,
