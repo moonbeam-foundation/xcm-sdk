@@ -94,17 +94,17 @@ export interface BuildTransferParams {
 }
 
 export async function buildTransfer(params: BuildTransferParams) {
-  // TODO mjm unify with check below
-  if (!params.route.mrl) {
+  const { route } = params;
+  if (!route.mrl) {
     throw new Error(
-      `MrlConfigBuilder is not defined for source chain ${params.route.source.chain.name} and asset ${params.route.source.asset.originSymbol}`,
+      `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
   const builderParams = await getMrlBuilderParams(params);
 
-  return params.route.mrl.transfer.build({
+  return route.mrl.transfer.build({
     ...builderParams,
-    transact: EvmParachain.isAnyParachain(params.route.source.chain) // TODO deconstruct?
+    transact: EvmParachain.isAnyParachain(route.source.chain)
       ? await getTransact(builderParams)
       : undefined,
   });
@@ -140,7 +140,7 @@ export async function getMrlBuilderParams({
     destinationAddress,
     destinationApi,
     fee: destinationFee,
-    isAutomatic: route.mrl.isAutomaticPossible, // TODO
+    isAutomatic: route.mrl.isAutomaticPossible,
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,

@@ -22,7 +22,6 @@ export interface TransferData {
   ): Promise<string[]>;
 }
 
-// TODO mjm is this needed?
 export interface SourceTransferData extends SourceChainTransferData {
   destinationFeeBalance: AssetAmount;
   relayFee?: AssetAmount;

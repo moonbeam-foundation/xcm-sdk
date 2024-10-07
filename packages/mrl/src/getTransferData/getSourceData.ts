@@ -146,6 +146,12 @@ export interface GetRelayFeeParams extends BuildTransferParams {
   transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
+export interface GetWormholeFeeParams {
+  asset: AssetAmount;
+  chain: AnyChain;
+  config: ContractConfig | ExtrinsicConfig | WormholeConfig;
+}
+
 export async function getFee({
   balance,
   feeBalance,
@@ -193,12 +199,7 @@ export async function getRelayFee({
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
   if (WormholeConfig.is(transfer)) {
-    const wh = WormholeService.create(chain as EvmChain | EvmParachain);
-    const fee = await wh.getFee(transfer);
-
-    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: fee.relayFee?.amount || 0n,
-    });
+    return getWormholeFee({ asset, chain, config: transfer });
   }
 
   if (route?.mrl?.transfer.provider === Provider.WORMHOLE) {
@@ -214,10 +215,22 @@ export async function getRelayFee({
       .wormhole()
       .wormhole()
       .tokenTransfer()
-      .build(builderParams) as WormholeConfig; // TODO specify in the build function?
+      .build(builderParams);
 
+    return getWormholeFee({ asset, chain, config: wormholeConfig });
+  }
+
+  return;
+}
+
+async function getWormholeFee({
+  asset,
+  chain,
+  config,
+}: GetWormholeFeeParams): Promise<AssetAmount | undefined> {
+  if (WormholeConfig.is(config)) {
     const wh = WormholeService.create(chain as EvmChain | EvmParachain);
-    const fee = await wh.getFee(wormholeConfig);
+    const fee = await wh.getFee(config);
 
     return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
       amount: fee.relayFee?.amount || 0n,

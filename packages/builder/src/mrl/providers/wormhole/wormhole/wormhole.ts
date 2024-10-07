@@ -18,75 +18,67 @@ export function wormhole() {
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
       provider: Provider.WORMHOLE,
-      build: (params): WormholeConfig => {
-        // TODO not needed to be extracted anymore
-        const args = getWormholeArgs(params);
+      build: ({
+        asset,
+        destination,
+        destinationAddress,
+        isAutomatic,
+        moonApi,
+        moonChain,
+        source,
+        sourceAddress,
+      }): WormholeConfig => {
+        const isNativeAsset = asset.isSame(source.nativeAsset);
+        const isDestinationMoonChain = destination.isEqual(moonChain);
+        const isDestinationEvmChain = EvmChain.is(destination);
+        const tokenAddress = isNativeAsset ? 'native' : asset.address;
+
+        const { address20: computedOriginAccount } =
+          getMultilocationDerivedAddresses({
+            address: sourceAddress,
+            paraId: moonChain.parachainId,
+            isParents: true,
+          });
+
+        if (!tokenAddress) {
+          throw new Error(`Asset ${asset.key} has no address`);
+        }
+
+        const wh = wormholeFactory(source);
+        const whSource = isDestinationEvmChain
+          ? wh.getChain(moonChain.getWormholeName())
+          : wh.getChain(source.getWormholeName());
+        const whDestination = isDestinationEvmChain
+          ? wh.getChain(destination.getWormholeName())
+          : wh.getChain(moonChain.getWormholeName());
+        const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
+        const whSourceAddress = Wormhole.chainAddress(
+          whSource.chain,
+          isDestinationEvmChain ? computedOriginAccount : sourceAddress,
+        );
+        const whDestinationAddress = Wormhole.chainAddress(
+          whDestination.chain,
+          isDestinationMoonChain || isDestinationEvmChain
+            ? destinationAddress
+            : GMP_CONTRACT_ADDRESS,
+        );
 
         return new WormholeConfig({
-          args,
+          args: [
+            whAsset,
+            asset.amount,
+            whSourceAddress,
+            whDestinationAddress,
+            isAutomatic,
+            isDestinationMoonChain || isDestinationEvmChain
+              ? undefined
+              : getPayload({ destination, destinationAddress, moonApi }),
+          ],
           func: 'tokenTransfer',
         });
       },
     }),
   };
-}
-
-export function getWormholeArgs({
-  asset,
-  destination,
-  destinationAddress,
-  isAutomatic,
-  moonApi,
-  moonChain,
-  source,
-  sourceAddress,
-}: MrlBuilderParams): WormholeFunctionArgs {
-  const isNativeAsset = asset.isSame(source.nativeAsset);
-  const isDestinationMoonChain = destination.isEqual(moonChain);
-  const isDestinationEvmChain = EvmChain.is(destination);
-  const tokenAddress = isNativeAsset ? 'native' : asset.address;
-
-  const { address20: computedOriginAccount } = getMultilocationDerivedAddresses(
-    {
-      address: sourceAddress,
-      paraId: moonChain.parachainId,
-      isParents: true,
-    },
-  );
-
-  if (!tokenAddress) {
-    throw new Error(`Asset ${asset.key} has no address`);
-  }
-
-  const wh = wormholeFactory(source);
-  const whSource = isDestinationEvmChain
-    ? wh.getChain(moonChain.getWormholeName())
-    : wh.getChain(source.getWormholeName());
-  const whDestination = isDestinationEvmChain
-    ? wh.getChain(destination.getWormholeName())
-    : wh.getChain(moonChain.getWormholeName());
-  const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
-  const whSourceAddress = Wormhole.chainAddress(
-    whSource.chain,
-    isDestinationEvmChain ? computedOriginAccount : sourceAddress,
-  );
-  const whDestinationAddress = Wormhole.chainAddress(
-    whDestination.chain,
-    isDestinationMoonChain || isDestinationEvmChain
-      ? destinationAddress
-      : GMP_CONTRACT_ADDRESS,
-  );
-
-  return [
-    whAsset,
-    asset.amount,
-    whSourceAddress,
-    whDestinationAddress,
-    isAutomatic,
-    isDestinationMoonChain || isDestinationEvmChain
-      ? undefined
-      : getPayload({ destination, destinationAddress, moonApi }),
-  ];
 }
 
 /*
