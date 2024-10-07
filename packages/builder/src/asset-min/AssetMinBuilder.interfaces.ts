@@ -4,9 +4,9 @@ import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConf
 
 export type AssetMinConfigBuilder = ConfigBuilder<
   SubstrateQueryConfig,
-  AssetMinConfigBuilderPrams
+  AssetMinConfigBuilderParams
 >;
 
-export interface AssetMinConfigBuilderPrams {
+export interface AssetMinConfigBuilderParams {
   asset: ChainAssetId;
 }

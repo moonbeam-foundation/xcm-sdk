@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import {
-  wormholeConfigBuilderPrams,
-  wormholeToMoonchainConfigBuilderPrams,
+  wormholeConfigBuilderParams,
+  wormholeToMoonchainConfigBuilderParams,
 } from '../../../../../fixtures';
 import { wormhole } from './wormhole';
 
@@ -18,7 +18,7 @@ describe('wormhole', async () => {
     it('should be correct config', () => {
       expect(
         transfer.build({
-          ...wormholeConfigBuilderPrams,
+          ...wormholeConfigBuilderParams,
           moonApi,
           isAutomatic: true,
         }),
@@ -32,7 +32,7 @@ describe('wormhole', async () => {
     it('should be correct config to moon chain', () => {
       expect(
         transfer.build({
-          ...wormholeToMoonchainConfigBuilderPrams,
+          ...wormholeToMoonchainConfigBuilderParams,
           moonApi,
           isAutomatic: false,
         }),

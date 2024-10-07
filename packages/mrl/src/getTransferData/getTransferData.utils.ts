@@ -17,11 +17,10 @@ import {
 import {
   type DestinationChainTransferData,
   PolkadotService,
-  type SourceChainTransferData,
   convertToChainDecimals,
   getMin,
 } from '@moonbeam-network/xcm-sdk';
-import { type AssetAmount, EvmParachain } from '@moonbeam-network/xcm-types';
+import { AssetAmount, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
   getMultilocationDerivedAddresses,
   getPolkadotApi,
@@ -33,7 +32,10 @@ import {
   createPublicClient,
   encodeFunctionData,
 } from 'viem';
-import type { MoonChainTransferData } from '../mrl.interfaces';
+import type {
+  MoonChainTransferData,
+  SourceTransferData,
+} from '../mrl.interfaces';
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 1273110n,
@@ -43,7 +45,7 @@ const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
 export interface DataParams {
   destinationData: DestinationChainTransferData;
   moonChainData: MoonChainTransferData;
-  sourceData: SourceChainTransferData;
+  sourceData: SourceTransferData;
 }
 
 export function getMoonChainFeeValueOnSource({
@@ -73,15 +75,24 @@ export function getMrlMin({
   moonChainData,
   sourceData,
 }: DataParams): AssetAmount {
-  const min = getMin(destinationData);
-  const fee = getMoonChainFeeValueOnSource({
+  const minInDestination = getMin(destinationData);
+  const min = AssetAmount.fromChainAsset(
+    sourceData.chain.getChainAsset(sourceData.balance),
+    {
+      amount: minInDestination.amount,
+    },
+  );
+  const moonChainFee = getMoonChainFeeValueOnSource({
     destinationData,
     moonChainData,
     sourceData,
   });
+  const relayerFee = sourceData.relayerFee?.amount
+    ? sourceData.relayerFee.toBig()
+    : Big(0);
 
   return min.copyWith({
-    amount: BigInt(min.toBig().add(fee).toFixed()),
+    amount: BigInt(min.toBig().add(moonChainFee).add(relayerFee).toFixed()),
   });
 }
 

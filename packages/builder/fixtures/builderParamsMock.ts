@@ -8,7 +8,7 @@ import {
   Parachain,
 } from '@moonbeam-network/xcm-types';
 import { vi } from 'vitest';
-import type { BuilderPrams, MrlBuilderParams } from '../src';
+import type { BuilderParams, MrlBuilderParams } from '../src';
 
 export const apiMock = {
   tx: {
@@ -98,7 +98,7 @@ export const fantomTestnet = new EvmChain({
   },
 });
 
-export const buildParamsMock: BuilderPrams = {
+export const buildParamsMock: BuilderParams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
@@ -109,7 +109,7 @@ export const buildParamsMock: BuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const buildParamsSameAssetMock: BuilderPrams = {
+export const buildParamsSameAssetMock: BuilderParams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
@@ -120,7 +120,7 @@ export const buildParamsSameAssetMock: BuilderPrams = {
   sourceApi: apiMock,
 };
 
-export const buildParachainParamsMock: BuilderPrams = {
+export const buildParachainParamsMock: BuilderParams = {
   asset: testAssetAmount,
   destination: interlayTestnetMock,
   /* cspell:disable-next-line */
@@ -164,7 +164,7 @@ export const mrlBuildParamsMock2: MrlBuilderParams = {
   },
 };
 
-export const wormholeConfigBuilderPrams: MrlBuilderParams = {
+export const wormholeConfigBuilderParams: MrlBuilderParams = {
   asset: testAssetAmount,
   destination: alphanetAssetHubMock,
   destinationAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
@@ -180,7 +180,7 @@ export const wormholeConfigBuilderPrams: MrlBuilderParams = {
   sourceApi: apiMock,
 };
 
-export const wormholeToMoonchainConfigBuilderPrams: MrlBuilderParams = {
+export const wormholeToMoonchainConfigBuilderParams: MrlBuilderParams = {
   asset: testAssetAmount,
   destination: moonbaseAlphaMock,
   destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',

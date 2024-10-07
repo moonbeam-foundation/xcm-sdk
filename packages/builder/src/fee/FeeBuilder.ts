@@ -4,7 +4,7 @@
 import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
 import type {
   FeeConfigBuilder,
-  FeeConfigBuilderPrams,
+  FeeConfigBuilderParams,
   XcmPaymentFeeProps,
 } from './FeeBuilder.interfaces';
 import {
@@ -36,7 +36,7 @@ function xcmPaymentApi() {
         asset,
         destination,
         feeAsset,
-      }: FeeConfigBuilderPrams) =>
+      }: FeeConfigBuilderParams) =>
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {

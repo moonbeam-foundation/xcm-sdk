@@ -7,10 +7,10 @@ import type { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig
 
 export type FeeConfigBuilder = ConfigBuilder<
   SubstrateCallConfig,
-  FeeConfigBuilderPrams
+  FeeConfigBuilderParams
 >;
 
-export interface FeeConfigBuilderPrams {
+export interface FeeConfigBuilderParams {
   address: string;
   api: ApiPromise;
   asset: ChainAsset;

@@ -26,9 +26,11 @@ export function wormhole() {
         source,
         sourceAddress,
       }): WormholeConfig => {
-        const isNativeAsset = asset.isSame(source.nativeAsset);
         const isDestinationMoonChain = destination.isEqual(moonChain);
         const isDestinationEvmChain = EvmChain.is(destination);
+        const isNativeAsset = asset.isSame(
+          isDestinationEvmChain ? moonChain.nativeAsset : source.nativeAsset,
+        );
         const tokenAddress = isNativeAsset
           ? 'native'
           : isDestinationEvmChain

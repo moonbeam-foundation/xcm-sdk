@@ -5,7 +5,7 @@ import type {
 } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { HexString } from '@polkadot/util/types';
-import type { BuilderPrams, ConfigBuilder } from '../builder.interfaces';
+import type { BuilderParams, ConfigBuilder } from '../builder.interfaces';
 import type { ContractConfig } from '../contract';
 import type { ExtrinsicConfig } from '../extrinsic';
 import type { WormholeConfig } from './providers/wormhole/wormhole';
@@ -15,7 +15,7 @@ export type MrlConfigBuilder = ConfigBuilder<
   MrlBuilderParams
 >;
 
-export interface MrlBuilderParams extends BuilderPrams<AnyChain> {
+export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   isAutomatic: boolean;
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
