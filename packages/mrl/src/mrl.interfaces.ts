@@ -24,7 +24,7 @@ export interface TransferData {
 
 export interface SourceTransferData extends SourceChainTransferData {
   destinationFeeBalance: AssetAmount;
-  relayFee?: AssetAmount;
+  relayerFee?: AssetAmount;
   feeBalance: AssetAmount;
   max: AssetAmount;
 }

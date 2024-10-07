@@ -100,7 +100,7 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const relayFee = await getRelayFee({
+  const relayerFee = await getRelayerFee({
     chain: source,
     transfer,
     asset: balance,
@@ -126,7 +126,7 @@ export async function getSourceData({
     feeBalance,
     max,
     min,
-    relayFee,
+    relayerFee,
   };
 }
 
@@ -188,7 +188,7 @@ export async function getFee({
   });
 }
 
-export async function getRelayFee({
+export async function getRelayerFee({
   asset,
   chain,
   destinationAddress,
