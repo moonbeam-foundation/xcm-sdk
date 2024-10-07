@@ -17,7 +17,6 @@ import {
 import {
   type DestinationChainTransferData,
   PolkadotService,
-  type SourceChainTransferData,
   convertToChainDecimals,
   getMin,
 } from '@moonbeam-network/xcm-sdk';
