@@ -272,7 +272,7 @@ export async function getMoonChainFeeBalance({
 
   if (!route.source.moonChainFee?.balance) {
     throw new Error(
-      'BalanceBuilder must be defined for source.moonChainFee.balance for AssetRoute',
+      'BalanceBuilder must be defined for source.moonChainFee.balance for MrlAssetRoute',
     );
   }
 
