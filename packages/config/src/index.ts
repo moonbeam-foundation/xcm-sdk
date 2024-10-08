@@ -4,5 +4,7 @@ export * from './chains';
 export * from './config.utils';
 export * from './mrl-configs';
 export * from './types/AssetRoute';
+export * from './types/MrlAssetRoute';
 export * from './types/ChainRoutes';
+export * from './types/MrlChainRoutes';
 export * from './xcm-configs';

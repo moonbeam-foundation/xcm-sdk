@@ -1,4 +1,4 @@
-import { type AssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
+import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import { Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
@@ -9,7 +9,7 @@ import type {
 
 export interface GetMoonChainDataParams {
   destinationData: DestinationTransferData;
-  route: AssetRoute;
+  route: MrlAssetRoute;
   sourceAddress: string;
 }
 

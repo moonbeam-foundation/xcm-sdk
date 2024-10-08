@@ -9,11 +9,13 @@ import { chainsMap } from '../chains';
 import { getKey } from '../config.utils';
 import type { AssetRoute } from '../types/AssetRoute';
 import type { ChainRoutes } from '../types/ChainRoutes';
+import type { MrlAssetRoute } from '../types/MrlAssetRoute';
+import type { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;
   chains?: Map<string, AnyChain>;
-  routes: Map<string, ChainRoutes>;
+  routes: Map<string, ChainRoutes | MrlChainRoutes>;
 }
 
 export class ConfigService {
@@ -21,7 +23,7 @@ export class ConfigService {
 
   protected chains: Map<string, AnyChain>;
 
-  protected routes: Map<string, ChainRoutes>;
+  protected routes: Map<string, ChainRoutes | MrlChainRoutes>;
 
   constructor(options: ConfigServiceOptions) {
     this.assets = options.assets ?? assetsMap;
@@ -67,7 +69,7 @@ export class ConfigService {
     return chain;
   }
 
-  getChainRoutes(keyOrChain: string | AnyChain): ChainRoutes {
+  getChainRoutes(keyOrChain: string | AnyChain): ChainRoutes | MrlChainRoutes {
     const key = getKey(keyOrChain);
     const route = this.routes.get(key);
 
@@ -126,7 +128,7 @@ export class ConfigService {
     asset: string | AnyAsset;
     source: string | AnyChain;
     destination: string | AnyChain;
-  }): AssetRoute {
+  }): AssetRoute | MrlAssetRoute {
     const routes = this.getChainRoutes(source);
 
     return routes.getAssetRoute(asset, destination);
