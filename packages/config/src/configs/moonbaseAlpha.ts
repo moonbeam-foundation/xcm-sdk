@@ -91,21 +91,6 @@ export const moonbaseAlphaConfig = new ChainConfig({
         balance: BalanceBuilder().substrate().system().account(),
       },
     }),
-    // NOTE: Disabling because ws endpoint is not working
-    // new AssetConfig({
-    //   asset: auq,
-    //   balance: BalanceBuilder().substrate().assets().account(),
-    //   contract: ContractBuilder().Xtokens().transfer(),
-    //   destination: uniqueAlpha,
-    //   destinationFee: {
-    //     amount: 0,
-    //     asset: auq,
-    //   },
-    //   fee: {
-    //     asset: dev,
-    //     balance: BalanceBuilder().substrate().system().account(),
-    //   },
-    // }),
     new AssetConfig({
       asset: ampe,
       balance: BalanceBuilder().substrate().assets().account(),
