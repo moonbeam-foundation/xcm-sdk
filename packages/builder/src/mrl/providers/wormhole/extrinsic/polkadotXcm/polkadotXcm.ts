@@ -4,9 +4,9 @@ import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 
-// TODO: Can we move them somewhere?
-const BUY_EXECUTION_FEE = 100_000_000_000_000_000n;
-const CROSS_CHAIN_FEE = 100_000_000_000_000_000n;
+// TODO: these have to come from the configs
+const BUY_EXECUTION_FEE = 100_000_000_000_000_000n; // moonChainFee
+const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing the xcm message in moon chain
 
 export function polkadotXcm() {
   return {

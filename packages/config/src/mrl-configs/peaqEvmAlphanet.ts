@@ -1,22 +1,26 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
-import { betaDEV, dev, ftm, ftmwh } from '../assets';
-import { fantomTestnet, moonbaseBeta } from '../chains';
+import { agng, dev, ftm, ftmwh } from '../assets';
+import { fantomTestnet, peaqEvmAlphanet } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
-export const moonbaseBetaRoutes = new MrlChainRoutes({
-  chain: moonbaseBeta,
+export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
+  chain: peaqEvmAlphanet,
   routes: [
     {
       source: {
         asset: ftmwh,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         destinationFee: {
           asset: ftmwh,
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
+        },
+        moonChainFee: {
+          asset: dev,
+          balance: BalanceBuilder().evm().erc20(),
         },
         fee: {
-          asset: betaDEV,
-          balance: BalanceBuilder().substrate().system().account(),
+          asset: agng,
+          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
         },
       },
       destination: {
@@ -30,7 +34,11 @@ export const moonbaseBetaRoutes = new MrlChainRoutes({
       },
       mrl: {
         isAutomaticPossible: true,
-        transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
+        transfer: MrlBuilder()
+          .wormhole()
+          .contract()
+          .TokenBridgeRelayer()
+          .transferTokensWithRelay(),
         moonChain: {
           asset: ftmwh,
           fee: {

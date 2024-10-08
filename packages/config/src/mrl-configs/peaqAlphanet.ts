@@ -1,9 +1,9 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftm, ftmwh } from '../assets';
 import { fantomTestnet, peaqAlphanet } from '../chains';
-import { ChainRoutes } from '../types/ChainRoutes';
+import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
-export const peaqAlphanetRoutes = new ChainRoutes({
+export const peaqAlphanetRoutes = new MrlChainRoutes({
   chain: peaqAlphanet,
   routes: [
     {
@@ -12,6 +12,10 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().assets().account(),
         destinationFee: {
           asset: ftmwh,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+        moonChainFee: {
+          asset: dev,
           balance: BalanceBuilder().substrate().assets().account(),
         },
         fee: {
@@ -47,6 +51,10 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().system().account(),
         destinationFee: {
           asset: ftmwh,
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+        moonChainFee: {
+          asset: dev,
           balance: BalanceBuilder().substrate().assets().account(),
         },
       },

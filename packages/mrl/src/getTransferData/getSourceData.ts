@@ -4,7 +4,7 @@ import {
   MrlBuilder,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
-import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
+import type { FeeConfig, MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import {
   getAssetMin,
   getBalance,
@@ -30,7 +30,7 @@ import {
 } from './getTransferData.utils';
 
 export interface GetSourceDataParams {
-  route: AssetRoute;
+  route: MrlAssetRoute;
   destinationAddress: string;
   destinationFee: AssetAmount;
   sourceAddress: string;
@@ -68,7 +68,15 @@ export async function getSourceData({
         chain: source,
       })
     : balance;
+
   const destinationFeeBalance = await getDestinationFeeBalance({
+    balance,
+    feeBalance,
+    route,
+    sourceAddress,
+  });
+
+  const moonChainFeeBalance = await getMoonChainFeeBalance({
     balance,
     feeBalance,
     route,
@@ -121,6 +129,7 @@ export async function getSourceData({
     balance,
     chain: source,
     destinationFeeBalance,
+    moonChainFeeBalance,
     existentialDeposit,
     fee,
     feeBalance,
@@ -234,4 +243,43 @@ async function getWormholeFee({
   }
 
   return;
+}
+
+export interface GetMoonChainFeeBalanceParams {
+  balance: AssetAmount;
+  feeBalance: AssetAmount;
+  route: MrlAssetRoute;
+  sourceAddress: string;
+}
+
+export async function getMoonChainFeeBalance({
+  balance,
+  feeBalance,
+  route,
+  sourceAddress,
+}: GetMoonChainFeeBalanceParams): Promise<AssetAmount | undefined> {
+  if (!route.source.moonChainFee) {
+    return undefined;
+  }
+
+  if (route.mrl?.moonChain.fee.asset.isEqual(balance)) {
+    return balance;
+  }
+
+  if (route.mrl?.moonChain.fee.asset.isEqual(feeBalance)) {
+    return feeBalance;
+  }
+
+  if (!route.source.moonChainFee.balance) {
+    throw new Error(
+      'BalanceBuilder must be defined for source.moonChainFee.balance for MrlAssetRoute',
+    );
+  }
+
+  return getBalance({
+    address: sourceAddress,
+    asset: route.source.chain.getChainAsset(route.source.moonChainFee.asset),
+    builder: route.source.moonChainFee.balance,
+    chain: route.source.chain,
+  });
 }

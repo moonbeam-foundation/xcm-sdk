@@ -3,7 +3,7 @@ import {
   ExtrinsicConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
-import type { AssetRoute } from '@moonbeam-network/xcm-config';
+import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import {
   EvmService,
   PolkadotService,
@@ -29,7 +29,7 @@ import {
 } from './getTransferData.utils';
 
 export interface GetTransferDataParams {
-  route: AssetRoute;
+  route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
 }

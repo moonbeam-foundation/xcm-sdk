@@ -1,9 +1,9 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { dev, ftm, ftmwh } from '../assets';
 import { fantomTestnet, moonbaseAlpha } from '../chains';
-import { ChainRoutes } from '../types/ChainRoutes';
+import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
-export const moonbaseAlphaRoutes = new ChainRoutes({
+export const moonbaseAlphaRoutes = new MrlChainRoutes({
   chain: moonbaseAlpha,
   routes: [
     {

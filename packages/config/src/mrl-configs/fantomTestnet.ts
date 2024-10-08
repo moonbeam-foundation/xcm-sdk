@@ -6,9 +6,9 @@ import {
   moonbaseBeta,
   peaqAlphanet,
 } from '../chains';
-import { ChainRoutes } from '../types/ChainRoutes';
+import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
-export const fantomTestnetRoutes = new ChainRoutes({
+export const fantomTestnetRoutes = new MrlChainRoutes({
   chain: fantomTestnet,
   routes: [
     {
