@@ -20,6 +20,7 @@ export interface AssetConfigConstructorParams {
 
 export interface DestinationFeeConfig extends FeeAssetConfig {
   amount: number | FeeConfigBuilder;
+  destinationBalance?: BalanceConfigBuilder;
 }
 
 export interface FeeAssetConfig {

@@ -473,6 +473,7 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.2,
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
+        destinationBalance: BalanceBuilder().substrate().system().account(),
       },
       fee: {
         asset: glmr,

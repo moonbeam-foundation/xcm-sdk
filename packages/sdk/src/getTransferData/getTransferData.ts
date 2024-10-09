@@ -13,6 +13,7 @@ import {
 } from '../sdk.interfaces';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
+import { validateSovereignAccountBalances } from './getTransferData.utils';
 
 export interface GetTransferDataParams extends Partial<Signers> {
   configService: IConfigService;
@@ -60,6 +61,7 @@ export async function getTransferData({
       const bigAmount = Big(
         toBigInt(amount, source.balance.decimals).toString(),
       );
+
       const result = bigAmount.minus(
         source.balance.isSame(destinationFee) ? destinationFee.toBig() : Big(0),
       );
@@ -93,6 +95,12 @@ export async function getTransferData({
     },
     async transfer(amount): Promise<string> {
       const bigintAmount = toBigInt(amount, source.balance.decimals);
+      validateSovereignAccountBalances({
+        amount: bigintAmount,
+        destination,
+        source,
+      });
+
       const {
         asset,
         source: { chain, config },

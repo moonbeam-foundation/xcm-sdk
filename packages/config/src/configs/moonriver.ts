@@ -283,6 +283,21 @@ export const moonriverConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
+      asset: ksm,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: kusamaAssetHub,
+      destinationFee: {
+        amount: 0.0003,
+        asset: ksm,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: movr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
       asset: mgx,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),

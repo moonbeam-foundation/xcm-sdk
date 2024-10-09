@@ -182,5 +182,36 @@ export function polkadotXcm() {
         }),
       };
     },
+    trasferAssets: () => {
+      const func = 'transferAssets';
+
+      return {
+        here: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) =>
+                getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: {
+                        Concrete: {
+                          parents: 1,
+                          interior: 'Here',
+                        },
+                      },
+                      fun: {
+                        Fungible: params.amount,
+                      },
+                    },
+                  ],
+                }),
+            }),
+        }),
+      };
+    },
   };
 }

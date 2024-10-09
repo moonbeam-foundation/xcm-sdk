@@ -57,6 +57,24 @@ export const kusamaAssetHubConfig = new ChainConfig({
       },
       min: AssetMinBuilder().assets().asset(),
     }),
+    new AssetConfig({
+      asset: ksm,
+      balance: BalanceBuilder().substrate().system().account(),
+      destination: moonriver,
+      destinationFee: {
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+        }),
+        asset: ksm,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+      extrinsic: ExtrinsicBuilder().polkadotXcm().trasferAssets().here(),
+      fee: {
+        asset: ksm,
+        balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
+      },
+    }),
   ],
   chain: kusamaAssetHub,
 });

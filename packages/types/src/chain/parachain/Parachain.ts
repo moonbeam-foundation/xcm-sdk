@@ -7,7 +7,9 @@ import { ChainAssetId, ChainAssetsData } from './Parachain.interfaces';
 export interface ParachainConstructorParams
   extends SetOptional<ChainConstructorParams, 'type'> {
   assetsData?: Map<string, ChainAssetsData> | ChainAssetsData[];
+  checkSovereignAccountBalances?: boolean;
   genesisHash: string;
+  isRelay?: boolean;
   parachainId: number;
   ss58Format: number;
   usesChainDecimals?: boolean;
@@ -18,7 +20,11 @@ export interface ParachainConstructorParams
 export class Parachain extends Chain {
   readonly assetsData: Map<string, ChainAssetsData>;
 
+  readonly checkSovereignAccountBalances: boolean;
+
   readonly genesisHash: string;
+
+  readonly isRelay: boolean;
 
   readonly parachainId: number;
 
@@ -32,7 +38,9 @@ export class Parachain extends Chain {
 
   constructor({
     assetsData,
+    checkSovereignAccountBalances,
     genesisHash,
+    isRelay,
     parachainId,
     usesChainDecimals,
     ss58Format,
@@ -47,7 +55,9 @@ export class Parachain extends Chain {
       assetsData instanceof Map
         ? assetsData
         : new Map(assetsData?.map((data) => [data.asset.key, data]));
+    this.checkSovereignAccountBalances = !!checkSovereignAccountBalances;
     this.genesisHash = genesisHash;
+    this.isRelay = !!isRelay;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
     this.usesChainDecimals = !!usesChainDecimals;
