@@ -671,6 +671,7 @@ export const kusamaAssetHub = new Parachain({
       metadataId: 9999999,
     },
   ],
+  checkSovereignAccountBalances: true,
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',

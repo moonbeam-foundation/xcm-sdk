@@ -4,11 +4,7 @@ import {
   ContractConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
-import {
-  AssetConfig,
-  FeeAssetConfig,
-  polkadotAssetHub,
-} from '@moonbeam-network/xcm-config';
+import { AssetConfig, FeeAssetConfig } from '@moonbeam-network/xcm-config';
 import { AnyChain, Asset, EvmParachain } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import {
@@ -125,8 +121,7 @@ export function validateSovereignAccountBalances({
   destination,
 }: ValidateSovereignAccountBalancesProps): void {
   if (
-    destination.chain.key !== polkadotAssetHub.key ||
-    // currently we want this only for this chain
+    !destination.chain.checkSovereignAccountBalances ||
     !destination.sovereignAccountBalances
   ) {
     return;
