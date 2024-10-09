@@ -2,7 +2,7 @@
 
 exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEm…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 570000000000000000n,
     "decimals": 18,
     "key": "cfg",
@@ -14,7 +14,7 @@ exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '4fAKSBMGVT9j
 
 exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 570000000000000000n,
     "decimals": 18,
     "key": "cfg",
@@ -26,28 +26,28 @@ exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '5FtGz8bgoCQ6
 
 exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 178046239082538836n,
     "decimals": 18,
     "key": "ftmwh",
     "originSymbol": "FTM.wh",
     "symbol": "FTM.wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",
     "symbol": "DEV",
   },
-  s {
+  r {
     "amount": 3000000000000n,
     "decimals": 12,
     "key": "hdx",
@@ -59,28 +59,28 @@ exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '5FtG
 
 exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 178046239082538836n,
     "decimals": 18,
     "key": "ftmwh",
     "originSymbol": "FTM.wh",
     "symbol": "FTM.wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",
     "symbol": "DEV",
   },
-  s {
+  r {
     "amount": 3000000000000n,
     "decimals": 12,
     "key": "hdx",
@@ -92,49 +92,49 @@ exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '7MR8
 
 exports[`sdk > getParachainBalances > on 'Hydration' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 37000000000000n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  s {
+  r {
     "amount": 120n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "glmr",
     "originSymbol": "GLMR",
     "symbol": "GLMR",
   },
-  s {
+  r {
     "amount": 1000000000000n,
     "decimals": 12,
     "key": "hdx",
@@ -146,49 +146,49 @@ exports[`sdk > getParachainBalances > on 'Hydration' for address: '5FtGz8bgoCQ6p
 
 exports[`sdk > getParachainBalances > on 'Hydration' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 37000000000000n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  s {
+  r {
     "amount": 120n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "glmr",
     "originSymbol": "GLMR",
     "symbol": "GLMR",
   },
-  s {
+  r {
     "amount": 1000000000000n,
     "decimals": 12,
     "key": "hdx",
@@ -200,91 +200,91 @@ exports[`sdk > getParachainBalances > on 'Hydration' for address: '7MR8Qxy9sJmN6
 
 exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "agng",
     "originSymbol": "AGNG",
     "symbol": "AGNG",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "hdx",
     "originSymbol": "HDX",
     "symbol": "HDX",
   },
-  s {
+  r {
     "amount": 1234567890000000000n,
     "decimals": 18,
     "key": "ftmwh",
     "originSymbol": "FTM.wh",
     "symbol": "FTM.wh",
   },
-  s {
+  r {
     "amount": 10000n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "unit",
     "originSymbol": "Unit",
     "symbol": "Unit",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "tur",
     "originSymbol": "TUR",
     "symbol": "TUR",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "tt1",
     "originSymbol": "TT1",
     "symbol": "TT1",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "pica",
     "originSymbol": "PICA",
     "symbol": "PICA",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "atom",
     "originSymbol": "ATOM",
     "symbol": "ATOM",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "otp",
     "originSymbol": "OTP",
     "symbol": "OTP",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "ampe",
     "originSymbol": "AMPE",
     "symbol": "AMPE",
   },
-  s {
+  r {
     "amount": 10000000000000000n,
     "decimals": 18,
     "key": "alan",
     "originSymbol": "ALAN",
     "symbol": "ALAN",
   },
-  s {
+  r {
     "amount": 6543210000000000000n,
     "decimals": 18,
     "key": "dev",
@@ -296,28 +296,14 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
 
 exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  s {
-    "amount": 100000000000000000n,
-    "decimals": 18,
-    "key": "ftmwh",
-    "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
-  },
-  s {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdcwh",
-    "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
-  },
-  s {
+  r {
     "amount": 1100000000000000000n,
     "decimals": 18,
     "key": "alan",
     "originSymbol": "ALAN",
     "symbol": "ALAN",
   },
-  s {
+  r {
     "amount": 1100000000000000000n,
     "decimals": 18,
     "key": "dev",
@@ -329,287 +315,287 @@ exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143
 
 exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "axlusdc",
     "originSymbol": "axlUSDC",
     "symbol": "axlUSDC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "peaq",
     "originSymbol": "PEAQ",
     "symbol": "PEAQ",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "bncs",
     "originSymbol": "BNCS",
     "symbol": "BNCS",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "sub",
     "originSymbol": "SUB",
     "symbol": "SUB",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "ztg",
     "originSymbol": "ZTG",
     "symbol": "ZTG",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "fil",
     "originSymbol": "FIL",
     "symbol": "FIL",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "vmanta",
     "originSymbol": "vMANTA",
     "symbol": "vMANTA",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "vglmr",
     "originSymbol": "vGLMR",
     "symbol": "vGLMR",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "vfil",
     "originSymbol": "vFIL",
     "symbol": "vFIL",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "vdot",
     "originSymbol": "vDOT",
     "symbol": "vDOT",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "vastr",
     "originSymbol": "vASTR",
     "symbol": "vASTR",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "hdx",
     "originSymbol": "HDX",
     "symbol": "HDX",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "apillon",
     "originSymbol": "NCTR",
     "symbol": "NCTR",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "wifd",
     "originSymbol": "WIFD",
     "symbol": "WIFD",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "stink",
     "originSymbol": "STINK",
     "symbol": "STINK",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "ded",
     "originSymbol": "DED",
     "symbol": "DED",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "pink",
     "originSymbol": "PINK",
     "symbol": "PINK",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdc",
     "originSymbol": "USDC",
     "symbol": "USDC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdt",
     "originSymbol": "USDT",
     "symbol": "USDT",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "ring",
     "originSymbol": "RING",
     "symbol": "RING",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "pha",
     "originSymbol": "PHA",
     "symbol": "PHA",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "pen",
     "originSymbol": "PEN",
     "symbol": "PEN",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "para",
     "originSymbol": "PARA",
     "symbol": "PARA",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "neuro",
     "originSymbol": "NEURO",
     "symbol": "NEURO",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 11,
     "key": "nodl",
     "originSymbol": "NODL",
     "symbol": "NODL",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "manta",
     "originSymbol": "MANTA",
     "symbol": "MANTA",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "ldot",
     "originSymbol": "LDOT",
     "symbol": "LDOT",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 10,
     "key": "intr",
     "originSymbol": "INTR",
     "symbol": "INTR",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 8,
     "key": "ibtc",
     "originSymbol": "IBTC",
     "symbol": "IBTC",
   },
-  s {
+  r {
     "amount": 330000000n,
     "decimals": 10,
     "key": "dot",
     "originSymbol": "DOT",
     "symbol": "DOT",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "cfg",
     "originSymbol": "CFG",
     "symbol": "CFG",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "bnc",
     "originSymbol": "BNC",
     "symbol": "BNC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "aseed",
     "originSymbol": "aSEED",
     "symbol": "aSEED",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "astr",
     "originSymbol": "ASTR",
     "symbol": "ASTR",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 12,
     "key": "aca",
     "originSymbol": "ACA",
     "symbol": "ACA",
   },
-  s {
+  r {
     "amount": 1330000000000000000n,
     "decimals": 18,
     "key": "glmr",
@@ -621,21 +607,21 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
 
 exports[`sdk > getParachainBalances > on 'peaq Alphanet' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "ftmwh",
     "originSymbol": "FTM.wh",
     "symbol": "FTM.wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",
     "symbol": "DEV",
   },
-  s {
+  r {
     "amount": 1223300000000000000n,
     "decimals": 18,
     "key": "agng",
@@ -647,14 +633,14 @@ exports[`sdk > getParachainBalances > on 'peaq Alphanet' for address: '5FtGz8bgo
 
 exports[`sdk > getParachainBalances > on 'peaq EVM Alphanet' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 330000000000000000n,
     "decimals": 18,
     "key": "dev",
     "originSymbol": "DEV",
     "symbol": "DEV",
   },
-  s {
+  r {
     "amount": 123000000000000000n,
     "decimals": 18,
     "key": "ftmwh",
@@ -666,42 +652,42 @@ exports[`sdk > getParachainBalances > on 'peaq EVM Alphanet' for address: '0x4E8
 
 exports[`sdk > getParachainBalances > on 'peaq EVM' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "glmr",
@@ -713,49 +699,49 @@ exports[`sdk > getParachainBalances > on 'peaq EVM' for address: '0x4E82143Af671
 
 exports[`sdk > getParachainBalances > on 'peaq' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdtwh",
     "originSymbol": "USDT.Wh",
     "symbol": "USDT.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "weth",
     "originSymbol": "WETH",
     "symbol": "WETH",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 8,
     "key": "wbtc",
     "originSymbol": "WBTC",
     "symbol": "WBTC",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "dai",
     "originSymbol": "DAI",
     "symbol": "DAI",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 6,
     "key": "usdcwh",
     "originSymbol": "USDC.Wh",
     "symbol": "USDC.Wh",
   },
-  s {
+  r {
     "amount": 0n,
     "decimals": 18,
     "key": "glmr",
     "originSymbol": "GLMR",
     "symbol": "GLMR",
   },
-  s {
+  r {
     "amount": 1313000000000000000n,
     "decimals": 18,
     "key": "peaq",
