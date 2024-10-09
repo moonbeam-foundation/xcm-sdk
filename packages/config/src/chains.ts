@@ -1351,7 +1351,10 @@ export const parallel = new Parachain({
   name: 'Parallel',
   parachainId: 2012,
   ss58Format: 172,
-  ws: ['wss://parallel-rpc.dwellir.com'],
+  ws: [
+    'wss://parallel-rpc.dwellir.com',
+    'wss://polkadot-parallel-rpc.parallel.fi',
+  ],
 });
 
 export const peaqAlphanet = new Parachain({
