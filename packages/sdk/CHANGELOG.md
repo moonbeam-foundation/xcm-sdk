@@ -1,5 +1,18 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.7.0
+
+### Minor Changes
+
+- [#339](https://github.com/moonbeam-foundation/xcm-sdk/pull/339) [`6e543ce`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6e543ce1adb1e81d283e1b1811d0eab6bffaad47) Thanks [@mmaurello](https://github.com/mmaurello)! - Add sovereign account balance checking
+
+### Patch Changes
+
+- Updated dependencies [[`6e543ce`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6e543ce1adb1e81d283e1b1811d0eab6bffaad47)]:
+  - @moonbeam-network/xcm-config@2.7.0
+  - @moonbeam-network/xcm-types@2.5.0
+  - @moonbeam-network/xcm-builder@2.5.2
+
 ## 2.6.4
 
 ### Patch Changes
