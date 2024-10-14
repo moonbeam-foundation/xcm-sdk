@@ -16,12 +16,17 @@ import {
   type ChainAsset,
   EvmChain,
   EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import type { DestinationChainTransferData } from '../sdk.interfaces';
 import { EvmService } from '../services/evm/EvmService';
 import { PolkadotService } from '../services/polkadot';
+import {
+  DestinationChainTransferData,
+  SourceChainTransferData,
+} from '../sdk.interfaces';
+
 
 export interface GetBalancesParams {
   address: string;
@@ -29,7 +34,6 @@ export interface GetBalancesParams {
   builder: BalanceConfigBuilder;
   chain: AnyChain;
 }
-
 export async function getBalance({
   address,
   asset,
@@ -335,6 +339,39 @@ export async function getContractFee({
     throw new Error(
       `Can't get a fee, make sure you have ${destinationFee.toDecimal()} ${destinationFee.getSymbol()} in your source balance, needed for destination fees`,
       { cause: error },
+    );
+  }
+}
+
+interface ValidateSovereignAccountBalancesProps {
+  amount: bigint;
+  destination: DestinationChainTransferData;
+  source: SourceChainTransferData;
+}
+
+export function validateSovereignAccountBalances({
+  amount,
+  source,
+  destination,
+}: ValidateSovereignAccountBalancesProps): void {
+  if (
+    !Parachain.is(destination.chain) || 
+    !destination.chain.checkSovereignAccountBalances ||
+    !destination.sovereignAccountBalances
+  ) {
+    return;
+  }
+  const { feeAssetBalance, transferAssetBalance } =
+    destination.sovereignAccountBalances;
+
+  if (amount > transferAssetBalance) {
+    throw new Error(
+      `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance for this transaction`,
+    );
+  }
+  if (feeAssetBalance && source.destinationFee.amount > feeAssetBalance) {
+    throw new Error(
+      `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance to pay for fees for this transaction`,
     );
   }
 }

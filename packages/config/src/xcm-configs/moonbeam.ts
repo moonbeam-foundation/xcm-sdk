@@ -715,6 +715,7 @@ export const moonbeamRoutes = new ChainRoutes({
         fee: {
           amount: 0.2,
           asset: usdt,
+          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),

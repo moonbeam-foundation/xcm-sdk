@@ -1,7 +1,9 @@
 import { Chain, type ChainConstructorParams } from '../Chain';
 
 export interface ParachainConstructorParams extends ChainConstructorParams {
+  checkSovereignAccountBalances?: boolean;
   genesisHash: string;
+  isRelay?: boolean;
   parachainId: number;
   ss58Format: number;
   usesChainDecimals?: boolean;
@@ -10,7 +12,12 @@ export interface ParachainConstructorParams extends ChainConstructorParams {
 }
 
 export class Parachain extends Chain {
+
+  readonly checkSovereignAccountBalances: boolean;
+
   readonly genesisHash: string;
+
+  readonly isRelay: boolean;
 
   readonly parachainId: number;
 
@@ -27,7 +34,9 @@ export class Parachain extends Chain {
   }
 
   constructor({
+    checkSovereignAccountBalances,
     genesisHash,
+    isRelay,
     parachainId,
     usesChainDecimals,
     ss58Format,
@@ -37,7 +46,9 @@ export class Parachain extends Chain {
   }: ParachainConstructorParams) {
     super(others);
 
+    this.checkSovereignAccountBalances = !!checkSovereignAccountBalances;
     this.genesisHash = genesisHash;
+    this.isRelay = !!isRelay;
     this.parachainId = parachainId;
     this.ss58Format = ss58Format;
     this.usesChainDecimals = !!usesChainDecimals;
