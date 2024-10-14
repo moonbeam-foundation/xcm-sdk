@@ -112,11 +112,16 @@ export async function getTransferData({
         route.source.chain.getChainAsset(route.source.asset),
         { amount: bigintAmount },
       );
-
+      const feeAsset = AssetAmount.fromChainAsset(
+        route.source.chain.getChainAsset(
+          route.source.fee?.asset || route.source.asset,
+        ),
+        { amount: sourceData.fee.amount },
+      );
       const transfer = await buildTransfer({
         asset,
         destinationAddress,
-        destinationFee,
+        feeAsset,
         route,
         sourceAddress,
       });

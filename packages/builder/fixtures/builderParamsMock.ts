@@ -13,7 +13,12 @@ import type { BuilderParams, MrlBuilderParams } from '../src';
 export const apiMock = {
   tx: {
     polkadotXcm: { send: vi.fn(() => 'polkadotXcm.send => RESULT') },
-    xTokens: { transfer: vi.fn(() => 'xTokens.transfer => RESULT') },
+    xTokens: {
+      transfer: vi.fn(() => 'xTokens.transfer => RESULT'),
+      transferMulticurrencies: vi.fn(
+        () => 'xTokens.transferMulticurrencies => RESULT',
+      ),
+    },
   },
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 } as any;
@@ -134,6 +139,22 @@ export const buildParachainParamsMock: BuilderParams = {
 
 export const mrlBuildParamsMock: MrlBuilderParams = {
   ...buildParamsMock,
+  isAutomatic: true,
+  moonApi: apiMock,
+  moonAsset: testAssetAmount,
+  moonChain: moonbaseAlphaMock,
+  moonGasLimit: 999_999n,
+  transact: {
+    call: '0x4d79207465787420737472696e67',
+    txWeight: {
+      refTime: 24_902_375_000n,
+      proofSize: 62_193n,
+    },
+  },
+};
+
+export const mrlBuildParamsSameAssetMock: MrlBuilderParams = {
+  ...buildParamsSameAssetMock,
   isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,

@@ -49,7 +49,7 @@ export async function getMoonChainData({
   if (Parachain.is(route.source.chain)) {
     const { address20 } = getMultilocationDerivedAddresses({
       address: sourceAddress,
-      paraId: moonChain.parachainId,
+      paraId: route.source.chain.parachainId,
       isParents: true,
     });
 

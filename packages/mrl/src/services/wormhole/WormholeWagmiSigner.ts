@@ -1,4 +1,3 @@
-import { wormholeFactory } from '@moonbeam-network/xcm-builder';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import type {
@@ -7,7 +6,6 @@ import type {
   SignAndSendSigner,
   SignedTx,
   UnsignedTransaction,
-  Wormhole,
 } from '@wormhole-foundation/sdk-connect';
 import {
   http,
@@ -28,8 +26,6 @@ export class WormholeWagmiSigner<
 
   readonly #publicClient: PublicClient<HttpTransport>;
 
-  readonly #wh: Wormhole<N>;
-
   constructor(chain: EvmChain | EvmParachain, signer: EvmSigner) {
     this.#chain = chain;
     this.#signer = signer;
@@ -37,12 +33,11 @@ export class WormholeWagmiSigner<
       chain: chain.getViemChain(),
       transport: http(),
     });
-    this.#wh = wormholeFactory(chain) as Wormhole<N>;
   }
 
   chain(): C {
     // biome-ignore lint/suspicious/noExplicitAny: need to fix types
-    return this.#wh.getChain(this.#chain.getWormholeName()) as any as C;
+    return this.#chain.getWormholeName() as any as C;
   }
 
   address(): Address {
@@ -61,13 +56,17 @@ export class WormholeWagmiSigner<
     transactions: UnsignedTransaction<Network, Chain>[],
   ): Promise<SignedTx[]> {
     const signed = [];
+    const signerChainID = await this.#signer.getChainId();
 
     let nonce = await this.#publicClient.getTransactionCount({
       address: this.address(),
     });
 
     for (const tx of transactions) {
-      const { transaction, parallelizable } = tx;
+      const { transaction, description, parallelizable } = tx;
+      console.log(
+        `Signing: ${description} for ${this.address()}, chainId: ${signerChainID}`,
+      );
 
       const signedTx = await this.#signer.sendTransaction({
         ...transaction,

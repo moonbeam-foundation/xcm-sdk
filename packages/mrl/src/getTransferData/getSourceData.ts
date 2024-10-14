@@ -93,7 +93,7 @@ export async function getSourceData({
   const transfer = await buildTransfer({
     asset: balance,
     destinationAddress,
-    destinationFee,
+    feeAsset: feeBalance,
     route,
     sourceAddress,
   });
@@ -112,8 +112,8 @@ export async function getSourceData({
     chain: source,
     transfer,
     asset: balance,
+    feeAsset: feeBalance,
     destinationAddress,
-    destinationFee,
     route,
     sourceAddress,
   });
@@ -201,7 +201,7 @@ export async function getRelayerFee({
   asset,
   chain,
   destinationAddress,
-  destinationFee,
+  feeAsset,
   route,
   sourceAddress,
   transfer,
@@ -214,7 +214,7 @@ export async function getRelayerFee({
   const builderParams = await getMrlBuilderParams({
     asset,
     destinationAddress,
-    destinationFee,
+    feeAsset,
     route,
     sourceAddress,
   });
