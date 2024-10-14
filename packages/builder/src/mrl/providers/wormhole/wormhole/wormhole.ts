@@ -1,4 +1,4 @@
-import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import { EvmChain, EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
@@ -26,6 +26,7 @@ export function wormhole() {
         source,
         sourceAddress,
       }): WormholeConfig => {
+        const isSourceParachain = Parachain.is(source);
         const isDestinationMoonChain = destination.isEqual(moonChain);
         const isDestinationEvmChain = EvmChain.is(destination);
         const isNativeAsset = asset.isSame(
@@ -40,7 +41,7 @@ export function wormhole() {
         const { address20: computedOriginAccount } =
           getMultilocationDerivedAddresses({
             address: sourceAddress,
-            paraId: moonChain.parachainId,
+            paraId: isSourceParachain ? source.parachainId : undefined,
             isParents: true,
           });
 

@@ -99,7 +99,7 @@ export function getMrlMin({
 export interface BuildTransferParams {
   asset: AssetAmount;
   destinationAddress: string;
-  destinationFee: AssetAmount;
+  feeAsset: AssetAmount;
   route: AssetRoute;
   sourceAddress: string;
 }
@@ -124,7 +124,7 @@ export async function buildTransfer(params: BuildTransferParams) {
 export async function getMrlBuilderParams({
   asset,
   destinationAddress,
-  destinationFee,
+  feeAsset,
   route,
   sourceAddress,
 }: BuildTransferParams): Promise<MrlBuilderParams> {
@@ -150,7 +150,7 @@ export async function getMrlBuilderParams({
     destination,
     destinationAddress,
     destinationApi,
-    fee: destinationFee,
+    fee: feeAsset,
     isAutomatic: route.mrl.isAutomaticPossible,
     moonApi,
     moonAsset: moonChain.nativeAsset,
