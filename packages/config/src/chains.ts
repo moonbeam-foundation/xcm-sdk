@@ -46,7 +46,6 @@ import {
   neuro,
   nodl,
   otp,
-  para,
   paring,
   peaq,
   pen,
@@ -993,11 +992,6 @@ export const moonbeam = new EvmParachain({
       id: '238111524681612888331172110363070489924',
     },
     {
-      address: '0xFfFffFFF18898CB5Fe1E88E668152B4f4052A947',
-      asset: para,
-      id: '32615670524745285411807346420584982855',
-    },
-    {
       address: '0xFffFFFFFEC4908b74688a01374f789B48E9a3eab',
       asset: peaq,
       id: '314077021455772878282433861213184736939',
@@ -1331,31 +1325,6 @@ export const originTrailAlphanet = new Parachain({
   parachainId: 2043,
   ss58Format: 101,
   ws: ['wss://otp-lunaris-alpha-node-02.origin-trail.network'],
-});
-
-export const parallel = new Parachain({
-  assetsData: [
-    {
-      asset: glmr,
-      id: 114,
-    },
-    // NOTE: no meta for native token
-    {
-      asset: para,
-      metadataId: 0,
-    },
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97',
-  key: 'parallel',
-  name: 'Parallel',
-  parachainId: 2012,
-  ss58Format: 172,
-  ws: [
-    'wss://parallel-rpc.dwellir.com',
-    'wss://polkadot-parallel-rpc.parallel.fi',
-  ],
 });
 
 export const peaqAlphanet = new Parachain({
@@ -1955,7 +1924,6 @@ export const chainsList: AnyChain[] = [
   neuroweb,
   nodle,
   originTrailAlphanet,
-  parallel,
   peaqChain,
   peaqEvm,
   peaqAlphanet,

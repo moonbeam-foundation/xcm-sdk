@@ -20,7 +20,6 @@ import {
   manta,
   neuro,
   nodl,
-  para,
   peaq,
   pen,
   pha,
@@ -54,7 +53,6 @@ import {
   moonbeam,
   neuroweb,
   nodle,
-  parallel,
   peaqChain,
   peaqEvm,
   pendulum,
@@ -131,17 +129,6 @@ export const moonbeamConfig = new ChainConfig({
       destination: mantaParachain,
       destinationFee: {
         amount: 0.1,
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: glmr,
-      balance: BalanceBuilder().substrate().system().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallel,
-      destinationFee: {
-        amount: 0.000000032,
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
       },
@@ -352,21 +339,6 @@ export const moonbeamConfig = new ChainConfig({
       destinationFee: {
         amount: 0.004,
         asset: neuro,
-        balance: BalanceBuilder().substrate().assets().account(),
-      },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-      },
-    }),
-    new AssetConfig({
-      asset: para,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: parallel,
-      destinationFee: {
-        amount: 0.064,
-        asset: para,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       fee: {

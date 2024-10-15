@@ -29,7 +29,6 @@ import { moonriverConfig } from './moonriver';
 import { neurowebConfig } from './neuroweb';
 import { nodleConfig } from './nodle';
 import { originTrailAlphanetConfig } from './originTrailAlphanet';
-import { parallelConfig } from './parallel';
 import { peaqConfig } from './peaq';
 import { peaqAlphanetConfig } from './peaqAlphanet';
 import { peaqEvmConfig } from './peaqEvm';
@@ -77,7 +76,6 @@ export const chainsConfigList: ChainConfig[] = [
   neurowebConfig,
   nodleConfig,
   originTrailAlphanetConfig,
-  parallelConfig,
   peaqConfig,
   peaqEvmConfig,
   peaqAlphanetConfig,
