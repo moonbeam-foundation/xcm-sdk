@@ -344,33 +344,33 @@ export async function getContractFee({
 
 interface ValidateSovereignAccountBalancesProps {
   amount: bigint;
-  destination: DestinationChainTransferData;
-  source: SourceChainTransferData;
+  destinationData: DestinationChainTransferData;
+  sourceData: SourceChainTransferData;
 }
 
 export function validateSovereignAccountBalances({
   amount,
-  source,
-  destination,
+  sourceData,
+  destinationData,
 }: ValidateSovereignAccountBalancesProps): void {
   if (
-    !Parachain.is(destination.chain) ||
-    !destination.chain.checkSovereignAccountBalances ||
-    !destination.sovereignAccountBalances
+    !Parachain.is(destinationData.chain) ||
+    !destinationData.chain.checkSovereignAccountBalances ||
+    !destinationData.sovereignAccountBalances
   ) {
     return;
   }
   const { feeAssetBalance, transferAssetBalance } =
-    destination.sovereignAccountBalances;
+    destinationData.sovereignAccountBalances;
 
   if (amount > transferAssetBalance) {
     throw new Error(
-      `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance for this transaction`,
+      `${sourceData.chain.name} Sovereign account in ${destinationData.chain.name} does not have enough balance for this transaction`,
     );
   }
-  if (feeAssetBalance && source.destinationFee.amount > feeAssetBalance) {
+  if (feeAssetBalance && sourceData.destinationFee.amount > feeAssetBalance) {
     throw new Error(
-      `${source.chain.name} Sovereign account in ${destination.chain.name} does not have enough balance to pay for fees for this transaction`,
+      `${sourceData.chain.name} Sovereign account in ${destinationData.chain.name} does not have enough balance to pay for fees for this transaction`,
     );
   }
 }
