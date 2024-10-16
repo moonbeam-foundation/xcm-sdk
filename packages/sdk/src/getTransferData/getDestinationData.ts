@@ -1,4 +1,10 @@
-import type { AssetRoute, DestinationConfig, SourceConfig } from '@moonbeam-network/xcm-config';
+import type {
+  AssetRoute,
+  DestinationConfig,
+  SourceConfig,
+} from '@moonbeam-network/xcm-config';
+import { Parachain } from '@moonbeam-network/xcm-types';
+import { getSovereignAccountAddresses } from '@moonbeam-network/xcm-utils';
 import type { DestinationChainTransferData } from '../sdk.interfaces';
 import {
   getAssetMin,
@@ -6,10 +12,6 @@ import {
   getDestinationFee,
   getExistentialDeposit,
 } from './getTransferData.utils';
-import {
-  getSovereignAccountAddresses,
-} from '@moonbeam-network/xcm-utils';
-import { Parachain } from '@moonbeam-network/xcm-types';
 
 export interface GetDestinationDataParams {
   route: AssetRoute;
@@ -48,34 +50,31 @@ export async function getDestinationData({
     existentialDeposit,
     fee,
     min,
-    sovereignAccountBalances:  await getSovereignAccountBalances({
-        source: route.source,
-        destination: route.destination,
-      }),
+    sovereignAccountBalances: await getSovereignAccountBalances({
+      source: route.source,
+      destination: route.destination,
+    }),
   };
-  
 }
 
 interface GetSovereignAccountBalancesProps {
- source: SourceConfig;
- destination: DestinationConfig;
+  source: SourceConfig;
+  destination: DestinationConfig;
 }
 
-async function getSovereignAccountBalances( {
+async function getSovereignAccountBalances({
   destination,
   source,
 }: GetSovereignAccountBalancesProps) {
-
-  if(!Parachain.is(source.chain) || !Parachain.is(destination.chain)) {
-    return undefined
+  if (!Parachain.is(source.chain) || !Parachain.is(destination.chain)) {
+    return undefined;
   }
 
   const sovereignAccountAddresses = getSovereignAccountAddresses(
     source.chain.parachainId,
   );
 
-  const destinationFeeAssetBalance =
-    destination.fee.balance;
+  const destinationFeeAssetBalance = destination.fee.balance;
 
   const sovereignAccountAddress = destination.chain.isRelay
     ? sovereignAccountAddresses.relay
@@ -93,7 +92,7 @@ async function getSovereignAccountBalances( {
         address: sovereignAccountAddress,
         asset: destination.chain.getChainAsset(destination.fee.asset),
         builder: destinationFeeAssetBalance,
-    chain: destination.chain,
+        chain: destination.chain,
       })
     : undefined;
   return {

@@ -20,13 +20,12 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { convertDecimals, toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import { EvmService } from '../services/evm/EvmService';
-import { PolkadotService } from '../services/polkadot';
-import {
+import type {
   DestinationChainTransferData,
   SourceChainTransferData,
 } from '../sdk.interfaces';
-
+import { EvmService } from '../services/evm/EvmService';
+import { PolkadotService } from '../services/polkadot';
 
 export interface GetBalancesParams {
   address: string;
@@ -355,7 +354,7 @@ export function validateSovereignAccountBalances({
   destination,
 }: ValidateSovereignAccountBalancesProps): void {
   if (
-    !Parachain.is(destination.chain) || 
+    !Parachain.is(destination.chain) ||
     !destination.chain.checkSovereignAccountBalances ||
     !destination.sovereignAccountBalances
   ) {
