@@ -16,7 +16,7 @@ import type {
 
 // TODO: these have to come from the configs
 const BUY_EXECUTION_FEE = 100_000_000_000_000_000n; // moonChainFee
-const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing the xcm message in moon chain
+export const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing the xcm message in moon chain
 
 export function polkadotXcm() {
   return {
@@ -37,10 +37,6 @@ export function polkadotXcm() {
       }) => {
         if (!destination.wh?.name) {
           throw new Error('Destination chain does not have a wormhole name');
-        }
-
-        if (!transact) {
-          throw new Error('Transact params are required');
         }
 
         if (!sourceApi) {
@@ -73,81 +69,21 @@ export function polkadotXcm() {
           sourceApi,
         });
 
-        const send = sourceApi.tx.polkadotXcm.send(
-          {
-            V3: {
-              parents: 1,
-              interior: { X1: { Parachain: moonChain.parachainId } },
-            },
-          },
-          {
-            V3: [
-              {
-                WithdrawAsset: [
-                  {
-                    id: {
-                      Concrete: {
-                        parents: 0,
-                        interior: {
-                          X1: {
-                            PalletInstance: moonAsset.getAssetPalletInstance(),
-                          },
-                        },
-                      },
-                    },
-                    fun: { Fungible: BUY_EXECUTION_FEE },
-                  },
-                ],
-              },
-              {
-                BuyExecution: {
-                  fees: {
-                    id: {
-                      Concrete: {
-                        parents: 0,
-                        interior: {
-                          X1: {
-                            PalletInstance: moonAsset.getAssetPalletInstance(),
-                          },
-                        },
-                      },
-                    },
-                    fun: { Fungible: BUY_EXECUTION_FEE },
-                  },
-                  weightLimit: 'Unlimited',
-                },
-              },
-              {
-                Transact: {
-                  originKind: 'SovereignAccount',
-                  requireWeightAtMost: {
-                    refTime: transact.txWeight.refTime,
-                    proofSize: transact.txWeight.proofSize,
-                  },
-                  call: {
-                    encoded: transact.call,
-                  },
-                },
-              },
-              {
-                SetAppendix: [
-                  { RefundSurplus: {} },
-                  {
-                    DepositAsset: {
-                      assets: { Wild: { AllCounted: 1 } },
-                      beneficiary: {
-                        parents: 0,
-                        interior: {
-                          X1: { AccountKey20: { key: computedOriginAccount } },
-                        },
-                      },
-                    },
-                  },
-                ],
-              },
-            ],
-          },
-        );
+        const send = buildSendExtrinsic({
+          asset,
+          destination,
+          destinationAddress,
+          computedOriginAccount,
+          fee,
+          isAutomatic,
+          moonAsset,
+          moonChain,
+          moonApi,
+          source,
+          sourceAddress,
+          sourceApi,
+          transact,
+        });
 
         // TODO add here ability to only send the remote execution (only `send`)
         return new ExtrinsicConfig({
@@ -160,10 +96,98 @@ export function polkadotXcm() {
   };
 }
 
-interface GetAssetTransferTxsParams extends MrlBuilderParams {
+interface HelperFunctionParams extends MrlBuilderParams {
   computedOriginAccount: string;
   source: AnyParachain;
   sourceApi: ApiPromise;
+}
+
+export function buildSendExtrinsic({
+  computedOriginAccount,
+  moonAsset,
+  moonChain,
+  sourceApi,
+  transact,
+}: HelperFunctionParams) {
+  if (!transact) {
+    throw new Error('Transact params are required');
+  }
+
+  return sourceApi.tx.polkadotXcm.send(
+    {
+      V3: {
+        parents: 1,
+        interior: { X1: { Parachain: moonChain.parachainId } },
+      },
+    },
+    {
+      V3: [
+        {
+          WithdrawAsset: [
+            {
+              id: {
+                Concrete: {
+                  parents: 0,
+                  interior: {
+                    X1: {
+                      PalletInstance: moonAsset.getAssetPalletInstance(),
+                    },
+                  },
+                },
+              },
+              fun: { Fungible: BUY_EXECUTION_FEE },
+            },
+          ],
+        },
+        {
+          BuyExecution: {
+            fees: {
+              id: {
+                Concrete: {
+                  parents: 0,
+                  interior: {
+                    X1: {
+                      PalletInstance: moonAsset.getAssetPalletInstance(),
+                    },
+                  },
+                },
+              },
+              fun: { Fungible: BUY_EXECUTION_FEE },
+            },
+            weightLimit: 'Unlimited',
+          },
+        },
+        {
+          Transact: {
+            originKind: 'SovereignAccount',
+            requireWeightAtMost: {
+              refTime: transact.txWeight.refTime,
+              proofSize: transact.txWeight.proofSize,
+            },
+            call: {
+              encoded: transact.call,
+            },
+          },
+        },
+        {
+          SetAppendix: [
+            { RefundSurplus: {} },
+            {
+              DepositAsset: {
+                assets: { Wild: { AllCounted: 1 } },
+                beneficiary: {
+                  parents: 0,
+                  interior: {
+                    X1: { AccountKey20: { key: computedOriginAccount } },
+                  },
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  );
 }
 
 function getAssetTransferTxs({
@@ -176,7 +200,7 @@ function getAssetTransferTxs({
   source,
   sourceAddress,
   sourceApi,
-}: GetAssetTransferTxsParams): SubmittableExtrinsic<
+}: HelperFunctionParams): SubmittableExtrinsic<
   'promise',
   ISubmittableResult
 >[] {

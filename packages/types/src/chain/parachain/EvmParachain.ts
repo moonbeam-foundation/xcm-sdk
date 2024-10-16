@@ -12,6 +12,8 @@ export interface EvmParachainConstructorParams
 }
 
 type Contracts = {
+  Batch?: Address;
+  XcmUtils?: Address;
   Xtokens?: Address;
 };
 

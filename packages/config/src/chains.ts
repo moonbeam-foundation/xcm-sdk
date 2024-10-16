@@ -1791,6 +1791,8 @@ export const peaqEvmAlphanet = new EvmParachain({
     }),
   ],
   contracts: {
+    Batch: '0x0000000000000000000000000000000000000805',
+    XcmUtils: '0x0000000000000000000000000000000000000804',
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.AlphanetRelay,

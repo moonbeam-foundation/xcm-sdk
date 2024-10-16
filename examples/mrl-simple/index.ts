@@ -12,7 +12,7 @@ import {
 } from '@moonbeam-network/xcm-config';
 import type { Asset } from '@moonbeam-network/xcm-types';
 import { Keyring } from '@polkadot/api';
-import { cryptoWaitReady, mnemonicToMiniSecret } from '@polkadot/util-crypto';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { moonbaseAlpha as moonbaseAlphaViem } from 'viem/chains';
@@ -56,9 +56,9 @@ main()
 async function main() {
   // await fromFantomToPeaq(ftm, 0.011);
   // await fromFantomToMoonbase(ftm, 0.01);
-  // await fromMoonbaseToFantom(ftmwh, 0.01);
-  // await fromPeaqToFantom(agng, 1);
-  await fromPeaqEvmToFantom(ftmwh, 0.01);
+  // await fromMoonbaseToFantom(dev, 0.01);
+  // await fromPeaqToFantom(ftmwh, 0.1);
+  await fromPeaqEvmToFantom(ftmwh, 0.12);
 }
 
 async function fromFantomToPeaq(asset: Asset, amount: number) {
