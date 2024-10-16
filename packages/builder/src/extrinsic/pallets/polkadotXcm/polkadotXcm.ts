@@ -185,7 +185,7 @@ export function polkadotXcm() {
         }),
       };
     },
-    trasferAssets: () => {
+    transferAssets: () => {
       const func = 'transferAssets';
 
       return {
