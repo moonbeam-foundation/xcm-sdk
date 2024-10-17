@@ -29,7 +29,6 @@ import { moonriverRoutes } from './moonriver';
 import { neurowebRoutes } from './neuroweb';
 import { nodleRoutes } from './nodle';
 import { originTrailAlphanetRoutes } from './originTrailAlphanet';
-import { parallelRoutes } from './parallel';
 import { peaqRoutes } from './peaq';
 import { peaqAlphanetRoutes } from './peaqAlphanet';
 import { peaqEvmRoutes } from './peaqEvm';
@@ -77,7 +76,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   neurowebRoutes,
   nodleRoutes,
   originTrailAlphanetRoutes,
-  parallelRoutes,
   peaqRoutes,
   peaqEvmRoutes,
   peaqAlphanetRoutes,

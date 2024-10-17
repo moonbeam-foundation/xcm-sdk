@@ -20,7 +20,6 @@ import {
   manta,
   neuro,
   nodl,
-  para,
   peaq,
   pen,
   pha,
@@ -54,7 +53,6 @@ import {
   moonbeam,
   neuroweb,
   nodle,
-  parallel,
   peaqChain,
   peaqEvm,
   pendulum,
@@ -178,25 +176,6 @@ export const moonbeamRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.1,
-          asset: glmr,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: glmr,
-        chain: parallel,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          amount: 0.000000032,
           asset: glmr,
         },
       },
@@ -531,29 +510,6 @@ export const moonbeamRoutes = new ChainRoutes({
         fee: {
           amount: 0.004,
           asset: neuro,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: para,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: para,
-        chain: parallel,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.064,
-          asset: para,
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),

@@ -50,7 +50,6 @@ import {
   neuro,
   nodl,
   otp,
-  para,
   paring,
   peaq,
   pen,
@@ -1016,7 +1015,10 @@ export const moonbaseBeta = new EvmParachain({
   parachainId: 888,
   rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
   ss58Format: 1287,
-  ws: ['wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network'],
+  ws: [
+    'wss://moonbase-beta.api.moonbase.moonbeam.network',
+    'wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network',
+  ],
 });
 
 export const moonbeam = new EvmParachain({
@@ -1161,13 +1163,6 @@ export const moonbeam = new EvmParachain({
       decimals: 12,
       ids: {
         id: '238111524681612888331172110363070489924',
-      },
-    }),
-    ChainAsset.fromAsset(para, {
-      address: '0xFfFffFFF18898CB5Fe1E88E668152B4f4052A947',
-      decimals: 12,
-      ids: {
-        id: '32615670524745285411807346420584982855',
       },
     }),
     ChainAsset.fromAsset(peaq, {
@@ -1569,32 +1564,6 @@ export const originTrailAlphanet = new Parachain({
   ss58Format: 101,
   /* cspell:disable-next-line */
   ws: ['wss://otp-lunaris-alpha-node-02.origin-trail.network'],
-});
-
-export const parallel = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(glmr, {
-      decimals: 18,
-      ids: {
-        id: 114,
-      },
-    }),
-    ChainAsset.fromAsset(para, {
-      decimals: 12,
-    }),
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97',
-  key: 'parallel',
-  name: 'Parallel',
-  nativeAsset: para,
-  parachainId: 2012,
-  ss58Format: 172,
-  ws: [
-    'wss://parallel-rpc.dwellir.com',
-    'wss://polkadot-parallel-rpc.parallel.fi',
-  ],
 });
 
 export const peaqAlphanet = new Parachain({
@@ -2265,8 +2234,6 @@ export const chainsList: AnyChain[] = [
   neuroweb,
   nodle,
   originTrailAlphanet,
-  parallel,
-  peaqAlphanet,
   peaqChain,
   peaqEvm,
   peaqEvmAlphanet,
