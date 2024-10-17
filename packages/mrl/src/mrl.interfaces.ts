@@ -18,6 +18,7 @@ export interface TransferData {
   source: SourceTransferData;
   transfer(
     amount: bigint | number | string,
+    isAutomatic: boolean,
     signers: Signers,
   ): Promise<string[]>;
 }

@@ -103,6 +103,7 @@ export async function getTransferData({
     source: sourceData,
     async transfer(
       amount,
+      isAutomatic,
       { evmSigner, polkadotSigner }: Partial<Signers>,
     ): Promise<string[]> {
       const source = route.source.chain;
@@ -122,6 +123,7 @@ export async function getTransferData({
         asset,
         destinationAddress,
         feeAsset,
+        isAutomatic,
         route,
         sourceAddress,
       });

@@ -33,7 +33,7 @@ export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
         },
       },
       mrl: {
-        isAutomaticPossible: false, // TODO
+        isAutomaticPossible: true,
         transfer: MrlBuilder()
           .wormhole()
           .contract()

@@ -100,6 +100,7 @@ export interface BuildTransferParams {
   asset: AssetAmount;
   destinationAddress: string;
   feeAsset: AssetAmount;
+  isAutomatic: boolean;
   route: AssetRoute;
   sourceAddress: string;
 }
@@ -109,6 +110,11 @@ export async function buildTransfer(params: BuildTransferParams) {
   if (!route.mrl) {
     throw new Error(
       `MrlConfigBuilder is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
+    );
+  }
+  if (params.isAutomatic && !route.mrl.isAutomaticPossible) {
+    throw new Error(
+      `Route from source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol} does not allow the automatic option`,
     );
   }
   const builderParams = await getMrlBuilderParams(params);
@@ -125,6 +131,7 @@ export async function getMrlBuilderParams({
   asset,
   destinationAddress,
   feeAsset,
+  isAutomatic,
   route,
   sourceAddress,
 }: BuildTransferParams): Promise<MrlBuilderParams> {
@@ -151,7 +158,7 @@ export async function getMrlBuilderParams({
     destinationAddress,
     destinationApi,
     fee: feeAsset,
-    isAutomatic: route.mrl.isAutomaticPossible,
+    isAutomatic,
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,
