@@ -33,12 +33,12 @@ export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
         },
       },
       mrl: {
-        isAutomaticPossible: true,
+        isAutomaticPossible: false, // TODO
         transfer: MrlBuilder()
           .wormhole()
           .contract()
-          .TokenBridgeRelayer()
-          .transferTokensWithRelay(),
+          .Batch()
+          .transferAssetsAndMessage(),
         moonChain: {
           asset: ftmwh,
           fee: {

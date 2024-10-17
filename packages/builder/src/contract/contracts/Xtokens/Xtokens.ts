@@ -1,7 +1,8 @@
-import { type AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
+import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
+import { getPrecompileDestinationInterior } from '../../../builder.utils';
 import { ContractConfig } from '../../../types/evm/ContractConfig';
 import type { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
 import { XTOKENS_ABI } from './XtokensABI';
@@ -116,6 +117,7 @@ type DestinationMultilocation = [
   ),
 ];
 
+// TODO test if this is needed
 function getDestinationMultilocationForPrecompileDestination(
   address: string,
   destination: AnyParachain,
@@ -145,22 +147,6 @@ function getDestinationMultilocation(
   address: string,
   destination: AnyParachain,
 ): DestinationMultilocation {
-  /* 
-   01: AccountId32
-   03: AccountKey20
-   https://docs.moonbeam.network/builders/interoperability/xcm/xc20/xtokens/#building-the-precompile-multilocation
-   */
-  const accountType = EvmParachain.is(destination) ? '03' : '01';
-  const acc = `0x${accountType}${u8aToHex(
-    decodeAddress(address),
-    -1,
-    false,
-  )}00`;
-
-  return [
-    1,
-    destination.parachainId
-      ? [`0x0000000${destination.parachainId.toString(16)}`, acc]
-      : [acc],
-  ];
+  const interior = getPrecompileDestinationInterior(destination, address);
+  return [1, interior];
 }

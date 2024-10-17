@@ -11,7 +11,11 @@ import { EvmService } from '../services/evm/EvmService';
 import { PolkadotService } from '../services/polkadot';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
-import { convertToChainDecimals, getMin, validateSovereignAccountBalances} from './getTransferData.utils';
+import {
+  convertToChainDecimals,
+  getMin,
+  validateSovereignAccountBalances,
+} from './getTransferData.utils';
 
 export interface GetTransferDataParams {
   route: AssetRoute;
@@ -67,14 +71,13 @@ export async function getTransferData({
       amount,
       { evmSigner, polkadotSigner }: Partial<Signers>,
     ): Promise<string> {
-
       const source = route.source.chain as AnyParachain;
       const destination = route.destination.chain as AnyParachain;
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
       validateSovereignAccountBalances({
         amount: bigintAmount,
-        destination,
-        source,
+        destinationData,
+        sourceData,
       });
       const asset = AssetAmount.fromChainAsset(
         route.source.chain.getChainAsset(route.source.asset),

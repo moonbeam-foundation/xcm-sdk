@@ -16,7 +16,8 @@ export function xTokens() {
           module: pallet,
           func: 'transfer',
           getArgs: (func) => {
-            const version = getExtrinsicArgumentVersion(func, 2);
+            const destIndex = 2;
+            const version = getExtrinsicArgumentVersion(func, destIndex);
 
             return [
               asset.getAssetId(),
@@ -29,6 +30,7 @@ export function xTokens() {
     }),
     transferMultiAsset: (originParachainId: number) => {
       const funcName = 'transferMultiasset';
+      const destIndex = 1;
 
       return {
         here: (): ExtrinsicConfigBuilder => ({
@@ -37,7 +39,7 @@ export function xTokens() {
               module: pallet,
               func: funcName,
               getArgs: (func) => {
-                const version = getExtrinsicArgumentVersion(func, 1);
+                const version = getExtrinsicArgumentVersion(func, destIndex);
 
                 return [
                   {
@@ -65,7 +67,7 @@ export function xTokens() {
               module: pallet,
               func: funcName,
               getArgs: (func) => {
-                const version = getExtrinsicArgumentVersion(func, 1);
+                const version = getExtrinsicArgumentVersion(func, destIndex);
 
                 return [
                   {
@@ -97,7 +99,7 @@ export function xTokens() {
               module: pallet,
               func: funcName,
               getArgs: (func) => {
-                const version = getExtrinsicArgumentVersion(func, 1);
+                const version = getExtrinsicArgumentVersion(func, destIndex);
 
                 return [
                   {

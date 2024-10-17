@@ -12,7 +12,6 @@ export interface ParachainConstructorParams extends ChainConstructorParams {
 }
 
 export class Parachain extends Chain {
-
   readonly checkSovereignAccountBalances: boolean;
 
   readonly genesisHash: string;

@@ -9,6 +9,7 @@
   "dependencies": {
     "@moonbeam-network/mrl": "workspace:*",
     "@moonbeam-network/xcm-config": "workspace:*",
+    "@moonbeam-network/xcm-types": "workspace:*",
     "@moonbeam-network/xcm-utils": "workspace:*"
   },
   "devDependencies": {
