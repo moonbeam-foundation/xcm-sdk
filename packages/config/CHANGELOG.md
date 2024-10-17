@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.7.1
+
+### Patch Changes
+
+- [#369](https://github.com/moonbeam-foundation/xcm-sdk/pull/369) [`6a119d9`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6a119d9e166ca3805696718cb9ff42455c65b65e) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Parallel
+
 ## 2.7.0
 
 ### Minor Changes
