@@ -54,14 +54,25 @@ main()
   .finally(() => process.exit());
 
 async function main() {
-  // await fromFantomToPeaq(ftm, 0.011);
-  // await fromFantomToMoonbase(ftm, 0.01);
-  // await fromMoonbaseToFantom(dev, 0.01);
-  // await fromPeaqToFantom(ftmwh, 0.1);
-  await fromPeaqEvmToFantom(ftmwh, 0.12);
+  const isAutomatic = true;
+  // await fromFantomToPeaq(ftm, 0.011, isAutomatic);
+  // await fromFantomToMoonbase(ftm, 0.01, isAutomatic);
+  // await fromMoonbaseToFantom(ftmwh, 0.01, isAutomatic);
+  await fromPeaqToFantom(agng, 20, isAutomatic);
+  // await fromPeaqEvmToFantom(ftmwh, 1.5, isAutomatic);
 }
 
-async function fromFantomToPeaq(asset: Asset, amount: number) {
+async function fromFantomToPeaq(
+  asset: Asset,
+  amount: number,
+  isAutomatic: boolean,
+) {
+  const walletClient = createWalletClient({
+    account,
+    chain: fantomTestnet.getViemChain(),
+    transport: http(),
+  });
+
   const data = await Mrl()
     .setSource(fantomTestnet)
     .setDestination(peaqAlphanet)
@@ -73,13 +84,17 @@ async function fromFantomToPeaq(asset: Asset, amount: number) {
 
   console.log(data);
 
-  await data.transfer(amount, {
+  await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
     evmSigner: walletClient,
   });
 }
 
-async function fromFantomToMoonbase(asset: Asset, amount: number) {
+async function fromFantomToMoonbase(
+  asset: Asset,
+  amount: number,
+  isAutomatic: boolean,
+) {
   const walletClient = createWalletClient({
     account,
     chain: fantomTestnet.getViemChain(),
@@ -89,7 +104,7 @@ async function fromFantomToMoonbase(asset: Asset, amount: number) {
   const data = await Mrl()
     .setSource(fantomTestnet)
     .setDestination(moonbaseAlpha)
-    .setAsset(dev)
+    .setAsset(asset)
     .setAddresses({
       sourceAddress: account.address,
       destinationAddress: account.address,
@@ -97,13 +112,17 @@ async function fromFantomToMoonbase(asset: Asset, amount: number) {
 
   console.log(data);
 
-  await data.transfer(0.5, {
+  await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
     evmSigner: walletClient,
   });
 }
 
-async function fromMoonbaseToFantom(asset: Asset, amount: number) {
+async function fromMoonbaseToFantom(
+  asset: Asset,
+  amount: number,
+  isAutomatic: boolean,
+) {
   const walletClient = createWalletClient({
     account,
     chain: moonbaseAlphaViem,
@@ -120,13 +139,17 @@ async function fromMoonbaseToFantom(asset: Asset, amount: number) {
 
   console.log(data);
 
-  await data.transfer(amount, {
+  await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
     evmSigner: walletClient,
   });
 }
 
-async function fromPeaqToFantom(asset: Asset, amount: number) {
+async function fromPeaqToFantom(
+  asset: Asset,
+  amount: number,
+  isAutomatic: boolean,
+) {
   const data = await Mrl()
     .setSource(peaqAlphanet)
     .setDestination(fantomTestnet)
@@ -138,12 +161,16 @@ async function fromPeaqToFantom(asset: Asset, amount: number) {
 
   console.log(data);
 
-  await data.transfer(amount, {
+  await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
   });
 }
 
-async function fromPeaqEvmToFantom(asset: Asset, amount: number) {
+async function fromPeaqEvmToFantom(
+  asset: Asset,
+  amount: number,
+  isAutomatic: boolean,
+) {
   const walletClient = createWalletClient({
     account,
     chain: peaqEvmAlphanet.getViemChain(),
@@ -161,5 +188,5 @@ async function fromPeaqEvmToFantom(asset: Asset, amount: number) {
 
   console.log(data);
 
-  await data.transfer(amount, { evmSigner: walletClient });
+  await data.transfer(amount, isAutomatic, { evmSigner: walletClient });
 }

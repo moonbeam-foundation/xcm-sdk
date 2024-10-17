@@ -29,7 +29,7 @@ export const moonbaseAlphaRoutes = new MrlChainRoutes({
         },
       },
       mrl: {
-        isAutomaticPossible: false, // TODO
+        isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,

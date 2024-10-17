@@ -94,6 +94,7 @@ export async function getSourceData({
     asset: balance,
     destinationAddress,
     feeAsset: feeBalance,
+    isAutomatic: route.mrl.isAutomaticPossible,
     route,
     sourceAddress,
   });
@@ -113,6 +114,7 @@ export async function getSourceData({
     transfer,
     asset: balance,
     feeAsset: feeBalance,
+    isAutomatic: route.mrl.isAutomaticPossible,
     destinationAddress,
     route,
     sourceAddress,
@@ -128,6 +130,7 @@ export async function getSourceData({
   return {
     balance,
     chain: source,
+    destinationFee,
     destinationFeeBalance,
     moonChainFeeBalance,
     existentialDeposit,
@@ -202,6 +205,7 @@ export async function getRelayerFee({
   chain,
   destinationAddress,
   feeAsset,
+  isAutomatic,
   route,
   sourceAddress,
   transfer,
@@ -215,6 +219,7 @@ export async function getRelayerFee({
     asset,
     destinationAddress,
     feeAsset,
+    isAutomatic,
     route,
     sourceAddress,
   });

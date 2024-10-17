@@ -31,10 +31,10 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: centrifuge, address: substrateAddress },
   { chain: hydrationAlphanet, address: hydrationAddress },
   { chain: hydrationAlphanet, address: substrateAddress },
-  // {
-  //   chain: moonbaseBeta,
-  //   address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',
-  // },
+  {
+    chain: moonbaseBeta,
+    address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',
+  },
   { chain: moonbaseAlpha, address: moonEvmAddress },
   { chain: peaqEvmAlphanet, address: moonEvmAddress },
   { chain: peaqAlphanet, address: substrateAddress },
