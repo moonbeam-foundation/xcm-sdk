@@ -39,7 +39,7 @@ import type {
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 1273110n,
-  [moonbaseAlpha.key]: 1271922n,
+  [moonbaseAlpha.key]: 1470417n,
 };
 
 export interface DataParams {
@@ -222,7 +222,7 @@ export async function getMoonGasLimit(
   // it requires the computedOriginAccount to have the balance for the call
   // which we don't have when we make the call. We hardcode it for now
   if (isAutomatic) {
-    return MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION[moonChain.key];
+    return (MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION[moonChain.key] * 110n) / 100n;
   }
 
   const contract = MrlBuilder()
