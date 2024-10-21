@@ -50,8 +50,8 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.cjs",
   "dependencies": {
-    "big.js": "^6.2.1",
-    "lru-cache": "^10.2.2"
+    "big.js": "^6.2.2",
+    "lru-cache": "^11.0.1"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2"

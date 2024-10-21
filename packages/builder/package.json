@@ -51,7 +51,7 @@
   "dependencies": {
     "@moonbeam-network/xcm-types": "2.5.0",
     "@moonbeam-network/xcm-utils": "2.2.0",
-    "big.js": "^6.2.1"
+    "big.js": "^6.2.2"
   },
   "peerDependencies": {
     "@polkadot/api": "^14.1.1",
