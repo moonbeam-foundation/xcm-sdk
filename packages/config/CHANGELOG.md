@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.7.2
+
+### Patch Changes
+
+- [#376](https://github.com/moonbeam-foundation/xcm-sdk/pull/376) [`56e9b57`](https://github.com/moonbeam-foundation/xcm-sdk/commit/56e9b572b6a3070a3f871617c4bcc36abd2a3cdd) Thanks [@mmaurello](https://github.com/mmaurello)! - Enable DOT transfers between Polkadot Asset Hub and Moonbeam
+
 ## 2.7.1
 
 ### Patch Changes
