@@ -52,6 +52,6 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "viem": "^2.21.29"
+    "viem": "^2.20.0"
   }
 }
