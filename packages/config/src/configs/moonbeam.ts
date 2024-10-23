@@ -247,7 +247,22 @@ export const moonbeamConfig = new ChainConfig({
       contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadot,
       destinationFee: {
-        amount: 0.052,
+        amount: 0.01,
+        asset: dot,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: dot,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.01,
         asset: dot,
         balance: BalanceBuilder().substrate().assets().account(),
       },
@@ -445,7 +460,8 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.2,
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
-        destinationBalance: BalanceBuilder().substrate().system().account(),
+        // TODO uncomment when we apply dot as payment asset
+        // destinationBalance: BalanceBuilder().substrate().system().account(),
       },
       fee: {
         asset: glmr,
