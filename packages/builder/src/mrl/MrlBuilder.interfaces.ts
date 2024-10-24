@@ -15,6 +15,11 @@ export type MrlConfigBuilder = ConfigBuilder<
   MrlBuilderParams
 >;
 
+export type MrlRedeemConfigBuilder = ConfigBuilder<
+  ContractConfig,
+  MrlRedeemBuilderParams
+>;
+
 export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   isAutomatic: boolean;
   moonApi: ApiPromise;
@@ -22,6 +27,10 @@ export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   moonChain: EvmParachain;
   moonGasLimit?: bigint;
   transact?: Transact;
+}
+
+export interface MrlRedeemBuilderParams {
+  bytes?: Uint8Array;
 }
 
 export interface Transact {

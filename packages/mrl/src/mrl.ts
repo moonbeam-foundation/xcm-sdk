@@ -3,7 +3,10 @@ import type {
   AnyAsset,
   AnyChain,
   Ecosystem,
+  EvmChain,
+  EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import { getRedeemData } from './getTransferData/getRedeemData';
 import { getTransferData } from './getTransferData/getTransferData';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: mrlRoutesMap });
@@ -53,6 +56,13 @@ export function Mrl(options?: MrlOptions) {
               };
             },
           };
+        },
+      };
+    },
+    setTxHashToRedeem(txId: string) {
+      return {
+        setRedeemChain(chain: EvmChain | EvmParachain) {
+          return getRedeemData({ txId, chain });
         },
       };
     },

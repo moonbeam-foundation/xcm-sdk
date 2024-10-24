@@ -1,5 +1,5 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
-import { dev, ftm, ftmwh } from '../assets';
+import { agng, dev, ftm, ftmwh } from '../assets';
 import {
   fantomTestnet,
   moonbaseAlpha,
@@ -34,6 +34,37 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,
+          fee: {
+            asset: dev,
+            amount: 0.1,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
+        asset: agng,
+        balance: BalanceBuilder().evm().erc20(),
+        destinationFee: {
+          asset: agng,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: agng,
+        chain: peaqAlphanet,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: agng,
+          amount: 1,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: agng,
           fee: {
             asset: dev,
             amount: 0.1,
