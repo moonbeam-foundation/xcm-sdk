@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "link": "pnpm ln --global",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
