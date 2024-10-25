@@ -4,7 +4,7 @@
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
-    "dev": "pnpm run build -- --watch",
+    "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
