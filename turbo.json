@@ -6,8 +6,6 @@
       "dependsOn": ["^build"]
     },
     "dev": {
-      "outputs": ["build/**"],
-      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
