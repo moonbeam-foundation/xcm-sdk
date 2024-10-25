@@ -38,24 +38,24 @@ jobs:
 
       - name: 🚀 Publish types
         working-directory: ./packages/types
-        run: pnpm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish utils
         working-directory: ./packages/utils
-        run: pnpm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish builder
         working-directory: ./packages/builder
-        run: pnpm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish config
         working-directory: ./packages/config
-        run: pnpm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish sdk
         working-directory: ./packages/sdk
-        run: pnpm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish mrl
         working-directory: ./packages/mrl
-        run: pnpm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
