@@ -55,3 +55,7 @@ jobs:
       - name: 🚀 Publish sdk
         working-directory: ./packages/sdk
         run: pnpm publish --tag dev
+
+      - name: 🚀 Publish mrl
+        working-directory: ./packages/mrl
+        run: pnpm publish --tag dev
