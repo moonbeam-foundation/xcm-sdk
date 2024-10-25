@@ -6,8 +6,7 @@
       "dependsOn": ["^build"]
     },
     "dev": {
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "link": {
       "cache": false
