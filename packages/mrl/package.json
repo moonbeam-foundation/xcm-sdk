@@ -4,7 +4,7 @@
   "description": "Moonbeam Routed Liquidity",
   "scripts": {
     "build": "tsup",
-    "dev": "pnpm run build -- --watch",
+    "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "prepack": "prettier --write build/index.d.ts"
   },
