@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "link": "pnpm ln --global",
+    "link": "pnpm ln ./",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:update": "vitest -u",
