@@ -63,27 +63,27 @@ async function main() {
   // await fromPeaqToFantom(ftmwh, 0.0121, isAutomatic);
   // await fromPeaqEvmToFantom(ftmwh, 1.5, isAutomatic);
 
-  // await redeemInMoonbaseAlpha();
-  await redeemInFantomTestnet();
+  await redeemInMoonbaseAlpha();
+  // await redeemInFantomTestnet();
 }
 
 async function redeemInMoonbaseAlpha() {
-  const tx =
-    '0x7c2771b74211420284c44116fe436003df31713a7ffefb034b2ce21ef3711cef';
+  const txId =
+    '0x59e70ad73c57bce44cbb3e3308fc6a31d29ff0dcbb2957055b05025969545bed';
   const walletClient = createWalletClient({
     account,
     chain: moonbaseAlphaViem,
     transport: http(),
   });
 
-  const data = await Mrl().setTxHashToRedeem(tx).setRedeemChain(moonbaseAlpha);
+  const data = await Mrl().getRedeemData({ txId, chain: moonbaseAlpha });
   console.log('data', data);
 
   await data.redeem(walletClient as EvmSigner);
 }
 
 async function redeemInFantomTestnet() {
-  const tx =
+  const txId =
     '0xa0032ff270885f7278a42d4d974fceab9e4feb039263db35b09beafe57bd6683';
   const walletClient = createWalletClient({
     account,
@@ -91,7 +91,7 @@ async function redeemInFantomTestnet() {
     transport: http(),
   });
 
-  const data = await Mrl().setTxHashToRedeem(tx).setRedeemChain(fantomTestnet);
+  const data = await Mrl().getRedeemData({ txId, chain: fantomTestnet });
   console.log('data', data);
 
   await data.redeem(walletClient as EvmSigner);

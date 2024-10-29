@@ -3,12 +3,12 @@ import { EvmService, type EvmSigner } from '@moonbeam-network/xcm-sdk';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { WormholeService } from '../services/wormhole';
 
-export interface GetRedeemDataParams {
+export interface WormholeRedeemParams {
   txId: string;
   chain: EvmChain | EvmParachain;
 }
 
-export async function getRedeemData({ txId, chain }: GetRedeemDataParams) {
+export async function getRedeemData({ txId, chain }: WormholeRedeemParams) {
   // TODO this is just for wormhole
   const wh = WormholeService.create(chain);
 
