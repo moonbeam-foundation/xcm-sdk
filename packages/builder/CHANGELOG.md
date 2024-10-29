@@ -1,5 +1,25 @@
 # @moonbeam-network/xcm-builder
 
+## 2.5.4
+
+### Patch Changes
+
+- [#379](https://github.com/moonbeam-foundation/xcm-sdk/pull/379) [`a724e92`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a724e92f4f7488ced6c4050cea2ad0e98731a5c2) Thanks [@Rihyx](https://github.com/Rihyx)! - fix vulnerability
+
+- Updated dependencies [[`a724e92`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a724e92f4f7488ced6c4050cea2ad0e98731a5c2)]:
+  - @moonbeam-network/xcm-types@2.5.2
+  - @moonbeam-network/xcm-utils@2.2.2
+
+## 2.5.3
+
+### Patch Changes
+
+- [#373](https://github.com/moonbeam-foundation/xcm-sdk/pull/373) [`10755b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/10755b4164ab7de94578732b4f92d70f8478c1ed) Thanks [@Rihyx](https://github.com/Rihyx)! - update minor and patch dependencies
+
+- Updated dependencies [[`10755b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/10755b4164ab7de94578732b4f92d70f8478c1ed)]:
+  - @moonbeam-network/xcm-types@2.5.1
+  - @moonbeam-network/xcm-utils@2.2.1
+
 ## 2.5.2
 
 ### Patch Changes
