@@ -7,11 +7,9 @@ import type {
   MrlBuilderParams,
   MrlConfigBuilder,
 } from '../../../MrlBuilder.interfaces';
+import { GMP_CONTRACT_ADDRESS } from '../contract/Gmp';
 import { WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
-
-export const GMP_CONTRACT_ADDRESS =
-  '0x0000000000000000000000000000000000000816';
 
 export function wormhole() {
   return {

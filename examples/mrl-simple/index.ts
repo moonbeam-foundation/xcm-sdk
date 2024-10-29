@@ -16,6 +16,7 @@ import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { moonbaseAlpha as moonbaseAlphaViem } from 'viem/chains';
+import type { EvmSigner } from '../../packages/sdk/build';
 
 // disable unnecessary warning logs
 console.warn = () => null;
@@ -54,12 +55,46 @@ main()
   .finally(() => process.exit());
 
 async function main() {
-  const isAutomatic = true;
-  // await fromFantomToPeaq(ftm, 0.011, isAutomatic);
-  // await fromFantomToMoonbase(ftm, 0.01, isAutomatic);
+  const isAutomatic = false;
+
+  // await fromFantomToPeaq(agng, 10, isAutomatic);
+  // await fromFantomToMoonbase(dev, 1.23, isAutomatic);
   // await fromMoonbaseToFantom(ftmwh, 0.01, isAutomatic);
-  await fromPeaqToFantom(agng, 20, isAutomatic);
+  // await fromPeaqToFantom(ftmwh, 0.0121, isAutomatic);
   // await fromPeaqEvmToFantom(ftmwh, 1.5, isAutomatic);
+
+  await redeemInMoonbaseAlpha();
+  // await redeemInFantomTestnet();
+}
+
+async function redeemInMoonbaseAlpha() {
+  const txId =
+    '0x59e70ad73c57bce44cbb3e3308fc6a31d29ff0dcbb2957055b05025969545bed';
+  const walletClient = createWalletClient({
+    account,
+    chain: moonbaseAlphaViem,
+    transport: http(),
+  });
+
+  const data = await Mrl().getRedeemData({ txId, chain: moonbaseAlpha });
+  console.log('data', data);
+
+  await data.redeem(walletClient as EvmSigner);
+}
+
+async function redeemInFantomTestnet() {
+  const txId =
+    '0xa0032ff270885f7278a42d4d974fceab9e4feb039263db35b09beafe57bd6683';
+  const walletClient = createWalletClient({
+    account,
+    chain: fantomTestnet.getViemChain(),
+    transport: http(),
+  });
+
+  const data = await Mrl().getRedeemData({ txId, chain: fantomTestnet });
+  console.log('data', data);
+
+  await data.redeem(walletClient as EvmSigner);
 }
 
 async function fromFantomToPeaq(
@@ -86,7 +121,7 @@ async function fromFantomToPeaq(
 
   await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
-    evmSigner: walletClient,
+    evmSigner: walletClient as EvmSigner,
   });
 }
 
@@ -112,10 +147,11 @@ async function fromFantomToMoonbase(
 
   console.log(data);
 
-  await data.transfer(amount, isAutomatic, {
+  const hash = await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
-    evmSigner: walletClient,
+    evmSigner: walletClient as EvmSigner,
   });
+  console.log('hash', hash);
 }
 
 async function fromMoonbaseToFantom(
@@ -141,7 +177,7 @@ async function fromMoonbaseToFantom(
 
   await data.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
-    evmSigner: walletClient,
+    evmSigner: walletClient as EvmSigner,
   });
 }
 
@@ -188,5 +224,7 @@ async function fromPeaqEvmToFantom(
 
   console.log(data);
 
-  await data.transfer(amount, isAutomatic, { evmSigner: walletClient });
+  await data.transfer(amount, isAutomatic, {
+    evmSigner: walletClient as EvmSigner,
+  });
 }

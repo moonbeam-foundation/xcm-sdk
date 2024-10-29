@@ -4,6 +4,10 @@ import type {
   AnyChain,
   Ecosystem,
 } from '@moonbeam-network/xcm-types';
+import {
+  type WormholeRedeemParams,
+  getRedeemData,
+} from './getTransferData/getRedeemData';
 import { getTransferData } from './getTransferData/getTransferData';
 
 const DEFAULT_SERVICE = new ConfigService({ routes: mrlRoutesMap });
@@ -55,6 +59,9 @@ export function Mrl(options?: MrlOptions) {
           };
         },
       };
+    },
+    getRedeemData({ txId, chain }: WormholeRedeemParams) {
+      return getRedeemData({ txId, chain });
     },
   };
 }
