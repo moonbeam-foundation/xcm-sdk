@@ -45,4 +45,44 @@ export class WormholeService {
 
     return xfer.initiateTransfer(new WormholeWagmiSigner(this.chain, signer));
   }
+
+  async getVaa(txId: string) {
+    return await TokenTransfer.getTransferVaa(this.#wh, txId);
+  }
+
+  async getVaaBytes(vaa: TokenTransfer.VAA) {
+    return (
+      (await this.#wh.getVaaBytes({
+        chain: vaa.emitterChain,
+        emitter: vaa.emitterAddress,
+        sequence: vaa.sequence,
+      })) || undefined
+    );
+  }
+
+  async getTokenTransfer(vaa: TokenTransfer.VAA, txId: string) {
+    return await TokenTransfer.from(this.#wh, {
+      chain: vaa.emitterChain,
+      txid: txId,
+    });
+  }
+
+  async isComplete(vaa: TokenTransfer.VAA, tokenTransfer: TokenTransfer) {
+    const isComplete = await TokenTransfer.isTransferComplete(
+      tokenTransfer.toChain,
+      vaa,
+    );
+    return isComplete;
+  }
+
+  async completeTransfer(
+    tokenTransfer: TokenTransfer,
+    signer: EvmSigner,
+  ): Promise<string> {
+    const txIds = await tokenTransfer.completeTransfer(
+      new WormholeWagmiSigner(this.chain, signer),
+    );
+
+    return txIds[0];
+  }
 }
