@@ -370,7 +370,30 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadot,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.052,
+          amount: 0.01,
+          asset: dot,
+        },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: dot,
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.01,
           asset: dot,
         },
       },
@@ -672,6 +695,9 @@ export const moonbeamRoutes = new ChainRoutes({
           amount: 0.2,
           asset: usdt,
           balance: BalanceBuilder().substrate().assets().account(),
+          // TODO change when DOT pays for fees
+          // asset: dot,
+          // balance: BalanceBuilder().substrate().system().account(),
         },
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),

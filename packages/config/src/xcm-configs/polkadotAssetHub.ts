@@ -15,6 +15,32 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
   routes: [
     {
       source: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dot,
+          balance: BalanceBuilder().substrate().system().account(),
+          extra,
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: dot,
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
+          asset: dot,
+        },
+      },
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().here(),
+    },
+    {
+      source: {
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {

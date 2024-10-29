@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-builder",
-  "version": "2.5.2",
+  "version": "2.5.4",
   "description": "Moonbeam XCM builder",
   "scripts": {
     "build": "tsup",
@@ -37,8 +37,8 @@
     "@polkadot/api": "^12.4.2",
     "@polkadot/api-augment": "^12.4.2",
     "@polkadot/types": "^12.4.2",
-    "@polkadot/util": "^13.0.2",
-    "@polkadot/util-crypto": "^13.0.2",
+    "@polkadot/util": "^13.1.1",
+    "@polkadot/util-crypto": "^13.1.1",
     "@wormhole-foundation/sdk-connect": "^0.8.2",
     "@wormhole-foundation/sdk-evm": "^0.8.2",
     "viem": "^2.20.0"
