@@ -1,4 +1,4 @@
-import type { Address } from 'viem';
+import { u8aToHex } from '@polkadot/util';
 import { ContractConfig } from '../../../../../contract';
 import type { MrlRedeemConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { GMP_ABI } from './GmpAbi';
@@ -12,8 +12,7 @@ export function Gmp() {
   return {
     wormholeTransferERC20: (): MrlRedeemConfigBuilder => ({
       build: ({ bytes }) => {
-        const hex =
-          `0x${Buffer.from(bytes as Uint8Array).toString('hex')}` as Address;
+        const hex = u8aToHex(bytes);
 
         return new ContractConfig({
           address: GMP_CONTRACT_ADDRESS,
