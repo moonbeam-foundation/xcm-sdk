@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "link": "pnpm ln --global",
+    "link": "pnpm ln ./",
     "typecheck": "tsc --noEmit",
     "prepack": "prettier --write build/index.d.ts"
   },
