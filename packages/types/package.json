@@ -5,11 +5,10 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "link": "pnpm ln ./",
+    "link": "pnpm ln --global",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "test:update": "vitest -u",
-    "prepack": "prettier --write build/index.d.ts"
+    "test:update": "vitest -u"
   },
   "repository": {
     "directory": "packages/types",
@@ -34,9 +33,9 @@
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2",
-    "@wormhole-foundation/sdk-connect": "^0.8.2"
+    "@wormhole-foundation/sdk-connect": "^0.10.7"
   },
   "peerDependencies": {
-    "viem": "^2.20.0"
+    "viem": "^2.21.7"
   }
 }
