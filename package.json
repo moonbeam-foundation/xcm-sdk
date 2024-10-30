@@ -17,6 +17,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
+    "postbuild": "npx bun scripts/copy-dts.ts",
     "dev": "turbo run dev",
     "link": "turbo run link",
     "lint": "pnpm biome check .",
