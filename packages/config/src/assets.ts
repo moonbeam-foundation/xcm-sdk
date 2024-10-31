@@ -390,6 +390,16 @@ export const wbtce = new Asset({
   originSymbol: 'WBTC.e',
 });
 
+export const wstethe = new Asset({
+  key: 'wstethe',
+  originSymbol: 'wstETH.e',
+});
+
+export const wethe = new Asset({
+  key: 'wethe',
+  originSymbol: 'WETH.e',
+});
+
 export const assetsList: Asset[] = [
   aca,
   alan,
@@ -464,8 +474,10 @@ export const assetsList: Asset[] = [
   wbtc,
   wbtce,
   weth,
+  wethe,
   wftm,
   wifd,
+  wstethe,
   xrt,
   ztg,
 ];

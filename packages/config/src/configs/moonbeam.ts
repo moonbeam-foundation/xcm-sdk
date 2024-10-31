@@ -37,6 +37,7 @@ import {
   vglmr,
   vmanta,
   wbtc,
+  wbtce,
   weth,
   wifd,
   ztg,
@@ -949,6 +950,17 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.02,
         asset: axlusdc,
         balance: BalanceBuilder().evm().erc20(),
+      },
+    }),
+    new AssetConfig({
+      asset: wbtce,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.02, // TODO
+        asset: usdt, // TODO
+        balance: BalanceBuilder().substrate().assets().account(),
       },
     }),
   ],

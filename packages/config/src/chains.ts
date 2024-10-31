@@ -77,7 +77,9 @@ import {
   wbtc,
   wbtce,
   weth,
+  wethe,
   wifd,
+  wstethe,
   xrt,
   ztg,
 } from './assets';
@@ -1107,6 +1109,18 @@ export const moonbeam = new EvmParachain({
       asset: wifd,
       id: '61295607754960722617854661686514597014',
     },
+    {
+      asset: wbtce,
+      id: '36282181791341254438422467838694599751',
+    },
+    {
+      asset: wethe,
+      id: '178794693648360392906933130845919698647',
+    },
+    {
+      asset: wstethe,
+      id: '124105859028862849477017063633156007283',
+    },
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -1723,6 +1737,16 @@ export const polkadotAssetHub = new Parachain({
     {
       address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
       asset: wbtce,
+      globalConcensusId: { ethereum: { chainId: 1 } },
+    },
+    {
+      address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+      asset: wethe,
+      globalConcensusId: { ethereum: { chainId: 1 } },
+    },
+    {
+      address: '0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0',
+      asset: wstethe,
       globalConcensusId: { ethereum: { chainId: 1 } },
     },
   ],

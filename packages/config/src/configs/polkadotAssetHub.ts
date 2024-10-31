@@ -4,7 +4,17 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { apillon, ded, dot, pink, stink, usdc, usdt, wifd } from '../assets';
+import {
+  apillon,
+  ded,
+  dot,
+  pink,
+  stink,
+  usdc,
+  usdt,
+  wbtce,
+  wifd,
+} from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
 import { ChainConfig } from '../types/ChainConfig';
@@ -178,6 +188,30 @@ export const polkadotAssetHubConfig = new ChainConfig({
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
       },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
+        .X2(),
+      fee: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
+      },
+      min: AssetMinBuilder().assets().asset(),
+    }),
+    new AssetConfig({
+      asset: wbtce,
+      balance: BalanceBuilder().substrate().foreignAssets().account(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+          shouldTransferAssetPrecedeAsset: true,
+        }),
+        asset: usdt,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      // TODO
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
