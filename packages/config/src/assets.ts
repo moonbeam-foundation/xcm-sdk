@@ -385,6 +385,11 @@ export const ftmwh = new Asset({
   originSymbol: 'FTM.wh',
 });
 
+export const wbtce = new Asset({
+  key: 'wbtce',
+  originSymbol: 'WBTC.e',
+});
+
 export const assetsList: Asset[] = [
   aca,
   alan,
@@ -457,6 +462,7 @@ export const assetsList: Asset[] = [
   vmanta,
   vmovr,
   wbtc,
+  wbtce,
   weth,
   wftm,
   wifd,

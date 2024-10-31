@@ -46,6 +46,9 @@ export async function getBalance({
   const cfg = balanceBuilder.build({
     address,
     asset: polkadot.chain.getBalanceAssetId(asset),
+    // TODO temporary low effort solution because this will not be needed in V3, with the concept of ChainAsset
+    globalConcensusId: polkadot.chain.assetsData.get(asset.key)
+      ?.globalConcensusId,
   });
   if (cfg.type === CallType.Substrate) {
     const balance = await polkadot.query(cfg as SubstrateQueryConfig);

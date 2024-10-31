@@ -34,6 +34,7 @@ export function evm() {
 export function substrate() {
   return {
     assets,
+    foreignAssets,
     system,
     tokens,
   };
@@ -68,6 +69,37 @@ function assets() {
             response: Option<PalletAssetsAssetAccount>,
           ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
         }),
+    }),
+  };
+}
+
+function foreignAssets() {
+  return {
+    account: (): BalanceConfigBuilder => ({
+      build: ({ address, asset, globalConcensusId }) => {
+        // TODO verify
+        const multilocation = {
+          parents: 2,
+          interior: [
+            { globalConsensus: globalConcensusId },
+            {
+              accountKey20: {
+                network: null,
+                key: asset,
+              },
+            },
+          ],
+        };
+
+        return new SubstrateQueryConfig({
+          module: 'foreignAssets',
+          func: 'account',
+          args: [multilocation, address],
+          transform: async (
+            response: Option<PalletAssetsAssetAccount>,
+          ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
+        });
+      },
     }),
   };
 }

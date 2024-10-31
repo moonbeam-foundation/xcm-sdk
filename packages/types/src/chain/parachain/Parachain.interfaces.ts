@@ -11,6 +11,7 @@ export interface ChainAssetsData {
   address?: string;
   balanceId?: ChainAssetId;
   decimals?: number;
+  globalConcensusId?: ChainAssetId;
   id?: ChainAssetId;
   metadataId?: ChainAssetId;
   minId?: ChainAssetId;
