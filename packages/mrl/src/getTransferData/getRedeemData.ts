@@ -13,6 +13,11 @@ export async function getRedeemData({ txId, chain }: WormholeRedeemParams) {
   const wh = WormholeService.create(chain);
 
   const vaa = await wh.getVaa(txId);
+  if (!vaa) {
+    // TODO handle softly when retrieving
+    throw new Error(`VAA not found for WormholeId ${txId}`);
+  }
+
   const tokenTransfer = await wh.getTokenTransfer(vaa, txId);
 
   const isXcm = vaa.payloadName === 'TransferWithPayload';

@@ -17,6 +17,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
+    "postbuild": "npx bun scripts/copy-dts.ts",
     "dev": "turbo run dev",
     "link": "turbo run link",
     "lint": "pnpm biome check .",
@@ -57,7 +58,6 @@
     "dotenv": "^16.4.5",
     "glob": "^11.0.0",
     "lefthook": "^1.7.15",
-    "prettier": "^3.3.3",
     "syncpack": "^13.0.0",
     "tsup": "^8.3.0",
     "turbo": "^2.1.3",

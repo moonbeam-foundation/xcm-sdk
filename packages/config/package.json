@@ -4,12 +4,12 @@
   "description": "All necessary configuration to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
   "scripts": {
     "build": "tsup",
-    "dev": "pnpm run build -- --watch",
+    "dev": "tsup --watch",
+    "link": "pnpm ln --global",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "test:update": "vitest -u",
-    "prepack": "prettier --write build/index.d.ts"
+    "test:update": "vitest -u"
   },
   "repository": {
     "directory": "packages/config",
