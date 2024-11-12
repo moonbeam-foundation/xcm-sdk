@@ -1,5 +1,6 @@
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import { getTypeDef } from '@polkadot/types';
+import type { AnyJson } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from './ExtrinsicBuilder.interfaces';
@@ -60,4 +61,41 @@ export function getExtrinsicAccount(address: string) {
           network: null,
         },
       };
+}
+
+export function isXcmV4(xcmVersion: XcmVersion): boolean {
+  return xcmVersion >= XcmVersion.v4;
+}
+
+export function normalizeX1(
+  xcmVersion: XcmVersion,
+  versionedObject: Record<string, AnyJson>,
+) {
+  if (!isXcmV4(xcmVersion)) {
+    return versionedObject;
+  }
+  const normalizedAssetType = { ...versionedObject };
+  console.log('normalizedAssetType', normalizedAssetType);
+  const interior = normalizedAssetType.interior;
+  if (interior && typeof interior === 'object' && !Array.isArray(interior)) {
+    const key = 'X1' in interior ? 'X1' : 'x1' in interior ? 'x1' : null;
+    if (key && !Array.isArray(interior[key])) {
+      interior[key] = [interior[key]];
+    }
+  }
+
+  return normalizedAssetType;
+}
+
+export function normalizeConcrete(
+  xcmVersion: XcmVersion,
+  versionedObject: object,
+) {
+  return isXcmV4(xcmVersion) ? versionedObject : applyConcreteWrapper;
+}
+
+function applyConcreteWrapper(versionedObject: object) {
+  return {
+    Concrete: { ...versionedObject },
+  };
 }

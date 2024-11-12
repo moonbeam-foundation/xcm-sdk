@@ -1,6 +1,10 @@
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import {
+  getExtrinsicArgumentVersion,
+  normalizeConcrete,
+} from '../../ExtrinsicBuilder.utils';
+import {
   getPolkadotXcmExtrinsicArgs,
   shouldFeeAssetPrecedeAsset,
 } from './polkadotXcm.util';
@@ -75,25 +79,24 @@ export function polkadotXcm() {
               func,
               getArgs: (extrinsicFunction) => {
                 const isAssetDifferent = !params.asset.isSame(params.fee);
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
                 const assets = [
                   {
-                    id: {
-                      Concrete: {
-                        parents: 0,
-                        interior: {
-                          X2: [
-                            {
-                              PalletInstance:
-                                params.asset.getAssetPalletInstance(),
-                            },
-                            {
-                              GeneralIndex: params.asset.getAssetId(),
-                            },
-                          ],
-                        },
+                    id: normalizeConcrete(version, {
+                      parents: 0,
+                      interior: {
+                        X2: [
+                          {
+                            PalletInstance:
+                              params.asset.getAssetPalletInstance(),
+                          },
+                          {
+                            GeneralIndex: params.asset.getAssetId(),
+                          },
+                        ],
                       },
-                    },
+                    }),
                     fun: {
                       Fungible: params.asset.amount,
                     },
@@ -105,22 +108,19 @@ export function polkadotXcm() {
 
                 if (isAssetDifferent) {
                   const feeAsset = {
-                    id: {
-                      Concrete: {
-                        parents: 0,
-                        interior: {
-                          X2: [
-                            {
-                              PalletInstance:
-                                params.fee.getAssetPalletInstance(),
-                            },
-                            {
-                              GeneralIndex: params.fee.getAssetId(),
-                            },
-                          ],
-                        },
+                    id: normalizeConcrete(version, {
+                      parents: 0,
+                      interior: {
+                        X2: [
+                          {
+                            PalletInstance: params.fee.getAssetPalletInstance(),
+                          },
+                          {
+                            GeneralIndex: params.fee.getAssetId(),
+                          },
+                        ],
                       },
-                    },
+                    }),
                     fun: {
                       Fungible: params.fee.amount,
                     },
@@ -153,34 +153,35 @@ export function polkadotXcm() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   asset: [
                     {
-                      id: {
-                        Concrete: {
-                          parents: 1,
-                          interior: {
-                            X2: [
-                              {
-                                Parachain: params.destination.parachainId,
-                              },
-                              {
-                                PalletInstance:
-                                  params.asset.getAssetPalletInstance(),
-                              },
-                            ],
-                          },
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                params.asset.getAssetPalletInstance(),
+                            },
+                          ],
                         },
-                      },
+                      }),
                       fun: {
                         Fungible: params.asset.amount,
                       },
                     },
                   ],
-                }),
+                });
+              },
             }),
         }),
       };
