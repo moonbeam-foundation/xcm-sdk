@@ -201,12 +201,12 @@ export async function getVersionedAssetId(
   const assetId = asset.getAssetId();
   const palletInstance = asset.getAssetPalletInstance();
 
-  if (assetId === chain.nativeAsset.address) {
+  if (assetId === chain.nativeAsset.originSymbol) {
     return getNativeAssetId(palletInstance);
   }
 
-  if (isHexString(assetId)) {
-    return getConcreteAssetIdWithAccountKey20(assetId, palletInstance);
+  if (asset.hasOnlyAddress()) {
+    return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
   }
 
   const assetType = await getAssetIdType(api, assetId);

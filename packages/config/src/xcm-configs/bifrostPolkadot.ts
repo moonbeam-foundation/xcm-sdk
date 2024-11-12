@@ -84,7 +84,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       destination: {
         asset: glmr,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().substrate().system().account(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
