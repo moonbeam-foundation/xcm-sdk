@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { XcmVersion } from './ExtrinsicBuilder.interfaces';
-import {
-  applyConcreteWrapper,
-  normalizeConcrete,
-  normalizeX1,
-} from './ExtrinsicBuilder.utils';
+import { normalizeConcrete, normalizeX1 } from './ExtrinsicBuilder.utils';
 
 describe('normalizeX1', () => {
   it('should return original object when xcmVersion < v4', () => {
