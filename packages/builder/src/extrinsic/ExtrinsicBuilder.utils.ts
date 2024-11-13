@@ -74,9 +74,8 @@ export function normalizeX1(
   if (!isXcmV4(xcmVersion)) {
     return versionedObject;
   }
-  const normalizedAssetType = { ...versionedObject };
-  console.log('normalizedAssetType', normalizedAssetType);
-  const interior = normalizedAssetType.interior;
+  const normalizedObject = { ...versionedObject };
+  const interior = normalizedObject.interior;
   if (interior && typeof interior === 'object' && !Array.isArray(interior)) {
     const key = 'X1' in interior ? 'X1' : 'x1' in interior ? 'x1' : null;
     if (key && !Array.isArray(interior[key])) {
@@ -84,7 +83,7 @@ export function normalizeX1(
     }
   }
 
-  return normalizedAssetType;
+  return normalizedObject;
 }
 
 export function normalizeConcrete(
