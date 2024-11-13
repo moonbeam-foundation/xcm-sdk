@@ -46,7 +46,7 @@ export function Xtokens() {
                 fee.address
                   ? formatAssetIdToERC20(fee.address)
                   : fee.getAssetId(),
-                fee,
+                fee.amount,
               ],
             ],
             1, // index of the fee asset

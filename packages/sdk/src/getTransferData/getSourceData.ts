@@ -64,7 +64,7 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const existentialDeposit = await getExistentialDeposit(destination);
+  const existentialDeposit = await getExistentialDeposit(source);
   const min = await getAssetMin({
     asset,
     builder: route.source.min,

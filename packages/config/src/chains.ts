@@ -1310,7 +1310,7 @@ export const moonbeam = new EvmParachain({
     }),
     ChainAsset.fromAsset(wifd, {
       address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
-      decimals: 18,
+      decimals: 10,
       ids: {
         id: '61295607754960722617854661686514597014',
       },
