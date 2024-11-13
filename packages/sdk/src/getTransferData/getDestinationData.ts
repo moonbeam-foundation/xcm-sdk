@@ -66,7 +66,11 @@ async function getSovereignAccountBalances({
   destination,
   source,
 }: GetSovereignAccountBalancesProps) {
-  if (!Parachain.is(source.chain) || !Parachain.is(destination.chain)) {
+  if (
+    !Parachain.is(source.chain) ||
+    !Parachain.is(destination.chain) ||
+    !destination.chain.checkSovereignAccountBalances
+  ) {
     return undefined;
   }
 

@@ -90,4 +90,8 @@ export class ChainAsset extends Asset {
   getAssetMin(): bigint {
     return this.min ?? 0n;
   }
+
+  hasOnlyAddress(): this is { address: string } {
+    return !!this.address && !this.ids?.id;
+  }
 }

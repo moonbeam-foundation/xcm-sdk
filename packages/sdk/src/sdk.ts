@@ -1,6 +1,7 @@
 import { ConfigService, xcmRoutesMap } from '@moonbeam-network/xcm-config';
 import {
   type AnyAsset,
+  type AnyChain,
   type AnyParachain,
   type AssetAmount,
   type Ecosystem,
@@ -28,7 +29,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 
       return {
         sources,
-        setSource(source: string | AnyParachain) {
+        setSource(source: string | AnyChain) {
           const destinations = service.getDestinationChains({
             asset,
             source,
@@ -36,7 +37,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
 
           return {
             destinations,
-            setDestination(destination: string | AnyParachain) {
+            setDestination(destination: string | AnyChain) {
               const route = service.getAssetRoute({
                 asset,
                 source,
@@ -59,7 +60,7 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                     );
                   }
 
-                  if (!EvmParachain.isAnyParachain(route.destination)) {
+                  if (!EvmParachain.isAnyParachain(route.destination.chain)) {
                     throw new Error(
                       'Destination chain should be a Parachain or EvmParachain',
                     );

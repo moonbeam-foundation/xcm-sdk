@@ -3,7 +3,6 @@ import type {
   ChainAsset,
   ChainAssetId,
 } from '@moonbeam-network/xcm-types';
-import { isHexString } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Option, Result, u128 } from '@polkadot/types';
 import type {
@@ -12,6 +11,10 @@ import type {
 } from '@polkadot/types/interfaces';
 import type { AnyJson } from '@polkadot/types/types';
 import { XcmVersion } from '../extrinsic';
+import {
+  normalizeConcrete,
+  normalizeX1,
+} from '../extrinsic/ExtrinsicBuilder.utils';
 import type { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
 const DEFAULT_AMOUNT = 10 ** 6;
@@ -22,23 +25,6 @@ const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
 
 function isXcmV4() {
   return XCM_VERSION === XcmVersion.v4;
-}
-
-function normalizeX1(assetType: Record<string, AnyJson>) {
-  if (!isXcmV4()) {
-    return assetType;
-  }
-  const normalizedAssetType = { ...assetType };
-  if (
-    normalizedAssetType.interior &&
-    typeof normalizedAssetType.interior === 'object' &&
-    'x1' in normalizedAssetType.interior
-  ) {
-    if (!Array.isArray(normalizedAssetType.interior.x1)) {
-      normalizedAssetType.interior.x1 = [normalizedAssetType.interior.x1];
-    }
-  }
-  return normalizedAssetType;
 }
 
 export function getWithdrawAssetInstruction(assetTypes: object[]) {
@@ -121,12 +107,6 @@ export function getSetTopicInstruction() {
   };
 }
 
-function applyConcreteWrapper(id: object) {
-  return {
-    Concrete: { ...id },
-  };
-}
-
 // TODO this is for Moonbeam, when applying to all we have to
 // configure the multilocation of the native asset in the chain
 function getNativeAssetId(palletInstanceNumber: number | undefined): object {
@@ -145,8 +125,7 @@ function getNativeAssetId(palletInstanceNumber: number | undefined): object {
     },
     parents: '0',
   };
-
-  return isXcmV4() ? id : applyConcreteWrapper(id);
+  return normalizeConcrete(XCM_VERSION, id);
 }
 
 function getConcreteAssetIdWithAccountKey20(
@@ -175,7 +154,7 @@ function getConcreteAssetIdWithAccountKey20(
     },
     parents: '0',
   };
-  return isXcmV4() ? id : applyConcreteWrapper(id);
+  return normalizeConcrete(XCM_VERSION, id);
 }
 
 export async function getAssetIdType(
@@ -201,22 +180,20 @@ export async function getVersionedAssetId(
   const assetId = asset.getAssetId();
   const palletInstance = asset.getAssetPalletInstance();
 
-  if (assetId === chain.nativeAsset.address) {
+  if (assetId === chain.nativeAsset.originSymbol) {
     return getNativeAssetId(palletInstance);
   }
 
-  if (isHexString(assetId)) {
-    return getConcreteAssetIdWithAccountKey20(assetId, palletInstance);
+  if (asset.hasOnlyAddress()) {
+    return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
   }
 
   const assetType = await getAssetIdType(api, assetId);
   const assetTypeObject = assetType.unwrap().asXcm.toJSON();
 
-  const normalizedAssetTypeObject = normalizeX1(assetTypeObject);
+  const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
 
-  return isXcmV4()
-    ? normalizedAssetTypeObject
-    : applyConcreteWrapper(normalizedAssetTypeObject);
+  return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
 }
 
 export async function getFeeForXcmInstructionsAndAsset(

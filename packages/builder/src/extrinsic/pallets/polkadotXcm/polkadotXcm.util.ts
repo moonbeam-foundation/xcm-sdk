@@ -4,6 +4,7 @@ import type { Parents } from '../../ExtrinsicBuilder.interfaces';
 import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
+  normalizeX1,
 } from '../../ExtrinsicBuilder.utils';
 
 export interface GetExtrinsicParams extends BuilderParams {
@@ -27,22 +28,22 @@ export function getPolkadotXcmExtrinsicArgs({
 
   return [
     {
-      [version]: {
+      [version]: normalizeX1(version, {
         parents,
         interior: {
           X1: {
             Parachain: destination.parachainId,
           },
         },
-      },
+      }),
     },
     {
-      [version]: {
+      [version]: normalizeX1(version, {
         parents: 0,
         interior: {
           X1: getExtrinsicAccount(destinationAddress),
         },
-      },
+      }),
     },
     {
       [version]: asset,
