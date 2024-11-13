@@ -91,10 +91,12 @@ export function normalizeConcrete(
   xcmVersion: XcmVersion,
   versionedObject: object,
 ) {
-  return isXcmV4(xcmVersion) ? versionedObject : applyConcreteWrapper;
+  return isXcmV4(xcmVersion)
+    ? versionedObject
+    : applyConcreteWrapper(versionedObject);
 }
 
-function applyConcreteWrapper(versionedObject: object) {
+export function applyConcreteWrapper(versionedObject: object) {
   return {
     Concrete: { ...versionedObject },
   };
