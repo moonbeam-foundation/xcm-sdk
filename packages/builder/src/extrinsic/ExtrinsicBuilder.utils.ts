@@ -67,15 +67,18 @@ export function isXcmV4(xcmVersion: XcmVersion): boolean {
   return xcmVersion >= XcmVersion.v4;
 }
 
-export function normalizeX1(xcmVersion: XcmVersion, versionedObject: Record<string, AnyJson>) {
+export function normalizeX1(
+  xcmVersion: XcmVersion,
+  versionedObject: Record<string, AnyJson | object>,
+) {
   if (!isXcmV4(xcmVersion)) return versionedObject;
 
   const normalizedObject = { ...versionedObject };
-  const interior = normalizedObject.interior;
+  const interior = normalizedObject.interior as object;
 
-  if (interior?.X1 && !Array.isArray(interior.X1)) {
+  if ('X1' in interior && interior?.X1 && !Array.isArray(interior.X1)) {
     interior.X1 = [interior.X1];
-  } else if (interior?.x1 && !Array.isArray(interior.x1)) {
+  } else if ('x1' in interior && interior?.x1 && !Array.isArray(interior.x1)) {
     interior.x1 = [interior.x1];
   }
 
