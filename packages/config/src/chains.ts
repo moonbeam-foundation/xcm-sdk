@@ -1539,29 +1539,6 @@ export const neuroweb = new Parachain({
   ],
 });
 
-export const nodle = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(nodl, {
-      decimals: 11,
-      ids: {
-        id: 'NodleNative',
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21',
-  key: 'nodle',
-  name: 'Nodle',
-  nativeAsset: nodl,
-  parachainId: 2026,
-  ss58Format: 37,
-  ws: [
-    'wss://nodle-rpc.dwellir.com',
-    'wss://nodle-parachain.api.onfinality.io/public-ws',
-  ],
-});
-
 export const originTrailAlphanet = new Parachain({
   assets: [
     ChainAsset.fromAsset(otp, {
@@ -2250,7 +2227,6 @@ export const chainsList: AnyChain[] = [
   moonbeam,
   moonriver,
   neuroweb,
-  nodle,
   originTrailAlphanet,
   peaqChain,
   peaqEvm,

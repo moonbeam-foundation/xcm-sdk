@@ -4,7 +4,11 @@ import {
   type Parents,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
+import {
+  getExtrinsicAccount,
+  getExtrinsicArgumentVersion,
+  normalizeConcrete,
+} from '../../ExtrinsicBuilder.utils';
 import { getPolkadotXcmExtrinsicArgs } from '../polkadotXcm/polkadotXcm.util';
 
 const pallet = 'xcmPallet';
@@ -20,25 +24,25 @@ export function xcmPallet() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+                return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   parents,
                   func: extrinsicFunction,
                   asset: [
                     {
-                      id: {
-                        Concrete: {
-                          parents: 0,
-                          interior: 'Here',
-                        },
-                      },
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: 'Here',
+                      }),
                       fun: {
                         Fungible: params.asset.amount,
                       },
                     },
                   ],
-                }),
+                });
+              },
             }),
         }),
       };

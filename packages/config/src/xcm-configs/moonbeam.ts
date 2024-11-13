@@ -1,4 +1,8 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
+import {
+  AssetMinBuilder,
+  BalanceBuilder,
+  ContractBuilder,
+} from '@moonbeam-network/xcm-builder';
 import {
   aca,
   apillon,
@@ -52,7 +56,6 @@ import {
   mantaParachain,
   moonbeam,
   neuroweb,
-  nodle,
   peaqChain,
   peaqEvm,
   pendulum,
@@ -493,29 +496,6 @@ export const moonbeamRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: nodl,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: nodl,
-        balance: BalanceBuilder().substrate().system().account(),
-        chain: nodle,
-        fee: {
-          amount: 0.02,
-          asset: nodl,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
         asset: neuro,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -673,6 +653,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: usdt,
           balance: BalanceBuilder().substrate().assets().account(), // TODO change when DOT pays for fees
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },
@@ -700,6 +681,7 @@ export const moonbeamRoutes = new ChainRoutes({
           // asset: dot,
           // balance: BalanceBuilder().substrate().system().account(),
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },
@@ -724,6 +706,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: usdt,
           balance: BalanceBuilder().substrate().assets().account(), // TODO change when DOT pays for fees
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },
@@ -748,6 +731,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: usdt,
           balance: BalanceBuilder().substrate().assets().account(), // TODO change when DOT pays for fees
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },
@@ -1431,6 +1415,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: usdt,
           balance: BalanceBuilder().substrate().assets().account(), // TODO change when DOT pays for fees
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
     },

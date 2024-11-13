@@ -195,24 +195,25 @@ export function polkadotXcm() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   asset: [
                     {
-                      id: {
-                        Concrete: {
-                          parents: 1,
-                          interior: 'Here',
-                        },
-                      },
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: 'Here',
+                      }),
                       fun: {
                         Fungible: params.asset.amount,
                       },
                     },
                   ],
-                }),
+                });
+              },
             }),
         }),
       };
