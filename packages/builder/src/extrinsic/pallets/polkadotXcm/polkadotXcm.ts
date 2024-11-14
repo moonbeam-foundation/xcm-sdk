@@ -3,6 +3,7 @@ import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import {
   getExtrinsicArgumentVersion,
   normalizeConcrete,
+  normalizeX1,
 } from '../../ExtrinsicBuilder.utils';
 import {
   getPolkadotXcmExtrinsicArgs,
@@ -22,24 +23,24 @@ export function polkadotXcm() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+                return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   asset: [
                     {
-                      id: {
-                        Concrete: {
-                          parents: 0,
-                          interior: 'Here',
-                        },
-                      },
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: 'Here',
+                      }),
                       fun: {
                         Fungible: params.asset.amount,
                       },
                     },
                   ],
-                }),
+                });
+              },
             }),
         }),
         X1: (): ExtrinsicConfigBuilder => ({
@@ -47,14 +48,17 @@ export function polkadotXcm() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   asset: [
                     {
-                      id: {
-                        Concrete: {
+                      id: normalizeConcrete(
+                        version,
+                        normalizeX1(version, {
                           parents: 0,
                           interior: {
                             X1: {
@@ -62,14 +66,15 @@ export function polkadotXcm() {
                                 params.asset.getAssetPalletInstance(),
                             },
                           },
-                        },
-                      },
+                        }),
+                      ),
                       fun: {
                         Fungible: params.asset.amount,
                       },
                     },
                   ],
-                }),
+                });
+              },
             }),
         }),
         X2: (): ExtrinsicConfigBuilder => ({

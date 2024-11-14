@@ -584,7 +584,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: darwinia,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 4,
+          amount: 0.1,
           asset: ring,
         },
       },

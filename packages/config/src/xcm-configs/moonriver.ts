@@ -266,7 +266,7 @@ export const moonriverRoutes = new ChainRoutes({
         chain: darwiniaCrab,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 4,
+          amount: 0.1,
           asset: crab,
         },
       },

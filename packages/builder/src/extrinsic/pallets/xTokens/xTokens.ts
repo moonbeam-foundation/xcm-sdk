@@ -3,7 +3,11 @@ import {
   type ExtrinsicConfigBuilder,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
+import {
+  getExtrinsicArgumentVersion,
+  normalizeConcrete,
+  normalizeX1,
+} from '../../ExtrinsicBuilder.utils';
 import { getDestination, getWeight } from './xTokens.utils';
 
 const pallet = 'xTokens';
@@ -44,12 +48,10 @@ export function xTokens() {
                 return [
                   {
                     [version]: {
-                      id: {
-                        Concrete: {
-                          parents: 0,
-                          interior: 'Here',
-                        },
-                      },
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: 'Here',
+                      }),
                       fun: {
                         Fungible: asset.amount,
                       },
@@ -72,16 +74,17 @@ export function xTokens() {
                 return [
                   {
                     [version]: {
-                      id: {
-                        Concrete: {
+                      id: normalizeConcrete(
+                        version,
+                        normalizeX1(version, {
                           parents: 1,
                           interior: {
                             X1: {
                               Parachain: originParachainId,
                             },
                           },
-                        },
-                      },
+                        }),
+                      ),
                       fun: {
                         Fungible: asset.amount,
                       },
@@ -104,21 +107,19 @@ export function xTokens() {
                 return [
                   {
                     [version]: {
-                      id: {
-                        Concrete: {
-                          parents: 1,
-                          interior: {
-                            X2: [
-                              {
-                                Parachain: originParachainId,
-                              },
-                              {
-                                GeneralKey: asset.getAssetId(),
-                              },
-                            ],
-                          },
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: originParachainId,
+                            },
+                            {
+                              GeneralKey: asset.getAssetId(),
+                            },
+                          ],
                         },
-                      },
+                      }),
                       fun: {
                         Fungible: asset.amount,
                       },
