@@ -1,4 +1,8 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
+import {
+  AssetMinBuilder,
+  BalanceBuilder,
+  ContractBuilder,
+} from '@moonbeam-network/xcm-builder';
 import {
   aseed,
   bnc,
@@ -64,6 +68,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.0008544,
           asset: movr,
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -83,6 +88,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.001,
           asset: movr,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -121,6 +127,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.001,
           asset: movr,
         },
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -221,29 +228,6 @@ export const moonriverRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: karura,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.256,
-          asset: aseed,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
         asset: bnc,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -331,6 +315,30 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.032,
           asset: kar,
         },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: aseed,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: movr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: aseed,
+        chain: karura,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.256,
+          asset: aseed,
+        },
+        min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -515,6 +523,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.0000504,
           asset: rmrk,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -630,6 +639,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.00504,
           asset: usdt,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -676,6 +686,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.0001,
           asset: vbnc,
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -699,6 +710,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.0001,
           asset: vksm,
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -722,6 +734,7 @@ export const moonriverRoutes = new ChainRoutes({
           amount: 0.00000001,
           asset: vmovr,
         },
+        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
