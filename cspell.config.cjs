@@ -12,6 +12,7 @@ module.exports = {
     '**/*.sol',
     'pnpm-lock.yaml',
     'CHANGELOG.md',
+    '.gitignore',
   ],
   words: vscodeConfig['cSpell.words'],
 };
