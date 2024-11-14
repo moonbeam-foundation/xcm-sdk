@@ -123,8 +123,10 @@ Build the project:
 pnpm run build
 ```
 
+Link the SDK:
+
 ```bash
-pnpm run link
+pnpm run clean && pnpm run build && pnpm run link
 ```
 
 In your project where you would like to test the changes:
