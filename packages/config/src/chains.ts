@@ -1310,7 +1310,7 @@ export const moonbeam = new EvmParachain({
     }),
     ChainAsset.fromAsset(wifd, {
       address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
-      decimals: 18,
+      decimals: 10,
       ids: {
         id: '61295607754960722617854661686514597014',
       },
@@ -1536,29 +1536,6 @@ export const neuroweb = new Parachain({
   ws: [
     'wss://neuroweb-rpc.dwellir.com',
     'wss://parachain-rpc.origin-trail.network',
-  ],
-});
-
-export const nodle = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(nodl, {
-      decimals: 11,
-      ids: {
-        id: 'NodleNative',
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21',
-  key: 'nodle',
-  name: 'Nodle',
-  nativeAsset: nodl,
-  parachainId: 2026,
-  ss58Format: 37,
-  ws: [
-    'wss://nodle-rpc.dwellir.com',
-    'wss://nodle-parachain.api.onfinality.io/public-ws',
   ],
 });
 
@@ -2250,7 +2227,6 @@ export const chainsList: AnyChain[] = [
   moonbeam,
   moonriver,
   neuroweb,
-  nodle,
   originTrailAlphanet,
   peaqChain,
   peaqEvm,

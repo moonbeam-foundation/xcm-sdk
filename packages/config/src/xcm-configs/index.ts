@@ -27,7 +27,6 @@ import { moonbaseBetaRoutes } from './moonbaseBeta';
 import { moonbeamRoutes } from './moonbeam';
 import { moonriverRoutes } from './moonriver';
 import { neurowebRoutes } from './neuroweb';
-import { nodleRoutes } from './nodle';
 import { originTrailAlphanetRoutes } from './originTrailAlphanet';
 import { peaqRoutes } from './peaq';
 import { peaqAlphanetRoutes } from './peaqAlphanet';
@@ -74,7 +73,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   moonbeamRoutes,
   moonriverRoutes,
   neurowebRoutes,
-  nodleRoutes,
   originTrailAlphanetRoutes,
   peaqRoutes,
   peaqEvmRoutes,

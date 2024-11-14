@@ -1,4 +1,8 @@
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
+import {
+  AssetMinBuilder,
+  BalanceBuilder,
+  ContractBuilder,
+} from '@moonbeam-network/xcm-builder';
 import {
   agng,
   alan,
@@ -243,6 +247,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           amount: 5,
           asset: tt1,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -419,6 +424,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           amount: 0.00000001,
           asset: dev,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -442,6 +448,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           amount: 0.01,
           asset: ftmwh,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -484,6 +491,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           amount: 0.00000001,
           asset: dev,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
     },
@@ -507,6 +515,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           amount: 0.01,
           asset: ftmwh,
         },
+        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
     },
