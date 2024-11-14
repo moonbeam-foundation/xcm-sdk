@@ -31,6 +31,7 @@ const keyring = new Keyring({
   type: 'sr25519',
 });
 const pair = keyring.createFromUri(POLKADOT_PRIVATE_KEY);
+
 console.log(`Substrate address: ${pair.address}`);
 
 // ===========================================================================
