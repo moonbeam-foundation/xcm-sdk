@@ -553,7 +553,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
   _AssetAmount {
     "address": "0xffffffff2e1d1ac9ea1686255befe995b31abc96",
     "amount": 0n,
-    "decimals": 18,
+    "decimals": 10,
     "ids": {
       "id": "61295607754960722617854661686514597014",
     },
@@ -872,18 +872,6 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "neuro",
     "min": undefined,
     "originSymbol": "NEURO",
-    "symbol": undefined,
-  },
-  _AssetAmount {
-    "address": "0xfffffffFe896ba7Cb118b9Fa571c6dC0a99dEfF1",
-    "amount": 0n,
-    "decimals": 11,
-    "ids": {
-      "id": "309163521958167876851250718453738106865",
-    },
-    "key": "nodl",
-    "min": undefined,
-    "originSymbol": "NODL",
     "symbol": undefined,
   },
   _AssetAmount {
