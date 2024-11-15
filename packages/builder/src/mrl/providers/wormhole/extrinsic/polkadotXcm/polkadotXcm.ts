@@ -115,6 +115,7 @@ export function buildSendExtrinsic({
 
   return sourceApi.tx.polkadotXcm.send(
     {
+      // TODO apply XCM versioning
       V3: {
         parents: 1,
         interior: { X1: { Parachain: moonChain.parachainId } },

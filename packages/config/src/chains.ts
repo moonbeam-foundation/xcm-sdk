@@ -932,6 +932,9 @@ export const moonbaseAlpha = new EvmParachain({
     ChainAsset.fromAsset(ftmwh, {
       address: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
       decimals: 18,
+      ids: {
+        palletInstance: 48,
+      },
     }),
     ChainAsset.fromAsset(hdx, {
       address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
@@ -943,6 +946,9 @@ export const moonbaseAlpha = new EvmParachain({
     ChainAsset.fromAsset(usdcwh, {
       address: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
       decimals: 6,
+      ids: {
+        palletInstance: 48,
+      },
     }),
     ChainAsset.fromAsset(agng, {
       address: '0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20',
@@ -2228,6 +2234,7 @@ export const chainsList: AnyChain[] = [
   moonriver,
   neuroweb,
   originTrailAlphanet,
+  peaqAlphanet,
   peaqChain,
   peaqEvm,
   peaqEvmAlphanet,
