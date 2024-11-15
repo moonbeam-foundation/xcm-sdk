@@ -22,7 +22,11 @@
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
   "files": ["build"],
   "type": "module",
-  "exports": "./build/index.mjs",
+  "exports": {
+    "import": "./build/index.mjs",
+    "types": "./build/index.d.ts",
+    "default": "./build/index.mjs"
+  },
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
