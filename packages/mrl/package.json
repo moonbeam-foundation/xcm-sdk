@@ -37,7 +37,7 @@
     "@polkadot/api": "^12.4.2",
     "@polkadot/api-augment": "^12.4.2",
     "@polkadot/types": "^12.4.2",
-    "@polkadot/util": "^13.0.2",
+    "@polkadot/util": "^13.1.1",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
     "@wormhole-foundation/sdk-evm": "^0.10.7",
     "viem": "^2.21.7"
