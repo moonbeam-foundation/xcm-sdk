@@ -43,10 +43,8 @@ async function main() {
 
   for (const pkg of pkgs) {
     const { name } = pkg;
-    const { stdout } = await execPromise(`npm view ${name} dist-tags.dev`);
 
-    const current = stdout.replace(/\n$/, '');
-    const newVersion = current.replace(/\.\d+$/, `.${nextVersionNumber}`);
+    const newVersion = `1.0.0-dev.${nextVersionNumber}`;
 
     pkg.version = newVersion;
 
