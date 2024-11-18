@@ -310,7 +310,7 @@
 
 ### Patch Changes
 
-- [#256](https://github.com/moonbeam-foundation/xcm-sdk/pull/256) [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependecies
+- [#256](https://github.com/moonbeam-foundation/xcm-sdk/pull/256) [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
 
 - Updated dependencies [[`6282815`](https://github.com/moonbeam-foundation/xcm-sdk/commit/62828150ee586049c81145e053e390fcb8027c2a), [`653b0b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/653b0b5d162d5b6d724dd91f37f026cfb3d3ed2f)]:
   - @moonbeam-network/xcm-builder@2.2.0
@@ -430,7 +430,7 @@
 
 ### Major Changes
 
-- [#178](https://github.com/moonbeam-foundation/xcm-sdk/pull/178) [`5e77c1ed8aba82a3b12bf52393cef5b658351614`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5e77c1ed8aba82a3b12bf52393cef5b658351614) Thanks [@mmaurello](https://github.com/mmaurello)! - Upgrate Viem and ethers major versions
+- [#178](https://github.com/moonbeam-foundation/xcm-sdk/pull/178) [`5e77c1ed8aba82a3b12bf52393cef5b658351614`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5e77c1ed8aba82a3b12bf52393cef5b658351614) Thanks [@mmaurello](https://github.com/mmaurello)! - Upgrade Viem and ethers major versions
 
   Breaking changes: we now require either `viem` V2 or `ethers` V6
 
@@ -789,6 +789,6 @@
 
 ### Patch Changes
 
-- [#74](https://github.com/moonbeam-foundation/xcm-sdk/pull/74) [`7159d68`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7159d68cd9a2a8c0c2e2e0f8a8405e6a1a9a8607) Thanks [@ekenigs](https://github.com/ekenigs)! - A new extrinsic fro Equilibrium
+- [#74](https://github.com/moonbeam-foundation/xcm-sdk/pull/74) [`7159d68`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7159d68cd9a2a8c0c2e2e0f8a8405e6a1a9a8607) Thanks [@ekenigs](https://github.com/ekenigs)! - A new extrinsic for Equilibrium
 
 - [#73](https://github.com/moonbeam-foundation/xcm-sdk/pull/73) [`a3f3d86`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a3f3d86290475e6353fa74c06c2b7e6c9ba65eb4) Thanks [@ekenigs](https://github.com/ekenigs)! - Khala and Phala v3 fix
