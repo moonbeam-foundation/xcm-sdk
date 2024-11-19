@@ -33,13 +33,13 @@
   "main": "./build/index.mjs",
   "dependencies": {
     "@moonbeam-network/xcm-utils": "workspace:*",
-    "big.js": "^6.2.1"
+    "big.js": "^6.2.2"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2",
     "@wormhole-foundation/sdk-connect": "^0.10.7"
   },
   "peerDependencies": {
-    "viem": "^2.21.7"
+    "viem": "^2.21.48"
   }
 }
