@@ -1,7 +1,7 @@
 {
   "name": "sdk-simple",
   "version": "3.0.0",
-  "private": true,
+  "private": false,
   "license": "UNLICENSED",
   "type": "module",
   "main": "index.ts",
