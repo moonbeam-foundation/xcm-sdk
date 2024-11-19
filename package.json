@@ -39,7 +39,7 @@
   "dependencies": {
     "@polkadot/api": "^14.3.1",
     "@polkadot/api-augment": "^14.3.1",
-    "@polkadot/apps-config": "^0.143.2",
+    "@polkadot/apps-config": "^0.146.1",
     "@polkadot/types": "^14.3.1",
     "@polkadot/util": "^13.2.3",
     "@polkadot/util-crypto": "^13.2.3",
