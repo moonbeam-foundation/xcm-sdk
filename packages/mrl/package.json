@@ -44,6 +44,6 @@
     "@polkadot/util": "^13.2.3",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
     "@wormhole-foundation/sdk-evm": "^0.10.7",
-    "viem": "^2.21.48"
+    "viem": "^2.21.7"
   }
 }
