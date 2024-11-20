@@ -2,7 +2,7 @@
   "name": "scripts",
   "version": "1.0.0",
   "scripts": {},
-  "private": false,
+  "private": true,
   "license": "UNLICENSED",
   "description": "",
   "dependencies": {
