@@ -1,7 +1,7 @@
 {
   "name": "mrl-simple",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "start": "bun index.ts"
