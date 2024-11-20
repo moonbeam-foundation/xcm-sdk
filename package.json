@@ -2,7 +2,7 @@
   "name": "xcm-sdk",
   "author": "moonbeam-foundation",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
