@@ -33,7 +33,7 @@
   "main": "./build/index.mjs",
   "dependencies": {
     "@moonbeam-network/xcm-utils": "workspace:*",
-    "big.js": "^6.2.2"
+    "big.js": "^6.2.1"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2",

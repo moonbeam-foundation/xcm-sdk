@@ -33,16 +33,16 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
-    "big.js": "^6.2.2",
+    "big.js": "^6.2.1",
     "lru-cache": "^10.2.2"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "^14.3.1",
-    "@polkadot/apps-config": "^0.146.1",
-    "@polkadot/util": "^13.2.3",
-    "@polkadot/util-crypto": "^13.2.3"
+    "@polkadot/api": "^12.4.2",
+    "@polkadot/apps-config": "^0.143.2",
+    "@polkadot/util": "^13.1.1",
+    "@polkadot/util-crypto": "^13.1.1"
   }
 }
