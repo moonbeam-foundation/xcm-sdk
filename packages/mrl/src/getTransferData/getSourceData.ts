@@ -21,6 +21,7 @@ import {
   type EvmChain,
   type EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type { SourceTransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
 import {
@@ -239,11 +240,13 @@ async function getWormholeFee({
   config,
 }: GetWormholeFeeParams): Promise<AssetAmount | undefined> {
   if (WormholeConfig.is(config)) {
+    const safetyAmount = toBigInt(0.000001, asset.decimals);
+
     const wh = WormholeService.create(chain as EvmChain | EvmParachain);
     const fee = await wh.getFee(config);
 
     return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: fee.relayFee?.amount || 0n,
+      amount: fee.relayFee ? fee.relayFee.amount + safetyAmount : 0n,
     });
   }
 

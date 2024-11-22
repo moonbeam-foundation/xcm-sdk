@@ -119,7 +119,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: ftmwh,
-          amount: 0,
+          amount: 0.01,
         },
       },
       mrl: {
@@ -150,7 +150,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
           asset: dev,
-          amount: 0,
+          amount: 0.01,
         },
       },
       mrl: {

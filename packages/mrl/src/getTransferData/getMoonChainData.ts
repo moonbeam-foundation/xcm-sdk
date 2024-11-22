@@ -25,16 +25,18 @@ export async function getMoonChainData({
   }
 
   const moonChain = getMoonChain(route.source.chain);
-  const asset = moonChain.getChainAsset(route.mrl.moonChain.asset);
-  const isDestinationMoonChain = route.destination.chain.isEqual(moonChain);
+  // TODO is this used for something? do we need the balance?
+  // const asset = moonChain.getChainAsset(route.mrl.moonChain.asset);
+  // const isDestinationMoonChain = route.destination.chain.isEqual(moonChain);
 
-  if (isDestinationMoonChain) {
-    return {
-      balance: destinationData.balance,
-      chain: destinationData.chain,
-      fee: destinationData.fee,
-    };
-  }
+  // TODO technically not correct
+  // if (isDestinationMoonChain) {
+  //   return {
+  //     balance: destinationData.balance,
+  //     chain: destinationData.chain,
+  //     fee: destinationData.fee,
+  //   };
+  // }
 
   const fee = await getDestinationFee({
     address: sourceAddress, // TODO not correct
@@ -56,15 +58,16 @@ export async function getMoonChainData({
     address = address20;
   }
 
-  const balance = await getBalance({
+  const feeBalance = await getBalance({
     address,
-    asset,
+    asset: moonChain.getChainAsset(route.mrl.moonChain.fee.asset),
     builder: route.mrl.moonChain.fee.balance,
     chain: moonChain,
   });
 
   return {
-    balance,
+    // TODO technically feeBalance
+    balance: feeBalance,
     chain: moonChain,
     fee,
   };
