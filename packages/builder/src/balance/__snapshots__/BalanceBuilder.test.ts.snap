@@ -14,6 +14,39 @@ SubstrateQueryConfig {
 
 exports[`balanceBuilder > assets > account > should transform correctly 1`] = `999n`;
 
+exports[`balanceBuilder > foreignAssets > account > should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    {
+      "interior": {
+        "X2": [
+          {
+            "GlobalConsensus": {
+              "ethereum": {
+                "chainId": 1,
+              },
+            },
+          },
+          {
+            "AccountKey20": {
+              "key": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            },
+          },
+        ],
+      },
+      "parents": 2,
+    },
+    "<ACCOUNT>",
+  ],
+  "func": "account",
+  "module": "foreignAssets",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`balanceBuilder > foreignAssets > account > should transform correctly 1`] = `999n`;
+
 exports[`balanceBuilder > system > account > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [

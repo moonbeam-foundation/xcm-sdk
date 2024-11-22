@@ -1,6 +1,8 @@
+import { XcmVersion } from '../../../../build';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import {
+  getExtrinsicAccount,
   getExtrinsicArgumentVersion,
   normalizeConcrete,
   normalizeX1,
@@ -220,6 +222,89 @@ export function polkadotXcm() {
                 });
               },
             }),
+        }),
+      };
+    },
+    transferAssetsUsingTypeAndThen: () => {
+      const func = 'transferAssetsUsingTypeAndThen';
+      return {
+        // TODO we could pass a parameter globalConsensus in the chain asset
+        // but we can do it in V3
+        globalConsensusEthereum: (): ExtrinsicConfigBuilder => ({
+          build: (params) => {
+            const version = XcmVersion.v4;
+            return new ExtrinsicConfig({
+              module: pallet,
+              func,
+
+              getArgs: () => [
+                {
+                  [version]: {
+                    parents: 1,
+                    interior: {
+                      X1: [
+                        {
+                          Parachain: params.destination.parachainId,
+                        },
+                      ],
+                    },
+                  },
+                },
+                {
+                  [version]: [
+                    {
+                      id: {
+                        parents: 2,
+                        interior: {
+                          X2: [
+                            // TODO param
+                            { globalConsensus: { Ethereum: { ChainId: 1 } } },
+                            getExtrinsicAccount(params.asset.address as string),
+                          ],
+                        },
+                      },
+                      fun: { fungible: params.asset.amount },
+                    },
+                  ],
+                },
+                'LocalReserve',
+                {
+                  [version]: {
+                    parents: 2,
+                    interior: {
+                      X2: [
+                        { globalConsensus: { Ethereum: { ChainId: 1 } } },
+                        getExtrinsicAccount(params.asset.address as string),
+                      ],
+                    },
+                  },
+                },
+                'LocalReserve',
+                {
+                  [version]: [
+                    {
+                      DepositAsset: {
+                        assets: {
+                          Wild: { AllCounted: 1 },
+                        },
+                        beneficiary: {
+                          parents: 0,
+                          interior: {
+                            X1: [
+                              getExtrinsicAccount(
+                                params.asset.address as string,
+                              ),
+                            ],
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+                'Unlimited',
+              ],
+            });
+          },
         }),
       };
     },

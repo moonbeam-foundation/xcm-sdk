@@ -1,5 +1,26 @@
 # @moonbeam-network/xcm-config
 
+## 2.7.6
+
+### Patch Changes
+
+- [#383](https://github.com/moonbeam-foundation/xcm-sdk/pull/383) [`5d3e8b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d3e8b470fb9c5640ba3d27c6140e2ff09fc897d) Thanks [@mmaurello](https://github.com/mmaurello)! - Add foreign assets configuration and Snowbridge assets tranfers between Asset Hub and Moonbeam
+
+- Updated dependencies [[`5d3e8b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d3e8b470fb9c5640ba3d27c6140e2ff09fc897d)]:
+  - @moonbeam-network/xcm-builder@2.6.0
+
+## 2.7.5
+
+### Patch Changes
+
+- [#390](https://github.com/moonbeam-foundation/xcm-sdk/pull/390) [`2790340`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2790340bb8ea0edda13765875d91a3a5d993a072) Thanks [@dependabot](https://github.com/apps/dependabot)! - Fix vulnerability
+
+- [#393](https://github.com/moonbeam-foundation/xcm-sdk/pull/393) [`1546937`](https://github.com/moonbeam-foundation/xcm-sdk/commit/1546937e5636cb6e225a06a8e41c6e6593413c42) Thanks [@Rihyx](https://github.com/Rihyx)! - fix cross-spawn vulnerability
+
+- Updated dependencies [[`2790340`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2790340bb8ea0edda13765875d91a3a5d993a072), [`1546937`](https://github.com/moonbeam-foundation/xcm-sdk/commit/1546937e5636cb6e225a06a8e41c6e6593413c42)]:
+  - @moonbeam-network/xcm-builder@2.5.5
+  - @moonbeam-network/xcm-types@2.5.3
+
 ## 2.7.4
 
 ### Patch Changes
