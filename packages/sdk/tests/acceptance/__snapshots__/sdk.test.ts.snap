@@ -317,6 +317,27 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
 [
   r {
     "amount": 0n,
+    "decimals": 18,
+    "key": "wstethe",
+    "originSymbol": "wstETH.e",
+    "symbol": "wstETH.e",
+  },
+  r {
+    "amount": 0n,
+    "decimals": 8,
+    "key": "wbtce",
+    "originSymbol": "WBTC.e",
+    "symbol": "WBTC.e",
+  },
+  r {
+    "amount": 0n,
+    "decimals": 18,
+    "key": "wethe",
+    "originSymbol": "WETH.e",
+    "symbol": "WETH.e",
+  },
+  r {
+    "amount": 0n,
     "decimals": 6,
     "key": "axlusdc",
     "originSymbol": "axlUSDC",
