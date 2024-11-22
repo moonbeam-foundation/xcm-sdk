@@ -12,8 +12,10 @@ import {
   stink,
   usdc,
   usdt,
+  wbtce,
   wethe,
   wifd,
+  wstethe,
 } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
 import { AssetConfig } from '../types/AssetConfig';
@@ -208,6 +210,50 @@ export const polkadotAssetHubConfig = new ChainConfig({
           isAssetReserveChain: false,
         }),
         asset: wethe,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConcensusEthereum(),
+      fee: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
+      },
+      min: AssetMinBuilder().foreignAssets().asset(),
+    }),
+    new AssetConfig({
+      asset: wbtce,
+      balance: BalanceBuilder().substrate().foreignAssets().account(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+        }),
+        asset: wbtce,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConcensusEthereum(),
+      fee: {
+        asset: dot,
+        balance: BalanceBuilder().substrate().system().account(),
+        xcmDeliveryFeeAmount,
+      },
+      min: AssetMinBuilder().foreignAssets().asset(),
+    }),
+    new AssetConfig({
+      asset: wstethe,
+      balance: BalanceBuilder().substrate().foreignAssets().account(),
+      destination: moonbeam,
+      destinationFee: {
+        amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          isAssetReserveChain: false,
+        }),
+        asset: wstethe,
         balance: BalanceBuilder().substrate().assets().account(),
       },
       extrinsic: ExtrinsicBuilder()
