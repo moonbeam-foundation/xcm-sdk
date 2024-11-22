@@ -462,6 +462,109 @@ exports[`polkadotXcm > limitedReserveWithdrawAssets > x2 > should get correct ar
 ]
 `;
 
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen > x2 > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssetsUsingTypeAndThen",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+  "type": "Substrate",
+}
+`;
+
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen > x2 > should get correct arguments 1`] = `
+[
+  {
+    "V4": {
+      "interior": {
+        "X1": [
+          {
+            "Parachain": 1000,
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V4": [
+      {
+        "fun": {
+          "fungible": 99000000000n,
+        },
+        "id": {
+          "interior": {
+            "X2": [
+              {
+                "globalConsensus": {
+                  "Ethereum": {
+                    "ChainId": 1,
+                  },
+                },
+              },
+              {
+                "AccountKey20": {
+                  "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+                },
+              },
+            ],
+          },
+          "parents": 2,
+        },
+      },
+    ],
+  },
+  "LocalReserve",
+  {
+    "V4": {
+      "interior": {
+        "X2": [
+          {
+            "globalConsensus": {
+              "Ethereum": {
+                "ChainId": 1,
+              },
+            },
+          },
+          {
+            "AccountKey20": {
+              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+            },
+          },
+        ],
+      },
+      "parents": 2,
+    },
+  },
+  "LocalReserve",
+  {
+    "V4": [
+      {
+        "DepositAsset": {
+          "assets": {
+            "Wild": {
+              "AllCounted": 1,
+            },
+          },
+          "beneficiary": {
+            "interior": {
+              "X1": [
+                {
+                  "AccountKey20": {
+                    "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+                  },
+                },
+              ],
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  "Unlimited",
+]
+`;
+
 exports[`polkadotXcm limitedReserveTransferAssets here should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",

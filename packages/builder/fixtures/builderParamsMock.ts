@@ -80,3 +80,14 @@ export const buildParachainParamsMock: ExtrinsicConfigBuilderPrams = {
   palletInstance: 10,
   source: alphanetAssetHubMock,
 };
+
+export const buildParamsMockEth: ExtrinsicConfigBuilderPrams = {
+  address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  amount: 99_000_000_000n,
+  asset: '0xeF46c7649270C912704fB09B75097f6E32208b85',
+  destination: moonbaseAlphaMock,
+  fee: 5_000_000_000n,
+  feeAsset: 'WETH.e',
+  palletInstance: 10,
+  source: alphanetAssetHubMock,
+};
