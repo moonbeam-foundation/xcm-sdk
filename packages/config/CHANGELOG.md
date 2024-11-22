@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-config
 
+## 2.7.6
+
+### Patch Changes
+
+- [#383](https://github.com/moonbeam-foundation/xcm-sdk/pull/383) [`5d3e8b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d3e8b470fb9c5640ba3d27c6140e2ff09fc897d) Thanks [@mmaurello](https://github.com/mmaurello)! - Add foreign assets configuration and Snowbridge assets tranfers between Asset Hub and Moonbeam
+
+- Updated dependencies [[`5d3e8b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d3e8b470fb9c5640ba3d27c6140e2ff09fc897d)]:
+  - @moonbeam-network/xcm-builder@2.6.0
+
 ## 2.7.5
 
 ### Patch Changes
