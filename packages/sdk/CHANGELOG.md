@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-sdk
 
+## 2.7.6
+
+### Patch Changes
+
+- Updated dependencies [[`5d3e8b4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5d3e8b470fb9c5640ba3d27c6140e2ff09fc897d)]:
+  - @moonbeam-network/xcm-builder@2.6.0
+  - @moonbeam-network/xcm-config@2.7.6
+
 ## 2.7.5
 
 ### Patch Changes
