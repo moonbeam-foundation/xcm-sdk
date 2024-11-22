@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildParachainParamsMock,
   buildParamsMock,
+  buildParamsMockEth,
   buildParamsSameAssetMock,
 } from '../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
@@ -109,6 +110,23 @@ describe('polkadotXcm', () => {
         .limitedReserveWithdrawAssets()
         .X2()
         .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('transferAssetsUsingTypeAndThen', () => {
+    describe('x2', () => {
+      const extrinsic = polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConcensusEthereum()
+        .build(buildParamsMockEth);
 
       it('should be correct config', () => {
         expect(extrinsic).toMatchSnapshot();

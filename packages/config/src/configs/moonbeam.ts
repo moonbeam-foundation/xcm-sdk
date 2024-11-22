@@ -37,8 +37,11 @@ import {
   vglmr,
   vmanta,
   wbtc,
+  wbtce,
   weth,
+  wethe,
   wifd,
+  wstethe,
   ztg,
 } from '../assets';
 import {
@@ -949,6 +952,51 @@ export const moonbeamConfig = new ChainConfig({
         amount: 0.02,
         asset: axlusdc,
         balance: BalanceBuilder().evm().erc20(),
+      },
+    }),
+    new AssetConfig({
+      asset: wethe,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.0000035,
+        asset: wethe,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: wbtce,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.0000004,
+        asset: wbtce,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    }),
+    new AssetConfig({
+      asset: wstethe,
+      balance: BalanceBuilder().substrate().assets().account(),
+      contract: ContractBuilder().Xtokens().transfer(),
+      destination: polkadotAssetHub,
+      destinationFee: {
+        amount: 0.000006,
+        asset: wstethe,
+        balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],

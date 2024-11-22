@@ -47,6 +47,31 @@ describe('balanceBuilder', () => {
     });
   });
 
+  describe('foreignAssets', () => {
+    describe('account', () => {
+      const config = BalanceBuilder()
+        .substrate()
+        .foreignAssets()
+        .account()
+        .build({
+          address: account,
+          asset: `0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2`,
+        }) as SubstrateQueryConfig;
+
+      it('should be correct config', () => {
+        expect(config).toMatchSnapshot();
+      });
+
+      it('should transform correctly', async () => {
+        await expect(
+          config.transform({
+            unwrapOrDefault: () => ({ balance: balanceOf(999) }),
+          }),
+        ).resolves.toMatchSnapshot();
+      });
+    });
+  });
+
   describe('system', () => {
     describe('account', () => {
       const config = BalanceBuilder()

@@ -10,6 +10,7 @@ import {
 import { isString } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfig } from '../contract';
+import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
   BalanceConfigBuilder,
@@ -34,6 +35,7 @@ export function evm() {
 export function substrate() {
   return {
     assets,
+    foreignAssets,
     system,
     tokens,
   };
@@ -68,6 +70,33 @@ function assets() {
             response: Option<PalletAssetsAssetAccount>,
           ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
         }),
+    }),
+  };
+}
+
+function foreignAssets() {
+  return {
+    account: (): BalanceConfigBuilder => ({
+      build: ({ address, asset }) => {
+        const multilocation = {
+          parents: 2,
+          interior: {
+            X2: [
+              { GlobalConsensus: { ethereum: { chainId: 1 } } },
+              getExtrinsicAccount(asset as string),
+            ],
+          },
+        };
+
+        return new SubstrateQueryConfig({
+          module: 'foreignAssets',
+          func: 'account',
+          args: [multilocation, address],
+          transform: async (
+            response: Option<PalletAssetsAssetAccount>,
+          ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
+        });
+      },
     }),
   };
 }
