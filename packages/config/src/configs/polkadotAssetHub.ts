@@ -12,7 +12,7 @@ import {
   stink,
   usdc,
   usdt,
-  wbtce,
+  wethe,
   wifd,
 } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
@@ -200,28 +200,26 @@ export const polkadotAssetHubConfig = new ChainConfig({
       min: AssetMinBuilder().assets().asset(),
     }),
     new AssetConfig({
-      asset: wbtce,
+      asset: wethe,
       balance: BalanceBuilder().substrate().foreignAssets().account(),
       destination: moonbeam,
       destinationFee: {
         amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
           isAssetReserveChain: false,
-          shouldTransferAssetPrecedeAsset: true,
         }),
-        asset: usdt,
+        asset: wethe,
         balance: BalanceBuilder().substrate().assets().account(),
       },
-      // TODO
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssetsUsingTypeAndThen()
+        .globalConcensusEthereum(),
       fee: {
         asset: dot,
         balance: BalanceBuilder().substrate().system().account(),
         xcmDeliveryFeeAmount,
       },
-      min: AssetMinBuilder().assets().asset(),
+      min: AssetMinBuilder().foreignAssets().asset(),
     }),
   ],
   chain: polkadotAssetHub,

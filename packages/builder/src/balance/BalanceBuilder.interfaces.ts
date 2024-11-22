@@ -12,7 +12,6 @@ export interface BalanceConfigBuilder {
 export interface BalanceConfigBuilderPrams {
   address: string;
   asset: ChainAssetId;
-  globalConcensusId?: ChainAssetId;
 }
 
 export interface PalletBalancesAccountDataOld extends Struct {

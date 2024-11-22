@@ -10,6 +10,7 @@ import {
 import { isString } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { ContractConfig } from '../contract';
+import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
   BalanceConfigBuilder,
@@ -76,19 +77,15 @@ function assets() {
 function foreignAssets() {
   return {
     account: (): BalanceConfigBuilder => ({
-      build: ({ address, asset, globalConcensusId }) => {
-        // TODO verify
+      build: ({ address, asset }) => {
         const multilocation = {
           parents: 2,
-          interior: [
-            { globalConsensus: globalConcensusId },
-            {
-              accountKey20: {
-                network: null,
-                key: asset,
-              },
-            },
-          ],
+          interior: {
+            X2: [
+              { GlobalConsensus: { ethereum: { chainId: 1 } } },
+              getExtrinsicAccount(asset as string),
+            ],
+          },
         };
 
         return new SubstrateQueryConfig({

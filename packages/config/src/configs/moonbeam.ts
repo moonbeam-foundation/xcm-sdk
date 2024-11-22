@@ -37,8 +37,8 @@ import {
   vglmr,
   vmanta,
   wbtc,
-  wbtce,
   weth,
+  wethe,
   wifd,
   ztg,
 } from '../assets';
@@ -953,14 +953,18 @@ export const moonbeamConfig = new ChainConfig({
       },
     }),
     new AssetConfig({
-      asset: wbtce,
+      asset: wethe,
       balance: BalanceBuilder().substrate().assets().account(),
       contract: ContractBuilder().Xtokens().transfer(),
       destination: polkadotAssetHub,
       destinationFee: {
-        amount: 0.02, // TODO
-        asset: usdt, // TODO
+        amount: 0.0000035,
+        asset: wethe,
         balance: BalanceBuilder().substrate().assets().account(),
+      },
+      fee: {
+        asset: glmr,
+        balance: BalanceBuilder().substrate().system().account(),
       },
     }),
   ],
