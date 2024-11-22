@@ -168,7 +168,7 @@ export async function getMrlBuilderParams({
   };
 }
 
-export async function getTransact(params: MrlBuilderParams): Promise<Transact> {
+async function getTransact(params: MrlBuilderParams): Promise<Transact> {
   const { sourceAddress, source, moonChain } = params;
   const polkadot = await PolkadotService.create(moonChain);
   const moonGasLimit = await getMoonGasLimit(params);
