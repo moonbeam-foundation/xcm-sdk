@@ -37,12 +37,12 @@
     "changeset:publish": "pnpm run build && pnpm publish -r"
   },
   "dependencies": {
-    "@polkadot/api": "^14.3.1",
-    "@polkadot/api-augment": "^14.3.1",
-    "@polkadot/apps-config": "^0.146.1",
-    "@polkadot/types": "^14.3.1",
-    "@polkadot/util": "^13.2.3",
-    "@polkadot/util-crypto": "^13.2.3",
+    "@polkadot/api": "14.3.1",
+    "@polkadot/api-augment": "14.3.1",
+    "@polkadot/apps-config": "0.146.1",
+    "@polkadot/types": "14.3.1",
+    "@polkadot/util": "13.2.3",
+    "@polkadot/util-crypto": "13.2.3",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
     "@wormhole-foundation/sdk-evm": "^0.10.7",
     "@wormhole-foundation/sdk-evm-tokenbridge": "^0.10.7"
