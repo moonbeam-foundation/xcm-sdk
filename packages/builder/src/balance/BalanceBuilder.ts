@@ -7,6 +7,7 @@ import type {
 import { evmToAddress } from '@polkadot/util-crypto';
 import type { Address } from 'viem';
 import { ContractConfig } from '../contract';
+import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
 import { EvmQueryConfig } from '../types/evm/EvmQueryConfig';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import type {
@@ -62,6 +63,7 @@ function native(): BalanceConfigBuilder {
 export function substrate() {
   return {
     assets,
+    foreignAssets,
     system,
     tokens,
   };
@@ -79,6 +81,39 @@ function assets() {
             response: Option<PalletAssetsAssetAccount>,
           ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
         }),
+    }),
+  };
+}
+
+function foreignAssets() {
+  return {
+    account: (): BalanceConfigBuilder => ({
+      build: ({ address, asset }) => {
+        if (!asset.address) {
+          throw new Error(
+            'Asset address is needed to calculate balance with foreignAssets.account function',
+          );
+        }
+
+        const multilocation = {
+          parents: 2,
+          interior: {
+            X2: [
+              { GlobalConsensus: { ethereum: { chainId: 1 } } },
+              getExtrinsicAccount(asset.address),
+            ],
+          },
+        };
+
+        return new SubstrateQueryConfig({
+          module: 'foreignAssets',
+          func: 'account',
+          args: [multilocation, address],
+          transform: async (
+            response: Option<PalletAssetsAssetAccount>,
+          ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
+        });
+      },
     }),
   };
 }

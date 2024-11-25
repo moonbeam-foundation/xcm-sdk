@@ -30,7 +30,7 @@ import {
   getMrlBuilderParams,
 } from './getTransferData.utils';
 
-export interface GetSourceDataParams {
+interface GetSourceDataParams {
   route: MrlAssetRoute;
   destinationAddress: string;
   destinationFee: AssetAmount;
@@ -143,7 +143,7 @@ export async function getSourceData({
   };
 }
 
-export interface GetFeeParams {
+interface GetFeeParams {
   balance: AssetAmount;
   chain: AnyChain;
   destinationFee: AssetAmount;
@@ -153,18 +153,18 @@ export interface GetFeeParams {
   transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
-export interface GetRelayFeeParams extends BuildTransferParams {
+interface GetRelayFeeParams extends BuildTransferParams {
   chain: AnyChain;
   transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
-export interface GetWormholeFeeParams {
+interface GetWormholeFeeParams {
   asset: AssetAmount;
   chain: AnyChain;
   config: ContractConfig | ExtrinsicConfig | WormholeConfig;
 }
 
-export async function getFee({
+async function getFee({
   balance,
   feeBalance,
   chain,
@@ -201,7 +201,7 @@ export async function getFee({
   });
 }
 
-export async function getRelayerFee({
+async function getRelayerFee({
   asset,
   chain,
   destinationAddress,
@@ -253,14 +253,14 @@ async function getWormholeFee({
   return;
 }
 
-export interface GetMoonChainFeeBalanceParams {
+interface GetMoonChainFeeBalanceParams {
   balance: AssetAmount;
   feeBalance: AssetAmount;
   route: MrlAssetRoute;
   sourceAddress: string;
 }
 
-export async function getMoonChainFeeBalance({
+async function getMoonChainFeeBalance({
   balance,
   feeBalance,
   route,

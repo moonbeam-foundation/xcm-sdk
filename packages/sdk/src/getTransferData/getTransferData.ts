@@ -17,7 +17,7 @@ import {
   validateSovereignAccountBalances,
 } from './getTransferData.utils';
 
-export interface GetTransferDataParams {
+interface GetTransferDataParams {
   route: AssetRoute;
   sourceAddress: string;
   destinationAddress: string;

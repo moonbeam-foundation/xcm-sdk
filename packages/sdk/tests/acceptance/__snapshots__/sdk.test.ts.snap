@@ -515,6 +515,42 @@ exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143
 exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
   _AssetAmount {
+    "address": "0xffffffff5d5deb44bf7278dee5381beb24cb6573",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "124105859028862849477017063633156007283",
+    },
+    "key": "wstethe",
+    "min": undefined,
+    "originSymbol": "wstETH.e",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xffffffff86829afe1521ad2296719df3ace8ded7",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "178794693648360392906933130845919698647",
+    },
+    "key": "wethe",
+    "min": undefined,
+    "originSymbol": "WETH.e",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xffffffff1b4bb1ac5749f73d866ffc91a3432c47",
+    "amount": 0n,
+    "decimals": 8,
+    "ids": {
+      "id": "36282181791341254438422467838694599751",
+    },
+    "key": "wbtce",
+    "min": undefined,
+    "originSymbol": "WBTC.e",
+    "symbol": undefined,
+  },
+  _AssetAmount {
     "address": "0xCa01a1D0993565291051daFF390892518ACfAD3A",
     "amount": 0n,
     "decimals": 6,

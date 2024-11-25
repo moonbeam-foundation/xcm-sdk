@@ -118,4 +118,21 @@ describe('polkadotXcm', () => {
       });
     });
   });
+
+  describe('transferAssetsUsingTypeAndThen', () => {
+    describe('globalConsensusEthereum', () => {
+      const extrinsic = polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConsensusEthereum()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+  });
 });

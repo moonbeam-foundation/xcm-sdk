@@ -94,7 +94,7 @@ export async function getAssetMin({
   if (builder && EvmParachain.isAnyParachain(chain)) {
     const polkadot = await PolkadotService.create(chain);
     const min = await polkadot.query(
-      builder.build({ asset: zero.getMinAssetId() }),
+      builder.build({ asset: zero.getMinAssetId(), address: zero.address }),
     );
 
     return zero.copyWith({ amount: min });

@@ -42,7 +42,7 @@ const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbaseAlpha.key]: 1470417n,
 };
 
-export interface DataParams {
+interface DataParams {
   destinationData: DestinationChainTransferData;
   moonChainData: MoonChainTransferData;
   sourceData: SourceTransferData;
@@ -168,7 +168,7 @@ export async function getMrlBuilderParams({
   };
 }
 
-export async function getTransact(params: MrlBuilderParams): Promise<Transact> {
+async function getTransact(params: MrlBuilderParams): Promise<Transact> {
   const { sourceAddress, source, moonChain } = params;
   const polkadot = await PolkadotService.create(moonChain);
   const moonGasLimit = await getMoonGasLimit(params);
@@ -199,9 +199,7 @@ export async function getTransact(params: MrlBuilderParams): Promise<Transact> {
   };
 }
 
-export async function getMoonGasLimit(
-  params: MrlBuilderParams,
-): Promise<bigint> {
+async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
   const { asset, isAutomatic, moonChain, source, sourceAddress } = params;
 
   if (!EvmParachain.isAnyParachain(source)) {

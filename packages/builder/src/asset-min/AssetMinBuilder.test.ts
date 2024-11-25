@@ -77,4 +77,27 @@ describe('assetMinBuilder', () => {
       });
     });
   });
+
+  describe('foreignAssets', () => {
+    describe('asset', () => {
+      const config = AssetMinBuilder().foreignAssets().asset().build({
+        asset,
+        address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+      });
+
+      it('should be correct config', () => {
+        expect(config).toMatchSnapshot();
+      });
+
+      it('should transform correctly', async () => {
+        await expect(
+          config.transform({
+            unwrapOrDefault: () => ({
+              minBalance: balanceOf(999),
+            }),
+          }),
+        ).resolves.toMatchSnapshot();
+      });
+    });
+  });
 });

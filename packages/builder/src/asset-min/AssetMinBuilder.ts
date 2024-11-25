@@ -1,5 +1,6 @@
 import type { Option } from '@polkadot/types';
 import type { PalletAssetsAssetDetails } from '@polkadot/types/lookup';
+import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import type { AssetMinConfigBuilder } from './AssetMinBuilder.interfaces';
 
@@ -7,6 +8,7 @@ export function AssetMinBuilder() {
   return {
     assetRegistry,
     assets,
+    foreignAssets,
   };
 }
 
@@ -51,6 +53,44 @@ function assets() {
           ): Promise<bigint> =>
             response.unwrapOrDefault().minBalance.toBigInt(),
         }),
+    }),
+  };
+}
+
+function foreignAssets() {
+  return {
+    asset: (): AssetMinConfigBuilder => ({
+      build: ({ address }) => {
+        if (!address) {
+          throw new Error(
+            'Asset address is missing for foreignAssets.asset min calculation',
+          );
+        }
+        const multilocation = {
+          parents: 2,
+          interior: {
+            X2: [
+              {
+                globalconsensus: {
+                  ethereum: {
+                    chainId: 1,
+                  },
+                },
+              },
+              getExtrinsicAccount(address),
+            ],
+          },
+        };
+        return new SubstrateQueryConfig({
+          module: 'foreignAssets',
+          func: 'asset',
+          args: [multilocation],
+          transform: async (
+            response: Option<PalletAssetsAssetDetails>,
+          ): Promise<bigint> =>
+            response.unwrapOrDefault().minBalance.toBigInt(),
+        });
+      },
     }),
   };
 }

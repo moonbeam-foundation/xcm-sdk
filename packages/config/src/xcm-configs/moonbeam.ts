@@ -40,8 +40,11 @@ import {
   vglmr,
   vmanta,
   wbtc,
+  wbtce,
   weth,
+  wethe,
   wifd,
+  wstethe,
   ztg,
 } from '../assets';
 import {
@@ -1460,6 +1463,81 @@ export const moonbeamRoutes = new ChainRoutes({
           amount: 0.04,
           asset: glmr,
         },
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: wbtce,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: wbtce,
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        fee: {
+          amount: 0.0000004,
+          asset: wbtce,
+          balance: BalanceBuilder().substrate().foreignAssets().account(),
+        },
+        min: AssetMinBuilder().foreignAssets().asset(),
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: wethe,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: wethe,
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        fee: {
+          amount: 0.0000035,
+          asset: wethe,
+          balance: BalanceBuilder().substrate().foreignAssets().account(),
+        },
+        min: AssetMinBuilder().foreignAssets().asset(),
+      },
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: wstethe,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: wstethe,
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        fee: {
+          amount: 0.000006,
+          asset: wstethe,
+          balance: BalanceBuilder().substrate().foreignAssets().account(),
+        },
+        min: AssetMinBuilder().foreignAssets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },

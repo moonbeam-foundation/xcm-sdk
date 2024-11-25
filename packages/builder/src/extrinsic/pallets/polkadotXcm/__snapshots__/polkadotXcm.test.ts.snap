@@ -454,3 +454,108 @@ exports[`polkadotXcm > limitedReserveWithdrawAssets > x2 > should get correct ar
   "Unlimited",
 ]
 `;
+
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen > globalConsensusEthereum > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssetsUsingTypeAndThen",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen > globalConsensusEthereum > should get correct arguments 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": [
+          {
+            "Parachain": 2032,
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X2": [
+                {
+                  "globalConsensus": {
+                    "Ethereum": {
+                      "ChainId": 1,
+                    },
+                  },
+                },
+                {
+                  "AccountKey20": {
+                    "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                  },
+                },
+              ],
+            },
+            "parents": 2,
+          },
+        },
+      },
+    ],
+  },
+  "LocalReserve",
+  {
+    "V1": {
+      "Concrete": {
+        "interior": {
+          "X2": [
+            {
+              "globalConsensus": {
+                "Ethereum": {
+                  "ChainId": 1,
+                },
+              },
+            },
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+              },
+            },
+          ],
+        },
+        "parents": 2,
+      },
+    },
+  },
+  "LocalReserve",
+  {
+    "V1": [
+      {
+        "DepositAsset": {
+          "assets": {
+            "Wild": {
+              "AllCounted": 1,
+            },
+          },
+          "beneficiary": {
+            "interior": {
+              "X1": {
+                "AccountId32": {
+                  "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+                  "network": null,
+                },
+              },
+            },
+            "parents": 0,
+          },
+        },
+      },
+    ],
+  },
+  "Unlimited",
+]
+`;

@@ -28,7 +28,7 @@ import {
   getMrlMin,
 } from './getTransferData.utils';
 
-export interface GetTransferDataParams {
+interface GetTransferDataParams {
   route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
