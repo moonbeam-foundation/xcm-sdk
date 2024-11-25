@@ -79,8 +79,11 @@ import {
   vmanta,
   vmovr,
   wbtc,
+  wbtce,
   weth,
+  wethe,
   wifd,
+  wstethe,
   xrt,
   ztg,
 } from './assets';
@@ -1321,6 +1324,27 @@ export const moonbeam = new EvmParachain({
         id: '61295607754960722617854661686514597014',
       },
     }),
+    ChainAsset.fromAsset(wbtce, {
+      // address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      decimals: 8,
+      ids: {
+        id: '36282181791341254438422467838694599751',
+      },
+    }),
+    ChainAsset.fromAsset(wethe, {
+      // address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      decimals: 18,
+      ids: {
+        id: '178794693648360392906933130845919698647',
+      },
+    }),
+    ChainAsset.fromAsset(wstethe, {
+      // address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      decimals: 18,
+      ids: {
+        id: '124105859028862849477017063633156007283',
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
@@ -2004,6 +2028,18 @@ export const polkadotAssetHub = new Parachain({
         id: 17,
         palletInstance: 50,
       },
+    }),
+    ChainAsset.fromAsset(wbtce, {
+      address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
+      decimals: 8,
+    }),
+    ChainAsset.fromAsset(wethe, {
+      address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(wethe, {
+      address: '0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0',
+      decimals: 18,
     }),
   ],
   checkSovereignAccountBalances: true,

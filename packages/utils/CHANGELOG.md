@@ -1,5 +1,13 @@
 # @moonbeam-network/xcm-utils
 
+## 2.2.3
+
+### Patch Changes
+
+- [#390](https://github.com/moonbeam-foundation/xcm-sdk/pull/390) [`2790340`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2790340bb8ea0edda13765875d91a3a5d993a072) Thanks [@dependabot](https://github.com/apps/dependabot)! - Fix vulnerability
+
+- [#393](https://github.com/moonbeam-foundation/xcm-sdk/pull/393) [`1546937`](https://github.com/moonbeam-foundation/xcm-sdk/commit/1546937e5636cb6e225a06a8e41c6e6593413c42) Thanks [@Rihyx](https://github.com/Rihyx)! - fix cross-spawn vulnerability
+
 ## 2.2.2
 
 ### Patch Changes

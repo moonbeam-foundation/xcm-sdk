@@ -38,3 +38,77 @@ SubstrateQueryConfig {
 `;
 
 exports[`assetMinBuilder > assets > asset > should transform correctly 1`] = `999n`;
+
+exports[`assetMinBuilder > foreignAssets > asset > should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    {
+      "interior": {
+        "X2": [
+          {
+            "globalconsensus": {
+              "ethereum": {
+                "chainId": 1,
+              },
+            },
+          },
+          {
+            "AccountKey20": {
+              "key": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            },
+          },
+        ],
+      },
+      "parents": 2,
+    },
+  ],
+  "func": "asset",
+  "module": "foreignAssets",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`assetMinBuilder > foreignAssets > asset > should transform correctly 1`] = `999n`;
+
+exports[`assetMinBuilder assetRegistry assetMetadatas should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ASSET>",
+  ],
+  "func": "assetMetadatas",
+  "module": "assetRegistry",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`assetMinBuilder assetRegistry assetMetadatas should transform correctly 1`] = `999n`;
+
+exports[`assetMinBuilder assetRegistry currencyMetadatas should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ASSET>",
+  ],
+  "func": "currencyMetadatas",
+  "module": "assetRegistry",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`assetMinBuilder assetRegistry currencyMetadatas should transform correctly 1`] = `999n`;
+
+exports[`assetMinBuilder assets asset should be correct config 1`] = `
+SubstrateQueryConfig {
+  "args": [
+    "<ASSET>",
+  ],
+  "func": "asset",
+  "module": "assets",
+  "transform": [Function],
+  "type": "Substrate",
+}
+`;
+
+exports[`assetMinBuilder assets asset should transform correctly 1`] = `999n`;
