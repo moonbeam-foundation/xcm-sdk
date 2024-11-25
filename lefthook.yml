@@ -7,5 +7,3 @@ pre-commit:
       stage_fixed: true
     spell:
       run: pnpm cspell --no-summary --no-progress --no-must-find-files --files {staged_files}
-    type-check:
-      run: pnpm typecheck
