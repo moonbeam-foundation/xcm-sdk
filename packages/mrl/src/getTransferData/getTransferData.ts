@@ -32,12 +32,14 @@ interface GetTransferDataParams {
   route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
+  isAutomatic: boolean;
 }
 
 export async function getTransferData({
   route,
   sourceAddress,
   destinationAddress,
+  isAutomatic,
 }: GetTransferDataParams): Promise<TransferData> {
   if (!route.mrl) {
     throw new Error(
@@ -98,6 +100,7 @@ export async function getTransferData({
       destinationData,
       moonChainData,
       sourceData,
+      isAutomatic,
     }),
     moonChain: moonChainData,
     source: sourceData,

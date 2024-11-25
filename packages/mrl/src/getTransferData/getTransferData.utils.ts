@@ -46,6 +46,7 @@ interface DataParams {
   destinationData: DestinationChainTransferData;
   moonChainData: MoonChainTransferData;
   sourceData: SourceTransferData;
+  isAutomatic?: boolean;
 }
 
 export function getMoonChainFeeValueOnSource({
@@ -74,6 +75,7 @@ export function getMrlMin({
   destinationData,
   moonChainData,
   sourceData,
+  isAutomatic,
 }: DataParams): AssetAmount {
   const minInDestination = getMin(destinationData);
   const min = AssetAmount.fromChainAsset(
@@ -87,9 +89,10 @@ export function getMrlMin({
     moonChainData,
     sourceData,
   });
-  const relayerFee = sourceData.relayerFee?.amount
-    ? sourceData.relayerFee.toBig()
-    : Big(0);
+  const relayerFee =
+    sourceData.relayerFee?.amount && isAutomatic
+      ? sourceData.relayerFee.toBig()
+      : Big(0);
 
   return min.copyWith({
     amount: BigInt(min.toBig().add(moonChainFee).add(relayerFee).toFixed()),

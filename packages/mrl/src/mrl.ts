@@ -39,20 +39,24 @@ export function Mrl(options?: MrlOptions) {
                 source,
                 destination,
               });
-
               return {
-                setAddresses({
-                  sourceAddress,
-                  destinationAddress,
-                }: {
-                  sourceAddress: string;
-                  destinationAddress: string;
-                }) {
-                  return getTransferData({
-                    route,
-                    sourceAddress,
-                    destinationAddress,
-                  });
+                setIsAutomatic(isAutomatic: boolean) {
+                  return {
+                    setAddresses({
+                      sourceAddress,
+                      destinationAddress,
+                    }: {
+                      sourceAddress: string;
+                      destinationAddress: string;
+                    }) {
+                      return getTransferData({
+                        route,
+                        sourceAddress,
+                        destinationAddress,
+                        isAutomatic,
+                      });
+                    },
+                  };
                 },
               };
             },
