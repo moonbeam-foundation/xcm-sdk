@@ -89,12 +89,18 @@ function foreignAssets() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) => {
+        if (!asset.address) {
+          throw new Error(
+            'Asset address is needed to calculate balance with foreignAssets.account function',
+          );
+        }
+
         const multilocation = {
           parents: 2,
           interior: {
             X2: [
               { GlobalConsensus: { ethereum: { chainId: 1 } } },
-              getExtrinsicAccount(asset.address as string), // TODO mjm fix
+              getExtrinsicAccount(asset.address),
             ],
           },
         };

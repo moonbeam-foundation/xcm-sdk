@@ -8,5 +8,6 @@ export type AssetMinConfigBuilder = ConfigBuilder<
 >;
 
 export interface AssetMinConfigBuilderParams {
+  address?: string;
   asset: ChainAssetId;
 }

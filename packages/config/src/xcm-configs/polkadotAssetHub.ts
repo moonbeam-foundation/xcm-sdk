@@ -4,7 +4,19 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { apillon, ded, dot, pink, stink, usdc, usdt, wifd } from '../assets';
+import {
+  apillon,
+  ded,
+  dot,
+  pink,
+  stink,
+  usdc,
+  usdt,
+  wbtce,
+  wethe,
+  wifd,
+  wstethe,
+} from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -252,6 +264,96 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
+    },
+    {
+      source: {
+        asset: wbtce,
+        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        fee: {
+          asset: dot,
+          balance: BalanceBuilder().substrate().system().account(),
+          extra,
+        },
+        min: AssetMinBuilder().foreignAssets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().foreignAssets().account(),
+        },
+      },
+      destination: {
+        asset: wbtce,
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+            isAssetReserveChain: false,
+          }),
+          asset: wbtce,
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConsensusEthereum(),
+    },
+    {
+      source: {
+        asset: wethe,
+        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        fee: {
+          asset: dot,
+          balance: BalanceBuilder().substrate().system().account(),
+          extra,
+        },
+        min: AssetMinBuilder().foreignAssets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().foreignAssets().account(),
+        },
+      },
+      destination: {
+        asset: wethe,
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+            isAssetReserveChain: false,
+          }),
+          asset: wethe,
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConsensusEthereum(),
+    },
+    {
+      source: {
+        asset: wstethe,
+        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        fee: {
+          asset: dot,
+          balance: BalanceBuilder().substrate().system().account(),
+          extra,
+        },
+        min: AssetMinBuilder().foreignAssets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().foreignAssets().account(),
+        },
+      },
+      destination: {
+        asset: wstethe,
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+            isAssetReserveChain: false,
+          }),
+          asset: wstethe,
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .globalConsensusEthereum(),
     },
   ],
 });

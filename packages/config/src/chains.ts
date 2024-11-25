@@ -1325,21 +1325,21 @@ export const moonbeam = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(wbtce, {
-      // address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      address: '0xffffffff1b4bb1ac5749f73d866ffc91a3432c47',
       decimals: 8,
       ids: {
         id: '36282181791341254438422467838694599751',
       },
     }),
     ChainAsset.fromAsset(wethe, {
-      // address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      address: '0xffffffff86829afe1521ad2296719df3ace8ded7',
       decimals: 18,
       ids: {
         id: '178794693648360392906933130845919698647',
       },
     }),
     ChainAsset.fromAsset(wstethe, {
-      // address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      address: '0xffffffff5d5deb44bf7278dee5381beb24cb6573',
       decimals: 18,
       ids: {
         id: '124105859028862849477017063633156007283',
@@ -2037,7 +2037,7 @@ export const polkadotAssetHub = new Parachain({
       address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
       decimals: 18,
     }),
-    ChainAsset.fromAsset(wethe, {
+    ChainAsset.fromAsset(wstethe, {
       address: '0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0',
       decimals: 18,
     }),

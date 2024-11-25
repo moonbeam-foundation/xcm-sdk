@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 import {
   buildParachainParamsMock,
   buildParamsMock,
-  buildParamsMockEth,
   buildParamsSameAssetMock,
 } from '../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
@@ -121,11 +120,11 @@ describe('polkadotXcm', () => {
   });
 
   describe('transferAssetsUsingTypeAndThen', () => {
-    describe('x2', () => {
+    describe('globalConsensusEthereum', () => {
       const extrinsic = polkadotXcm()
         .transferAssetsUsingTypeAndThen()
         .globalConsensusEthereum()
-        .build(buildParamsMockEth);
+        .build(buildParachainParamsMock);
 
       it('should be correct config', () => {
         expect(extrinsic).toMatchSnapshot();

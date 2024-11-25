@@ -80,10 +80,10 @@ describe('assetMinBuilder', () => {
 
   describe('foreignAssets', () => {
     describe('asset', () => {
-      const config = AssetMinBuilder()
-        .foreignAssets()
-        .asset()
-        .build({ asset: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' });
+      const config = AssetMinBuilder().foreignAssets().asset().build({
+        asset,
+        address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+      });
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
