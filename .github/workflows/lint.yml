@@ -37,3 +37,6 @@ jobs:
         if: always()
         id: spell-check
         run: pnpm run spell
+
+      - name: 🚪 Run Check Exports
+        run: npm run lint:exports      

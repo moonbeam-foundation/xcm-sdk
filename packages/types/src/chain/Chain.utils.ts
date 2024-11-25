@@ -1,7 +1,7 @@
 import { type Chain, defineChain } from 'viem';
 import type { ChainAsset } from '../asset';
 
-export interface GetViemChainParams {
+interface GetViemChainParams {
   id: number;
   name: string;
   nativeAsset: ChainAsset;

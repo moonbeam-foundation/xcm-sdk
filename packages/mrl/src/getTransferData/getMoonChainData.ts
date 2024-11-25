@@ -7,7 +7,7 @@ import type {
   MoonChainTransferData,
 } from '../mrl.interfaces';
 
-export interface GetMoonChainDataParams {
+interface GetMoonChainDataParams {
   destinationData: DestinationTransferData;
   route: MrlAssetRoute;
   sourceAddress: string;
