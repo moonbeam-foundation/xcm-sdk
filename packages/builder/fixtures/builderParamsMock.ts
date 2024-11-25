@@ -217,7 +217,7 @@ export const wormholeToMoonchainConfigBuilderParams: MrlBuilderParams = {
   sourceApi: apiMock,
 };
 
-export const buildParamsMockEth = {
+export const buildParamsMockEth: ExtrinsicConfigBuilderPrams = {
   address: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   amount: 99_000_000_000n,
   asset: '0xeF46c7649270C912704fB09B75097f6E32208b85',
