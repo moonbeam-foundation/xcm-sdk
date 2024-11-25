@@ -60,7 +60,12 @@ function assets() {
 function foreignAssets() {
   return {
     asset: (): AssetMinConfigBuilder => ({
-      build: ({ asset }) => {
+      build: ({ address }) => {
+        if (!address) {
+          throw new Error(
+            'Asset address is missing for foreignAssets.asset min calculation',
+          );
+        }
         const multilocation = {
           parents: 2,
           interior: {
@@ -72,7 +77,7 @@ function foreignAssets() {
                   },
                 },
               },
-              getExtrinsicAccount(asset as string),
+              getExtrinsicAccount(address),
             ],
           },
         };
