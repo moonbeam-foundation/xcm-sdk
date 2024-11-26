@@ -90,18 +90,37 @@ export class PolkadotService {
     account: string,
     config: ExtrinsicConfig,
     signer: PolkadotSigner | IKeyringPair,
+    statusCallback?: (params: ISubmittableResult) => void,
   ): Promise<string> {
     const extrinsic = this.getExtrinsic(config);
-    const hash = await extrinsic.signAndSend(
-      this.#isSigner(signer) ? account : signer,
-      {
-        nonce: -1,
-        signer: this.#isSigner(signer) ? signer : undefined,
-        withSignedTransaction: true,
-      },
-    );
 
-    return hash.toString();
+    const hash = await new Promise<string>((resolve, reject) => {
+      extrinsic
+        .signAndSend(
+          this.#isSigner(signer) ? account : signer,
+          {
+            nonce: -1,
+            signer: this.#isSigner(signer) ? signer : undefined,
+            withSignedTransaction: true,
+          },
+          (result) => {
+            if (result.isError || result.dispatchError) {
+              reject(
+                new Error(
+                  result.dispatchError?.toString() || 'Transaction failed',
+                ),
+              );
+            }
+            if (result.txHash) {
+              resolve(result.txHash.toString());
+            }
+            statusCallback?.(result);
+          },
+        )
+        .catch(reject);
+    });
+
+    return hash;
   }
 
   #isSigner(signer: PolkadotSigner | IKeyringPair): signer is PolkadotSigner {
