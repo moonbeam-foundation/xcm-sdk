@@ -2,19 +2,14 @@ import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import { Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
-import type {
-  DestinationTransferData,
-  MoonChainTransferData,
-} from '../mrl.interfaces';
+import type { MoonChainTransferData } from '../mrl.interfaces';
 
 interface GetMoonChainDataParams {
-  destinationData: DestinationTransferData;
   route: MrlAssetRoute;
   sourceAddress: string;
 }
 
 export async function getMoonChainData({
-  destinationData,
   route,
   sourceAddress,
 }: GetMoonChainDataParams): Promise<MoonChainTransferData> {
@@ -25,18 +20,6 @@ export async function getMoonChainData({
   }
 
   const moonChain = getMoonChain(route.source.chain);
-  // TODO is this used for something? do we need the balance?
-  // const asset = moonChain.getChainAsset(route.mrl.moonChain.asset);
-  // const isDestinationMoonChain = route.destination.chain.isEqual(moonChain);
-
-  // TODO technically not correct
-  // if (isDestinationMoonChain) {
-  //   return {
-  //     balance: destinationData.balance,
-  //     chain: destinationData.chain,
-  //     fee: destinationData.fee,
-  //   };
-  // }
 
   const fee = await getDestinationFee({
     address: sourceAddress, // TODO not correct
@@ -48,7 +31,10 @@ export async function getMoonChainData({
 
   let address = sourceAddress;
 
-  if (Parachain.is(route.source.chain)) {
+  if (
+    Parachain.is(route.source.chain) &&
+    !route.source.chain.isEqual(moonChain)
+  ) {
     const { address20 } = getMultilocationDerivedAddresses({
       address: sourceAddress,
       paraId: route.source.chain.parachainId,
@@ -66,8 +52,7 @@ export async function getMoonChainData({
   });
 
   return {
-    // TODO technically feeBalance
-    balance: feeBalance,
+    feeBalance,
     chain: moonChain,
     fee,
   };

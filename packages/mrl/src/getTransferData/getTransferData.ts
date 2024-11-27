@@ -67,7 +67,6 @@ export async function getTransferData({
   });
 
   const moonChainData = await getMoonChainData({
-    destinationData,
     route,
     sourceAddress,
   });

@@ -94,29 +94,28 @@ export class PolkadotService {
   ): Promise<string> {
     const extrinsic = this.getExtrinsic(config);
 
+    const isSigner = this.#isSigner(signer);
+    const signOptions = {
+      nonce: -1,
+      signer: isSigner ? signer : undefined,
+      withSignedTransaction: true,
+    };
+
     const hash = await new Promise<string>((resolve, reject) => {
       extrinsic
-        .signAndSend(
-          this.#isSigner(signer) ? account : signer,
-          {
-            nonce: -1,
-            signer: this.#isSigner(signer) ? signer : undefined,
-            withSignedTransaction: true,
-          },
-          (result) => {
-            if (result.isError || result.dispatchError) {
-              reject(
-                new Error(
-                  result.dispatchError?.toString() || 'Transaction failed',
-                ),
-              );
-            }
-            if (result.txHash) {
-              resolve(result.txHash.toString());
-            }
-            statusCallback?.(result);
-          },
-        )
+        .signAndSend(isSigner ? account : signer, signOptions, (result) => {
+          if (result.isError || result.dispatchError) {
+            reject(
+              new Error(
+                result.dispatchError?.toString() || 'Transaction failed',
+              ),
+            );
+          }
+          if (result.txHash) {
+            resolve(result.txHash.toString());
+          }
+          statusCallback?.(result);
+        })
         .catch(reject);
     });
 
