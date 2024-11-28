@@ -5,6 +5,8 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   peaqAlphanet,
+  peaqEvm,
+  peaqEvmAlphanet,
 } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
@@ -24,6 +26,37 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         asset: ftmwh,
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: ftmwh,
+          amount: 0.01,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: ftmwh,
+          fee: {
+            asset: dev,
+            amount: 0.1,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
+        asset: ftm,
+        balance: BalanceBuilder().evm().native(),
+        destinationFee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: ftmwh,
+        chain: peaqEvmAlphanet,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: ftmwh,
           amount: 0.01,
