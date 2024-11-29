@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.7.7
+
+### Patch Changes
+
+- [#402](https://github.com/moonbeam-foundation/xcm-sdk/pull/402) [`7f88012`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7f88012e6b052127d5d03881f9f3c14c63e46210) Thanks [@mmaurello](https://github.com/mmaurello)! - add alphanet relay ws endpoint and check sovereign account in Polkadot and Kusama
+
 ## 2.7.6
 
 ### Patch Changes
