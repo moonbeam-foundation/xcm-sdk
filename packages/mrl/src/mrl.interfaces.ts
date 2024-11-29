@@ -16,6 +16,7 @@ export interface Signers {
 export interface TransferData {
   destination: DestinationTransferData;
   getEstimate(amount: number | string): AssetAmount;
+  isAutomaticPossible: boolean;
   max: AssetAmount;
   min: AssetAmount;
   moonChain: MoonChainTransferData;

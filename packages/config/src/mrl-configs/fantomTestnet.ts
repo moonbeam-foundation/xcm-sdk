@@ -5,7 +5,6 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   peaqAlphanet,
-  peaqEvm,
   peaqEvmAlphanet,
 } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';

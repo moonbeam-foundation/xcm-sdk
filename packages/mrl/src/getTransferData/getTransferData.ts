@@ -60,6 +60,7 @@ export async function getTransferData({
   });
 
   const sourceData = await getSourceData({
+    isAutomatic: route.mrl.isAutomaticPossible && isAutomatic,
     route,
     destinationAddress,
     destinationFee,
@@ -88,18 +89,19 @@ export async function getTransferData({
         .minus(
           isSameAssetPayingDestinationFee ? destinationFee.toBig() : Big(0),
         )
-        .minus(fee);
+        .minus(fee)
+        .minus(sourceData.relayerFee?.toBig() || Big(0));
 
       return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
       });
     },
+    isAutomaticPossible: route.mrl.isAutomaticPossible,
     max: sourceData.max,
     min: getMrlMin({
       destinationData,
       moonChainData,
       sourceData,
-      isAutomatic,
     }),
     moonChain: moonChainData,
     source: sourceData,

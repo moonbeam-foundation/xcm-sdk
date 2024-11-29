@@ -31,6 +31,7 @@ import {
 } from './getTransferData.utils';
 
 interface GetSourceDataParams {
+  isAutomatic: boolean;
   route: MrlAssetRoute;
   destinationAddress: string;
   destinationFee: AssetAmount;
@@ -38,6 +39,7 @@ interface GetSourceDataParams {
 }
 
 export async function getSourceData({
+  isAutomatic,
   route,
   destinationAddress,
   destinationFee,
@@ -95,7 +97,7 @@ export async function getSourceData({
     asset: balance,
     destinationAddress,
     feeAsset: feeBalance,
-    isAutomatic: route.mrl.isAutomaticPossible,
+    isAutomatic,
     route,
     sourceAddress,
   });
@@ -115,7 +117,7 @@ export async function getSourceData({
     transfer,
     asset: balance,
     feeAsset: feeBalance,
-    isAutomatic: route.mrl.isAutomaticPossible,
+    isAutomatic,
     destinationAddress,
     route,
     sourceAddress,
