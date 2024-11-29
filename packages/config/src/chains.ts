@@ -158,7 +158,10 @@ export const alphanetRelay = new Parachain({
   name: 'Alphanet Relay',
   parachainId: 0,
   ss58Format: 42,
-  ws: ['wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network'],
+  ws: [
+    'wss://relay.api.moonbase.moonbeam.network',
+    'wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network',
+  ],
 });
 
 export const astar = new Parachain({
@@ -640,6 +643,7 @@ export const kintsugi = new Parachain({
 });
 
 export const kusama = new Parachain({
+  checkSovereignAccountBalances: true,
   ecosystem: Ecosystem.Kusama,
   genesisHash:
     '0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe',
@@ -1677,6 +1681,7 @@ export const picassoAlphanet = new Parachain({
 });
 
 export const polkadot = new Parachain({
+  checkSovereignAccountBalances: true,
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3',
