@@ -480,7 +480,7 @@ export const fantomTestnet = new EvmChain({
   key: 'fantom-testnet',
   name: 'Fantom Testnet',
   nativeAsset: ftm,
-  rpc: 'https://rpc.testnet.fantom.network',
+  rpc: 'https://fantom-testnet-rpc.publicnode.com',
   wh: {
     name: 'Fantom',
   },
