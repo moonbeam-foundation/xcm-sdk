@@ -4,7 +4,7 @@ import type {
 } from '@moonbeam-network/xcm-sdk';
 import type { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
-import type { IKeyringPair } from '@polkadot/types/types';
+import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
 import type { TokenTransfer } from '@wormhole-foundation/sdk-connect';
 import type { WalletClient } from 'viem';
 
@@ -16,6 +16,7 @@ export interface Signers {
 export interface TransferData {
   destination: DestinationTransferData;
   getEstimate(amount: number | string): AssetAmount;
+  isAutomaticPossible: boolean;
   max: AssetAmount;
   min: AssetAmount;
   moonChain: MoonChainTransferData;
@@ -24,6 +25,7 @@ export interface TransferData {
     amount: bigint | number | string,
     isAutomatic: boolean,
     signers: Signers,
+    statusCallback?: (params: ISubmittableResult) => void,
   ): Promise<string[]>;
 }
 
@@ -37,7 +39,12 @@ export interface SourceTransferData extends SourceChainTransferData {
 
 export interface DestinationTransferData extends ChainTransferData {}
 
-export type MoonChainTransferData = Omit<ChainTransferData, 'min'>;
+export type MoonChainTransferData = Omit<
+  ChainTransferData,
+  'min' | 'balance'
+> & {
+  feeBalance: AssetAmount;
+};
 
 export interface ChainTransferData {
   chain: AnyChain;

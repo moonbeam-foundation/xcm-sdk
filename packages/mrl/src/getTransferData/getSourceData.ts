@@ -21,6 +21,7 @@ import {
   type EvmChain,
   type EvmParachain,
 } from '@moonbeam-network/xcm-types';
+import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type { SourceTransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
 import {
@@ -30,6 +31,7 @@ import {
 } from './getTransferData.utils';
 
 interface GetSourceDataParams {
+  isAutomatic: boolean;
   route: MrlAssetRoute;
   destinationAddress: string;
   destinationFee: AssetAmount;
@@ -37,6 +39,7 @@ interface GetSourceDataParams {
 }
 
 export async function getSourceData({
+  isAutomatic,
   route,
   destinationAddress,
   destinationFee,
@@ -94,7 +97,7 @@ export async function getSourceData({
     asset: balance,
     destinationAddress,
     feeAsset: feeBalance,
-    isAutomatic: route.mrl.isAutomaticPossible,
+    isAutomatic,
     route,
     sourceAddress,
   });
@@ -114,7 +117,7 @@ export async function getSourceData({
     transfer,
     asset: balance,
     feeAsset: feeBalance,
-    isAutomatic: route.mrl.isAutomaticPossible,
+    isAutomatic,
     destinationAddress,
     route,
     sourceAddress,
@@ -239,11 +242,13 @@ async function getWormholeFee({
   config,
 }: GetWormholeFeeParams): Promise<AssetAmount | undefined> {
   if (WormholeConfig.is(config)) {
+    const safetyAmount = toBigInt(0.000001, asset.decimals);
+
     const wh = WormholeService.create(chain as EvmChain | EvmParachain);
     const fee = await wh.getFee(config);
 
     return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: fee.relayFee?.amount || 0n,
+      amount: fee.relayFee ? fee.relayFee.amount + safetyAmount : 0n,
     });
   }
 

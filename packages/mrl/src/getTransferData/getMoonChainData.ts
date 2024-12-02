@@ -2,19 +2,14 @@ import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import { Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
-import type {
-  DestinationTransferData,
-  MoonChainTransferData,
-} from '../mrl.interfaces';
+import type { MoonChainTransferData } from '../mrl.interfaces';
 
 interface GetMoonChainDataParams {
-  destinationData: DestinationTransferData;
   route: MrlAssetRoute;
   sourceAddress: string;
 }
 
 export async function getMoonChainData({
-  destinationData,
   route,
   sourceAddress,
 }: GetMoonChainDataParams): Promise<MoonChainTransferData> {
@@ -25,16 +20,6 @@ export async function getMoonChainData({
   }
 
   const moonChain = getMoonChain(route.source.chain);
-  const asset = moonChain.getChainAsset(route.mrl.moonChain.asset);
-  const isDestinationMoonChain = route.destination.chain.isEqual(moonChain);
-
-  if (isDestinationMoonChain) {
-    return {
-      balance: destinationData.balance,
-      chain: destinationData.chain,
-      fee: destinationData.fee,
-    };
-  }
 
   const fee = await getDestinationFee({
     address: sourceAddress, // TODO not correct
@@ -46,7 +31,10 @@ export async function getMoonChainData({
 
   let address = sourceAddress;
 
-  if (Parachain.is(route.source.chain)) {
+  if (
+    Parachain.is(route.source.chain) &&
+    !route.source.chain.isEqual(moonChain)
+  ) {
     const { address20 } = getMultilocationDerivedAddresses({
       address: sourceAddress,
       paraId: route.source.chain.parachainId,
@@ -56,15 +44,15 @@ export async function getMoonChainData({
     address = address20;
   }
 
-  const balance = await getBalance({
+  const feeBalance = await getBalance({
     address,
-    asset,
+    asset: moonChain.getChainAsset(route.mrl.moonChain.fee.asset),
     builder: route.mrl.moonChain.fee.balance,
     chain: moonChain,
   });
 
   return {
-    balance,
+    feeBalance,
     chain: moonChain,
     fee,
   };

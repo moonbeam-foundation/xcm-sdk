@@ -61,7 +61,7 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
       destination: {
         asset: agng,
         chain: fantomTestnet,
-        balance: BalanceBuilder().evm().native(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: agng,
           amount: 0.2,

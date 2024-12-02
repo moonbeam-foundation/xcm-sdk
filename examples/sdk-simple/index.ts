@@ -38,34 +38,24 @@ console.log(`Substrate address: ${pair.address}`);
 
 export function logBalances(data: TransferData): void {
   console.log(
-    `Balance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${
-      data.source.balance.symbol
-    }`,
+    `Balance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${data.source.balance.getSymbol()}`,
   );
   console.log(
     `Balance on ${
       data.destination.chain.name
-    } ${data.destination.balance.toDecimal()} ${
-      data.destination.balance.symbol
-    }`,
+    } ${data.destination.balance.toDecimal()} ${data.destination.balance.getSymbol()}`,
   );
 }
 
 export function logTxDetails(data: TransferData): void {
   console.log(
-    `\nYou can send min: ${data.min.toDecimal()} ${
-      data.min.symbol
-    } and max: ${data.max.toDecimal()} ${data.max.symbol} from ${
+    `\nYou can send min: ${data.min.toDecimal()} ${data.min.getSymbol()} and max: ${data.max.toDecimal()} ${data.max.getSymbol()} from ${
       data.source.chain.name
     } to ${
       data.destination.chain.name
-    }. You will pay ${data.source.fee.toDecimal()} ${
-      data.source.fee.symbol
-    } fee on ${
+    }. You will pay ${data.source.fee.toDecimal()} ${data.source.fee.getSymbol()} fee on ${
       data.source.chain.name
-    } and ${data.destination.fee.toDecimal()} ${
-      data.destination.fee.symbol
-    } fee on ${data.destination.chain.name}.`,
+    } and ${data.destination.fee.toDecimal()} ${data.destination.fee.getSymbol()} fee on ${data.destination.chain.name}.`,
   );
 }
 

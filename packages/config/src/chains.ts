@@ -480,7 +480,7 @@ export const fantomTestnet = new EvmChain({
   key: 'fantom-testnet',
   name: 'Fantom Testnet',
   nativeAsset: ftm,
-  rpc: 'https://rpc.testnet.fantom.network',
+  rpc: 'https://fantom-testnet-rpc.publicnode.com',
   wh: {
     name: 'Fantom',
   },
@@ -962,6 +962,7 @@ export const moonbaseAlpha = new EvmParachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: 'https://moonbase.moonscan.io',
   genesisHash:
     '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
@@ -1014,6 +1015,9 @@ export const moonbaseBeta = new EvmParachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
+  explorer: getPolkadotAppsUrl(
+    'wss://moonbase-beta.api.moonbase.moonbeam.network',
+  ),
   genesisHash:
     '0xeebb5d05763801e54d6a7a60a4b7998ac125c4d050dcec418dd07ea959a54464',
   id: 1282,
@@ -1347,6 +1351,7 @@ export const moonbeam = new EvmParachain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
+  explorer: 'https://moonbeam.moonscan.io',
   genesisHash:
     '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
   id: 1284,
