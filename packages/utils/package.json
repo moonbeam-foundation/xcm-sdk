@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-utils",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
