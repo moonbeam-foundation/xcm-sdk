@@ -1,6 +1,7 @@
 import type { Address } from 'viem';
 import type { Chain } from 'viem/chains';
 import { getViemChain } from '../Chain.utils';
+import { EvmChain } from '../EvmChain';
 import { Parachain, type ParachainConstructorParams } from './Parachain';
 
 export interface EvmParachainConstructorParams
@@ -32,6 +33,10 @@ export class EvmParachain extends Parachain {
 
   static isAnyParachain(obj: unknown): obj is EvmParachain | Parachain {
     return obj instanceof EvmParachain || obj instanceof Parachain;
+  }
+
+  static isAnyEvmChain(obj: unknown): obj is EvmParachain | EvmChain {
+    return obj instanceof EvmParachain || obj instanceof EvmChain;
   }
 
   constructor({

@@ -1,6 +1,7 @@
 import { type ContractConfig, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { EvmService, type EvmSigner } from '@moonbeam-network/xcm-sdk';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import type { RedeemData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
 
 export interface WormholeRedeemParams {
@@ -8,7 +9,10 @@ export interface WormholeRedeemParams {
   chain: EvmChain | EvmParachain;
 }
 
-export async function getRedeemData({ txId, chain }: WormholeRedeemParams) {
+export async function getRedeemData({
+  txId,
+  chain,
+}: WormholeRedeemParams): Promise<RedeemData> {
   // TODO this is just for wormhole
   const wh = WormholeService.create(chain);
 
