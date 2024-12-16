@@ -30,6 +30,7 @@ export function polkadotXcm() {
         moonAsset,
         moonChain,
         moonApi,
+        sendOnlyRemoteExecution,
         source,
         sourceAddress,
         sourceApi,
@@ -85,11 +86,14 @@ export function polkadotXcm() {
           transact,
         });
 
-        // TODO add here ability to only send the remote execution (only `send`)
+        const transactionsToSend = sendOnlyRemoteExecution
+          ? [send]
+          : [...assetTransferTxs, send];
+
         return new ExtrinsicConfig({
           module: 'utility',
           func: 'batchAll',
-          getArgs: () => [[...assetTransferTxs, send]],
+          getArgs: () => [transactionsToSend],
         });
       },
     }),

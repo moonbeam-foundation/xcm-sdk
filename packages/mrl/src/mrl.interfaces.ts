@@ -26,6 +26,7 @@ export interface TransferData {
     isAutomatic: boolean,
     signers: Signers,
     statusCallback?: (params: ISubmittableResult) => void,
+    sendOnlyRemoteExecution?: boolean,
   ): Promise<string[]>;
 }
 

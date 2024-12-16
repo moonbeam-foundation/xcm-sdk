@@ -26,6 +26,7 @@ export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   moonAsset: ChainAsset;
   moonChain: EvmParachain;
   moonGasLimit?: bigint;
+  sendOnlyRemoteExecution?: boolean;
   transact?: Transact;
 }
 
