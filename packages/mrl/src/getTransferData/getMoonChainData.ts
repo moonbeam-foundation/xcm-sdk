@@ -23,52 +23,72 @@ export async function getMoonChainData({
   }
 
   const moonChain = getMoonChain(route.source.chain);
-  const isDestinationMoonChain = moonChain.isEqual(route.destination.chain);
-  let address = isDestinationMoonChain ? destinationAddress : sourceAddress;
+  const moonChainAddress = getMoonChainAddress({
+    route,
+    sourceAddress,
+    destinationAddress,
+  });
 
   const fee = await getDestinationFee({
-    address,
+    address: moonChainAddress,
     asset: route.source.asset,
     destination: moonChain,
     fee: route.mrl.moonChain.fee.amount,
     feeAsset: route.mrl.moonChain.fee.asset,
   });
 
-  if (
-    Parachain.is(route.source.chain) &&
-    !route.source.chain.isEqual(moonChain)
-  ) {
-    const addressToUse = EvmParachain.is(route.source.chain)
-      ? evmToAddress(sourceAddress)
-      : sourceAddress;
-    const { address20 } = getMultilocationDerivedAddresses({
-      address: addressToUse,
-      paraId: route.source.chain.parachainId,
-      isParents: true,
-    });
-
-    address = address20;
-  }
-
   const balance = await getBalance({
-    address,
+    address: moonChainAddress,
     asset: moonChain.getChainAsset(route.mrl.moonChain.asset),
     builder: route.mrl.moonChain.balance,
     chain: moonChain,
   });
 
   const feeBalance = await getBalance({
-    address,
+    address: moonChainAddress,
     asset: moonChain.getChainAsset(route.mrl.moonChain.fee.asset),
     builder: route.mrl.moonChain.fee.balance,
     chain: moonChain,
   });
 
   return {
-    address,
+    address: moonChainAddress,
     balance,
     feeBalance,
     chain: moonChain,
     fee,
   };
+}
+
+function getMoonChainAddress({
+  route: { source, destination },
+  sourceAddress,
+  destinationAddress,
+}: GetMoonChainDataParams): string {
+  const moonChain = getMoonChain(source.chain);
+  const isDestinationMoonChain = moonChain.isEqual(destination.chain);
+  const isSourceMoonChain = moonChain.isEqual(source.chain);
+
+  let moonChainAddress = isDestinationMoonChain
+    ? destinationAddress
+    : sourceAddress;
+
+  // for Parachain to EVM transactions, we use the computed origin account in the moonchain
+  if (Parachain.is(source.chain) && !isSourceMoonChain) {
+    const isSourceEvmSigner =
+      EvmParachain.is(source.chain) && source.chain.isEvmSigner;
+
+    const { address20: computedOriginAccount } =
+      getMultilocationDerivedAddresses({
+        address: isSourceEvmSigner
+          ? evmToAddress(sourceAddress)
+          : sourceAddress,
+        paraId: source.chain.parachainId,
+        isParents: true,
+      });
+
+    moonChainAddress = computedOriginAccount;
+  }
+
+  return moonChainAddress;
 }
