@@ -1,6 +1,6 @@
 import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
-import { EvmChain, EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
+import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import type { MoonChainTransferData } from '../mrl.interfaces';
