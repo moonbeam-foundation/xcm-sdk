@@ -102,6 +102,7 @@ export interface BuildTransferParams {
   feeAsset: AssetAmount;
   isAutomatic: boolean;
   route: AssetRoute;
+  sendOnlyRemoteExecution?: boolean;
   sourceAddress: string;
 }
 
@@ -133,6 +134,7 @@ export async function getMrlBuilderParams({
   feeAsset,
   isAutomatic,
   route,
+  sendOnlyRemoteExecution,
   sourceAddress,
 }: BuildTransferParams): Promise<MrlBuilderParams> {
   if (!route.mrl) {
@@ -162,6 +164,7 @@ export async function getMrlBuilderParams({
     moonApi,
     moonAsset: moonChain.nativeAsset,
     moonChain,
+    sendOnlyRemoteExecution,
     source,
     sourceAddress,
     sourceApi,

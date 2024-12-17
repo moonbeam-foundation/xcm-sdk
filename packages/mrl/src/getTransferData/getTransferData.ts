@@ -110,6 +110,7 @@ export async function getTransferData({
       isAutomatic,
       { evmSigner, polkadotSigner }: Partial<Signers>,
       statusCallback,
+      sendOnlyRemoteExecution,
     ): Promise<string[]> {
       const source = route.source.chain;
 
@@ -130,6 +131,7 @@ export async function getTransferData({
         feeAsset,
         isAutomatic,
         route,
+        sendOnlyRemoteExecution,
         sourceAddress,
       });
 
