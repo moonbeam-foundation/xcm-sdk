@@ -33,6 +33,7 @@ export const moonbaseBetaRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().substrate().assets().account(),
           fee: {
             asset: dev,
             amount: 0.1,
