@@ -24,11 +24,7 @@ export async function getMoonChainData({
 
   const moonChain = getMoonChain(route.source.chain);
   const isDestinationMoonChain = moonChain.isEqual(route.destination.chain);
-  const isSourceEvmChain = EvmChain.is(route.source.chain);
-  let address =
-    isDestinationMoonChain || isSourceEvmChain
-      ? destinationAddress
-      : sourceAddress;
+  let address = isDestinationMoonChain ? destinationAddress : sourceAddress;
 
   const fee = await getDestinationFee({
     address,
@@ -44,7 +40,7 @@ export async function getMoonChainData({
   ) {
     const addressToUse = EvmParachain.is(route.source.chain)
       ? evmToAddress(sourceAddress)
-      : address;
+      : sourceAddress;
     const { address20 } = getMultilocationDerivedAddresses({
       address: addressToUse,
       paraId: route.source.chain.parachainId,
