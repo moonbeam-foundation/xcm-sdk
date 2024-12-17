@@ -1,6 +1,10 @@
 import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
-import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
+import {
+  type AnyChain,
+  EvmParachain,
+  Parachain,
+} from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import type { MoonChainTransferData } from '../mrl.interfaces';
@@ -24,11 +28,13 @@ export async function getMoonChainData({
 
   const moonChain = getMoonChain(route.source.chain);
   const moonChainAddress = getMoonChainAddress({
-    route,
+    source: route.source.chain,
+    destination: route.destination.chain,
     sourceAddress,
     destinationAddress,
   });
 
+  console.log('sourceAddress', sourceAddress);
   const fee = await getDestinationFee({
     address: moonChainAddress,
     asset: route.source.asset,
@@ -60,30 +66,37 @@ export async function getMoonChainData({
   };
 }
 
-function getMoonChainAddress({
-  route: { source, destination },
+interface GetMoonChainAddressParams {
+  source: AnyChain;
+  destination: AnyChain;
+  sourceAddress: string;
+  destinationAddress: string;
+}
+
+export function getMoonChainAddress({
+  source,
+  destination,
   sourceAddress,
   destinationAddress,
-}: GetMoonChainDataParams): string {
-  const moonChain = getMoonChain(source.chain);
-  const isDestinationMoonChain = moonChain.isEqual(destination.chain);
-  const isSourceMoonChain = moonChain.isEqual(source.chain);
+}: GetMoonChainAddressParams): string {
+  const moonChain = getMoonChain(source);
+  const isDestinationMoonChain = moonChain.isEqual(destination);
+  const isSourceMoonChain = moonChain.isEqual(source);
 
   let moonChainAddress = isDestinationMoonChain
     ? destinationAddress
     : sourceAddress;
 
   // for Parachain to EVM transactions, we use the computed origin account in the moonchain
-  if (Parachain.is(source.chain) && !isSourceMoonChain) {
-    const isSourceEvmSigner =
-      EvmParachain.is(source.chain) && source.chain.isEvmSigner;
+  if (Parachain.is(source) && !isSourceMoonChain) {
+    const isSourceEvmSigner = EvmParachain.is(source) && source.isEvmSigner;
 
     const { address20: computedOriginAccount } =
       getMultilocationDerivedAddresses({
         address: isSourceEvmSigner
           ? evmToAddress(sourceAddress)
           : sourceAddress,
-        paraId: source.chain.parachainId,
+        paraId: source.parachainId,
         isParents: true,
       });
 
