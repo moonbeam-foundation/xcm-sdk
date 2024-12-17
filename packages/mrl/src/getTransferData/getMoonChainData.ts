@@ -1,17 +1,20 @@
 import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
-import { Parachain } from '@moonbeam-network/xcm-types';
+import { EvmChain, EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
+import { evmToAddress } from '@polkadot/util-crypto';
 import type { MoonChainTransferData } from '../mrl.interfaces';
 
 interface GetMoonChainDataParams {
   route: MrlAssetRoute;
   sourceAddress: string;
+  destinationAddress: string;
 }
 
 export async function getMoonChainData({
   route,
   sourceAddress,
+  destinationAddress,
 }: GetMoonChainDataParams): Promise<MoonChainTransferData> {
   if (!route.mrl) {
     throw new Error(
@@ -20,29 +23,43 @@ export async function getMoonChainData({
   }
 
   const moonChain = getMoonChain(route.source.chain);
+  const isDestinationMoonChain = moonChain.isEqual(route.destination.chain);
+  const isSourceEvmChain = EvmChain.is(route.source.chain);
+  let address =
+    isDestinationMoonChain || isSourceEvmChain
+      ? destinationAddress
+      : sourceAddress;
 
   const fee = await getDestinationFee({
-    address: sourceAddress, // TODO not correct
+    address,
     asset: route.source.asset,
     destination: moonChain,
     fee: route.mrl.moonChain.fee.amount,
     feeAsset: route.mrl.moonChain.fee.asset,
   });
 
-  let address = sourceAddress;
-
   if (
     Parachain.is(route.source.chain) &&
     !route.source.chain.isEqual(moonChain)
   ) {
+    const addressToUse = EvmParachain.is(route.source.chain)
+      ? evmToAddress(sourceAddress)
+      : address;
     const { address20 } = getMultilocationDerivedAddresses({
-      address: sourceAddress,
+      address: addressToUse,
       paraId: route.source.chain.parachainId,
       isParents: true,
     });
 
     address = address20;
   }
+
+  const balance = await getBalance({
+    address,
+    asset: moonChain.getChainAsset(route.mrl.moonChain.asset),
+    builder: route.mrl.moonChain.balance,
+    chain: moonChain,
+  });
 
   const feeBalance = await getBalance({
     address,
@@ -52,6 +69,8 @@ export async function getMoonChainData({
   });
 
   return {
+    address,
+    balance,
     feeBalance,
     chain: moonChain,
     fee,

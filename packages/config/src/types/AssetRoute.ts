@@ -58,6 +58,7 @@ export interface DestinationFeeConfig
 
 export interface MoonChainConfig {
   asset: Asset;
+  balance: BalanceConfigBuilder;
   fee: MoonChainFeeConfig;
 }
 

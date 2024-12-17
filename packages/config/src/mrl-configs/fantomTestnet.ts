@@ -35,6 +35,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,
@@ -66,6 +67,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,
@@ -97,6 +99,8 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: agng,
+          balance: BalanceBuilder().substrate().assets().account(),
+
           fee: {
             asset: dev,
             amount: 0.1,
@@ -128,6 +132,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,
@@ -159,6 +164,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,
@@ -190,6 +196,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
           fee: {
             asset: dev,
             amount: 0.1,
