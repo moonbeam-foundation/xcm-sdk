@@ -33,9 +33,10 @@ export const moonbaseAlphaRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
-            amount: 0.1, // TODO not really, it would be the source fee as source is moonChain
+            amount: 0.1,
             balance: BalanceBuilder().substrate().system().account(),
           },
         },
@@ -64,6 +65,7 @@ export const moonbaseAlphaRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: dev,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0,

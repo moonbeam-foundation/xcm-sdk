@@ -37,6 +37,7 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,
@@ -72,6 +73,7 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
         moonChain: {
           asset: agng,
+          balance: BalanceBuilder().substrate().assets().account(),
           fee: {
             asset: dev,
             amount: 0.1,

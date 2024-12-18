@@ -40,10 +40,8 @@ export interface SourceTransferData extends SourceChainTransferData {
 
 export interface DestinationTransferData extends ChainTransferData {}
 
-export type MoonChainTransferData = Omit<
-  ChainTransferData,
-  'min' | 'balance'
-> & {
+export type MoonChainTransferData = Omit<ChainTransferData, 'min'> & {
+  address: string;
   feeBalance: AssetAmount;
 };
 

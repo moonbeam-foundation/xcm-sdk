@@ -41,6 +41,7 @@ export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
           .transferAssetsAndMessage(),
         moonChain: {
           asset: ftmwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,

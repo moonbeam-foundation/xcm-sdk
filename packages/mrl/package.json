@@ -6,7 +6,10 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "link": "pnpm ln --global",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:update": "vitest -u"
   },
   "repository": {
     "directory": "packages/mrl",
@@ -42,6 +45,7 @@
     "@polkadot/api-augment": "14.3.1",
     "@polkadot/types": "14.3.1",
     "@polkadot/util": "13.2.3",
+    "@polkadot/util-crypto": "13.2.3",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
     "@wormhole-foundation/sdk-evm": "^0.10.7",
     "viem": "^2.21.7"
