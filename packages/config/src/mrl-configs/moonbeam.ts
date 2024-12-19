@@ -1,16 +1,6 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
-import {
-  dai,
-  glmr,
-  peaq,
-  usdc,
-  usdcwh,
-  usdt,
-  usdtwh,
-  wbtc,
-  weth,
-} from '../assets';
-import { ethereum, hydration, moonbeam, peaqChain } from '../chains';
+import { glmr, peaq } from '../assets';
+import { ethereum, moonbeam } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export const moonbeamRoutes = new MrlChainRoutes({
