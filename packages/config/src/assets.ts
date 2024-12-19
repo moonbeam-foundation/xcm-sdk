@@ -110,6 +110,11 @@ export const eqd = new Asset({
   originSymbol: 'EQD',
 });
 
+export const eth = new Asset({
+  key: 'eth',
+  originSymbol: 'ETH',
+});
+
 export const fil = new Asset({
   key: 'fil',
   originSymbol: 'FIL',
@@ -428,6 +433,7 @@ export const assetsList: Asset[] = [
   dot,
   eq,
   eqd,
+  eth,
   fil,
   ftm,
   ftmwh,

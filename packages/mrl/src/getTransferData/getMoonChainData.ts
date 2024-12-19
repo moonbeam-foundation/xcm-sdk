@@ -34,7 +34,6 @@ export async function getMoonChainData({
     destinationAddress,
   });
 
-  console.log('sourceAddress', sourceAddress);
   const fee = await getDestinationFee({
     address: moonChainAddress,
     asset: route.source.asset,

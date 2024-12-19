@@ -117,7 +117,6 @@ type DestinationMultilocation = [
   ),
 ];
 
-// TODO test if this is needed
 function getDestinationMultilocationForPrecompileDestination(
   address: string,
   destination: AnyParachain,
