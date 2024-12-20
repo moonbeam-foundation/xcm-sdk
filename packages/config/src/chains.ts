@@ -30,6 +30,7 @@ import {
   dot,
   eq,
   eqd,
+  eth,
   fil,
   ftm,
   ftmwh,
@@ -461,12 +462,53 @@ export const darwiniaCrab = new EvmParachain({
   ws: ['wss://darwiniacrab-rpc.dwellir.com', 'wss://crab-rpc.darwinia.network'],
 });
 
+export const ethereum = new EvmChain({
+  assets: [
+    ChainAsset.fromAsset(eth, {
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(usdc, {
+      address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+      decimals: 6,
+    }),
+    ChainAsset.fromAsset(usdt, {
+      address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+      decimals: 6,
+    }),
+    ChainAsset.fromAsset(dai, {
+      address: '0x6b175474e89094c44da98b954eedeac495271d0f',
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(wbtc, {
+      address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
+      decimals: 8,
+    }),
+    ChainAsset.fromAsset(glmr, {
+      address: '0x93d3696A9F879b331f40CB5059e37015423A3Bd0',
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(peaq, {
+      address: '0x6e642b4dfe787b8f101d1fb66c2ef56e2b4c6c52',
+      decimals: 18,
+    }),
+  ],
+  ecosystem: Ecosystem.Polkadot,
+  explorer: 'https://etherscan.io',
+  id: 1,
+  key: 'ethereum',
+  name: 'Ethereum',
+  nativeAsset: eth,
+  rpc: 'https://ethereum-rpc.publicnode.com',
+  wh: {
+    name: 'Ethereum',
+  },
+});
+
 export const fantomTestnet = new EvmChain({
   assets: [
     ChainAsset.fromAsset(ftm, {
       decimals: 18,
     }),
-    // TODO should be WGLMR ?
     ChainAsset.fromAsset(dev, {
       address: '0x41E3CFDFC255A4bF3C8D3560Bc8D3D9b5080338e',
       decimals: 18,
@@ -1367,6 +1409,9 @@ export const moonbeam = new EvmParachain({
   rpc: 'https://rpc.api.moonbeam.network',
   ss58Format: 1284,
   ws: ['wss://wss.api.moonbeam.network'],
+  wh: {
+    name: 'Moonbeam',
+  },
 });
 
 export const moonriver = new EvmParachain({
@@ -2262,6 +2307,7 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   darwiniaCrab,
+  ethereum,
   fantomTestnet,
   hydration,
   hydrationAlphanet,

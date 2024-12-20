@@ -83,7 +83,7 @@ export const moonriverRoutes = new ChainRoutes({
       destination: {
         asset: movr,
         chain: calamari,
-        balance: BalanceBuilder().substrate().system().account(),
+        balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           amount: 0.001,
           asset: movr,
@@ -144,7 +144,7 @@ export const moonriverRoutes = new ChainRoutes({
         chain: khala,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.0002,
+          amount: 0.001,
           asset: movr,
         },
       },
@@ -683,7 +683,7 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.0001,
+          amount: 0.1,
           asset: vbnc,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -707,7 +707,7 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.0001,
+          amount: 0.001,
           asset: vksm,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -731,7 +731,7 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.00000001,
+          amount: 0.1,
           asset: vmovr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),

@@ -63,6 +63,7 @@ export async function getSourceData({
     builder: route.source.balance,
     chain: source,
   });
+
   const feeBalance = route.source.fee
     ? await getBalance({
         address: sourceAddress,
@@ -87,6 +88,7 @@ export async function getSourceData({
   });
 
   const existentialDeposit = await getExistentialDeposit(source);
+
   const min = await getAssetMin({
     asset,
     builder: route.source.min,
@@ -185,6 +187,7 @@ async function getFee({
   if (ContractConfig.is(transfer)) {
     return getContractFee({
       address: sourceAddress,
+      balance,
       chain: chain as EvmChain | EvmParachain,
       contract: transfer,
       destinationFee,
@@ -248,7 +251,7 @@ async function getWormholeFee({
     const fee = await wh.getFee(config);
 
     return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: fee.relayFee ? fee.relayFee.amount + safetyAmount : 0n,
+      amount: fee?.relayFee ? fee.relayFee.amount + safetyAmount : 0n,
     });
   }
 

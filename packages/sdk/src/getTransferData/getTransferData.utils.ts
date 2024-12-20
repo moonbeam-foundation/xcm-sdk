@@ -307,6 +307,7 @@ export async function getExtrinsicFee({
 
 export interface GetContractFeeParams {
   address: string;
+  balance: AssetAmount;
   chain: EvmChain | EvmParachain;
   contract: ContractConfig;
   destinationFee: AssetAmount;
@@ -316,6 +317,7 @@ export interface GetContractFeeParams {
 
 export async function getContractFee({
   address,
+  balance,
   chain,
   contract,
   destinationFee,
@@ -323,6 +325,9 @@ export async function getContractFee({
   feeConfig,
 }: GetContractFeeParams): Promise<AssetAmount> {
   try {
+    if (balance.amount === 0n) {
+      return feeBalance.copyWith({ amount: 0n });
+    }
     const evm = EvmService.create(chain);
     const fee = await evm.getFee(address, contract);
     const extra = feeConfig?.extra
