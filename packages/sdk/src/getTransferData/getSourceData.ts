@@ -152,6 +152,7 @@ export async function getFee({
   if (contract) {
     return getContractFee({
       address: sourceAddress,
+      balance,
       chain: chain as EvmChain | EvmParachain,
       contract,
       destinationFee,

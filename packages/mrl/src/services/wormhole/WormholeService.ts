@@ -26,7 +26,12 @@ export class WormholeService {
     this.#wh = wormholeFactory(chain);
   }
 
-  async getFee(transfer: WormholeConfig): Promise<TransferQuote> {
+  async getFee(transfer: WormholeConfig): Promise<TransferQuote | undefined> {
+    const amount = transfer.args[1];
+    if (amount === 0n) {
+      return undefined;
+    }
+
     const xfer = await this.#wh[transfer.func](...transfer.args);
 
     return TokenTransfer.quoteTransfer(
