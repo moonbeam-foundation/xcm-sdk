@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 2.2.5
+
+### Patch Changes
+
+- [#410](https://github.com/moonbeam-foundation/xcm-sdk/pull/410) [`8f9a961`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8f9a9613afa73ca5a56ed4af93f4c37fd9f500f9) Thanks [@Rihyx](https://github.com/Rihyx)! - resolve nanoid vulnerability
+
 ## 2.2.4
 
 ### Patch Changes
