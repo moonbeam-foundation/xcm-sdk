@@ -857,7 +857,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: bifrostPolkadot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.00001,
+          amount: 0.7,
           asset: vastr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -881,7 +881,7 @@ export const moonbeamRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().tokens().accounts(),
         chain: bifrostPolkadot,
         fee: {
-          amount: 0.0000001,
+          amount: 0.05,
           asset: vdot,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -905,7 +905,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: bifrostPolkadot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.00000001,
+          amount: 0.1,
           asset: vfil,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -929,7 +929,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: bifrostPolkadot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.00000001,
+          amount: 0.2,
           asset: vglmr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -953,7 +953,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: bifrostPolkadot,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.00000001,
+          amount: 0.05,
           asset: vmanta,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
