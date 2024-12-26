@@ -132,15 +132,14 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeFeeAsset: true,
           }),
-          asset: usdt,
+          asset: dot,
         },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssets()
+        .X2AndFeeHere(),
     },
     {
       source: {
@@ -163,15 +162,14 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeFeeAsset: true,
           }),
-          asset: usdt,
+          asset: dot,
         },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssets()
+        .X2AndFeeHere(),
     },
     {
       source: {
@@ -195,13 +193,13 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           amount: FeeBuilder()
             .xcmPaymentApi()
             .xcmPaymentFee({ isAssetReserveChain: false }),
-          asset: usdt,
+          asset: dot,
         },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssets()
+        .X2AndFeeHere(),
     },
     {
       source: {
@@ -224,15 +222,14 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeFeeAsset: true,
           }),
-          asset: usdt,
+          asset: dot,
         },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssets()
+        .X2AndFeeHere(),
     },
     {
       source: {
@@ -255,15 +252,14 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
-            shouldTransferAssetPrecedeFeeAsset: true,
           }),
-          asset: usdt,
+          asset: dot,
         },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssets()
+        .X2AndFeeHere(),
     },
     {
       source: {

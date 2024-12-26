@@ -119,6 +119,40 @@ describe('polkadotXcm', () => {
     });
   });
 
+  describe('transferAssets', () => {
+    describe('here', () => {
+      const extrinsic = polkadotXcm()
+        .transferAssets()
+        .here()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('transferAssets', () => {
+    describe('X2AndFeeHere', () => {
+      const extrinsic = polkadotXcm()
+        .transferAssets()
+        .X2AndFeeHere()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+  });
+
   describe('transferAssetsUsingTypeAndThen', () => {
     describe('globalConsensusEthereum', () => {
       const extrinsic = polkadotXcm()
