@@ -1106,6 +1106,9 @@ export const moonbeam = new EvmParachain({
     ChainAsset.fromAsset(axlusdc, {
       address: '0xCa01a1D0993565291051daFF390892518ACfAD3A',
       decimals: 6,
+      ids: {
+        palletInstance: 110,
+      },
     }),
     ChainAsset.fromAsset(bnc, {
       address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
