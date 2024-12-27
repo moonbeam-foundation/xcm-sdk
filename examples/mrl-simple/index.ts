@@ -1,26 +1,16 @@
-import { Mrl } from '@moonbeam-network/mrl';
+import { Mrl, type TransferData } from '@moonbeam-network/mrl';
 import {
-  agng,
-  dev,
   fantomTestnet,
   ftm,
   ftmwh,
   moonbaseAlpha,
-  moonbaseBeta,
   peaqAlphanet,
-  peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
-import type { Asset } from '@moonbeam-network/xcm-types';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { moonbaseAlpha as moonbaseAlphaViem } from 'viem/chains';
 import type { EvmSigner } from '../../packages/sdk/build';
-
-// disable unnecessary warning logs
-console.warn = () => null;
-console.clear();
 
 const { EVM_PRIVATE_KEY, POLKADOT_PRIVATE_KEY } = process.env;
 
@@ -55,176 +45,166 @@ main()
   .finally(() => process.exit());
 
 async function main() {
+  console.warn = () => null;
+  console.clear();
+
   const isAutomatic = false;
 
-  // await fromFantomToPeaq(agng, 10, isAutomatic);
-  // await fromFantomToMoonbase(dev, 1.23, isAutomatic);
-  // await fromMoonbaseToFantom(ftmwh, 0.01, isAutomatic);
-  // await fromPeaqToFantom(ftmwh, 0.0121, isAutomatic);
-  // await fromPeaqEvmToFantom(ftmwh, 1.5, isAutomatic);
-
-  await redeemInMoonbaseAlpha();
-  // await redeemInFantomTestnet();
+  // await fromEvmChain(isAutomatic);
+  await fromParachain(isAutomatic);
 }
 
-async function redeemInMoonbaseAlpha() {
-  const txId =
-    '0x59e70ad73c57bce44cbb3e3308fc6a31d29ff0dcbb2957055b05025969545bed';
-  const walletClient = createWalletClient({
-    account,
-    chain: moonbaseAlphaViem,
-    transport: http(),
-  });
-
-  const data = await Mrl().getRedeemData({ txId, chain: moonbaseAlpha });
-  console.log('data', data);
-
-  await data.redeem(walletClient as EvmSigner);
+export function logBalances(data: TransferData): void {
+  console.log(
+    `\nBalance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${data.source.balance.getSymbol()}`,
+  );
+  console.log(
+    `Balance on ${
+      data.destination.chain.name
+    } ${data.destination.balance.toDecimal()} ${data.destination.balance.getSymbol()}`,
+  );
 }
 
-async function redeemInFantomTestnet() {
-  const txId =
-    '0xa0032ff270885f7278a42d4d974fceab9e4feb039263db35b09beafe57bd6683';
-  const walletClient = createWalletClient({
-    account,
-    chain: fantomTestnet.getViemChain(),
-    transport: http(),
-  });
-
-  const data = await Mrl().getRedeemData({ txId, chain: fantomTestnet });
-  console.log('data', data);
-
-  await data.redeem(walletClient as EvmSigner);
+export function logTxDetails(data: TransferData, isAutomatic: boolean): void {
+  console.log(
+    `\nYou can send min: ${data.min.toDecimal()} ${data.min.getSymbol()} and max: ${data.max.toDecimal()} ${data.max.getSymbol()} from ${
+      data.source.chain.name
+    } to ${data.destination.chain.name}.`,
+  );
+  if (!isAutomatic) {
+    console.log(
+      `You will have to manually complete the transaction in ${data.moonChain.chain.name} and you will need to pay ${data.moonChain.fee.toDecimal()} ${data.moonChain.fee.getSymbol()} for completing it`,
+    );
+  } else {
+    console.log(
+      `This transaction will be completed automatically in ${data.moonChain.chain.name}`,
+    );
+  }
 }
 
-async function fromFantomToPeaq(
-  asset: Asset,
-  amount: number,
-  isAutomatic: boolean,
-) {
-  const walletClient = createWalletClient({
+async function fromEvmChain(isAutomatic: boolean) {
+  const fantomWalletClient = createWalletClient({
     account,
     chain: fantomTestnet.getViemChain(),
     transport: http(),
   });
 
-  const data = await Mrl()
-    .setSource(fantomTestnet)
-    .setDestination(peaqAlphanet)
-    .setAsset(asset)
-    .setAddresses({
-      sourceAddress: account.address,
-      destinationAddress: pair.address,
-    });
+  console.log(`\Source address: ${account.address}`);
 
-  console.log(data);
-
-  await data.transfer(amount, isAutomatic, {
-    polkadotSigner: pair,
-    evmSigner: walletClient as EvmSigner,
-  });
-}
-
-async function fromFantomToMoonbase(
-  asset: Asset,
-  amount: number,
-  isAutomatic: boolean,
-) {
-  const walletClient = createWalletClient({
-    account,
-    chain: fantomTestnet.getViemChain(),
-    transport: http(),
-  });
-
-  const data = await Mrl()
+  const transferData = await Mrl()
     .setSource(fantomTestnet)
     .setDestination(moonbaseAlpha)
-    .setAsset(asset)
+    .setAsset(ftm)
+    .setIsAutomatic(isAutomatic)
     .setAddresses({
       sourceAddress: account.address,
       destinationAddress: account.address,
     });
+  logBalances(transferData);
 
-  console.log(data);
+  const amount = +transferData.min.toDecimal() * 1.5 + 0.000001;
 
-  const hash = await data.transfer(amount, isAutomatic, {
-    polkadotSigner: pair,
-    evmSigner: walletClient as EvmSigner,
+  console.log(
+    `\nSending ${amount} ${transferData.source.balance.getSymbol()} from ${transferData.source.chain.name} to ${transferData.destination.chain.name}`,
+  );
+
+  const result = await transferData.transfer(amount, isAutomatic, {
+    evmSigner: fantomWalletClient,
   });
-  console.log('hash', hash);
-}
+  const hash = result.pop();
 
-async function fromMoonbaseToFantom(
-  asset: Asset,
-  amount: number,
-  isAutomatic: boolean,
-) {
-  const walletClient = createWalletClient({
-    account,
-    chain: moonbaseAlphaViem,
-    transport: http(),
-  });
-  const data = await Mrl()
-    .setSource(moonbaseAlpha)
-    .setDestination(fantomTestnet)
-    .setAsset(asset)
-    .setAddresses({
-      sourceAddress: account.address,
-      destinationAddress: account.address,
+  if (!isAutomatic && hash) {
+    console.log(
+      `\nYou will have to manually complete the transaction in ${transferData.moonChain.chain.name} and you will need to pay ${transferData.moonChain.fee.toDecimal()} ${transferData.moonChain.fee.getSymbol()} for completing it`,
+    );
+    console.log(
+      `Balance for fees on ${
+        transferData.moonChain.chain.name
+      } ${transferData.moonChain.feeBalance.toDecimal()} ${transferData.moonChain.feeBalance.getSymbol()}`,
+    );
+
+    const redeemChainWalletClient = createWalletClient({
+      account,
+      chain: transferData.moonChain.chain.getViemChain(),
+      transport: http(),
     });
 
-  console.log(data);
+    console.log('\nWaiting 30 seconds for tx to be confirmed before redeeming');
+    await new Promise((resolve) => setTimeout(resolve, 30000));
 
-  await data.transfer(amount, isAutomatic, {
-    polkadotSigner: pair,
-    evmSigner: walletClient as EvmSigner,
-  });
+    console.log(`Redeeming tx ${hash} in ${transferData.moonChain.chain.name}`);
+
+    const redeemData = await Mrl().getRedeemData({
+      txId: hash,
+      chain: transferData.moonChain.chain,
+    });
+
+    await redeemData.redeem(redeemChainWalletClient);
+  } else {
+    console.log(
+      `\nRedeeming will happen automatically for this tx ${hash} in ${transferData.moonChain.chain.name}`,
+    );
+  }
 }
 
-async function fromPeaqToFantom(
-  asset: Asset,
-  amount: number,
-  isAutomatic: boolean,
-) {
-  const data = await Mrl()
+async function fromParachain(isAutomatic: boolean) {
+  const transferData = await Mrl()
     .setSource(peaqAlphanet)
     .setDestination(fantomTestnet)
-    .setAsset(asset)
+    .setAsset(ftmwh)
+    .setIsAutomatic(isAutomatic)
     .setAddresses({
       sourceAddress: pair.address,
       destinationAddress: account.address,
     });
+  logBalances(transferData);
 
-  console.log(data);
+  console.log(`Source address: ${pair.address}`);
+  console.log(`Destination address: ${account.address}`);
 
-  await data.transfer(amount, isAutomatic, {
+  const amount = +transferData.min.toDecimal() * 1.5 + 0.000001;
+
+  console.log(
+    `\nSending ${amount} ${transferData.source.balance.getSymbol()} from ${transferData.source.chain.name} to ${transferData.destination.chain.name}`,
+  );
+  console.log(
+    `Sending also ${transferData.moonChain.fee.toDecimal()} ${transferData.moonChain.fee.getSymbol()} from ${transferData.source.chain.name} to ${transferData.moonChain.chain.name} to cover for fees`,
+  );
+
+  await transferData.transfer(amount, isAutomatic, {
     polkadotSigner: pair,
   });
+
+  console.log(
+    `\nA remote execution will be sent to the computed origin account (${transferData.moonChain.address}) in ${transferData.moonChain.chain.name} which will relay the ${amount} ${transferData.source.balance.getSymbol()} to ${transferData.destination.chain.name}`,
+  );
+
+  if (isAutomatic) {
+    console.log(
+      `\nThe transaction will be completed automatically in ${transferData.destination.chain.name} once picked up by a relayer`,
+    );
+  } else {
+    console.log(
+      `\nYou will have to manually complete the transaction in ${transferData.destination.chain.name} once the transaction is confirmed
+      This sdk does not yet return the tx hash that needs to be redeemed, so you will have to look it up in the explorer and paste it in the redeemInEvm function`,
+    );
+  }
 }
 
-async function fromPeaqEvmToFantom(
-  asset: Asset,
-  amount: number,
-  isAutomatic: boolean,
-) {
+async function redeemInEvm() {
+  const txHashToBeRedeemed =
+    '0xaaa0d615da43544eb0ae6f11148d14be809973d90c52041ce1c8d682db0c48c2';
   const walletClient = createWalletClient({
     account,
-    chain: peaqEvmAlphanet.getViemChain(),
+    chain: fantomTestnet.getViemChain(),
     transport: http(),
   });
 
-  const data = await Mrl()
-    .setSource(peaqEvmAlphanet)
-    .setDestination(fantomTestnet)
-    .setAsset(asset)
-    .setAddresses({
-      sourceAddress: account.address,
-      destinationAddress: account.address,
-    });
-
-  console.log(data);
-
-  await data.transfer(amount, isAutomatic, {
-    evmSigner: walletClient as EvmSigner,
+  const data = await Mrl().getRedeemData({
+    txId: txHashToBeRedeemed,
+    chain: fantomTestnet,
   });
+  console.log('data', data);
+
+  await data.redeem(walletClient as EvmSigner);
 }
