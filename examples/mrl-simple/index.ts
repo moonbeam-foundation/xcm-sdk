@@ -2,7 +2,6 @@ import { Mrl, type TransferData } from '@moonbeam-network/mrl';
 import {
   fantomTestnet,
   ftm,
-  ftmwh,
   moonbaseAlpha,
   peaqAlphanet,
 } from '@moonbeam-network/xcm-config';
@@ -52,9 +51,9 @@ async function main() {
   /**
    *  Set the source, destination and asset
    */
-  const source = peaqAlphanet;
-  const destination = fantomTestnet;
-  const asset = ftmwh;
+  const source = fantomTestnet;
+  const destination = moonbaseAlpha;
+  const asset = ftm;
 
   /**
    * Set the transaction to be automatic or not
@@ -66,8 +65,7 @@ async function main() {
   /**
    * Set the tx hash to be redeemed if the transaction is not automatic
    */
-  const txHashToBeRedeemed: string | undefined =
-    '0x7918a77b120fedd8b9cf48d4086a4617579929fb92b5c5c44c2d43a840a37592';
+  const txHashToBeRedeemed: string | undefined = undefined;
 
   if (txHashToBeRedeemed) {
     await redeemInEvm(txHashToBeRedeemed, destination);
