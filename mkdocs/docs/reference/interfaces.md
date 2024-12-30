@@ -168,7 +168,8 @@ Defines properties related to a chain and is used to define the source and desti
 - `genesisHash` ++"string"++ - The hash of the genesis block
 - `parachainId` ++"number"++ - The ID of the parachain (not the EVM chain ID)
 - `ss58Format` ++"number"++ - The [ss58 format](https://polkadot.js.org/docs/keyring/start/ss58/){target=\_blank} for the chain
-- `usesChainDecimals` ++"boolean"++ - A flag indicating if the chain uses its own decimals in balance queries for all the assets. defaults to `false`
+- `usesChainDecimals` ++"boolean"++ - A flag indicating if the chain uses its own decimals in balance queries for all the assets. Defaults to `false`
+- `checkSovereignAccountBalances` ++"boolean"++ - Indicates whether a check of the sovereign account balances for the asset is required when transferring to this chain. Defaults to `false`
 - `ws` ++"string"++ - The WebSocket endpoint for the chain
 - `id` ++"number"++ - **For EVM parachains only** - The chain ID
 - `rpc` ++"string"++ - **For EVM parachains only** - The HTTP RPC endpoint for the chain
