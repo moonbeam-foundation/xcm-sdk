@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://moonbeam-foundation.github.io/xcm-sdk/latest/</loc>
-         <lastmod>2024-07-08</lastmod>
+         <lastmod>2024-12-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moonbeam-foundation.github.io/xcm-sdk/latest/contribute/</loc>
-         <lastmod>2024-07-08</lastmod>
+         <lastmod>2024-12-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moonbeam-foundation.github.io/xcm-sdk/latest/example-usage/</loc>
-         <lastmod>2024-07-08</lastmod>
+         <lastmod>2024-12-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/interfaces/</loc>
-         <lastmod>2024-07-08</lastmod>
+         <lastmod>2024-12-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/methods/</loc>
-         <lastmod>2024-07-08</lastmod>
+         <lastmod>2024-12-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

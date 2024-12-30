@@ -650,8 +650,8 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Assets are listed in alphabetical order. Please make sure you follow this order when adding new assets.</p>
 </div>
+<p>Assets are listed in alphabetical order. Please make sure you follow this order when adding new assets.</p>
 <h2 id="add-a-chain">Add a Chain</h2>
 <p>The next step to support an asset integration is to add chain information for the chains in which your asset can be sent to and from to the <a href="https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/chains.ts" target="_blank">chains configuration file</a>.</p>
 <p>To add a chain, take the following steps:</p>
@@ -721,8 +721,8 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.</p>
 </div>
+<p>Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.</p>
 <p>Now that you've added the chain, you can continue to the next section to add the assets that this chain supports.</p>
 <h2 id="configure-a-chains-assets">Configure a Chain's Assets</h2>
 <p>To designate a chain as a destination or source chain for an asset, you must specify the asset within the <code>assetsData</code> array of the chain's configuration. This array outlines the supported assets on the chain, and the asset information within it determines how the asset is identified or targeted on that specific chain. For example, when adding a chain's native asset, you'll need to define how the chain sees its own asset, and when adding the asset to a destination chain, you'll need to define how the destination chain sees the asset.</p>
@@ -827,8 +827,8 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.</p>
 </div>
+<p>Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.</p>
 <p>For example, to add support to transfer USDT from the Polkadot Asset Hub to Moonbeam, the Polkadot Asset Hub configuration file is as follows:</p>
 <div class="language-ts highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nx">AssetMinBuilder</span><span class="p">,</span>
@@ -850,24 +850,26 @@
 </span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">      </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="kt">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">assets</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
 </span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">      </span><span class="nx">destination</span><span class="o">:</span><span class="w"> </span><span class="kt">moonbeam</span><span class="p">,</span>
 </span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">      </span><span class="nx">destinationFee</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">        </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="kt">FeeBuilder</span><span class="p">().</span><span class="nx">assetManager</span><span class="p">().</span><span class="nx">assetTypeUnitsPerSecond</span><span class="p">(),</span>
-</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">        </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="kt">usdt</span><span class="p">,</span>
-</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="kt">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">assets</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
-</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">      </span><span class="p">},</span>
-</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">      </span><span class="nx">extrinsic</span><span class="o">:</span><span class="w"> </span><span class="kt">ExtrinsicBuilder</span><span class="p">()</span>
-</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">        </span><span class="p">.</span><span class="nx">polkadotXcm</span><span class="p">()</span>
-</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">        </span><span class="p">.</span><span class="nx">limitedReserveTransferAssets</span><span class="p">()</span>
-</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">        </span><span class="p">.</span><span class="nx">X2</span><span class="p">(),</span>
-</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">      </span><span class="nx">fee</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">        </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="kt">dot</span><span class="p">,</span>
-</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="kt">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">system</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
-</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">        </span><span class="nx">xcmDeliveryFeeAmount</span><span class="p">,</span>
-</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">      </span><span class="p">},</span>
-</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="w">      </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="kt">AssetMinBuilder</span><span class="p">().</span><span class="nx">assets</span><span class="p">().</span><span class="nx">asset</span><span class="p">(),</span>
-</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">    </span><span class="p">}),</span>
-</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">  </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="kt">polkadotAssetHub</span><span class="p">,</span>
-</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="p">});</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">        </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="kt">FeeBuilder</span><span class="p">()</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">          </span><span class="p">.</span><span class="nx">xcmPaymentApi</span><span class="p">()</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">          </span><span class="p">.</span><span class="nx">xcmPaymentFee</span><span class="p">({</span><span class="w"> </span><span class="nx">isAssetReserveChain</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="w"> </span><span class="p">}),</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">        </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="kt">usdt</span><span class="p">,</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="kt">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">assets</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">      </span><span class="p">},</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">      </span><span class="nx">extrinsic</span><span class="o">:</span><span class="w"> </span><span class="kt">ExtrinsicBuilder</span><span class="p">()</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">        </span><span class="p">.</span><span class="nx">polkadotXcm</span><span class="p">()</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">        </span><span class="p">.</span><span class="nx">limitedReserveTransferAssets</span><span class="p">()</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">        </span><span class="p">.</span><span class="nx">X2</span><span class="p">(),</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">      </span><span class="nx">fee</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">        </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="kt">dot</span><span class="p">,</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="kt">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">system</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="w">        </span><span class="nx">xcmDeliveryFeeAmount</span><span class="p">,</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">      </span><span class="p">},</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="w">      </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="kt">AssetMinBuilder</span><span class="p">().</span><span class="nx">assets</span><span class="p">().</span><span class="nx">asset</span><span class="p">(),</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">    </span><span class="p">}),</span>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="w">  </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="kt">polkadotAssetHub</span><span class="p">,</span>
+</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="p">});</span>
 </span></code></pre></div>
 <p>You're almost there. With this configuration, you can send the asset one-way from the configured chain to the asset's specified destination chain. To send the asset back to the original source chain, you must update (or create) the specified destination chain's configurations. Considering the above example, the Moonbeam configuration file would need to be updated to transfer USDT from Moonbeam back to the Polkadot Asset Hub.</p>
 <p>You must take the same steps in the destination chain's configuration file. If a configuration file does not exist, you must create one. Otherwise, update the chain's configuration file to include the asset configuration, as step three outlines.</p>
