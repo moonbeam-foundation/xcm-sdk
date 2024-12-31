@@ -246,7 +246,7 @@ In this guide, we'll show you first how to build the transfer data if you alread
 
 
 ### Simple Example {: #build-xcm-transfer-data-simple }
-<!-- TODO mjm sdk, assets, getTransferData reference -->
+<!-- TODO mjm sdk, setSource, setDestination reference -->
 In this example, we want to transfer DOT from Polkadot to Moonbeam. So to get the transfer data, we'll need to set the asset, source, and destination chains. First we'll need to instantiate the SDK, by calling the [`Sdk`](./reference/methods.md#initialize-the-sdk) function and then calling the `setAsset`, `setSource`, and `setDestination` functions.
 You can optionally pass in the ecosystem to the `Sdk` function, but in this example, we know the route we want to use, so there is no need to pass in the ecosystem.
 
