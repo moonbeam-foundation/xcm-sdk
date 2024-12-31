@@ -21,6 +21,38 @@ export const ethereumRoutes = new MrlChainRoutes({
      */
     {
       source: {
+        asset: eth,
+        balance: BalanceBuilder().evm().native(),
+        destinationFee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: weth,
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: weth,
+          amount: 0.000002,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: weth,
+          balance: BalanceBuilder().evm().erc20(),
+          fee: {
+            asset: glmr,
+            amount: 0.15,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
         asset: usdc,
         balance: BalanceBuilder().evm().erc20(),
         destinationFee: {
@@ -53,6 +85,38 @@ export const ethereumRoutes = new MrlChainRoutes({
     },
     {
       source: {
+        asset: usdt,
+        balance: BalanceBuilder().evm().erc20(),
+        destinationFee: {
+          asset: usdt,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: usdtwh,
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: usdtwh,
+          amount: 0.004,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: usdtwh,
+          balance: BalanceBuilder().evm().erc20(),
+          fee: {
+            asset: glmr,
+            amount: 0.15,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
         asset: dai,
         balance: BalanceBuilder().evm().erc20(),
         destinationFee: {
@@ -74,6 +138,38 @@ export const ethereumRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: dai,
+          balance: BalanceBuilder().evm().erc20(),
+          fee: {
+            asset: glmr,
+            amount: 0.15,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
+        asset: wbtc,
+        balance: BalanceBuilder().evm().erc20(),
+        destinationFee: {
+          asset: wbtc,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: wbtc,
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: wbtc,
+          amount: 0.0000001,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: wbtc,
           balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: glmr,
