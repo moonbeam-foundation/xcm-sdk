@@ -1,5 +1,5 @@
 ---
-title: Using the XCM SDK v2
+title: Using the XCM SDK v3
 description: Use the Moonbeam XCM SDK to easily transfer cross-chain assets between parachains or between a parachain and relay chain within the Polkadot/Kusama ecosystems.
 template: tutorial.html
 ---
@@ -176,7 +176,7 @@ You can use any of the following code examples to retrieve information on the su
 
 ### Get List of Supported Assets {: #get-list-of-supported-assets }
 
-To get a list of all of the assets supported by the XCM SDK, you can instantiate the XCM SDK and call the [`assets`](./reference/methods.md#the-assets-method) function.
+To get a list of all of the assets supported by the XCM SDK, you can instantiate the XCM SDK and get the assets property.
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
@@ -193,7 +193,7 @@ assets.forEach((asset) => {
 ### Get List of Supported Assets by Ecosystem {: #get-supported-assets-by-ecosystem }
 
 <!-- TODO mjm exosystem reference -->
-To get a list of the supported assets for a particular [ecosystem](./reference/interfaces.md#the-ecosystem-type), you can pass in the ecosystem name: `polkadot`, `kusama`, or `alphanet-relay`. For example, the following snippet will get all of the Polkadot assets supported:
+To get a list of the supported assets for a particular [ecosystem](./reference/interfaces.md#the-ecosystem-type), you can pass in the ecosystem: `polkadot`, `kusama`, or `alphanet-relay`. For example, the following snippet will get all of the Polkadot assets supported:
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
