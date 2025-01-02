@@ -455,6 +455,132 @@ exports[`polkadotXcm > limitedReserveWithdrawAssets > x2 > should get correct ar
 ]
 `;
 
+exports[`polkadotXcm > transferAssets > X2AndFeeHere > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssets",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm > transferAssets > X2AndFeeHere > should get correct arguments 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 2032,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": {
+              "X2": [
+                {
+                  "PalletInstance": 10,
+                },
+                {
+                  "GeneralIndex": "USDT",
+                },
+              ],
+            },
+            "parents": 0,
+          },
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 5000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": "Here",
+            "parents": 1,
+          },
+        },
+      },
+    ],
+  },
+  1,
+  "Unlimited",
+]
+`;
+
+exports[`polkadotXcm > transferAssets > here > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssets",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm > transferAssets > here > should get correct arguments 1`] = `
+[
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "Parachain": 2032,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V1": {
+      "interior": {
+        "X1": {
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
+          },
+        },
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V1": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": "Here",
+            "parents": 1,
+          },
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
 exports[`polkadotXcm > transferAssetsUsingTypeAndThen > globalConsensusEthereum > should be correct config 1`] = `
 ExtrinsicConfig {
   "func": "transferAssetsUsingTypeAndThen",
