@@ -378,7 +378,7 @@ The same output will be generated regardless of which example you used to build 
 
     ```js
     // Send DOT from Polkadot to Moonbeam
-    // data
+    // transfer data
     {
       destination: {
         chain: _EvmParachain {
@@ -871,7 +871,7 @@ const estimatedAmount = transferData.getEstimate(amount);
 
 console.log(
   `The estimated amount of ${
-    transferData.source.balance.originSymbol
+    transferData.source.balance.getSymbol()
   } to be received on ${
     transferData.destination.chain.name
   } is: ${estimatedAmount.toDecimal()} ${transferData.destination.balance.getSymbol()}`,
