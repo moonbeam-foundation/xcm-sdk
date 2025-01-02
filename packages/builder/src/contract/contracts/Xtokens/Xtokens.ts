@@ -29,33 +29,40 @@ export function Xtokens() {
           module: 'Xtokens',
         }),
     }),
-    transferMultiCurrencies: (weight = U_64_MAX): ContractConfigBuilder => ({
-      build: ({ asset, destination, destinationAddress, fee }) =>
-        new ContractConfig({
+    transferMultiCurrencies: (
+      shouldTransferAssetPrecedeFeeAsset = true,
+      weight = U_64_MAX,
+    ): ContractConfigBuilder => ({
+      build: ({ asset, destination, destinationAddress, fee }) => {
+        const transferAsset = [
+          asset.address
+            ? formatAssetIdToERC20(asset.address)
+            : asset.getAssetId(),
+          asset.amount,
+        ];
+
+        const feeAsset = [
+          fee.address ? formatAssetIdToERC20(fee.address) : fee.getAssetId(),
+          fee.amount,
+        ];
+
+        const assets = shouldTransferAssetPrecedeFeeAsset
+          ? [transferAsset, feeAsset]
+          : [feeAsset, transferAsset];
+        const feeAssetIndex = shouldTransferAssetPrecedeFeeAsset ? 1 : 0;
+        return new ContractConfig({
           address: XTOKENS_CONTRACT_ADDRESS,
           abi: XTOKENS_ABI,
           args: [
-            [
-              [
-                asset.address
-                  ? formatAssetIdToERC20(asset.address)
-                  : asset.getAssetId(),
-                asset.amount,
-              ],
-              [
-                fee.address
-                  ? formatAssetIdToERC20(fee.address)
-                  : fee.getAssetId(),
-                fee.amount,
-              ],
-            ],
-            1, // index of the fee asset
+            assets,
+            feeAssetIndex,
             getDestinationMultilocation(destinationAddress, destination),
             weight,
           ],
           func: 'transferMultiCurrencies',
           module: 'Xtokens',
-        }),
+        });
+      },
     }),
     transferWithEvmTo32: (weight = U_64_MAX): ContractConfigBuilder => ({
       build: ({ destinationAddress, asset, destination }) => {
