@@ -6,16 +6,20 @@ template: tutorial.html
 # Using the Moonbeam MRL SDK
 
 ## Introduction {: #introduction }
-Moonbeam Routed Liquidity (MRL) allows liquidity from any blockchain connected to Moonbeam to be seamlessly routed to Polkadot parachains. This is achieved through technologies like General Message Passing (GMP), Polkadot's Cross-Consensus Message Passing (XCM), and XCM-enabled ERC-20 tokens (XC-20s). For more details, refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank}.
 
-The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s.
+<!-- TODO mjm remove the description from this page? -->
+Moonbeam Routed Liquidity (MRL) allows liquidity from any blockchain connected to Moonbeam to be seamlessly routed to Polkadot parachains. The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s.
 
-It allows three types of transfers:
+The SDK allows the three types of transfers. Here is a brief description of what happens in each:
 
-1. **From EVM chains to parachains**: Assets from chains like Ethereum to Polkadot parachains, like Hydration. A message is sent 
-2. **From parachains to EVM chains**:  
-3. **Bewtween Moonbeam and EVM chains**
+<!-- TODO mjm reference transfer types -->
+1. **From EVM chains to parachains**: Assets are sent from the EVM chain to Moonbeam via a GMP provider bridge (like Wormhole). A contract call is executed in Moonbeam which initiates the XCM transfer to the destination parachain.
+2. **From parachains to EVM chains**: Assets are sent alongside a remote execution message from the parachain to Moonbeam via XCM. The message then is executed in Moonbeam, which bridges the assets to the destination EVM chain via a GMP provider bridge.
+3. **Bewtween Moonbeam and EVM chains**: Assets move between Moonbeam and EVM chains via the GMP provider bridge.
 
+In MRL transfers, the transaction must be completed in the destination chain of the bridge. This can be done automatically by a relayer or manually by the user, and the SDK supports both options.
+
+Regardless of the type of transfer you're making, the usage of the MRL SDK is the same, with only a few considerations to be made when redeeming/completing the transfer.
 <!-- TODO mjm add info here -->
 ## Install the MRL SDK {: #install-the-xcm-sdk }
 
@@ -111,7 +115,8 @@ sources.forEach((source) => {
 Much like in XCM, to transfer an asset from one chain to another, you'll need to first build the transfer data, which defines the asset to be transferred, the source chain and address, the destination chain and address, and the associated signer for the transaction. Building the transfer data is the first step; in the next section, you'll learn how to use it to actually transfer the asset.
 
 <!-- TODO mjm reference redeem -->
-In MRL transfers, the assets must be redeemed in the destination chain before they can be used by the destination address. This can be done automatically by a relayer or manually by the user. For manual redemtions, the SDK also provides a `redeem` function that can be used after the transaction is completed. It will be explained in a following section.
+In MRL transfers, the assets must be redeemed in the destination chain of the bridge. This can be done automatically by a relayer or manually by the user. For manual redemtions, the SDK also provides a `redeem` function that can be used after the transaction is completed. It will be explained in a following section.
+
 
 In this guide, we'll show you first how to build the transfer data if you already know the route you want to use and don't need chain or asset information. Then, we'll show you how to build the transfer data if you need to retrieve the list of supported assets and chains for a given asset, which is useful if you're building a UI to allow users to select the asset, source, and destination chains.
 
