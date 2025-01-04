@@ -1,6 +1,6 @@
 import { u8aToHex } from '@polkadot/util';
 import { ContractConfig } from '../../../../../contract';
-import type { MrlRedeemConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import type { MrlExecuteConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { GMP_ABI } from './GmpAbi';
 
 const module = 'GMP';
@@ -10,7 +10,7 @@ export const GMP_CONTRACT_ADDRESS =
 
 export function Gmp() {
   return {
-    wormholeTransferERC20: (): MrlRedeemConfigBuilder => ({
+    wormholeTransferERC20: (): MrlExecuteConfigBuilder => ({
       build: ({ bytes }) => {
         const hex = u8aToHex(bytes);
 
