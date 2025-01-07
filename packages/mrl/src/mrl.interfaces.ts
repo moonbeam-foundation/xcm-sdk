@@ -2,7 +2,11 @@ import type {
   EvmSigner,
   SourceChainTransferData,
 } from '@moonbeam-network/xcm-sdk';
-import type { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
+import type {
+  AnyChain,
+  AssetAmount,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
 import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
 import type { TokenTransfer } from '@wormhole-foundation/sdk-connect';
@@ -41,6 +45,7 @@ export interface SourceTransferData extends SourceChainTransferData {
 export interface DestinationTransferData extends ChainTransferData {}
 
 export type MoonChainTransferData = Omit<ChainTransferData, 'min'> & {
+  chain: EvmParachain;
   address: string;
   feeBalance: AssetAmount;
 };
