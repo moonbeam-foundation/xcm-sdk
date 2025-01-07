@@ -15,9 +15,9 @@ export type MrlConfigBuilder = ConfigBuilder<
   MrlBuilderParams
 >;
 
-export type MrlRedeemConfigBuilder = ConfigBuilder<
+export type MrlExecuteConfigBuilder = ConfigBuilder<
   ContractConfig,
-  MrlRedeemBuilderParams
+  MrlExecuteBuilderParams
 >;
 
 export interface MrlBuilderParams extends BuilderParams<AnyChain> {
@@ -30,7 +30,7 @@ export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   transact?: Transact;
 }
 
-export interface MrlRedeemBuilderParams {
+export interface MrlExecuteBuilderParams {
   bytes?: Uint8Array;
 }
 

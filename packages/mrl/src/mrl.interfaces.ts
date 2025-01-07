@@ -53,8 +53,8 @@ export interface ChainTransferData {
 }
 
 // TODO this is just for Wormhole
-export interface RedeemData {
+export interface ExecuteTransferData {
   vaa: TokenTransfer.VAA;
   tokenTransfer: TokenTransfer;
-  redeem(signer: EvmSigner): Promise<string>;
+  executeTransfer(signer: EvmSigner): Promise<string>;
 }
