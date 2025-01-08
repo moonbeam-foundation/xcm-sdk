@@ -586,10 +586,10 @@ export const hydration = new Parachain({
   parachainId: 2034,
   ss58Format: 63,
   ws: [
-    'wss://hydradx-rpc.dwellir.com',
     'wss://rpc.hydradx.cloud',
     'wss://rpc.helikon.io/hydradx',
     'wss://hydradx.paras.dotters.network',
+    'wss://hydradx-rpc.dwellir.com',
   ],
 });
 
