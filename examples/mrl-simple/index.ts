@@ -63,12 +63,12 @@ async function main() {
   const isAutomatic = false;
 
   /**
-   * Set the tx hash to be redeemed if the transaction is not automatic
+   * Set the tx hash to be executed if the transaction is not automatic
    */
-  const txHashToBeRedeemed: string | undefined = undefined;
+  const txHashToBeExecuted: string | undefined = undefined;
 
-  if (txHashToBeRedeemed) {
-    await redeemInEvm(txHashToBeRedeemed, destination);
+  if (txHashToBeExecuted) {
+    await executeInEvm(txHashToBeExecuted, destination);
   } else if (EvmChain.is(source)) {
     await fromEvmChain(source, destination, asset, isAutomatic);
   } else if (Parachain.is(source)) {
@@ -139,17 +139,17 @@ async function fromEvmChain(
       transport: http(),
     });
 
-    console.log('\nWaiting 30 seconds for tx to be confirmed before redeeming');
+    console.log('\nWaiting 30 seconds for tx to be confirmed before executing');
     await new Promise((resolve) => setTimeout(resolve, 30000));
 
     console.log(`Redeeming tx ${hash} in ${transferData.moonChain.chain.name}`);
 
-    const redeemData = await Mrl().getRedeemData({
+    const executeTransferData = await Mrl().getExecuteTransferData({
       txId: hash,
       chain: transferData.moonChain.chain,
     });
 
-    await redeemData.redeem(redeemChainWalletClient);
+    await executeTransferData.executeTransfer(redeemChainWalletClient);
   } else {
     console.log(
       `\nRedeeming will happen automatically for this tx ${hash} in ${transferData.moonChain.chain.name}`,
@@ -203,24 +203,24 @@ async function fromParachain(
       `\nYou will have to manually complete the transaction in ${transferData.destination.chain.name} once the transaction is confirmed`,
     );
     console.log(
-      'This sdk does not yet return the tx hash that needs to be redeemed, so you will have to look it up in the explorer and paste it in the redeemInEvm function',
+      'This sdk does not yet return the tx hash that needs to be executed, so you will have to look it up in the explorer and paste it in the executeInEvm function',
     );
   }
 }
 
-async function redeemInEvm(txHashToBeRedeemed: string, destination: EvmChain) {
+async function executeInEvm(txHashToBeExecuted: string, destination: EvmChain) {
   const walletClient = createWalletClient({
     account,
     chain: destination.getViemChain(),
     transport: http(),
   });
 
-  const data = await Mrl().getRedeemData({
-    txId: txHashToBeRedeemed,
+  const data = await Mrl().getExecuteTransferData({
+    txId: txHashToBeExecuted,
     chain: fantomTestnet,
   });
 
-  console.log(`Redeeming tx ${txHashToBeRedeemed} in ${destination.name}`);
+  console.log(`Executing tx ${txHashToBeExecuted} in ${destination.name}`);
 
-  await data.redeem(walletClient as EvmSigner);
+  await data.executeTransfer(walletClient as EvmSigner);
 }
