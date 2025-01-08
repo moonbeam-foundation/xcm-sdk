@@ -7,10 +7,10 @@ description: A reference for the types and interfaces in the Moonbeam XCM SDK th
 
 The XCM SDK is based on defining an asset to transfer, then the source chain to send the asset from, and the destination chain to send the asset to, which, together, build the transfer data.
 
-The following sections cover the types and interfaces you'll encounter when working with assets, chains, and transfer data.
+The following sections cover the most important types, interfaces and classes you'll encounter when working with assets, chains, and transfer data.
 
 ## Assets
-
+<!-- 
 ### The Asset Object
 
 <div class="grid" markdown>
@@ -33,9 +33,9 @@ Defines an asset's key and symbol used on the asset's origin chain.
 }
 ```
 
-</div>
+</div> 
 
----
+--- -->
 
 ### The Asset Amount Object
 

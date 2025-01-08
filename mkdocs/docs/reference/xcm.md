@@ -1,0 +1,154 @@
+---
+title: XCM SDK Reference - v3
+description: A reference for the types and classes in the Moonbeam XCM SDK that can be used to send XCM transfers between chains within the Polkadot/Kusama ecosystems.
+---
+
+# Moonbeam XCM SDK Reference: Types and Interfaces
+
+The XCM SDK is based on defining an asset to transfer, then the source chain to send the asset from, and the destination chain to send the asset to, which, together, build the transfer data.
+
+The following sections cover the most important types, interfaces and classes you'll encounter when working with assets, chains, and transfer data.
+
+
+## Assets
+
+### The [Asset](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/asset.ts){target=\_blank} Object
+Defines an asset's key and symbol used on the asset's origin chain.
+
+**Attributes**
+
+- `key` ++"string"++ - Identifies an asset
+- `originSymbol` ++"string"++ - The symbol of the asset on the asset's origin chain
+
+### The [Chain Asset](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/ChainAsset.ts){target=\_blank} Object 
+It extends the `Asset` object and adds properties related to the asset information in a specific chain.
+
+**Attributes**
+
+- `address` ++"string"++ - The address of the asset on the chain
+- `decimals` ++"number"++ - The number of decimals the asset has
+- `ids` ++"ChainAssetIds"++ - Different identifiers of the asset on the chain for getting balances and other information
+- `min` ++"bigint"++ - The minimum amount of the asset that can be transferred
+- `symbol` ++"string"++ - The symbol of the asset in the chain, if different from the origin symbol
+
+It contains methods to get the differnet asset's ids in the chain.
+
+### The [Asset Amount](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/AssetAmount.ts){target=\_blank} Object
+
+It's the Chain Asset object with an amount.
+
+<div class="grid" markdown>
+<div markdown>
+**Attributes**
+
+- `amount` ++"bigint"++ - The amount of the asset
+
+It also contains utility methods for converting the amount to different formats, comparing amounts, and more. Some of the most important methods are:
+
+- `isSame` - Checks if the asset in question is the same as another asset, without considering the amount
+- `isEqual` - Checks if the asset in question is the same as another asset, and also the amount is the same
+- `copyWith` - Creates a new `AssetAmount` object copy, with the specified properties
+</div>
+
+```js title="Example"
+// The Asset Amount object
+// USDC.Wh
+{
+  key: "usdcwh",
+  originSymbol: "USDC.Wh",
+  address: undefined,
+  decimals: 6,
+  ids: {
+    id: 21,
+  },
+  min: undefined,
+  symbol: undefined,
+  amount: 8261697n,
+  isSame: [Function: isSame],
+  isEqual: [Function: isEqual],
+  copyWith: [Function: copyWith],
+  convertDecimals: [Function: convertDecimals],
+  toBig: [Function: toBig],
+  toBigDecimal: [Function: toBigDecimal],
+  toDecimal: [Function: toDecimal],
+  getSymbol: [Function: getSymbol],
+  getAssetId: [Function: getAssetId],
+  getBalanceAssetId: [Function: getBalanceAssetId],
+  getMinAssetId: [Function: getMinAssetId],
+  getAssetPalletInstance: [Function: getAssetPalletInstance],
+  getAssetMin: [Function: getAssetMin],
+  hasOnlyAddress: [Function: hasOnlyAddress],
+}
+```
+
+</div>
+
+## Chains
+
+### The [Chain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/chain.ts){target=\_blank} Object
+It is the base object for all chains. Contains the information that is relevant to all types of chains.
+
+**Attributes**
+
+- `assets` ++"Map<string, ChainAsset>"++ [:material-link-variant:](#the-chain-asset-object) - A map of all assets in the chain
+- `ecosystem` ++"Ecosystem"++ - The ecosystem the chain belongs to
+- `explorer` ++"string"++ - The explorer URL for the chain
+- `isTestChain` ++"boolean"++ - Whether the chain is a test chain
+- `key` ++"string"++ - The key of the chain
+- `name` ++"string"++ - The name of the chain
+- `nativeAsset` ++"Asset"++ - The native asset of the chain
+- `wh` ++"WormholeConfig"++ - The Wormhole configuration for the chain (for [MRL](./mrl.md){target=\_blank} only)
+
+It has some methods that are useful for getting information about the chain or comparing chains. One method worth mentioning is:
+
+- `getChainAsset` - Returns the [Chain Asset](./#the-chain-asset-object) for the chain for a given asset key, [Asset](./#the-asset-object) or [Asset Amount](./#the-asset-amount-object)
+
+### The [EVM Chain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/EvmChain.ts){target=\_blank} Object
+It contains information exclusive to chains in the Ethereum Ecosystem
+
+**Example**: Ethereum
+<!-- TODO mjm add examples for the chains ? -->
+
+**Attributes**
+
+- `id` ++"number"++ - The chain Id in the Ethereum ecosystem
+- `rpc` ++"string"++ - The RPC URL
+
+### The [Parachain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/parachain/Parachain.ts){target=\_blank} Object
+It contains information exclusive to chains in the Polkadot Ecosystem
+
+**Example**: Hydration
+
+**Attributes**
+
+- `parachainId` ++"number"++ - The parachain Id in the Polkadot ecosystem
+- `ss58Format` ++"number"++ - The SS58 format of the chain
+- `genesisHash` ++"string"++ - The genesis hash of the chain
+- `isRelay` ++"boolean"++ - Whether the chain is a relay chain
+- `weight` ++"number"++ - The weight of the chain
+- `ws` ++"string"++ - The WebSocket URL
+- `checkSovereignAccountBalances` ++"boolean"++ - Indicates whether a check of the sovereign account balances for the asset is required when transferring to this chain. If true, a validation is made at the moment of the transfer. Defaults to `false`. 
+- `usesChainDecimals` ++"boolean"++ - Used for chains that use the chain's own decimal number for some balances calculations. This case is uncommon.
+
+The [EVM Parachain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/parachain/EvmParachain.ts){target=\_blank} object is similar to the [Parachain](./#the-parachain-object) object, but it contains additional properties for EVM chains.
+
+### The [EVM Parachain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/parachain/EvmParachain.ts){target=\_blank} Object
+These are parachains that use EVM signers or Ethereum type addresses.
+
+**Example**: Moonbeam
+
+**Attributes**
+
+- `id` ++"number"++ - The chain Id in the Ethereum ecosystem
+- `rpc` ++"string"++ - The RPC URL
+- `isEvmSigner` ++"boolean"++ - Whether the chain uses an EVM signer
+- `contracts` ++"Contracts"++ - Some contract addresses for the chain, used for building the transactions
+
+
+## Transfer Data
+
+Defines the complete transfer data for transferring an asset, including asset, source chain, and destination chain information, as well as a few helper functions for the transfer process.
+
+**Attributes**
+
+- `source` ++"SourceChainTransferData"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/sdk/src/sdk.interfaces.ts){target=\_blank} - The assembled source chain and address information

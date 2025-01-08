@@ -1,8 +1,7 @@
 nav:
  - 'index.md'
- - 'XCM SDK Reference': 'reference'
- - 'Using the XCM SDK': 'example-usage.md'
- - 'MRL SDK Reference': 'reference-mrl.md'
- - 'Using the MRL SDK': 'example-usage-mrl.md'
+ - 'SDK Reference': 'reference'
+ - 'Using the SDK': 'example-usage'
  - 'Contribute': 'contribute.md'
  - 'Contribute-new': 'contribute-new'
+

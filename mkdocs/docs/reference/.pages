@@ -1,3 +1,5 @@
 nav:
- - 'Types and Interfaces': 'interfaces.md'
- - 'Methods': 'methods.md'
+ - 'Types and Interfaces [REMOVE]': 'interfaces.md'
+ - 'Methods [REMOVE]': 'methods.md'
+ - 'XCM Reference': 'xcm.md'
+ - 'MRL Reference': 'mrl.md'
