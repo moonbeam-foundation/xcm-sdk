@@ -1,18 +1,18 @@
 import { type ContractConfig, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { EvmService, type EvmSigner } from '@moonbeam-network/xcm-sdk';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
-import type { RedeemData } from '../mrl.interfaces';
+import type { ExecuteTransferData } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
 
-export interface WormholeRedeemParams {
+export interface WormholeExecuteTransferParams {
   txId: string;
   chain: EvmChain | EvmParachain;
 }
 
-export async function getRedeemData({
+export async function getExecuteTransferData({
   txId,
   chain,
-}: WormholeRedeemParams): Promise<RedeemData> {
+}: WormholeExecuteTransferParams): Promise<ExecuteTransferData> {
   // TODO this is just for wormhole
   const wh = WormholeService.create(chain);
 
@@ -29,7 +29,7 @@ export async function getRedeemData({
   return {
     vaa,
     tokenTransfer,
-    async redeem(signer: EvmSigner) {
+    async executeTransfer(signer: EvmSigner) {
       const isComplete = await wh.isComplete(vaa, tokenTransfer);
 
       if (isComplete) {

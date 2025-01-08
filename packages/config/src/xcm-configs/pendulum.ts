@@ -79,7 +79,7 @@ export const pendulumRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
     },
   ],
 });

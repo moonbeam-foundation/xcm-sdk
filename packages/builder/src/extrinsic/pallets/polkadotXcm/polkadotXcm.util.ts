@@ -22,8 +22,7 @@ export function getPolkadotXcmExtrinsicArgs({
   func,
   parents = 1,
   feeIndex = 0,
-  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
-}: GetExtrinsicParams): any[] {
+}: GetExtrinsicParams) {
   const version = getExtrinsicArgumentVersion(func);
 
   return [
