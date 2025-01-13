@@ -21,7 +21,7 @@ import {
   vbnc,
   vksm,
   vmovr,
-  xrt
+  xrt,
 } from '../assets';
 import {
   bifrostKusama,
