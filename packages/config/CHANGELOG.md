@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 2.7.10
+
+### Patch Changes
+
+- [#421](https://github.com/moonbeam-foundation/xcm-sdk/pull/421) [`01eceef`](https://github.com/moonbeam-foundation/xcm-sdk/commit/01eceefd107d25aa1a4c4c8de5d1eca1b143a3e9) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Tinkernet chain
+
 ## 2.7.9
 
 ### Patch Changes
