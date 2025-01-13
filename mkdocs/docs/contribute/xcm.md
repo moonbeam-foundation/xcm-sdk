@@ -209,8 +209,8 @@ If they aren't available, feel free to open a PR or [submit an issue on GitHub](
 
 Assuming that all of the required pallets and methods are already supported, you can create the configuration file for the source chain:
 
-1. In the `xcm-sdk/packages/config/src/configs/xcm-configs` directory, add a TypeScript file for the new chain. If the chain already has a configuration file, you can update it instead adding the new routes, go to step 3.
-2. Use the following snippet as a starting point for adding the chain configuration:
+1. In the `xcm-sdk/packages/config/src/xcm-configs` directory, add a TypeScript file for the new chain. If the chain already has a configuration file, you can update it instead adding the new routes, go to step 3.
+2. Use the following snippet as a starting point for adding the chain routes:
 
     ```ts
     import { INSERT_REQUIRED_BUILDERS } from '@moonbeam-network/xcm-builder';
@@ -218,7 +218,7 @@ Assuming that all of the required pallets and methods are already supported, you
     import { INSERT_SOURCE_CHAIN, INSERT_DESTINATION_CHAIN } from '../chains';
     import { ChainRoutes } from '../types/ChainRoutes';
 
-    // The chain config name should be formatted as: 'chainName' + 'Config'
+    // The chain config name should be formatted as: 'chainName' + 'Routes'
     export const INSERT_CHAIN_CONFIG_NAME = new ChainRoutes({
       chain: INSERT_SOURCE_CHAIN, // The source chain
       routes: [], // In the next step, you'll add routes here
@@ -261,7 +261,7 @@ Assuming that all of the required pallets and methods are already supported, you
     }
     ```
 
-4. Add the newly created chain configurations to the `chainsConfigList` in the `xcm-sdk/blob/main/packages/config/src/configs/index.ts` file
+4. Add the newly created chain configurations to the `xcmRoutesList` in the `xcm-sdk/blob/main/packages/config/src/xcm-configs/index.ts` file
 
 !!! note
 Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.
@@ -275,81 +275,93 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { usdt } from '../assets';
+import { dot, usdt } from '../assets';
 import { moonbeam, polkadotAssetHub } from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-const xcmDeliveryFeeAmount = 0.036;
+const extra = 0.036;
 
-export const polkadotAssetHubConfig = new ChainConfig({
-  assets: [
-    ...new AssetConfig({
-      asset: usdt,
-      balance: BalanceBuilder().substrate().assets().account(),
-      destination: moonbeam,
-      destinationFee: {
-        amount: FeeBuilder()
-          .xcmPaymentApi()
-          .xcmPaymentFee({ isAssetReserveChain: false }),
+export const polkadotAssetHubRoutes = new ChainRoutes({
+  chain: polkadotAssetHub,
+  routes: [
+    {
+      source: {
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: dot, // fees in Polkadot Asset Hub are paid in DOT
+          balance: BalanceBuilder().substrate().system().account(),
+          extra,
+        },
+        min: AssetMinBuilder().assets().asset(),
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: usdt,
+        chain: moonbeam,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
+          asset: usdt, // fees in Moonbeam are paid in USDT, in this case is the same asset as the one being transferred, but it is not always the case
+        },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      fee: {
-        asset: dot,
-        balance: BalanceBuilder().substrate().system().account(),
-        xcmDeliveryFeeAmount,
-      },
-      min: AssetMinBuilder().assets().asset(),
-    }),
+    },
   ],
-  chain: polkadotAssetHub,
 });
 ```
 
 You're almost there. With this configuration, you can send the asset one-way from the configured chain to the asset's specified destination chain. To send the asset back to the original source chain, you must update (or create) the specified destination chain's configurations. Considering the above example, the Moonbeam configuration file would need to be updated to transfer USDT from Moonbeam back to the Polkadot Asset Hub.
 
-You must take the same steps in the destination chain's configuration file. If a configuration file does not exist, you must create one. Otherwise, update the chain's configuration file to include the asset configuration, as step three outlines.
+You must take the same steps in the destination chain's configuration file. If a configuration file does not exist, you must create one. Otherwise, update the chain's configuration file to include the asset route, as step three outlines.
 
 For example, enabling USDT transfers from Moonbeam back to the Polkadot Asset Hub requires the following Moonbeam chain configuration:
 
 ```ts
-import { BalanceBuilder, ContractBuilder } from '@moonbeam-network/xcm-builder';
 import {
-  ...
-  usdt,
-} from '../assets';
-import {
-  ...
-  polkadotAssetHub,
-} from '../chains';
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+  AssetMinBuilder,
+  BalanceBuilder,
+  ContractBuilder,
+} from '@moonbeam-network/xcm-builder';
+import { glmr, usdt } from '../assets';
+import { moonbeam, polkadotAssetHub } from '../chains';
+import { ChainRoutes } from '../types/ChainRoutes';
 
-export const moonbeamConfig = new ChainConfig({
-  assets: [
-    ...
-    new AssetConfig({
-      asset: usdt,
-      balance: BalanceBuilder().substrate().assets().account(),
-      contract: ContractBuilder().Xtokens().transfer(),
-      destination: polkadotAssetHub,
-      destinationFee: {
-        amount: 0.7,
+export const moonbeamRoutes = new ChainRoutes({
+  chain: moonbeam,
+  routes: [
+    {
+      source: {
         asset: usdt,
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
       },
-      fee: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
+      destination: {
+        asset: usdt,
+        chain: polkadotAssetHub,
+        balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          amount: 0.02,
+          asset: usdt,
+        },
+        min: AssetMinBuilder().assets().asset(),
       },
-    }),
+      contract: ContractBuilder().Xtokens().transfer(),
+    },
   ],
-  chain: moonbeam,
 });
 ```
 
@@ -361,7 +373,7 @@ The SDK is configured to work for most parachains in the Polkadot ecosystem. How
 
 You can use the following queries to ensure that the new configurations have been properly set up.
 
-- `assetRegistry.assetMetadatas` - From here, we extract the `decimals` and the `minBalance` for
+- `assetRegistry.assetMetadatas` - From here, we extract the `minBalance` for
   `aSEED`:
 
       ```js
@@ -373,22 +385,29 @@ You can use the following queries to ensure that the new configurations have bee
       }
       ```
 
-- `assets.metadata` - Here, we get the `decimals` for `DOT`
+- `assets.assetMetadatas` - Here, we get the `minBalance` for `USDT`
 
-  ```js
-  {
-    deposit: 0;
-    name: xcDOT;
-    symbol: xcDOT;
-    decimals: 10;
-    isFrozen: false;
-  }
-  ```
+      ```js
+      {
+        owner: 15uPcYeUE2XaMiMJuR6W7QGW2LsLdKXX7F3PxKG8gcizPh3X
+        issuer: 15uPcYeUE2XaMiMJuR6W7QGW2LsLdKXX7F3PxKG8gcizPh3X
+        admin: 15uPcYeUE2XaMiMJuR6W7QGW2LsLdKXX7F3PxKG8gcizPh3X
+        freezer: 15uPcYeUE2XaMiMJuR6W7QGW2LsLdKXX7F3PxKG8gcizPh3X
+        supply: 77,998,715,321,907
+        deposit: 1,000,000,000,000
+        minBalance: 10,000
+        isSufficient: true
+        accounts: 9,151
+        sufficients: 9,042
+        approvals: 14
+        status: Live
+      }
+      ```
 
 - `balances.existentialDeposit` - This is the standard way of querying the existential deposit for most chains
 
-  ```js
-  100000000000;
-  ```
+      ```js
+      100000000000;
+      ```
 
 Most cases are considered already, but for newly integrated chains, this data might be queried by a different pallet or function. You can check if the pallet is supported in the [Polkadot Service file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/sdk/src/polkadot/PolkadotService.ts).
