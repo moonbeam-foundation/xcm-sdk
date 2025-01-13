@@ -13,7 +13,7 @@ The following sections cover the most important types, interfaces and classes yo
 
 ## Assets
 
-### The [Asset](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/asset.ts){target=\_blank} Object
+### The [Asset](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/Asset.ts){target=\_blank} Object
 Defines an asset's key and symbol used on the asset's origin chain.
 
 **Attributes**
@@ -34,9 +34,10 @@ It extends the `Asset` object and adds properties related to the asset informati
 - `min` ++"bigint"++ - The minimum amount of the asset that can be transferred
 - `symbol` ++"string"++ - The symbol of the asset in the chain, if different from the origin symbol
 
-It contains methods to get the differnet asset's ids in the chain.
+It contains methods to get the differnet asset's ids in the chain, and some utility methods, among which:
 
----
+- `fromAsset` - Creates a new `ChainAsset` object using an `Asset` object as a base
+- `copyWith` - Creates a new `ChainAsset` object copy, with the specified properties
 
 ### The [Asset Amount](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/AssetAmount.ts){target=\_blank} Object
 
@@ -112,19 +113,6 @@ It has some methods that are useful for getting information about the chain or c
 
 ---
 
-### The [EVM Chain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/EvmChain.ts){target=\_blank} Object
-It contains information exclusive to chains in the Ethereum Ecosystem
-
-**Example**: Ethereum
-<!-- TODO mjm add examples for the chains ? -->
-
-**Attributes**
-
-- `id` ++"number"++ - The chain Id in the Ethereum ecosystem
-- `rpc` ++"string"++ - The RPC URL
-
----
-
 ### The [Parachain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/parachain/Parachain.ts){target=\_blank} Object
 It contains information exclusive to chains in the Polkadot Ecosystem
 
@@ -156,6 +144,19 @@ These are parachains that use EVM signers or Ethereum type addresses.
 - `rpc` ++"string"++ - The RPC URL
 - `isEvmSigner` ++"boolean"++ - Whether the chain uses an EVM signer
 - `contracts` ++"Contracts"++ - Some contract addresses for the chain, used for building the transactions
+
+---
+
+### The [EVM Chain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/EvmChain.ts){target=\_blank} Object
+It contains information exclusive to chains in the Ethereum Ecosystem. This type of chain is used for the [MRL](./mrl.md){target=\_blank} module
+
+**Example**: Ethereum
+<!-- TODO mjm add examples for the chains ? -->
+
+**Attributes**
+
+- `id` ++"number"++ - The chain Id in the Ethereum ecosystem
+- `rpc` ++"string"++ - The RPC URL
 
 ---
 

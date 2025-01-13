@@ -2,6 +2,6 @@ nav:
  - 'index.md'
  - 'SDK Reference': 'reference'
  - 'Using the SDK': 'example-usage'
- - 'Contribute': 'contribute.md'
- - 'Contribute-new': 'contribute-new'
+ - 'Contribute Old [remove]': 'contribute.md'
+ - 'Contribute': 'contribute'
 
