@@ -163,3 +163,220 @@ Here are the steps to configure the source and destination chains of an asset, s
 
 !!! note
 Note that the asset we're using is different in each chain, `usdt` in Ethereum and `usdtwh` in Moonbeam. This is because the symbol of the asset is different on each chain, in this case because USDT.wh is a representation of USDT on Wormhole. You'll need to determine which representation of the asset you're using on each chain.
+
+## Configure a Chain Route
+
+### Prerequisites
+These steps are the same as the [XCM SDK](./xcm.md#configure-a-chain-route){target=\_blank}, but you'll need to create the builders for the MRL routes as well. So you'll need to know which pallet, method and provider you're using for the MRL routes.
+Also, you'll need to know the [type of transfer](../reference/mrl.md#transfer-types){target=\_blank} you're using, as the builders will be different depending on the type of transfer.
+
+### Creating the routes in the configuration files
+
+Assuming that all of the required pallets and methods are already supported, you can create the configuration file for the source chain:  
+
+1. In the `xcm-sdk/packages/config/src/mrl-configs` directory, add a TypeScript file for the new chain. If the chain already has a configuration file, you can update it instead adding the new routes, go to step 3.
+2. Use the following snippet as a starting point for adding the chain routes:
+
+    ```ts
+    import { INSERT_REQUIRED_BUILDERS } from '@moonbeam-network/xcm-builder';
+    import { INSERT_REQUIRED_ASSETS } from '../assets';
+    import { INSERT_SOURCE_CHAIN, INSERT_DESTINATION_CHAIN, INSERT_MOON_CHAIN } from '../chains';
+    import { MrlChainRoutes } from '../types/MrlChainRoutes';
+
+    // The chain config name should be formatted as: 'chainName' + 'Routes'
+    export const INSERT_CHAIN_CONFIG_NAME = new MrlChainRoutes({
+      chain: INSERT_SOURCE_CHAIN, // The source chain
+      routes: [], // In the next step, you'll add routes here
+    });
+    ```
+
+3. As seen in the above example, a `routes` array contains the chain's routes. The route configuration defines the asset being transferred, the destination chain, the moonchain, information associated with fees, and the builder functions. The builder functions must be used to build the queries or calls as if they were being executed from this chain. 
+
+    You'll need to create an Route for each asset, for example:
+
+    ```ts
+     {
+      source: {
+        asset: INSERT_ASSET,
+        balance: INSERT_BALANCE_BUILDER,
+        destinationFee: {
+          asset: INSERT_DESTINATION_FEE_ASSET,
+          balance: INSERT_DESTINATION_FEE_BALANCE_BUILDER,
+        },
+      },
+      destination: {
+        asset: INSERT_ASSET,
+        chain: INSERT_DESTINATION_CHAIN,
+        balance: INSERT_BALANCE_BUILDER,
+        fee: {
+          asset: INSERT_DESTINATION_FEE_ASSET,
+          amount: INSERT_FEE_AMOUNT,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: INSERT_IS_AUTOMATIC_POSSIBLE,
+        transfer: INSERT_MRL_BUILDER,
+        moonChain: {
+          asset: INSERT_ASSET_IN_MOON_CHAIN,
+          balance: INSERT_BALANCE_BUILDER,
+          fee: {
+            asset: INSERT_FEE_ASSET_MOON_CHAIN,
+            amount: INSERT_FEE_AMOUNT,
+            balance: INSERT_FEE_BALANCE_BUILDER,
+          },
+        },
+      },
+    },
+    ```	
+
+4. Add the newly created chain configurations to the `mrlRoutesList` in the `xcm-sdk/blob/main/packages/config/src/mrl-configs/index.ts` file
+
+!!! note
+Chain configurations are listed in alphabetical order. Please follow this order when adding new chain configurations.
+
+For example, to add support to transfer USDT from Ethereum to Hydration, and ETH from Ethereum to Moonbeam, the Ethereum configuration file is as follows:
+
+```ts
+import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
+import { eth, glmr, usdt, usdtwh, weth } from '../assets';
+import { ethereum, hydration, moonbeam } from '../chains';
+import { MrlChainRoutes } from '../types/MrlChainRoutes';
+
+export const ethereumRoutes = new MrlChainRoutes({
+  chain: ethereum,
+  routes: [
+    /**
+     * Destination Hydration
+     */
+    {
+      source: {
+        asset: usdt,
+        balance: BalanceBuilder().evm().erc20(),
+        destinationFee: {
+          asset: usdt,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: usdtwh,
+        chain: hydration,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: usdtwh,
+          amount: 0.004,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: usdtwh,
+          balance: BalanceBuilder().evm().erc20(),
+          fee: {
+            asset: glmr,
+            amount: 0.15,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    /**
+     * Destination Moonbeam
+     */
+    {
+      source: {
+        asset: eth,
+        balance: BalanceBuilder().evm().native(),
+        destinationFee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: weth,
+        chain: moonbeam,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: weth,
+          amount: 0,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: true,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: weth,
+          balance: BalanceBuilder().evm().erc20(),
+          fee: {
+            asset: glmr,
+            amount: 0.15,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+  ],
+});
+
+```
+
+With this configuration, you can send the asset one-way from the configured chain to the asset's specified destination chain. To send the asset back to the original source chain, you must update (or create) the specified destination chain's configurations. Considering the above example, the Hydration configuration file would need to be updated to transfer USDT from Hydration back to Ethereum.
+
+You must take the same steps in the destination chain's configuration file. If a configuration file does not exist, you must create one. Otherwise, update the chain's configuration file to include the asset route, as step three outlines.
+
+For example, enabling USDT transfers from Hydration back to Ethereum requires the following Hydration chain configuration:
+
+```ts
+import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
+import { glmr, hdx, usdt, usdtwh } from '../assets';
+import { ethereum, hydration } from '../chains';
+import { MrlChainRoutes } from '../types/MrlChainRoutes';
+
+export const hydrationRoutes = new MrlChainRoutes({
+  chain: hydration,
+  routes: [
+    {
+      source: {
+        asset: usdtwh,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        destinationFee: {
+          asset: usdtwh,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
+        moonChainFee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
+        fee: {
+          asset: hdx,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        asset: usdt,
+        chain: ethereum,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: usdt,
+          amount: 0,
+        },
+      },
+      mrl: {
+        isAutomaticPossible: true,
+        transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
+        moonChain: {
+          asset: usdtwh,
+          balance: BalanceBuilder().evm().erc20(),
+          fee: {
+            asset: glmr,
+            amount: 0.1,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+  ],
+});
+```
+
+And that's it! You now know how to add new assets and chains and configure the chains that an asset can be sent to and from. To ensure that you've properly set everything up, read on to the next section.
