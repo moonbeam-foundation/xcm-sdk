@@ -192,8 +192,7 @@ assets.forEach((asset) => {
 
 ### Get List of Supported Assets by Ecosystem {: #get-supported-assets-by-ecosystem }
 
-<!-- TODO mjm exosystem reference -->
-To get a list of the supported assets for a particular [ecosystem](./reference/interfaces.md#the-ecosystem-type), you can pass in the ecosystem: `polkadot`, `kusama`, or `alphanet-relay`. For example, the following snippet will get all of the Polkadot assets supported:
+To get a list of the supported assets for a particular ecosystem, you can pass in the ecosystem: `polkadot`, `kusama`, or `alphanet-relay`. For example, the following snippet will get all of the Polkadot assets supported:
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
@@ -212,8 +211,7 @@ assets.forEach((asset) => {
 ```
 
 ### Get List of Supported Routes by Asset {: #get-list-of-supported-routes-by-asset }
-<!-- TODO mjm source and destination reference -->
-To get a list of the supported [source](./reference/methods.md#the-source-method) and [destination](./reference/methods.md#the-destination-method) chains for a given asset, you can use the following code snippet, which logs the supported routes by asset for all of the supported assets in the Polkadot ecosystem:
+To get a list of the supported [source and destination](../reference/xcm.md#transfer-data) chains for a given asset, you can use the following code snippet, which logs the supported routes by asset for all of the supported assets in the Polkadot ecosystem:
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
@@ -246,9 +244,8 @@ In this guide, we'll show you first how to build the transfer data if you alread
 
 
 ### Simple Example {: #build-xcm-transfer-data-simple }
-<!-- TODO mjm sdk, setSource, setDestination reference -->
-In this example, we want to transfer DOT from Polkadot to Moonbeam. So to get the transfer data, we'll need to set the asset, source, and destination chains. First we'll need to instantiate the SDK, by calling the [`Sdk`](./reference/methods.md#initialize-the-sdk) function and then calling the `setAsset`, `setSource`, and `setDestination` functions.
-You can optionally pass in the ecosystem to the `Sdk` function, but in this example, we know the route we want to use, so there is no need to pass in the ecosystem.
+In this example, we want to transfer DOT from Polkadot to Moonbeam. So to get the transfer data, we'll need to set the asset, source, and destination chains. First we'll need to instantiate the SDK, by calling the [`Sdk`](../reference/xcm.md#the-sdk-method) method and then calling the `setAsset`, `setSource`, and `setDestination` methods.
+You can optionally pass in the ecosystem to the `Sdk` method, but in this example, we know the route we want to use, so there is no need to pass in the ecosystem.
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
@@ -270,8 +267,7 @@ fromPolkadot();
 	
 ### Example with assets and chains information {: #build-xcm-transfer-data-information }
 
-<!-- TODO mjm sdk, assets, getTransferData reference -->
-To get started, you'll use the [`Sdk`](./reference/methods.md#initialize-the-sdk) function, which eventually will return the transfer data after calling a series of chained methods. In this case you'll want to include the ecosystem, as you'll need to retrieve the list of supported assets and chains for the asset you want to transfer.
+To get started, you'll use the [`Sdk`](../reference/xcm.md#the-sdk-method) method, which eventually will return the transfer data after calling a series of chained methods. In this case you'll want to include the ecosystem, as you'll need to retrieve the list of supported assets and chains for the asset you want to transfer.
 
 
 ```js
@@ -298,8 +294,7 @@ The chained methods will provide data on the assets and chains along the way, bu
    const { sources, setSource } = setAsset(dot);
    ```
 
-  <!-- TODO mjm setSource reference -->
-   This will return a list of the supported source chains for this asset and the [`setSource`]() function, which is used to define the source chain to transfer the asset from
+   This will return a list of the supported source chains for this asset and the [`setSource`](../reference/xcm.md#the-sdk-method) function, which is used to define the source chain to transfer the asset from
 
 3. Call the `setSource` function and pass in the chain object (which includes the key, name, and chain type). For example:
 
@@ -309,8 +304,7 @@ The chained methods will provide data on the assets and chains along the way, bu
    const { destinations, setDestination } = setSource(polkadot);
    ```
 
-  <!-- TODO mjm setDestination reference -->
-   This will return a list of the supported destination chains where there is an open XCM channel from the source chain for the given asset and the [`setDestination`](./reference/methods.md#the-destination-method) function, which is used to define the destination chain to transfer the asset to
+   This will return a list of the supported destination chains where there is an open XCM channel from the source chain for the given asset and the [`setDestination`](../reference/xcm.md#the-sdk-method) function, which is used to define the destination chain to transfer the asset to
 
 4. Call the `setDestination` function and pass in the the chain object (which includes the key, name, and chain type). For example:
 
@@ -318,8 +312,7 @@ The chained methods will provide data on the assets and chains along the way, bu
    const { setAddresses } = setDestination(moonbeam);
    ```
 
-  <!-- TODO mjm setAddresses reference -->
-   This will return the [`setAddresses`](./reference/methods.md#the-accounts-method) function, which is used to define the source and destination addresses.
+   This will return the [`setAddresses`](../reference/xcm.md#the-sdk-method) function, which is used to define the source and destination addresses.
 
 The asset and chain objects are managed within the `@moonbeam-network/xcm-config` package. You do not need to directly interact with this package as the SDK exposes this data, but there you can find the list of [assets](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/assets.ts){target=\_blank} and [chain data](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/chains.ts){target=\_blank}.
 
@@ -364,13 +357,7 @@ fromPolkadot();
 ```
 
 !!! note
-<!-- TODO mjm set references here -->
-<!-- For more information on each of the `Sdk().assets()` builder functions, including the parameters and returned data, please refer to the [XCM SDK Reference](./reference/methods.md#build-the-transfer-data-starting-with-assets){target=\_blank}. -->
-
-
-!!! note
-<!-- TODO mjm set references here -->
-<!-- For more information on the `Sdk().getTransferData()` function, including the parameters and returned data, please refer to the [XCM SDK Reference](./reference/methods.md#the-get-transfer-data-method){target=\_blank}. -->
+For more information on each of the `Sdk()` builder functions, including the parameters and returned data, please refer to the [XCM SDK Reference](../reference/xcm.md#the-sdk-method){target=\_blank}.
 
 The same output will be generated regardless of which example you used to build the transfer data.
 

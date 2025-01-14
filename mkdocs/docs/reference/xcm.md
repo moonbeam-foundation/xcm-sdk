@@ -93,7 +93,7 @@ It also contains utility methods for converting the amount to different formats,
 
 ## Chains
 
-### The [Chain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/chain.ts){target=\_blank} Object
+### The [Chain](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/chain/Chain.ts){target=\_blank} Object
 It is the base object for all chains. Contains the information that is relevant to all types of chains.
 
 **Attributes**
