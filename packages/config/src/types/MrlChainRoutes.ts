@@ -1,3 +1,5 @@
+import type { AnyAsset, AnyChain } from '@moonbeam-network/xcm-types';
+import { getKey } from '../config.utils';
 import { ChainRoutes, type ChainRoutesConstructorParams } from './ChainRoutes';
 import {
   MrlAssetRoute,
@@ -36,5 +38,22 @@ export class MrlChainRoutes extends ChainRoutes {
 
   getRoutes(): MrlAssetRoute[] {
     return Array.from(this.#routes.values());
+  }
+
+  getAssetRoute(
+    asset: string | AnyAsset,
+    destination: string | AnyChain,
+  ): MrlAssetRoute {
+    const assetKey = getKey(asset);
+    const destKey = getKey(destination);
+    const route = this.#routes.get(`${assetKey}-${destKey}`);
+
+    if (!route) {
+      throw new Error(
+        `AssetRoute for asset ${assetKey} and destination ${destKey} not found`,
+      );
+    }
+
+    return route;
   }
 }

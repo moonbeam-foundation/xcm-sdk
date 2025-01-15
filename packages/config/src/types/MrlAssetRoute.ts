@@ -3,12 +3,14 @@ import type { Asset } from '@moonbeam-network/xcm-types';
 import {
   AssetRoute,
   type AssetRouteConstructorParams,
+  type MrlConfig,
   type SourceConfig,
 } from './AssetRoute';
 
 export interface MrlAssetRouteConstructorParams
   extends AssetRouteConstructorParams {
   source: MrlSourceConfig;
+  mrl: MrlConfig;
 }
 
 export interface MrlSourceConfig extends SourceConfig {
@@ -19,6 +21,7 @@ export interface MrlSourceConfig extends SourceConfig {
 }
 
 export class MrlAssetRoute extends AssetRoute {
+  readonly mrl: MrlConfig;
   readonly source: MrlSourceConfig;
 
   constructor({
@@ -28,7 +31,8 @@ export class MrlAssetRoute extends AssetRoute {
     extrinsic,
     mrl,
   }: MrlAssetRouteConstructorParams & { source: MrlSourceConfig }) {
-    super({ source, destination, contract, extrinsic, mrl });
+    super({ source, destination, contract, extrinsic });
+    this.mrl = mrl;
     this.source = source;
   }
 }

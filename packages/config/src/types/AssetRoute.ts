@@ -18,7 +18,6 @@ export interface AssetRouteConstructorParams {
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
   extrinsic?: ExtrinsicConfigBuilder;
-  mrl?: MrlConfig;
 }
 
 export interface SourceConfig {
@@ -75,20 +74,16 @@ export class AssetRoute {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
-  readonly mrl?: MrlConfig;
-
   constructor({
     source,
     destination,
     contract,
     extrinsic,
-    mrl,
   }: AssetRouteConstructorParams) {
     this.source = source;
     this.destination = destination;
     this.contract = contract;
     this.extrinsic = extrinsic;
-    this.mrl = mrl;
   }
 
   getDestinationFeeAssetOnSource(): ChainAsset {

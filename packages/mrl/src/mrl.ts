@@ -1,4 +1,8 @@
-import { ConfigService, mrlRoutesMap } from '@moonbeam-network/xcm-config';
+import {
+  ConfigService,
+  type MrlAssetRoute,
+  mrlRoutesMap,
+} from '@moonbeam-network/xcm-config';
 import type {
   AnyAsset,
   AnyChain,
@@ -39,6 +43,7 @@ export function Mrl(options?: MrlOptions) {
                 source,
                 destination,
               });
+
               return {
                 setIsAutomatic(isAutomatic: boolean) {
                   return {
@@ -50,7 +55,7 @@ export function Mrl(options?: MrlOptions) {
                       destinationAddress: string;
                     }) {
                       return getTransferData({
-                        route,
+                        route: route as MrlAssetRoute,
                         sourceAddress,
                         destinationAddress,
                         isAutomatic,
