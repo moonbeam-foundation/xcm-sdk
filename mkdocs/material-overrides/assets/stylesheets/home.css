@@ -36,11 +36,12 @@
 .hero h1 {
   font-size: 36px;
   color: var(--md-default-fg-color);
+  margin-bottom: 20px;
 }
 
 .hero p {
   font-size: 18px;
-  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .md-typeset .hero-content hr {
@@ -111,6 +112,7 @@
 }
 
 .md-typeset pre {
+  height: 5em;
   margin: 0;
 }
 
