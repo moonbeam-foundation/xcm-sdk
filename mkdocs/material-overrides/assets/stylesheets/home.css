@@ -61,6 +61,8 @@
 }
 
 .feature {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding: 20px;
   box-shadow: 0px 0px 1px var(--md-default-fg-color);
@@ -74,6 +76,7 @@
 }
 
 .feature img {
+  align-self: center;
   width: 60px;
   max-width: 100%;
   height: auto;
@@ -133,4 +136,22 @@
   .feature {
     width: 100%;
   }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 0.1px solid rgb(54, 53, 53);
+  color: var(--md-default-fg-color) !important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 12px;
 }
