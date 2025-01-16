@@ -28,7 +28,7 @@ Always refer to the [MRL Documentation](https://docs.moonbeam.network/builders/i
 ### From EVM chains to parachains. {: #from-evm-chains-to-parachains }
 Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object) and the destination chain either a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVMParachain](../reference/xcm.md#the-evm-parachain-object).
 
-1. A contract call is made in the source chain, which triggers the assets to be sent to Moonbeam ([moon chain](#moonchain)). This process is done in this sdk by leveraging a [GMP provider](https://docs.moonbeam.network/builders/interoperability/protocols/){target=\_blank}. Currently the only one supported is [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}.
+1. A contract call is made in the source chain, which triggers the assets to be sent to Moonbeam ([moon chain](#the-moon-chain)). This process is done in this sdk by leveraging a [GMP provider](https://docs.moonbeam.network/builders/interoperability/protocols/){target=\_blank}. Currently the only one supported is [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}.
 2. Next, to complete the transfer in Moonbeam, it must be executed, either manually or automatically by a relayer from the GMP provider. This execution consists of calling the [GMP precompile](https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/){target=\_blank}, which triggers the next step.
 3. An XCM message is sent from Moonbeam to the destination chain, containing the assets that were sent from the source chain.
 
