@@ -9,7 +9,7 @@ import {
   type Transact,
 } from '@moonbeam-network/xcm-builder';
 import {
-  type AssetRoute,
+  type MrlAssetRoute,
   getMoonChain,
   moonbaseAlpha,
   moonbeam,
@@ -101,7 +101,7 @@ export interface BuildTransferParams {
   destinationAddress: string;
   feeAsset: AssetAmount;
   isAutomatic: boolean;
-  route: AssetRoute;
+  route: MrlAssetRoute;
   sendOnlyRemoteExecution?: boolean;
   sourceAddress: string;
 }
