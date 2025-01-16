@@ -227,7 +227,7 @@ Assuming that all of the required pallets and methods are already supported, you
 
 3. As seen in the above example, a `routes` array contains the chain's routes. The route configuration defines the asset being transferred, the destination chain, information associated with fees, and the builder functions. The builder functions must be used to build the queries or calls as if they were being executed from this chain.
 
-    You'll need to create an Route for each asset, for example:
+    You'll need to create a [Route](../reference/xcm.md#the-asset-route-object) for each asset, for example:
 
     ```ts
     {
@@ -410,4 +410,4 @@ You can use the following queries to ensure that the new configurations have bee
       100000000000;
       ```
 
-Most cases are considered already, but for newly integrated chains, this data might be queried by a different pallet or function. You can check if the pallet is supported in the [Polkadot Service file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/sdk/src/polkadot/PolkadotService.ts).
+Most cases are considered already, but for newly integrated chains, this data might be queried by a different pallet or function.

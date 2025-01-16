@@ -192,7 +192,7 @@ Assuming that all of the required pallets and methods are already supported, you
 
 3. As seen in the above example, a `routes` array contains the chain's routes. The route configuration defines the asset being transferred, the destination chain, the moonchain, information associated with fees, and the builder functions. The builder functions must be used to build the queries or calls as if they were being executed from this chain. 
 
-    You'll need to create an Route for each asset, for example:
+    You'll need to create a [Route](../reference/mrl.md#the-mrl-asset-route-object) for each asset, for example:
 
     ```ts
      {

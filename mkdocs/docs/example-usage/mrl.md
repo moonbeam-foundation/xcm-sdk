@@ -42,7 +42,7 @@ npm install viem@2
 
 ## Create Signers {: #create-signers }
 
-Similar to the XCM SDK, you'll need to create signers to interact with the SDK. You can refer to the [Create Signers](./example-usage.md#create-signers) section in the XCM SDK guide for more information.
+Similar to the XCM SDK, you'll need to create signers to interact with the SDK. You can refer to the [Create Signers](./xcm.md#create-signers) section in the XCM SDK guide for more information.
 
 ## Get Chain Data {: #get-chain-data }
 

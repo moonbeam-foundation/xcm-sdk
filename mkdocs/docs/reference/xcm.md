@@ -867,7 +867,7 @@ console.log(bigintValue);
 <div class="grid" markdown>
 <div markdown>
 
-`convertDecimals()` - Converts an asset amount to a different number of decimals. Useful when chains have different decimals for the same asset, for example when [usesOwnDecimals](../reference/xcm.md#the-parachain-object) is set to `true` in a chain.
+`convertDecimals()` - Converts an asset amount to a different number of decimals. Useful when chains have different decimals for the same asset, for example when [usesChainDecimals](../reference/xcm.md#the-parachain-object) is set to `true` in a chain.
 
 **Parameters**
 

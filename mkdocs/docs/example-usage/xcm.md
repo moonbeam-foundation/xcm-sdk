@@ -10,9 +10,9 @@ template: tutorial.html
 
 The Moonbeam XCM SDK enables developers to easily transfer assets between chains, either between parachains or between a parachain and the relay chain, within the Polkadot/Kusama ecosystem. With the SDK, you don't need to worry about determining the multilocation of the origin or destination assets or which extrinsics are used on which networks to send XCM transfers.
 
-The XCM SDK offers helper functions that provide a very simple interface for executing XCM transfers between chains in the Polkadot/Kusama ecosystem. In addition, the XCM config package allows any parachain project to [add their information](./contribute.md) in a standard way, so the XCM SDK can immediately support them.
+The XCM SDK offers helper functions that provide a very simple interface for executing XCM transfers between chains in the Polkadot/Kusama ecosystem. In addition, the XCM config package allows any parachain project to [add their information](../contribute/xcm.md){target=\_blank} in a standard way, so the XCM SDK can immediately support them.
 
-For an overview of the available methods and interfaces in the Moonbeam XCM SDK, please refer to the [Reference](./reference/interfaces.md){target=\_blank} page.
+For an overview of the available methods and interfaces in the Moonbeam XCM SDK, please refer to the [Reference](../reference/xcm.md){target=\_blank} page.
 
 This guide shows how to transfer DOT from Polkadot to Moonbeam.
 
@@ -814,12 +814,12 @@ The same output will be generated regardless of which example you used to build 
 
 As you may have noticed in the example response, the transfer data contains information on the asset, source, and destination chain. In addition, a couple of functions have been exposed:
 
-- [`transfer`](./reference/methods.md#the-transfer-method) - transfers a given amount of the asset from the source chain to the destination chain
-- [`getEstimate`](./reference/methods.md#the-get-estimate-method) - returns an estimated amount of the asset that will be received on the destination chain, less any destination fees
+- [`transfer`](../reference/xcm.md#the-transfer-method) - transfers a given amount of the asset from the source chain to the destination chain
+- [`getEstimate`](../reference/xcm.md#the-transfer-data-object) - returns an estimated amount of the asset that will be received on the destination chain, less any destination fees
 
 ## Transfer an Asset {: #transfer-an-asset }
 
-Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](./reference/methods.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 DOT, you could use `1000000000n` or `'0.1'`. You can use [asset conversion methods](../reference/xcm.md#asset-utility-methods){target=\_blank}, like `toDecimal` to convert the asset to decimal format.
+Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](../reference/xcm.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 DOT, you could use `1000000000n` or `'0.1'`. You can use [asset conversion methods](../reference/xcm.md#asset-utility-methods){target=\_blank}, like `toDecimal` to convert the asset to decimal format.
 You'll also need to specify the signer you're using for the transfer.
 
 For this example, you can transfer twice the minimum amount required of DOT:
@@ -840,11 +840,11 @@ console.log(`${transferData.source.chain.name} tx hash: ${hash}`);
 As the above snippet shows, the `transfer` function returns a transaction hash on the source chain.
 
 !!! note
-For more information on the parameters and returned data for `transfer`, please refer to the [XCM SDK Reference](./reference/methods.md#the-transfer-method){target=\_blank}.
+For more information on the parameters and returned data for `transfer`, please refer to the [XCM SDK Reference](../reference/xcm.md#the-transfer-method){target=\_blank}.
 
 ## Get an Estimate of the Asset to Be Received on the Destination Chain {: #get-estimate }
 
-When you send an XCM message, you typically pay fees on the destination chain to execute the XCM instructions. Before you transfer the asset, you can use the [`getEstimate`](./reference/methods.md#the-get-estimate-method) function to calculate an estimated amount of the asset that will be received on the destination chain minus any fees.
+When you send an XCM message, you typically pay fees on the destination chain to execute the XCM instructions. Before you transfer the asset, you can use the `getEstimate` function to calculate an estimated amount of the asset that will be received on the destination chain minus any fees.
 
 The `getEstimate` function is tied to a specific transfer request as it is based on the asset being transferred and the destination chain fees, so you'll need to create the [transfer data](#build-xcm-transfer-data) first.
 
@@ -896,9 +896,6 @@ The `getEstimate` function returns the estimated amount along with information o
       hasOnlyAddress: [Function: hasOnlyAddress],
     }
     ```
-
-!!! note
-For more information on the parameters and returned data for `getEstimate`, please refer to the [XCM SDK Reference](./reference/methods.md#the-get-estimate-method){target=\_blank}.
 
 ## Get Transfer Minimum and Maximum Amounts {: #transfer-min-max-amounts }
 

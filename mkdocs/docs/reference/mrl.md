@@ -5,9 +5,9 @@ description: A reference for the types and interfaces in the Moonbeam MRL SDK th
 
 # Moonbeam MRL SDK Reference
 
-A new module, `@moonbeam-foundation/mrl-sdk`, has been added to the Moonbeam SDK to support transfers between chains from the Polkadot ecosystem and external chains from outside the Polkadot ecosystem.
+A new module, `@moonbeam-foundation/mrl`, has been added to the Moonbeam SDK to support transfers between chains from the Polkadot ecosystem and external chains from outside the Polkadot ecosystem.
 
-For more details, refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank}.
+For more details about Moonbeam Routed Liquidity (MRL) itself, refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank}.
 
 The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s. 
 
@@ -25,7 +25,7 @@ Always refer to the [MRL Documentation](https://docs.moonbeam.network/builders/i
 ---
 
 ### From EVM chains to parachains. {: #from-evm-chains-to-parachains }
-Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object) and the destination chain either a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVMParachain](../reference/xcm.md#the-evm-parachain-object).
+Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object) and the destination chain either a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object).
 
 1. A contract call is made in the source chain, which triggers the assets to be sent to Moonbeam ([moon chain](#the-moon-chain)). This process is done in this sdk by leveraging a [GMP provider](https://docs.moonbeam.network/builders/interoperability/protocols/){target=\_blank}. Currently the only one supported is [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}.
 2. Next, to complete the transfer in Moonbeam, it must be executed, either manually or automatically by a relayer from the GMP provider. This execution consists of calling the [GMP precompile](https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/){target=\_blank}, which triggers the next step.
@@ -35,13 +35,13 @@ Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object
 
 ### From parachains to EVM chains. {: #from-parachains-to-evm-chains }
 
-Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVMParachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object).
+Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object).
 
 1. An XCM message is sent from the source chain to Moonbeam, this message is a batch call containing the following information:
     - A 'transfer assets' message, containing the asset that the user wants to transfer, plus the fees necessary to complete the transfer in Moonbeam, if any.
     - A 'remote execution' message, which will be executed in Moonbeam.
     - The assets are sent to the [computed origin account](https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account){target=\_blank}, which is an account that can only be manipulated remotely by the source address.
-    - *Note*: It is possible to only send the remote execution message, in cases where the computed origin account already has the assets necessary to complete the transfer. Refer to the [transfer method](#the-transfer-method) for more information.
+    - *Note*: It is possible to only send the remote execution message, in cases where the computed origin account already has the assets necessary to complete the transfer. Refer to the [transfer method](#the-transfer-method) for information on how to do this.
 
 2. Now that the computed origin account has the assets, the remote execution message is executed in Moonbeam, which will send the assets to the destination chain through a GMP provider. It is the same first step described in the [From EVM chains to parachains](#from-evm-chains-to-parachains) section, but in reverse.
 
@@ -128,7 +128,7 @@ This object contains the routes for a specific chain.
 **Attributes**
 
 - `chain` ++"Chain"++ [:material-link-variant:](./reference/xcm.md#the-chain-object) - The chain the routes are for
-- `routes` ++"MrlAssetRoute[]"++ [:material-link-variant:](#mrl-asset-route) - The list of asset routes for the chain
+- `routes` ++"MrlAssetRoute[]"++ [:material-link-variant:](#the-mrl-asset-route-object) - The list of asset routes for the chain
 
 Chain routes are defined in the [MRL Config](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/mrl-configs/){target=\_blank} files.
 
@@ -143,7 +143,7 @@ In the process of transferring the assets, you must get the transfer data first 
 <div class="grid" markdown>
 <div markdown>
 
-Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exlusive to MRL which is the [moon chain](#moonchain)
+Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exlusive to MRL which is the [moon chain](#the-moon-chain)
 
 **Attributes**
 
@@ -738,7 +738,7 @@ We call Moon Chain to the intermediary chain that is used to transfer the assets
 
 - `amount` ++"bigint | number | string"++ - The amount of the asset to transfer
 - `isAutomatic` ++"boolean"++ - Whether or not the transfer should be automatic
-- `signers` ++"Signers"++ [:material-link-variant:](#the-signers-object) - The signers of the transaction
+- `signers` ++"Signers"++ - The signers of the transaction
 - `statusCallback` ++"function"++ (optional) - Comes from the polkadot api. A callback function that can be passed to the signAndSend method, and will be called with the status of the transaction. Only applicable for polkadot signers, when the source chain is a parachain.
 - `sendOnlyRemoteExecution` ++"boolean"++ (optional) - When this flag is set to true, instead of sending a transfer assets message plus a remote execution message from the parachain to the moon chain, only the remote execution message is sent. Applicable only when the source chain is a parachain. This is useful when some assets are stuck in the moon chain in the [computed origin account](https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account){target=\_blank} of the sender, in which case sending the assets would not be necessary from the source chain.
 
@@ -789,7 +789,7 @@ await transferData.transfer(
 
 This is a concept that is not present in XCM, it represents the fee that the relayer charges for executing the transfer automatically. Note that if the transfer is not automatic, the relayer fee will be 0.
 
-In the [transfer data](#transfer-data-object) you can find the relayer fee in the `relayerFee` attribute in the `source` object, and it is represented as an [AssetAmount](#the-assetamount-object) object.
+In the [transfer data](#transfer-data-object) you can find the relayer fee in the `relayerFee` attribute in the `source` object, and it is represented as an [Asset Amount](./xcm.md#the-asset-amount-object) object.
 
 ## Execute Transfer Data 
 
@@ -805,7 +805,7 @@ Defines the data needed to execute the transfer in the destination chain. Usuall
 
 - `vaa` ++"VAA"++ - The [VAA](https://wormhole.com/docs/learn/infrastructure/vaas/) of the transfer. Related to Wormhole
 - `tokenTransfer` ++"TokenTransfer"++ - The token transfer of the transfer. Related to Wormhole
-- `executeTransfer` ++"function"++ - The function to execute the transfer
+- `executeTransfer` ++"function"++ [:material-link-variant:](#the-execute-transfer-method) - The function to execute the transfer
 
 
 ### The Execute Transfer Method
