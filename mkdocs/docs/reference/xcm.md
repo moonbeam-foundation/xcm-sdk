@@ -39,6 +39,8 @@ It contains methods to get the differnet asset's ids in the chain, and some util
 - `fromAsset` - Creates a new `ChainAsset` object using an `Asset` object as a base
 - `copyWith` - Creates a new `ChainAsset` object copy, with the specified properties
 
+---
+
 ### The [Asset Amount](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/types/src/asset/AssetAmount.ts){target=\_blank} Object
 
 It's the Chain Asset object with an amount.
@@ -49,11 +51,14 @@ It's the Chain Asset object with an amount.
 
 - `amount` ++"bigint"++ - The amount of the asset
 
-It also contains utility methods for converting the amount to different formats, comparing amounts, and more. Some of the most important methods are:
+It contains methods for converting the amount to different formats, comparing amounts, and more. Some of the most important methods are:
 
 - `isSame` - Checks if the asset in question is the same as another asset, without considering the amount
 - `isEqual` - Checks if the asset in question is the same as another asset, and also the amount is the same
 - `copyWith` - Creates a new `AssetAmount` object copy, with the specified properties
+
+It also leverages the [asset utility methods](#asset-utility-methods) using the properties of the `AssetAmount` object.
+
 </div>
 
 ```js title="Example"
@@ -151,7 +156,6 @@ These are parachains that use EVM signers or Ethereum type addresses.
 It contains information exclusive to chains in the Ethereum Ecosystem. This type of chain is used for the [MRL](./mrl.md){target=\_blank} module
 
 **Example**: Ethereum
-<!-- TODO mjm add examples for the chains ? -->
 
 **Attributes**
 
@@ -161,6 +165,10 @@ It contains information exclusive to chains in the Ethereum Ecosystem. This type
 ---
 
 ## Transfer Data
+
+In the process of transferring the assets, you must get the transfer data first and then use it to transfer the assets.
+
+### The Transfer Data Object
 
 <div class="grid" markdown>
 <div markdown>
@@ -640,8 +648,7 @@ Defines the complete transfer data for transferring an asset, including asset, s
 **Parameters**
 
 - `amount` ++"number | string | bigint"++ - The amount of the asset to transfer
-<!-- TODO mjm fix reference -->
-- `signers` ++"Signers"++ [:material-link-variant:](./interfaces.md#the-signers-object) - The signers to use for the transfer
+- `signers` ++"Signers"++ - The signers to use for the transfer
 
 **Returns**
 
@@ -651,20 +658,22 @@ Defines the complete transfer data for transferring an asset, including asset, s
 
 ```js title="Example Usage"
 const data = await Sdk()
-  .setAsset(dot)
-  .setSource(polkadot)
-  .setDestination(moonbeam)
+  .setAsset(INSERT_ASSET)
+  .setSource(INSERT_SOURCE_CHAIN)
+  .setDestination(INSERT_DESTINATION_CHAIN)
   .setAddresses({
-    sourceAddress: pair.address,
-    destinationAddress: account.address,
+    sourceAddress: INSERT_SOURCE_ADDRESS,
+    destinationAddress: INSERT_DESTINATION_ADDRESS,
   });
 
-const txHash = await data.transfer(1000000000000000000n, {
-  polkadotSigner: pair,
-  evmSigner: walletClient,
+const txHash = await data.transfer(INSERT_AMOUNT, {
+  polkadotSigner: INSERT_POLKADOT_SIGNER,
+  evmSigner: INSERT_EVM_SIGNER_OR_WALLET_CLIENT,
 });
 ```
 </div>
+
+---
 
 ## The SDK Method
 
@@ -685,16 +694,137 @@ This is the main method that you'll use to build the transfer data. It contains 
 
 ```js title="Example Usage"
 const data = await Sdk()
-  .setAsset(dot)
-  .setSource(polkadot)
-  .setDestination(moonbeam)
+  .setAsset(INSERT_ASSET)
+  .setSource(INSERT_SOURCE_CHAIN)
+  .setDestination(INSERT_DESTINATION_CHAIN)
   .setAddresses({
-    sourceAddress: pair.address,
-    destinationAddress: account.address,
+    sourceAddress: INSERT_SOURCE_ADDRESS,
+    destinationAddress: INSERT_DESTINATION_ADDRESS,
   });
 
 ```
 </div>
 
+---
 
-<!-- TODO mjm arrange / sort this page -->
+## Asset Utility Methods
+
+### The To Decimal Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`toDecimal()` - Converts an asset amount to a decimal string. Useful for hanlding amounts in Wei and presenting them in a more readable format.
+
+**Parameters**
+
+- `number` ++"bigint | number | string"++ - The amount to convert to decimal format
+- `decimals` ++"number"++ - The number of decimals the asset uses
+- `maxDecimal` ++"number"++ - The maximum number of decimals to display in the string, defaults to `6`
+- `roundType` ++"RoundingMode"++ - The [rounding mode](https://mikemcl.github.io/big.js/#rm){target=\_blank} to use, defaults to `Big.roundDown`
+
+**Returns**
+
+- `string` - The amount in decimal format
+
+</div>
+<div markdown>
+
+```js title="Example Usage"
+import { toDecimal } from '@moonbeam-network/xcm-utils';
+
+const amount = 1000000000000000000n;
+const decimals = 18;
+const symbol = 'GLMR';
+
+const decimalValue = toDecimal(amount, decimals);
+
+console.log(`${decimalValue} ${symbol}`);
+```
+
+```js title="Response"
+1 GLMR
+```
+
+</div>
+</div>
+
+---
+
+### The To Big Int Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`toBigInt()` - Converts an asset amount to a bigint. Useful for transforming all the amounts to the same format to perform operations.
+
+**Parameters**
+
+- `number` ++"bigint | number | string"++ - The amount to convert to bigint format
+- `decimals` ++"number"++ - The number of decimals the asset uses
+
+**Returns**
+
+- `bigint` - The amount in bigint format
+
+</div> 
+<div markdown>
+
+```js title="Example Usage"
+import { toBigInt } from '@moonbeam-network/xcm-utils';
+
+const amount = '1';
+const decimals = 18;
+
+const bigintValue = toBigInt(amount, decimals);
+
+console.log(bigintValue);
+```
+
+```js title="Response"
+1000000000000000000n
+```
+
+</div>
+</div>
+
+---
+
+### The Convert Decimals Method
+
+<div class="grid" markdown>
+<div markdown>
+
+`convertDecimals()` - Converts an asset amount to a different number of decimals. Useful when chains have different decimals for the same asset, for example when [usesOwnDecimals](../reference/xcm.md#the-parachain-object) is set to `true` in a chain.
+
+**Parameters**
+
+- `number` ++"bigint | string"++ - The amount to convert to decimal format
+- `decimals` ++"number"++ - The number of decimals the asset uses
+- `targetDecimals` ++"number"++ - The number of decimals to convert the amount to
+
+**Returns**
+
+- `bigint` - The amount in bigint format
+
+</div>
+<div markdown>
+
+```js title="Example Usage"
+import { convertDecimals } from '@moonbeam-network/xcm-utils';
+
+const amount = 1000000000000000000n;
+const decimals = 18;
+const targetDecimals = 9;
+
+const convertedAmount = convertDecimals(amount, decimals, targetDecimals);
+
+console.log(convertedAmount);
+```
+
+```js title="Response"
+1000000000n
+```
+
+</div>
+</div>

@@ -7,21 +7,19 @@ template: tutorial.html
 
 ## Introduction {: #introduction }
 
-<!-- TODO mjm remove the description from this page? -->
 Moonbeam Routed Liquidity (MRL) allows liquidity from any blockchain connected to Moonbeam to be seamlessly routed to Polkadot parachains. The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s.
 
-The SDK allows the three types of transfers. Here is a brief description of what happens in each:
+The SDK allows the three [types of transfers](../reference/mrl.md#transfer-types). Here is a brief description of what happens in each:
 
-<!-- TODO mjm reference transfer types -->
 1. **From EVM chains to parachains**: Assets are sent from the EVM chain to Moonbeam via a GMP provider bridge (like Wormhole). A contract call is executed in Moonbeam which initiates the XCM transfer to the destination parachain.
 2. **From parachains to EVM chains**: Assets are sent alongside a remote execution message from the parachain to Moonbeam via XCM. The message then is executed in Moonbeam, which bridges the assets to the destination EVM chain via a GMP provider bridge.
 3. **Bewtween Moonbeam and EVM chains**: Assets move between Moonbeam and EVM chains via the GMP provider bridge.
 
 In MRL transfers, the transaction must be completed in the destination chain of the bridge. This can be done automatically by a relayer or manually by the user, and the SDK supports both options.
 
-Regardless of the type of transfer you're making, the usage of the MRL SDK is the same, with only a few considerations to be made when redeeming/completing the transfer.
-<!-- TODO mjm add info here -->
-## Install the MRL SDK {: #install-the-xcm-sdk }
+Regardless of the type of transfer you're making, the usage of the MRL SDK is the same, with only a few considerations to be made when executing or completing the transfer.
+
+## Install the MRL SDK {: #install-the-mrl-sdk }
 
 To get started with the Moonbeam MRL SDK, you'll need first to install the SDK:
 
@@ -67,8 +65,7 @@ sources.forEach((source) => {
 ```
 
 ### Get List of Supported Sources by Ecosystem {: #get-supported-sources-by-ecosystem }
-<!-- TODO mjm exosystem reference -->
-To get a list of the supported sources for a particular [ecosystem](./reference/interfaces.md#the-ecosystem-type), you can pass in the ecosystem  `polkadot`, `kusama`, or `alphanet-relay`. Under the hood, the ecosystems for MRL are `Mainnet` or `Testnet`, you can extract the ecosystem from the chain configuration you're going to use. For example, the following snippet will get all of the sources supported in the ecosystem associated with Moonbeam:
+To get a list of the supported sources for a particular ecosystem, you can pass in the ecosystem  `polkadot`, `kusama`, or `alphanet-relay`. Under the hood, the ecosystems for MRL are `Mainnet` or `Testnet`, you can extract the ecosystem from the chain configuration you're going to use. For example, the following snippet will get all of the sources supported in the ecosystem associated with Moonbeam:
 
 ```js
 import { Mrl } from '@moonbeam-network/mrl';
@@ -114,18 +111,15 @@ sources.forEach((source) => {
 
 Much like in XCM, to transfer an asset from one chain to another, you'll need to first build the transfer data, which defines the asset to be transferred, the source chain and address, the destination chain and address, and the associated signer for the transaction. Building the transfer data is the first step; in the next section, you'll learn how to use it to actually transfer the asset.
 
-<!-- TODO mjm reference redeem -->
-In MRL transfers, the assets must be redeemed in the destination chain of the bridge. This can be done automatically by a relayer or manually by the user. For manual redemtions, the SDK also provides a `redeem` function that can be used after the transaction is completed. It will be explained in a following section.
+In MRL transfers, the assets must be redeemed, or the transfer must be executed in the destination chain of the bridge. This can be done automatically by a relayer or manually by the user. For manual executions, the SDK also provides a `executeTransfer` function that can be used after the transaction is completed. It will be explained in a following section.
 
 
 In this guide, we'll show you first how to build the transfer data if you already know the route you want to use and don't need chain or asset information. Then, we'll show you how to build the transfer data if you need to retrieve the list of supported assets and chains for a given asset, which is useful if you're building a UI to allow users to select the asset, source, and destination chains.
 
 
 ### Simple Example {: #build-mrl-transfer-data-simple }
-<!-- TODO mjm mrl, assets, getTransferData reference -->
-<!-- TODO mjm avoid `we` -->
-In this example, we want to transfer USDC from Ethereum to Hydration. So to get the transfer data, we'll need to set the source, and destination chains, and the asset. First we'll need to instantiate the SDK, by calling the [`Mrl`](./reference/methods.md#initialize-the-sdk) function and then calling the `setAsset`, `setSource`, and `setDestination` functions.
-You can optionally pass in the ecosystem to the `Mrl` function, but in this example, we know the route we want to use, so there is no need to pass in the ecosystem.
+In this example, if you want to transfer USDC from Ethereum to Hydration, you'll need to set the source, and destination chains, and the asset to get the transfer data. First you'll need to instantiate the SDK, by calling the [`Mrl`](../reference/mrl.md#the-mrl-method) function and then calling the `setAsset`, `setSource`, and `setDestination` functions.
+You can optionally pass in the ecosystem to the `Mrl` function, but in this example, you know the route you want to use, so there is no need to pass in the ecosystem.
 
 ```js
 import { Mrl } from '@moonbeam-network/mrl';
@@ -148,8 +142,7 @@ fromEvm();
 
 ### Example with assets and chains information {: #build-mrl-transfer-data-information }
 
-<!-- TODO MRL function reference -->
-To get started, you'll use the [`Mrl`](./reference/methods.md#initialize-the-sdk) function, which eventually will return the transfer data after calling a series of chained methods. In this case you'll want to include the ecosystem, as you'll need to retrieve the list of supported assets and chains for the asset you want to transfer.
+To get started, you'll use the [`Mrl`](../reference/mrl.md#the-mrl-method) function, which eventually will return the transfer data after calling a series of chained methods. In this case you'll want to include the ecosystem, as you'll need to retrieve the list of supported assets and chains for the asset you want to transfer.
 
 ```js
 import { Mrl } from '@moonbeam-network/mrl';
@@ -160,44 +153,42 @@ const mrlInstance = Mrl({ ecosystem: Ecosystem.Polkadot });
 
 The chained methods will provide data on the assets and chains along the way, but the final method will return the transfer data. The process of calling the methods is as follows:
 
-<!-- TODO mjm The numbers are not being displayed correctly in the page -->
-1. Get the list of supported assets for the specified ecosystem
+1. Get the list of supported sources for the specified ecosystem
 
-   ```js
-   const { sources, setSource } = mrlInstance;
-   ``` 
+    ```js
+    const { sources, setSource } = mrlInstance;
+    ``` 
 
 2. Call the `setSource` function and pass in the source chain to define the source chain for the transfer
 
-   ```js
-   import { ethereum } from '@moonbeam-network/xcm-config';
+    ```js
+    import { ethereum } from '@moonbeam-network/xcm-config';
 
-   const { destinations, setDestination } = mrlInstance.setSource(ethereum);
-   ```
+    const { destinations, setDestination } = mrlInstance.setSource(ethereum);
+    ```
 
 3. Call the `setDestination` function and pass in the destination chain to define the destination chain for the transfer
 
-   ```js
-   import { ethereum } from '@moonbeam-network/xcm-config';
+    ```js
+    import { ethereum } from '@moonbeam-network/xcm-config';
 
-   const { assets, setAsset } = mrlInstance.setDestination(hydration);
-   ```
+    const { assets, setAsset } = mrlInstance.setDestination(hydration);
+    ```
 
 4. Call the `setAsset` function and pass in the asset to define the asset to be transferred
 
-   ```js
-   import { usdc } from '@moonbeam-network/xcm-config';
+    ```js
+    import { usdc } from '@moonbeam-network/xcm-config';
 
-   const { setIsAutomatic } = setAsset(usdc);
-   ```
+    const { setIsAutomatic } = setAsset(usdc);
+    ```
 
 5. Call the `setIsAutomatic` function and pass in the boolean value to define if the transfer should be automatic or not.
 
-   ```js
-   const { setAddresses } = setIsAutomatic(false);
-   ```
-   <!-- TODO mjm reference chains configuration file or isAutomaticPossible -->
-   There are routes in which the automatic transfer is not supported. You can check it in the [chains configuration file](https://github.com/moonbeam-foundation/mrl-config/blob/main/src/chains/chains.ts). If you set automatic as `true` for a route that is not supported, the SDK will throw an error at the moment of fetching the transfer data.
+    ```js
+    const { setAddresses } = setIsAutomatic(false);
+    ```
+    There are routes in which the automatic transfer is not supported. You can check it in the [chains routes file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/mrl-configs/moonbeam.ts). If you set automatic as `true` for a route that is not supported, the SDK will throw an error at the moment of fetching the transfer data.
 
 6.  Finally call the `setAddresses` function and pass in the source and destination addresses to define the addresses for the       ransfer. This will return the transfer data including the balances of the source and destination addresses. Take into account that depending on the source or the destination chain, the address format will be different. For example, from Ethereum to Hydration, you can pass as the source the address from the EVM signer, but as the destination the address from the Polkadot signer.
 
@@ -803,18 +794,14 @@ The same output will be generated regardless of which example you used to build 
     }
 
     ```	
-<!-- TODO mjm reference moonChain -->
-As you may have noticed in the example response, the transfer data contains information on the asset, source, and destination chain, and also the moonChian. In addition, a couple of functions have been exposed:
+As you may have noticed in the example response, the transfer data contains information on the asset, source, and destination chain, and also the [moonChain](../reference/mrl.md#the-moon-chain). In addition, a couple of functions have been exposed:
 
-<!-- TODO mjm reference  -->
-- [`transfer`](./reference/methods.md#the-transfer-method) - transfers a given amount of the asset from the source chain to the destination chain
-<!-- TODO mjm reference  -->
-- [`getEstimate`](./reference/methods.md#the-get-estimate-method) - returns an estimated amount of the asset that will be received on the destination chain, less any destination fees
+- [`transfer`](../reference/mrl.md#the-transfer-method) - transfers a given amount of the asset from the source chain to the destination chain
+- [`getEstimate`](../reference/mrl.md#the-transfer-data-object) - returns an estimated amount of the asset that will be received on the destination chain, less any destination fees
 
 ## Transfer an Asset {: #transfer-an-asset }
 
-<!-- TODO mjm transfer reference -->
-Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](./reference/methods.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 USDC, you could use `100000n` or `'0.1'`. You can use [asset conversion methods](./reference/methods.md#asset-utilities){target=\_blank}, like [`toDecimal`](./reference/methods.md#the-to-decimal-method) to convert the asset to decimal format.
+Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](../reference/mrl.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 USDC, you could use `100000n` or `'0.1'`. You can use [asset conversion methods](../reference/xcm.md#asset-utility-methods){target=\_blank}, like `toDecimal` to convert the asset to decimal format.
 You'll also need to specify if the transfer is automatic or not and the signer you're using for the transfer.
 
 
@@ -835,20 +822,17 @@ const result = await transferData.transfer(amount, false, {
 The `transfer` function returns an array of strings that represent the transaction hashes. It is an array because for some assets coming from EVM chains, two transactions are sent in the process: one Approve and the actual Transfer. Where applicable, the first transaction is the Approve and the second is the Transfer. Where an Approve is not needed, only one transaction is returned.
 
 !!! note
-<!-- TODO mjm reference transfer -->
-The transfer function also admits other optional parameters, which are not needed for this example. For more information on the parameters and returned data for `transfer`, please refer to the [MRL SDK Reference](./reference/methods.md#the-transfer-method){target=\_blank}.
+The transfer function also admits other optional parameters, which are not needed for this example. For more information on the parameters and returned data for `transfer`, please refer to the [MRL SDK Reference](../reference/mrl.md#the-transfer-method){target=\_blank}.
 
-## Redeem the Asset - Complete the Transfer {: #redeem-an-asset }
+## Execute the Transfer {: #execute-the-transfer }
 
-<!-- TODO mjm reference redeem -->
-<!-- TODO mjm reference some information about moonChain and the flow -->
-As mentioned before, if the isAutomatic flag is set to false, a manual redeem is required to complete the transfer in the destination chain of the bridge (redeem chain). Take into account that, if the transfer is from EVM chains to a Parachain, the redeem chain is the MoonChain, which is where the GMP contract call is made to initiate the XCM transfer to the destination parachain. For other types of transfers, the redeem chain is the destination chain.
+As mentioned before, if the isAutomatic flag is set to false, a manual execution is required to complete the transfer in the destination chain of the bridge (redeem chain). Take into account that, if the transfer is from EVM chains to a Parachain, the redeem chain is the [MoonChain](../reference/mrl.md#the-moon-chain), which is where the GMP contract call is made to initiate the XCM transfer to the destination parachain. For other types of transfers, the redeem chain is the destination chain.
 
-This SDK also provides a function for redeeming, but the same way as with the transfer, you first have to build the redeem data.
+This SDK also provides a function for executing the transfer, but the same way as with the transfer, you first have to build the execute transfer data.
 
-### Build the Redeem Data {: #build-the-redeem-data }
+### Build the Execute Transfer Data {: #build-the-execute-transfer-data }
 
-Following the example above, you can build the redeem data by calling the [`getRedeemData`](./reference/methods.md#the-get-redeem-data-method) function, with the transfer hash that was returned from the transfer function.
+Following the example above, you can build the execute transfer data by calling the [`getExecuteTransferData`](../reference/mrl.md#the-get-execute-transfer-data-method) function, with the transfer hash that was returned from the transfer function.
 
 Remember that for this example (Ethereum to Hydration), the redeem chain is going to be Moonbeam, which can be extracted from the transfer data as moonChain.
 
@@ -858,39 +842,36 @@ Remember that for this example (Ethereum to Hydration), the redeem chain is goin
 const hash = result.pop();
 
 if (!isAutomatic && hash) {
-    const redeemData = await Mrl().getRedeemData({
+    const executeTransferData = await Mrl().getExecuteTransferData({
         txId: hash,
         chain: transferData.moonChain.chain,
     });
 }
 ```
 
-### Redeem the Asset {: #redeem-the-asset }
+### Execute the Transfer {: #execute-the-transfer }
 
-<!-- TODO mjm reference redeem function -->
-Once you have the redeem data, you can redeem the asset by calling the [`redeem`](./reference/methods.md#the-redeem-method) function.
+Once you have the execute transfer data, you can execute the transfer by calling the [`executeTransfer`](../reference/mrl.md#the-execute-transfer-method) function.
 You'll need to specify the signer you're using for the redeem chain. Note that the signer is different from the signer used for the transfer, as the chains are different.
 
 ```js
 ...
 
-const redeemChainWalletClient = createWalletClient({
+const moonChainWalletClient = createWalletClient({
     account,
     chain: transferData.moonChain.chain.getViemChain(),
     transport: http(),
 });
 
 
-const redeemResult = await redeemData.redeem(redeemChainWalletClient);
+const executeTransferResult = await executeTransferData.executeTransfer(moonChainWalletClient);
 ```
 
 ## Get an Estimate of the Asset to Be Received on the Destination Chain {: #get-estimate }
 
-<!-- TODO mjm getEstimate reference -->
-When you send an MRL message, you typically pay fees on the destination chain to execute the XCM instructions, if any, or to pay the relayer if the transfer is set as automatic. Before you transfer the asset, you can use the [`getEstimate`](./reference/methods.md#the-get-estimate-method) function to calculate an estimated amount of the asset that will be received on the destination chain minus any fees.
+When you send an MRL message, you typically pay fees on the destination chain to execute the XCM instructions, if any, or to pay the relayer if the transfer is set as automatic. Before you transfer the asset, you can use the [`getEstimate`](../reference/mrl.md#the-transfer-data-object) function to calculate an estimated amount of the asset that will be received on the destination chain minus any fees.
 
-<!-- TODO mjm transferData reference -->
-The `getEstimate` function is tied to a specific transfer request as it is based on the asset being transferred and the destination chain fees, so you'll need to create the [transfer data](#build-xcm-transfer-data) first.
+The `getEstimate` function is tied to a specific transfer request as it is based on the asset being transferred and the destination chain fees, so you'll need to create the [transfer data](#build-mrl-transfer-data) first.
 
 You must provide the amount to be transferred to the `getEstimate` function. In the following example, you'll get the estimated amount of DOT that will be received on Moonbeam when 0.1 DOT is transferred. You can specify the amount in integer (`1000000000n`) or decimal (`'0.1'`) format.
 
@@ -911,8 +892,7 @@ console.log(
 
 ## Get information about the MoonChain  {: #get-moonchain-info }
 
-<!-- TODO mjm reference moonChain -->
-The MoonChain (Moonbeam for Mainnet and Moonbase Alpha for Testnet) is the chain which serves as intermediary between the Polkadot Ecosystem and external chains.
+The [MoonChain](../reference/mrl.md#the-moon-chain) (Moonbeam for Mainnet and Moonbase Alpha for Testnet) is the chain which serves as intermediary between the Polkadot Ecosystem and external chains.
 
 Depending on the type of transfer you're making, you may need to have balance in the MoonChain to pay for the fees. You can see the information about the balance by looking at the `moonChain` property in the transfer data.
 

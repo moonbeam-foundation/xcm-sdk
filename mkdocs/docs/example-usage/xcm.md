@@ -281,38 +281,38 @@ The chained methods will provide data on the assets and chains along the way, bu
 
 1. Get the list of supported assets for the specified ecosystem
 
-   ```js
-   const { assets, setAsset } = sdkInstance;
-   ```
+    ```js
+    const { assets, setAsset } = sdkInstance;
+    ```
 
 2. Call the `setAasset` function and pass in the key or asset object (which includes the key and the origin symbol) to define the asset to be transferred. For example:
 
-   ```js
-   import { dot } from '@moonbeam-network/xcm-config';
+    ```js
+    import { dot } from '@moonbeam-network/xcm-config';
 
-   // Using the key
-   const { sources, setSource } = setAsset(dot);
-   ```
+    // Using the key
+    const { sources, setSource } = setAsset(dot);
+    ```
 
-   This will return a list of the supported source chains for this asset and the [`setSource`](../reference/xcm.md#the-sdk-method) function, which is used to define the source chain to transfer the asset from
+    This will return a list of the supported source chains for this asset and the [`setSource`](../reference/xcm.md#the-sdk-method) function, which is used to define the source chain to transfer the asset from
 
 3. Call the `setSource` function and pass in the chain object (which includes the key, name, and chain type). For example:
 
-   ```js
-   import { polkadot } from '@moonbeam-network/xcm-config';
+    ```js
+    import { polkadot } from '@moonbeam-network/xcm-config';
 
-   const { destinations, setDestination } = setSource(polkadot);
-   ```
+    const { destinations, setDestination } = setSource(polkadot);
+    ```
 
-   This will return a list of the supported destination chains where there is an open XCM channel from the source chain for the given asset and the [`setDestination`](../reference/xcm.md#the-sdk-method) function, which is used to define the destination chain to transfer the asset to
+    This will return a list of the supported destination chains where there is an open XCM channel from the source chain for the given asset and the [`setDestination`](../reference/xcm.md#the-sdk-method) function, which is used to define the destination chain to transfer the asset to.
 
 4. Call the `setDestination` function and pass in the the chain object (which includes the key, name, and chain type). For example:
 
-   ```js
-   const { setAddresses } = setDestination(moonbeam);
-   ```
+    ```js
+    const { setAddresses } = setDestination(moonbeam);
+    ```
 
-   This will return the [`setAddresses`](../reference/xcm.md#the-sdk-method) function, which is used to define the source and destination addresses.
+    This will return the [`setAddresses`](../reference/xcm.md#the-sdk-method) function, which is used to define the source and destination addresses.
 
 The asset and chain objects are managed within the `@moonbeam-network/xcm-config` package. You do not need to directly interact with this package as the SDK exposes this data, but there you can find the list of [assets](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/assets.ts){target=\_blank} and [chain data](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/chains.ts){target=\_blank}.
 
@@ -819,7 +819,7 @@ As you may have noticed in the example response, the transfer data contains info
 
 ## Transfer an Asset {: #transfer-an-asset }
 
-Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](./reference/methods.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 DOT, you could use `1000000000n` or `'0.1'`. You can use [asset conversion methods](./reference/methods.md#asset-utilities){target=\_blank}, like [`toDecimal`](./reference/methods.md#the-to-decimal-method) to convert the asset to decimal format.
+Now that you've built the transfer data, you can transfer the asset from the source chain to the destination chain. To do so, you can use the [`transfer`](./reference/methods.md#the-transfer-method) function, but first, you'll need to specify an amount to send. You can specify the amount in integer or decimal format. For example, if you wanted to send 0.1 DOT, you could use `1000000000n` or `'0.1'`. You can use [asset conversion methods](../reference/xcm.md#asset-utility-methods){target=\_blank}, like `toDecimal` to convert the asset to decimal format.
 You'll also need to specify the signer you're using for the transfer.
 
 For this example, you can transfer twice the minimum amount required of DOT:

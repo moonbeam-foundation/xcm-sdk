@@ -5,9 +5,11 @@ description: A reference for the types and interfaces in the Moonbeam MRL SDK th
 
 # Moonbeam MRL SDK Reference
 
-A new module, `@moonbeam-foundation/mrl-sdk`, has been added to the Moonbeam SDK to support transfers between chains from the Polkadot ecosystem and external chains from outside the Polkadot ecosystem. MRL stands for Moonbeam Routed Liquidity. It allows liquidity from any blockchain connected to Moonbeam to be seamlessly routed to Polkadot parachains. This is achieved through technologies like General Message Passing (GMP), Polkadot's Cross-Consensus Message Passing (XCM), and XCM-enabled ERC-20 tokens (XC-20s). For more details, refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank}.
+A new module, `@moonbeam-foundation/mrl-sdk`, has been added to the Moonbeam SDK to support transfers between chains from the Polkadot ecosystem and external chains from outside the Polkadot ecosystem.
 
-This SDK aims to simplify this process, abstracting away the complexities of integrating the GPM providers, building the XCM messages, and executing the remote execution messages.
+For more details, refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank}.
+
+The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s. 
 
 To use it, chains are configured following an iterface which contains all the necessary information to perform the transfers.
 
@@ -16,7 +18,7 @@ This sdk uses the [XCM-SDK types and concepts as base](../reference/xcm.md). In 
 ---
 
 ## Transfer types
-<!-- TODO fix redaccion -->
+<!-- TODO mjm fix redaccion -->
 To understand how to use the MRL SDK, we can identify three different types of transfers, which ultimately don't affect the way the SDK is used, but depending on the type of transfer, the logic behind each one is going to be different.
 
 Always refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank} for a full explanation of the process, but here is a brief overview of what happens in each type of transfers, which will help you understand how the SDK works.
@@ -24,8 +26,7 @@ Always refer to the [MRL Documentation](https://docs.moonbeam.network/builders/i
 ---
 
 ### From EVM chains to parachains. {: #from-evm-chains-to-parachains }
-<!-- TODO mjm references -->
-Here the source chain is an [EVM chain]() and the destination chain either a [Parachain]() or an [EVMParachain]().
+Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object) and the destination chain either a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVMParachain](../reference/xcm.md#the-evm-parachain-object).
 
 1. A contract call is made in the source chain, which triggers the assets to be sent to Moonbeam ([moon chain](#moonchain)). This process is done in this sdk by leveraging a [GMP provider](https://docs.moonbeam.network/builders/interoperability/protocols/){target=\_blank}. Currently the only one supported is [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}.
 2. Next, to complete the transfer in Moonbeam, it must be executed, either manually or automatically by a relayer from the GMP provider. This execution consists of calling the [GMP precompile](https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/){target=\_blank}, which triggers the next step.
@@ -35,15 +36,16 @@ Here the source chain is an [EVM chain]() and the destination chain either a [Pa
 
 ### From parachains to EVM chains. {: #from-parachains-to-evm-chains }
 
-Here the source chain is a [Parachain]() or an [EVMParachain]() and the destination chain an [EVM chain]().
+Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVMParachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object).
 
 1. An XCM message is sent from the source chain to Moonbeam, this message is a batch call containing the following information:
     - A 'transfer assets' message, containing the asset that the user wants to transfer, plus the fees necessary to complete the transfer in Moonbeam, if any.
-    <!-- TODO mjm reference sendOnlyRemoteExecution -->
-    <!-- It is possible to only send the remote execution message, in cases where the computed origin account already has the assets necessary to complete the transfer. -->
     - A 'remote execution' message, which will be executed in Moonbeam.
     - The assets are sent to the [computed origin account](https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account){target=\_blank}, which is an account that can only be manipulated remotely by the source address.
+    - *Note*: It is possible to only send the remote execution message, in cases where the computed origin account already has the assets necessary to complete the transfer. Refer to the [transfer method](#the-transfer-method) for more information.
+
 2. Now that the computed origin account has the assets, the remote execution message is executed in Moonbeam, which will send the assets to the destination chain through a GMP provider. It is the same first step described in the [From EVM chains to parachains](#from-evm-chains-to-parachains) section, but in reverse.
+
 3. The transaction must be executed in the destination chain, either manually or automatically by a relayer.
 
 ---
@@ -65,23 +67,24 @@ Routes are defined in the [MRL Configs](https://github.com/moonbeam-foundation/x
 
 ## Transfer Data
 
+In the process of transferring the assets, you must get the transfer data first and then use it to transfer the assets.
+
+### The Transfer Data Object
+
 <div class="grid" markdown>
 <div markdown>
 
-### Transfer Data Object
 Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exlusive to MRL which is the [moon chain](#moonchain)
 
 **Attributes**
 
-<!-- TODO mjm references -->
-- `destination` ++"DestinationTransferData"++ [:material-link-variant:](#the-destination-transfer-data-object) - The assembled destination chain and address information
-- `getEstimate` ++"function"++ [:material-link-variant:](./methods.md#the-get-estimate-method) - Gets the estimated amount of the asset that the destination address will receive
+- `source` ++"SourceTransferData"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts) - The assembled source chain and address information
+- `destination` ++"DestinationTransferData"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts) - The assembled destination chain and address information
+- `moonChain` ++"MoonChainTransferData"++ [:material-link-variant:](#the-moon-chain) - The assembled moon chain and address information
+- `getEstimate` ++"function"++ - Gets the estimated amount of the asset that the destination address will receive
 - `isAutomaticPossible` ++"boolean"++ - Returns whether or not the automatic transfer is possible
-- `max` ++"AssetAmount"++ [:material-link-variant:](#the-asset-amount-object) - The maximum amount of the asset that _can_ be transferred
-- `min` ++"AssetAmount"++ [:material-link-variant:](#the-asset-amount-object) - The minimum amount of the asset that _can_ be transferred
-- `moonChain` ++"MoonChainTransferData"++ [:material-link-variant:](#moonchain) - The assembled moon chain and address information
-- `source` ++"SourceTransferData"++ [:material-link-variant:](#the-source-transfer-data-object) - The assembled source chain and address information
-<!-- TODO mjm transfer reference -->
+- `max` ++"AssetAmount"++ [:material-link-variant:](xcm.md#the-asset-amount-object) - The maximum amount of the asset that _can_ be transferred
+- `min` ++"AssetAmount"++ [:material-link-variant:](xcm.md#the-asset-amount-object) - The minimum amount of the asset that _can_ be transferred
 - `transfer` ++"function"++ [:material-link-variant:](./#the-transfer-method) - Transfers a given amount of the asset from the source chain to the destination chain
 
 </div>
@@ -646,7 +649,7 @@ Defines the complete transfer data for transferring an asset, including asset ba
 
 ---
 
-### MoonChain
+### The Moon Chain
 
 We call Moon Chain to the intermediary chain that is used to transfer the assets between the Polkadot ecosystem and the external chains. For `Mainnet` Moonbeam is the moon chain, and for `Testnet` it is `Moonbase Alpha`.
 
@@ -656,10 +659,11 @@ We call Moon Chain to the intermediary chain that is used to transfer the assets
 
 ---
 
+### The Transfer Method
+
 <div class="grid" markdown>
 <div markdown>
 
-### The transfer method
 
 **Parameters**
 
@@ -712,7 +716,105 @@ await transferData.transfer(
 </div>
 </div>
 
-### TODO relayer fee
+### The Relayer Fee
+
+This is a concept that is not present in XCM, it represents the fee that the relayer charges for executing the transfer automatically. Note that if the transfer is not automatic, the relayer fee will be 0.
+
+In the [transfer data](#transfer-data-object) you can find the relayer fee in the `relayerFee` attribute in the `source` object, and it is represented as an [AssetAmount](#the-assetamount-object) object.
+
+## Execute Transfer Data 
+
+Apart from transferring the assets, the MRL SDK also provides a way to execute the transfer in the destination chain. This is useful when the transfer needs to be completed manually.
+
+Similar to the [transfer data](#transfer-data), first you need to get the execute transfer data, and then you can execute the transfer.
+
+### The Execute Transfer Data Object
+
+Defines the data needed to execute the transfer in the destination chain. Usually it is related to the bridge you're using to transfer the assets. Currently, the only bridge supported is Wormhole.
+
+**Attributes**
+
+- `vaa` ++"VAA"++ - The [VAA](https://wormhole.com/docs/learn/infrastructure/vaas/) of the transfer. Related to Wormhole
+- `tokenTransfer` ++"TokenTransfer"++ - The token transfer of the transfer. Related to Wormhole
+- `executeTransfer` ++"function"++ - The function to execute the transfer
 
 
-### TODO MRL method
+### The Execute Transfer Method
+
+<div class="grid" markdown>
+<div markdown>
+
+**Parameters**
+
+- `signer` ++"EvmSigner"++ - The signer to use to execute the transfer  
+
+</div>
+
+```js title="Example Usage"
+  const data = await Mrl().getExecuteTransferData({
+    txId: INSERT_TX_HASH_TO_BE_EXECUTED,
+    chain: INSERT_DESTINATION_CHAIN,
+  });
+
+  await data.executeTransfer(INSERT_SIGNER_OR_WALLET_CLIENT);
+```
+
+</div>
+
+## The MRL Method
+
+<div class="grid" markdown>
+<div markdown>
+
+This is the main method that you'll use to build the transfer data, and the execute transfer data. It contains a series of chained methods that you'll use to set the information about the transfer.
+
+**Methods**
+
+- `Mrl()` [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.ts#L10){:target="_blank"} - Initializes the MRL, returns all the sources supported by a given ecosystem
+- `setSource()` - Sets the source chain of the transfer, returns all the available destinations for this source chain
+- `setDestination()` - Sets the destination chain of the transfer, returns all the available assets for this source and destination chain
+- `setAsset()` - Sets the asset to be transferred
+- `setIsAutomatic()` - Sets whether the transfer is going to be completed automatically
+- `setAddresses()` - Sets the addresses for the transfer, returns the [transfer data](#the-transfer-data-object)
+- `transfer()` [:material-link-variant:](#the-transfer-method) - Transfers the assets
+- `executeTransfer()` [:material-link-variant:](#the-execute-transfer-method) - Executes the transfer
+- `getExecuteTransferData()` [:material-link-variant:](#the-get-execute-transfer-data-method) - Returns the [execute transfer data](#the-execute-transfer-data-object)
+
+
+</div>
+
+```js title="Example Usage"
+const transferData = await Mrl()
+  .setSource(INSERT_SOURCE_CHAIN)
+  .setDestination(INSERT_DESTINATION_CHAIN)
+  .setAsset(INSERT_ASSET)
+  .setIsAutomatic(INSERT_IS_AUTOMATIC)
+  .setAddresses({
+    sourceAddress: INSERT_SOURCE_ADDRESS,
+    destinationAddress: INSERT_DESTINATION_ADDRESS,
+  });
+```
+</div>
+
+### The Get Execute Transfer Data Method
+
+<div class="grid" markdown>
+<div markdown>
+
+**Parameters**
+
+- `txId` ++"string"++ - The transaction hash to be executed. This is the transaction hash of the bridge between the EVM chain and the Moon Chain
+- `chain` ++"EvmChain | EvmParachain"++ - The chain to execute the transfer on
+
+</div>
+
+```js title="Example Usage"
+const data = await Mrl().getExecuteTransferData({
+  txId: INSERT_TX_HASH_TO_BE_EXECUTED,
+  chain: INSERT_DESTINATION_CHAIN,
+});
+```
+</div>
+
+
+<!-- TODO mjm sort / arrange this page -->
