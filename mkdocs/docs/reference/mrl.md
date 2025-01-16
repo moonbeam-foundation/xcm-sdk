@@ -18,7 +18,6 @@ This sdk uses the [XCM-SDK types and concepts as base](../reference/xcm.md). In 
 ---
 
 ## Transfer types
-<!-- TODO mjm fix redaccion -->
 To understand how to use the MRL SDK, we can identify three different types of transfers, which ultimately don't affect the way the SDK is used, but depending on the type of transfer, the logic behind each one is going to be different.
 
 Always refer to the [MRL Documentation](https://docs.moonbeam.network/builders/interoperability/mrl/){target=\_blank} for a full explanation of the process, but here is a brief overview of what happens in each type of transfers, which will help you understand how the SDK works.
@@ -60,8 +59,78 @@ For this type of transfer there is no need for a polkadot signer.
 
 ---
 ## MRL Asset Routes
-<!-- TODO mjm reference Chain objects and Asset Amounts -->
-Routes are defined in the [MRL Configs](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/mrl-configs/ethereum.ts){target=\_blank} file. Each route is an object that contains the source and destination chains, the assets to be transferred, and the fees.
+
+These objects define the routes for transferring assets between chains. For a more detailed explanation on how to implement them, refer to the [Contribute Section](../contribute/mrl.md#configure-a-chain-route){target=\_blank}.
+
+<div class="grid" markdown>
+<div markdown>
+
+### The [Mrl Asset Route](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/types/MrlAssetRoute.ts){target=\_blank} Object
+Each asset route is an object that contains the source and destination chains, the assets to be transferred, the fees, and the extrinsic or contract calls to be executed.
+
+**Attributes**
+
+- `source` ++"MrlSourceConfig"++ - Contains the information about the transfer regarding the source chain
+- `destination` ++"DestinationConfig"++ - Contains the information about the transfer regarding the destination chain
+- `mrl` ++"MrlConfig"++ [:material-link-variant:](#mrl-config) - Contains the information about the transfer exclusive to MRL, like information about the transfer calls and the [moon chain](#the-moon-chain)
+
+#### MRL Config 
+
+**Attributes**
+
+- `isAutomaticPossible` ++"boolean"++ - Whether or not the automatic transfer is possible
+- `transfer` ++"MrlConfigBuilder"++ - Contains the builder for the transfer call, either an extrinsic or a contract call
+- `moonChain` ++"MoonChainConfig"++ - Contains the information about the transfer regarding the [moon chain](#the-moon-chain)
+
+</div>
+
+```js title="Example"
+// MRL Asset Route for ETH from Ethereum to Moonbeam
+{
+  source: {
+    asset: weth,
+    balance: BalanceBuilder().evm().erc20(),
+    destinationFee: {
+      asset: weth,
+      balance: BalanceBuilder().evm().erc20(),
+    },
+  },
+  destination: {
+    asset: eth,
+    chain: ethereum,
+    balance: BalanceBuilder().evm().native(),
+    fee: {
+      asset: eth,
+      amount: 0,
+    },
+  },
+  mrl: {
+    isAutomaticPossible: true,
+    transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+    moonChain: {
+      asset: weth,
+      balance: BalanceBuilder().evm().erc20(),
+      fee: {
+        asset: glmr,
+        amount: 0,
+        balance: BalanceBuilder().substrate().system().account(),
+      },
+    },
+  },
+},
+```
+</div>
+
+### The [Mrl Chain Routes](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/types/MrlChainRoutes.ts){target=\_blank} Object
+
+This object contains the routes for a specific chain.
+
+**Attributes**
+
+- `chain` ++"Chain"++ [:material-link-variant:](./reference/xcm.md#the-chain-object) - The chain the routes are for
+- `routes` ++"MrlAssetRoute[]"++ [:material-link-variant:](#mrl-asset-route) - The list of asset routes for the chain
+
+Chain routes are defined in the [MRL Config](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/mrl-configs/){target=\_blank} files.
 
 ---
 
@@ -815,6 +884,3 @@ const data = await Mrl().getExecuteTransferData({
 });
 ```
 </div>
-
-
-<!-- TODO mjm sort / arrange this page -->

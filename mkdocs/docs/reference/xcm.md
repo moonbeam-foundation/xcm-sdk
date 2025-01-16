@@ -164,6 +164,78 @@ It contains information exclusive to chains in the Ethereum Ecosystem. This type
 
 ---
 
+## XCM Routes
+
+These objects define the routes for transferring assets between chains. For a more detailed explanation on how to implement them, refer to the [Contribute Section](../contribute/xcm.md#configure-a-chain-route){target=\_blank}.
+
+<div class="grid" markdown>
+<div markdown>
+
+### The [Asset Route](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/types/AssetRoute.ts){target=\_blank} Object
+
+An `AssetRoute` object contains the information for a route between an asset and a chain. It contains the configuration necessary for getting the transfer data of that specific asset on that chain, and in the chain that serves as the destination. 
+
+It includes builders for the queries to get the balances, fees, which asset is used for fees when transferring, the contract calls, the extrinsics and any other configuration necessary for completing the transfer.
+
+**Attributes**
+
+- `source` ++"SourceConfig"++ - Contains the information about the transfer regarding the source chain
+- `destination` ++"DestinationConfig"++ - Contains the information about the transfer regarding the destination chain
+- `contract` ++"ContractConfigBuilder"++ - Contains the builder for the contract call for the transfer, in case the transfer is done through a contract, like in [EVM Parachains](./#the-evm-parachain-object)
+- `extrinsic` ++"ExtrinsicConfigBuilder"++ - Contains the builder for the extrinsic call for the transfer, in case the transfer is done through an extrinsic, like in [Parachains](./#the-parachain-object)
+
+</div>
+
+```js title="Example"
+// Assert route for DOT from Polkadot to Moonbeam
+{
+  source: {
+    asset: dot,
+    balance: BalanceBuilder().substrate().system().account(),
+    fee: {
+      asset: dot,
+      balance: BalanceBuilder().substrate().system().account(),
+      extra: 0.047,
+    },
+    destinationFee: {
+      balance: BalanceBuilder().substrate().system().account(),
+    },
+  },
+  destination: {
+    asset: dot,
+    chain: moonbeam,
+    balance: BalanceBuilder().substrate().assets().account(),
+    fee: {
+      amount: FeeBuilder()
+        .xcmPaymentApi()
+        .xcmPaymentFee({ isAssetReserveChain: false }),
+      asset: dot,
+    },
+  },
+  extrinsic: ExtrinsicBuilder()
+    .xcmPallet()
+    .transferAssetsUsingTypeAndThen()
+    .here(),
+},
+```
+
+</div>
+
+---
+
+### The [Chain Routes](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/types/ChainRoutes.ts){target=\_blank} Object
+
+It represents a list of [Asset Routes](./#the-asset-route-object) for a given chain.
+
+**Attributes**
+
+- `chain` ++"Chain"++ [:material-link-variant:](#the-chain-object) - The chain the routes are for
+- `routes` ++"AssetRoute[]"++ [:material-link-variant:](#the-asset-route-object) - The list of asset routes for the chain
+
+Chain routes are defined in the [XCM Config](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/xcm-configs){target=\_blank} files.
+
+---
+
 ## Transfer Data
 
 In the process of transferring the assets, you must get the transfer data first and then use it to transfer the assets.
