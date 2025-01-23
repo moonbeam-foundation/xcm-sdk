@@ -293,26 +293,31 @@ The chained methods will provide data on the assets and chains along the way, bu
     ```js
     import { dot } from '@moonbeam-network/xcm-config';
 
-    // Using the key
+    // Using the object
     const { sources, setSource } = setAsset(dot);
+
+    // Using the key
+    const { sources, setSource } = setAsset('dot');
     ```
 
     This will return a list of the supported source chains for this asset and the [`setSource`](../reference/xcm.md#the-sdk-method) function, which is used to define the source chain to transfer the asset from
 
-3. Call the `setSource` function and pass in the chain object (which includes the key, name, and chain type). For example:
+3. Call the `setSource` function and pass in the chain key or chain object (which includes the key, name, and chain type). For example:
 
     ```js
     import { polkadot } from '@moonbeam-network/xcm-config';
 
+    // Using the object
     const { destinations, setDestination } = setSource(polkadot);
     ```
 
     This will return a list of the supported destination chains where there is an open XCM channel from the source chain for the given asset and the [`setDestination`](../reference/xcm.md#the-sdk-method) function, which is used to define the destination chain to transfer the asset to.
 
-4. Call the `setDestination` function and pass in the the chain object (which includes the key, name, and chain type). For example:
+4. Call the `setDestination` function and pass in the the chain key or chain object (which includes the key, name, and chain type). For example:
 
     ```js
-    const { setAddresses } = setDestination(moonbeam);
+    // Using the key
+    const { setAddresses } = setDestination('moonbeam');
     ```
 
     This will return the [`setAddresses`](../reference/xcm.md#the-sdk-method) function, which is used to define the source and destination addresses.

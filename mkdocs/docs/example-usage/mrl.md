@@ -159,23 +159,27 @@ The chained methods will provide data on the assets and chains along the way, bu
     const { sources, setSource } = mrlInstance;
     ``` 
 
-2. Call the `setSource` function and pass in the source chain to define the source chain for the transfer
+2. Call the `setSource` function and pass in the source chain object or chain key to define the source chain for the transfer
 
     ```js
     import { ethereum } from '@moonbeam-network/xcm-config';
 
+    // Using the object
     const { destinations, setDestination } = mrlInstance.setSource(ethereum);
+
+    // Using the key
+    const { destinations, setDestination } = mrlInstance.setSource('ethereum');
     ```
 
-3. Call the `setDestination` function and pass in the destination chain to define the destination chain for the transfer
+3. Call the `setDestination` function and pass in the destination chain object or chain key to define the destination chain for the transfer
 
     ```js
-    import { ethereum } from '@moonbeam-network/xcm-config';
+    import { hydration } from '@moonbeam-network/xcm-config';
 
     const { assets, setAsset } = mrlInstance.setDestination(hydration);
     ```
 
-4. Call the `setAsset` function and pass in the asset to define the asset to be transferred
+4. Call the `setAsset` function and pass in the asset object or asset key to define the asset to be transferred
 
     ```js
     import { usdc } from '@moonbeam-network/xcm-config';
