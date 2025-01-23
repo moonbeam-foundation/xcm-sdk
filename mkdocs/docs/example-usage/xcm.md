@@ -222,10 +222,13 @@ const assets = sdkInstance.assets;
 
 assets.forEach((asset) => {
   const { sources, setSource } = sdkInstance.setAsset(asset);
+
   console.log(`You can send ${asset.originSymbol}...`);
+
   if (sources.length > 1) {
     sources.forEach((source) => {
       const { destinations } = setSource(source);
+ 
       if (destinations.length > 0) {
         destinations.forEach((destination) => {
           console.log(`- From ${source.name} to ${destination.name}`);
