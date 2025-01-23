@@ -259,11 +259,11 @@ const fromPolkadot = async () => {
   .setAsset(dot)
   .setSource(polkadot)
   .setDestination(moonbeam)
-.setAddresses({
-  sourceAddress: pair.address,
-    destinationAddress: account.address,
-  });
-};
+  .setAddresses({
+    sourceAddress: pair.address,
+      destinationAddress: account.address,
+    });
+  };
 
 fromPolkadot();
 ```
