@@ -159,7 +159,6 @@ Here are the steps to configure the source and destination chains of an asset, s
       });
       ```
 
-
 !!! note
 Note that the asset we're using is different in each chain, `usdt` in Ethereum and `usdtwh` in Moonbeam. This is because the symbol of the asset is different on each chain, in this case because USDT.wh is a representation of USDT on Wormhole. You'll need to determine which representation of the asset you're using on each chain.
 
