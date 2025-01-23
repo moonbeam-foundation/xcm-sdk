@@ -113,7 +113,6 @@ To add a chain, take the following steps:
 !!! note
 Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.
 
-
 ## Configure a Chain's Assets
 
 Similar to the [XCM SDK](./xcm.md#configure-a-chain-s-assets){target=\_blank}, you'll need to configure the source and destination chains of an asset. 
