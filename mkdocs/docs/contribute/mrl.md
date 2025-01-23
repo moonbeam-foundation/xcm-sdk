@@ -8,10 +8,10 @@ template: tutorial.html
 
 ## Get Started
 
-To contribute to the MRL SDK, you'll first need to clone the GitHub repository:
+To contribute to the MRL SDK, you'll first need to fork the [GitHub repository](https://github.com/moonbeam-foundation/xcm-sdk){target=\_blank}, and then clone the repository to your local machine.
 
 ```bash
-git clone git@github.com:moonbeam-foundation/mrl.git
+git clone https://github.com/YOUR_GITHUB_USERNAME/xcm-sdk.git
 ```
 
 Then, install dependencies:
@@ -30,9 +30,9 @@ The next step to support an asset integration is to add chain information for th
 
 To add a chain, take the following steps:
 
-1.  Open the `xcm-sdk/packages/config/src/chains.ts` file
-2.  Add your asset to the list of imported assets from the assets configuration file (`./assets.ts`)
-3.  Create a new variable for each chain if an entry doesn't already exist. You'll need to create a [Chain Object](../reference/xcm.md#the-chain-object), providing metadata related to the chain
+1. Open the `xcm-sdk/packages/config/src/chains.ts` file
+2. Add your asset to the list of imported assets from the assets configuration file (`./assets.ts`)
+3. Create a new variable for each chain if an entry doesn't already exist. You'll need to create a [Chain Object](../reference/xcm.md#the-chain-object), providing metadata related to the chain
 
     === "Parachain"
 
@@ -48,9 +48,7 @@ To add a chain, take the following steps:
           parachainId: INSERT_PARACHAIN_ID,
           ss58Format: INSERT_SS58_FORMAT,
           ws: ['INSERT_WSS_ENDPOINTS'],
-        })
-
-        ;
+        });
         ```
 
     === "EVM Parachain"
@@ -69,7 +67,7 @@ To add a chain, take the following steps:
           ss58Format: INSERT_SS58_FORMAT,
           rpc: 'INSERT_RPC_ENDPOINT',
           ws: ['INSERT_WSS_ENDPOINTS'],
-        })
+        });
         ```
 
     === "EVM Chain"
@@ -87,7 +85,7 @@ To add a chain, take the following steps:
           wh: {
             name: 'INSERT_WORMHOLE_NAME',
           }, // Optional - if using Wormhole for MRL
-        })
+        });
         ```
 
     For example, this is the configuration for adding the Ethereum chain:
@@ -108,7 +106,7 @@ To add a chain, take the following steps:
     });
     ```
 
-4.  Add the newly created chain to the `chainsList` array at the end of the file
+4. Add the newly created chain to the `chainsList` array at the end of the file
 
 !!! note
 Chains are listed in alphabetical order. Please make sure you follow this order when adding new chains.
@@ -165,6 +163,7 @@ Note that the asset we're using is different in each chain, `usdt` in Ethereum a
 ## Configure a Chain Route
 
 ### Prerequisites
+
 These steps are the same as the [XCM SDK](./xcm.md#configure-a-chain-route){target=\_blank}, but you'll need to create the builders for the MRL routes as well. So you'll need to know which pallet, method and provider you're using for the MRL routes.
 Also, you'll need to know the [type of transfer](../reference/mrl.md#transfer-types){target=\_blank} you're using, as the builders will be different depending on the type of transfer.
 

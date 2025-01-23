@@ -8,10 +8,10 @@ template: tutorial.html
 
 ## Get Started
 
-To contribute to the XCM SDK, you'll first need to clone the GitHub repository:
+To contribute to the XCM SDK, you'll first need to fork the [GitHub repository](https://github.com/moonbeam-foundation/xcm-sdk){target=\_blank}, and then clone the repository to your local machine.
 
 ```bash
-git clone git@github.com:moonbeam-foundation/xcm-sdk.git
+git clone https://github.com/YOUR_GITHUB_USERNAME/xcm-sdk.git
 ```
 
 Then, install dependencies:
