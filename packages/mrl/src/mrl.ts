@@ -1,6 +1,6 @@
 import {
   ConfigService,
-  type MrlAssetRoute,
+  MrlAssetRoute,
   mrlRoutesMap,
 } from '@moonbeam-network/xcm-config';
 import type {
@@ -44,6 +44,10 @@ export function Mrl(options?: MrlOptions) {
                 destination,
               });
 
+              if (!(route instanceof MrlAssetRoute)) {
+                throw new Error('Route must be an MrlAssetRoute');
+              }
+
               return {
                 setIsAutomatic(isAutomatic: boolean) {
                   return {
@@ -55,7 +59,7 @@ export function Mrl(options?: MrlOptions) {
                       destinationAddress: string;
                     }) {
                       return getTransferData({
-                        route: route as MrlAssetRoute,
+                        route,
                         sourceAddress,
                         destinationAddress,
                         isAutomatic,
