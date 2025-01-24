@@ -2176,26 +2176,6 @@ export const subsocial = new Parachain({
   ws: ['wss://para.subsocial.network', 'wss://subsocial-rpc.dwellir.com'],
 });
 
-export const tinkernet = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(tnkr, {
-      decimals: 12,
-      ids: {
-        id: 0,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xd42e9606a995dfe433dc7955dc2a70f495f350f373daa200098ae84437816ad2',
-  key: 'tinkernet',
-  name: 'InvArch Tinkernet',
-  nativeAsset: tnkr,
-  parachainId: 2125,
-  ss58Format: 117,
-  ws: ['wss://tinkernet-rpc.dwellir.com'],
-});
-
 export const turing = new Parachain({
   assets: [
     ChainAsset.fromAsset(tur, {
@@ -2343,7 +2323,6 @@ export const chainsList: AnyChain[] = [
   robonomics,
   shiden,
   subsocial,
-  tinkernet,
   turing,
   turingAlphanet,
   uniqueAlpha,

@@ -20,7 +20,6 @@ import {
   rmrk,
   sdn,
   teer,
-  tnkr,
   tur,
   usdt,
   vbnc,
@@ -44,7 +43,6 @@ import {
   picasso,
   robonomics,
   shiden,
-  tinkernet,
   turing,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -569,29 +567,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 0.004,
           asset: teer,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: tnkr,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: tnkr,
-        chain: tinkernet,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.4,
-          asset: tnkr,
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
