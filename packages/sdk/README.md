@@ -15,40 +15,30 @@ npm i @moonbeam-network/xcm-sdk
 :warning: You need to have peer dependencies of SDK installed as well.
 
 ```bash
-npm i @polkadot/api @polkadot/api-augment @polkadot/types @polkadot/util @polkadot/util-crypto @polkadot/apps-config ethers
+npm i @polkadot/api @polkadot/util-crypto
 ```
 
 # Usage
 
-The following sections contain basic examples of how to work with the XCM SDK to build transfer data to transfer an asset from one chain to another and how to submit the transfer. For a detailed overview on how to use each method, including a reference to the parameters and returned data of each method exposed by the SDK, please refer to the [XCM SDK docs](https://docs.moonbeam.network/builders/interoperability/xcm/xcm-sdk/v1/).
+The following sections contain basic examples of how to work with the XCM SDK to build transfer data to transfer an asset from one chain to another and how to submit the transfer. For a detailed overview on how to use it, please refer to the [XCM SDK docs](https://moonbeam-foundation.github.io/xcm-sdk/latest/example-usage/xcm).
 
 ## Build XCM Transfer Data
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const { assets, getTransferData } = Sdk();
+const transferData = async () => {
+  const transferData = await Sdk()
+  .setAsset(INSERT_ASSET)
+  .setSource(INSERT_SOURCE_CHAIN)
+  .setDestination(INSERT_DESTINATION_CHAIN)
+  .setAddresses({
+    sourceAddress: INSERT_SOURCE_ADDRESS,
+      destinationAddress: INSERT_DESTINATION_ADDRESS,
+    });
+  };
 
-// You can build the XCM transfer data via the assets function
-const dataViaAssetsMethod = await assets()
-  .asset('INSERT_ASSET')
-  .source('INSERT_SOURCE_CHAIN')
-  .destination('INSERT_DESTINATION_CHAIN')
-  .accounts('INSERT_SOURCE_ADDRESS', 'INSERT_DESTINATION_ADDRESS', {
-    evmSigner?: 'INSERT_EVM_SIGNER',
-    polkadotSigner?: 'INSERT_POLKADOT_SIGNER',
-  });
-
-// Or via the getTransferData function
-const dataViaGetTransferDataMethod = await getTransferData({
-  destinationAddress: 'INSERT_DESTINATION_ADDRESS',
-  destinationKeyOrChain: 'INSERT_DESTINATION_CHAIN',
-  evmSigner?: 'INSERT_EVM_SIGNER',
-  keyOrAsset: 'INSERT_ASSET',
-  polkadotSigner?: 'INSERT_POLKADOT_SIGNER',
-  sourceAddress: 'INSERT_SOURCE_ADDRESS',
-  sourceKeyOrChain: 'INSERT_SOURCE_CHAIN',
-});
+fromPolkadot();
 ```
 
 ## Transfer
@@ -56,7 +46,7 @@ const dataViaGetTransferDataMethod = await getTransferData({
 ```js
 ...
 
-const hash = await dataViaGetTransferDataMethod.transfer('INSERT_TRANSFER_AMOUNT');
+const hash = await transferData.transfer(INSERT_TRANSFER_AMOUNT, { INSERT_SIGNERS });
 ```
 
 # Examples
@@ -76,10 +66,11 @@ pnpm run start
 
 # Contributing
 
+First fork the repository and clone it.
+
 ```bash
-git clone git@github.com:moonbeam-foundation/xcm-sdk.git
+git clone git@github.com:YOUR_GITHUB_USERNAME/xcm-sdk.git
 pnpm install
-pnpm run dev
 ```
 
 Optionally, you can install the `pre-commit` hook to run the linter and tests before committing:
@@ -99,9 +90,6 @@ pnpm run test
 ## Acceptance tests
 
 ```bash
-cp .env.example .env
-# add private key and suri to .env file
-
 pnpm run test:acc
 ```
 
