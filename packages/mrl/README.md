@@ -1,6 +1,6 @@
-The Moonbeam MRL SDK enables developers to easily transfer liquidity into and across the Polkadot ecosystem from other ecosystems like Ethereum. With the SDK, you don't need to worry about setting up the different contract calls and extrisics involved in the process of movin assets between the chains and ecosystems. It is an extension  of the XCM SDK as it uses the same config and utils.
+The Moonbeam MRL SDK enables developers to easily transfer liquidity into and across the Polkadot ecosystem from other ecosystems like Ethereum. With the SDK, you don't need to worry about setting up the different contract calls and extrinsics involved in the process of moving assets between the chains and ecosystems. It is an extension of the XCM SDK as it uses the same config and utils.
 
-The MRL SDK offers helper functions, that provide a very simple interface to execute transfers from parachains or contract calls from EVM chains. In addition, the MRL config package allows any external project to add their information in a standard way, so they can be immediately supported by the MRL SDK.
+The MRL SDK offers helper functions that provide a very simple interface to execute transfers from parachains or contract calls from EVM chains. In addition, the MRL config package allows any external project to add their information in a standard way, allowing immediate support by the MRL SDK.
 
 # Documentation
 

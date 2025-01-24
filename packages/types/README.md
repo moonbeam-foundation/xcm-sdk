@@ -1,4 +1,4 @@
-The Types package contains the types definitions for the Moonbeam XCM SDK and MRL SDK.
+The Types package contains the type definitions for the Moonbeam XCM SDK and MRL SDK.
 
 # Documentation for the Moonbeam XCM SDK
 
