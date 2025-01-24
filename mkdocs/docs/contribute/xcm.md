@@ -52,7 +52,7 @@ Assets are listed in alphabetical order. Please make sure you follow this order 
 
 ## Add a Chain
 
-The next step to support an asset integration is to add chain information for the chains in which your asset can be sent to and from to the [chains configuration file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/chains.ts){target=\_blank}.
+The next step in supporting a new asset is to add chain information for all the chains to and from which your asset can be transferred. This is done in the [chains configuration file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/chains.ts){target=\_blank}.
 
 To add a chain, take the following steps:
 
@@ -209,7 +209,7 @@ If they aren't available, feel free to open a PR or [submit an issue on GitHub](
 
 Assuming that all of the required pallets and methods are already supported, you can create the configuration file for the source chain:
 
-1. In the `xcm-sdk/packages/config/src/xcm-configs` directory, add a TypeScript file for the new chain. If the chain already has a configuration file, you can update it instead adding the new routes, go to step 3.
+1. In the `xcm-sdk/packages/config/src/xcm-configs` directory, add a TypeScript file for the new chain. If the chain already has a configuration file, you can update it instead by adding the new routes, so you can go directly to step 3.
 2. Use the following snippet as a starting point for adding the chain routes:
 
     ```ts
@@ -241,7 +241,7 @@ Assuming that all of the required pallets and methods are already supported, you
         },
         destinationFee: {
           asset: INSERT_DESTINATION_FEE_ASSET, // Optional, if the fee asset in destination have different representation in the source chain
-          balance: INSERT_DESTINATION_FEE_BALANCE_BUILDER, // The builder function for the balancein the source chain for the asset used for fees in the destination chain
+          balance: INSERT_DESTINATION_FEE_BALANCE_BUILDER, // The builder function for the balance in the source chain for the asset used for fees in the destination chain
         },
         min: INSERT_MIN_ASSET_BUILDER, // Optional
       },

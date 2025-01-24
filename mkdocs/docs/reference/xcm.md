@@ -34,7 +34,7 @@ It extends the `Asset` object and adds properties related to the asset informati
 - `min` ++"bigint"++ - The minimum amount of the asset that can be transferred
 - `symbol` ++"string"++ - The symbol of the asset in the chain, if different from the origin symbol
 
-It contains methods to get the differnet asset's ids in the chain, and some utility methods, among which:
+It contains methods to get the different asset's ids in the chain, and some utility methods, among which:
 
 - `fromAsset` - Creates a new `ChainAsset` object using an `Asset` object as a base
 - `copyWith` - Creates a new `ChainAsset` object copy, with the specified properties
@@ -187,7 +187,7 @@ It includes builders for the queries to get the balances, fees, which asset is u
 </div>
 
 ```js title="Example"
-// Assert route for DOT from Polkadot to Moonbeam
+// Asset route for DOT from Polkadot to Moonbeam
 {
   source: {
     asset: dot,
@@ -786,7 +786,7 @@ const data = await Sdk()
 <div class="grid" markdown>
 <div markdown>
 
-`toDecimal()` - Converts an asset amount to a decimal string. Useful for hanlding amounts in Wei and presenting them in a more readable format.
+`toDecimal()` - Converts an asset amount to a decimal string. Useful for handling amounts in Wei and presenting them in a more readable format.
 
 **Parameters**
 

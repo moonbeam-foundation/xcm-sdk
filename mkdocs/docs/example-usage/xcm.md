@@ -196,7 +196,7 @@ To get a list of the supported assets for a particular ecosystem, you can pass i
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
-import { Ecosystem } from '../../packages/types/build';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
 
 const sdkInstance = Sdk({ ecosystem: Ecosystem.Polkadot });
 const assets = sdkInstance.assets;
@@ -215,7 +215,7 @@ To get a list of the supported [source and destination](../reference/xcm.md#tran
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
-import { Ecosystem } from '../../packages/types/build';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
 
 const sdkInstance = Sdk({ ecosystem: Ecosystem.Polkadot });
 const assets = sdkInstance.assets;
@@ -275,7 +275,7 @@ To get started, you'll use the [`Sdk`](../reference/xcm.md#the-sdk-method) metho
 
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
-import { Ecosystem } from '../../packages/types/build';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
 
 const sdkInstance = Sdk({ ecosystem: Ecosystem.Polkadot });
 ```
@@ -288,7 +288,7 @@ The chained methods will provide data on the assets and chains along the way, bu
     const { assets, setAsset } = sdkInstance;
     ```
 
-2. Call the `setAasset` function and pass in the key or asset object (which includes the key and the origin symbol) to define the asset to be transferred. For example:
+2. Call the `setAsset` function and pass in the key or asset object (which includes the key and the origin symbol) to define the asset to be transferred. For example:
 
     ```js
     import { dot } from '@moonbeam-network/xcm-config';
@@ -313,7 +313,7 @@ The chained methods will provide data on the assets and chains along the way, bu
 
     This will return a list of the supported destination chains where there is an open XCM channel from the source chain for the given asset and the [`setDestination`](../reference/xcm.md#the-sdk-method) function, which is used to define the destination chain to transfer the asset to.
 
-4. Call the `setDestination` function and pass in the the chain key or chain object (which includes the key, name, and chain type). For example:
+4. Call the `setDestination` function and pass in the chain key or chain object (which includes the key, name, and chain type). For example:
 
     ```js
     // Using the key
@@ -329,7 +329,8 @@ An example of the steps described above to build the transfer data to transfer D
 ```js
 import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
 import { Sdk } from '@moonbeam-network/xcm-sdk';
-import { Ecosystem } from '../../packages/types/build';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
+
 
 const fromPolkadot = async () => {
   const sdkInstance = Sdk({ ecosystem: Ecosystem.Polkadot });

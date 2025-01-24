@@ -86,7 +86,7 @@ To get a list of the supported routes for a particular ecosystem, you can use th
 
 ```js
 import { Mrl } from '@moonbeam-network/mrl';
-import { Ecosystem } from '../../packages/types/build';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
 
 const mrlInstance = Mrl({ ecosystem: Ecosystem.Polkadot });
 const sources = mrlInstance.sources;
@@ -146,7 +146,7 @@ To get started, you'll use the [`Mrl`](../reference/mrl.md#the-mrl-method) funct
 
 ```js
 import { Mrl } from '@moonbeam-network/mrl';
-import { Ecosystem } from '../../packages/types/build';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
 
 const mrlInstance = Mrl({ ecosystem: Ecosystem.Polkadot });
 ```
