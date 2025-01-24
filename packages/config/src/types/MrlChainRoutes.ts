@@ -1,3 +1,4 @@
+import type { AnyAsset, AnyChain } from '@moonbeam-network/xcm-types';
 import { ChainRoutes, type ChainRoutesConstructorParams } from './ChainRoutes';
 import {
   MrlAssetRoute,
@@ -16,11 +17,11 @@ interface MrlRoutesParam
 }
 
 export class MrlChainRoutes extends ChainRoutes {
-  readonly #routes: Map<string, MrlAssetRoute>;
+  protected routes: Map<string, MrlAssetRoute>;
 
   constructor({ chain, routes }: MrlChainRoutesConstructorParams) {
     super({ chain, routes });
-    this.#routes = new Map(
+    this.routes = new Map(
       routes.map(({ source, destination, contract, extrinsic, mrl }) => [
         `${source.asset.key}-${destination.chain.key}`,
         new MrlAssetRoute({
@@ -35,6 +36,16 @@ export class MrlChainRoutes extends ChainRoutes {
   }
 
   getRoutes(): MrlAssetRoute[] {
-    return Array.from(this.#routes.values());
+    return Array.from(this.routes.values());
+  }
+
+  getAssetRoute(
+    asset: string | AnyAsset,
+    destination: string | AnyChain,
+  ): MrlAssetRoute {
+    const route = super.getAssetRoute(asset, destination);
+    // Since we know this class only stores MrlAssetRoute instances,
+    // we can safely cast the parent's return value
+    return route as MrlAssetRoute;
   }
 }

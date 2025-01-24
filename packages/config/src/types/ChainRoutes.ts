@@ -18,26 +18,25 @@ interface RoutesParam extends Omit<AssetRouteConstructorParams, 'source'> {
 export class ChainRoutes {
   readonly chain: AnyChain;
 
-  readonly #routes: Map<string, AssetRoute>;
+  protected routes: Map<string, AssetRoute>;
 
   constructor({ chain, routes }: ChainRoutesConstructorParams) {
     this.chain = chain;
-    this.#routes = new Map(
-      routes.map(({ source, destination, contract, extrinsic, mrl }) => [
+    this.routes = new Map(
+      routes.map(({ source, destination, contract, extrinsic }) => [
         `${source.asset.key}-${destination.chain.key}`,
         new AssetRoute({
           source: { ...source, chain },
           destination,
           contract,
           extrinsic,
-          mrl,
         }),
       ]),
     );
   }
 
   getRoutes(): AssetRoute[] {
-    return Array.from(this.#routes.values());
+    return Array.from(this.routes.values());
   }
 
   getAssetRoutes(keyOrAsset: string | AnyAsset): AssetRoute[] {
@@ -66,7 +65,7 @@ export class ChainRoutes {
   ): AssetRoute {
     const assetKey = getKey(asset);
     const destKey = getKey(destination);
-    const route = this.#routes.get(`${assetKey}-${destKey}`);
+    const route = this.routes.get(`${assetKey}-${destKey}`);
 
     if (!route) {
       throw new Error(

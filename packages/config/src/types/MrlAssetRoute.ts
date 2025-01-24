@@ -1,14 +1,26 @@
-import type { BalanceConfigBuilder } from '@moonbeam-network/xcm-builder';
+import type {
+  BalanceConfigBuilder,
+  FeeConfigBuilder,
+  MrlConfigBuilder,
+} from '@moonbeam-network/xcm-builder';
 import type { Asset } from '@moonbeam-network/xcm-types';
 import {
   AssetRoute,
   type AssetRouteConstructorParams,
+  type FeeConfig,
   type SourceConfig,
 } from './AssetRoute';
 
 export interface MrlAssetRouteConstructorParams
   extends AssetRouteConstructorParams {
   source: MrlSourceConfig;
+  mrl: MrlConfig;
+}
+
+export interface MrlConfig {
+  isAutomaticPossible: boolean;
+  transfer: MrlConfigBuilder;
+  moonChain: MoonChainConfig;
 }
 
 export interface MrlSourceConfig extends SourceConfig {
@@ -18,7 +30,18 @@ export interface MrlSourceConfig extends SourceConfig {
   };
 }
 
+export interface MoonChainConfig {
+  asset: Asset;
+  balance: BalanceConfigBuilder;
+  fee: MoonChainFeeConfig;
+}
+
+export interface MoonChainFeeConfig extends FeeConfig {
+  amount: number | FeeConfigBuilder;
+}
+
 export class MrlAssetRoute extends AssetRoute {
+  readonly mrl: MrlConfig;
   readonly source: MrlSourceConfig;
 
   constructor({
@@ -28,7 +51,8 @@ export class MrlAssetRoute extends AssetRoute {
     extrinsic,
     mrl,
   }: MrlAssetRouteConstructorParams & { source: MrlSourceConfig }) {
-    super({ source, destination, contract, extrinsic, mrl });
+    super({ source, destination, contract, extrinsic });
+    this.mrl = mrl;
     this.source = source;
   }
 }

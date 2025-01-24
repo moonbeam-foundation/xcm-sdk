@@ -5,12 +5,12 @@ import {
   moonbaseAlpha,
   peaqAlphanet,
 } from '@moonbeam-network/xcm-config';
+import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
 import { type Asset, EvmChain, Parachain } from '@moonbeam-network/xcm-types';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import type { EvmSigner } from '../../packages/sdk/build';
 
 const { EVM_PRIVATE_KEY, POLKADOT_PRIVATE_KEY } = process.env;
 

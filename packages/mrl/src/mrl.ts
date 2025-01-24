@@ -1,4 +1,8 @@
-import { ConfigService, mrlRoutesMap } from '@moonbeam-network/xcm-config';
+import {
+  ConfigService,
+  MrlAssetRoute,
+  mrlRoutesMap,
+} from '@moonbeam-network/xcm-config';
 import type {
   AnyAsset,
   AnyChain,
@@ -39,6 +43,11 @@ export function Mrl(options?: MrlOptions) {
                 source,
                 destination,
               });
+
+              if (!(route instanceof MrlAssetRoute)) {
+                throw new Error('Route must be an MrlAssetRoute');
+              }
+
               return {
                 setIsAutomatic(isAutomatic: boolean) {
                   return {
