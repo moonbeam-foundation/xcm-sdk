@@ -10,5 +10,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["./scripts/**", "mrl-simple", "sdk-simple"]
+  "ignore": ["scripts", "mrl-simple", "sdk-simple"]
 }
