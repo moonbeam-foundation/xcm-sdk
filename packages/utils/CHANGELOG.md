@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.0.3
+
+### Patch Changes
+
+- [#430](https://github.com/moonbeam-foundation/xcm-sdk/pull/430) [`81c13dc`](https://github.com/moonbeam-foundation/xcm-sdk/commit/81c13dc45e4f15ef9a311ef0c9f449224b88e535) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix lint
+
 ## 3.0.2
 
 ### Patch Changes
