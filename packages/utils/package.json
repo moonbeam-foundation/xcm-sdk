@@ -40,8 +40,8 @@
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "14.3.1",
-    "@polkadot/apps-config": "0.146.1",
+    "@polkadot/api": "15.2.1",
+    "@polkadot/apps-config": "0.148.1",
     "@polkadot/util": "13.2.3",
     "@polkadot/util-crypto": "13.2.3"
   }

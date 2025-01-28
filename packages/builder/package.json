@@ -38,9 +38,9 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "14.3.1",
-    "@polkadot/api-augment": "14.3.1",
-    "@polkadot/types": "14.3.1",
+    "@polkadot/api": "15.2.1",
+    "@polkadot/api-augment": "15.2.1",
+    "@polkadot/types": "15.2.1",
     "@polkadot/util": "13.2.3",
     "@polkadot/util-crypto": "13.2.3",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
