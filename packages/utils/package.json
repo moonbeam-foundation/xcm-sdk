@@ -18,19 +18,12 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "xcm",
-    "utils"
-  ],
+  "keywords": ["moonbeam", "moonriver", "xcm", "utils"],
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",
