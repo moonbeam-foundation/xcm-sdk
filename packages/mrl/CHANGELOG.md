@@ -1,6 +1,6 @@
 # @moonbeam-network/mrl
 
-## 1.0.0
+## 3.0.1
 
 ### Major Changes
 
