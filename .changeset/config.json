@@ -8,7 +8,7 @@
   "fixed": [],
   "linked": [],
   "access": "public",
-  "baseBranch": "v3-next",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["scripts", "mrl-simple", "sdk-simple"]
+  "ignore": ["sdk-simple", "mrl-simple"]
 }
