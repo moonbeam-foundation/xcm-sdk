@@ -34,8 +34,9 @@
     "sync-deps": "npx syncpack fix-mismatches",
     "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",
     "changeset": "changeset",
+    "changeset:status": "changeset status",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
-    "changeset:publish": "pnpm run build && pnpm publish -r"
+    "changeset:publish": "pnpm run build && changeset publish"
   },
   "dependencies": {
     "@polkadot/api": "14.3.1",
