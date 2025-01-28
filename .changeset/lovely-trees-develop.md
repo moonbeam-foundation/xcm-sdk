@@ -5,7 +5,6 @@
 "@moonbeam-network/xcm-sdk": patch
 "@moonbeam-network/xcm-types": patch
 "@moonbeam-network/xcm-utils": patch
-"scripts": patch
 ---
 
 Update dependencies and fix vulnerabilities
