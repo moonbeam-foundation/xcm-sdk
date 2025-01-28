@@ -4,7 +4,7 @@ This directory contains the XCM SDK documentation found at [https://moonbeam-fou
 
 These docs are versioned and rely on [mike](https://github.com/jimporter/mike) to deploy new versions and manage existing ones. **Any updates to the documentation site require you to use mike to deploy the changes**, pushing changes to the `main` branch will **not** automatically publish the changes to the live site. You need to follow the [deployment process](#deployment-process).
 
-## Get Started 
+## Get Started
 
 Clone the `xcm-sdk` repository:
 
