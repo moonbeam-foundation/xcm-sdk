@@ -42,7 +42,7 @@
   "peerDependencies": {
     "@polkadot/api": "15.2.1",
     "@polkadot/apps-config": "0.148.1",
-    "@polkadot/util": "13.2.3",
-    "@polkadot/util-crypto": "13.2.3"
+    "@polkadot/util": "13.3.1",
+    "@polkadot/util-crypto": "13.3.1"
   }
 }
