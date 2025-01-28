@@ -11,19 +11,21 @@ jobs:
       - name: 🤘 checkout
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js environment
+      - uses: pnpm/action-setup@v4
+
+      - name: ⚙ Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - run: npm ci --ignore-scripts
+      - run: pnpm install --ignore-scripts
 
       - name: 🛠️ Build
-        run: npm run build
+        run: pnpm run build
 
       - name: 🧪 Run acceptance tests
         env:
           TESTS_MOONBEAM_PRIVATE_KEY: ${{ secrets.TESTS_MOONBEAM_PRIVATE_KEY }}
           TESTS_POLKADOT_SURI: ${{ secrets.TESTS_POLKADOT_SURI }}
-        run: npm run test:acc
+        run: pnpm run test:acc

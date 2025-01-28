@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "transferXcm",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
@@ -42,7 +41,6 @@ ExtrinsicConfig {
   "func": "transferXcm",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
@@ -80,7 +78,6 @@ ExtrinsicConfig {
   "func": "xcmTransfer",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
@@ -112,151 +109,10 @@ ExtrinsicConfig {
   "func": "xcmTransfer",
   "getArgs": [Function],
   "module": "eqBalances",
-  "type": "Substrate",
 }
 `;
 
 exports[`eqBalances > xcmTransfer to parachain > should get correct arguments 1`] = `
-[
-  "USDT",
-  99000000000n,
-  {
-    "interior": {
-      "X2": [
-        {
-          "Parachain": 2032,
-        },
-        {
-          "AccountId32": {
-            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
-            "network": null,
-          },
-        },
-      ],
-    },
-    "parents": 1,
-  },
-  "ThisAccWillPay",
-]
-`;
-
-exports[`eqBalances transferXcm should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferXcm",
-  "getArgs": [Function],
-  "module": "eqBalances",
-  "type": "Substrate",
-}
-`;
-
-exports[`eqBalances transferXcm should get correct arguments 1`] = `
-[
-  [
-    "USDT",
-    99000000000n,
-  ],
-  [
-    "RMRK",
-    5000000000n,
-  ],
-  {
-    "interior": {
-      "X2": [
-        {
-          "Parachain": 1000,
-        },
-        {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      ],
-    },
-    "parents": 1,
-  },
-]
-`;
-
-exports[`eqBalances transferXcm to parachain should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferXcm",
-  "getArgs": [Function],
-  "module": "eqBalances",
-  "type": "Substrate",
-}
-`;
-
-exports[`eqBalances transferXcm to parachain should get correct arguments 1`] = `
-[
-  [
-    "USDT",
-    99000000000n,
-  ],
-  [
-    "RMRK",
-    5000000000n,
-  ],
-  {
-    "interior": {
-      "X2": [
-        {
-          "Parachain": 2032,
-        },
-        {
-          "AccountId32": {
-            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
-            "network": null,
-          },
-        },
-      ],
-    },
-    "parents": 1,
-  },
-]
-`;
-
-exports[`eqBalances xcmTransfer should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "xcmTransfer",
-  "getArgs": [Function],
-  "module": "eqBalances",
-  "type": "Substrate",
-}
-`;
-
-exports[`eqBalances xcmTransfer should get correct arguments 1`] = `
-[
-  "USDT",
-  99000000000n,
-  {
-    "interior": {
-      "X2": [
-        {
-          "Parachain": 1000,
-        },
-        {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      ],
-    },
-    "parents": 1,
-  },
-  "ThisAccWillPay",
-]
-`;
-
-exports[`eqBalances xcmTransfer to parachain should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "xcmTransfer",
-  "getArgs": [Function],
-  "module": "eqBalances",
-  "type": "Substrate",
-}
-`;
-
-exports[`eqBalances xcmTransfer to parachain should get correct arguments 1`] = `
 [
   "USDT",
   99000000000n,

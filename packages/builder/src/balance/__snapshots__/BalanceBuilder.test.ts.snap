@@ -3,13 +3,12 @@
 exports[`balanceBuilder > assets > account > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ASSET>",
-    "<ACCOUNT>",
+    "USDT",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "assets",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -30,19 +29,18 @@ SubstrateQueryConfig {
           },
           {
             "AccountKey20": {
-              "key": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
             },
           },
         ],
       },
       "parents": 2,
     },
-    "<ACCOUNT>",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "foreignAssets",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -51,12 +49,11 @@ exports[`balanceBuilder > foreignAssets > account > should transform correctly 1
 exports[`balanceBuilder > system > account > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ACCOUNT>",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "system",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -69,12 +66,11 @@ exports[`balanceBuilder > system > account > should transform correctly with res
 exports[`balanceBuilder > system > accountEquilibrium > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ACCOUNT>",
+    "<ADDRESS>",
   ],
   "func": "account",
   "module": "system",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -87,78 +83,13 @@ exports[`balanceBuilder > system > accountEquilibrium > should transform v0 corr
 exports[`balanceBuilder > tokens > accounts > should be correct config 1`] = `
 SubstrateQueryConfig {
   "args": [
-    "<ACCOUNT>",
-    "<ASSET>",
+    "<ADDRESS>",
+    "USDT",
   ],
   "func": "accounts",
   "module": "tokens",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
 exports[`balanceBuilder > tokens > accounts > should transform correctly 1`] = `900n`;
-
-exports[`balanceBuilder assets account should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ASSET>",
-    "<ACCOUNT>",
-  ],
-  "func": "account",
-  "module": "assets",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`balanceBuilder assets account should transform correctly 1`] = `999n`;
-
-exports[`balanceBuilder system account should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ACCOUNT>",
-  ],
-  "func": "account",
-  "module": "system",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`balanceBuilder system account should transform correctly with frozen balance 1`] = `900n`;
-
-exports[`balanceBuilder system account should transform correctly with miscFrozen balance 1`] = `900n`;
-
-exports[`balanceBuilder system accountEquilibrium should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ACCOUNT>",
-  ],
-  "func": "account",
-  "module": "system",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`balanceBuilder system accountEquilibrium should return 0 if response empty 1`] = `0n`;
-
-exports[`balanceBuilder system accountEquilibrium should transform correctly if not v0 1`] = `62730076931n`;
-
-exports[`balanceBuilder system accountEquilibrium should transform v0 correctly 1`] = `2954852364913n`;
-
-exports[`balanceBuilder tokens accounts should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ACCOUNT>",
-    "<ASSET>",
-  ],
-  "func": "accounts",
-  "module": "tokens",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`balanceBuilder tokens accounts should transform correctly 1`] = `900n`;

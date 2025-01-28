@@ -1,13 +1,12 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { defineConfig } from 'tsup';
+import type { Options } from 'tsup';
 
-// eslint-disable-next-line import/no-default-export
-export default defineConfig(({ watch }) => ({
+export const baseConfig: Options = {
   entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
+  format: 'esm',
   outDir: 'build',
-  target: 'node16',
-  minify: !watch,
+  target: 'es2022',
+  minify: false,
+  splitting: false,
   sourcemap: true,
   clean: true,
   dts: true,
@@ -18,4 +17,4 @@ export default defineConfig(({ watch }) => ({
       js: `.${ext}`,
     };
   },
-}));
+};

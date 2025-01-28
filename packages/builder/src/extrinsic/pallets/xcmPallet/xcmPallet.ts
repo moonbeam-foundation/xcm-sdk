@@ -1,11 +1,14 @@
-/* eslint-disable sort-keys */
+import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import {
-  ExtrinsicConfigBuilder,
-  Parents,
+  type ExtrinsicConfigBuilder,
+  type Parents,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicAccount } from '../../ExtrinsicBuilder.utils';
-import { ExtrinsicConfig } from '../../ExtrinsicConfig';
+import {
+  getExtrinsicAccount,
+  getExtrinsicArgumentVersion,
+  normalizeConcrete,
+} from '../../ExtrinsicBuilder.utils';
 import { getPolkadotXcmExtrinsicArgs } from '../polkadotXcm/polkadotXcm.util';
 
 const pallet = 'xcmPallet';
@@ -21,25 +24,25 @@ export function xcmPallet() {
             new ExtrinsicConfig({
               module: pallet,
               func,
-              getArgs: (extrinsicFunction) =>
-                getPolkadotXcmExtrinsicArgs({
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+                return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   parents,
                   func: extrinsicFunction,
                   asset: [
                     {
-                      id: {
-                        Concrete: {
-                          parents: 0,
-                          interior: 'Here',
-                        },
-                      },
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: 'Here',
+                      }),
                       fun: {
-                        Fungible: params.amount,
+                        Fungible: params.asset.amount,
                       },
                     },
                   ],
-                }),
+                });
+              },
             }),
         }),
       };
@@ -76,7 +79,7 @@ export function xcmPallet() {
                           interior: 'Here',
                         },
                         fun: {
-                          Fungible: params.amount,
+                          Fungible: params.asset.amount,
                         },
                       },
                     ],
@@ -99,7 +102,9 @@ export function xcmPallet() {
                           beneficiary: {
                             parents: 0,
                             interior: {
-                              X1: [getExtrinsicAccount(params.address)],
+                              X1: [
+                                getExtrinsicAccount(params.destinationAddress),
+                              ],
                             },
                           },
                         },

@@ -1,11 +1,8 @@
-/* eslint-disable sort-keys */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
-import { Option } from '@polkadot/types';
-import { PalletAssetsAssetDetails } from '@polkadot/types/lookup';
+import type { Option } from '@polkadot/types';
+import type { PalletAssetsAssetDetails } from '@polkadot/types/lookup';
 import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
-import { AssetMinConfigBuilder } from './AssetMinBuilder.interfaces';
+import type { AssetMinConfigBuilder } from './AssetMinBuilder.interfaces';
 
 export function AssetMinBuilder() {
   return {
@@ -24,7 +21,7 @@ function assetRegistry() {
           module: pallet,
           func: 'assetMetadatas',
           args: [asset],
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
           transform: async (response: Option<any>): Promise<bigint> =>
             response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),
@@ -35,7 +32,7 @@ function assetRegistry() {
           module: pallet,
           func: 'currencyMetadatas',
           args: [asset],
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
           transform: async (response: Option<any>): Promise<bigint> =>
             response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),
@@ -63,7 +60,12 @@ function assets() {
 function foreignAssets() {
   return {
     asset: (): AssetMinConfigBuilder => ({
-      build: ({ asset }) => {
+      build: ({ address }) => {
+        if (!address) {
+          throw new Error(
+            'Asset address is missing for foreignAssets.asset min calculation',
+          );
+        }
         const multilocation = {
           parents: 2,
           interior: {
@@ -75,7 +77,7 @@ function foreignAssets() {
                   },
                 },
               },
-              getExtrinsicAccount(asset as string),
+              getExtrinsicAccount(address),
             ],
           },
         };

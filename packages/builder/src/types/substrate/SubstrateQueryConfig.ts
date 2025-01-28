@@ -1,29 +1,27 @@
-import { SetOptional } from '@moonbeam-network/xcm-types';
-import { CallType } from '../../builder.interfaces';
-import { BaseConfig, BaseConfigConstructorParams } from '../BaseConfig';
+import { BaseConfig, type BaseConfigConstructorParams } from '../BaseConfig';
 
 export interface QueryConfigConstructorParams
-  extends SetOptional<BaseConfigConstructorParams, 'type'> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  args?: any[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extends BaseConfigConstructorParams {
+  args?: unknown[];
+  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
   transform: (data: any) => Promise<bigint>;
 }
 
 export class SubstrateQueryConfig extends BaseConfig {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly args: any[];
+  readonly args: unknown[];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly transform: (data: any) => Promise<bigint>;
+  readonly transform: (data: unknown) => Promise<bigint>;
+
+  static is(obj: unknown): obj is SubstrateQueryConfig {
+    return obj instanceof SubstrateQueryConfig;
+  }
 
   constructor({
     args = [],
     transform,
-    type = CallType.Substrate,
     ...other
   }: QueryConfigConstructorParams) {
-    super({ ...other, type });
+    super({ ...other });
 
     this.args = args;
     this.transform = transform;

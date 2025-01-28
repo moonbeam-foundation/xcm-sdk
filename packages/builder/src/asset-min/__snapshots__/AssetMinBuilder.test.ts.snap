@@ -8,7 +8,6 @@ SubstrateQueryConfig {
   "func": "assetMetadatas",
   "module": "assetRegistry",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -22,7 +21,6 @@ SubstrateQueryConfig {
   "func": "currencyMetadatas",
   "module": "assetRegistry",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -36,7 +34,6 @@ SubstrateQueryConfig {
   "func": "asset",
   "module": "assets",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
@@ -68,50 +65,7 @@ SubstrateQueryConfig {
   "func": "asset",
   "module": "foreignAssets",
   "transform": [Function],
-  "type": "Substrate",
 }
 `;
 
 exports[`assetMinBuilder > foreignAssets > asset > should transform correctly 1`] = `999n`;
-
-exports[`assetMinBuilder assetRegistry assetMetadatas should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ASSET>",
-  ],
-  "func": "assetMetadatas",
-  "module": "assetRegistry",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`assetMinBuilder assetRegistry assetMetadatas should transform correctly 1`] = `999n`;
-
-exports[`assetMinBuilder assetRegistry currencyMetadatas should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ASSET>",
-  ],
-  "func": "currencyMetadatas",
-  "module": "assetRegistry",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`assetMinBuilder assetRegistry currencyMetadatas should transform correctly 1`] = `999n`;
-
-exports[`assetMinBuilder assets asset should be correct config 1`] = `
-SubstrateQueryConfig {
-  "args": [
-    "<ASSET>",
-  ],
-  "func": "asset",
-  "module": "assets",
-  "transform": [Function],
-  "type": "Substrate",
-}
-`;
-
-exports[`assetMinBuilder assets asset should transform correctly 1`] = `999n`;

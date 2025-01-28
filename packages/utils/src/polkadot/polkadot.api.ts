@@ -12,7 +12,6 @@ export enum MRLTypes {
 
 const cache = new LRUCache<string, Promise<ApiPromise>>({
   max: 20,
-  // eslint-disable-next-line sort-keys
   dispose: async (promise: Promise<ApiPromise>) => {
     const api = await promise;
 

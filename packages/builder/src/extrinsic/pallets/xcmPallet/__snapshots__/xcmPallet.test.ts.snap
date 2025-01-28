@@ -5,64 +5,10 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "xcmPallet",
-  "type": "Substrate",
 }
 `;
 
 exports[`xcmPallet > limitedReserveTransferAssets > should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
-      },
-      "parents": 1,
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V1": [
-      {
-        "fun": {
-          "Fungible": 99000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": "Here",
-            "parents": 0,
-          },
-        },
-      },
-    ],
-  },
-  0,
-  "Unlimited",
-]
-`;
-
-exports[`xcmPallet limitedReserveTransferAssets should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "limitedReserveTransferAssets",
-  "getArgs": [Function],
-  "module": "xcmPallet",
-  "type": "Substrate",
-}
-`;
-
-exports[`xcmPallet limitedReserveTransferAssets should get correct arguments 1`] = `
 [
   {
     "V1": {

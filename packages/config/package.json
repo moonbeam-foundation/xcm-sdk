@@ -4,57 +4,42 @@
   "description": "All necessary configuration to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
   "scripts": {
     "build": "tsup",
-    "dev": "npm run build -- --watch",
-    "link": "npm ln",
-    "lint": "eslint ./src --ext .js,.ts",
-    "lint:fix": "npm run lint -- --fix",
+    "dev": "tsup --watch",
+    "link": "pnpm ln --global",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "test:update": "vitest -u",
-    "prepack": "prettier --write build/index.d.ts"
+    "test:update": "vitest -u"
   },
   "repository": {
     "directory": "packages/config",
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "xcm"
-  ],
+  "keywords": ["moonbeam", "moonriver", "xcm"],
   "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
-    ".": {
-      "import": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.mjs"
-      },
-      "require": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.cjs"
-      }
-    }
+    "import": "./build/index.mjs",
+    "types": "./build/index.d.ts",
+    "default": "./build/index.mjs"
   },
   "types": "./build/index.d.ts",
-  "main": "./build/index.cjs",
+  "main": "./build/index.mjs",
   "dependencies": {
-    "@moonbeam-network/xcm-builder": "2.6.2",
-    "@moonbeam-network/xcm-types": "2.5.5"
+    "@moonbeam-network/xcm-builder": "workspace:*",
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@moonbeam-network/xcm-utils": "workspace:*"
   },
   "peerDependencies": {
-    "@polkadot/types": "^12.4.2",
-    "@polkadot/util": "^13.1.1",
-    "@polkadot/util-crypto": "^13.1.1"
+    "@polkadot/types": "14.3.1",
+    "@polkadot/util": "13.2.3",
+    "@polkadot/util-crypto": "13.2.3"
   }
 }

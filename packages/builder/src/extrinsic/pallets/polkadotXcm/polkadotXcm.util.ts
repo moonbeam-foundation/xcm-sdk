@@ -1,16 +1,14 @@
-/* eslint-disable sort-keys */
-import { SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import {
-  ExtrinsicConfigBuilderPrams,
-  Parents,
-} from '../../ExtrinsicBuilder.interfaces';
+import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
+import type { BuilderParams } from '../../../builder.interfaces';
+import type { Parents } from '../../ExtrinsicBuilder.interfaces';
 import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
+  normalizeX1,
 } from '../../ExtrinsicBuilder.utils';
 
-export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface GetExtrinsicParams extends BuilderParams {
+  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
   asset: any;
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
@@ -19,34 +17,32 @@ export interface GetExtrinsicParams extends ExtrinsicConfigBuilderPrams {
 
 export function getPolkadotXcmExtrinsicArgs({
   asset,
-  address,
+  destinationAddress,
   destination,
   func,
   parents = 1,
   feeIndex = 0,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}: GetExtrinsicParams): any[] {
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+}: GetExtrinsicParams) {
   const version = getExtrinsicArgumentVersion(func);
 
   return [
     {
-      [version]: {
+      [version]: normalizeX1(version, {
         parents,
         interior: {
           X1: {
             Parachain: destination.parachainId,
           },
         },
-      },
+      }),
     },
     {
-      [version]: {
+      [version]: normalizeX1(version, {
         parents: 0,
         interior: {
-          X1: getExtrinsicAccount(address),
+          X1: getExtrinsicAccount(destinationAddress),
         },
-      },
+      }),
     },
     {
       [version]: asset,
@@ -58,10 +54,10 @@ export function getPolkadotXcmExtrinsicArgs({
 
 export function shouldFeeAssetPrecedeAsset({
   asset,
-  feeAsset,
-}: ExtrinsicConfigBuilderPrams): boolean {
-  const assetIdNumber = Number(asset);
-  const feeAssetIdNumber = Number(feeAsset);
+  fee,
+}: BuilderParams): boolean {
+  const assetIdNumber = Number(asset.getAssetId());
+  const feeAssetIdNumber = Number(fee.getAssetId());
 
   if (Number.isNaN(assetIdNumber) || Number.isNaN(feeAssetIdNumber)) {
     return false;

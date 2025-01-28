@@ -1,107 +1,84 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
-import { EvmSigner, Sdk, TransferData } from '@moonbeam-network/xcm-sdk';
+import { Sdk, type TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { ethers } from 'ethers';
-import { setTimeout } from 'node:timers/promises';
-import { createWalletClient, http } from 'viem';
+import { http, type Address, createWalletClient } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { moonbeam as moonbeamViem } from 'viem/chains';
+
+const { EVM_PRIVATE_KEY, POLKADOT_PRIVATE_KEY } = process.env;
+
+if (!EVM_PRIVATE_KEY || !POLKADOT_PRIVATE_KEY) {
+  throw new Error(
+    'Env variables EVM_PRIVATE_KEY and POLKADOT_PRIVATE_KEY must be defined',
+  );
+}
 // Moonbeam Signer ===========================================================
 
-const moonbeamPrivateKey = '0x...';
-const provider = new ethers.WebSocketProvider(moonbeam.ws[0], {
-  chainId: moonbeam.id,
-  name: moonbeam.name,
-});
-
-// Using ethers
-// *****WARNING: IN THE UPCOMING VERSION OF THIS SDK, ethers SUPPORT WILL BE REMOVED, PLEASE SWITCH TO viem WHEN POSSIBLE
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ethersSigner = new ethers.Wallet(moonbeamPrivateKey, provider);
-
-// Using viem
-const account = privateKeyToAccount(moonbeamPrivateKey);
-const viemSigner = createWalletClient({
+const account = privateKeyToAccount(EVM_PRIVATE_KEY as Address);
+const walletClient = createWalletClient({
   account,
-  chain: moonbeamViem,
-  transport: http('https://rpc.api.moonbeam.network'),
+  chain: moonbeam.getViemChain(),
+  transport: http(),
 });
 
-// ethers
-// const evmSigner: EvmSigner = ethersSigner
-// const address = ethersSigner.address
-// viem
-const evmSigner: EvmSigner = viemSigner;
-const { address } = account;
+console.log(`\nMoonbeam address: ${account.address}`);
 
 // Polkadot Signer ===========================================================
-
-const polkadotPrivateKey = '';
 
 await cryptoWaitReady();
 const keyring = new Keyring({
   ss58Format: polkadot.ss58Format,
   type: 'sr25519',
 });
-const pair = keyring.createFromUri(polkadotPrivateKey);
+const pair = keyring.createFromUri(POLKADOT_PRIVATE_KEY);
+
+console.log(`Substrate address: ${pair.address}`);
 
 // ===========================================================================
 
 export function logBalances(data: TransferData): void {
   console.log(
-    `Balance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${
-      data.source.balance.symbol
-    }`,
+    `Balance on ${data.source.chain.name} ${data.source.balance.toDecimal()} ${data.source.balance.getSymbol()}`,
   );
   console.log(
     `Balance on ${
       data.destination.chain.name
-    } ${data.destination.balance.toDecimal()} ${
-      data.destination.balance.symbol
-    }`,
+    } ${data.destination.balance.toDecimal()} ${data.destination.balance.getSymbol()}`,
   );
 }
 
 export function logTxDetails(data: TransferData): void {
   console.log(
-    `\nYou can send min: ${data.min.toDecimal()} ${
-      data.min.symbol
-    } and max: ${data.max.toDecimal()} ${data.max.symbol} from ${
+    `\nYou can send min: ${data.min.toDecimal()} ${data.min.getSymbol()} and max: ${data.max.toDecimal()} ${data.max.getSymbol()} from ${
       data.source.chain.name
     } to ${
       data.destination.chain.name
-    }. You will pay ${data.source.fee.toDecimal()} ${
-      data.source.fee.symbol
-    } fee on ${
+    }. You will pay ${data.source.fee.toDecimal()} ${data.source.fee.getSymbol()} fee on ${
       data.source.chain.name
-    } and ${data.destination.fee.toDecimal()} ${
-      data.destination.fee.symbol
-    } fee on ${data.destination.chain.name}.`,
+    } and ${data.destination.fee.toDecimal()} ${data.destination.fee.getSymbol()} fee on ${data.destination.chain.name}.`,
   );
 }
 
 export async function fromPolkadot() {
   console.log('\nTransfer from Polkadot to Moonbeam\n');
 
-  const data = await Sdk().getTransferData({
-    destinationAddress: address,
-    destinationKeyOrChain: moonbeam,
-    keyOrAsset: dot,
-    polkadotSigner: pair,
-    sourceAddress: pair.address,
-    sourceKeyOrChain: polkadot,
-  });
+  const data = await Sdk()
+    .setAsset(dot)
+    .setSource(polkadot)
+    .setDestination(moonbeam)
+    .setAddresses({
+      sourceAddress: pair.address,
+      destinationAddress: account.address,
+    });
 
   logBalances(data);
   logTxDetails(data);
 
-  const amount = +data.min.toDecimal() * 2;
+  const amount = +data.min.toDecimal() * 1.5;
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount);
+  const hash = await data.transfer(amount, { polkadotSigner: pair });
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }
@@ -110,22 +87,24 @@ export async function fromMoonbeam() {
   console.log('\nTransfer from Moonbeam to Polkadot\n');
 
   const data = await Sdk()
-    .assets()
-    .asset(dot)
-    .source(moonbeam)
-    .destination(polkadot)
-    .accounts(address, pair.address, {
-      evmSigner,
+    .setAsset(dot)
+    .setSource(moonbeam)
+    .setDestination(polkadot)
+    .setAddresses({
+      sourceAddress: account.address,
+      destinationAddress: pair.address,
     });
 
   logBalances(data);
   logTxDetails(data);
 
-  const amount = +data.min.toDecimal() * 2;
+  const amount = +data.min.toDecimal() * 1.5;
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount);
+  const hash = await data.transfer(amount, {
+    evmSigner: walletClient,
+  });
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }
@@ -135,12 +114,12 @@ async function main() {
   console.warn = () => null;
   console.clear();
 
-  console.log(`\nMoonbeam address: ${address}.`);
+  console.log(`\nMoonbeam address: ${account.address}.`);
   console.log(`Polkadot address: ${pair.address}.`);
 
   await fromPolkadot();
   console.log('\nWaiting 30 seconds...');
-  await setTimeout(30000);
+  await new Promise((resolve) => setTimeout(resolve, 30000));
   await fromMoonbeam();
 }
 

@@ -1,10 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
 import {
   buildParachainParamsMock,
   buildParamsMock,
-  buildParamsMockEth,
   buildParamsSameAssetMock,
 } from '../../../../fixtures';
 import { polkadotXcm } from './polkadotXcm';
@@ -121,12 +119,46 @@ describe('polkadotXcm', () => {
     });
   });
 
+  describe('transferAssets', () => {
+    describe('here', () => {
+      const extrinsic = polkadotXcm()
+        .transferAssets()
+        .here()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('transferAssets', () => {
+    describe('X2AndFeeHere', () => {
+      const extrinsic = polkadotXcm()
+        .transferAssets()
+        .X2AndFeeHere()
+        .build(buildParachainParamsMock);
+
+      it('should be correct config', () => {
+        expect(extrinsic).toMatchSnapshot();
+      });
+
+      it('should get correct arguments', () => {
+        expect(extrinsic.getArgs()).toMatchSnapshot();
+      });
+    });
+  });
+
   describe('transferAssetsUsingTypeAndThen', () => {
-    describe('x2', () => {
+    describe('globalConsensusEthereum', () => {
       const extrinsic = polkadotXcm()
         .transferAssetsUsingTypeAndThen()
-        .globalConcensusEthereum()
-        .build(buildParamsMockEth);
+        .globalConsensusEthereum()
+        .build(buildParachainParamsMock);
 
       it('should be correct config', () => {
         expect(extrinsic).toMatchSnapshot();

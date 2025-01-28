@@ -1,61 +1,76 @@
-/* eslint-disable sort-keys */
+import { ConfigService, xcmRoutesMap } from '@moonbeam-network/xcm-config';
 import {
-  ConfigBuilder,
-  ConfigService,
-  IConfigService,
-} from '@moonbeam-network/xcm-config';
-import {
-  AnyChain,
-  Asset,
-  AssetAmount,
-  Ecosystem,
+  type AnyAsset,
+  type AnyChain,
+  type AnyParachain,
+  type AssetAmount,
+  type Ecosystem,
+  EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
-import { getTransferData as gtd } from './getTransferData/getTransferData';
-import { PolkadotService } from './polkadot';
-import { Signers, TransferData } from './sdk.interfaces';
+import { getTransferData } from './getTransferData/getTransferData';
+import type { TransferData } from './sdk.interfaces';
 
-export interface SdkOptions extends Partial<Signers> {
-  configService?: IConfigService;
+const DEFAULT_SERVICE = new ConfigService({ routes: xcmRoutesMap });
+
+export interface SdkOptions {
+  configService?: ConfigService;
+  ecosystem?: Ecosystem;
 }
 
-export function Sdk(options?: SdkOptions) {
-  const configService = options?.configService ?? new ConfigService();
+export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
+  const service = configService ?? DEFAULT_SERVICE;
+  const assets = service.getEcosystemAssets(ecosystem);
 
   return {
-    assets(ecosystem?: Ecosystem) {
-      const { assets, asset } = ConfigBuilder(configService).assets(ecosystem);
+    assets,
+    setAsset(asset: string | AnyAsset) {
+      const sources = service.getSourceChains({ asset, ecosystem });
 
       return {
-        assets,
-        asset(keyOrAsset: string | Asset) {
-          const { sourceChains, source } = asset(keyOrAsset);
+        sources,
+        setSource(source: string | AnyChain) {
+          const destinations = service.getDestinationChains({
+            asset,
+            source,
+          });
 
           return {
-            sourceChains,
-            source(keyOrChain: string | AnyChain) {
-              const { destinationChains, destination } = source(keyOrChain);
+            destinations,
+            setDestination(destination: string | AnyChain) {
+              const route = service.getAssetRoute({
+                asset,
+                source,
+                destination,
+              });
 
               return {
-                destinationChains,
-                destination(destKeyOrChain: string | AnyChain) {
-                  return {
-                    async accounts(
-                      sourceAddress: string,
-                      destinationAddress: string,
-                      signers?: Partial<Signers>,
-                    ): Promise<TransferData> {
-                      return gtd({
-                        ...options,
-                        configService,
-                        destinationAddress,
-                        evmSigner: signers?.evmSigner ?? signers?.ethersSigner,
-                        sourceAddress,
-                        transferConfig: destination(destKeyOrChain).build(),
-                        polkadotSigner: signers?.polkadotSigner,
-                      });
-                    },
-                  };
+                setAddresses({
+                  sourceAddress,
+                  destinationAddress,
+                }: {
+                  sourceAddress: string;
+                  destinationAddress: string;
+                }): Promise<TransferData> {
+                  const sourceChain = service.getChain(source);
+
+                  if (!EvmParachain.isAnyParachain(sourceChain)) {
+                    throw new Error(
+                      'Source chain should be a Parachain or EvmParachain',
+                    );
+                  }
+
+                  if (!EvmParachain.isAnyParachain(route.destination.chain)) {
+                    throw new Error(
+                      'Destination chain should be a Parachain or EvmParachain',
+                    );
+                  }
+
+                  return getTransferData({
+                    route,
+                    sourceAddress,
+                    destinationAddress,
+                  });
                 },
               };
             },
@@ -63,57 +78,20 @@ export function Sdk(options?: SdkOptions) {
         },
       };
     },
-    async getTransferData({
-      destinationAddress,
-      destinationKeyOrChain,
-      ethersSigner,
-      evmSigner,
-      keyOrAsset,
-      polkadotSigner,
-      sourceAddress,
-      sourceKeyOrChain,
-    }: SdkTransferParams): Promise<TransferData> {
-      return gtd({
-        configService,
-        destinationAddress,
-        evmSigner: evmSigner ?? ethersSigner,
-        polkadotSigner,
-        sourceAddress,
-        transferConfig: ConfigBuilder(configService)
-          .assets()
-          .asset(keyOrAsset)
-          .source(sourceKeyOrChain)
-          .destination(destinationKeyOrChain)
-          .build(),
-      });
-    },
   };
 }
 
 export async function getParachainBalances(
-  chain: AnyChain,
+  chain: AnyParachain,
   address: string,
+  service: ConfigService = DEFAULT_SERVICE,
 ): Promise<AssetAmount[]> {
-  const configService = new ConfigService();
-  const chainsConfig = configService.getChainConfig(chain);
-  const assets = chainsConfig.getAssetsConfigs();
-
-  const polkadot = await PolkadotService.create(chain, configService);
-
+  const routes = service.getChainRoutes(chain).getRoutes();
   const balances = await getAssetsBalances({
     chain,
-    assets,
+    routes,
     address,
-    polkadot,
   });
 
   return balances;
-}
-
-export interface SdkTransferParams extends Partial<Signers> {
-  destinationAddress: string;
-  destinationKeyOrChain: string | AnyChain;
-  keyOrAsset: string | Asset;
-  sourceAddress: string;
-  sourceKeyOrChain: string | AnyChain;
 }

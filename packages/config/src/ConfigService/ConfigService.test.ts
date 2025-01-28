@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -7,35 +6,42 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import {
   Asset,
+  ChainAsset,
   Ecosystem,
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { assetsList, dev, glmr, tt1, unit } from '../assets';
+import { alan, assetsList, dev, dot, glmr, tt1, unit } from '../assets';
 import {
+  alphanetRelay,
   hydration,
   moonbaseAlpha,
+  moonbaseBeta,
   moonbeam,
+  moonriver,
   pendulumAlphanet,
+  turing,
 } from '../chains';
 import { ConfigService } from './ConfigService';
 
-import { AssetConfig } from '../types/AssetConfig';
-import { ChainConfig } from '../types/ChainConfig';
+import { ChainRoutes } from '../types/ChainRoutes';
+import { xcmRoutesMap } from '../xcm-configs';
 
 const TEST_CHAIN = new Parachain({
+  assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   ecosystem: Ecosystem.Polkadot,
   genesisHash: '',
   isTestChain: true,
   key: 'test',
   name: 'test',
+  nativeAsset: dot,
   parachainId: 9999,
   ss58Format: 1999,
   ws: [''],
 });
 
 describe('config service', () => {
-  const configService = new ConfigService();
+  const configService = new ConfigService({ routes: xcmRoutesMap });
 
   describe('getEcosystemAssets', () => {
     it('should return all assets', () => {
@@ -102,17 +108,14 @@ describe('config service', () => {
       expect(() =>
         configService.getChain(
           new EvmParachain({
+            assets: [],
             ecosystem: Ecosystem.AlphanetRelay,
             genesisHash: '',
             id: 1287,
             isTestChain: true,
             key: 'test',
             name: 'test',
-            nativeCurrency: {
-              decimals: 18,
-              name: 'TEST',
-              symbol: 'TEST',
-            },
+            nativeAsset: unit,
             parachainId: 1000,
             rpc: '',
             ss58Format: 1287,
@@ -124,15 +127,55 @@ describe('config service', () => {
   });
 
   describe('getSourceChains', () => {
-    it('should get source chains for asset', () => {
-      const chains = configService.getSourceChains(
-        dev,
-        Ecosystem.AlphanetRelay,
-      );
+    it('should get source chains', () => {
+      const chains = configService.getSourceChains({
+        ecosystem: Ecosystem.AlphanetRelay,
+      });
 
       expect(chains).toStrictEqual(
         expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
       );
+    });
+
+    it('should get source chains for asset', () => {
+      const chains = configService.getSourceChains({
+        asset: dev,
+        ecosystem: Ecosystem.AlphanetRelay,
+      });
+
+      expect(chains).toStrictEqual(
+        expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
+      );
+    });
+  });
+
+  describe('getDestinationChains', () => {
+    it('should get destination chains', () => {
+      const chains = configService.getDestinationChains({
+        source: turing,
+      });
+
+      expect(chains).toStrictEqual(expect.arrayContaining([moonriver]));
+    });
+
+    it('should get destination chains for asset', () => {
+      const chains = configService.getDestinationChains({
+        asset: unit,
+        source: moonbaseAlpha,
+      });
+
+      expect(chains).toStrictEqual(expect.arrayContaining([alphanetRelay]));
+    });
+  });
+
+  describe('getRouteAssets', () => {
+    it('should get route assets', () => {
+      const assets = configService.getRouteAssets({
+        source: moonbaseAlpha,
+        destination: moonbaseBeta,
+      });
+
+      expect(assets).toStrictEqual(expect.arrayContaining([dev, alan]));
     });
   });
 
@@ -156,56 +199,35 @@ describe('config service', () => {
     });
   });
 
-  describe('updateChainConfig', () => {
+  describe('updateChainRoute', () => {
     it('should update existing chain config', () => {
-      const assetConfig = new AssetConfig({
-        asset: glmr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        destination: moonbeam,
-        destinationFee: {
-          amount: 0.02,
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
-        extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      });
-
-      const chainConfig = new ChainConfig({
-        assets: [assetConfig],
+      const routes = new ChainRoutes({
         chain: hydration,
+        routes: [
+          {
+            source: {
+              asset: glmr,
+              balance: BalanceBuilder().substrate().tokens().accounts(),
+            },
+            destination: {
+              asset: glmr,
+              chain: moonbeam,
+              balance: BalanceBuilder().substrate().tokens().accounts(),
+              fee: {
+                amount: 0.02,
+                asset: glmr,
+                balance: BalanceBuilder().substrate().tokens().accounts(),
+              },
+            },
+            extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+          },
+        ],
       });
 
-      configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainConfig(hydration);
-      expect(updated.getAssetsConfigs()).toStrictEqual(
-        chainConfig.getAssetsConfigs(),
-      );
-    });
+      configService.updateChainRoute(routes);
 
-    it('should create new chain config', () => {
-      configService.updateChain(TEST_CHAIN);
-
-      const assetConfig = new AssetConfig({
-        asset: glmr,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        destination: moonbeam,
-        destinationFee: {
-          amount: 0.02,
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
-        extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      });
-
-      const chainConfig = new ChainConfig({
-        assets: [assetConfig],
-        chain: TEST_CHAIN,
-      });
-
-      configService.updateChainConfig(chainConfig);
-      const updated = configService.getChainConfig('test');
-      expect(updated.getAssetsConfigs()).toStrictEqual(
-        chainConfig.getAssetsConfigs(),
+      expect(configService.getChainRoutes(hydration).getRoutes()).toStrictEqual(
+        routes.getRoutes(),
       );
     });
   });

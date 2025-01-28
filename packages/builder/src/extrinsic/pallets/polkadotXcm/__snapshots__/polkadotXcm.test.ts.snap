@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -58,7 +57,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -118,7 +116,7 @@ exports[`polkadotXcm > limitedReserveTransferAssets > parachain > should get cor
             "interior": {
               "X2": [
                 {
-                  "PalletInstance": 10,
+                  "PalletInstance": 18,
                 },
                 {
                   "GeneralIndex": "RMRK",
@@ -141,7 +139,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -198,7 +195,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -257,7 +253,7 @@ exports[`polkadotXcm > limitedReserveTransferAssets > x2 > different assets > sh
             "interior": {
               "X2": [
                 {
-                  "PalletInstance": 10,
+                  "PalletInstance": 18,
                 },
                 {
                   "GeneralIndex": "RMRK",
@@ -280,7 +276,6 @@ ExtrinsicConfig {
   "func": "limitedReserveTransferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -342,7 +337,6 @@ ExtrinsicConfig {
   "func": "limitedReserveWithdrawAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -405,7 +399,6 @@ ExtrinsicConfig {
   "func": "limitedReserveWithdrawAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
@@ -462,96 +455,54 @@ exports[`polkadotXcm > limitedReserveWithdrawAssets > x2 > should get correct ar
 ]
 `;
 
-exports[`polkadotXcm > transferAssetsUsingTypeAndThen > x2 > should be correct config 1`] = `
+exports[`polkadotXcm > transferAssets > X2AndFeeHere > should be correct config 1`] = `
 ExtrinsicConfig {
-  "func": "transferAssetsUsingTypeAndThen",
+  "func": "transferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
-exports[`polkadotXcm > transferAssetsUsingTypeAndThen > x2 > should get correct arguments 1`] = `
+exports[`polkadotXcm > transferAssets > X2AndFeeHere > should get correct arguments 1`] = `
 [
   {
-    "V4": {
+    "V1": {
       "interior": {
-        "X1": [
-          {
-            "Parachain": 1000,
-          },
-        ],
+        "X1": {
+          "Parachain": 2032,
+        },
       },
       "parents": 1,
     },
   },
   {
-    "V4": [
-      {
-        "fun": {
-          "fungible": 99000000000n,
-        },
-        "id": {
-          "interior": {
-            "X2": [
-              {
-                "globalConsensus": {
-                  "Ethereum": {
-                    "ChainId": 1,
-                  },
-                },
-              },
-              {
-                "AccountKey20": {
-                  "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-                },
-              },
-            ],
-          },
-          "parents": 2,
-        },
-      },
-    ],
-  },
-  "LocalReserve",
-  {
-    "V4": {
+    "V1": {
       "interior": {
-        "X2": [
-          {
-            "globalConsensus": {
-              "Ethereum": {
-                "ChainId": 1,
-              },
-            },
+        "X1": {
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
           },
-          {
-            "AccountKey20": {
-              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            },
-          },
-        ],
+        },
       },
-      "parents": 2,
+      "parents": 0,
     },
   },
-  "LocalReserve",
   {
-    "V4": [
+    "V1": [
       {
-        "DepositAsset": {
-          "assets": {
-            "Wild": {
-              "AllCounted": 1,
-            },
-          },
-          "beneficiary": {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "Concrete": {
             "interior": {
-              "X1": [
+              "X2": [
                 {
-                  "AccountKey20": {
-                    "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-                  },
+                  "PalletInstance": 10,
+                },
+                {
+                  "GeneralIndex": "USDT",
                 },
               ],
             },
@@ -559,28 +510,39 @@ exports[`polkadotXcm > transferAssetsUsingTypeAndThen > x2 > should get correct 
           },
         },
       },
+      {
+        "fun": {
+          "Fungible": 5000000000n,
+        },
+        "id": {
+          "Concrete": {
+            "interior": "Here",
+            "parents": 1,
+          },
+        },
+      },
     ],
   },
+  1,
   "Unlimited",
 ]
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets here should be correct config 1`] = `
+exports[`polkadotXcm > transferAssets > here > should be correct config 1`] = `
 ExtrinsicConfig {
-  "func": "limitedReserveTransferAssets",
+  "func": "transferAssets",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets here should get correct arguments 1`] = `
+exports[`polkadotXcm > transferAssets > here > should get correct arguments 1`] = `
 [
   {
     "V1": {
       "interior": {
         "X1": {
-          "Parachain": 1000,
+          "Parachain": 2032,
         },
       },
       "parents": 1,
@@ -590,8 +552,9 @@ exports[`polkadotXcm limitedReserveTransferAssets here should get correct argume
     "V1": {
       "interior": {
         "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+          "AccountId32": {
+            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+            "network": null,
           },
         },
       },
@@ -607,7 +570,7 @@ exports[`polkadotXcm limitedReserveTransferAssets here should get correct argume
         "id": {
           "Concrete": {
             "interior": "Here",
-            "parents": 0,
+            "parents": 1,
           },
         },
       },
@@ -618,133 +581,99 @@ exports[`polkadotXcm limitedReserveTransferAssets here should get correct argume
 ]
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets parachain should be correct config 1`] = `
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen > globalConsensusEthereum > should be correct config 1`] = `
 ExtrinsicConfig {
-  "func": "limitedReserveTransferAssets",
+  "func": "transferAssetsUsingTypeAndThen",
   "getArgs": [Function],
   "module": "polkadotXcm",
-  "type": "Substrate",
 }
 `;
 
-exports[`polkadotXcm limitedReserveTransferAssets parachain should get correct arguments 1`] = `
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen > globalConsensusEthereum > should get correct arguments 1`] = `
 [
   {
     "V1": {
       "interior": {
-        "X1": {
-          "Parachain": 2032,
-        },
+        "X1": [
+          {
+            "Parachain": 2032,
+          },
+        ],
       },
       "parents": 1,
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountId32": {
-            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
-            "network": null,
-          },
-        },
-      },
-      "parents": 0,
     },
   },
   {
     "V1": [
       {
         "fun": {
-          "Fungible": 99000000000n,
+          "fungible": 99000000000n,
         },
         "id": {
           "Concrete": {
             "interior": {
               "X2": [
                 {
-                  "PalletInstance": 10,
+                  "globalConsensus": {
+                    "Ethereum": {
+                      "ChainId": 1,
+                    },
+                  },
                 },
                 {
-                  "GeneralIndex": "USDT",
+                  "AccountKey20": {
+                    "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                  },
                 },
               ],
             },
-            "parents": 0,
-          },
-        },
-      },
-      {
-        "fun": {
-          "Fungible": 5000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": {
-              "X2": [
-                {
-                  "PalletInstance": 10,
-                },
-                {
-                  "GeneralIndex": "RMRK",
-                },
-              ],
-            },
-            "parents": 0,
+            "parents": 2,
           },
         },
       },
     ],
   },
-  1,
-  "Unlimited",
-]
-`;
-
-exports[`polkadotXcm limitedReserveTransferAssets x1 should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "limitedReserveTransferAssets",
-  "getArgs": [Function],
-  "module": "polkadotXcm",
-  "type": "Substrate",
-}
-`;
-
-exports[`polkadotXcm limitedReserveTransferAssets x1 should get correct arguments 1`] = `
-[
+  "LocalReserve",
   {
     "V1": {
-      "interior": {
-        "X1": {
-          "Parachain": 1000,
+      "Concrete": {
+        "interior": {
+          "X2": [
+            {
+              "globalConsensus": {
+                "Ethereum": {
+                  "ChainId": 1,
+                },
+              },
+            },
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+              },
+            },
+          ],
         },
+        "parents": 2,
       },
-      "parents": 1,
     },
   },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
+  "LocalReserve",
   {
     "V1": [
       {
-        "fun": {
-          "Fungible": 99000000000n,
-        },
-        "id": {
-          "Concrete": {
+        "DepositAsset": {
+          "assets": {
+            "Wild": {
+              "AllCounted": 1,
+            },
+          },
+          "beneficiary": {
             "interior": {
               "X1": {
-                "PalletInstance": 10,
+                "AccountId32": {
+                  "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
+                  "network": null,
+                },
               },
             },
             "parents": 0,
@@ -753,276 +682,6 @@ exports[`polkadotXcm limitedReserveTransferAssets x1 should get correct argument
       },
     ],
   },
-  0,
-  "Unlimited",
-]
-`;
-
-exports[`polkadotXcm limitedReserveTransferAssets x2 different assets should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "limitedReserveTransferAssets",
-  "getArgs": [Function],
-  "module": "polkadotXcm",
-  "type": "Substrate",
-}
-`;
-
-exports[`polkadotXcm limitedReserveTransferAssets x2 different assets should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
-      },
-      "parents": 1,
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V1": [
-      {
-        "fun": {
-          "Fungible": 99000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": {
-              "X2": [
-                {
-                  "PalletInstance": 10,
-                },
-                {
-                  "GeneralIndex": "USDT",
-                },
-              ],
-            },
-            "parents": 0,
-          },
-        },
-      },
-      {
-        "fun": {
-          "Fungible": 5000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": {
-              "X2": [
-                {
-                  "PalletInstance": 10,
-                },
-                {
-                  "GeneralIndex": "RMRK",
-                },
-              ],
-            },
-            "parents": 0,
-          },
-        },
-      },
-    ],
-  },
-  1,
-  "Unlimited",
-]
-`;
-
-exports[`polkadotXcm limitedReserveTransferAssets x2 the same asset should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "limitedReserveTransferAssets",
-  "getArgs": [Function],
-  "module": "polkadotXcm",
-  "type": "Substrate",
-}
-`;
-
-exports[`polkadotXcm limitedReserveTransferAssets x2 the same asset should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
-      },
-      "parents": 1,
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V1": [
-      {
-        "fun": {
-          "Fungible": 99000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": {
-              "X2": [
-                {
-                  "PalletInstance": 10,
-                },
-                {
-                  "GeneralIndex": "USDT",
-                },
-              ],
-            },
-            "parents": 0,
-          },
-        },
-      },
-    ],
-  },
-  0,
-  "Unlimited",
-]
-`;
-
-exports[`polkadotXcm limitedReserveWithdrawAssets parachain should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "limitedReserveWithdrawAssets",
-  "getArgs": [Function],
-  "module": "polkadotXcm",
-  "type": "Substrate",
-}
-`;
-
-exports[`polkadotXcm limitedReserveWithdrawAssets parachain should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "Parachain": 2032,
-        },
-      },
-      "parents": 1,
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountId32": {
-            "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
-            "network": null,
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V1": [
-      {
-        "fun": {
-          "Fungible": 99000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": {
-              "X2": [
-                {
-                  "Parachain": 2032,
-                },
-                {
-                  "PalletInstance": 10,
-                },
-              ],
-            },
-            "parents": 1,
-          },
-        },
-      },
-    ],
-  },
-  0,
-  "Unlimited",
-]
-`;
-
-exports[`polkadotXcm limitedReserveWithdrawAssets x2 should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "limitedReserveWithdrawAssets",
-  "getArgs": [Function],
-  "module": "polkadotXcm",
-  "type": "Substrate",
-}
-`;
-
-exports[`polkadotXcm limitedReserveWithdrawAssets x2 should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
-      },
-      "parents": 1,
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X1": {
-          "AccountKey20": {
-            "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-          },
-        },
-      },
-      "parents": 0,
-    },
-  },
-  {
-    "V1": [
-      {
-        "fun": {
-          "Fungible": 99000000000n,
-        },
-        "id": {
-          "Concrete": {
-            "interior": {
-              "X2": [
-                {
-                  "Parachain": 1000,
-                },
-                {
-                  "PalletInstance": 10,
-                },
-              ],
-            },
-            "parents": 1,
-          },
-        },
-      },
-    ],
-  },
-  0,
   "Unlimited",
 ]
 `;

@@ -13,6 +13,13 @@ export class Asset {
     this.originSymbol = originSymbol;
   }
 
+  copyWith(params: Partial<AssetConstructorParams>): Asset {
+    return new Asset({
+      ...this,
+      ...params,
+    });
+  }
+
   isEqual(asset: Asset): boolean {
     return this.key === asset.key && this.originSymbol === asset.originSymbol;
   }

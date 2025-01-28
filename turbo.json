@@ -6,7 +6,10 @@
       "dependsOn": ["^build"]
     },
     "dev": {
-      "cache": false
+      "outputs": ["build/**"],
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
     },
     "link": {
       "cache": false

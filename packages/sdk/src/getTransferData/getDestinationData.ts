@@ -1,163 +1,106 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { FeeConfigBuilder } from '@moonbeam-network/xcm-builder';
-import { TransferConfig } from '@moonbeam-network/xcm-config';
-import { AssetAmount } from '@moonbeam-network/xcm-types';
+import type {
+  AssetRoute,
+  DestinationConfig,
+  SourceConfig,
+} from '@moonbeam-network/xcm-config';
+import { Parachain } from '@moonbeam-network/xcm-types';
+import { getSovereignAccountAddresses } from '@moonbeam-network/xcm-utils';
+import type { DestinationChainTransferData } from '../sdk.interfaces';
 import {
-  getSovereignAccountAddresses,
-  toBigInt,
-} from '@moonbeam-network/xcm-utils';
-import { PolkadotService } from '../polkadot';
-import { DestinationChainTransferData } from '../sdk.interfaces';
-import { getBalance, getDecimals, getMin } from './getTransferData.utils';
+  getAssetMin,
+  getBalance,
+  getDestinationFee,
+  getExistentialDeposit,
+} from './getTransferData.utils';
 
 export interface GetDestinationDataParams {
-  transferConfig: TransferConfig;
+  route: AssetRoute;
   destinationAddress: string;
-  polkadot: PolkadotService;
 }
 
 export async function getDestinationData({
-  transferConfig,
+  route,
   destinationAddress,
-  polkadot,
 }: GetDestinationDataParams): Promise<DestinationChainTransferData> {
-  const {
-    asset,
-    destination: { chain, config },
-  } = transferConfig;
-
-  const zeroAmount = AssetAmount.fromAsset(asset, {
-    amount: 0n,
-    decimals: await getDecimals({
-      address: destinationAddress,
-      chain,
-      config,
-      polkadot,
-    }),
-  });
-
+  const destination = route.destination.chain;
+  const asset = destination.getChainAsset(route.destination.asset);
   const balance = await getBalance({
     address: destinationAddress,
-    asset: config.asset,
-    balanceBuilder: config.balance,
-    chain,
-    decimals: zeroAmount.decimals,
-    polkadot,
+    asset,
+    builder: route.destination.balance,
+    chain: destination,
   });
-
-  const min = await getMin(config, polkadot);
-
-  const balanceAmount = zeroAmount.copyWith({ amount: balance });
-  const { existentialDeposit } = polkadot;
-
-  const feeAmount = await getFee({
+  const min = await getAssetMin({
+    asset,
+    builder: route.destination.min,
+    chain: destination,
+  });
+  const fee = await getDestinationFee({
     address: destinationAddress,
-    config: transferConfig,
-    polkadot,
+    feeAsset: route.destination.fee.asset,
+    destination,
+    fee: route.destination.fee.amount,
+    asset: route.source.asset,
   });
-  const minAmount = zeroAmount.copyWith({ amount: min });
+  const existentialDeposit = await getExistentialDeposit(destination);
 
   return {
-    balance: balanceAmount,
-    chain,
+    chain: destination,
+    balance,
     existentialDeposit,
-    fee: feeAmount,
-    min: minAmount,
-    sovereignAccountBalances: chain.checkSovereignAccountBalances
-      ? await getSovereignAccountBalances({
-          decimals: zeroAmount.decimals,
-          polkadot,
-          transferConfig,
-        })
-      : undefined,
+    fee,
+    min,
+    sovereignAccountBalances: await getSovereignAccountBalances({
+      source: route.source,
+      destination: route.destination,
+    }),
   };
 }
 
-export interface GetFeeParams {
-  address: string;
-  config: TransferConfig;
-  polkadot: PolkadotService;
-}
-
-export async function getFee({
-  address,
-  config,
-  polkadot,
-}: GetFeeParams): Promise<AssetAmount> {
-  const { amount, asset } = config.source.config.destinationFee;
-  // TODO we have to consider correctly here when an asset is ERC20 to get it from contract
-  const decimals = await polkadot.getAssetDecimals(asset);
-  const zeroAmount = AssetAmount.fromAsset(asset, {
-    amount: 0n,
-    decimals,
-  });
-
-  if (Number.isFinite(amount)) {
-    return zeroAmount.copyWith({
-      amount: toBigInt(amount as number, decimals),
-    });
-  }
-
-  const cfg = (amount as FeeConfigBuilder).build({
-    address,
-    api: polkadot.api,
-    chain: polkadot.chain,
-    feeAsset: polkadot.chain.getRegisteredAssetIdOrAddress(asset),
-    transferAsset: polkadot.chain.getRegisteredAssetIdOrAddress(config.asset),
-  });
-
-  return zeroAmount.copyWith({
-    amount: await cfg.call(),
-  });
-}
-
 interface GetSovereignAccountBalancesProps {
-  transferConfig: TransferConfig;
-  decimals: number;
-  polkadot: PolkadotService;
+  source: SourceConfig;
+  destination: DestinationConfig;
 }
 
 async function getSovereignAccountBalances({
-  transferConfig,
-  decimals,
-  polkadot,
+  destination,
+  source,
 }: GetSovereignAccountBalancesProps) {
-  const {
-    destination: { chain, config },
-    source: { config: sourceConfig },
-  } = transferConfig;
+  if (
+    !Parachain.is(source.chain) ||
+    !Parachain.is(destination.chain) ||
+    !destination.chain.checkSovereignAccountBalances
+  ) {
+    return undefined;
+  }
+
   const sovereignAccountAddresses = getSovereignAccountAddresses(
-    transferConfig.source.chain.parachainId,
+    source.chain.parachainId,
   );
 
-  const destinationFeeAssetBalance =
-    sourceConfig.destinationFee?.destinationBalance;
+  const destinationFeeAssetBalance = destination.fee.balance;
 
-  const sovereignAccountAddress = chain.isRelay
+  const sovereignAccountAddress = destination.chain.isRelay
     ? sovereignAccountAddresses.relay
     : sovereignAccountAddresses.generic;
 
   const sovereignAccountBalance = await getBalance({
     address: sovereignAccountAddress,
-    asset: config.asset,
-    balanceBuilder: config.balance,
-    chain,
-    decimals,
-    polkadot,
+    asset: destination.chain.getChainAsset(destination.asset),
+    builder: destination.balance,
+    chain: destination.chain,
   });
 
   const sovereignAccountFeeAssetBalance = destinationFeeAssetBalance
     ? await getBalance({
         address: sovereignAccountAddress,
-        asset: sourceConfig.destinationFee.asset,
-        balanceBuilder: destinationFeeAssetBalance,
-        chain,
-        decimals, // TODO this is not correct but will only affect us if a chain has both checkSovereignAccountBalances and usesChainDecimals flags
-        polkadot,
+        asset: destination.chain.getChainAsset(destination.fee.asset),
+        builder: destinationFeeAssetBalance,
+        chain: destination.chain,
       })
     : undefined;
   return {
-    feeAssetBalance: sovereignAccountFeeAssetBalance,
-    transferAssetBalance: sovereignAccountBalance,
+    feeAssetBalance: sovereignAccountFeeAssetBalance?.amount,
+    transferAssetBalance: sovereignAccountBalance.amount,
   };
 }

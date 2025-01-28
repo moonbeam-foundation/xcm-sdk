@@ -2,7 +2,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
-import { FeeConfigBuilder, XcmPaymentFeeProps } from './FeeBuilder.interfaces';
+import type {
+  FeeConfigBuilder,
+  FeeConfigBuilderParams,
+  XcmPaymentFeeProps,
+} from './FeeBuilder.interfaces';
 import {
   getBuyExecutionInstruction,
   getClearOriginInstruction,
@@ -24,35 +28,41 @@ function xcmPaymentApi() {
   return {
     xcmPaymentFee: ({
       isAssetReserveChain,
-      shouldTransferAssetPrecedeAsset = false,
+      shouldTransferAssetPrecedeFeeAsset = false,
     }: XcmPaymentFeeProps): FeeConfigBuilder => ({
-      build: ({ address, api, feeAsset, chain, transferAsset }) =>
+      build: ({
+        address,
+        api,
+        asset,
+        destination,
+        feeAsset,
+      }: FeeConfigBuilderParams) =>
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
-            const versionedAssetId = await getVersionedAssetId(
+            const versionedFeeAssetId = await getVersionedAssetId(
               api,
               feeAsset,
-              chain,
+              destination,
             );
             const versionedTransferAssetId = await getVersionedAssetId(
               api,
-              transferAsset,
-              chain,
+              asset,
+              destination,
             );
-            const versionedAssets = shouldTransferAssetPrecedeAsset
-              ? [versionedTransferAssetId, versionedAssetId]
-              : [versionedAssetId, versionedTransferAssetId];
+            const versionedAssets = shouldTransferAssetPrecedeFeeAsset
+              ? [versionedTransferAssetId, versionedFeeAssetId]
+              : [versionedFeeAssetId, versionedTransferAssetId];
 
             const assets =
-              feeAsset === transferAsset ? [versionedAssetId] : versionedAssets;
+              feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
 
             const instructions = [
               isAssetReserveChain
                 ? getWithdrawAssetInstruction(assets)
                 : getReserveAssetDepositedInstruction(assets),
               getClearOriginInstruction(),
-              getBuyExecutionInstruction(versionedAssetId),
+              getBuyExecutionInstruction(versionedFeeAssetId),
               getDepositAssetInstruction(address, assets),
               getSetTopicInstruction(),
             ];
@@ -60,7 +70,7 @@ function xcmPaymentApi() {
             return getFeeForXcmInstructionsAndAsset(
               api,
               instructions,
-              versionedAssetId,
+              versionedFeeAssetId,
             );
           },
         }),

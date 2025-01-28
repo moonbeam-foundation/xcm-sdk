@@ -1,0 +1,101 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`wormhole > tokenTransfer with isAutomatic=false > should be correct config to moon chain 1`] = `
+WormholeConfig {
+  "args": [
+    {
+      "address": "native",
+      "chain": "Fantom",
+    },
+    99000000000n,
+    {
+      "address": EvmAddress {
+        "address": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+        "type": "Native",
+      },
+      "chain": "Fantom",
+    },
+    {
+      "address": EvmAddress {
+        "address": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+        "type": "Native",
+      },
+      "chain": "Moonbeam",
+    },
+    false,
+    undefined,
+  ],
+  "func": "tokenTransfer",
+}
+`;
+
+exports[`wormhole > tokenTransfer with isAutomatic=true > should be correct config 1`] = `
+WormholeConfig {
+  "args": [
+    {
+      "address": "native",
+      "chain": "Fantom",
+    },
+    99000000000n,
+    {
+      "address": EvmAddress {
+        "address": "0xeF46c7649270C912704fB09B75097f6E32208b85",
+        "type": "Native",
+      },
+      "chain": "Fantom",
+    },
+    {
+      "address": EvmAddress {
+        "address": "0x0000000000000000000000000000000000000816",
+        "type": "Native",
+      },
+      "chain": "Moonbeam",
+    },
+    true,
+    Uint8Array [
+      0,
+      3,
+      1,
+      2,
+      0,
+      165,
+      15,
+      1,
+      0,
+      212,
+      53,
+      147,
+      199,
+      21,
+      253,
+      211,
+      28,
+      97,
+      20,
+      26,
+      189,
+      4,
+      169,
+      159,
+      214,
+      130,
+      44,
+      133,
+      88,
+      133,
+      76,
+      205,
+      227,
+      154,
+      86,
+      132,
+      231,
+      165,
+      109,
+      162,
+      125,
+    ],
+  ],
+  "func": "tokenTransfer",
+}
+`;

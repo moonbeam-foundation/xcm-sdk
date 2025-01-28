@@ -1,0 +1,228 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`polkadotXcm > send with transferMulticurrencies > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "batchAll",
+  "getArgs": [Function],
+  "module": "utility",
+}
+`;
+
+exports[`polkadotXcm > send with transferMulticurrencies > should get correct arguments 1`] = `
+[
+  [
+    "xTokens.transferMulticurrencies => RESULT",
+    "polkadotXcm.send => RESULT",
+  ],
+]
+`;
+
+exports[`polkadotXcm > send with transferMulticurrencies > should get correct arguments 2`] = `
+[
+  {
+    "V3": {
+      "interior": {
+        "X1": {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V3": [
+      {
+        "WithdrawAsset": [
+          {
+            "fun": {
+              "Fungible": 100000000000000000n,
+            },
+            "id": {
+              "Concrete": {
+                "interior": {
+                  "X1": {
+                    "PalletInstance": 10,
+                  },
+                },
+                "parents": 0,
+              },
+            },
+          },
+        ],
+      },
+      {
+        "BuyExecution": {
+          "fees": {
+            "fun": {
+              "Fungible": 100000000000000000n,
+            },
+            "id": {
+              "Concrete": {
+                "interior": {
+                  "X1": {
+                    "PalletInstance": 10,
+                  },
+                },
+                "parents": 0,
+              },
+            },
+          },
+          "weightLimit": "Unlimited",
+        },
+      },
+      {
+        "Transact": {
+          "call": {
+            "encoded": "0x4d79207465787420737472696e67",
+          },
+          "originKind": "SovereignAccount",
+          "requireWeightAtMost": {
+            "proofSize": 62193n,
+            "refTime": 24902375000n,
+          },
+        },
+      },
+      {
+        "SetAppendix": [
+          {
+            "RefundSurplus": {},
+          },
+          {
+            "DepositAsset": {
+              "assets": {
+                "Wild": {
+                  "AllCounted": 1,
+                },
+              },
+              "beneficiary": {
+                "interior": {
+                  "X1": {
+                    "AccountKey20": {
+                      "key": "0xcd93e4dcf4e6bb23f1c58109113266e9b79cd844",
+                    },
+                  },
+                },
+                "parents": 0,
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+]
+`;
+
+exports[`polkadotXcm > send with transfers > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "batchAll",
+  "getArgs": [Function],
+  "module": "utility",
+}
+`;
+
+exports[`polkadotXcm > send with transfers > should get correct arguments 1`] = `
+[
+  [
+    "xTokens.transfer => RESULT",
+    "xTokens.transfer => RESULT",
+    "polkadotXcm.send => RESULT",
+  ],
+]
+`;
+
+exports[`polkadotXcm > send with transfers > should get correct arguments 2`] = `
+[
+  {
+    "V3": {
+      "interior": {
+        "X1": {
+          "Parachain": 1000,
+        },
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V3": [
+      {
+        "WithdrawAsset": [
+          {
+            "fun": {
+              "Fungible": 100000000000000000n,
+            },
+            "id": {
+              "Concrete": {
+                "interior": {
+                  "X1": {
+                    "PalletInstance": 10,
+                  },
+                },
+                "parents": 0,
+              },
+            },
+          },
+        ],
+      },
+      {
+        "BuyExecution": {
+          "fees": {
+            "fun": {
+              "Fungible": 100000000000000000n,
+            },
+            "id": {
+              "Concrete": {
+                "interior": {
+                  "X1": {
+                    "PalletInstance": 10,
+                  },
+                },
+                "parents": 0,
+              },
+            },
+          },
+          "weightLimit": "Unlimited",
+        },
+      },
+      {
+        "Transact": {
+          "call": {
+            "encoded": "0x4d79207465787420737472696e67",
+          },
+          "originKind": "SovereignAccount",
+          "requireWeightAtMost": {
+            "proofSize": 62193n,
+            "refTime": 24902375000n,
+          },
+        },
+      },
+      {
+        "SetAppendix": [
+          {
+            "RefundSurplus": {},
+          },
+          {
+            "DepositAsset": {
+              "assets": {
+                "Wild": {
+                  "AllCounted": 1,
+                },
+              },
+              "beneficiary": {
+                "interior": {
+                  "X1": {
+                    "AccountKey20": {
+                      "key": "0xcd93e4dcf4e6bb23f1c58109113266e9b79cd844",
+                    },
+                  },
+                },
+                "parents": 0,
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+]
+`;

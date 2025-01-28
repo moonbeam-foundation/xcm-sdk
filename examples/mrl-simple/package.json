@@ -1,0 +1,19 @@
+{
+  "name": "mrl-simple",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "bun index.ts"
+  },
+  "dependencies": {
+    "@moonbeam-network/mrl": "workspace:*",
+    "@moonbeam-network/xcm-config": "workspace:*",
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@moonbeam-network/xcm-utils": "workspace:*",
+    "@moonbeam-network/xcm-sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "bun": "^1.1.31"
+  }
+}

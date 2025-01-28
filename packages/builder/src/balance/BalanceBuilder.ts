@@ -1,23 +1,22 @@
-/* eslint-disable sort-keys */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
-import { Option } from '@polkadot/types';
-import {
+import type { Option } from '@polkadot/types';
+import type {
   FrameSystemAccountInfo,
   PalletAssetsAssetAccount,
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
-import { isString } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto';
+import type { Address } from 'viem';
 import { ContractConfig } from '../contract';
 import { getExtrinsicAccount } from '../extrinsic/ExtrinsicBuilder.utils';
+import { EvmQueryConfig } from '../types/evm/EvmQueryConfig';
 import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
-import {
+import type {
   BalanceConfigBuilder,
   EquilibriumSystemBalanceData,
   PalletBalancesAccountDataOld,
   TokensPalletAccountData,
 } from './BalanceBuilder.interfaces';
+import { ERC20_ABI } from './Erc20Abi';
 
 export function BalanceBuilder() {
   return {
@@ -29,32 +28,44 @@ export function BalanceBuilder() {
 export function evm() {
   return {
     erc20,
+    native,
   };
 }
 
+function erc20(): BalanceConfigBuilder {
+  return {
+    build: ({ asset, address }) => {
+      if (!asset.address) {
+        throw new Error(`Asset ${asset.key} has no address`);
+      }
+
+      return new ContractConfig({
+        address: asset.address,
+        abi: ERC20_ABI,
+        args: [address],
+        func: 'balanceOf',
+        module: 'Erc20',
+      });
+    },
+  };
+}
+
+function native(): BalanceConfigBuilder {
+  return {
+    build: ({ address }) => {
+      return new EvmQueryConfig({
+        func: 'getBalance',
+        args: [{ address: address as Address }],
+      });
+    },
+  };
+}
 export function substrate() {
   return {
     assets,
     foreignAssets,
     system,
     tokens,
-  };
-}
-
-function erc20(): BalanceConfigBuilder {
-  return {
-    build: ({ address, asset }) => {
-      if (!asset || !isString(asset)) {
-        throw new Error(`Invalid contract address: ${asset}`);
-      }
-
-      return new ContractConfig({
-        address: asset,
-        args: [address],
-        func: 'balanceOf',
-        module: 'Erc20',
-      });
-    },
   };
 }
 
@@ -65,7 +76,7 @@ function assets() {
         new SubstrateQueryConfig({
           module: 'assets',
           func: 'account',
-          args: [asset, address],
+          args: [asset.getBalanceAssetId(), address],
           transform: async (
             response: Option<PalletAssetsAssetAccount>,
           ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
@@ -78,12 +89,18 @@ function foreignAssets() {
   return {
     account: (): BalanceConfigBuilder => ({
       build: ({ address, asset }) => {
+        if (!asset.address) {
+          throw new Error(
+            'Asset address is needed to calculate balance with foreignAssets.account function',
+          );
+        }
+
         const multilocation = {
           parents: 2,
           interior: {
             X2: [
               { GlobalConsensus: { ethereum: { chainId: 1 } } },
-              getExtrinsicAccount(asset as string),
+              getExtrinsicAccount(asset.address),
             ],
           },
         };
@@ -132,9 +149,9 @@ function system() {
               balances = res;
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
             if (Array.isArray((res as any)?.v0?.balance)) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
               balances = (res as any).v0.balance;
             }
 
@@ -142,7 +159,9 @@ function system() {
               throw new Error("Can't get balance from Equilibrium chain");
             }
 
-            const balance = balances.find(([assetId]) => assetId === asset);
+            const balance = balances.find(
+              ([assetId]) => assetId === asset.getBalanceAssetId(),
+            );
 
             if (!balance) {
               return 0n;
@@ -176,7 +195,7 @@ function tokens() {
         new SubstrateQueryConfig({
           module: 'tokens',
           func: 'accounts',
-          args: [address, asset],
+          args: [address, asset.getBalanceAssetId()],
           transform: async ({
             free,
             frozen,

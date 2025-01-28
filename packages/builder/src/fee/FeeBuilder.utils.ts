@@ -1,51 +1,30 @@
-/* eslint-disable sort-keys */
-import { AnyParachain, ChainAssetId } from '@moonbeam-network/xcm-types';
-import { isHexString } from '@moonbeam-network/xcm-utils';
-import { ApiPromise } from '@polkadot/api';
-import { Option, Result, u128 } from '@polkadot/types';
-import { Error as PolkadotError, Weight } from '@polkadot/types/interfaces';
-import { AnyJson } from '@polkadot/types/types';
+import type {
+  AnyParachain,
+  ChainAsset,
+  ChainAssetId,
+} from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
+import type { Option, Result, u128 } from '@polkadot/types';
+import type {
+  Error as PolkadotError,
+  Weight,
+} from '@polkadot/types/interfaces';
+import type { AnyJson } from '@polkadot/types/types';
 import { XcmVersion } from '../extrinsic';
-import { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
+import {
+  normalizeConcrete,
+  normalizeX1,
+} from '../extrinsic/ExtrinsicBuilder.utils';
+import type { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
 
 const DEFAULT_AMOUNT = 10 ** 6;
-const DEFALUT_HEX_STRING =
+const DEFAULT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
-
-const MOON_CHAIN_NATIVE_ASSET_ID = '0x0000000000000000000000000000000000000802';
-
-const MOON_CHAIN_BALANCES_PALLET_INSTANCE: Record<string, string> = {
-  moonbeam: '10',
-  moonriver: '10',
-  'moonbase-alpha': '3',
-};
-const MOON_CHIAN_ERC20_PALLET_INSTANCE: Record<string, string> = {
-  moonbeam: '110',
-  moonriver: '110',
-  'moonbase-alpha': '48',
-};
 
 const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
 
 function isXcmV4() {
   return XCM_VERSION === XcmVersion.v4;
-}
-
-function normalizeX1(assetType: Record<string, AnyJson>) {
-  if (!isXcmV4()) {
-    return assetType;
-  }
-  const normalizedAssetType = { ...assetType };
-  if (
-    normalizedAssetType.interior &&
-    typeof normalizedAssetType.interior === 'object' &&
-    'x1' in normalizedAssetType.interior
-  ) {
-    if (!Array.isArray(normalizedAssetType.interior.x1)) {
-      normalizedAssetType.interior.x1 = [normalizedAssetType.interior.x1];
-    }
-  }
-  return normalizedAssetType;
 }
 
 export function getWithdrawAssetInstruction(assetTypes: object[]) {
@@ -124,20 +103,21 @@ export function getDepositAssetInstruction(address: string, assets: object[]) {
 
 export function getSetTopicInstruction() {
   return {
-    SetTopic: DEFALUT_HEX_STRING,
+    SetTopic: DEFAULT_HEX_STRING,
   };
 }
 
-function applyConcreteWrapper(id: object) {
-  return {
-    Concrete: { ...id },
-  };
-}
+// TODO this is for Moonbeam, when applying to all we have to
+// configure the multilocation of the native asset in the chain
+function getNativeAssetId(palletInstanceNumber: number | undefined): object {
+  if (!palletInstanceNumber) {
+    throw new Error(
+      'No pallet instance configured for the native asset for XcmPaymentApi fee calculation',
+    );
+  }
 
-// TODO this is for Moonbeam
-function getNativeAssetId(chainKey: string): object {
   const palletInstance = {
-    PalletInstance: MOON_CHAIN_BALANCES_PALLET_INSTANCE[chainKey],
+    PalletInstance: palletInstanceNumber,
   };
   const id = {
     interior: {
@@ -145,19 +125,24 @@ function getNativeAssetId(chainKey: string): object {
     },
     parents: '0',
   };
-
-  return isXcmV4() ? id : applyConcreteWrapper(id);
+  return normalizeConcrete(XCM_VERSION, id);
 }
 
 function getConcreteAssetIdWithAccountKey20(
   asset: ChainAssetId,
-  chainKey: string,
+  palletInstance: number | undefined,
 ): object {
+  if (!palletInstance) {
+    throw new Error(
+      `No pallet instance configured for the asset ${asset} for XcmPaymentApi fee calculation`,
+    );
+  }
+
   const id = {
     interior: {
       X2: [
         {
-          PalletInstance: MOON_CHIAN_ERC20_PALLET_INSTANCE[chainKey],
+          PalletInstance: palletInstance,
         },
         {
           AccountKey20: {
@@ -169,7 +154,7 @@ function getConcreteAssetIdWithAccountKey20(
     },
     parents: '0',
   };
-  return isXcmV4() ? id : applyConcreteWrapper(id);
+  return normalizeConcrete(XCM_VERSION, id);
 }
 
 export async function getAssetIdType(
@@ -189,25 +174,26 @@ export async function getAssetIdType(
 
 export async function getVersionedAssetId(
   api: ApiPromise,
-  asset: ChainAssetId,
+  asset: ChainAsset,
   chain: AnyParachain,
 ): Promise<object> {
-  if (asset === MOON_CHAIN_NATIVE_ASSET_ID) {
-    return getNativeAssetId(chain.key);
+  const assetId = asset.getAssetId();
+  const palletInstance = asset.getAssetPalletInstance();
+
+  if (assetId === chain.nativeAsset.originSymbol) {
+    return getNativeAssetId(palletInstance);
   }
 
-  if (isHexString(asset)) {
-    return getConcreteAssetIdWithAccountKey20(asset, chain.key);
+  if (asset.hasOnlyAddress()) {
+    return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
   }
 
-  const assetType = await getAssetIdType(api, asset);
+  const assetType = await getAssetIdType(api, assetId);
   const assetTypeObject = assetType.unwrap().asXcm.toJSON();
 
-  const normalizedAssetTypeObject = normalizeX1(assetTypeObject);
+  const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
 
-  return isXcmV4()
-    ? normalizedAssetTypeObject
-    : applyConcreteWrapper(normalizedAssetTypeObject);
+  return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
 }
 
 export async function getFeeForXcmInstructionsAndAsset(
@@ -227,7 +213,7 @@ export async function getFeeForXcmInstructionsAndAsset(
   }
   const xcmToWeight = xcmToWeightResult.asOk;
 
-  const weightToForeingAssets =
+  const weightToForeignAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
       Result<u128, PolkadotError>
     >(xcmToWeight, {
@@ -235,10 +221,10 @@ export async function getFeeForXcmInstructionsAndAsset(
         ...versionedAssetId,
       },
     });
-  if (!weightToForeingAssets.isOk) {
+  if (!weightToForeignAssets.isOk) {
     throw new Error(
-      'There was an error trying to get the fee with the weight and asset (weightToForeingAssets)',
+      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets)',
     );
   }
-  return weightToForeingAssets.asOk.toBigInt();
+  return weightToForeignAssets.asOk.toBigInt();
 }

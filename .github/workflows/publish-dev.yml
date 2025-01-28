@@ -10,24 +10,22 @@ jobs:
       - name: 🤘 checkout
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js environment
+      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v1
+
+      - name: ⚙ Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          cache: 'npm'
-
-      - uses: oven-sh/setup-bun@v1     
+          cache: 'pnpm'
 
       - name: 🔐 Authenticate with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Update npm
-        run: npm i -g npm@latest
-      
       - name: node/npm version
-        run: node --version && npm --version    
+        run: node --version && pnpm --version
 
-      - run: npm ci --ignore-scripts
+      - run: pnpm install --ignore-scripts
 
       - name: ✌️ Update versions (BUN)
         run: bun ./scripts/update-dev-versions.ts
@@ -36,24 +34,28 @@ jobs:
         run: find ./packages -name 'package.json' -not -path '*/node_modules/*' -exec grep -H 'version' {} +
 
       - name: 🛠️ Build
-        run: npm run build
+        run: pnpm run build
 
       - name: 🚀 Publish types
         working-directory: ./packages/types
-        run: npm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish utils
         working-directory: ./packages/utils
-        run: npm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish builder
         working-directory: ./packages/builder
-        run: npm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish config
         working-directory: ./packages/config
-        run: npm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
 
       - name: 🚀 Publish sdk
         working-directory: ./packages/sdk
-        run: npm publish --tag dev
+        run: pnpm publish  --no-git-checks --tag dev
+
+      - name: 🚀 Publish mrl
+        working-directory: ./packages/mrl
+        run: pnpm publish  --no-git-checks --tag dev

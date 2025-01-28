@@ -1,17 +1,17 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest';
 
 import { TypeRegistry, U128 } from '@polkadot/types';
-import {
+import type {
   FrameSystemAccountInfo,
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
-import { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
+import { testChainAsset } from '../../fixtures';
+import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {
   BalanceBuilder,
   calculateSystemAccountBalance,
 } from './BalanceBuilder';
-import { PalletBalancesAccountDataOld } from './BalanceBuilder.interfaces';
+import type { PalletBalancesAccountDataOld } from './BalanceBuilder.interfaces';
 
 function balanceOf(number: number | string): U128 {
   return new U128(new TypeRegistry(), number);
@@ -22,8 +22,8 @@ function balanceOf(number: number | string): U128 {
  */
 
 describe('balanceBuilder', () => {
-  const account = '<ACCOUNT>';
-  const asset = '<ASSET>';
+  const address = '<ADDRESS>';
+  const asset = testChainAsset;
 
   describe('assets', () => {
     describe('account', () => {
@@ -31,7 +31,7 @@ describe('balanceBuilder', () => {
         .substrate()
         .assets()
         .account()
-        .build({ address: account, asset }) as SubstrateQueryConfig;
+        .build({ address, asset }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -54,8 +54,8 @@ describe('balanceBuilder', () => {
         .foreignAssets()
         .account()
         .build({
-          address: account,
-          asset: `0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2`,
+          address,
+          asset,
         }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
@@ -78,7 +78,7 @@ describe('balanceBuilder', () => {
         .substrate()
         .system()
         .account()
-        .build({ address: account, asset }) as SubstrateQueryConfig;
+        .build({ address, asset }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -126,7 +126,14 @@ describe('balanceBuilder', () => {
         .substrate()
         .system()
         .accountEquilibrium()
-        .build({ address: account, asset: 25969 }) as SubstrateQueryConfig;
+        .build({
+          address,
+          asset: testChainAsset.copyWith({
+            ids: {
+              balanceId: 25969,
+            },
+          }),
+        }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();
@@ -209,7 +216,7 @@ describe('balanceBuilder', () => {
         .substrate()
         .tokens()
         .accounts()
-        .build({ address: account, asset }) as SubstrateQueryConfig;
+        .build({ address, asset }) as SubstrateQueryConfig;
 
       it('should be correct config', () => {
         expect(config).toMatchSnapshot();

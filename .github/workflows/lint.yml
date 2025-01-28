@@ -1,0 +1,42 @@
+name: lint
+
+on: push
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - name: ⚙ Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+
+      - run: pnpm install --ignore-scripts
+
+      - name: 🛠️ Build
+        run: pnpm run build
+
+      - name: 🧪 Run TypeScript
+        if: always()
+        run: pnpm run typecheck
+
+      - name: 🧪 Run Linter
+        if: always()
+        id: linter
+        run: pnpm run lint
+
+      - name: 🧪 Run Spell Check
+        if: always()
+        id: spell-check
+        run: pnpm run spell
+
+      - name: 🚪 Run Check Exports
+        run: npm run lint:exports      

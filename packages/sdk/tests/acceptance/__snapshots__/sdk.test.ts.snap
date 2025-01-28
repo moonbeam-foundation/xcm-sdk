@@ -2,765 +2,1265 @@
 
 exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEm…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 570000000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": "Native",
+    },
     "key": "cfg",
+    "min": undefined,
     "originSymbol": "CFG",
-    "symbol": "CFG",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Centrifuge' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 570000000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": "Native",
+    },
     "key": "cfg",
+    "min": undefined,
     "originSymbol": "CFG",
-    "symbol": "CFG",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 178046239082538836n,
     "decimals": 18,
+    "ids": {
+      "id": 1000002,
+    },
     "key": "ftmwh",
+    "min": undefined,
     "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 1000001,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1,
+    },
     "key": "dev",
+    "min": undefined,
     "originSymbol": "DEV",
-    "symbol": "DEV",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 3000000000000n,
     "decimals": 12,
+    "ids": {
+      "id": 0,
+    },
     "key": "hdx",
+    "min": undefined,
     "originSymbol": "HDX",
-    "symbol": "HDX",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Hydration Alphanet' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 178046239082538836n,
     "decimals": 18,
+    "ids": {
+      "id": 1000002,
+    },
     "key": "ftmwh",
+    "min": undefined,
     "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 1000001,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1,
+    },
     "key": "dev",
+    "min": undefined,
     "originSymbol": "DEV",
-    "symbol": "DEV",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 3000000000000n,
     "decimals": 12,
+    "ids": {
+      "id": 0,
+    },
     "key": "hdx",
+    "min": undefined,
     "originSymbol": "HDX",
-    "symbol": "HDX",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Hydration' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 37000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": 20,
+    },
     "key": "weth",
+    "min": undefined,
     "originSymbol": "WETH",
-    "symbol": "WETH",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 120n,
     "decimals": 8,
+    "ids": {
+      "id": 19,
+    },
     "key": "wbtc",
+    "min": undefined,
     "originSymbol": "WBTC",
-    "symbol": "WBTC",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 23,
+    },
     "key": "usdtwh",
+    "min": undefined,
     "originSymbol": "USDT.Wh",
-    "symbol": "USDT.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 21,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 18,
+    },
     "key": "dai",
+    "min": undefined,
     "originSymbol": "DAI",
-    "symbol": "DAI",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 16,
+    },
     "key": "glmr",
+    "min": undefined,
     "originSymbol": "GLMR",
-    "symbol": "GLMR",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 1000000000000n,
     "decimals": 12,
+    "ids": {
+      "id": 0,
+    },
     "key": "hdx",
+    "min": undefined,
     "originSymbol": "HDX",
-    "symbol": "HDX",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Hydration' for address: '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 37000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": 20,
+    },
     "key": "weth",
+    "min": undefined,
     "originSymbol": "WETH",
-    "symbol": "WETH",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 120n,
     "decimals": 8,
+    "ids": {
+      "id": 19,
+    },
     "key": "wbtc",
+    "min": undefined,
     "originSymbol": "WBTC",
-    "symbol": "WBTC",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 23,
+    },
     "key": "usdtwh",
+    "min": undefined,
     "originSymbol": "USDT.Wh",
-    "symbol": "USDT.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 21,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 18,
+    },
     "key": "dai",
+    "min": undefined,
     "originSymbol": "DAI",
-    "symbol": "DAI",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 16,
+    },
     "key": "glmr",
+    "min": undefined,
     "originSymbol": "GLMR",
-    "symbol": "GLMR",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 1000000000000n,
     "decimals": 12,
+    "ids": {
+      "id": 0,
+    },
     "key": "hdx",
+    "min": undefined,
     "originSymbol": "HDX",
-    "symbol": "HDX",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": "0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "75066649112131892397889252914026143264",
+    },
     "key": "agng",
+    "min": undefined,
     "originSymbol": "AGNG",
-    "symbol": "AGNG",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "69606720909260275826784788104880799692",
+    },
     "key": "hdx",
+    "min": undefined,
     "originSymbol": "HDX",
-    "symbol": "HDX",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee",
     "amount": 1234567890000000000n,
     "decimals": 18,
+    "ids": {
+      "palletInstance": 48,
+    },
     "key": "ftmwh",
+    "min": undefined,
     "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9",
     "amount": 10000n,
     "decimals": 6,
+    "ids": {
+      "palletInstance": 48,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "42259045809535163221576417993425387648",
+    },
     "key": "unit",
+    "min": undefined,
     "originSymbol": "Unit",
-    "symbol": "Unit",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFffffFf6448d0746f2a66342B67ef9CAf89478E",
     "amount": 0n,
     "decimals": 10,
+    "ids": {
+      "id": "133300872918374599700079037156071917454",
+    },
     "key": "tur",
+    "min": undefined,
     "originSymbol": "TUR",
-    "symbol": "TUR",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFffFfFf75976211C786fe4d73d2477e222786Ac",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "156305701417244550631956600137082963628",
+    },
     "key": "tt1",
+    "min": undefined,
     "originSymbol": "TT1",
-    "symbol": "TT1",
+    "symbol": undefined,
   },
-  r {
-    "amount": 0n,
-    "decimals": 12,
-    "key": "pica",
-    "originSymbol": "PICA",
-    "symbol": "PICA",
-  },
-  r {
+  _AssetAmount {
+    "address": "0xFFFfFFFF10DD5Fd142163a40Ce0dae8c56e2801f",
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": "22417088946346045371238623691600461855",
+    },
+    "key": "pica",
+    "min": undefined,
+    "originSymbol": "PICA",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xffffffffb7cdb201c395c238350568f17cfbd3b5",
+    "amount": 0n,
+    "decimals": 6,
+    "ids": {
+      "id": "244316754493307480955066032215622931381",
+    },
     "key": "atom",
+    "min": undefined,
     "originSymbol": "ATOM",
-    "symbol": "ATOM",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFfffffFfB3229c8E7657eABEA704d5e75246e544",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "238111524681612888331172110363070489924",
+    },
     "key": "otp",
+    "min": undefined,
     "originSymbol": "OTP",
-    "symbol": "OTP",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFfFfffF7fee8415e1c2AC3A15C48D3546B95e16",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "170050401128744171791743427490841452054",
+    },
     "key": "ampe",
+    "min": undefined,
     "originSymbol": "AMPE",
-    "symbol": "AMPE",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0x9133c5a22024118804089f1fB752b7B2ce2a6351",
     "amount": 10000000000000000n,
     "decimals": 18,
+    "ids": undefined,
     "key": "alan",
+    "min": undefined,
     "originSymbol": "ALAN",
-    "symbol": "ALAN",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0x0000000000000000000000000000000000000802",
     "amount": 6543210000000000000n,
     "decimals": 18,
+    "ids": {
+      "palletInstance": 3,
+    },
     "key": "dev",
+    "min": 10000000000000000n,
     "originSymbol": "DEV",
-    "symbol": "DEV",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Moonbase Beta' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 1100000000000000000n,
     "decimals": 18,
+    "ids": {
+      "balanceId": "85534404031760856987006367174489651085",
+      "id": {
+        "ForeignAsset": "85534404031760856987006367174489651085",
+      },
+    },
     "key": "alan",
+    "min": undefined,
     "originSymbol": "ALAN",
-    "symbol": "ALAN",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 1100000000000000000n,
     "decimals": 18,
+    "ids": {
+      "balanceId": "222902676330054289648817870329963141953",
+      "id": {
+        "ForeignAsset": "222902676330054289648817870329963141953",
+      },
+    },
     "key": "dev",
+    "min": undefined,
     "originSymbol": "DEV",
-    "symbol": "DEV",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": "0xffffffff5d5deb44bf7278dee5381beb24cb6573",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "124105859028862849477017063633156007283",
+    },
     "key": "wstethe",
+    "min": undefined,
     "originSymbol": "wstETH.e",
-    "symbol": "wstETH.e",
+    "symbol": undefined,
   },
-  r {
-    "amount": 0n,
-    "decimals": 8,
-    "key": "wbtce",
-    "originSymbol": "WBTC.e",
-    "symbol": "WBTC.e",
-  },
-  r {
+  _AssetAmount {
+    "address": "0xffffffff86829afe1521ad2296719df3ace8ded7",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "178794693648360392906933130845919698647",
+    },
     "key": "wethe",
+    "min": undefined,
     "originSymbol": "WETH.e",
-    "symbol": "WETH.e",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xffffffff1b4bb1ac5749f73d866ffc91a3432c47",
+    "amount": 0n,
+    "decimals": 8,
+    "ids": {
+      "id": "36282181791341254438422467838694599751",
+    },
+    "key": "wbtce",
+    "min": undefined,
+    "originSymbol": "WBTC.e",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xCa01a1D0993565291051daFF390892518ACfAD3A",
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "palletInstance": 110,
+    },
     "key": "axlusdc",
+    "min": undefined,
     "originSymbol": "axlUSDC",
-    "symbol": "axlUSDC",
+    "symbol": undefined,
   },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "peaq",
-    "originSymbol": "PEAQ",
-    "symbol": "PEAQ",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 12,
-    "key": "bncs",
-    "originSymbol": "BNCS",
-    "symbol": "BNCS",
-  },
-  r {
+  _AssetAmount {
+    "address": "0xffffffff2e1d1ac9ea1686255befe995b31abc96",
     "amount": 0n,
     "decimals": 10,
-    "key": "sub",
-    "originSymbol": "SUB",
-    "symbol": "SUB",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 10,
-    "key": "ztg",
-    "originSymbol": "ZTG",
-    "symbol": "ZTG",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "fil",
-    "originSymbol": "FIL",
-    "symbol": "FIL",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "weth",
-    "originSymbol": "WETH",
-    "symbol": "WETH",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 8,
-    "key": "wbtc",
-    "originSymbol": "WBTC",
-    "symbol": "WBTC",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "vmanta",
-    "originSymbol": "vMANTA",
-    "symbol": "vMANTA",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "vglmr",
-    "originSymbol": "vGLMR",
-    "symbol": "vGLMR",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "vfil",
-    "originSymbol": "vFIL",
-    "symbol": "vFIL",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 10,
-    "key": "vdot",
-    "originSymbol": "vDOT",
-    "symbol": "vDOT",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "vastr",
-    "originSymbol": "vASTR",
-    "symbol": "vASTR",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdtwh",
-    "originSymbol": "USDT.Wh",
-    "symbol": "USDT.Wh",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdcwh",
-    "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "dai",
-    "originSymbol": "DAI",
-    "symbol": "DAI",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 12,
-    "key": "hdx",
-    "originSymbol": "HDX",
-    "symbol": "HDX",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 18,
-    "key": "apillon",
-    "originSymbol": "NCTR",
-    "symbol": "NCTR",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 10,
+    "ids": {
+      "id": "61295607754960722617854661686514597014",
+    },
     "key": "wifd",
+    "min": undefined,
     "originSymbol": "WIFD",
-    "symbol": "WIFD",
+    "symbol": undefined,
   },
-  r {
-    "amount": 0n,
-    "decimals": 10,
-    "key": "stink",
-    "originSymbol": "STINK",
-    "symbol": "STINK",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 10,
-    "key": "ded",
-    "originSymbol": "DED",
-    "symbol": "DED",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 10,
-    "key": "pink",
-    "originSymbol": "PINK",
-    "symbol": "PINK",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdc",
-    "originSymbol": "USDC",
-    "symbol": "USDC",
-  },
-  r {
-    "amount": 0n,
-    "decimals": 6,
-    "key": "usdt",
-    "originSymbol": "USDT",
-    "symbol": "USDT",
-  },
-  r {
+  _AssetAmount {
+    "address": "0xFffFFFFFEC4908b74688a01374f789B48E9a3eab",
     "amount": 0n,
     "decimals": 18,
-    "key": "ring",
-    "originSymbol": "RING",
-    "symbol": "RING",
+    "ids": {
+      "id": "314077021455772878282433861213184736939",
+    },
+    "key": "peaq",
+    "min": undefined,
+    "originSymbol": "PEAQ",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFfffffF6aF229AE7f0F4e0188157e189a487D59",
     "amount": 0n,
     "decimals": 12,
-    "key": "pha",
-    "originSymbol": "PHA",
-    "symbol": "PHA",
+    "ids": {
+      "id": "142155548796783636521833385094843759961",
+    },
+    "key": "bncs",
+    "min": undefined,
+    "originSymbol": "BNCS",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFfFffFf43B4560Bc0C451a3386E082bff50aC90",
     "amount": 0n,
-    "decimals": 12,
-    "key": "pen",
-    "originSymbol": "PEN",
-    "symbol": "PEN",
+    "decimals": 10,
+    "ids": {
+      "id": "89994634370519791027168048838578580624",
+    },
+    "key": "sub",
+    "min": undefined,
+    "originSymbol": "SUB",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFFFFfffF71815ab6142E0E20c7259126C6B40612",
     "amount": 0n,
-    "decimals": 12,
-    "key": "neuro",
-    "originSymbol": "NEURO",
-    "symbol": "NEURO",
+    "decimals": 10,
+    "ids": {
+      "id": "150874409661081770150564009349448205842",
+    },
+    "key": "ztg",
+    "min": undefined,
+    "originSymbol": "ZTG",
+    "symbol": undefined,
   },
-  r {
-    "amount": 0n,
-    "decimals": 11,
-    "key": "nodl",
-    "originSymbol": "NODL",
-    "symbol": "NODL",
-  },
-  r {
+  _AssetAmount {
+    "address": "0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2",
     "amount": 0n,
     "decimals": 18,
-    "key": "manta",
-    "originSymbol": "MANTA",
-    "symbol": "MANTA",
+    "ids": {
+      "id": "144012926827374458669278577633504620722",
+    },
+    "key": "fil",
+    "min": undefined,
+    "originSymbol": "FIL",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xab3f0245B83feB11d15AAffeFD7AD465a59817eD",
     "amount": 0n,
-    "decimals": 10,
-    "key": "ldot",
-    "originSymbol": "LDOT",
-    "symbol": "LDOT",
+    "decimals": 18,
+    "ids": {
+      "palletInstance": 110,
+    },
+    "key": "weth",
+    "min": undefined,
+    "originSymbol": "WETH",
+    "symbol": undefined,
   },
-  r {
-    "amount": 0n,
-    "decimals": 10,
-    "key": "intr",
-    "originSymbol": "INTR",
-    "symbol": "INTR",
-  },
-  r {
+  _AssetAmount {
+    "address": "0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D",
     "amount": 0n,
     "decimals": 8,
-    "key": "ibtc",
-    "originSymbol": "IBTC",
-    "symbol": "IBTC",
+    "ids": {
+      "palletInstance": 110,
+    },
+    "key": "wbtc",
+    "min": undefined,
+    "originSymbol": "WBTC",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "289989900872525819559124583375550296953",
+    },
+    "key": "vmanta",
+    "min": undefined,
+    "originSymbol": "vMANTA",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "204507659831918931608354793288110796652",
+    },
+    "key": "vglmr",
+    "min": undefined,
+    "originSymbol": "vGLMR",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "272547899416482196831721420898811311297",
+    },
+    "key": "vfil",
+    "min": undefined,
+    "originSymbol": "vFIL",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf",
+    "amount": 0n,
+    "decimals": 10,
+    "ids": {
+      "id": "29085784439601774464560083082574142143",
+    },
+    "key": "vdot",
+    "min": undefined,
+    "originSymbol": "vDOT",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFffFffff55C732C47639231a4C4373245763d26E",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "114018676402354620972806895487280206446",
+    },
+    "key": "vastr",
+    "min": undefined,
+    "originSymbol": "vASTR",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f",
+    "amount": 0n,
+    "decimals": 6,
+    "ids": {
+      "palletInstance": 110,
+    },
+    "key": "usdtwh",
+    "min": undefined,
+    "originSymbol": "USDT.Wh",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0x931715FEE2d06333043d11F658C8CE934aC61D0c",
+    "amount": 0n,
+    "decimals": 6,
+    "ids": {
+      "palletInstance": 110,
+    },
+    "key": "usdcwh",
+    "min": undefined,
+    "originSymbol": "USDC.Wh",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0x06e605775296e851FF43b4dAa541Bb0984E9D6fD",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "palletInstance": 110,
+    },
+    "key": "dai",
+    "min": undefined,
+    "originSymbol": "DAI",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC",
+    "amount": 0n,
+    "decimals": 12,
+    "ids": {
+      "id": "69606720909260275826784788104880799692",
+    },
+    "key": "hdx",
+    "min": undefined,
+    "originSymbol": "HDX",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xffffffff8a9736b44ebf188972725bed67bf694e",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "184218609779515850660274730699350567246",
+    },
+    "key": "apillon",
+    "min": undefined,
+    "originSymbol": "NCTR",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xffffffff54c556bd1d0f64ec6c78f1b477525e56",
+    "amount": 0n,
+    "decimals": 10,
+    "ids": {
+      "id": "112679793397406599376365943185137098326",
+    },
+    "key": "stink",
+    "min": undefined,
+    "originSymbol": "STINK",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6",
+    "amount": 0n,
+    "decimals": 10,
+    "ids": {
+      "id": "124463719055550872076363892993240202694",
+    },
+    "key": "ded",
+    "min": undefined,
+    "originSymbol": "DED",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xfFfFFfFf30478fAFBE935e466da114E14fB3563d",
+    "amount": 0n,
+    "decimals": 10,
+    "ids": {
+      "id": "64174511183114006009298114091987195453",
+    },
+    "key": "pink",
+    "min": undefined,
+    "originSymbol": "PINK",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D",
+    "amount": 0n,
+    "decimals": 6,
+    "ids": {
+      "id": "166377000701797186346254371275954761085",
+    },
+    "key": "usdc",
+    "min": undefined,
+    "originSymbol": "USDC",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d",
+    "amount": 0n,
+    "decimals": 6,
+    "ids": {
+      "id": "311091173110107856861649819128533077277",
+    },
+    "key": "usdt",
+    "min": undefined,
+    "originSymbol": "USDT",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "125699734534028342599692732320197985871",
+    },
+    "key": "ring",
+    "min": undefined,
+    "originSymbol": "RING",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED",
+    "amount": 0n,
+    "decimals": 12,
+    "ids": {
+      "id": "132685552157663328694213725410064821485",
+    },
+    "key": "pha",
+    "min": undefined,
+    "originSymbol": "PHA",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0",
+    "amount": 0n,
+    "decimals": 12,
+    "ids": {
+      "id": "45647473099451451833602657905356404688",
+    },
+    "key": "pen",
+    "min": undefined,
+    "originSymbol": "PEN",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFfffffFfB3229c8E7657eABEA704d5e75246e544",
+    "amount": 0n,
+    "decimals": 12,
+    "ids": {
+      "id": "238111524681612888331172110363070489924",
+    },
+    "key": "neuro",
+    "min": undefined,
+    "originSymbol": "NEURO",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xfFFffFFf7D3875460d4509eb8d0362c611B4E841",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "id": "166446646689194205559791995948102903873",
+    },
+    "key": "manta",
+    "min": undefined,
+    "originSymbol": "MANTA",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4",
+    "amount": 0n,
+    "decimals": 10,
+    "ids": {
+      "id": "225719522181998468294117309041779353812",
+    },
+    "key": "ldot",
+    "min": undefined,
+    "originSymbol": "LDOT",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab",
+    "amount": 0n,
+    "decimals": 10,
+    "ids": {
+      "id": "101170542313601871197860408087030232491",
+    },
+    "key": "intr",
+    "min": undefined,
+    "originSymbol": "INTR",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52",
+    "amount": 0n,
+    "decimals": 8,
+    "ids": {
+      "id": "120637696315203257380661607956669368914",
+    },
+    "key": "ibtc",
+    "min": undefined,
+    "originSymbol": "IBTC",
+    "symbol": undefined,
+  },
+  _AssetAmount {
+    "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
     "amount": 330000000n,
     "decimals": 10,
+    "ids": {
+      "id": "42259045809535163221576417993425387648",
+    },
     "key": "dot",
+    "min": undefined,
     "originSymbol": "DOT",
-    "symbol": "DOT",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "91372035960551235635465443179559840483",
+    },
     "key": "cfg",
+    "min": undefined,
     "originSymbol": "CFG",
-    "symbol": "CFG",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFFffffFf7cC06abdF7201b350A1265c62C8601d2",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "165823357460190568952172802245839421906",
+    },
     "key": "bnc",
+    "min": undefined,
     "originSymbol": "BNC",
-    "symbol": "BNC",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "110021739665376159354538090254163045594",
+    },
     "key": "aseed",
+    "min": undefined,
     "originSymbol": "aSEED",
-    "symbol": "aSEED",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFfFFFfffA893AD19e540E172C10d78D4d479B5Cf",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "224077081838586484055667086558292981199",
+    },
     "key": "astr",
+    "min": undefined,
     "originSymbol": "ASTR",
-    "symbol": "ASTR",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f",
     "amount": 0n,
     "decimals": 12,
+    "ids": {
+      "id": "224821240862170613278369189818311486111",
+    },
     "key": "aca",
+    "min": undefined,
     "originSymbol": "ACA",
-    "symbol": "ACA",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0x0000000000000000000000000000000000000802",
     "amount": 1330000000000000000n,
     "decimals": 18,
+    "ids": {
+      "palletInstance": 10,
+    },
     "key": "glmr",
+    "min": 100000000000000000n,
     "originSymbol": "GLMR",
-    "symbol": "GLMR",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'peaq Alphanet' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1001,
+    },
     "key": "ftmwh",
+    "min": undefined,
     "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1000,
+    },
     "key": "dev",
+    "min": undefined,
     "originSymbol": "DEV",
-    "symbol": "DEV",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 1223300000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": 0,
+    },
     "key": "agng",
+    "min": undefined,
     "originSymbol": "AGNG",
-    "symbol": "AGNG",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'peaq EVM Alphanet' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": "0xFfFfFffF000000000000000000000000000003e8",
     "amount": 330000000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": "0xFfFfFffF000000000000000000000000000003e8",
+      "minId": 1000,
+    },
     "key": "dev",
+    "min": undefined,
     "originSymbol": "DEV",
-    "symbol": "DEV",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFffFffFF000000000000000000000000000003E9",
     "amount": 123000000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": "0xFffFffFF000000000000000000000000000003E9",
+      "minId": 1001,
+    },
     "key": "ftmwh",
+    "min": undefined,
     "originSymbol": "FTM.wh",
-    "symbol": "FTM.wh",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'peaq EVM' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": "0xfFffffFF000000000000000000000000000003Ed",
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": "0xfFffffFF000000000000000000000000000003Ed",
+      "minId": 1005,
+    },
     "key": "usdtwh",
+    "min": undefined,
     "originSymbol": "USDT.Wh",
-    "symbol": "USDT.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFFFfFfFf000000000000000000000000000003ea",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "0xFFFfFfFf000000000000000000000000000003ea",
+      "minId": 1002,
+    },
     "key": "weth",
+    "min": undefined,
     "originSymbol": "WETH",
-    "symbol": "WETH",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfffFFFFF000000000000000000000000000003eb",
     "amount": 0n,
     "decimals": 8,
+    "ids": {
+      "id": "0xfffFFFFF000000000000000000000000000003eb",
+      "minId": 1003,
+    },
     "key": "wbtc",
+    "min": undefined,
     "originSymbol": "WBTC",
-    "symbol": "WBTC",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xfFffFFFF000000000000000000000000000003Ec",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "0xfFffFFFF000000000000000000000000000003Ec",
+      "minId": 1004,
+    },
     "key": "dai",
+    "min": undefined,
     "originSymbol": "DAI",
-    "symbol": "DAI",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFffFffFF000000000000000000000000000003E9",
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": "0xFffFffFF000000000000000000000000000003E9",
+      "minId": 1001,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": "0xFfFfFffF000000000000000000000000000003e8",
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": "0xFfFfFffF000000000000000000000000000003e8",
+      "minId": 1000,
+    },
     "key": "glmr",
+    "min": undefined,
     "originSymbol": "GLMR",
-    "symbol": "GLMR",
+    "symbol": undefined,
   },
 ]
 `;
 
 exports[`sdk > getParachainBalances > on 'peaq' for address: '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2T…' > should get expected balances 1`] = `
 [
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 1005,
+    },
     "key": "usdtwh",
+    "min": undefined,
     "originSymbol": "USDT.Wh",
-    "symbol": "USDT.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1002,
+    },
     "key": "weth",
+    "min": undefined,
     "originSymbol": "WETH",
-    "symbol": "WETH",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 8,
+    "ids": {
+      "id": 1003,
+    },
     "key": "wbtc",
+    "min": undefined,
     "originSymbol": "WBTC",
-    "symbol": "WBTC",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1004,
+    },
     "key": "dai",
+    "min": undefined,
     "originSymbol": "DAI",
-    "symbol": "DAI",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 6,
+    "ids": {
+      "id": 1001,
+    },
     "key": "usdcwh",
+    "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": "USDC.Wh",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 0n,
     "decimals": 18,
+    "ids": {
+      "id": 1000,
+    },
     "key": "glmr",
+    "min": undefined,
     "originSymbol": "GLMR",
-    "symbol": "GLMR",
+    "symbol": undefined,
   },
-  r {
+  _AssetAmount {
+    "address": undefined,
     "amount": 1313000000000000000n,
     "decimals": 18,
+    "ids": {
+      "id": 0,
+    },
     "key": "peaq",
+    "min": undefined,
     "originSymbol": "PEAQ",
-    "symbol": "PEAQ",
+    "symbol": undefined,
   },
 ]
 `;

@@ -4,15 +4,12 @@
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
-    "dev": "npm run build -- --watch",
-    "link": "npm ln",
-    "lint": "eslint . --ext .js,.ts",
-    "lint:fix": "npm run lint -- --fix",
+    "dev": "tsup --watch",
+    "link": "pnpm ln --global",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "test:update": "vitest -u",
-    "prepack": "prettier --write build/index.d.ts"
+    "test:update": "vitest -u"
   },
   "author": "moonbeam-foundation",
   "license": "MIT",
@@ -21,34 +18,20 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "xcm",
-    "utils"
-  ],
+  "keywords": ["moonbeam", "moonriver", "xcm", "utils"],
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
-    ".": {
-      "import": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.mjs"
-      },
-      "require": {
-        "types": "./build/index.d.ts",
-        "default": "./build/index.cjs"
-      }
-    }
+    "import": "./build/index.mjs",
+    "types": "./build/index.d.ts",
+    "default": "./build/index.mjs"
   },
   "types": "./build/index.d.ts",
-  "main": "./build/index.cjs",
+  "main": "./build/index.mjs",
   "dependencies": {
     "big.js": "^6.2.1",
     "lru-cache": "^10.2.2"
@@ -57,8 +40,9 @@
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "^12.4.2",
-    "@polkadot/apps-config": "^0.143.2",
-    "@polkadot/util": "^13.1.1"
+    "@polkadot/api": "14.3.1",
+    "@polkadot/apps-config": "0.146.1",
+    "@polkadot/util": "13.2.3",
+    "@polkadot/util-crypto": "13.2.3"
   }
 }

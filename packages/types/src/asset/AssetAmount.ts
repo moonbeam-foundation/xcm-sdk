@@ -1,47 +1,43 @@
-import { toDecimal } from '@moonbeam-network/xcm-utils';
-import Big, { RoundingMode } from 'big.js';
-import { Asset, AssetConstructorParams } from './Asset';
+import {
+  convertDecimals,
+  toBigInt,
+  toDecimal,
+} from '@moonbeam-network/xcm-utils';
+import Big, { type RoundingMode } from 'big.js';
+import { ChainAsset, type ChainAssetConstructorParams } from './ChainAsset';
 
 Big.NE = -18;
 
-export interface AssetAmountParams {
-  amount: bigint;
+export interface AssetAmountConstructorParams
+  extends ChainAssetConstructorParams {
+  amount: number | bigint;
   decimals: number;
   symbol?: string;
 }
 
-export interface AssetAmountConstructorParams
-  extends AssetConstructorParams,
-    AssetAmountParams {}
-
-export class AssetAmount extends Asset {
+export class AssetAmount extends ChainAsset {
   readonly amount: bigint;
 
-  readonly decimals: number;
-
-  readonly symbol: string;
-
-  constructor({
-    amount,
-    decimals,
-    symbol,
-    ...other
-  }: AssetAmountConstructorParams) {
+  constructor({ amount, ...other }: AssetAmountConstructorParams) {
     super(other);
 
-    this.amount = BigInt(amount);
-    this.decimals = decimals;
-    this.symbol = symbol || this.originSymbol;
+    this.amount = toBigInt(amount, other.decimals);
   }
 
-  static fromAsset(asset: Asset, params: AssetAmountParams) {
+  static fromChainAsset(
+    asset: ChainAsset,
+    params: Omit<
+      AssetAmountConstructorParams,
+      keyof ChainAssetConstructorParams
+    >,
+  ): AssetAmount {
     return new AssetAmount({
       ...asset,
       ...params,
     });
   }
 
-  isSame(asset: AssetAmount): boolean {
+  isSame(asset: ChainAsset | AssetAmount): boolean {
     return super.isEqual(asset) && this.decimals === asset.decimals;
   }
 
@@ -49,10 +45,21 @@ export class AssetAmount extends Asset {
     return this.isSame(asset) && this.amount === asset.amount;
   }
 
-  copyWith(params: Partial<AssetAmountConstructorParams>) {
+  copyWith(params: Partial<AssetAmountConstructorParams>): AssetAmount {
     return new AssetAmount({
       ...this,
       ...params,
+    });
+  }
+
+  convertDecimals(decimals: number): AssetAmount {
+    if (this.decimals === decimals) {
+      return this.copyWith({});
+    }
+
+    return this.copyWith({
+      amount: convertDecimals(this.amount, this.decimals, decimals),
+      decimals,
     });
   }
 

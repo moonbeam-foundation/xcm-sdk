@@ -1,24 +1,20 @@
-import { Address, defineChain } from 'viem';
-import { Chain } from 'viem/chains';
-import { ChainType } from '../Chain.interfaces';
-import { Parachain, ParachainConstructorParams } from './Parachain';
+import type { Address } from 'viem';
+import type { Chain } from 'viem/chains';
+import { getViemChain } from '../Chain.utils';
+import { EvmChain } from '../EvmChain';
+import { Parachain, type ParachainConstructorParams } from './Parachain';
 
 export interface EvmParachainConstructorParams
-  extends Omit<ParachainConstructorParams, 'type'> {
+  extends ParachainConstructorParams {
   id: number;
   rpc: string;
-  nativeCurrency: NativeCurrency;
   isEvmSigner?: boolean;
   contracts?: Contracts;
 }
 
-type NativeCurrency = {
-  decimals: number;
-  name: string;
-  symbol: string;
-};
-
 type Contracts = {
+  Batch?: Address;
+  XcmUtils?: Address;
   Xtokens?: Address;
 };
 
@@ -27,40 +23,38 @@ export class EvmParachain extends Parachain {
 
   readonly rpc: string;
 
-  readonly nativeCurrency: NativeCurrency;
-
   readonly isEvmSigner: boolean;
 
   readonly contracts?: Contracts;
 
+  static is(obj: unknown): obj is EvmParachain {
+    return obj instanceof EvmParachain;
+  }
+
+  static isAnyParachain(obj: unknown): obj is EvmParachain | Parachain {
+    return obj instanceof EvmParachain || obj instanceof Parachain;
+  }
+
+  static isAnyEvmChain(obj: unknown): obj is EvmParachain | EvmChain {
+    return obj instanceof EvmParachain || obj instanceof EvmChain;
+  }
+
   constructor({
     id,
     rpc,
-    nativeCurrency,
     isEvmSigner = false,
     contracts,
     ...others
   }: EvmParachainConstructorParams) {
-    super({ type: ChainType.EvmParachain, ...others });
+    super(others);
 
     this.contracts = contracts;
     this.id = id;
     this.rpc = rpc;
-    this.nativeCurrency = nativeCurrency;
     this.isEvmSigner = isEvmSigner;
   }
 
   getViemChain(): Chain {
-    return defineChain({
-      id: this.id,
-      name: this.name,
-      nativeCurrency: this.nativeCurrency,
-      rpcUrls: {
-        default: {
-          http: [this.rpc],
-          webSocket: Array.isArray(this.ws) ? this.ws : [this.ws],
-        },
-      },
-    });
+    return getViemChain(this);
   }
 }

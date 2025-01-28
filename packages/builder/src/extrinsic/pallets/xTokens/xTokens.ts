@@ -1,10 +1,13 @@
-/* eslint-disable sort-keys */
+import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import {
-  ExtrinsicConfigBuilder,
+  type ExtrinsicConfigBuilder,
   XcmVersion,
 } from '../../ExtrinsicBuilder.interfaces';
-import { getExtrinsicArgumentVersion } from '../../ExtrinsicBuilder.utils';
-import { ExtrinsicConfig } from '../../ExtrinsicConfig';
+import {
+  getExtrinsicArgumentVersion,
+  normalizeConcrete,
+  normalizeX1,
+} from '../../ExtrinsicBuilder.utils';
 import { getDestination, getWeight } from './xTokens.utils';
 
 const pallet = 'xTokens';
@@ -12,17 +15,18 @@ const pallet = 'xTokens';
 export function xTokens() {
   return {
     transfer: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination }) =>
+      build: ({ destinationAddress, asset, destination }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'transfer',
           getArgs: (func) => {
-            const version = getExtrinsicArgumentVersion(func, 2);
+            const destIndex = 2;
+            const version = getExtrinsicArgumentVersion(func, destIndex);
 
             return [
-              asset,
-              amount,
-              getDestination(version, address, destination),
+              asset.getAssetId(),
+              asset.amount,
+              getDestination(version, destinationAddress, destination),
               getWeight(),
             ];
           },
@@ -30,27 +34,26 @@ export function xTokens() {
     }),
     transferMultiAsset: (originParachainId: number) => {
       const funcName = 'transferMultiasset';
+      const destIndex = 1;
 
       return {
         here: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, destination }) =>
+          build: ({ destinationAddress: address, asset, destination }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: funcName,
               getArgs: (func) => {
-                const version = getExtrinsicArgumentVersion(func, 1);
+                const version = getExtrinsicArgumentVersion(func, destIndex);
 
                 return [
                   {
                     [version]: {
-                      id: {
-                        Concrete: {
-                          parents: 0,
-                          interior: 'Here',
-                        },
-                      },
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: 'Here',
+                      }),
                       fun: {
-                        Fungible: amount,
+                        Fungible: asset.amount,
                       },
                     },
                   },
@@ -61,28 +64,29 @@ export function xTokens() {
             }),
         }),
         X1: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, destination }) =>
+          build: ({ destinationAddress: address, asset, destination }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: funcName,
               getArgs: (func) => {
-                const version = getExtrinsicArgumentVersion(func, 1);
+                const version = getExtrinsicArgumentVersion(func, destIndex);
 
                 return [
                   {
                     [version]: {
-                      id: {
-                        Concrete: {
+                      id: normalizeConcrete(
+                        version,
+                        normalizeX1(version, {
                           parents: 1,
                           interior: {
                             X1: {
                               Parachain: originParachainId,
                             },
                           },
-                        },
-                      },
+                        }),
+                      ),
                       fun: {
-                        Fungible: amount,
+                        Fungible: asset.amount,
                       },
                     },
                   },
@@ -93,33 +97,31 @@ export function xTokens() {
             }),
         }),
         X2: (): ExtrinsicConfigBuilder => ({
-          build: ({ address, amount, asset, destination }) =>
+          build: ({ destinationAddress: address, asset, destination }) =>
             new ExtrinsicConfig({
               module: pallet,
               func: funcName,
               getArgs: (func) => {
-                const version = getExtrinsicArgumentVersion(func, 1);
+                const version = getExtrinsicArgumentVersion(func, destIndex);
 
                 return [
                   {
                     [version]: {
-                      id: {
-                        Concrete: {
-                          parents: 1,
-                          interior: {
-                            X2: [
-                              {
-                                Parachain: originParachainId,
-                              },
-                              {
-                                GeneralKey: asset,
-                              },
-                            ],
-                          },
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: originParachainId,
+                            },
+                            {
+                              GeneralKey: asset.getAssetId(),
+                            },
+                          ],
                         },
-                      },
+                      }),
                       fun: {
-                        Fungible: amount,
+                        Fungible: asset.amount,
                       },
                     },
                   },
@@ -132,14 +134,14 @@ export function xTokens() {
       };
     },
     transferMultiCurrencies: (): ExtrinsicConfigBuilder => ({
-      build: ({ address, amount, asset, destination, fee, feeAsset }) =>
+      build: ({ destinationAddress: address, asset, destination, fee }) =>
         new ExtrinsicConfig({
           module: pallet,
           func: 'transferMulticurrencies',
           getArgs: () => [
             [
-              [asset, amount],
-              [feeAsset, fee],
+              [asset.getAssetId(), asset.amount],
+              [fee.getAssetId(), fee.amount],
             ],
             1,
             getDestination(XcmVersion.v3, address, destination),

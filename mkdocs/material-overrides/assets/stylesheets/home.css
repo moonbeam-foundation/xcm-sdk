@@ -1,15 +1,15 @@
 /* Background image on home page */
-[data-md-color-scheme='slate'] .md-main {
+[data-md-color-scheme="slate"] .md-main {
   /* Set gradient background */
-  background: linear-gradient(#000, #291E3A);
+  background: linear-gradient(#000, #291e3a);
   /* For older browsers */
-  background: -webkit-linear-gradient(#000, #291E3A);
-  background: -moz-linear-gradient(#000, #291E3A);
-  background: -o-linear-gradient(#000, #291E3A);
+  background: -webkit-linear-gradient(#000, #291e3a);
+  background: -moz-linear-gradient(#000, #291e3a);
+  background: -o-linear-gradient(#000, #291e3a);
 }
 
 /* Background image on home page */
-[data-md-color-scheme='default'] .md-main {
+[data-md-color-scheme="default"] .md-main {
   /* Set gradient background */
   background: linear-gradient(#958fdc, #fff);
   /* For older browsers */
@@ -36,11 +36,12 @@
 .hero h1 {
   font-size: 36px;
   color: var(--md-default-fg-color);
+  margin-bottom: 20px;
 }
 
 .hero p {
   font-size: 18px;
-  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .md-typeset .hero-content hr {
@@ -61,6 +62,8 @@
 }
 
 .feature {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding: 20px;
   box-shadow: 0px 0px 1px var(--md-default-fg-color);
@@ -74,6 +77,7 @@
 }
 
 .feature img {
+  align-self: center;
   width: 60px;
   max-width: 100%;
   height: auto;
@@ -101,19 +105,20 @@
   justify-content: center;
 }
 
-.md-typeset pre>code {
+.md-typeset pre > code {
   display: flex;
   height: 4em;
   padding: 0;
 }
 
 .md-typeset pre {
+  height: 5em;
   margin: 0;
 }
 
 @media screen and (max-width: 76.234375em) {
   .code {
-    display: none
+    display: none;
   }
 }
 
@@ -133,4 +138,22 @@
   .feature {
     width: 100%;
   }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 0.1px solid rgb(54, 53, 53);
+  color: var(--md-default-fg-color) !important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 12px;
 }

@@ -5,7 +5,6 @@ ExtrinsicConfig {
   "func": "transfer",
   "getArgs": [Function],
   "module": "xTokens",
-  "type": "Substrate",
 }
 `;
 
@@ -39,7 +38,6 @@ ExtrinsicConfig {
   "func": "transferMultiasset",
   "getArgs": [Function],
   "module": "xTokens",
-  "type": "Substrate",
 }
 `;
 
@@ -94,7 +92,6 @@ ExtrinsicConfig {
   "func": "transferMultiasset",
   "getArgs": [Function],
   "module": "xTokens",
-  "type": "Substrate",
 }
 `;
 
@@ -143,7 +140,6 @@ ExtrinsicConfig {
   "func": "transferMultiasset",
   "getArgs": [Function],
   "module": "xTokens",
-  "type": "Substrate",
 }
 `;
 
@@ -197,7 +193,6 @@ ExtrinsicConfig {
   "func": "transferMulticurrencies",
   "getArgs": [Function],
   "module": "xTokens",
-  "type": "Substrate",
 }
 `;
 
@@ -241,290 +236,10 @@ ExtrinsicConfig {
   "func": "transferMulticurrencies",
   "getArgs": [Function],
   "module": "xTokens",
-  "type": "Substrate",
 }
 `;
 
 exports[`xTokens > transferMultiCurrencies > x2 > should get correct arguments 1`] = `
-[
-  [
-    [
-      "USDT",
-      99000000000n,
-    ],
-    [
-      "RMRK",
-      5000000000n,
-    ],
-  ],
-  1,
-  {
-    "V3": {
-      "interior": {
-        "X2": [
-          {
-            "Parachain": 1000,
-          },
-          {
-            "AccountKey20": {
-              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            },
-          },
-        ],
-      },
-      "parents": 1,
-    },
-  },
-  "Unlimited",
-]
-`;
-
-exports[`xTokens transfer should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transfer",
-  "getArgs": [Function],
-  "module": "xTokens",
-  "type": "Substrate",
-}
-`;
-
-exports[`xTokens transfer should get correct arguments 1`] = `
-[
-  "USDT",
-  99000000000n,
-  {
-    "V1": {
-      "interior": {
-        "X2": [
-          {
-            "Parachain": 1000,
-          },
-          {
-            "AccountKey20": {
-              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            },
-          },
-        ],
-      },
-      "parents": 1,
-    },
-  },
-  "Unlimited",
-]
-`;
-
-exports[`xTokens transferMultiAsset parachain should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferMultiasset",
-  "getArgs": [Function],
-  "module": "xTokens",
-  "type": "Substrate",
-}
-`;
-
-exports[`xTokens transferMultiAsset parachain should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "fun": {
-        "Fungible": 99000000000n,
-      },
-      "id": {
-        "Concrete": {
-          "interior": {
-            "X2": [
-              {
-                "Parachain": 100,
-              },
-              {
-                "GeneralKey": "USDT",
-              },
-            ],
-          },
-          "parents": 1,
-        },
-      },
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X2": [
-          {
-            "Parachain": 2032,
-          },
-          {
-            "AccountId32": {
-              "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
-              "network": null,
-            },
-          },
-        ],
-      },
-      "parents": 1,
-    },
-  },
-  "Unlimited",
-]
-`;
-
-exports[`xTokens transferMultiAsset x1 should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferMultiasset",
-  "getArgs": [Function],
-  "module": "xTokens",
-  "type": "Substrate",
-}
-`;
-
-exports[`xTokens transferMultiAsset x1 should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "fun": {
-        "Fungible": 99000000000n,
-      },
-      "id": {
-        "Concrete": {
-          "interior": {
-            "X1": {
-              "Parachain": 100,
-            },
-          },
-          "parents": 1,
-        },
-      },
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X2": [
-          {
-            "Parachain": 1000,
-          },
-          {
-            "AccountKey20": {
-              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            },
-          },
-        ],
-      },
-      "parents": 1,
-    },
-  },
-  "Unlimited",
-]
-`;
-
-exports[`xTokens transferMultiAsset x2 should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferMultiasset",
-  "getArgs": [Function],
-  "module": "xTokens",
-  "type": "Substrate",
-}
-`;
-
-exports[`xTokens transferMultiAsset x2 should get correct arguments 1`] = `
-[
-  {
-    "V1": {
-      "fun": {
-        "Fungible": 99000000000n,
-      },
-      "id": {
-        "Concrete": {
-          "interior": {
-            "X2": [
-              {
-                "Parachain": 100,
-              },
-              {
-                "GeneralKey": "USDT",
-              },
-            ],
-          },
-          "parents": 1,
-        },
-      },
-    },
-  },
-  {
-    "V1": {
-      "interior": {
-        "X2": [
-          {
-            "Parachain": 1000,
-          },
-          {
-            "AccountKey20": {
-              "key": "0xeF46c7649270C912704fB09B75097f6E32208b85",
-            },
-          },
-        ],
-      },
-      "parents": 1,
-    },
-  },
-  "Unlimited",
-]
-`;
-
-exports[`xTokens transferMultiCurrencies parachain should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferMulticurrencies",
-  "getArgs": [Function],
-  "module": "xTokens",
-  "type": "Substrate",
-}
-`;
-
-exports[`xTokens transferMultiCurrencies parachain should get correct arguments 1`] = `
-[
-  [
-    [
-      "USDT",
-      99000000000n,
-    ],
-    [
-      "RMRK",
-      5000000000n,
-    ],
-  ],
-  1,
-  {
-    "V3": {
-      "interior": {
-        "X2": [
-          {
-            "Parachain": 2032,
-          },
-          {
-            "AccountId32": {
-              "id": "0x18e6c7ad45fbab18778710642072fdd057470b76d4d568b44dea6accd5b0c423",
-              "network": null,
-            },
-          },
-        ],
-      },
-      "parents": 1,
-    },
-  },
-  "Unlimited",
-]
-`;
-
-exports[`xTokens transferMultiCurrencies x2 should be correct config 1`] = `
-ExtrinsicConfig {
-  "func": "transferMulticurrencies",
-  "getArgs": [Function],
-  "module": "xTokens",
-  "type": "Substrate",
-}
-`;
-
-exports[`xTokens transferMultiCurrencies x2 should get correct arguments 1`] = `
 [
   [
     [
