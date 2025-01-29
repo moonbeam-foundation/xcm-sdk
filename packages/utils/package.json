@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-utils",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "Moonbeam XCM utilities",
   "scripts": {
     "build": "tsup",
@@ -18,19 +18,12 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "xcm",
-    "utils"
-  ],
+  "keywords": ["moonbeam", "moonriver", "xcm", "utils"],
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",
@@ -47,9 +40,9 @@
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "14.3.1",
-    "@polkadot/apps-config": "0.146.1",
-    "@polkadot/util": "13.2.3",
-    "@polkadot/util-crypto": "13.2.3"
+    "@polkadot/api": "15.5.1",
+    "@polkadot/apps-config": "0.148.1",
+    "@polkadot/util": "13.3.1",
+    "@polkadot/util-crypto": "13.3.1"
   }
 }
