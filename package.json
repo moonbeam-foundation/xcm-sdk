@@ -12,7 +12,7 @@
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "type": "module",
-  "workspaces": ["packages/*", "examples/*", "scripts/*"],
+  "workspaces": ["packages/*", "examples/*", "scripts"],
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -22,7 +22,7 @@
     "link": "turbo run link",
     "lint": "pnpm biome check .",
     "lint:fix": "pnpm biome check --write .",
-    "lint:exports": "ts-unused-exports tsconfig.json --excludePathsFromReport='vitest.workspace.ts;tsup.config.ts;build;examples;vitest.config;src/index.ts' --exitWithCount",
+    "lint:exports": "ts-unused-exports tsconfig.json --excludePathsFromReport='vitest.workspace.ts;tsup.config.ts;build;examples;scripts;vitest.config;src/index.ts' --exitWithCount",
     "typecheck": "turbo run typecheck",
     "spell": "cspell --quiet -c cspell.config.cjs 'packages/**/src/**'",
     "test": "turbo run test",
