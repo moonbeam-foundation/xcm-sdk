@@ -5,59 +5,29 @@ on:
   schedule:
     # Runs every 30 minutes
     - cron: '*/30 * * * *'
-
+    
 jobs:
-  debug:
+  run_script:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: 🤘 checkout
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          corepack enable # Required if using pnpm
-          pnpm install || yarn install || npm install
+      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v1
 
-      - name: List directory structure
-        run: |
-          echo "Repository root structure:"
-          ls -la
-          echo "Packages directory structure:"
-          tree -L 2
+      - name: ⚙ Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
 
-      - name: Show workspace packages
-        run: |
-          echo "Checking workspaces:"
-          pnpm list --depth=1 || yarn workspaces list || npm ls --depth=1
+      - name: ⬇️ install
+        run: pnpm install --ignore-scripts
 
-      - name: Show Changeset Status
-        run: |
-          echo "Checking Changeset Status:"
-          npx changeset status --verbose
+      - name: 🛠️ Build
+        run: pnpm run build
 
-
-# jobs:
-#   run_script:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: 🤘 checkout
-#         uses: actions/checkout@v4
-
-#       - uses: pnpm/action-setup@v4
-#       - uses: oven-sh/setup-bun@v1
-
-#       - name: ⚙ Setup Node.js environment
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 20.x
-#           cache: 'pnpm'
-
-#       - name: ⬇️ install
-#         run: pnpm install --ignore-scripts
-
-#       - name: 🛠️ Build
-#         run: pnpm run build
-
-#       - name: 💻 Run script
-#         run: bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: 💻 Run script
+        run: bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
