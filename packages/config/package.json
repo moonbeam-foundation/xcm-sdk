@@ -16,20 +16,14 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "xcm"
-  ],
+  "keywords": ["moonbeam", "moonriver", "xcm"],
   "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",
@@ -44,8 +38,8 @@
     "@moonbeam-network/xcm-utils": "workspace:*"
   },
   "peerDependencies": {
-    "@polkadot/types": "14.3.1",
-    "@polkadot/util": "13.2.3",
-    "@polkadot/util-crypto": "13.2.3"
+    "@polkadot/types": "15.5.1",
+    "@polkadot/util": "13.3.1",
+    "@polkadot/util-crypto": "13.3.1"
   }
 }

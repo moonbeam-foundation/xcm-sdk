@@ -16,20 +16,14 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "xcm"
-  ],
+  "keywords": ["moonbeam", "moonriver", "xcm"],
   "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",
@@ -44,11 +38,11 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "14.3.1",
-    "@polkadot/api-augment": "14.3.1",
-    "@polkadot/types": "14.3.1",
-    "@polkadot/util": "13.2.3",
-    "@polkadot/util-crypto": "13.2.3",
+    "@polkadot/api": "15.5.1",
+    "@polkadot/api-augment": "15.5.1",
+    "@polkadot/types": "15.5.1",
+    "@polkadot/util": "13.3.1",
+    "@polkadot/util-crypto": "13.3.1",
     "@wormhole-foundation/sdk-connect": "^0.10.7",
     "@wormhole-foundation/sdk-evm": "^0.10.7",
     "viem": "^2.21.7"
