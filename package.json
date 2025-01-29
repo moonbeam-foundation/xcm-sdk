@@ -12,7 +12,7 @@
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
   "type": "module",
-  "workspaces": ["packages/*", "examples/*", "scripts"],
+  "workspaces": ["packages/*", "examples/*", "scripts/*"],
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
