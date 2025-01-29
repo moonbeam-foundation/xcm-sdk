@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-builder
 
+## 3.0.5
+
+### Patch Changes
+
+- [#432](https://github.com/moonbeam-foundation/xcm-sdk/pull/432) [`ff0177f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ff0177f7993ce365e28083d7d54abf4030160bd4) Thanks [@mmaurello](https://github.com/mmaurello)! - Update Wormhole dependencies
+
+- Updated dependencies [[`ff0177f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ff0177f7993ce365e28083d7d54abf4030160bd4)]:
+  - @moonbeam-network/xcm-types@3.0.5
+
 ## 3.0.4
 
 ### Patch Changes
