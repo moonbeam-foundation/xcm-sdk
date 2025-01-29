@@ -10,5 +10,6 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["sdk-simple", "mrl-simple", "scripts"]
+  "ignore": ["sdk-simple", "mrl-simple", "scripts"],
+  "debug": true
 }
