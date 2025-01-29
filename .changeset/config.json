@@ -8,7 +8,7 @@
   "fixed": [],
   "linked": [],
   "access": "public",
-  "baseBranch": "main",
+  "baseBranch": "mjm/fix-changeset-ignore",
   "updateInternalDependencies": "patch",
   "ignore": ["sdk-simple", "mrl-simple", "scripts"]
 }
