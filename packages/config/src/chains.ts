@@ -909,11 +909,9 @@ export const laosAlphanet = new EvmParachain({
     '0x324e69fa1a64c0b3badec0016aca64878bc2f4b6146e6da26c7aaddee21947f7',
   key: 'laos-alphanet',
   name: 'Laos Alphanet',
-  id: 0, // TODO
   isTestChain: true,
   nativeAsset: maos,
   parachainId: 4001,
-  rpc: 'https://rpc.laosalphanet.gorengine.com', // TODO
   ss58Format: 42,
   ws: ['wss://rpc.laosalphanet.gorengine.com'],
 });
