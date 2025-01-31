@@ -321,6 +321,18 @@ exports[`sdk > getParachainBalances > on 'Hydration' for address: '7MR8Qxy9sJmN6
 exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
   _AssetAmount {
+    "address": "0xffffffff06a14960bddc8610d0e694d39a3c682e",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "palletInstance": 48,
+    },
+    "key": "maos",
+    "min": undefined,
+    "originSymbol": "MAOS",
+    "symbol": undefined,
+  },
+  _AssetAmount {
     "address": "0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20",
     "amount": 0n,
     "decimals": 18,
@@ -456,7 +468,9 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "address": "0x9133c5a22024118804089f1fB752b7B2ce2a6351",
     "amount": 10000000000000000n,
     "decimals": 18,
-    "ids": undefined,
+    "ids": {
+      "palletInstance": 48,
+    },
     "key": "alan",
     "min": undefined,
     "originSymbol": "ALAN",

@@ -123,7 +123,7 @@ describe('polkadotXcm', () => {
     describe('here', () => {
       const extrinsic = polkadotXcm()
         .transferAssets()
-        .here()
+        .here(1)
         .build(buildParachainParamsMock);
 
       it('should be correct config', () => {
