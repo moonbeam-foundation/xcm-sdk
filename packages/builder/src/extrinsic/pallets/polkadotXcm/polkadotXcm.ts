@@ -196,7 +196,7 @@ export function polkadotXcm() {
       const func = 'transferAssets';
 
       return {
-        here: (): ExtrinsicConfigBuilder => ({
+        here: (parents = 0): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
               module: pallet,
@@ -210,7 +210,7 @@ export function polkadotXcm() {
                   asset: [
                     {
                       id: normalizeConcrete(version, {
-                        parents: 1,
+                        parents,
                         interior: 'Here',
                       }),
                       fun: {
@@ -274,6 +274,72 @@ export function polkadotXcm() {
     transferAssetsUsingTypeAndThen: () => {
       const func = 'transferAssetsUsingTypeAndThen';
       return {
+        here: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return [
+                  {
+                    [version]: {
+                      parents: 1,
+                      interior: {
+                        X1: [
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                        ],
+                      },
+                    },
+                  },
+                  {
+                    [version]: [
+                      {
+                        id: {
+                          parents: 0,
+                          interior: 'Here',
+                        },
+                        fun: {
+                          Fungible: params.asset.amount,
+                        },
+                      },
+                    ],
+                  },
+                  'LocalReserve',
+                  {
+                    [version]: {
+                      parents: 0,
+                      interior: 'Here',
+                    },
+                  },
+                  'LocalReserve',
+                  {
+                    [version]: [
+                      {
+                        DepositAsset: {
+                          assets: {
+                            Wild: { AllCounted: 1 },
+                          },
+                          beneficiary: {
+                            parents: 0,
+                            interior: {
+                              X1: [
+                                getExtrinsicAccount(params.destinationAddress),
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  'Unlimited',
+                ];
+              },
+            }),
+        }),
         // TODO we could pass a parameter globalConsensus in the chain asset if we need a different one
         globalConsensusEthereum: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
