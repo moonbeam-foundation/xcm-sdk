@@ -145,9 +145,9 @@ These are parachains that use EVM signers or Ethereum type addresses.
 
 **Attributes**
 
-- `id` ++"number"++ - The chain Id in the Ethereum ecosystem
-- `rpc` ++"string"++ - The RPC URL
 - `isEvmSigner` ++"boolean"++ - Whether the chain uses an EVM signer
+- `id` ++"number"++ - The chain Id in the Ethereum ecosystem. Optional, only required if `isEvmSigner` is true
+- `rpc` ++"string"++ - The RPC URL. Optional, only required if `isEvmSigner` is true
 - `contracts` ++"Contracts"++ - Some contract addresses for the chain, used for building the transactions
 
 ---

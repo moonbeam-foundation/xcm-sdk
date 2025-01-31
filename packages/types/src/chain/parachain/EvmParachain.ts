@@ -4,25 +4,13 @@ import { getViemChain } from '../Chain.utils';
 import { EvmChain } from '../EvmChain';
 import { Parachain, type ParachainConstructorParams } from './Parachain';
 
-interface EvmParachainConstructorParams extends ParachainConstructorParams {
+export interface EvmParachainConstructorParams
+  extends ParachainConstructorParams {
+  id?: number;
+  rpc?: string;
   isEvmSigner?: boolean;
   contracts?: Contracts;
 }
-
-type EvmParachainConstructorParamsForEvmSigner =
-  EvmParachainConstructorParams & {
-    id: number;
-    rpc: string;
-  };
-
-type EvmParachainConstructorParamsForNonEvmSigner = Omit<
-  EvmParachainConstructorParams,
-  'id' | 'rpc'
->;
-
-type EvmParachainConstructorParamsConditional =
-  | (EvmParachainConstructorParamsForEvmSigner & { isEvmSigner: true })
-  | (EvmParachainConstructorParamsForNonEvmSigner & { isEvmSigner?: false });
 
 type Contracts = {
   Batch?: Address;
@@ -51,13 +39,27 @@ export class EvmParachain extends Parachain {
     return obj instanceof EvmParachain || obj instanceof EvmChain;
   }
 
-  constructor(params: EvmParachainConstructorParamsConditional) {
-    super(params);
+  constructor({
+    id,
+    rpc,
+    isEvmSigner = false,
+    contracts,
+    ...others
+  }: EvmParachainConstructorParams) {
+    super(others);
 
-    this.contracts = params.contracts;
-    this.id = 'id' in params ? params.id : 0;
-    this.rpc = 'rpc' in params ? params.rpc : '';
-    this.isEvmSigner = params.isEvmSigner ?? false;
+    if (isEvmSigner) {
+      if (!id || !rpc) {
+        throw new Error(
+          `'id' and 'rpc' must be provided for ${this.name} if 'isEvmSigner' is true`,
+        );
+      }
+    }
+
+    this.contracts = contracts;
+    this.id = id ?? 0;
+    this.rpc = rpc ?? '';
+    this.isEvmSigner = isEvmSigner;
   }
 
   getViemChain(): Chain {
