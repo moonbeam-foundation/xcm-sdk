@@ -1,5 +1,17 @@
 # @moonbeam-network/mrl
 
+## 3.0.6
+
+### Patch Changes
+
+- [#435](https://github.com/moonbeam-foundation/xcm-sdk/pull/435) [`555ea8b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/555ea8b10fb376924fbb1e48d8154fb3cca7e8f7) Thanks [@mmaurello](https://github.com/mmaurello)! - Lint fixes
+
+- Updated dependencies [[`555ea8b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/555ea8b10fb376924fbb1e48d8154fb3cca7e8f7), [`4c3399f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4c3399fd71fc39aef06226f03b294076746cfec3)]:
+  - @moonbeam-network/xcm-builder@3.0.6
+  - @moonbeam-network/xcm-config@3.0.6
+  - @moonbeam-network/xcm-types@3.0.6
+  - @moonbeam-network/xcm-sdk@3.0.6
+
 ## 3.0.5
 
 ### Patch Changes
