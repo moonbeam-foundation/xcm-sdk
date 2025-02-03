@@ -6,8 +6,8 @@ import { Parachain, type ParachainConstructorParams } from './Parachain';
 
 export interface EvmParachainConstructorParams
   extends ParachainConstructorParams {
-  id: number;
-  rpc: string;
+  id?: number;
+  rpc?: string;
   isEvmSigner?: boolean;
   contracts?: Contracts;
 }
@@ -48,9 +48,17 @@ export class EvmParachain extends Parachain {
   }: EvmParachainConstructorParams) {
     super(others);
 
+    if (isEvmSigner) {
+      if (!id || !rpc) {
+        throw new Error(
+          `'id' and 'rpc' must be provided for ${this.name} if 'isEvmSigner' is true`,
+        );
+      }
+    }
+
     this.contracts = contracts;
-    this.id = id;
-    this.rpc = rpc;
+    this.id = id ?? 0;
+    this.rpc = rpc ?? '';
     this.isEvmSigner = isEvmSigner;
   }
 

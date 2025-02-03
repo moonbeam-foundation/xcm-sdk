@@ -49,7 +49,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           asset: dot,
         },
       },
-      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().here(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().here(1),
     },
     {
       source: {

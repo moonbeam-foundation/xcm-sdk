@@ -46,6 +46,7 @@ import {
   ldot,
   lit,
   manta,
+  maos,
   mgx,
   movr,
   neuro,
@@ -901,11 +902,28 @@ export const mantaParachain = new Parachain({
   ws: ['wss://ws.manta.systems'],
 });
 
+export const laosAlphanet = new EvmParachain({
+  assets: [ChainAsset.fromAsset(maos, { decimals: 18 })],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x324e69fa1a64c0b3badec0016aca64878bc2f4b6146e6da26c7aaddee21947f7',
+  key: 'laos-alphanet',
+  name: 'Laos Alphanet',
+  isTestChain: true,
+  nativeAsset: maos,
+  parachainId: 4001,
+  ss58Format: 42,
+  ws: ['wss://rpc.laosalphanet.gorengine.com'],
+});
+
 export const moonbaseAlpha = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(alan, {
       address: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
       decimals: 18,
+      ids: {
+        palletInstance: 48,
+      },
     }),
     ChainAsset.fromAsset(ampe, {
       address: '0xfFfFfffF7fee8415e1c2AC3A15C48D3546B95e16',
@@ -934,6 +952,13 @@ export const moonbaseAlpha = new EvmParachain({
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
+      },
+    }),
+    ChainAsset.fromAsset(maos, {
+      address: '0xffffffff06a14960bddc8610d0e694d39a3c682e',
+      decimals: 18,
+      ids: {
+        palletInstance: 48,
       },
     }),
     ChainAsset.fromAsset(otp, {
@@ -2301,6 +2326,7 @@ export const chainsList: AnyChain[] = [
   kintsugi,
   kusama,
   kusamaAssetHub,
+  laosAlphanet,
   mangataKusama,
   mantaParachain,
   moonbaseAlpha,
