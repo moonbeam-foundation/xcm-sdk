@@ -1049,9 +1049,9 @@
 <p><strong>Example</strong>: Moonbeam</p>
 <p><strong>Attributes</strong></p>
 <ul>
-<li><code>id</code> <span class="keys"><kbd>number</kbd></span> - The chain Id in the Ethereum ecosystem</li>
-<li><code>rpc</code> <span class="keys"><kbd>string</kbd></span> - The RPC URL</li>
 <li><code>isEvmSigner</code> <span class="keys"><kbd>boolean</kbd></span> - Whether the chain uses an EVM signer</li>
+<li><code>id</code> <span class="keys"><kbd>number</kbd></span> - The chain Id in the Ethereum ecosystem. Optional, only required if <code>isEvmSigner</code> is true</li>
+<li><code>rpc</code> <span class="keys"><kbd>string</kbd></span> - The RPC URL. Optional, only required if <code>isEvmSigner</code> is true</li>
 <li><code>contracts</code> <span class="keys"><kbd>Contracts</kbd></span> - Some contract addresses for the chain, used for building the transactions</li>
 </ul>
 <hr />
