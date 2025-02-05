@@ -21,7 +21,7 @@ export const alphanetRelayRoutes = new ChainRoutes({
       destination: {
         asset: unit,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
