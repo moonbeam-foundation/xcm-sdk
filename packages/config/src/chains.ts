@@ -735,34 +735,6 @@ export const karura = new Parachain({
   ],
 });
 
-export const khala = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 6,
-        palletInstance: 10,
-      },
-    }),
-    ChainAsset.fromAsset(pha, {
-      decimals: 12,
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xd43540ba6d3eb4897c28a77d48cb5b729fea37603cbbfc7a86a73b72adb3be8d',
-  key: 'khala',
-  name: 'Khala',
-  nativeAsset: pha,
-  parachainId: 2004,
-  ss58Format: 30,
-  ws: [
-    'wss://khala-rpc.dwellir.com',
-    'wss://khala-api.phala.network/ws',
-    'wss://khala.api.onfinality.io/public-ws',
-  ],
-});
-
 export const kintsugi = new Parachain({
   assets: [
     ChainAsset.fromAsset(kint, {
@@ -2322,7 +2294,6 @@ export const chainsList: AnyChain[] = [
   integritee,
   interlay,
   karura,
-  khala,
   kintsugi,
   kusama,
   kusamaAssetHub,
