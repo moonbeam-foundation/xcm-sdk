@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/mrl",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "Moonbeam Routed Liquidity",
   "scripts": {
     "build": "tsup",
@@ -16,20 +16,14 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": [
-    "moonbeam",
-    "moonriver",
-    "mrl"
-  ],
+  "keywords": ["moonbeam", "moonriver", "mrl"],
   "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",

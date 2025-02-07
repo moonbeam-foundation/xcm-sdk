@@ -15,7 +15,6 @@ import {
   ksm,
   mgx,
   movr,
-  pha,
   pica,
   rmrk,
   sdn,
@@ -34,7 +33,6 @@ import {
   darwiniaCrab,
   integritee,
   karura,
-  khala,
   kintsugi,
   kusama,
   kusamaAssetHub,
@@ -126,25 +124,6 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
         min: AssetMinBuilder().assetRegistry().assetMetadatas(),
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: khala,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          amount: 0.001,
-          asset: movr,
-        },
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -451,29 +430,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 5.5,
           asset: mgx,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: pha,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: pha,
-        chain: khala,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.32,
-          asset: pha,
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),

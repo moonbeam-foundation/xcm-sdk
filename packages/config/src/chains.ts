@@ -254,7 +254,6 @@ export const bifrostKusama = new Parachain({
     'wss://bifrost-rpc.dwellir.com',
     'wss://us.bifrost-rpc.liebi.com/ws',
     'wss://bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-parachain.api.onfinality.io/public-ws',
   ],
 });
 
@@ -327,7 +326,6 @@ export const bifrostPolkadot = new Parachain({
     'wss://bifrost-polkadot-rpc.dwellir.com',
     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
     'wss://hk.p.bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-polkadot.api.onfinality.io/public-ws',
   ],
 });
 
@@ -732,34 +730,6 @@ export const karura = new Parachain({
     'wss://karura-rpc-0.aca-api.network',
     'wss://karura-rpc.dwellir.com',
     'wss://karura.api.onfinality.io/public-ws',
-  ],
-});
-
-export const khala = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 6,
-        palletInstance: 10,
-      },
-    }),
-    ChainAsset.fromAsset(pha, {
-      decimals: 12,
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xd43540ba6d3eb4897c28a77d48cb5b729fea37603cbbfc7a86a73b72adb3be8d',
-  key: 'khala',
-  name: 'Khala',
-  nativeAsset: pha,
-  parachainId: 2004,
-  ss58Format: 30,
-  ws: [
-    'wss://khala-rpc.dwellir.com',
-    'wss://khala-api.phala.network/ws',
-    'wss://khala.api.onfinality.io/public-ws',
   ],
 });
 
@@ -2296,11 +2266,7 @@ export const zeitgeist = new Parachain({
   parachainId: 2092,
   ss58Format: 73,
   usesChainDecimals: true,
-  ws: [
-    'wss://main.rpc.zeitgeist.pm/ws',
-    'wss://zeitgeist-rpc.dwellir.com',
-    'wss://zeitgeist.api.onfinality.io/public-ws',
-  ],
+  ws: ['wss://zeitgeist.api.onfinality.io/public-ws'],
 });
 
 export const chainsList: AnyChain[] = [
@@ -2322,7 +2288,6 @@ export const chainsList: AnyChain[] = [
   integritee,
   interlay,
   karura,
-  khala,
   kintsugi,
   kusama,
   kusamaAssetHub,
