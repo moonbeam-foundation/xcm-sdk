@@ -254,7 +254,6 @@ export const bifrostKusama = new Parachain({
     'wss://bifrost-rpc.dwellir.com',
     'wss://us.bifrost-rpc.liebi.com/ws',
     'wss://bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-parachain.api.onfinality.io/public-ws',
   ],
 });
 
@@ -327,7 +326,6 @@ export const bifrostPolkadot = new Parachain({
     'wss://bifrost-polkadot-rpc.dwellir.com',
     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
     'wss://hk.p.bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-polkadot.api.onfinality.io/public-ws',
   ],
 });
 
@@ -2268,11 +2266,7 @@ export const zeitgeist = new Parachain({
   parachainId: 2092,
   ss58Format: 73,
   usesChainDecimals: true,
-  ws: [
-    'wss://main.rpc.zeitgeist.pm/ws',
-    'wss://zeitgeist-rpc.dwellir.com',
-    'wss://zeitgeist.api.onfinality.io/public-ws',
-  ],
+  ws: ['wss://zeitgeist.api.onfinality.io/public-ws'],
 });
 
 export const chainsList: AnyChain[] = [
