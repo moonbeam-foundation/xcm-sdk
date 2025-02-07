@@ -143,7 +143,7 @@ In the process of transferring the assets, you must get the transfer data first 
 <div class="grid" markdown>
 <div markdown>
 
-Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exlusive to MRL which is the [moon chain](#the-moon-chain)
+Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exclusive to MRL which is the [moon chain](#the-moon-chain)
 
 **Attributes**
 
