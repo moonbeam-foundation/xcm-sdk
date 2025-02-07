@@ -11,7 +11,7 @@ For more details about Moonbeam Routed Liquidity (MRL) itself, refer to the [MRL
 
 The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s. 
 
-To use it, chains are configured following an iterface which contains all the necessary information to perform the transfers.
+To use it, chains are configured following an interface which contains all the necessary information to perform the transfers.
 
 This sdk uses the [XCM-SDK types and concepts as base](../reference/xcm.md). In this section we'll provide a detailed reference for the most important concepts, types, interfaces and methods related to the MRL SDK.
 
