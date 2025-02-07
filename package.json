@@ -35,7 +35,7 @@
     "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",
     "changeset": "changeset",
     "changeset:status": "changeset status",
-    "changeset:version": "changeset version && pnpm install --lockfile-only",
+    "changeset:version": "changeset version && pnpm install --lockfile-only && pnpm lint:fix",
     "changeset:publish": "pnpm run build && changeset publish"
   },
   "dependencies": {
