@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-config",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "All necessary configuration to transfer assets from Moonbeam, Moonriver, Moonbase to other parachains and back",
   "scripts": {
     "build": "tsup",
@@ -16,14 +16,20 @@
     "type": "git",
     "url": "git+https://github.com/moonbeam-foundation/xcm-sdk.git"
   },
-  "keywords": ["moonbeam", "moonriver", "xcm"],
+  "keywords": [
+    "moonbeam",
+    "moonriver",
+    "xcm"
+  ],
   "author": "moonbeam-foundation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",
