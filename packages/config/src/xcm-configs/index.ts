@@ -16,7 +16,6 @@ import { hydrationAlphanetRoutes } from './hydrationAlphanet';
 import { integriteeRoutes } from './integritee';
 import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
-import { khalaRouts } from './khala';
 import { kintsugiRoutes } from './kintsugi';
 import { kusamaRoutes } from './kusama';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
@@ -64,7 +63,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   integriteeRoutes,
   interlayRoutes,
   karuraRoutes,
-  khalaRouts,
   kintsugiRoutes,
   kusamaRoutes,
   mangataKusamaRoutes,
