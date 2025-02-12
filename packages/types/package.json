@@ -40,6 +40,6 @@
     "@wormhole-foundation/sdk-connect": "^1.4.5"
   },
   "peerDependencies": {
-    "viem": "^2.21.7"
+    "viem": "^2.23.1"
   }
 }
