@@ -177,24 +177,29 @@ export async function getVersionedAssetId(
   asset: ChainAsset,
   chain: AnyParachain,
 ): Promise<object> {
-  return { parents: 0, interior: 'Here' };
-  // const assetId = asset.getAssetId();
-  // const palletInstance = asset.getAssetPalletInstance();
+  if (asset.key === 'dot' && chain.key === 'polkadot') {
+    return { parents: 0, interior: 'Here' };
+  }
+  if (asset.key === 'dot' && chain.key === 'polkadot-asset-hub') {
+    return { parents: 1, interior: 'Here' };
+  }
+  const assetId = asset.getAssetId();
+  const palletInstance = asset.getAssetPalletInstance();
 
-  // if (assetId === chain.nativeAsset.originSymbol) {
-  //   return getNativeAssetId(palletInstance);
-  // }
+  if (assetId === chain.nativeAsset.originSymbol) {
+    return getNativeAssetId(palletInstance);
+  }
 
-  // if (asset.hasOnlyAddress()) {
-  //   return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
-  // }
+  if (asset.hasOnlyAddress()) {
+    return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
+  }
 
-  // const assetType = await getAssetIdType(api, assetId);
-  // const assetTypeObject = assetType.unwrap().asXcm.toJSON();
+  const assetType = await getAssetIdType(api, assetId);
+  const assetTypeObject = assetType.unwrap().asXcm.toJSON();
 
-  // const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
+  const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
 
-  // return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
+  return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
 }
 
 export async function getFeeForXcmInstructionsAndAsset(

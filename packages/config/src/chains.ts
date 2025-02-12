@@ -2099,7 +2099,7 @@ export const polkadotAssetHub = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
-  key: 'Polkadot-asset-hub',
+  key: 'polkadot-asset-hub',
   name: 'Polkadot Asset Hub',
   nativeAsset: dot,
   parachainId: 1000,
