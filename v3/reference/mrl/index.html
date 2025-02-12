@@ -925,7 +925,7 @@
 <p>A new module, <code>@moonbeam-foundation/mrl</code>, has been added to the Moonbeam SDK to support transfers between chains from the Polkadot ecosystem and external chains from outside the Polkadot ecosystem.</p>
 <p>For more details about Moonbeam Routed Liquidity (MRL) itself, refer to the <a href="https://docs.moonbeam.network/builders/interoperability/mrl/" target="_blank">MRL Documentation</a>.</p>
 <p>The MRL SDK simplifies the process of routing liquidity from various blockchains into the Polkadot ecosystem by providing a set of tools and functions that abstract away the complexities of cross-chain communication, by leveraging GMP, XCM, and XC-20s. </p>
-<p>To use it, chains are configured following an iterface which contains all the necessary information to perform the transfers.</p>
+<p>To use it, chains are configured following an interface which contains all the necessary information to perform the transfers.</p>
 <p>This sdk uses the <a href="../xcm/">XCM-SDK types and concepts as base</a>. In this section we'll provide a detailed reference for the most important concepts, types, interfaces and methods related to the MRL SDK.</p>
 <hr />
 <h2 id="transfer-types">Transfer types</h2>
@@ -1037,7 +1037,7 @@
 <h3 id="the-transfer-data-object">The Transfer Data Object</h3>
 <div class="grid">
 <div>
-<p>Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exlusive to MRL which is the <a href="#the-moon-chain">moon chain</a></p>
+<p>Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exclusive to MRL which is the <a href="#the-moon-chain">moon chain</a></p>
 <p><strong>Attributes</strong></p>
 <ul>
 <li><code>source</code> <span class="keys"><kbd>SourceTransferData</kbd></span> <a href="https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - The assembled source chain and address information</li>
