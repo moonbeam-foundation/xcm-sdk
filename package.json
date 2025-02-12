@@ -55,18 +55,18 @@
     "@changesets/cli": "^2.27.12",
     "@slack/webhook": "^7.0.4",
     "@types/big.js": "^6.2.2",
-    "bun": "^1.2.1",
+    "bun": "^1.2.2",
     "cspell": "^8.17.3",
     "dotenv": "^16.4.7",
     "glob": "^11.0.1",
     "lefthook": "^1.10.10",
-    "syncpack": "^13.0.0",
+    "syncpack": "^13.0.2",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.3.6",
-    "turbo": "^2.3.4",
+    "turbo": "^2.4.1",
     "typescript": "^5.7.3",
-    "viem": "^2.22.16",
-    "vitest": "^3.0.4"
+    "viem": "^2.23.1",
+    "vitest": "^3.0.5"
   },
   "overrides": {
     "cross-spawn": "^7.0.5"
