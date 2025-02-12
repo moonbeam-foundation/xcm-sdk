@@ -50,12 +50,19 @@ function xcmPaymentApi() {
               asset,
               destination,
             );
+            console.log('versionedFeeAssetId', versionedFeeAssetId);
+            console.log(
+              'getWithdrawAssetInstruction(assets)',
+              getWithdrawAssetInstruction([versionedFeeAssetId]),
+            );
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
               : [versionedFeeAssetId, versionedTransferAssetId];
+            console.log('versionedAssets', versionedAssets);
 
             const assets =
               feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
+            console.log('assets', assets);
 
             const instructions = [
               isAssetReserveChain
@@ -66,6 +73,8 @@ function xcmPaymentApi() {
               getDepositAssetInstruction(address, assets),
               getSetTopicInstruction(),
             ];
+
+            console.log('instructions', instructions);
 
             return getFeeForXcmInstructionsAndAsset(
               api,

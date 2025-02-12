@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ContractBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   aca,
@@ -360,7 +361,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadot,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dot,
         },
       },
@@ -383,7 +386,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: dot,
         },
       },
