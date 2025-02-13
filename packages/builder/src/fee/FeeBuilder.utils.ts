@@ -183,6 +183,20 @@ export async function getVersionedAssetId(
   if (asset.key === 'dot' && chain.key === 'polkadot-asset-hub') {
     return { parents: 1, interior: 'Here' };
   }
+
+  if (asset.key === 'astr' && chain.key === 'astar') {
+    return { parents: 0, interior: 'Here' };
+  }
+
+  if (asset.key === 'glmr' && chain.key === 'astar') {
+    return {
+      parents: 1,
+      interior: {
+        X2: [{ Parachain: 2004 }, { PalletInstance: 10 }],
+      },
+    };
+  }
+
   const assetId = asset.getAssetId();
   const palletInstance = asset.getAssetPalletInstance();
 

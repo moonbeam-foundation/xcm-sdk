@@ -106,7 +106,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: astar,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.0002,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: glmr,
         },
       },
@@ -268,7 +270,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: astar,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.1,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: astr,
         },
       },
