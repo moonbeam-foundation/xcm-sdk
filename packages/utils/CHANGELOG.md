@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.0.6
+
+### Patch Changes
+
+- [#448](https://github.com/moonbeam-foundation/xcm-sdk/pull/448) [`9cfb71c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9cfb71c2f78698454fc753ec2643caa52b92bcb3) Thanks [@Rihyx](https://github.com/Rihyx)! - Update esbuild
+
 ## 3.0.5
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # @moonbeam-network/mrl
 
+## 3.0.9
+
+### Patch Changes
+
+- [#448](https://github.com/moonbeam-foundation/xcm-sdk/pull/448) [`9cfb71c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9cfb71c2f78698454fc753ec2643caa52b92bcb3) Thanks [@Rihyx](https://github.com/Rihyx)! - Update esbuild
+
+- Updated dependencies [[`9cfb71c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/9cfb71c2f78698454fc753ec2643caa52b92bcb3)]:
+  - @moonbeam-network/xcm-builder@3.0.8
+  - @moonbeam-network/xcm-config@3.0.9
+  - @moonbeam-network/xcm-sdk@3.0.9
+  - @moonbeam-network/xcm-types@3.0.8
+  - @moonbeam-network/xcm-utils@3.0.6
+
 ## 3.0.8
 
 ### Patch Changes
