@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-utils
 
+## 3.0.5
+
+### Patch Changes
+
+- [#447](https://github.com/moonbeam-foundation/xcm-sdk/pull/447) [`0424bca`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0424bcaeb1912096a6e0effd1a8313002850db2a) Thanks [@Rihyx](https://github.com/Rihyx)! - Migrate GitHub workflows to OpsLayer pnpm installation
+
+- [#442](https://github.com/moonbeam-foundation/xcm-sdk/pull/442) [`2c4a22d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2c4a22d0538fba4202e88e9ef4534a55cb09441c) Thanks [@mmaurello](https://github.com/mmaurello)! - PAtch bump to test changeset fix in release flow
+
+- [#445](https://github.com/moonbeam-foundation/xcm-sdk/pull/445) [`a6c32a8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a6c32a8d6ae26a7864b9ccf16c78978d0af7aa1c) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
+
+- [#446](https://github.com/moonbeam-foundation/xcm-sdk/pull/446) [`3ea4276`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3ea427622b36de0f9a1dce299a1455a272afbcd3) Thanks [@Rihyx](https://github.com/Rihyx)! - Update polkadot packages and pnpm
+
 ## 3.0.4
 
 ### Patch Changes
