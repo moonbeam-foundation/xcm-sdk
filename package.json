@@ -13,7 +13,7 @@
   },
   "type": "module",
   "workspaces": ["packages/*", "examples/*", "scripts"],
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.3.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
@@ -39,10 +39,10 @@
     "changeset:publish": "pnpm run build && changeset publish"
   },
   "dependencies": {
-    "@polkadot/api": "15.5.1",
-    "@polkadot/api-augment": "15.5.1",
-    "@polkadot/apps-config": "0.148.1",
-    "@polkadot/types": "15.5.1",
+    "@polkadot/api": "15.5.2",
+    "@polkadot/api-augment": "15.5.2",
+    "@polkadot/apps-config": "0.149.1",
+    "@polkadot/types": "15.5.2",
     "@polkadot/util": "13.3.1",
     "@polkadot/util-crypto": "13.3.1",
     "@wormhole-foundation/sdk-connect": "^1.4.5",
@@ -63,9 +63,9 @@
     "syncpack": "^13.0.2",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.3.6",
-    "turbo": "^2.4.1",
+    "turbo": "^2.4.2",
     "typescript": "^5.7.3",
-    "viem": "^2.23.1",
+    "viem": "^2.23.2",
     "vitest": "^3.0.5"
   },
   "overrides": {
