@@ -7,17 +7,7 @@ jobs:
   publish-dev-versions:
     runs-on: ubuntu-latest
     steps:
-      - name: 🤘 checkout
-        uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-      - uses: oven-sh/setup-bun@v1
-
-      - name: ⚙ Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: 'pnpm'
+      - uses: opslayertech/setup-node@pnpm
 
       - name: 🔐 Authenticate with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
