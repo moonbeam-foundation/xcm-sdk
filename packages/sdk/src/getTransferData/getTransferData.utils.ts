@@ -163,6 +163,7 @@ export interface GetDestinationFeeParams {
   feeAsset: Asset;
   destination: AnyChain;
   fee: number | FeeConfigBuilder;
+  source: AnyChain;
 }
 
 export async function getDestinationFee({
@@ -171,25 +172,27 @@ export async function getDestinationFee({
   destination,
   fee,
   feeAsset,
+  source,
 }: GetDestinationFeeParams): Promise<AssetAmount> {
   const zero = AssetAmount.fromChainAsset(destination.getChainAsset(feeAsset), {
     amount: 0n,
   });
 
-  if (Number.isFinite(fee)) {
+  if (typeof fee === 'number') {
     return zero.copyWith({
-      amount: fee as number,
+      amount: fee,
     });
   }
 
   if (EvmParachain.isAnyParachain(destination)) {
     const polkadot = await PolkadotService.create(destination);
-    const cfg = (fee as FeeConfigBuilder).build({
+    const cfg = fee.build({
       address,
       api: polkadot.api,
       asset: destination.getChainAsset(asset),
       destination,
       feeAsset: destination.getChainAsset(feeAsset),
+      source,
     });
 
     return zero.copyWith({

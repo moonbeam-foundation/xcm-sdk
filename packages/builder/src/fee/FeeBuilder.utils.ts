@@ -77,6 +77,7 @@ export function getBuyExecutionInstruction(assetType: object) {
 
 export function getDepositAssetInstruction(address: string, assets: object[]) {
   const accountKey = {
+    // TODO get AccountId32 or AccountKey20 dynamically
     AccountId32: {
       key: address,
       network: null,
@@ -188,11 +189,36 @@ export async function getVersionedAssetId(
     return { parents: 0, interior: 'Here' };
   }
 
-  if (asset.key === 'glmr' && chain.key === 'astar') {
+  if (asset.key === 'hdx' && chain.key === 'hydration') {
+    return {
+      parents: 0,
+      interior: { X1: [{ GeneralIndex: 0 }] },
+    };
+  }
+
+  if (
+    asset.key === 'glmr' &&
+    (chain.key === 'astar' || chain.key === 'hydration')
+  ) {
     return {
       parents: 1,
       interior: {
         X2: [{ Parachain: 2004 }, { PalletInstance: 10 }],
+      },
+    };
+  }
+  console.log('asset', asset);
+
+  if (asset.key === 'usdcwh' && chain.key === 'hydration') {
+    console.log('asset post', asset.key, asset.address);
+    return {
+      parents: 1,
+      interior: {
+        X3: [
+          { Parachain: 2004 },
+          { PalletInstance: 110 },
+          { AccountKey20: { key: asset.address, network: null } },
+        ],
       },
     };
   }

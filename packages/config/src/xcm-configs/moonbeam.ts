@@ -147,7 +147,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: hydration,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.05,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: false }),
           asset: glmr,
         },
       },
@@ -748,7 +750,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: hydration,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.6,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .xcmPaymentFee({ isAssetReserveChain: true }),
           asset: hdx,
         },
       },
@@ -794,7 +798,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: hydration,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.004,
+          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+            isAssetReserveChain: false,
+          }),
           asset: usdcwh,
         },
       },

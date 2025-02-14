@@ -36,13 +36,15 @@ function xcmPaymentApi() {
         asset,
         destination,
         feeAsset,
+        source,
       }: FeeConfigBuilderParams) =>
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
+            const sourceAsset = source.getChainAsset(asset);
             const versionedFeeAssetId = await getVersionedAssetId(
               api,
-              feeAsset,
+              sourceAsset,
               destination,
             );
             const versionedTransferAssetId = await getVersionedAssetId(
@@ -55,6 +57,8 @@ function xcmPaymentApi() {
               'getWithdrawAssetInstruction(assets)',
               getWithdrawAssetInstruction([versionedFeeAssetId]),
             );
+
+            // TODO mjm refactor all this
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
               : [versionedFeeAssetId, versionedTransferAssetId];
