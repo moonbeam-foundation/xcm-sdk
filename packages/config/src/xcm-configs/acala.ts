@@ -22,7 +22,7 @@ export const acalaRoutes = new ChainRoutes({
       destination: {
         asset: aca,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
@@ -48,7 +48,7 @@ export const acalaRoutes = new ChainRoutes({
       destination: {
         asset: aseed,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
@@ -100,7 +100,7 @@ export const acalaRoutes = new ChainRoutes({
       destination: {
         asset: ldot,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

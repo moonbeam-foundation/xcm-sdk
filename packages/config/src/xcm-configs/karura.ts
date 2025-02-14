@@ -22,7 +22,7 @@ export const karuraRoutes = new ChainRoutes({
       destination: {
         asset: kar,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
@@ -48,7 +48,7 @@ export const karuraRoutes = new ChainRoutes({
       destination: {
         asset: aseed,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
