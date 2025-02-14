@@ -13,7 +13,7 @@
   },
   "type": "module",
   "workspaces": ["packages/*", "examples/*", "scripts"],
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.3.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
@@ -35,14 +35,14 @@
     "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",
     "changeset": "changeset",
     "changeset:status": "changeset status",
-    "changeset:version": "changeset version && pnpm install --lockfile-only",
+    "changeset:version": "changeset version && pnpm install --lockfile-only && pnpm lint:fix",
     "changeset:publish": "pnpm run build && changeset publish"
   },
   "dependencies": {
-    "@polkadot/api": "15.5.1",
-    "@polkadot/api-augment": "15.5.1",
-    "@polkadot/apps-config": "0.148.1",
-    "@polkadot/types": "15.5.1",
+    "@polkadot/api": "15.5.2",
+    "@polkadot/api-augment": "15.5.2",
+    "@polkadot/apps-config": "0.149.1",
+    "@polkadot/types": "15.5.2",
     "@polkadot/util": "13.3.1",
     "@polkadot/util-crypto": "13.3.1",
     "@wormhole-foundation/sdk-connect": "^1.4.5",
@@ -55,18 +55,18 @@
     "@changesets/cli": "^2.27.12",
     "@slack/webhook": "^7.0.4",
     "@types/big.js": "^6.2.2",
-    "bun": "^1.2.1",
+    "bun": "^1.2.2",
     "cspell": "^8.17.3",
     "dotenv": "^16.4.7",
     "glob": "^11.0.1",
     "lefthook": "^1.10.10",
-    "syncpack": "^13.0.0",
+    "syncpack": "^13.0.2",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.3.6",
-    "turbo": "^2.3.4",
+    "turbo": "^2.4.2",
     "typescript": "^5.7.3",
-    "viem": "^2.22.16",
-    "vitest": "^3.0.4"
+    "viem": "^2.23.2",
+    "vitest": "^3.0.5"
   },
   "overrides": {
     "cross-spawn": "^7.0.5"
@@ -78,7 +78,8 @@
       "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5",
       "nanoid@<3.3.8": ">=3.3.8",
       "elliptic@<6.6.0": ">=6.6.0",
-      "vite@>=5.0.0 <=5.4.11": ">=5.4.12"
+      "vite@>=5.0.0 <=5.4.11": ">=5.4.12",
+      "esbuild@<= 0.24.2": ">=0.25.0"
     }
   }
 }

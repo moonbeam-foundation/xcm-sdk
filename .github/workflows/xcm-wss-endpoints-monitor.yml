@@ -11,20 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🤘 checkout
-        uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-      - uses: oven-sh/setup-bun@v1
-
-      - name: ⚙ Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'pnpm'
-
-      - name: ⬇️ install
-        run: pnpm install --ignore-scripts
+      - uses: opslayertech/setup-node@pnpm
 
       - name: 🛠️ Build
         run: pnpm run build

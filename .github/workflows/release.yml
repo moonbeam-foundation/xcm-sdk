@@ -12,19 +12,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: 🤘 checkout
-        uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-
-      - name: ⚙ Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: 'pnpm'
-
-      - name: ⬇️  Install dependencies
-        run: pnpm install --ignore-scripts --frozen-lockfile
+      - uses: opslayertech/setup-node@pnpm
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
