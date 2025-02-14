@@ -22,7 +22,7 @@ export const peaqRoutes = new ChainRoutes({
       destination: {
         asset: peaq,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

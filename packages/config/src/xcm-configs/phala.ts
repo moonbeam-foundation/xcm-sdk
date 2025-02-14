@@ -21,7 +21,7 @@ export const phalaRoutes = new ChainRoutes({
       destination: {
         asset: pha,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

@@ -21,7 +21,7 @@ export const pendulumRoutes = new ChainRoutes({
       destination: {
         asset: pen,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

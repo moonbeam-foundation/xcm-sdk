@@ -21,7 +21,7 @@ export const zeitgeistRoutes = new ChainRoutes({
       destination: {
         asset: ztg,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

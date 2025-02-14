@@ -41,7 +41,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: dot,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
@@ -68,7 +68,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: usdt,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
@@ -128,7 +128,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: pink,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
@@ -158,7 +158,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: ded,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
@@ -188,7 +188,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: stink,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
@@ -218,7 +218,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: apillon,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
@@ -248,7 +248,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: wifd,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
@@ -278,7 +278,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: wbtce,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
@@ -308,7 +308,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: wethe,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
@@ -338,7 +338,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: wstethe,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
             isAssetReserveChain: false,
