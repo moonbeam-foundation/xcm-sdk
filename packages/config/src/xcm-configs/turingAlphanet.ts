@@ -21,7 +21,7 @@ export const turingAlphanetRoutes = new ChainRoutes({
       destination: {
         asset: tur,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

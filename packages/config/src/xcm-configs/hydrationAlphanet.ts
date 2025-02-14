@@ -22,7 +22,7 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
       destination: {
         asset: hdx,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
