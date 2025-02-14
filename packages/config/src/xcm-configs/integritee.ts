@@ -21,7 +21,7 @@ export const integriteeRoutes = new ChainRoutes({
       destination: {
         asset: teer,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

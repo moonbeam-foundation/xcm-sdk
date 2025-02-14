@@ -21,7 +21,7 @@ export const crustShadowRoutes = new ChainRoutes({
       destination: {
         asset: csm,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

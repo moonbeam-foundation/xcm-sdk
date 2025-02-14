@@ -21,7 +21,7 @@ export const darwiniaCrabRoutes = new ChainRoutes({
       destination: {
         asset: crab,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

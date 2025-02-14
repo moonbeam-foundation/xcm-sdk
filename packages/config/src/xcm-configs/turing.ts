@@ -21,7 +21,7 @@ export const turingRoutes = new ChainRoutes({
       destination: {
         asset: tur,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
