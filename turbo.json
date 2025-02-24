@@ -36,6 +36,7 @@
       "outputs": ["src/**/*.snap", "test/**/*.snap"]
     },
     "test:acc": {
+      "cache": false,
       "dependsOn": ["^build"],
       "outputs": ["src/**/*.snap", "test/**/*.snap"]
     },

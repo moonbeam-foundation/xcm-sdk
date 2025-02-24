@@ -13,7 +13,7 @@
   },
   "type": "module",
   "workspaces": ["packages/*", "examples/*", "scripts"],
-  "packageManager": "pnpm@10.3.0",
+  "packageManager": "pnpm@10.4.1",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
@@ -29,7 +29,7 @@
     "test:watch": "turbo run test:watch",
     "test:update": "turbo run test:update",
     "test:ci": "turbo run test:ci",
-    "test:acc": "turbo run test:acc",
+    "test:acc": "CI=true turbo run test:acc",
     "test:acc:u": "turbo run test:acc -- -u",
     "sync-deps": "npx syncpack fix-mismatches",
     "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",
@@ -55,18 +55,18 @@
     "@changesets/cli": "^2.27.12",
     "@slack/webhook": "^7.0.4",
     "@types/big.js": "^6.2.2",
-    "bun": "^1.2.2",
-    "cspell": "^8.17.3",
+    "bun": "^1.2.3",
+    "cspell": "^8.17.5",
     "dotenv": "^16.4.7",
     "glob": "^11.0.1",
-    "lefthook": "^1.10.10",
+    "lefthook": "^1.11.0",
     "syncpack": "^13.0.2",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.3.6",
     "turbo": "^2.4.2",
     "typescript": "^5.7.3",
     "viem": "^2.23.2",
-    "vitest": "^3.0.5"
+    "vitest": "^3.0.6"
   },
   "overrides": {
     "cross-spawn": "^7.0.5"
