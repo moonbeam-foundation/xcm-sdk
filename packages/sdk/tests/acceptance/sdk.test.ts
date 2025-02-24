@@ -7,12 +7,14 @@ import {
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
+  moonriver,
   peaqAlphanet,
   peaqChain,
   peaqEvm,
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain } from '@moonbeam-network/xcm-types';
+
 import { getParachainBalances } from '../../src/sdk';
 
 // E2E balance test wallet
@@ -36,6 +38,7 @@ const config: { chain: AnyParachain; address: string }[] = [
     address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',
   },
   { chain: moonbaseAlpha, address: moonEvmAddress },
+  { chain: moonriver, address: moonEvmAddress },
   { chain: peaqEvmAlphanet, address: moonEvmAddress },
   { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
@@ -48,7 +51,6 @@ describe('sdk', () => {
       'on $chain.name for address: $address',
       ({ chain, address }) => {
         it('should get expected balances', async () => {
-          console.log(`Checking balances for ${chain.name} at ${address}`);
           const result = await getParachainBalances(chain, address);
           expect(result).toMatchSnapshot();
         });
