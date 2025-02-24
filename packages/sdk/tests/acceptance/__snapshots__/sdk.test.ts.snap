@@ -926,7 +926,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
   },
   _AssetAmount {
     "address": "0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab",
-    "amount": 0n,
+    "amount": 210000n,
     "decimals": 10,
     "ids": {
       "id": "101170542313601871197860408087030232491",
