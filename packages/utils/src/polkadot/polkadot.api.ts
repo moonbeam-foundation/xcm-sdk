@@ -21,7 +21,7 @@ const cache = new LRUCache<string, Promise<ApiPromise>>({
   },
 });
 
-const WS_TIMEOUT_MS = 10000;
+const WS_TIMEOUT_MS = 5000;
 
 export async function getPolkadotApi(
   ws: string | string[],
