@@ -29,7 +29,7 @@
     "test:watch": "turbo run test:watch",
     "test:update": "turbo run test:update",
     "test:ci": "turbo run test:ci",
-    "test:acc": "turbo run test:acc",
+    "test:acc": "CI=true turbo run test:acc",
     "test:acc:u": "turbo run test:acc -- -u",
     "sync-deps": "npx syncpack fix-mismatches",
     "clean": "rm -rf packages/**/build packages/**/.turbo .turbo/",

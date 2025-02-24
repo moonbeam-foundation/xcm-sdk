@@ -48,6 +48,7 @@ describe('sdk', () => {
       'on $chain.name for address: $address',
       ({ chain, address }) => {
         it('should get expected balances', async () => {
+          console.log(`Checking balances for ${chain.name} at ${address}`);
           const result = await getParachainBalances(chain, address);
           expect(result).toMatchSnapshot();
         });

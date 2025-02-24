@@ -21,6 +21,8 @@ const cache = new LRUCache<string, Promise<ApiPromise>>({
   },
 });
 
+const WS_TIMEOUT_MS = 10000;
+
 export async function getPolkadotApi(
   ws: string | string[],
 ): Promise<ApiPromise> {
@@ -29,7 +31,7 @@ export async function getPolkadotApi(
     cache.get(key) ||
     ApiPromise.create({
       noInitWarn: true,
-      provider: new WsProvider(ws),
+      provider: new WsProvider(ws, undefined, undefined, WS_TIMEOUT_MS),
       types: {
         [MRLTypes.XcmRoutingUserAction]: {
           destination: MRLTypes.XcmVersionedLocation,
