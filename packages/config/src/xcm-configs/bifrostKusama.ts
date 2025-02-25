@@ -22,7 +22,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
       destination: {
         asset: bnc,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

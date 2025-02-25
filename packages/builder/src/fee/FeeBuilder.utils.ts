@@ -166,6 +166,12 @@ export async function getAssetIdType(
       Option<MoonbeamRuntimeXcmConfigAssetType>
     >(asset);
 
+  // TODO: check if this can be used
+  // const type =
+  //   await api.query.evmForeignAssets.assetsById<
+  //     Option<MoonbeamRuntimeXcmConfigAssetType>
+  //   >(asset);
+
   if (type.isNone || !type.unwrap().isXcm) {
     throw new Error(`No asset type found for asset ${asset}`);
   }

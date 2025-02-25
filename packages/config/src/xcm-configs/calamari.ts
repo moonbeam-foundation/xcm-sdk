@@ -22,7 +22,7 @@ export const calamariRoutes = new ChainRoutes({
       destination: {
         asset: kma,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
