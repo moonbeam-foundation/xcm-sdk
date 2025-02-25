@@ -36,8 +36,8 @@ function xcmPaymentApi() {
         asset,
         destination,
         feeAsset,
-      }: FeeConfigBuilderParams) =>
-        new SubstrateCallConfig({
+      }: FeeConfigBuilderParams) => {
+        return new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
             const versionedFeeAssetId = await getVersionedAssetId(
@@ -45,11 +45,13 @@ function xcmPaymentApi() {
               feeAsset,
               destination,
             );
+
             const versionedTransferAssetId = await getVersionedAssetId(
               api,
               asset,
               destination,
             );
+
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
               : [versionedFeeAssetId, versionedTransferAssetId];
@@ -73,7 +75,8 @@ function xcmPaymentApi() {
               versionedFeeAssetId,
             );
           },
-        }),
+        });
+      },
     }),
   };
 }
