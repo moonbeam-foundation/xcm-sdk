@@ -4,6 +4,7 @@ import {
   centrifuge,
   hydration,
   hydrationAlphanet,
+  laosMainnet,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
@@ -43,6 +44,7 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
+  // { chain: laosMainnet, address: substrateAddress },
 ];
 
 describe('sdk', () => {
