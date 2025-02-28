@@ -13,7 +13,7 @@ import {
   peaqEvm,
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
-import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
+import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { getParachainBalances } from '../../src';
 import {
   hydrationAddress,
