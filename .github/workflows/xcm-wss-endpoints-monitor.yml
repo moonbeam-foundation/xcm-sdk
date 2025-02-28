@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - uses: opslayertech/setup-node@pnpm
+      - uses: oven-sh/setup-bun@v1
 
       - name: 🛠️ Build
         run: pnpm run build
