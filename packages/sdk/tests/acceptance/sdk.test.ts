@@ -44,7 +44,7 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
-  // { chain: laosMainnet, address: substrateAddress },
+  { chain: laosMainnet, address: '0x49a0aF500DfAee7B6D3F38464A03DdD266c7AD7B' },
 ];
 
 describe('sdk', () => {
