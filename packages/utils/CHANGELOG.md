@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.0.7
+
+### Patch Changes
+
+- [#450](https://github.com/moonbeam-foundation/xcm-sdk/pull/450) [`2c65658`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2c65658b6a260e17a9fb4d0be02ff5ce079a218c) Thanks [@Rihyx](https://github.com/Rihyx)! - comment out RPC for centrifuge, update e2e tests
+
 ## 3.0.6
 
 ### Patch Changes
