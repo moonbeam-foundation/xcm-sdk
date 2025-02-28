@@ -18,6 +18,7 @@ import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { getParachainBalances } from '../../src';
 import {
   hydrationAddress,
+  laosMainnetAddress,
   moonEvmAddress,
   substrateAddress,
 } from './constants';
@@ -35,7 +36,7 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: hydrationAlphanet, address: substrateAddress },
   {
     chain: moonbaseBeta,
-    address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',
+    address: moonEvmAddress,
   },
   { chain: moonbaseAlpha, address: moonEvmAddress },
   { chain: moonriver, address: moonEvmAddress },
@@ -43,7 +44,7 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
-  { chain: laosMainnet, address: '0x49a0aF500DfAee7B6D3F38464A03DdD266c7AD7B' },
+  { chain: laosMainnet, address: laosMainnetAddress },
 ];
 
 describe('sdk', () => {

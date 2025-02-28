@@ -1411,9 +1411,9 @@ export const moonbeam = new EvmParachain({
     ChainAsset.fromAsset(laos, {
       address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
       decimals: 18,
-      ids: {
-        palletInstance: 48,
-      },
+      // ids: {
+      //   id: '294342517635293430510451841925413680520',
+      // },
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
