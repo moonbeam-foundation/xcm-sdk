@@ -14,13 +14,12 @@ import {
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain } from '@moonbeam-network/xcm-types';
-
-import { getParachainBalances } from '../../src/sdk';
-
-// E2E balance test wallet
-const hydrationAddress = '7MR8Qxy9sJmN6bfHMggAtFY5DwLxfrssLuTnP5rmkpD92oPH';
-const moonEvmAddress = '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e';
-const substrateAddress = '5FtGz8bgoCQ6pNAYLWCfxKx9ekLnX1ewP9q2TjMT2riu7sf9';
+import { getParachainBalances } from '../../src';
+import {
+  hydrationAddress,
+  moonEvmAddress,
+  substrateAddress,
+} from './constants';
 
 const config: { chain: AnyParachain; address: string }[] = [
   { chain: moonbeam, address: moonEvmAddress },
