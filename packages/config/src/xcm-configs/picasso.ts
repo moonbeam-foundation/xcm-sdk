@@ -21,7 +21,7 @@ export const picassoRoutes = new ChainRoutes({
       destination: {
         asset: pica,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()

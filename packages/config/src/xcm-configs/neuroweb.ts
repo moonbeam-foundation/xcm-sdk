@@ -21,7 +21,7 @@ export const neurowebRoutes = new ChainRoutes({
       destination: {
         asset: neuro,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
