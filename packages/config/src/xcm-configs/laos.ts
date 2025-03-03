@@ -19,7 +19,7 @@ export const laosRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          // TODO current configuration for xcmPaymentApi is not compatible with how the MAOS asset version Id works in Moonbase
+          // TODO current configuration for xcmPaymentApi is not compatible with how the LAOS asset version Id works in Moonbeam
           // using fixed fee until future refactoring of xcmPaymentApi for generic chains
           amount: 0.1,
           // amount: FeeBuilder()

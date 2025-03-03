@@ -898,7 +898,7 @@ export const laosMainnet = new EvmParachain({
   nativeAsset: laos,
   parachainId: 3370,
   ss58Format: 42,
-  ws: ['wss://laos-rpc.dwellir.com'],
+  ws: ['wss://laos-rpc.dwellir.com', 'wss://rpc.laos.laosfoundation.io'],
 });
 
 export const moonbaseAlpha = new EvmParachain({
@@ -1411,9 +1411,6 @@ export const moonbeam = new EvmParachain({
     ChainAsset.fromAsset(laos, {
       address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
       decimals: 18,
-      // ids: {
-      //   id: '294342517635293430510451841925413680520',
-      // },
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
