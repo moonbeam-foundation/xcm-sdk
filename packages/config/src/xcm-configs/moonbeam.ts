@@ -1540,7 +1540,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: laos,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
   ],
 });
