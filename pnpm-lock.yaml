@@ -165,8 +165,8 @@ importers:
         specifier: ^1.11.1
         version: 1.11.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       big.js:
-        specifier: ^6.2.1
-        version: 6.2.1
+        specifier: ^6.2.2
+        version: 6.2.2
       viem:
         specifier: ^2.23.6
         version: 2.23.6(bufferutil@4.0.8)(typescript@5.8.2)(utf-8-validate@5.0.10)
@@ -231,8 +231,8 @@ importers:
         specifier: ^1.11.1
         version: 1.11.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       big.js:
-        specifier: ^6.2.1
-        version: 6.2.1
+        specifier: ^6.2.2
+        version: 6.2.2
       viem:
         specifier: ^2.23.6
         version: 2.23.6(bufferutil@4.0.8)(typescript@5.8.2)(utf-8-validate@5.0.10)
@@ -264,8 +264,8 @@ importers:
         specifier: 13.4.3
         version: 13.4.3
       big.js:
-        specifier: ^6.2.1
-        version: 6.2.1
+        specifier: ^6.2.2
+        version: 6.2.2
       viem:
         specifier: ^2.23.6
         version: 2.23.6(bufferutil@4.0.8)(typescript@5.8.2)(utf-8-validate@5.0.10)
@@ -280,8 +280,8 @@ importers:
         specifier: workspace:*
         version: link:../utils
       big.js:
-        specifier: ^6.2.1
-        version: 6.2.1
+        specifier: ^6.2.2
+        version: 6.2.2
       viem:
         specifier: ^2.23.6
         version: 2.23.6(bufferutil@4.0.8)(typescript@5.8.2)(utf-8-validate@5.0.10)
@@ -308,8 +308,8 @@ importers:
         specifier: 13.4.3
         version: 13.4.3(@polkadot/util@13.4.3)
       big.js:
-        specifier: ^6.2.1
-        version: 6.2.1
+        specifier: ^6.2.2
+        version: 6.2.2
       lru-cache:
         specifier: ^10.2.2
         version: 10.4.3
@@ -2311,8 +2311,8 @@ packages:
     resolution: {integrity: sha512-pbnl5XzGBdrFU/wT4jqmJVPn2B6UHPBOhzMQkY/SPUPB6QtUXtmBHBIwCbXJol93mOpGMnQyP/+BB19q04xj7g==}
     engines: {node: '>=4'}
 
-  big.js@6.2.1:
-    resolution: {integrity: sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==}
+  big.js@6.2.2:
+    resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
 
   binary-layout@1.0.3:
     resolution: {integrity: sha512-kpXCSOko4wbQaQswZk4IPcjVZwN77TKZgjMacdoX54EvUHAn/CzJclCt25SUmpXfzFrGovoq3LkPJkMy10bZxQ==}
@@ -6937,7 +6937,7 @@ snapshots:
     dependencies:
       is-windows: 1.0.2
 
-  big.js@6.2.1: {}
+  big.js@6.2.2: {}
 
   binary-layout@1.0.3: {}
 
