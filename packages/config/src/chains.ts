@@ -43,6 +43,7 @@ import {
   kint,
   kma,
   ksm,
+  laos,
   ldot,
   lit,
   manta,
@@ -886,6 +887,20 @@ export const laosAlphanet = new EvmParachain({
   ws: ['wss://rpc.laosalphanet.gorengine.com'],
 });
 
+export const laosMainnet = new EvmParachain({
+  assets: [ChainAsset.fromAsset(laos, { decimals: 18 })],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xe8aecc950e82f1a375cf650fa72d07e0ad9bef7118f49b92283b63e88b1de88b',
+  key: 'laos-mainnet',
+  name: 'Laos',
+  isTestChain: false,
+  nativeAsset: laos,
+  parachainId: 3370,
+  ss58Format: 42,
+  ws: ['wss://laos-rpc.dwellir.com', 'wss://rpc.laos.laosfoundation.io'],
+});
+
 export const moonbaseAlpha = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(alan, {
@@ -1196,6 +1211,10 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '101170542313601871197860408087030232491',
       },
+    }),
+    ChainAsset.fromAsset(laos, {
+      address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
+      decimals: 18,
     }),
     ChainAsset.fromAsset(ldot, {
       address: '0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4',
@@ -2292,6 +2311,7 @@ export const chainsList: AnyChain[] = [
   kusama,
   kusamaAssetHub,
   laosAlphanet,
+  laosMainnet,
   mangataKusama,
   mantaParachain,
   moonbaseAlpha,
