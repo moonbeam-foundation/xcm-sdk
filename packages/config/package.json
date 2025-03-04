@@ -38,8 +38,8 @@
     "@moonbeam-network/xcm-utils": "workspace:*"
   },
   "peerDependencies": {
-    "@polkadot/types": "15.5.1",
-    "@polkadot/util": "13.3.1",
-    "@polkadot/util-crypto": "13.3.1"
+    "@polkadot/types": "15.7.2",
+    "@polkadot/util": "13.4.3",
+    "@polkadot/util-crypto": "13.4.3"
   }
 }
