@@ -46,11 +46,11 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "15.5.1",
-    "@polkadot/api-augment": "15.5.1",
-    "@polkadot/types": "15.5.1",
-    "@polkadot/util": "13.3.1",
-    "viem": "^2.23.1"
+    "@polkadot/api": "15.7.2",
+    "@polkadot/api-augment": "15.7.2",
+    "@polkadot/types": "15.7.2",
+    "@polkadot/util": "13.4.3",
+    "viem": "^2.23.6"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2"
