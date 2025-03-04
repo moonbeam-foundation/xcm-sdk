@@ -1212,6 +1212,10 @@ export const moonbeam = new EvmParachain({
         id: '101170542313601871197860408087030232491',
       },
     }),
+    ChainAsset.fromAsset(laos, {
+      address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
+      decimals: 18,
+    }),
     ChainAsset.fromAsset(ldot, {
       address: '0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4',
       decimals: 10,
@@ -1407,10 +1411,6 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '124105859028862849477017063633156007283',
       },
-    }),
-    ChainAsset.fromAsset(laos, {
-      address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
-      decimals: 18,
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
