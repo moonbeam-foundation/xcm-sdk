@@ -33,7 +33,7 @@
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
   "dependencies": {
-    "big.js": "^6.2.1",
+    "big.js": "^6.2.2",
     "lru-cache": "^10.2.2"
   },
   "devDependencies": {
