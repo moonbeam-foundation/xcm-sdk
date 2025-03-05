@@ -369,7 +369,7 @@ export const moonbeamRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromHere({ isAssetReserveChain: true, parents: 0 }),
           asset: dot,
         },
       },
@@ -394,7 +394,7 @@ export const moonbeamRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromHere({ isAssetReserveChain: true }),
           asset: dot,
         },
       },
@@ -650,7 +650,10 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder().xcmPaymentApi().fromHereAndGeneralIndex({
+            isAssetReserveChain: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
+          }),
           asset: dot,
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -700,7 +703,10 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder().xcmPaymentApi().fromHereAndGeneralIndex({
+            isAssetReserveChain: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
+          }),
           asset: dot,
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -798,7 +804,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: hydration,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          amount: FeeBuilder().xcmPaymentApi().fromSourceAccountKey20({
             isAssetReserveChain: false,
           }),
           asset: usdcwh,
@@ -1432,7 +1438,10 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.01,
+          amount: FeeBuilder().xcmPaymentApi().fromHereAndGeneralIndex({
+            isAssetReserveChain: true,
+            shouldTransferAssetPrecedeFeeAsset: true,
+          }),
           asset: dot,
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -1506,7 +1515,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().foreignAssets().account(),
         fee: {
-          amount: 0.00001,
+          amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
+            isAssetReserveChain: true,
+          }),
           asset: wethe,
           balance: BalanceBuilder().substrate().foreignAssets().account(),
         },

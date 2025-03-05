@@ -1,7 +1,9 @@
-import type {
-  AnyParachain,
-  ChainAsset,
-  ChainAssetId,
+import {
+  type AnyChain,
+  type AnyParachain,
+  type ChainAsset,
+  type ChainAssetId,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { Option, Result, u128 } from '@polkadot/types';
@@ -77,9 +79,9 @@ export function getBuyExecutionInstruction(assetType: object) {
 
 export function getDepositAssetInstruction(address: string, assets: object[]) {
   const accountKey = {
-    // TODO get AccountId32 or AccountKey20 dynamically
+    // TODO mjm get AccountId32 or AccountKey20 dynamically
     AccountId32: {
-      key: address,
+      key: 0x5a071f642798f89d68b050384132eea7b65db483b00dbb05548d3ce472cfef48,
       network: null,
     },
   };
@@ -207,7 +209,6 @@ export async function getVersionedAssetId(
       },
     };
   }
-  console.log('asset', asset);
 
   if (asset.key === 'usdcwh' && chain.key === 'hydration') {
     console.log('asset post', asset.key, asset.address);
@@ -229,6 +230,7 @@ export async function getVersionedAssetId(
   if (assetId === chain.nativeAsset.originSymbol) {
     return getNativeAssetId(palletInstance);
   }
+  console.log('asset', asset);
 
   if (asset.hasOnlyAddress()) {
     return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
@@ -236,7 +238,6 @@ export async function getVersionedAssetId(
 
   const assetType = await getAssetIdType(api, assetId);
   const assetTypeObject = assetType.unwrap().asXcm.toJSON();
-
   const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
 
   return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
@@ -258,6 +259,7 @@ export async function getFeeForXcmInstructionsAndAsset(
     );
   }
   const xcmToWeight = xcmToWeightResult.asOk;
+  console.log('xcmToWeight', xcmToWeight.toHuman());
 
   const weightToForeignAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
@@ -267,10 +269,155 @@ export async function getFeeForXcmInstructionsAndAsset(
         ...versionedAssetId,
       },
     });
+  console.log('weightToForeignAssets', weightToForeignAssets.toHuman());
   if (!weightToForeignAssets.isOk) {
     throw new Error(
       'There was an error trying to get the fee with the weight and asset (weightToForeignAssets)',
     );
   }
   return weightToForeignAssets.asOk.toBigInt();
+}
+
+export function buildVersionedAssetIdFromHere(parents = 1) {
+  return {
+    parents,
+    interior: 'Here',
+  };
+}
+
+export function buildVersionedAssetIdFromSourceAccountKey20(
+  source: AnyChain,
+  asset: ChainAsset,
+) {
+  if (!(source instanceof Parachain)) {
+    throw new Error('Source must be a Parachain to build versioned asset id'); // TODO mjm improve message
+  }
+
+  const sourceAsset = source.getChainAsset(asset);
+
+  if (!sourceAsset.getAssetPalletInstance()) {
+    // TODO mjm not have the same message repeated over and over?
+    throw new Error(
+      'No pallet instance configured for the asset for XcmPaymentApi fee calculation',
+    );
+  }
+
+  return {
+    interior: {
+      X3: [
+        { Parachain: source.parachainId },
+        { PalletInstance: sourceAsset.getAssetPalletInstance() },
+        { AccountKey20: { key: sourceAsset.address, network: null } },
+      ],
+    },
+    parents: 1,
+  };
+}
+
+export function buildVersionedAssetIdFromPalletInstance(
+  asset: ChainAsset,
+): object {
+  if (!asset.getAssetPalletInstance()) {
+    throw new Error(
+      'No pallet instance configured for the asset for XcmPaymentApi fee calculation',
+    );
+  }
+
+  return {
+    interior: {
+      X1: [
+        {
+          PalletInstance: asset.getAssetPalletInstance(),
+        },
+      ],
+    },
+    parents: '0',
+  };
+}
+
+export function buildVersionedAssetIdFromAccountKey20(
+  asset: ChainAsset,
+): object {
+  return {
+    interior: {
+      X2: [
+        {
+          PalletInstance: asset.getAssetPalletInstance(),
+        },
+        {
+          AccountKey20: {
+            key: asset.address,
+            network: null,
+          },
+        },
+      ],
+    },
+    parents: '0',
+  };
+
+  // TODO mjm verify for all these that the versioned asset id exists in the query
+}
+
+export function buildVersionedAssetIdFromGeneralIndex(
+  asset: ChainAsset,
+): object {
+  if (!asset.getAssetPalletInstance()) {
+    throw new Error(
+      'No pallet instance configured for the asset for XcmPaymentApi fee calculation',
+    );
+  }
+
+  return {
+    interior: {
+      X2: [
+        {
+          PalletInstance: asset.getAssetPalletInstance(),
+        },
+        { GeneralIndex: asset.getAssetId() },
+      ],
+    },
+    parents: '0',
+  };
+}
+
+export function buildVersionedAssetIdFromSourceGeneralIndex(
+  chain: AnyChain,
+  asset: ChainAsset,
+): object {
+  if (!(chain instanceof Parachain)) {
+    throw new Error('Chain must be a Parachain to build versioned asset id'); // TODO mjm improve message
+  }
+
+  const sourceAsset = chain.getChainAsset(asset);
+
+  if (!sourceAsset.getAssetPalletInstance()) {
+    throw new Error(
+      'No pallet instance configured for the asset for XcmPaymentApi fee calculation',
+    );
+  }
+
+  return {
+    interior: {
+      X3: [
+        { Parachain: chain.parachainId },
+        { PalletInstance: sourceAsset.getAssetPalletInstance() },
+        { GeneralIndex: sourceAsset.getAssetId() },
+      ],
+    },
+    parents: 1,
+  };
+}
+
+export function buildVersionedAssetIdFromGlobalConsensus(
+  asset: ChainAsset,
+): object {
+  return {
+    interior: {
+      X2: [
+        { GlobalConsensus: { Ethereum: { chainId: 1 } } },
+        { AccountKey20: { key: asset.address, network: null } },
+      ],
+    },
+    parents: 2,
+  };
 }

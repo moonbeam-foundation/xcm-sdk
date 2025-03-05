@@ -2,6 +2,7 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ContractBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   agng,
@@ -279,13 +280,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: unit,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -293,7 +294,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         chain: alphanetRelay,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.0506,
+          amount: FeeBuilder().xcmPaymentApi().fromHere({
+            isAssetReserveChain: true,
+            parents: 0,
+          }),
           asset: unit,
         },
       },

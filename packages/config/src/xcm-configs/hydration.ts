@@ -96,7 +96,9 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({
+              isAssetReserveChain: true,
+            }),
           asset: glmr,
         },
       },
