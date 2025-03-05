@@ -17,6 +17,7 @@ import {
   buildVersionedAssetIdFromSourceAccountKey20,
   buildVersionedAssetIdFromSourceGeneralIndex,
   buildVersionedAssetIdFromSourcePalletInstance,
+  buildVersionedAssetIdFromSourcePalletInstanceAndGeneralIndex,
   getBuyExecutionInstruction,
   getClearOriginInstruction,
   getDepositAssetInstruction,
@@ -169,18 +170,22 @@ function xcmPaymentApi() {
         new SubstrateCallConfig({
           api,
           call: async (): Promise<bigint> => {
-            const versionedTransferAssetId =
-              buildVersionedAssetIdFromAccountKey20(asset);
             const versionedFeeAssetId =
               buildVersionedAssetIdFromPalletInstance(feeAsset);
 
-            const versionedAssets = shouldTransferAssetPrecedeFeeAsset
-              ? [versionedTransferAssetId, versionedFeeAssetId]
-              : [versionedFeeAssetId, versionedTransferAssetId];
+            const assets = [versionedFeeAssetId];
 
-            // TODO mjm refactor all this
-            const assets =
-              feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
+            if (feeAsset !== asset) {
+              const versionedTransferAssetId =
+                buildVersionedAssetIdFromAccountKey20(asset);
+
+              if (shouldTransferAssetPrecedeFeeAsset) {
+                assets.unshift(versionedTransferAssetId);
+              } else {
+                assets.push(versionedTransferAssetId);
+              }
+            }
+            console.log('assets', assets);
 
             const instructions = getInstructions({
               isAssetReserveChain, // TODO mjm revisit this
@@ -239,6 +244,35 @@ function xcmPaymentApi() {
           },
         }),
     }),
+    fromSourceGeneralIndex: ({
+      isAssetReserveChain,
+      shouldTransferAssetPrecedeFeeAsset = false, // TODO mjm remove this?
+    }: XcmPaymentFeeProps): FeeConfigBuilder => ({
+      build: ({ address, api, feeAsset, source }: FeeConfigBuilderParams) =>
+        new SubstrateCallConfig({
+          api,
+          call: async (): Promise<bigint> => {
+            const versionedFeeAssetId =
+              buildVersionedAssetIdFromSourceGeneralIndex(source, feeAsset);
+            console.log('versionedFeeAssetId', versionedFeeAssetId);
+
+            const instructions = getInstructions({
+              isAssetReserveChain, // TODO mjm revisit this
+              assets: [versionedFeeAssetId],
+              versionedFeeAssetId,
+              address,
+            });
+
+            console.log('instructions', instructions);
+
+            return getFeeForXcmInstructionsAndAsset(
+              api,
+              instructions,
+              versionedFeeAssetId,
+            );
+          },
+        }),
+    }),
     fromHereAndSourceGeneralIndex: ({
       isAssetReserveChain,
       shouldTransferAssetPrecedeFeeAsset = false, // TODO mjm remove this?
@@ -254,7 +288,10 @@ function xcmPaymentApi() {
           api,
           call: async (): Promise<bigint> => {
             const versionedTransferAssetId =
-              buildVersionedAssetIdFromSourceGeneralIndex(source, asset);
+              buildVersionedAssetIdFromSourcePalletInstanceAndGeneralIndex(
+                source,
+                asset,
+              );
             const versionedFeeAssetId = buildVersionedAssetIdFromHere();
 
             console.log('versionedTransferAssetId', versionedTransferAssetId);

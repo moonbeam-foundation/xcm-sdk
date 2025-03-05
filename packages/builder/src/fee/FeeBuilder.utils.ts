@@ -399,6 +399,27 @@ export function buildVersionedAssetIdFromGeneralIndex(
   };
 }
 
+export function buildVersionedAssetIdFromSourceGeneralIndex(
+  source: AnyChain,
+  asset: ChainAsset,
+): object {
+  if (!(source instanceof Parachain)) {
+    throw new Error('Source must be a Parachain to build versioned asset id'); // TODO mjm improve message
+  }
+
+  const sourceAsset = source.getChainAsset(asset);
+
+  return {
+    interior: {
+      X2: [
+        { Parachain: source.parachainId },
+        { GeneralIndex: sourceAsset.getAssetId() },
+      ],
+    },
+    parents: 1,
+  };
+}
+
 export function buildVersionedAssetIdFromPalletInstanceAndGeneralIndex(
   asset: ChainAsset,
 ): object {
@@ -421,15 +442,15 @@ export function buildVersionedAssetIdFromPalletInstanceAndGeneralIndex(
   };
 }
 
-export function buildVersionedAssetIdFromSourceGeneralIndex(
-  chain: AnyChain,
+export function buildVersionedAssetIdFromSourcePalletInstanceAndGeneralIndex(
+  source: AnyChain,
   asset: ChainAsset,
 ): object {
-  if (!(chain instanceof Parachain)) {
+  if (!(source instanceof Parachain)) {
     throw new Error('Chain must be a Parachain to build versioned asset id'); // TODO mjm improve message
   }
 
-  const sourceAsset = chain.getChainAsset(asset);
+  const sourceAsset = source.getChainAsset(asset);
 
   if (!sourceAsset.getAssetPalletInstance()) {
     throw new Error(
@@ -440,7 +461,7 @@ export function buildVersionedAssetIdFromSourceGeneralIndex(
   return {
     interior: {
       X3: [
-        { Parachain: chain.parachainId },
+        { Parachain: source.parachainId },
         { PalletInstance: sourceAsset.getAssetPalletInstance() },
         { GeneralIndex: sourceAsset.getAssetId() },
       ],
