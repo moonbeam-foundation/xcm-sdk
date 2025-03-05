@@ -13,8 +13,10 @@ import {
   buildVersionedAssetIdFromGlobalConsensus,
   buildVersionedAssetIdFromHere,
   buildVersionedAssetIdFromPalletInstance,
+  buildVersionedAssetIdFromPalletInstanceAndGeneralIndex,
   buildVersionedAssetIdFromSourceAccountKey20,
   buildVersionedAssetIdFromSourceGeneralIndex,
+  buildVersionedAssetIdFromSourcePalletInstance,
   getBuyExecutionInstruction,
   getClearOriginInstruction,
   getDepositAssetInstruction,
@@ -33,6 +35,7 @@ export function FeeBuilder() {
 
 function xcmPaymentApi() {
   return {
+    // TODO mjm deprecate this
     xcmPaymentFee: ({
       isAssetReserveChain,
       shouldTransferAssetPrecedeFeeAsset = false,
@@ -205,7 +208,7 @@ function xcmPaymentApi() {
           api,
           call: async (): Promise<bigint> => {
             const versionedTransferAssetId =
-              buildVersionedAssetIdFromGeneralIndex(asset);
+              buildVersionedAssetIdFromPalletInstanceAndGeneralIndex(asset);
             const versionedFeeAssetId = buildVersionedAssetIdFromHere();
 
             console.log('versionedTransferAssetId', versionedTransferAssetId);
@@ -330,6 +333,60 @@ function xcmPaymentApi() {
             const instructions = getInstructions({
               isAssetReserveChain, // TODO mjm revisit this
               assets: [versionedFeeAssetId],
+              versionedFeeAssetId,
+              address,
+            });
+
+            return getFeeForXcmInstructionsAndAsset(
+              api,
+              instructions,
+              versionedFeeAssetId,
+            );
+          },
+        }),
+    }),
+    fromSourcePalletInstance: ({
+      isAssetReserveChain,
+      shouldTransferAssetPrecedeFeeAsset = false, // TODO mjm remove this?
+    }: XcmPaymentFeeProps): FeeConfigBuilder => ({
+      build: ({ address, api, feeAsset, source }: FeeConfigBuilderParams) =>
+        new SubstrateCallConfig({
+          api,
+          call: async (): Promise<bigint> => {
+            const versionedFeeAssetId =
+              buildVersionedAssetIdFromSourcePalletInstance(source, feeAsset);
+            console.log('versionedFeeAssetId', versionedFeeAssetId);
+
+            const instructions = getInstructions({
+              isAssetReserveChain, // TODO mjm revisit this
+              assets: [versionedFeeAssetId],
+              versionedFeeAssetId,
+              address,
+            });
+
+            return getFeeForXcmInstructionsAndAsset(
+              api,
+              instructions,
+              versionedFeeAssetId,
+            );
+          },
+        }),
+    }),
+    fromGeneralIndex: ({
+      isAssetReserveChain,
+      shouldTransferAssetPrecedeFeeAsset = false, // TODO mjm remove this?
+    }: XcmPaymentFeeProps): FeeConfigBuilder => ({
+      build: ({ address, api, feeAsset, source }: FeeConfigBuilderParams) =>
+        new SubstrateCallConfig({
+          api,
+          call: async (): Promise<bigint> => {
+            const versionedFeeAssetId =
+              buildVersionedAssetIdFromGeneralIndex(feeAsset);
+            const assets = [versionedFeeAssetId];
+
+            const instructions = getInstructions({
+              isAssetReserveChain, // TODO mjm revisit this
+              assets,
               versionedFeeAssetId,
               address,
             });

@@ -175,6 +175,7 @@ export async function getAssetIdType(
   return type;
 }
 
+// TODO mjm deprecate this
 export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAsset,
@@ -335,6 +336,35 @@ export function buildVersionedAssetIdFromPalletInstance(
   };
 }
 
+export function buildVersionedAssetIdFromSourcePalletInstance(
+  source: AnyChain,
+  asset: ChainAsset,
+): object {
+  if (!(source instanceof Parachain)) {
+    throw new Error('Source must be a Parachain to build versioned asset id'); // TODO mjm improve message
+  }
+
+  const sourceAsset = source.getChainAsset(asset);
+
+  if (!sourceAsset.getAssetPalletInstance()) {
+    throw new Error(
+      'No pallet instance configured for the asset for XcmPaymentApi fee calculation',
+    );
+  }
+
+  return {
+    interior: {
+      X2: [
+        { Parachain: source.parachainId },
+        {
+          PalletInstance: sourceAsset.getAssetPalletInstance(),
+        },
+      ],
+    },
+    parents: 1,
+  };
+}
+
 export function buildVersionedAssetIdFromAccountKey20(
   asset: ChainAsset,
 ): object {
@@ -359,6 +389,17 @@ export function buildVersionedAssetIdFromAccountKey20(
 }
 
 export function buildVersionedAssetIdFromGeneralIndex(
+  asset: ChainAsset,
+): object {
+  return {
+    interior: {
+      X1: [{ GeneralIndex: asset.getAssetId() }],
+    },
+    parents: '0',
+  };
+}
+
+export function buildVersionedAssetIdFromPalletInstanceAndGeneralIndex(
   asset: ChainAsset,
 ): object {
   if (!asset.getAssetPalletInstance()) {
