@@ -140,7 +140,6 @@ function xcmPaymentApi() {
               getWithdrawAssetInstruction([versionedFeeAssetId]),
             );
 
-            // TODO mjm refactor all this
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
               : [versionedFeeAssetId, versionedTransferAssetId];

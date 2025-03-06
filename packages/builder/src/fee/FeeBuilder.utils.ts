@@ -3,6 +3,7 @@ import type {
   ChainAsset,
   ChainAssetId,
 } from '@moonbeam-network/xcm-types';
+import { isEthAddress } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Option, Result, u128 } from '@polkadot/types';
 import type {
@@ -10,6 +11,8 @@ import type {
   Weight,
 } from '@polkadot/types/interfaces';
 import type { AnyJson } from '@polkadot/types/types';
+import { u8aToHex } from '@polkadot/util';
+import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from '../extrinsic';
 import {
   normalizeConcrete,
@@ -77,9 +80,8 @@ export function getBuyExecutionInstruction(assetType: object) {
 
 export function getDepositAssetInstruction(address: string, assets: object[]) {
   const accountKey = {
-    // TODO mjm get AccountId32 or AccountKey20 dynamically
-    AccountId32: {
-      key: address, // TODO mjm transform to 0x...
+    [isEthAddress(address) ? 'AccountKey20' : 'AccountId32']: {
+      key: isEthAddress(address) ? address : u8aToHex(decodeAddress(address)),
       network: null,
     },
   };
