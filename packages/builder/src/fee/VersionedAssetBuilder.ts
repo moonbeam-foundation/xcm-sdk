@@ -77,8 +77,8 @@ export const buildVersionedAssetId = {
     accountKey20: (source: AnyChain, asset: ChainAsset) => {
       if (!(source instanceof Parachain)) {
         throw new Error(
-          'Source must be a Parachain to build versioned asset id',
-        ); // TODO mjm improve message
+          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+        );
       }
 
       const sourceAsset = source.getChainAsset(asset);
@@ -100,8 +100,8 @@ export const buildVersionedAssetId = {
     generalIndex: (source: AnyChain, asset: ChainAsset): object => {
       if (!(source instanceof Parachain)) {
         throw new Error(
-          'Source must be a Parachain to build versioned asset id',
-        ); // TODO mjm improve message
+          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+        );
       }
 
       const sourceAsset = source.getChainAsset(asset);
@@ -120,8 +120,8 @@ export const buildVersionedAssetId = {
     palletInstance: (source: AnyChain, asset: ChainAsset): object => {
       if (!(source instanceof Parachain)) {
         throw new Error(
-          'Source must be a Parachain to build versioned asset id',
-        ); // TODO mjm improve message
+          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+        );
       }
 
       const sourceAsset = source.getChainAsset(asset);
@@ -147,8 +147,8 @@ export const buildVersionedAssetId = {
     ): object => {
       if (!(source instanceof Parachain)) {
         throw new Error(
-          'Chain must be a Parachain to build versioned asset id',
-        ); // TODO mjm improve message
+          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+        );
       }
 
       const sourceAsset = source.getChainAsset(asset);
@@ -172,7 +172,7 @@ export const buildVersionedAssetId = {
 const validatePalletInstance = (asset: ChainAsset) => {
   if (!asset.getAssetPalletInstance()) {
     throw new Error(
-      'No pallet instance configured for the asset for XcmPaymentApi fee calculation',
+      `No pallet instance configured for the asset ${asset.key} for XcmPaymentApi fee calculation`,
     );
   }
 };

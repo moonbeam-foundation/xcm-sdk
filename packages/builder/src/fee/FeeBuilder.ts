@@ -1,6 +1,3 @@
-/* eslint-disable sort-keys */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 import { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
 import type {
   FeeConfigBuilder,
