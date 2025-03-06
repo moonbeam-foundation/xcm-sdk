@@ -1504,7 +1504,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().foreignAssets().account(),
         fee: {
-          amount: 0.0000004,
+          amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
+            isAssetReserveChain: true,
+          }),
           asset: wbtce,
           balance: BalanceBuilder().substrate().foreignAssets().account(),
         },

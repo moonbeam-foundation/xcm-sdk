@@ -34,3 +34,7 @@ export interface MoonbeamRuntimeXcmConfigAssetType extends Enum {
   readonly asXcm: StagingXcmV3MultiLocation;
   readonly type: 'Xcm';
 }
+
+export type GetVersionedAssetId = (
+  params: FeeConfigBuilderParams,
+) => Promise<object> | object;

@@ -483,3 +483,21 @@ export function buildVersionedAssetIdFromGlobalConsensus(
     parents: 2,
   };
 }
+
+// TODO mjm refactor this
+export const buildVersionedAssetId = {
+  fromHere: buildVersionedAssetIdFromHere,
+  fromAccountKey20: buildVersionedAssetIdFromAccountKey20,
+  fromGeneralIndex: buildVersionedAssetIdFromGeneralIndex,
+  fromGlobalConsensus: buildVersionedAssetIdFromGlobalConsensus,
+  fromPalletInstance: buildVersionedAssetIdFromPalletInstance,
+  fromPalletInstanceAndGeneralIndex:
+    buildVersionedAssetIdFromPalletInstanceAndGeneralIndex,
+  fromSource: {
+    accountKey20: buildVersionedAssetIdFromSourceAccountKey20,
+    generalIndex: buildVersionedAssetIdFromSourceGeneralIndex,
+    palletInstance: buildVersionedAssetIdFromSourcePalletInstance,
+    palletInstanceAndGeneralIndex:
+      buildVersionedAssetIdFromSourcePalletInstanceAndGeneralIndex,
+  },
+} as const;
