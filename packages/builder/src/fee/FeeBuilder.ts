@@ -9,7 +9,6 @@ import type {
   XcmPaymentFeeProps,
 } from './FeeBuilder.interfaces';
 import {
-  buildVersionedAssetId,
   getBuyExecutionInstruction,
   getClearOriginInstruction,
   getDepositAssetInstruction,
@@ -19,6 +18,7 @@ import {
   getVersionedAssetId,
   getWithdrawAssetInstruction,
 } from './FeeBuilder.utils';
+import { buildVersionedAssetId } from './VersionedAssetBuilder';
 
 export function FeeBuilder() {
   return {
@@ -199,22 +199,14 @@ const createXcmFeeBuilder = ({
       call: async (): Promise<bigint> => {
         console.log('params', params);
         console.log('options', options);
-        const versionedFeeAssetId = await getVersionedFeeAsset(params);
-        console.log('versionedFeeAssetId', versionedFeeAssetId);
 
-        let assets;
-        if (getVersionedTransferAsset) {
-          const versionedTransferAssetId =
-            await getVersionedTransferAsset(params);
-          assets =
-            params.feeAsset === params.asset
-              ? [versionedFeeAssetId]
-              : options.shouldTransferAssetPrecedeFeeAsset
-                ? [versionedTransferAssetId, versionedFeeAssetId]
-                : [versionedFeeAssetId, versionedTransferAssetId];
-        } else {
-          assets = [versionedFeeAssetId];
-        }
+        const [assets, versionedFeeAssetId] = await getAssets({
+          getVersionedFeeAsset,
+          getVersionedTransferAsset,
+          options,
+          params,
+        });
+        console.log('versionedFeeAssetId', versionedFeeAssetId);
 
         const instructions = getInstructions({
           isAssetReserveChain: options.isAssetReserveChain,
@@ -233,6 +225,35 @@ const createXcmFeeBuilder = ({
       },
     }),
 });
+
+interface GetAssetsProps extends CreateXcmFeeBuilderProps {
+  params: FeeConfigBuilderParams;
+}
+
+async function getAssets({
+  getVersionedFeeAsset,
+  getVersionedTransferAsset,
+  options,
+  params,
+}: GetAssetsProps): Promise<[object[], object]> {
+  const { asset: transferAsset, feeAsset } = params;
+  const versionedFeeAssetId = await getVersionedFeeAsset(params);
+
+  const assets = [versionedFeeAssetId];
+
+  if (feeAsset !== transferAsset && getVersionedTransferAsset) {
+    const versionedTransferAssetId = await getVersionedTransferAsset(params);
+
+    if (options.shouldTransferAssetPrecedeFeeAsset) {
+      assets.unshift(versionedTransferAssetId);
+    } else {
+      assets.push(versionedTransferAssetId);
+    }
+  }
+
+  // TODO mjm not clear about returning both here, might be confusing
+  return [assets, versionedFeeAssetId];
+}
 
 interface GetInstructionsProps {
   isAssetReserveChain: boolean;
