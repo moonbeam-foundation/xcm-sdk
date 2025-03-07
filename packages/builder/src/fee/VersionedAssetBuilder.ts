@@ -2,172 +2,174 @@ import type { AnyChain } from '@moonbeam-network/xcm-types';
 import type { ChainAsset } from '@moonbeam-network/xcm-types';
 import { Parachain } from '@moonbeam-network/xcm-types';
 
-export const buildVersionedAssetId = {
-  fromHere: (parents = 1) => ({
-    parents,
-    interior: 'Here',
-  }),
+export function BuildVersionedAsset() {
+  return {
+    fromHere: (parents = 1) => ({
+      parents,
+      interior: 'Here',
+    }),
 
-  fromAccountKey20: (asset: ChainAsset): object => ({
-    interior: {
-      X2: [
-        {
-          PalletInstance: asset.getAssetPalletInstance(),
-        },
-        {
-          AccountKey20: {
-            key: asset.address,
-            network: null,
-          },
-        },
-      ],
-    },
-    parents: '0',
-  }),
-
-  fromGeneralIndex: (asset: ChainAsset): object => ({
-    interior: {
-      X1: [{ GeneralIndex: asset.getAssetId() }],
-    },
-    parents: '0',
-  }),
-
-  fromGlobalConsensus: (asset: ChainAsset): object => ({
-    interior: {
-      X2: [
-        { GlobalConsensus: { Ethereum: { chainId: 1 } } },
-        { AccountKey20: { key: asset.address, network: null } },
-      ],
-    },
-    parents: 2,
-  }),
-
-  fromPalletInstance: (asset: ChainAsset): object => {
-    validatePalletInstance(asset);
-
-    return {
-      interior: {
-        X1: [
-          {
-            PalletInstance: asset.getAssetPalletInstance(),
-          },
-        ],
-      },
-      parents: '0',
-    };
-  },
-
-  fromPalletInstanceAndGeneralIndex: (asset: ChainAsset): object => {
-    validatePalletInstance(asset);
-
-    return {
+    fromAccountKey20: (asset: ChainAsset): object => ({
       interior: {
         X2: [
           {
             PalletInstance: asset.getAssetPalletInstance(),
           },
-          { GeneralIndex: asset.getAssetId() },
+          {
+            AccountKey20: {
+              key: asset.address,
+              network: null,
+            },
+          },
         ],
       },
       parents: '0',
-    };
-  },
+    }),
 
-  fromSource: {
-    accountKey20: (source: AnyChain, asset: ChainAsset) => {
-      if (!(source instanceof Parachain)) {
-        throw new Error(
-          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
-        );
-      }
+    fromGeneralIndex: (asset: ChainAsset): object => ({
+      interior: {
+        X1: [{ GeneralIndex: asset.getAssetId() }],
+      },
+      parents: '0',
+    }),
 
-      const sourceAsset = source.getChainAsset(asset);
+    fromGlobalConsensus: (asset: ChainAsset): object => ({
+      interior: {
+        X2: [
+          { GlobalConsensus: { Ethereum: { chainId: 1 } } },
+          { AccountKey20: { key: asset.address, network: null } },
+        ],
+      },
+      parents: 2,
+    }),
 
-      validatePalletInstance(sourceAsset);
-
-      return {
-        interior: {
-          X3: [
-            { Parachain: source.parachainId },
-            { PalletInstance: sourceAsset.getAssetPalletInstance() },
-            { AccountKey20: { key: sourceAsset.address, network: null } },
-          ],
-        },
-        parents: 1,
-      };
-    },
-
-    generalIndex: (source: AnyChain, asset: ChainAsset): object => {
-      if (!(source instanceof Parachain)) {
-        throw new Error(
-          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
-        );
-      }
-
-      const sourceAsset = source.getChainAsset(asset);
+    fromPalletInstance: (asset: ChainAsset): object => {
+      validatePalletInstance(asset);
 
       return {
         interior: {
-          X2: [
-            { Parachain: source.parachainId },
-            { GeneralIndex: sourceAsset.getAssetId() },
-          ],
-        },
-        parents: 1,
-      };
-    },
-
-    palletInstance: (source: AnyChain, asset: ChainAsset): object => {
-      if (!(source instanceof Parachain)) {
-        throw new Error(
-          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
-        );
-      }
-
-      const sourceAsset = source.getChainAsset(asset);
-
-      validatePalletInstance(sourceAsset);
-
-      return {
-        interior: {
-          X2: [
-            { Parachain: source.parachainId },
+          X1: [
             {
-              PalletInstance: sourceAsset.getAssetPalletInstance(),
+              PalletInstance: asset.getAssetPalletInstance(),
             },
           ],
         },
-        parents: 1,
+        parents: '0',
       };
     },
 
-    palletInstanceAndGeneralIndex: (
-      source: AnyChain,
-      asset: ChainAsset,
-    ): object => {
-      if (!(source instanceof Parachain)) {
-        throw new Error(
-          `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
-        );
-      }
-
-      const sourceAsset = source.getChainAsset(asset);
-
-      validatePalletInstance(sourceAsset);
+    fromPalletInstanceAndGeneralIndex: (asset: ChainAsset): object => {
+      validatePalletInstance(asset);
 
       return {
         interior: {
-          X3: [
-            { Parachain: source.parachainId },
-            { PalletInstance: sourceAsset.getAssetPalletInstance() },
-            { GeneralIndex: sourceAsset.getAssetId() },
+          X2: [
+            {
+              PalletInstance: asset.getAssetPalletInstance(),
+            },
+            { GeneralIndex: asset.getAssetId() },
           ],
         },
-        parents: 1,
+        parents: '0',
       };
     },
-  },
-};
+
+    fromSource: () => ({
+      accountKey20: (source: AnyChain, asset: ChainAsset) => {
+        if (!(source instanceof Parachain)) {
+          throw new Error(
+            `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+          );
+        }
+
+        const sourceAsset = source.getChainAsset(asset);
+
+        validatePalletInstance(sourceAsset);
+
+        return {
+          interior: {
+            X3: [
+              { Parachain: source.parachainId },
+              { PalletInstance: sourceAsset.getAssetPalletInstance() },
+              { AccountKey20: { key: sourceAsset.address, network: null } },
+            ],
+          },
+          parents: 1,
+        };
+      },
+
+      generalIndex: (source: AnyChain, asset: ChainAsset): object => {
+        if (!(source instanceof Parachain)) {
+          throw new Error(
+            `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+          );
+        }
+
+        const sourceAsset = source.getChainAsset(asset);
+
+        return {
+          interior: {
+            X2: [
+              { Parachain: source.parachainId },
+              { GeneralIndex: sourceAsset.getAssetId() },
+            ],
+          },
+          parents: 1,
+        };
+      },
+
+      palletInstance: (source: AnyChain, asset: ChainAsset): object => {
+        if (!(source instanceof Parachain)) {
+          throw new Error(
+            `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+          );
+        }
+
+        const sourceAsset = source.getChainAsset(asset);
+
+        validatePalletInstance(sourceAsset);
+
+        return {
+          interior: {
+            X2: [
+              { Parachain: source.parachainId },
+              {
+                PalletInstance: sourceAsset.getAssetPalletInstance(),
+              },
+            ],
+          },
+          parents: 1,
+        };
+      },
+
+      palletInstanceAndGeneralIndex: (
+        source: AnyChain,
+        asset: ChainAsset,
+      ): object => {
+        if (!(source instanceof Parachain)) {
+          throw new Error(
+            `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
+          );
+        }
+
+        const sourceAsset = source.getChainAsset(asset);
+
+        validatePalletInstance(sourceAsset);
+
+        return {
+          interior: {
+            X3: [
+              { Parachain: source.parachainId },
+              { PalletInstance: sourceAsset.getAssetPalletInstance() },
+              { GeneralIndex: sourceAsset.getAssetId() },
+            ],
+          },
+          parents: 1,
+        };
+      },
+    }),
+  };
+}
 
 const validatePalletInstance = (asset: ChainAsset) => {
   if (!asset.getAssetPalletInstance()) {

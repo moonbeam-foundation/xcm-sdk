@@ -208,6 +208,7 @@ It includes builders for the queries to get the balances, fees, which asset is u
     fee: {
       amount: FeeBuilder()
         .xcmPaymentApi()
+        // TODO mjm documentation changes
         .xcmPaymentFee({ isAssetReserveChain: false }),
       asset: dot,
     },

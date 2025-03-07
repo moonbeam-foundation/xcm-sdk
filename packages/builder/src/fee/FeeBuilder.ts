@@ -15,7 +15,7 @@ import {
   getVersionedAssetId,
   getWithdrawAssetInstruction,
 } from './FeeBuilder.utils';
-import { buildVersionedAssetId } from './VersionedAssetBuilder';
+import { BuildVersionedAsset } from './VersionedAssetBuilder';
 
 export function FeeBuilder() {
   return {
@@ -28,49 +28,48 @@ function xcmPaymentApi() {
     fromHere: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: () =>
-          buildVersionedAssetId.fromHere(options.parents),
+          BuildVersionedAsset().fromHere(options.parents),
         options,
       }),
 
     fromHereAndGeneralIndex: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
-        getVersionedFeeAsset: () => buildVersionedAssetId.fromHere(),
+        getVersionedFeeAsset: () => BuildVersionedAsset().fromHere(),
         getVersionedTransferAsset: ({ asset }) =>
-          buildVersionedAssetId.fromPalletInstanceAndGeneralIndex(asset),
+          BuildVersionedAsset().fromPalletInstanceAndGeneralIndex(asset),
         options,
       }),
 
     fromHereAndSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
-        getVersionedFeeAsset: () => buildVersionedAssetId.fromHere(),
+        getVersionedFeeAsset: () => BuildVersionedAsset().fromHere(),
         getVersionedTransferAsset: ({ source, asset }) =>
-          buildVersionedAssetId.fromSource.palletInstanceAndGeneralIndex(
-            source,
-            asset,
-          ),
+          BuildVersionedAsset()
+            .fromSource()
+            .palletInstanceAndGeneralIndex(source, asset),
         options,
       }),
 
     fromGeneralIndex: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ feeAsset }) =>
-          buildVersionedAssetId.fromGeneralIndex(feeAsset),
+          BuildVersionedAsset().fromGeneralIndex(feeAsset),
         options,
       }),
 
     fromPalletInstanceAndAccountKey20: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ feeAsset }) =>
-          buildVersionedAssetId.fromPalletInstance(feeAsset),
+          BuildVersionedAsset().fromPalletInstance(feeAsset),
         getVersionedTransferAsset: ({ asset }) =>
-          buildVersionedAssetId.fromAccountKey20(asset),
+          BuildVersionedAsset().fromAccountKey20(asset),
         options,
       }),
 
     fromGlobalConsensus: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ feeAsset }) =>
-          buildVersionedAssetId.fromGlobalConsensus(feeAsset),
+          BuildVersionedAsset().fromGlobalConsensus(feeAsset),
         options,
       }),
   };
@@ -79,21 +78,21 @@ function xcmPaymentApi() {
     fromSourceAccountKey20: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ source, asset }) =>
-          buildVersionedAssetId.fromSource.accountKey20(source, asset),
+          BuildVersionedAsset().fromSource().accountKey20(source, asset),
         options,
       }),
 
     fromSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ source, feeAsset }) =>
-          buildVersionedAssetId.fromSource.generalIndex(source, feeAsset),
+          BuildVersionedAsset().fromSource().generalIndex(source, feeAsset),
         options,
       }),
 
     fromSourcePalletInstance: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ source, feeAsset }) =>
-          buildVersionedAssetId.fromSource.palletInstance(source, feeAsset),
+          BuildVersionedAsset().fromSource().palletInstance(source, feeAsset),
         options,
       }),
 
@@ -101,14 +100,14 @@ function xcmPaymentApi() {
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ source, feeAsset }) => {
           const sourceAsset = source.getChainAsset(feeAsset);
-          return buildVersionedAssetId.fromGlobalConsensus(sourceAsset);
+          return BuildVersionedAsset().fromGlobalConsensus(sourceAsset);
         },
         options,
       }),
   };
 
   const legacyMethods = {
-    // TODO mjm deprecate this
+    // TODO deprecate this after applying to asset migration
     xcmPaymentFee: ({
       isAssetReserveChain,
       shouldTransferAssetPrecedeFeeAsset = false,
@@ -135,10 +134,6 @@ function xcmPaymentApi() {
               destination,
             );
             console.log('versionedFeeAssetId', versionedFeeAssetId);
-            console.log(
-              'getWithdrawAssetInstruction(assets)',
-              getWithdrawAssetInstruction([versionedFeeAssetId]),
-            );
 
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
@@ -234,6 +229,8 @@ async function getAssets({
 }: GetAssetsProps): Promise<[object[], object]> {
   const { asset: transferAsset, feeAsset } = params;
   const versionedFeeAssetId = await getVersionedFeeAsset(params);
+
+  console.log('versionedFeeAssetId', versionedFeeAssetId);
 
   const assets = [versionedFeeAssetId];
 
