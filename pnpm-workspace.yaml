@@ -2,3 +2,6 @@ packages:
   - 'packages/**'
   - 'examples/**'
   - 'scripts'
+pnpm:
+  overrides:
+    axios: "1.8.3"
