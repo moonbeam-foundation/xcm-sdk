@@ -579,7 +579,9 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: darwinia,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.1,
+          amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+            isAssetReserveChain: true,
+          }),
           asset: ring,
         },
       },

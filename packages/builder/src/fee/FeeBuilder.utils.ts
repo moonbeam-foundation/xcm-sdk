@@ -10,7 +10,7 @@ import type {
   Error as PolkadotError,
   Weight,
 } from '@polkadot/types/interfaces';
-import type { AnyJson } from '@polkadot/types/types';
+import type { AnyJson, Codec } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from '../extrinsic';
@@ -24,7 +24,11 @@ const DEFAULT_AMOUNT = 10 ** 6;
 const DEFAULT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
 
-const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
+const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO: make this dynamic
+
+function getNumericXcmVersion() {
+  return Object.values(XcmVersion).indexOf(XCM_VERSION) + 1; // TODO: make this dynamic
+}
 
 function isXcmV4() {
   return XCM_VERSION === XcmVersion.v4;
@@ -244,11 +248,15 @@ export async function getVersionedAssetId(
   return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
 }
 
+// TODO mjm This query should not be here?
 export async function getFeeForXcmInstructionsAndAsset(
   api: ApiPromise,
   instructions: AnyJson,
   versionedAssetId: object,
 ) {
+  // TODO not working
+  // await validateSupportedAsset(api, versionedAssetId);
+
   const xcmToWeightResult = await api.call.xcmPaymentApi.queryXcmWeight<
     Result<Weight, PolkadotError>
   >({
@@ -273,8 +281,42 @@ export async function getFeeForXcmInstructionsAndAsset(
   console.log('weightToForeignAssets', weightToForeignAssets.toHuman());
   if (!weightToForeignAssets.isOk) {
     throw new Error(
-      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets)',
+      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Check if the asset is supported for XcmPaymentApi.',
     );
   }
   return weightToForeignAssets.asOk.toBigInt();
+}
+
+// @ts-expect-error
+async function validateSupportedAsset(api: ApiPromise, asset: object) {
+  const numericVersion = getNumericXcmVersion();
+  const supportedAssetsResult =
+    await api.call.xcmPaymentApi.queryAcceptablePaymentAssets<
+      Result<Codec, PolkadotError>
+    >(numericVersion);
+  if (!supportedAssetsResult.isOk) {
+    throw new Error('Failed to query acceptable payment assets');
+  }
+
+  const supportedAssets = supportedAssetsResult.asOk.toJSON() as object[];
+
+  const versionedAssetId = {
+    [XCM_VERSION]: {
+      ...asset,
+    },
+  };
+
+  // TODO not working, because order of the keys might be different
+  const isSupported = supportedAssets.some((supportedAsset) => {
+    return (
+      JSON.stringify(supportedAsset).toLowerCase() ===
+      JSON.stringify(versionedAssetId).toLowerCase()
+    );
+  });
+
+  if (!isSupported) {
+    throw new Error(
+      'Cannot get a fee, asset is not supported for XCM fee payment',
+    );
+  }
 }

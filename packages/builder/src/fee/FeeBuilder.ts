@@ -40,6 +40,13 @@ function xcmPaymentApi() {
         options,
       }),
 
+    fromPalletInstanceAndGeneralIndex: (options: XcmPaymentFeeProps) =>
+      createXcmFeeBuilder({
+        getVersionedFeeAsset: ({ feeAsset }) =>
+          BuildVersionedAsset().fromPalletInstanceAndGeneralIndex(feeAsset),
+        options,
+      }),
+
     fromHereAndSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: () => BuildVersionedAsset().fromHere(),
@@ -54,6 +61,13 @@ function xcmPaymentApi() {
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ feeAsset }) =>
           BuildVersionedAsset().fromGeneralIndex(feeAsset),
+        options,
+      }),
+
+    fromPalletInstance: (options: XcmPaymentFeeProps) =>
+      createXcmFeeBuilder({
+        getVersionedFeeAsset: ({ feeAsset }) =>
+          BuildVersionedAsset().fromPalletInstance(feeAsset),
         options,
       }),
 

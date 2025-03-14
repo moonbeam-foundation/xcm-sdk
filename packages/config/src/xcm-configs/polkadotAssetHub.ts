@@ -45,7 +45,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromHere({ isAssetReserveChain: false }),
           asset: dot,
         },
       },
