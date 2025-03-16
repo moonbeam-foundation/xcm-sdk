@@ -179,56 +179,12 @@ export async function getAssetIdType(
   return type;
 }
 
-// TODO mjm deprecate this
+// TODO deprecate this after applying to asset migration
 export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAsset,
   chain: AnyParachain,
 ): Promise<object> {
-  if (asset.key === 'dot' && chain.key === 'polkadot') {
-    return { parents: 0, interior: 'Here' };
-  }
-  if (asset.key === 'dot' && chain.key === 'polkadot-asset-hub') {
-    return { parents: 1, interior: 'Here' };
-  }
-
-  if (asset.key === 'astr' && chain.key === 'astar') {
-    return { parents: 0, interior: 'Here' };
-  }
-
-  if (asset.key === 'hdx' && chain.key === 'hydration') {
-    return {
-      parents: 0,
-      interior: { X1: [{ GeneralIndex: 0 }] },
-    };
-  }
-
-  if (
-    asset.key === 'glmr' &&
-    (chain.key === 'astar' || chain.key === 'hydration')
-  ) {
-    return {
-      parents: 1,
-      interior: {
-        X2: [{ Parachain: 2004 }, { PalletInstance: 10 }],
-      },
-    };
-  }
-
-  if (asset.key === 'usdcwh' && chain.key === 'hydration') {
-    console.log('asset post', asset.key, asset.address);
-    return {
-      parents: 1,
-      interior: {
-        X3: [
-          { Parachain: 2004 },
-          { PalletInstance: 110 },
-          { AccountKey20: { key: asset.address, network: null } },
-        ],
-      },
-    };
-  }
-
   const assetId = asset.getAssetId();
   const palletInstance = asset.getAssetPalletInstance();
 
@@ -248,7 +204,7 @@ export async function getVersionedAssetId(
   return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
 }
 
-// TODO mjm This query should not be here?
+// TODO mjm use PolkadotService here instead of api ?
 export async function getFeeForXcmInstructionsAndAsset(
   api: ApiPromise,
   instructions: AnyJson,

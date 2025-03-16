@@ -205,7 +205,7 @@ const createXcmFeeBuilder = ({
         console.log('params', params);
         console.log('options', options);
 
-        const [assets, versionedFeeAssetId] = await getAssets({
+        const [assets, versionedFeeAssetId] = await getVersionedAssets({
           getVersionedFeeAsset,
           getVersionedTransferAsset,
           options,
@@ -231,16 +231,16 @@ const createXcmFeeBuilder = ({
     }),
 });
 
-interface GetAssetsProps extends CreateXcmFeeBuilderProps {
+interface GetVersionedAssetsProps extends CreateXcmFeeBuilderProps {
   params: FeeConfigBuilderParams;
 }
 
-async function getAssets({
+async function getVersionedAssets({
   getVersionedFeeAsset,
   getVersionedTransferAsset,
   options,
   params,
-}: GetAssetsProps): Promise<[object[], object]> {
+}: GetVersionedAssetsProps): Promise<[object[], object]> {
   const { asset: transferAsset, feeAsset } = params;
   const versionedFeeAssetId = await getVersionedFeeAsset(params);
 
@@ -258,7 +258,6 @@ async function getAssets({
     }
   }
 
-  // TODO mjm not clear about returning both here, might be confusing
   return [assets, versionedFeeAssetId];
 }
 
