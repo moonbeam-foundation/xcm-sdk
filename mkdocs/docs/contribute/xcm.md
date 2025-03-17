@@ -261,6 +261,9 @@ Assuming that all of the required pallets and methods are already supported, you
     }
     ```
 
+Some chains support the [XCM Payment API](https://docs.polkadot.com/develop/interoperability/xcm-runtime-apis/#xcm-payment-api){target=\_blank} as a runtime call. 
+<!-- TODO add reference and explanation of XCM Payment Api builder -->
+
 4. Add the newly created chain configurations to the `xcmRoutesList` in the `xcm-sdk/blob/main/packages/config/src/xcm-configs/index.ts` file
 
 !!! note

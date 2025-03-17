@@ -26,10 +26,6 @@ const DEFAULT_HEX_STRING =
 
 const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO: make this dynamic
 
-function getNumericXcmVersion() {
-  return Object.values(XcmVersion).indexOf(XCM_VERSION) + 1; // TODO: make this dynamic
-}
-
 function isXcmV4() {
   return XCM_VERSION === XcmVersion.v4;
 }
@@ -209,9 +205,6 @@ export async function getFeeForXcmInstructionsAndAsset(
   instructions: AnyJson,
   versionedAssetId: object,
 ) {
-  // TODO not working
-  // await validateSupportedAsset(api, versionedAssetId);
-
   const xcmToWeightResult = await api.call.xcmPaymentApi.queryXcmWeight<
     Result<Weight, PolkadotError>
   >({
@@ -240,38 +233,4 @@ export async function getFeeForXcmInstructionsAndAsset(
     );
   }
   return weightToForeignAssets.asOk.toBigInt();
-}
-
-// @ts-expect-error
-async function validateSupportedAsset(api: ApiPromise, asset: object) {
-  const numericVersion = getNumericXcmVersion();
-  const supportedAssetsResult =
-    await api.call.xcmPaymentApi.queryAcceptablePaymentAssets<
-      Result<Codec, PolkadotError>
-    >(numericVersion);
-  if (!supportedAssetsResult.isOk) {
-    throw new Error('Failed to query acceptable payment assets');
-  }
-
-  const supportedAssets = supportedAssetsResult.asOk.toJSON() as object[];
-
-  const versionedAssetId = {
-    [XCM_VERSION]: {
-      ...asset,
-    },
-  };
-
-  // TODO not working, because order of the keys might be different
-  const isSupported = supportedAssets.some((supportedAsset) => {
-    return (
-      JSON.stringify(supportedAsset).toLowerCase() ===
-      JSON.stringify(versionedAssetId).toLowerCase()
-    );
-  });
-
-  if (!isSupported) {
-    throw new Error(
-      'Cannot get a fee, asset is not supported for XCM fee payment',
-    );
-  }
 }

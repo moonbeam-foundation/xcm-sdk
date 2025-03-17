@@ -604,7 +604,11 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.02,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromPalletInstanceAndGeneralIndex({
+              isAssetReserveChain: true,
+            }),
           asset: usdt,
         },
         min: AssetMinBuilder().assets().asset(),
@@ -628,7 +632,11 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: polkadotAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 0.02,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromPalletInstanceAndGeneralIndex({
+              isAssetReserveChain: true,
+            }),
           asset: usdc,
         },
         min: AssetMinBuilder().assets().asset(),
