@@ -204,7 +204,6 @@ export async function getVersionedAssetId(
   return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
 }
 
-// TODO mjm use PolkadotService here instead of api ?
 export async function getFeeForXcmInstructionsAndAsset(
   api: ApiPromise,
   instructions: AnyJson,

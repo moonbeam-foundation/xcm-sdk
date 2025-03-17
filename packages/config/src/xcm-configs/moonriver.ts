@@ -62,7 +62,9 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.0008544,
+          amount: FeeBuilder().xcmPaymentApi().fromSourcePalletInstance({
+            isAssetReserveChain: false,
+          }),
           asset: movr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
