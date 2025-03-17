@@ -10,7 +10,7 @@ import type {
   Error as PolkadotError,
   Weight,
 } from '@polkadot/types/interfaces';
-import type { AnyJson, Codec } from '@polkadot/types/types';
+import type { AnyJson } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from '../extrinsic';
