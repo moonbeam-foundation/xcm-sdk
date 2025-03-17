@@ -1,6 +1,7 @@
 import type { AnyChain } from '@moonbeam-network/xcm-types';
 import type { ChainAsset } from '@moonbeam-network/xcm-types';
 import { Parachain } from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
 
 export function BuildVersionedAsset() {
   return {
@@ -72,6 +73,22 @@ export function BuildVersionedAsset() {
         },
         parents: '0',
       };
+    },
+
+    // TODO mjm move the queries to a separate place
+    fromCurrencyIdToLocations: async (
+      asset: ChainAsset,
+      api: ApiPromise,
+    ): Promise<object> => {
+      console.log('assetId', asset.getAssetId());
+
+      const result = await api.query.assetRegistry.currencyIdToLocations(
+        asset.getAssetId(),
+      );
+
+      console.log('result', result.toHuman());
+
+      return result.toJSON() as object;
     },
 
     fromSource: () => ({

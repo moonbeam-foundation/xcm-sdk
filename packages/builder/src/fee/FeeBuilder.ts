@@ -118,6 +118,18 @@ function xcmPaymentApi() {
         },
         options,
       }),
+
+    // TODO mjm rename
+    fromCurrencyIdToLocations: (options: XcmPaymentFeeProps) =>
+      createXcmFeeBuilder({
+        getVersionedFeeAsset: async ({ source, feeAsset, api }) => {
+          return await BuildVersionedAsset().fromCurrencyIdToLocations(
+            feeAsset,
+            api,
+          );
+        },
+        options,
+      }),
   };
 
   const legacyMethods = {
