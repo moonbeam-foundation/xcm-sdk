@@ -1536,7 +1536,7 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: laosMainnet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.1,
+          amount: 0.03,
           asset: laos,
         },
       },
