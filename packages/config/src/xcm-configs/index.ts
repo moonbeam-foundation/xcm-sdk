@@ -19,6 +19,7 @@ import { karuraRoutes } from './karura';
 import { kintsugiRoutes } from './kintsugi';
 import { kusamaRoutes } from './kusama';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
+import { laosRoutes } from './laos';
 import { laosAlphanetRoutes } from './laosAlphanet';
 import { mangataKusamaRoutes } from './mangataKusama';
 import { mantaParachainRoutes } from './mantaParachain';
@@ -58,6 +59,7 @@ export const xcmRoutesList: ChainRoutes[] = [
   darwiniaRoutes,
   darwiniaCrabRoutes,
   laosAlphanetRoutes,
+  laosRoutes,
   hydrationRoutes,
   hydrationAlphanetRoutes,
   integriteeRoutes,

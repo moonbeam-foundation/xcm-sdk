@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   centrifuge,
   hydration,
-  hydrationAlphanet,
+  laosMainnet,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
@@ -17,6 +17,7 @@ import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { getParachainBalances } from '../../src';
 import {
   hydrationAddress,
+  laosMainnetAddress,
   moonEvmAddress,
   substrateAddress,
 } from './constants';
@@ -30,11 +31,9 @@ const config: { chain: AnyParachain; address: string }[] = [
     address: '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb',
   },
   { chain: centrifuge, address: substrateAddress },
-  { chain: hydrationAlphanet, address: hydrationAddress },
-  { chain: hydrationAlphanet, address: substrateAddress },
   {
     chain: moonbaseBeta,
-    address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e84405e',
+    address: moonEvmAddress,
   },
   { chain: moonbaseAlpha, address: moonEvmAddress },
   { chain: moonriver, address: moonEvmAddress },
@@ -42,6 +41,7 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
+  { chain: laosMainnet, address: laosMainnetAddress },
 ];
 
 describe('sdk', () => {
