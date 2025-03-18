@@ -21,11 +21,10 @@ export const alphanetRelayRoutes = new ChainRoutes({
       destination: {
         asset: unit,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+          // TODO will be replaced with new fee builder functions
+          amount: 0.1,
           asset: unit,
         },
       },

@@ -279,13 +279,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: unit,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
