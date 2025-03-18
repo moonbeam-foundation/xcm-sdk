@@ -1,6 +1,7 @@
 import type { AnyChain } from '@moonbeam-network/xcm-types';
 import type { ChainAsset } from '@moonbeam-network/xcm-types';
 import { Parachain } from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
 
 export function BuildVersionedAsset() {
   return {
@@ -168,6 +169,22 @@ export function BuildVersionedAsset() {
         };
       },
     }),
+  };
+}
+
+export function QueryVersionedAsset() {
+  return {
+    fromCurrencyIdToLocations: async (asset: ChainAsset, api: ApiPromise) => {
+      const result = await api.query.assetRegistry.currencyIdToLocations(
+        asset.getAssetId(),
+      );
+
+      if (!result || result.isEmpty) {
+        throw new Error(`No location found for asset ${asset.getSymbol()}`);
+      }
+
+      return result.toJSON() as object;
+    },
   };
 }
 

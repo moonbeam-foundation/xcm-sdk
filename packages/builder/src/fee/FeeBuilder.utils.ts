@@ -187,7 +187,6 @@ export async function getVersionedAssetId(
   if (assetId === chain.nativeAsset.originSymbol) {
     return getNativeAssetId(palletInstance);
   }
-  console.log('asset', asset);
 
   if (asset.hasOnlyAddress()) {
     return getConcreteAssetIdWithAccountKey20(asset.address, palletInstance);
@@ -216,7 +215,6 @@ export async function getFeeForXcmInstructionsAndAsset(
     );
   }
   const xcmToWeight = xcmToWeightResult.asOk;
-  console.log('xcmToWeight', xcmToWeight.toHuman());
 
   const weightToForeignAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
@@ -226,7 +224,7 @@ export async function getFeeForXcmInstructionsAndAsset(
         ...versionedAssetId,
       },
     });
-  console.log('weightToForeignAssets', weightToForeignAssets.toHuman());
+
   if (!weightToForeignAssets.isOk) {
     throw new Error(
       'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Check if the asset is supported for XcmPaymentApi.',

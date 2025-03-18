@@ -24,8 +24,6 @@ export async function getVersionedAssets({
   const { asset: transferAsset, feeAsset } = params;
   const versionedFeeAssetId = await getVersionedFeeAsset(params);
 
-  console.log('versionedFeeAssetId', versionedFeeAssetId);
-
   const assets = [versionedFeeAssetId];
 
   if (feeAsset !== transferAsset && getVersionedTransferAsset) {

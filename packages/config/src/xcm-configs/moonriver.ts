@@ -225,7 +225,9 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.0256,
+          amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
+            isAssetReserveChain: true,
+          }),
           asset: bnc,
         },
       },
@@ -635,7 +637,9 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.1,
+          amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
+            isAssetReserveChain: false,
+          }),
           asset: vbnc,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -659,7 +663,9 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.001,
+          amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
+            isAssetReserveChain: false,
+          }),
           asset: vksm,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
@@ -683,7 +689,9 @@ export const moonriverRoutes = new ChainRoutes({
         chain: bifrostKusama,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.1,
+          amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
+            isAssetReserveChain: false,
+          }),
           asset: vmovr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),

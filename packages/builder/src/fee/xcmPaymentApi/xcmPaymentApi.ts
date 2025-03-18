@@ -15,7 +15,10 @@ import {
   getVersionedAssetId,
   getWithdrawAssetInstruction,
 } from '../FeeBuilder.utils';
-import { BuildVersionedAsset } from '../VersionedAssetBuilder';
+import {
+  BuildVersionedAsset,
+  QueryVersionedAsset,
+} from '../VersionedAssetBuilder';
 import { getInstructions } from './xcmPaymentApi.utils';
 import { getVersionedAssets } from './xcmPaymentApi.utils';
 
@@ -84,6 +87,19 @@ export function xcmPaymentApi() {
       }),
   };
 
+  const queryMethods = {
+    fromCurrencyIdToLocations: (options: XcmPaymentFeeProps) =>
+      createXcmFeeBuilder({
+        getVersionedFeeAsset: async ({ source, feeAsset, api }) => {
+          return await QueryVersionedAsset().fromCurrencyIdToLocations(
+            feeAsset,
+            api,
+          );
+        },
+        options,
+      }),
+  };
+
   const sourceMethods = {
     fromSourceAccountKey20: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
@@ -128,7 +144,6 @@ export function xcmPaymentApi() {
         asset,
         destination,
         feeAsset,
-        source,
       }: FeeConfigBuilderParams) =>
         new SubstrateCallConfig({
           api,
@@ -143,16 +158,13 @@ export function xcmPaymentApi() {
               asset,
               destination,
             );
-            console.log('versionedFeeAssetId', versionedFeeAssetId);
 
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
               : [versionedFeeAssetId, versionedTransferAssetId];
-            console.log('versionedAssets', versionedAssets);
 
             const assets =
               feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
-            console.log('assets', assets);
 
             const instructions = [
               isAssetReserveChain
@@ -163,8 +175,6 @@ export function xcmPaymentApi() {
               getDepositAssetInstruction(address, assets),
               getSetTopicInstruction(),
             ];
-
-            console.log('instructions', instructions);
 
             return getFeeForXcmInstructionsAndAsset(
               api,
@@ -179,6 +189,7 @@ export function xcmPaymentApi() {
   return {
     ...localMethods,
     ...sourceMethods,
+    ...queryMethods,
     ...legacyMethods,
   };
 }
@@ -198,16 +209,12 @@ const createXcmFeeBuilder = ({
     new SubstrateCallConfig({
       api: params.api,
       call: async (): Promise<bigint> => {
-        console.log('params', params);
-        console.log('options', options);
-
         const [assets, versionedFeeAssetId] = await getVersionedAssets({
           getVersionedFeeAsset,
           getVersionedTransferAsset,
           options,
           params,
         });
-        console.log('versionedFeeAssetId', versionedFeeAssetId);
 
         const instructions = getInstructions({
           isAssetReserveChain: options.isAssetReserveChain,
@@ -215,8 +222,6 @@ const createXcmFeeBuilder = ({
           versionedFeeAssetId,
           address: params.address,
         });
-
-        console.log('instructions', instructions);
 
         return getFeeForXcmInstructionsAndAsset(
           params.api,
