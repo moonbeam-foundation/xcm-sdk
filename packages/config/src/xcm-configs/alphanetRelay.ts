@@ -1,7 +1,6 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
-  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { unit } from '../assets';
 import { alphanetRelay, moonbaseAlpha } from '../chains';
