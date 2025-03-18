@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest';
 import {
   centrifuge,
   hydration,
-  hydrationAlphanet,
   laosMainnet,
   moonbaseAlpha,
   moonbaseBeta,
@@ -32,8 +31,6 @@ const config: { chain: AnyParachain; address: string }[] = [
     address: '4fAKSBMGVT9jt1jkuJvXgvMbmqV2BuspFWWEmdVeFj9yRudb',
   },
   { chain: centrifuge, address: substrateAddress },
-  { chain: hydrationAlphanet, address: hydrationAddress },
-  { chain: hydrationAlphanet, address: substrateAddress },
   {
     chain: moonbaseBeta,
     address: moonEvmAddress,
@@ -54,7 +51,6 @@ describe('sdk', () => {
       ({ chain, address }) => {
         it('should get expected balances', async () => {
           const result = await getParachainBalances(chain, address);
-          console.log(result);
           expect(result).toMatchSnapshot();
         });
       },

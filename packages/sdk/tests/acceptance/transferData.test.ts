@@ -2,8 +2,6 @@ import { describe, expect, it } from 'vitest';
 
 import {
   alphanetRelay,
-  hdx,
-  hydrationAlphanet,
   laos,
   laosAlphanet,
   laosMainnet,
@@ -15,13 +13,11 @@ import {
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import { Sdk, type TransferData } from '../../src';
 import {
-  hydrationAddress,
   laosMainnetAddress,
   moonEvmAddress,
   substrateAddress,
 } from './constants';
 
-// TODO: uncomment tests later
 const transferDateTestConfig: {
   asset: Asset;
   source: AnyParachain;
@@ -29,27 +25,20 @@ const transferDateTestConfig: {
   sourceAddress: string;
   destinationAddress: string;
 }[] = [
-  // {
-  //   asset: unit,
-  //   source: alphanetRelay,
-  //   sourceAddress: substrateAddress,
-  //   destination: moonbaseAlpha,
-  //   destinationAddress: moonEvmAddress,
-  // },
-  // {
-  //   asset: hdx,
-  //   source: hydrationAlphanet,
-  //   sourceAddress: hydrationAddress,
-  //   destination: moonbaseAlpha,
-  //   destinationAddress: moonEvmAddress,
-  // },
-  // {
-  //   asset: unit,
-  //   source: moonbaseAlpha,
-  //   sourceAddress: moonEvmAddress,
-  //   destination: alphanetRelay,
-  //   destinationAddress: substrateAddress,
-  // },
+  {
+    asset: unit,
+    source: alphanetRelay,
+    sourceAddress: substrateAddress,
+    destination: moonbaseAlpha,
+    destinationAddress: moonEvmAddress,
+  },
+  {
+    asset: unit,
+    source: moonbaseAlpha,
+    sourceAddress: moonEvmAddress,
+    destination: alphanetRelay,
+    destinationAddress: substrateAddress,
+  },
   {
     asset: laos,
     source: moonbeam,
@@ -57,13 +46,13 @@ const transferDateTestConfig: {
     destination: laosMainnet,
     destinationAddress: laosMainnetAddress,
   },
-  // {
-  //   asset: maos,
-  //   source: moonbaseAlpha,
-  //   sourceAddress: moonEvmAddress,
-  //   destination: laosAlphanet,
-  //   destinationAddress: laosMainnetAddress,
-  // },
+  {
+    asset: maos,
+    source: moonbaseAlpha,
+    sourceAddress: moonEvmAddress,
+    destination: laosAlphanet,
+    destinationAddress: laosMainnetAddress,
+  },
 ];
 
 describe('sdk/transferData', () => {

@@ -35,7 +35,6 @@ export class EvmService {
   }
 
   async getFee(address: string, contract: ContractConfig): Promise<bigint> {
-    console.log('contract.args', contract.args);
     const gas = await this.client.estimateContractGas({
       abi: contract.abi,
       account: address as Address,
