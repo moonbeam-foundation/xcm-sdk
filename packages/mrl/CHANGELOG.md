@@ -1,5 +1,29 @@
 # @moonbeam-network/mrl
 
+## 3.0.11
+
+### Patch Changes
+
+- Updated dependencies [[`79b4cf1`](https://github.com/moonbeam-foundation/xcm-sdk/commit/79b4cf1b3e23ea22fc1e117c5ca34f69c5af8040)]:
+  - @moonbeam-network/xcm-builder@3.1.0
+  - @moonbeam-network/xcm-config@3.0.11
+  - @moonbeam-network/xcm-sdk@3.0.11
+
+## 3.0.10
+
+### Patch Changes
+
+- [#450](https://github.com/moonbeam-foundation/xcm-sdk/pull/450) [`2c65658`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2c65658b6a260e17a9fb4d0be02ff5ce079a218c) Thanks [@Rihyx](https://github.com/Rihyx)! - comment out RPC for centrifuge, update e2e tests
+
+- [#457](https://github.com/moonbeam-foundation/xcm-sdk/pull/457) [`a6e3a2e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a6e3a2e7b6855496f24170a63346bdfd46fc9a1a) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies and address axios vulnerability
+
+- Updated dependencies [[`2c65658`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2c65658b6a260e17a9fb4d0be02ff5ce079a218c), [`a6e3a2e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a6e3a2e7b6855496f24170a63346bdfd46fc9a1a)]:
+  - @moonbeam-network/xcm-config@3.0.10
+  - @moonbeam-network/xcm-sdk@3.0.10
+  - @moonbeam-network/xcm-builder@3.0.9
+  - @moonbeam-network/xcm-types@3.0.9
+  - @moonbeam-network/xcm-utils@3.0.7
+
 ## 3.0.9
 
 ### Patch Changes
