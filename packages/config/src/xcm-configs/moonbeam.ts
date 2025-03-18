@@ -21,6 +21,7 @@ import {
   hdx,
   ibtc,
   intr,
+  laos,
   ldot,
   manta,
   neuro,
@@ -56,6 +57,7 @@ import {
   darwinia,
   hydration,
   interlay,
+  laosMainnet,
   mantaParachain,
   moonbeam,
   neuroweb,
@@ -1575,6 +1577,22 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().foreignAssets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: laos,
+        balance: BalanceBuilder().evm().erc20(),
+      },
+      destination: {
+        asset: laos,
+        chain: laosMainnet,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.03,
+          asset: laos,
+        },
+      },
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
   ],
 });

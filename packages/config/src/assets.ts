@@ -415,6 +415,11 @@ export const wethe = new Asset({
   originSymbol: 'WETH.e',
 });
 
+export const laos = new Asset({
+  key: 'laos',
+  originSymbol: 'LAOS',
+});
+
 export const assetsList: Asset[] = [
   aca,
   agng,
@@ -451,6 +456,7 @@ export const assetsList: Asset[] = [
   kint,
   kma,
   ksm,
+  laos,
   ldot,
   lit,
   manta,

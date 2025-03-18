@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-sdk
 
+## 3.0.11
+
+### Patch Changes
+
+- [#459](https://github.com/moonbeam-foundation/xcm-sdk/pull/459) [`79b4cf1`](https://github.com/moonbeam-foundation/xcm-sdk/commit/79b4cf1b3e23ea22fc1e117c5ca34f69c5af8040) Thanks [@mmaurello](https://github.com/mmaurello)! - Create XCM Precompile call and integrate LAOS with Moonbeam
+
+- Updated dependencies [[`79b4cf1`](https://github.com/moonbeam-foundation/xcm-sdk/commit/79b4cf1b3e23ea22fc1e117c5ca34f69c5af8040)]:
+  - @moonbeam-network/xcm-builder@3.1.0
+  - @moonbeam-network/xcm-config@3.0.11
+
 ## 3.0.10
 
 ### Patch Changes
