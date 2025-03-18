@@ -985,7 +985,7 @@ export const moonbaseAlpha = new EvmParachain({
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 12,
       ids: {
-        id: '42259045809535163221576417993425387648',
+        palletInstance: 48,
       },
     }),
     ChainAsset.fromAsset(ftmwh, {
