@@ -1,3 +1,4 @@
+import { isEthAddress } from '@moonbeam-network/xcm-utils';
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import { getTypeDef } from '@polkadot/types';
 import type { AnyJson } from '@polkadot/types/types';
@@ -47,9 +48,7 @@ export function getExtrinsicArgumentVersion(
 }
 
 export function getExtrinsicAccount(address: string) {
-  const isEthAddress = address.length === 42 && address.startsWith('0x');
-
-  return isEthAddress
+  return isEthAddress(address)
     ? {
         AccountKey20: {
           key: address,

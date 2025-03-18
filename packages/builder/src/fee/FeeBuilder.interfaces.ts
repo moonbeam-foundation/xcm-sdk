@@ -1,4 +1,8 @@
-import type { AnyParachain, ChainAsset } from '@moonbeam-network/xcm-types';
+import type {
+  AnyChain,
+  AnyParachain,
+  ChainAsset,
+} from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { Enum } from '@polkadot/types';
 import type { StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
@@ -16,11 +20,13 @@ export interface FeeConfigBuilderParams {
   asset: ChainAsset;
   destination: AnyParachain;
   feeAsset: ChainAsset;
+  source: AnyChain;
 }
 
 export interface XcmPaymentFeeProps {
   isAssetReserveChain: boolean;
   shouldTransferAssetPrecedeFeeAsset?: boolean;
+  parents?: number;
 }
 
 export interface MoonbeamRuntimeXcmConfigAssetType extends Enum {
@@ -28,3 +34,7 @@ export interface MoonbeamRuntimeXcmConfigAssetType extends Enum {
   readonly asXcm: StagingXcmV3MultiLocation;
   readonly type: 'Xcm';
 }
+
+export type GetVersionedAssetId = (
+  params: FeeConfigBuilderParams,
+) => Promise<object> | object;
