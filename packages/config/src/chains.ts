@@ -31,6 +31,7 @@ import {
   eq,
   eqd,
   eth,
+  eurc,
   fil,
   ftm,
   ftmwh,
@@ -1412,6 +1413,13 @@ export const moonbeam = new EvmParachain({
       address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
       decimals: 18,
     }),
+    ChainAsset.fromAsset(eurc, {
+      address: '0xffffffffa608ec1332131289cbd8a97a0bb3d90f',
+      decimals: 12,
+      ids: {
+        palletInstance: 110,
+      },
+    }),
   ],
   ecosystem: Ecosystem.Polkadot,
   explorer: 'https://moonbeam.moonscan.io',
@@ -1884,16 +1892,30 @@ export const pendulum = new Parachain({
         id: { XCM: 12 },
       },
     }),
-    ChainAsset.fromAsset(pen, {
+    ChainAsset.fromAsset(eurc, {
       decimals: 12,
       ids: {
-        id: 'Native',
+        id: {
+          Stellar: {
+            AlphaNum4: {
+              code: eurc.originSymbol,
+              issuer:
+                '0xcf4f5a26e2090bb3adcf02c7a9d73dbfe6659cc690461475b86437fa49c71136',
+            },
+          },
+        },
       },
     }),
     ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { XCM: 6 },
+      },
+    }),
+    ChainAsset.fromAsset(pen, {
+      decimals: 12,
+      ids: {
+        id: 'Native',
       },
     }),
   ],
