@@ -1,5 +1,17 @@
 # @moonbeam-network/mrl
 
+## 3.0.13
+
+### Patch Changes
+
+- [#464](https://github.com/moonbeam-foundation/xcm-sdk/pull/464) [`f0185be`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f0185beadc97f4303153798b58b296c15a3ebdce) Thanks [@mmaurello](https://github.com/mmaurello)! - Override Wormhole endpoints
+
+- Updated dependencies [[`f0185be`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f0185beadc97f4303153798b58b296c15a3ebdce)]:
+  - @moonbeam-network/xcm-builder@3.1.2
+  - @moonbeam-network/xcm-types@3.0.10
+  - @moonbeam-network/xcm-config@3.0.13
+  - @moonbeam-network/xcm-sdk@3.0.13
+
 ## 3.0.12
 
 ### Patch Changes
