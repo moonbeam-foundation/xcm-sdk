@@ -31,6 +31,7 @@ import {
   eq,
   eqd,
   eth,
+  eurc,
   fil,
   ftm,
   ftmwh,
@@ -43,6 +44,7 @@ import {
   kint,
   kma,
   ksm,
+  laos,
   ldot,
   lit,
   manta,
@@ -886,6 +888,20 @@ export const laosAlphanet = new EvmParachain({
   ws: ['wss://rpc.laosalphanet.gorengine.com'],
 });
 
+export const laosMainnet = new EvmParachain({
+  assets: [ChainAsset.fromAsset(laos, { decimals: 18 })],
+  ecosystem: Ecosystem.Polkadot,
+  genesisHash:
+    '0xe8aecc950e82f1a375cf650fa72d07e0ad9bef7118f49b92283b63e88b1de88b',
+  key: 'laos-mainnet',
+  name: 'Laos',
+  isTestChain: false,
+  nativeAsset: laos,
+  parachainId: 3370,
+  ss58Format: 42,
+  ws: ['wss://laos-rpc.dwellir.com', 'wss://rpc.laos.laosfoundation.io'],
+});
+
 export const moonbaseAlpha = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(alan, {
@@ -970,7 +986,7 @@ export const moonbaseAlpha = new EvmParachain({
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 12,
       ids: {
-        id: '42259045809535163221576417993425387648',
+        palletInstance: 48,
       },
     }),
     ChainAsset.fromAsset(ftmwh, {
@@ -1391,6 +1407,17 @@ export const moonbeam = new EvmParachain({
       decimals: 18,
       ids: {
         id: '124105859028862849477017063633156007283',
+      },
+    }),
+    ChainAsset.fromAsset(laos, {
+      address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(eurc, {
+      address: '0xffffffffa608ec1332131289cbd8a97a0bb3d90f',
+      decimals: 12,
+      ids: {
+        palletInstance: 110,
       },
     }),
   ],
@@ -1865,16 +1892,30 @@ export const pendulum = new Parachain({
         id: { XCM: 12 },
       },
     }),
-    ChainAsset.fromAsset(pen, {
+    ChainAsset.fromAsset(eurc, {
       decimals: 12,
       ids: {
-        id: 'Native',
+        id: {
+          Stellar: {
+            AlphaNum4: {
+              code: eurc.originSymbol,
+              issuer:
+                '0xcf4f5a26e2090bb3adcf02c7a9d73dbfe6659cc690461475b86437fa49c71136',
+            },
+          },
+        },
       },
     }),
     ChainAsset.fromAsset(glmr, {
       decimals: 18,
       ids: {
         id: { XCM: 6 },
+      },
+    }),
+    ChainAsset.fromAsset(pen, {
+      decimals: 12,
+      ids: {
+        id: 'Native',
       },
     }),
   ],
@@ -2292,6 +2333,7 @@ export const chainsList: AnyChain[] = [
   kusama,
   kusamaAssetHub,
   laosAlphanet,
+  laosMainnet,
   mangataKusama,
   mantaParachain,
   moonbaseAlpha,

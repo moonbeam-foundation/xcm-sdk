@@ -37,6 +37,17 @@ function assetRegistry() {
             response.unwrapOrDefault().minimalBalance.toBigInt(),
         }),
     }),
+    metadata: (): AssetMinConfigBuilder => ({
+      build: ({ asset }) =>
+        new SubstrateQueryConfig({
+          module: pallet,
+          func: 'metadata',
+          args: [asset],
+          // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
+          transform: async (response: Option<any>): Promise<bigint> =>
+            response.unwrapOrDefault().existentialDeposit.toBigInt(),
+        }),
+    }),
   };
 }
 

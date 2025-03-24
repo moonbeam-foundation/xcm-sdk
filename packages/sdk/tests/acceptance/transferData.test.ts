@@ -2,15 +2,16 @@ import { describe, expect, it } from 'vitest';
 
 import {
   alphanetRelay,
-  hdx,
-  hydrationAlphanet,
+  laos,
+  laosMainnet,
   moonbaseAlpha,
+  moonbeam,
   unit,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import { Sdk, type TransferData } from '../../src';
 import {
-  hydrationAddress,
+  laosMainnetAddress,
   moonEvmAddress,
   substrateAddress,
 } from './constants';
@@ -30,18 +31,18 @@ const transferDateTestConfig: {
     destinationAddress: moonEvmAddress,
   },
   {
-    asset: hdx,
-    source: hydrationAlphanet,
-    sourceAddress: hydrationAddress,
-    destination: moonbaseAlpha,
-    destinationAddress: moonEvmAddress,
-  },
-  {
     asset: unit,
     source: moonbaseAlpha,
     sourceAddress: moonEvmAddress,
     destination: alphanetRelay,
     destinationAddress: substrateAddress,
+  },
+  {
+    asset: laos,
+    source: moonbeam,
+    sourceAddress: moonEvmAddress,
+    destination: laosMainnet,
+    destinationAddress: laosMainnetAddress,
   },
 ];
 

@@ -115,6 +115,11 @@ export const eth = new Asset({
   originSymbol: 'ETH',
 });
 
+export const eurc = new Asset({
+  key: 'eurc',
+  originSymbol: 'EURC',
+});
+
 export const fil = new Asset({
   key: 'fil',
   originSymbol: 'FIL',
@@ -415,6 +420,11 @@ export const wethe = new Asset({
   originSymbol: 'WETH.e',
 });
 
+export const laos = new Asset({
+  key: 'laos',
+  originSymbol: 'LAOS',
+});
+
 export const assetsList: Asset[] = [
   aca,
   agng,
@@ -439,6 +449,7 @@ export const assetsList: Asset[] = [
   eq,
   eqd,
   eth,
+  eurc,
   fil,
   ftm,
   ftmwh,
@@ -451,6 +462,7 @@ export const assetsList: Asset[] = [
   kint,
   kma,
   ksm,
+  laos,
   ldot,
   lit,
   manta,

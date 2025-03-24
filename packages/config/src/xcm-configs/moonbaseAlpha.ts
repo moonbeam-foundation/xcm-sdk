@@ -535,7 +535,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: maos,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
   ],
 });

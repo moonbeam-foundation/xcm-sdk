@@ -15,11 +15,13 @@ import {
   dai,
   ded,
   dot,
+  eurc,
   fil,
   glmr,
   hdx,
   ibtc,
   intr,
+  laos,
   ldot,
   manta,
   neuro,
@@ -55,6 +57,7 @@ import {
   darwinia,
   hydration,
   interlay,
+  laosMainnet,
   mantaParachain,
   moonbeam,
   neuroweb,
@@ -1523,6 +1526,47 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().foreignAssets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
+    },
+    {
+      source: {
+        asset: laos,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        asset: laos,
+        chain: laosMainnet,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: 0.03,
+          asset: laos,
+        },
+      },
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+    },
+    {
+      source: {
+        asset: eurc,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        asset: eurc,
+        chain: pendulum,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.1,
+          asset: eurc,
+        },
+        min: AssetMinBuilder().assetRegistry().metadata(),
+      },
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
   ],
 });
