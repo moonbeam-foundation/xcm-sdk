@@ -40,6 +40,7 @@ export async function getDestinationData({
     feeAsset: route.destination.fee.asset,
     destination,
     fee: route.destination.fee.amount,
+    source: route.source.chain,
     asset: route.source.asset,
   });
   const existentialDeposit = await getExistentialDeposit(destination);

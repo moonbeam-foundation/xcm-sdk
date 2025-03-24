@@ -6,6 +6,7 @@ import {
   u8aToHex,
 } from '@polkadot/util';
 import { blake2AsU8a, decodeAddress } from '@polkadot/util-crypto';
+import { isEthAddress } from '../format';
 
 /**
  * reference: https://github.com/Moonsong-Labs/xcm-tools/blob/main/scripts/calculate-sovereign-account.ts
@@ -42,9 +43,8 @@ export function getMultilocationDerivedAddresses({
   isParents?: boolean;
 }) {
   const parents = isParents ? 1 : 0;
-  const isEthAddress = address.length === 42 && address.startsWith('0x');
-  const accType = isEthAddress ? 'AccountKey20' : 'AccountId32';
-  const decodedAddress = isEthAddress
+  const accType = isEthAddress(address) ? 'AccountKey20' : 'AccountId32';
+  const decodedAddress = isEthAddress(address)
     ? hexToU8a(address)
     : decodeAddress(address);
 
@@ -61,7 +61,7 @@ export function getMultilocationDerivedAddresses({
     new Uint8Array([
       ...stringToU8a(family),
       ...(paraId ? compactToU8a(paraId) : []),
-      ...compactToU8a(accType.length + (isEthAddress ? 20 : 32)),
+      ...compactToU8a(accType.length + (isEthAddress(address) ? 20 : 32)),
       ...stringToU8a(accType),
       ...decodedAddress,
     ]),

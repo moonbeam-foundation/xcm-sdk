@@ -3,6 +3,7 @@ import type {
   ChainAsset,
   ChainAssetId,
 } from '@moonbeam-network/xcm-types';
+import { isEthAddress } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Option, Result, u128 } from '@polkadot/types';
 import type {
@@ -10,6 +11,8 @@ import type {
   Weight,
 } from '@polkadot/types/interfaces';
 import type { AnyJson } from '@polkadot/types/types';
+import { u8aToHex } from '@polkadot/util';
+import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from '../extrinsic';
 import {
   normalizeConcrete,
@@ -21,7 +24,7 @@ const DEFAULT_AMOUNT = 10 ** 6;
 const DEFAULT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
 
-const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO
+const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO: make this dynamic
 
 function isXcmV4() {
   return XCM_VERSION === XcmVersion.v4;
@@ -77,8 +80,8 @@ export function getBuyExecutionInstruction(assetType: object) {
 
 export function getDepositAssetInstruction(address: string, assets: object[]) {
   const accountKey = {
-    AccountKey20: {
-      key: address,
+    [isEthAddress(address) ? 'AccountKey20' : 'AccountId32']: {
+      key: isEthAddress(address) ? address : u8aToHex(decodeAddress(address)),
       network: null,
     },
   };
@@ -178,6 +181,7 @@ export async function getAssetIdType(
   return type;
 }
 
+// TODO deprecate this after applying to asset migration
 export async function getVersionedAssetId(
   api: ApiPromise,
   asset: ChainAsset,
@@ -196,7 +200,6 @@ export async function getVersionedAssetId(
 
   const assetType = await getAssetIdType(api, assetId);
   const assetTypeObject = assetType.unwrap().asXcm.toJSON();
-
   const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
 
   return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
@@ -227,9 +230,10 @@ export async function getFeeForXcmInstructionsAndAsset(
         ...versionedAssetId,
       },
     });
+
   if (!weightToForeignAssets.isOk) {
     throw new Error(
-      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets)',
+      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Check if the asset is supported for XcmPaymentApi.',
     );
   }
   return weightToForeignAssets.asOk.toBigInt();
