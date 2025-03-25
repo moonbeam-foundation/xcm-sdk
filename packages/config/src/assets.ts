@@ -35,11 +35,6 @@ export const astr = new Asset({
   originSymbol: 'ASTR',
 });
 
-export const atom = new Asset({
-  key: 'atom',
-  originSymbol: 'ATOM',
-});
-
 export const auq = new Asset({
   key: 'auq',
   originSymbol: 'AUQ',
@@ -168,11 +163,6 @@ export const kbtc = new Asset({
 export const kint = new Asset({
   key: 'kint',
   originSymbol: 'KINT',
-});
-
-export const kma = new Asset({
-  key: 'kma',
-  originSymbol: 'KMA',
 });
 
 export const ksm = new Asset({
@@ -433,7 +423,6 @@ export const assetsList: Asset[] = [
   apillon,
   aseed,
   astr,
-  atom,
   auq,
   axlusdc,
   betaDEV,
@@ -460,7 +449,6 @@ export const assetsList: Asset[] = [
   kar,
   kbtc,
   kint,
-  kma,
   ksm,
   laos,
   ldot,
