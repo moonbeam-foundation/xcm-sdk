@@ -48,9 +48,10 @@ export const interlayRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+            isAssetReserveChain: false,
+            shouldTransferAssetPrecedeFeeAsset: true,
+          }),
           asset: intr,
         },
       },
