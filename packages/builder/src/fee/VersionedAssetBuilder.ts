@@ -2,6 +2,11 @@ import type { AnyChain } from '@moonbeam-network/xcm-types';
 import type { ChainAsset } from '@moonbeam-network/xcm-types';
 import { Parachain } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
+import type { Option } from '@polkadot/types';
+import type { StagingXcmV4Location } from '@polkadot/types/lookup';
+import { normalizeX1 } from '../extrinsic/ExtrinsicBuilder.utils';
+import type { MoonbeamRuntimeXcmConfigAssetType } from './FeeBuilder.interfaces';
+import { STABLE_XCM_VERSION } from './FeeBuilder.utils';
 
 export function BuildVersionedAsset() {
   return {
@@ -99,26 +104,6 @@ export function BuildVersionedAsset() {
         };
       },
 
-      generalIndex: (source: AnyChain, asset: ChainAsset): object => {
-        if (!(source instanceof Parachain)) {
-          throw new Error(
-            `Chain ${source.name} must be a Parachain to build versioned asset id for XcmPaymentApi fee calculation`,
-          );
-        }
-
-        const sourceAsset = source.getChainAsset(asset);
-
-        return {
-          interior: {
-            X2: [
-              { Parachain: source.parachainId },
-              { GeneralIndex: sourceAsset.getAssetId() },
-            ],
-          },
-          parents: 1,
-        };
-      },
-
       palletInstance: (source: AnyChain, asset: ChainAsset): object => {
         if (!(source instanceof Parachain)) {
           throw new Error(
@@ -175,8 +160,9 @@ export function BuildVersionedAsset() {
 export function QueryVersionedAsset() {
   return {
     fromCurrencyIdToLocations: async (asset: ChainAsset, api: ApiPromise) => {
+      console.log('asset registered id', asset.getAssetRegisteredId());
       const result = await api.query.assetRegistry.currencyIdToLocations(
-        asset.getAssetId(),
+        asset.getAssetRegisteredId(),
       );
 
       if (!result || result.isEmpty) {
@@ -184,6 +170,47 @@ export function QueryVersionedAsset() {
       }
 
       return result.toJSON() as object;
+    },
+    fromAssetId: async (asset: ChainAsset, api: ApiPromise) => {
+      console.log('asset id', asset.getAssetRegisteredId());
+
+      if (!asset.getAssetRegisteredId()) {
+        throw new Error(
+          `No asset registered id found for asset ${asset.getSymbol()}`,
+        );
+      }
+
+      const assetManagerResult = await api.query.assetManager.assetIdType<
+        Option<MoonbeamRuntimeXcmConfigAssetType>
+      >(asset.getAssetRegisteredId());
+
+      console.log('assetManagerResult', assetManagerResult.toHuman());
+
+      if (
+        assetManagerResult.isNone ||
+        assetManagerResult.isEmpty ||
+        !assetManagerResult.unwrap().isXcm
+      ) {
+        const evmForeignAssetsResult =
+          await api.query.evmForeignAssets.assetsById<
+            Option<StagingXcmV4Location>
+          >(asset.getAssetRegisteredId());
+
+        if (
+          !evmForeignAssetsResult ||
+          evmForeignAssetsResult.isEmpty ||
+          evmForeignAssetsResult.isNone
+        ) {
+          throw new Error(`No asset type found for asset ${asset.getSymbol()}`);
+        }
+
+        return evmForeignAssetsResult.unwrapOrDefault().toJSON() as object;
+      }
+
+      return normalizeX1(
+        STABLE_XCM_VERSION,
+        assetManagerResult.unwrapOrDefault().asXcm.toJSON(),
+      ) as object;
     },
   };
 }

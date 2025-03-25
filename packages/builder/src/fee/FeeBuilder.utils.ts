@@ -24,10 +24,10 @@ const DEFAULT_AMOUNT = 10 ** 6;
 const DEFAULT_HEX_STRING =
   '0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321';
 
-const XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO: make this dynamic
+export const STABLE_XCM_VERSION: XcmVersion = XcmVersion.v4; // TODO: make this dynamic
 
 function isXcmV4() {
-  return XCM_VERSION === XcmVersion.v4;
+  return STABLE_XCM_VERSION === XcmVersion.v4;
 }
 
 export function getWithdrawAssetInstruction(assetTypes: object[]) {
@@ -128,7 +128,7 @@ function getNativeAssetId(palletInstanceNumber: number | undefined): object {
     },
     parents: '0',
   };
-  return normalizeConcrete(XCM_VERSION, id);
+  return normalizeConcrete(STABLE_XCM_VERSION, id);
 }
 
 function getConcreteAssetIdWithAccountKey20(
@@ -157,7 +157,7 @@ function getConcreteAssetIdWithAccountKey20(
     },
     parents: '0',
   };
-  return normalizeConcrete(XCM_VERSION, id);
+  return normalizeConcrete(STABLE_XCM_VERSION, id);
 }
 
 export async function getAssetIdType(
@@ -200,9 +200,12 @@ export async function getVersionedAssetId(
 
   const assetType = await getAssetIdType(api, assetId);
   const assetTypeObject = assetType.unwrap().asXcm.toJSON();
-  const normalizedAssetTypeObject = normalizeX1(XCM_VERSION, assetTypeObject);
+  const normalizedAssetTypeObject = normalizeX1(
+    STABLE_XCM_VERSION,
+    assetTypeObject,
+  );
 
-  return normalizeConcrete(XCM_VERSION, normalizedAssetTypeObject);
+  return normalizeConcrete(STABLE_XCM_VERSION, normalizedAssetTypeObject);
 }
 
 export async function getFeeForXcmInstructionsAndAsset(
@@ -213,7 +216,7 @@ export async function getFeeForXcmInstructionsAndAsset(
   const xcmToWeightResult = await api.call.xcmPaymentApi.queryXcmWeight<
     Result<Weight, PolkadotError>
   >({
-    [XCM_VERSION]: instructions,
+    [STABLE_XCM_VERSION]: instructions,
   });
   if (!xcmToWeightResult.isOk) {
     throw new Error(
@@ -221,12 +224,13 @@ export async function getFeeForXcmInstructionsAndAsset(
     );
   }
   const xcmToWeight = xcmToWeightResult.asOk;
+  console.log('xcmToWeight', xcmToWeight);
 
   const weightToForeignAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
       Result<u128, PolkadotError>
     >(xcmToWeight, {
-      [XCM_VERSION]: {
+      [STABLE_XCM_VERSION]: {
         ...versionedAssetId,
       },
     });

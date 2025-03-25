@@ -25,7 +25,7 @@ export const kintsugiRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: kint,
         },
       },
@@ -48,10 +48,9 @@ export const kintsugiRoutes = new ChainRoutes({
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
-            isAssetReserveChain: false,
-            shouldTransferAssetPrecedeFeeAsset: true,
-          }),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: kint,
         },
       },

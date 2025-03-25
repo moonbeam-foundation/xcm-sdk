@@ -87,19 +87,6 @@ export function xcmPaymentApi() {
       }),
   };
 
-  const queryMethods = {
-    fromCurrencyIdToLocations: (options: XcmPaymentFeeProps) =>
-      createXcmFeeBuilder({
-        getVersionedFeeAsset: async ({ source, feeAsset, api }) => {
-          return await QueryVersionedAsset().fromCurrencyIdToLocations(
-            feeAsset,
-            api,
-          );
-        },
-        options,
-      }),
-  };
-
   const sourceMethods = {
     fromSourceAccountKey20: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
@@ -108,12 +95,13 @@ export function xcmPaymentApi() {
         options,
       }),
 
-    fromSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
-      createXcmFeeBuilder({
-        getVersionedFeeAsset: ({ source, feeAsset }) =>
-          BuildVersionedAsset().fromSource().generalIndex(source, feeAsset),
-        options,
-      }),
+    // TODO mjm maybe not needed
+    // fromSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
+    //   createXcmFeeBuilder({
+    //     getVersionedFeeAsset: ({ source, feeAsset }) =>
+    //       BuildVersionedAsset().fromSource().generalIndex(source, feeAsset),
+    //     options,
+    //   }),
 
     fromSourcePalletInstance: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
@@ -122,14 +110,48 @@ export function xcmPaymentApi() {
         options,
       }),
 
-    fromSourceGlobalConsensus: (options: XcmPaymentFeeProps) =>
+    // TODO mjm maybe not needed
+    // fromSourceGlobalConsensus: (options: XcmPaymentFeeProps) =>
+    //   createXcmFeeBuilder({
+    //     getVersionedFeeAsset: ({ source, feeAsset }) => {
+    //       const sourceAsset = source.getChainAsset(feeAsset);
+    //       return BuildVersionedAsset().fromGlobalConsensus(sourceAsset);
+    //     },
+    //     options,
+    //   }),
+  };
+
+  const queryMethods = {
+    fromCurrencyIdToLocations: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
-        getVersionedFeeAsset: ({ source, feeAsset }) => {
-          const sourceAsset = source.getChainAsset(feeAsset);
-          return BuildVersionedAsset().fromGlobalConsensus(sourceAsset);
+        getVersionedFeeAsset: async ({ feeAsset, api }) => {
+          return await QueryVersionedAsset().fromCurrencyIdToLocations(
+            feeAsset,
+            api,
+          );
         },
         options,
       }),
+    fromAssetIdQuery: (options: XcmPaymentFeeProps) =>
+      createXcmFeeBuilder({
+        getVersionedFeeAsset: async ({ feeAsset, api }) => {
+          return await QueryVersionedAsset().fromAssetId(feeAsset, api);
+        },
+        getVersionedTransferAsset: async ({ asset, api }) => {
+          return await QueryVersionedAsset().fromAssetId(asset, api);
+        },
+        options,
+      }),
+    // fromAssetIdQueryAndAccountKey20: (options: XcmPaymentFeeProps) =>
+    //   createXcmFeeBuilder({
+    //     getVersionedFeeAsset: async ({ feeAsset, api }) => {
+    //       return await QueryVersionedAsset().fromAssetId(feeAsset, api);
+    //     },
+    //     getVersionedTransferAsset: async ({ asset, api }) => {
+    //       return BuildVersionedAsset().fromAccountKey20(asset);
+    //     },
+    //     options,
+    //   }),
   };
 
   const legacyMethods = {
@@ -159,6 +181,7 @@ export function xcmPaymentApi() {
               destination,
             );
 
+            console.log('versionedFeeAssetId', versionedFeeAssetId);
             const versionedAssets = shouldTransferAssetPrecedeFeeAsset
               ? [versionedTransferAssetId, versionedFeeAssetId]
               : [versionedFeeAssetId, versionedTransferAssetId];
@@ -175,6 +198,7 @@ export function xcmPaymentApi() {
               getDepositAssetInstruction(address, assets),
               getSetTopicInstruction(),
             ];
+            console.log('instructions', instructions);
 
             return getFeeForXcmInstructionsAndAsset(
               api,
@@ -216,12 +240,17 @@ const createXcmFeeBuilder = ({
           params,
         });
 
+        console.log('assets', assets);
+        console.log('versionedFeeAssetId', versionedFeeAssetId);
+
         const instructions = getInstructions({
           isAssetReserveChain: options.isAssetReserveChain,
           assets,
           versionedFeeAssetId,
           address: params.address,
         });
+
+        console.log('instructions', instructions);
 
         return getFeeForXcmInstructionsAndAsset(
           params.api,
