@@ -772,17 +772,6 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
           "originSymbol": "AMPE",
           "symbol": undefined,
         },
-        "atom" => _ChainAsset {
-          "address": "0xffffffffb7cdb201c395c238350568f17cfbd3b5",
-          "decimals": 6,
-          "ids": {
-            "id": "244316754493307480955066032215622931381",
-          },
-          "key": "atom",
-          "min": undefined,
-          "originSymbol": "ATOM",
-          "symbol": undefined,
-        },
         "dev" => _ChainAsset {
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
@@ -1260,17 +1249,6 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
           "key": "ampe",
           "min": undefined,
           "originSymbol": "AMPE",
-          "symbol": undefined,
-        },
-        "atom" => _ChainAsset {
-          "address": "0xffffffffb7cdb201c395c238350568f17cfbd3b5",
-          "decimals": 6,
-          "ids": {
-            "id": "244316754493307480955066032215622931381",
-          },
-          "key": "atom",
-          "min": undefined,
-          "originSymbol": "ATOM",
           "symbol": undefined,
         },
         "dev" => _ChainAsset {
