@@ -15,7 +15,6 @@ import {
   apillon,
   aseed,
   astr,
-  atom,
   auq,
   axlusdc,
   betaDEV,
@@ -885,13 +884,6 @@ export const moonbaseAlpha = new EvmParachain({
       decimals: 12,
       ids: {
         id: '170050401128744171791743427490841452054',
-      },
-    }),
-    ChainAsset.fromAsset(atom, {
-      address: '0xffffffffb7cdb201c395c238350568f17cfbd3b5', // Picasso Cosmos Hub
-      decimals: 6,
-      ids: {
-        id: '244316754493307480955066032215622931381',
       },
     }),
     ChainAsset.fromAsset(dev, {
