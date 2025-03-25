@@ -11,11 +11,9 @@ import {
   kar,
   kbtc,
   kint,
-  kma,
   ksm,
   mgx,
   movr,
-  pica,
   rmrk,
   sdn,
   teer,
@@ -28,7 +26,6 @@ import {
 } from '../assets';
 import {
   bifrostKusama,
-  calamari,
   crustShadow,
   darwiniaCrab,
   integritee,
@@ -38,7 +35,6 @@ import {
   kusamaAssetHub,
   mangataKusama,
   moonriver,
-  picasso,
   robonomics,
   shiden,
   turing,
@@ -65,26 +61,6 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: calamari,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          amount: 0.001,
-          asset: movr,
-        },
-        min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().Xtokens().transfer(),
     },
@@ -179,25 +155,6 @@ export const moonriverRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.004,
-          asset: movr,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: picasso,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.001,
           asset: movr,
         },
       },
@@ -367,29 +324,6 @@ export const moonriverRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: kma,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: kma,
-        chain: calamari,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.000004,
-          asset: kma,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
         asset: ksm,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -430,29 +364,6 @@ export const moonriverRoutes = new ChainRoutes({
         fee: {
           amount: 5.5,
           asset: mgx,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: pica,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
-      },
-      destination: {
-        asset: pica,
-        chain: picasso,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.001,
-          asset: pica,
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
