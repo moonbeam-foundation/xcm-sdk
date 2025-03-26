@@ -5,16 +5,7 @@ import type {
   GetVersionedAssetId,
   XcmPaymentFeeProps,
 } from '../FeeBuilder.interfaces';
-import {
-  getBuyExecutionInstruction,
-  getClearOriginInstruction,
-  getDepositAssetInstruction,
-  getFeeForXcmInstructionsAndAsset,
-  getReserveAssetDepositedInstruction,
-  getSetTopicInstruction,
-  getVersionedAssetId,
-  getWithdrawAssetInstruction,
-} from '../FeeBuilder.utils';
+import { getFeeForXcmInstructionsAndAsset } from '../FeeBuilder.utils';
 import {
   BuildVersionedAsset,
   QueryVersionedAsset,
@@ -95,30 +86,12 @@ export function xcmPaymentApi() {
         options,
       }),
 
-    // TODO mjm maybe not needed
-    // fromSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
-    //   createXcmFeeBuilder({
-    //     getVersionedFeeAsset: ({ source, feeAsset }) =>
-    //       BuildVersionedAsset().fromSource().generalIndex(source, feeAsset),
-    //     options,
-    //   }),
-
     fromSourcePalletInstance: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ source, feeAsset }) =>
           BuildVersionedAsset().fromSource().palletInstance(source, feeAsset),
         options,
       }),
-
-    // TODO mjm maybe not needed
-    // fromSourceGlobalConsensus: (options: XcmPaymentFeeProps) =>
-    //   createXcmFeeBuilder({
-    //     getVersionedFeeAsset: ({ source, feeAsset }) => {
-    //       const sourceAsset = source.getChainAsset(feeAsset);
-    //       return BuildVersionedAsset().fromGlobalConsensus(sourceAsset);
-    //     },
-    //     options,
-    //   }),
   };
 
   const queryMethods = {
@@ -142,79 +115,12 @@ export function xcmPaymentApi() {
         },
         options,
       }),
-    // fromAssetIdQueryAndAccountKey20: (options: XcmPaymentFeeProps) =>
-    //   createXcmFeeBuilder({
-    //     getVersionedFeeAsset: async ({ feeAsset, api }) => {
-    //       return await QueryVersionedAsset().fromAssetId(feeAsset, api);
-    //     },
-    //     getVersionedTransferAsset: async ({ asset, api }) => {
-    //       return BuildVersionedAsset().fromAccountKey20(asset);
-    //     },
-    //     options,
-    //   }),
-  };
-
-  const legacyMethods = {
-    // TODO deprecate this after applying to asset migration
-    xcmPaymentFee: ({
-      isAssetReserveChain,
-      shouldTransferAssetPrecedeFeeAsset = false,
-    }: XcmPaymentFeeProps): FeeConfigBuilder => ({
-      build: ({
-        address,
-        api,
-        asset,
-        destination,
-        feeAsset,
-      }: FeeConfigBuilderParams) =>
-        new SubstrateCallConfig({
-          api,
-          call: async (): Promise<bigint> => {
-            const versionedFeeAssetId = await getVersionedAssetId(
-              api,
-              feeAsset,
-              destination,
-            );
-            const versionedTransferAssetId = await getVersionedAssetId(
-              api,
-              asset,
-              destination,
-            );
-
-            console.log('versionedFeeAssetId', versionedFeeAssetId);
-            const versionedAssets = shouldTransferAssetPrecedeFeeAsset
-              ? [versionedTransferAssetId, versionedFeeAssetId]
-              : [versionedFeeAssetId, versionedTransferAssetId];
-
-            const assets =
-              feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
-
-            const instructions = [
-              isAssetReserveChain
-                ? getWithdrawAssetInstruction(assets)
-                : getReserveAssetDepositedInstruction(assets),
-              getClearOriginInstruction(),
-              getBuyExecutionInstruction(versionedFeeAssetId),
-              getDepositAssetInstruction(address, assets),
-              getSetTopicInstruction(),
-            ];
-            console.log('instructions', instructions);
-
-            return getFeeForXcmInstructionsAndAsset(
-              api,
-              instructions,
-              versionedFeeAssetId,
-            );
-          },
-        }),
-    }),
   };
 
   return {
     ...localMethods,
     ...sourceMethods,
     ...queryMethods,
-    ...legacyMethods,
   };
 }
 
