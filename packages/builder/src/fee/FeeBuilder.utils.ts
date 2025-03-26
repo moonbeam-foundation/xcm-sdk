@@ -223,6 +223,7 @@ export async function getFeeForXcmInstructionsAndAsset(
       'There was an error trying to get the weight for the xcm instructions (queryXcmWeight)',
     );
   }
+
   const xcmToWeight = xcmToWeightResult.asOk;
   // TODO mjm remove logs
   console.log('xcmToWeight', xcmToWeight.toHuman());
@@ -238,7 +239,7 @@ export async function getFeeForXcmInstructionsAndAsset(
 
   if (!weightToForeignAssets.isOk) {
     throw new Error(
-      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Check if the asset is supported for XcmPaymentApi.',
+      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Make sure the asset is supported by XcmPaymentApi.',
     );
   }
   return weightToForeignAssets.asOk.toBigInt();
