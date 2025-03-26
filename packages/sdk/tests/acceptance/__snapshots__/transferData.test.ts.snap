@@ -84,7 +84,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
     "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
     "amount": 1230012345000000000n,
     "decimals": 18,
-    "ids": undefined,
+    "ids": {
+      "id": "294342517635293430510451841925413680520",
+    },
     "key": "laos",
     "min": undefined,
     "originSymbol": "LAOS",
@@ -105,7 +107,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
       "amount": 1230012345000000000n,
       "decimals": 18,
-      "ids": undefined,
+      "ids": {
+        "id": "294342517635293430510451841925413680520",
+      },
       "key": "laos",
       "min": undefined,
       "originSymbol": "LAOS",
@@ -611,7 +615,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
         "laos" => _ChainAsset {
           "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
           "decimals": 18,
-          "ids": undefined,
+          "ids": {
+            "id": "294342517635293430510451841925413680520",
+          },
           "key": "laos",
           "min": undefined,
           "originSymbol": "LAOS",
@@ -621,7 +627,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "address": "0xffffffffa608ec1332131289cbd8a97a0bb3d90f",
           "decimals": 12,
           "ids": {
-            "palletInstance": 110,
+            "id": "220698173844663170714431919474506717455",
           },
           "key": "eurc",
           "min": undefined,
@@ -656,7 +662,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
       "amount": 30000000000000000n,
       "decimals": 18,
-      "ids": undefined,
+      "ids": {
+        "id": "294342517635293430510451841925413680520",
+      },
       "key": "laos",
       "min": undefined,
       "originSymbol": "LAOS",
@@ -666,7 +674,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
       "amount": 1230012345000000000n,
       "decimals": 18,
-      "ids": undefined,
+      "ids": {
+        "id": "294342517635293430510451841925413680520",
+      },
       "key": "laos",
       "min": undefined,
       "originSymbol": "LAOS",
@@ -712,7 +722,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
       "amount": 1230012345000000000n,
       "decimals": 18,
-      "ids": undefined,
+      "ids": {
+        "id": "294342517635293430510451841925413680520",
+      },
       "key": "laos",
       "min": undefined,
       "originSymbol": "LAOS",
@@ -722,7 +734,9 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
       "amount": 0n,
       "decimals": 18,
-      "ids": undefined,
+      "ids": {
+        "id": "294342517635293430510451841925413680520",
+      },
       "key": "laos",
       "min": undefined,
       "originSymbol": "LAOS",
@@ -741,6 +755,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
       "amount": 10000n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -798,6 +813,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
           "address": "0xffffffff06a14960bddc8610d0e694d39a3c682e",
           "decimals": 18,
           "ids": {
+            "id": "8812816049497534070792537960559175726",
             "palletInstance": 48,
           },
           "key": "maos",
@@ -864,6 +880,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
           "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
           "decimals": 12,
           "ids": {
+            "id": "42259045809535163221576417993425387648",
             "palletInstance": 48,
           },
           "key": "unit",
@@ -953,9 +970,10 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
     },
     "fee": _AssetAmount {
       "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-      "amount": 100000000000n,
+      "amount": 2256681856n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -968,6 +986,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
       "amount": 0n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -990,9 +1009,10 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
   },
   "min": _AssetAmount {
     "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-    "amount": 100000000000n,
+    "amount": 2256681856n,
     "decimals": 12,
     "ids": {
+      "id": "42259045809535163221576417993425387648",
       "palletInstance": 48,
     },
     "key": "unit",
@@ -1043,7 +1063,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
     },
     "destinationFee": _AssetAmount {
       "address": undefined,
-      "amount": 100000000000n,
+      "amount": 2256681856n,
       "decimals": 12,
       "ids": undefined,
       "key": "unit",
@@ -1171,7 +1191,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "fee": _AssetAmount {
       "address": undefined,
-      "amount": 50600000000n,
+      "amount": 2716083497n,
       "decimals": 12,
       "ids": undefined,
       "key": "unit",
@@ -1197,6 +1217,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     "amount": 10000n,
     "decimals": 12,
     "ids": {
+      "id": "42259045809535163221576417993425387648",
       "palletInstance": 48,
     },
     "key": "unit",
@@ -1206,7 +1227,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
   },
   "min": _AssetAmount {
     "address": undefined,
-    "amount": 60600000000n,
+    "amount": 12716083497n,
     "decimals": 12,
     "ids": undefined,
     "key": "unit",
@@ -1220,6 +1241,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
       "amount": 10000n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -1277,6 +1299,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
           "address": "0xffffffff06a14960bddc8610d0e694d39a3c682e",
           "decimals": 18,
           "ids": {
+            "id": "8812816049497534070792537960559175726",
             "palletInstance": 48,
           },
           "key": "maos",
@@ -1343,6 +1366,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
           "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
           "decimals": 12,
           "ids": {
+            "id": "42259045809535163221576417993425387648",
             "palletInstance": 48,
           },
           "key": "unit",
@@ -1420,9 +1444,10 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "destinationFee": _AssetAmount {
       "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-      "amount": 50600000000n,
+      "amount": 2716083497n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -1435,6 +1460,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
       "amount": 10000n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -1483,6 +1509,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
       "amount": 10000n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
@@ -1495,6 +1522,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
       "amount": 0n,
       "decimals": 12,
       "ids": {
+        "id": "42259045809535163221576417993425387648",
         "palletInstance": 48,
       },
       "key": "unit",
