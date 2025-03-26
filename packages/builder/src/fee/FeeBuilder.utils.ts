@@ -169,12 +169,6 @@ export async function getAssetIdType(
       Option<MoonbeamRuntimeXcmConfigAssetType>
     >(asset);
 
-  // TODO: check if this can be used
-  // const type =
-  //   await api.query.evmForeignAssets.assetsById<
-  //     Option<MoonbeamRuntimeXcmConfigAssetType>
-  //   >(asset);
-
   if (type.isNone || !type.unwrap().isXcm) {
     throw new Error(`No asset type found for asset ${asset}`);
   }
@@ -237,10 +231,28 @@ export async function getFeeForXcmInstructionsAndAsset(
       },
     });
 
+  // If the asset is not supported by V4, retry with V5
+  // TODO this is a temporary solution, we should find a better way to handle this, with xcmPallet.supportedVersion or polkadotXcm.supportedVersion
   if (!weightToForeignAssets.isOk) {
-    throw new Error(
-      'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Make sure the asset is supported by XcmPaymentApi.',
+    console.error(
+      'Error trying to get the fee with the weight and asset (weightToForeignAssets) with V4, retrying with V5',
     );
+
+    const weightToForeignAssetsV5 =
+      await api.call.xcmPaymentApi.queryWeightToAssetFee<
+        Result<u128, PolkadotError>
+      >(xcmToWeight, {
+        [XcmVersion.v5]: {
+          ...versionedAssetId,
+        },
+      });
+
+    if (!weightToForeignAssetsV5.isOk) {
+      throw new Error(
+        'There was an error trying to get the fee with the weight and asset (weightToForeignAssets). Make sure the asset is supported by XcmPaymentApi.',
+      );
+    }
+    return weightToForeignAssetsV5.asOk.toBigInt();
   }
   return weightToForeignAssets.asOk.toBigInt();
 }
