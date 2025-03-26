@@ -15,7 +15,6 @@ import {
   apillon,
   aseed,
   astr,
-  atom,
   auq,
   axlusdc,
   betaDEV,
@@ -42,7 +41,6 @@ import {
   kar,
   kbtc,
   kint,
-  kma,
   ksm,
   laos,
   ldot,
@@ -328,36 +326,6 @@ export const bifrostPolkadot = new Parachain({
     'wss://bifrost-polkadot-rpc.dwellir.com',
     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
     'wss://hk.p.bifrost-rpc.liebi.com/ws',
-  ],
-});
-
-export const calamari = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        balanceId: 11,
-        id: { MantaCurrency: 11 },
-      },
-    }),
-    ChainAsset.fromAsset(kma, {
-      decimals: 12,
-      ids: {
-        id: { MantaCurrency: 1 },
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x4ac80c99289841dd946ef92765bf659a307d39189b3ce374a92b5f0415ee17a1',
-  key: 'calamari',
-  name: 'Calamari',
-  nativeAsset: kma,
-  parachainId: 2084,
-  ss58Format: 78,
-  ws: [
-    'wss://calamari.systems',
-    // "wss://calamari-rpc.dwellir.com"
   ],
 });
 
@@ -916,13 +884,6 @@ export const moonbaseAlpha = new EvmParachain({
       decimals: 12,
       ids: {
         id: '170050401128744171791743427490841452054',
-      },
-    }),
-    ChainAsset.fromAsset(atom, {
-      address: '0xffffffffb7cdb201c395c238350568f17cfbd3b5', // Picasso Cosmos Hub
-      decimals: 6,
-      ids: {
-        id: '244316754493307480955066032215622931381',
       },
     }),
     ChainAsset.fromAsset(dev, {
@@ -1495,13 +1456,6 @@ export const moonriver = new EvmParachain({
         id: '175400718394635817552109270754364440562',
       },
     }),
-    ChainAsset.fromAsset(kma, {
-      address: '0xFFffFffFA083189f870640b141ae1E882c2b5bad',
-      decimals: 12,
-      ids: {
-        id: '213357169630950964874127107356898319277',
-      },
-    }),
     ChainAsset.fromAsset(ksm, {
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 12,
@@ -1991,70 +1945,6 @@ export const phala = new Parachain({
   ],
 });
 
-export const picasso = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(pica, {
-      decimals: 12,
-      ids: {
-        id: 1,
-      },
-    }),
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 23,
-      },
-      min: 0.0041,
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x6811a339673c9daa897944dcdac99c6e2939cc88245ed21951a0a3c9a2be75bc',
-  key: 'picasso',
-  name: 'Picasso',
-  nativeAsset: pica,
-  parachainId: 2087,
-  ss58Format: 49,
-  ws: [
-    'wss://picasso-rpc.dwellir.com',
-    'wss://rpc.composablenodes.tech',
-    'wss://picasso-rpc.composable.finance',
-  ],
-});
-
-export const picassoAlphanet = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(pica, {
-      decimals: 12,
-      ids: {
-        id: 1,
-      },
-    }),
-    ChainAsset.fromAsset(atom, {
-      decimals: 6,
-      ids: {
-        id: 7,
-      },
-    }),
-    ChainAsset.fromAsset(dev, {
-      decimals: 18,
-      ids: {
-        id: 10,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x3db2074093ab964732631d842b99d6612a6dc75a379738a660642b05ccad59c8',
-  isTestChain: true,
-  key: 'picasso-alphanet',
-  name: 'Picasso Alphanet',
-  nativeAsset: pica,
-  parachainId: 2019,
-  ss58Format: 49,
-  ws: ['wss://boot-01.picasso2270.composablenodes.tech/'],
-});
-
 export const polkadot = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   checkSovereignAccountBalances: true,
@@ -2322,7 +2212,6 @@ export const chainsList: AnyChain[] = [
   astar,
   bifrostKusama,
   bifrostPolkadot,
-  calamari,
   centrifuge,
   crustShadow,
   darwinia,
@@ -2354,8 +2243,6 @@ export const chainsList: AnyChain[] = [
   pendulum,
   pendulumAlphanet,
   phala,
-  picasso,
-  picassoAlphanet,
   polkadot,
   polkadotAssetHub,
   robonomics,

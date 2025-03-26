@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 3.0.14
+
+### Patch Changes
+
+- [#466](https://github.com/moonbeam-foundation/xcm-sdk/pull/466) [`313fbfe`](https://github.com/moonbeam-foundation/xcm-sdk/commit/313fbfeb0301564dc83b39f2e0a35637fea79650) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Calamari and Picasso
+
 ## 3.0.13
 
 ### Patch Changes

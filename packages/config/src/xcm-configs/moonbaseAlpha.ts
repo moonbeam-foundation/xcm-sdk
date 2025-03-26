@@ -8,13 +8,11 @@ import {
   agng,
   alan,
   ampe,
-  atom,
   dev,
   ftmwh,
   hdx,
   maos,
   otp,
-  pica,
   tt1,
   tur,
   unit,
@@ -31,7 +29,6 @@ import {
   peaqAlphanet,
   peaqEvmAlphanet,
   pendulumAlphanet,
-  picassoAlphanet,
   turingAlphanet,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -91,25 +88,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: 0.0000001,
-          asset: dev,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: dev,
-        chain: picassoAlphanet,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.00000001,
           asset: dev,
         },
       },
@@ -180,52 +158,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         fee: {
           amount: 0.004,
           asset: otp,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: atom,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: atom,
-        chain: picassoAlphanet,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.0001,
-          asset: atom,
-        },
-      },
-      contract: ContractBuilder().Xtokens().transfer(),
-    },
-    {
-      source: {
-        asset: pica,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: pica,
-        chain: picassoAlphanet,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.01,
-          asset: pica,
         },
       },
       contract: ContractBuilder().Xtokens().transfer(),
