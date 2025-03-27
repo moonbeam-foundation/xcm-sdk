@@ -160,7 +160,6 @@ export function BuildVersionedAsset() {
 export function QueryVersionedAsset() {
   return {
     fromCurrencyIdToLocations: async (asset: ChainAsset, api: ApiPromise) => {
-      console.log('asset registered id', asset.getAssetRegisteredId());
       const result = await api.query.assetRegistry.currencyIdToLocations(
         asset.getAssetRegisteredId(),
       );
@@ -172,8 +171,6 @@ export function QueryVersionedAsset() {
       return result.toJSON() as object;
     },
     fromAssetId: async (asset: ChainAsset, api: ApiPromise) => {
-      console.log('asset id', asset.getAssetRegisteredId());
-
       if (!asset.getAssetRegisteredId()) {
         throw new Error(
           `No asset registered id found for asset ${asset.getSymbol()}`,
@@ -183,8 +180,6 @@ export function QueryVersionedAsset() {
       const assetManagerResult = await api.query.assetManager.assetIdType<
         Option<MoonbeamRuntimeXcmConfigAssetType>
       >(asset.getAssetRegisteredId());
-
-      console.log('assetManagerResult', assetManagerResult.toHuman());
 
       if (
         assetManagerResult.isNone ||

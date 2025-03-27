@@ -146,17 +146,12 @@ const createXcmFeeBuilder = ({
           params,
         });
 
-        console.log('assets', assets);
-        console.log('versionedFeeAssetId', versionedFeeAssetId);
-
         const instructions = getInstructions({
           isAssetReserveChain: options.isAssetReserveChain,
           assets,
           versionedFeeAssetId,
           address: params.address,
         });
-
-        console.log('instructions', instructions);
 
         return getFeeForXcmInstructionsAndAsset(
           params.api,

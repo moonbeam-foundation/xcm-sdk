@@ -117,8 +117,6 @@ export async function getFeeForXcmInstructionsAndAsset(
   }
 
   const xcmToWeight = xcmToWeightResult.asOk;
-  // TODO mjm remove logs
-  console.log('xcmToWeight', xcmToWeight.toHuman());
 
   const weightToForeignAssets =
     await api.call.xcmPaymentApi.queryWeightToAssetFee<
