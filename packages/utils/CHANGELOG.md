@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.1.0
+
+### Minor Changes
+
+- [#458](https://github.com/moonbeam-foundation/xcm-sdk/pull/458) [`0117cf4`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0117cf402e9b17d5d6e1974a3691aaed980e2ada) Thanks [@mmaurello](https://github.com/mmaurello)! - XCM Payment API for generic chains. Prepare for Moonbeam ERC20 migrations
+
 ## 3.0.7
 
 ### Patch Changes
