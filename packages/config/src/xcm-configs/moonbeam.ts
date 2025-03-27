@@ -16,6 +16,7 @@ import {
   dai,
   ded,
   dot,
+  eurc,
   fil,
   glmr,
   hdx,
@@ -1600,6 +1601,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: laos,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         asset: laos,
@@ -1611,6 +1616,27 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+    },
+    {
+      source: {
+        asset: eurc,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      destination: {
+        asset: eurc,
+        chain: pendulum,
+        balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          amount: 0.1,
+          asset: eurc,
+        },
+        min: AssetMinBuilder().assetRegistry().metadata(),
+      },
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
   ],
 });

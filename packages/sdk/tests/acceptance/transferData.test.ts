@@ -3,9 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   alphanetRelay,
   laos,
-  laosAlphanet,
   laosMainnet,
-  maos,
   moonbaseAlpha,
   moonbeam,
   unit,
@@ -44,13 +42,6 @@ const transferDateTestConfig: {
     source: moonbeam,
     sourceAddress: moonEvmAddress,
     destination: laosMainnet,
-    destinationAddress: laosMainnetAddress,
-  },
-  {
-    asset: maos,
-    source: moonbaseAlpha,
-    sourceAddress: moonEvmAddress,
-    destination: laosAlphanet,
     destinationAddress: laosMainnetAddress,
   },
 ];

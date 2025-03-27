@@ -1,5 +1,20 @@
 # @moonbeam-network/xcm-builder
 
+## 3.1.2
+
+### Patch Changes
+
+- [#464](https://github.com/moonbeam-foundation/xcm-sdk/pull/464) [`f0185be`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f0185beadc97f4303153798b58b296c15a3ebdce) Thanks [@mmaurello](https://github.com/mmaurello)! - Override Wormhole endpoints
+
+- Updated dependencies [[`f0185be`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f0185beadc97f4303153798b58b296c15a3ebdce)]:
+  - @moonbeam-network/xcm-types@3.0.10
+
+## 3.1.1
+
+### Patch Changes
+
+- [#462](https://github.com/moonbeam-foundation/xcm-sdk/pull/462) [`55e7990`](https://github.com/moonbeam-foundation/xcm-sdk/commit/55e7990c7636e6b7745c4fa372034cce33574687) Thanks [@mmaurello](https://github.com/mmaurello)! - EURC integration between Pendulum and Moonbeam
+
 ## 3.1.0
 
 ### Minor Changes

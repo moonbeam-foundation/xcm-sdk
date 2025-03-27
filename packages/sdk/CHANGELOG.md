@@ -1,5 +1,31 @@
 # @moonbeam-network/xcm-sdk
 
+## 3.0.14
+
+### Patch Changes
+
+- [#466](https://github.com/moonbeam-foundation/xcm-sdk/pull/466) [`313fbfe`](https://github.com/moonbeam-foundation/xcm-sdk/commit/313fbfeb0301564dc83b39f2e0a35637fea79650) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Calamari and Picasso
+
+- Updated dependencies [[`313fbfe`](https://github.com/moonbeam-foundation/xcm-sdk/commit/313fbfeb0301564dc83b39f2e0a35637fea79650)]:
+  - @moonbeam-network/xcm-config@3.0.14
+
+## 3.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`f0185be`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f0185beadc97f4303153798b58b296c15a3ebdce)]:
+  - @moonbeam-network/xcm-builder@3.1.2
+  - @moonbeam-network/xcm-types@3.0.10
+  - @moonbeam-network/xcm-config@3.0.13
+
+## 3.0.12
+
+### Patch Changes
+
+- Updated dependencies [[`55e7990`](https://github.com/moonbeam-foundation/xcm-sdk/commit/55e7990c7636e6b7745c4fa372034cce33574687)]:
+  - @moonbeam-network/xcm-builder@3.1.1
+  - @moonbeam-network/xcm-config@3.0.12
+
 ## 3.0.11
 
 ### Patch Changes

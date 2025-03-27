@@ -6,7 +6,6 @@ import { alphanetRelayRoutes } from './alphanetRelay';
 import { astarRoutes } from './astar';
 import { bifrostKusamaRoutes } from './bifrostKusama';
 import { bifrostPolkadotRoutes } from './bifrostPolkadot';
-import { calamariRoutes } from './calamari';
 import { centrifugeRoutes } from './centrifuge';
 import { crustShadowRoutes } from './crustShadow';
 import { darwiniaRoutes } from './darwinia';
@@ -36,8 +35,6 @@ import { peaqEvmAlphanetRoutes } from './peaqEvmAlphanet';
 import { pendulumRoutes } from './pendulum';
 import { pendulumAlphanetRoutes } from './pendulumAlphanet';
 import { phalaRoutes } from './phala';
-import { picassoRoutes } from './picasso';
-import { picassoAlphanetRoutes } from './picassoAlphanet';
 import { polkadotRoutes } from './polkadot';
 import { polkadotAssetHubRoutes } from './polkadotAssetHub';
 import { robonomicsRoutes } from './robonomics';
@@ -53,7 +50,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   astarRoutes,
   bifrostKusamaRoutes,
   bifrostPolkadotRoutes,
-  calamariRoutes,
   centrifugeRoutes,
   crustShadowRoutes,
   darwiniaRoutes,
@@ -82,8 +78,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   pendulumRoutes,
   pendulumAlphanetRoutes,
   phalaRoutes,
-  picassoRoutes,
-  picassoAlphanetRoutes,
   polkadotRoutes,
   robonomicsRoutes,
   shidenRoutes,
