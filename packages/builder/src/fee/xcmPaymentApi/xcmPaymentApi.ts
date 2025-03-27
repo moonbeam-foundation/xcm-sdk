@@ -5,16 +5,7 @@ import type {
   GetVersionedAssetId,
   XcmPaymentFeeProps,
 } from '../FeeBuilder.interfaces';
-import {
-  getBuyExecutionInstruction,
-  getClearOriginInstruction,
-  getDepositAssetInstruction,
-  getFeeForXcmInstructionsAndAsset,
-  getReserveAssetDepositedInstruction,
-  getSetTopicInstruction,
-  getVersionedAssetId,
-  getWithdrawAssetInstruction,
-} from '../FeeBuilder.utils';
+import { getFeeForXcmInstructionsAndAsset } from '../FeeBuilder.utils';
 import {
   BuildVersionedAsset,
   QueryVersionedAsset,
@@ -87,31 +78,11 @@ export function xcmPaymentApi() {
       }),
   };
 
-  const queryMethods = {
-    fromCurrencyIdToLocations: (options: XcmPaymentFeeProps) =>
-      createXcmFeeBuilder({
-        getVersionedFeeAsset: async ({ source, feeAsset, api }) => {
-          return await QueryVersionedAsset().fromCurrencyIdToLocations(
-            feeAsset,
-            api,
-          );
-        },
-        options,
-      }),
-  };
-
   const sourceMethods = {
     fromSourceAccountKey20: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
         getVersionedFeeAsset: ({ source, asset }) =>
           BuildVersionedAsset().fromSource().accountKey20(source, asset),
-        options,
-      }),
-
-    fromSourceGeneralIndex: (options: XcmPaymentFeeProps) =>
-      createXcmFeeBuilder({
-        getVersionedFeeAsset: ({ source, feeAsset }) =>
-          BuildVersionedAsset().fromSource().generalIndex(source, feeAsset),
         options,
       }),
 
@@ -121,76 +92,35 @@ export function xcmPaymentApi() {
           BuildVersionedAsset().fromSource().palletInstance(source, feeAsset),
         options,
       }),
+  };
 
-    fromSourceGlobalConsensus: (options: XcmPaymentFeeProps) =>
+  const queryMethods = {
+    fromCurrencyIdToLocations: (options: XcmPaymentFeeProps) =>
       createXcmFeeBuilder({
-        getVersionedFeeAsset: ({ source, feeAsset }) => {
-          const sourceAsset = source.getChainAsset(feeAsset);
-          return BuildVersionedAsset().fromGlobalConsensus(sourceAsset);
+        getVersionedFeeAsset: async ({ feeAsset, api }) => {
+          return await QueryVersionedAsset().fromCurrencyIdToLocations(
+            feeAsset,
+            api,
+          );
         },
         options,
       }),
-  };
-
-  const legacyMethods = {
-    // TODO deprecate this after applying to asset migration
-    xcmPaymentFee: ({
-      isAssetReserveChain,
-      shouldTransferAssetPrecedeFeeAsset = false,
-    }: XcmPaymentFeeProps): FeeConfigBuilder => ({
-      build: ({
-        address,
-        api,
-        asset,
-        destination,
-        feeAsset,
-      }: FeeConfigBuilderParams) =>
-        new SubstrateCallConfig({
-          api,
-          call: async (): Promise<bigint> => {
-            const versionedFeeAssetId = await getVersionedAssetId(
-              api,
-              feeAsset,
-              destination,
-            );
-            const versionedTransferAssetId = await getVersionedAssetId(
-              api,
-              asset,
-              destination,
-            );
-
-            const versionedAssets = shouldTransferAssetPrecedeFeeAsset
-              ? [versionedTransferAssetId, versionedFeeAssetId]
-              : [versionedFeeAssetId, versionedTransferAssetId];
-
-            const assets =
-              feeAsset === asset ? [versionedFeeAssetId] : versionedAssets;
-
-            const instructions = [
-              isAssetReserveChain
-                ? getWithdrawAssetInstruction(assets)
-                : getReserveAssetDepositedInstruction(assets),
-              getClearOriginInstruction(),
-              getBuyExecutionInstruction(versionedFeeAssetId),
-              getDepositAssetInstruction(address, assets),
-              getSetTopicInstruction(),
-            ];
-
-            return getFeeForXcmInstructionsAndAsset(
-              api,
-              instructions,
-              versionedFeeAssetId,
-            );
-          },
-        }),
-    }),
+    fromAssetIdQuery: (options: XcmPaymentFeeProps) =>
+      createXcmFeeBuilder({
+        getVersionedFeeAsset: async ({ feeAsset, api }) => {
+          return await QueryVersionedAsset().fromAssetId(feeAsset, api);
+        },
+        getVersionedTransferAsset: async ({ asset, api }) => {
+          return await QueryVersionedAsset().fromAssetId(asset, api);
+        },
+        options,
+      }),
   };
 
   return {
     ...localMethods,
     ...sourceMethods,
     ...queryMethods,
-    ...legacyMethods,
   };
 }
 

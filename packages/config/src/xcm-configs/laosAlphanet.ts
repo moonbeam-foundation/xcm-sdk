@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { maos } from '../assets';
 import { laosAlphanet, moonbaseAlpha } from '../chains';
@@ -19,12 +20,9 @@ export const laosAlphanetRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          // TODO current configuration for xcmPaymentApi is not compatible with how the MAOS asset version Id works in Moonbase
-          // using fixed fee until future refactoring of xcmPaymentApi for generic chains
-          amount: 0.1,
-          // amount: FeeBuilder()
-          //   .xcmPaymentApi()
-          //   .xcmPaymentFee({ isAssetReserveChain: false }),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: maos,
         },
       },

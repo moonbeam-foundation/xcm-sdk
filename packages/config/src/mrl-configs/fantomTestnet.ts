@@ -99,8 +99,7 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
         moonChain: {
           asset: agng,
-          balance: BalanceBuilder().substrate().assets().account(),
-
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: dev,
             amount: 0.1,

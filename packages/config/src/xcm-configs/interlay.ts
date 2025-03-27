@@ -21,11 +21,11 @@ export const interlayRoutes = new ChainRoutes({
       destination: {
         asset: intr,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: intr,
         },
       },
@@ -46,9 +46,9 @@ export const interlayRoutes = new ChainRoutes({
       destination: {
         asset: ibtc,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder().xcmPaymentApi().xcmPaymentFee({
+          amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
             isAssetReserveChain: false,
             shouldTransferAssetPrecedeFeeAsset: true,
           }),
@@ -72,7 +72,7 @@ export const interlayRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

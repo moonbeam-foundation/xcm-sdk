@@ -21,11 +21,11 @@ export const pendulumAlphanetRoutes = new ChainRoutes({
       destination: {
         asset: ampe,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: ampe,
         },
       },
@@ -50,7 +50,7 @@ export const pendulumAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: dev,
         },
       },

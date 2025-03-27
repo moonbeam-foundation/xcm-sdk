@@ -22,11 +22,11 @@ export const pendulumRoutes = new ChainRoutes({
       destination: {
         asset: pen,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: pen,
         },
       },
@@ -51,7 +51,7 @@ export const pendulumRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -76,7 +76,7 @@ export const pendulumRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -100,8 +100,9 @@ export const pendulumRoutes = new ChainRoutes({
         chain: moonbeam,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          // TODO add after merging XCM Payment API rework
-          amount: 0.005,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: eurc,
         },
       },

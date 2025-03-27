@@ -75,6 +75,10 @@ export class ChainAsset extends Asset {
     return this.ids?.id ?? this.originSymbol;
   }
 
+  getAssetRegisteredId(): ChainAssetId | undefined {
+    return this.ids?.id;
+  }
+
   getBalanceAssetId(): ChainAssetId {
     return this.ids?.balanceId ?? this.getAssetId();
   }

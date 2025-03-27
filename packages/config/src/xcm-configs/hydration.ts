@@ -21,11 +21,11 @@ export const hydrationRoutes = new ChainRoutes({
       destination: {
         asset: hdx,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .fromSourceGeneralIndex({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: hdx,
         },
       },
@@ -46,7 +46,7 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

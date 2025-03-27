@@ -29,7 +29,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
@@ -54,7 +54,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromAssetIdQuery({ isAssetReserveChain: true }),
           asset: dev,
         },
       },

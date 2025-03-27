@@ -119,13 +119,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: ampe,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -142,13 +142,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: otp,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -165,13 +165,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: tt1,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -189,13 +189,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: tur,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -326,13 +326,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: hdx,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -393,13 +393,13 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     {
       source: {
         asset: agng,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {

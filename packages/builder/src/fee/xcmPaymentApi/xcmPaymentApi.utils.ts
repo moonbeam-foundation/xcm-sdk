@@ -11,7 +11,7 @@ import {
 import { getWithdrawAssetInstruction } from '../FeeBuilder.utils';
 import type { CreateXcmFeeBuilderProps } from './xcmPaymentApi';
 
-interface GetVersionedAssetsProps extends CreateXcmFeeBuilderProps {
+export interface GetVersionedAssetsProps extends CreateXcmFeeBuilderProps {
   params: FeeConfigBuilderParams;
 }
 
