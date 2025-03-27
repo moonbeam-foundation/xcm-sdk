@@ -21,11 +21,11 @@ export const subsocialRoutes = new ChainRoutes({
       destination: {
         asset: sub,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: sub,
         },
       },

@@ -21,11 +21,11 @@ export const turingAlphanetRoutes = new ChainRoutes({
       destination: {
         asset: tur,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: tur,
         },
       },
@@ -53,7 +53,7 @@ export const turingAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: dev,
         },
       },

@@ -22,11 +22,11 @@ export const karuraRoutes = new ChainRoutes({
       destination: {
         asset: kar,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: kar,
         },
       },
@@ -48,11 +48,11 @@ export const karuraRoutes = new ChainRoutes({
       destination: {
         asset: aseed,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: aseed,
         },
       },
@@ -78,7 +78,7 @@ export const karuraRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: movr,
         },
       },

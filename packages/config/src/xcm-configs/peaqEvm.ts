@@ -31,7 +31,7 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -57,7 +57,7 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -83,7 +83,7 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -109,7 +109,7 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -135,7 +135,7 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -161,7 +161,7 @@ export const peaqEvmRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

@@ -21,11 +21,11 @@ export const hydrationRoutes = new ChainRoutes({
       destination: {
         asset: hdx,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: hdx,
         },
       },
@@ -46,7 +46,7 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -71,7 +71,7 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -96,7 +96,9 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({
+              isAssetReserveChain: true,
+            }),
           asset: glmr,
         },
       },
@@ -121,7 +123,7 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -146,7 +148,7 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },
@@ -171,7 +173,7 @@ export const hydrationRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

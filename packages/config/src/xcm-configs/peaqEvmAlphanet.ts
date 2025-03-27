@@ -31,7 +31,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
@@ -57,7 +57,7 @@ export const peaqEvmAlphanetRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: dev,
         },
       },

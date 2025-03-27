@@ -27,11 +27,11 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: tt1,
         chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: tt1,
         },
       },

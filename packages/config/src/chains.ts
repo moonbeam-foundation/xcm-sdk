@@ -555,10 +555,10 @@ export const hydration = new Parachain({
   parachainId: 2034,
   ss58Format: 63,
   ws: [
-    'wss://rpc.hydradx.cloud',
-    'wss://rpc.helikon.io/hydradx',
     'wss://hydradx.paras.dotters.network',
     'wss://hydradx-rpc.dwellir.com',
+    'wss://rpc.hydradx.cloud',
+    'wss://rpc.helikon.io/hydradx',
   ],
 });
 
@@ -905,6 +905,7 @@ export const moonbaseAlpha = new EvmParachain({
       address: '0xffffffff06a14960bddc8610d0e694d39a3c682e',
       decimals: 18,
       ids: {
+        id: '8812816049497534070792537960559175726',
         palletInstance: 48,
       },
     }),
@@ -947,6 +948,7 @@ export const moonbaseAlpha = new EvmParachain({
       address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
       decimals: 12,
       ids: {
+        id: '42259045809535163221576417993425387648',
         palletInstance: 48,
       },
     }),
@@ -1373,12 +1375,15 @@ export const moonbeam = new EvmParachain({
     ChainAsset.fromAsset(laos, {
       address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
       decimals: 18,
+      ids: {
+        id: '294342517635293430510451841925413680520',
+      },
     }),
     ChainAsset.fromAsset(eurc, {
       address: '0xffffffffa608ec1332131289cbd8a97a0bb3d90f',
       decimals: 12,
       ids: {
-        palletInstance: 110,
+        id: '220698173844663170714431919474506717455',
       },
     }),
   ],
@@ -2030,7 +2035,7 @@ export const polkadotAssetHub = new Parachain({
   ecosystem: Ecosystem.Polkadot,
   genesisHash:
     '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
-  key: 'Polkadot-asset-hub',
+  key: 'polkadot-asset-hub',
   name: 'Polkadot Asset Hub',
   nativeAsset: dot,
   parachainId: 1000,

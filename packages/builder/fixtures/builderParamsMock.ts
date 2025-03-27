@@ -8,7 +8,11 @@ import {
   Parachain,
 } from '@moonbeam-network/xcm-types';
 import { vi } from 'vitest';
-import type { BuilderParams, MrlBuilderParams } from '../src';
+import type {
+  BuilderParams,
+  FeeConfigBuilderParams,
+  MrlBuilderParams,
+} from '../src';
 
 export const apiMock = {
   tx: {
@@ -135,6 +139,20 @@ export const buildParachainParamsMock: BuilderParams = {
   source: alphanetAssetHubMock,
   sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   sourceApi: apiMock,
+};
+
+export const feeBuilderParamsMock: FeeConfigBuilderParams = {
+  ...buildParamsMock,
+  address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+  api: apiMock,
+  feeAsset: testAssetAmount,
+};
+
+export const feeBuilderParamsMockDifferentAsset: FeeConfigBuilderParams = {
+  ...buildParamsMock,
+  address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+  api: apiMock,
+  feeAsset: testAssetAmount2,
 };
 
 export const mrlBuildParamsMock: MrlBuilderParams = {

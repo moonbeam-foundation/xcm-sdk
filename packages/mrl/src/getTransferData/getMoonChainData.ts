@@ -40,6 +40,7 @@ export async function getMoonChainData({
     destination: moonChain,
     fee: route.mrl.moonChain.fee.amount,
     feeAsset: route.mrl.moonChain.fee.asset,
+    source: route.source.chain,
   });
 
   const balance = await getBalance({

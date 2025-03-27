@@ -261,6 +261,13 @@ Assuming that all of the required pallets and methods are already supported, you
     }
     ```
 
+    Some chains support the [XCM Payment API](https://docs.polkadot.com/develop/interoperability/xcm-runtime-apis/#xcm-payment-api){target=\_blank} as a runtime call.<br/>
+    When building your route, check whether the `xcmPaymentApi` runtime call is available on the destination chain. This ensures you can fetch the exact transaction fees at the moment of execution.<br/>
+    If the runtime call is available, you can use one of the helper methods in the [xcmPaymentApi.ts file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/builder/src/fee/xcmPaymentApi/xcmPaymentApi.ts){target=\_blank}, or create a new one if your use case isn’t already covered.<br/>
+    To use these methods, you’ll need the location of the asset — referred to in the code as `versionedAssetId` — for both the transfer asset and the fee asset. This location can either be, constructed manually based on the asset type and destination, or retrieved via a query, depending on the chain's implementation.<br/>
+    To better understand asset locations, you can inspect the instructions of a real XCM transaction in an explorer.<br/>
+    Example: [XCM Transaction in Subscan](https://moonbeam.subscan.io/xcm_message/polkadot-033abb26f1b78f1213d0cd150891c6a3af2a1f69){target=\_blank}.
+
 4. Add the newly created chain configurations to the `xcmRoutesList` in the `xcm-sdk/blob/main/packages/config/src/xcm-configs/index.ts` file
 
 !!! note
@@ -305,7 +312,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: usdt, // fees in Moonbeam are paid in USDT, in this case is the same asset as the one being transferred, but it is not always the case
         },
       },

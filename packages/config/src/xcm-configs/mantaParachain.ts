@@ -22,11 +22,11 @@ export const mantaParachainRoutes = new ChainRoutes({
       destination: {
         asset: manta,
         chain: moonbeam,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: manta,
         },
       },
@@ -52,7 +52,7 @@ export const mantaParachainRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: true }),
+            .fromPalletInstance({ isAssetReserveChain: true }),
           asset: glmr,
         },
       },

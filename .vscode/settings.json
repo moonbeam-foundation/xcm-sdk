@@ -78,6 +78,8 @@
     "shiden",
     "sibl",
     "statemint",
+    "subscan",
+    "sufficients",
     "suri",
     "syncpack",
     "teer",
@@ -115,5 +117,11 @@
   "editor.codeActionsOnSave": {
     "quickfix.biome": "explicit",
     "source.organizeImports.biome": "explicit"
+  },
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#4a0000",
+    "titleBar.activeForeground": "#ff0000c7",
+    "titleBar.inactiveBackground": "#2b0000",
+    "titleBar.inactiveForeground": "#80000099"
   }
 }

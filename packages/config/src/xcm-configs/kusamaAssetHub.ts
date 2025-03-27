@@ -30,11 +30,11 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: rmrk,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: rmrk,
         },
       },
@@ -60,11 +60,11 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
       destination: {
         asset: usdt,
         chain: moonriver,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .xcmPaymentFee({ isAssetReserveChain: false }),
+            .fromAssetIdQuery({ isAssetReserveChain: false }),
           asset: usdt,
         },
       },
