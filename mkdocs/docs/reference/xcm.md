@@ -208,8 +208,7 @@ It includes builders for the queries to get the balances, fees, which asset is u
     fee: {
       amount: FeeBuilder()
         .xcmPaymentApi()
-        // TODO documentation changes
-        .xcmPaymentFee({ isAssetReserveChain: false }),
+        .fromAssetIdQuery({ isAssetReserveChain: false }),
       asset: dot,
     },
   },
