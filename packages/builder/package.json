@@ -45,6 +45,6 @@
     "@polkadot/util-crypto": "13.4.3",
     "@wormhole-foundation/sdk-connect": "^1.13.3",
     "@wormhole-foundation/sdk-evm": "^1.13.3",
-    "viem": "^2.23.2"
+    "viem": "^2.25.0"
   }
 }
