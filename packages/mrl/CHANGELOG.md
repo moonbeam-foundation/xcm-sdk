@@ -1,5 +1,18 @@
 # @moonbeam-network/mrl
 
+## 3.1.1
+
+### Patch Changes
+
+- [#470](https://github.com/moonbeam-foundation/xcm-sdk/pull/470) [`0835496`](https://github.com/moonbeam-foundation/xcm-sdk/commit/083549616852d5728f1533ae813623d04efc6929) Thanks [@Rihyx](https://github.com/Rihyx)! - Update vitest and fix vite vulnerability
+
+- Updated dependencies [[`0835496`](https://github.com/moonbeam-foundation/xcm-sdk/commit/083549616852d5728f1533ae813623d04efc6929)]:
+  - @moonbeam-network/xcm-builder@3.2.1
+  - @moonbeam-network/xcm-config@3.1.1
+  - @moonbeam-network/xcm-sdk@3.1.1
+  - @moonbeam-network/xcm-types@3.1.1
+  - @moonbeam-network/xcm-utils@3.1.1
+
 ## 3.1.0
 
 ### Minor Changes
