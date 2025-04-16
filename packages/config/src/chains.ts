@@ -867,7 +867,7 @@ export const laosMainnet = new EvmParachain({
   nativeAsset: laos,
   parachainId: 3370,
   ss58Format: 42,
-  ws: ['wss://laos-rpc.dwellir.com', 'wss://rpc.laos.laosfoundation.io'],
+  ws: ['wss://rpc.laos.laosfoundation.io'],
 });
 
 export const moonbaseAlpha = new EvmParachain({
