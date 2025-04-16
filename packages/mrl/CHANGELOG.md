@@ -1,5 +1,13 @@
 # @moonbeam-network/mrl
 
+## 3.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`4212e9c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4212e9c643a1688fe0a63f337d0033505da2daa7)]:
+  - @moonbeam-network/xcm-config@3.1.3
+  - @moonbeam-network/xcm-sdk@3.1.3
+
 ## 3.1.2
 
 ### Patch Changes
