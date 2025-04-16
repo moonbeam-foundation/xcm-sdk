@@ -43,7 +43,6 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "weight": undefined,
       "wh": undefined,
       "ws": [
-        "wss://laos-rpc.dwellir.com",
         "wss://rpc.laos.laosfoundation.io",
       ],
     },
