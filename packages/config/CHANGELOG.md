@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 3.1.3
+
+### Patch Changes
+
+- [#474](https://github.com/moonbeam-foundation/xcm-sdk/pull/474) [`4212e9c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4212e9c643a1688fe0a63f337d0033505da2daa7) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Moonbase Beta config
+
 ## 3.1.2
 
 ### Patch Changes
