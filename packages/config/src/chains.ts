@@ -1040,13 +1040,13 @@ export const moonbaseBeta = new EvmParachain({
   ),
   genesisHash:
     '0xeebb5d05763801e54d6a7a60a4b7998ac125c4d050dcec418dd07ea959a54464',
-  id: 1282,
+  id: 1288,
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
   nativeAsset: betaDEV,
   parachainId: 888,
-  rpc: 'https://frag-moonbase-beta-rpc.g.moonbase.moonbeam.network',
+  rpc: 'https://moonbase-beta.api.moonbase.moonbeam.network',
   ss58Format: 1287,
   ws: [
     'wss://moonbase-beta.api.moonbase.moonbeam.network',
