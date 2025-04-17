@@ -7,7 +7,7 @@
     "dev": "tsup --watch",
     "link": "pnpm ln --global",
     "typecheck": "tsc --noEmit",
-    "test:acc": "vitest --run --testTimeout 300000 ./tests/acceptance"
+    "test:acc": "vitest --run --no-cache --testTimeout 300000 ./tests/acceptance"
   },
   "author": "moonbeam-foundation",
   "license": "MIT",
