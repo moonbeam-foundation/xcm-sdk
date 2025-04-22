@@ -2107,28 +2107,28 @@ export const subsocial = new Parachain({
   ws: ['wss://para.subsocial.network', 'wss://subsocial-rpc.dwellir.com'],
 });
 
-export const turing = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(tur, {
-      decimals: 10,
-    }),
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 9,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x0f62b701fb12d02237a33b84818c11f621653d2b1614c777973babf4652b535d',
-  key: 'turing',
-  name: 'Turing',
-  nativeAsset: tur,
-  parachainId: 2114,
-  ss58Format: 51,
-  ws: ['wss://rpc.turing.oak.tech', 'wss://turing-rpc.dwellir.com'],
-});
+// export const turing = new Parachain({
+//   assets: [
+//     ChainAsset.fromAsset(tur, {
+//       decimals: 10,
+//     }),
+//     ChainAsset.fromAsset(movr, {
+//       decimals: 18,
+//       ids: {
+//         id: 9,
+//       },
+//     }),
+//   ],
+//   ecosystem: Ecosystem.Kusama,
+//   genesisHash:
+//     '0x0f62b701fb12d02237a33b84818c11f621653d2b1614c777973babf4652b535d',
+//   key: 'turing',
+//   name: 'Turing',
+//   nativeAsset: tur,
+//   parachainId: 2114,
+//   ss58Format: 51,
+//   ws: ['wss://turing-rpc.dwellir.com'],
+// });
 
 export const turingAlphanet = new Parachain({
   assets: [
@@ -2248,7 +2248,7 @@ export const chainsList: AnyChain[] = [
   robonomics,
   shiden,
   subsocial,
-  turing,
+  // turing,
   turingAlphanet,
   uniqueAlpha,
   zeitgeist,
