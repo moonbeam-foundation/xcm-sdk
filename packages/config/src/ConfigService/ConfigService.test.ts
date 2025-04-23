@@ -20,7 +20,7 @@ import {
   moonbeam,
   moonriver,
   pendulumAlphanet,
-  turing,
+  shiden,
 } from '../chains';
 import { ConfigService } from './ConfigService';
 
@@ -152,7 +152,7 @@ describe('config service', () => {
   describe('getDestinationChains', () => {
     it('should get destination chains', () => {
       const chains = configService.getDestinationChains({
-        source: turing,
+        source: shiden,
       });
 
       expect(chains).toStrictEqual(expect.arrayContaining([moonriver]));
