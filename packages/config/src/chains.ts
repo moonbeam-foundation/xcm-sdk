@@ -1000,6 +1000,32 @@ export const moonbaseAlpha = new EvmParachain({
   },
 });
 
+export const moonbaseStage = new EvmParachain({
+  assets: [
+    ChainAsset.fromAsset(dev, {
+      address: '0x0000000000000000000000000000000000000802',
+      decimals: 18,
+      min: 0.01,
+      ids: {
+        palletInstance: 3,
+      },
+    }),
+  ],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
+  id: 1282,
+  isEvmSigner: true,
+  isTestChain: true,
+  key: 'moonbase-stage',
+  name: 'Moonbase Stage',
+  nativeAsset: dev,
+  parachainId: 1000,
+  rpc: 'https://rpc.api.moondev.network',
+  ss58Format: 1287,
+  ws: ['wss://wss.api.moondev.network'],
+});
+
 export const moonbaseBeta = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(betaDEV, {
