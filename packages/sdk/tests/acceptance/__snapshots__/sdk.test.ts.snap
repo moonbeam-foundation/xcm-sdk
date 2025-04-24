@@ -1009,18 +1009,6 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "symbol": undefined,
   },
   _AssetAmount {
-    "address": "0xfFffffFf6448d0746f2a66342B67ef9CAf89478E",
-    "amount": 132131n,
-    "decimals": 10,
-    "ids": {
-      "id": "133300872918374599700079037156071917454",
-    },
-    "key": "tur",
-    "min": undefined,
-    "originSymbol": "TUR",
-    "symbol": undefined,
-  },
-  _AssetAmount {
     "address": "0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e",
     "amount": 0n,
     "decimals": 12,
