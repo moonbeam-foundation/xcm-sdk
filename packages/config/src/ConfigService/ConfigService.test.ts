@@ -11,7 +11,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
-import { alan, assetsList, dev, dot, glmr, tt1, unit } from '../assets';
+import { alan, assetsList, dev, dot, glmr, hdx, tt1, unit } from '../assets';
 import {
   alphanetRelay,
   hydration,
@@ -208,6 +208,10 @@ describe('config service', () => {
             source: {
               asset: glmr,
               balance: BalanceBuilder().substrate().tokens().accounts(),
+              fee: {
+                asset: hdx,
+                balance: BalanceBuilder().substrate().system().account(),
+              },
             },
             destination: {
               asset: glmr,
