@@ -14,6 +14,10 @@ export const interlayRoutes = new ChainRoutes({
       source: {
         asset: intr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: intr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -61,6 +65,10 @@ export const interlayRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: intr,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },

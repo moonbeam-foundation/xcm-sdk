@@ -15,6 +15,10 @@ export const acalaRoutes = new ChainRoutes({
       source: {
         asset: aca,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: aca,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

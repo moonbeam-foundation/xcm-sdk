@@ -14,6 +14,10 @@ export const phalaRoutes = new ChainRoutes({
       source: {
         asset: pha,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: pha,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

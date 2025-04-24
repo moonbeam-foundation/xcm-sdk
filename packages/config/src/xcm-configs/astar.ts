@@ -14,6 +14,10 @@ export const astarRoutes = new ChainRoutes({
       source: {
         asset: astr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: astr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

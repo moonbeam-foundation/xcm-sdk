@@ -14,6 +14,10 @@ export const hydrationRoutes = new ChainRoutes({
       source: {
         asset: hdx,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: hdx,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

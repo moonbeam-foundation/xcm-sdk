@@ -14,6 +14,10 @@ export const kintsugiRoutes = new ChainRoutes({
       source: {
         asset: kint,
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: kint,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },

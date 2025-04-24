@@ -14,6 +14,10 @@ export const subsocialRoutes = new ChainRoutes({
       source: {
         asset: sub,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: sub,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

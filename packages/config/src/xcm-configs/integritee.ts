@@ -14,6 +14,10 @@ export const integriteeRoutes = new ChainRoutes({
       source: {
         asset: teer,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: teer,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

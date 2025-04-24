@@ -14,6 +14,10 @@ export const mangataKusamaRoutes = new ChainRoutes({
       source: {
         asset: mgx,
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: mgx,
+          balance: BalanceBuilder().substrate().tokens().accounts(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },

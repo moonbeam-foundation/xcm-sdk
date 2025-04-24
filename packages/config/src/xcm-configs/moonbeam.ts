@@ -80,6 +80,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -100,6 +104,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -121,6 +129,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -143,6 +155,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -164,6 +180,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -183,6 +203,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -203,6 +227,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -222,6 +250,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -1167,6 +1199,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -1330,6 +1366,10 @@ export const moonbeamRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

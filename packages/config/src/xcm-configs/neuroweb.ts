@@ -14,6 +14,10 @@ export const neurowebRoutes = new ChainRoutes({
       source: {
         asset: neuro,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: neuro,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

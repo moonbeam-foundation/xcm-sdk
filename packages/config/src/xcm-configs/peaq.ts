@@ -15,6 +15,10 @@ export const peaqRoutes = new ChainRoutes({
       source: {
         asset: peaq,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -36,6 +40,10 @@ export const peaqRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: peaq,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         min: AssetMinBuilder().assets().asset(),
         destinationFee: {
           balance: BalanceBuilder().substrate().assets().account(),

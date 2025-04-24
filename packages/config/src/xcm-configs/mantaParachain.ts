@@ -15,6 +15,10 @@ export const mantaParachainRoutes = new ChainRoutes({
       source: {
         asset: manta,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: manta,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
