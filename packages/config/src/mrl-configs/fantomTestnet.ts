@@ -16,6 +16,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       source: {
         asset: ftm,
         balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: ftm,
           balance: BalanceBuilder().evm().native(),
@@ -48,6 +52,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       source: {
         asset: ftm,
         balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: ftm,
           balance: BalanceBuilder().evm().native(),
@@ -80,6 +88,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       source: {
         asset: agng,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: agng,
           balance: BalanceBuilder().evm().erc20(),
@@ -112,6 +124,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       source: {
         asset: ftm,
         balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: ftm,
           balance: BalanceBuilder().evm().native(),
@@ -144,6 +160,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       source: {
         asset: ftm,
         balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: ftm,
           balance: BalanceBuilder().evm().native(),
@@ -176,6 +196,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: ftm,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: dev,
           balance: BalanceBuilder().evm().erc20(),

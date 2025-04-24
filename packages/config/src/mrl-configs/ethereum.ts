@@ -23,6 +23,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: eth,
         balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: eth,
           balance: BalanceBuilder().evm().native(),
@@ -55,6 +59,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: usdc,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: usdc,
           balance: BalanceBuilder().evm().erc20(),
@@ -87,6 +95,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: usdt,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: usdt,
           balance: BalanceBuilder().evm().erc20(),
@@ -119,6 +131,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: dai,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: dai,
           balance: BalanceBuilder().evm().erc20(),
@@ -151,6 +167,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: wbtc,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: wbtc,
           balance: BalanceBuilder().evm().erc20(),
@@ -186,6 +206,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: eth,
         balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: eth,
           balance: BalanceBuilder().evm().native(),
@@ -218,6 +242,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: usdc,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: usdc,
           balance: BalanceBuilder().evm().erc20(),
@@ -250,6 +278,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: usdt,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: usdt,
           balance: BalanceBuilder().evm().erc20(),
@@ -282,6 +314,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: dai,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: dai,
           balance: BalanceBuilder().evm().erc20(),
@@ -314,6 +350,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: wbtc,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: wbtc,
           balance: BalanceBuilder().evm().erc20(),
@@ -346,6 +386,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
         destinationFee: {
           asset: glmr,
           balance: BalanceBuilder().evm().erc20(),

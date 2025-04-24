@@ -21,6 +21,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       source: {
         asset: weth,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: weth,
           balance: BalanceBuilder().evm().erc20(),
@@ -53,6 +57,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       source: {
         asset: peaq,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: peaq,
           balance: BalanceBuilder().evm().erc20(),
@@ -85,6 +93,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       source: {
         asset: usdcwh,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
@@ -117,6 +129,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       source: {
         asset: usdtwh,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: usdtwh,
           balance: BalanceBuilder().evm().erc20(),
@@ -149,6 +165,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       source: {
         asset: dai,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: dai,
           balance: BalanceBuilder().evm().erc20(),
@@ -181,6 +201,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       source: {
         asset: wbtc,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: glmr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: wbtc,
           balance: BalanceBuilder().evm().erc20(),

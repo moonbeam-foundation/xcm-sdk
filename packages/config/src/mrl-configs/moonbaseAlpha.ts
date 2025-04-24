@@ -46,6 +46,10 @@ export const moonbaseAlphaRoutes = new MrlChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
