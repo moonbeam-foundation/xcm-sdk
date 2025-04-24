@@ -35,6 +35,10 @@ export const hydrationRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: hdx,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
