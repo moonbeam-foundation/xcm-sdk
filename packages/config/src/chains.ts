@@ -347,8 +347,9 @@ export const centrifuge = new Parachain({
   parachainId: 2031,
   ss58Format: 36,
   ws: [
-    // 'wss://fullnode.centrifuge.io', // THIS ENDPOINT IS NOT WORKING PROPERLY
+    'wss://fullnode.centrifuge.io',
     'wss://centrifuge-rpc.dwellir.com',
+    'wss://rpc-centrifuge.luckyfriday.io',
     'wss://centrifuge-parachain.api.onfinality.io/public-ws',
   ],
 });
