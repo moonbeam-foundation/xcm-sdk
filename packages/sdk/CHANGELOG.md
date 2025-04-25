@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 3.1.4
+
+### Patch Changes
+
+- [#481](https://github.com/moonbeam-foundation/xcm-sdk/pull/481) [`c34e774`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c34e774e7976ab4cc61346fc0fc7b7cb253a436a) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove optional flag from fees in Source Config
+
+- Updated dependencies [[`c34e774`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c34e774e7976ab4cc61346fc0fc7b7cb253a436a), [`a446e43`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a446e4345228727b513ab216c503dde8f0e40e29)]:
+  - @moonbeam-network/xcm-config@3.1.4
+
 ## 3.1.3
 
 ### Patch Changes
