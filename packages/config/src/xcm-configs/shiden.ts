@@ -14,6 +14,10 @@ export const shidenRoutes = new ChainRoutes({
       source: {
         asset: sdn,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: sdn,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

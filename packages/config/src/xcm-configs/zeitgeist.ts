@@ -14,6 +14,10 @@ export const zeitgeistRoutes = new ChainRoutes({
       source: {
         asset: ztg,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: ztg,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -60,6 +64,10 @@ export const zeitgeistRoutes = new ChainRoutes({
       source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().tokens().accounts(),
+        fee: {
+          asset: ztg,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },

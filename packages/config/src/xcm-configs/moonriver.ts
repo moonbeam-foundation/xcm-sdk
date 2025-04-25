@@ -48,6 +48,10 @@ export const moonriverRoutes = new ChainRoutes({
       source: {
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: movr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -70,6 +74,10 @@ export const moonriverRoutes = new ChainRoutes({
       source: {
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: movr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -89,6 +97,10 @@ export const moonriverRoutes = new ChainRoutes({
       source: {
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: movr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -109,6 +121,10 @@ export const moonriverRoutes = new ChainRoutes({
       source: {
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: movr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -128,6 +144,10 @@ export const moonriverRoutes = new ChainRoutes({
       source: {
         asset: movr,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: movr,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

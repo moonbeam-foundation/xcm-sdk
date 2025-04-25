@@ -25,6 +25,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
       source: {
         asset: bnc,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: bnc,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

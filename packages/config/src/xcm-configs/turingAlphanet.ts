@@ -14,6 +14,10 @@ export const turingAlphanetRoutes = new ChainRoutes({
       source: {
         asset: tur,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: tur,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

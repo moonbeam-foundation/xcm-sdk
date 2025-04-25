@@ -50,6 +50,10 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
       source: {
         asset: agng,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: agng,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           asset: ftmwh,
           balance: BalanceBuilder().substrate().assets().account(),

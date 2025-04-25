@@ -14,6 +14,10 @@ export const laosAlphanetRoutes = new ChainRoutes({
       source: {
         asset: maos,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: maos,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         asset: maos,

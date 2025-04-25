@@ -23,7 +23,7 @@ export interface SourceConfig {
   asset: Asset;
   chain: AnyChain;
   balance: BalanceConfigBuilder;
-  fee?: FeeConfig;
+  fee: FeeConfig;
   destinationFee?: {
     asset?: Asset;
     balance: BalanceConfigBuilder;

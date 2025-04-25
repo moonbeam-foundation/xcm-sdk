@@ -14,6 +14,10 @@ export const crustShadowRoutes = new ChainRoutes({
       source: {
         asset: csm,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: csm,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

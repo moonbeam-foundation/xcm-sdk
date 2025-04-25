@@ -14,6 +14,10 @@ export const originTrailAlphanetRoutes = new ChainRoutes({
       source: {
         asset: otp,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: otp,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

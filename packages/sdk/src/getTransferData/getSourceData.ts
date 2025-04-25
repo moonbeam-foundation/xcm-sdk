@@ -49,14 +49,13 @@ export async function getSourceData({
     builder: route.source.balance,
     chain: source,
   });
-  const feeBalance = route.source.fee
-    ? await getBalance({
-        address: sourceAddress,
-        asset: feeAsset,
-        builder: route.source.fee.balance,
-        chain: source,
-      })
-    : balance;
+  const feeBalance = await getBalance({
+    address: sourceAddress,
+    asset: feeAsset,
+    builder: route.source.fee.balance,
+    chain: source,
+  });
+
   const destinationFeeBalance = await getDestinationFeeBalance({
     balance,
     feeBalance,

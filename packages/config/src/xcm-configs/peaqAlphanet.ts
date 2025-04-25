@@ -15,6 +15,10 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       source: {
         asset: agng,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: agng,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -36,6 +40,10 @@ export const peaqAlphanetRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().assets().account(),
+        fee: {
+          asset: agng,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         min: AssetMinBuilder().assets().asset(),
         destinationFee: {
           balance: BalanceBuilder().substrate().assets().account(),

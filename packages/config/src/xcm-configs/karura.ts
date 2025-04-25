@@ -15,6 +15,10 @@ export const karuraRoutes = new ChainRoutes({
       source: {
         asset: kar,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: kar,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

@@ -14,6 +14,10 @@ export const alphanetRelayRoutes = new ChainRoutes({
       source: {
         asset: unit,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: unit,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

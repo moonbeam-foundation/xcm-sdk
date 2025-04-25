@@ -14,6 +14,10 @@ export const centrifugeRoutes = new ChainRoutes({
       source: {
         asset: cfg,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: cfg,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

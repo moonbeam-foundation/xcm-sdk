@@ -40,6 +40,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -59,6 +63,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -78,6 +86,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -308,6 +320,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -350,6 +366,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -417,6 +437,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: dev,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -461,6 +485,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       source: {
         asset: maos,
         balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         asset: maos,

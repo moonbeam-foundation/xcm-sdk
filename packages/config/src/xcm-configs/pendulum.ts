@@ -15,6 +15,10 @@ export const pendulumRoutes = new ChainRoutes({
       source: {
         asset: pen,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: pen,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
         destinationFee: {
           balance: BalanceBuilder().substrate().system().account(),
         },

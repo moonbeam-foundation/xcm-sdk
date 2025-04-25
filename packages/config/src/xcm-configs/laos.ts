@@ -14,6 +14,10 @@ export const laosRoutes = new ChainRoutes({
       source: {
         asset: laos,
         balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: laos,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
       },
       destination: {
         asset: laos,
