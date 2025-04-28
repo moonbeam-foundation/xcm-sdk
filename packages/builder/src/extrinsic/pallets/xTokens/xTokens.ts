@@ -12,6 +12,7 @@ import { getDestination, getWeight } from './xTokens.utils';
 
 const pallet = 'xTokens';
 
+// TODO remove this Folder
 export function xTokens() {
   return {
     transfer: (): ExtrinsicConfigBuilder => ({
