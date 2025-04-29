@@ -412,7 +412,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: dot,
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
     },
     {
       source: {
@@ -1360,7 +1360,7 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: peaq,
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {

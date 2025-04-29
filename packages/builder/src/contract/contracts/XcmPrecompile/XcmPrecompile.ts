@@ -52,6 +52,21 @@ export function XcmPrecompile() {
         });
       },
     }),
+    transferAssetsToRelay: (): ContractConfigBuilder => ({
+      build: ({ destinationAddress, asset }) => {
+        return new ContractConfig({
+          address: XCM_PRECOMPILE_ADDRESS,
+          abi: XCM_ABI,
+          args: [
+            u8aToHex(decodeAddress(destinationAddress)),
+            [[asset.address, asset.amount]],
+            0,
+          ],
+          func: 'transferAssetsToRelay',
+          module: 'Xcm',
+        });
+      },
+    }),
   };
 }
 

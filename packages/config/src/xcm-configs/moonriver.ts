@@ -372,7 +372,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: ksm,
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
     },
     {
       source: {

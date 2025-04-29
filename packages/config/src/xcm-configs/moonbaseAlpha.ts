@@ -245,7 +245,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: unit,
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
     },
     {
       source: {
