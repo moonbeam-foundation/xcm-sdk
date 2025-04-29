@@ -58,7 +58,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
     },
     "fee": _AssetAmount {
       "address": undefined,
-      "amount": 30000000000000000n,
+      "amount": 25000000000000000n,
       "decimals": 18,
       "ids": undefined,
       "key": "laos",
@@ -93,7 +93,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
   },
   "min": _AssetAmount {
     "address": undefined,
-    "amount": 30000000000000000n,
+    "amount": 25000000000000000n,
     "decimals": 18,
     "ids": undefined,
     "key": "laos",
@@ -659,7 +659,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
     },
     "destinationFee": _AssetAmount {
       "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
-      "amount": 30000000000000000n,
+      "amount": 25000000000000000n,
       "decimals": 18,
       "ids": {
         "id": "294342517635293430510451841925413680520",
@@ -1481,7 +1481,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "fee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 3540093750000n,
+      "amount": 3645625000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
