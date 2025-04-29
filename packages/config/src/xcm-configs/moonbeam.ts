@@ -1384,7 +1384,7 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(), // TODO will this work?
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
     {
       source: {
@@ -1653,7 +1653,10 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: laosMainnet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.03,
+          amount: FeeBuilder().xcmPaymentApi().fromHere({
+            isAssetReserveChain: true,
+            parents: 0,
+          }),
           asset: laos,
         },
       },
