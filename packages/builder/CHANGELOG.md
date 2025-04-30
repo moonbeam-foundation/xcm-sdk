@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 3.2.3
+
+### Patch Changes
+
+- [#482](https://github.com/moonbeam-foundation/xcm-sdk/pull/482) [`bf98d17`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf98d1754f8428cad5d71371867dc0e841dcae44) Thanks [@mmaurello](https://github.com/mmaurello)! - Change all Xtokens prrecompile calls to Xcm Precompile for Moonchains
+
 ## 3.2.2
 
 ### Patch Changes
