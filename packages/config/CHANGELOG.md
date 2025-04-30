@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 3.2.1
+
+### Patch Changes
+
+- [#484](https://github.com/moonbeam-foundation/xcm-sdk/pull/484) [`f8b51d0`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f8b51d0d97b9ee127c6ce69e5fbd05b2d0fa23ed) Thanks [@mmaurello](https://github.com/mmaurello)! - Include Stagenet in the chainlist
+
 ## 3.2.0
 
 ### Minor Changes
