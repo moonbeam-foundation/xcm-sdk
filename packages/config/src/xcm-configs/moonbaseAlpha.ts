@@ -57,7 +57,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: dev,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -80,7 +80,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: dev,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
     {
       source: {
@@ -103,7 +103,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: dev,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -126,7 +126,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: dev,
         },
       },
-      contract: ContractBuilder().Xtokens().transferMultiCurrencies(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
     {
       source: {
@@ -149,7 +149,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: ampe,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -172,7 +172,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: otp,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -196,7 +196,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -219,7 +219,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: tur,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -245,7 +245,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: unit,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
     },
     {
       source: {
@@ -268,7 +268,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: usdcwh,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -291,7 +291,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: ftmwh,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -314,7 +314,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: ftmwh,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -337,7 +337,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: dev,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -360,7 +360,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: hdx,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -384,7 +384,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -408,7 +408,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -431,7 +431,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: agng,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -455,7 +455,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
     {
       source: {
@@ -479,7 +479,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transferWithEvmTo32(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
     {
       source: {

@@ -366,7 +366,7 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
   ],
 });

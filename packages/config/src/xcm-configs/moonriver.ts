@@ -68,7 +68,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -91,7 +91,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -115,7 +115,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -138,7 +138,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -163,7 +163,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     // {
     //   source: {
@@ -207,7 +207,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -230,7 +230,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: crab,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
     {
       source: {
@@ -253,7 +253,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: csm,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -276,7 +276,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: kar,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -300,7 +300,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assetRegistry().assetMetadatas(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -323,7 +323,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: kbtc,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -346,7 +346,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: kint,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -372,7 +372,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: ksm,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
     },
     {
       source: {
@@ -395,7 +395,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: mgx,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -425,7 +425,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -451,7 +451,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: sdn,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -474,7 +474,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: teer,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     // {
     //   source: {
@@ -525,7 +525,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -548,7 +548,7 @@ export const moonriverRoutes = new ChainRoutes({
           asset: xrt,
         },
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -574,7 +574,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -600,7 +600,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
@@ -626,7 +626,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
-      contract: ContractBuilder().Xtokens().transfer(),
+      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
   ],
 });
