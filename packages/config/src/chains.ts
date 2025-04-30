@@ -2259,6 +2259,7 @@ export const chainsList: AnyChain[] = [
   mantaParachain,
   moonbaseAlpha,
   moonbaseBeta,
+  moonbaseStage,
   moonbeam,
   moonriver,
   neuroweb,
