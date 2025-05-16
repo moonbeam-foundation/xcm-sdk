@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-types
 
+## 3.1.3
+
+### Patch Changes
+
+- [#486](https://github.com/moonbeam-foundation/xcm-sdk/pull/486) [`d46716a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d46716affcb04e8b218cc67322b7adcd2c5b23cc) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix rpc overwriting in Wormhole
+
 ## 3.1.2
 
 ### Patch Changes

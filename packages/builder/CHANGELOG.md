@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-builder
 
+## 3.2.4
+
+### Patch Changes
+
+- [#486](https://github.com/moonbeam-foundation/xcm-sdk/pull/486) [`d46716a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d46716affcb04e8b218cc67322b7adcd2c5b23cc) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix rpc overwriting in Wormhole
+
+- Updated dependencies [[`d46716a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d46716affcb04e8b218cc67322b7adcd2c5b23cc)]:
+  - @moonbeam-network/xcm-types@3.1.3
+
 ## 3.2.3
 
 ### Patch Changes
