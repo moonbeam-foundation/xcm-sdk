@@ -489,7 +489,7 @@ export const fantomTestnet = new EvmChain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: 'https://testnet.ftmscan.com',
+  explorer: 'https://explorer.testnet.fantom.network/',
   id: 4_002,
   isTestChain: true,
   key: 'fantom-testnet',

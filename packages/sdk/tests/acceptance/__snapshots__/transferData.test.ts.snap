@@ -1190,7 +1190,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "fee": _AssetAmount {
       "address": undefined,
-      "amount": 2716083497n,
+      "amount": 2750044001n,
       "decimals": 12,
       "ids": undefined,
       "key": "unit",
@@ -1226,7 +1226,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
   },
   "min": _AssetAmount {
     "address": undefined,
-    "amount": 12716083497n,
+    "amount": 12750044001n,
     "decimals": 12,
     "ids": undefined,
     "key": "unit",
@@ -1443,7 +1443,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "destinationFee": _AssetAmount {
       "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-      "amount": 2716083497n,
+      "amount": 2750044001n,
       "decimals": 12,
       "ids": {
         "id": "42259045809535163221576417993425387648",
