@@ -14,6 +14,6 @@
     "@moonbeam-network/xcm-sdk": "workspace:*"
   },
   "devDependencies": {
-    "bun": "^1.2.9"
+    "bun": "^1.2.13"
   }
 }
