@@ -2121,19 +2121,6 @@ export const shiden = new Parachain({
   ],
 });
 
-export const subsocial = new Parachain({
-  assets: [ChainAsset.fromAsset(sub, { decimals: 10 })],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x4a12be580bb959937a1c7a61d5cf24428ed67fa571974b4007645d1886e7c89f',
-  key: 'subsocial',
-  name: 'Subsocial',
-  nativeAsset: sub,
-  parachainId: 2101,
-  ss58Format: 28,
-  ws: ['wss://para.subsocial.network', 'wss://subsocial-rpc.dwellir.com'],
-});
-
 // export const turing = new Parachain({
 //   assets: [
 //     ChainAsset.fromAsset(tur, {
@@ -2275,7 +2262,6 @@ export const chainsList: AnyChain[] = [
   polkadotAssetHub,
   robonomics,
   shiden,
-  subsocial,
   // turing,
   turingAlphanet,
   uniqueAlpha,
