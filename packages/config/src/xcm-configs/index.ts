@@ -39,7 +39,6 @@ import { polkadotRoutes } from './polkadot';
 import { polkadotAssetHubRoutes } from './polkadotAssetHub';
 import { robonomicsRoutes } from './robonomics';
 import { shidenRoutes } from './shiden';
-import { subsocialRoutes } from './subsocial';
 // import { turingRoutes } from './turing';
 import { turingAlphanetRoutes } from './turingAlphanet';
 import { zeitgeistRoutes } from './zeitgeist';
@@ -84,7 +83,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   alphanetAssetHubRoutes,
   kusamaAssetHubRoutes,
   polkadotAssetHubRoutes,
-  subsocialRoutes,
   // turingRoutes,
   turingAlphanetRoutes,
   zeitgeistRoutes,

@@ -32,7 +32,6 @@ import {
   pink,
   ring,
   stink,
-  sub,
   usdc,
   usdcwh,
   usdt,
@@ -68,7 +67,6 @@ import {
   phala,
   polkadot,
   polkadotAssetHub,
-  subsocial,
   zeitgeist,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -1142,29 +1140,6 @@ export const moonbeamRoutes = new ChainRoutes({
         fee: {
           amount: 0.101,
           asset: usdcwh,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: sub,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: sub,
-        chain: subsocial,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 1,
-          asset: sub,
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
