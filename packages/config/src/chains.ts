@@ -17,7 +17,6 @@ import {
   astr,
   auq,
   axlusdc,
-  betaDEV,
   bnc,
   bncs,
   cfg,
@@ -26,6 +25,8 @@ import {
   dai,
   ded,
   dev,
+  devBeta,
+  devStage,
   dot,
   eq,
   eqd,
@@ -1003,7 +1004,7 @@ export const moonbaseAlpha = new EvmParachain({
 
 export const moonbaseStage = new EvmParachain({
   assets: [
-    ChainAsset.fromAsset(dev, {
+    ChainAsset.fromAsset(devStage, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       min: 0.01,
@@ -1012,7 +1013,7 @@ export const moonbaseStage = new EvmParachain({
       },
     }),
   ],
-  ecosystem: Ecosystem.AlphanetRelay,
+  ecosystem: Ecosystem.StagenetRelay,
   genesisHash:
     '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
   id: 1282,
@@ -1020,7 +1021,7 @@ export const moonbaseStage = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-stage',
   name: 'Moonbase Stage',
-  nativeAsset: dev,
+  nativeAsset: devStage,
   parachainId: 1000,
   rpc: 'https://rpc.api.moondev.network',
   ss58Format: 1287,
@@ -1029,7 +1030,7 @@ export const moonbaseStage = new EvmParachain({
 
 export const moonbaseBeta = new EvmParachain({
   assets: [
-    ChainAsset.fromAsset(betaDEV, {
+    ChainAsset.fromAsset(devBeta, {
       decimals: 18,
     }),
     ChainAsset.fromAsset(dev, {
@@ -1071,7 +1072,7 @@ export const moonbaseBeta = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
-  nativeAsset: betaDEV,
+  nativeAsset: devBeta,
   parachainId: 888,
   rpc: 'https://moonbase-beta.api.moonbase.moonbeam.network',
   ss58Format: 1287,
