@@ -1034,6 +1034,7 @@ export const moonbaseBeta = new EvmParachain({
       decimals: 18,
     }),
     ChainAsset.fromAsset(dev, {
+      address: '0xffffffffA7B17E706A2391F346D8C82B6788DB41',
       decimals: 18,
       ids: {
         balanceId: '222902676330054289648817870329963141953',
@@ -1041,6 +1042,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(alan, {
+      address: '0xffffffff405953B645C61B0F5FFB28DF2B39B78D',
       decimals: 18,
       ids: {
         balanceId: '85534404031760856987006367174489651085',
@@ -1048,6 +1050,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(usdcwh, {
+      address: '0xffffffffF0963FD9B1D84D5740E911AA5D99A08D',
       decimals: 6,
       ids: {
         balanceId: '319794858556516669238969276945382613133',
@@ -1055,6 +1058,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(ftmwh, {
+      address: '0xffffffff958FAF8E6B11DA766006DF735C4A8DA0',
       decimals: 18,
       ids: {
         balanceId: '198801030527939140930753142903035039136',
