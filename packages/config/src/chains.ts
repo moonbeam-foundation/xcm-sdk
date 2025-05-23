@@ -1013,7 +1013,7 @@ export const moonbaseStage = new EvmParachain({
       },
     }),
   ],
-  ecosystem: Ecosystem.StagenetRelay,
+  ecosystem: Ecosystem.AlphanetRelay, // TODO, it should be Ecosystem.StagenetRelay
   genesisHash:
     '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
   id: 1282,
@@ -1060,6 +1060,10 @@ export const moonbaseBeta = new EvmParachain({
         balanceId: '198801030527939140930753142903035039136',
         id: { ForeignAsset: '198801030527939140930753142903035039136' },
       },
+    }),
+    ChainAsset.fromAsset(devStage, {
+      address: '0xffffffff00000000000000000000000000000001',
+      decimals: 18,
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,

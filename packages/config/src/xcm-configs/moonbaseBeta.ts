@@ -3,8 +3,8 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { alan, dev, devBeta } from '../assets';
-import { moonbaseAlpha, moonbaseBeta } from '../chains';
+import { alan, dev, devBeta, devStage } from '../assets';
+import { moonbaseAlpha, moonbaseBeta, moonbaseStage } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 export const moonbaseBetaRoutes = new ChainRoutes({
@@ -59,6 +59,30 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+    },
+    {
+      source: {
+        asset: devStage,
+        balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: devBeta,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: devStage,
+        chain: moonbaseStage,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: devStage,
+          amount: 0.1, // TODO
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .byGenesis(),
     },
   ],
 });

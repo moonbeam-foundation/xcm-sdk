@@ -423,5 +423,82 @@ export function polkadotXcm() {
         }),
       };
     },
+    transferAssetsToEcosystem: () => {
+      const func = 'transferAssets';
+
+      return {
+        byGenesis: (): ExtrinsicConfigBuilder => ({
+          build: (params) => {
+            return new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                // TODO mjm
+                const genesis =
+                  params.destination.key === 'moonbase-stage'
+                    ? '0x64d25a5d58d8d330b8804103e6452be6258ebfd7c4f4c1294835130e75628401'
+                    : '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443';
+
+                return [
+                  // dest
+                  {
+                    [version]: normalizeX1(version, {
+                      parents: 2,
+                      interior: {
+                        X2: [
+                          {
+                            GlobalConsensus: {
+                              ByGenesis: genesis, // Relay of destination ecosystem
+                            },
+                          },
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                        ],
+                      },
+                    }),
+                  },
+                  // beneficiary
+                  {
+                    [version]: normalizeX1(version, {
+                      parents: 0,
+                      interior: {
+                        X1: getExtrinsicAccount(params.destinationAddress),
+                      },
+                    }),
+                  },
+                  // assets
+                  {
+                    [version]: {
+                      id: normalizeConcrete(
+                        version,
+                        normalizeX1(version, {
+                          parents: 0,
+                          interior: {
+                            X1: {
+                              PalletInstance:
+                                params.asset.getAssetPalletInstance(),
+                            },
+                          },
+                        }),
+                      ),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  },
+                  // feeAssetItem
+                  0,
+                  // weightLimit
+                  'Unlimited',
+                ];
+              },
+            });
+          },
+        }),
+      };
+    },
   };
 }

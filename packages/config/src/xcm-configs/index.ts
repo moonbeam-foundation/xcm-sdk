@@ -24,6 +24,7 @@ import { mangataKusamaRoutes } from './mangataKusama';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
 import { moonbaseBetaRoutes } from './moonbaseBeta';
+import { moonbaseStageRoutes } from './moonbaseStage';
 import { moonbeamRoutes } from './moonbeam';
 import { moonriverRoutes } from './moonriver';
 import { neurowebRoutes } from './neuroweb';
@@ -66,6 +67,7 @@ export const xcmRoutesList: ChainRoutes[] = [
   mantaParachainRoutes,
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,
+  moonbaseStageRoutes,
   moonbeamRoutes,
   moonriverRoutes,
   neurowebRoutes,
