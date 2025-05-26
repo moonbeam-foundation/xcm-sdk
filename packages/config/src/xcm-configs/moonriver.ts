@@ -8,7 +8,6 @@ import {
   aseed,
   bnc,
   crab,
-  csm,
   kar,
   kbtc,
   kint,
@@ -26,7 +25,6 @@ import {
 } from '../assets';
 import {
   bifrostKusama,
-  crustShadow,
   darwiniaCrab,
   integritee,
   karura,
@@ -67,29 +65,6 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: crustShadow,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          amount: 0.0002,
-          asset: movr,
-        },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
@@ -231,29 +206,6 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
-    },
-    {
-      source: {
-        asset: csm,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: csm,
-        chain: crustShadow,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.004,
-          asset: csm,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
