@@ -471,23 +471,25 @@ export function polkadotXcm() {
                   },
                   // assets
                   {
-                    [version]: {
-                      id: normalizeConcrete(
-                        version,
-                        normalizeX1(version, {
-                          parents: 0,
-                          interior: {
-                            X1: {
-                              PalletInstance:
-                                params.asset.getAssetPalletInstance(),
+                    [version]: [
+                      {
+                        id: normalizeConcrete(
+                          version,
+                          normalizeX1(version, {
+                            parents: 0,
+                            interior: {
+                              X1: {
+                                PalletInstance:
+                                  params.asset.getAssetPalletInstance(),
+                              },
                             },
-                          },
-                        }),
-                      ),
-                      fun: {
-                        Fungible: params.asset.amount,
+                          }),
+                        ),
+                        fun: {
+                          Fungible: params.asset.amount,
+                        },
                       },
-                    },
+                    ],
                   },
                   // feeAssetItem
                   0,

@@ -2,7 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { dev, devStage } from '../assets';
+import { devStage } from '../assets';
 import { moonbaseBeta, moonbaseStage } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -27,7 +27,8 @@ export const moonbaseStageRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.1, // TODO
-          asset: dev,
+          asset: devStage,
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       extrinsic: ExtrinsicBuilder()
