@@ -34,7 +34,7 @@ export const moonbaseStageRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .transferAssetsToEcosystem()
-        .byGenesis(),
+        .X1(),
     },
   ],
 });

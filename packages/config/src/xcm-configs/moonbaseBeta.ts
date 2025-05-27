@@ -82,7 +82,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .transferAssetsToEcosystem()
-        .byGenesis(),
+        .X3(),
     },
   ],
 });
