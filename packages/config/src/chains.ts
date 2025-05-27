@@ -355,6 +355,34 @@ export const centrifuge = new Parachain({
   ],
 });
 
+export const crustShadow = new Parachain({
+  assets: [
+    ChainAsset.fromAsset(movr, {
+      decimals: 18,
+      ids: {
+        balanceId: 232263652204149413431520870009560565298n,
+        id: { OtherReserve: 232263652204149413431520870009560565298n },
+      },
+    }),
+    ChainAsset.fromAsset(csm, {
+      decimals: 12,
+    }),
+  ],
+  ecosystem: Ecosystem.Kusama,
+  genesisHash:
+    '0xd4c0c08ca49dc7c680c3dac71a7c0703e5b222f4b6c03fe4c5219bb8f22c18dc',
+  key: 'crust-shadow',
+  name: 'Crust Shadow',
+  nativeAsset: csm,
+  parachainId: 2012,
+  ss58Format: 66,
+  ws: [
+    'wss://rpc2-shadow.crust.network',
+    'wss://rpc-shadow.crust.network/',
+    'wss://rpc-shadow.crustnetwork.app',
+  ],
+});
+
 export const darwinia = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(ring, {
@@ -2208,6 +2236,7 @@ export const chainsList: AnyChain[] = [
   bifrostKusama,
   bifrostPolkadot,
   centrifuge,
+  crustShadow,
   darwinia,
   darwiniaCrab,
   ethereum,
