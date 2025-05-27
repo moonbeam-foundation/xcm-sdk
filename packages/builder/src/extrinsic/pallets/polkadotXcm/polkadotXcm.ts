@@ -435,13 +435,6 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                // TODO mjm
-                const genesis =
-                  params.destination.key === 'moonbase-stage'
-                    ? '0x64d25a5d58d8d330b8804103e6452be6258ebfd7c4f4c1294835130e75628401'
-                    : '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443';
-
-                // TODO mjm unify this
                 return [
                   // dest
                   {
@@ -451,7 +444,7 @@ export function polkadotXcm() {
                         X2: [
                           {
                             GlobalConsensus: {
-                              ByGenesis: genesis, // Relay of destination ecosystem
+                              ByGenesis: params.destination.relayGenesisHash,
                             },
                           },
                           {
@@ -512,12 +505,6 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                // TODO mjm
-                const genesis =
-                  params.destination.key === 'moonbase-stage'
-                    ? '0x64d25a5d58d8d330b8804103e6452be6258ebfd7c4f4c1294835130e75628401'
-                    : '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443';
-
                 return [
                   // dest
                   {
@@ -527,7 +514,7 @@ export function polkadotXcm() {
                         X2: [
                           {
                             GlobalConsensus: {
-                              ByGenesis: genesis, // Relay of destination ecosystem
+                              ByGenesis: params.destination.relayGenesisHash,
                             },
                           },
                           {
@@ -556,7 +543,8 @@ export function polkadotXcm() {
                             X3: [
                               {
                                 GlobalConsensus: {
-                                  ByGenesis: genesis,
+                                  ByGenesis:
+                                    params.destination.relayGenesisHash,
                                 },
                               },
                               {

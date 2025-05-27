@@ -62,6 +62,30 @@ export const moonbaseBetaRoutes = new ChainRoutes({
     },
     {
       source: {
+        asset: devBeta,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: devBeta,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: devBeta,
+        chain: moonbaseStage,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: devBeta,
+          amount: 0.1, // TODO mjm
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X1(),
+    },
+    {
+      source: {
         asset: devStage,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

@@ -1002,36 +1002,13 @@ export const moonbaseAlpha = new EvmParachain({
   },
 });
 
-export const moonbaseStage = new EvmParachain({
-  assets: [
-    ChainAsset.fromAsset(devStage, {
-      address: '0x0000000000000000000000000000000000000802',
-      decimals: 18,
-      min: 0.01,
-      ids: {
-        palletInstance: 3,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.StagenetRelay,
-  genesisHash:
-    '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
-  id: 1282,
-  isEvmSigner: true,
-  isTestChain: true,
-  key: 'moonbase-stage',
-  name: 'Moonbase Stage',
-  nativeAsset: devStage,
-  parachainId: 1000,
-  rpc: 'https://rpc.api.moondev.network',
-  ss58Format: 1287,
-  ws: ['wss://wss.api.moondev.network'],
-});
-
 export const moonbaseBeta = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(devBeta, {
       decimals: 18,
+      ids: {
+        palletInstance: 3,
+      },
     }),
     ChainAsset.fromAsset(dev, {
       address: '0xffffffffA7B17E706A2391F346D8C82B6788DB41',
@@ -1082,12 +1059,45 @@ export const moonbaseBeta = new EvmParachain({
   name: 'Moonbase Beta',
   nativeAsset: devBeta,
   parachainId: 888,
+  relayGenesisHash:
+    '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
   rpc: 'https://moonbase-beta.api.moonbase.moonbeam.network',
   ss58Format: 1287,
   ws: [
     'wss://moonbase-beta.api.moonbase.moonbeam.network',
     'wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network',
   ],
+});
+
+export const moonbaseStage = new EvmParachain({
+  assets: [
+    ChainAsset.fromAsset(devStage, {
+      address: '0x0000000000000000000000000000000000000802',
+      decimals: 18,
+      ids: {
+        palletInstance: 3,
+      },
+    }),
+    ChainAsset.fromAsset(devBeta, {
+      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      decimals: 18,
+    }),
+  ],
+  ecosystem: Ecosystem.StagenetRelay,
+  genesisHash:
+    '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
+  id: 1282,
+  isEvmSigner: true,
+  isTestChain: true,
+  key: 'moonbase-stage',
+  name: 'Moonbase Stage',
+  nativeAsset: devStage,
+  parachainId: 1000,
+  relayGenesisHash:
+    '0x64d25a5d58d8d330b8804103e6452be6258ebfd7c4f4c1294835130e75628401',
+  rpc: 'https://rpc.api.moondev.network',
+  ss58Format: 1287,
+  ws: ['wss://wss.api.moondev.network'],
 });
 
 export const moonbeam = new EvmParachain({
