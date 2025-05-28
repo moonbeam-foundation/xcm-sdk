@@ -75,7 +75,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: devBeta,
-          amount: 0.1, // TODO mjm
+          amount: 0.0001, // TODO mjm calculate?
           balance: BalanceBuilder().evm().erc20(),
         },
       },

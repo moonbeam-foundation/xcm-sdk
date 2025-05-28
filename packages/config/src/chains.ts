@@ -1005,6 +1005,7 @@ export const moonbaseAlpha = new EvmParachain({
 export const moonbaseBeta = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(devBeta, {
+      address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       ids: {
         palletInstance: 3,
