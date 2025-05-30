@@ -26,7 +26,7 @@ export const moonbaseStageRoutes = new ChainRoutes({
         chain: moonbaseBeta,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.0001, // TODO calculate
+          amount: 0.1, // TODO calculate
           asset: devStage,
           balance: BalanceBuilder().evm().erc20(),
         },
@@ -51,7 +51,7 @@ export const moonbaseStageRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
           asset: devBeta,
-          amount: 0.0001, // TODO calculate
+          amount: 0.1, // TODO calculate
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
