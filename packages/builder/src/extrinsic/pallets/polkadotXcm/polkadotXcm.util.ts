@@ -26,6 +26,7 @@ export function getPolkadotXcmExtrinsicArgs({
   const version = getExtrinsicArgumentVersion(func);
 
   return [
+    // dest
     {
       [version]: normalizeX1(version, {
         parents,
@@ -36,6 +37,7 @@ export function getPolkadotXcmExtrinsicArgs({
         },
       }),
     },
+    // beneficiary
     {
       [version]: normalizeX1(version, {
         parents: 0,
@@ -44,10 +46,13 @@ export function getPolkadotXcmExtrinsicArgs({
         },
       }),
     },
+    // assets
     {
       [version]: asset,
     },
+    // feeAssetItem
     feeIndex,
+    // weightLimit
     'Unlimited',
   ];
 }

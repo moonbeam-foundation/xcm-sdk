@@ -9,6 +9,7 @@ export enum Ecosystem {
   Polkadot = 'polkadot',
   Kusama = 'kusama',
   AlphanetRelay = 'alphanet-relay',
+  StagenetRelay = 'stagenet-relay',
 }
 
 export interface WormholeConfig {

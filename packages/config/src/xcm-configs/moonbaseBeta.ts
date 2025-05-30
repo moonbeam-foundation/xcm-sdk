@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { alan, betaDEV, dev } from '../assets';
+import { alan, dev, devBeta } from '../assets';
 import { moonbaseAlpha, moonbaseBeta } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -15,7 +15,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         asset: dev,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          asset: betaDEV,
+          asset: devBeta,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
@@ -40,7 +40,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         asset: alan,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          asset: betaDEV,
+          asset: devBeta,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {

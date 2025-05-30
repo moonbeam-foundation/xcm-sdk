@@ -1,5 +1,5 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
-import { betaDEV, dev, ftm, ftmwh } from '../assets';
+import { dev, devBeta, ftm, ftmwh } from '../assets';
 import { fantomTestnet, moonbaseBeta } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
@@ -15,7 +15,7 @@ export const moonbaseBetaRoutes = new MrlChainRoutes({
           balance: BalanceBuilder().substrate().assets().account(),
         },
         fee: {
-          asset: betaDEV,
+          asset: devBeta,
           balance: BalanceBuilder().substrate().system().account(),
         },
       },

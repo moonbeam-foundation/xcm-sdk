@@ -45,11 +45,6 @@ export const axlusdc = new Asset({
   originSymbol: 'axlUSDC',
 });
 
-export const betaDEV = new Asset({
-  key: 'beta-dev',
-  originSymbol: 'betaDEV',
-});
-
 export const bnc = new Asset({
   key: 'bnc',
   originSymbol: 'BNC',
@@ -88,6 +83,16 @@ export const ded = new Asset({
 export const dev = new Asset({
   key: 'dev',
   originSymbol: 'DEV',
+});
+
+export const devBeta = new Asset({
+  key: 'dev-beta',
+  originSymbol: 'DEVbeta',
+});
+
+export const devStage = new Asset({
+  key: 'dev-stage',
+  originSymbol: 'DEVstage',
 });
 
 export const dot = new Asset({
@@ -425,7 +430,6 @@ export const assetsList: Asset[] = [
   astr,
   auq,
   axlusdc,
-  betaDEV,
   bnc,
   bncs,
   cfg,
@@ -434,6 +438,8 @@ export const assetsList: Asset[] = [
   dai,
   ded,
   dev,
+  devBeta,
+  devStage,
   dot,
   eq,
   eqd,

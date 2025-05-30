@@ -17,7 +17,6 @@ import {
   astr,
   auq,
   axlusdc,
-  betaDEV,
   bnc,
   bncs,
   cfg,
@@ -26,6 +25,8 @@ import {
   dai,
   ded,
   dev,
+  devBeta,
+  devStage,
   dot,
   eq,
   eqd,
@@ -1001,38 +1002,17 @@ export const moonbaseAlpha = new EvmParachain({
   },
 });
 
-export const moonbaseStage = new EvmParachain({
+export const moonbaseBeta = new EvmParachain({
   assets: [
-    ChainAsset.fromAsset(dev, {
+    ChainAsset.fromAsset(devBeta, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
-      min: 0.01,
       ids: {
         palletInstance: 3,
       },
     }),
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
-  id: 1282,
-  isEvmSigner: true,
-  isTestChain: true,
-  key: 'moonbase-stage',
-  name: 'Moonbase Stage',
-  nativeAsset: dev,
-  parachainId: 1000,
-  rpc: 'https://rpc.api.moondev.network',
-  ss58Format: 1287,
-  ws: ['wss://wss.api.moondev.network'],
-});
-
-export const moonbaseBeta = new EvmParachain({
-  assets: [
-    ChainAsset.fromAsset(betaDEV, {
-      decimals: 18,
-    }),
     ChainAsset.fromAsset(dev, {
+      address: '0xffffffffA7B17E706A2391F346D8C82B6788DB41',
       decimals: 18,
       ids: {
         balanceId: '222902676330054289648817870329963141953',
@@ -1040,6 +1020,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(alan, {
+      address: '0xffffffff405953B645C61B0F5FFB28DF2B39B78D',
       decimals: 18,
       ids: {
         balanceId: '85534404031760856987006367174489651085',
@@ -1047,6 +1028,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(usdcwh, {
+      address: '0xffffffffF0963FD9B1D84D5740E911AA5D99A08D',
       decimals: 6,
       ids: {
         balanceId: '319794858556516669238969276945382613133',
@@ -1054,11 +1036,16 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(ftmwh, {
+      address: '0xffffffff958FAF8E6B11DA766006DF735C4A8DA0',
       decimals: 18,
       ids: {
         balanceId: '198801030527939140930753142903035039136',
         id: { ForeignAsset: '198801030527939140930753142903035039136' },
       },
+    }),
+    ChainAsset.fromAsset(devStage, {
+      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      decimals: 18,
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
@@ -1071,14 +1058,46 @@ export const moonbaseBeta = new EvmParachain({
   isTestChain: true,
   key: 'moonbase-beta',
   name: 'Moonbase Beta',
-  nativeAsset: betaDEV,
+  nativeAsset: devBeta,
   parachainId: 888,
+  relayGenesisHash:
+    '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
   rpc: 'https://moonbase-beta.api.moonbase.moonbeam.network',
   ss58Format: 1287,
   ws: [
     'wss://moonbase-beta.api.moonbase.moonbeam.network',
     'wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network',
   ],
+});
+
+export const moonbaseStage = new EvmParachain({
+  assets: [
+    ChainAsset.fromAsset(devStage, {
+      address: '0x0000000000000000000000000000000000000802',
+      decimals: 18,
+      ids: {
+        palletInstance: 3,
+      },
+    }),
+    ChainAsset.fromAsset(devBeta, {
+      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      decimals: 18,
+    }),
+  ],
+  ecosystem: Ecosystem.StagenetRelay,
+  genesisHash:
+    '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
+  id: 1282,
+  isTestChain: true,
+  key: 'moonbase-stage',
+  name: 'Moonbase Stage',
+  nativeAsset: devStage,
+  parachainId: 1000,
+  relayGenesisHash:
+    '0x64d25a5d58d8d330b8804103e6452be6258ebfd7c4f4c1294835130e75628401',
+  rpc: 'https://rpc.api.moondev.network',
+  ss58Format: 1287,
+  ws: ['wss://wss.api.moondev.network'],
 });
 
 export const moonbeam = new EvmParachain({
@@ -2121,29 +2140,6 @@ export const shiden = new Parachain({
   ],
 });
 
-// export const turing = new Parachain({
-//   assets: [
-//     ChainAsset.fromAsset(tur, {
-//       decimals: 10,
-//     }),
-//     ChainAsset.fromAsset(movr, {
-//       decimals: 18,
-//       ids: {
-//         id: 9,
-//       },
-//     }),
-//   ],
-//   ecosystem: Ecosystem.Kusama,
-//   genesisHash:
-//     '0x0f62b701fb12d02237a33b84818c11f621653d2b1614c777973babf4652b535d',
-//   key: 'turing',
-//   name: 'Turing',
-//   nativeAsset: tur,
-//   parachainId: 2114,
-//   ss58Format: 51,
-//   ws: ['wss://turing-rpc.dwellir.com'],
-// });
-
 export const turingAlphanet = new Parachain({
   assets: [
     ChainAsset.fromAsset(tur, {
@@ -2262,7 +2258,6 @@ export const chainsList: AnyChain[] = [
   polkadotAssetHub,
   robonomics,
   shiden,
-  // turing,
   turingAlphanet,
   uniqueAlpha,
   zeitgeist,
