@@ -1088,7 +1088,6 @@ export const moonbaseStage = new EvmParachain({
   genesisHash:
     '0xd97c0d8c02a2878f817b688d3397efa2584977f0332d0ba82303498110a0836f',
   id: 1282,
-  isEvmSigner: true,
   isTestChain: true,
   key: 'moonbase-stage',
   name: 'Moonbase Stage',
