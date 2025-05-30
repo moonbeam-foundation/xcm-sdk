@@ -24,7 +24,6 @@ import { mangataKusamaRoutes } from './mangataKusama';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
 import { moonbaseBetaRoutes } from './moonbaseBeta';
-import { moonbaseStageRoutes } from './moonbaseStage';
 import { moonbeamRoutes } from './moonbeam';
 import { moonriverRoutes } from './moonriver';
 import { neurowebRoutes } from './neuroweb';
@@ -40,7 +39,6 @@ import { polkadotRoutes } from './polkadot';
 import { polkadotAssetHubRoutes } from './polkadotAssetHub';
 import { robonomicsRoutes } from './robonomics';
 import { shidenRoutes } from './shiden';
-// import { turingRoutes } from './turing';
 import { turingAlphanetRoutes } from './turingAlphanet';
 import { zeitgeistRoutes } from './zeitgeist';
 
@@ -67,7 +65,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   mantaParachainRoutes,
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,
-  moonbaseStageRoutes,
   moonbeamRoutes,
   moonriverRoutes,
   neurowebRoutes,
@@ -85,7 +82,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   alphanetAssetHubRoutes,
   kusamaAssetHubRoutes,
   polkadotAssetHubRoutes,
-  // turingRoutes,
   turingAlphanetRoutes,
   zeitgeistRoutes,
 ];

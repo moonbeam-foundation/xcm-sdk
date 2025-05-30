@@ -2141,29 +2141,6 @@ export const shiden = new Parachain({
   ],
 });
 
-// export const turing = new Parachain({
-//   assets: [
-//     ChainAsset.fromAsset(tur, {
-//       decimals: 10,
-//     }),
-//     ChainAsset.fromAsset(movr, {
-//       decimals: 18,
-//       ids: {
-//         id: 9,
-//       },
-//     }),
-//   ],
-//   ecosystem: Ecosystem.Kusama,
-//   genesisHash:
-//     '0x0f62b701fb12d02237a33b84818c11f621653d2b1614c777973babf4652b535d',
-//   key: 'turing',
-//   name: 'Turing',
-//   nativeAsset: tur,
-//   parachainId: 2114,
-//   ss58Format: 51,
-//   ws: ['wss://turing-rpc.dwellir.com'],
-// });
-
 export const turingAlphanet = new Parachain({
   assets: [
     ChainAsset.fromAsset(tur, {
@@ -2282,7 +2259,6 @@ export const chainsList: AnyChain[] = [
   polkadotAssetHub,
   robonomics,
   shiden,
-  // turing,
   turingAlphanet,
   uniqueAlpha,
   zeitgeist,
