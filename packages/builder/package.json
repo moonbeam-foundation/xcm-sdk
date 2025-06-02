@@ -38,11 +38,11 @@
     "big.js": "^6.2.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "15.9.2",
-    "@polkadot/api-augment": "15.9.2",
-    "@polkadot/types": "15.9.2",
-    "@polkadot/util": "13.4.4",
-    "@polkadot/util-crypto": "13.4.4",
+    "@polkadot/api": "16.1.1",
+    "@polkadot/api-augment": "16.1.1",
+    "@polkadot/types": "16.1.1",
+    "@polkadot/util": "13.5.1",
+    "@polkadot/util-crypto": "13.5.1",
     "@wormhole-foundation/sdk-connect": "^1.18.0",
     "@wormhole-foundation/sdk-evm": "^1.18.0",
     "viem": "^2.27.0"
