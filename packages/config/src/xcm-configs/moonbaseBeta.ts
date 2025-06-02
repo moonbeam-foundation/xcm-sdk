@@ -52,13 +52,11 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .fromAssetIdQuery({ isAssetReserveChain: true }),
+          amount: 0.1, // TODO calculate
           asset: dev,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
   ],
 });

@@ -222,6 +222,47 @@ export function polkadotXcm() {
               },
             }),
         }),
+        X3: (parents = 0): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents,
+                        interior: {
+                          X3: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                params.asset.getAssetPalletInstance(),
+                            },
+                            {
+                              AccountKey20: {
+                                key: params.asset.address,
+                              },
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
         X2AndFeeHere: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
