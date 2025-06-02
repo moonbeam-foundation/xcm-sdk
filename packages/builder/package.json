@@ -43,8 +43,8 @@
     "@polkadot/types": "16.1.1",
     "@polkadot/util": "13.5.1",
     "@polkadot/util-crypto": "13.5.1",
-    "@wormhole-foundation/sdk-connect": "^1.18.0",
-    "@wormhole-foundation/sdk-evm": "^1.18.0",
-    "viem": "^2.27.0"
+    "@wormhole-foundation/sdk-connect": "^1.23.0",
+    "@wormhole-foundation/sdk-evm": "^1.23.0",
+    "viem": "^2.30.6"
   }
 }
