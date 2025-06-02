@@ -52,7 +52,7 @@ export async function getSourceData({
   const feeBalance = await getBalance({
     address: sourceAddress,
     asset: feeAsset,
-    builder: route.source.fee.balance,
+    builder: route.source.fee?.balance,
     chain: source,
   });
 
