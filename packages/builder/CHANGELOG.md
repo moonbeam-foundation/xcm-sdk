@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-builder
 
+## 3.2.6
+
+### Patch Changes
+
+- [#496](https://github.com/moonbeam-foundation/xcm-sdk/pull/496) [`e04f939`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e04f9398d74a546f7c5ab9af0be1fb810f9f030c) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix vite vulnerability
+
+- Updated dependencies [[`e04f939`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e04f9398d74a546f7c5ab9af0be1fb810f9f030c)]:
+  - @moonbeam-network/xcm-types@3.1.5
+  - @moonbeam-network/xcm-utils@3.1.4
+
 ## 3.2.5
 
 ### Patch Changes
