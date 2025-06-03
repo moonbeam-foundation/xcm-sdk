@@ -1,4 +1,4 @@
-import type { ChainRoutes } from '../types/ChainRoutes';
+import { ChainRoutes } from '../types/ChainRoutes';
 
 import { acalaRoutes } from './acala';
 import { alphanetAssetHubRoutes } from './alphanetAssetHub';
@@ -88,4 +88,33 @@ export const xcmRoutesList: ChainRoutes[] = [
 
 export const xcmRoutesMap = new Map<string, ChainRoutes>(
   xcmRoutesList.map((config) => [config.chain.key, config]),
+);
+
+// TODO remove this if not used
+export const crossEcosystemsRoutesMapDeprecated = new Map<string, ChainRoutes>(
+  xcmRoutesList
+    .map((chainRoutes) => {
+      const sourceEcosystem = chainRoutes.chain.ecosystem;
+      // Get all routes for this chain
+      const routes = chainRoutes.getRoutes();
+      // Check if any route has a different destination ecosystem than the source
+      const crossEcosystemRoutes = routes.filter(
+        (route) => route.destination.chain.ecosystem !== sourceEcosystem,
+      );
+
+      // If there are no cross-ecosystem routes, return null (to be filtered out)
+      if (crossEcosystemRoutes.length === 0) {
+        return null;
+      }
+
+      // Create a new ChainRoutes with only the cross-ecosystem routes
+      return [
+        chainRoutes.chain.key,
+        new ChainRoutes({
+          chain: chainRoutes.chain,
+          routes: crossEcosystemRoutes,
+        }),
+      ];
+    })
+    .filter(Boolean) as [string, ChainRoutes][],
 );

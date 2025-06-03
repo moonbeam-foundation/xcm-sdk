@@ -70,6 +70,8 @@ export async function getTransferData({
     async transfer(
       amount,
       { evmSigner, polkadotSigner }: Partial<Signers>,
+      statusCallback,
+      eventCallback,
     ): Promise<string> {
       const source = route.source.chain as AnyParachain;
       const destination = route.destination.chain as AnyParachain;
@@ -126,6 +128,8 @@ export async function getTransferData({
           sourceAddress,
           extrinsic,
           polkadotSigner,
+          statusCallback,
+          eventCallback,
         );
       }
 

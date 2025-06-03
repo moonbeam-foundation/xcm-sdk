@@ -91,6 +91,7 @@ export class PolkadotService {
     config: ExtrinsicConfig,
     signer: PolkadotSigner | IKeyringPair,
     statusCallback?: (params: ISubmittableResult) => void,
+    eventCallback?: (section: string, method: string, data: unknown) => void,
   ): Promise<string> {
     const extrinsic = this.getExtrinsic(config);
 
@@ -111,9 +112,24 @@ export class PolkadotService {
               ),
             );
           }
-          if (result.txHash) {
-            resolve(result.txHash.toString());
+
+          // Process transaction status
+          if (result.status.isInBlock || result.status.isFinalized) {
+            // Process events if callback is provided
+            if (eventCallback) {
+              // Loop through all events for this transaction
+              result.events.forEach(({ event }) => {
+                const { section, method, data } = event;
+                eventCallback(section, method, data);
+              });
+            }
+
+            // If we haven't resolved yet and have a transaction hash, do it now
+            if (result.txHash) {
+              resolve(result.txHash.toString());
+            }
           }
+
           statusCallback?.(result);
         })
         .catch(reject);
