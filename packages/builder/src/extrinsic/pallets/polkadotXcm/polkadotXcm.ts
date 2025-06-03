@@ -222,6 +222,114 @@ export function polkadotXcm() {
               },
             }),
         }),
+        X2: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const assetInDestination = params.destination.getChainAsset(
+                  params.asset,
+                );
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                assetInDestination.getAssetPalletInstance(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
+        X3: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const assetInDestination = params.destination.getChainAsset(
+                  params.asset,
+                );
+
+                const feeAssetInDestination = params.destination.getChainAsset(
+                  params.fee,
+                );
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                feeAssetInDestination.getAssetPalletInstance(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.fee.amount,
+                      },
+                    },
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X3: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                assetInDestination.getAssetPalletInstance(),
+                            },
+                            {
+                              AccountKey20: {
+                                key: assetInDestination.address,
+                              },
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
         X2AndFeeHere: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
