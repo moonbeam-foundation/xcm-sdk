@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.1.4
+
+### Patch Changes
+
+- [#496](https://github.com/moonbeam-foundation/xcm-sdk/pull/496) [`e04f939`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e04f9398d74a546f7c5ab9af0be1fb810f9f030c) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix vite vulnerability
+
 ## 3.1.3
 
 ### Patch Changes
