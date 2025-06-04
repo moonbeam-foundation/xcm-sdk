@@ -1,5 +1,18 @@
 # @moonbeam-network/xcm-sdk
 
+## 3.2.0
+
+### Minor Changes
+
+- [#493](https://github.com/moonbeam-foundation/xcm-sdk/pull/493) [`bf2a793`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf2a7931a4a74bc9f1a4f3f1e0b5c0c04a577e08) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement Cross Ecosystem routes (Moonbase Stage <> Moonbase Beta)
+
+### Patch Changes
+
+- Updated dependencies [[`bf2a793`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf2a7931a4a74bc9f1a4f3f1e0b5c0c04a577e08)]:
+  - @moonbeam-network/xcm-builder@3.3.0
+  - @moonbeam-network/xcm-config@3.3.0
+  - @moonbeam-network/xcm-types@3.2.0
+
 ## 3.1.9
 
 ### Patch Changes
