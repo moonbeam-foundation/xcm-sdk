@@ -37,7 +37,6 @@ import {
   moonriver,
   robonomics,
   shiden,
-  // turing,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -165,25 +164,6 @@ export const moonriverRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
-    // {
-    //   source: {
-    //     asset: movr,
-    //     balance: BalanceBuilder().substrate().system().account(),
-    //     destinationFee: {
-    //       balance: BalanceBuilder().substrate().system().account(),
-    //     },
-    //   },
-    //   destination: {
-    //     asset: movr,
-    //     chain: turing,
-    //     balance: BalanceBuilder().substrate().tokens().accounts(),
-    //     fee: {
-    //       amount: 0.004,
-    //       asset: movr,
-    //     },
-    //   },
-    //   contract: ContractBuilder().Xtokens().transfer(),
-    // },
     {
       source: {
         asset: bnc,
@@ -476,29 +456,6 @@ export const moonriverRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
-    // {
-    //   source: {
-    //     asset: tur,
-    //     balance: BalanceBuilder().evm().erc20(),
-    //     fee: {
-    //       asset: movr,
-    //       balance: BalanceBuilder().substrate().system().account(),
-    //     },
-    //     destinationFee: {
-    //       balance: BalanceBuilder().evm().erc20(),
-    //     },
-    //   },
-    //   destination: {
-    //     asset: tur,
-    //     chain: turing,
-    //     balance: BalanceBuilder().substrate().system().account(),
-    //     fee: {
-    //       amount: 0.2,
-    //       asset: tur,
-    //     },
-    //   },
-    //   contract: ContractBuilder().Xtokens().transfer(),
-    // },
     {
       source: {
         asset: usdt,

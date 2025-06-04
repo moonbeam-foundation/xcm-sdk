@@ -222,6 +222,114 @@ export function polkadotXcm() {
               },
             }),
         }),
+        X2: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const assetInDestination = params.destination.getChainAsset(
+                  params.asset,
+                );
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                assetInDestination.getAssetPalletInstance(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
+        X3: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const assetInDestination = params.destination.getChainAsset(
+                  params.asset,
+                );
+
+                const feeAssetInDestination = params.destination.getChainAsset(
+                  params.fee,
+                );
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                feeAssetInDestination.getAssetPalletInstance(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.fee.amount,
+                      },
+                    },
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X3: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                assetInDestination.getAssetPalletInstance(),
+                            },
+                            {
+                              AccountKey20: {
+                                key: assetInDestination.address,
+                              },
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
         X2AndFeeHere: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
@@ -420,6 +528,157 @@ export function polkadotXcm() {
                 ];
               },
             }),
+        }),
+      };
+    },
+    transferAssetsToEcosystem: () => {
+      const func = 'transferAssets';
+
+      return {
+        X1: (): ExtrinsicConfigBuilder => ({
+          build: (params) => {
+            return new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return [
+                  // dest
+                  {
+                    [version]: normalizeX1(version, {
+                      parents: 2,
+                      interior: {
+                        X2: [
+                          {
+                            GlobalConsensus: {
+                              ByGenesis: params.destination.relayGenesisHash,
+                            },
+                          },
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                        ],
+                      },
+                    }),
+                  },
+                  // beneficiary
+                  {
+                    [version]: normalizeX1(version, {
+                      parents: 0,
+                      interior: {
+                        X1: getExtrinsicAccount(params.destinationAddress),
+                      },
+                    }),
+                  },
+                  // assets
+                  {
+                    [version]: [
+                      {
+                        id: normalizeConcrete(
+                          version,
+                          normalizeX1(version, {
+                            parents: 0,
+                            interior: {
+                              X1: {
+                                PalletInstance:
+                                  params.asset.getAssetPalletInstance(),
+                              },
+                            },
+                          }),
+                        ),
+                        fun: {
+                          Fungible: params.asset.amount,
+                        },
+                      },
+                    ],
+                  },
+                  // feeAssetItem
+                  0,
+                  // weightLimit
+                  'Unlimited',
+                ];
+              },
+            });
+          },
+        }),
+        X3: (): ExtrinsicConfigBuilder => ({
+          build: (params) => {
+            const assetInDestination = params.destination.getChainAsset(
+              params.asset,
+            );
+            return new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return [
+                  // dest
+                  {
+                    [version]: normalizeX1(version, {
+                      parents: 2,
+                      interior: {
+                        X2: [
+                          {
+                            GlobalConsensus: {
+                              ByGenesis: params.destination.relayGenesisHash,
+                            },
+                          },
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                        ],
+                      },
+                    }),
+                  },
+                  // beneficiary
+                  {
+                    [version]: normalizeX1(version, {
+                      parents: 0,
+                      interior: {
+                        X1: getExtrinsicAccount(params.destinationAddress),
+                      },
+                    }),
+                  },
+                  // assets
+                  {
+                    [version]: [
+                      {
+                        id: normalizeConcrete(version, {
+                          parents: 2,
+                          interior: {
+                            X3: [
+                              {
+                                GlobalConsensus: {
+                                  ByGenesis:
+                                    params.destination.relayGenesisHash,
+                                },
+                              },
+                              {
+                                Parachain: params.destination.parachainId,
+                              },
+                              {
+                                PalletInstance:
+                                  assetInDestination.getAssetPalletInstance(),
+                              },
+                            ],
+                          },
+                        }),
+                        fun: {
+                          Fungible: params.asset.amount,
+                        },
+                      },
+                    ],
+                  },
+                  // feeAssetItem
+                  0,
+                  // weightLimit
+                  'Unlimited',
+                ];
+              },
+            });
+          },
         }),
       };
     },

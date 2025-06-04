@@ -5,6 +5,7 @@ export interface ParachainConstructorParams extends ChainConstructorParams {
   genesisHash: string;
   isRelay?: boolean;
   parachainId: number;
+  relayGenesisHash?: string;
   ss58Format: number;
   usesChainDecimals?: boolean;
   weight?: number;
@@ -24,6 +25,8 @@ export class Parachain extends Chain {
 
   readonly usesChainDecimals: boolean;
 
+  readonly relayGenesisHash?: string;
+
   readonly weight: number | undefined;
 
   readonly ws: string[];
@@ -37,6 +40,7 @@ export class Parachain extends Chain {
     genesisHash,
     isRelay,
     parachainId,
+    relayGenesisHash,
     usesChainDecimals,
     ss58Format,
     weight,
@@ -49,6 +53,7 @@ export class Parachain extends Chain {
     this.genesisHash = genesisHash;
     this.isRelay = !!isRelay;
     this.parachainId = parachainId;
+    this.relayGenesisHash = relayGenesisHash;
     this.ss58Format = ss58Format;
     this.usesChainDecimals = !!usesChainDecimals;
     this.weight = weight;

@@ -8,3 +8,4 @@ export * from './types/MrlAssetRoute';
 export * from './types/ChainRoutes';
 export * from './types/MrlChainRoutes';
 export * from './xcm-configs';
+export * from './cross-ecosystem-configs';
