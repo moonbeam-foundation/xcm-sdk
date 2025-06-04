@@ -87,7 +87,13 @@ export class ChainAsset extends Asset {
     return this.ids?.minId ?? this.getAssetId();
   }
 
-  getAssetPalletInstance(): number | undefined {
+  getAssetPalletInstance(): number {
+    if (!this.ids?.palletInstance) {
+      throw new Error(
+        `Pallet instance is not defined for ${this.originSymbol}`,
+      );
+    }
+
     return this.ids?.palletInstance;
   }
 

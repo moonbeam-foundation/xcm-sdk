@@ -103,7 +103,7 @@ describe('BuildVersionedAsset', () => {
 
       expect(() => {
         BuildVersionedAsset().fromPalletInstance(assetWithoutPallet);
-      }).toThrow('No pallet instance configured');
+      }).toThrow('Pallet instance is not defined for MOCK');
     });
   });
 

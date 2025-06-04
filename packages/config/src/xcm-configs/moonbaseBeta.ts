@@ -33,7 +33,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: dev,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
     },
     {
       source: {
@@ -54,11 +54,11 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
-            .fromAssetIdQuery({ isAssetReserveChain: true }),
+            .fromPalletInstanceAndAccountKey20({ isAssetReserveChain: true }),
           asset: dev,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
     },
   ],
 });

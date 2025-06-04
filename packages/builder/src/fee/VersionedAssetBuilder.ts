@@ -50,8 +50,6 @@ export function BuildVersionedAsset() {
     }),
 
     fromPalletInstance: (asset: ChainAsset): object => {
-      validatePalletInstance(asset);
-
       return {
         interior: {
           X1: [
@@ -65,8 +63,6 @@ export function BuildVersionedAsset() {
     },
 
     fromPalletInstanceAndGeneralIndex: (asset: ChainAsset): object => {
-      validatePalletInstance(asset);
-
       return {
         interior: {
           X2: [
@@ -90,8 +86,6 @@ export function BuildVersionedAsset() {
 
         const sourceAsset = source.getChainAsset(asset);
 
-        validatePalletInstance(sourceAsset);
-
         return {
           interior: {
             X3: [
@@ -112,8 +106,6 @@ export function BuildVersionedAsset() {
         }
 
         const sourceAsset = source.getChainAsset(asset);
-
-        validatePalletInstance(sourceAsset);
 
         return {
           interior: {
@@ -139,8 +131,6 @@ export function BuildVersionedAsset() {
         }
 
         const sourceAsset = source.getChainAsset(asset);
-
-        validatePalletInstance(sourceAsset);
 
         return {
           interior: {
@@ -209,11 +199,3 @@ export function QueryVersionedAsset() {
     },
   };
 }
-
-const validatePalletInstance = (asset: ChainAsset) => {
-  if (!asset.getAssetPalletInstance()) {
-    throw new Error(
-      `No pallet instance configured for the asset ${asset.key} for XcmPaymentApi fee calculation`,
-    );
-  }
-};

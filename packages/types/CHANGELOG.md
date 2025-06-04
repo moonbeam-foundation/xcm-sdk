@@ -1,5 +1,20 @@
 # @moonbeam-network/xcm-types
 
+## 3.2.0
+
+### Minor Changes
+
+- [#493](https://github.com/moonbeam-foundation/xcm-sdk/pull/493) [`bf2a793`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bf2a7931a4a74bc9f1a4f3f1e0b5c0c04a577e08) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement Cross Ecosystem routes (Moonbase Stage <> Moonbase Beta)
+
+## 3.1.5
+
+### Patch Changes
+
+- [#496](https://github.com/moonbeam-foundation/xcm-sdk/pull/496) [`e04f939`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e04f9398d74a546f7c5ab9af0be1fb810f9f030c) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix vite vulnerability
+
+- Updated dependencies [[`e04f939`](https://github.com/moonbeam-foundation/xcm-sdk/commit/e04f9398d74a546f7c5ab9af0be1fb810f9f030c)]:
+  - @moonbeam-network/xcm-utils@3.1.4
+
 ## 3.1.4
 
 ### Patch Changes
