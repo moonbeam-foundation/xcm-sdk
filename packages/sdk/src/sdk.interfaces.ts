@@ -1,6 +1,6 @@
 import type { AnyChain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
-import type { IKeyringPair } from '@polkadot/types/types';
+import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
 import type { WalletClient } from 'viem';
 
 export type EvmSigner = WalletClient;
@@ -16,7 +16,11 @@ export interface TransferData {
   max: AssetAmount;
   min: AssetAmount;
   source: SourceChainTransferData;
-  transfer(amount: bigint | number | string, signers: Signers): Promise<string>;
+  transfer(
+    amount: bigint | number | string,
+    signers: Signers,
+    statusCallback?: (params: ISubmittableResult) => void,
+  ): Promise<string>;
 }
 
 export interface SourceChainTransferData extends ChainTransferData {
