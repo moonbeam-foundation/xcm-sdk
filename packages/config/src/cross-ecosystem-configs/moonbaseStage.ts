@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { devBeta, devStage } from '../assets';
 import { moonbaseBeta, moonbaseStage } from '../chains';
@@ -26,7 +27,9 @@ export const moonbaseStageRoutes = new ChainRoutes({
         chain: moonbaseBeta,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: 0.1, // TODO calculate
+          amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
+            isAssetReserveChain: false,
+          }),
           asset: devStage,
           balance: BalanceBuilder().evm().erc20(),
         },
@@ -51,7 +54,9 @@ export const moonbaseStageRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
           asset: devBeta,
-          amount: 0.1, // TODO calculate
+          amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+            isAssetReserveChain: true,
+          }),
           balance: BalanceBuilder().substrate().system().account(),
         },
       },

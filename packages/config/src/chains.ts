@@ -1046,6 +1046,9 @@ export const moonbaseBeta = new EvmParachain({
     ChainAsset.fromAsset(devStage, {
       address: '0xfFFFFFfF0000000000000000000000000000000A',
       decimals: 18,
+      ids: {
+        id: 10,
+      },
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
@@ -1082,6 +1085,9 @@ export const moonbaseStage = new EvmParachain({
     ChainAsset.fromAsset(devBeta, {
       address: '0xfFFFFFfF0000000000000000000000000000000A',
       decimals: 18,
+      ids: {
+        id: 10,
+      },
     }),
   ],
   ecosystem: Ecosystem.StagenetRelay,
