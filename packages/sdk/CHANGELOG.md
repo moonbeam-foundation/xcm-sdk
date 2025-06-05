@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-sdk
 
+## 3.2.1
+
+### Patch Changes
+
+- [#500](https://github.com/moonbeam-foundation/xcm-sdk/pull/500) [`8b0245b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8b0245b426cda5c3051e28e3de2e9f185ab78114) Thanks [@mmaurello](https://github.com/mmaurello)! - Include Status callback in XCM transfer function
+
 ## 3.2.0
 
 ### Minor Changes
