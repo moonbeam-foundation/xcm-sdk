@@ -36,14 +36,14 @@ importers:
         specifier: 13.5.1
         version: 13.5.1(@polkadot/util@13.5.1)
       '@wormhole-foundation/sdk-connect':
-        specifier: ^1.23.0
-        version: 1.23.0
+        specifier: ^2.0.0
+        version: 2.0.0
       '@wormhole-foundation/sdk-evm':
-        specifier: ^1.23.0
-        version: 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^2.0.0
+        version: 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       '@wormhole-foundation/sdk-evm-tokenbridge':
-        specifier: ^1.23.0
-        version: 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^2.0.0
+        version: 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -159,11 +159,11 @@ importers:
         specifier: 13.5.1
         version: 13.5.1(@polkadot/util@13.5.1)
       '@wormhole-foundation/sdk-connect':
-        specifier: ^1.23.0
-        version: 1.23.0
+        specifier: ^2.0.0
+        version: 2.0.0
       '@wormhole-foundation/sdk-evm':
-        specifier: ^1.23.0
-        version: 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^2.0.0
+        version: 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       big.js:
         specifier: ^6.2.1
         version: 6.2.2
@@ -225,11 +225,11 @@ importers:
         specifier: 13.5.1
         version: 13.5.1(@polkadot/util@13.5.1)
       '@wormhole-foundation/sdk-connect':
-        specifier: ^1.23.0
-        version: 1.23.0
+        specifier: ^2.0.0
+        version: 2.0.0
       '@wormhole-foundation/sdk-evm':
-        specifier: ^1.23.0
-        version: 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^2.0.0
+        version: 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       big.js:
         specifier: ^6.2.1
         version: 6.2.2
@@ -290,8 +290,8 @@ importers:
         specifier: ^6.2.2
         version: 6.2.2
       '@wormhole-foundation/sdk-connect':
-        specifier: ^1.23.0
-        version: 1.23.0
+        specifier: ^2.0.0
+        version: 2.0.0
 
   packages/utils:
     dependencies:
@@ -1710,26 +1710,26 @@ packages:
   '@vitest/utils@3.2.0':
     resolution: {integrity: sha512-gXXOe7Fj6toCsZKVQouTRLJftJwmvbhH5lKOBR6rlP950zUq9AitTUjnFoXS/CqjBC2aoejAztLPzzuva++XBw==}
 
-  '@wormhole-foundation/sdk-base@1.23.0':
-    resolution: {integrity: sha512-zegzUZC23uWVxjUExhNOwSEAkxCVxt7kgHWn1p66BgM29P7zgXVEoiYlGUQh0XEbsrqTZUHqy9K6zUKWMT85sg==}
+  '@wormhole-foundation/sdk-base@2.0.0':
+    resolution: {integrity: sha512-y78HVewNY7Mzo51GARSMVNtRMGmlC/CGZMAHIDM9pdRgGwnVC1dPBkjQeLAt2HXtlg6Ew8i4zUNJ/2uBDfmhKw==}
 
-  '@wormhole-foundation/sdk-connect@1.23.0':
-    resolution: {integrity: sha512-hNUjcufOAG0KaVH8uYELvG2IiONa9oon7WmsLcQUC9N+GJlfF/UDKKEsXOCk1Z1ql3IKupbTA694Ci/GRyg1QQ==}
+  '@wormhole-foundation/sdk-connect@2.0.0':
+    resolution: {integrity: sha512-VQfHyCbBGZNneEu/4wjlSqQWhjT+pWm0CkaRSWKVFs+1/nsmfvqS9qWebfb+awuEvrOMECLe4Upqq5vwdtVHQA==}
     engines: {node: '>=16'}
 
-  '@wormhole-foundation/sdk-definitions@1.23.0':
-    resolution: {integrity: sha512-BUIIlF/euGs7OtqNInLSId3CW7FzzeRNeriuQfpkWSzd14dzYPWQ110TGKPLQss/sn9XAWJ81gIqvwKcGuDUzA==}
+  '@wormhole-foundation/sdk-definitions@2.0.0':
+    resolution: {integrity: sha512-TNQWDlJZmsGncEXac7qwgO/SwxktyY9Na33AUdpDEHc+C0gzD762vopTrMaSAhHVo7EpfieQLicYTP5OdPUVVw==}
 
-  '@wormhole-foundation/sdk-evm-core@1.23.0':
-    resolution: {integrity: sha512-tXAGVMgn9x+7pg4kK2uFVg5xWI/xaTqjwKEWxjcyBjcfkSDh59WGaaqkpU8V4qbho4kIpqALJaomKE5NCi7bjw==}
+  '@wormhole-foundation/sdk-evm-core@2.0.0':
+    resolution: {integrity: sha512-nDKryrydmZeqpyxOZFVW3/t96bKz2jcUB++bRT5acX1Z4wpJblwlYeti8XREB6Sd6zZmXkms0oa12vCtul5EGw==}
     engines: {node: '>=16'}
 
-  '@wormhole-foundation/sdk-evm-tokenbridge@1.23.0':
-    resolution: {integrity: sha512-cDBA0ttITL77+Elvzwsrr4l8EhzcVVUR1kPLJDbq3cgye8xoKJlqaiCgVl6PR69bKrJE5QE9bfNrZt07px8IYQ==}
+  '@wormhole-foundation/sdk-evm-tokenbridge@2.0.0':
+    resolution: {integrity: sha512-IefByj5M8+bBmT5ilNe0sEd1s+ehFFq+fi5V1thQ0i9wfGid+U9zDDrKyg/C6vAylqODq1y43w1hygGj5urHRA==}
     engines: {node: '>=16'}
 
-  '@wormhole-foundation/sdk-evm@1.23.0':
-    resolution: {integrity: sha512-mr4AvSlCRcNEJnoaBgBrznwr/24em/i8Cyq3vphf4hJ2W7Xqsr/UbEC+L2epAe8WZB/3RKuH6yNMnmbNo1IteA==}
+  '@wormhole-foundation/sdk-evm@2.0.0':
+    resolution: {integrity: sha512-puc0g0nWqsXzayOFomF8OfzkpGwwJqPiXlPGU3xyx56o5l8h6eA75jLTpe1Z8cRzZjMQtGNEWYZ4AMlJTj2OvQ==}
     engines: {node: '>=16'}
 
   '@zeitgeistpm/type-defs@1.0.0':
@@ -5310,49 +5310,49 @@ snapshots:
       loupe: 3.1.3
       tinyrainbow: 2.0.0
 
-  '@wormhole-foundation/sdk-base@1.23.0':
+  '@wormhole-foundation/sdk-base@2.0.0':
     dependencies:
-      '@scure/base': 1.2.4
+      '@scure/base': 1.2.6
       binary-layout: 1.2.0
 
-  '@wormhole-foundation/sdk-connect@1.23.0':
+  '@wormhole-foundation/sdk-connect@2.0.0':
     dependencies:
-      '@wormhole-foundation/sdk-base': 1.23.0
-      '@wormhole-foundation/sdk-definitions': 1.23.0
+      '@wormhole-foundation/sdk-base': 2.0.0
+      '@wormhole-foundation/sdk-definitions': 2.0.0
       axios: 1.8.3
     transitivePeerDependencies:
       - debug
 
-  '@wormhole-foundation/sdk-definitions@1.23.0':
+  '@wormhole-foundation/sdk-definitions@2.0.0':
     dependencies:
-      '@noble/curves': 1.8.1
-      '@noble/hashes': 1.7.1
-      '@wormhole-foundation/sdk-base': 1.23.0
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@wormhole-foundation/sdk-base': 2.0.0
 
-  '@wormhole-foundation/sdk-evm-core@1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
+  '@wormhole-foundation/sdk-evm-core@2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
-      '@wormhole-foundation/sdk-connect': 1.23.0
-      '@wormhole-foundation/sdk-evm': 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      '@wormhole-foundation/sdk-connect': 2.0.0
+      '@wormhole-foundation/sdk-evm': 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       ethers: 6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - debug
       - utf-8-validate
 
-  '@wormhole-foundation/sdk-evm-tokenbridge@1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
+  '@wormhole-foundation/sdk-evm-tokenbridge@2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
-      '@wormhole-foundation/sdk-connect': 1.23.0
-      '@wormhole-foundation/sdk-evm': 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      '@wormhole-foundation/sdk-evm-core': 1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      '@wormhole-foundation/sdk-connect': 2.0.0
+      '@wormhole-foundation/sdk-evm': 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      '@wormhole-foundation/sdk-evm-core': 2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       ethers: 6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - debug
       - utf-8-validate
 
-  '@wormhole-foundation/sdk-evm@1.23.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
+  '@wormhole-foundation/sdk-evm@2.0.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
-      '@wormhole-foundation/sdk-connect': 1.23.0
+      '@wormhole-foundation/sdk-connect': 2.0.0
       ethers: 6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
