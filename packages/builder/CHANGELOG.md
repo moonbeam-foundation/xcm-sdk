@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-builder
 
+## 3.3.1
+
+### Patch Changes
+
+- [#503](https://github.com/moonbeam-foundation/xcm-sdk/pull/503) [`c3b7c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c3b7c3f794549cd00311ab67e866b745815fc3e6) Thanks [@mmaurello](https://github.com/mmaurello)! - Use dynamic xcm versioning in MRL extrinsics. Update Wormhole SDK
+
+- Updated dependencies [[`c3b7c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c3b7c3f794549cd00311ab67e866b745815fc3e6)]:
+  - @moonbeam-network/xcm-types@3.2.1
+
 ## 3.3.0
 
 ### Minor Changes
