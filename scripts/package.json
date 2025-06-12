@@ -6,9 +6,9 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
-    "@moonbeam-network/xcm-config": "3.3.2",
-    "@moonbeam-network/xcm-types": "3.2.2",
-    "@types/ws": "^8.5.12",
-    "ws": "^8.18.0"
+    "@moonbeam-network/xcm-config": "workspace:*",
+    "@moonbeam-network/xcm-types": "workspace:*",
+    "@types/ws": "^8.18.1",
+    "ws": "^8.18.2"
   }
 }

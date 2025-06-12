@@ -43,7 +43,7 @@
     "@moonbeam-network/xcm-config": "workspace:*",
     "@moonbeam-network/xcm-types": "workspace:*",
     "@moonbeam-network/xcm-utils": "workspace:*",
-    "big.js": "^6.2.1"
+    "big.js": "^7.0.1"
   },
   "peerDependencies": {
     "@polkadot/api": "16.2.1",
