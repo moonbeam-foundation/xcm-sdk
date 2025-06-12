@@ -13,7 +13,7 @@
   },
   "type": "module",
   "workspaces": ["packages/*", "examples/*", "scripts"],
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
@@ -55,7 +55,7 @@
     "@changesets/cli": "^2.29.4",
     "@slack/webhook": "^7.0.5",
     "@types/big.js": "^6.2.2",
-    "bun": "^1.2.15",
+    "bun": "^1.2.16",
     "cspell": "^9.0.2",
     "dotenv": "^16.5.0",
     "glob": "^11.0.2",
@@ -65,8 +65,8 @@
     "tsup": "^8.5.0",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3",
-    "viem": "^2.30.5",
-    "vitest": "^3.2.0"
+    "viem": "^2.31.0",
+    "vitest": "^3.2.3"
   },
   "overrides": {
     "cross-spawn": "^7.0.5"
@@ -79,7 +79,8 @@
       "@polkadot/types": "16.1.1",
       "@polkadot/util": "13.5.1",
       "@polkadot/util-crypto": "13.5.1",
-      "vite@ <=6.3.3": ">=6.3.4"
+      "vite@ <=6.3.3": ">=6.3.4",
+      "brace-expansion@ >=2.0.0 <=2.0.1": ">=2.0.2"
     }
   }
 }
