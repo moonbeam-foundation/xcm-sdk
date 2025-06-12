@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-types
 
+## 3.2.2
+
+### Patch Changes
+
+- [#505](https://github.com/moonbeam-foundation/xcm-sdk/pull/505) [`de1fa0f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/de1fa0f1015854a04de892667b0026da9101ab7a) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies and fix brace-expansion vulnerability
+
 ## 3.2.1
 
 ### Patch Changes
