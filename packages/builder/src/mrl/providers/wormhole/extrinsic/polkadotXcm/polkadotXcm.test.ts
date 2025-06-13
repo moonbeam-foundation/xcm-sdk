@@ -17,6 +17,8 @@ vi.mock(
     return {
       getExtrinsicArgumentVersion: vi.fn(() => XcmVersion.v4),
       getExtrinsicAccount: mod.getExtrinsicAccount,
+      normalizeX1: mod.normalizeX1,
+      normalizeConcrete: mod.normalizeConcrete,
     };
   },
 );

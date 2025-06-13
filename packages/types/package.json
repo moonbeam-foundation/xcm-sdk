@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-types",
-  "version": "3.2.0",
+  "version": "3.2.3",
   "description": "Moonbeam XCM Types",
   "scripts": {
     "build": "tsup",
@@ -33,13 +33,13 @@
   "main": "./build/index.mjs",
   "dependencies": {
     "@moonbeam-network/xcm-utils": "workspace:*",
-    "big.js": "^6.2.1"
+    "big.js": "^7.0.1"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2",
-    "@wormhole-foundation/sdk-connect": "^1.23.0"
+    "@wormhole-foundation/sdk-connect": "^2.0.0"
   },
   "peerDependencies": {
-    "viem": "^2.30.5"
+    "viem": "^2.31.0"
   }
 }

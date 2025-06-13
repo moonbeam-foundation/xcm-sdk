@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/mrl",
-  "version": "3.1.11",
+  "version": "3.1.14",
   "description": "Moonbeam Routed Liquidity",
   "scripts": {
     "build": "tsup",
@@ -38,16 +38,16 @@
     "@moonbeam-network/xcm-sdk": "workspace:*",
     "@moonbeam-network/xcm-types": "workspace:*",
     "@moonbeam-network/xcm-utils": "workspace:*",
-    "big.js": "^6.2.1"
+    "big.js": "^7.0.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "16.1.1",
-    "@polkadot/api-augment": "16.1.1",
-    "@polkadot/types": "16.1.1",
+    "@polkadot/api": "16.2.1",
+    "@polkadot/api-augment": "16.2.1",
+    "@polkadot/types": "16.2.1",
     "@polkadot/util": "13.5.1",
     "@polkadot/util-crypto": "13.5.1",
-    "@wormhole-foundation/sdk-connect": "^1.23.0",
-    "@wormhole-foundation/sdk-evm": "^1.23.0",
-    "viem": "^2.30.5"
+    "@wormhole-foundation/sdk-connect": "^2.0.0",
+    "@wormhole-foundation/sdk-evm": "^2.0.0",
+    "viem": "^2.31.0"
   }
 }

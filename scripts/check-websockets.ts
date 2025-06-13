@@ -12,12 +12,26 @@ interface ChainEndpoint {
   ws: string;
 }
 
+const processIgnoredChains = (args: string[]) => {
+  const ignoreChainsArg = args.find((arg) =>
+    arg.startsWith('--ignore-chains='),
+  );
+  return ignoreChainsArg
+    ? ignoreChainsArg
+        .split('=')[1]
+        .split(',')
+        .map((chain) => chain.trim())
+    : [];
+};
+
 function processArgs() {
   const args = process.argv;
   const includeTestChains = args.some((arg) => arg === '--include-test-chains');
   const slackWebhookArg = args.find((arg) => arg.startsWith('--slack-wh='));
   const webhookUrl = slackWebhookArg ? slackWebhookArg.split('=')[1] : '';
-  return { includeTestChains, webhookUrl };
+  const ignoredChains = processIgnoredChains(args);
+
+  return { includeTestChains, webhookUrl, ignoredChains };
 }
 
 function checkIsWebSocketAlive({
@@ -84,16 +98,24 @@ async function checkWebSocketEndpoints(endpoints: ChainEndpoint[]): Promise<{
   return { failingEndpoints, successfulEndpoints };
 }
 
-function filterChainList(includeTestChains: boolean): AnyParachain[] {
+function filterChainList(
+  includeTestChains: boolean,
+  ignoredChains: string[],
+): AnyParachain[] {
   return (
     includeTestChains
       ? chainsList
       : chainsList.filter((chain) => !chain.isTestChain)
-  ).filter((chain) => Parachain.is(chain) || EvmParachain.is(chain));
+  )
+    .filter((chain) => Parachain.is(chain) || EvmParachain.is(chain))
+    .filter((chain) => !ignoredChains.includes(chain.key));
 }
 
-function getChainsAndEndpoints(includeTestChains: boolean) {
-  const filteredChainList = filterChainList(includeTestChains);
+function getChainsAndEndpoints(
+  includeTestChains: boolean,
+  ignoredChains: string[],
+) {
+  const filteredChainList = filterChainList(includeTestChains, ignoredChains);
 
   const websocketEndpoints = filteredChainList.flatMap(({ key, ws }) =>
     ws.map((endpoint) => ({
@@ -138,10 +160,18 @@ async function sendNotification(
 }
 
 async function main() {
-  console.log('Starting main function...');
-  const { includeTestChains, webhookUrl } = processArgs();
+  console.log('Script starting...');
+  const { includeTestChains, webhookUrl, ignoredChains } = processArgs();
 
-  const websocketEndpoints = getChainsAndEndpoints(includeTestChains);
+  if (ignoredChains.length) {
+    console.log('Ignored chains:', ignoredChains.join(', '));
+  }
+
+  const websocketEndpoints = getChainsAndEndpoints(
+    includeTestChains,
+    ignoredChains,
+  );
+  console.log('Total endpoints to check:', websocketEndpoints.length);
 
   if (includeTestChains) {
     console.log(
@@ -149,10 +179,8 @@ async function main() {
     );
   }
 
-  console.log('About to check WebSocket endpoints...');
   const { successfulEndpoints, failingEndpoints } =
     await checkWebSocketEndpoints(websocketEndpoints);
-  console.log('Finished checking WebSocket endpoints.');
 
   console.log('\nSummary:');
   console.log(`Working endpoints: ${successfulEndpoints.length}`);
@@ -160,7 +188,7 @@ async function main() {
 
   if (failingEndpoints.length > 0) {
     const failingEndpointsByChainCount = countChainKeys(failingEndpoints);
-    const filteredChainList = filterChainList(includeTestChains);
+    const filteredChainList = filterChainList(includeTestChains, ignoredChains);
 
     const chainsToReview: string[] = [];
     filteredChainList.forEach(async (chain) => {
