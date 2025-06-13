@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 3.3.4
+
+### Patch Changes
+
+- [#509](https://github.com/moonbeam-foundation/xcm-sdk/pull/509) [`72784b7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/72784b7a8e993e7893d27a2fa2ef47f9d89eaf3d) Thanks [@mmaurello](https://github.com/mmaurello)! - Change RMRK configuration to use KSM as fee asset
+
 ## 3.3.3
 
 ### Patch Changes
