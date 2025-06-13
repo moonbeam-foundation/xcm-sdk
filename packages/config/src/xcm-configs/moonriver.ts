@@ -394,7 +394,6 @@ export const moonriverRoutes = new ChainRoutes({
         chain: kusamaAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          // RMRK is not supported by XCM Payment API in Kusama yet
           amount: FeeBuilder().xcmPaymentApi().fromHereAndGeneralIndex({
             isAssetReserveChain: true,
             shouldTransferAssetPrecedeFeeAsset: true,
