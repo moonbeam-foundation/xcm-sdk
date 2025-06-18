@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
-
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
+import { describe, expect, it } from 'vitest';
 import {
   wormholeConfigBuilderParams,
   wormholeToMoonchainConfigBuilderParams,

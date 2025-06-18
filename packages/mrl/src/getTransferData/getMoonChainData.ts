@@ -1,4 +1,4 @@
-import { type MrlAssetRoute, getMoonChain } from '@moonbeam-network/xcm-config';
+import { getMoonChain, type MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import {
   type AnyChain,
