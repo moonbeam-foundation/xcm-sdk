@@ -235,4 +235,80 @@ describe('config service', () => {
       );
     });
   });
+
+  describe('updateEndpoints', () => {
+    it('should update both RPC and WS endpoints for EVM chains', () => {
+      const configService = new ConfigService({ routes: xcmRoutesMap });
+      const newEndpoints = {
+        [moonbaseAlpha.key]: {
+          rpc: 'https://new-rpc.test',
+          ws: ['wss://new-ws.test'],
+        },
+      };
+      const beforeChain = configService.getChain(
+        moonbaseAlpha.key,
+      ) as EvmParachain;
+
+      configService.updateEndpoints(newEndpoints);
+
+      const afterChain = configService.getChain(
+        moonbaseAlpha.key,
+      ) as EvmParachain;
+
+      expect(afterChain).toBe(beforeChain); // Should be the same object reference
+      expect(afterChain.ws).toStrictEqual(['wss://new-ws.test']);
+      expect(afterChain.rpc).toBe('https://new-rpc.test');
+    });
+
+    it('should update only WS endpoints for non-EVM chains', () => {
+      const configService = new ConfigService({ routes: xcmRoutesMap });
+      const newEndpoints = {
+        [alphanetRelay.key]: {
+          rpc: 'https://new-rpc.test',
+          ws: ['wss://new-ws.test'],
+        },
+      };
+
+      configService.updateEndpoints(newEndpoints);
+      const chain = configService.getChain(alphanetRelay.key) as Parachain;
+
+      expect(chain.ws).toStrictEqual(['wss://new-ws.test']);
+    });
+
+    it('should handle non-existent chains gracefully', () => {
+      const configService = new ConfigService({ routes: xcmRoutesMap });
+      const newEndpoints = {
+        nonExistentChain: {
+          rpc: 'https://new-rpc.test',
+          ws: ['wss://new-ws.test'],
+        },
+      };
+
+      // Should not throw an error
+      expect(() => configService.updateEndpoints(newEndpoints)).not.toThrow();
+    });
+
+    it('should handle empty endpoint values', () => {
+      const configService = new ConfigService({ routes: xcmRoutesMap });
+      const originalChain = configService.getChain(
+        moonbaseAlpha.key,
+      ) as EvmParachain;
+
+      const originalRpc = originalChain.rpc;
+      const originalWs = originalChain.ws;
+
+      const newEndpoints = {
+        [moonbaseAlpha.key]: {
+          rpc: '',
+          ws: [''],
+        },
+      };
+
+      configService.updateEndpoints(newEndpoints);
+      const chain = configService.getChain(moonbaseAlpha.key) as EvmParachain;
+
+      expect(chain.rpc).toBe(originalRpc);
+      expect(chain.ws).toStrictEqual(originalWs);
+    });
+  });
 });
