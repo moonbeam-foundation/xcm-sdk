@@ -1,5 +1,20 @@
 # @moonbeam-network/xcm-config
 
+## 3.4.0
+
+### Minor Changes
+
+- [#511](https://github.com/moonbeam-foundation/xcm-sdk/pull/511) [`574e54c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/574e54c1f246eaa96ca37947e3ace6230b1f2ede) Thanks [@Rihyx](https://github.com/Rihyx)! - Add possibility to overwrite rpc and ws endpoints
+
+### Patch Changes
+
+- [#512](https://github.com/moonbeam-foundation/xcm-sdk/pull/512) [`b515e8c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b515e8c979eb6ed18ff2fcbb164080a2b6ebd472) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
+
+- Updated dependencies [[`b515e8c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b515e8c979eb6ed18ff2fcbb164080a2b6ebd472)]:
+  - @moonbeam-network/xcm-builder@3.3.4
+  - @moonbeam-network/xcm-types@3.2.4
+  - @moonbeam-network/xcm-utils@3.1.6
+
 ## 3.3.4
 
 ### Patch Changes
