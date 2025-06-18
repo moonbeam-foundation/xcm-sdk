@@ -15,7 +15,7 @@
   "files": {
     "includes": ["**/*"],
     "experimentalScannerIgnores": [
-      ".turbo/**/*",
+      ".turbo",
       ".vscode/extensions.json",
       "build",
       "dist",
@@ -49,6 +49,15 @@
     },
     {
       "includes": ["**/build/**/*"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": [".turbo/**/*"],
       "linter": {
         "enabled": false
       },
