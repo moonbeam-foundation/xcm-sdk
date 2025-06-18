@@ -16,6 +16,12 @@ export interface ConfigServiceOptions {
   assets?: Map<string, Asset>;
   chains?: Map<string, AnyChain>;
   routes: Map<string, ChainRoutes | MrlChainRoutes>;
+  endpoints?: {
+    [key: string]: {
+      rpc: string;
+      ws: string;
+    };
+  };
 }
 
 export class ConfigService {
@@ -29,6 +35,12 @@ export class ConfigService {
     this.assets = options.assets ?? assetsMap;
     this.chains = options.chains ?? chainsMap;
     this.routes = options.routes;
+    if (options.endpoints) {
+      this.chains = ConfigService.updateEndpoints(
+        this.chains,
+        options.endpoints,
+      );
+    }
   }
 
   getAsset(keyOrAsset: string | Asset): Asset {
@@ -156,5 +168,36 @@ export class ConfigService {
 
   updateChainRoute(route: ChainRoutes): void {
     this.routes.set(route.chain.key, route);
+  }
+
+  static updateEndpoints(
+    chains: Map<string, AnyChain>,
+    endpoints: {
+      [key: string]: {
+        rpc: string;
+        ws: string;
+      };
+    },
+  ): Map<string, AnyChain> {
+    const updatedChains = new Map(chains);
+
+    for (const [chainKey, endpoint] of Object.entries(endpoints)) {
+      const chain = updatedChains.get(chainKey);
+      if (!chain) continue;
+
+      const updatedChain = { ...chain };
+
+      if ('ws' in updatedChain) {
+        updatedChain.ws = [endpoint.ws];
+      }
+
+      if ('rpc' in updatedChain) {
+        updatedChain.rpc = endpoint.rpc;
+      }
+
+      updatedChains.set(chainKey, updatedChain as AnyChain);
+    }
+
+    return updatedChains;
   }
 }
