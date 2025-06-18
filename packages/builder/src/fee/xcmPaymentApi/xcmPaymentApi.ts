@@ -10,8 +10,7 @@ import {
   BuildVersionedAsset,
   QueryVersionedAsset,
 } from '../VersionedAssetBuilder';
-import { getInstructions } from './xcmPaymentApi.utils';
-import { getVersionedAssets } from './xcmPaymentApi.utils';
+import { getInstructions, getVersionedAssets } from './xcmPaymentApi.utils';
 
 export function xcmPaymentApi() {
   const localMethods = {

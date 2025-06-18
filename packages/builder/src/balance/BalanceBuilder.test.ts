@@ -1,10 +1,9 @@
-import { describe, expect, it } from 'vitest';
-
 import { TypeRegistry, U128 } from '@polkadot/types';
 import type {
   FrameSystemAccountInfo,
   PalletBalancesAccountData,
 } from '@polkadot/types/lookup';
+import { describe, expect, it } from 'vitest';
 import { testChainAsset } from '../../fixtures';
 import type { SubstrateQueryConfig } from '../types/substrate/SubstrateQueryConfig';
 import {

@@ -1,10 +1,9 @@
-import { describe, expect, it } from 'vitest';
-
 import {
   fantomTestnet,
   moonbaseAlpha,
   peaqAlphanet,
 } from '@moonbeam-network/xcm-config';
+import { describe, expect, it } from 'vitest';
 import { getMoonChainAddress } from './getMoonChainData';
 
 describe('mrl - getMoonChainData', () => {

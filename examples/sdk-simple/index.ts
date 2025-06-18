@@ -2,7 +2,7 @@ import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
 import { Sdk, type TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { http, type Address, createWalletClient } from 'viem';
+import { type Address, createWalletClient, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
 const { EVM_PRIVATE_KEY, POLKADOT_PRIVATE_KEY } = process.env;

@@ -5,15 +5,14 @@ import {
   type Parachain,
 } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
-import { _0n } from '@polkadot/util';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, maxUint64 } from 'viem';
 import { getPrecompileDestinationInterior } from '../../../../../builder.utils';
 import { ContractConfig } from '../../../../../contract';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import {
-  CROSS_CHAIN_FEE,
   buildSendExtrinsic,
+  CROSS_CHAIN_FEE,
 } from '../../extrinsic/polkadotXcm/polkadotXcm';
 import { getAbisForChain } from './abi/abi.helpers';
 

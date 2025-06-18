@@ -1,5 +1,4 @@
-import type { AnyChain } from '@moonbeam-network/xcm-types';
-import type { ChainAsset } from '@moonbeam-network/xcm-types';
+import type { AnyChain, ChainAsset } from '@moonbeam-network/xcm-types';
 import { Parachain } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { Option } from '@polkadot/types';

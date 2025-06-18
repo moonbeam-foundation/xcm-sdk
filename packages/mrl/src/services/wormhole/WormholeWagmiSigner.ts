@@ -8,11 +8,11 @@ import type {
   UnsignedTransaction,
 } from '@wormhole-foundation/sdk-connect';
 import {
-  http,
   type Address,
-  type HttpTransport,
-  type PublicClient,
   createPublicClient,
+  type HttpTransport,
+  http,
+  type PublicClient,
 } from 'viem';
 
 export class WormholeWagmiSigner<

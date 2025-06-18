@@ -9,8 +9,8 @@ import type {
   Ecosystem,
 } from '@moonbeam-network/xcm-types';
 import {
-  type WormholeExecuteTransferParams,
   getExecuteTransferData,
+  type WormholeExecuteTransferParams,
 } from './getTransferData/getExecuteTransferData';
 import { getTransferData } from './getTransferData/getTransferData';
 

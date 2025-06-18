@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import {
   centrifuge,
   hydration,
@@ -14,6 +12,7 @@ import {
   peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from 'vitest';
 import { getParachainBalances } from '../../src';
 import {
   hydrationAddress,

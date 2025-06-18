@@ -1,16 +1,10 @@
-import type { ApiPromise } from '@polkadot/api';
 import { describe, expect, it } from 'vitest';
 import {
   feeBuilderParamsMock,
   feeBuilderParamsMockDifferentAsset,
 } from '../../../fixtures';
-import { getInstructions, getVersionedAssets } from './xcmPaymentApi.utils';
 import type { GetVersionedAssetsProps } from './xcmPaymentApi.utils';
-const mockApi = {
-  isReady: Promise.resolve(true),
-  isReadyOrError: Promise.resolve(true),
-  clone: () => mockApi,
-} as unknown as ApiPromise;
+import { getInstructions, getVersionedAssets } from './xcmPaymentApi.utils';
 
 describe('xcmPaymentApi.utils', () => {
   describe('getVersionedAssets', () => {

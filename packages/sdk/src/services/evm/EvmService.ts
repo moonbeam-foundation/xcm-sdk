@@ -4,12 +4,12 @@ import type {
 } from '@moonbeam-network/xcm-builder';
 import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import {
-  http,
   type Address,
+  createPublicClient,
   type Hash,
   type HttpTransport,
+  http,
   type PublicClient,
-  createPublicClient,
 } from 'viem';
 import type { EvmSigner } from '../../sdk.interfaces';
 

@@ -1,14 +1,12 @@
 import type { FeeConfigBuilderParams } from '../FeeBuilder.interfaces';
 import {
-  getDepositAssetInstruction,
-  getSetTopicInstruction,
-} from '../FeeBuilder.utils';
-import { getBuyExecutionInstruction } from '../FeeBuilder.utils';
-import {
+  getBuyExecutionInstruction,
   getClearOriginInstruction,
+  getDepositAssetInstruction,
   getReserveAssetDepositedInstruction,
+  getSetTopicInstruction,
+  getWithdrawAssetInstruction,
 } from '../FeeBuilder.utils';
-import { getWithdrawAssetInstruction } from '../FeeBuilder.utils';
 import type { CreateXcmFeeBuilderProps } from './xcmPaymentApi';
 
 export interface GetVersionedAssetsProps extends CreateXcmFeeBuilderProps {

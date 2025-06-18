@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
@@ -11,6 +9,7 @@ import {
   EvmParachain,
   Parachain,
 } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from 'vitest';
 import { alan, assetsList, dev, dot, glmr, hdx, tt1, unit } from '../assets';
 import {
   alphanetRelay,
@@ -22,10 +21,9 @@ import {
   pendulumAlphanet,
   shiden,
 } from '../chains';
-import { ConfigService } from './ConfigService';
-
 import { ChainRoutes } from '../types/ChainRoutes';
 import { xcmRoutesMap } from '../xcm-configs';
+import { ConfigService } from './ConfigService';
 
 const TEST_CHAIN = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],

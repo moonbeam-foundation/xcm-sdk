@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import {
   alphanetRelay,
   laos,
@@ -9,6 +7,7 @@ import {
   unit,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
+import { describe, expect, it } from 'vitest';
 import { Sdk, type TransferData } from '../../src';
 import {
   laosMainnetAddress,

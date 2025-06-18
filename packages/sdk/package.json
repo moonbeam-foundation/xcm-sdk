@@ -29,7 +29,9 @@
     "url": "https://github.com/moonbeam-foundation/xcm-sdk/issues"
   },
   "homepage": "https://moonbeam-foundation.github.io/xcm-sdk/latest",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "type": "module",
   "exports": {
     "import": "./build/index.mjs",
@@ -46,11 +48,11 @@
     "big.js": "^7.0.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "16.2.1",
-    "@polkadot/api-augment": "16.2.1",
-    "@polkadot/types": "16.2.1",
-    "@polkadot/util": "13.5.1",
-    "viem": "^2.31.0"
+    "@polkadot/api": "16.2.2",
+    "@polkadot/api-augment": "16.2.2",
+    "@polkadot/types": "16.2.2",
+    "@polkadot/util": "13.5.2",
+    "viem": "^2.31.3"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2"
