@@ -2,7 +2,10 @@ import { EvmChain, EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto/address';
 import { Wormhole } from '@wormhole-foundation/sdk-connect';
-import { getExtrinsicAccount } from '../../../../extrinsic/ExtrinsicBuilder.utils';
+import {
+  getExtrinsicAccount,
+  getExtrinsicArgumentVersion,
+} from '../../../../extrinsic/ExtrinsicBuilder.utils';
 import type {
   MrlBuilderParams,
   MrlConfigBuilder,
@@ -101,12 +104,12 @@ export function getPayload({
     );
   }
 
-  // TODO: This is workaround for Peaq EVM. Can we improve it so we don't need to have hardcoded values?
-  const isPeaqEvm =
-    destination.key === 'peaq-evm-Alphanet' || destination.key === 'peaq-evm';
+  const isEvmDestination = EvmParachain.is(destination);
+
+  const version = getExtrinsicArgumentVersion(moonApi.tx.polkadotXcm.send);
 
   const multilocation = moonApi.createType('XcmVersionedLocation', {
-    V3: {
+    [version]: {
       parents: 1,
       interior: {
         X2: [
@@ -114,7 +117,9 @@ export function getPayload({
             Parachain: destination.parachainId,
           },
           getExtrinsicAccount(
-            isPeaqEvm ? evmToAddress(destinationAddress) : destinationAddress,
+            isEvmDestination
+              ? evmToAddress(destinationAddress)
+              : destinationAddress,
           ),
         ],
       },

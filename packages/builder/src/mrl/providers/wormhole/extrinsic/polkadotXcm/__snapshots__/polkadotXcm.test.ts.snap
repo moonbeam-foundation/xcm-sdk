@@ -20,17 +20,19 @@ exports[`polkadotXcm > send with transferMulticurrencies > should get correct ar
 exports[`polkadotXcm > send with transferMulticurrencies > should get correct arguments 2`] = `
 [
   {
-    "V3": {
+    "V4": {
       "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
+        "X1": [
+          {
+            "Parachain": 1000,
+          },
+        ],
       },
       "parents": 1,
     },
   },
   {
-    "V3": [
+    "V4": [
       {
         "WithdrawAsset": [
           {
@@ -38,14 +40,14 @@ exports[`polkadotXcm > send with transferMulticurrencies > should get correct ar
               "Fungible": 100000000000000000n,
             },
             "id": {
-              "Concrete": {
-                "interior": {
-                  "X1": {
+              "interior": {
+                "X1": [
+                  {
                     "PalletInstance": 10,
                   },
-                },
-                "parents": 0,
+                ],
               },
+              "parents": 0,
             },
           },
         ],
@@ -57,14 +59,14 @@ exports[`polkadotXcm > send with transferMulticurrencies > should get correct ar
               "Fungible": 100000000000000000n,
             },
             "id": {
-              "Concrete": {
-                "interior": {
-                  "X1": {
+              "interior": {
+                "X1": [
+                  {
                     "PalletInstance": 10,
                   },
-                },
-                "parents": 0,
+                ],
               },
+              "parents": 0,
             },
           },
           "weightLimit": "Unlimited",
@@ -96,11 +98,13 @@ exports[`polkadotXcm > send with transferMulticurrencies > should get correct ar
               },
               "beneficiary": {
                 "interior": {
-                  "X1": {
-                    "AccountKey20": {
-                      "key": "0xcd93e4dcf4e6bb23f1c58109113266e9b79cd844",
+                  "X1": [
+                    {
+                      "AccountKey20": {
+                        "key": "0xcd93e4dcf4e6bb23f1c58109113266e9b79cd844",
+                      },
                     },
-                  },
+                  ],
                 },
                 "parents": 0,
               },
@@ -134,17 +138,19 @@ exports[`polkadotXcm > send with transfers > should get correct arguments 1`] = 
 exports[`polkadotXcm > send with transfers > should get correct arguments 2`] = `
 [
   {
-    "V3": {
+    "V4": {
       "interior": {
-        "X1": {
-          "Parachain": 1000,
-        },
+        "X1": [
+          {
+            "Parachain": 1000,
+          },
+        ],
       },
       "parents": 1,
     },
   },
   {
-    "V3": [
+    "V4": [
       {
         "WithdrawAsset": [
           {
@@ -152,14 +158,14 @@ exports[`polkadotXcm > send with transfers > should get correct arguments 2`] = 
               "Fungible": 100000000000000000n,
             },
             "id": {
-              "Concrete": {
-                "interior": {
-                  "X1": {
+              "interior": {
+                "X1": [
+                  {
                     "PalletInstance": 10,
                   },
-                },
-                "parents": 0,
+                ],
               },
+              "parents": 0,
             },
           },
         ],
@@ -171,14 +177,14 @@ exports[`polkadotXcm > send with transfers > should get correct arguments 2`] = 
               "Fungible": 100000000000000000n,
             },
             "id": {
-              "Concrete": {
-                "interior": {
-                  "X1": {
+              "interior": {
+                "X1": [
+                  {
                     "PalletInstance": 10,
                   },
-                },
-                "parents": 0,
+                ],
               },
+              "parents": 0,
             },
           },
           "weightLimit": "Unlimited",
@@ -210,11 +216,13 @@ exports[`polkadotXcm > send with transfers > should get correct arguments 2`] = 
               },
               "beneficiary": {
                 "interior": {
-                  "X1": {
-                    "AccountKey20": {
-                      "key": "0xcd93e4dcf4e6bb23f1c58109113266e9b79cd844",
+                  "X1": [
+                    {
+                      "AccountKey20": {
+                        "key": "0xcd93e4dcf4e6bb23f1c58109113266e9b79cd844",
+                      },
                     },
-                  },
+                  ],
                 },
                 "parents": 0,
               },

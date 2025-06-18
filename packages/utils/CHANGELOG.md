@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.1.5
+
+### Patch Changes
+
+- [#507](https://github.com/moonbeam-foundation/xcm-sdk/pull/507) [`8e5b2b5`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8e5b2b54993a2f272ae1c2cd5fe95dcd35d77523) Thanks [@Rihyx](https://github.com/Rihyx)! - Update polkadot packages and other dependencies
+
 ## 3.1.4
 
 ### Patch Changes

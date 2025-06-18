@@ -8,6 +8,11 @@ import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { ISubmittableResult } from '@polkadot/types/types';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
+import {
+  getExtrinsicArgumentVersion,
+  normalizeConcrete,
+  normalizeX1,
+} from '../../../../../extrinsic/ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
 import type {
   MrlBuilderParams,
@@ -117,29 +122,33 @@ export function buildSendExtrinsic({
     throw new Error('Transact params are required');
   }
 
+  const version = getExtrinsicArgumentVersion(sourceApi.tx.polkadotXcm.send);
+
   return sourceApi.tx.polkadotXcm.send(
     {
-      // TODO apply XCM versioning
-      V3: {
+      [version]: normalizeX1(version, {
         parents: 1,
-        interior: { X1: { Parachain: moonChain.parachainId } },
-      },
+        interior: {
+          X1: { Parachain: moonChain.parachainId },
+        },
+      }),
     },
     {
-      V3: [
+      [version]: [
         {
           WithdrawAsset: [
             {
-              id: {
-                Concrete: {
+              id: normalizeConcrete(
+                version,
+                normalizeX1(version, {
                   parents: 0,
                   interior: {
                     X1: {
                       PalletInstance: moonAsset.getAssetPalletInstance(),
                     },
                   },
-                },
-              },
+                }),
+              ),
               fun: { Fungible: BUY_EXECUTION_FEE },
             },
           ],
@@ -147,16 +156,17 @@ export function buildSendExtrinsic({
         {
           BuyExecution: {
             fees: {
-              id: {
-                Concrete: {
+              id: normalizeConcrete(
+                version,
+                normalizeX1(version, {
                   parents: 0,
                   interior: {
                     X1: {
                       PalletInstance: moonAsset.getAssetPalletInstance(),
                     },
                   },
-                },
-              },
+                }),
+              ),
               fun: { Fungible: BUY_EXECUTION_FEE },
             },
             weightLimit: 'Unlimited',
@@ -180,12 +190,14 @@ export function buildSendExtrinsic({
             {
               DepositAsset: {
                 assets: { Wild: { AllCounted: 1 } },
-                beneficiary: {
+                beneficiary: normalizeX1(version, {
                   parents: 0,
                   interior: {
-                    X1: { AccountKey20: { key: computedOriginAccount } },
+                    X1: {
+                      AccountKey20: { key: computedOriginAccount },
+                    },
                   },
-                },
+                }),
               },
             },
           ],
