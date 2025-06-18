@@ -21,13 +21,13 @@ type Contracts = {
 export class EvmParachain extends Parachain {
   readonly id: number;
 
-  rpc: string;
+  readonly rpc: string;
 
   readonly isEvmSigner: boolean;
 
   readonly contracts?: Contracts;
 
-  ws: string[];
+  readonly ws: string[];
 
   static is(obj: unknown): obj is EvmParachain {
     return obj instanceof EvmParachain;

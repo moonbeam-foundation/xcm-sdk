@@ -29,7 +29,7 @@ export class Parachain extends Chain {
 
   readonly weight: number | undefined;
 
-  ws: string[];
+  readonly ws: string[];
 
   static is(obj: unknown): obj is Parachain {
     return obj instanceof Parachain;
