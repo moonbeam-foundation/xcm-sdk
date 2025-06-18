@@ -144,6 +144,32 @@ If you want to pass in a browser extension wallet to viem, you can use the follo
 !!! note
 --8<-- 'text/endpoint-setup.md'
 
+### Create a Polkadot Signer {: #create-a-polkadot-signer }
+
+In this example, you can use a [Polkadot.js Keyring](https://polkadot.js.org/docs/api/start/keyring/){target=\_blank} to sign transactions. Please note that this approach is not recommended for production applications. 
+
+```js
+import { polkadot } from '@moonbeam-network/xcm-config';
+import { Keyring } from '@polkadot/api';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
+
+const privateKey = 'INSERT_PRIVATE_KEY';
+
+const createPolkadotSigner = async () => {
+  await cryptoWaitReady();
+  const keyring = new Keyring({
+    ss58Format: polkadot.ss58Format,
+    type: 'sr25519',
+  });
+  const pair = keyring.createFromUri(privateKey);
+};
+
+createPolkadotSigner();
+```
+
+!!! note
+In the above `INSERT_PRIVATE_KEY` field, you can specify a seed phrase instead of a private key.
+
 ### Customize Chain Endpoints {: #customize-chain-endpoints }
 
 You can customize the RPC and WebSocket endpoints for any chain by using the `ConfigService`. This is particularly useful when you want to use your own endpoints or override the default ones. Here's how you can do it:
@@ -194,32 +220,6 @@ configService.updateEndpoints(newEndpoints);
 
 !!! note
     Make sure to use reliable and performant endpoints, especially in production environments. Consider using dedicated endpoint providers or running your own infrastructure.
-
-### Create a Polkadot Signer {: #create-a-polkadot-signer }
-
-In this example, you can use a [Polkadot.js Keyring](https://polkadot.js.org/docs/api/start/keyring/){target=\_blank} to sign transactions. Please note that this approach is not recommended for production applications. 
-
-```js
-import { polkadot } from '@moonbeam-network/xcm-config';
-import { Keyring } from '@polkadot/api';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-
-const privateKey = 'INSERT_PRIVATE_KEY';
-
-const createPolkadotSigner = async () => {
-  await cryptoWaitReady();
-  const keyring = new Keyring({
-    ss58Format: polkadot.ss58Format,
-    type: 'sr25519',
-  });
-  const pair = keyring.createFromUri(privateKey);
-};
-
-createPolkadotSigner();
-```
-
-!!! note
-In the above `INSERT_PRIVATE_KEY` field, you can specify a seed phrase instead of a private key.
 
 ## Get Asset and Chain Data {: #asset-chain-data }
 
