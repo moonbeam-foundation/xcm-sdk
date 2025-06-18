@@ -59,4 +59,11 @@ export class Parachain extends Chain {
     this.weight = weight;
     this.ws = ws;
   }
+
+  copyWith(params: Partial<ParachainConstructorParams>): Parachain {
+    return new Parachain({
+      ...this,
+      ...params,
+    });
+  }
 }

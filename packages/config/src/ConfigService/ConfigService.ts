@@ -12,12 +12,28 @@ import type { ChainRoutes } from '../types/ChainRoutes';
 import type { MrlAssetRoute } from '../types/MrlAssetRoute';
 import type { MrlChainRoutes } from '../types/MrlChainRoutes';
 
+/**
+ * Configuration options for initializing the ConfigService.
+ * This interface defines the structure for configuring assets, chains, routes, and endpoints.
+ */
 export interface ConfigServiceOptions {
+  /**
+   * Optional map of assets where the key is the asset identifier and the value is the Asset object.
+   * If not provided, defaults to the predefined assetsMap.
+   */
   assets?: Map<string, Asset>;
+
+  /**
+   * Optional map of chains where the key is the chain identifier and the value is the Chain object.
+   * If not provided, defaults to the predefined chainsMap.
+   */
   chains?: Map<string, AnyChain>;
+
+  /**
+   * Routes configuration.
+   */
   routes: Map<string, ChainRoutes | MrlChainRoutes>;
 }
-
 export class ConfigService {
   protected assets: Map<string, Asset>;
 
@@ -156,5 +172,31 @@ export class ConfigService {
 
   updateChainRoute(route: ChainRoutes): void {
     this.routes.set(route.chain.key, route);
+  }
+
+  updateEndpoints(endpoints: {
+    [key: string]: {
+      rpc: string;
+      ws: string[];
+    };
+  }): void {
+    for (const [chainKey, endpoint] of Object.entries(endpoints)) {
+      let chain = this.chains.get(chainKey);
+      if (!chain) continue;
+
+      if ('ws' in chain && endpoint.ws.length && endpoint.ws.at(0)) {
+        chain = chain.copyWith({
+          ws: endpoint.ws,
+        });
+      }
+
+      if ('rpc' in chain && endpoint.rpc) {
+        chain = chain.copyWith({
+          rpc: endpoint.rpc,
+        });
+      }
+
+      this.chains.set(chainKey, chain);
+    }
   }
 }
