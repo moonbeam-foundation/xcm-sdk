@@ -13,7 +13,7 @@
     }
   },
   "files": {
-    "includes": ["**/*"],
+    "includes": ["**/*", "!**/build/**"],
     "experimentalScannerIgnores": [
       ".turbo",
       ".vscode/extensions.json",
@@ -42,36 +42,11 @@
       }
     },
     {
-      "includes": ["mkdocs/**/*.css"],
-      "linter": {
-        "enabled": false
-      }
-    },
-    {
-      "includes": ["**/build/**/*"],
-      "linter": {
-        "enabled": false
-      },
-      "formatter": {
-        "enabled": false
-      }
-    },
-    {
-      "includes": [".turbo/**/*"],
-      "linter": {
-        "enabled": false
-      },
-      "formatter": {
-        "enabled": false
-      }
-    },
-    {
-      "includes": ["packages/**/build/**/*"],
-      "linter": {
-        "enabled": false
-      },
-      "formatter": {
-        "enabled": false
+      "includes": ["**/build/**", ".turbo/**/*", "mkdocs/**/*.css"],
+      "linter": { "enabled": false },
+      "formatter": { "enabled": false },
+      "javascript": {
+        "assist": { "enabled": false }
       }
     }
   ]
