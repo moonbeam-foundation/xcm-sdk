@@ -21,7 +21,7 @@ type Contracts = {
 export class EvmParachain extends Parachain {
   readonly id: number;
 
-  readonly rpc: string;
+  rpc: string;
 
   readonly isEvmSigner: boolean;
 

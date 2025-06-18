@@ -30,24 +30,9 @@ export interface ConfigServiceOptions {
   chains?: Map<string, AnyChain>;
 
   /**
-   * Required map of routes configuration where the key is the chain identifier and the value contains
-   * either standard XCM chain routes or MRL (Message Router Layer) chain routes.
+   * Routes configuration.
    */
   routes: Map<string, ChainRoutes | MrlChainRoutes>;
-
-  /**
-   * Optional object to override chain endpoints.
-   * Each key represents a chain identifier, and the value contains RPC and WebSocket URLs.
-   * When provided, these endpoints will override the default endpoints in the chains configuration.
-   */
-  endpoints?: {
-    [key: string]: {
-      /** HTTP RPC endpoint URL */
-      rpc: string;
-      /** WebSocket endpoint URL */
-      ws: string;
-    };
-  };
 }
 export class ConfigService {
   protected assets: Map<string, Asset>;
@@ -60,12 +45,6 @@ export class ConfigService {
     this.assets = options.assets ?? assetsMap;
     this.chains = options.chains ?? chainsMap;
     this.routes = options.routes;
-    if (options.endpoints) {
-      this.chains = ConfigService.updateEndpoints(
-        this.chains,
-        options.endpoints,
-      );
-    }
   }
 
   getAsset(keyOrAsset: string | Asset): Asset {
@@ -195,34 +174,23 @@ export class ConfigService {
     this.routes.set(route.chain.key, route);
   }
 
-  static updateEndpoints(
-    chains: Map<string, AnyChain>,
-    endpoints: {
-      [key: string]: {
-        rpc: string;
-        ws: string;
-      };
-    },
-  ): Map<string, AnyChain> {
-    const updatedChains = new Map(chains);
-
+  updateEndpoints(endpoints: {
+    [key: string]: {
+      rpc: string;
+      ws: string;
+    };
+  }): void {
     for (const [chainKey, endpoint] of Object.entries(endpoints)) {
-      const chain = updatedChains.get(chainKey);
+      const chain = this.chains.get(chainKey);
       if (!chain) continue;
 
-      const updatedChain = { ...chain };
-
-      if ('ws' in updatedChain) {
-        updatedChain.ws = [endpoint.ws];
+      if ('ws' in chain && endpoint.ws) {
+        chain.setWs([endpoint.ws]);
       }
 
-      if ('rpc' in updatedChain) {
-        updatedChain.rpc = endpoint.rpc;
+      if ('rpc' in chain && endpoint.rpc && 'setRpc' in chain) {
+        chain.setRpc(endpoint.rpc);
       }
-
-      updatedChains.set(chainKey, updatedChain as AnyChain);
     }
-
-    return updatedChains;
   }
 }

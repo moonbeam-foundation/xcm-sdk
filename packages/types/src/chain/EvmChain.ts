@@ -10,7 +10,7 @@ export interface EvmChainConstructorParams extends ChainConstructorParams {
 export class EvmChain extends Chain {
   readonly id: number;
 
-  readonly rpc: string;
+  rpc: string;
 
   static is(obj: unknown): obj is EvmChain {
     return obj instanceof EvmChain;
@@ -25,5 +25,9 @@ export class EvmChain extends Chain {
 
   getViemChain(): ViemChain {
     return getViemChain(this);
+  }
+
+  setRpc(rpc: string): void {
+    this.rpc = rpc;
   }
 }

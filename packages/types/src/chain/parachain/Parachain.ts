@@ -29,7 +29,7 @@ export class Parachain extends Chain {
 
   readonly weight: number | undefined;
 
-  readonly ws: string[];
+  ws: string[];
 
   static is(obj: unknown): obj is Parachain {
     return obj instanceof Parachain;
@@ -57,6 +57,10 @@ export class Parachain extends Chain {
     this.ss58Format = ss58Format;
     this.usesChainDecimals = !!usesChainDecimals;
     this.weight = weight;
+    this.ws = ws;
+  }
+
+  setWs(ws: string[]): void {
     this.ws = ws;
   }
 }
