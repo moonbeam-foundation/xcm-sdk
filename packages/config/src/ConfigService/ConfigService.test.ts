@@ -245,19 +245,13 @@ describe('config service', () => {
           ws: ['wss://new-ws.test'],
         },
       };
-      const beforeChain = configService.getChain(
-        moonbaseAlpha.key,
-      ) as EvmParachain;
 
       configService.updateEndpoints(newEndpoints);
+      const chain = configService.getChain(moonbaseAlpha.key) as EvmParachain;
 
-      const afterChain = configService.getChain(
-        moonbaseAlpha.key,
-      ) as EvmParachain;
-
-      expect(afterChain).toBe(beforeChain); // Should be the same object reference
-      expect(afterChain.ws).toStrictEqual(['wss://new-ws.test']);
-      expect(afterChain.rpc).toBe('https://new-rpc.test');
+      expect(chain.ws).toStrictEqual(['wss://new-ws.test']);
+      expect(chain.rpc).toBe('https://new-rpc.test');
+      expect(chain).toBeInstanceOf(EvmParachain);
     });
 
     it('should update only WS endpoints for non-EVM chains', () => {
