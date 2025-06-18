@@ -64,6 +64,15 @@
       "formatter": {
         "enabled": false
       }
+    },
+    {
+      "includes": ["packages/**/build/**/*"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
     }
   ]
 }
