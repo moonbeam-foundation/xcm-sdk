@@ -61,14 +61,6 @@ export class Parachain extends Chain {
   }
 
   setWs(ws: string[]): void {
-    console.log(
-      '\x1b[34m████████████████████▓▓▒▒░ Parachain.ts:64 ░▒▒▓▓████████████████████\x1b[0m',
-    );
-    console.log('* ws = ');
-    console.log(ws);
-    console.log(
-      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-    );
     this.ws = ws;
   }
 }

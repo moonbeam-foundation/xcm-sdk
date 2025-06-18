@@ -186,12 +186,12 @@ export class ConfigService {
       if (!chain) continue;
 
       if ('ws' in chain && endpoint.ws.length && endpoint.ws[0]) {
-        chain.ws = endpoint.ws;
+        chain.setWs(endpoint.ws);
       }
 
       if ('rpc' in chain && endpoint.rpc) {
         if (chain instanceof EvmParachain) {
-          chain.rpc = endpoint.rpc;
+          chain.setRpc(endpoint.rpc);
         }
       }
 

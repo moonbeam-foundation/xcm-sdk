@@ -73,4 +73,8 @@ export class EvmParachain extends Parachain {
     console.log('EvmParachain setWs called with:', ws);
     this.ws = ws;
   }
+
+  setRpc(rpc: string): void {
+    this.rpc = rpc;
+  }
 }
