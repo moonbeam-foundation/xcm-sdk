@@ -170,6 +170,57 @@ createPolkadotSigner();
 !!! note
 In the above `INSERT_PRIVATE_KEY` field, you can specify a seed phrase instead of a private key.
 
+### Customize Chain Endpoints {: #customize-chain-endpoints }
+
+You can customize the RPC and WebSocket endpoints for any chain by using the `ConfigService`. This is particularly useful when you want to use your own endpoints or override the default ones. Here's how you can do it:
+
+```typescript
+import { ConfigService, xcmRoutesMap } from '@moonbeam-network/xcm-config';
+
+// Create a new config service instance
+const configService = new ConfigService({ routes: xcmRoutesMap });
+
+// Define new endpoints
+const newEndpoints = {
+  moonbeam: {  // Use the chain key
+    rpc: 'https://your-rpc-endpoint.com',
+    ws: ['wss://your-websocket-endpoint.com']
+  }
+};
+
+// Update the endpoints
+configService.updateEndpoints(newEndpoints);
+
+// Use the updated config service when initializing the SDK
+const sdkInstance = Sdk({ configService });
+```
+
+The endpoint update behavior depends on the chain type:
+
+- For EVM chains (like Moonbeam), both RPC and WebSocket endpoints can be updated
+- For non-EVM chains, only WebSocket endpoints can be updated
+- Empty endpoint values will be ignored, preserving the original endpoints
+- Updates for non-existent chains will be ignored
+
+You can update multiple chains at once:
+
+```typescript
+const newEndpoints = {
+  moonbeam: {
+    rpc: 'https://moonbeam-rpc.com',
+    ws: ['wss://moonbeam-ws.com']
+  },
+  polkadot: {
+    ws: ['wss://polkadot-ws.com']
+  }
+};
+
+configService.updateEndpoints(newEndpoints);
+```
+
+!!! note
+    Make sure to use reliable and performant endpoints, especially in production environments. Consider using dedicated endpoint providers or running your own infrastructure.
+
 ## Get Asset and Chain Data {: #asset-chain-data }
 
 You can use any of the following code examples to retrieve information on the supported assets and the chains that support these assets.

@@ -26,4 +26,11 @@ export class EvmChain extends Chain {
   getViemChain(): ViemChain {
     return getViemChain(this);
   }
+
+  copyWith(params: Partial<EvmChainConstructorParams>): EvmChain {
+    return new EvmChain({
+      ...this,
+      ...params,
+    });
+  }
 }

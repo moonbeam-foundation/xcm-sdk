@@ -27,6 +27,8 @@ export class EvmParachain extends Parachain {
 
   readonly contracts?: Contracts;
 
+  readonly ws: string[];
+
   static is(obj: unknown): obj is EvmParachain {
     return obj instanceof EvmParachain;
   }
@@ -60,9 +62,17 @@ export class EvmParachain extends Parachain {
     this.id = id ?? 0;
     this.rpc = rpc ?? '';
     this.isEvmSigner = isEvmSigner;
+    this.ws = others.ws;
   }
 
   getViemChain(): Chain {
     return getViemChain(this);
+  }
+
+  copyWith(params: Partial<EvmParachainConstructorParams>): EvmParachain {
+    return new EvmParachain({
+      ...this,
+      ...params,
+    });
   }
 }
