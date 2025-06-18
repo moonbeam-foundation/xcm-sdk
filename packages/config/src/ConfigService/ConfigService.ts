@@ -12,18 +12,43 @@ import type { ChainRoutes } from '../types/ChainRoutes';
 import type { MrlAssetRoute } from '../types/MrlAssetRoute';
 import type { MrlChainRoutes } from '../types/MrlChainRoutes';
 
+/**
+ * Configuration options for initializing the ConfigService.
+ * This interface defines the structure for configuring assets, chains, routes, and endpoints.
+ */
 export interface ConfigServiceOptions {
+  /**
+   * Optional map of assets where the key is the asset identifier and the value is the Asset object.
+   * If not provided, defaults to the predefined assetsMap.
+   */
   assets?: Map<string, Asset>;
+
+  /**
+   * Optional map of chains where the key is the chain identifier and the value is the Chain object.
+   * If not provided, defaults to the predefined chainsMap.
+   */
   chains?: Map<string, AnyChain>;
+
+  /**
+   * Required map of routes configuration where the key is the chain identifier and the value contains
+   * either standard XCM chain routes or MRL (Message Router Layer) chain routes.
+   */
   routes: Map<string, ChainRoutes | MrlChainRoutes>;
+
+  /**
+   * Optional object to override chain endpoints.
+   * Each key represents a chain identifier, and the value contains RPC and WebSocket URLs.
+   * When provided, these endpoints will override the default endpoints in the chains configuration.
+   */
   endpoints?: {
     [key: string]: {
+      /** HTTP RPC endpoint URL */
       rpc: string;
+      /** WebSocket endpoint URL */
       ws: string;
     };
   };
 }
-
 export class ConfigService {
   protected assets: Map<string, Asset>;
 
