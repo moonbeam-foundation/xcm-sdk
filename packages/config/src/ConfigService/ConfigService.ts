@@ -4,7 +4,6 @@ import type {
   Asset,
   Ecosystem,
 } from '@moonbeam-network/xcm-types';
-import { EvmParachain } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
 import { getKey } from '../config.utils';
@@ -182,17 +181,19 @@ export class ConfigService {
     };
   }): void {
     for (const [chainKey, endpoint] of Object.entries(endpoints)) {
-      const chain = this.chains.get(chainKey);
+      let chain = this.chains.get(chainKey);
       if (!chain) continue;
 
-      if ('ws' in chain && endpoint.ws.length && endpoint.ws[0]) {
-        chain.setWs(endpoint.ws);
+      if ('ws' in chain && endpoint.ws.length && endpoint.ws.at(0)) {
+        chain = chain.copyWith({
+          ws: endpoint.ws,
+        });
       }
 
       if ('rpc' in chain && endpoint.rpc) {
-        if (chain instanceof EvmParachain) {
-          chain.setRpc(endpoint.rpc);
-        }
+        chain = chain.copyWith({
+          rpc: endpoint.rpc,
+        });
       }
 
       this.chains.set(chainKey, chain);

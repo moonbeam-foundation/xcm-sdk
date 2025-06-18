@@ -27,7 +27,10 @@ export class EvmChain extends Chain {
     return getViemChain(this);
   }
 
-  setRpc(rpc: string): void {
-    this.rpc = rpc;
+  copyWith(params: Partial<EvmChainConstructorParams>): EvmChain {
+    return new EvmChain({
+      ...this,
+      ...params,
+    });
   }
 }

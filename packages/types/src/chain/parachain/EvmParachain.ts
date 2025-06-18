@@ -69,12 +69,10 @@ export class EvmParachain extends Parachain {
     return getViemChain(this);
   }
 
-  setWs(ws: string[]): void {
-    console.log('EvmParachain setWs called with:', ws);
-    this.ws = ws;
-  }
-
-  setRpc(rpc: string): void {
-    this.rpc = rpc;
+  copyWith(params: Partial<EvmParachainConstructorParams>): EvmParachain {
+    return new EvmParachain({
+      ...this,
+      ...params,
+    });
   }
 }

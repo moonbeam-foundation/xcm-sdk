@@ -60,7 +60,10 @@ export class Parachain extends Chain {
     this.ws = ws;
   }
 
-  setWs(ws: string[]): void {
-    this.ws = ws;
+  copyWith(params: Partial<ParachainConstructorParams>): Parachain {
+    return new Parachain({
+      ...this,
+      ...params,
+    });
   }
 }
