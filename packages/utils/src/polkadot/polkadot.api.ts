@@ -1,4 +1,4 @@
-import { ApiPromise, WsProvider } from '@polkadot/api';
+import { ApiPromise, HttpProvider, WsProvider } from '@polkadot/api';
 import { typesBundle } from '@polkadot/apps-config';
 import { LRUCache } from 'lru-cache';
 
@@ -30,6 +30,33 @@ export async function getPolkadotApi(
     ApiPromise.create({
       noInitWarn: true,
       provider: new WsProvider(ws),
+      types: {
+        [MRLTypes.XcmRoutingUserAction]: {
+          destination: MRLTypes.XcmVersionedLocation,
+        },
+        [MRLTypes.VersionedUserAction]: {
+          _enum: { V1: MRLTypes.XcmRoutingUserAction },
+        },
+      },
+      typesBundle,
+    });
+
+  cache.set(key, promise);
+
+  const api = await promise;
+
+  await api.isReady;
+
+  return api;
+}
+
+export async function getPolkadotHttpApi(rpc: string): Promise<ApiPromise> {
+  const key = rpc;
+  const promise =
+    cache.get(key) ||
+    ApiPromise.create({
+      noInitWarn: true,
+      provider: new HttpProvider(rpc),
       types: {
         [MRLTypes.XcmRoutingUserAction]: {
           destination: MRLTypes.XcmVersionedLocation,
