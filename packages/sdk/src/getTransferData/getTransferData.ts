@@ -9,7 +9,10 @@ import Big from 'big.js';
 import type { TransferData, TransferParams } from '../sdk.interfaces';
 import { EvmService } from '../services/evm/EvmService';
 import { PolkadotService } from '../services/polkadot';
-import { createMonitoringCallback } from '../utils/monitoring';
+import {
+  createMonitoringCallback,
+  listenToDestinationEvents,
+} from '../utils/monitoring';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 import {
@@ -120,7 +123,22 @@ export async function getTransferData({
 
         const evm = EvmService.create(source as EvmParachain);
 
-        return evm.transfer(evmSigner, contract);
+        const hash = await evm.transfer(evmSigner, contract);
+        console.log('hash', hash);
+
+        // Start listening to destination events after the transfer is sent
+        const shouldListenToDestinationEvents =
+          !!onDestinationFinalized || !!onDestinationError;
+
+        if (shouldListenToDestinationEvents) {
+          listenToDestinationEvents({
+            route,
+            onDestinationFinalized,
+            onDestinationError,
+          });
+        }
+
+        return hash;
       }
 
       if (extrinsic) {
@@ -134,6 +152,7 @@ export async function getTransferData({
           !!onDestinationFinalized ||
           !!onDestinationError;
 
+        // TODO leave this here or leave it of the user to create it?
         const monitoringCallback = useMonitoringCallback
           ? createMonitoringCallback({
               sourceAddress,

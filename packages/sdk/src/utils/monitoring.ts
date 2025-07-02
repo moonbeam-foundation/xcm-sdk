@@ -46,7 +46,7 @@ interface ListenToDestinationEventsProps {
   onDestinationError?: (error: Error) => void;
 }
 
-async function listenToDestinationEvents({
+export async function listenToDestinationEvents({
   route,
   messageId,
   onDestinationFinalized,
@@ -216,7 +216,7 @@ export function createMonitoringCallback({
     const xTokensSentEvent = status.events.find((event) => {
       return (
         event.event.section === 'xTokens' &&
-        event.event.method === 'TransferredAssets' // TODO depends on the extrinsic
+        event.event.method === 'TransferredMultiAssets' // TODO depends on the extrinsic
       );
     });
 
