@@ -38,6 +38,11 @@ export const alphanetRelayRoutes = new ChainRoutes({
         .xcmPallet()
         .transferAssetsUsingTypeAndThen()
         .here(),
+      /**
+       * TODO maybe I  can put a `monitoring` property here in which it is
+       * specified the pallet and method of events in both chains and even
+       * how messageIds match in both chains
+       */
     },
   ],
 });
