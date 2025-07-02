@@ -11,7 +11,7 @@ import { EvmService } from '../services/evm/EvmService';
 import { PolkadotService } from '../services/polkadot';
 import {
   createMonitoringCallback,
-  listenToDestinationEvents,
+  listenToSourceEvents,
 } from '../utils/monitoring';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
@@ -116,6 +116,12 @@ export async function getTransferData({
         sourceApi: sourcePolkadot.api,
       });
 
+      const shouldListenToEvents =
+        !!onSourceFinalized ||
+        !!onSourceError ||
+        !!onDestinationFinalized ||
+        !!onDestinationError;
+
       if (contract) {
         if (!evmSigner) {
           throw new Error('EVM Signer must be provided');
@@ -124,15 +130,13 @@ export async function getTransferData({
         const evm = EvmService.create(source as EvmParachain);
 
         const hash = await evm.transfer(evmSigner, contract);
-        console.log('hash', hash);
 
-        // Start listening to destination events after the transfer is sent
-        const shouldListenToDestinationEvents =
-          !!onDestinationFinalized || !!onDestinationError;
-
-        if (shouldListenToDestinationEvents) {
-          listenToDestinationEvents({
+        if (shouldListenToEvents) {
+          listenToSourceEvents({
             route,
+            sourceAddress,
+            onSourceFinalized,
+            onSourceError,
             onDestinationFinalized,
             onDestinationError,
           });
@@ -146,14 +150,8 @@ export async function getTransferData({
           throw new Error('Polkadot signer must be provided');
         }
 
-        const useMonitoringCallback =
-          !!onSourceFinalized ||
-          !!onSourceError ||
-          !!onDestinationFinalized ||
-          !!onDestinationError;
-
         // TODO leave this here or leave it of the user to create it?
-        const monitoringCallback = useMonitoringCallback
+        const monitoringCallback = shouldListenToEvents
           ? createMonitoringCallback({
               sourceAddress,
               route,

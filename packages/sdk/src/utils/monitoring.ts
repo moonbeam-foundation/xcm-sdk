@@ -3,7 +3,11 @@ import type { AssetRoute } from '@moonbeam-network/xcm-config';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Bool, U8aFixed } from '@polkadot/types';
-import type { AccountId32, H256 } from '@polkadot/types/interfaces';
+import type {
+  AccountId32,
+  EventRecord,
+  H256,
+} from '@polkadot/types/interfaces';
 import type {
   CumulusPrimitivesCoreAggregateMessageOrigin,
   StagingXcmV5Location,
@@ -12,6 +16,7 @@ import type { ISubmittableResult } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 
+// TODO mjm review this
 // MessageQueue.Processed event data structure
 // Based on: AugmentedEvent<ApiType, [id: H256, origin: ..., weightUsed: ..., success: bool], { id: H256, origin: ..., weightUsed: ..., success: bool }>
 interface MessageQueueProcessedData {
@@ -26,6 +31,7 @@ interface MessageQueueProcessedData {
   3: Bool; // success
 }
 
+// TODO rename, common with polkadotXcm for example
 interface XcmPalletSentEventData {
   origin: StagingXcmV5Location;
   messageId: U8aFixed;
@@ -145,12 +151,185 @@ interface EventInfo {
 interface CreateMonitoringCallbackProps {
   sourceAddress: string;
   route?: AssetRoute;
-  extrinsic: ExtrinsicConfig | undefined;
+  extrinsic?: ExtrinsicConfig;
   statusCallback?: (status: ISubmittableResult) => void;
   onSourceFinalized?: () => void;
   onSourceError?: (error: Error) => void;
   onDestinationFinalized?: () => void;
   onDestinationError?: (error: Error) => void;
+}
+
+// TODO needed?
+interface ListenToSourceEventsProps extends CreateMonitoringCallbackProps {}
+
+interface ProcessSourceEventsProps extends CreateMonitoringCallbackProps {
+  events: EventRecord[];
+  unsubscribe?: () => void;
+}
+
+/**
+ * Listen to source chain events from any events array
+ * This function can be used independently of the monitoring callback
+ */
+export function processSourceEvents({
+  events,
+  sourceAddress,
+  route,
+  onSourceFinalized,
+  onSourceError,
+  onDestinationFinalized,
+  onDestinationError,
+  unsubscribe,
+}: ProcessSourceEventsProps): void {
+  // XcmPallet monitoring
+  const xcmPalletSentEvent = events.find((event) => {
+    return event.event.section === 'xcmPallet' && event.event.method === 'Sent';
+  });
+
+  console.log('xcmPalletSentEvent', xcmPalletSentEvent?.toHuman());
+
+  if (xcmPalletSentEvent?.event.data) {
+    const eventData = xcmPalletSentEvent.event
+      .data as unknown as XcmPalletSentEventData;
+    const originLocation = eventData.origin;
+
+    const address = originLocation.interior.asX1[0].asAccountId32.id.toHex();
+    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+
+    console.log('decodedSourceAddress', decodedSourceAddress);
+    console.log('address', address);
+
+    if (address === decodedSourceAddress) {
+      onSourceFinalized?.();
+      const messageId = eventData.messageId.toHex();
+
+      console.log('messageId', messageId);
+
+      listenToDestinationEvents({
+        route,
+        messageId,
+        onDestinationFinalized,
+        onDestinationError,
+      });
+    }
+  }
+  // End of XcmPallet monitoring
+
+  // polkadotXcm monitoring
+  const polkadotXcmSentEvent = events.find((event) => {
+    return (
+      event.event.section === 'polkadotXcm' && event.event.method === 'Sent'
+    );
+  });
+
+  console.log('polkadotXcmSentEvent', polkadotXcmSentEvent?.toHuman());
+
+  if (polkadotXcmSentEvent) {
+    const eventData = polkadotXcmSentEvent.event
+      .data as unknown as XcmPalletSentEventData;
+    const originLocation = eventData.origin;
+
+    const address = originLocation.interior.asX1[0].asAccountKey20.key.toHex(); // TODO make sure somehow isAccountKey20 or isAccountId32
+    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+
+    console.log('decodedSourceAddress', decodedSourceAddress);
+    console.log('address', address);
+
+    if (address === decodedSourceAddress) {
+      onSourceFinalized?.();
+      const messageId = eventData.messageId.toHex();
+
+      console.log('messageId', messageId);
+
+      listenToDestinationEvents({
+        route,
+        messageId,
+        onDestinationFinalized,
+        onDestinationError,
+      });
+    }
+  }
+
+  // XTokens monitoring
+  const xTokensSentEvent = events.find((event) => {
+    return (
+      event.event.section === 'xTokens' &&
+      (event.event.method === 'TransferredMultiAssets' || // TODO depends on the extrinsic
+        event.event.method === 'TransferredAssets')
+    );
+  });
+
+  const xcmpQueueEvent = events.find((event) => {
+    return (
+      event.event.section === 'xcmpQueue' &&
+      event.event.method === 'XcmpMessageSent'
+    );
+  });
+
+  console.log('xTokensSentEvent', xTokensSentEvent?.toHuman());
+  console.log('xcmpQueueEvent', xcmpQueueEvent?.toHuman());
+  if (xTokensSentEvent && xcmpQueueEvent) {
+    const eventData = xTokensSentEvent.event
+      .data as unknown as XTokensEventData;
+    const eventAddress = eventData.sender.toString();
+
+    const decodedEventAddress = u8aToHex(decodeAddress(eventAddress));
+    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+
+    if (decodedEventAddress === decodedSourceAddress) {
+      onSourceFinalized?.();
+      unsubscribe?.();
+      const messageId = (
+        xcmpQueueEvent?.event.data as unknown as XcmQueueEventData
+      ).messageHash.toHex();
+
+      console.log('messageId', messageId);
+
+      listenToDestinationEvents({
+        route,
+        messageId,
+        onDestinationFinalized,
+        onDestinationError,
+      });
+    }
+  }
+  // End of XTokens monitoring
+
+  const extrinsicFailedEvent = events.find((event) => {
+    return (
+      event.event.section === 'system' &&
+      event.event.method === 'ExtrinsicFailed'
+    );
+  });
+
+  if (extrinsicFailedEvent) {
+    onSourceError?.(new Error('Extrinsic failed'));
+    unsubscribe?.();
+    return;
+  }
+
+  // Ecosystem bridge monitoring
+  const successfulEventIndicator: EventInfo = {
+    section: 'bridgeMessages',
+    method: 'MessageAccepted',
+  };
+
+  const event = events.find((event) => {
+    return (
+      event.event.section === successfulEventIndicator.section &&
+      event.event.method === successfulEventIndicator.method
+    );
+  });
+
+  if (event && onSourceFinalized) {
+    console.log('MessageAccepted', event);
+    onSourceFinalized();
+    listenToDestinationEvents({
+      route,
+      onDestinationFinalized,
+      onDestinationError,
+    });
+  }
 }
 
 export function createMonitoringCallback({
@@ -176,119 +355,52 @@ export function createMonitoringCallback({
       );
     }
 
-    // XcmPallet monitoring
-    const xcmPalletSentEvent = status.events.find((event) => {
-      return (
-        event.event.section === 'xcmPallet' && event.event.method === 'Sent'
-      );
+    processSourceEvents({
+      events: status.events,
+      sourceAddress,
+      route,
+      extrinsic,
+      onSourceFinalized,
+      onSourceError,
+      onDestinationFinalized,
+      onDestinationError,
     });
+  };
+}
 
-    console.log('xcmPalletSentEvent', xcmPalletSentEvent?.toHuman());
+export async function listenToSourceEvents({
+  route,
+  sourceAddress,
+  onSourceFinalized,
+  onSourceError,
+  onDestinationFinalized,
+  onDestinationError,
+}: ListenToSourceEventsProps) {
+  if (!route?.source?.chain || !('ws' in route.source.chain)) {
+    console.log('No source WS endpoint available');
+    return;
+  }
 
-    if (xcmPalletSentEvent?.event.data) {
-      const eventData = xcmPalletSentEvent.event
-        .data as unknown as XcmPalletSentEventData;
-      const originLocation = eventData.origin;
+  try {
+    const api: ApiPromise = await getPolkadotApi(route.source.chain.ws);
 
-      const address = originLocation.interior.asX1[0].asAccountId32.id.toHex();
-      const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+    console.log('Subscribing to source events...');
+    const unsubscribe = await api.query.system.events((events) => {
+      console.log('Source events:', events.toHuman());
 
-      console.log('decodedSourceAddress', decodedSourceAddress);
-      console.log('address', address);
-
-      if (address === decodedSourceAddress) {
-        onSourceFinalized?.();
-        const messageId = eventData.messageId.toHex();
-
-        console.log('messageId', messageId);
-
-        listenToDestinationEvents({
-          route,
-          messageId,
-          onDestinationFinalized,
-          onDestinationError,
-        });
-      }
-    }
-    // End of XcmPallet monitoring
-
-    // XTokens monitoring
-    const xTokensSentEvent = status.events.find((event) => {
-      return (
-        event.event.section === 'xTokens' &&
-        event.event.method === 'TransferredMultiAssets' // TODO depends on the extrinsic
-      );
-    });
-
-    const xcmpQueueEvent = status.events.find((event) => {
-      return (
-        event.event.section === 'xcmpQueue' &&
-        event.event.method === 'XcmpMessageSent'
-      );
-    });
-
-    console.log('xTokensSentEvent', xTokensSentEvent?.toHuman());
-    console.log('xcmpQueueEvent', xcmpQueueEvent?.toHuman());
-    if (xTokensSentEvent && xcmpQueueEvent) {
-      const eventData = xTokensSentEvent.event
-        .data as unknown as XTokensEventData;
-      const eventAddress = eventData.sender.toString();
-
-      const decodedEventAddress = u8aToHex(decodeAddress(eventAddress));
-      const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
-
-      if (decodedEventAddress === decodedSourceAddress) {
-        onSourceFinalized?.();
-        const messageId = (
-          xcmpQueueEvent?.event.data as unknown as XcmQueueEventData
-        ).messageHash.toHex();
-
-        console.log('messageId', messageId);
-
-        listenToDestinationEvents({
-          route,
-          messageId,
-          onDestinationFinalized,
-          onDestinationError,
-        });
-      }
-    }
-    // End of XTokens monitoring
-
-    const extrinsicFailedEvent = status.events.find((event) => {
-      return (
-        event.event.section === 'system' &&
-        event.event.method === 'ExtrinsicFailed'
-      );
-    });
-
-    if (extrinsicFailedEvent) {
-      onSourceError?.(new Error('Extrinsic failed'));
-
-      return;
-    }
-
-    // Ecosystem bridge monitoring
-    const successfulEventIndicator: EventInfo = {
-      section: 'bridgeMessages',
-      method: 'MessageAccepted',
-    };
-
-    const event = status.events.find((event) => {
-      return (
-        event.event.section === successfulEventIndicator.section &&
-        event.event.method === successfulEventIndicator.method
-      );
-    });
-
-    if (event && onSourceFinalized) {
-      console.log('MessageAccepted', event);
-      onSourceFinalized();
-      listenToDestinationEvents({
+      processSourceEvents({
+        events,
+        sourceAddress,
         route,
+        onSourceFinalized,
+        onSourceError,
         onDestinationFinalized,
         onDestinationError,
+        unsubscribe,
       });
-    }
-  };
+    });
+  } catch (error) {
+    console.error('Error listening to source events:', error);
+    onSourceError?.(error as Error);
+  }
 }
