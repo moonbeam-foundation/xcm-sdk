@@ -1,3 +1,5 @@
+import type { ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
+import type { AssetRoute } from '@moonbeam-network/xcm-config';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Bool, U8aFixed } from '@polkadot/types';
@@ -9,7 +11,6 @@ import type {
 import type { ISubmittableResult } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
-import type { TransferData } from '../sdk.interfaces';
 
 // MessageQueue.Processed event data structure
 // Based on: AugmentedEvent<ApiType, [id: H256, origin: ..., weightUsed: ..., success: bool], { id: H256, origin: ..., weightUsed: ..., success: bool }>
@@ -39,30 +40,25 @@ interface XcmQueueEventData {
 }
 
 interface ListenToDestinationEventsProps {
-  transferData: TransferData;
+  route?: AssetRoute; // TODO mjm optional?
   messageId?: string;
   onDestinationFinalized?: () => void;
   onDestinationError?: (error: Error) => void;
 }
 
 async function listenToDestinationEvents({
-  transferData,
+  route,
   messageId,
   onDestinationFinalized,
   onDestinationError,
 }: ListenToDestinationEventsProps): Promise<void> {
-  if (
-    !transferData?.destination?.chain ||
-    !('ws' in transferData.destination.chain)
-  ) {
+  if (!route?.destination?.chain || !('ws' in route.destination.chain)) {
     console.log('No destination WS endpoint available');
     return;
   }
 
   try {
-    const api: ApiPromise = await getPolkadotApi(
-      transferData.destination.chain.ws,
-    );
+    const api: ApiPromise = await getPolkadotApi(route.destination.chain.ws);
 
     console.log('Subscribing to destination events...');
     const unsubscribe = await api.query.system.events((events) => {
@@ -100,6 +96,7 @@ async function listenToDestinationEvents({
           } else {
             onDestinationError?.(new Error('Message queue processing failed'));
           }
+          console.log('Unsubscribing from destination events...');
           unsubscribe();
         }
       }
@@ -124,7 +121,7 @@ async function listenToDestinationEvents({
           onDestinationFinalized?.();
         } else {
           const error = new Error(
-            `Message queue processing failed on destination chain: ${transferData.destination.chain.name}`,
+            `Message queue processing failed on destination chain: ${route.destination.chain.name}`,
           );
           console.error(
             'Destination message queue processing failed:',
@@ -145,25 +142,39 @@ interface EventInfo {
   method: string;
 }
 
-interface CreateStatusCallbackProps {
-  transferData: TransferData;
+interface CreateMonitoringCallbackProps {
   sourceAddress: string;
+  route?: AssetRoute;
+  extrinsic: ExtrinsicConfig | undefined;
+  statusCallback?: (status: ISubmittableResult) => void;
   onSourceFinalized?: () => void;
-  onSourceError?: () => void;
+  onSourceError?: (error: Error) => void;
   onDestinationFinalized?: () => void;
   onDestinationError?: (error: Error) => void;
 }
 
-export function createStatusCallback({
-  transferData,
+export function createMonitoringCallback({
   sourceAddress,
+  route,
+  extrinsic,
+  statusCallback,
   onSourceFinalized,
   onSourceError,
   onDestinationFinalized,
   onDestinationError,
-}: CreateStatusCallbackProps) {
+}: CreateMonitoringCallbackProps) {
   return (status: ISubmittableResult) => {
-    console.log('status', status.toHuman());
+    // Execute the original user callback
+    statusCallback?.(status);
+
+    const extrinsicPalletName = extrinsic?.module;
+    const extrinsicFunctionName = extrinsic?.func;
+
+    if (extrinsicPalletName && extrinsicFunctionName) {
+      console.log(
+        `Monitoring extrinsic: ${extrinsicPalletName}::${extrinsicFunctionName}`,
+      );
+    }
 
     // XcmPallet monitoring
     const xcmPalletSentEvent = status.events.find((event) => {
@@ -192,7 +203,7 @@ export function createStatusCallback({
         console.log('messageId', messageId);
 
         listenToDestinationEvents({
-          transferData,
+          route,
           messageId,
           onDestinationFinalized,
           onDestinationError,
@@ -235,7 +246,7 @@ export function createStatusCallback({
         console.log('messageId', messageId);
 
         listenToDestinationEvents({
-          transferData,
+          route,
           messageId,
           onDestinationFinalized,
           onDestinationError,
@@ -252,7 +263,7 @@ export function createStatusCallback({
     });
 
     if (extrinsicFailedEvent) {
-      onSourceError?.();
+      onSourceError?.(new Error('Extrinsic failed'));
 
       return;
     }
@@ -274,7 +285,7 @@ export function createStatusCallback({
       console.log('MessageAccepted', event);
       onSourceFinalized();
       listenToDestinationEvents({
-        transferData,
+        route,
         onDestinationFinalized,
         onDestinationError,
       });

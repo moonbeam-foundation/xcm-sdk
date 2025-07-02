@@ -25,6 +25,7 @@ export interface TransferData {
   min: AssetAmount;
   moonChain: MoonChainTransferData;
   source: SourceTransferData;
+  // TODO convert this to an object to make it consistent with the sdk transfer function
   transfer(
     amount: bigint | number | string,
     isAutomatic: boolean,

@@ -6,9 +6,10 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import type { Signers, TransferData } from '../sdk.interfaces';
+import type { TransferData, TransferParams } from '../sdk.interfaces';
 import { EvmService } from '../services/evm/EvmService';
 import { PolkadotService } from '../services/polkadot';
+import { createMonitoringCallback } from '../utils/monitoring';
 import { getDestinationData } from './getDestinationData';
 import { getSourceData } from './getSourceData';
 import {
@@ -67,11 +68,15 @@ export async function getTransferData({
     max: sourceData.max,
     min: getMin(destinationData),
     source: sourceData,
-    async transfer(
+    async transfer({
       amount,
-      { evmSigner, polkadotSigner }: Partial<Signers>,
+      signers: { evmSigner, polkadotSigner },
       statusCallback,
-    ): Promise<string> {
+      onSourceFinalized,
+      onSourceError,
+      onDestinationFinalized,
+      onDestinationError,
+    }: TransferParams): Promise<string> {
       const source = route.source.chain as AnyParachain;
       const destination = route.destination.chain as AnyParachain;
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);
@@ -123,11 +128,30 @@ export async function getTransferData({
           throw new Error('Polkadot signer must be provided');
         }
 
+        const useMonitoringCallback =
+          !!onSourceFinalized ||
+          !!onSourceError ||
+          !!onDestinationFinalized ||
+          !!onDestinationError;
+
+        const monitoringCallback = useMonitoringCallback
+          ? createMonitoringCallback({
+              sourceAddress,
+              route,
+              extrinsic,
+              statusCallback,
+              onSourceFinalized,
+              onSourceError,
+              onDestinationFinalized,
+              onDestinationError,
+            })
+          : undefined;
+
         return sourcePolkadot.transfer(
           sourceAddress,
           extrinsic,
           polkadotSigner,
-          statusCallback,
+          monitoringCallback || statusCallback,
         );
       }
 
