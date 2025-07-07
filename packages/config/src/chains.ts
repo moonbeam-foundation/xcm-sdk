@@ -158,7 +158,10 @@ export const alphanetAssetHub = new Parachain({
   nativeAsset: unit,
   parachainId: 1001,
   ss58Format: 42,
-  ws: ['wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/'],
+  ws: [
+    'wss://statemint.api.moonbase.moonbeam.network',
+    'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network',
+  ],
 });
 
 export const alphanetRelay = new Parachain({

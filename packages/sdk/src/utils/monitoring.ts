@@ -77,8 +77,18 @@ export async function listenToDestinationEvents({
         );
       });
 
+      // Find the specific messageQueue.Processed event that matches our messageId
       const messageQueueEvent = events.find(({ event }) => {
-        return event.section === 'messageQueue' && event.method === 'Processed';
+        // TODO extract this to a function matchMessageQueueEvent ?
+        if (event.section === 'messageQueue' && event.method === 'Processed') {
+          if (messageId) {
+            const eventData =
+              event.data as unknown as MessageQueueProcessedData;
+            return messageId === eventData.id.toString();
+          }
+          return true;
+        }
+        return false;
       });
 
       // XcmPallet-XTokens monitoring
@@ -91,20 +101,16 @@ export async function listenToDestinationEvents({
         const eventData = messageQueueEvent.event
           .data as unknown as MessageQueueProcessedData;
 
-        const isSameEvent = messageId === eventData.id.toString();
+        const isMessageQueueSuccess = eventData.success.isTrue;
+        console.log('isMessageQueueSuccess', isMessageQueueSuccess);
 
-        if (isSameEvent) {
-          const isMessageQueueSuccess = eventData.success.isTrue;
-          console.log('isMessageQueueSuccess', isMessageQueueSuccess);
-
-          if (isMessageQueueSuccess) {
-            onDestinationFinalized?.();
-          } else {
-            onDestinationError?.(new Error('Message queue processing failed'));
-          }
-          console.log('Unsubscribing from destination events...');
-          unsubscribe();
+        if (isMessageQueueSuccess) {
+          onDestinationFinalized?.();
+        } else {
+          onDestinationError?.(new Error('Message queue processing failed'));
         }
+        console.log('Unsubscribing from destination events...');
+        unsubscribe();
       }
 
       // Ecosystem bridge monitoring

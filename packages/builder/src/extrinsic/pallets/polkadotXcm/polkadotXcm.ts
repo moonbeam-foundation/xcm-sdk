@@ -222,6 +222,38 @@ export function polkadotXcm() {
               },
             }),
         }),
+        X1: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: {
+                          X1: [
+                            {
+                              GeneralIndex: params.asset.getAssetId(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
         X2: (): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
@@ -230,6 +262,7 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
+                // TODO find a better way to identify when the asset info is in the destination
                 const assetInDestination = params.destination.getChainAsset(
                   params.asset,
                 );
