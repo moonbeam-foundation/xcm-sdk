@@ -11,12 +11,37 @@ import type {
   ChainAsset,
   SetOptional,
 } from '@moonbeam-network/xcm-types';
+import type { Event } from '@polkadot/types/interfaces';
+
+export interface EventConfig {
+  section: string;
+  method: string;
+}
+
+export interface SourceEventConfig {
+  event: EventConfig;
+  addressExtractor: (event: Event) => string;
+  messageIdExtractor: (event: Event) => string;
+}
+
+export interface DestinationEventConfig {
+  event: EventConfig;
+  messageIdMatcher?: (event: Event, messageId: string) => boolean;
+  // TODO mjm needed?
+  successIndicator?: (event: Event) => boolean;
+}
+
+export interface MonitoringConfig {
+  source: SourceEventConfig;
+  destination?: DestinationEventConfig;
+}
 
 export interface AssetRouteConstructorParams {
   source: SourceConfig;
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
   extrinsic?: ExtrinsicConfigBuilder;
+  monitoring?: MonitoringConfig;
 }
 
 export interface SourceConfig {
@@ -57,16 +82,20 @@ export class AssetRoute {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
+  readonly monitoring?: MonitoringConfig;
+
   constructor({
     source,
     destination,
     contract,
     extrinsic,
+    monitoring,
   }: AssetRouteConstructorParams) {
     this.source = source;
     this.destination = destination;
     this.contract = contract;
     this.extrinsic = extrinsic;
+    this.monitoring = monitoring;
   }
 
   getDestinationFeeAssetOnSource(): ChainAsset {

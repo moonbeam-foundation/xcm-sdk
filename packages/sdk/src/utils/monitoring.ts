@@ -86,6 +86,7 @@ export async function listenToDestinationEvents({
               event.data as unknown as MessageQueueProcessedData;
             return messageId === eventData.id.toString();
           }
+          // TODO should we return true?
           return true;
         }
         return false;
@@ -156,7 +157,7 @@ interface EventInfo {
 
 interface CreateMonitoringCallbackProps {
   sourceAddress: string;
-  route?: AssetRoute;
+  route: AssetRoute;
   extrinsic?: ExtrinsicConfig;
   statusCallback?: (status: ISubmittableResult) => void;
   onSourceFinalized?: () => void;
@@ -187,39 +188,48 @@ export function processSourceEvents({
   onDestinationError,
   unsubscribe,
 }: ProcessSourceEventsProps): void {
-  // XcmPallet monitoring
-  const xcmPalletSentEvent = events.find((event) => {
-    return event.event.section === 'xcmPallet' && event.event.method === 'Sent';
+  // TODO route.monitoring check should be done differently after all is integrated
+  // TODO mjm change to monitoringConfig?
+  const monitoringConfig = route.monitoring;
+  if (!monitoringConfig) {
+    console.log('No monitoring config found');
+    return;
+  }
+
+  // generic monitoring
+  const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+
+  const sentEvent = events.find((event) => {
+    if (
+      event.event.section !== monitoringConfig.source.event.section ||
+      event.event.method !== monitoringConfig.source.event.method
+    ) {
+      return false;
+    }
+
+    const address = monitoringConfig.source.addressExtractor(event.event);
+    return address === decodedSourceAddress;
   });
 
-  console.log('xcmPalletSentEvent', xcmPalletSentEvent?.toHuman());
+  console.log('sentEvent', sentEvent?.toHuman());
 
-  if (xcmPalletSentEvent?.event.data) {
-    const eventData = xcmPalletSentEvent.event
-      .data as unknown as XcmPalletSentEventData;
-    const originLocation = eventData.origin;
+  if (sentEvent?.event.data) {
+    onSourceFinalized?.();
 
-    const address = originLocation.interior.asX1[0].asAccountId32.id.toHex();
-    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+    const messageId = monitoringConfig.source.messageIdExtractor(
+      sentEvent.event,
+    );
 
-    console.log('decodedSourceAddress', decodedSourceAddress);
-    console.log('address', address);
+    console.log('messageId', messageId);
 
-    if (address === decodedSourceAddress) {
-      onSourceFinalized?.();
-      const messageId = eventData.messageId.toHex();
-
-      console.log('messageId', messageId);
-
-      listenToDestinationEvents({
-        route,
-        messageId,
-        onDestinationFinalized,
-        onDestinationError,
-      });
-    }
+    listenToDestinationEvents({
+      route,
+      messageId,
+      onDestinationFinalized,
+      onDestinationError,
+    });
   }
-  // End of XcmPallet monitoring
+  // end of generic monitoring
 
   // polkadotXcm monitoring
   const polkadotXcmSentEvent = events.find((event) => {
@@ -235,7 +245,7 @@ export function processSourceEvents({
       .data as unknown as XcmPalletSentEventData;
     const originLocation = eventData.origin;
 
-    const address = originLocation.interior.asX1[0].asAccountKey20.key.toHex(); // TODO make sure somehow isAccountKey20 or isAccountId32
+    const address = originLocation.interior.asX1[0].asAccountId32.id.toHex(); // TODO make sure somehow isAccountKey20 or isAccountId32
     const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
 
     console.log('decodedSourceAddress', decodedSourceAddress);
@@ -351,6 +361,7 @@ export function createMonitoringCallback({
   return (status: ISubmittableResult) => {
     // Execute the original user callback
     statusCallback?.(status);
+    console.log('status', status.toHuman());
 
     const extrinsicPalletName = extrinsic?.module;
     const extrinsicFunctionName = extrinsic?.func;

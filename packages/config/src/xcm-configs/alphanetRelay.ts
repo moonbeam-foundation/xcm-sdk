@@ -2,7 +2,9 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  XcmPallet,
 } from '@moonbeam-network/xcm-builder';
+
 import { unit } from '../assets';
 import { alphanetRelay, moonbaseAlpha } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -38,6 +40,17 @@ export const alphanetRelayRoutes = new ChainRoutes({
         .xcmPallet()
         .transferAssetsUsingTypeAndThen()
         .here(),
+      monitoring: {
+        source: {
+          event: {
+            section: 'xcmPallet',
+            method: 'Sent',
+          },
+          // TODO mjm move inside event?
+          addressExtractor: XcmPallet().getAddress().fromAccountId32(),
+          messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
+        },
+      },
       /**
        * TODO maybe I  can put a `monitoring` property here in which it is
        * specified the pallet and method of events in both chains and even
