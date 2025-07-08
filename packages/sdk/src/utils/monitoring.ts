@@ -31,12 +31,6 @@ interface MessageQueueProcessedData {
   3: Bool; // success
 }
 
-// TODO rename, common with polkadotXcm for example
-interface XcmPalletSentEventData {
-  origin: StagingXcmV5Location;
-  messageId: U8aFixed;
-}
-
 interface XTokensEventData {
   sender: AccountId32;
 }
@@ -230,41 +224,6 @@ export function processSourceEvents({
     });
   }
   // end of generic monitoring
-
-  // polkadotXcm monitoring
-  const polkadotXcmSentEvent = events.find((event) => {
-    return (
-      event.event.section === 'polkadotXcm' && event.event.method === 'Sent'
-    );
-  });
-
-  console.log('polkadotXcmSentEvent', polkadotXcmSentEvent?.toHuman());
-
-  if (polkadotXcmSentEvent) {
-    const eventData = polkadotXcmSentEvent.event
-      .data as unknown as XcmPalletSentEventData;
-    const originLocation = eventData.origin;
-
-    const address = originLocation.interior.asX1[0].asAccountId32.id.toHex(); // TODO make sure somehow isAccountKey20 or isAccountId32
-    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
-
-    console.log('decodedSourceAddress', decodedSourceAddress);
-    console.log('address', address);
-
-    if (address === decodedSourceAddress) {
-      onSourceFinalized?.();
-      const messageId = eventData.messageId.toHex();
-
-      console.log('messageId', messageId);
-
-      listenToDestinationEvents({
-        route,
-        messageId,
-        onDestinationFinalized,
-        onDestinationError,
-      });
-    }
-  }
 
   // XTokens monitoring
   const xTokensSentEvent = events.find((event) => {

@@ -47,15 +47,11 @@ export const alphanetRelayRoutes = new ChainRoutes({
             method: 'Sent',
           },
           // TODO mjm move inside event?
+          // TODO mjm call it address? like balance, which is a builder
           addressExtractor: XcmPallet().getAddress().fromAccountId32(),
           messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
         },
       },
-      /**
-       * TODO maybe I  can put a `monitoring` property here in which it is
-       * specified the pallet and method of events in both chains and even
-       * how messageIds match in both chains
-       */
     },
   ],
 });
