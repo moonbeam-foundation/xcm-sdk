@@ -3,6 +3,8 @@ import {
   BalanceBuilder,
   ContractBuilder,
   FeeBuilder,
+  MessageQueue,
+  XcmPallet,
 } from '@moonbeam-network/xcm-builder';
 import {
   agng,
@@ -246,6 +248,23 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
+      monitoring: {
+        source: {
+          event: {
+            section: 'polkadotXcm',
+            method: 'Sent',
+          },
+          addressExtractor: XcmPallet().getAddress().fromAccountKey20(),
+          messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
+        },
+        destination: {
+          event: {
+            section: 'messageQueue',
+            method: 'Processed',
+          },
+          messageIdExtractor: MessageQueue().getMessageId().fromId(),
+        },
+      },
     },
     {
       source: {
