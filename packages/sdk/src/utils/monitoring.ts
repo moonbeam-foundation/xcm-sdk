@@ -2,35 +2,8 @@ import type { ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute } from '@moonbeam-network/xcm-config';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
-import type { Bool } from '@polkadot/types';
-import type { EventRecord, H256 } from '@polkadot/types/interfaces';
-import type { CumulusPrimitivesCoreAggregateMessageOrigin } from '@polkadot/types/lookup';
+import type { EventRecord } from '@polkadot/types/interfaces';
 import type { ISubmittableResult } from '@polkadot/types/types';
-import { u8aToHex } from '@polkadot/util';
-import { decodeAddress } from '@polkadot/util-crypto';
-
-// TODO mjm review this
-// MessageQueue.Processed event data structure
-// Based on: AugmentedEvent<ApiType, [id: H256, origin: ..., weightUsed: ..., success: bool], { id: H256, origin: ..., weightUsed: ..., success: bool }>
-interface MessageQueueProcessedData {
-  id: H256; // H256
-  origin: CumulusPrimitivesCoreAggregateMessageOrigin; // CumulusPrimitivesCoreAggregateMessageOrigin
-  weightUsed: unknown; // not used
-  success: Bool;
-  // Also support array access
-  0: H256; // id
-  1: CumulusPrimitivesCoreAggregateMessageOrigin; // origin
-  2: unknown; // weightUsed
-  3: Bool; // success
-}
-
-// interface XTokensEventData {
-//   sender: AccountId32;
-// }
-
-// interface XcmQueueEventData {
-//   messageHash: U8aFixed;
-// }
 
 interface ListenToDestinationEventsProps {
   route?: AssetRoute; // TODO mjm optional?
@@ -64,78 +37,29 @@ export async function listenToDestinationEvents({
     const unsubscribe = await api.query.system.events((events) => {
       console.log('Destination events:', events.toHuman());
 
-      const bridgeMessageEvent = events.find(({ event }) => {
-        return (
-          event.section === 'bridgeMessages' &&
-          event.method === 'MessagesReceived'
-        );
-      });
+      // Use the new MonitoringBuilder approach for destination monitoring
+      const destinationResult = monitoringConfig.checkDestination(
+        events,
+        messageId,
+      );
 
-      // Find the specific messageQueue.Processed event that matches our messageId
-      const messageQueueEvent = events.find(({ event }) => {
-        // TODO extract this to a function matchMessageQueueEvent ?
-        if (
-          event.section === monitoringConfig.destination.event.section &&
-          event.method === monitoringConfig.destination.event.method
-        ) {
-          if (messageId) {
-            const destinationMessageId =
-              monitoringConfig.destination.messageIdExtractor(event, events);
-            return messageId === destinationMessageId;
-          }
-          // TODO should we return true?
-          return true;
-        }
-        return false;
-      });
-
-      // XcmPallet-XTokens monitoring
-      if (messageQueueEvent) {
+      if (destinationResult.matched) {
         console.log(
-          'Found MessageQueue event on destination:',
-          messageQueueEvent?.toHuman(),
+          'Destination event matched:',
+          destinationResult.event?.toHuman(),
         );
-        // Access the messageQueue.Processed event data with proper typing
-        const eventData = messageQueueEvent.event
-          .data as unknown as MessageQueueProcessedData;
-
-        const isMessageQueueSuccess = eventData.success.isTrue;
-        console.log('isMessageQueueSuccess', isMessageQueueSuccess);
-
-        if (isMessageQueueSuccess) {
-          onDestinationFinalized?.();
-        } else {
-          onDestinationError?.(new Error('Message queue processing failed'));
-        }
-        console.log('Unsubscribing from destination events...');
-        unsubscribe();
-      }
-
-      // Ecosystem bridge monitoring
-      if (bridgeMessageEvent && messageQueueEvent) {
-        console.log(
-          'Found bridgeMessages event on destination:',
-          bridgeMessageEvent?.toHuman(),
-        );
-        console.log(
-          'Found MessageQueue event on destination:',
-          messageQueueEvent?.toHuman(),
-        );
-
-        const eventData = messageQueueEvent.event
-          .data as unknown as MessageQueueProcessedData;
-        const isMessageQueueSuccess = eventData.success.isTrue;
 
         unsubscribe();
-        if (isMessageQueueSuccess) {
+
+        if (destinationResult.success) {
           onDestinationFinalized?.();
         } else {
           const error = new Error(
-            `Message queue processing failed on destination chain: ${route.destination.chain.name}`,
+            `Message processing failed on destination chain: ${route.destination.chain.name}`,
           );
           console.error(
-            'Destination message queue processing failed:',
-            messageQueueEvent?.toHuman(),
+            'Destination message processing failed:',
+            destinationResult.event?.toHuman(),
           );
           onDestinationError?.(error);
         }
@@ -145,11 +69,6 @@ export async function listenToDestinationEvents({
     console.error('Error listening to destination events:', error);
     onDestinationError?.(error as Error);
   }
-}
-
-interface EventInfo {
-  section: string;
-  method: string;
 }
 
 interface CreateMonitoringCallbackProps {
@@ -202,80 +121,46 @@ export function processSourceEvents({
   // TODO mjm change to monitoringConfig parameter?
   const monitoringConfig = route.monitoring;
   if (!monitoringConfig) {
-    console.log('No monitoring config found');
+    console.log('No valid MonitoringBuilder config found');
     return;
   }
 
-  const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+  console.log('Using MonitoringBuilder config');
 
-  const sentEvent = events.find((event) => {
-    if (
-      event.event.section !== monitoringConfig.source.event.section ||
-      event.event.method !== monitoringConfig.source.event.method
-    ) {
-      return false;
+  try {
+    const sourceResult = monitoringConfig.checkSource(events, sourceAddress);
+
+    if (sourceResult.matched) {
+      console.log('Source event matched:', sourceResult.event?.toHuman());
+      onSourceFinalized?.();
+
+      if (unsubscribe) {
+        console.log('Unsubscribing from source events...');
+        unsubscribe();
+      }
+
+      // Listen to destination events with extracted message ID
+      listenToDestinationEvents({
+        route,
+        messageId: sourceResult.messageId,
+        onDestinationFinalized,
+        onDestinationError,
+      });
+
+      return;
     }
-
-    // Extract address and check if it matches source address
-    try {
-      console.log('event', event.toHuman());
-      const address = monitoringConfig.source.addressExtractor(event);
-
-      console.log('address', address);
-      return address === decodedSourceAddress;
-    } catch (error) {
-      console.error('Error extracting address from event:', error);
-      return false;
-    }
-  });
-
-  console.log('sentEvent', sentEvent?.toHuman());
-
-  if (sentEvent) {
-    onSourceFinalized?.();
-    if (unsubscribe) {
-      console.log('Unsubscribing from source events...');
-      unsubscribe();
-    }
-
-    const messageId = monitoringConfig.source.messageIdExtractor(
-      sentEvent,
-      events,
-    );
-
-    console.log('messageId', messageId);
-
-    listenToDestinationEvents({
-      route,
-      messageId,
-      onDestinationFinalized,
-      onDestinationError,
-    });
+  } catch (error) {
+    console.error('Error in MonitoringBuilder config:', error);
+    // onSourceError?.(
+    //   new Error(
+    //     `Monitoring failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    //   ),
+    // );
+    return;
   }
-  // end of generic monitoring
 
-  // Ecosystem bridge monitoring
-  const successfulEventIndicator: EventInfo = {
-    section: 'bridgeMessages',
-    method: 'MessageAccepted',
-  };
-
-  const event = events.find((event) => {
-    return (
-      event.event.section === successfulEventIndicator.section &&
-      event.event.method === successfulEventIndicator.method
-    );
-  });
-
-  if (event && onSourceFinalized) {
-    console.log('MessageAccepted', event);
-    onSourceFinalized();
-    listenToDestinationEvents({
-      route,
-      onDestinationFinalized,
-      onDestinationError,
-    });
-  }
+  // No valid MonitoringBuilder config found and no events matched
+  console.log('No monitoring events matched');
 }
 
 export function createMonitoringCallback({

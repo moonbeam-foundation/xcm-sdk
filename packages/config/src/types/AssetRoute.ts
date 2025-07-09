@@ -13,6 +13,7 @@ import type {
 } from '@moonbeam-network/xcm-types';
 import type { Event, EventRecord } from '@polkadot/types/interfaces';
 
+// ======= OLD MONITORING INTERFACES (for reference) =======
 export interface EventConfig {
   section: string;
   method: string;
@@ -37,12 +38,40 @@ export interface MonitoringConfig {
   destination: DestinationEventConfig;
 }
 
+// ======= NEW MONITORING BUILDER INTERFACES (active) =======
+
+// Source checker function type from MonitoringBuilder
+export type SourceChecker = (
+  events: EventRecord[],
+  sourceAddress: string,
+) => {
+  matched: boolean;
+  messageId?: string;
+  event?: EventRecord;
+};
+
+// Destination checker function type from MonitoringBuilder
+export type DestinationChecker = (
+  events: EventRecord[],
+  messageId?: string,
+) => {
+  matched: boolean;
+  success: boolean;
+  event?: EventRecord;
+};
+
+// New MonitoringBuilder config interface (this is the only one we use now)
+export interface MonitoringBuilderConfig {
+  checkSource: SourceChecker;
+  checkDestination: DestinationChecker;
+}
+
 export interface AssetRouteConstructorParams {
   source: SourceConfig;
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
   extrinsic?: ExtrinsicConfigBuilder;
-  monitoring?: MonitoringConfig;
+  monitoring?: MonitoringBuilderConfig;
 }
 
 export interface SourceConfig {
@@ -83,7 +112,7 @@ export class AssetRoute {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
-  readonly monitoring?: MonitoringConfig;
+  readonly monitoring?: MonitoringBuilderConfig;
 
   constructor({
     source,
