@@ -3,6 +3,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MessageQueue,
   XcmPallet,
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
@@ -48,6 +49,13 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
           },
           addressExtractor: XcmPallet().getAddress().fromAccountId32(),
           messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
+        },
+        destination: {
+          event: {
+            section: 'messageQueue',
+            method: 'Processed',
+          },
+          messageIdExtractor: MessageQueue().getMessageId().fromId(),
         },
       },
     },

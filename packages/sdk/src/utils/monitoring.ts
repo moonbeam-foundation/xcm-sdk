@@ -2,16 +2,9 @@ import type { ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute } from '@moonbeam-network/xcm-config';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
-import type { Bool, U8aFixed } from '@polkadot/types';
-import type {
-  AccountId32,
-  EventRecord,
-  H256,
-} from '@polkadot/types/interfaces';
-import type {
-  CumulusPrimitivesCoreAggregateMessageOrigin,
-  StagingXcmV5Location,
-} from '@polkadot/types/lookup';
+import type { Bool } from '@polkadot/types';
+import type { EventRecord, H256 } from '@polkadot/types/interfaces';
+import type { CumulusPrimitivesCoreAggregateMessageOrigin } from '@polkadot/types/lookup';
 import type { ISubmittableResult } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
@@ -31,13 +24,13 @@ interface MessageQueueProcessedData {
   3: Bool; // success
 }
 
-interface XTokensEventData {
-  sender: AccountId32;
-}
+// interface XTokensEventData {
+//   sender: AccountId32;
+// }
 
-interface XcmQueueEventData {
-  messageHash: U8aFixed;
-}
+// interface XcmQueueEventData {
+//   messageHash: U8aFixed;
+// }
 
 interface ListenToDestinationEventsProps {
   route?: AssetRoute; // TODO mjm optional?
@@ -58,6 +51,13 @@ export async function listenToDestinationEvents({
   }
 
   try {
+    // TODO mjm handle better
+    const monitoringConfig = route?.monitoring;
+    if (!monitoringConfig) {
+      console.log('No monitoring config found');
+      return;
+    }
+
     const api: ApiPromise = await getPolkadotApi(route.destination.chain.ws);
 
     console.log('Subscribing to destination events...');
@@ -74,11 +74,14 @@ export async function listenToDestinationEvents({
       // Find the specific messageQueue.Processed event that matches our messageId
       const messageQueueEvent = events.find(({ event }) => {
         // TODO extract this to a function matchMessageQueueEvent ?
-        if (event.section === 'messageQueue' && event.method === 'Processed') {
+        if (
+          event.section === monitoringConfig.destination.event.section &&
+          event.method === monitoringConfig.destination.event.method
+        ) {
           if (messageId) {
-            const eventData =
-              event.data as unknown as MessageQueueProcessedData;
-            return messageId === eventData.id.toString();
+            const destinationMessageId =
+              monitoringConfig.destination.messageIdExtractor(event, events);
+            return messageId === destinationMessageId;
           }
           // TODO should we return true?
           return true;
@@ -182,94 +185,6 @@ export function processSourceEvents({
   onDestinationError,
   unsubscribe,
 }: ProcessSourceEventsProps): void {
-  // TODO route.monitoring check should be done differently after all is integrated
-  // TODO mjm change to monitoringConfig?
-  const monitoringConfig = route.monitoring;
-  if (!monitoringConfig) {
-    console.log('No monitoring config found');
-    return;
-  }
-
-  // generic monitoring
-  const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
-
-  const sentEvent = events.find((event) => {
-    if (
-      event.event.section !== monitoringConfig.source.event.section ||
-      event.event.method !== monitoringConfig.source.event.method
-    ) {
-      return false;
-    }
-
-    const address = monitoringConfig.source.addressExtractor(event.event);
-    return address === decodedSourceAddress;
-  });
-
-  console.log('sentEvent', sentEvent?.toHuman());
-
-  if (sentEvent?.event.data) {
-    onSourceFinalized?.();
-
-    const messageId = monitoringConfig.source.messageIdExtractor(
-      sentEvent.event,
-    );
-
-    console.log('messageId', messageId);
-
-    listenToDestinationEvents({
-      route,
-      messageId,
-      onDestinationFinalized,
-      onDestinationError,
-    });
-  }
-  // end of generic monitoring
-
-  // XTokens monitoring
-  const xTokensSentEvent = events.find((event) => {
-    return (
-      event.event.section === 'xTokens' &&
-      (event.event.method === 'TransferredMultiAssets' || // TODO depends on the extrinsic
-        event.event.method === 'TransferredAssets')
-    );
-  });
-
-  const xcmpQueueEvent = events.find((event) => {
-    return (
-      event.event.section === 'xcmpQueue' &&
-      event.event.method === 'XcmpMessageSent'
-    );
-  });
-
-  console.log('xTokensSentEvent', xTokensSentEvent?.toHuman());
-  console.log('xcmpQueueEvent', xcmpQueueEvent?.toHuman());
-  if (xTokensSentEvent && xcmpQueueEvent) {
-    const eventData = xTokensSentEvent.event
-      .data as unknown as XTokensEventData;
-    const eventAddress = eventData.sender.toString();
-
-    const decodedEventAddress = u8aToHex(decodeAddress(eventAddress));
-    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
-
-    if (decodedEventAddress === decodedSourceAddress) {
-      onSourceFinalized?.();
-      unsubscribe?.();
-      const messageId = (
-        xcmpQueueEvent?.event.data as unknown as XcmQueueEventData
-      ).messageHash.toHex();
-
-      console.log('messageId', messageId);
-
-      listenToDestinationEvents({
-        route,
-        messageId,
-        onDestinationFinalized,
-        onDestinationError,
-      });
-    }
-  }
-  // End of XTokens monitoring
-
   const extrinsicFailedEvent = events.find((event) => {
     return (
       event.event.section === 'system' &&
@@ -282,6 +197,62 @@ export function processSourceEvents({
     unsubscribe?.();
     return;
   }
+
+  // TODO route.monitoring check should be done differently after all is integrated
+  // TODO mjm change to monitoringConfig parameter?
+  const monitoringConfig = route.monitoring;
+  if (!monitoringConfig) {
+    console.log('No monitoring config found');
+    return;
+  }
+
+  const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+
+  const sentEvent = events.find((event) => {
+    if (
+      event.event.section !== monitoringConfig.source.event.section ||
+      event.event.method !== monitoringConfig.source.event.method
+    ) {
+      return false;
+    }
+
+    // Extract address and check if it matches source address
+    try {
+      console.log('event', event.toHuman());
+      const address = monitoringConfig.source.addressExtractor(event);
+
+      console.log('address', address);
+      return address === decodedSourceAddress;
+    } catch (error) {
+      console.error('Error extracting address from event:', error);
+      return false;
+    }
+  });
+
+  console.log('sentEvent', sentEvent?.toHuman());
+
+  if (sentEvent) {
+    onSourceFinalized?.();
+    if (unsubscribe) {
+      console.log('Unsubscribing from source events...');
+      unsubscribe();
+    }
+
+    const messageId = monitoringConfig.source.messageIdExtractor(
+      sentEvent,
+      events,
+    );
+
+    console.log('messageId', messageId);
+
+    listenToDestinationEvents({
+      route,
+      messageId,
+      onDestinationFinalized,
+      onDestinationError,
+    });
+  }
+  // end of generic monitoring
 
   // Ecosystem bridge monitoring
   const successfulEventIndicator: EventInfo = {
@@ -377,6 +348,5 @@ export async function listenToSourceEvents({
     });
   } catch (error) {
     console.error('Error listening to source events:', error);
-    onSourceError?.(error as Error);
   }
 }

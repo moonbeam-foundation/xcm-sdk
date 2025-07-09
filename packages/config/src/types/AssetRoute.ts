@@ -11,7 +11,7 @@ import type {
   ChainAsset,
   SetOptional,
 } from '@moonbeam-network/xcm-types';
-import type { Event } from '@polkadot/types/interfaces';
+import type { Event, EventRecord } from '@polkadot/types/interfaces';
 
 export interface EventConfig {
   section: string;
@@ -20,20 +20,21 @@ export interface EventConfig {
 
 export interface SourceEventConfig {
   event: EventConfig;
-  addressExtractor: (event: Event) => string;
-  messageIdExtractor: (event: Event) => string;
+  addressExtractor: (event: EventRecord) => string;
+  messageIdExtractor: (event: EventRecord, allEvents?: EventRecord[]) => string;
 }
 
 export interface DestinationEventConfig {
   event: EventConfig;
-  messageIdMatcher?: (event: Event, messageId: string) => boolean;
+  // TODO mjm unify Event and EventRecord
+  messageIdExtractor: (event: Event, allEvents?: EventRecord[]) => string;
   // TODO mjm needed?
-  successIndicator?: (event: Event) => boolean;
+  successIndicator?: (event: EventRecord) => boolean;
 }
 
 export interface MonitoringConfig {
   source: SourceEventConfig;
-  destination?: DestinationEventConfig;
+  destination: DestinationEventConfig;
 }
 
 export interface AssetRouteConstructorParams {
