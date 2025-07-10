@@ -446,11 +446,12 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: 0.0000000001, // TODO mjm forcing error in destination, return to 0.01 after testing
           asset: agng,
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().polkadotXcm().xcmpQueue(),
     },
     {
       source: {

@@ -4,6 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
   MessageQueue,
+  MonitoringBuilder,
   XTokens,
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
@@ -38,25 +39,7 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      // TODO maybe apply just one, like extrinsic
-      // monitoring: MonitoringBuilder().xTokens().transferredMultiAssets() or something
-      monitoring: {
-        source: {
-          event: {
-            section: 'xTokens',
-            method: 'TransferredMultiAssets',
-          },
-          addressExtractor: XTokens().getAddress().fromSender(),
-          messageIdExtractor: XTokens().getMessageId().fromXcmpQueue(),
-        },
-        destination: {
-          event: {
-            section: 'messageQueue',
-            method: 'Processed',
-          },
-          messageIdExtractor: MessageQueue().getMessageId().fromId(),
-        },
-      },
+      monitoring: MonitoringBuilder().xTokens().messageQueue(),
     },
     {
       source: {

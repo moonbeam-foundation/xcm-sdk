@@ -1,18 +1,31 @@
 // TODO mjm fix the architecture, make it like the other builders. Or is it actually a builder?
+// TODO mjm review and remove redundant comments
 
-import type { U8aFixed } from '@polkadot/types';
+import type { Bool, U8aFixed } from '@polkadot/types';
 import type {
   AccountId32,
   Event,
   EventRecord,
   H256,
 } from '@polkadot/types/interfaces';
-import type { StagingXcmV5Location } from '@polkadot/types/lookup';
+import type {
+  CumulusPrimitivesCoreAggregateMessageOrigin,
+  StagingXcmV5Location,
+} from '@polkadot/types/lookup';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 
+// TODO mjm review this
 interface MessageQueueProcessedData {
   id: H256;
+  origin: CumulusPrimitivesCoreAggregateMessageOrigin;
+  weightUsed: unknown; // not used
+  success: Bool;
+  // TODO mjm necessary? Also support array access
+  0: H256; // id
+  1: CumulusPrimitivesCoreAggregateMessageOrigin; // origin
+  2: unknown; // weightUsed
+  3: Bool; // success
 }
 
 interface XcmEventData {
@@ -152,6 +165,7 @@ export interface MonitoringConfig {
   checkDestination: DestinationChecker;
 }
 
+// TODO mjm too much duplication here. Implement something like address extractor and message id extractor
 // Pre-built source checkers
 const sourceCheckers = {
   xcmPallet:
@@ -199,53 +213,100 @@ const sourceCheckers = {
       return { matched: true, messageId, event };
     },
 
-  polkadotXcm:
-    (method = 'Sent'): SourceChecker =>
-    (events, sourceAddress) => {
-      const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+  polkadotXcm: (): SourceChecker => (events, sourceAddress) => {
+    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
 
-      const event = events.find((event) => {
-        if (
-          event.event.section !== 'polkadotXcm' ||
-          event.event.method !== method
-        ) {
-          return false;
-        }
-
-        try {
-          // Extract address from PolkadotXcm event with automatic type detection
-          const eventData = event.event.data as unknown as XcmEventData;
-          const interior = eventData.origin.interior.asX1[0];
-
-          let address: string;
-          if (interior.isAccountId32) {
-            address = interior.asAccountId32.id.toHex();
-          } else if (interior.isAccountKey20) {
-            address = interior.asAccountKey20.key.toString();
-          } else {
-            return false; // Unsupported address type
-          }
-
-          return address === decodedSourceAddress;
-        } catch {
-          return false;
-        }
-      });
-
-      if (!event) {
-        return { matched: false };
+    const event = events.find((event) => {
+      if (
+        event.event.section !== 'polkadotXcm' ||
+        event.event.method !== 'Sent'
+      ) {
+        return false;
       }
 
-      const eventData = event.event.data as unknown as XcmEventData;
-      const messageId = eventData.messageId.toHex();
+      try {
+        // Extract address from PolkadotXcm event with automatic type detection
+        const eventData = event.event.data as unknown as XcmEventData;
+        const interior = eventData.origin.interior.asX1[0];
 
-      return { matched: true, messageId, event };
-    },
+        let address: string;
+        if (interior.isAccountId32) {
+          address = interior.asAccountId32.id.toHex();
+        } else if (interior.isAccountKey20) {
+          address = interior.asAccountKey20.key.toString();
+        } else {
+          return false; // Unsupported address type
+        }
+
+        return address === decodedSourceAddress;
+      } catch {
+        return false;
+      }
+    });
+
+    if (!event) {
+      return { matched: false };
+    }
+
+    const eventData = event.event.data as unknown as XcmEventData;
+    const messageId = eventData.messageId.toHex();
+
+    return { matched: true, messageId, event };
+  },
+
+  polkadotXcmAndXcmpQueue: (): SourceChecker => (events, sourceAddress) => {
+    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
+
+    const polkadotXcmEvent = events.find((event) => {
+      if (
+        event.event.section !== 'polkadotXcm' ||
+        event.event.method !== 'Sent'
+      ) {
+        return false;
+      }
+
+      try {
+        // Extract address from PolkadotXcm event with automatic type detection
+        const eventData = event.event.data as unknown as XcmEventData;
+        const interior = eventData.origin.interior.asX1[0];
+
+        let address: string;
+        if (interior.isAccountId32) {
+          address = interior.asAccountId32.id.toHex();
+        } else if (interior.isAccountKey20) {
+          address = interior.asAccountKey20.key.toString();
+        } else {
+          return false; // Unsupported address type
+        }
+
+        return address === decodedSourceAddress;
+      } catch {
+        return false;
+      }
+    });
+
+    if (!polkadotXcmEvent) {
+      return { matched: false };
+    }
+    const xcmpEvent = events.find(
+      (event) =>
+        event.event.section === 'xcmpQueue' &&
+        event.event.method === 'XcmpMessageSent',
+    );
+
+    if (!polkadotXcmEvent || !xcmpEvent) {
+      return { matched: false };
+    }
+
+    const eventData = xcmpEvent.event.data as unknown as XcmQueueEventData;
+    const messageId = eventData.messageHash.toHex();
+
+    return { matched: true, messageId, event: polkadotXcmEvent };
+  },
 
   xTokens: (): SourceChecker => (events, sourceAddress) => {
     const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
 
-    // Find xTokens event
     const xTokensEvent = events.find((event) => {
       if (event.event.section !== 'xTokens') return false;
       if (
@@ -264,7 +325,6 @@ const sourceCheckers = {
       }
     });
 
-    // Find xcmpQueue event in same block
     const xcmpEvent = events.find(
       (event) =>
         event.event.section === 'xcmpQueue' &&
@@ -322,12 +382,54 @@ const destinationCheckers = {
     }
 
     try {
-      const eventData = event.event.data as any;
+      const eventData = event.event
+        .data as unknown as MessageQueueProcessedData;
       const success = eventData.success.isTrue;
       return { matched: true, success, event };
     } catch (error) {
       return { matched: true, success: false, event };
     }
+  },
+
+  xcmpQueue: (): DestinationChecker => (events, messageId) => {
+    const successEvent = events.find((event) => {
+      if (
+        event.event.section !== 'xcmpQueue' ||
+        event.event.method !== 'Success'
+      ) {
+        return false;
+      }
+
+      console.log('successEvent', event.toHuman());
+
+      if (messageId) {
+        try {
+          const eventData = event.event.data as unknown as XcmQueueEventData;
+          return eventData.messageHash.toString() === messageId;
+        } catch (error) {
+          return false;
+        }
+      }
+      return true;
+    });
+
+    const failEvent = events.find(
+      (event) =>
+        event.event.section === 'xcmpQueue' && event.event.method === 'Fail',
+    );
+
+    console.log('failEvent', failEvent?.toHuman());
+
+    if (!successEvent && !failEvent) {
+      return { matched: false, success: false };
+    }
+
+    // TODO mjm review this
+    return {
+      matched: true,
+      success: !!successEvent,
+      event: successEvent || failEvent,
+    };
   },
 
   bridgeMessages: (): DestinationChecker => (events, messageId) => {
@@ -341,125 +443,48 @@ const destinationCheckers = {
       ? { matched: true, success: true, event }
       : { matched: false, success: false };
   },
-
-  custom:
-    (section: string, method: string): DestinationChecker =>
-    (events, messageId) => {
-      const event = events.find(
-        (event) =>
-          event.event.section === section && event.event.method === method,
-      );
-
-      return event
-        ? { matched: true, success: true, event }
-        : { matched: false, success: false };
-    },
 };
 
-// Builder interface
-interface SourceBuilder {
-  messageQueue: () => MonitoringConfig;
-  bridgeMessages: () => MonitoringConfig;
-  custom: (section: string, method: string) => MonitoringConfig;
-}
-
-// Method configurable builder interface for pallets that allow custom methods
-interface MethodConfigurableBuilder {
-  withMethod: (method: string) => SourceBuilder;
-  messageQueue: () => MonitoringConfig;
-  bridgeMessages: () => MonitoringConfig;
-  custom: (section: string, method: string) => MonitoringConfig;
-}
+// TODO mjm use?
+// interface MethodConfigurableBuilder {
+//   messageQueue: () => MonitoringConfig;
+//   bridgeMessages: () => MonitoringConfig;
+//   // custom: (section: string, method: string) => MonitoringConfig;
+// }
 
 // Main MonitoringBuilder
 export function MonitoringBuilder() {
   return {
-    xcmPallet: (): MethodConfigurableBuilder => ({
-      withMethod: (method: string): SourceBuilder => ({
-        messageQueue: () => ({
-          checkSource: sourceCheckers.xcmPallet(method),
-          checkDestination: destinationCheckers.messageQueue(),
-        }),
-        bridgeMessages: () => ({
-          checkSource: sourceCheckers.xcmPallet(method),
-          checkDestination: destinationCheckers.bridgeMessages(),
-        }),
-        custom: (section: string, method: string) => ({
-          checkSource: sourceCheckers.xcmPallet(method),
-          checkDestination: destinationCheckers.custom(section, method),
-        }),
-      }),
+    xcmPallet: () => ({
       messageQueue: () => ({
         checkSource: sourceCheckers.xcmPallet(),
         checkDestination: destinationCheckers.messageQueue(),
       }),
-      bridgeMessages: () => ({
-        checkSource: sourceCheckers.xcmPallet(),
-        checkDestination: destinationCheckers.bridgeMessages(),
-      }),
-      custom: (section: string, method: string) => ({
-        checkSource: sourceCheckers.xcmPallet(),
-        checkDestination: destinationCheckers.custom(section, method),
-      }),
     }),
 
-    polkadotXcm: (): MethodConfigurableBuilder => ({
-      // TODO mjm not like
-      withMethod: (method: string): SourceBuilder => ({
-        messageQueue: () => ({
-          checkSource: sourceCheckers.polkadotXcm(method),
-          checkDestination: destinationCheckers.messageQueue(),
-        }),
-        bridgeMessages: () => ({
-          checkSource: sourceCheckers.polkadotXcm(method),
-          checkDestination: destinationCheckers.bridgeMessages(),
-        }),
-        custom: (section: string, method: string) => ({
-          checkSource: sourceCheckers.polkadotXcm(method),
-          checkDestination: destinationCheckers.custom(section, method),
-        }),
-      }),
+    polkadotXcm: () => ({
       messageQueue: () => ({
         checkSource: sourceCheckers.polkadotXcm(),
         checkDestination: destinationCheckers.messageQueue(),
       }),
-      bridgeMessages: () => ({
-        checkSource: sourceCheckers.polkadotXcm(),
-        checkDestination: destinationCheckers.bridgeMessages(),
-      }),
-      custom: (section: string, method: string) => ({
-        checkSource: sourceCheckers.polkadotXcm(),
-        checkDestination: destinationCheckers.custom(section, method),
+      xcmpQueue: () => ({
+        checkSource: sourceCheckers.polkadotXcmAndXcmpQueue(),
+        checkDestination: destinationCheckers.xcmpQueue(),
       }),
     }),
 
-    xTokens: (): SourceBuilder => ({
+    xTokens: () => ({
       messageQueue: () => ({
         checkSource: sourceCheckers.xTokens(),
         checkDestination: destinationCheckers.messageQueue(),
       }),
-      bridgeMessages: () => ({
-        checkSource: sourceCheckers.xTokens(),
-        checkDestination: destinationCheckers.bridgeMessages(),
-      }),
-      custom: (section: string, method: string) => ({
-        checkSource: sourceCheckers.xTokens(),
-        checkDestination: destinationCheckers.custom(section, method),
-      }),
     }),
 
-    bridgeMessages: (): SourceBuilder => ({
-      messageQueue: () => ({
-        checkSource: sourceCheckers.bridgeMessages(),
-        checkDestination: destinationCheckers.messageQueue(),
-      }),
+    // TODO mjm call ecosystem bridge or something?
+    bridgeMessages: () => ({
       bridgeMessages: () => ({
         checkSource: sourceCheckers.bridgeMessages(),
         checkDestination: destinationCheckers.bridgeMessages(),
-      }),
-      custom: (section: string, method: string) => ({
-        checkSource: sourceCheckers.bridgeMessages(),
-        checkDestination: destinationCheckers.custom(section, method),
       }),
     }),
   };
