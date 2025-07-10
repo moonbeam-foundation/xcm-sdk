@@ -198,6 +198,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
     },
     {
       source: {
@@ -248,23 +249,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
       monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
-      // monitoring: {
-      //   source: {
-      //     event: {
-      //       section: 'polkadotXcm',
-      //       method: 'Sent',
-      //     },
-      //     addressExtractor: XcmPallet().getAddress().fromAccountKey20(),
-      //     messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
-      //   },
-      //   destination: {
-      //     event: {
-      //       section: 'messageQueue',
-      //       method: 'Processed',
-      //     },
-      //     messageIdExtractor: MessageQueue().getMessageId().fromId(),
-      //   },
-      // },
     },
     {
       source: {
