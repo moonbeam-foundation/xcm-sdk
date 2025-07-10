@@ -2,7 +2,6 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MessageQueue,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 

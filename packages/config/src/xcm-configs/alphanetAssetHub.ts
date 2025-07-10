@@ -3,7 +3,6 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MessageQueue,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
@@ -41,25 +40,7 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      // TODO add monitoring
       monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
-      // monitoring: {
-      //   source: {
-      //     event: {
-      //       section: 'polkadotXcm',
-      //       method: 'Sent',
-      //     },
-      //     addressExtractor: XcmPallet().getAddress().fromAccountId32(),
-      //     messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
-      //   },
-      //   destination: {
-      //     event: {
-      //       section: 'messageQueue',
-      //       method: 'Processed',
-      //     },
-      //     messageIdExtractor: MessageQueue().getMessageId().fromId(),
-      //   },
-      // },
     },
   ],
 });
