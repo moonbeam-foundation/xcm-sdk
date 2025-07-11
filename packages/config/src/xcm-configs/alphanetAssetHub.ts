@@ -1,9 +1,9 @@
 import {
   AssetMinBuilder,
   BalanceBuilder,
+  EventMonitoringBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
 import { alphanetAssetHub, moonbaseAlpha } from '../chains';
@@ -40,7 +40,7 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      // monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
+      // monitoring: EventMonitoringBuilder().polkadotXcm().messageQueue(),
     },
   ],
 });

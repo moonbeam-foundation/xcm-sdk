@@ -1,4 +1,3 @@
-// TODO mjm fix the architecture, make it like the other builders. Or is it actually a builder?
 // TODO mjm review and remove redundant comments
 
 import type { Bool, U8aFixed } from '@polkadot/types';
@@ -13,18 +12,17 @@ import type {
 } from '@polkadot/types/lookup';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
+import type {
+  DestinationChecker,
+  EventMonitoringBuilderReturn,
+  SourceChecker,
+} from './EventMonitoringBuilder.interfaces';
 
-// TODO mjm review this
 interface MessageQueueProcessedData {
   id: H256;
   origin: CumulusPrimitivesCoreAggregateMessageOrigin;
-  weightUsed: unknown; // not used
+  weightUsed: unknown;
   success: Bool;
-  // TODO mjm necessary? Also support array access
-  0: H256; // id
-  1: CumulusPrimitivesCoreAggregateMessageOrigin; // origin
-  2: unknown; // weightUsed
-  3: Bool; // success
 }
 
 interface XcmEventData {
@@ -40,130 +38,7 @@ interface XcmQueueEventData {
   messageHash: U8aFixed;
 }
 
-// TODO mjm handle try-catches, too bloating
-// TODO mjm could be catching somewhere else (in monitoring.ts) or just returning undefined and handling
-// TODO mjm add tests
-// TODO mjm rename? PolkadotXcm also uses this builder
-// export function XcmCommonPallets() {
-//   return {
-//     getAddress: () => ({
-//       fromAccountId32: () => (event: EventRecord) => {
-//         try {
-//           const eventData = event.event.data as unknown as XcmEventData;
-
-//           return eventData.origin.interior.asX1[0].asAccountId32.id.toHex();
-//         } catch (error) {
-//           console.error('Error extracting address from event:', error);
-//           throw error;
-//         }
-//       },
-//       fromAccountKey20: () => (event: EventRecord) => {
-//         try {
-//           const eventData = event.event.data as unknown as XcmEventData;
-
-//           return eventData.origin.interior.asX1[0].asAccountKey20.key.toString();
-//         } catch (error) {
-//           console.error('Error extracting address from event:', error);
-//           throw error;
-//         }
-//       },
-//     }),
-//     getMessageId: () => ({
-//       fromMessageId: () => (event: EventRecord) => {
-//         try {
-//           const eventData = event.event.data as unknown as XcmEventData;
-
-//           return eventData.messageId.toHex();
-//         } catch (error) {
-//           console.error('Error extracting message ID from event:', error);
-//           throw error;
-//         }
-//       },
-//     }),
-//   };
-// }
-
-// export function XTokens() {
-//   return {
-//     getAddress: () => ({
-//       fromSender: () => (event: EventRecord) => {
-//         try {
-//           const eventData = event.event.data as unknown as XTokensEventData;
-
-//           const sender = eventData.sender.toString();
-
-//           return u8aToHex(decodeAddress(sender));
-//         } catch (error) {
-//           console.error('Error extracting address from event:', error);
-//           throw error;
-//         }
-//       },
-//     }),
-//     getMessageId: () => ({
-//       fromXcmpQueue: () => (event: EventRecord, events?: EventRecord[]) => {
-//         try {
-//           const xcmpQueueEvent = events?.find((e) => {
-//             return (
-//               e.event.section === 'xcmpQueue' &&
-//               e.event.method === 'XcmpMessageSent'
-//             );
-//           });
-
-//           if (!xcmpQueueEvent) {
-//             throw new Error('XcmpMessageSent event not found');
-//           }
-
-//           return (
-//             xcmpQueueEvent?.event.data as unknown as XcmQueueEventData
-//           ).messageHash.toHex();
-//         } catch (error) {
-//           console.error('Error extracting message ID from event:', error);
-//           throw error;
-//         }
-//       },
-//     }),
-//   };
-// }
-
-// export function MessageQueue() {
-//   return {
-//     getMessageId: () => ({
-//       fromId: () => (event: Event) => {
-//         return (
-//           event.data as unknown as MessageQueueProcessedData
-//         ).id.toString();
-//       },
-//     }),
-//   };
-// }
-
-/// NEW IMPLEMENTATION
-
-// Source checker function type
-export type SourceChecker = (
-  events: EventRecord[],
-  sourceAddress: string,
-) => {
-  matched: boolean;
-  messageId?: string;
-  event?: EventRecord;
-};
-
-// Destination checker function type
-export type DestinationChecker = (
-  events: EventRecord[],
-  messageId?: string,
-) => {
-  matched: boolean;
-  success: boolean;
-  event?: EventRecord;
-};
-
-export interface MonitoringConfig {
-  checkSource: SourceChecker;
-  checkDestination: DestinationChecker;
-}
-
+// TODO mjm move all this to utils?
 // Address extractor builder
 function GetAddress() {
   return {
@@ -203,7 +78,7 @@ function GetMessageId() {
 
     fromXcmpQueue:
       () =>
-      (event: EventRecord, events?: EventRecord[]): string => {
+      (_event: EventRecord, events?: EventRecord[]): string => {
         const xcmpEvent = events?.find(
           (event) =>
             event.event.section === 'xcmpQueue' &&
@@ -220,7 +95,6 @@ function GetMessageId() {
   };
 }
 
-// Message ID matcher builder for destination checkers
 function MatchMessageId() {
   return {
     fromMessageQueueId:
@@ -352,7 +226,6 @@ const createSourceChecker =
     }
   };
 
-// Source checker builder
 function CheckSource() {
   return {
     xcmPallet: (): SourceChecker =>
@@ -387,7 +260,7 @@ function CheckSource() {
         GetMessageId().fromXcmpQueue(),
       ),
 
-    bridgeMessages: (): SourceChecker => (events, sourceAddress) => {
+    bridgeMessages: (): SourceChecker => (events) => {
       const event = events.find(
         (event) =>
           event.event.section === 'bridgeMessages' &&
@@ -458,15 +331,7 @@ function CheckDestination() {
   };
 }
 
-// TODO mjm use?
-// interface MethodConfigurableBuilder {
-//   messageQueue: () => MonitoringConfig;
-//   bridgeMessages: () => MonitoringConfig;
-//   // custom: (section: string, method: string) => MonitoringConfig;
-// }
-
-// Main MonitoringBuilder
-export function MonitoringBuilder() {
+export function EventMonitoringBuilder(): EventMonitoringBuilderReturn {
   return {
     xcmPallet: () => ({
       messageQueue: () => ({
@@ -493,7 +358,6 @@ export function MonitoringBuilder() {
       }),
     }),
 
-    // TODO mjm call ecosystem bridge or something?
     bridgeMessages: () => ({
       bridgeMessages: () => ({
         checkSource: CheckSource().bridgeMessages(),

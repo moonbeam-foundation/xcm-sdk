@@ -2,8 +2,8 @@ import {
   AssetMinBuilder,
   BalanceBuilder,
   ContractBuilder,
+  EventMonitoringBuilder,
   FeeBuilder,
-  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   agng,
@@ -198,7 +198,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
+      monitoring: EventMonitoringBuilder().polkadotXcm().messageQueue(),
     },
     {
       source: {
@@ -248,7 +248,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
-      monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
+      monitoring: EventMonitoringBuilder().polkadotXcm().messageQueue(),
     },
     {
       source: {
@@ -435,7 +435,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().polkadotXcm().xcmpQueue(),
+      monitoring: EventMonitoringBuilder().polkadotXcm().xcmpQueue(),
     },
     {
       source: {

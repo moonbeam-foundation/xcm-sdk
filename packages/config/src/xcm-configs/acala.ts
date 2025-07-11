@@ -1,9 +1,9 @@
 import {
   AssetMinBuilder,
   BalanceBuilder,
+  EventMonitoringBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { aca, aseed, glmr, ldot } from '../assets';
 import { acala, moonbeam } from '../chains';
@@ -88,7 +88,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      monitoring: MonitoringBuilder().xTokens().messageQueue(),
+      monitoring: EventMonitoringBuilder().xTokens().messageQueue(),
     },
     {
       source: {
