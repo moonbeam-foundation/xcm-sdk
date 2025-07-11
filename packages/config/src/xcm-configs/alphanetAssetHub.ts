@@ -40,7 +40,7 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
+      // monitoring: MonitoringBuilder().polkadotXcm().messageQueue(),
     },
   ],
 });
