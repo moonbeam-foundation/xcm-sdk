@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 3.1.7
+
+### Patch Changes
+
+- [#516](https://github.com/moonbeam-foundation/xcm-sdk/pull/516) [`c7e3640`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c7e3640a0a2ce47ebae90fba823b334e187ad20e) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
+
 ## 3.1.6
 
 ### Patch Changes
