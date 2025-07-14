@@ -2,6 +2,7 @@ import type {
   AssetMinConfigBuilder,
   BalanceConfigBuilder,
   ContractConfigBuilder,
+  EventMonitoringConfig,
   ExtrinsicConfigBuilder,
   FeeConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -11,38 +12,13 @@ import type {
   ChainAsset,
   SetOptional,
 } from '@moonbeam-network/xcm-types';
-import type { Event, EventRecord } from '@polkadot/types/interfaces';
-
-export interface EventConfig {
-  section: string;
-  method: string;
-}
-
-export interface SourceEventConfig {
-  event: EventConfig;
-  addressExtractor: (event: EventRecord) => string;
-  messageIdExtractor: (event: EventRecord, allEvents?: EventRecord[]) => string;
-}
-
-export interface DestinationEventConfig {
-  event: EventConfig;
-  // TODO mjm unify Event and EventRecord
-  messageIdExtractor: (event: Event, allEvents?: EventRecord[]) => string;
-  // TODO mjm needed?
-  successIndicator?: (event: EventRecord) => boolean;
-}
-
-export interface MonitoringConfig {
-  source: SourceEventConfig;
-  destination: DestinationEventConfig;
-}
 
 export interface AssetRouteConstructorParams {
   source: SourceConfig;
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
   extrinsic?: ExtrinsicConfigBuilder;
-  monitoring?: MonitoringConfig;
+  monitoring?: EventMonitoringConfig;
 }
 
 export interface SourceConfig {
@@ -83,7 +59,7 @@ export class AssetRoute {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
-  readonly monitoring?: MonitoringConfig;
+  readonly monitoring?: EventMonitoringConfig;
 
   constructor({
     source,

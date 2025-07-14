@@ -3,8 +3,7 @@ import {
   BalanceBuilder,
   ContractBuilder,
   FeeBuilder,
-  MessageQueue,
-  XcmPallet,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   agng,
@@ -193,12 +192,16 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         chain: alphanetAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 5,
+          amount: 8, // TODO mjm fee builder?
           asset: tt1,
         },
         min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -248,23 +251,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
-      monitoring: {
-        source: {
-          event: {
-            section: 'polkadotXcm',
-            method: 'Sent',
-          },
-          addressExtractor: XcmPallet().getAddress().fromAccountKey20(),
-          messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
-        },
-        destination: {
-          event: {
-            section: 'messageQueue',
-            method: 'Processed',
-          },
-          messageIdExtractor: MessageQueue().getMessageId().fromId(),
-        },
-      },
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -446,11 +436,12 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         chain: peaqAlphanet,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: 0.01,
+          amount: 0.0000000001, // TODO mjm forcing error in destination, return to 0.01 after testing
           asset: agng,
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {

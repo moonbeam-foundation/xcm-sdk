@@ -3,8 +3,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MessageQueue,
-  XcmPallet,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { tt1, unit } from '../assets';
 import { alphanetAssetHub, moonbaseAlpha } from '../chains';
@@ -41,23 +40,11 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      monitoring: {
-        source: {
-          event: {
-            section: 'polkadotXcm',
-            method: 'Sent',
-          },
-          addressExtractor: XcmPallet().getAddress().fromAccountId32(),
-          messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
-        },
-        destination: {
-          event: {
-            section: 'messageQueue',
-            method: 'Processed',
-          },
-          messageIdExtractor: MessageQueue().getMessageId().fromId(),
-        },
-      },
+      // TODO uncomment this, forcing timeout in the dapp
+      // monitoring: MonitoringBuilder()
+      //   .monitorEvent()
+      //   .polkadotXcm()
+      //   .messageQueue(),
     },
   ],
 });

@@ -1,6 +1,7 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { devBeta, devStage } from '../assets';
 import { moonbaseBeta, moonbaseStage } from '../chains';
@@ -35,6 +36,10 @@ export const moonbaseStageRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsToEcosystem()
         .X1(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .bridgeMessages()
+        .bridgeMessages(),
     },
     {
       source: {
@@ -59,6 +64,10 @@ export const moonbaseStageRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsToEcosystem()
         .X3(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .bridgeMessages()
+        .bridgeMessages(),
     },
   ],
 });

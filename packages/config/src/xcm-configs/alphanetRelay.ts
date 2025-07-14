@@ -2,10 +2,8 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MessageQueue,
-  XcmPallet,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-
 import { unit } from '../assets';
 import { alphanetRelay, moonbaseAlpha } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -41,24 +39,7 @@ export const alphanetRelayRoutes = new ChainRoutes({
         .xcmPallet()
         .transferAssetsUsingTypeAndThen()
         .here(),
-      monitoring: {
-        source: {
-          event: {
-            section: 'xcmPallet',
-            method: 'Sent',
-          },
-          // TODO mjm call it address? like balance, which is a builder
-          addressExtractor: XcmPallet().getAddress().fromAccountId32(),
-          messageIdExtractor: XcmPallet().getMessageId().fromMessageId(),
-        },
-        destination: {
-          event: {
-            section: 'messageQueue',
-            method: 'Processed',
-          },
-          messageIdExtractor: MessageQueue().getMessageId().fromId(),
-        },
-      },
+      monitoring: MonitoringBuilder().monitorEvent().xcmPallet().messageQueue(),
     },
   ],
 });

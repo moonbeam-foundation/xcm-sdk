@@ -1,0 +1,295 @@
+// TODO mjm review and remove redundant comments
+
+import type { Bool, U8aFixed } from '@polkadot/types';
+import type {
+  AccountId32,
+  EventRecord,
+  H256,
+} from '@polkadot/types/interfaces';
+import type {
+  CumulusPrimitivesCoreAggregateMessageOrigin,
+  StagingXcmV5Location,
+} from '@polkadot/types/lookup';
+import { u8aToHex } from '@polkadot/util';
+import { decodeAddress } from '@polkadot/util-crypto';
+import type {
+  DestinationChecker,
+  MonitorEventReturn,
+  SourceChecker,
+} from './eventMonitoring.interfaces';
+import {
+  createDestinationChecker,
+  createSourceChecker,
+} from './eventMonitoring.utils';
+
+interface MessageQueueProcessedData {
+  id: H256;
+  origin: CumulusPrimitivesCoreAggregateMessageOrigin;
+  weightUsed: unknown;
+  success: Bool;
+}
+
+interface XcmEventData {
+  origin: StagingXcmV5Location;
+  messageId: U8aFixed;
+}
+
+interface XTokensEventData {
+  sender: AccountId32;
+}
+
+interface XcmQueueEventData {
+  messageHash: U8aFixed;
+}
+
+function GetAddress() {
+  return {
+    fromXcmEvent:
+      () =>
+      (event: EventRecord): string => {
+        const eventData = event.event.data as unknown as XcmEventData;
+        const interior = eventData.origin.interior.asX1[0];
+
+        if (interior.isAccountId32) {
+          return interior.asAccountId32.id.toHex();
+        } else if (interior.isAccountKey20) {
+          return interior.asAccountKey20.key.toString();
+        } else {
+          throw new Error('Unsupported address type');
+        }
+      },
+
+    fromXTokensEvent:
+      () =>
+      (event: EventRecord): string => {
+        const eventData = event.event.data as unknown as XTokensEventData;
+        return u8aToHex(decodeAddress(eventData.sender.toString()));
+      },
+  };
+}
+
+function GetMessageId() {
+  return {
+    fromXcmEvent:
+      () =>
+      (event: EventRecord): string => {
+        const eventData = event.event.data as unknown as XcmEventData;
+        return eventData.messageId.toHex();
+      },
+
+    fromXcmpQueue:
+      () =>
+      (_event: EventRecord, events?: EventRecord[]): string => {
+        const xcmpEvent = events?.find(
+          (event) =>
+            event.event.section === 'xcmpQueue' &&
+            event.event.method === 'XcmpMessageSent',
+        );
+
+        if (!xcmpEvent) {
+          throw new Error('XcmpMessageSent event not found');
+        }
+
+        const eventData = xcmpEvent.event.data as unknown as XcmQueueEventData;
+        return eventData.messageHash.toHex();
+      },
+  };
+}
+
+function MatchMessageId() {
+  return {
+    fromMessageQueueId:
+      () =>
+      (event: EventRecord, messageId?: string): boolean => {
+        if (!messageId) return true;
+
+        try {
+          const eventData = event.event
+            .data as unknown as MessageQueueProcessedData;
+          return eventData.id.toString() === messageId;
+        } catch {
+          return false;
+        }
+      },
+
+    fromXcmpQueueHash:
+      () =>
+      (event: EventRecord, messageId?: string): boolean => {
+        if (!messageId) return true;
+
+        try {
+          const eventData = event.event.data as unknown as XcmQueueEventData;
+          return eventData.messageHash.toString() === messageId;
+        } catch {
+          return false;
+        }
+      },
+
+    // TODO
+    never: () => (): boolean => true, // Always match for cases where messageId is not used
+  };
+}
+
+function GetIsSuccess() {
+  return {
+    fromMessageQueueProcessed:
+      () =>
+      (event: EventRecord): boolean => {
+        try {
+          const eventData = event.event
+            .data as unknown as MessageQueueProcessedData;
+          return eventData.success.isTrue;
+        } catch {
+          return false;
+        }
+      },
+
+    fromXcmpQueueEvent:
+      () =>
+      (event: EventRecord): boolean => {
+        return event.event.method === 'Success';
+      },
+
+    // TODO
+    alwaysTrue: () => (): boolean => true, // Always successful for simple cases
+  };
+}
+
+function CheckSource() {
+  return {
+    xcmPallet: (): SourceChecker =>
+      createSourceChecker(
+        'xcmPallet',
+        'Sent',
+        GetAddress().fromXcmEvent(),
+        GetMessageId().fromXcmEvent(),
+      ),
+
+    polkadotXcm: (): SourceChecker =>
+      createSourceChecker(
+        'polkadotXcm',
+        'Sent',
+        GetAddress().fromXcmEvent(),
+        GetMessageId().fromXcmEvent(),
+      ),
+
+    polkadotXcmAndXcmpQueue: (): SourceChecker =>
+      createSourceChecker(
+        'polkadotXcm',
+        'Sent',
+        GetAddress().fromXcmEvent(),
+        GetMessageId().fromXcmpQueue(),
+      ),
+
+    xTokens: (): SourceChecker =>
+      createSourceChecker(
+        'xTokens',
+        ['TransferredMultiAssets', 'TransferredAssets'],
+        GetAddress().fromXTokensEvent(),
+        GetMessageId().fromXcmpQueue(),
+      ),
+
+    bridgeMessages: (): SourceChecker => (events) => {
+      const event = events.find(
+        (event) =>
+          event.event.section === 'bridgeMessages' &&
+          event.event.method === 'MessageAccepted',
+      );
+
+      return event ? { matched: true, event } : { matched: false };
+    },
+  };
+}
+
+function CheckDestination() {
+  return {
+    messageQueue: (): DestinationChecker =>
+      createDestinationChecker(
+        'messageQueue',
+        'Processed',
+        MatchMessageId().fromMessageQueueId(),
+        GetIsSuccess().fromMessageQueueProcessed(),
+      ),
+
+    xcmpQueue: (): DestinationChecker => (events, messageId) => {
+      // Special handling for xcmpQueue as it needs to check both Success and Fail events
+      const matchMessageId = MatchMessageId().fromXcmpQueueHash();
+
+      const successEvent = events.find((event) => {
+        if (
+          event.event.section !== 'xcmpQueue' ||
+          event.event.method !== 'Success'
+        ) {
+          return false;
+        }
+
+        return matchMessageId(event, messageId);
+      });
+
+      const failEvent = events.find((event) => {
+        if (
+          event.event.section !== 'xcmpQueue' ||
+          event.event.method !== 'Fail'
+        ) {
+          return false;
+        }
+
+        return matchMessageId(event, messageId);
+      });
+
+      if (!successEvent && !failEvent) {
+        return { matched: false, success: false };
+      }
+
+      return {
+        matched: true,
+        success: !!successEvent,
+        event: successEvent || failEvent,
+      };
+    },
+
+    bridgeMessages: (): DestinationChecker =>
+      createDestinationChecker(
+        'bridgeMessages',
+        'MessagesReceived',
+        MatchMessageId().never(),
+        GetIsSuccess().alwaysTrue(),
+      ),
+  };
+}
+
+export function monitorEvent(): MonitorEventReturn {
+  return {
+    xcmPallet: () => ({
+      messageQueue: () => ({
+        checkSource: CheckSource().xcmPallet(),
+        checkDestination: CheckDestination().messageQueue(),
+      }),
+    }),
+
+    polkadotXcm: () => ({
+      messageQueue: () => ({
+        checkSource: CheckSource().polkadotXcm(),
+        checkDestination: CheckDestination().messageQueue(),
+      }),
+      xcmpQueue: () => ({
+        checkSource: CheckSource().polkadotXcmAndXcmpQueue(),
+        checkDestination: CheckDestination().xcmpQueue(),
+      }),
+    }),
+
+    xTokens: () => ({
+      messageQueue: () => ({
+        checkSource: CheckSource().xTokens(),
+        checkDestination: CheckDestination().messageQueue(),
+      }),
+    }),
+
+    bridgeMessages: () => ({
+      bridgeMessages: () => ({
+        checkSource: CheckSource().bridgeMessages(),
+        checkDestination: CheckDestination().bridgeMessages(),
+      }),
+    }),
+  };
+}

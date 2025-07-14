@@ -3,8 +3,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
-  MessageQueue,
-  XTokens,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
 import { moonbaseAlpha, peaqAlphanet } from '../chains';
@@ -38,25 +37,7 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      // TODO maybe apply just one, like extrinsic
-      // monitoring: MonitoringBuilder().xTokens().transferredMultiAssets() or something
-      monitoring: {
-        source: {
-          event: {
-            section: 'xTokens',
-            method: 'TransferredMultiAssets',
-          },
-          addressExtractor: XTokens().getAddress().fromSender(),
-          messageIdExtractor: XTokens().getMessageId().fromXcmpQueue(),
-        },
-        destination: {
-          event: {
-            section: 'messageQueue',
-            method: 'Processed',
-          },
-          messageIdExtractor: MessageQueue().getMessageId().fromId(),
-        },
-      },
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
     {
       source: {
