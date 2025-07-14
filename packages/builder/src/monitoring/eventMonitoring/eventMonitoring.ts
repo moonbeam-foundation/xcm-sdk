@@ -14,9 +14,13 @@ import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import type {
   DestinationChecker,
-  EventMonitoringBuilderReturn,
+  MonitorEventReturn,
   SourceChecker,
-} from './EventMonitoringBuilder.interfaces';
+} from './eventMonitoring.interfaces';
+import {
+  createDestinationChecker,
+  createSourceChecker,
+} from './eventMonitoring.utils';
 
 interface MessageQueueProcessedData {
   id: H256;
@@ -156,76 +160,6 @@ function GetIsSuccess() {
   };
 }
 
-// Generic destination checker factory
-const createDestinationChecker =
-  (
-    section: string,
-    method: string | string[],
-    matchMessageId: (event: EventRecord, messageId?: string) => boolean,
-    getIsSuccess: (event: EventRecord) => boolean,
-  ): DestinationChecker =>
-  (events, messageId) => {
-    const methods = Array.isArray(method) ? method : [method];
-
-    const event = events.find((event) => {
-      if (
-        event.event.section !== section ||
-        !methods.includes(event.event.method)
-      ) {
-        return false;
-      }
-
-      return matchMessageId(event, messageId);
-    });
-
-    if (!event) {
-      return { matched: false, success: false };
-    }
-
-    const success = getIsSuccess(event);
-    return { matched: true, success, event };
-  };
-
-// Generic source checker factory
-const createSourceChecker =
-  (
-    section: string,
-    method: string | string[],
-    addressExtractor: (event: EventRecord) => string,
-    messageIdExtractor: (event: EventRecord, events?: EventRecord[]) => string,
-  ): SourceChecker =>
-  (events, sourceAddress) => {
-    const decodedSourceAddress = u8aToHex(decodeAddress(sourceAddress));
-    const methods = Array.isArray(method) ? method : [method];
-
-    const event = events.find((event) => {
-      if (
-        event.event.section !== section ||
-        !methods.includes(event.event.method)
-      ) {
-        return false;
-      }
-
-      try {
-        const address = addressExtractor(event);
-        return address === decodedSourceAddress;
-      } catch {
-        return false;
-      }
-    });
-
-    if (!event) {
-      return { matched: false };
-    }
-
-    try {
-      const messageId = messageIdExtractor(event, events);
-      return { matched: true, messageId, event };
-    } catch {
-      return { matched: true, event }; // Return without messageId if extraction fails
-    }
-  };
-
 function CheckSource() {
   return {
     xcmPallet: (): SourceChecker =>
@@ -331,7 +265,7 @@ function CheckDestination() {
   };
 }
 
-export function EventMonitoringBuilder(): EventMonitoringBuilderReturn {
+export function monitorEvent(): MonitorEventReturn {
   return {
     xcmPallet: () => ({
       messageQueue: () => ({

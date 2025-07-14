@@ -1,2 +1,2 @@
-export * from './EventMonitoringBuilder';
-export * from './EventMonitoringBuilder.interfaces';
+export * from './MonitoringBuilder';
+export * from './MonitoringBuilder.interfaces';

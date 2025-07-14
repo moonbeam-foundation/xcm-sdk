@@ -2,7 +2,7 @@ import type {
   AssetMinConfigBuilder,
   BalanceConfigBuilder,
   ContractConfigBuilder,
-  EventMonitoringBuilderConfig,
+  EventMonitoringConfig,
   ExtrinsicConfigBuilder,
   FeeConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -18,7 +18,7 @@ export interface AssetRouteConstructorParams {
   destination: DestinationConfig;
   contract?: ContractConfigBuilder;
   extrinsic?: ExtrinsicConfigBuilder;
-  monitoring?: EventMonitoringBuilderConfig;
+  monitoring?: EventMonitoringConfig;
 }
 
 export interface SourceConfig {
@@ -59,7 +59,7 @@ export class AssetRoute {
 
   readonly extrinsic?: ExtrinsicConfigBuilder;
 
-  readonly monitoring?: EventMonitoringBuilderConfig;
+  readonly monitoring?: EventMonitoringConfig;
 
   constructor({
     source,

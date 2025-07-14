@@ -1,9 +1,9 @@
 import {
   AssetMinBuilder,
   BalanceBuilder,
-  EventMonitoringBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
 import { moonbaseAlpha, peaqAlphanet } from '../chains';
@@ -37,7 +37,7 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      monitoring: EventMonitoringBuilder().xTokens().messageQueue(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
     {
       source: {

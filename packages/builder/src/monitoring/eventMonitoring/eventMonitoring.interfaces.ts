@@ -18,13 +18,13 @@ export type DestinationChecker = (
   event?: EventRecord;
 };
 
-export interface EventMonitoringBuilderReturn {
+export interface MonitorEventReturn {
   [key: string]: () => {
-    [key: string]: () => EventMonitoringBuilderConfig;
+    [key: string]: () => EventMonitoringConfig;
   };
 }
 
-export interface EventMonitoringBuilderConfig {
+export interface EventMonitoringConfig {
   checkSource: SourceChecker;
   checkDestination: DestinationChecker;
 }

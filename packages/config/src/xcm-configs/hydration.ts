@@ -1,8 +1,8 @@
 import {
   BalanceBuilder,
-  EventMonitoringBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, hdx, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { hydration, moonbeam } from '../chains';
@@ -112,7 +112,10 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
-      monitoring: EventMonitoringBuilder().polkadotXcm().messageQueue(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
