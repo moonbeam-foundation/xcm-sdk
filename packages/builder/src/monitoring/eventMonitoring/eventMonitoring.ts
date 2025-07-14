@@ -42,8 +42,6 @@ interface XcmQueueEventData {
   messageHash: U8aFixed;
 }
 
-// TODO mjm move all this to utils?
-// Address extractor builder
 function GetAddress() {
   return {
     fromXcmEvent:
@@ -70,7 +68,6 @@ function GetAddress() {
   };
 }
 
-// Message ID extractor builder
 function GetMessageId() {
   return {
     fromXcmEvent:
@@ -133,7 +130,6 @@ function MatchMessageId() {
   };
 }
 
-// Success extractor builder for destination checkers
 function GetIsSuccess() {
   return {
     fromMessageQueueProcessed:
@@ -151,7 +147,6 @@ function GetIsSuccess() {
     fromXcmpQueueEvent:
       () =>
       (event: EventRecord): boolean => {
-        // Success if it's a 'Success' event, fail if it's a 'Fail' event
         return event.event.method === 'Success';
       },
 
@@ -206,7 +201,6 @@ function CheckSource() {
   };
 }
 
-// Destination checker builder
 function CheckDestination() {
   return {
     messageQueue: (): DestinationChecker =>
@@ -247,7 +241,6 @@ function CheckDestination() {
         return { matched: false, success: false };
       }
 
-      // TODO mjm review this
       return {
         matched: true,
         success: !!successEvent,

@@ -1,4 +1,7 @@
-import type { ExtrinsicConfig } from '@moonbeam-network/xcm-builder';
+import type {
+  EventMonitoringConfig,
+  ExtrinsicConfig,
+} from '@moonbeam-network/xcm-builder';
 import type { AssetRoute } from '@moonbeam-network/xcm-config';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
@@ -6,7 +9,8 @@ import type { EventRecord } from '@polkadot/types/interfaces';
 import type { ISubmittableResult } from '@polkadot/types/types';
 
 interface ListenToDestinationEventsProps {
-  route?: AssetRoute; // TODO mjm optional?
+  route: AssetRoute;
+  monitoringConfig: EventMonitoringConfig;
   messageId?: string;
   onDestinationFinalized?: () => void;
   onDestinationError?: (error: Error) => void;
@@ -14,6 +18,7 @@ interface ListenToDestinationEventsProps {
 
 export async function listenToDestinationEvents({
   route,
+  monitoringConfig,
   messageId,
   onDestinationFinalized,
   onDestinationError,
@@ -24,13 +29,6 @@ export async function listenToDestinationEvents({
   }
 
   try {
-    // TODO mjm handle better
-    const monitoringConfig = route?.monitoring;
-    if (!monitoringConfig) {
-      console.log('No monitoring config found');
-      return;
-    }
-
     const api: ApiPromise = await getPolkadotApi(route.destination.chain.ws);
 
     console.log('Subscribing to destination events...');
@@ -82,10 +80,9 @@ interface CreateMonitoringCallbackProps {
   onDestinationError?: (error: Error) => void;
 }
 
-// TODO needed?
 interface ListenToSourceEventsProps extends CreateMonitoringCallbackProps {}
 
-interface ProcessSourceEventsProps extends CreateMonitoringCallbackProps {
+interface ProcessSourceEventsProps extends ListenToSourceEventsProps {
   events: EventRecord[];
   unsubscribe?: () => void;
 }
@@ -104,6 +101,13 @@ export function processSourceEvents({
   onDestinationError,
   unsubscribe,
 }: ProcessSourceEventsProps): void {
+  const monitoringConfig = route.monitoring;
+  if (!monitoringConfig) {
+    console.log('No monitoring config found');
+    unsubscribe?.();
+    return;
+  }
+
   const extrinsicFailedEvent = events.find((event) => {
     return (
       event.event.section === 'system' &&
@@ -117,16 +121,6 @@ export function processSourceEvents({
     return;
   }
 
-  // TODO route.monitoring check should be done differently after all is integrated
-  // TODO mjm change to monitoringConfig parameter?
-  const monitoringConfig = route.monitoring;
-  if (!monitoringConfig) {
-    console.log('No valid MonitoringBuilder config found');
-    return;
-  }
-
-  console.log('Using MonitoringBuilder config');
-
   try {
     const sourceResult = monitoringConfig.checkSource(events, sourceAddress);
 
@@ -139,9 +133,9 @@ export function processSourceEvents({
         unsubscribe();
       }
 
-      // Listen to destination events with extracted message ID
       listenToDestinationEvents({
         route,
+        monitoringConfig,
         messageId: sourceResult.messageId,
         onDestinationFinalized,
         onDestinationError,
@@ -151,16 +145,8 @@ export function processSourceEvents({
     }
   } catch (error) {
     console.error('Error in MonitoringBuilder config:', error);
-    // onSourceError?.(
-    //   new Error(
-    //     `Monitoring failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-    //   ),
-    // );
     return;
   }
-
-  // No valid MonitoringBuilder config found and no events matched
-  console.log('No monitoring events matched');
 }
 
 export function createMonitoringCallback({
@@ -176,7 +162,6 @@ export function createMonitoringCallback({
   return (status: ISubmittableResult) => {
     // Execute the original user callback
     statusCallback?.(status);
-    console.log('status', status.toHuman());
 
     const extrinsicPalletName = extrinsic?.module;
     const extrinsicFunctionName = extrinsic?.func;

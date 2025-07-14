@@ -36,6 +36,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
     {
       source: {

@@ -150,7 +150,6 @@ export async function getTransferData({
           throw new Error('Polkadot signer must be provided');
         }
 
-        // TODO leave this here or leave it of the user to create it?
         const monitoringCallback = shouldListenToEvents
           ? createMonitoringCallback({
               sourceAddress,
