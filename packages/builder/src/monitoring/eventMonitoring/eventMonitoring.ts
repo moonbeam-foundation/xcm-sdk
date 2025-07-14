@@ -1,5 +1,3 @@
-// TODO mjm review and remove redundant comments
-
 import type { Bool, U8aFixed } from '@polkadot/types';
 import type {
   AccountId32,
@@ -125,7 +123,6 @@ function MatchMessageId() {
         }
       },
 
-    // TODO
     never: () => (): boolean => true, // Always match for cases where messageId is not used
   };
 }
@@ -150,7 +147,6 @@ function GetIsSuccess() {
         return event.event.method === 'Success';
       },
 
-    // TODO
     alwaysTrue: () => (): boolean => true, // Always successful for simple cases
   };
 }
@@ -252,6 +248,7 @@ function CheckDestination() {
       createDestinationChecker(
         'bridgeMessages',
         'MessagesReceived',
+        // TODO implement message matching
         MatchMessageId().never(),
         GetIsSuccess().alwaysTrue(),
       ),
