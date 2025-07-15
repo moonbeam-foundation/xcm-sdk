@@ -189,7 +189,6 @@ export const astar = new Parachain({
       decimals: 18,
       ids: {
         id: 18446744073709551619n,
-        palletInstance: 10,
       },
     }),
     ChainAsset.fromAsset(astr, {
