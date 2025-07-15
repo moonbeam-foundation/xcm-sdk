@@ -34,7 +34,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
     {
       source: {
@@ -60,7 +60,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: movr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
     },
     {
       source: {
@@ -86,7 +86,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
     {
       source: {
@@ -112,7 +112,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
     {
       source: {
@@ -138,7 +138,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
   ],
 });

@@ -189,6 +189,7 @@ export const astar = new Parachain({
       decimals: 18,
       ids: {
         id: 18446744073709551619n,
+        palletInstance: 10,
       },
     }),
     ChainAsset.fromAsset(astr, {
@@ -222,24 +223,40 @@ export const bifrostKusama = new Parachain({
       decimals: 12,
       ids: {
         id: { Native: bnc.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0001000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vbnc, {
       decimals: 12,
       ids: {
         id: { VToken: bnc.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0101000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vksm, {
       decimals: 12,
       ids: {
         id: { VToken: ksm.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0104000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vmovr, {
       decimals: 18,
       ids: {
         id: { VToken: movr.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x010a000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
   ],
@@ -252,9 +269,9 @@ export const bifrostKusama = new Parachain({
   parachainId: 2001,
   ss58Format: 6,
   ws: [
-    'wss://bifrost-rpc.dwellir.com',
     'wss://us.bifrost-rpc.liebi.com/ws',
     'wss://bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-rpc.dwellir.com',
   ],
 });
 
