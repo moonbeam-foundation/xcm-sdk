@@ -40,6 +40,11 @@ interface XcmQueueEventData {
   messageHash: U8aFixed;
 }
 
+interface EthereumXcmEventData {
+  xcmMsgHash: H256;
+  ethTxHash: H256;
+}
+
 function GetAddress() {
   return {
     fromXcmEvent:
@@ -121,6 +126,13 @@ function MatchMessageId() {
         } catch {
           return false;
         }
+      },
+
+    fromEthereumXcmEvent:
+      () =>
+      (event: EventRecord): string => {
+        const eventData = event.event.data as unknown as EthereumXcmEventData;
+        return eventData.xcmMsgHash.toHex();
       },
 
     never: () => (): boolean => true, // Always match for cases where messageId is not used
@@ -252,6 +264,14 @@ function CheckDestination() {
         MatchMessageId().never(),
         GetIsSuccess().alwaysTrue(),
       ),
+
+    ethereumXcm: (): DestinationChecker =>
+      createDestinationChecker(
+        'ethereumXcm',
+        'ExecutedFromXcm',
+        MatchMessageId().never(),
+        GetIsSuccess().alwaysTrue(),
+      ),
   };
 }
 
@@ -279,6 +299,10 @@ export function monitorEvent(): MonitorEventReturn {
       messageQueue: () => ({
         checkSource: CheckSource().xTokens(),
         checkDestination: CheckDestination().messageQueue(),
+      }),
+      ethereumXcm: () => ({
+        checkSource: CheckSource().xTokens(),
+        checkDestination: CheckDestination().ethereumXcm(),
       }),
     }),
 

@@ -35,10 +35,13 @@ export const astarRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder()
-        .xTokens()
-        .transferMultiAsset(astar.parachainId)
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
         .here(),
-      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -64,7 +67,6 @@ export const astarRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
   ],
 });
