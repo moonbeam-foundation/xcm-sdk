@@ -287,48 +287,80 @@ export const bifrostPolkadot = new Parachain({
       decimals: 12,
       ids: {
         id: { Native: bnc.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0001000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(bncs, {
       decimals: 12,
       ids: {
         id: { Token2: 9 },
+        generalKey: {
+          length: 2,
+          data: '0x0809000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(fil, {
       decimals: 18,
       ids: {
         id: { Token2: 4 },
+        generalKey: {
+          length: 2,
+          data: '0x0804000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vastr, {
       decimals: 18,
       ids: {
         id: { VToken2: 3 },
+        generalKey: {
+          length: 2,
+          data: '0x0903000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vdot, {
       decimals: 10,
       ids: {
         id: { VToken2: 0 },
+        generalKey: {
+          length: 2,
+          data: '0x0900000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vfil, {
       decimals: 18,
       ids: {
         id: { VToken2: 4 },
+        generalKey: {
+          length: 2,
+          data: '0x0904000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vglmr, {
       decimals: 18,
       ids: {
         id: { VToken2: 1 },
+        generalKey: {
+          length: 2,
+          data: '0x0901000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vmanta, {
       decimals: 18,
       ids: {
         id: { VToken2: 8 },
+        generalKey: {
+          length: 2,
+          data: '0x0908000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
   ],
@@ -341,9 +373,9 @@ export const bifrostPolkadot = new Parachain({
   parachainId: 2030,
   ss58Format: 6,
   ws: [
-    'wss://bifrost-polkadot-rpc.dwellir.com',
     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
     'wss://hk.p.bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-polkadot-rpc.dwellir.com',
   ],
 });
 
