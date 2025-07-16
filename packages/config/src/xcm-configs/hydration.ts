@@ -33,7 +33,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: hdx,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
     {
       source: {
@@ -58,7 +58,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
     },
     {
       source: {
@@ -83,7 +83,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
     },
     {
       source: {
@@ -110,7 +110,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
     },
     {
       source: {
@@ -135,7 +135,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
     },
     {
       source: {
@@ -160,7 +160,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
     },
     {
       source: {
@@ -185,7 +185,7 @@ export const hydrationRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
     },
   ],
 });

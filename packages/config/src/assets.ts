@@ -195,11 +195,6 @@ export const maos = new Asset({
   originSymbol: 'MAOS',
 });
 
-export const mgx = new Asset({
-  key: 'mgx',
-  originSymbol: 'MGX',
-});
-
 export const movr = new Asset({
   key: 'movr',
   originSymbol: 'MOVR',
@@ -461,7 +456,6 @@ export const assetsList: Asset[] = [
   lit,
   manta,
   maos,
-  mgx,
   movr,
   neuro,
   nodl,

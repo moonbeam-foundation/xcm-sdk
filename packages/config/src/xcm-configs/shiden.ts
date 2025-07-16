@@ -34,8 +34,8 @@ export const shidenRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder()
-        .xTokens()
-        .transferMultiAsset(shiden.parachainId)
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
         .here(),
     },
     {
@@ -61,7 +61,10 @@ export const shidenRoutes = new ChainRoutes({
           asset: movr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
+        .X2PalletInstance(),
     },
   ],
 });

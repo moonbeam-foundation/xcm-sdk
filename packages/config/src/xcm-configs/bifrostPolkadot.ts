@@ -44,7 +44,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -70,7 +73,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -96,7 +102,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
     },
     {
       source: {
@@ -122,7 +128,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -148,7 +157,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: vdot,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -174,7 +186,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
     },
     {
       source: {
@@ -200,7 +212,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -226,7 +241,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -252,7 +270,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
   ],
 });

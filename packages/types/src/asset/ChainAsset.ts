@@ -14,6 +14,7 @@ export interface ChainAssetIds {
   id?: ChainAssetId;
   minId?: ChainAssetId;
   palletInstance?: number;
+  generalKey?: GeneralKey;
 }
 
 export type ChainAssetId =
@@ -21,6 +22,11 @@ export type ChainAssetId =
   | number
   | bigint
   | { [key: string]: ChainAssetId };
+
+export interface GeneralKey {
+  length: number;
+  data: string;
+}
 
 export class ChainAsset extends Asset {
   readonly address?: string;
@@ -99,6 +105,10 @@ export class ChainAsset extends Asset {
 
   getAssetMin(): bigint {
     return this.min ?? 0n;
+  }
+
+  getGeneralKey(): GeneralKey | undefined {
+    return this.ids?.generalKey;
   }
 
   hasOnlyAddress(): this is { address: string } {
