@@ -18,10 +18,20 @@ export type DestinationChecker = (
   event?: EventRecord;
 };
 
-// TODO mjm do proper name functions
 export interface MonitorEventReturn {
-  [key: string]: () => {
-    [key: string]: () => EventMonitoringConfig;
+  xcmPallet: () => {
+    messageQueue: () => EventMonitoringConfig;
+  };
+  polkadotXcm: () => {
+    messageQueue: () => EventMonitoringConfig;
+    xcmpQueue: () => EventMonitoringConfig;
+  };
+  xTokens: () => {
+    messageQueue: () => EventMonitoringConfig;
+    ethereumXcm: () => EventMonitoringConfig;
+  };
+  bridgeMessages: () => {
+    bridgeMessages: () => EventMonitoringConfig;
   };
 }
 
