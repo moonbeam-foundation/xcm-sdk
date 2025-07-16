@@ -186,7 +186,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
