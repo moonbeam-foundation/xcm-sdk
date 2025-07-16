@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-types
 
+## 3.2.6
+
+### Patch Changes
+
+- [#520](https://github.com/moonbeam-foundation/xcm-sdk/pull/520) [`8179c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8179c3f97be3e5d9c23db1cce1d868ea013f15e3) Thanks [@mmaurello](https://github.com/mmaurello)! - Change some routes from using xTokens pallet to polkadotXcm
+
 ## 3.2.5
 
 ### Patch Changes
