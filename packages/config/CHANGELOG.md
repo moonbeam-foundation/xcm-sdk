@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 3.4.3
+
+### Patch Changes
+
+- [#522](https://github.com/moonbeam-foundation/xcm-sdk/pull/522) [`7f3031e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7f3031e28088ab10243efcf1e5d8b04c9a5447f1) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix VFIL route
+
 ## 3.4.2
 
 ### Patch Changes
