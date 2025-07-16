@@ -48,7 +48,6 @@ import {
   lit,
   manta,
   maos,
-  mgx,
   movr,
   neuro,
   nodl,
@@ -225,24 +224,40 @@ export const bifrostKusama = new Parachain({
       decimals: 12,
       ids: {
         id: { Native: bnc.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0001000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vbnc, {
       decimals: 12,
       ids: {
         id: { VToken: bnc.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0101000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vksm, {
       decimals: 12,
       ids: {
         id: { VToken: ksm.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0104000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vmovr, {
       decimals: 18,
       ids: {
         id: { VToken: movr.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x010a000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
   ],
@@ -255,9 +270,9 @@ export const bifrostKusama = new Parachain({
   parachainId: 2001,
   ss58Format: 6,
   ws: [
-    'wss://bifrost-rpc.dwellir.com',
     'wss://us.bifrost-rpc.liebi.com/ws',
     'wss://bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-rpc.dwellir.com',
   ],
 });
 
@@ -273,48 +288,80 @@ export const bifrostPolkadot = new Parachain({
       decimals: 12,
       ids: {
         id: { Native: bnc.originSymbol },
+        generalKey: {
+          length: 2,
+          data: '0x0001000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(bncs, {
       decimals: 12,
       ids: {
         id: { Token2: 9 },
+        generalKey: {
+          length: 2,
+          data: '0x0809000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(fil, {
       decimals: 18,
       ids: {
         id: { Token2: 4 },
+        generalKey: {
+          length: 2,
+          data: '0x0804000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vastr, {
       decimals: 18,
       ids: {
         id: { VToken2: 3 },
+        generalKey: {
+          length: 2,
+          data: '0x0903000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vdot, {
       decimals: 10,
       ids: {
         id: { VToken2: 0 },
+        generalKey: {
+          length: 2,
+          data: '0x0900000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vfil, {
       decimals: 18,
       ids: {
         id: { VToken2: 4 },
+        generalKey: {
+          length: 2,
+          data: '0x0904000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vglmr, {
       decimals: 18,
       ids: {
         id: { VToken2: 1 },
+        generalKey: {
+          length: 2,
+          data: '0x0901000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
     ChainAsset.fromAsset(vmanta, {
       decimals: 18,
       ids: {
         id: { VToken2: 8 },
+        generalKey: {
+          length: 2,
+          data: '0x0908000000000000000000000000000000000000000000000000000000000000',
+        },
       },
     }),
   ],
@@ -327,9 +374,9 @@ export const bifrostPolkadot = new Parachain({
   parachainId: 2030,
   ss58Format: 6,
   ws: [
-    'wss://bifrost-polkadot-rpc.dwellir.com',
     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
     'wss://hk.p.bifrost-rpc.liebi.com/ws',
+    'wss://bifrost-polkadot-rpc.dwellir.com',
   ],
 });
 
@@ -789,35 +836,6 @@ export const kusamaAssetHub = new Parachain({
   ws: [
     'wss://asset-hub-kusama-rpc.dwellir.com',
     'wss://kusama-asset-hub-rpc.polkadot.io',
-  ],
-});
-
-export const mangataKusama = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(mgx, {
-      decimals: 18,
-      ids: {
-        id: 0,
-      },
-    }),
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 39,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xd611f22d291c5b7b69f1e105cca03352984c344c4421977efaa4cbdd1834e2aa',
-  key: 'mangata-kusama',
-  name: 'Mangata',
-  nativeAsset: mgx,
-  parachainId: 2110,
-  ss58Format: 42,
-  ws: [
-    'wss://kusama-archive.mangata.online',
-    'wss://kusama-rpc.mangata.online',
   ],
 });
 
@@ -1517,13 +1535,6 @@ export const moonriver = new EvmParachain({
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
-      },
-    }),
-    ChainAsset.fromAsset(mgx, {
-      address: '0xffFfFffF58d867EEa1Ce5126A4769542116324e9',
-      decimals: 18,
-      ids: {
-        id: '118095707745084482624853002839493125353',
       },
     }),
     ChainAsset.fromAsset(movr, {
@@ -2241,7 +2252,6 @@ export const chainsList: AnyChain[] = [
   kusamaAssetHub,
   laosAlphanet,
   laosMainnet,
-  mangataKusama,
   mantaParachain,
   moonbaseAlpha,
   moonbaseBeta,

@@ -1,5 +1,15 @@
 # @moonbeam-network/xcm-config
 
+## 3.4.2
+
+### Patch Changes
+
+- [#520](https://github.com/moonbeam-foundation/xcm-sdk/pull/520) [`8179c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8179c3f97be3e5d9c23db1cce1d868ea013f15e3) Thanks [@mmaurello](https://github.com/mmaurello)! - Change some routes from using xTokens pallet to polkadotXcm
+
+- Updated dependencies [[`8179c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8179c3f97be3e5d9c23db1cce1d868ea013f15e3)]:
+  - @moonbeam-network/xcm-builder@3.3.6
+  - @moonbeam-network/xcm-types@3.2.6
+
 ## 3.4.1
 
 ### Patch Changes
