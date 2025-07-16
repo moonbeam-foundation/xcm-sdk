@@ -3,6 +3,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   bnc,
@@ -48,6 +49,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -77,6 +82,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -103,6 +112,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -132,6 +145,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -161,6 +178,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -186,7 +207,14 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -216,6 +244,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -245,6 +277,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -274,6 +310,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });
