@@ -270,6 +270,38 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: {
+                          X1: [
+                            {
+                              GeneralIndex: params.asset.getAssetId(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
+        X1GeneralKey: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
                 const isAssetDifferent = !params.asset.isSame(params.fee);
 
                 const assets = [
