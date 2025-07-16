@@ -13,7 +13,6 @@ import {
   kbtc,
   kint,
   ksm,
-  mgx,
   movr,
   rmrk,
   sdn,
@@ -33,7 +32,6 @@ import {
   kintsugi,
   kusama,
   kusamaAssetHub,
-  mangataKusama,
   moonriver,
   robonomics,
   shiden,
@@ -113,29 +111,6 @@ export const moonriverRoutes = new ChainRoutes({
           asset: movr,
         },
         min: AssetMinBuilder().assetRegistry().assetMetadatas(),
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: mangataKusama,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.002,
-          asset: movr,
-        },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
@@ -353,29 +328,6 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
-    },
-    {
-      source: {
-        asset: mgx,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: mgx,
-        chain: mangataKusama,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 5.5,
-          asset: mgx,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {

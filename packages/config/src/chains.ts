@@ -837,35 +837,6 @@ export const kusamaAssetHub = new Parachain({
   ],
 });
 
-export const mangataKusama = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(mgx, {
-      decimals: 18,
-      ids: {
-        id: 0,
-      },
-    }),
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        id: 39,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xd611f22d291c5b7b69f1e105cca03352984c344c4421977efaa4cbdd1834e2aa',
-  key: 'mangata-kusama',
-  name: 'Mangata',
-  nativeAsset: mgx,
-  parachainId: 2110,
-  ss58Format: 42,
-  ws: [
-    'wss://kusama-archive.mangata.online',
-    'wss://kusama-rpc.mangata.online',
-  ],
-});
-
 export const mantaParachain = new Parachain({
   assets: [
     ChainAsset.fromAsset(manta, {
@@ -2286,7 +2257,6 @@ export const chainsList: AnyChain[] = [
   kusamaAssetHub,
   laosAlphanet,
   laosMainnet,
-  mangataKusama,
   mantaParachain,
   moonbaseAlpha,
   moonbaseBeta,
