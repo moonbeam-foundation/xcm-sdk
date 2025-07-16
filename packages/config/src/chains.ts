@@ -48,7 +48,6 @@ import {
   lit,
   manta,
   maos,
-  mgx,
   movr,
   neuro,
   nodl,
@@ -1533,13 +1532,6 @@ export const moonriver = new EvmParachain({
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
-      },
-    }),
-    ChainAsset.fromAsset(mgx, {
-      address: '0xffFfFffF58d867EEa1Ce5126A4769542116324e9',
-      decimals: 18,
-      ids: {
-        id: '118095707745084482624853002839493125353',
       },
     }),
     ChainAsset.fromAsset(movr, {
