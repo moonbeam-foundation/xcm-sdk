@@ -1718,6 +1718,10 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
