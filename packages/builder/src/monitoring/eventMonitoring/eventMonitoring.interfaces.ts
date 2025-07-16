@@ -24,6 +24,7 @@ export interface MonitorEventReturn {
   };
   polkadotXcm: () => {
     messageQueue: () => EventMonitoringConfig;
+    mixedQueue: () => EventMonitoringConfig;
     xcmpQueue: () => EventMonitoringConfig;
   };
   xTokens: () => {

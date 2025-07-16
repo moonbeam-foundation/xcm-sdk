@@ -289,6 +289,10 @@ export function monitorEvent(): MonitorEventReturn {
         checkSource: CheckSource().polkadotXcm(),
         checkDestination: CheckDestination().messageQueue(),
       }),
+      mixedQueue: () => ({
+        checkSource: CheckSource().polkadotXcmAndXcmpQueue(),
+        checkDestination: CheckDestination().messageQueue(),
+      }),
       xcmpQueue: () => ({
         checkSource: CheckSource().polkadotXcmAndXcmpQueue(),
         checkDestination: CheckDestination().xcmpQueue(),
