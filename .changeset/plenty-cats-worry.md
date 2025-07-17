@@ -2,4 +2,4 @@
 "@moonbeam-network/xcm-config": patch
 ---
 
-Fix Bifrost fees
+Fix Bifrost fees and remove BNCS
