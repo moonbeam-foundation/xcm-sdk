@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/mrl",
-  "version": "3.1.19",
+  "version": "3.1.20",
   "description": "Moonbeam Routed Liquidity",
   "scripts": {
     "build": "tsup",
