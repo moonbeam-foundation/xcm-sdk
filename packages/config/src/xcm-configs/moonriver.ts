@@ -474,7 +474,7 @@ export const moonriverRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
-            isAssetReserveChain: false,
+            isAssetReserveChain: true,
           }),
           asset: vbnc,
         },
@@ -500,7 +500,7 @@ export const moonriverRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
-            isAssetReserveChain: false,
+            isAssetReserveChain: true,
           }),
           asset: vksm,
         },
@@ -526,7 +526,7 @@ export const moonriverRoutes = new ChainRoutes({
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
-            isAssetReserveChain: false,
+            isAssetReserveChain: true,
           }),
           asset: vmovr,
         },

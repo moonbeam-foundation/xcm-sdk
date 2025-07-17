@@ -50,11 +50,6 @@ export const bnc = new Asset({
   originSymbol: 'BNC',
 });
 
-export const bncs = new Asset({
-  key: 'bncs',
-  originSymbol: 'BNCS',
-});
-
 export const cfg = new Asset({
   key: 'cfg',
   originSymbol: 'CFG',
@@ -426,7 +421,6 @@ export const assetsList: Asset[] = [
   auq,
   axlusdc,
   bnc,
-  bncs,
   cfg,
   crab,
   csm,
