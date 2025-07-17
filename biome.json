@@ -9,6 +9,9 @@
       "recommended": true,
       "complexity": {
         "noForEach": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": { "level": "warn", "fix": "none" }
       }
     }
   },

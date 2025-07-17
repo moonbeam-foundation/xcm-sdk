@@ -360,6 +360,7 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
+                // TODO find a better way to identify when the asset info is in the destination
                 const assetInDestination = params.destination.getChainAsset(
                   params.asset,
                 );

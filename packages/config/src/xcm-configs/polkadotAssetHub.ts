@@ -3,6 +3,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   apillon,
@@ -21,6 +22,11 @@ import { moonbeam, polkadotAssetHub } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 const extra = 0.036;
+
+const monitoringToMoonbeam = MonitoringBuilder()
+  .monitorEvent()
+  .polkadotXcm()
+  .messageQueue();
 
 export const polkadotAssetHubRoutes = new ChainRoutes({
   chain: polkadotAssetHub,
@@ -50,6 +56,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().here(1),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -80,6 +87,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -110,6 +118,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -140,6 +149,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X2AndFeeHere(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -170,6 +180,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X2AndFeeHere(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -200,6 +211,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X2AndFeeHere(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -230,6 +242,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X2AndFeeHere(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -260,6 +273,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X2AndFeeHere(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -290,6 +304,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsUsingTypeAndThen()
         .globalConsensusEthereum(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -320,6 +335,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsUsingTypeAndThen()
         .globalConsensusEthereum(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -350,6 +366,7 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsUsingTypeAndThen()
         .globalConsensusEthereum(),
+      monitoring: monitoringToMoonbeam,
     },
   ],
 });

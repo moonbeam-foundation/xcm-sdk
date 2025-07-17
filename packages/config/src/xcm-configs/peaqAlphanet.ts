@@ -3,6 +3,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftmwh } from '../assets';
 import { moonbaseAlpha, peaqAlphanet } from '../chains';
@@ -28,13 +29,15 @@ export const peaqAlphanetRoutes = new ChainRoutes({
         chain: moonbaseAlpha,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .fromAssetIdQuery({ isAssetReserveChain: false }),
+          // amount: FeeBuilder()
+          //   .xcmPaymentApi()
+          //   .fromAssetIdQuery({ isAssetReserveChain: false }),
+          amount: 0.001, // TODO remove this, force error in destination
           asset: agng,
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
     {
       source: {
