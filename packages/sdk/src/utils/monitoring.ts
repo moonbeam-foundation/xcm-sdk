@@ -13,6 +13,15 @@ interface ListenToDestinationEventsProps {
   onDestinationError?: (error: Error) => void;
 }
 
+// Enable when debugging
+const ENABLE_LOGGING = false;
+
+function log(label: string, message?: unknown): void {
+  if (ENABLE_LOGGING) {
+    console.log(`[${label}]`, message ?? '');
+  }
+}
+
 export async function listenToDestinationEvents({
   route,
   monitoringConfig,
@@ -28,9 +37,9 @@ export async function listenToDestinationEvents({
   try {
     const api: ApiPromise = await getPolkadotApi(route.destination.chain.ws);
 
-    console.log('Subscribing to destination events...');
+    log('Subscribing to destination events...');
     const unsubscribe = await api.query.system.events((events) => {
-      console.log('Destination events:', events.toHuman());
+      log('Destination events', events.toHuman());
 
       // Use the new MonitoringBuilder approach for destination monitoring
       const destinationResult = monitoringConfig.checkDestination(
@@ -39,10 +48,7 @@ export async function listenToDestinationEvents({
       );
 
       if (destinationResult.matched) {
-        console.log(
-          'Destination event matched:',
-          destinationResult.event?.toHuman(),
-        );
+        log('Destination event matched:', destinationResult.event?.toHuman());
 
         unsubscribe();
 
@@ -99,7 +105,7 @@ export function processSourceEvents({
 }: ProcessSourceEventsProps): void {
   const monitoringConfig = route.monitoring;
   if (!monitoringConfig) {
-    console.log('No monitoring config found');
+    log('No monitoring config found');
     unsubscribe?.();
     return;
   }
@@ -121,11 +127,11 @@ export function processSourceEvents({
     const sourceResult = monitoringConfig.checkSource(events, sourceAddress);
 
     if (sourceResult.matched) {
-      console.log('Source event matched:', sourceResult.event?.toHuman());
+      log('Source event matched:', sourceResult.event?.toHuman());
       onSourceFinalized?.();
 
       if (unsubscribe) {
-        console.log('Unsubscribing from source events...');
+        log('Unsubscribing from source events...');
         unsubscribe();
       }
 
@@ -179,16 +185,16 @@ export async function listenToSourceEvents({
   onDestinationError,
 }: ListenToSourceEventsProps) {
   if (!route?.source?.chain || !('ws' in route.source.chain)) {
-    console.log('No source WS endpoint available');
+    log('No source WS endpoint available');
     return;
   }
 
   try {
     const api: ApiPromise = await getPolkadotApi(route.source.chain.ws);
 
-    console.log('Subscribing to source events...');
+    log('Subscribing to source events...');
     const unsubscribe = await api.query.system.events((events) => {
-      console.log('Source events:', events.toHuman());
+      log('Source events:', events.toHuman());
 
       processSourceEvents({
         events,

@@ -10,6 +10,15 @@ export interface Signers {
   polkadotSigner?: Signer | IKeyringPair;
 }
 
+export interface TransferData {
+  destination: DestinationChainTransferData;
+  getEstimate(amount: number | string): AssetAmount;
+  max: AssetAmount;
+  min: AssetAmount;
+  source: SourceChainTransferData;
+  transfer(params: TransferParams): Promise<string>;
+}
+
 export interface TransferParams {
   amount: number | string;
   signers: Partial<Signers>;
@@ -18,15 +27,6 @@ export interface TransferParams {
   onSourceError?: (error: Error) => void;
   onDestinationFinalized?: () => void;
   onDestinationError?: (error: Error) => void;
-}
-
-export interface TransferData {
-  destination: DestinationChainTransferData;
-  getEstimate(amount: number | string): AssetAmount;
-  max: AssetAmount;
-  min: AssetAmount;
-  source: SourceChainTransferData;
-  transfer(params: TransferParams): Promise<string>;
 }
 
 export interface SourceChainTransferData extends ChainTransferData {

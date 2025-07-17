@@ -78,7 +78,10 @@ export async function fromPolkadot() {
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount, { polkadotSigner: pair });
+  const hash = await data.transfer({
+    amount,
+    signers: { polkadotSigner: pair },
+  });
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }
@@ -102,9 +105,20 @@ export async function fromMoonbeam() {
 
   console.log(`Sending from ${data.source.chain.name} amount: ${amount}`);
 
-  const hash = await data.transfer(amount, {
-    evmSigner: walletClient,
+  const hash = await data.transfer({
+    amount,
+    signers: { evmSigner: walletClient },
+    // Monitoring callbacks - Optional
+    onSourceFinalized: () =>
+      console.log('Transaction sent successfully from Moonbeam'),
+    onSourceError: (error) => console.error('Error sending transaction', error),
+    onDestinationFinalized: () =>
+      console.log('Assets successfully received on Polkadot'),
+    onDestinationError: (error) =>
+      console.error('Error receiving assets', error),
   });
+  // Give it time to be able to see the logs on the monitoring callbacks
+  await new Promise((resolve) => setTimeout(resolve, 30000));
 
   console.log(`${data.source.chain.name} tx hash: ${hash}`);
 }

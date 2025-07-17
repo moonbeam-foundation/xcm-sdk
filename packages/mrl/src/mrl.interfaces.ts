@@ -25,14 +25,16 @@ export interface TransferData {
   min: AssetAmount;
   moonChain: MoonChainTransferData;
   source: SourceTransferData;
-  // TODO convert this to an object to make it consistent with the sdk transfer function
-  transfer(
-    amount: bigint | number | string,
-    isAutomatic: boolean,
-    signers: Signers,
-    statusCallback?: (params: ISubmittableResult) => void,
-    sendOnlyRemoteExecution?: boolean,
-  ): Promise<string[]>;
+  transfer(params: TransferParams): Promise<string[]>;
+}
+
+export interface TransferParams {
+  amount: number | string;
+  isAutomatic: boolean;
+  signers: Signers;
+  statusCallback?: (status: ISubmittableResult) => void;
+  sendOnlyRemoteExecution?: boolean;
+  // TODO add monitoring callbacks here when implemented
 }
 
 export interface SourceTransferData extends SourceChainTransferData {
