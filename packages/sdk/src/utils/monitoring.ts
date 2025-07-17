@@ -1,7 +1,4 @@
-import type {
-  EventMonitoringConfig,
-  ExtrinsicConfig,
-} from '@moonbeam-network/xcm-builder';
+import type { EventMonitoringConfig } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute } from '@moonbeam-network/xcm-config';
 import { getPolkadotApi } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
@@ -72,7 +69,6 @@ export async function listenToDestinationEvents({
 interface CreateMonitoringCallbackProps {
   sourceAddress: string;
   route: AssetRoute;
-  extrinsic?: ExtrinsicConfig;
   statusCallback?: (status: ISubmittableResult) => void;
   onSourceFinalized?: () => void;
   onSourceError?: (error: Error) => void;
@@ -152,7 +148,6 @@ export function processSourceEvents({
 export function createMonitoringCallback({
   sourceAddress,
   route,
-  extrinsic,
   statusCallback,
   onSourceFinalized,
   onSourceError,
@@ -163,20 +158,10 @@ export function createMonitoringCallback({
     // Execute the original user callback
     statusCallback?.(status);
 
-    const extrinsicPalletName = extrinsic?.module;
-    const extrinsicFunctionName = extrinsic?.func;
-
-    if (extrinsicPalletName && extrinsicFunctionName) {
-      console.log(
-        `Monitoring extrinsic: ${extrinsicPalletName}::${extrinsicFunctionName}`,
-      );
-    }
-
     processSourceEvents({
       events: status.events,
       sourceAddress,
       route,
-      extrinsic,
       onSourceFinalized,
       onSourceError,
       onDestinationFinalized,

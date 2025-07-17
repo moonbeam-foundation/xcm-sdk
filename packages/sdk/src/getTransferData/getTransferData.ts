@@ -154,7 +154,6 @@ export async function getTransferData({
           ? createMonitoringCallback({
               sourceAddress,
               route,
-              extrinsic,
               statusCallback,
               onSourceFinalized,
               onSourceError,
