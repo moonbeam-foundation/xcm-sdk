@@ -148,6 +148,10 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -369,6 +373,10 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -1006,6 +1014,10 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -1032,6 +1044,10 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -1084,6 +1100,10 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -1168,6 +1188,10 @@ export const moonbeamRoutes = new ChainRoutes({
         min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
