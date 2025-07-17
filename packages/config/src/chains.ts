@@ -18,7 +18,6 @@ import {
   auq,
   axlusdc,
   bnc,
-  bncs,
   cfg,
   crab,
   csm,
@@ -291,16 +290,6 @@ export const bifrostPolkadot = new Parachain({
         generalKey: {
           length: 2,
           data: '0x0001000000000000000000000000000000000000000000000000000000000000',
-        },
-      },
-    }),
-    ChainAsset.fromAsset(bncs, {
-      decimals: 12,
-      ids: {
-        id: { Token2: 9 },
-        generalKey: {
-          length: 2,
-          data: '0x0809000000000000000000000000000000000000000000000000000000000000',
         },
       },
     }),
@@ -1156,13 +1145,6 @@ export const moonbeam = new EvmParachain({
       decimals: 12,
       ids: {
         id: '165823357460190568952172802245839421906',
-      },
-    }),
-    ChainAsset.fromAsset(bncs, {
-      address: '0xfFfffffF6aF229AE7f0F4e0188157e189a487D59',
-      decimals: 12,
-      ids: {
-        id: '142155548796783636521833385094843759961',
       },
     }),
     ChainAsset.fromAsset(cfg, {

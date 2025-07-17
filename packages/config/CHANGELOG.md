@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 3.4.4
+
+### Patch Changes
+
+- [#524](https://github.com/moonbeam-foundation/xcm-sdk/pull/524) [`f71e65b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f71e65bc43ad622b54a1f86dfe55f3b989018c8b) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Bifrost fees and remove BNCS
+
 ## 3.4.3
 
 ### Patch Changes
