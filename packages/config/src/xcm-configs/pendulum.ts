@@ -3,10 +3,16 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { axlusdc, eurc, glmr, pen } from '../assets';
 import { moonbeam, pendulum } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
+
+const monitoringToMoonbeam = MonitoringBuilder()
+  .monitorEvent()
+  .xTokens()
+  .messageQueue();
 
 export const pendulumRoutes = new ChainRoutes({
   chain: pendulum,
@@ -35,6 +41,7 @@ export const pendulumRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -60,6 +67,7 @@ export const pendulumRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -85,6 +93,7 @@ export const pendulumRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -111,6 +120,7 @@ export const pendulumRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
   ],
 });
