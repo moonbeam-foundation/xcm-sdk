@@ -11,7 +11,6 @@ import {
   astr,
   axlusdc,
   bnc,
-  bncs,
   cfg,
   dai,
   ded,
@@ -1141,32 +1140,6 @@ export const moonbeamRoutes = new ChainRoutes({
           amount: 0.101,
           asset: usdcwh,
         },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: bncs,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: bncs,
-        chain: bifrostPolkadot,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: FeeBuilder().xcmPaymentApi().fromCurrencyIdToLocations({
-            isAssetReserveChain: true,
-          }),
-          asset: bncs,
-        },
-        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
