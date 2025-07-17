@@ -172,17 +172,6 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "originSymbol": "BNC",
           "symbol": undefined,
         },
-        "bncs" => _ChainAsset {
-          "address": "0xfFfffffF6aF229AE7f0F4e0188157e189a487D59",
-          "decimals": 12,
-          "ids": {
-            "id": "142155548796783636521833385094843759961",
-          },
-          "key": "bncs",
-          "min": undefined,
-          "originSymbol": "BNCS",
-          "symbol": undefined,
-        },
         "cfg" => _ChainAsset {
           "address": "0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3",
           "decimals": 18,
