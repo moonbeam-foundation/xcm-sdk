@@ -891,9 +891,34 @@ const amount = +transferData.min.toDecimal() * 2;
 console.log(
   `Sending from ${transferData.source.chain.name} amount: ${amount}`,
 );
-const hash = await transferData.transfer(amount, {
-  polkadotSigner: pair,
-});
+const hash = await transferData.transfer({
+    amount,
+    signers: { polkadotSigner: pair },
+  });
+console.log(`${transferData.source.chain.name} tx hash: ${hash}`);
+```
+
+You can also pass monitoring callbacks to the transfer function to track the transaction status. The SDK provides callbacks for both success and error cases on the source and destination chains:
+
+```js
+...
+
+const amount = +transferData.min.toDecimal() * 2;
+console.log(
+  `Sending from ${transferData.source.chain.name} amount: ${amount}`,
+);
+const hash = await transferData.transfer({
+    amount,
+    signers: { polkadotSigner: pair },
+    // Monitoring callbacks - Optional
+    onSourceFinalized: () =>
+      console.log(`Transaction sent successfully from ${transferData.source.chain.name}`),
+    onSourceError: (error) => console.error('Error sending transaction', error),
+    onDestinationFinalized: () =>
+      console.log(`Assets successfully received on ${transferData.destination.chain.name}`),
+    onDestinationError: (error) =>
+      console.error('Error receiving assets', error),
+  });
 console.log(`${transferData.source.chain.name} tx hash: ${hash}`);
 ```
 

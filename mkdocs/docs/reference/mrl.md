@@ -733,7 +733,6 @@ We call Moon Chain to the intermediary chain that is used to transfer the assets
 <div class="grid" markdown>
 <div markdown>
 
-
 **Parameters**
 
 - `amount` ++"bigint | number | string"++ - The amount of the asset to transfer
@@ -770,14 +769,14 @@ const statusCallback = ({ status }: ISubmittableResult) => {
   }
 };
 
-await transferData.transfer(
-  0.1,
+await transferData.transfer({
+  amount: 0.1,
   isAutomatic,
-  {
+  signers: {
     polkadotSigner: INSERT_POLKADOT_SIGNER, // pair
   },
   statusCallback,
-);
+});
 
 ```
 

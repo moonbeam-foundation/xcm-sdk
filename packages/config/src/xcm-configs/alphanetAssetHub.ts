@@ -40,11 +40,10 @@ export const alphanetAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
-      // TODO uncomment this, forcing timeout in the dapp
-      // monitoring: MonitoringBuilder()
-      //   .monitorEvent()
-      //   .polkadotXcm()
-      //   .messageQueue(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });

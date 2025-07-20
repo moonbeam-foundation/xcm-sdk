@@ -200,10 +200,16 @@ In this step, you have to create or update the configuration files of the chains
 - **Extrinsic Builder** - builds the extrinsic for the cross-chain transfer
 - **Fee Builder** - builds the query to retrieve the fee for the execution of the cross-chain transfer
 - **Minimum Asset Builder** - builds a query to retrieve the minimum amount of an asset required to be left in an account
+- **Monitoring Builder** - Optional - builds the config that will be used for tracking the cross-chain transfer status and completion
 
 You will need to know which pallet and method each chain is using for its XCM transactions and for fetching asset balances, and make sure that said pallets and methods are already available in the [xcm-builder package](https://github.com/moonbeam-foundation/xcm-sdk/tree/main/packages/builder){target=\_blank}.
 
 If they aren't available, feel free to open a PR or [submit an issue on GitHub](https://github.com/moonbeam-foundation/xcm-sdk/issues/new){target=\_blank}.
+
+To add monitoring via events, you will need to know which events are emitted in the source chain when the XCM message is sent and in the destination chain when the XCM message is processed. The SDK provides monitoring builders that can track these events to determine when a cross-chain transfer has completed successfully or failed. For example:
+
+- Source chain events like `xcmPallet.Sent` or `polkadotXcm.Sent` indicate the XCM message was sent
+- Destination chain events like `messageQueue.Processed` or `xcmpQueue.Success` indicate successful processing
 
 ### Creating the routes in the configuration files
 
@@ -258,6 +264,7 @@ Assuming that all of the required pallets and methods are already supported, you
         min: INSERT_MIN_ASSET_BUILDER, // Optional
       },
       extrinsic: INSERT_EXTRINSIC_BUILDER,
+      monitoring: INSERT_MONITORING_BUILDER // Optional
     }
     ```
 
@@ -320,6 +327,10 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue();
     },
   ],
 });

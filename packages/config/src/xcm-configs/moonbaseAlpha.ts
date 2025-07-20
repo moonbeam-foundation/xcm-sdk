@@ -192,7 +192,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         chain: alphanetAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
-          amount: 8, // TODO mjm fee builder?
+          amount: 8,
           asset: tt1,
         },
         min: AssetMinBuilder().assets().asset(),
