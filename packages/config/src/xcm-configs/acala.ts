@@ -9,6 +9,11 @@ import { aca, aseed, glmr, ldot } from '../assets';
 import { acala, moonbeam } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
+const monitoringToMoonbeam = MonitoringBuilder()
+  .monitorEvent()
+  .xTokens()
+  .messageQueue();
+
 export const acalaRoutes = new ChainRoutes({
   chain: acala,
   routes: [
@@ -36,7 +41,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -63,6 +68,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -89,7 +95,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -116,6 +122,7 @@ export const acalaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
   ],
 });
