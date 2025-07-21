@@ -41,7 +41,6 @@ export async function listenToDestinationEvents({
     const unsubscribe = await api.query.system.events((events) => {
       log('Destination events', events.toHuman());
 
-      // Use the new MonitoringBuilder approach for destination monitoring
       const destinationResult = monitoringConfig.checkDestination(
         events,
         messageId,
@@ -89,10 +88,6 @@ interface ProcessSourceEventsProps extends ListenToSourceEventsProps {
   unsubscribe?: () => void;
 }
 
-/**
- * Listen to source chain events from any events array
- * This function can be used independently of the monitoring callback
- */
 export function processSourceEvents({
   events,
   sourceAddress,
