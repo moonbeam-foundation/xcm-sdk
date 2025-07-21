@@ -3,6 +3,9 @@ name: publish dev versions
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   publish-dev-versions:
     runs-on: ubuntu-latest

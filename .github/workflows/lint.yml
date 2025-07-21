@@ -2,6 +2,9 @@ name: lint
 
 on: push
 
+permissions:
+  contents: read
+
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:

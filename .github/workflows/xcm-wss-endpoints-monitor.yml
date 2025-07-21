@@ -6,6 +6,9 @@ on:
     # Runs every 30 minutes
     - cron: '*/30 * * * *'
 
+permissions:
+  contents: read
+
 jobs:
   run_script:
     runs-on: ubuntu-latest

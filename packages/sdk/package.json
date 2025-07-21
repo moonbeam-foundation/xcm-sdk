@@ -52,7 +52,7 @@
     "@polkadot/api-augment": "16.4.1",
     "@polkadot/types": "16.4.1",
     "@polkadot/util": "13.5.3",
-    "viem": "^2.31.7"
+    "viem": "^2.33.0"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2"
