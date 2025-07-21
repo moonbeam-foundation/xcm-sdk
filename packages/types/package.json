@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-types",
-  "version": "3.2.6",
+  "version": "3.2.7",
   "description": "Moonbeam XCM Types",
   "scripts": {
     "build": "tsup",
