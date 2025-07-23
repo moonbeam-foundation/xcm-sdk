@@ -13,8 +13,7 @@ interface ListenToDestinationEventsProps {
   onDestinationError?: (error: Error) => void;
 }
 
-// Enable when debugging
-const ENABLE_LOGGING = false;
+const ENABLE_LOGGING = true;
 
 function log(label: string, message?: unknown): void {
   if (ENABLE_LOGGING) {
@@ -30,7 +29,7 @@ export async function listenToDestinationEvents({
   onDestinationError,
 }: ListenToDestinationEventsProps): Promise<void> {
   if (!route?.destination?.chain || !('ws' in route.destination.chain)) {
-    console.log('No destination WS endpoint available');
+    log('No destination WS endpoint available');
     return;
   }
 
