@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-builder
 
+## 3.3.7
+
+### Patch Changes
+
+- [#527](https://github.com/moonbeam-foundation/xcm-sdk/pull/527) [`ead3303`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ead33037b56da906b2db3e4e337af56e64f0cddd) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
+
+- Updated dependencies [[`ead3303`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ead33037b56da906b2db3e4e337af56e64f0cddd)]:
+  - @moonbeam-network/xcm-types@3.2.7
+
 ## 3.3.6
 
 ### Patch Changes

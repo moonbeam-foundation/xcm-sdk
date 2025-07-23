@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/mrl",
-  "version": "3.1.20",
+  "version": "3.1.21",
   "description": "Moonbeam Routed Liquidity",
   "scripts": {
     "build": "tsup",
@@ -54,6 +54,6 @@
     "@polkadot/util-crypto": "13.5.3",
     "@wormhole-foundation/sdk-connect": "^2.4.0",
     "@wormhole-foundation/sdk-evm": "^2.4.0",
-    "viem": "^2.31.7"
+    "viem": "^2.33.0"
   }
 }
