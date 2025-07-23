@@ -29,13 +29,13 @@ import { Mrl } from '@moonbeam-network/mrl';
 
 const fromEvm = async () => {
   const transferData = await Mrl()
-    .setSource(INSERT_SOURCE_CHAIN)
-    .setDestination(INSERT_DESTINATION_CHAIN)
-    .setAsset(INSERT_ASSET)
-    .setIsAutomatic(INSERT_IF_IS_AUTOMATIC)
+    .setSource(ethereum)
+    .setDestination(moonbeam)
+    .setAsset(eth)
+    .setIsAutomatic(false)
     .setAddresses({
-      sourceAddress: INSERT_SOURCE_ADDRESS,
-      destinationAddress: INSERT_DESTINATION_ADDRESS,
+      sourceAddress: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+      destinationAddress: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
     });
 };
 
@@ -47,8 +47,11 @@ fromEvm();
 ```js
 ...
 
-const hash = await transferData.transfer(INSERT_TRANSFER_AMOUNT, INSERT_IF_IS_AUTOMATIC, { INSERT_SIGNERS });
-
+const hash = await transferData.transfer({
+    amount: 0.1,
+    isAutomatic: false,
+    signers: { evmSigner: ethereumWalletClient }, // Ethereum Signer, for example created with wagmi
+  });
 ```
 
 # Examples
