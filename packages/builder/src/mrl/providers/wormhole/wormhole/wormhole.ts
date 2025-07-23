@@ -70,30 +70,16 @@ export function wormhole() {
         );
 
         return new WormholeConfig({
-          args: isAutomatic
-            ? [
-                whAsset,
-                asset.amount,
-                whSourceAddress,
-                whDestinationAddress,
-                'AutomaticTokenBridge',
-              ]
-            : isDestinationMoonChain || isDestinationEvmChain
-              ? [
-                  whAsset,
-                  asset.amount,
-                  whSourceAddress,
-                  whDestinationAddress,
-                  'ExecutorTokenBridge',
-                ]
-              : [
-                  whAsset,
-                  asset.amount,
-                  whSourceAddress,
-                  whDestinationAddress,
-                  'TokenBridge',
-                  getPayload({ destination, destinationAddress, moonApi }),
-                ],
+          args: [
+            whAsset,
+            asset.amount,
+            whSourceAddress,
+            whDestinationAddress,
+            isAutomatic ? 'AutomaticTokenBridge' : 'TokenBridge',
+            isDestinationMoonChain || isDestinationEvmChain
+              ? undefined
+              : getPayload({ destination, destinationAddress, moonApi }),
+          ],
           func: 'tokenTransfer',
         });
       },
