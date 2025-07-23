@@ -148,6 +148,46 @@ export function polkadotXcm() {
               },
             }),
         }),
+        X2PalletInstance: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const assetInDestination = params.destination.getChainAsset(
+                  params.asset,
+                );
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 1,
+                        interior: {
+                          X2: [
+                            {
+                              Parachain: params.destination.parachainId,
+                            },
+                            {
+                              PalletInstance:
+                                assetInDestination.getAssetPalletInstance(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
       };
     },
     limitedReserveWithdrawAssets: () => {
@@ -218,6 +258,96 @@ export function polkadotXcm() {
                       },
                     },
                   ],
+                });
+              },
+            }),
+        }),
+        X1: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: [
+                    {
+                      id: normalizeConcrete(version, {
+                        parents: 0,
+                        interior: {
+                          X1: [
+                            {
+                              GeneralIndex: params.asset.getAssetId(),
+                            },
+                          ],
+                        },
+                      }),
+                      fun: {
+                        Fungible: params.asset.amount,
+                      },
+                    },
+                  ],
+                });
+              },
+            }),
+        }),
+        X1GeneralKey: (): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const isAssetDifferent = !params.asset.isSame(params.fee);
+
+                const assets = [
+                  {
+                    id: normalizeConcrete(
+                      version,
+                      normalizeX1(version, {
+                        parents: 0,
+                        interior: {
+                          X1: {
+                            GeneralKey: params.asset.getGeneralKey(),
+                          },
+                        },
+                      }),
+                    ),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
+                  },
+                ];
+
+                if (isAssetDifferent) {
+                  const feeAsset = {
+                    id: normalizeConcrete(
+                      version,
+                      normalizeX1(version, {
+                        parents: 0,
+                        interior: {
+                          X1: {
+                            GeneralKey: params.fee.getGeneralKey(),
+                          },
+                        },
+                      }),
+                    ),
+                    fun: {
+                      Fungible: params.fee.amount,
+                    },
+                  };
+
+                  assets.unshift(feeAsset);
+                }
+
+                return getPolkadotXcmExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  asset: assets,
                 });
               },
             }),

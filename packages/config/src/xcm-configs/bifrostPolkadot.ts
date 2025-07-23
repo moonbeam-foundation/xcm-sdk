@@ -4,17 +4,7 @@ import {
   ExtrinsicBuilder,
   FeeBuilder,
 } from '@moonbeam-network/xcm-builder';
-import {
-  bnc,
-  bncs,
-  fil,
-  glmr,
-  vastr,
-  vdot,
-  vfil,
-  vglmr,
-  vmanta,
-} from '../assets';
+import { bnc, fil, glmr, vastr, vdot, vfil, vglmr, vmanta } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -44,7 +34,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -70,7 +63,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -96,7 +92,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
     },
     {
       source: {
@@ -122,7 +118,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -148,7 +147,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: vdot,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -174,7 +176,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -200,7 +205,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
     {
       source: {
@@ -226,33 +234,10 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
           asset: bnc,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
-    },
-    {
-      source: {
-        asset: bncs,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          asset: bnc,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        min: AssetMinBuilder().assetRegistry().currencyMetadatas(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: bncs,
-        chain: moonbeam,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .fromAssetIdQuery({ isAssetReserveChain: false }),
-          asset: bnc,
-        },
-      },
-      extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssets()
+        .X1GeneralKey(),
     },
   ],
 });

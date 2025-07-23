@@ -50,11 +50,6 @@ export const bnc = new Asset({
   originSymbol: 'BNC',
 });
 
-export const bncs = new Asset({
-  key: 'bncs',
-  originSymbol: 'BNCS',
-});
-
 export const cfg = new Asset({
   key: 'cfg',
   originSymbol: 'CFG',
@@ -193,11 +188,6 @@ export const manta = new Asset({
 export const maos = new Asset({
   key: 'maos',
   originSymbol: 'MAOS',
-});
-
-export const mgx = new Asset({
-  key: 'mgx',
-  originSymbol: 'MGX',
 });
 
 export const movr = new Asset({
@@ -431,7 +421,6 @@ export const assetsList: Asset[] = [
   auq,
   axlusdc,
   bnc,
-  bncs,
   cfg,
   crab,
   csm,
@@ -461,7 +450,6 @@ export const assetsList: Asset[] = [
   lit,
   manta,
   maos,
-  mgx,
   movr,
   neuro,
   nodl,

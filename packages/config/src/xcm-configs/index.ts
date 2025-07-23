@@ -20,7 +20,6 @@ import { kusamaRoutes } from './kusama';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
 import { laosRoutes } from './laos';
 import { laosAlphanetRoutes } from './laosAlphanet';
-import { mangataKusamaRoutes } from './mangataKusama';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
 import { moonbaseBetaRoutes } from './moonbaseBeta';
@@ -61,7 +60,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   karuraRoutes,
   kintsugiRoutes,
   kusamaRoutes,
-  mangataKusamaRoutes,
   mantaParachainRoutes,
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,

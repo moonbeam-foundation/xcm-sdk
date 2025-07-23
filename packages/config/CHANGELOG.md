@@ -1,5 +1,35 @@
 # @moonbeam-network/xcm-config
 
+## 3.4.5
+
+### Patch Changes
+
+- Updated dependencies [[`ead3303`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ead33037b56da906b2db3e4e337af56e64f0cddd)]:
+  - @moonbeam-network/xcm-builder@3.3.7
+  - @moonbeam-network/xcm-types@3.2.7
+
+## 3.4.4
+
+### Patch Changes
+
+- [#524](https://github.com/moonbeam-foundation/xcm-sdk/pull/524) [`f71e65b`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f71e65bc43ad622b54a1f86dfe55f3b989018c8b) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Bifrost fees and remove BNCS
+
+## 3.4.3
+
+### Patch Changes
+
+- [#522](https://github.com/moonbeam-foundation/xcm-sdk/pull/522) [`7f3031e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7f3031e28088ab10243efcf1e5d8b04c9a5447f1) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix VFIL route
+
+## 3.4.2
+
+### Patch Changes
+
+- [#520](https://github.com/moonbeam-foundation/xcm-sdk/pull/520) [`8179c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8179c3f97be3e5d9c23db1cce1d868ea013f15e3) Thanks [@mmaurello](https://github.com/mmaurello)! - Change some routes from using xTokens pallet to polkadotXcm
+
+- Updated dependencies [[`8179c3f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8179c3f97be3e5d9c23db1cce1d868ea013f15e3)]:
+  - @moonbeam-network/xcm-builder@3.3.6
+  - @moonbeam-network/xcm-types@3.2.6
+
 ## 3.4.1
 
 ### Patch Changes

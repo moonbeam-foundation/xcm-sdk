@@ -34,8 +34,8 @@ export const astarRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder()
-        .xTokens()
-        .transferMultiAsset(astar.parachainId)
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
         .here(),
     },
     {
@@ -61,7 +61,10 @@ export const astarRoutes = new ChainRoutes({
           asset: glmr,
         },
       },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .limitedReserveTransferAssets()
+        .X2PalletInstance(),
     },
   ],
 });

@@ -54,22 +54,22 @@
     "@wormhole-foundation/sdk-evm-tokenbridge": "^3.0.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.1",
+    "@biomejs/biome": "^2.1.2",
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.5",
     "@slack/webhook": "^7.0.5",
     "@types/big.js": "^6.2.2",
-    "bun": "^1.2.18",
-    "cspell": "^9.1.5",
+    "bun": "^1.2.19",
+    "cspell": "^9.2.0",
     "dotenv": "^17.2.0",
     "glob": "^11.0.3",
     "lefthook": "^1.12.2",
     "syncpack": "^13.0.4",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.5.0",
-    "turbo": "^2.5.4",
+    "turbo": "^2.5.5",
     "typescript": "^5.8.3",
-    "viem": "^2.31.7",
+    "viem": "^2.33.0",
     "vitest": "^3.2.4"
   },
   "overrides": {
