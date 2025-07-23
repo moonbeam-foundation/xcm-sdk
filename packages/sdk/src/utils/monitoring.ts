@@ -13,7 +13,7 @@ interface ListenToDestinationEventsProps {
   onDestinationError?: (error: Error) => void;
 }
 
-const ENABLE_LOGGING = true;
+const ENABLE_LOGGING = process.env.ENABLE_LOGGING === 'true';
 
 function log(label: string, message?: unknown): void {
   if (ENABLE_LOGGING) {
