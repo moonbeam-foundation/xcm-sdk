@@ -61,7 +61,7 @@ export function xcmPallet() {
                 return [
                   {
                     [version]: {
-                      parents: 1, // TODO put 1 to force error in source, revert to 0 to fix
+                      parents: 0,
                       interior: {
                         X1: [
                           {
