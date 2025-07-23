@@ -6,7 +6,6 @@ import type {
   SourceChecker,
 } from './eventMonitoring.interfaces';
 
-// Generic source checker factory
 export const createSourceChecker =
   (
     section: string,
@@ -46,7 +45,6 @@ export const createSourceChecker =
     }
   };
 
-// Generic destination checker factory
 export const createDestinationChecker =
   (
     section: string,

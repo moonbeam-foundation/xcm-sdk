@@ -27,7 +27,7 @@ interface MessageQueueProcessedData {
   success: Bool;
 }
 
-interface XcmEventData {
+export interface XcmEventData {
   origin: StagingXcmV5Location;
   messageId: U8aFixed;
 }
@@ -45,7 +45,7 @@ interface EthereumXcmEventData {
   ethTxHash: H256;
 }
 
-function GetAddress() {
+export function GetAddress() {
   return {
     fromXcmEvent:
       () =>
@@ -71,7 +71,7 @@ function GetAddress() {
   };
 }
 
-function GetMessageId() {
+export function GetMessageId() {
   return {
     fromXcmEvent:
       () =>
@@ -99,7 +99,7 @@ function GetMessageId() {
   };
 }
 
-function MatchMessageId() {
+export function MatchMessageId() {
   return {
     fromMessageQueueId:
       () =>
@@ -139,7 +139,7 @@ function MatchMessageId() {
   };
 }
 
-function GetIsSuccess() {
+export function GetIsSuccess() {
   return {
     fromMessageQueueProcessed:
       () =>
@@ -221,7 +221,7 @@ function CheckDestination() {
 
     xcmpQueue: (): DestinationChecker => (events, messageId) => {
       // Special handling for xcmpQueue as it needs to check both Success and Fail events
-      const matchMessageId = MatchMessageId().fromXcmpQueueHash();
+      const messageIdMatcher = MatchMessageId().fromXcmpQueueHash();
 
       const successEvent = events.find((event) => {
         if (
@@ -231,7 +231,7 @@ function CheckDestination() {
           return false;
         }
 
-        return matchMessageId(event, messageId);
+        return messageIdMatcher(event, messageId);
       });
 
       const failEvent = events.find((event) => {
@@ -242,7 +242,7 @@ function CheckDestination() {
           return false;
         }
 
-        return matchMessageId(event, messageId);
+        return messageIdMatcher(event, messageId);
       });
 
       if (!successEvent && !failEvent) {
