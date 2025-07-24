@@ -5,7 +5,7 @@ import type { Ecosystem, WormholeConfig } from './Chain.interfaces';
 export interface ChainConstructorParams {
   assets: Map<string, ChainAsset> | ChainAsset[];
   ecosystem?: Ecosystem;
-  explorer?: string;
+  explorer?: Explorer;
   isTestChain?: boolean;
   key: string;
   name: string;
@@ -13,12 +13,17 @@ export interface ChainConstructorParams {
   wh?: WormholeConfig;
 }
 
+interface Explorer {
+  base: string;
+  txPath?: string;
+}
+
 export abstract class Chain {
   readonly assets: Map<string, ChainAsset>;
 
   readonly ecosystem?: Ecosystem;
 
-  readonly explorer?: string;
+  readonly explorer?: Explorer;
 
   readonly isTestChain: boolean;
 
