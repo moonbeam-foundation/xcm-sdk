@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { unit } from '../assets';
 import { alphanetRelay, moonbaseAlpha } from '../chains';
@@ -37,6 +38,7 @@ export const alphanetRelayRoutes = new ChainRoutes({
         .xcmPallet()
         .transferAssetsUsingTypeAndThen()
         .here(),
+      monitoring: MonitoringBuilder().monitorEvent().xcmPallet().messageQueue(),
     },
   ],
 });

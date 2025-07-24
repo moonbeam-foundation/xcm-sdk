@@ -13,7 +13,7 @@ The SDK allows the three [types of transfers](../reference/mrl.md#transfer-types
 
 1. **From EVM chains to parachains**: Assets are sent from the EVM chain to Moonbeam via a GMP provider bridge (like Wormhole). A contract call is executed in Moonbeam which initiates the XCM transfer to the destination parachain.
 2. **From parachains to EVM chains**: Assets are sent alongside a remote execution message from the parachain to Moonbeam via XCM. The message then is executed in Moonbeam, which bridges the assets to the destination EVM chain via a GMP provider bridge.
-3. **Bewtween Moonbeam and EVM chains**: Assets move between Moonbeam and EVM chains via the GMP provider bridge.
+3. **Between Moonbeam and EVM chains**: Assets move between Moonbeam and EVM chains via the GMP provider bridge.
 
 In MRL transfers, the transaction must be completed in the destination chain of the bridge. This can be done automatically by a relayer or manually by the user, and the SDK supports both options.
 
@@ -194,9 +194,9 @@ The chained methods will provide data on the assets and chains along the way, bu
     ```
     There are routes in which the automatic transfer is not supported. You can check it in the [chains routes file](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/mrl-configs/moonbeam.ts). If you set automatic as `true` for a route that is not supported, the SDK will throw an error at the moment of fetching the transfer data.
 
-6.  Finally call the `setAddresses` function and pass in the source and destination addresses to define the addresses for the       ransfer. This will return the transfer data including the balances of the source and destination addresses. Take into account that depending on the source or the destination chain, the address format will be different. For example, from Ethereum to Hydration, you can pass as the source the address from the EVM signer, but as the destination the address from the Polkadot signer.
+6.  Finally call the `setAddresses` function and pass in the source and destination addresses to define the addresses for the transfer. This will return the transfer data including the balances of the source and destination addresses. Take into account that depending on the source or the destination chain, the address format will be different. For example, from Ethereum to Hydration, you can pass as the source the address from the EVM signer, but as the destination the address from the Polkadot signer.
 
-An example of the steps described above to build the transfer data to transfer USDC from Ethereym to Hydration is as follows:   
+An example of the steps described above to build the transfer data to transfer USDC from Ethereum to Hydration is as follows:   
 
 ```js
 import { Mrl } from '@moonbeam-network/mrl';
@@ -818,9 +818,12 @@ const amount = +transferData.min.toDecimal() * 1.5 + 0.000001;
 console.log(
     `\nSending ${amount} ${transferData.source.balance.getSymbol()} from ${transferData.source.chain.name} to ${transferData.destination.chain.name}`,
 );
-const result = await transferData.transfer(amount, false, {
-    evmSigner: walletClient,
-});
+
+const result = await transferData.transfer({
+    amount,
+    isAutomatic: false,
+    signers: { evmSigner: walletClient },
+  });
 ```
 
 The `transfer` function returns an array of strings that represent the transaction hashes. It is an array because for some assets coming from EVM chains, two transactions are sent in the process: one Approve and the actual Transfer. Where applicable, the first transaction is the Approve and the second is the Transfer. Where an Approve is not needed, only one transaction is returned.

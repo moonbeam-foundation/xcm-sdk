@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { astr, glmr } from '../assets';
 import { astar, moonbeam } from '../chains';
@@ -37,6 +38,10 @@ export const astarRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .here(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {

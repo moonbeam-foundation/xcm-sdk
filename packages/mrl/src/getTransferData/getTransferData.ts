@@ -9,7 +9,6 @@ import {
   EvmService,
   getDestinationData,
   PolkadotService,
-  type Signers,
 } from '@moonbeam-network/xcm-sdk';
 import {
   AssetAmount,
@@ -18,7 +17,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
-import type { TransferData } from '../mrl.interfaces';
+import type { TransferData, TransferParams } from '../mrl.interfaces';
 import { WormholeService } from '../services/wormhole';
 import { getMoonChainData } from './getMoonChainData';
 import { getSourceData } from './getSourceData';
@@ -106,13 +105,13 @@ export async function getTransferData({
     }),
     moonChain: moonChainData,
     source: sourceData,
-    async transfer(
+    async transfer({
       amount,
       isAutomatic,
-      { evmSigner, polkadotSigner }: Partial<Signers>,
+      signers: { evmSigner, polkadotSigner },
       statusCallback,
       sendOnlyRemoteExecution,
-    ): Promise<string[]> {
+    }: TransferParams): Promise<string[]> {
       const source = route.source.chain;
 
       const bigintAmount = toBigInt(amount, sourceData.balance.decimals);

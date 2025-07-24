@@ -156,7 +156,10 @@ export const alphanetAssetHub = new Parachain({
   nativeAsset: unit,
   parachainId: 1001,
   ss58Format: 42,
-  ws: ['wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network/'],
+  ws: [
+    'wss://statemint.api.moonbase.moonbeam.network',
+    'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network',
+  ],
 });
 
 export const alphanetRelay = new Parachain({
@@ -593,10 +596,12 @@ export const hydration = new Parachain({
   parachainId: 2034,
   ss58Format: 63,
   ws: [
-    'wss://hydradx.paras.dotters.network',
+    'wss://hydration-rpc.n.dwellir.com',
     'wss://hydradx-rpc.dwellir.com',
     'wss://rpc.hydradx.cloud',
     'wss://rpc.helikon.io/hydradx',
+    'wss://hydration.ibp.network',
+    'wss://hydration.dotters.network',
   ],
 });
 

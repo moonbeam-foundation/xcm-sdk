@@ -27,16 +27,16 @@ The following sections contain basic examples of how to work with the XCM SDK to
 ```js
 import { Sdk } from '@moonbeam-network/xcm-sdk';
 
-const transferData = async () => {
+const fromPolkadot = async () => {
   const transferData = await Sdk()
-  .setAsset(INSERT_ASSET)
-  .setSource(INSERT_SOURCE_CHAIN)
-  .setDestination(INSERT_DESTINATION_CHAIN)
-  .setAddresses({
-    sourceAddress: INSERT_SOURCE_ADDRESS,
-      destinationAddress: INSERT_DESTINATION_ADDRESS,
+    .setAsset(dot)
+    .setSource(polkadot) 
+    .setDestination(moonbeam)
+    .setAddresses({
+      sourceAddress: pair.address,
+      destinationAddress: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
     });
-  };
+};
 
 fromPolkadot();
 ```
@@ -46,7 +46,11 @@ fromPolkadot();
 ```js
 ...
 
-const hash = await transferData.transfer(INSERT_TRANSFER_AMOUNT, { INSERT_SIGNERS });
+const hash = await data.transfer({
+  amount: 1,
+  signers: { polkadotSigner: pair }, // Insert the signer, in this case a Substrate key pair
+});
+
 ```
 
 # Examples

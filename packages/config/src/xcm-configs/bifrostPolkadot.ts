@@ -3,10 +3,16 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { bnc, fil, glmr, vastr, vdot, vfil, vglmr, vmanta } from '../assets';
 import { bifrostPolkadot, moonbeam } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
+
+const monitoringToMoonbeam = MonitoringBuilder()
+  .monitorEvent()
+  .polkadotXcm()
+  .messageQueue();
 
 export const bifrostPolkadotRoutes = new ChainRoutes({
   chain: bifrostPolkadot,
@@ -38,6 +44,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -67,6 +74,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -93,6 +101,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -122,6 +131,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -151,6 +161,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -180,6 +191,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -209,6 +221,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -238,6 +251,7 @@ export const bifrostPolkadotRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonbeam,
     },
   ],
 });

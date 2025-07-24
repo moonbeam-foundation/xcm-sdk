@@ -23,13 +23,14 @@ export class ChainRoutes {
   constructor({ chain, routes }: ChainRoutesConstructorParams) {
     this.chain = chain;
     this.routes = new Map(
-      routes.map(({ source, destination, contract, extrinsic }) => [
+      routes.map(({ source, destination, contract, extrinsic, monitoring }) => [
         `${source.asset.key}-${destination.chain.key}`,
         new AssetRoute({
           source: { ...source, chain },
           destination,
           contract,
           extrinsic,
+          monitoring,
         }),
       ]),
     );
