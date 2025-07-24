@@ -13,6 +13,7 @@ overrides:
   '@polkadot/util-crypto': 13.5.3
   vite@ <=6.3.3: '>=6.3.4'
   brace-expansion@ >=2.0.0 <=2.0.1: '>=2.0.2'
+  axios@=1.10.0: '>=1.11.0'
 
 importers:
 
@@ -1796,8 +1797,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  axios@1.10.0:
-    resolution: {integrity: sha512-/1xYAC4MP/HEG+3duIhFr4ZQXR4sQXOIe+o6sdqzeykGLx6Upp/1p8MHqhINOvGeP7xyNHe7tsiJByc4SSVUxw==}
+  axios@1.11.0:
+    resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
 
   balanced-match@3.0.1:
     resolution: {integrity: sha512-vjtV3hiLqYDNRoiAv0zC4QaGAMPomEoq83PRmYIofPswwZurCeWR5LByXm7SyoL0Zh5+2z0+HC7jG8gSZJUh0w==}
@@ -5052,7 +5053,7 @@ snapshots:
     dependencies:
       '@slack/types': 2.14.0
       '@types/node': 24.0.15
-      axios: 1.10.0
+      axios: 1.11.0
     transitivePeerDependencies:
       - debug
 
@@ -5273,7 +5274,7 @@ snapshots:
     dependencies:
       '@wormhole-foundation/sdk-base': 2.4.0
       '@wormhole-foundation/sdk-definitions': 2.4.0
-      axios: 1.10.0
+      axios: 1.11.0
     transitivePeerDependencies:
       - debug
 
@@ -5353,7 +5354,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.10.0:
+  axios@1.11.0:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.4

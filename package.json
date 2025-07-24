@@ -84,7 +84,8 @@
       "@polkadot/util": "13.5.3",
       "@polkadot/util-crypto": "13.5.3",
       "vite@ <=6.3.3": ">=6.3.4",
-      "brace-expansion@ >=2.0.0 <=2.0.1": ">=2.0.2"
+      "brace-expansion@ >=2.0.0 <=2.0.1": ">=2.0.2",
+      "axios@=1.10.0": ">=1.11.0"
     }
   }
 }
