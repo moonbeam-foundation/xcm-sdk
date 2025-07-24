@@ -22,7 +22,7 @@ WormholeConfig {
       },
       "chain": "Moonbeam",
     },
-    false,
+    "TokenBridge",
     undefined,
   ],
   "func": "tokenTransfer",
@@ -51,7 +51,7 @@ WormholeConfig {
       },
       "chain": "Moonbeam",
     },
-    true,
+    "AutomaticTokenBridge",
     Uint8Array [
       0,
       5,
