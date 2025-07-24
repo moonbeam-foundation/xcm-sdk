@@ -4,16 +4,22 @@ import type {
   TokenTransfer,
 } from '@wormhole-foundation/sdk-connect';
 
+export enum Protocols {
+  TokenBridge = 'TokenBridge',
+  AutomaticTokenBridge = 'AutomaticTokenBridge',
+  ExecutorTokenBridge = 'ExecutorTokenBridge',
+}
+
 export type WormholeTransferFunctions = 'tokenTransfer';
 
-export type WormholeFunctionArgs = [
-  TokenId,
-  bigint,
-  ChainAddress,
-  ChainAddress,
-  TokenTransfer.Protocol,
-  Uint8Array?,
-];
+export interface WormholeFunctionArgs {
+  token: TokenId;
+  amount: bigint;
+  from: ChainAddress;
+  to: ChainAddress;
+  protocol: TokenTransfer.Protocol;
+  payload?: Uint8Array;
+}
 
 export interface WormholeConfigConstructorParams {
   args: WormholeFunctionArgs;

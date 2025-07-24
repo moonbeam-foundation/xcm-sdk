@@ -11,7 +11,7 @@ import type {
   MrlConfigBuilder,
 } from '../../../MrlBuilder.interfaces';
 import { GMP_CONTRACT_ADDRESS } from '../contract/Gmp';
-import { WormholeConfig } from './WormholeConfig';
+import { Protocols, WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 
 export function wormhole() {
@@ -70,16 +70,19 @@ export function wormhole() {
         );
 
         return new WormholeConfig({
-          args: [
-            whAsset,
-            asset.amount,
-            whSourceAddress,
-            whDestinationAddress,
-            isAutomatic ? 'AutomaticTokenBridge' : 'TokenBridge',
-            isDestinationMoonChain || isDestinationEvmChain
-              ? undefined
-              : getPayload({ destination, destinationAddress, moonApi }),
-          ],
+          args: {
+            token: whAsset,
+            amount: asset.amount,
+            from: whSourceAddress,
+            to: whDestinationAddress,
+            protocol: isAutomatic
+              ? Protocols.AutomaticTokenBridge
+              : Protocols.TokenBridge,
+            payload:
+              isDestinationMoonChain || isDestinationEvmChain
+                ? undefined
+                : getPayload({ destination, destinationAddress, moonApi }),
+          },
           func: 'tokenTransfer',
         });
       },
