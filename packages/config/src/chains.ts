@@ -503,7 +503,10 @@ export const ethereum = new EvmChain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
-  explorer: 'https://etherscan.io',
+  explorer: {
+    base: 'https://etherscan.io',
+    txPath: '/tx',
+  },
   id: 1,
   key: 'ethereum',
   name: 'Ethereum',
@@ -529,7 +532,10 @@ export const fantomTestnet = new EvmChain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: 'https://explorer.testnet.fantom.network/',
+  explorer: {
+    base: 'https://explorer.testnet.fantom.network',
+    txPath: '/transactions',
+  },
   id: 4_002,
   isTestChain: true,
   key: 'fantom-testnet',
@@ -587,7 +593,9 @@ export const hydration = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
-  explorer: 'https://hydradx.subscan.io',
+  explorer: {
+    base: 'https://hydration.subscan.io',
+  },
   genesisHash:
     '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
   key: 'hydration',
@@ -639,9 +647,9 @@ export const hydrationAlphanet = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: getPolkadotAppsUrl(
-    'wss://hydradx-moonbase-rpc.play.hydration.cloud',
-  ),
+  explorer: {
+    base: getPolkadotAppsUrl('wss://hydradx-moonbase-rpc.play.hydration.cloud'),
+  },
   genesisHash:
     '0x025980095be141a99f983631c49271af15cab61c4ce0d73db73192443932669a',
   isTestChain: true,
@@ -996,7 +1004,10 @@ export const moonbaseAlpha = new EvmParachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: 'https://moonbase.moonscan.io',
+  explorer: {
+    base: 'https://moonbase.moonscan.io',
+    txPath: '/tx',
+  },
   genesisHash:
     '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527',
   id: 1287,
@@ -1061,9 +1072,11 @@ export const moonbaseBeta = new EvmParachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: getPolkadotAppsUrl(
-    'wss://moonbase-beta.api.moonbase.moonbeam.network',
-  ),
+  explorer: {
+    base: getPolkadotAppsUrl(
+      'wss://moonbase-beta.api.moonbase.moonbeam.network',
+    ),
+  },
   genesisHash:
     '0xeebb5d05763801e54d6a7a60a4b7998ac125c4d050dcec418dd07ea959a54464',
   id: 1288,
@@ -1439,7 +1452,10 @@ export const moonbeam = new EvmParachain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
-  explorer: 'https://moonbeam.moonscan.io',
+  explorer: {
+    base: 'https://moonbeam.moonscan.io',
+    txPath: '/tx',
+  },
   genesisHash:
     '0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d',
   id: 1284,
@@ -1695,7 +1711,9 @@ export const peaqAlphanet = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
+  explorer: {
+    base: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
+  },
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   isTestChain: true,
@@ -1759,7 +1777,9 @@ export const peaqChain = new Parachain({
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
-  explorer: getPolkadotAppsUrl('wss://peaq.api.onfinality.io/public-ws'),
+  explorer: {
+    base: getPolkadotAppsUrl('wss://peaq.api.onfinality.io/public-ws'),
+  },
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   isTestChain: false,
@@ -1829,7 +1849,9 @@ export const peaqEvm = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.Polkadot,
-  explorer: 'https://peaq.subscan.io',
+  explorer: {
+    base: 'https://peaq.subscan.io',
+  },
   genesisHash:
     '0xd2a5d385932d1f650dae03ef8e2748983779ee342c614f80854d32b8cd8fa48c',
   id: 3338,
@@ -1872,7 +1894,9 @@ export const peaqEvmAlphanet = new EvmParachain({
     Xtokens: '0x0000000000000000000000000000000000000803',
   },
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
+  explorer: {
+    base: getPolkadotAppsUrl('wss://moonbeam.peaq.network'),
+  },
   genesisHash:
     '0x2dfcd5c560f6db1667cbc2bc3791dfd337f88f400af6de39b1b8638ee7af6ed4',
   id: 9990,
