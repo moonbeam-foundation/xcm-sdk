@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-builder
 
+## 3.3.9
+
+### Patch Changes
+
+- [#519](https://github.com/moonbeam-foundation/xcm-sdk/pull/519) [`7dd4ba3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7dd4ba33792e8042c6b69ef99d56d9d8a9f6a08a) Thanks [@mmaurello](https://github.com/mmaurello)! - Update Wormhole SDK to V3
+
+- Updated dependencies [[`7dd4ba3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7dd4ba33792e8042c6b69ef99d56d9d8a9f6a08a)]:
+  - @moonbeam-network/xcm-types@3.2.9
+
 ## 3.3.8
 
 ### Patch Changes
