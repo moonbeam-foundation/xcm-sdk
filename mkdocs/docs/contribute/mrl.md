@@ -94,7 +94,10 @@ To add a chain, take the following steps:
     export const ethereum = new EvmChain({
       assets: [],
       ecosystem: Ecosystem.Polkadot,
-      explorer: 'https://etherscan.io',
+      explorer: {
+        base: 'https://etherscan.io',
+        txPath: '/tx',
+      },
       id: 1,
       key: 'ethereum',
       name: 'Ethereum',
