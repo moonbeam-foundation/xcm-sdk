@@ -67,7 +67,19 @@ To migrate your existing code:
    });
    ```
 
-2. **For MRL transfers:**
+2. **Add monitoring callbacks (optional):**
+   ```typescript
+   await data.transfer({
+     amount,
+     signers: { polkadotSigner: pair },
+     onSourceFinalized: () => console.log('Transaction sent successfully'),
+     onSourceError: (error) => console.error('Error sending transaction', error),
+     onDestinationFinalized: () => console.log('Assets successfully received'),
+     onDestinationError: (error) => console.error('Error receiving assets', error)
+   });
+   ```
+
+3. **For MRL transfers:**
    ```typescript
    // Replace this:
    await transferData.transfer(amount, isAutomatic, { evmSigner: walletClient });
@@ -80,17 +92,6 @@ To migrate your existing code:
    });
    ```
 
-3. **Add monitoring callbacks (optional):**
-   ```typescript
-   await data.transfer({
-     amount,
-     signers: { polkadotSigner: pair },
-     onSourceFinalized: () => console.log('Transaction sent successfully'),
-     onSourceError: (error) => console.error('Error sending transaction', error),
-     onDestinationFinalized: () => console.log('Assets successfully received'),
-     onDestinationError: (error) => console.error('Error receiving assets', error)
-   });
-   ```
 
 For detailed migration instructions, see: https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/xcm/#the-transfer-method
 
