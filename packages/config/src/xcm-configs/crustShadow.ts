@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { csm, movr } from '../assets';
 import { crustShadow, moonriver } from '../chains';
@@ -37,6 +38,10 @@ export const crustShadowRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .here(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(), // TODO test
     },
     {
       source: {

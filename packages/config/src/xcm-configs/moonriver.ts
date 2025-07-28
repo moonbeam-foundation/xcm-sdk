@@ -3,6 +3,7 @@ import {
   BalanceBuilder,
   ContractBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import {
   aseed,
@@ -209,6 +210,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
     },
     {
       source: {
