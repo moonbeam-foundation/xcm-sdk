@@ -70,7 +70,7 @@ To migrate your existing code:
 2. **For MRL transfers:**
    ```typescript
    // Replace this:
-   await transferData.transfer(amount, { evmSigner: walletClient }, isAutomatic);
+   await transferData.transfer(amount, isAutomatic, { evmSigner: walletClient });
    
    // With this:
    await transferData.transfer({
