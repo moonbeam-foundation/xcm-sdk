@@ -95,7 +95,10 @@ To add a chain, take the following steps:
       assets: [],
       ecosystem: Ecosystem.Polkadot,
       // TODO mjm change all docs
-      explorer: 'https://etherscan.io',
+      explorer: {
+        base: 'https://etherscan.io',
+        txPath: '/tx',
+      },
       id: 1,
       key: 'ethereum',
       name: 'Ethereum',

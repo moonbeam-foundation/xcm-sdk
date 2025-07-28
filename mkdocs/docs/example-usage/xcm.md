@@ -477,7 +477,10 @@ The same output will be generated regardless of which example you used to build 
             "wstethe": [Object ...],
           },
           ecosystem: "polkadot",
-          explorer: "https://moonbeam.moonscan.io",
+          explorer: {
+            base: "https://moonbeam.moonscan.io",
+            txPath: "/tx",
+          },
           isTestChain: false,
           key: "moonbeam",
           name: "Moonbeam",
