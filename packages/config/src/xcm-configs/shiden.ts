@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { movr, sdn } from '../assets';
 import { moonriver, shiden } from '../chains';
@@ -37,6 +38,10 @@ export const shidenRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .here(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -65,6 +70,10 @@ export const shidenRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2PalletInstance(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });

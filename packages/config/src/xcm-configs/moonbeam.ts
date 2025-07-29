@@ -126,6 +126,7 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
     },
     {
       source: {
@@ -208,6 +209,7 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {
@@ -333,6 +335,7 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
     },
     {
       source: {
@@ -489,11 +492,12 @@ export const moonbeamRoutes = new ChainRoutes({
         chain: interlay,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {
-          amount: 0.00000064,
+          amount: 0.000001,
           asset: ibtc,
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {
@@ -517,6 +521,7 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {

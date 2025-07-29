@@ -3,12 +3,18 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ksm, rmrk, usdt } from '../assets';
 import { kusamaAssetHub, moonriver } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
 const extra = 0.0015;
+
+const monitoringToMoonriver = MonitoringBuilder()
+  .monitorEvent()
+  .polkadotXcm()
+  .messageQueue();
 
 export const kusamaAssetHubRoutes = new ChainRoutes({
   chain: kusamaAssetHub,
@@ -42,6 +48,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -72,6 +79,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .X2(),
+      monitoring: monitoringToMoonriver,
     },
   ],
 });

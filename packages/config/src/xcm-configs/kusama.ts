@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { ksm } from '../assets';
 import { kusama, moonriver } from '../chains';
@@ -38,6 +39,7 @@ export const kusamaRoutes = new ChainRoutes({
         .xcmPallet()
         .transferAssetsUsingTypeAndThen()
         .here(),
+      monitoring: MonitoringBuilder().monitorEvent().xcmPallet().messageQueue(),
     },
   ],
 });
