@@ -38,10 +38,7 @@ export const crustShadowRoutes = new ChainRoutes({
         .polkadotXcm()
         .limitedReserveTransferAssets()
         .here(),
-      monitoring: MonitoringBuilder()
-        .monitorEvent()
-        .polkadotXcm()
-        .messageQueue(), // TODO test
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
     {
       source: {

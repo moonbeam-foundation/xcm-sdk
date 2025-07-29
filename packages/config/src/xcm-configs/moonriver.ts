@@ -94,6 +94,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {
@@ -200,6 +201,10 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -223,7 +228,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
+      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {
