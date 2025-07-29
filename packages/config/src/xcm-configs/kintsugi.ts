@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { kbtc, kint } from '../assets';
 import { kintsugi, moonriver } from '../chains';
@@ -34,6 +35,7 @@ export const kintsugiRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
     {
       source: {
@@ -60,6 +62,7 @@ export const kintsugiRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
   ],
 });

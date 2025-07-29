@@ -124,6 +124,8 @@ export function processSourceEvents({
       log('Source event matched:', sourceResult.event?.toHuman());
       onSourceFinalized?.();
 
+      log('Message ID:', sourceResult.messageId);
+
       if (unsubscribe) {
         log('Unsubscribing from source events...');
         unsubscribe();
