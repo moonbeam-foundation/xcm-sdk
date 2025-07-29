@@ -1,5 +1,22 @@
 # @moonbeam-network/mrl
 
+## 5.0.0
+
+### Major Changes
+
+- [#534](https://github.com/moonbeam-foundation/xcm-sdk/pull/534) [`6519ef9`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6519ef9ba3004fb52eb6d3fc2027bedc8d757e85) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement Monitoring callbacks for XCM transfers
+
+  Breaking Change: now the `transfer` function receives an object as parameter. The monitoring callback is optional.
+
+### Patch Changes
+
+- Updated dependencies [[`6519ef9`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6519ef9ba3004fb52eb6d3fc2027bedc8d757e85)]:
+  - @moonbeam-network/xcm-builder@5.0.0
+  - @moonbeam-network/xcm-config@5.0.0
+  - @moonbeam-network/xcm-types@5.0.0
+  - @moonbeam-network/xcm-sdk@5.0.0
+  - @moonbeam-network/xcm-utils@5.0.0
+
 ## 4.0.0
 
 ### Major Changes
