@@ -3,10 +3,16 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { bnc, movr, vbnc, vksm, vmovr } from '../assets';
 import { bifrostKusama, moonriver } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
+
+const monitoringToMoonriver = MonitoringBuilder()
+  .monitorEvent()
+  .polkadotXcm()
+  .messageQueue();
 
 export const bifrostKusamaRoutes = new ChainRoutes({
   chain: bifrostKusama,
@@ -38,6 +44,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -64,6 +71,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -93,6 +101,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -122,6 +131,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -151,6 +161,7 @@ export const bifrostKusamaRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssets()
         .X1GeneralKey(),
+      monitoring: monitoringToMoonriver,
     },
   ],
 });
