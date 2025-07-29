@@ -1,5 +1,144 @@
 # @moonbeam-network/xcm-sdk
 
+## 4.0.0
+
+### Major Changes
+
+- [#526](https://github.com/moonbeam-foundation/xcm-sdk/pull/526) [`6b69f5a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6b69f5a6ec6d41c68f373a7b11bc7609b7ce8244) Thanks [@mmaurello](https://github.com/mmaurello)! - # Major Release: Enhanced XCM Transfer Monitoring
+
+  This major release introduces comprehensive monitoring capabilities for XCM transfers, enabling developers to track transfer states across both source and destination chains.
+
+  ## 🚨 Breaking Changes
+
+  ### Transfer Function API Changes
+
+  The `transfer` function signature has been updated across all packages to improve consistency and enable monitoring features:
+
+  **Before:**
+
+  ```typescript
+  // XCM
+  const data = await Sdk()
+    .setAsset(asset)
+    .setSource(source)
+    .setDestination(destination);
+  await data.transfer(amount, { polkadotSigner: pair });
+
+  // MRL
+  const transferData = await Mrl()
+    .setSource(source)
+    .setDestination(destination)
+    .setAsset(asset);
+  await transferData.transfer(amount, isAutomatic, { evmSigner: walletClient });
+  ```
+
+  **After:**
+
+  ```typescript
+  // XCM
+  const data = await Sdk().setAsset(asset).setSource(source).setDestination(destination);
+  await data.transfer({
+    amount,
+    signers: { polkadotSigner: pair },
+    onSourceFinalized?: () => void,
+    onSourceError?: (error) => void,
+    onDestinationFinalized?: () => void,
+    onDestinationError?: (error) => void
+  });
+
+  // MRL
+  const transferData = await Mrl().setSource(source).setDestination(destination).setAsset(asset);
+  await transferData.transfer({
+    amount,
+    isAutomatic,
+    signers: { evmSigner: walletClient },
+    // Monitoring is not implemented to MRL yet
+  });
+  ```
+
+  ### Migration Guide
+
+  To migrate your existing code:
+
+  1. **Convert separate parameters to object parameter:**
+
+     ```typescript
+     // Replace this:
+     await data.transfer(amount, { polkadotSigner: pair });
+
+     // With this:
+     await data.transfer({
+       amount,
+       signers: { polkadotSigner: pair },
+     });
+     ```
+
+  2. **Add monitoring callbacks (optional):**
+
+     ```typescript
+     await data.transfer({
+       amount,
+       signers: { polkadotSigner: pair },
+       onSourceFinalized: () => console.log("Transaction sent successfully"),
+       onSourceError: (error) =>
+         console.error("Error sending transaction", error),
+       onDestinationFinalized: () =>
+         console.log("Assets successfully received"),
+       onDestinationError: (error) =>
+         console.error("Error receiving assets", error),
+     });
+     ```
+
+  3. **For MRL transfers:**
+
+     ```typescript
+     // Replace this:
+     await transferData.transfer(amount, isAutomatic, {
+       evmSigner: walletClient,
+     });
+
+     // With this:
+     await transferData.transfer({
+       amount,
+       isAutomatic,
+       signers: { evmSigner: walletClient },
+     });
+     ```
+
+  For detailed migration instructions, see: https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/xcm/#the-transfer-method
+
+  ## ✨ New Features
+
+  ### Real-time Transfer Monitoring
+
+  - **Source Chain Monitoring**: Track transaction submission, inclusion, and finalization on the source chain
+  - **Destination Chain Monitoring**: Monitor XCM message execution and asset delivery on the destination chain
+  - **Error Handling**: Error reporting for both chains with detailed error contexts
+  - **Success Callbacks**: Receive notifications when transfers complete successfully at each stage
+
+  ### Enhanced Developer Experience
+
+  - **Type-safe Callbacks**: All monitoring callbacks are fully typed for better IDE support
+  - **Flexible Integration**: Monitoring is optional - existing functionality works without callbacks
+  - **Comprehensive State Tracking**: Monitor the complete lifecycle of cross-chain transfers
+
+### Patch Changes
+
+- Updated dependencies [[`6b69f5a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/6b69f5a6ec6d41c68f373a7b11bc7609b7ce8244)]:
+  - @moonbeam-network/xcm-builder@4.0.0
+  - @moonbeam-network/xcm-config@4.0.0
+  - @moonbeam-network/xcm-types@4.0.0
+  - @moonbeam-network/xcm-utils@4.0.0
+
+## 3.2.13
+
+### Patch Changes
+
+- Updated dependencies [[`7dd4ba3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7dd4ba33792e8042c6b69ef99d56d9d8a9f6a08a)]:
+  - @moonbeam-network/xcm-builder@3.3.9
+  - @moonbeam-network/xcm-config@3.4.7
+  - @moonbeam-network/xcm-types@3.2.9
+
 ## 3.2.12
 
 ### Patch Changes

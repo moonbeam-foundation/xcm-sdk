@@ -313,7 +313,10 @@ Defines the complete transfer data for transferring an asset, including asset, s
         "wstethe": [Object ...],
       },
       ecosystem: "polkadot",
-      explorer: "https://moonbeam.moonscan.io",
+      explorer: {
+        base: "https://moonbeam.moonscan.io",
+        txPath: "/tx",
+      },
       isTestChain: false,
       key: "moonbeam",
       name: "Moonbeam",

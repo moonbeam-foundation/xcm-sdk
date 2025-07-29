@@ -49,9 +49,9 @@
     "@polkadot/types": "16.4.1",
     "@polkadot/util": "13.5.3",
     "@polkadot/util-crypto": "13.5.3",
-    "@wormhole-foundation/sdk-connect": "^2.4.0",
-    "@wormhole-foundation/sdk-evm": "^2.4.0",
-    "@wormhole-foundation/sdk-evm-tokenbridge": "^2.4.0"
+    "@wormhole-foundation/sdk-connect": "^3.0.4",
+    "@wormhole-foundation/sdk-evm": "^3.0.4",
+    "@wormhole-foundation/sdk-evm-tokenbridge": "^3.0.4"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.2",

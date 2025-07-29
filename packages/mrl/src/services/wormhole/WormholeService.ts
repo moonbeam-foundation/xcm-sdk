@@ -1,4 +1,5 @@
 import {
+  Protocols,
   type WormholeConfig,
   wormholeFactory,
 } from '@moonbeam-network/xcm-builder';
@@ -26,13 +27,45 @@ export class WormholeService {
     this.#wh = wormholeFactory(chain);
   }
 
+  async createTokenTransfer(transfer: WormholeConfig): Promise<TokenTransfer> {
+    const { token, amount, from, to, protocol, payload } = transfer.args;
+
+    // Call the tokenTransfer method with correct overload parameters
+    if (protocol === Protocols.TokenBridge) {
+      return await this.#wh[transfer.func](
+        token,
+        amount,
+        from,
+        to,
+        protocol,
+        payload,
+      );
+    } else if (protocol === Protocols.AutomaticTokenBridge) {
+      return await this.#wh[transfer.func](
+        token,
+        amount,
+        from,
+        to,
+        protocol,
+        // For AutomaticTokenBridge, the 6th parameter is nativeGas (bigint), not payload
+        payload ? 0n : undefined,
+      );
+    } else {
+      throw new Error(`Unsupported protocol: ${protocol}`);
+    }
+  }
+
   async getFee(transfer: WormholeConfig): Promise<TransferQuote | undefined> {
-    const amount = transfer.args[1];
+    const { amount } = transfer.args;
     if (amount === 0n) {
       return undefined;
     }
 
-    const xfer = await this.#wh[transfer.func](...transfer.args);
+    const xfer = await this.createTokenTransfer(transfer);
+
+    if (xfer.transfer.protocol === Protocols.ExecutorTokenBridge) {
+      throw new Error(`${Protocols.ExecutorTokenBridge} is not supported`);
+    }
 
     return TokenTransfer.quoteTransfer(
       this.#wh,
@@ -46,7 +79,7 @@ export class WormholeService {
     signer: EvmSigner,
     transfer: WormholeConfig,
   ): Promise<string[]> {
-    const xfer = await this.#wh[transfer.func](...transfer.args);
+    const xfer = await this.createTokenTransfer(transfer);
 
     return xfer.initiateTransfer(new WormholeWagmiSigner(this.chain, signer));
   }
