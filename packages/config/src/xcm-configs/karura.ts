@@ -3,10 +3,16 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { aseed, kar, movr } from '../assets';
 import { karura, moonriver } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
+
+const monitoringToMoonriver = MonitoringBuilder()
+  .monitorEvent()
+  .xTokens()
+  .messageQueue();
 
 export const karuraRoutes = new ChainRoutes({
   chain: karura,
@@ -35,6 +41,7 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -61,6 +68,7 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonriver,
     },
     {
       source: {
@@ -87,6 +95,7 @@ export const karuraRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonriver,
     },
   ],
 });
