@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { teer } from '../assets';
 import { integritee, moonriver } from '../chains';
@@ -34,6 +35,7 @@ export const integriteeRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().messageQueue(),
     },
   ],
 });
