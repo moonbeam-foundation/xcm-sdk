@@ -183,6 +183,8 @@ It includes builders for the queries to get the balances, fees, which asset is u
 - `destination` ++"DestinationConfig"++ - Contains the information about the transfer regarding the destination chain
 - `contract` ++"ContractConfigBuilder"++ - Contains the builder for the contract call for the transfer, in case the transfer is done through a contract, like in [EVM Parachains](./#the-evm-parachain-object)
 - `extrinsic` ++"ExtrinsicConfigBuilder"++ - Contains the builder for the extrinsic call for the transfer, in case the transfer is done through an extrinsic, like in [Parachains](./#the-parachain-object)
+- `monitoring` ++"EventMonitoringConfig"++ - Contains the config for monitoring the transfer status and completion. It defines which events to track and how to process them to determine success/failure
+
 
 </div>
 
@@ -311,7 +313,10 @@ Defines the complete transfer data for transferring an asset, including asset, s
         "wstethe": [Object ...],
       },
       ecosystem: "polkadot",
-      explorer: "https://moonbeam.moonscan.io",
+      explorer: {
+        base: "https://moonbeam.moonscan.io",
+        txPath: "/tx",
+      },
       isTestChain: false,
       key: "moonbeam",
       name: "Moonbeam",
@@ -719,8 +724,15 @@ Defines the complete transfer data for transferring an asset, including asset, s
 
 **Parameters**
 
-- `amount` ++"number | string | bigint"++ - The amount of the asset to transfer
-- `signers` ++"Signers"++ - The signers to use for the transfer
+- `params` ++"TransferParams"++ - An object containing the transfer parameters:
+- `amount` ++"number | string"++ - The amount of the asset to transfer
+- `signers` ++"Partial<Signers>"++ - The signers to use for the transfer
+- `statusCallback?` ++"(status: ISubmittableResult) => void"++ - Optional callback to receive status updates during the transfer
+- `onSourceFinalized?` ++"() => void"++ - Optional callback when the transaction is successful in the source chain 
+- `onSourceError?` ++"(error: Error) => void"++ - Optional callback when the source chain encounters an error
+- `onDestinationFinalized?` ++"() => void"++ - Optional callback when the transfer successfully reaches the destination chain
+- `onDestinationError?` ++"(error: Error) => void"++ - Optional callback when the destination chain encounters an error
+
 
 **Returns**
 
@@ -738,9 +750,37 @@ const data = await Sdk()
     destinationAddress: INSERT_DESTINATION_ADDRESS,
   });
 
-const txHash = await data.transfer(INSERT_AMOUNT, {
-  polkadotSigner: INSERT_POLKADOT_SIGNER,
-  evmSigner: INSERT_EVM_SIGNER_OR_WALLET_CLIENT,
+// Basic transfer
+const txHash = await data.transfer({
+  amount: INSERT_AMOUNT,
+  signers: {
+    polkadotSigner: INSERT_POLKADOT_SIGNER,
+    evmSigner: INSERT_EVM_SIGNER_OR_WALLET_CLIENT,
+  },
+});
+
+// Transfer with monitoring callbacks
+const txHashWithMonitoring = await data.transfer({
+  amount: INSERT_AMOUNT,
+  signers: {
+    polkadotSigner: INSERT_POLKADOT_SIGNER,
+    evmSigner: INSERT_EVM_SIGNER_OR_WALLET_CLIENT,
+  },
+  statusCallback: (status) => {
+    console.log('Transfer status:', status.toHuman());
+  },
+  onSourceFinalized: () => {
+    console.log('Source chain transfer finalized');
+  },
+  onSourceError: (error) => {
+    console.error('Source chain error:', error);
+  },
+  onDestinationFinalized: () => {
+    console.log('Destination chain transfer finalized');
+  },
+  onDestinationError: (error) => {
+    console.error('Destination chain error:', error);
+  },
 });
 ```
 </div>

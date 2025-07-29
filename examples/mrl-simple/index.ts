@@ -118,8 +118,10 @@ async function fromEvmChain(
     `\nSending ${amount} ${transferData.source.balance.getSymbol()} from ${transferData.source.chain.name} to ${transferData.destination.chain.name}`,
   );
 
-  const result = await transferData.transfer(amount, isAutomatic, {
-    evmSigner: fantomWalletClient,
+  const result = await transferData.transfer({
+    amount,
+    isAutomatic,
+    signers: { evmSigner: fantomWalletClient },
   });
   const hash = result.pop();
 
@@ -186,8 +188,10 @@ async function fromParachain(
     `Sending also ${transferData.moonChain.fee.toDecimal()} ${transferData.moonChain.fee.getSymbol()} from ${transferData.source.chain.name} to ${transferData.moonChain.chain.name} to cover for fees`,
   );
 
-  await transferData.transfer(amount, isAutomatic, {
-    polkadotSigner: pair,
+  await transferData.transfer({
+    amount,
+    isAutomatic,
+    signers: { polkadotSigner: pair },
   });
 
   console.log(

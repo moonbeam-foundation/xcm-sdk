@@ -2,10 +2,16 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dai, glmr, hdx, usdcwh, usdtwh, wbtc, weth } from '../assets';
 import { hydration, moonbeam } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
+
+const monitoringToMoonbeam = MonitoringBuilder()
+  .monitorEvent()
+  .polkadotXcm()
+  .messageQueue();
 
 export const hydrationRoutes = new ChainRoutes({
   chain: hydration,
@@ -34,6 +40,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X1(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -59,6 +66,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X2(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -84,6 +92,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -111,6 +120,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -136,6 +146,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -161,6 +172,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -186,6 +198,7 @@ export const hydrationRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
+      monitoring: monitoringToMoonbeam,
     },
   ],
 });

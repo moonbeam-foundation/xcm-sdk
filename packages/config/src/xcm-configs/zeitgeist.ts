@@ -2,10 +2,16 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, usdcwh, ztg } from '../assets';
 import { moonbeam, zeitgeist } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
+
+const monitoringToMoonbeam = MonitoringBuilder()
+  .monitorEvent()
+  .xTokens()
+  .messageQueue();
 
 export const zeitgeistRoutes = new ChainRoutes({
   chain: zeitgeist,
@@ -34,6 +40,7 @@ export const zeitgeistRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -59,6 +66,7 @@ export const zeitgeistRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transferMultiCurrencies(),
+      monitoring: monitoringToMoonbeam,
     },
     {
       source: {
@@ -84,6 +92,7 @@ export const zeitgeistRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: monitoringToMoonbeam,
     },
   ],
 });

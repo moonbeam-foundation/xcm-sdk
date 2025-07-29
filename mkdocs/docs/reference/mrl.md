@@ -175,7 +175,9 @@ Defines the complete transfer data for transferring an asset, including asset ba
                 "weth": [Object...],
             },
             ecosystem: "polkadot",
-            explorer: "https://hydradx.subscan.io",
+            explorer: {
+                base: "https://hydration.subscan.io",
+            },
             isTestChain: false,
             key: "hydration",
             name: "Hydration",
@@ -442,7 +444,10 @@ Defines the complete transfer data for transferring an asset, including asset ba
                 "wstethe": [Object...],
             },
             ecosystem: "polkadot",
-            explorer: "https://moonbeam.moonscan.io",
+            explorer: {
+                base: "https://moonbeam.moonscan.io",
+                txPath: "/tx",
+            },
             isTestChain: false,
             key: "moonbeam",
             name: "Moonbeam",
@@ -526,7 +531,10 @@ Defines the complete transfer data for transferring an asset, including asset ba
                 "peaq": [Object...],
             },
             ecosystem: "polkadot",
-            explorer: "https://etherscan.io",
+            explorer: {
+                base: "https://etherscan.io",
+                txPath: "/tx",
+            },
             isTestChain: false,
             key: "ethereum",
             name: "Ethereum",
@@ -733,7 +741,6 @@ We call Moon Chain to the intermediary chain that is used to transfer the assets
 <div class="grid" markdown>
 <div markdown>
 
-
 **Parameters**
 
 - `amount` ++"bigint | number | string"++ - The amount of the asset to transfer
@@ -770,14 +777,14 @@ const statusCallback = ({ status }: ISubmittableResult) => {
   }
 };
 
-await transferData.transfer(
-  0.1,
+await transferData.transfer({
+  amount: 0.1,
   isAutomatic,
-  {
+  signers: {
     polkadotSigner: INSERT_POLKADOT_SIGNER, // pair
   },
   statusCallback,
-);
+});
 
 ```
 

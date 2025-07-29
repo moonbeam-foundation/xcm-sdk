@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { laos } from '../assets';
 import { laosMainnet, moonbeam } from '../chains';
@@ -34,6 +35,10 @@ export const laosRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsUsingTypeAndThen()
         .here(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });

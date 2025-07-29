@@ -95,7 +95,7 @@ export const moonbaseAlphaMock = new EvmParachain({
 export const fantomTestnet = new EvmChain({
   assets: [testChainAsset, testChainAsset2],
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: 'https://testnet.ftmscan.com',
+  explorer: { base: 'https://testnet.ftmscan.com' },
   id: 4_002,
   isTestChain: true,
   key: 'fantom-testnet',

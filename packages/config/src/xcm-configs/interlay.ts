@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { glmr, ibtc, intr } from '../assets';
 import { interlay, moonbeam } from '../chains';
@@ -34,6 +35,7 @@ export const interlayRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().xTokens().transfer(),
+      monitoring: MonitoringBuilder().monitorEvent().xTokens().ethereumXcm(),
     },
     {
       source: {

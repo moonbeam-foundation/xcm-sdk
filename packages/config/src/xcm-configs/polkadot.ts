@@ -2,6 +2,7 @@ import {
   BalanceBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
+  MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { dot } from '../assets';
 import { moonbeam, polkadot } from '../chains';
@@ -38,6 +39,7 @@ export const polkadotRoutes = new ChainRoutes({
         .xcmPallet()
         .transferAssetsUsingTypeAndThen()
         .here(),
+      monitoring: MonitoringBuilder().monitorEvent().xcmPallet().messageQueue(),
     },
   ],
 });

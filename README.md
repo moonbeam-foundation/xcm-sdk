@@ -12,7 +12,7 @@ Additionally, the Moonbeam MRL SDK allows users to easily transfer liquidity int
 
 The updated documentation is available [here](https://moonbeam-foundation.github.io/xcm-sdk/latest/).
 
-## v3 (current)
+## v4 (current)
 
 ### Usage
 
@@ -24,7 +24,14 @@ The updated documentation is available [here](https://moonbeam-foundation.github
 - [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/xcm)
 - [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/mrl)
 
-## v2 (previous)
+## v3 (previous)
 
-- [usage](https://moonbeam-foundation.github.io/xcm-sdk/v2/example-usage)
-- [references](https://moonbeam-foundation.github.io/xcm-sdk/v2/reference/interfaces)
+### Usage
+
+- [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/example-usage/xcm)
+- [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/example-usage/mrl)
+
+### References
+
+- [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/reference/xcm)
+- [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/reference/mrl)
