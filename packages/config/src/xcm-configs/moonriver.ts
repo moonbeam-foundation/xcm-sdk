@@ -352,6 +352,10 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -379,6 +383,10 @@ export const moonriverRoutes = new ChainRoutes({
         min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -460,6 +468,10 @@ export const moonriverRoutes = new ChainRoutes({
         min: AssetMinBuilder().assets().asset(),
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
