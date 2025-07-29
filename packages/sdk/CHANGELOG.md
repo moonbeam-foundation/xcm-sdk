@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 4.0.1
+
+### Patch Changes
+
+- [#536](https://github.com/moonbeam-foundation/xcm-sdk/pull/536) [`4497e25`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4497e256489ca2cdb65f098140f8975e1d9fcba4) Thanks [@mmaurello](https://github.com/mmaurello)! - Add monitoring to Moonriver routes
+
+- Updated dependencies [[`4497e25`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4497e256489ca2cdb65f098140f8975e1d9fcba4)]:
+  - @moonbeam-network/xcm-config@4.0.1
+
 ## 4.0.0
 
 ### Major Changes
