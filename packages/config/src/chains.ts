@@ -57,6 +57,7 @@ import {
   pha,
   pica,
   pink,
+  pizza,
   ring,
   rmrk,
   sdn,
@@ -1070,6 +1071,10 @@ export const moonbaseBeta = new EvmParachain({
       address: '0xfFFFFFfF0000000000000000000000000000000A',
       decimals: 18,
     }),
+    ChainAsset.fromAsset(pizza, {
+      address: '0x7a218FFD31C1dF5edf62d3aAd0a398062AC16DCd',
+      decimals: 18,
+    }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,
   explorer: {
@@ -1106,6 +1111,10 @@ export const moonbaseStage = new EvmParachain({
     }),
     ChainAsset.fromAsset(devBeta, {
       address: '0xfFFFFFfF0000000000000000000000000000000A',
+      decimals: 18,
+    }),
+    ChainAsset.fromAsset(pizza, {
+      address: '0xffffffffedca8a390b82ebf296523132eb5105e6',
       decimals: 18,
     }),
   ],
