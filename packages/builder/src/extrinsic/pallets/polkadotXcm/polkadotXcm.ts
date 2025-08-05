@@ -7,6 +7,7 @@ import {
   normalizeX1,
 } from '../../ExtrinsicBuilder.utils';
 import {
+  getEcosystemTransferExtrinsicArgs,
   getPolkadotXcmExtrinsicArgs,
   shouldFeeAssetPrecedeAsset,
 } from './polkadotXcm.util';
@@ -29,7 +30,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,
@@ -55,7 +56,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(
                         version,
@@ -142,7 +143,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: assets,
+                  assets,
                   feeIndex: isAssetDifferent && !shouldFeeAssetPrecede ? 1 : 0,
                 });
               },
@@ -163,7 +164,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -205,7 +206,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -247,7 +248,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents,
@@ -273,7 +274,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,
@@ -347,7 +348,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: assets,
+                  assets,
                 });
               },
             }),
@@ -368,7 +369,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -412,7 +413,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -472,7 +473,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,
@@ -674,61 +675,31 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                return [
-                  // dest
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
-                      parents: 2,
-                      interior: {
-                        X2: [
-                          {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                    id: normalizeConcrete(
+                      version,
+                      normalizeX1(version, {
+                        parents: 0,
+                        interior: {
+                          X1: {
+                            PalletInstance:
+                              params.asset.getAssetPalletInstance(),
                           },
-                          {
-                            Parachain: params.destination.parachainId,
-                          },
-                        ],
-                      },
-                    }),
-                  },
-                  // beneficiary
-                  {
-                    [version]: normalizeX1(version, {
-                      parents: 0,
-                      interior: {
-                        X1: getExtrinsicAccount(params.destinationAddress),
-                      },
-                    }),
-                  },
-                  // assets
-                  {
-                    [version]: [
-                      {
-                        id: normalizeConcrete(
-                          version,
-                          normalizeX1(version, {
-                            parents: 0,
-                            interior: {
-                              X1: {
-                                PalletInstance:
-                                  params.asset.getAssetPalletInstance(),
-                              },
-                            },
-                          }),
-                        ),
-                        fun: {
-                          Fungible: params.asset.amount,
                         },
-                      },
-                    ],
+                      }),
+                    ),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // feeAssetItem
-                  0,
-                  // weightLimit
-                  'Unlimited',
                 ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
               },
             });
           },
@@ -741,65 +712,35 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                return [
-                  // dest
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
-                      parents: 2,
+                    id: normalizeConcrete(version, {
+                      parents: 0,
                       interior: {
                         X2: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            PalletInstance:
+                              params.asset.getAssetPalletInstance(),
                           },
                           {
-                            Parachain: params.destination.parachainId,
+                            AccountKey20: {
+                              key: params.asset.address,
+                            },
                           },
                         ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // beneficiary
-                  {
-                    [version]: normalizeX1(version, {
-                      parents: 0,
-                      interior: {
-                        X1: getExtrinsicAccount(params.destinationAddress),
-                      },
-                    }),
-                  },
-                  // assets
-                  {
-                    [version]: [
-                      {
-                        id: normalizeConcrete(version, {
-                          parents: 2,
-                          interior: {
-                            X2: [
-                              {
-                                PalletInstance:
-                                  params.asset.getAssetPalletInstance(),
-                              },
-                              {
-                                AccountKey20: {
-                                  key: params.asset.address,
-                                },
-                              },
-                            ],
-                          },
-                        }),
-                        fun: {
-                          Fungible: params.asset.amount,
-                        },
-                      },
-                    ],
-                  },
-                  // feeAssetItem
-                  0,
-                  // weightLimit
-                  'Unlimited',
                 ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
               },
             });
           },
@@ -815,13 +756,12 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                return [
-                  // dest
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
+                    id: normalizeConcrete(version, {
                       parents: 2,
                       interior: {
-                        X2: [
+                        X3: [
                           {
                             GlobalConsensus: {
                               ByGenesis: params.destination.relayGenesisHash,
@@ -830,54 +770,24 @@ export function polkadotXcm() {
                           {
                             Parachain: params.destination.parachainId,
                           },
+                          {
+                            PalletInstance:
+                              assetInDestination.getAssetPalletInstance(),
+                          },
                         ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // beneficiary
-                  {
-                    [version]: normalizeX1(version, {
-                      parents: 0,
-                      interior: {
-                        X1: getExtrinsicAccount(params.destinationAddress),
-                      },
-                    }),
-                  },
-                  // assets
-                  {
-                    [version]: [
-                      {
-                        id: normalizeConcrete(version, {
-                          parents: 2,
-                          interior: {
-                            X3: [
-                              {
-                                GlobalConsensus: {
-                                  ByGenesis:
-                                    params.destination.relayGenesisHash,
-                                },
-                              },
-                              {
-                                Parachain: params.destination.parachainId,
-                              },
-                              {
-                                PalletInstance:
-                                  assetInDestination.getAssetPalletInstance(),
-                              },
-                            ],
-                          },
-                        }),
-                        fun: {
-                          Fungible: params.asset.amount,
-                        },
-                      },
-                    ],
-                  },
-                  // feeAssetItem
-                  0,
-                  // weightLimit
-                  'Unlimited',
                 ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
               },
             });
           },
@@ -898,14 +808,12 @@ export function polkadotXcm() {
                   params.asset,
                 );
 
-                // TODO mjm group common in a helper function
-                return [
-                  // dest
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
+                    id: normalizeConcrete(version, {
                       parents: 2,
                       interior: {
-                        X2: [
+                        X3: [
                           {
                             GlobalConsensus: {
                               ByGenesis: params.destination.relayGenesisHash,
@@ -914,84 +822,53 @@ export function polkadotXcm() {
                           {
                             Parachain: params.destination.parachainId,
                           },
+                          {
+                            PalletInstance:
+                              feeAssetInDestination.getAssetPalletInstance(),
+                          },
                         ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.fee.amount,
+                    },
                   },
-                  // beneficiary
                   {
-                    [version]: normalizeX1(version, {
-                      parents: 0,
+                    id: normalizeConcrete(version, {
+                      parents: 2,
                       interior: {
-                        X1: getExtrinsicAccount(params.destinationAddress),
+                        X4: [
+                          {
+                            GlobalConsensus: {
+                              ByGenesis: params.destination.relayGenesisHash,
+                            },
+                          },
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                          {
+                            PalletInstance:
+                              assetInDestination.getAssetPalletInstance(),
+                          },
+                          {
+                            AccountKey20: {
+                              key: assetInDestination.address,
+                            },
+                          },
+                        ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // assets
-                  {
-                    [version]: [
-                      {
-                        id: normalizeConcrete(version, {
-                          parents: 2,
-                          interior: {
-                            X3: [
-                              {
-                                GlobalConsensus: {
-                                  ByGenesis:
-                                    params.destination.relayGenesisHash,
-                                },
-                              },
-                              {
-                                Parachain: params.destination.parachainId,
-                              },
-                              {
-                                PalletInstance:
-                                  feeAssetInDestination.getAssetPalletInstance(),
-                              },
-                            ],
-                          },
-                        }),
-                        fun: {
-                          Fungible: params.asset.amount,
-                        },
-                      },
-                      {
-                        id: normalizeConcrete(version, {
-                          parents: 2,
-                          interior: {
-                            X4: [
-                              {
-                                GlobalConsensus: {
-                                  ByGenesis:
-                                    params.destination.relayGenesisHash,
-                                },
-                              },
-                              {
-                                Parachain: params.destination.parachainId,
-                              },
-                              {
-                                PalletInstance:
-                                  assetInDestination.getAssetPalletInstance(),
-                              },
-                              {
-                                AccountKey20: {
-                                  key: assetInDestination.address,
-                                },
-                              },
-                            ],
-                          },
-                        }),
-                        fun: {
-                          Fungible: params.asset.amount,
-                        },
-                      },
-                    ],
-                  },
-                  // feeAssetItem
-                  0,
-                  // weightLimit
-                  'Unlimited',
                 ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
               },
             });
           },

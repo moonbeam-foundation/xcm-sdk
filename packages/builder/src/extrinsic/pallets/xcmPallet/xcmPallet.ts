@@ -30,7 +30,7 @@ export function xcmPallet() {
                   ...params,
                   parents,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,

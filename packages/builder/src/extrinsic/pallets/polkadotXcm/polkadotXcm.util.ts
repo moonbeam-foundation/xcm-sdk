@@ -7,16 +7,15 @@ import {
   normalizeX1,
 } from '../../ExtrinsicBuilder.utils';
 
-export interface GetExtrinsicParams extends BuilderParams {
-  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
-  asset: any;
+export interface GetExtrinsicParams extends Omit<BuilderParams, 'asset'> {
+  assets: object[];
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
   feeIndex?: number;
 }
 
 export function getPolkadotXcmExtrinsicArgs({
-  asset,
+  assets,
   destinationAddress,
   destination,
   func,
@@ -48,7 +47,55 @@ export function getPolkadotXcmExtrinsicArgs({
     },
     // assets
     {
-      [version]: asset,
+      [version]: assets,
+    },
+    // feeAssetItem
+    feeIndex,
+    // weightLimit
+    'Unlimited',
+  ];
+}
+
+export function getEcosystemTransferExtrinsicArgs({
+  assets,
+  destinationAddress,
+  destination,
+  func,
+  feeIndex = 0,
+}: GetExtrinsicParams) {
+  const version = getExtrinsicArgumentVersion(func);
+
+  return [
+    // dest
+    {
+      [version]: normalizeX1(version, {
+        parents: 2,
+        interior: {
+          X2: [
+            {
+              GlobalConsensus: {
+                ByGenesis: destination.relayGenesisHash,
+              },
+            },
+            {
+              Parachain: destination.parachainId,
+            },
+          ],
+        },
+      }),
+    },
+    // beneficiary
+    {
+      [version]: normalizeX1(version, {
+        parents: 0,
+        interior: {
+          X1: getExtrinsicAccount(destinationAddress),
+        },
+      }),
+    },
+    // assets
+    {
+      [version]: assets,
     },
     // feeAssetItem
     feeIndex,

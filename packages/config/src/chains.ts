@@ -1074,6 +1074,9 @@ export const moonbaseBeta = new EvmParachain({
     ChainAsset.fromAsset(pizza, {
       address: '0x7a218FFD31C1dF5edf62d3aAd0a398062AC16DCd',
       decimals: 18,
+      ids: {
+        palletInstance: 48,
+      },
     }),
   ],
   ecosystem: Ecosystem.AlphanetRelay,

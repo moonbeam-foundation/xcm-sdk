@@ -77,11 +77,15 @@ export const moonbaseStageRoutes = new ChainRoutes({
           asset: pizza,
           balance: BalanceBuilder().evm().erc20(),
         },
+        destinationFee: {
+          asset: devBeta,
+          balance: BalanceBuilder().evm().erc20(),
+        },
       },
       destination: {
         asset: pizza,
         chain: moonbaseBeta,
-        balance: BalanceBuilder().substrate().system().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: devBeta,
           amount: 0.1, // TODO calculate
@@ -94,8 +98,8 @@ export const moonbaseStageRoutes = new ChainRoutes({
         .X4(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
-        .bridgeMessages()
-        .bridgeMessages(),
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });
