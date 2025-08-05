@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 4.0.1
+
+### Patch Changes
+
+- [#538](https://github.com/moonbeam-foundation/xcm-sdk/pull/538) [`bd42536`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bd4253666b39350b5a9d06e44f5e6b8ab64efd6b) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement PIZZA (ERC20) transfers between Moonbase Beta and Moonbase Stage
+
 ## 4.0.0
 
 ### Major Changes
