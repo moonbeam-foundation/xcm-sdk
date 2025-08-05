@@ -7,6 +7,7 @@ import {
   normalizeX1,
 } from '../../ExtrinsicBuilder.utils';
 import {
+  getEcosystemTransferExtrinsicArgs,
   getPolkadotXcmExtrinsicArgs,
   shouldFeeAssetPrecedeAsset,
 } from './polkadotXcm.util';
@@ -29,7 +30,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,
@@ -55,7 +56,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(
                         version,
@@ -142,7 +143,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: assets,
+                  assets,
                   feeIndex: isAssetDifferent && !shouldFeeAssetPrecede ? 1 : 0,
                 });
               },
@@ -163,7 +164,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -205,7 +206,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -247,7 +248,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents,
@@ -273,7 +274,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,
@@ -347,7 +348,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: assets,
+                  assets,
                 });
               },
             }),
@@ -368,7 +369,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -412,7 +413,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 1,
@@ -472,7 +473,7 @@ export function polkadotXcm() {
                 return getPolkadotXcmExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
-                  asset: [
+                  assets: [
                     {
                       id: normalizeConcrete(version, {
                         parents: 0,
@@ -674,61 +675,72 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                return [
-                  // dest
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
-                      parents: 2,
+                    id: normalizeConcrete(
+                      version,
+                      normalizeX1(version, {
+                        parents: 0,
+                        interior: {
+                          X1: {
+                            PalletInstance:
+                              params.asset.getAssetPalletInstance(),
+                          },
+                        },
+                      }),
+                    ),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
+                  },
+                ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
+              },
+            });
+          },
+        }),
+        X2: (): ExtrinsicConfigBuilder => ({
+          build: (params) => {
+            return new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const assets = [
+                  {
+                    id: normalizeConcrete(version, {
+                      parents: 0,
                       interior: {
                         X2: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            PalletInstance:
+                              params.asset.getAssetPalletInstance(),
                           },
                           {
-                            Parachain: params.destination.parachainId,
+                            AccountKey20: {
+                              key: params.asset.address,
+                            },
                           },
                         ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // beneficiary
-                  {
-                    [version]: normalizeX1(version, {
-                      parents: 0,
-                      interior: {
-                        X1: getExtrinsicAccount(params.destinationAddress),
-                      },
-                    }),
-                  },
-                  // assets
-                  {
-                    [version]: [
-                      {
-                        id: normalizeConcrete(
-                          version,
-                          normalizeX1(version, {
-                            parents: 0,
-                            interior: {
-                              X1: {
-                                PalletInstance:
-                                  params.asset.getAssetPalletInstance(),
-                              },
-                            },
-                          }),
-                        ),
-                        fun: {
-                          Fungible: params.asset.amount,
-                        },
-                      },
-                    ],
-                  },
-                  // feeAssetItem
-                  0,
-                  // weightLimit
-                  'Unlimited',
                 ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
               },
             });
           },
@@ -744,13 +756,12 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                return [
-                  // dest
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
+                    id: normalizeConcrete(version, {
                       parents: 2,
                       interior: {
-                        X2: [
+                        X3: [
                           {
                             GlobalConsensus: {
                               ByGenesis: params.destination.relayGenesisHash,
@@ -759,54 +770,105 @@ export function polkadotXcm() {
                           {
                             Parachain: params.destination.parachainId,
                           },
+                          {
+                            PalletInstance:
+                              assetInDestination.getAssetPalletInstance(),
+                          },
                         ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // beneficiary
+                ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
+              },
+            });
+          },
+        }),
+        X4: (): ExtrinsicConfigBuilder => ({
+          build: (params) => {
+            return new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const feeAssetInDestination = params.destination.getChainAsset(
+                  params.fee,
+                );
+
+                const assetInDestination = params.destination.getChainAsset(
+                  params.asset,
+                );
+
+                const assets = [
                   {
-                    [version]: normalizeX1(version, {
-                      parents: 0,
+                    id: normalizeConcrete(version, {
+                      parents: 2,
                       interior: {
-                        X1: getExtrinsicAccount(params.destinationAddress),
+                        X3: [
+                          {
+                            GlobalConsensus: {
+                              ByGenesis: params.destination.relayGenesisHash,
+                            },
+                          },
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                          {
+                            PalletInstance:
+                              feeAssetInDestination.getAssetPalletInstance(),
+                          },
+                        ],
                       },
                     }),
+                    fun: {
+                      Fungible: params.fee.amount,
+                    },
                   },
-                  // assets
                   {
-                    [version]: [
-                      {
-                        id: normalizeConcrete(version, {
-                          parents: 2,
-                          interior: {
-                            X3: [
-                              {
-                                GlobalConsensus: {
-                                  ByGenesis:
-                                    params.destination.relayGenesisHash,
-                                },
-                              },
-                              {
-                                Parachain: params.destination.parachainId,
-                              },
-                              {
-                                PalletInstance:
-                                  assetInDestination.getAssetPalletInstance(),
-                              },
-                            ],
+                    id: normalizeConcrete(version, {
+                      parents: 2,
+                      interior: {
+                        X4: [
+                          {
+                            GlobalConsensus: {
+                              ByGenesis: params.destination.relayGenesisHash,
+                            },
                           },
-                        }),
-                        fun: {
-                          Fungible: params.asset.amount,
-                        },
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                          {
+                            PalletInstance:
+                              assetInDestination.getAssetPalletInstance(),
+                          },
+                          {
+                            AccountKey20: {
+                              key: assetInDestination.address,
+                            },
+                          },
+                        ],
                       },
-                    ],
+                    }),
+                    fun: {
+                      Fungible: params.asset.amount,
+                    },
                   },
-                  // feeAssetItem
-                  0,
-                  // weightLimit
-                  'Unlimited',
                 ];
+
+                return getEcosystemTransferExtrinsicArgs({
+                  ...params,
+                  func: extrinsicFunction,
+                  assets,
+                });
               },
             });
           },

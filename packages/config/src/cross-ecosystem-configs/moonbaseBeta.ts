@@ -3,7 +3,7 @@ import {
   ExtrinsicBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { devBeta, devStage } from '../assets';
+import { devBeta, devStage, pizza } from '../assets';
 import { moonbaseBeta, moonbaseStage } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -65,6 +65,34 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         .monitorEvent()
         .bridgeMessages()
         .bridgeMessages(),
+    },
+    {
+      source: {
+        asset: pizza,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: devBeta,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: pizza,
+        chain: moonbaseStage,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: pizza,
+          amount: 0.1,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X2(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });

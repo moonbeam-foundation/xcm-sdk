@@ -170,6 +170,11 @@ export const ksm = new Asset({
   originSymbol: 'KSM',
 });
 
+export const laos = new Asset({
+  key: 'laos',
+  originSymbol: 'LAOS',
+});
+
 export const ldot = new Asset({
   key: 'ldot',
   originSymbol: 'LDOT',
@@ -243,6 +248,11 @@ export const pica = new Asset({
 export const pink = new Asset({
   key: 'pink',
   originSymbol: 'PINK',
+});
+
+export const pizza = new Asset({
+  key: 'pizza',
+  originSymbol: 'PIZZA',
 });
 
 export const ring = new Asset({
@@ -405,11 +415,6 @@ export const wethe = new Asset({
   originSymbol: 'WETH.e',
 });
 
-export const laos = new Asset({
-  key: 'laos',
-  originSymbol: 'LAOS',
-});
-
 export const assetsList: Asset[] = [
   aca,
   agng,
@@ -461,6 +466,7 @@ export const assetsList: Asset[] = [
   pha,
   pica,
   pink,
+  pizza,
   ring,
   rmrk,
   sdn,
