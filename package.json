@@ -17,7 +17,7 @@
     "examples/*",
     "scripts"
   ],
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
@@ -43,33 +43,33 @@
     "changeset:publish": "pnpm run build && changeset publish"
   },
   "dependencies": {
-    "@polkadot/api": "16.4.1",
-    "@polkadot/api-augment": "16.4.1",
-    "@polkadot/apps-config": "0.160.1",
-    "@polkadot/types": "16.4.1",
-    "@polkadot/util": "13.5.3",
-    "@polkadot/util-crypto": "13.5.3",
-    "@wormhole-foundation/sdk-connect": "^3.0.4",
-    "@wormhole-foundation/sdk-evm": "^3.0.4",
-    "@wormhole-foundation/sdk-evm-tokenbridge": "^3.0.4"
+    "@polkadot/api": "16.4.3",
+    "@polkadot/api-augment": "16.4.3",
+    "@polkadot/apps-config": "0.162.1",
+    "@polkadot/types": "16.4.3",
+    "@polkadot/util": "13.5.4",
+    "@polkadot/util-crypto": "13.5.4",
+    "@wormhole-foundation/sdk-connect": "^3.2.0",
+    "@wormhole-foundation/sdk-evm": "^3.2.0",
+    "@wormhole-foundation/sdk-evm-tokenbridge": "^3.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.2",
+    "@biomejs/biome": "^2.1.4",
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.5",
     "@slack/webhook": "^7.0.5",
     "@types/big.js": "^6.2.2",
     "bun": "^1.2.19",
     "cspell": "^9.2.0",
-    "dotenv": "^17.2.0",
+    "dotenv": "^17.2.1",
     "glob": "^11.0.3",
     "lefthook": "^1.12.2",
     "syncpack": "^13.0.4",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.5.0",
     "turbo": "^2.5.5",
-    "typescript": "^5.8.3",
-    "viem": "^2.33.0",
+    "typescript": "^5.9.2",
+    "viem": "^2.33.3",
     "vitest": "^3.2.4"
   },
   "overrides": {
@@ -77,12 +77,12 @@
   },
   "pnpm": {
     "overrides": {
-      "@polkadot/api": "16.4.1",
-      "@polkadot/api-augment": "16.4.1",
-      "@polkadot/apps-config": "0.160.1",
-      "@polkadot/types": "16.4.1",
-      "@polkadot/util": "13.5.3",
-      "@polkadot/util-crypto": "13.5.3",
+      "@polkadot/api": "16.4.3",
+      "@polkadot/api-augment": "16.4.3",
+      "@polkadot/apps-config": "0.162.1",
+      "@polkadot/types": "16.4.3",
+      "@polkadot/util": "13.5.4",
+      "@polkadot/util-crypto": "13.5.4",
       "vite@ <=6.3.3": ">=6.3.4",
       "brace-expansion@ >=2.0.0 <=2.0.1": ">=2.0.2",
       "axios@=1.10.0": ">=1.11.0"
