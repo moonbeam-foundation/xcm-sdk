@@ -161,17 +161,17 @@ importers:
         specifier: 13.5.4
         version: 13.5.4(@polkadot/util@13.5.4)
       '@wormhole-foundation/sdk-connect':
-        specifier: ^3.0.4
-        version: 3.0.4
+        specifier: ^3.2.0
+        version: 3.2.0
       '@wormhole-foundation/sdk-evm':
-        specifier: ^3.0.4
-        version: 3.0.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^3.2.0
+        version: 3.2.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       big.js:
         specifier: ^7.0.1
         version: 7.0.1
       viem:
-        specifier: ^2.33.0
-        version: 2.33.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
+        specifier: ^2.33.3
+        version: 2.33.3(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
 
   packages/config:
     dependencies:
@@ -227,17 +227,17 @@ importers:
         specifier: 13.5.4
         version: 13.5.4(@polkadot/util@13.5.4)
       '@wormhole-foundation/sdk-connect':
-        specifier: ^3.0.4
-        version: 3.0.4
+        specifier: ^3.2.0
+        version: 3.2.0
       '@wormhole-foundation/sdk-evm':
-        specifier: ^3.0.4
-        version: 3.0.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^3.2.0
+        version: 3.2.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       big.js:
         specifier: ^7.0.1
         version: 7.0.1
       viem:
-        specifier: ^2.33.0
-        version: 2.33.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
+        specifier: ^2.33.3
+        version: 2.33.3(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
 
   packages/sdk:
     dependencies:
@@ -269,8 +269,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1
       viem:
-        specifier: ^2.33.0
-        version: 2.33.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
+        specifier: ^2.33.3
+        version: 2.33.3(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
     devDependencies:
       '@types/big.js':
         specifier: ^6.2.2
@@ -285,8 +285,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1
       viem:
-        specifier: ^2.33.0
-        version: 2.33.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
+        specifier: ^2.33.3
+        version: 2.33.3(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
     devDependencies:
       '@types/big.js':
         specifier: ^6.2.2
@@ -1718,22 +1718,12 @@ packages:
   '@vitest/utils@3.2.4':
     resolution: {integrity: sha512-fB2V0JFrQSMsCo9HiSq3Ezpdv4iYaXRG1Sx8edX3MwxfyNn83mKiGzOcH+Fkxt4MHxr3y42fQi1oeAInqgX2QA==}
 
-  '@wormhole-foundation/sdk-base@3.0.4':
-    resolution: {integrity: sha512-pOT81IiFDxLNWgQrBXCuSjkUj0No1uGzxXeDaUPe2IhvteA52LviIsKzTgWkm4/Rqer+iXYehfR7LgYcUcVb6A==}
-
   '@wormhole-foundation/sdk-base@3.2.0':
     resolution: {integrity: sha512-Ss90qA3Da48Lu0VCrXA4di3r9IT/a6w6mUBU8dLYEZcCsllWP864Ru/no22C57Kash2uo4KB3TgPLnEi5iCqbw==}
-
-  '@wormhole-foundation/sdk-connect@3.0.4':
-    resolution: {integrity: sha512-1xPzUzbysySWgOtegxOgiGs2iRZCL//sfFYiTb55T7ae9tQQjMypq2KOLn/XlbLzR50y6zgqEVQ0l7RpewXZWQ==}
-    engines: {node: '>=16'}
 
   '@wormhole-foundation/sdk-connect@3.2.0':
     resolution: {integrity: sha512-vc7RKLiO715qMoEkHhFVfuVg2AmUBCUj8gnw84PwOn6PYZKxQpYvZfgKKztvL1GDfaO+R3+nT8WxfSemLK0R3w==}
     engines: {node: '>=16'}
-
-  '@wormhole-foundation/sdk-definitions@3.0.4':
-    resolution: {integrity: sha512-e8E8AwHMc7dXHqjG13xjxZ7DMWLszlfLpfEuPUWpuYURc7dZgODfrlA3bXx1A1kFKnppOMdrjBqVGHwFa9gsDg==}
 
   '@wormhole-foundation/sdk-definitions@3.2.0':
     resolution: {integrity: sha512-6HPDxFM6dmtVqs6JDETIXLsm0evgRhOOGAoFI48BgJJiYJwDZApfJHOo02dN0wPVYiWQdNDRCevS/sGSM9dSVA==}
@@ -1744,10 +1734,6 @@ packages:
 
   '@wormhole-foundation/sdk-evm-tokenbridge@3.2.0':
     resolution: {integrity: sha512-AYTShYueKWl01ijL99o9+LHbqAFI+h8v1jS7x5wXC2TftbpHfWKmNFiginWCZOeCKmR3HXirLZFkeJN702ANzg==}
-    engines: {node: '>=16'}
-
-  '@wormhole-foundation/sdk-evm@3.0.4':
-    resolution: {integrity: sha512-GON+V03YiJ2LSWF95IZ/8LDcp2bAp2hu9dA+SAPI1FwFLawXDRsQt4nmghcefrS4DRKDViRQiKO+gB78P4pzsw==}
     engines: {node: '>=16'}
 
   '@wormhole-foundation/sdk-evm@3.2.0':
@@ -2720,14 +2706,6 @@ packages:
   outdent@0.5.0:
     resolution: {integrity: sha512-/jHxFIzoMXdqPzTaCpFzAAWhpkSjZPF4Vsn6jAfNpmbH/ymsmd7Qc6VE9BGn0L6YMj6uwpQLxCECpus4ukKS9Q==}
 
-  ox@0.8.1:
-    resolution: {integrity: sha512-e+z5epnzV+Zuz91YYujecW8cF01mzmrUtWotJ0oEPym/G82uccs7q0WDHTYL3eiONbTUEvcZrptAKLgTBD3u2A==}
-    peerDependencies:
-      typescript: '>=5.4.0'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   ox@0.8.6:
     resolution: {integrity: sha512-eiKcgiVVEGDtEpEdFi1EGoVVI48j6icXHce9nFwCNM7CKG3uoCXKdr4TPhS00Iy1TR2aWSF1ltPD0x/YgqIL9w==}
     peerDependencies:
@@ -3288,14 +3266,6 @@ packages:
   validate-npm-package-name@6.0.1:
     resolution: {integrity: sha512-OaI//3H0J7ZkR1OqlhGA8cA+Cbk/2xFOQpJOt5+s27/ta9eZwpeervh4Mxh4w0im/kdgktowaqVNR7QOrUd7Yg==}
     engines: {node: ^18.17.0 || >=20.5.0}
-
-  viem@2.33.0:
-    resolution: {integrity: sha512-SxBM3CmeU+LWLlBclV9MPdbuFV8mQEl0NeRc9iyYU4a7Xb5sr5oku3s/bRGTPpEP+1hCAHYpM09/ui3/dQ6EsA==}
-    peerDependencies:
-      typescript: '>=5.0.4'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
 
   viem@2.33.3:
     resolution: {integrity: sha512-aWDr6i6r3OfNCs0h9IieHFhn7xQJJ8YsuA49+9T5JRyGGAkWhLgcbLq2YMecgwM7HdUZpx1vPugZjsShqNi7Gw==}
@@ -5304,23 +5274,10 @@ snapshots:
       loupe: 3.1.4
       tinyrainbow: 2.0.0
 
-  '@wormhole-foundation/sdk-base@3.0.4':
-    dependencies:
-      '@scure/base': 1.2.6
-      binary-layout: 1.2.2
-
   '@wormhole-foundation/sdk-base@3.2.0':
     dependencies:
       '@scure/base': 1.2.6
       binary-layout: 1.2.2
-
-  '@wormhole-foundation/sdk-connect@3.0.4':
-    dependencies:
-      '@wormhole-foundation/sdk-base': 3.0.4
-      '@wormhole-foundation/sdk-definitions': 3.0.4
-      axios: 1.11.0
-    transitivePeerDependencies:
-      - debug
 
   '@wormhole-foundation/sdk-connect@3.2.0':
     dependencies:
@@ -5329,12 +5286,6 @@ snapshots:
       axios: 1.11.0
     transitivePeerDependencies:
       - debug
-
-  '@wormhole-foundation/sdk-definitions@3.0.4':
-    dependencies:
-      '@noble/curves': 1.9.4
-      '@noble/hashes': 1.8.0
-      '@wormhole-foundation/sdk-base': 3.0.4
 
   '@wormhole-foundation/sdk-definitions@3.2.0':
     dependencies:
@@ -5357,15 +5308,6 @@ snapshots:
       '@wormhole-foundation/sdk-connect': 3.2.0
       '@wormhole-foundation/sdk-evm': 3.2.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       '@wormhole-foundation/sdk-evm-core': 3.2.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      ethers: 6.14.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - utf-8-validate
-
-  '@wormhole-foundation/sdk-evm@3.0.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
-    dependencies:
-      '@wormhole-foundation/sdk-connect': 3.0.4
       ethers: 6.14.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
@@ -6334,21 +6276,6 @@ snapshots:
 
   outdent@0.5.0: {}
 
-  ox@0.8.1(typescript@5.9.2):
-    dependencies:
-      '@adraffy/ens-normalize': 1.11.0
-      '@noble/ciphers': 1.3.0
-      '@noble/curves': 1.9.2
-      '@noble/hashes': 1.8.0
-      '@scure/bip32': 1.7.0
-      '@scure/bip39': 1.6.0
-      abitype: 1.0.8(typescript@5.9.2)
-      eventemitter3: 5.0.1
-    optionalDependencies:
-      typescript: 5.9.2
-    transitivePeerDependencies:
-      - zod
-
   ox@0.8.6(typescript@5.9.2):
     dependencies:
       '@adraffy/ens-normalize': 1.11.0
@@ -6888,23 +6815,6 @@ snapshots:
   uuid@9.0.1: {}
 
   validate-npm-package-name@6.0.1: {}
-
-  viem@2.33.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10):
-    dependencies:
-      '@noble/curves': 1.9.2
-      '@noble/hashes': 1.8.0
-      '@scure/bip32': 1.7.0
-      '@scure/bip39': 1.6.0
-      abitype: 1.0.8(typescript@5.9.2)
-      isows: 1.0.7(ws@8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      ox: 0.8.1(typescript@5.9.2)
-      ws: 8.18.2(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-    optionalDependencies:
-      typescript: 5.9.2
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
 
   viem@2.33.3(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10):
     dependencies:
