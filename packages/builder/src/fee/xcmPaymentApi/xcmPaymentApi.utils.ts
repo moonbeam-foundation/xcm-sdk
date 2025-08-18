@@ -3,8 +3,10 @@ import {
   getBuyExecutionInstruction,
   getClearOriginInstruction,
   getDepositAssetInstruction,
+  getDescendOriginInstruction,
   getReserveAssetDepositedInstruction,
   getSetTopicInstruction,
+  getUniversalOriginInstruction,
   getWithdrawAssetInstruction,
 } from '../FeeBuilder.utils';
 import type { CreateXcmFeeBuilderProps } from './xcmPaymentApi';
@@ -19,6 +21,9 @@ export async function getVersionedAssets({
   options,
   params,
 }: GetVersionedAssetsProps): Promise<[object[], object]> {
+  console.log('options', options);
+  console.log('params', params);
+
   const { asset: transferAsset, feeAsset } = params;
   const versionedFeeAssetId = await getVersionedFeeAsset(params);
 
@@ -51,6 +56,25 @@ export function getInstructions({
   address,
 }: GetInstructionsProps) {
   return [
+    isAssetReserveChain
+      ? getWithdrawAssetInstruction(assets)
+      : getReserveAssetDepositedInstruction(assets),
+    getClearOriginInstruction(),
+    getBuyExecutionInstruction(versionedFeeAssetId),
+    getDepositAssetInstruction(address, assets),
+    getSetTopicInstruction(),
+  ];
+}
+
+export function getEcosystemBridgeInstructions({
+  isAssetReserveChain,
+  assets,
+  versionedFeeAssetId,
+  address,
+}: GetInstructionsProps) {
+  return [
+    getUniversalOriginInstruction(),
+    getDescendOriginInstruction(),
     isAssetReserveChain
       ? getWithdrawAssetInstruction(assets)
       : getReserveAssetDepositedInstruction(assets),

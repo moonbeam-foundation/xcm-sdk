@@ -1115,10 +1115,16 @@ export const moonbaseStage = new EvmParachain({
     ChainAsset.fromAsset(devBeta, {
       address: '0xfFFFFFfF0000000000000000000000000000000A',
       decimals: 18,
+      ids: {
+        id: 10,
+      },
     }),
     ChainAsset.fromAsset(pizza, {
       address: '0xffffffffedca8a390b82ebf296523132eb5105e6',
       decimals: 18,
+      ids: {
+        id: 316078682458542273998403192999193413094n,
+      },
     }),
   ],
   ecosystem: Ecosystem.StagenetRelay,

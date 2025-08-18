@@ -10,7 +10,11 @@ import {
   BuildVersionedAsset,
   QueryVersionedAsset,
 } from '../VersionedAssetBuilder';
-import { getInstructions, getVersionedAssets } from './xcmPaymentApi.utils';
+import {
+  getEcosystemBridgeInstructions,
+  // getInstructions,
+  getVersionedAssets,
+} from './xcmPaymentApi.utils';
 
 export function xcmPaymentApi() {
   const localMethods = {
@@ -145,12 +149,13 @@ const createXcmFeeBuilder = ({
           params,
         });
 
-        const instructions = getInstructions({
+        const instructions = getEcosystemBridgeInstructions({
           isAssetReserveChain: options.isAssetReserveChain,
           assets,
           versionedFeeAssetId,
           address: params.address,
         });
+        console.log('instructions', instructions);
 
         return getFeeForXcmInstructionsAndAsset(
           params.api,

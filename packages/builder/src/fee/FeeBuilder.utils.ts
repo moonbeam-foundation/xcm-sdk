@@ -31,6 +31,29 @@ export function getWithdrawAssetInstruction(assetTypes: object[]) {
   };
 }
 
+export function getUniversalOriginInstruction() {
+  return {
+    UniversalOrigin: {
+      globalConsensus: {
+        byGenesis:
+          '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
+      },
+    },
+  };
+}
+
+export function getDescendOriginInstruction() {
+  return {
+    DescendOrigin: {
+      X1: [
+        {
+          Parachain: 888,
+        },
+      ],
+    },
+  };
+}
+
 export function getReserveAssetDepositedInstruction(assetTypes: object[]) {
   return {
     ReserveAssetDeposited: assetTypes.map((assetType) => ({
