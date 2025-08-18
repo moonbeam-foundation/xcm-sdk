@@ -45,7 +45,7 @@ interface GetInstructionsProps {
   assets: object[];
   versionedFeeAssetId: object;
   address: string;
-  source: AnyChain;
+  source?: AnyChain;
   isEcosystemBridge?: boolean;
 }
 

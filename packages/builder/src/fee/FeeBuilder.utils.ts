@@ -32,7 +32,7 @@ export function getWithdrawAssetInstruction(assetTypes: object[]) {
   };
 }
 
-export function getUniversalOriginInstruction(source: AnyChain) {
+export function getUniversalOriginInstruction(source?: AnyChain) {
   if (!EvmParachain.isAnyParachain(source)) {
     throw new Error('Source is not a parachain');
   }
@@ -46,7 +46,7 @@ export function getUniversalOriginInstruction(source: AnyChain) {
   };
 }
 
-export function getDescendOriginInstruction(source: AnyChain) {
+export function getDescendOriginInstruction(source?: AnyChain) {
   if (!EvmParachain.isAnyParachain(source)) {
     throw new Error('Source is not a parachain');
   }
