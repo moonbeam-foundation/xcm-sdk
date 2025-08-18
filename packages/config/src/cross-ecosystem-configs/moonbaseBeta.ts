@@ -28,6 +28,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: devBeta,
           amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
             isAssetReserveChain: false,
+            isEcosystemBridge: true,
           }),
           balance: BalanceBuilder().evm().erc20(),
         },
@@ -58,6 +59,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: devStage,
           amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
             isAssetReserveChain: true,
+            isEcosystemBridge: true,
           }),
           balance: BalanceBuilder().substrate().system().account(),
         },
@@ -88,6 +90,7 @@ export const moonbaseBetaRoutes = new ChainRoutes({
           asset: pizza,
           amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
             isAssetReserveChain: false,
+            isEcosystemBridge: true,
           }),
           balance: BalanceBuilder().evm().erc20(),
         },

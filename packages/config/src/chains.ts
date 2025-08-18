@@ -1070,6 +1070,9 @@ export const moonbaseBeta = new EvmParachain({
     ChainAsset.fromAsset(devStage, {
       address: '0xfFFFFFfF0000000000000000000000000000000A',
       decimals: 18,
+      ids: {
+        id: 10,
+      },
     }),
     ChainAsset.fromAsset(pizza, {
       address: '0x7a218FFD31C1dF5edf62d3aAd0a398062AC16DCd',

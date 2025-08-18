@@ -1,3 +1,4 @@
+import type { AnyChain } from '@moonbeam-network/xcm-types';
 import type { FeeConfigBuilderParams } from '../FeeBuilder.interfaces';
 import {
   getBuyExecutionInstruction,
@@ -21,9 +22,6 @@ export async function getVersionedAssets({
   options,
   params,
 }: GetVersionedAssetsProps): Promise<[object[], object]> {
-  console.log('options', options);
-  console.log('params', params);
-
   const { asset: transferAsset, feeAsset } = params;
   const versionedFeeAssetId = await getVersionedFeeAsset(params);
 
@@ -47,6 +45,8 @@ interface GetInstructionsProps {
   assets: object[];
   versionedFeeAssetId: object;
   address: string;
+  source: AnyChain;
+  isEcosystemBridge?: boolean;
 }
 
 export function getInstructions({
@@ -54,8 +54,10 @@ export function getInstructions({
   assets,
   versionedFeeAssetId,
   address,
+  source,
+  isEcosystemBridge,
 }: GetInstructionsProps) {
-  return [
+  const instructions = [
     isAssetReserveChain
       ? getWithdrawAssetInstruction(assets)
       : getReserveAssetDepositedInstruction(assets),
@@ -64,23 +66,14 @@ export function getInstructions({
     getDepositAssetInstruction(address, assets),
     getSetTopicInstruction(),
   ];
-}
 
-export function getEcosystemBridgeInstructions({
-  isAssetReserveChain,
-  assets,
-  versionedFeeAssetId,
-  address,
-}: GetInstructionsProps) {
-  return [
-    getUniversalOriginInstruction(),
-    getDescendOriginInstruction(),
-    isAssetReserveChain
-      ? getWithdrawAssetInstruction(assets)
-      : getReserveAssetDepositedInstruction(assets),
-    getClearOriginInstruction(),
-    getBuyExecutionInstruction(versionedFeeAssetId),
-    getDepositAssetInstruction(address, assets),
-    getSetTopicInstruction(),
-  ];
+  if (isEcosystemBridge) {
+    return [
+      getUniversalOriginInstruction(source),
+      getDescendOriginInstruction(source),
+      ...instructions,
+    ];
+  }
+
+  return instructions;
 }
