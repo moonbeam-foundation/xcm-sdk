@@ -1,7 +1,347 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`xcmPaymentApi.utils > getInstructions > should handle isEcosystemBridge true with different asset reserve chain settings 1`] = `
+[
+  {
+    "UniversalOrigin": {
+      "GlobalConsensus": {
+        "ByGenesis": undefined,
+      },
+    },
+  },
+  {
+    "DescendOrigin": {
+      "X1": [
+        {
+          "Parachain": 1001,
+        },
+      ],
+    },
+  },
+  {
+    "WithdrawAsset": [
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 2,
+        },
+      },
+    ],
+  },
+  {
+    "ClearOrigin": "NULL",
+  },
+  {
+    "BuyExecution": {
+      "fees": {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      "weight_limit": {
+        "Unlimited": "NULL",
+      },
+    },
+  },
+  {
+    "DepositAsset": {
+      "assets": {
+        "Wild": {
+          "AllCounted": 2,
+        },
+      },
+      "beneficiary": {
+        "interior": {
+          "X1": [
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                "network": null,
+              },
+            },
+          ],
+        },
+        "parents": 0,
+      },
+      "max_assets": 0,
+    },
+  },
+  {
+    "SetTopic": "0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321",
+  },
+]
+`;
+
+exports[`xcmPaymentApi.utils > getInstructions > should handle isEcosystemBridge true with different asset reserve chain settings 2`] = `
+[
+  {
+    "UniversalOrigin": {
+      "GlobalConsensus": {
+        "ByGenesis": undefined,
+      },
+    },
+  },
+  {
+    "DescendOrigin": {
+      "X1": [
+        {
+          "Parachain": 1001,
+        },
+      ],
+    },
+  },
+  {
+    "ReserveAssetDeposited": [
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 2,
+        },
+      },
+    ],
+  },
+  {
+    "ClearOrigin": "NULL",
+  },
+  {
+    "BuyExecution": {
+      "fees": {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      "weight_limit": {
+        "Unlimited": "NULL",
+      },
+    },
+  },
+  {
+    "DepositAsset": {
+      "assets": {
+        "Wild": {
+          "AllCounted": 2,
+        },
+      },
+      "beneficiary": {
+        "interior": {
+          "X1": [
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                "network": null,
+              },
+            },
+          ],
+        },
+        "parents": 0,
+      },
+      "max_assets": 0,
+    },
+  },
+  {
+    "SetTopic": "0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321",
+  },
+]
+`;
+
 exports[`xcmPaymentApi.utils > getInstructions > should maintain correct instruction order 1`] = `
 [
+  {
+    "WithdrawAsset": [
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 2,
+        },
+      },
+    ],
+  },
+  {
+    "ClearOrigin": "NULL",
+  },
+  {
+    "BuyExecution": {
+      "fees": {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      "weight_limit": {
+        "Unlimited": "NULL",
+      },
+    },
+  },
+  {
+    "DepositAsset": {
+      "assets": {
+        "Wild": {
+          "AllCounted": 2,
+        },
+      },
+      "beneficiary": {
+        "interior": {
+          "X1": [
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                "network": null,
+              },
+            },
+          ],
+        },
+        "parents": 0,
+      },
+      "max_assets": 0,
+    },
+  },
+  {
+    "SetTopic": "0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321",
+  },
+]
+`;
+
+exports[`xcmPaymentApi.utils > getInstructions > should prepend universal origin and descend origin instructions when isEcosystemBridge is true 1`] = `
+[
+  {
+    "UniversalOrigin": {
+      "GlobalConsensus": {
+        "ByGenesis": undefined,
+      },
+    },
+  },
+  {
+    "DescendOrigin": {
+      "X1": [
+        {
+          "Parachain": 1001,
+        },
+      ],
+    },
+  },
+  {
+    "ReserveAssetDeposited": [
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 2,
+        },
+      },
+    ],
+  },
+  {
+    "ClearOrigin": "NULL",
+  },
+  {
+    "BuyExecution": {
+      "fees": {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      "weight_limit": {
+        "Unlimited": "NULL",
+      },
+    },
+  },
+  {
+    "DepositAsset": {
+      "assets": {
+        "Wild": {
+          "AllCounted": 2,
+        },
+      },
+      "beneficiary": {
+        "interior": {
+          "X1": [
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                "network": null,
+              },
+            },
+          ],
+        },
+        "parents": 0,
+      },
+      "max_assets": 0,
+    },
+  },
+  {
+    "SetTopic": "0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321",
+  },
+]
+`;
+
+exports[`xcmPaymentApi.utils > getInstructions > should return ecosystem bridge instructions when isEcosystemBridge is true 1`] = `
+[
+  {
+    "UniversalOrigin": {
+      "GlobalConsensus": {
+        "ByGenesis": undefined,
+      },
+    },
+  },
+  {
+    "DescendOrigin": {
+      "X1": [
+        {
+          "Parachain": 1001,
+        },
+      ],
+    },
+  },
   {
     "WithdrawAsset": [
       {
@@ -73,6 +413,75 @@ exports[`xcmPaymentApi.utils > getInstructions > should return reserve asset dep
 [
   {
     "ReserveAssetDeposited": [
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 2,
+        },
+      },
+    ],
+  },
+  {
+    "ClearOrigin": "NULL",
+  },
+  {
+    "BuyExecution": {
+      "fees": {
+        "fun": {
+          "Fungible": 1000000,
+        },
+        "id": {
+          "id": 1,
+        },
+      },
+      "weight_limit": {
+        "Unlimited": "NULL",
+      },
+    },
+  },
+  {
+    "DepositAsset": {
+      "assets": {
+        "Wild": {
+          "AllCounted": 2,
+        },
+      },
+      "beneficiary": {
+        "interior": {
+          "X1": [
+            {
+              "AccountKey20": {
+                "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                "network": null,
+              },
+            },
+          ],
+        },
+        "parents": 0,
+      },
+      "max_assets": 0,
+    },
+  },
+  {
+    "SetTopic": "0xabcdef1234567890fedcba0987654321abcdef1234567890fedcba0987654321",
+  },
+]
+`;
+
+exports[`xcmPaymentApi.utils > getInstructions > should return standard instructions when isEcosystemBridge is false 1`] = `
+[
+  {
+    "WithdrawAsset": [
       {
         "fun": {
           "Fungible": 1000000,
