@@ -1,5 +1,20 @@
 # @moonbeam-network/xcm-config
 
+## 4.1.0
+
+### Minor Changes
+
+- [#543](https://github.com/moonbeam-foundation/xcm-sdk/pull/543) [`86a7a4c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/86a7a4cb92724b666fb2566e8052f678ce67f6e2) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement instruction configuration for Ecosystem Bridge fee calculations
+
+### Patch Changes
+
+- [#541](https://github.com/moonbeam-foundation/xcm-sdk/pull/541) [`38fdf0f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/38fdf0f178ff67fcde83af0018112b3c122a7f6a) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`38fdf0f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/38fdf0f178ff67fcde83af0018112b3c122a7f6a), [`86a7a4c`](https://github.com/moonbeam-foundation/xcm-sdk/commit/86a7a4cb92724b666fb2566e8052f678ce67f6e2)]:
+  - @moonbeam-network/xcm-builder@4.1.0
+  - @moonbeam-network/xcm-types@4.0.1
+  - @moonbeam-network/xcm-utils@4.0.1
+
 ## 4.0.2
 
 ### Patch Changes
