@@ -1,3 +1,4 @@
+import { type AnyChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { isEthAddress } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { Result, u128 } from '@polkadot/types';
@@ -28,6 +29,36 @@ export function getWithdrawAssetInstruction(assetTypes: object[]) {
         Fungible: DEFAULT_AMOUNT,
       },
     })),
+  };
+}
+
+export function getUniversalOriginInstruction(source?: AnyChain) {
+  if (!EvmParachain.isAnyParachain(source)) {
+    throw new Error('Source is not a parachain');
+  }
+
+  return {
+    UniversalOrigin: {
+      GlobalConsensus: {
+        ByGenesis: source.relayGenesisHash,
+      },
+    },
+  };
+}
+
+export function getDescendOriginInstruction(source?: AnyChain) {
+  if (!EvmParachain.isAnyParachain(source)) {
+    throw new Error('Source is not a parachain');
+  }
+
+  return {
+    DescendOrigin: {
+      X1: [
+        {
+          Parachain: source.parachainId,
+        },
+      ],
+    },
   };
 }
 

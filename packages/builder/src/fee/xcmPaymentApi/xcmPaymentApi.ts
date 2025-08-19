@@ -150,6 +150,8 @@ const createXcmFeeBuilder = ({
           assets,
           versionedFeeAssetId,
           address: params.address,
+          source: params.source,
+          isEcosystemBridge: options.isEcosystemBridge,
         });
 
         return getFeeForXcmInstructionsAndAsset(

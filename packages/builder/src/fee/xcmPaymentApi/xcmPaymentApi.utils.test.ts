@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  alphanetAssetHubMock,
   feeBuilderParamsMock,
   feeBuilderParamsMockDifferentAsset,
 } from '../../../fixtures';
@@ -86,6 +87,7 @@ describe('xcmPaymentApi.utils', () => {
     const mockAddress = '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E';
     const mockAssets = [{ id: 1 }, { id: 2 }];
     const mockFeeAssetId = { id: 1 };
+    const mockSource = alphanetAssetHubMock;
 
     it('should return withdraw asset instruction when isAssetReserveChain is true', () => {
       const instructions = getInstructions({
@@ -120,6 +122,76 @@ describe('xcmPaymentApi.utils', () => {
       });
 
       expect(instructions).toMatchSnapshot();
+    });
+
+    it('should return standard instructions when isEcosystemBridge is false', () => {
+      const instructions = getInstructions({
+        isAssetReserveChain: true,
+        assets: mockAssets,
+        versionedFeeAssetId: mockFeeAssetId,
+        address: mockAddress,
+        source: mockSource,
+        isEcosystemBridge: false,
+      });
+
+      expect(instructions).toHaveLength(5);
+      expect(instructions).toMatchSnapshot();
+    });
+
+    it('should return ecosystem bridge instructions when isEcosystemBridge is true', () => {
+      const instructions = getInstructions({
+        isAssetReserveChain: true,
+        assets: mockAssets,
+        versionedFeeAssetId: mockFeeAssetId,
+        address: mockAddress,
+        source: mockSource,
+        isEcosystemBridge: true,
+      });
+
+      expect(instructions).toHaveLength(7);
+      expect(instructions).toMatchSnapshot();
+    });
+
+    it('should prepend universal origin and descend origin instructions when isEcosystemBridge is true', () => {
+      const instructions = getInstructions({
+        isAssetReserveChain: false,
+        assets: mockAssets,
+        versionedFeeAssetId: mockFeeAssetId,
+        address: mockAddress,
+        source: mockSource,
+        isEcosystemBridge: true,
+      });
+
+      expect(instructions).toHaveLength(7);
+      // First two instructions should be universal origin and descend origin
+      expect(instructions[0]).toEqual(expect.objectContaining({})); // UniversalOrigin instruction
+      expect(instructions[1]).toEqual(expect.objectContaining({})); // DescendOrigin instruction
+      expect(instructions).toMatchSnapshot();
+    });
+
+    it('should handle isEcosystemBridge true with different asset reserve chain settings', () => {
+      const instructionsReserve = getInstructions({
+        isAssetReserveChain: true,
+        assets: mockAssets,
+        versionedFeeAssetId: mockFeeAssetId,
+        address: mockAddress,
+        source: mockSource,
+        isEcosystemBridge: true,
+      });
+
+      const instructionsNonReserve = getInstructions({
+        isAssetReserveChain: false,
+        assets: mockAssets,
+        versionedFeeAssetId: mockFeeAssetId,
+        address: mockAddress,
+        source: mockSource,
+        isEcosystemBridge: true,
+      });
+
+      expect(instructionsReserve).toHaveLength(7);
+      expect(instructionsNonReserve).toHaveLength(7);
+      expect(instructionsReserve).toMatchSnapshot();
+      expect(instructionsNonReserve).toMatchSnapshot();
     });
   });
 });

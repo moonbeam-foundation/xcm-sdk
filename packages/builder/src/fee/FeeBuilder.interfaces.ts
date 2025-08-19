@@ -26,6 +26,7 @@ export interface FeeConfigBuilderParams {
 export interface XcmPaymentFeeProps {
   isAssetReserveChain: boolean;
   shouldTransferAssetPrecedeFeeAsset?: boolean;
+  isEcosystemBridge?: boolean;
   parents?: number;
 }
 

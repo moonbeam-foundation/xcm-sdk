@@ -1,10 +1,13 @@
+import type { AnyChain } from '@moonbeam-network/xcm-types';
 import type { FeeConfigBuilderParams } from '../FeeBuilder.interfaces';
 import {
   getBuyExecutionInstruction,
   getClearOriginInstruction,
   getDepositAssetInstruction,
+  getDescendOriginInstruction,
   getReserveAssetDepositedInstruction,
   getSetTopicInstruction,
+  getUniversalOriginInstruction,
   getWithdrawAssetInstruction,
 } from '../FeeBuilder.utils';
 import type { CreateXcmFeeBuilderProps } from './xcmPaymentApi';
@@ -42,6 +45,8 @@ interface GetInstructionsProps {
   assets: object[];
   versionedFeeAssetId: object;
   address: string;
+  source?: AnyChain;
+  isEcosystemBridge?: boolean;
 }
 
 export function getInstructions({
@@ -49,8 +54,10 @@ export function getInstructions({
   assets,
   versionedFeeAssetId,
   address,
+  source,
+  isEcosystemBridge,
 }: GetInstructionsProps) {
-  return [
+  const instructions = [
     isAssetReserveChain
       ? getWithdrawAssetInstruction(assets)
       : getReserveAssetDepositedInstruction(assets),
@@ -59,4 +66,14 @@ export function getInstructions({
     getDepositAssetInstruction(address, assets),
     getSetTopicInstruction(),
   ];
+
+  if (isEcosystemBridge) {
+    return [
+      getUniversalOriginInstruction(source),
+      getDescendOriginInstruction(source),
+      ...instructions,
+    ];
+  }
+
+  return instructions;
 }
