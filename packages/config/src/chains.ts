@@ -42,12 +42,14 @@ import {
   kbtc,
   kint,
   ksm,
+  lama,
   laos,
   ldot,
   lit,
   manta,
   maos,
   movr,
+  movrsama,
   neuro,
   nodl,
   otp,
@@ -1144,6 +1146,58 @@ export const moonbaseStage = new EvmParachain({
   rpc: 'https://rpc.api.moondev.network',
   ss58Format: 1287,
   ws: ['wss://wss.api.moondev.network'],
+});
+
+export const moonlama = new EvmParachain({
+  assets: [
+    ChainAsset.fromAsset(lama, {
+      address: '0x0000000000000000000000000000000000000802',
+      decimals: 18,
+      ids: {
+        palletInstance: 3,
+      },
+    }),
+  ],
+  ecosystem: Ecosystem.MoonlamaRelay,
+  genesisHash:
+    '0xb7e61bf426fa70533e2cc8d17bc00f1d373f3f45a01eac924da95214930a0d0e',
+  id: 1283,
+  isTestChain: true,
+  key: 'moonlama',
+  name: 'Moonlama',
+  nativeAsset: lama,
+  parachainId: 2004,
+  relayGenesisHash:
+    '0xd0a2c75ad080394edaaa9cd1c766b543478efb415db1b6cd7772536c9a413167',
+  rpc: 'https://moonlama-relay.api.moondev.network',
+  ss58Format: 1284,
+  ws: ['wss://moonlama-relay.api.moondev.network'],
+});
+
+export const moonsama = new EvmParachain({
+  assets: [
+    ChainAsset.fromAsset(movrsama, {
+      address: '0x0000000000000000000000000000000000000802',
+      decimals: 18,
+      ids: {
+        palletInstance: 3,
+      },
+    }),
+  ],
+  ecosystem: Ecosystem.MoonsamaRelay,
+  genesisHash:
+    '0x13df313fb1b9b0c99dd215ff130c6437464706eabf0f63123d4da26019e1a0cc',
+  id: 1285,
+  isTestChain: true,
+  key: 'moonsama',
+  name: 'Moonsama',
+  nativeAsset: movrsama,
+  parachainId: 2023,
+  relayGenesisHash:
+    '0xe553c7f33ab7dbbd8770a82169ac9ad7f49f53204e6d72d3a75f9df5d22e1183',
+  rpc: 'https://viro-moonsama-rpc-1.rv.moondev.network',
+  ss58Format: 1285,
+  ws: ['wss://viro-moonsama-rpc-1.rv.moondev.network/'],
 });
 
 export const moonbeam = new EvmParachain({
@@ -2287,6 +2341,8 @@ export const chainsList: AnyChain[] = [
   moonbaseStage,
   moonbeam,
   moonriver,
+  moonlama,
+  moonsama,
   neuroweb,
   originTrailAlphanet,
   peaqAlphanet,

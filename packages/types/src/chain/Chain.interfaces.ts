@@ -10,6 +10,8 @@ export enum Ecosystem {
   Kusama = 'kusama',
   AlphanetRelay = 'alphanet-relay',
   StagenetRelay = 'stagenet-relay',
+  MoonlamaRelay = 'moonlama-relay',
+  MoonsamaRelay = 'moonsama-relay',
 }
 
 export interface WormholeConfig {

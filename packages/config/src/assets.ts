@@ -170,6 +170,11 @@ export const ksm = new Asset({
   originSymbol: 'KSM',
 });
 
+export const lama = new Asset({
+  key: 'lama',
+  originSymbol: 'LAMA',
+});
+
 export const laos = new Asset({
   key: 'laos',
   originSymbol: 'LAOS',
@@ -198,6 +203,11 @@ export const maos = new Asset({
 export const movr = new Asset({
   key: 'movr',
   originSymbol: 'MOVR',
+});
+
+export const movrsama = new Asset({
+  key: 'movrsama',
+  originSymbol: 'MOVR-SAMA',
 });
 
 export const neuro = new Asset({
@@ -450,12 +460,14 @@ export const assetsList: Asset[] = [
   kbtc,
   kint,
   ksm,
+  lama,
   laos,
   ldot,
   lit,
   manta,
   maos,
   movr,
+  movrsama,
   neuro,
   nodl,
   otp,
