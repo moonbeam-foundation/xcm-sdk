@@ -1169,9 +1169,9 @@ export const moonlama = new EvmParachain({
   parachainId: 2004,
   relayGenesisHash:
     '0xd0a2c75ad080394edaaa9cd1c766b543478efb415db1b6cd7772536c9a413167',
-  rpc: 'https://moonlama-relay.api.moondev.network',
+  rpc: 'https://moonlama.api.moondev.network',
   ss58Format: 1284,
-  ws: ['wss://moonlama-relay.api.moondev.network'],
+  ws: ['wss://moonlama.api.moondev.network'],
 });
 
 export const moonsama = new EvmParachain({
