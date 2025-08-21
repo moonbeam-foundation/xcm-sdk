@@ -1,6 +1,6 @@
 {
   "name": "@moonbeam-network/xcm-builder",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Moonbeam XCM builder",
   "scripts": {
     "build": "tsup",
