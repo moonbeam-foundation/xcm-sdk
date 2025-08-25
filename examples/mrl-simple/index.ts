@@ -99,7 +99,7 @@ async function fromEvmChain(
     transport: http(),
   });
 
-  console.log(`\Source address: ${account.address}`);
+  console.log(`Source address: ${account.address}`);
 
   const transferData = await Mrl()
     .setSource(source)

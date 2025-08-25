@@ -16,7 +16,7 @@
     }
   },
   "files": {
-    "includes": ["**/*", "!**/build/**"],
+    "includes": ["**/*", "!**/build"],
     "experimentalScannerIgnores": [
       ".turbo",
       ".vscode/extensions.json",
