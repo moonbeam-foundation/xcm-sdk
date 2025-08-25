@@ -124,8 +124,7 @@
   "editor.formatOnSaveMode": "file",
   "typescript.preferences.importModuleSpecifier": "relative",
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
+    "source.fixAll.biome": "explicit"
   },
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#4a0000",
