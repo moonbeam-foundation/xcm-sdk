@@ -1157,6 +1157,13 @@ export const moonlama = new EvmParachain({
         palletInstance: 3,
       },
     }),
+    ChainAsset.fromAsset(movrsama, {
+      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      decimals: 18,
+      ids: {
+        id: 10,
+      },
+    }),
   ],
   ecosystem: Ecosystem.MoonlamaRelay,
   genesisHash:
@@ -1181,6 +1188,13 @@ export const moonsama = new EvmParachain({
       decimals: 18,
       ids: {
         palletInstance: 3,
+      },
+    }),
+    ChainAsset.fromAsset(lama, {
+      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      decimals: 18,
+      ids: {
+        id: 10,
       },
     }),
   ],
