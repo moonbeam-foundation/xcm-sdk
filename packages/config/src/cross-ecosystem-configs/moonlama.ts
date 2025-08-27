@@ -4,7 +4,7 @@ import {
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { lama, movrsama } from '../assets';
+import { lama } from '../assets';
 import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -21,7 +21,7 @@ export const moonlamaRoutes = new ChainRoutes({
         },
       },
       destination: {
-        asset: movrsama,
+        asset: lama,
         chain: moonsama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {

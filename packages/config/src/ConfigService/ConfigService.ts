@@ -89,6 +89,15 @@ export class ConfigService {
     const key = getKey(keyOrChain);
     const route = this.routes.get(key);
 
+    console.log(
+      '\x1b[34m████████████████████▓▓▒▒░ ConfigService.ts:92 ░▒▒▓▓████████████████████\x1b[0m',
+    );
+    console.log('* this.routes = ');
+    console.log(this.routes);
+    console.log(
+      '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+    );
+
     if (!route) {
       throw new Error(`ChainRoute for ${key} not found`);
     }
