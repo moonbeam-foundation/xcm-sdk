@@ -1176,7 +1176,7 @@ export const moonlama = new EvmParachain({
       address: '', // NOT SURE ABOUT THIS
       decimals: 18,
       ids: {
-        palletInstance: 3, // NOT SURE ABOUT THIS,
+        palletInstance: 10,
       },
     }),
   ],
