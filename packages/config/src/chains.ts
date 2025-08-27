@@ -60,6 +60,7 @@ import {
   pica,
   pink,
   pizza,
+  pizzaUSDC,
   ring,
   rmrk,
   sdn,
@@ -1157,11 +1158,25 @@ export const moonlama = new EvmParachain({
         palletInstance: 3,
       },
     }),
-    ChainAsset.fromAsset(movrsama, {
-      address: '0xfFFFFFfF0000000000000000000000000000000A',
+    ChainAsset.fromAsset(pizza, {
+      address: '0xbdd558f3be2807fce11b5fb2b2fa86f310f67855',
       decimals: 18,
       ids: {
-        id: 10,
+        palletInstance: 110,
+      },
+    }),
+    ChainAsset.fromAsset(pizzaUSDC, {
+      address: '0x385c00353cff4c3129306e0a6dcd1947e8354133',
+      decimals: 18,
+      ids: {
+        palletInstance: 110,
+      },
+    }),
+    ChainAsset.fromAsset(glmr, {
+      address: '', // NOT SURE ABOUT THIS
+      decimals: 18,
+      ids: {
+        palletInstance: 3, // NOT SURE ABOUT THIS,
       },
     }),
   ],
@@ -1190,11 +1205,25 @@ export const moonsama = new EvmParachain({
         palletInstance: 3,
       },
     }),
-    ChainAsset.fromAsset(lama, {
-      address: '0xfFFFFFfF0000000000000000000000000000000A',
+    ChainAsset.fromAsset(glmr, {
+      address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
       decimals: 18,
       ids: {
-        id: 10,
+        palletInstance: 3, // NOT SURE ABOUT THIS
+      },
+    }),
+    ChainAsset.fromAsset(pizza, {
+      address: '0xffffffff57029d0ec61f38481147f4e1a0d5e3ed',
+      decimals: 18,
+      ids: {
+        palletInstance: 3, // NOT SURE ABOUT THIS
+      },
+    }),
+    ChainAsset.fromAsset(pizzaUSDC, {
+      address: '0xffffffffa993c0ca4b46667277c3caaa5a4da783',
+      decimals: 18,
+      ids: {
+        palletInstance: 3, // NOT SURE ABOUT THIS
       },
     }),
   ],

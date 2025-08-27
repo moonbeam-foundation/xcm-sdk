@@ -265,6 +265,11 @@ export const pizza = new Asset({
   originSymbol: 'PIZZA',
 });
 
+export const pizzaUSDC = new Asset({
+  key: 'pizza-usdc',
+  originSymbol: 'pizzaUSDC',
+});
+
 export const ring = new Asset({
   key: 'ring',
   originSymbol: 'RING',
