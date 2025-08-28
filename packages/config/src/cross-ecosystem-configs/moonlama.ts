@@ -1,10 +1,9 @@
 import {
   BalanceBuilder,
   ExtrinsicBuilder,
-  FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { lama } from '../assets';
+import { lama, pizza } from '../assets';
 import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -13,65 +12,37 @@ export const moonlamaRoutes = new ChainRoutes({
   routes: [
     {
       source: {
-        asset: lama,
-        balance: BalanceBuilder().evm().native(),
+        asset: pizza,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: lama,
           balance: BalanceBuilder().evm().native(),
         },
       },
       destination: {
-        asset: lama,
+        asset: pizza,
         chain: moonsama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: lama,
-          amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
-            isAssetReserveChain: false,
-            isEcosystemBridge: true,
-          }),
-          balance: BalanceBuilder().evm().erc20(),
+          asset: pizza,
+          amount: 0,
+          // amount: FeeBuilder()
+          //   .xcmPaymentApi()
+          //   .fromPalletInstanceAndAccountKey20({
+          //     isAssetReserveChain: true,
+          //     isEcosystemBridge: true,
+          //   }),
+          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .transferAssetsToEcosystem()
-        .X1(),
+        .X2(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
         .messageQueue(),
     },
-    // {
-    //   source: {
-    //     asset: devStage,
-    //     balance: BalanceBuilder().evm().erc20(),
-    //     fee: {
-    //       asset: devBeta,
-    //       balance: BalanceBuilder().evm().native(),
-    //     },
-    //   },
-    //   destination: {
-    //     asset: devStage,
-    //     chain: moonbaseStage,
-    //     balance: BalanceBuilder().substrate().system().account(),
-    //     fee: {
-    //       asset: devStage,
-    //       amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
-    //         isAssetReserveChain: true,
-    //         isEcosystemBridge: true,
-    //       }),
-    //       balance: BalanceBuilder().substrate().system().account(),
-    //     },
-    //   },
-    //   extrinsic: ExtrinsicBuilder()
-    //     .polkadotXcm()
-    //     .transferAssetsToEcosystem()
-    //     .X3(),
-    //   monitoring: MonitoringBuilder()
-    //     .monitorEvent()
-    //     .polkadotXcm()
-    //     .messageQueue(),
-    // },
   ],
 });
