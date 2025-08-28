@@ -1160,14 +1160,14 @@ export const moonlama = new EvmParachain({
     }),
     ChainAsset.fromAsset(pizza, {
       address: '0xbdd558f3be2807fce11b5fb2b2fa86f310f67855',
-      decimals: 18,
+      decimals: 18, // NOT SURE ABOUT THIS
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(pizzaUSDC, {
       address: '0x385c00353cff4c3129306e0a6dcd1947e8354133',
-      decimals: 18,
+      decimals: 6,
       ids: {
         palletInstance: 110,
       },
@@ -1200,7 +1200,7 @@ export const moonsama = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(movrsama, {
       address: '0x0000000000000000000000000000000000000802',
-      decimals: 18,
+      decimals: 18, // not sure about this
       ids: {
         palletInstance: 3,
       },
@@ -1214,14 +1214,14 @@ export const moonsama = new EvmParachain({
     }),
     ChainAsset.fromAsset(pizza, {
       address: '0xffffffff57029d0ec61f38481147f4e1a0d5e3ed',
-      decimals: 18,
+      decimals: 18, // not sure about this
       ids: {
         palletInstance: 3, // NOT SURE ABOUT THIS
       },
     }),
     ChainAsset.fromAsset(pizzaUSDC, {
       address: '0xffffffffa993c0ca4b46667277c3caaa5a4da783',
-      decimals: 18,
+      decimals: 6, // not sure about this
       ids: {
         palletInstance: 3, // NOT SURE ABOUT THIS
       },

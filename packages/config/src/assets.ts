@@ -484,6 +484,7 @@ export const assetsList: Asset[] = [
   pica,
   pink,
   pizza,
+  pizzaUSDC,
   ring,
   rmrk,
   sdn,

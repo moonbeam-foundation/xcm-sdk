@@ -4,6 +4,7 @@ import {
   moonlama,
   moonsama,
   pizza,
+  pizzaUSDC,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
@@ -19,6 +20,13 @@ const transferDateTestConfig: {
 }[] = [
   {
     asset: pizza,
+    source: moonlama,
+    sourceAddress: moonEvmAddress,
+    destination: moonsama,
+    destinationAddress: moonEvmAddress,
+  },
+  {
+    asset: pizzaUSDC,
     source: moonlama,
     sourceAddress: moonEvmAddress,
     destination: moonsama,
