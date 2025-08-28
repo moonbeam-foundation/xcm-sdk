@@ -25,13 +25,11 @@ export const moonlamaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: pizza,
-          amount: 0,
-          // amount: FeeBuilder()
-          //   .xcmPaymentApi()
-          //   .fromPalletInstanceAndAccountKey20({
-          //     isAssetReserveChain: true,
-          //     isEcosystemBridge: true,
-          //   }),
+          amount: 0.0001,
+          // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+          //   isAssetReserveChain: false,
+          //   isEcosystemBridge: true,
+          // }),
           balance: BalanceBuilder().substrate().system().account(),
         },
       },

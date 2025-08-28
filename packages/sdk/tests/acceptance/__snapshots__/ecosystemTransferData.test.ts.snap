@@ -98,7 +98,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "fee": _AssetAmount {
       "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
-      "amount": 0n,
+      "amount": 100000000000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
@@ -137,7 +137,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
   },
   "min": _AssetAmount {
     "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
-    "amount": 0n,
+    "amount": 100000000000000n,
     "decimals": 18,
     "ids": {
       "palletInstance": 3,
@@ -231,7 +231,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "destinationFee": _AssetAmount {
       "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
-      "amount": 0n,
+      "amount": 100000000000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 110,
@@ -266,27 +266,27 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
       "symbol": undefined,
     },
     "fee": _AssetAmount {
-      "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
+      "address": "0x0000000000000000000000000000000000000802",
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 110,
+        "palletInstance": 3,
       },
-      "key": "pizza",
+      "key": "lama",
       "min": undefined,
-      "originSymbol": "PIZZA",
+      "originSymbol": "LAMA",
       "symbol": undefined,
     },
     "feeBalance": _AssetAmount {
-      "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
+      "address": "0x0000000000000000000000000000000000000802",
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 110,
+        "palletInstance": 3,
       },
-      "key": "pizza",
+      "key": "lama",
       "min": undefined,
-      "originSymbol": "PIZZA",
+      "originSymbol": "LAMA",
       "symbol": undefined,
     },
     "max": _AssetAmount {
