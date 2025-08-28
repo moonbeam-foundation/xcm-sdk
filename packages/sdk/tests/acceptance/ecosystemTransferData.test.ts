@@ -1,6 +1,7 @@
 import {
   ConfigService,
   crossEcosystemsRoutesMap,
+  lamaGLMR,
   moonlama,
   moonsama,
   pizza,
@@ -27,6 +28,13 @@ const transferDateTestConfig: {
   },
   {
     asset: pizzaUSDC,
+    source: moonlama,
+    sourceAddress: moonEvmAddress,
+    destination: moonsama,
+    destinationAddress: moonEvmAddress,
+  },
+  {
+    asset: lamaGLMR,
     source: moonlama,
     sourceAddress: moonEvmAddress,
     destination: moonsama,

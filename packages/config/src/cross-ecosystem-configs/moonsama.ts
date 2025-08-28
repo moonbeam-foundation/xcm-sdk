@@ -4,7 +4,7 @@ import {
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { lama, movrsama } from '../assets';
+import { lamaGLMR, movrsama } from '../assets';
 import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -21,11 +21,11 @@ export const moonsamaRoutes = new ChainRoutes({
         },
       },
       destination: {
-        asset: lama,
+        asset: lamaGLMR,
         chain: moonlama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: lama,
+          asset: lamaGLMR,
           amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
             isAssetReserveChain: false,
             isEcosystemBridge: true,

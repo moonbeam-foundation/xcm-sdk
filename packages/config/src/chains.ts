@@ -42,7 +42,7 @@ import {
   kbtc,
   kint,
   ksm,
-  lama,
+  lamaGLMR,
   laos,
   ldot,
   lit,
@@ -1152,7 +1152,7 @@ export const moonbaseStage = new EvmParachain({
 export const moonlama = new EvmParachain({
   assets: [
     // this is actually the GLMR asset
-    ChainAsset.fromAsset(lama, {
+    ChainAsset.fromAsset(lamaGLMR, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       ids: {
@@ -1181,7 +1181,7 @@ export const moonlama = new EvmParachain({
   isTestChain: true,
   key: 'moonlama',
   name: 'Moonlama',
-  nativeAsset: lama,
+  nativeAsset: lamaGLMR,
   parachainId: 2004,
   relayGenesisHash:
     '0xd0a2c75ad080394edaaa9cd1c766b543478efb415db1b6cd7772536c9a413167',
@@ -1201,7 +1201,7 @@ export const moonsama = new EvmParachain({
       },
     }),
     // this is actually the GLMR asset on Moonlama
-    ChainAsset.fromAsset(lama, {
+    ChainAsset.fromAsset(lamaGLMR, {
       address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
       decimals: 18,
       ids: {

@@ -170,9 +170,9 @@ export const ksm = new Asset({
   originSymbol: 'KSM',
 });
 
-export const lama = new Asset({
-  key: 'lama',
-  originSymbol: 'LAMA',
+export const lamaGLMR = new Asset({
+  key: 'lama-glmr',
+  originSymbol: 'lamaGLMR',
 });
 
 export const laos = new Asset({
@@ -465,7 +465,7 @@ export const assetsList: Asset[] = [
   kbtc,
   kint,
   ksm,
-  lama,
+  lamaGLMR,
   laos,
   ldot,
   lit,
