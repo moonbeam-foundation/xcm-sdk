@@ -28,15 +28,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
           "originSymbol": "MOVR-SAMA",
           "symbol": undefined,
         },
-        "glmr" => _ChainAsset {
+        "lama" => _ChainAsset {
           "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
           "decimals": 18,
           "ids": {
             "palletInstance": 3,
           },
-          "key": "glmr",
+          "key": "lama",
           "min": undefined,
-          "originSymbol": "GLMR",
+          "originSymbol": "LAMA",
           "symbol": undefined,
         },
         "pizza" => _ChainAsset {
@@ -195,17 +195,6 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
           "originSymbol": "pizzaUSDC",
           "symbol": undefined,
         },
-        "glmr" => _ChainAsset {
-          "address": "",
-          "decimals": 18,
-          "ids": {
-            "palletInstance": 10,
-          },
-          "key": "glmr",
-          "min": undefined,
-          "originSymbol": "GLMR",
-          "symbol": undefined,
-        },
       },
       "checkSovereignAccountBalances": false,
       "contracts": undefined,
@@ -346,15 +335,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
           "originSymbol": "MOVR-SAMA",
           "symbol": undefined,
         },
-        "glmr" => _ChainAsset {
+        "lama" => _ChainAsset {
           "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
           "decimals": 18,
           "ids": {
             "palletInstance": 3,
           },
-          "key": "glmr",
+          "key": "lama",
           "min": undefined,
-          "originSymbol": "GLMR",
+          "originSymbol": "LAMA",
           "symbol": undefined,
         },
         "pizza" => _ChainAsset {
@@ -511,17 +500,6 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
           "key": "pizza-usdc",
           "min": undefined,
           "originSymbol": "pizzaUSDC",
-          "symbol": undefined,
-        },
-        "glmr" => _ChainAsset {
-          "address": "",
-          "decimals": 18,
-          "ids": {
-            "palletInstance": 10,
-          },
-          "key": "glmr",
-          "min": undefined,
-          "originSymbol": "GLMR",
           "symbol": undefined,
         },
       },
