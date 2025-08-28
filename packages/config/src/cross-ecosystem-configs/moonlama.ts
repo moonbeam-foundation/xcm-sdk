@@ -3,6 +3,7 @@ import {
   ExtrinsicBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
 import { lama, pizza, pizzaUSDC } from '../assets';
 import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -68,7 +69,9 @@ export const moonlamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .transferAssetsToEcosystem()
-        .X2(),
+        .X2({
+          globalConsensus: Ecosystem.Kusama,
+        }),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

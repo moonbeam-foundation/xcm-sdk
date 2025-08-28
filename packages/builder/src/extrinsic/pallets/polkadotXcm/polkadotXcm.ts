@@ -1,3 +1,4 @@
+import type { Ecosystem } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import {
@@ -704,7 +705,11 @@ export function polkadotXcm() {
             });
           },
         }),
-        X2: (): ExtrinsicConfigBuilder => ({
+        X2: ({
+          globalConsensus,
+        }: {
+          globalConsensus?: Ecosystem;
+        } = {}): ExtrinsicConfigBuilder => ({
           build: (params) => {
             return new ExtrinsicConfig({
               module: pallet,
@@ -740,6 +745,7 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
+                  globalConsensus,
                 });
               },
             });

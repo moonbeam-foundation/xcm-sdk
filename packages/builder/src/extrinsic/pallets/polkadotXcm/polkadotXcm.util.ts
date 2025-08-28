@@ -1,3 +1,4 @@
+import type { Ecosystem } from '@moonbeam-network/xcm-types';
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import type { BuilderParams } from '../../../builder.interfaces';
 import type { Parents } from '../../ExtrinsicBuilder.interfaces';
@@ -12,6 +13,7 @@ export interface GetExtrinsicParams extends Omit<BuilderParams, 'asset'> {
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
   feeIndex?: number;
+  globalConsensus?: Ecosystem;
 }
 
 export function getPolkadotXcmExtrinsicArgs({
@@ -61,9 +63,27 @@ export function getEcosystemTransferExtrinsicArgs({
   destinationAddress,
   destination,
   func,
+  globalConsensus,
   feeIndex = 0,
 }: GetExtrinsicParams) {
   const version = getExtrinsicArgumentVersion(func);
+
+  console.log(
+    '\x1b[34m████████████████████▓▓▒▒░ polkadotXcm.util.ts:68 ░▒▒▓▓████████████████████\x1b[0m',
+  );
+  console.log('* destination = ');
+  console.log(destination);
+  console.log(
+    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
+  );
+
+  const GlobalConsensus = globalConsensus
+    ? { GlobalConsensus: { ByGenesis: globalConsensus } }
+    : {
+        GlobalConsensus: {
+          ByGenesis: destination.relayGenesisHash,
+        },
+      };
 
   return [
     // dest
@@ -72,11 +92,7 @@ export function getEcosystemTransferExtrinsicArgs({
         parents: 2,
         interior: {
           X2: [
-            {
-              GlobalConsensus: {
-                ByGenesis: destination.relayGenesisHash,
-              },
-            },
+            GlobalConsensus,
             {
               Parachain: destination.parachainId,
             },
