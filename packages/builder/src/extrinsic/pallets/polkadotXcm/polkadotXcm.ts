@@ -741,12 +741,14 @@ export function polkadotXcm() {
                   },
                 ];
 
-                return getEcosystemTransferExtrinsicArgs({
+                const result = getEcosystemTransferExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   assets,
                   globalConsensus,
                 });
+
+                return result;
               },
             });
           },

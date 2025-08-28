@@ -68,17 +68,8 @@ export function getEcosystemTransferExtrinsicArgs({
 }: GetExtrinsicParams) {
   const version = getExtrinsicArgumentVersion(func);
 
-  console.log(
-    '\x1b[34m████████████████████▓▓▒▒░ polkadotXcm.util.ts:68 ░▒▒▓▓████████████████████\x1b[0m',
-  );
-  console.log('* destination = ');
-  console.log(destination);
-  console.log(
-    '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-  );
-
   const GlobalConsensus = globalConsensus
-    ? { GlobalConsensus: { ByGenesis: globalConsensus } }
+    ? { GlobalConsensus: globalConsensus }
     : {
         GlobalConsensus: {
           ByGenesis: destination.relayGenesisHash,
