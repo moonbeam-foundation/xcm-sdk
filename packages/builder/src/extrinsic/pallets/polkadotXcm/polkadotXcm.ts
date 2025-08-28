@@ -15,6 +15,10 @@ import {
 
 const pallet = 'polkadotXcm';
 
+type ParamsWithGlobalConsensus = {
+  globalConsensus?: Ecosystem;
+};
+
 export function polkadotXcm() {
   return {
     limitedReserveTransferAssets: () => {
@@ -707,9 +711,7 @@ export function polkadotXcm() {
         }),
         X2: ({
           globalConsensus,
-        }: {
-          globalConsensus?: Ecosystem;
-        } = {}): ExtrinsicConfigBuilder => ({
+        }: ParamsWithGlobalConsensus = {}): ExtrinsicConfigBuilder => ({
           build: (params) => {
             return new ExtrinsicConfig({
               module: pallet,
@@ -800,7 +802,9 @@ export function polkadotXcm() {
             });
           },
         }),
-        X4: (): ExtrinsicConfigBuilder => ({
+        X4: ({
+          globalConsensus,
+        }: ParamsWithGlobalConsensus = {}): ExtrinsicConfigBuilder => ({
           build: (params) => {
             return new ExtrinsicConfig({
               module: pallet,
@@ -876,6 +880,7 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
+                  globalConsensus,
                 });
               },
             });

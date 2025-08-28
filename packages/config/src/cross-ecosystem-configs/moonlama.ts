@@ -13,6 +13,40 @@ export const moonlamaRoutes = new ChainRoutes({
   routes: [
     {
       source: {
+        asset: lama,
+        balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: lama,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: lama,
+        chain: moonsama,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: lama,
+          amount: 0.0001,
+          // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+          //   isAssetReserveChain: false,
+          //   isEcosystemBridge: true,
+          // }),
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X2({
+          globalConsensus: Ecosystem.Kusama,
+        }),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
+    },
+    {
+      source: {
         asset: pizza,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -37,7 +71,9 @@ export const moonlamaRoutes = new ChainRoutes({
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
         .transferAssetsToEcosystem()
-        .X2(),
+        .X2({
+          globalConsensus: Ecosystem.Kusama,
+        }),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
