@@ -205,9 +205,9 @@ export const movr = new Asset({
   originSymbol: 'MOVR',
 });
 
-export const movrsama = new Asset({
-  key: 'movrsama',
-  originSymbol: 'MOVR-SAMA',
+export const samaMOVR = new Asset({
+  key: 'sama-movr',
+  originSymbol: 'samaMOVR',
 });
 
 export const neuro = new Asset({
@@ -472,7 +472,7 @@ export const assetsList: Asset[] = [
   manta,
   maos,
   movr,
-  movrsama,
+  samaMOVR,
   neuro,
   nodl,
   otp,

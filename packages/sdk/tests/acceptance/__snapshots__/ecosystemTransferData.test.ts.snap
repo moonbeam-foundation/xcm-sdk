@@ -17,15 +17,15 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "chain": _EvmParachain {
       "assets": Map {
-        "movrsama" => _ChainAsset {
+        "sama-movr" => _ChainAsset {
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
-          "key": "movrsama",
+          "key": "sama-movr",
           "min": undefined,
-          "originSymbol": "MOVR-SAMA",
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "lama-glmr" => _ChainAsset {
@@ -89,11 +89,11 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "movrsama",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "MOVR-SAMA",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "fee": _AssetAmount {
@@ -171,6 +171,17 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
           "key": "lama-glmr",
           "min": undefined,
           "originSymbol": "lamaGLMR",
+          "symbol": undefined,
+        },
+        "sama-movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "pizza" => _ChainAsset {
@@ -324,15 +335,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "chain": _EvmParachain {
       "assets": Map {
-        "movrsama" => _ChainAsset {
+        "sama-movr" => _ChainAsset {
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
-          "key": "movrsama",
+          "key": "sama-movr",
           "min": undefined,
-          "originSymbol": "MOVR-SAMA",
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "lama-glmr" => _ChainAsset {
@@ -396,11 +407,11 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "movrsama",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "MOVR-SAMA",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "fee": _AssetAmount {
@@ -478,6 +489,17 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
           "key": "lama-glmr",
           "min": undefined,
           "originSymbol": "lamaGLMR",
+          "symbol": undefined,
+        },
+        "sama-movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "pizza" => _ChainAsset {
@@ -642,6 +664,17 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
           "originSymbol": "lamaGLMR",
           "symbol": undefined,
         },
+        "sama-movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
+          "symbol": undefined,
+        },
         "pizza" => _ChainAsset {
           "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
           "decimals": 18,
@@ -700,15 +733,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
       "symbol": undefined,
     },
     "fee": _AssetAmount {
-      "address": "0x0000000000000000000000000000000000000802",
-      "amount": 10000000000000000n,
+      "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
+      "amount": 100000000000000000n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 10,
+        "palletInstance": 110,
       },
-      "key": "lama-glmr",
+      "key": "pizza",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "PIZZA",
       "symbol": undefined,
     },
     "min": _AssetAmount {
@@ -740,7 +773,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
   },
   "min": _AssetAmount {
     "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
-    "amount": 0n,
+    "amount": 100000000000000000n,
     "decimals": 18,
     "ids": {
       "palletInstance": 110,
@@ -765,15 +798,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
     },
     "chain": _EvmParachain {
       "assets": Map {
-        "movrsama" => _ChainAsset {
+        "sama-movr" => _ChainAsset {
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
-          "key": "movrsama",
+          "key": "sama-movr",
           "min": undefined,
-          "originSymbol": "MOVR-SAMA",
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "lama-glmr" => _ChainAsset {
@@ -833,27 +866,27 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
       ],
     },
     "destinationFee": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
-      "amount": 10000000000000000n,
+      "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
+      "amount": 100000000000000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
       },
-      "key": "lama-glmr",
+      "key": "pizza",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "PIZZA",
       "symbol": undefined,
     },
     "destinationFeeBalance": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+      "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
       "amount": 0n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
       },
-      "key": "lama-glmr",
+      "key": "pizza",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "PIZZA",
       "symbol": undefined,
     },
     "existentialDeposit": _AssetAmount {
@@ -861,35 +894,35 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "movrsama",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "MOVR-SAMA",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "fee": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+      "address": "0x0000000000000000000000000000000000000802",
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "lama-glmr",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "feeBalance": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+      "address": "0x0000000000000000000000000000000000000802",
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "lama-glmr",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "max": _AssetAmount {
@@ -938,15 +971,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
     },
     "chain": _EvmParachain {
       "assets": Map {
-        "movrsama" => _ChainAsset {
+        "sama-movr" => _ChainAsset {
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
-          "key": "movrsama",
+          "key": "sama-movr",
           "min": undefined,
-          "originSymbol": "MOVR-SAMA",
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "lama-glmr" => _ChainAsset {
@@ -1010,11 +1043,11 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "movrsama",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "MOVR-SAMA",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "fee": _AssetAmount {
@@ -1092,6 +1125,17 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
           "key": "lama-glmr",
           "min": undefined,
           "originSymbol": "lamaGLMR",
+          "symbol": undefined,
+        },
+        "sama-movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "pizza" => _ChainAsset {
@@ -1256,6 +1300,17 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
           "originSymbol": "lamaGLMR",
           "symbol": undefined,
         },
+        "sama-movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
+          "symbol": undefined,
+        },
         "pizza" => _ChainAsset {
           "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
           "decimals": 18,
@@ -1314,15 +1369,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
       "symbol": undefined,
     },
     "fee": _AssetAmount {
-      "address": "0x0000000000000000000000000000000000000802",
-      "amount": 10000000000000000n,
-      "decimals": 18,
+      "address": "0x385c00353cff4c3129306e0a6dcd1947e8354133",
+      "amount": 100000n,
+      "decimals": 6,
       "ids": {
-        "palletInstance": 10,
+        "palletInstance": 110,
       },
-      "key": "lama-glmr",
+      "key": "pizza-usdc",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "pizzaUSDC",
       "symbol": undefined,
     },
     "min": _AssetAmount {
@@ -1354,7 +1409,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
   },
   "min": _AssetAmount {
     "address": "0x385c00353cff4c3129306e0a6dcd1947e8354133",
-    "amount": 0n,
+    "amount": 100000n,
     "decimals": 6,
     "ids": {
       "palletInstance": 110,
@@ -1379,15 +1434,15 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
     },
     "chain": _EvmParachain {
       "assets": Map {
-        "movrsama" => _ChainAsset {
+        "sama-movr" => _ChainAsset {
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
-          "key": "movrsama",
+          "key": "sama-movr",
           "min": undefined,
-          "originSymbol": "MOVR-SAMA",
+          "originSymbol": "samaMOVR",
           "symbol": undefined,
         },
         "lama-glmr" => _ChainAsset {
@@ -1447,27 +1502,27 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
       ],
     },
     "destinationFee": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
-      "amount": 10000000000000000n,
-      "decimals": 18,
+      "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
+      "amount": 100000n,
+      "decimals": 6,
       "ids": {
         "palletInstance": 3,
       },
-      "key": "lama-glmr",
+      "key": "pizza-usdc",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "pizzaUSDC",
       "symbol": undefined,
     },
     "destinationFeeBalance": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+      "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
       "amount": 0n,
-      "decimals": 18,
+      "decimals": 6,
       "ids": {
         "palletInstance": 3,
       },
-      "key": "lama-glmr",
+      "key": "pizza-usdc",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "pizzaUSDC",
       "symbol": undefined,
     },
     "existentialDeposit": _AssetAmount {
@@ -1475,35 +1530,35 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
-      "key": "movrsama",
+      "key": "sama-movr",
       "min": undefined,
-      "originSymbol": "MOVR-SAMA",
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
     "fee": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+      "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
       "amount": 0n,
-      "decimals": 18,
+      "decimals": 6,
       "ids": {
         "palletInstance": 3,
       },
-      "key": "lama-glmr",
+      "key": "pizza-usdc",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "pizzaUSDC",
       "symbol": undefined,
     },
     "feeBalance": _AssetAmount {
-      "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+      "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
       "amount": 0n,
-      "decimals": 18,
+      "decimals": 6,
       "ids": {
         "palletInstance": 3,
       },
-      "key": "lama-glmr",
+      "key": "pizza-usdc",
       "min": undefined,
-      "originSymbol": "lamaGLMR",
+      "originSymbol": "pizzaUSDC",
       "symbol": undefined,
     },
     "max": _AssetAmount {
@@ -1528,6 +1583,324 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
       "key": "pizza-usdc",
       "min": undefined,
       "originSymbol": "pizzaUSDC",
+      "symbol": undefined,
+    },
+  },
+  "transfer": [Function],
+}
+`;
+
+exports[`sdk/transferData ecosystem > asset 'sama-movr' from source 'Moonsama' to destination 'Moonlama' > should get expected balances 1`] = `
+{
+  "destination": {
+    "balance": _AssetAmount {
+      "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "chain": _EvmParachain {
+      "assets": Map {
+        "lama-glmr" => _ChainAsset {
+          "address": "0x0000000000000000000000000000000000000802",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "lama-glmr",
+          "min": undefined,
+          "originSymbol": "lamaGLMR",
+          "symbol": undefined,
+        },
+        "sama-movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
+          "symbol": undefined,
+        },
+        "pizza" => _ChainAsset {
+          "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 110,
+          },
+          "key": "pizza",
+          "min": undefined,
+          "originSymbol": "PIZZA",
+          "symbol": undefined,
+        },
+        "pizza-usdc" => _ChainAsset {
+          "address": "0x385c00353cff4c3129306e0a6dcd1947e8354133",
+          "decimals": 6,
+          "ids": {
+            "palletInstance": 110,
+          },
+          "key": "pizza-usdc",
+          "min": undefined,
+          "originSymbol": "pizzaUSDC",
+          "symbol": undefined,
+        },
+      },
+      "checkSovereignAccountBalances": false,
+      "contracts": undefined,
+      "ecosystem": "moonlama-relay",
+      "explorer": undefined,
+      "genesisHash": "0xb7e61bf426fa70533e2cc8d17bc00f1d373f3f45a01eac924da95214930a0d0e",
+      "id": 1283,
+      "isEvmSigner": false,
+      "isRelay": false,
+      "isTestChain": true,
+      "key": "moonlama",
+      "name": "Moonlama",
+      "parachainId": 2004,
+      "relayGenesisHash": "0xd0a2c75ad080394edaaa9cd1c766b543478efb415db1b6cd7772536c9a413167",
+      "rpc": "https://moonlama.api.moondev.network",
+      "ss58Format": 1284,
+      "usesChainDecimals": false,
+      "weight": undefined,
+      "wh": undefined,
+      "ws": [
+        "wss://moonlama.api.moondev.network",
+      ],
+    },
+    "existentialDeposit": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "lama-glmr",
+      "min": undefined,
+      "originSymbol": "lamaGLMR",
+      "symbol": undefined,
+    },
+    "fee": _AssetAmount {
+      "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+      "amount": 300000000000000000n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "min": _AssetAmount {
+      "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "sovereignAccountBalances": undefined,
+  },
+  "getEstimate": [Function],
+  "max": _AssetAmount {
+    "address": "0x0000000000000000000000000000000000000802",
+    "amount": 0n,
+    "decimals": 18,
+    "ids": {
+      "palletInstance": 10,
+    },
+    "key": "sama-movr",
+    "min": undefined,
+    "originSymbol": "samaMOVR",
+    "symbol": undefined,
+  },
+  "min": _AssetAmount {
+    "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+    "amount": 300000000000000000n,
+    "decimals": 18,
+    "ids": {
+      "palletInstance": 10,
+    },
+    "key": "sama-movr",
+    "min": undefined,
+    "originSymbol": "samaMOVR",
+    "symbol": undefined,
+  },
+  "source": {
+    "balance": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "chain": _EvmParachain {
+      "assets": Map {
+        "sama-movr" => _ChainAsset {
+          "address": "0x0000000000000000000000000000000000000802",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 10,
+          },
+          "key": "sama-movr",
+          "min": undefined,
+          "originSymbol": "samaMOVR",
+          "symbol": undefined,
+        },
+        "lama-glmr" => _ChainAsset {
+          "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 3,
+          },
+          "key": "lama-glmr",
+          "min": undefined,
+          "originSymbol": "lamaGLMR",
+          "symbol": undefined,
+        },
+        "pizza" => _ChainAsset {
+          "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
+          "decimals": 18,
+          "ids": {
+            "palletInstance": 3,
+          },
+          "key": "pizza",
+          "min": undefined,
+          "originSymbol": "PIZZA",
+          "symbol": undefined,
+        },
+        "pizza-usdc" => _ChainAsset {
+          "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
+          "decimals": 6,
+          "ids": {
+            "palletInstance": 3,
+          },
+          "key": "pizza-usdc",
+          "min": undefined,
+          "originSymbol": "pizzaUSDC",
+          "symbol": undefined,
+        },
+      },
+      "checkSovereignAccountBalances": false,
+      "contracts": undefined,
+      "ecosystem": "moonsama-relay",
+      "explorer": undefined,
+      "genesisHash": "0x13df313fb1b9b0c99dd215ff130c6437464706eabf0f63123d4da26019e1a0cc",
+      "id": 1285,
+      "isEvmSigner": false,
+      "isRelay": false,
+      "isTestChain": true,
+      "key": "moonsama",
+      "name": "Moonsama",
+      "parachainId": 2023,
+      "relayGenesisHash": "0xe553c7f33ab7dbbd8770a82169ac9ad7f49f53204e6d72d3a75f9df5d22e1183",
+      "rpc": "https://viro-moonsama-rpc-1.rv.moondev.network",
+      "ss58Format": 1285,
+      "usesChainDecimals": false,
+      "weight": undefined,
+      "wh": undefined,
+      "ws": [
+        "wss://viro-moonsama-rpc-1.rv.moondev.network/",
+      ],
+    },
+    "destinationFee": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 300000000000000000n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "destinationFeeBalance": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "existentialDeposit": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "fee": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "feeBalance": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "max": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
+      "symbol": undefined,
+    },
+    "min": _AssetAmount {
+      "address": "0x0000000000000000000000000000000000000802",
+      "amount": 0n,
+      "decimals": 18,
+      "ids": {
+        "palletInstance": 10,
+      },
+      "key": "sama-movr",
+      "min": undefined,
+      "originSymbol": "samaMOVR",
       "symbol": undefined,
     },
   },

@@ -798,6 +798,7 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
+                  globalConsensus,
                 });
               },
             });

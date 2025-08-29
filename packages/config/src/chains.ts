@@ -49,7 +49,6 @@ import {
   manta,
   maos,
   movr,
-  movrsama,
   neuro,
   nodl,
   otp,
@@ -63,6 +62,7 @@ import {
   pizzaUSDC,
   ring,
   rmrk,
+  samaMOVR,
   sdn,
   stink,
   sub,
@@ -1151,9 +1151,15 @@ export const moonbaseStage = new EvmParachain({
 
 export const moonlama = new EvmParachain({
   assets: [
-    // this is actually the GLMR asset
     ChainAsset.fromAsset(lamaGLMR, {
       address: '0x0000000000000000000000000000000000000802',
+      decimals: 18,
+      ids: {
+        palletInstance: 10,
+      },
+    }),
+    ChainAsset.fromAsset(samaMOVR, {
+      address: '0xffffffff54c47f43713fd9211724362697f1a302',
       decimals: 18,
       ids: {
         palletInstance: 10,
@@ -1192,12 +1198,11 @@ export const moonlama = new EvmParachain({
 
 export const moonsama = new EvmParachain({
   assets: [
-    // this is actually the MOVR asset
-    ChainAsset.fromAsset(movrsama, {
+    ChainAsset.fromAsset(samaMOVR, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       ids: {
-        palletInstance: 3,
+        palletInstance: 10,
       },
     }),
     // this is actually the GLMR asset on Moonlama
@@ -1230,7 +1235,7 @@ export const moonsama = new EvmParachain({
   isTestChain: true,
   key: 'moonsama',
   name: 'Moonsama',
-  nativeAsset: movrsama,
+  nativeAsset: samaMOVR,
   parachainId: 2023,
   relayGenesisHash:
     '0xe553c7f33ab7dbbd8770a82169ac9ad7f49f53204e6d72d3a75f9df5d22e1183',
