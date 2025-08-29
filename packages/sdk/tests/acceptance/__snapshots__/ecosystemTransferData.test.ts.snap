@@ -405,7 +405,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "fee": _AssetAmount {
       "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
-      "amount": 10000000000000000n,
+      "amount": 100000000000000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
@@ -444,7 +444,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
   },
   "min": _AssetAmount {
     "address": "0xffffffff57029d0ec61f38481147f4e1a0d5e3ed",
-    "amount": 10000000000000000n,
+    "amount": 100000000000000000n,
     "decimals": 18,
     "ids": {
       "palletInstance": 3,
@@ -527,7 +527,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "destinationFee": _AssetAmount {
       "address": "0xbdd558f3be2807fce11b5fb2b2fa86f310f67855",
-      "amount": 10000000000000000n,
+      "amount": 100000000000000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 110,
@@ -1019,7 +1019,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
     },
     "fee": _AssetAmount {
       "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
-      "amount": 10000n,
+      "amount": 100000n,
       "decimals": 6,
       "ids": {
         "palletInstance": 3,
@@ -1058,7 +1058,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
   },
   "min": _AssetAmount {
     "address": "0xffffffffa993c0ca4b46667277c3caaa5a4da783",
-    "amount": 10000n,
+    "amount": 100000n,
     "decimals": 6,
     "ids": {
       "palletInstance": 3,
@@ -1141,7 +1141,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
     },
     "destinationFee": _AssetAmount {
       "address": "0x385c00353cff4c3129306e0a6dcd1947e8354133",
-      "amount": 10000n,
+      "amount": 100000n,
       "decimals": 6,
       "ids": {
         "palletInstance": 110,

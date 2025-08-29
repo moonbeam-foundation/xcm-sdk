@@ -60,9 +60,9 @@ export const moonlamaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: pizza,
-          amount: 0.01,
-          // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
-          //   isAssetReserveChain: false,
+          amount: 0.1,
+          // amount: FeeBuilder().xcmPaymentApi().fromSourceAccountKey20({
+          //   isAssetReserveChain: true,
           //   isEcosystemBridge: true,
           // }),
           balance: BalanceBuilder().substrate().system().account(),
@@ -94,7 +94,7 @@ export const moonlamaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: pizzaUSDC,
-          amount: 0.01,
+          amount: 0.1,
           // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
           //   isAssetReserveChain: false,
           //   isEcosystemBridge: true,
