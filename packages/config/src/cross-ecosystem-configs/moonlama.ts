@@ -12,7 +12,6 @@ export const moonlamaRoutes = new ChainRoutes({
   chain: moonlama,
   routes: [
     {
-      // ! this still is broken
       source: {
         asset: lamaGLMR,
         balance: BalanceBuilder().evm().native(),
@@ -27,7 +26,7 @@ export const moonlamaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: lamaGLMR,
-          amount: 0.0001,
+          amount: 0.3,
           // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
           //   isAssetReserveChain: false,
           //   isEcosystemBridge: true,
@@ -37,10 +36,10 @@ export const moonlamaRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X4({
+        .transferAssetsToEcosystem({
           globalConsensus: Ecosystem.Kusama,
-        }),
+        })
+        .X1(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -71,10 +70,10 @@ export const moonlamaRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X2({
+        .transferAssetsToEcosystem({
           globalConsensus: Ecosystem.Kusama,
-        }),
+        })
+        .X2(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -105,10 +104,10 @@ export const moonlamaRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X2({
+        .transferAssetsToEcosystem({
           globalConsensus: Ecosystem.Kusama,
-        }),
+        })
+        .X2(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

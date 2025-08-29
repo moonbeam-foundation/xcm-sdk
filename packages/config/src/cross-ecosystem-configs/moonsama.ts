@@ -37,7 +37,9 @@ export const moonsamaRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssetsToEcosystem()
+        .transferAssetsToEcosystem({
+          globalConsensus: Ecosystem.Polkadot,
+        })
         .X1(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
@@ -69,10 +71,10 @@ export const moonsamaRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X2({
+        .transferAssetsToEcosystem({
           globalConsensus: Ecosystem.Polkadot,
-        }),
+        })
+        .X2(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -103,10 +105,10 @@ export const moonsamaRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X2({
+        .transferAssetsToEcosystem({
           globalConsensus: Ecosystem.Polkadot,
-        }),
+        })
+        .X2(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

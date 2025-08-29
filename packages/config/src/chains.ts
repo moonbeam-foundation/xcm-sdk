@@ -1156,7 +1156,7 @@ export const moonlama = new EvmParachain({
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       ids: {
-        palletInstance: 3,
+        palletInstance: 10,
       },
     }),
     ChainAsset.fromAsset(pizza, {

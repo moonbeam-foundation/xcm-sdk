@@ -668,7 +668,9 @@ export function polkadotXcm() {
         }),
       };
     },
-    transferAssetsToEcosystem: () => {
+    transferAssetsToEcosystem: ({
+      globalConsensus,
+    }: ParamsWithGlobalConsensus = {}) => {
       const func = 'transferAssets';
 
       return {
@@ -704,14 +706,13 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
+                  globalConsensus,
                 });
               },
             });
           },
         }),
-        X2: ({
-          globalConsensus,
-        }: ParamsWithGlobalConsensus = {}): ExtrinsicConfigBuilder => ({
+        X2: (): ExtrinsicConfigBuilder => ({
           build: (params) => {
             return new ExtrinsicConfig({
               module: pallet,
@@ -802,9 +803,7 @@ export function polkadotXcm() {
             });
           },
         }),
-        X4: ({
-          globalConsensus,
-        }: ParamsWithGlobalConsensus = {}): ExtrinsicConfigBuilder => ({
+        X4: (): ExtrinsicConfigBuilder => ({
           build: (params) => {
             return new ExtrinsicConfig({
               module: pallet,

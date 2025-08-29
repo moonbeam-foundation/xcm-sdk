@@ -98,7 +98,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "fee": _AssetAmount {
       "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
-      "amount": 100000000000000n,
+      "amount": 300000000000000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
@@ -128,7 +128,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     "amount": 0n,
     "decimals": 18,
     "ids": {
-      "palletInstance": 3,
+      "palletInstance": 10,
     },
     "key": "lama-glmr",
     "min": undefined,
@@ -137,7 +137,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
   },
   "min": _AssetAmount {
     "address": "0xffffffff1a49463978f19dfd6983f2fa1885c254",
-    "amount": 100000000000000n,
+    "amount": 300000000000000000n,
     "decimals": 18,
     "ids": {
       "palletInstance": 3,
@@ -153,7 +153,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -166,7 +166,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
           "key": "lama-glmr",
           "min": undefined,
@@ -220,10 +220,10 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "destinationFee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 100000000000000n,
+      "amount": 300000000000000000n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -235,7 +235,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -247,7 +247,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -259,7 +259,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -271,7 +271,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -283,7 +283,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -295,7 +295,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -473,7 +473,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
           "key": "lama-glmr",
           "min": undefined,
@@ -554,7 +554,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -566,7 +566,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -578,7 +578,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -635,7 +635,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
           "key": "lama-glmr",
           "min": undefined,
@@ -692,7 +692,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -704,7 +704,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
       "amount": 10000000000000000n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -1087,7 +1087,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
           "key": "lama-glmr",
           "min": undefined,
@@ -1168,7 +1168,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -1180,7 +1180,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -1192,7 +1192,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -1249,7 +1249,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
           "address": "0x0000000000000000000000000000000000000802",
           "decimals": 18,
           "ids": {
-            "palletInstance": 3,
+            "palletInstance": 10,
           },
           "key": "lama-glmr",
           "min": undefined,
@@ -1306,7 +1306,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
       "amount": 0n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
@@ -1318,7 +1318,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
       "amount": 10000000000000000n,
       "decimals": 18,
       "ids": {
-        "palletInstance": 3,
+        "palletInstance": 10,
       },
       "key": "lama-glmr",
       "min": undefined,
