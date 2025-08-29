@@ -49,7 +49,7 @@ export const moonsamaRoutes = new ChainRoutes({
         asset: pizza,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: movrsama,
+          asset: lamaGLMR,
           balance: BalanceBuilder().evm().native(),
         },
       },
@@ -58,7 +58,7 @@ export const moonsamaRoutes = new ChainRoutes({
         chain: moonlama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: pizza,
+          asset: lamaGLMR,
           amount: 0.01,
           // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
           //   isAssetReserveChain: false,
@@ -83,7 +83,7 @@ export const moonsamaRoutes = new ChainRoutes({
         asset: pizzaUSDC,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: movrsama,
+          asset: lamaGLMR,
           balance: BalanceBuilder().evm().native(),
         },
       },
@@ -92,7 +92,7 @@ export const moonsamaRoutes = new ChainRoutes({
         chain: moonlama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: pizzaUSDC,
+          asset: lamaGLMR,
           amount: 0.01,
           // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
           //   isAssetReserveChain: false,
