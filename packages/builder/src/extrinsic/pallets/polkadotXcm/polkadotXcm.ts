@@ -767,17 +767,21 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
+                const GlobalConsensus = globalConsensus
+                  ? { GlobalConsensus: globalConsensus }
+                  : {
+                      GlobalConsensus: {
+                        ByGenesis: params.destination.relayGenesisHash,
+                      },
+                    };
+
                 const assets = [
                   {
                     id: normalizeConcrete(version, {
                       parents: 2,
                       interior: {
                         X3: [
-                          {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
-                          },
+                          GlobalConsensus,
                           {
                             Parachain: params.destination.parachainId,
                           },

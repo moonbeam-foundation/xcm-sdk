@@ -4,7 +4,7 @@ import {
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
 import { Ecosystem } from '@moonbeam-network/xcm-types';
-import { lamaGLMR, pizza, pizzaUSDC } from '../assets';
+import { lamaGLMR, pizza, pizzaUSDC, samaMOVR } from '../assets';
 import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -108,6 +108,40 @@ export const moonlamaRoutes = new ChainRoutes({
           globalConsensus: Ecosystem.Kusama,
         })
         .X2(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
+    },
+    {
+      source: {
+        asset: samaMOVR,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: lamaGLMR,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: samaMOVR,
+        chain: moonsama,
+        balance: BalanceBuilder().evm().native(),
+        fee: {
+          asset: lamaGLMR,
+          amount: 0.3,
+          // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+          //   isAssetReserveChain: false,
+          //   isEcosystemBridge: true,
+          // }),
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem({
+          globalConsensus: Ecosystem.Kusama,
+        })
+        .X3(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
