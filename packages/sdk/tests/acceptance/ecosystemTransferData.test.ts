@@ -40,6 +40,20 @@ const transferDateTestConfig: {
     destination: moonsama,
     destinationAddress: moonEvmAddress,
   },
+  {
+    asset: pizzaUSDC,
+    source: moonsama,
+    sourceAddress: moonEvmAddress,
+    destination: moonlama,
+    destinationAddress: moonEvmAddress,
+  },
+  {
+    asset: pizza,
+    source: moonsama,
+    sourceAddress: moonEvmAddress,
+    destination: moonlama,
+    destinationAddress: moonEvmAddress,
+  },
 ];
 
 describe('sdk/transferData ecosystem', () => {

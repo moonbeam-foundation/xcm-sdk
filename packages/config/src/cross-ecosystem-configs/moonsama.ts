@@ -4,7 +4,8 @@ import {
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { lamaGLMR, movrsama } from '../assets';
+import { Ecosystem } from '@moonbeam-network/xcm-types';
+import { lamaGLMR, movrsama, pizza, pizzaUSDC } from '../assets';
 import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -12,6 +13,7 @@ export const moonsamaRoutes = new ChainRoutes({
   chain: moonsama,
   routes: [
     {
+      // ! this still is broken
       source: {
         asset: movrsama,
         balance: BalanceBuilder().evm().native(),
@@ -37,6 +39,74 @@ export const moonsamaRoutes = new ChainRoutes({
         .polkadotXcm()
         .transferAssetsToEcosystem()
         .X1(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
+    },
+    {
+      source: {
+        asset: pizza,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: movrsama,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: pizza,
+        chain: moonlama,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: pizza,
+          amount: 0.01,
+          // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+          //   isAssetReserveChain: false,
+          //   isEcosystemBridge: true,
+          // }),
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X2({
+          globalConsensus: Ecosystem.Polkadot,
+        }),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
+    },
+    {
+      source: {
+        asset: pizzaUSDC,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: movrsama,
+          balance: BalanceBuilder().evm().native(),
+        },
+      },
+      destination: {
+        asset: pizzaUSDC,
+        chain: moonlama,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: pizzaUSDC,
+          amount: 0.01,
+          // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
+          //   isAssetReserveChain: false,
+          //   isEcosystemBridge: true,
+          // }),
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X2({
+          globalConsensus: Ecosystem.Polkadot,
+        }),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

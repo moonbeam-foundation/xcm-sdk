@@ -883,15 +883,6 @@ export function polkadotXcm() {
                   globalConsensus,
                 });
 
-                console.log(
-                  '\x1b[34m████████████████████▓▓▒▒░ polkadotXcm.ts:886 ░▒▒▓▓████████████████████\x1b[0m',
-                );
-                console.log('* result = ');
-                console.log(result);
-                console.log(
-                  '\x1b[34m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\x1b[0m',
-                );
-
                 return result;
               },
             });

@@ -12,6 +12,7 @@ export const moonlamaRoutes = new ChainRoutes({
   chain: moonlama,
   routes: [
     {
+      // ! this still is broken
       source: {
         asset: lamaGLMR,
         balance: BalanceBuilder().evm().native(),
@@ -60,7 +61,7 @@ export const moonlamaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: pizza,
-          amount: 0.0001,
+          amount: 0.01,
           // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
           //   isAssetReserveChain: false,
           //   isEcosystemBridge: true,
@@ -94,7 +95,7 @@ export const moonlamaRoutes = new ChainRoutes({
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: pizzaUSDC,
-          amount: 0.0001,
+          amount: 0.01,
           // amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
           //   isAssetReserveChain: false,
           //   isEcosystemBridge: true,
