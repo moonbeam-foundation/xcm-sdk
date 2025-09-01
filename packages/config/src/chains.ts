@@ -42,14 +42,13 @@ import {
   kbtc,
   kint,
   ksm,
-  lama,
+  lamaGLMR,
   laos,
   ldot,
   lit,
   manta,
   maos,
   movr,
-  movrsama,
   neuro,
   nodl,
   otp,
@@ -60,8 +59,10 @@ import {
   pica,
   pink,
   pizza,
+  pizzaUSDC,
   ring,
   rmrk,
+  samaMOVR,
   sdn,
   stink,
   sub,
@@ -1150,11 +1151,32 @@ export const moonbaseStage = new EvmParachain({
 
 export const moonlama = new EvmParachain({
   assets: [
-    ChainAsset.fromAsset(lama, {
+    ChainAsset.fromAsset(lamaGLMR, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       ids: {
-        palletInstance: 3,
+        palletInstance: 10,
+      },
+    }),
+    ChainAsset.fromAsset(samaMOVR, {
+      address: '0xffffffff54c47f43713fd9211724362697f1a302',
+      decimals: 18,
+      ids: {
+        id: 112675423039561305557350799263187182338n,
+      },
+    }),
+    ChainAsset.fromAsset(pizza, {
+      address: '0xbdd558f3be2807fce11b5fb2b2fa86f310f67855',
+      decimals: 18,
+      ids: {
+        palletInstance: 110,
+      },
+    }),
+    ChainAsset.fromAsset(pizzaUSDC, {
+      address: '0x385c00353cff4c3129306e0a6dcd1947e8354133',
+      decimals: 6,
+      ids: {
+        palletInstance: 110,
       },
     }),
   ],
@@ -1165,7 +1187,7 @@ export const moonlama = new EvmParachain({
   isTestChain: true,
   key: 'moonlama',
   name: 'Moonlama',
-  nativeAsset: lama,
+  nativeAsset: lamaGLMR,
   parachainId: 2004,
   relayGenesisHash:
     '0xd0a2c75ad080394edaaa9cd1c766b543478efb415db1b6cd7772536c9a413167',
@@ -1176,11 +1198,32 @@ export const moonlama = new EvmParachain({
 
 export const moonsama = new EvmParachain({
   assets: [
-    ChainAsset.fromAsset(movrsama, {
+    ChainAsset.fromAsset(samaMOVR, {
       address: '0x0000000000000000000000000000000000000802',
       decimals: 18,
       ids: {
-        palletInstance: 3,
+        palletInstance: 10,
+      },
+    }),
+    ChainAsset.fromAsset(lamaGLMR, {
+      address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
+      decimals: 18,
+      ids: {
+        id: 34940389883188672429634411751708934740n,
+      },
+    }),
+    ChainAsset.fromAsset(pizza, {
+      address: '0xffffffff57029d0ec61f38481147f4e1a0d5e3ed',
+      decimals: 18,
+      ids: {
+        id: 115656405735822573536813785456152273901n,
+      },
+    }),
+    ChainAsset.fromAsset(pizzaUSDC, {
+      address: '0xffffffffa993c0ca4b46667277c3caaa5a4da783',
+      decimals: 6,
+      ids: {
+        id: 225406709175884615521168913363167455107n,
       },
     }),
   ],
@@ -1191,7 +1234,7 @@ export const moonsama = new EvmParachain({
   isTestChain: true,
   key: 'moonsama',
   name: 'Moonsama',
-  nativeAsset: movrsama,
+  nativeAsset: samaMOVR,
   parachainId: 2023,
   relayGenesisHash:
     '0xe553c7f33ab7dbbd8770a82169ac9ad7f49f53204e6d72d3a75f9df5d22e1183',

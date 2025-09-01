@@ -1,3 +1,4 @@
+import { type AnyParachain, Ecosystem } from '@moonbeam-network/xcm-types';
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import type { BuilderParams } from '../../../builder.interfaces';
 import type { Parents } from '../../ExtrinsicBuilder.interfaces';
@@ -12,6 +13,7 @@ export interface GetExtrinsicParams extends Omit<BuilderParams, 'asset'> {
   func?: SubmittableExtrinsicFunction<'promise'>;
   parents?: Parents;
   feeIndex?: number;
+  globalConsensus?: Ecosystem;
 }
 
 export function getPolkadotXcmExtrinsicArgs({
@@ -56,6 +58,34 @@ export function getPolkadotXcmExtrinsicArgs({
   ];
 }
 
+function isKusamaDestination(destination: AnyParachain) {
+  return (
+    destination.ecosystem === Ecosystem.Kusama ||
+    destination.ecosystem === Ecosystem.MoonsamaRelay
+  );
+}
+
+function isPolkadotDestination(destination: AnyParachain) {
+  return (
+    destination.ecosystem === Ecosystem.Polkadot ||
+    destination.ecosystem === Ecosystem.MoonlamaRelay
+  );
+}
+
+export function getGlobalConsensus(destination: AnyParachain) {
+  if (isKusamaDestination(destination)) {
+    return 'Kusama';
+  }
+
+  if (isPolkadotDestination(destination)) {
+    return 'Polkadot';
+  }
+
+  return {
+    ByGenesis: destination.relayGenesisHash,
+  };
+}
+
 export function getEcosystemTransferExtrinsicArgs({
   assets,
   destinationAddress,
@@ -65,6 +95,8 @@ export function getEcosystemTransferExtrinsicArgs({
 }: GetExtrinsicParams) {
   const version = getExtrinsicArgumentVersion(func);
 
+  const globalConsensus = getGlobalConsensus(destination);
+
   return [
     // dest
     {
@@ -72,11 +104,7 @@ export function getEcosystemTransferExtrinsicArgs({
         parents: 2,
         interior: {
           X2: [
-            {
-              GlobalConsensus: {
-                ByGenesis: destination.relayGenesisHash,
-              },
-            },
+            { GlobalConsensus: globalConsensus },
             {
               Parachain: destination.parachainId,
             },
