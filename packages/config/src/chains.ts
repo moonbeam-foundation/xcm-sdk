@@ -1162,7 +1162,7 @@ export const moonlama = new EvmParachain({
       address: '0xffffffff54c47f43713fd9211724362697f1a302',
       decimals: 18,
       ids: {
-        palletInstance: 10,
+        id: 112675423039561305557350799263187182338n,
       },
     }),
     ChainAsset.fromAsset(pizza, {
@@ -1205,26 +1205,25 @@ export const moonsama = new EvmParachain({
         palletInstance: 10,
       },
     }),
-    // this is actually the GLMR asset on Moonlama
     ChainAsset.fromAsset(lamaGLMR, {
       address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
       decimals: 18,
       ids: {
-        palletInstance: 3, // NOT SURE ABOUT THIS
+        id: 34940389883188672429634411751708934740n,
       },
     }),
     ChainAsset.fromAsset(pizza, {
       address: '0xffffffff57029d0ec61f38481147f4e1a0d5e3ed',
       decimals: 18,
       ids: {
-        palletInstance: 3, // NOT SURE ABOUT THIS
+        id: 115656405735822573536813785456152273901n,
       },
     }),
     ChainAsset.fromAsset(pizzaUSDC, {
       address: '0xffffffffa993c0ca4b46667277c3caaa5a4da783',
       decimals: 6,
       ids: {
-        palletInstance: 3, // NOT SURE ABOUT THIS
+        id: 225406709175884615521168913363167455107n,
       },
     }),
   ],

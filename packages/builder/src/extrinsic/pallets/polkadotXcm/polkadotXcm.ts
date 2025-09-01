@@ -1,4 +1,3 @@
-import type { Ecosystem } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import type { ExtrinsicConfigBuilder } from '../../ExtrinsicBuilder.interfaces';
 import {
@@ -9,15 +8,12 @@ import {
 } from '../../ExtrinsicBuilder.utils';
 import {
   getEcosystemTransferExtrinsicArgs,
+  getGlobalConsensus,
   getPolkadotXcmExtrinsicArgs,
   shouldFeeAssetPrecedeAsset,
 } from './polkadotXcm.util';
 
 const pallet = 'polkadotXcm';
-
-type ParamsWithGlobalConsensus = {
-  globalConsensus?: Ecosystem;
-};
 
 export function polkadotXcm() {
   return {
@@ -668,9 +664,7 @@ export function polkadotXcm() {
         }),
       };
     },
-    transferAssetsToEcosystem: ({
-      globalConsensus,
-    }: ParamsWithGlobalConsensus = {}) => {
+    transferAssetsToEcosystem: () => {
       const func = 'transferAssets';
 
       return {
@@ -706,7 +700,6 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
-                  globalConsensus,
                 });
               },
             });
@@ -748,7 +741,6 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
-                  globalConsensus,
                 });
 
                 return result;
@@ -767,21 +759,17 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                const GlobalConsensus = globalConsensus
-                  ? { GlobalConsensus: globalConsensus }
-                  : {
-                      GlobalConsensus: {
-                        ByGenesis: params.destination.relayGenesisHash,
-                      },
-                    };
-
                 const assets = [
                   {
                     id: normalizeConcrete(version, {
                       parents: 2,
                       interior: {
                         X3: [
-                          GlobalConsensus,
+                          {
+                            GlobalConsensus: getGlobalConsensus(
+                              params.destination,
+                            ),
+                          },
                           {
                             Parachain: params.destination.parachainId,
                           },
@@ -802,7 +790,6 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
-                  globalConsensus,
                 });
               },
             });
@@ -824,6 +811,8 @@ export function polkadotXcm() {
                   params.asset,
                 );
 
+                const globalConsensus = getGlobalConsensus(params.destination);
+
                 const assets = [
                   {
                     id: normalizeConcrete(version, {
@@ -831,9 +820,7 @@ export function polkadotXcm() {
                       interior: {
                         X3: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: globalConsensus,
                           },
                           {
                             Parachain: params.destination.parachainId,
@@ -855,9 +842,7 @@ export function polkadotXcm() {
                       interior: {
                         X4: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: globalConsensus,
                           },
                           {
                             Parachain: params.destination.parachainId,
@@ -884,7 +869,6 @@ export function polkadotXcm() {
                   ...params,
                   func: extrinsicFunction,
                   assets,
-                  globalConsensus,
                 });
 
                 return result;
