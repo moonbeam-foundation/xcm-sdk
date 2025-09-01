@@ -4,36 +4,33 @@ import {
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { devBeta, devStage, pizza } from '../assets';
-import { moonbaseBeta, moonbaseStage } from '../chains';
+import { lamaGLMR, pizza, pizzaUSDC, samaMOVR } from '../assets';
+import { moonlama, moonsama } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
-export const moonbaseStageRoutes = new ChainRoutes({
-  chain: moonbaseStage,
+export const moonsamaRoutes = new ChainRoutes({
+  chain: moonsama,
   routes: [
     {
       source: {
-        asset: devStage,
-        balance: BalanceBuilder().substrate().system().account(),
+        asset: samaMOVR,
+        balance: BalanceBuilder().evm().native(),
         fee: {
-          asset: devStage,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
+          asset: samaMOVR,
+          balance: BalanceBuilder().evm().native(),
         },
       },
       destination: {
-        asset: devStage,
-        chain: moonbaseBeta,
+        asset: samaMOVR,
+        chain: moonlama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
+          asset: samaMOVR,
           amount: FeeBuilder().xcmPaymentApi().fromAssetIdQuery({
             isAssetReserveChain: false,
             isEcosystemBridge: true,
           }),
-          asset: devStage,
-          balance: BalanceBuilder().evm().erc20(),
+          balance: BalanceBuilder().substrate().system().account(),
         },
       },
       extrinsic: ExtrinsicBuilder()
@@ -42,24 +39,24 @@ export const moonbaseStageRoutes = new ChainRoutes({
         .X1(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
-        .bridgeMessages()
-        .bridgeMessages(),
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
-        asset: devBeta,
+        asset: lamaGLMR,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: devStage,
+          asset: samaMOVR,
           balance: BalanceBuilder().evm().native(),
         },
       },
       destination: {
-        asset: devBeta,
-        chain: moonbaseBeta,
+        asset: lamaGLMR,
+        chain: moonlama,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          asset: devBeta,
+          asset: lamaGLMR,
           amount: FeeBuilder().xcmPaymentApi().fromPalletInstance({
             isAssetReserveChain: true,
             isEcosystemBridge: true,
@@ -73,28 +70,65 @@ export const moonbaseStageRoutes = new ChainRoutes({
         .X3(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
-        .bridgeMessages()
-        .bridgeMessages(),
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
         asset: pizza,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: devStage,
+          asset: samaMOVR,
           balance: BalanceBuilder().evm().erc20(),
         },
         destinationFee: {
-          asset: devBeta,
+          asset: lamaGLMR,
           balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
         asset: pizza,
-        chain: moonbaseBeta,
+        chain: moonlama,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: devBeta,
+          asset: lamaGLMR,
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromPalletInstanceAndAccountKey20({
+              isAssetReserveChain: true,
+              isEcosystemBridge: true,
+            }),
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X4(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
+    },
+    {
+      source: {
+        asset: pizzaUSDC,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: samaMOVR,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+        destinationFee: {
+          asset: lamaGLMR,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: pizzaUSDC,
+        chain: moonlama,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: lamaGLMR,
           amount: FeeBuilder()
             .xcmPaymentApi()
             .fromPalletInstanceAndAccountKey20({

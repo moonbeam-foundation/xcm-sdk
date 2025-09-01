@@ -33,9 +33,11 @@
   ],
   "type": "module",
   "exports": {
-    "import": "./build/index.mjs",
-    "types": "./build/index.d.ts",
-    "default": "./build/index.mjs"
+    ".": {
+      "import": "./build/index.mjs",
+      "types": "./build/index.d.ts",
+      "default": "./build/index.mjs"
+    }
   },
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",

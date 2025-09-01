@@ -170,9 +170,9 @@ export const ksm = new Asset({
   originSymbol: 'KSM',
 });
 
-export const lama = new Asset({
-  key: 'lama',
-  originSymbol: 'LAMA',
+export const lamaGLMR = new Asset({
+  key: 'lama-glmr',
+  originSymbol: 'lamaGLMR',
 });
 
 export const laos = new Asset({
@@ -205,9 +205,9 @@ export const movr = new Asset({
   originSymbol: 'MOVR',
 });
 
-export const movrsama = new Asset({
-  key: 'movrsama',
-  originSymbol: 'MOVR-SAMA',
+export const samaMOVR = new Asset({
+  key: 'sama-movr',
+  originSymbol: 'samaMOVR',
 });
 
 export const neuro = new Asset({
@@ -263,6 +263,11 @@ export const pink = new Asset({
 export const pizza = new Asset({
   key: 'pizza',
   originSymbol: 'PIZZA',
+});
+
+export const pizzaUSDC = new Asset({
+  key: 'pizza-usdc',
+  originSymbol: 'pizzaUSDC',
 });
 
 export const ring = new Asset({
@@ -460,14 +465,14 @@ export const assetsList: Asset[] = [
   kbtc,
   kint,
   ksm,
-  lama,
+  lamaGLMR,
   laos,
   ldot,
   lit,
   manta,
   maos,
   movr,
-  movrsama,
+  samaMOVR,
   neuro,
   nodl,
   otp,
@@ -479,6 +484,7 @@ export const assetsList: Asset[] = [
   pica,
   pink,
   pizza,
+  pizzaUSDC,
   ring,
   rmrk,
   sdn,

@@ -8,6 +8,7 @@ import {
 } from '../../ExtrinsicBuilder.utils';
 import {
   getEcosystemTransferExtrinsicArgs,
+  getGlobalConsensus,
   getPolkadotXcmExtrinsicArgs,
   shouldFeeAssetPrecedeAsset,
 } from './polkadotXcm.util';
@@ -763,9 +764,9 @@ export function polkadotXcm() {
                       interior: {
                         X3: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: getGlobalConsensus(
+                              params.destination,
+                            ),
                           },
                           {
                             Parachain: params.destination.parachainId,
@@ -808,6 +809,8 @@ export function polkadotXcm() {
                   params.asset,
                 );
 
+                const globalConsensus = getGlobalConsensus(params.destination);
+
                 const assets = [
                   {
                     id: normalizeConcrete(version, {
@@ -815,9 +818,7 @@ export function polkadotXcm() {
                       interior: {
                         X3: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: globalConsensus,
                           },
                           {
                             Parachain: params.destination.parachainId,
@@ -839,9 +840,7 @@ export function polkadotXcm() {
                       interior: {
                         X4: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: globalConsensus,
                           },
                           {
                             Parachain: params.destination.parachainId,

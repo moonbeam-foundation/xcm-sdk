@@ -10,6 +10,7 @@ import type { AnyJson } from '@polkadot/types/types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { XcmVersion } from '../extrinsic';
+import { getGlobalConsensus } from '../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
 
 const DEFAULT_AMOUNT = 10 ** 6;
 const DEFAULT_HEX_STRING =
@@ -39,9 +40,7 @@ export function getUniversalOriginInstruction(source?: AnyChain) {
 
   return {
     UniversalOrigin: {
-      GlobalConsensus: {
-        ByGenesis: source.relayGenesisHash,
-      },
+      GlobalConsensus: getGlobalConsensus(source),
     },
   };
 }
