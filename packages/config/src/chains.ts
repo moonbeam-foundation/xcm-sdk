@@ -1205,7 +1205,6 @@ export const moonsama = new EvmParachain({
         palletInstance: 10,
       },
     }),
-    // this is actually the GLMR asset on Moonlama
     ChainAsset.fromAsset(lamaGLMR, {
       address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
       decimals: 18,
