@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 4.1.0
+
+### Minor Changes
+
+- [#548](https://github.com/moonbeam-foundation/xcm-sdk/pull/548) [`50d36ef`](https://github.com/moonbeam-foundation/xcm-sdk/commit/50d36ef88dc4ba493b07f93065ad8da2b6c149c0) Thanks [@Rihyx](https://github.com/Rihyx)! - Add Moonsama <> Moonlama bridge routes
+
 ## 4.0.2
 
 ### Patch Changes
