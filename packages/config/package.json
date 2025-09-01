@@ -32,9 +32,23 @@
   ],
   "type": "module",
   "exports": {
-    "import": "./build/index.mjs",
-    "types": "./build/index.d.ts",
-    "default": "./build/index.mjs"
+    ".": {
+      "import": "./build/index.mjs",
+      "types": "./build/index.d.ts",
+      "default": "./build/index.mjs"
+    },
+    "./assets": {
+      "import": "./build/assets.mjs",
+      "types": "./build/assets.d.ts"
+    },
+    "./chains": {
+      "import": "./build/chains.mjs",
+      "types": "./build/chains.d.ts"
+    },
+    "./xcm-configs": {
+      "import": "./build/xcm-configs.mjs",
+      "types": "./build/xcm-configs.d.ts"
+    }
   },
   "types": "./build/index.d.ts",
   "main": "./build/index.mjs",
