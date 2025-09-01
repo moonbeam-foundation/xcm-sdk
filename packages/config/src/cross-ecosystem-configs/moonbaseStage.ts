@@ -81,7 +81,7 @@ export const moonbaseStageRoutes = new ChainRoutes({
         asset: pizza,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: pizza,
+          asset: devStage,
           balance: BalanceBuilder().evm().erc20(),
         },
         destinationFee: {

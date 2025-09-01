@@ -58,13 +58,27 @@ export function getPolkadotXcmExtrinsicArgs({
   ];
 }
 
+function isKusamaDestination(destination: AnyParachain) {
+  return (
+    destination.ecosystem === Ecosystem.Kusama ||
+    destination.ecosystem === Ecosystem.MoonsamaRelay
+  );
+}
+
+function isPolkadotDestination(destination: AnyParachain) {
+  return (
+    destination.ecosystem === Ecosystem.Polkadot ||
+    destination.ecosystem === Ecosystem.MoonlamaRelay
+  );
+}
+
 export function getGlobalConsensus(destination: AnyParachain) {
-  if (destination.ecosystem === Ecosystem.Kusama) {
-    return Ecosystem.Kusama;
+  if (isKusamaDestination(destination)) {
+    return 'Kusama';
   }
 
-  if (destination.ecosystem === Ecosystem.Polkadot) {
-    return Ecosystem.Polkadot;
+  if (isPolkadotDestination(destination)) {
+    return 'Polkadot';
   }
 
   return {

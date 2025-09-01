@@ -759,7 +759,6 @@ export function polkadotXcm() {
               getArgs: (extrinsicFunction) => {
                 const version = getExtrinsicArgumentVersion(extrinsicFunction);
 
-                // TODO mjm use getEcosystemTransferExtrinsicArgs?
                 const assets = [
                   {
                     id: normalizeConcrete(version, {
@@ -812,6 +811,8 @@ export function polkadotXcm() {
                   params.asset,
                 );
 
+                const globalConsensus = getGlobalConsensus(params.destination);
+
                 const assets = [
                   {
                     id: normalizeConcrete(version, {
@@ -819,9 +820,7 @@ export function polkadotXcm() {
                       interior: {
                         X3: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: globalConsensus,
                           },
                           {
                             Parachain: params.destination.parachainId,
@@ -843,9 +842,7 @@ export function polkadotXcm() {
                       interior: {
                         X4: [
                           {
-                            GlobalConsensus: {
-                              ByGenesis: params.destination.relayGenesisHash,
-                            },
+                            GlobalConsensus: globalConsensus,
                           },
                           {
                             Parachain: params.destination.parachainId,
