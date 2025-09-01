@@ -737,13 +737,11 @@ export function polkadotXcm() {
                   },
                 ];
 
-                const result = getEcosystemTransferExtrinsicArgs({
+                return getEcosystemTransferExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   assets,
                 });
-
-                return result;
               },
             });
           },
@@ -865,13 +863,11 @@ export function polkadotXcm() {
                   },
                 ];
 
-                const result = getEcosystemTransferExtrinsicArgs({
+                return getEcosystemTransferExtrinsicArgs({
                   ...params,
                   func: extrinsicFunction,
                   assets,
                 });
-
-                return result;
               },
             });
           },
