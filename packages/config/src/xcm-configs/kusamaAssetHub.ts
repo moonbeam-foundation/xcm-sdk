@@ -46,8 +46,8 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonriver,
     },
     {
@@ -77,8 +77,8 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonriver,
     },
   ],
