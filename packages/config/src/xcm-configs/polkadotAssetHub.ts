@@ -55,7 +55,10 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           asset: dot,
         },
       },
-      extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().here(1),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .here(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -85,8 +88,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -116,8 +119,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .limitedReserveTransferAssets()
-        .X2(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -130,9 +133,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
       },
       destination: {
         asset: pink,
@@ -147,8 +147,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssets()
-        .X2AndFeeHere(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -161,9 +161,6 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
           extra,
         },
         min: AssetMinBuilder().assets().asset(),
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
       },
       destination: {
         asset: ded,
@@ -178,8 +175,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssets()
-        .X2AndFeeHere(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -209,8 +206,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssets()
-        .X2AndFeeHere(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -240,8 +237,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssets()
-        .X2AndFeeHere(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {
@@ -271,8 +268,8 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
       },
       extrinsic: ExtrinsicBuilder()
         .polkadotXcm()
-        .transferAssets()
-        .X2AndFeeHere(),
+        .transferAssetsUsingTypeAndThen()
+        .X2(1),
       monitoring: monitoringToMoonbeam,
     },
     {

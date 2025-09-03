@@ -515,7 +515,7 @@ export function polkadotXcm() {
     transferAssetsUsingTypeAndThen: () => {
       const func = 'transferAssetsUsingTypeAndThen';
       return {
-        here: (): ExtrinsicConfigBuilder => ({
+        here: (parents = 0): ExtrinsicConfigBuilder => ({
           build: (params) =>
             new ExtrinsicConfig({
               module: pallet,
@@ -540,7 +540,7 @@ export function polkadotXcm() {
                     [version]: [
                       {
                         id: {
-                          parents: 0,
+                          parents,
                           interior: 'Here',
                         },
                         fun: {
@@ -552,7 +552,7 @@ export function polkadotXcm() {
                   'LocalReserve',
                   {
                     [version]: {
-                      parents: 0,
+                      parents,
                       interior: 'Here',
                     },
                   },
@@ -576,6 +576,106 @@ export function polkadotXcm() {
                       },
                     ],
                   },
+                  'Unlimited',
+                ];
+              },
+            }),
+        }),
+        X2: (parents = 0): ExtrinsicConfigBuilder => ({
+          build: (params) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+
+                const isSameAsset = params.asset.isSame(params.fee);
+
+                const shouldFeeAssetPrecede =
+                  shouldFeeAssetPrecedeAsset(params);
+
+                const asset = {
+                  parents: 0,
+                  interior: {
+                    X2: [
+                      {
+                        PalletInstance: params.asset.getAssetPalletInstance(),
+                      },
+                      {
+                        GeneralIndex: params.asset.getAssetId(),
+                      },
+                    ],
+                  },
+                };
+
+                const assetWithAmount = {
+                  id: asset,
+                  fun: { Fungible: params.asset.amount },
+                };
+
+                const feeAsset = {
+                  parents,
+                  interior: 'Here',
+                };
+
+                const feeAssetWithAmount = {
+                  id: feeAsset,
+                  fun: { Fungible: params.fee.amount },
+                };
+
+                const assets = isSameAsset
+                  ? [assetWithAmount]
+                  : shouldFeeAssetPrecede
+                    ? [feeAssetWithAmount, assetWithAmount]
+                    : [assetWithAmount, feeAssetWithAmount];
+
+                return [
+                  // dest
+                  {
+                    [version]: {
+                      parents: 1,
+                      interior: {
+                        X1: [
+                          {
+                            Parachain: params.destination.parachainId,
+                          },
+                        ],
+                      },
+                    },
+                  },
+                  // assets
+                  {
+                    [version]: assets,
+                  },
+                  // assetsTransferType
+                  'LocalReserve',
+                  // remoteFeesId
+                  {
+                    [version]: isSameAsset ? asset : feeAsset,
+                  },
+                  // feesTransferType
+                  'LocalReserve',
+                  // customXcmOnDest
+                  {
+                    [version]: [
+                      {
+                        DepositAsset: {
+                          assets: {
+                            Wild: { AllCounted: isSameAsset ? 1 : 2 },
+                          },
+                          beneficiary: {
+                            parents: 0,
+                            interior: {
+                              X1: [
+                                getExtrinsicAccount(params.destinationAddress),
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  // weightLimit
                   'Unlimited',
                 ];
               },
