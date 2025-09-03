@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 4.2.1
+
+### Patch Changes
+
+- [#552](https://github.com/moonbeam-foundation/xcm-sdk/pull/552) [`da45616`](https://github.com/moonbeam-foundation/xcm-sdk/commit/da45616edb5cb7f7f9ea562d127341d7d9819794) Thanks [@mmaurello](https://github.com/mmaurello)! - Change extrinsics from asset hub to stop using transfer_assets and limited_reserve_transfer_assets
+
 ## 4.2.0
 
 ### Minor Changes
