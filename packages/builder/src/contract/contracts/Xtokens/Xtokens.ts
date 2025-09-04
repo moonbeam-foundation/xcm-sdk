@@ -2,9 +2,12 @@ import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { formatAssetIdToERC20 } from '@moonbeam-network/xcm-utils';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress, evmToAddress } from '@polkadot/util-crypto';
-import { getPrecompileDestinationInterior } from '../../../builder.utils';
 import { ContractConfig } from '../../../types/evm/ContractConfig';
-import type { ContractConfigBuilder } from '../../ContractBuilder.interfaces';
+import type {
+  ContractConfigBuilder,
+  DestinationMultilocation,
+} from '../../ContractBuilder.interfaces';
+import { getDestinationMultilocation } from '../../ContractBuilder.utils';
 import { XTOKENS_ABI } from './XtokensABI';
 
 const U_64_MAX = 18446744073709551615n;
@@ -91,39 +94,6 @@ export function Xtokens() {
   };
 }
 
-type DestinationMultilocation = [
-  /**
-   * 1 - if transaction is going through a relay chain
-   */
-  1,
-  (
-    | [
-        /**
-         * example '0x00000007DC'
-         * 7DC - parachain id in hex
-         * can be found here:
-         *   - https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkusama-rpc.polkadot.io#/parachains
-         *   - https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc.polkadot.io#/parachains
-         */
-        string,
-        /**
-         * example '0x01%account%00',
-         * enum = 01 (AccountId32)
-         * networkId = 00 (any)
-         */
-        string,
-      ]
-    | [
-        /**
-         * example '0x01%account%00',
-         * enum = 01 (AccountId32)
-         * networkId = 00 (any)
-         */
-        string,
-      ]
-  ),
-];
-
 function getDestinationMultilocationForPrecompileDestination(
   address: string,
   destination: AnyParachain,
@@ -147,12 +117,4 @@ function getDestinationMultilocationForPrecompileDestination(
       ? [`0x0000000${destination.parachainId.toString(16)}`, acc]
       : [acc],
   ];
-}
-
-function getDestinationMultilocation(
-  address: string,
-  destination: AnyParachain,
-): DestinationMultilocation {
-  const interior = getPrecompileDestinationInterior(destination, address);
-  return [1, interior];
 }

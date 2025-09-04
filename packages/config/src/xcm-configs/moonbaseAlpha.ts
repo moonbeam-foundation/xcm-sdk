@@ -197,7 +197,9 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -251,6 +253,38 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
+    },
+    {
+      source: {
+        asset: unit,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: dev,
+          balance: BalanceBuilder().substrate().system().account(),
+        },
+        destinationFee: {
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: unit,
+        chain: alphanetAssetHub,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          amount: FeeBuilder().xcmPaymentApi().fromHere({
+            isAssetReserveChain: true,
+            parents: 1,
+          }),
+          asset: unit,
+        },
+      },
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

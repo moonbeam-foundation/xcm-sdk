@@ -7,8 +7,8 @@ import {
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, maxUint64 } from 'viem';
-import { getPrecompileDestinationInterior } from '../../../../../builder.utils';
 import { ContractConfig } from '../../../../../contract';
+import { getPrecompileDestinationInterior } from '../../../../../contract/ContractBuilder.utils';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import {
   buildSendExtrinsic,
