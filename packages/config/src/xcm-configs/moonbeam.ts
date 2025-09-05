@@ -440,7 +440,9 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: dot,
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToRelay(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -469,7 +471,9 @@ export const moonbeamRoutes = new ChainRoutes({
           asset: dot,
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -700,7 +704,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -732,7 +738,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -764,7 +772,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -796,7 +806,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -828,7 +840,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -860,7 +874,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -1601,7 +1617,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().assets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -1657,7 +1675,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -1688,7 +1708,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -1719,7 +1741,9 @@ export const moonbeamRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsUsingTypeAndThenAddress(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
