@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 4.2.2
+
+### Patch Changes
+
+- [#554](https://github.com/moonbeam-foundation/xcm-sdk/pull/554) [`7cd2a04`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7cd2a04d010912cf4e6df99a8988f1e65a339767) Thanks [@mmaurello](https://github.com/mmaurello)! - Change function used in transfers from Moon chains to Polkadot chains
+
 ## 4.2.1
 
 ### Patch Changes
