@@ -5,7 +5,7 @@ export type ContractConfigBuilder = ConfigBuilder<ContractConfig>;
 
 export type DestinationMultilocation = [
   /**
-   * 1 - if transaction is going through a relay chain
+   * 1 - if transaction is going through or to a relay chain
    */
   1,
   (
@@ -33,6 +33,10 @@ export type DestinationMultilocation = [
          */
         string,
       ]
+    /**
+     * example 'Here',
+     */
+    | []
   ),
 ];
 

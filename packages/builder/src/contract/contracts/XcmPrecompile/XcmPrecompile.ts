@@ -1,7 +1,8 @@
 import type { AssetAmount } from '@moonbeam-network/xcm-types';
+import type { ApiPromise } from '@polkadot/api';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
-import { XcmVersion } from '../../../extrinsic';
+import { getExtrinsicArgumentVersion } from '../../../extrinsic/ExtrinsicBuilder.utils';
 import { ContractConfig } from '../../../types';
 import {
   type AssetAddressFormat,
@@ -85,6 +86,7 @@ export function XcmPrecompile() {
         fee,
         destination,
         destinationApi,
+        sourceApi,
       }) => {
         const assets = getAssets(
           asset,
@@ -94,15 +96,16 @@ export function XcmPrecompile() {
 
         const destLocation = getDestinationParachainMultilocation(destination);
 
-        const xcmMessage = buildXcmMessage(assets, destinationAddress);
+        const xcmMessage = buildXcmMessage(
+          assets,
+          destinationAddress,
+          sourceApi,
+        );
 
         const customXcmOnDest = encodeXcmMessageToBytes(
           xcmMessage,
           destinationApi,
         );
-
-        console.log('assets', assets);
-        console.log('customXcmOnDest', customXcmOnDest);
 
         const feeIndex = shouldTransferAssetPrecedeFeeAsset ? 1 : 0;
 
@@ -148,7 +151,12 @@ function getAssets(
 function buildXcmMessage(
   assets: AssetAddressFormat[],
   destinationAddress: string,
+  sourceApi: ApiPromise | undefined,
 ) {
+  const xcmVersion = getExtrinsicArgumentVersion(
+    sourceApi?.tx.polkadotXcm?.send || sourceApi?.tx.xcmPallet?.send,
+  );
+
   const instruction = {
     DepositAsset: {
       assets: { Wild: { AllCounted: assets.length } },
@@ -167,8 +175,7 @@ function buildXcmMessage(
       },
     },
   };
-
   return {
-    [XcmVersion.v5]: [instruction],
+    [xcmVersion]: [instruction],
   };
 }

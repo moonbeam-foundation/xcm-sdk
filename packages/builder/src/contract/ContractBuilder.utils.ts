@@ -41,29 +41,29 @@ export function getDestinationMultilocation(
 export function getDestinationParachainMultilocation(
   destination: AnyParachain,
 ): DestinationMultilocation {
+  if (destination.isRelay) {
+    return [1, []];
+  }
+
   return [1, [`0x00${destination.parachainId.toString(16).padStart(8, '0')}`]];
 }
 
 /**
  * Encodes an XCM message to bytes for use in Solidity precompiles
- * @param api - Polkadot API instance
- * @param xcmMessage - XCM message object with version and instructions
- * @returns Hex-encoded bytes string
  */
 export function encodeXcmMessageToBytes(
   xcmMessage: Record<string, unknown>,
   api: ApiPromise | undefined,
 ): string {
   if (!api) {
-    throw new Error('API is required'); // TODO mjm improve
+    throw new Error('API is required to encode XCM message');
   }
 
   try {
-    // Create a VersionedXcm type from the message
     const versionedXcm = api.createType('XcmVersionedXcm', xcmMessage);
     return versionedXcm.toHex();
   } catch (error) {
     console.error('Failed to encode XCM message:', error);
-    return '0x';
+    throw error;
   }
 }
