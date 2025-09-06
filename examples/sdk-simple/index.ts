@@ -1,4 +1,7 @@
 import { dot, moonbeam, polkadot } from '@moonbeam-network/xcm-config';
+// You can also import the assets and chains from the config package
+// import { dot } from '@moonbeam-network/xcm-config/assets';
+// import { moonbeam, polkadot } from '@moonbeam-network/xcm-config/chains';
 import { Sdk, type TransferData } from '@moonbeam-network/xcm-sdk';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
