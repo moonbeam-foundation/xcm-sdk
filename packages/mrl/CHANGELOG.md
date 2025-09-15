@@ -1,5 +1,18 @@
 # @moonbeam-network/mrl
 
+## 4.0.10
+
+### Patch Changes
+
+- [#559](https://github.com/moonbeam-foundation/xcm-sdk/pull/559) [`c6490ee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c6490ee2e6577d02b0f3f24bb597dc9d61625400) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix Axios vulnerability
+
+- Updated dependencies [[`c6490ee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c6490ee2e6577d02b0f3f24bb597dc9d61625400)]:
+  - @moonbeam-network/xcm-builder@4.2.4
+  - @moonbeam-network/xcm-config@4.3.4
+  - @moonbeam-network/xcm-sdk@4.1.4
+  - @moonbeam-network/xcm-types@4.2.2
+  - @moonbeam-network/xcm-utils@4.1.2
+
 ## 4.0.9
 
 ### Patch Changes

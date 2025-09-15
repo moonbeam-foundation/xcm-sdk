@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-utils
 
+## 4.1.2
+
+### Patch Changes
+
+- [#559](https://github.com/moonbeam-foundation/xcm-sdk/pull/559) [`c6490ee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/c6490ee2e6577d02b0f3f24bb597dc9d61625400) Thanks [@Rihyx](https://github.com/Rihyx)! - Fix Axios vulnerability
+
 ## 4.1.1
 
 ### Patch Changes
