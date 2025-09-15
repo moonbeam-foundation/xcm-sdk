@@ -171,17 +171,18 @@ export function QueryVersionedAsset() {
         );
       }
 
-      const assetManagerResult = await api.query.assetManager.assetIdType<
+      const assetManagerResult = await api.query.assetManager?.assetIdType<
         Option<MoonbeamRuntimeXcmConfigAssetType>
       >(asset.getAssetRegisteredId());
 
       if (
+        !assetManagerResult ||
         assetManagerResult.isNone ||
         assetManagerResult.isEmpty ||
         !assetManagerResult.unwrap().isXcm
       ) {
         const evmForeignAssetsResult =
-          await api.query.evmForeignAssets.assetsById<
+          await api.query.evmForeignAssets?.assetsById<
             Option<StagingXcmV4Location>
           >(asset.getAssetRegisteredId());
 
