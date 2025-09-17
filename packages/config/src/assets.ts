@@ -340,6 +340,12 @@ export const usdt = new Asset({
   originSymbol: 'USDT',
 });
 
+// From the Kusama Ecosystem
+export const usdtksm = new Asset({
+  key: 'usdtksm',
+  originSymbol: 'USDT',
+});
+
 export const usdtwh = new Asset({
   key: 'usdtwh',
   originSymbol: 'USDT.Wh',
@@ -499,6 +505,7 @@ export const assetsList: Asset[] = [
   usdc,
   usdcwh,
   usdt,
+  usdtksm,
   usdtwh,
   vastr,
   vbnc,
