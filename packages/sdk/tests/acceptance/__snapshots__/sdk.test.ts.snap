@@ -721,6 +721,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "decimals": 6,
     "ids": {
       "id": "166377000701797186346254371275954761085",
+      "palletInstance": 110,
     },
     "key": "usdc",
     "min": undefined,
@@ -733,6 +734,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "decimals": 6,
     "ids": {
       "id": "311091173110107856861649819128533077277",
+      "palletInstance": 110,
     },
     "key": "usdt",
     "min": undefined,
@@ -979,7 +981,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "ids": {
       "id": "311091173110107856861649819128533077277",
     },
-    "key": "usdt",
+    "key": "usdtksm",
     "min": undefined,
     "originSymbol": "USDT",
     "symbol": undefined,
