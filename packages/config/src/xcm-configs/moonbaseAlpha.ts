@@ -82,6 +82,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
@@ -128,6 +132,10 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
     {
       source: {
