@@ -240,7 +240,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "maos",
     "min": undefined,
     "originSymbol": "MAOS",
-    "symbol": undefined,
+    "symbol": "xcMAOS",
   },
   _AssetAmount {
     "address": "0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20",
@@ -252,7 +252,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "agng",
     "min": undefined,
     "originSymbol": "AGNG",
-    "symbol": undefined,
+    "symbol": "xcAGNG",
   },
   _AssetAmount {
     "address": "0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC",
@@ -264,7 +264,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "hdx",
     "min": undefined,
     "originSymbol": "HDX",
-    "symbol": undefined,
+    "symbol": "xcHDX",
   },
   _AssetAmount {
     "address": "0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee",
@@ -276,7 +276,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "ftmwh",
     "min": undefined,
     "originSymbol": "FTM.wh",
-    "symbol": undefined,
+    "symbol": "WFTM",
   },
   _AssetAmount {
     "address": "0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9",
@@ -288,7 +288,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "usdcwh",
     "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": undefined,
+    "symbol": "USDC",
   },
   _AssetAmount {
     "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
@@ -301,7 +301,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "unit",
     "min": undefined,
     "originSymbol": "Unit",
-    "symbol": undefined,
+    "symbol": "xcUNIT",
   },
   _AssetAmount {
     "address": "0xfFffffFf6448d0746f2a66342B67ef9CAf89478E",
@@ -313,7 +313,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "tur",
     "min": undefined,
     "originSymbol": "TUR",
-    "symbol": undefined,
+    "symbol": "xcTUR",
   },
   _AssetAmount {
     "address": "0xfFffFfFf75976211C786fe4d73d2477e222786Ac",
@@ -325,7 +325,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "tt1",
     "min": undefined,
     "originSymbol": "TT1",
-    "symbol": undefined,
+    "symbol": "xcTT1",
   },
   _AssetAmount {
     "address": "0xFfffffFfB3229c8E7657eABEA704d5e75246e544",
@@ -337,7 +337,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "otp",
     "min": undefined,
     "originSymbol": "OTP",
-    "symbol": undefined,
+    "symbol": "xcOTP",
   },
   _AssetAmount {
     "address": "0xfFfFfffF7fee8415e1c2AC3A15C48D3546B95e16",
@@ -349,7 +349,7 @@ exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E8214
     "key": "ampe",
     "min": undefined,
     "originSymbol": "AMPE",
-    "symbol": undefined,
+    "symbol": "xcAMPE",
   },
   _AssetAmount {
     "address": "0x9133c5a22024118804089f1fB752b7B2ce2a6351",
@@ -425,7 +425,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "eurc",
     "min": undefined,
     "originSymbol": "EURC",
-    "symbol": undefined,
+    "symbol": "xcEURC.s",
   },
   _AssetAmount {
     "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
@@ -437,7 +437,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "laos",
     "min": undefined,
     "originSymbol": "LAOS",
-    "symbol": undefined,
+    "symbol": "xcLAOS",
   },
   _AssetAmount {
     "address": "0xffffffff5d5deb44bf7278dee5381beb24cb6573",
@@ -497,7 +497,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "wifd",
     "min": undefined,
     "originSymbol": "WIFD",
-    "symbol": undefined,
+    "symbol": "xcWIFD",
   },
   _AssetAmount {
     "address": "0xFffFFFFFEC4908b74688a01374f789B48E9a3eab",
@@ -509,7 +509,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "peaq",
     "min": undefined,
     "originSymbol": "PEAQ",
-    "symbol": undefined,
+    "symbol": "xcPEAQ",
   },
   _AssetAmount {
     "address": "0xFFFFfffF71815ab6142E0E20c7259126C6B40612",
@@ -521,7 +521,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "ztg",
     "min": undefined,
     "originSymbol": "ZTG",
-    "symbol": undefined,
+    "symbol": "xcZTG",
   },
   _AssetAmount {
     "address": "0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2",
@@ -533,7 +533,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "fil",
     "min": undefined,
     "originSymbol": "FIL",
-    "symbol": undefined,
+    "symbol": "xcFIL",
   },
   _AssetAmount {
     "address": "0xab3f0245B83feB11d15AAffeFD7AD465a59817eD",
@@ -569,7 +569,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "vmanta",
     "min": undefined,
     "originSymbol": "vMANTA",
-    "symbol": undefined,
+    "symbol": "xcvMANTA",
   },
   _AssetAmount {
     "address": "0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c",
@@ -581,7 +581,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "vglmr",
     "min": undefined,
     "originSymbol": "vGLMR",
-    "symbol": undefined,
+    "symbol": "xcvGLMR",
   },
   _AssetAmount {
     "address": "0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1",
@@ -593,7 +593,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "vfil",
     "min": undefined,
     "originSymbol": "vFIL",
-    "symbol": undefined,
+    "symbol": "xcvFIL",
   },
   _AssetAmount {
     "address": "0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf",
@@ -605,7 +605,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "vdot",
     "min": undefined,
     "originSymbol": "vDOT",
-    "symbol": undefined,
+    "symbol": "xcvDOT",
   },
   _AssetAmount {
     "address": "0xFffFffff55C732C47639231a4C4373245763d26E",
@@ -617,7 +617,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "vastr",
     "min": undefined,
     "originSymbol": "vASTR",
-    "symbol": undefined,
+    "symbol": "xcvASTR",
   },
   _AssetAmount {
     "address": "0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f",
@@ -665,7 +665,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "hdx",
     "min": undefined,
     "originSymbol": "HDX",
-    "symbol": undefined,
+    "symbol": "xcHDX",
   },
   _AssetAmount {
     "address": "0xffffffff8a9736b44ebf188972725bed67bf694e",
@@ -677,7 +677,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "apillon",
     "min": undefined,
     "originSymbol": "NCTR",
-    "symbol": undefined,
+    "symbol": "xcNCTR",
   },
   _AssetAmount {
     "address": "0xffffffff54c556bd1d0f64ec6c78f1b477525e56",
@@ -689,7 +689,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "stink",
     "min": undefined,
     "originSymbol": "STINK",
-    "symbol": undefined,
+    "symbol": "xcSTINK",
   },
   _AssetAmount {
     "address": "0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6",
@@ -701,7 +701,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "ded",
     "min": undefined,
     "originSymbol": "DED",
-    "symbol": undefined,
+    "symbol": "xcDED",
   },
   _AssetAmount {
     "address": "0xfFfFFfFf30478fAFBE935e466da114E14fB3563d",
@@ -713,7 +713,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "pink",
     "min": undefined,
     "originSymbol": "PINK",
-    "symbol": undefined,
+    "symbol": "xcPINK",
   },
   _AssetAmount {
     "address": "0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D",
@@ -751,7 +751,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "ring",
     "min": undefined,
     "originSymbol": "RING",
-    "symbol": undefined,
+    "symbol": "xcRING",
   },
   _AssetAmount {
     "address": "0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED",
@@ -763,7 +763,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "pha",
     "min": undefined,
     "originSymbol": "PHA",
-    "symbol": undefined,
+    "symbol": "xcPHA",
   },
   _AssetAmount {
     "address": "0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0",
@@ -775,7 +775,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "pen",
     "min": undefined,
     "originSymbol": "PEN",
-    "symbol": undefined,
+    "symbol": "xcPEN",
   },
   _AssetAmount {
     "address": "0xFfffffFfB3229c8E7657eABEA704d5e75246e544",
@@ -787,7 +787,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "neuro",
     "min": undefined,
     "originSymbol": "NEURO",
-    "symbol": undefined,
+    "symbol": "xcNEURO",
   },
   _AssetAmount {
     "address": "0xfFFffFFf7D3875460d4509eb8d0362c611B4E841",
@@ -799,7 +799,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "manta",
     "min": undefined,
     "originSymbol": "MANTA",
-    "symbol": undefined,
+    "symbol": "xcMANTA",
   },
   _AssetAmount {
     "address": "0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4",
@@ -811,7 +811,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "ldot",
     "min": undefined,
     "originSymbol": "LDOT",
-    "symbol": undefined,
+    "symbol": "xcLDOT",
   },
   _AssetAmount {
     "address": "0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab",
@@ -823,7 +823,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "intr",
     "min": undefined,
     "originSymbol": "INTR",
-    "symbol": undefined,
+    "symbol": "xcINTR",
   },
   _AssetAmount {
     "address": "0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52",
@@ -835,7 +835,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "ibtc",
     "min": undefined,
     "originSymbol": "IBTC",
-    "symbol": undefined,
+    "symbol": "xcIBTC",
   },
   _AssetAmount {
     "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
@@ -847,7 +847,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "dot",
     "min": undefined,
     "originSymbol": "DOT",
-    "symbol": undefined,
+    "symbol": "xcDOT",
   },
   _AssetAmount {
     "address": "0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3",
@@ -859,7 +859,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "cfg",
     "min": undefined,
     "originSymbol": "CFG",
-    "symbol": undefined,
+    "symbol": "xcCFG",
   },
   _AssetAmount {
     "address": "0xFFffffFf7cC06abdF7201b350A1265c62C8601d2",
@@ -871,7 +871,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "bnc",
     "min": undefined,
     "originSymbol": "BNC",
-    "symbol": undefined,
+    "symbol": "xcBNC",
   },
   _AssetAmount {
     "address": "0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda",
@@ -895,7 +895,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "astr",
     "min": undefined,
     "originSymbol": "ASTR",
-    "symbol": undefined,
+    "symbol": "xcASTR",
   },
   _AssetAmount {
     "address": "0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f",
@@ -907,7 +907,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "aca",
     "min": undefined,
     "originSymbol": "ACA",
-    "symbol": undefined,
+    "symbol": "xcACA",
   },
   _AssetAmount {
     "address": "0x0000000000000000000000000000000000000802",
@@ -936,7 +936,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "vmovr",
     "min": undefined,
     "originSymbol": "vMOVR",
-    "symbol": undefined,
+    "symbol": "xcvMOVR",
   },
   _AssetAmount {
     "address": "0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe",
@@ -948,7 +948,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "vksm",
     "min": undefined,
     "originSymbol": "vKSM",
-    "symbol": undefined,
+    "symbol": "xcvKSM",
   },
   _AssetAmount {
     "address": "0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4",
@@ -960,7 +960,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "vbnc",
     "min": undefined,
     "originSymbol": "vBNC",
-    "symbol": undefined,
+    "symbol": "xcvBNC",
   },
   _AssetAmount {
     "address": "0xFffFFffF51470Dca3dbe535bD2880a9CcDBc6Bd9",
@@ -972,7 +972,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "xrt",
     "min": undefined,
     "originSymbol": "XRT",
-    "symbol": undefined,
+    "symbol": "xcXRT",
   },
   _AssetAmount {
     "address": "0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d",
@@ -984,7 +984,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "usdtksm",
     "min": undefined,
     "originSymbol": "USDT",
-    "symbol": undefined,
+    "symbol": "xcUSDT",
   },
   _AssetAmount {
     "address": "0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e",
@@ -996,7 +996,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "teer",
     "min": undefined,
     "originSymbol": "TEER",
-    "symbol": undefined,
+    "symbol": "xcTEER",
   },
   _AssetAmount {
     "address": "0xFFFfffFF0Ca324C842330521525E7De111F38972",
@@ -1008,7 +1008,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "sdn",
     "min": undefined,
     "originSymbol": "SDN",
-    "symbol": undefined,
+    "symbol": "xcSDN",
   },
   _AssetAmount {
     "address": "0xffffffFF893264794d9d57E1E0E21E0042aF5A0A",
@@ -1020,7 +1020,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "rmrk",
     "min": undefined,
     "originSymbol": "RMRK",
-    "symbol": undefined,
+    "symbol": "xcRMRK",
   },
   _AssetAmount {
     "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
@@ -1032,7 +1032,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "ksm",
     "min": undefined,
     "originSymbol": "KSM",
-    "symbol": undefined,
+    "symbol": "xcKSM",
   },
   _AssetAmount {
     "address": "0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2",
@@ -1044,7 +1044,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "kint",
     "min": undefined,
     "originSymbol": "KINT",
-    "symbol": undefined,
+    "symbol": "xcKINT",
   },
   _AssetAmount {
     "address": "0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0",
@@ -1056,7 +1056,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "kbtc",
     "min": undefined,
     "originSymbol": "KBTC",
-    "symbol": undefined,
+    "symbol": "xcKBTC",
   },
   _AssetAmount {
     "address": "0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228",
@@ -1080,7 +1080,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "kar",
     "min": undefined,
     "originSymbol": "KAR",
-    "symbol": undefined,
+    "symbol": "xcKAR",
   },
   _AssetAmount {
     "address": "0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7",
@@ -1092,7 +1092,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "csm",
     "min": undefined,
     "originSymbol": "CSM",
-    "symbol": undefined,
+    "symbol": "xcCSM",
   },
   _AssetAmount {
     "address": "0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165",
@@ -1104,7 +1104,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "crab",
     "min": undefined,
     "originSymbol": "CRAB",
-    "symbol": undefined,
+    "symbol": "xcCRAB",
   },
   _AssetAmount {
     "address": "0xFFfFFfFFF075423be54811EcB478e911F22dDe7D",
@@ -1116,7 +1116,7 @@ exports[`sdk > getParachainBalances > on 'Moonriver' for address: '0x4E82143Af67
     "key": "bnc",
     "min": undefined,
     "originSymbol": "BNC",
-    "symbol": undefined,
+    "symbol": "xcBNC",
   },
   _AssetAmount {
     "address": "0x0000000000000000000000000000000000000802",
