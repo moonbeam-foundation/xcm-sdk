@@ -74,6 +74,7 @@ import {
   usdc,
   usdcwh,
   usdt,
+  usdtksm,
   usdtwh,
   vastr,
   vbnc,
@@ -809,7 +810,7 @@ export const kusama = new Parachain({
 
 export const kusamaAssetHub = new Parachain({
   assets: [
-    ChainAsset.fromAsset(usdt, {
+    ChainAsset.fromAsset(usdtksm, {
       decimals: 6,
       ids: {
         id: 1984,
@@ -1426,6 +1427,7 @@ export const moonbeam = new EvmParachain({
       decimals: 6,
       ids: {
         id: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
+        palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(usdcwh, {
@@ -1447,6 +1449,7 @@ export const moonbeam = new EvmParachain({
       decimals: 6,
       ids: {
         id: '311091173110107856861649819128533077277',
+        palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(vastr, {
@@ -1566,6 +1569,13 @@ export const moonbeam = new EvmParachain({
       decimals: 12,
       ids: {
         id: '220698173844663170714431919474506717455',
+      },
+    }),
+    ChainAsset.fromAsset(movr, {
+      address: '0xffffffff54c47f43713fd9211724362697f1a302',
+      decimals: 18,
+      ids: {
+        id: 112675423039561305557350799263187182338n,
       },
     }),
   ],
@@ -1712,7 +1722,8 @@ export const moonriver = new EvmParachain({
         id: '133300872918374599700079037156071917454',
       },
     }),
-    ChainAsset.fromAsset(usdt, {
+    //  USDT from Kusama Ecosystem
+    ChainAsset.fromAsset(usdtksm, {
       address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
       decimals: 6,
       ids: {
@@ -1745,6 +1756,35 @@ export const moonriver = new EvmParachain({
       decimals: 18,
       ids: {
         id: '203223821023327994093278529517083736593',
+      },
+    }),
+    ChainAsset.fromAsset(glmr, {
+      address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
+      decimals: 18,
+      ids: {
+        id: 34940389883188672429634411751708934740n,
+      },
+    }),
+    ChainAsset.fromAsset(usdc, {
+      address: '0xffffffff2215880e56fe63a96e54e073757c3092',
+      decimals: 6,
+      ids: {
+        id: 45305549634539991528356533909445161106n,
+      },
+    }),
+    ChainAsset.fromAsset(usdcwh, {
+      address: '0xffffffff9e27ab60fadfd33abf71b39a7445f7ed',
+      decimals: 6,
+      ids: {
+        id: 210223998887087232417477484708341610477n,
+      },
+    }),
+    // Bridged USDT from Moonbeam Ecosystem
+    ChainAsset.fromAsset(usdt, {
+      address: '0xffffffffc70260a3bf46a91cf87b6f5e6abba712',
+      decimals: 6,
+      ids: {
+        id: 264528715839624829046161791069655377682n,
       },
     }),
   ],

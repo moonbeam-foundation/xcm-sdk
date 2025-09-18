@@ -397,6 +397,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "decimals": 6,
           "ids": {
             "id": "166377000701797186346254371275954761085",
+            "palletInstance": 110,
           },
           "key": "usdc",
           "min": undefined,
@@ -430,6 +431,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "decimals": 6,
           "ids": {
             "id": "311091173110107856861649819128533077277",
+            "palletInstance": 110,
           },
           "key": "usdt",
           "min": undefined,
@@ -621,6 +623,17 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "eurc",
           "min": undefined,
           "originSymbol": "EURC",
+          "symbol": undefined,
+        },
+        "movr" => _ChainAsset {
+          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "decimals": 18,
+          "ids": {
+            "id": 112675423039561305557350799263187182338n,
+          },
+          "key": "movr",
+          "min": undefined,
+          "originSymbol": "MOVR",
           "symbol": undefined,
         },
       },
