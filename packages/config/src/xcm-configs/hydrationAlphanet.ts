@@ -38,31 +38,6 @@ export const hydrationAlphanetRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          asset: hdx,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
-      },
-      destination: {
-        asset: dev,
-        chain: moonbaseAlpha,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .fromPalletInstance({ isAssetReserveChain: true }),
-          asset: dev,
-        },
-      },
-      extrinsic: ExtrinsicBuilder().xTokens().transfer(),
-    },
-    {
-      source: {
         asset: usdcwh,
         balance: BalanceBuilder().substrate().tokens().accounts(),
         fee: {

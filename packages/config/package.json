@@ -43,7 +43,8 @@
   "dependencies": {
     "@moonbeam-network/xcm-builder": "workspace:*",
     "@moonbeam-network/xcm-types": "workspace:*",
-    "@moonbeam-network/xcm-utils": "workspace:*"
+    "@moonbeam-network/xcm-utils": "workspace:*",
+    "viem": "^2.37.6"
   },
   "peerDependencies": {
     "@polkadot/types": "16.4.6",
