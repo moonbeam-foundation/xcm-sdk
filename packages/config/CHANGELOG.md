@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.3
+
+### Patch Changes
+
+- [#564](https://github.com/moonbeam-foundation/xcm-sdk/pull/564) [`f80b62d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f80b62decd8f2ce46a76a6eac7c08942abf4cde2) Thanks [@mmaurello](https://github.com/mmaurello)! - Change symbols in Moon Chains
+
 ## 4.4.2
 
 ### Patch Changes
