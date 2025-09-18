@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.2
+
+### Patch Changes
+
+- [#566](https://github.com/moonbeam-foundation/xcm-sdk/pull/566) [`1562cf9`](https://github.com/moonbeam-foundation/xcm-sdk/commit/1562cf904ef3ead551114d89887841a0645e6c7a) Thanks [@mmaurello](https://github.com/mmaurello)! - Add MOVR symbol in Moonbeam
+
 ## 4.4.1
 
 ### Patch Changes
