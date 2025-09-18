@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.0
+
+### Minor Changes
+
+- [#561](https://github.com/moonbeam-foundation/xcm-sdk/pull/561) [`0cc2a1d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0cc2a1d1d253bb7374b56de1798a243408caa369) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement Moonriver <> Moonbeam bridge
+
 ## 4.3.4
 
 ### Patch Changes
