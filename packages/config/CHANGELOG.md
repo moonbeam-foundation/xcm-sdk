@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.1
+
+### Patch Changes
+
+- [#563](https://github.com/moonbeam-foundation/xcm-sdk/pull/563) [`f615192`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f6151927a1645ec3e9b08a786a68571631a25631) Thanks [@mmaurello](https://github.com/mmaurello)! - Change symbols for assets related to the moonbeam bridge
+
 ## 4.4.0
 
 ### Minor Changes
