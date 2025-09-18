@@ -14,13 +14,10 @@ export const moonbaseBetaRoutes = new ChainRoutes({
     {
       source: {
         asset: dev,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: devBeta,
           balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().assets().account(),
         },
       },
       destination: {
@@ -43,13 +40,13 @@ export const moonbaseBetaRoutes = new ChainRoutes({
     {
       source: {
         asset: alan,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: devBeta,
           balance: BalanceBuilder().substrate().system().account(),
         },
         destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
+          balance: BalanceBuilder().evm().erc20(),
         },
       },
       destination: {
@@ -64,6 +61,10 @@ export const moonbaseBetaRoutes = new ChainRoutes({
         },
       },
       extrinsic: ExtrinsicBuilder().polkadotXcm().transferAssets().X3(),
+      monitoring: MonitoringBuilder()
+        .monitorEvent()
+        .polkadotXcm()
+        .messageQueue(),
     },
   ],
 });

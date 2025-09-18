@@ -75,7 +75,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       destination: {
         asset: dev,
         chain: moonbaseBeta,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.0002,
           asset: dev,
@@ -125,7 +125,7 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
       destination: {
         asset: alan,
         chain: moonbaseBeta,
-        balance: BalanceBuilder().substrate().assets().account(),
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: 0.0002,
           asset: dev,
@@ -365,29 +365,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         fee: {
           amount: 0.01,
           asset: ftmwh,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: dev,
-        chain: hydrationAlphanet,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.0002,
-          asset: dev,
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),

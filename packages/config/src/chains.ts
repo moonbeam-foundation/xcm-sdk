@@ -7,6 +7,7 @@ import {
   Parachain,
 } from '@moonbeam-network/xcm-types';
 import { getPolkadotAppsUrl } from '@moonbeam-network/xcm-utils';
+import { getAddress } from 'viem';
 import {
   aca,
   agng,
@@ -900,7 +901,7 @@ export const laosMainnet = new EvmParachain({
 export const moonbaseAlpha = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(alan, {
-      address: '0x9133c5a22024118804089f1fB752b7B2ce2a6351',
+      address: getAddress('0x9133c5a22024118804089f1fB752b7B2ce2a6351'),
       decimals: 18,
       ids: {
         palletInstance: 48,
@@ -923,7 +924,7 @@ export const moonbaseAlpha = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(lit, {
-      address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
+      address: getAddress('0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0'),
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
@@ -931,7 +932,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcLIT',
     }),
     ChainAsset.fromAsset(maos, {
-      address: '0xffffffff06a14960bddc8610d0e694d39a3c682e',
+      address: getAddress('0xffffffff06a14960bddc8610d0e694d39a3c682e'),
       decimals: 18,
       ids: {
         id: '8812816049497534070792537960559175726',
@@ -940,7 +941,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcMAOS',
     }),
     ChainAsset.fromAsset(otp, {
-      address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
+      address: getAddress('0xFfffffFfB3229c8E7657eABEA704d5e75246e544'),
       decimals: 12,
       ids: {
         id: '238111524681612888331172110363070489924',
@@ -948,7 +949,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcOTP',
     }),
     ChainAsset.fromAsset(paring, {
-      address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
+      address: getAddress('0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165'),
       decimals: 18,
       ids: {
         id: '173481220575862801646329923366065693029',
@@ -956,7 +957,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcPARING',
     }),
     ChainAsset.fromAsset(pica, {
-      address: '0xFFFfFFFF10DD5Fd142163a40Ce0dae8c56e2801f',
+      address: getAddress('0xFFFfFFFF10DD5Fd142163a40Ce0dae8c56e2801f'),
       decimals: 6,
       ids: {
         id: '22417088946346045371238623691600461855',
@@ -964,7 +965,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcPICA',
     }),
     ChainAsset.fromAsset(tt1, {
-      address: '0xfFffFfFf75976211C786fe4d73d2477e222786Ac',
+      address: getAddress('0xfFffFfFf75976211C786fe4d73d2477e222786Ac'),
       decimals: 18,
       ids: {
         id: '156305701417244550631956600137082963628',
@@ -972,7 +973,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcTT1',
     }),
     ChainAsset.fromAsset(tur, {
-      address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
+      address: getAddress('0xfFffffFf6448d0746f2a66342B67ef9CAf89478E'),
       decimals: 10,
       ids: {
         id: '133300872918374599700079037156071917454',
@@ -980,7 +981,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcTUR',
     }),
     ChainAsset.fromAsset(unit, {
-      address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
+      address: getAddress('0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080'),
       decimals: 12,
       ids: {
         id: '42259045809535163221576417993425387648',
@@ -989,7 +990,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcUNIT',
     }),
     ChainAsset.fromAsset(ftmwh, {
-      address: '0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee',
+      address: getAddress('0x566c1cebc6A4AFa1C122E039C4BEBe77043148Ee'),
       decimals: 18,
       ids: {
         palletInstance: 48,
@@ -997,7 +998,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'WFTM',
     }),
     ChainAsset.fromAsset(hdx, {
-      address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
+      address: getAddress('0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC'),
       decimals: 12,
       ids: {
         id: '69606720909260275826784788104880799692',
@@ -1005,7 +1006,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'xcHDX',
     }),
     ChainAsset.fromAsset(usdcwh, {
-      address: '0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9',
+      address: getAddress('0xE5dE10C4b744bac6b783fAF8d9B9fDFF14Acc3c9'),
       decimals: 6,
       ids: {
         palletInstance: 48,
@@ -1013,7 +1014,7 @@ export const moonbaseAlpha = new EvmParachain({
       symbol: 'USDC',
     }),
     ChainAsset.fromAsset(agng, {
-      address: '0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20',
+      address: getAddress('0xFFfFFFFF38794F8c53fC7325ea07463dc6965e20'),
       decimals: 18,
       ids: {
         id: '75066649112131892397889252914026143264',
@@ -1053,7 +1054,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(dev, {
-      address: '0xffffffffA7B17E706A2391F346D8C82B6788DB41',
+      address: getAddress('0xffffffffA7B17E706A2391F346D8C82B6788DB41'),
       decimals: 18,
       ids: {
         balanceId: '222902676330054289648817870329963141953',
@@ -1061,15 +1062,15 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(alan, {
-      address: '0xffffffff405953B645C61B0F5FFB28DF2B39B78D',
+      address: getAddress('0xffffffff405953B645C61B0F5FFB28DF2B39B78D'),
       decimals: 18,
       ids: {
-        balanceId: '85534404031760856987006367174489651085',
+        // balanceId: '85534404031760856987006367174489651085',
         id: { ForeignAsset: '85534404031760856987006367174489651085' },
       },
     }),
     ChainAsset.fromAsset(usdcwh, {
-      address: '0xffffffffF0963FD9B1D84D5740E911AA5D99A08D',
+      address: getAddress('0xffffffffF0963FD9B1D84D5740E911AA5D99A08D'),
       decimals: 6,
       ids: {
         balanceId: '319794858556516669238969276945382613133',
@@ -1077,7 +1078,7 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(ftmwh, {
-      address: '0xffffffff958FAF8E6B11DA766006DF735C4A8DA0',
+      address: getAddress('0xffffffff958FAF8E6B11DA766006DF735C4A8DA0'),
       decimals: 18,
       ids: {
         balanceId: '198801030527939140930753142903035039136',
@@ -1085,14 +1086,14 @@ export const moonbaseBeta = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(devStage, {
-      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      address: getAddress('0xfFFFFFfF0000000000000000000000000000000A'),
       decimals: 18,
       ids: {
         id: 10,
       },
     }),
     ChainAsset.fromAsset(pizza, {
-      address: '0x7a218FFD31C1dF5edf62d3aAd0a398062AC16DCd',
+      address: getAddress('0x7a218FFD31C1dF5edf62d3aAd0a398062AC16DCd'),
       decimals: 18,
       ids: {
         palletInstance: 48,
@@ -1133,14 +1134,14 @@ export const moonbaseStage = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(devBeta, {
-      address: '0xfFFFFFfF0000000000000000000000000000000A',
+      address: getAddress('0xfFFFFFfF0000000000000000000000000000000A'),
       decimals: 18,
       ids: {
         id: 10,
       },
     }),
     ChainAsset.fromAsset(pizza, {
-      address: '0xffffffffedca8a390b82ebf296523132eb5105e6',
+      address: getAddress('0xffffffffedca8a390b82ebf296523132eb5105e6'),
       decimals: 18,
       ids: {
         id: 316078682458542273998403192999193413094n,
@@ -1173,21 +1174,21 @@ export const moonlama = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(samaMOVR, {
-      address: '0xffffffff54c47f43713fd9211724362697f1a302',
+      address: getAddress('0xffffffff54c47f43713fd9211724362697f1a302'),
       decimals: 18,
       ids: {
         id: 112675423039561305557350799263187182338n,
       },
     }),
     ChainAsset.fromAsset(pizza, {
-      address: '0xbdd558f3be2807fce11b5fb2b2fa86f310f67855',
+      address: getAddress('0xbdd558f3be2807fce11b5fb2b2fa86f310f67855'),
       decimals: 18,
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(pizzaUSDC, {
-      address: '0x385c00353cff4c3129306e0a6dcd1947e8354133',
+      address: getAddress('0x385c00353cff4c3129306e0a6dcd1947e8354133'),
       decimals: 6,
       ids: {
         palletInstance: 110,
@@ -1220,21 +1221,21 @@ export const moonsama = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(lamaGLMR, {
-      address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
+      address: getAddress('0xffffffff1a49463978f19dfd6983f2fa1885c254'),
       decimals: 18,
       ids: {
         id: 34940389883188672429634411751708934740n,
       },
     }),
     ChainAsset.fromAsset(pizza, {
-      address: '0xffffffff57029d0ec61f38481147f4e1a0d5e3ed',
+      address: getAddress('0xffffffff57029d0ec61f38481147f4e1a0d5e3ed'),
       decimals: 18,
       ids: {
         id: 115656405735822573536813785456152273901n,
       },
     }),
     ChainAsset.fromAsset(pizzaUSDC, {
-      address: '0xffffffffa993c0ca4b46667277c3caaa5a4da783',
+      address: getAddress('0xffffffffa993c0ca4b46667277c3caaa5a4da783'),
       decimals: 6,
       ids: {
         id: 225406709175884615521168913363167455107n,
@@ -1260,7 +1261,7 @@ export const moonsama = new EvmParachain({
 export const moonbeam = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(aca, {
-      address: '0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f',
+      address: getAddress('0xffffFFffa922Fef94566104a6e5A35a4fCDDAA9f'),
       decimals: 12,
       ids: {
         id: '224821240862170613278369189818311486111',
@@ -1268,7 +1269,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcACA',
     }),
     ChainAsset.fromAsset(astr, {
-      address: '0xFfFFFfffA893AD19e540E172C10d78D4d479B5Cf',
+      address: getAddress('0xFfFFFfffA893AD19e540E172C10d78D4d479B5Cf'),
       decimals: 18,
       ids: {
         id: '224077081838586484055667086558292981199',
@@ -1276,21 +1277,21 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcASTR',
     }),
     ChainAsset.fromAsset(aseed, {
-      address: '0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda',
+      address: getAddress('0xfFfFFFFF52C56A9257bB97f4B2b6F7B2D624ecda'),
       decimals: 12,
       ids: {
         id: '110021739665376159354538090254163045594',
       },
     }),
     ChainAsset.fromAsset(axlusdc, {
-      address: '0xCa01a1D0993565291051daFF390892518ACfAD3A',
+      address: getAddress('0xCa01a1D0993565291051daFF390892518ACfAD3A'),
       decimals: 6,
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(bnc, {
-      address: '0xFFffffFf7cC06abdF7201b350A1265c62C8601d2',
+      address: getAddress('0xFFffffFf7cC06abdF7201b350A1265c62C8601d2'),
       decimals: 12,
       ids: {
         id: '165823357460190568952172802245839421906',
@@ -1298,7 +1299,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcBNC',
     }),
     ChainAsset.fromAsset(cfg, {
-      address: '0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3',
+      address: getAddress('0xFFfFfFff44bD9D2FFEE20B25D1Cf9E78Edb6Eae3'),
       decimals: 18,
       ids: {
         id: '91372035960551235635465443179559840483',
@@ -1306,14 +1307,14 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcCFG',
     }),
     ChainAsset.fromAsset(dai, {
-      address: '0x06e605775296e851FF43b4dAa541Bb0984E9D6fD',
+      address: getAddress('0x06e605775296e851FF43b4dAa541Bb0984E9D6fD'),
       decimals: 18,
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(ded, {
-      address: '0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6',
+      address: getAddress('0xfFffFFFf5da2d7214D268375cf8fb1715705FdC6'),
       decimals: 10,
       ids: {
         id: '124463719055550872076363892993240202694',
@@ -1321,7 +1322,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcDED',
     }),
     ChainAsset.fromAsset(dot, {
-      address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
+      address: getAddress('0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080'),
       decimals: 10,
       ids: {
         id: '42259045809535163221576417993425387648',
@@ -1329,7 +1330,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcDOT',
     }),
     ChainAsset.fromAsset(eq, {
-      address: '0xFffFFfFf8f6267e040D8a0638C576dfBa4F0F6D6',
+      address: getAddress('0xFffFFfFf8f6267e040D8a0638C576dfBa4F0F6D6'),
       decimals: 9,
       ids: {
         id: '190590555344745888270686124937537713878',
@@ -1337,7 +1338,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcEQ',
     }),
     ChainAsset.fromAsset(eqd, {
-      address: '0xFFffFfFF8cdA1707bAF23834d211B08726B1E499',
+      address: getAddress('0xFFffFfFF8cdA1707bAF23834d211B08726B1E499'),
       decimals: 9,
       ids: {
         id: '187224307232923873519830480073807488153',
@@ -1345,7 +1346,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcEQD',
     }),
     ChainAsset.fromAsset(fil, {
-      address: '0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2',
+      address: getAddress('0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2'),
       decimals: 18,
       ids: {
         id: '144012926827374458669278577633504620722',
@@ -1361,7 +1362,7 @@ export const moonbeam = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(hdx, {
-      address: '0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC',
+      address: getAddress('0xFFFfFfff345Dc44DDAE98Df024Eb494321E73FcC'),
       decimals: 12,
       ids: {
         id: '69606720909260275826784788104880799692',
@@ -1369,7 +1370,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcHDX',
     }),
     ChainAsset.fromAsset(ibtc, {
-      address: '0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52',
+      address: getAddress('0xFFFFFfFf5AC1f9A51A93F5C527385edF7Fe98A52'),
       decimals: 8,
       ids: {
         id: '120637696315203257380661607956669368914',
@@ -1377,7 +1378,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcIBTC',
     }),
     ChainAsset.fromAsset(intr, {
-      address: '0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab',
+      address: getAddress('0xFffFFFFF4C1cbCd97597339702436d4F18a375Ab'),
       decimals: 10,
       ids: {
         id: '101170542313601871197860408087030232491',
@@ -1385,7 +1386,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcINTR',
     }),
     ChainAsset.fromAsset(ldot, {
-      address: '0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4',
+      address: getAddress('0xFFfFfFffA9cfFfa9834235Fe53f4733F1b8B28d4'),
       decimals: 10,
       ids: {
         id: '225719522181998468294117309041779353812',
@@ -1393,7 +1394,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcLDOT',
     }),
     ChainAsset.fromAsset(manta, {
-      address: '0xfFFffFFf7D3875460d4509eb8d0362c611B4E841',
+      address: getAddress('0xfFFffFFf7D3875460d4509eb8d0362c611B4E841'),
       decimals: 18,
       ids: {
         id: '166446646689194205559791995948102903873',
@@ -1401,7 +1402,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcMANTA',
     }),
     ChainAsset.fromAsset(nodl, {
-      address: '0xfffffffFe896ba7Cb118b9Fa571c6dC0a99dEfF1',
+      address: getAddress('0xfffffffFe896ba7Cb118b9Fa571c6dC0a99dEfF1'),
       decimals: 11,
       ids: {
         id: '309163521958167876851250718453738106865',
@@ -1409,7 +1410,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcNODL',
     }),
     ChainAsset.fromAsset(neuro, {
-      address: '0xFfffffFfB3229c8E7657eABEA704d5e75246e544',
+      address: getAddress('0xFfffffFfB3229c8E7657eABEA704d5e75246e544'),
       decimals: 12,
       ids: {
         id: '238111524681612888331172110363070489924',
@@ -1417,7 +1418,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcNEURO',
     }),
     ChainAsset.fromAsset(peaq, {
-      address: '0xFffFFFFFEC4908b74688a01374f789B48E9a3eab',
+      address: getAddress('0xFffFFFFFEC4908b74688a01374f789B48E9a3eab'),
       decimals: 18,
       ids: {
         id: '314077021455772878282433861213184736939',
@@ -1425,7 +1426,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcPEAQ',
     }),
     ChainAsset.fromAsset(pha, {
-      address: '0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED',
+      address: getAddress('0xFFFfFfFf63d24eCc8eB8a7b5D0803e900F7b6cED'),
       decimals: 12,
       ids: {
         id: '132685552157663328694213725410064821485',
@@ -1433,7 +1434,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcPHA',
     }),
     ChainAsset.fromAsset(pen, {
-      address: '0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0',
+      address: getAddress('0xffFFfFFf2257622F345E1ACDe0D4f46D7d1D77D0'),
       decimals: 12,
       ids: {
         id: '45647473099451451833602657905356404688',
@@ -1441,7 +1442,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcPEN',
     }),
     ChainAsset.fromAsset(ring, {
-      address: '0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f',
+      address: getAddress('0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f'),
       decimals: 18,
       ids: {
         id: '125699734534028342599692732320197985871',
@@ -1449,14 +1450,14 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcRING',
     }),
     ChainAsset.fromAsset(sub, {
-      address: '0xfFfFffFf43B4560Bc0C451a3386E082bff50aC90',
+      address: getAddress('0xfFfFffFf43B4560Bc0C451a3386E082bff50aC90'),
       decimals: 10,
       ids: {
         id: '89994634370519791027168048838578580624',
       },
     }),
     ChainAsset.fromAsset(usdc, {
-      address: '0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D',
+      address: getAddress('0xFFfffffF7D2B0B761Af01Ca8e25242976ac0aD7D'),
       decimals: 6,
       ids: {
         id: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
@@ -1465,7 +1466,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcUSDC',
     }),
     ChainAsset.fromAsset(usdcwh, {
-      address: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
+      address: getAddress('0x931715FEE2d06333043d11F658C8CE934aC61D0c'),
       decimals: 6,
       ids: {
         palletInstance: 110,
@@ -1473,14 +1474,14 @@ export const moonbeam = new EvmParachain({
       symbol: 'USDC',
     }),
     ChainAsset.fromAsset(usdtwh, {
-      address: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
+      address: getAddress('0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f'),
       decimals: 6,
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(usdt, {
-      address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
+      address: getAddress('0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d'),
       decimals: 6,
       ids: {
         id: '311091173110107856861649819128533077277',
@@ -1489,7 +1490,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcUSDT',
     }),
     ChainAsset.fromAsset(vastr, {
-      address: '0xFffFffff55C732C47639231a4C4373245763d26E',
+      address: getAddress('0xFffFffff55C732C47639231a4C4373245763d26E'),
       decimals: 18,
       ids: {
         id: '114018676402354620972806895487280206446', // registered XC20 id for ERC20 tokens
@@ -1497,7 +1498,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcvASTR',
     }),
     ChainAsset.fromAsset(vdot, {
-      address: '0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf',
+      address: getAddress('0xFFFfffFf15e1b7E3dF971DD813Bc394deB899aBf'),
       decimals: 10,
       ids: {
         id: '29085784439601774464560083082574142143', // registered XC20 id for ERC20 tokens
@@ -1505,7 +1506,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcvDOT',
     }),
     ChainAsset.fromAsset(vfil, {
-      address: '0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1',
+      address: getAddress('0xFffffFffCd0aD0EA6576B7b285295c85E94cf4c1'),
       decimals: 18,
       ids: {
         id: '272547899416482196831721420898811311297', // registered XC20 id for ERC20 tokens
@@ -1513,7 +1514,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcvFIL',
     }),
     ChainAsset.fromAsset(vglmr, {
-      address: '0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c',
+      address: getAddress('0xFfFfFFff99dABE1a8De0EA22bAa6FD48fdE96F6c'),
       decimals: 18,
       ids: {
         id: '204507659831918931608354793288110796652', // registered XC20 id for ERC20 tokens
@@ -1521,7 +1522,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcvGLMR',
     }),
     ChainAsset.fromAsset(vmanta, {
-      address: '0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379',
+      address: getAddress('0xFFfFFfFfdA2a05FB50e7ae99275F4341AEd43379'),
       decimals: 18,
       ids: {
         id: '289989900872525819559124583375550296953', // registered XC20 id for ERC20 tokens
@@ -1529,21 +1530,21 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcvMANTA',
     }),
     ChainAsset.fromAsset(wbtc, {
-      address: '0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D',
+      address: getAddress('0xE57eBd2d67B462E9926e04a8e33f01cD0D64346D'),
       decimals: 8,
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(weth, {
-      address: '0xab3f0245B83feB11d15AAffeFD7AD465a59817eD',
+      address: getAddress('0xab3f0245B83feB11d15AAffeFD7AD465a59817eD'),
       decimals: 18,
       ids: {
         palletInstance: 110,
       },
     }),
     ChainAsset.fromAsset(ztg, {
-      address: '0xFFFFfffF71815ab6142E0E20c7259126C6B40612',
+      address: getAddress('0xFFFFfffF71815ab6142E0E20c7259126C6B40612'),
       decimals: 10,
       ids: {
         id: '150874409661081770150564009349448205842',
@@ -1551,7 +1552,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcZTG',
     }),
     ChainAsset.fromAsset(pink, {
-      address: '0xfFfFFfFf30478fAFBE935e466da114E14fB3563d',
+      address: getAddress('0xfFfFFfFf30478fAFBE935e466da114E14fB3563d'),
       decimals: 10,
       ids: {
         id: '64174511183114006009298114091987195453',
@@ -1559,7 +1560,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcPINK',
     }),
     ChainAsset.fromAsset(stink, {
-      address: '0xffffffff54c556bd1d0f64ec6c78f1b477525e56',
+      address: getAddress('0xffffffff54c556bd1d0f64ec6c78f1b477525e56'),
       decimals: 10,
       ids: {
         id: '112679793397406599376365943185137098326',
@@ -1567,7 +1568,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcSTINK',
     }),
     ChainAsset.fromAsset(apillon, {
-      address: '0xffffffff8a9736b44ebf188972725bed67bf694e',
+      address: getAddress('0xffffffff8a9736b44ebf188972725bed67bf694e'),
       decimals: 18,
       ids: {
         id: '184218609779515850660274730699350567246',
@@ -1575,7 +1576,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcNCTR',
     }),
     ChainAsset.fromAsset(wifd, {
-      address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
+      address: getAddress('0xffffffff2e1d1ac9ea1686255befe995b31abc96'),
       decimals: 10,
       ids: {
         id: '61295607754960722617854661686514597014',
@@ -1583,28 +1584,28 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcWIFD',
     }),
     ChainAsset.fromAsset(wbtce, {
-      address: '0xffffffff1b4bb1ac5749f73d866ffc91a3432c47',
+      address: getAddress('0xffffffff1b4bb1ac5749f73d866ffc91a3432c47'),
       decimals: 8,
       ids: {
         id: '36282181791341254438422467838694599751',
       },
     }),
     ChainAsset.fromAsset(wethe, {
-      address: '0xffffffff86829afe1521ad2296719df3ace8ded7',
+      address: getAddress('0xffffffff86829afe1521ad2296719df3ace8ded7'),
       decimals: 18,
       ids: {
         id: '178794693648360392906933130845919698647',
       },
     }),
     ChainAsset.fromAsset(wstethe, {
-      address: '0xffffffff5d5deb44bf7278dee5381beb24cb6573',
+      address: getAddress('0xffffffff5d5deb44bf7278dee5381beb24cb6573'),
       decimals: 18,
       ids: {
         id: '124105859028862849477017063633156007283',
       },
     }),
     ChainAsset.fromAsset(laos, {
-      address: '0xffffffffdd704e8e824a5eec47de88f5b9e13588',
+      address: getAddress('0xffffffffdd704e8e824a5eec47de88f5b9e13588'),
       decimals: 18,
       ids: {
         id: '294342517635293430510451841925413680520',
@@ -1612,7 +1613,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcLAOS',
     }),
     ChainAsset.fromAsset(eurc, {
-      address: '0xffffffffa608ec1332131289cbd8a97a0bb3d90f',
+      address: getAddress('0xffffffffa608ec1332131289cbd8a97a0bb3d90f'),
       decimals: 12,
       ids: {
         id: '220698173844663170714431919474506717455',
@@ -1620,7 +1621,7 @@ export const moonbeam = new EvmParachain({
       symbol: 'xcEURC.s',
     }),
     ChainAsset.fromAsset(movr, {
-      address: '0xffffffff54c47f43713fd9211724362697f1a302',
+      address: getAddress('0xffffffff54c47f43713fd9211724362697f1a302'),
       decimals: 18,
       ids: {
         id: 112675423039561305557350799263187182338n,
@@ -1652,14 +1653,14 @@ export const moonbeam = new EvmParachain({
 export const moonriver = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(aseed, {
-      address: '0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228',
+      address: getAddress('0xFfFffFFfa1B026a00FbAA67c86D5d1d5BF8D8228'),
       decimals: 12,
       ids: {
         id: '214920334981412447805621250067209749032',
       },
     }),
     ChainAsset.fromAsset(bnc, {
-      address: '0xFFfFFfFFF075423be54811EcB478e911F22dDe7D',
+      address: getAddress('0xFFfFFfFFF075423be54811EcB478e911F22dDe7D'),
       decimals: 12,
       ids: {
         id: '319623561105283008236062145480775032445',
@@ -1667,7 +1668,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcBNC',
     }),
     ChainAsset.fromAsset(crab, {
-      address: '0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165',
+      address: getAddress('0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165'),
       decimals: 18,
       ids: {
         id: '173481220575862801646329923366065693029',
@@ -1675,7 +1676,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcCRAB',
     }),
     ChainAsset.fromAsset(csm, {
-      address: '0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7',
+      address: getAddress('0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7'),
       decimals: 12,
       ids: {
         id: '108457044225666871745333730479173774551',
@@ -1683,7 +1684,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcCSM',
     }),
     ChainAsset.fromAsset(kar, {
-      address: '0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5',
+      address: getAddress('0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5'),
       decimals: 12,
       ids: {
         id: '10810581592933651521121702237638664357',
@@ -1691,7 +1692,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcKAR',
     }),
     ChainAsset.fromAsset(kbtc, {
-      address: '0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0',
+      address: getAddress('0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0'),
       decimals: 8,
       ids: {
         id: '328179947973504579459046439826496046832',
@@ -1699,7 +1700,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcKBTC',
     }),
     ChainAsset.fromAsset(kint, {
-      address: '0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2',
+      address: getAddress('0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2'),
       decimals: 12,
       ids: {
         id: '175400718394635817552109270754364440562',
@@ -1707,7 +1708,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcKINT',
     }),
     ChainAsset.fromAsset(ksm, {
-      address: '0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080',
+      address: getAddress('0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080'),
       decimals: 12,
       ids: {
         id: '42259045809535163221576417993425387648',
@@ -1715,7 +1716,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcKSM',
     }),
     ChainAsset.fromAsset(lit, {
-      address: '0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0',
+      address: getAddress('0xfffFFfFF31103d490325BB0a8E40eF62e2F614C0'),
       decimals: 12,
       ids: {
         id: '65216491554813189869575508812319036608',
@@ -1731,7 +1732,7 @@ export const moonriver = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(pha, {
-      address: '0xffFfFFff8E6b63d9e447B6d4C45BDA8AF9dc9603',
+      address: getAddress('0xffFfFFff8E6b63d9e447B6d4C45BDA8AF9dc9603'),
       decimals: 12,
       ids: {
         id: '189307976387032586987344677431204943363',
@@ -1739,7 +1740,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcPHA',
     }),
     ChainAsset.fromAsset(pica, {
-      address: '0xFffFfFFf7dD9B9C60ac83e49D7E3E1f7A1370aD2',
+      address: getAddress('0xFffFfFFf7dD9B9C60ac83e49D7E3E1f7A1370aD2'),
       decimals: 12,
       ids: {
         id: '167283995827706324502761431814209211090',
@@ -1747,7 +1748,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcPICA',
     }),
     ChainAsset.fromAsset(rmrk, {
-      address: '0xffffffFF893264794d9d57E1E0E21E0042aF5A0A',
+      address: getAddress('0xffffffFF893264794d9d57E1E0E21E0042aF5A0A'),
       decimals: 10,
       ids: {
         id: '182365888117048807484804376330534607370',
@@ -1755,7 +1756,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcRMRK',
     }),
     ChainAsset.fromAsset(sdn, {
-      address: '0xFFFfffFF0Ca324C842330521525E7De111F38972',
+      address: getAddress('0xFFFfffFF0Ca324C842330521525E7De111F38972'),
       decimals: 18,
       ids: {
         id: '16797826370226091782818345603793389938',
@@ -1763,7 +1764,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcSDN',
     }),
     ChainAsset.fromAsset(teer, {
-      address: '0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e',
+      address: getAddress('0xFfFfffFf4F0CD46769550E5938F6beE2F5d4ef1e'),
       decimals: 12,
       ids: {
         id: '105075627293246237499203909093923548958',
@@ -1771,7 +1772,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcTEER',
     }),
     ChainAsset.fromAsset(tnkr, {
-      address: '0xfFFfFffF683474B842852111cc31d470bD8f5081',
+      address: getAddress('0xfFFfFffF683474B842852111cc31d470bD8f5081'),
       decimals: 12,
       ids: {
         id: '138512078356357941985706694377215053953',
@@ -1779,7 +1780,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcTNKR',
     }),
     ChainAsset.fromAsset(tur, {
-      address: '0xfFffffFf6448d0746f2a66342B67ef9CAf89478E',
+      address: getAddress('0xfFffffFf6448d0746f2a66342B67ef9CAf89478E'),
       decimals: 10,
       ids: {
         id: '133300872918374599700079037156071917454',
@@ -1788,7 +1789,7 @@ export const moonriver = new EvmParachain({
     }),
     //  USDT from Kusama Ecosystem
     ChainAsset.fromAsset(usdtksm, {
-      address: '0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d',
+      address: getAddress('0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d'),
       decimals: 6,
       ids: {
         id: '311091173110107856861649819128533077277',
@@ -1796,7 +1797,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcUSDT',
     }),
     ChainAsset.fromAsset(xrt, {
-      address: '0xFffFFffF51470Dca3dbe535bD2880a9CcDBc6Bd9',
+      address: getAddress('0xFffFFffF51470Dca3dbe535bD2880a9CcDBc6Bd9'),
       decimals: 9,
       ids: {
         id: '108036400430056508975016746969135344601',
@@ -1804,7 +1805,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcXRT',
     }),
     ChainAsset.fromAsset(vbnc, {
-      address: '0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4',
+      address: getAddress('0xFFffffff3646A00f78caDf8883c5A2791BfCDdc4'),
       decimals: 12,
       ids: {
         id: '72145018963825376852137222787619937732',
@@ -1812,7 +1813,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcvBNC',
     }),
     ChainAsset.fromAsset(vksm, {
-      address: '0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe',
+      address: getAddress('0xFFffffFFC6DEec7Fc8B11A2C8ddE9a59F8c62EFe'),
       decimals: 12,
       ids: {
         id: '264344629840762281112027368930249420542',
@@ -1820,7 +1821,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcvKSM',
     }),
     ChainAsset.fromAsset(vmovr, {
-      address: '0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11',
+      address: getAddress('0xfFfffFfF98e37bF6a393504b5aDC5B53B4D0ba11'),
       decimals: 18,
       ids: {
         id: '203223821023327994093278529517083736593',
@@ -1828,7 +1829,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcvMOVR',
     }),
     ChainAsset.fromAsset(glmr, {
-      address: '0xffffffff1a49463978f19dfd6983f2fa1885c254',
+      address: getAddress('0xffffffff1a49463978f19dfd6983f2fa1885c254'),
       decimals: 18,
       ids: {
         id: 34940389883188672429634411751708934740n,
@@ -1836,7 +1837,7 @@ export const moonriver = new EvmParachain({
       symbol: 'GLMR.mb',
     }),
     ChainAsset.fromAsset(usdc, {
-      address: '0xffffffff2215880e56fe63a96e54e073757c3092',
+      address: getAddress('0xffffffff2215880e56fe63a96e54e073757c3092'),
       decimals: 6,
       ids: {
         id: 45305549634539991528356533909445161106n,
@@ -1844,7 +1845,7 @@ export const moonriver = new EvmParachain({
       symbol: 'xcUSDC.mb',
     }),
     ChainAsset.fromAsset(usdcwh, {
-      address: '0xffffffff9e27ab60fadfd33abf71b39a7445f7ed',
+      address: getAddress('0xffffffff9e27ab60fadfd33abf71b39a7445f7ed'),
       decimals: 6,
       ids: {
         id: 210223998887087232417477484708341610477n,
@@ -1853,7 +1854,7 @@ export const moonriver = new EvmParachain({
     }),
     // Bridged USDT from Moonbeam Ecosystem
     ChainAsset.fromAsset(usdt, {
-      address: '0xffffffffc70260a3bf46a91cf87b6f5e6abba712',
+      address: getAddress('0xffffffffc70260a3bf46a91cf87b6f5e6abba712'),
       decimals: 6,
       ids: {
         id: 264528715839624829046161791069655377682n,
@@ -2028,7 +2029,7 @@ export const peaqEvm = new EvmParachain({
       decimals: 18,
     }),
     ChainAsset.fromAsset(glmr, {
-      address: '0xFfFfFffF000000000000000000000000000003e8',
+      address: getAddress('0xFfFfFffF000000000000000000000000000003e8'),
       decimals: 18,
       ids: {
         id: '0xFfFfFffF000000000000000000000000000003e8',
@@ -2036,7 +2037,7 @@ export const peaqEvm = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(usdcwh, {
-      address: '0xFffFffFF000000000000000000000000000003E9',
+      address: getAddress('0xFffFffFF000000000000000000000000000003E9'),
       decimals: 6,
       ids: {
         id: '0xFffFffFF000000000000000000000000000003E9',
@@ -2044,7 +2045,7 @@ export const peaqEvm = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(weth, {
-      address: '0xFFFfFfFf000000000000000000000000000003ea',
+      address: getAddress('0xFFFfFfFf000000000000000000000000000003ea'),
       decimals: 18,
       ids: {
         id: '0xFFFfFfFf000000000000000000000000000003ea',
@@ -2052,7 +2053,7 @@ export const peaqEvm = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(wbtc, {
-      address: '0xfffFFFFF000000000000000000000000000003eb',
+      address: getAddress('0xfffFFFFF000000000000000000000000000003eb'),
       decimals: 8,
       ids: {
         id: '0xfffFFFFF000000000000000000000000000003eb',
@@ -2060,7 +2061,7 @@ export const peaqEvm = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(dai, {
-      address: '0xfFffFFFF000000000000000000000000000003Ec',
+      address: getAddress('0xfFffFFFF000000000000000000000000000003Ec'),
       decimals: 18,
       ids: {
         id: '0xfFffFFFF000000000000000000000000000003Ec',
@@ -2068,7 +2069,7 @@ export const peaqEvm = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(usdtwh, {
-      address: '0xfFffffFF000000000000000000000000000003Ed',
+      address: getAddress('0xfFffffFF000000000000000000000000000003Ed'),
       decimals: 6,
       ids: {
         id: '0xfFffffFF000000000000000000000000000003Ed',
@@ -2103,7 +2104,7 @@ export const peaqEvmAlphanet = new EvmParachain({
       decimals: 18,
     }),
     ChainAsset.fromAsset(dev, {
-      address: '0xFfFfFffF000000000000000000000000000003e8',
+      address: getAddress('0xFfFfFffF000000000000000000000000000003e8'),
       decimals: 18,
       ids: {
         id: '0xFfFfFffF000000000000000000000000000003e8',
@@ -2111,7 +2112,7 @@ export const peaqEvmAlphanet = new EvmParachain({
       },
     }),
     ChainAsset.fromAsset(ftmwh, {
-      address: '0xFffFffFF000000000000000000000000000003E9',
+      address: getAddress('0xFffFffFF000000000000000000000000000003E9'),
       decimals: 18,
       ids: {
         id: '0xFffFffFF000000000000000000000000000003E9',
