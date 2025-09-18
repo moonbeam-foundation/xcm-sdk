@@ -1451,6 +1451,7 @@ export const moonbeam = new EvmParachain({
         id: '311091173110107856861649819128533077277',
         palletInstance: 110,
       },
+      symbol: 'xcUSDT',
     }),
     ChainAsset.fromAsset(vastr, {
       address: '0xFffFffff55C732C47639231a4C4373245763d26E',
@@ -1507,6 +1508,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '150874409661081770150564009349448205842',
       },
+      symbol: 'xcZTG',
     }),
     ChainAsset.fromAsset(pink, {
       address: '0xfFfFFfFf30478fAFBE935e466da114E14fB3563d',
@@ -1514,6 +1516,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '64174511183114006009298114091987195453',
       },
+      symbol: 'xcPINK',
     }),
     ChainAsset.fromAsset(stink, {
       address: '0xffffffff54c556bd1d0f64ec6c78f1b477525e56',
@@ -1521,6 +1524,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '112679793397406599376365943185137098326',
       },
+      symbol: 'xcSTINK',
     }),
     ChainAsset.fromAsset(apillon, {
       address: '0xffffffff8a9736b44ebf188972725bed67bf694e',
@@ -1528,6 +1532,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '184218609779515850660274730699350567246',
       },
+      symbol: 'xcNCTR',
     }),
     ChainAsset.fromAsset(wifd, {
       address: '0xffffffff2e1d1ac9ea1686255befe995b31abc96',
@@ -1535,6 +1540,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '61295607754960722617854661686514597014',
       },
+      symbol: 'xcWIFD',
     }),
     ChainAsset.fromAsset(wbtce, {
       address: '0xffffffff1b4bb1ac5749f73d866ffc91a3432c47',
@@ -1563,6 +1569,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '294342517635293430510451841925413680520',
       },
+      symbol: 'xcLAOS',
     }),
     ChainAsset.fromAsset(eurc, {
       address: '0xffffffffa608ec1332131289cbd8a97a0bb3d90f',
@@ -1570,6 +1577,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: '220698173844663170714431919474506717455',
       },
+      symbol: 'xcEURC.s',
     }),
     ChainAsset.fromAsset(movr, {
       address: '0xffffffff54c47f43713fd9211724362697f1a302',
@@ -1577,6 +1585,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: 112675423039561305557350799263187182338n,
       },
+      symbol: 'MOVR.mr',
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
@@ -1764,6 +1773,7 @@ export const moonriver = new EvmParachain({
       ids: {
         id: 34940389883188672429634411751708934740n,
       },
+      symbol: 'GLMR.mb',
     }),
     ChainAsset.fromAsset(usdc, {
       address: '0xffffffff2215880e56fe63a96e54e073757c3092',
