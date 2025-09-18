@@ -641,7 +641,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "usdcwh",
     "min": undefined,
     "originSymbol": "USDC.Wh",
-    "symbol": undefined,
+    "symbol": "USDC",
   },
   _AssetAmount {
     "address": "0x06e605775296e851FF43b4dAa541Bb0984E9D6fD",
@@ -726,7 +726,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "usdc",
     "min": undefined,
     "originSymbol": "USDC",
-    "symbol": undefined,
+    "symbol": "xcUSDC",
   },
   _AssetAmount {
     "address": "0xFFFFFFfFea09FB06d082fd1275CD48b191cbCD1d",
@@ -739,7 +739,7 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "key": "usdt",
     "min": undefined,
     "originSymbol": "USDT",
-    "symbol": undefined,
+    "symbol": "xcUSDT",
   },
   _AssetAmount {
     "address": "0xFfffFfff5e90e365eDcA87fB4c8306Df1E91464f",

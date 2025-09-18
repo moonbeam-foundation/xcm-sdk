@@ -402,7 +402,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "usdc",
           "min": undefined,
           "originSymbol": "USDC",
-          "symbol": undefined,
+          "symbol": "xcUSDC",
         },
         "usdcwh" => _ChainAsset {
           "address": "0x931715FEE2d06333043d11F658C8CE934aC61D0c",
@@ -413,7 +413,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "usdcwh",
           "min": undefined,
           "originSymbol": "USDC.Wh",
-          "symbol": undefined,
+          "symbol": "USDC",
         },
         "usdtwh" => _ChainAsset {
           "address": "0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f",
@@ -436,7 +436,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "usdt",
           "min": undefined,
           "originSymbol": "USDT",
-          "symbol": undefined,
+          "symbol": "xcUSDT",
         },
         "vastr" => _ChainAsset {
           "address": "0xFffFffff55C732C47639231a4C4373245763d26E",
