@@ -1580,6 +1580,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         id: 112675423039561305557350799263187182338n,
       },
+      symbol: 'MOVR.mr',
     }),
   ],
   ecosystem: Ecosystem.Polkadot,
