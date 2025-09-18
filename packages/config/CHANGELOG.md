@@ -1,5 +1,29 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.3
+
+### Patch Changes
+
+- [#564](https://github.com/moonbeam-foundation/xcm-sdk/pull/564) [`f80b62d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f80b62decd8f2ce46a76a6eac7c08942abf4cde2) Thanks [@mmaurello](https://github.com/mmaurello)! - Change symbols in Moon Chains
+
+## 4.4.2
+
+### Patch Changes
+
+- [#566](https://github.com/moonbeam-foundation/xcm-sdk/pull/566) [`1562cf9`](https://github.com/moonbeam-foundation/xcm-sdk/commit/1562cf904ef3ead551114d89887841a0645e6c7a) Thanks [@mmaurello](https://github.com/mmaurello)! - Add MOVR symbol in Moonbeam
+
+## 4.4.1
+
+### Patch Changes
+
+- [#563](https://github.com/moonbeam-foundation/xcm-sdk/pull/563) [`f615192`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f6151927a1645ec3e9b08a786a68571631a25631) Thanks [@mmaurello](https://github.com/mmaurello)! - Change symbols for assets related to the moonbeam bridge
+
+## 4.4.0
+
+### Minor Changes
+
+- [#561](https://github.com/moonbeam-foundation/xcm-sdk/pull/561) [`0cc2a1d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/0cc2a1d1d253bb7374b56de1798a243408caa369) Thanks [@mmaurello](https://github.com/mmaurello)! - Implement Moonriver <> Moonbeam bridge
+
 ## 4.3.4
 
 ### Patch Changes

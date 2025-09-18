@@ -5,7 +5,7 @@ import {
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
-import { ksm, rmrk, usdt } from '../assets';
+import { ksm, rmrk, usdtksm } from '../assets';
 import { kusamaAssetHub, moonriver } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -52,7 +52,7 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: usdt,
+        asset: usdtksm,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
           asset: ksm,
@@ -65,14 +65,14 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
         },
       },
       destination: {
-        asset: usdt,
+        asset: usdtksm,
         chain: moonriver,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           amount: FeeBuilder()
             .xcmPaymentApi()
             .fromAssetIdQuery({ isAssetReserveChain: false }),
-          asset: usdt,
+          asset: usdtksm,
         },
       },
       extrinsic: ExtrinsicBuilder()

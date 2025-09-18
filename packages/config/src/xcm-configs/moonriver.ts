@@ -18,7 +18,7 @@ import {
   rmrk,
   sdn,
   teer,
-  usdt,
+  usdtksm,
   vbnc,
   vksm,
   vmovr,
@@ -454,7 +454,7 @@ export const moonriverRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: usdt,
+        asset: usdtksm,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
           asset: movr,
@@ -465,7 +465,7 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       destination: {
-        asset: usdt,
+        asset: usdtksm,
         chain: kusamaAssetHub,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
@@ -474,7 +474,7 @@ export const moonriverRoutes = new ChainRoutes({
             .fromPalletInstanceAndGeneralIndex({
               isAssetReserveChain: true,
             }),
-          asset: usdt,
+          asset: usdtksm,
         },
         min: AssetMinBuilder().assets().asset(),
       },
