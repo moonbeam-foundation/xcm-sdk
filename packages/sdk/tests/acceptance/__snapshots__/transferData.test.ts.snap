@@ -402,7 +402,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "usdc",
           "min": undefined,
           "originSymbol": "USDC",
-          "symbol": undefined,
+          "symbol": "xcUSDC",
         },
         "usdcwh" => _ChainAsset {
           "address": "0x931715FEE2d06333043d11F658C8CE934aC61D0c",
@@ -413,7 +413,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "usdcwh",
           "min": undefined,
           "originSymbol": "USDC.Wh",
-          "symbol": undefined,
+          "symbol": "USDC",
         },
         "usdtwh" => _ChainAsset {
           "address": "0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f",
@@ -436,7 +436,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "usdt",
           "min": undefined,
           "originSymbol": "USDT",
-          "symbol": undefined,
+          "symbol": "xcUSDT",
         },
         "vastr" => _ChainAsset {
           "address": "0xFffFffff55C732C47639231a4C4373245763d26E",
@@ -634,7 +634,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "key": "movr",
           "min": undefined,
           "originSymbol": "MOVR",
-          "symbol": undefined,
+          "symbol": "MOVR.mr",
         },
       },
       "checkSovereignAccountBalances": false,
@@ -1203,7 +1203,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "fee": _AssetAmount {
       "address": undefined,
-      "amount": 2750044001n,
+      "amount": 2773584905n,
       "decimals": 12,
       "ids": undefined,
       "key": "unit",
@@ -1239,7 +1239,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
   },
   "min": _AssetAmount {
     "address": undefined,
-    "amount": 12750044001n,
+    "amount": 12773584905n,
     "decimals": 12,
     "ids": undefined,
     "key": "unit",
@@ -1460,7 +1460,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "destinationFee": _AssetAmount {
       "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-      "amount": 2750044001n,
+      "amount": 2773584905n,
       "decimals": 12,
       "ids": {
         "id": "42259045809535163221576417993425387648",

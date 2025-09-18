@@ -1429,6 +1429,7 @@ export const moonbeam = new EvmParachain({
         id: '166377000701797186346254371275954761085', // registered XC20 id for ERC20 tokens
         palletInstance: 110,
       },
+      symbol: 'xcUSDC',
     }),
     ChainAsset.fromAsset(usdcwh, {
       address: '0x931715FEE2d06333043d11F658C8CE934aC61D0c',
@@ -1436,6 +1437,7 @@ export const moonbeam = new EvmParachain({
       ids: {
         palletInstance: 110,
       },
+      symbol: 'USDC',
     }),
     ChainAsset.fromAsset(usdtwh, {
       address: '0xc30E9cA94CF52f3Bf5692aaCF81353a27052c46f',
@@ -1781,6 +1783,7 @@ export const moonriver = new EvmParachain({
       ids: {
         id: 45305549634539991528356533909445161106n,
       },
+      symbol: 'xcUSDC.mb',
     }),
     ChainAsset.fromAsset(usdcwh, {
       address: '0xffffffff9e27ab60fadfd33abf71b39a7445f7ed',
@@ -1788,6 +1791,7 @@ export const moonriver = new EvmParachain({
       ids: {
         id: 210223998887087232417477484708341610477n,
       },
+      symbol: 'whUSDC.mb',
     }),
     // Bridged USDT from Moonbeam Ecosystem
     ChainAsset.fromAsset(usdt, {
@@ -1796,6 +1800,7 @@ export const moonriver = new EvmParachain({
       ids: {
         id: 264528715839624829046161791069655377682n,
       },
+      symbol: 'xcUSDT.mb',
     }),
   ],
   ecosystem: Ecosystem.Kusama,
