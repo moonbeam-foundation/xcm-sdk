@@ -1,5 +1,15 @@
 # @moonbeam-network/mrl
 
+## 4.0.15
+
+### Patch Changes
+
+- [#569](https://github.com/moonbeam-foundation/xcm-sdk/pull/569) [`d23ac5e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d23ac5ecf7865951d9e8f4d8d6184bcd2f563a78) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Moonbase Beta routes and apply checksum check
+
+- Updated dependencies [[`d23ac5e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d23ac5ecf7865951d9e8f4d8d6184bcd2f563a78)]:
+  - @moonbeam-network/xcm-config@4.4.4
+  - @moonbeam-network/xcm-sdk@4.1.9
+
 ## 4.0.14
 
 ### Patch Changes

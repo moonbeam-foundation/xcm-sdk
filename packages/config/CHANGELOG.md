@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.4
+
+### Patch Changes
+
+- [#569](https://github.com/moonbeam-foundation/xcm-sdk/pull/569) [`d23ac5e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/d23ac5ecf7865951d9e8f4d8d6184bcd2f563a78) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix Moonbase Beta routes and apply checksum check
+
 ## 4.4.3
 
 ### Patch Changes
