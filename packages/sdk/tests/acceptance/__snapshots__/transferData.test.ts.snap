@@ -81,7 +81,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
   },
   "getEstimate": [Function],
   "max": _AssetAmount {
-    "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+    "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
     "amount": 1230012345000000000n,
     "decimals": 18,
     "ids": {
@@ -104,7 +104,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
   },
   "source": {
     "balance": _AssetAmount {
-      "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+      "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
       "amount": 1230012345000000000n,
       "decimals": 18,
       "ids": {
@@ -538,7 +538,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": "xcPINK",
         },
         "stink" => _ChainAsset {
-          "address": "0xffffffff54c556bd1d0f64ec6c78f1b477525e56",
+          "address": "0xFffFffFf54c556bD1d0F64ec6c78f1B477525E56",
           "decimals": 10,
           "ids": {
             "id": "112679793397406599376365943185137098326",
@@ -549,7 +549,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": "xcSTINK",
         },
         "apillon" => _ChainAsset {
-          "address": "0xffffffff8a9736b44ebf188972725bed67bf694e",
+          "address": "0xFfFFfFfF8A9736B44EbF188972725bED67BF694E",
           "decimals": 18,
           "ids": {
             "id": "184218609779515850660274730699350567246",
@@ -560,7 +560,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": "xcNCTR",
         },
         "wifd" => _ChainAsset {
-          "address": "0xffffffff2e1d1ac9ea1686255befe995b31abc96",
+          "address": "0xfffffffF2e1D1ac9eA1686255bEfe995B31abc96",
           "decimals": 10,
           "ids": {
             "id": "61295607754960722617854661686514597014",
@@ -571,7 +571,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": "xcWIFD",
         },
         "wbtce" => _ChainAsset {
-          "address": "0xffffffff1b4bb1ac5749f73d866ffc91a3432c47",
+          "address": "0xfFffFFFf1B4Bb1ac5749F73D866FfC91a3432c47",
           "decimals": 8,
           "ids": {
             "id": "36282181791341254438422467838694599751",
@@ -582,7 +582,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": undefined,
         },
         "wethe" => _ChainAsset {
-          "address": "0xffffffff86829afe1521ad2296719df3ace8ded7",
+          "address": "0xFFffFFfF86829AFE1521ad2296719Df3acE8DEd7",
           "decimals": 18,
           "ids": {
             "id": "178794693648360392906933130845919698647",
@@ -593,7 +593,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": undefined,
         },
         "wstethe" => _ChainAsset {
-          "address": "0xffffffff5d5deb44bf7278dee5381beb24cb6573",
+          "address": "0xfFFFFFFf5d5Deb44bf7278dEE5381Beb24CB6573",
           "decimals": 18,
           "ids": {
             "id": "124105859028862849477017063633156007283",
@@ -604,7 +604,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": undefined,
         },
         "laos" => _ChainAsset {
-          "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+          "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
           "decimals": 18,
           "ids": {
             "id": "294342517635293430510451841925413680520",
@@ -615,7 +615,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": "xcLAOS",
         },
         "eurc" => _ChainAsset {
-          "address": "0xffffffffa608ec1332131289cbd8a97a0bb3d90f",
+          "address": "0xFfFfffFfa608Ec1332131289cBD8A97a0bB3D90F",
           "decimals": 12,
           "ids": {
             "id": "220698173844663170714431919474506717455",
@@ -626,7 +626,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
           "symbol": "xcEURC.s",
         },
         "movr" => _ChainAsset {
-          "address": "0xffffffff54c47f43713fd9211724362697f1a302",
+          "address": "0xFfffFffF54c47F43713fd9211724362697f1a302",
           "decimals": 18,
           "ids": {
             "id": 112675423039561305557350799263187182338n,
@@ -665,7 +665,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       ],
     },
     "destinationFee": _AssetAmount {
-      "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+      "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
       "amount": 25000000000000000n,
       "decimals": 18,
       "ids": {
@@ -677,7 +677,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "symbol": "xcLAOS",
     },
     "destinationFeeBalance": _AssetAmount {
-      "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+      "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
       "amount": 1230012345000000000n,
       "decimals": 18,
       "ids": {
@@ -725,7 +725,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "symbol": undefined,
     },
     "max": _AssetAmount {
-      "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+      "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
       "amount": 1230012345000000000n,
       "decimals": 18,
       "ids": {
@@ -737,7 +737,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
       "symbol": "xcLAOS",
     },
     "min": _AssetAmount {
-      "address": "0xffffffffdd704e8e824a5eec47de88f5b9e13588",
+      "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
       "amount": 0n,
       "decimals": 18,
       "ids": {
@@ -816,7 +816,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
           "symbol": "xcLIT",
         },
         "maos" => _ChainAsset {
-          "address": "0xffffffff06a14960bddc8610d0e694d39a3c682e",
+          "address": "0xfFFffFFf06A14960bDdc8610d0E694D39A3C682e",
           "decimals": 18,
           "ids": {
             "id": "8812816049497534070792537960559175726",
@@ -1308,7 +1308,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
           "symbol": "xcLIT",
         },
         "maos" => _ChainAsset {
-          "address": "0xffffffff06a14960bddc8610d0e694d39a3c682e",
+          "address": "0xfFFffFFf06A14960bDdc8610d0E694D39A3C682e",
           "decimals": 18,
           "ids": {
             "id": "8812816049497534070792537960559175726",
