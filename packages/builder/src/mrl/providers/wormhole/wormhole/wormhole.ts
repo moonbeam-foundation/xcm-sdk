@@ -6,6 +6,7 @@ import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
 } from '../../../../extrinsic/ExtrinsicBuilder.utils';
+import { getGlobalConsensus } from '../../../../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
 import type {
   MrlBuilderParams,
   MrlConfigBuilder,
@@ -81,7 +82,12 @@ export function wormhole() {
             payload:
               isDestinationMoonChain || isDestinationEvmChain
                 ? undefined
-                : getPayload({ destination, destinationAddress, moonApi }),
+                : getPayload({
+                    destination,
+                    destinationAddress,
+                    moonApi,
+                    moonChain,
+                  }),
           },
           func: 'tokenTransfer',
         });
@@ -98,20 +104,73 @@ export function getPayload({
   moonApi,
   destination,
   destinationAddress,
-}: Pick<MrlBuilderParams, 'destination' | 'destinationAddress' | 'moonApi'>):
-  | Uint8Array
-  | undefined {
+  moonChain,
+}: Pick<
+  MrlBuilderParams,
+  'destination' | 'destinationAddress' | 'moonApi' | 'moonChain'
+>): Uint8Array | undefined {
+  const multilocation = getMultilocation({
+    destination,
+    destinationAddress,
+    moonApi,
+    moonChain,
+  });
+
+  console.log('multilocation', multilocation.toHuman());
+  const action = moonApi.createType('XcmRoutingUserAction', {
+    destination: multilocation,
+  });
+  const versioned = moonApi.createType('VersionedUserAction', {
+    V1: action,
+  });
+
+  return versioned.toU8a();
+}
+
+export function getMultilocation({
+  moonApi,
+  destination,
+  destinationAddress,
+  moonChain,
+}: Pick<
+  MrlBuilderParams,
+  'destination' | 'destinationAddress' | 'moonApi' | 'moonChain'
+>) {
   if (!EvmParachain.isAnyParachain(destination)) {
     throw new Error(
       `Destination ${destination.name} is not a Parachain or EvmParachain`,
     );
   }
 
+  const version = getExtrinsicArgumentVersion(moonApi.tx.polkadotXcm.send);
+  const isDifferentEcosystem = destination.ecosystem !== moonChain.ecosystem;
   const isEvmDestination = EvmParachain.is(destination);
 
-  const version = getExtrinsicArgumentVersion(moonApi.tx.polkadotXcm.send);
+  if (isDifferentEcosystem) {
+    return moonApi.createType('XcmVersionedLocation', {
+      [version]: {
+        parents: 2,
+        interior: {
+          X3: [
+            {
+              GlobalConsensus: getGlobalConsensus(destination),
+            },
+            {
+              Parachain: destination.parachainId,
+            },
+            // wrong
+            getExtrinsicAccount(
+              isEvmDestination
+                ? evmToAddress(destinationAddress)
+                : destinationAddress,
+            ),
+          ],
+        },
+      },
+    });
+  }
 
-  const multilocation = moonApi.createType('XcmVersionedLocation', {
+  return moonApi.createType('XcmVersionedLocation', {
     [version]: {
       parents: 1,
       interior: {
@@ -128,12 +187,4 @@ export function getPayload({
       },
     },
   });
-  const action = moonApi.createType('XcmRoutingUserAction', {
-    destination: multilocation,
-  });
-  const versioned = moonApi.createType('VersionedUserAction', {
-    V1: action,
-  });
-
-  return versioned.toU8a();
 }

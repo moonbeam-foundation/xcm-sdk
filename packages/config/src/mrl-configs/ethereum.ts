@@ -10,7 +10,7 @@ import {
   wbtc,
   weth,
 } from '../assets';
-import { ethereum, hydration, moonbeam } from '../chains';
+import { ethereum, hydration, moonbeam, moonriver } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export const ethereumRoutes = new MrlChainRoutes({
@@ -410,6 +410,42 @@ export const ethereumRoutes = new MrlChainRoutes({
         moonChain: {
           asset: glmr,
           balance: BalanceBuilder().substrate().system().account(),
+          fee: {
+            asset: glmr,
+            amount: 0.15,
+            balance: BalanceBuilder().substrate().system().account(),
+          },
+        },
+      },
+    },
+    {
+      source: {
+        asset: usdc,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: eth,
+          balance: BalanceBuilder().evm().native(),
+        },
+        destinationFee: {
+          asset: usdc,
+          balance: BalanceBuilder().evm().erc20(),
+        },
+      },
+      destination: {
+        asset: usdcwh,
+        chain: moonriver,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          asset: usdcwh,
+          amount: 0.03, // TODO calculate
+        },
+      },
+      mrl: {
+        isAutomaticPossible: false,
+        transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
+        moonChain: {
+          asset: usdcwh,
+          balance: BalanceBuilder().evm().erc20(),
           fee: {
             asset: glmr,
             amount: 0.15,
