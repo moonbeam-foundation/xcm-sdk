@@ -7,6 +7,7 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { ISubmittableResult } from '@polkadot/types/types';
+import { moonriver } from 'viem/chains';
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import {
   getExtrinsicArgumentVersion,
@@ -94,6 +95,17 @@ export function polkadotXcm() {
         const transactionsToSend = sendOnlyRemoteExecution
           ? [send]
           : [...assetTransferTxs, send];
+        console.log('send', send.toHuman());
+        console.log(
+          'assetTransferTxs',
+          assetTransferTxs.map((tx) => tx.toHuman()),
+        );
+
+        console.log('transact', transact);
+        console.log(
+          'transactionsToSend',
+          transactionsToSend.map((tx) => tx.toHuman()),
+        );
 
         return new ExtrinsicConfig({
           module: 'utility',
@@ -127,9 +139,12 @@ export function buildSendExtrinsic({
   return sourceApi.tx.polkadotXcm.send(
     {
       [version]: normalizeX1(version, {
-        parents: 1,
+        parents: 2,
         interior: {
-          X1: { Parachain: moonChain.parachainId },
+          X2: [
+            { GlobalConsensus: 'Polkadot' },
+            { Parachain: moonChain.parachainId },
+          ],
         },
       }),
     },
@@ -221,11 +236,44 @@ function getAssetTransferTxs({
   'promise',
   ISubmittableResult
 >[] {
-  const { transfer, transferMulticurrencies } = sourceApi.tx.xTokens;
+  const { transferAssets } = sourceApi.tx.polkadotXcm;
+  // TODO mjm rename?
   const transferBuilder = ExtrinsicBuilder().xTokens().transfer();
+  const polkadotXcmBuilder = ExtrinsicBuilder()
+    .polkadotXcm()
+    .transferAssetsToEcosystem()
+    .X4();
   const transferMulticurrenciesBuilder = ExtrinsicBuilder()
     .xTokens()
     .transferMultiCurrencies();
+
+  const testMoonriver = source.name === moonriver.name;
+
+  console.log('testMoonriver', testMoonriver);
+
+  if (testMoonriver) {
+    const transferAssetsTx = transferAssets(
+      ...polkadotXcmBuilder
+        .build({
+          asset,
+          destination: moonChain,
+          destinationAddress: computedOriginAccount,
+          destinationApi: moonApi,
+          fee: AssetAmount.fromChainAsset(source.getChainAsset(moonAsset), {
+            amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
+          }),
+          source: source,
+          sourceAddress,
+          sourceApi,
+        })
+        .getArgs(transferAssets),
+    );
+
+    console.log('transferAssetsTx', transferAssetsTx.toHuman());
+
+    return [transferAssetsTx];
+  }
+  const { transfer, transferMulticurrencies } = sourceApi.tx.xTokens;
   /**
    * TODO here we should compare the asset with the cross chain fee asset.
    * For example, FTM cannot pay for fees in Moonbase while AGNG can, so for FTM we have to send a transferMulticurrencies

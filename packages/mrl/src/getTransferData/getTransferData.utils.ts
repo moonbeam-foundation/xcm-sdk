@@ -13,6 +13,7 @@ import {
   type MrlAssetRoute,
   moonbaseAlpha,
   moonbeam,
+  moonriver,
 } from '@moonbeam-network/xcm-config';
 import {
   convertToChainDecimals,
@@ -39,6 +40,7 @@ import type {
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 1273110n,
+  [moonriver.key]: 1273110n,
   [moonbaseAlpha.key]: 1470417n,
 };
 
@@ -192,6 +194,8 @@ async function getTransact(params: MrlBuilderParams): Promise<Transact> {
     .transact()
     .build({ ...params, moonGasLimit }) as ExtrinsicConfig;
   const { weight } = await polkadot.getPaymentInfo(address20, extrinsic);
+
+  console.log('extrinsic', extrinsic.getArgs());
 
   return {
     call: polkadot.getExtrinsicCallHash(extrinsic),

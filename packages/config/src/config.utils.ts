@@ -15,6 +15,8 @@ export function getKey(keyOrModel: string | AnyAsset | AnyChain): string {
 }
 
 export function getMoonChain(chain: AnyChain): EvmParachain {
+  return moonbeam;
+  // TODO mjm adapt this to Moonriver MRL
   switch (chain.ecosystem) {
     case Ecosystem.AlphanetRelay:
       return moonbaseAlpha;
