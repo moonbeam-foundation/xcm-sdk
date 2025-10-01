@@ -1199,6 +1199,7 @@ export const moonlama = new EvmParachain({
   genesisHash:
     '0xb7e61bf426fa70533e2cc8d17bc00f1d373f3f45a01eac924da95214930a0d0e',
   id: 1283,
+  isEvmSigner: true,
   isTestChain: true,
   key: 'moonlama',
   name: 'Moonlama',
@@ -1246,6 +1247,7 @@ export const moonsama = new EvmParachain({
   genesisHash:
     '0x13df313fb1b9b0c99dd215ff130c6437464706eabf0f63123d4da26019e1a0cc',
   id: 1285,
+  isEvmSigner: true,
   isTestChain: true,
   key: 'moonsama',
   name: 'Moonsama',
