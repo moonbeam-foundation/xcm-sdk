@@ -1,9 +1,19 @@
-import { type AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
+import {
+  type AnyParachain,
+  type AssetAmount,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import type { Address } from 'viem';
+import { getGlobalConsensus } from '../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
 import type { DestinationMultilocation } from './ContractBuilder.interfaces';
+
+// TODO do it correctly after PoC
+function encodeParachain(paraId: number): string {
+  return `0x00${paraId.toString(16).padStart(8, '0')}`;
+}
 
 export function getPrecompileDestinationInterior(
   destination: AnyParachain,
@@ -30,6 +40,22 @@ export function getPrecompileDestinationInterior(
     : [acc];
 }
 
+// TODO do it correctly after PoC
+export function getBeneficiaryMultilocation(
+  address: string,
+  destination: AnyParachain,
+): DestinationMultilocation {
+  // TODO extract to function
+  const accountType = EvmParachain.is(destination) ? '03' : '01';
+  const acc = `0x${accountType}${u8aToHex(
+    decodeAddress(address),
+    -1,
+    false,
+  )}00` as Address;
+
+  return [0, [acc]];
+}
+
 export function getDestinationMultilocation(
   address: string,
   destination: AnyParachain,
@@ -46,6 +72,28 @@ export function getDestinationParachainMultilocation(
   }
 
   return [1, [`0x00${destination.parachainId.toString(16).padStart(8, '0')}`]];
+}
+
+// TODO do it correctly after PoC
+export function getAssetMultilocation(
+  sourceApi: ApiPromise | undefined,
+  asset: AssetAmount,
+) {
+  return [[0, [encodePalletInstance(sourceApi)]], asset.amount];
+}
+
+// TODO do it correctly after PoC
+export function getGlobalConsensusDestination(
+  sourceApi: ApiPromise | undefined,
+  destination: AnyParachain,
+) {
+  return [
+    2,
+    [
+      encodeGlobalConsensus(sourceApi, destination),
+      encodeParachain(destination.parachainId),
+    ],
+  ];
 }
 
 /**
@@ -66,4 +114,35 @@ export function encodeXcmMessageToBytes(
     console.error('Failed to encode XCM message:', error);
     throw error;
   }
+}
+
+export function encodeGlobalConsensus(
+  api: ApiPromise | undefined,
+  destination: AnyParachain,
+): string {
+  if (!api) {
+    throw new Error('API is required to encode XCM message');
+  }
+
+  const globalConsensus = getGlobalConsensus(destination);
+
+  const junctionType = api.registry.createType('XcmV3Junction', {
+    GlobalConsensus: globalConsensus,
+  });
+
+  return junctionType.toHex();
+}
+
+export function encodePalletInstance(api: ApiPromise | undefined): string {
+  if (!api) {
+    throw new Error('API is required to encode asset');
+  }
+
+  const assetType = {
+    PalletInstance: 10,
+  };
+
+  const multiLocationType = api.registry.createType('XcmV3Junction', assetType);
+
+  return multiLocationType.toHex();
 }

@@ -7,7 +7,8 @@ export type DestinationMultilocation = [
   /**
    * 1 - if transaction is going through or to a relay chain
    */
-  1,
+  // TODO
+  number,
   (
     | [
         /**

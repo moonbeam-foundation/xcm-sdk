@@ -11,7 +11,10 @@ import {
 } from '../../ContractBuilder.interfaces';
 import {
   encodeXcmMessageToBytes,
+  getAssetMultilocation,
+  getBeneficiaryMultilocation,
   getDestinationParachainMultilocation,
+  getGlobalConsensusDestination,
 } from '../../ContractBuilder.utils';
 import { XCM_ABI } from './XcmPrecompileAbi';
 
@@ -77,6 +80,36 @@ export function XcmPrecompile() {
         });
       },
     }),
+    transferAssetsLocation: (): ContractConfigBuilder => ({
+      // TODO
+
+      build: ({ destinationAddress, asset, destination, sourceApi }) => {
+        const destinationMultilocation = getGlobalConsensusDestination(
+          sourceApi,
+          destination,
+        );
+
+        console.log('destinationMultilocation', destinationMultilocation);
+
+        console.log(
+          'assetMultilocation',
+          getAssetMultilocation(sourceApi, asset),
+        );
+
+        return new ContractConfig({
+          address: XCM_PRECOMPILE_ADDRESS,
+          abi: XCM_ABI,
+          args: [
+            getGlobalConsensusDestination(sourceApi, destination),
+            getBeneficiaryMultilocation(destinationAddress, destination),
+            [getAssetMultilocation(sourceApi, asset)],
+            0,
+          ],
+          func: 'transferAssetsLocation',
+          module: 'Xcm',
+        });
+      },
+    }),
     transferAssetsUsingTypeAndThenAddress: (
       shouldTransferAssetPrecedeFeeAsset = false,
     ): ContractConfigBuilder => ({
@@ -93,8 +126,6 @@ export function XcmPrecompile() {
           fee,
           shouldTransferAssetPrecedeFeeAsset,
         );
-
-        const destLocation = getDestinationParachainMultilocation(destination);
 
         const xcmMessage = buildXcmMessage(
           assets,
@@ -113,7 +144,7 @@ export function XcmPrecompile() {
           address: XCM_PRECOMPILE_ADDRESS,
           abi: XCM_ABI,
           args: [
-            destLocation,
+            getDestinationParachainMultilocation(destination),
             assets,
             TransferType.DestinationReserve,
             feeIndex,
