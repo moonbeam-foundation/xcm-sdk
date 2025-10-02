@@ -1247,7 +1247,7 @@ export const moonsama = new EvmParachain({
   genesisHash:
     '0x13df313fb1b9b0c99dd215ff130c6437464706eabf0f63123d4da26019e1a0cc',
   id: 1285,
-  isEvmSigner: true,
+  isEvmSigner: false,
   isTestChain: true,
   key: 'moonsama',
   name: 'Moonsama',
