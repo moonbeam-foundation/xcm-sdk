@@ -1,6 +1,5 @@
 import {
   BalanceBuilder,
-  ContractBuilder,
   ExtrinsicBuilder,
   FeeBuilder,
   MonitoringBuilder,
@@ -34,7 +33,10 @@ export const moonsamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsLocation(),
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsToEcosystem()
+        .X1(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

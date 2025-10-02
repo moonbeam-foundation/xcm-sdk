@@ -1,7 +1,6 @@
 import {
   BalanceBuilder,
   ContractBuilder,
-  ExtrinsicBuilder,
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -34,7 +33,10 @@ export const moonlamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsLocation().X1(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .nativeAsset(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -62,10 +64,10 @@ export const moonlamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X3(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .foreignAsset(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -93,11 +95,10 @@ export const moonlamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      // extrinsic: ExtrinsicBuilder()
-      //   .polkadotXcm()
-      //   .transferAssetsToEcosystem()
-      //   .X2(),
-      contract: ContractBuilder().XcmPrecompile().transferAssetsLocation().X2(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .localErc20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -125,10 +126,10 @@ export const moonlamaRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X2(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .localErc20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
