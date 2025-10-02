@@ -48,3 +48,5 @@ export enum TransferType {
   LocalReserve,
   DestinationReserve,
 }
+
+export type AssetMultilocation = (bigint | (number | string[])[])[];

@@ -8,7 +8,10 @@ import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import type { Address } from 'viem';
 import { getGlobalConsensus } from '../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
-import type { DestinationMultilocation } from './ContractBuilder.interfaces';
+import type {
+  AssetMultilocation,
+  DestinationMultilocation,
+} from './ContractBuilder.interfaces';
 
 // TODO do it correctly after PoC
 function encodeParachain(paraId: number): string {
@@ -74,12 +77,35 @@ export function getDestinationParachainMultilocation(
   return [1, [`0x00${destination.parachainId.toString(16).padStart(8, '0')}`]];
 }
 
-// TODO do it correctly after PoC
-export function getAssetMultilocation(
+export function getPalletInstanceMultilocation(
   sourceApi: ApiPromise | undefined,
   asset: AssetAmount,
-) {
-  return [[0, [encodePalletInstance(sourceApi)]], asset.amount];
+): AssetMultilocation {
+  return [
+    [0, [encodePalletInstance(sourceApi, asset.getAssetPalletInstance())]],
+    asset.amount,
+  ];
+}
+
+export function getAccountKey20Multilocation(
+  sourceApi: ApiPromise | undefined,
+  asset: AssetAmount,
+  destination: AnyParachain,
+): AssetMultilocation {
+  if (!asset.address) {
+    throw new Error(`Asset address is required for ${asset.key}`);
+  }
+
+  return [
+    [
+      0,
+      [
+        encodePalletInstance(sourceApi, asset.getAssetPalletInstance()),
+        encodeAddress(destination, asset.address),
+      ],
+    ],
+    asset.amount,
+  ];
 }
 
 // TODO do it correctly after PoC
@@ -116,33 +142,44 @@ export function encodeXcmMessageToBytes(
   }
 }
 
-export function encodeGlobalConsensus(
+function encodeGlobalConsensus(
   api: ApiPromise | undefined,
   destination: AnyParachain,
 ): string {
-  if (!api) {
-    throw new Error('API is required to encode XCM message');
-  }
-
   const globalConsensus = getGlobalConsensus(destination);
 
-  const junctionType = api.registry.createType('XcmV3Junction', {
+  return encodeXcmJunction(api, {
     GlobalConsensus: globalConsensus,
   });
+}
+
+function encodePalletInstance(
+  api: ApiPromise | undefined,
+  palletInstance: number,
+): string {
+  return encodeXcmJunction(api, {
+    PalletInstance: palletInstance,
+  });
+}
+
+function encodeXcmJunction(
+  api: ApiPromise | undefined,
+  junction: object,
+): string {
+  if (!api) {
+    throw new Error('API is required to encode XCM junction');
+  }
+
+  const junctionType = api.registry.createType('XcmV3Junction', junction);
 
   return junctionType.toHex();
 }
 
-export function encodePalletInstance(api: ApiPromise | undefined): string {
-  if (!api) {
-    throw new Error('API is required to encode asset');
-  }
-
-  const assetType = {
-    PalletInstance: 10,
-  };
-
-  const multiLocationType = api.registry.createType('XcmV3Junction', assetType);
-
-  return multiLocationType.toHex();
+function encodeAddress(destination: AnyParachain, address: string): string {
+  const accountType = EvmParachain.is(destination) ? '03' : '01';
+  return `0x${accountType}${u8aToHex(
+    decodeAddress(address),
+    -1,
+    false,
+  )}00` as Address;
 }

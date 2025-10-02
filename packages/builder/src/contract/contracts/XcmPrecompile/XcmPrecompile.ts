@@ -1,20 +1,23 @@
-import type { AssetAmount } from '@moonbeam-network/xcm-types';
+import type { AnyParachain, AssetAmount } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
+import type { BuilderParams } from '../../../builder.interfaces';
 import { getExtrinsicArgumentVersion } from '../../../extrinsic/ExtrinsicBuilder.utils';
 import { ContractConfig } from '../../../types';
 import {
   type AssetAddressFormat,
+  type AssetMultilocation,
   type ContractConfigBuilder,
   TransferType,
 } from '../../ContractBuilder.interfaces';
 import {
   encodeXcmMessageToBytes,
-  getAssetMultilocation,
+  getAccountKey20Multilocation,
   getBeneficiaryMultilocation,
   getDestinationParachainMultilocation,
   getGlobalConsensusDestination,
+  getPalletInstanceMultilocation,
 } from '../../ContractBuilder.utils';
 import { XCM_ABI } from './XcmPrecompileAbi';
 
@@ -80,35 +83,24 @@ export function XcmPrecompile() {
         });
       },
     }),
-    transferAssetsLocation: (): ContractConfigBuilder => ({
+    transferAssetsLocation: () => ({
       // TODO
-
-      build: ({ destinationAddress, asset, destination, sourceApi }) => {
-        const destinationMultilocation = getGlobalConsensusDestination(
-          sourceApi,
-          destination,
-        );
-
-        console.log('destinationMultilocation', destinationMultilocation);
-
-        console.log(
-          'assetMultilocation',
-          getAssetMultilocation(sourceApi, asset),
-        );
-
-        return new ContractConfig({
-          address: XCM_PRECOMPILE_ADDRESS,
-          abi: XCM_ABI,
-          args: [
-            getGlobalConsensusDestination(sourceApi, destination),
-            getBeneficiaryMultilocation(destinationAddress, destination),
-            [getAssetMultilocation(sourceApi, asset)],
-            0,
-          ],
-          func: 'transferAssetsLocation',
-          module: 'Xcm',
-        });
-      },
+      X1: (): ContractConfigBuilder => ({
+        build: (params) => {
+          return buildTransferAssetsLocation({
+            ...params,
+            getAssetMultilocation: getPalletInstanceMultilocation,
+          });
+        },
+      }),
+      X2: (): ContractConfigBuilder => ({
+        build: (params) => {
+          return buildTransferAssetsLocation({
+            ...params,
+            getAssetMultilocation: getAccountKey20Multilocation,
+          });
+        },
+      }),
     }),
     transferAssetsUsingTypeAndThenAddress: (
       shouldTransferAssetPrecedeFeeAsset = false,
@@ -209,4 +201,45 @@ function buildXcmMessage(
   return {
     [xcmVersion]: [instruction],
   };
+}
+
+interface BuildTransferAssetsLocationParams extends BuilderParams {
+  getAssetMultilocation: (
+    sourceApi: ApiPromise | undefined,
+    asset: AssetAmount,
+    destination: AnyParachain,
+  ) => AssetMultilocation;
+}
+
+function buildTransferAssetsLocation({
+  getAssetMultilocation,
+  destinationAddress,
+  asset,
+  destination,
+  sourceApi,
+}: BuildTransferAssetsLocationParams) {
+  const destinationMultilocation = getGlobalConsensusDestination(
+    sourceApi,
+    destination,
+  );
+
+  console.log('destinationMultilocation', destinationMultilocation);
+
+  console.log(
+    'assetMultilocation',
+    getAssetMultilocation(sourceApi, asset, destination),
+  );
+
+  return new ContractConfig({
+    address: XCM_PRECOMPILE_ADDRESS,
+    abi: XCM_ABI,
+    args: [
+      getGlobalConsensusDestination(sourceApi, destination),
+      getBeneficiaryMultilocation(destinationAddress, destination),
+      [getAssetMultilocation(sourceApi, asset, destination)],
+      0,
+    ],
+    func: 'transferAssetsLocation',
+    module: 'Xcm',
+  });
 }
