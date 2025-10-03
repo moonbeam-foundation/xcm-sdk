@@ -1,9 +1,12 @@
-import { type AnyParachain, EvmParachain } from '@moonbeam-network/xcm-types';
+import {
+  type AnyParachain,
+  type AssetAmount,
+  EvmParachain,
+} from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import type { Address } from 'viem';
-import type { BuilderParams } from '../../build';
 import { getGlobalConsensus } from '../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
 import type {
   AssetMultilocation,
@@ -62,21 +65,21 @@ export function getGlobalConsensusDestination(
   ];
 }
 
-export function getPalletInstanceMultilocation({
-  sourceApi,
-  asset,
-}: BuilderParams): AssetMultilocation {
+export function getPalletInstanceMultilocation(
+  sourceApi: ApiPromise | undefined,
+  asset: AssetAmount,
+): AssetMultilocation {
   return [
     [0, [encodePalletInstance(sourceApi, asset.getAssetPalletInstance())]],
     asset.amount,
   ];
 }
 
-export function getAssetAddressMultilocation({
-  sourceApi,
-  asset,
-  destination,
-}: BuilderParams): AssetMultilocation {
+export function getAssetAddressMultilocation(
+  sourceApi: ApiPromise | undefined,
+  asset: AssetAmount,
+  destination: AnyParachain,
+): AssetMultilocation {
   if (!asset.address) {
     throw new Error(`Asset address is required for ${asset.key}`);
   }
@@ -93,11 +96,11 @@ export function getAssetAddressMultilocation({
   ];
 }
 
-export function getGlobalConsensusAssetMultilocation({
-  sourceApi,
-  asset,
-  destination,
-}: BuilderParams): AssetMultilocation {
+export function getGlobalConsensusAssetMultilocation(
+  sourceApi: ApiPromise | undefined,
+  asset: AssetAmount,
+  destination: AnyParachain,
+): AssetMultilocation {
   const assetInDestination = destination.getChainAsset(asset);
   return [
     [
@@ -115,13 +118,15 @@ export function getGlobalConsensusAssetMultilocation({
   ];
 }
 
-export function getAddressGlobalConsensusAssetMultilocation({
-  sourceApi,
-  asset,
-  destination,
-}: BuilderParams): AssetMultilocation {
-  if (!asset.address) {
-    throw new Error(`Asset address is required for ${asset.key}`);
+export function getAddressGlobalConsensusAssetMultilocation(
+  sourceApi: ApiPromise | undefined,
+  asset: AssetAmount,
+  destination: AnyParachain,
+): AssetMultilocation {
+  const assetInDestination = destination.getChainAsset(asset);
+
+  if (!assetInDestination.address) {
+    throw new Error(`Asset address is required for ${assetInDestination.key}`);
   }
 
   return [
@@ -130,8 +135,11 @@ export function getAddressGlobalConsensusAssetMultilocation({
       [
         encodeGlobalConsensus(sourceApi, destination),
         encodeParachain(destination.parachainId),
-        encodePalletInstance(sourceApi, asset.getAssetPalletInstance()),
-        encodeAddress(destination, asset.address),
+        encodePalletInstance(
+          sourceApi,
+          assetInDestination.getAssetPalletInstance(),
+        ),
+        encodeAddress(destination, assetInDestination.address),
       ],
     ],
     asset.amount,

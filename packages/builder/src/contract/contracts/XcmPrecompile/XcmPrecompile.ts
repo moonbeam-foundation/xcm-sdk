@@ -90,7 +90,9 @@ export function XcmPrecompile() {
         build: (params) => {
           return buildTransferAssetsLocation({
             ...params,
-            assetsMultilocations: [getPalletInstanceMultilocation(params)],
+            assetsMultilocations: [
+              getPalletInstanceMultilocation(params.sourceApi, params.asset),
+            ],
           });
         },
       }),
@@ -98,7 +100,13 @@ export function XcmPrecompile() {
         build: (params) => {
           return buildTransferAssetsLocation({
             ...params,
-            assetsMultilocations: [getAssetAddressMultilocation(params)],
+            assetsMultilocations: [
+              getAssetAddressMultilocation(
+                params.sourceApi,
+                params.asset,
+                params.destination,
+              ),
+            ],
           });
         },
       }),
@@ -107,7 +115,11 @@ export function XcmPrecompile() {
           return buildTransferAssetsLocation({
             ...params,
             assetsMultilocations: [
-              getGlobalConsensusAssetMultilocation(params),
+              getGlobalConsensusAssetMultilocation(
+                params.sourceApi,
+                params.asset,
+                params.destination,
+              ),
             ],
           });
         },
@@ -117,8 +129,18 @@ export function XcmPrecompile() {
           return buildTransferAssetsLocation({
             ...params,
             assetsMultilocations: [
-              getGlobalConsensusAssetMultilocation(params),
-              getAddressGlobalConsensusAssetMultilocation(params),
+              // fee asset
+              getGlobalConsensusAssetMultilocation(
+                params.sourceApi,
+                params.fee,
+                params.destination,
+              ),
+              // transfer asset
+              getAddressGlobalConsensusAssetMultilocation(
+                params.sourceApi,
+                params.asset,
+                params.destination,
+              ),
             ],
           });
         },
