@@ -1,6 +1,6 @@
 import {
   BalanceBuilder,
-  ExtrinsicBuilder,
+  ContractBuilder,
   FeeBuilder,
   MonitoringBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -33,10 +33,10 @@ export const moonriverRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X1(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .nativeAsset(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -64,10 +64,10 @@ export const moonriverRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X3(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .foreignAsset(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -101,10 +101,10 @@ export const moonriverRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X4(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .foreignErc20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -138,10 +138,10 @@ export const moonriverRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X4(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .foreignErc20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
@@ -175,10 +175,10 @@ export const moonriverRoutes = new ChainRoutes({
           balance: BalanceBuilder().substrate().system().account(),
         },
       },
-      extrinsic: ExtrinsicBuilder()
-        .polkadotXcm()
-        .transferAssetsToEcosystem()
-        .X4(),
+      contract: ContractBuilder()
+        .XcmPrecompile()
+        .transferAssetsLocation()
+        .foreignErc20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

@@ -7,7 +7,7 @@ export type DestinationMultilocation = [
   /**
    * 1 - if transaction is going through or to a relay chain
    */
-  1,
+  0 | 1 | 2,
   (
     | [
         /**
@@ -47,3 +47,5 @@ export enum TransferType {
   LocalReserve,
   DestinationReserve,
 }
+
+export type AssetMultilocation = (bigint | (number | string[])[])[];
