@@ -21,6 +21,36 @@ export const kusamaAssetHubRoutes = new ChainRoutes({
   routes: [
     {
       source: {
+        asset: ksm,
+        balance: BalanceBuilder().substrate().system().account(),
+        fee: {
+          asset: ksm,
+          balance: BalanceBuilder().substrate().system().account(),
+          extra,
+        },
+        destinationFee: {
+          balance: BalanceBuilder().substrate().assets().account(),
+        },
+      },
+      destination: {
+        asset: ksm,
+        chain: moonriver,
+        balance: BalanceBuilder().evm().erc20(),
+        fee: {
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromHere({ isAssetReserveChain: false }),
+          asset: ksm,
+        },
+      },
+      extrinsic: ExtrinsicBuilder()
+        .polkadotXcm()
+        .transferAssetsUsingTypeAndThen()
+        .here(1),
+      monitoring: monitoringToMoonriver,
+    },
+    {
+      source: {
         asset: rmrk,
         balance: BalanceBuilder().substrate().assets().account(),
         fee: {
