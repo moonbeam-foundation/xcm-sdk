@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 4.2.6
+
+### Patch Changes
+
+- [#571](https://github.com/moonbeam-foundation/xcm-sdk/pull/571) [`bee256e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bee256e17a82bcde46a21be617c2c7eca0bcf445) Thanks [@mmaurello](https://github.com/mmaurello)! - Change Moonbeam Moonriver bridge extrinsics to contract transactions
+
 ## 4.2.5
 
 ### Patch Changes
