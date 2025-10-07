@@ -1,5 +1,27 @@
 # @moonbeam-network/mrl
 
+## 4.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`bee256e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bee256e17a82bcde46a21be617c2c7eca0bcf445)]:
+  - @moonbeam-network/xcm-builder@4.2.6
+  - @moonbeam-network/xcm-config@4.4.6
+  - @moonbeam-network/xcm-sdk@4.1.11
+
+## 4.0.16
+
+### Patch Changes
+
+- [#572](https://github.com/moonbeam-foundation/xcm-sdk/pull/572) [`b6ad5e8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6ad5e8059fccac6513dd1de0484e7f6a205cb62) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`b6ad5e8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6ad5e8059fccac6513dd1de0484e7f6a205cb62)]:
+  - @moonbeam-network/xcm-builder@4.2.5
+  - @moonbeam-network/xcm-config@4.4.5
+  - @moonbeam-network/xcm-types@4.2.3
+  - @moonbeam-network/xcm-utils@4.1.3
+  - @moonbeam-network/xcm-sdk@4.1.10
+
 ## 4.0.15
 
 ### Patch Changes

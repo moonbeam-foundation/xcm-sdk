@@ -1,0 +1,240 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContractBuilder.utils > encodeXcmMessageToBytes > should encode XCM message correctly 1`] = `"0x03140004000100a10f043205011f000210020400010100a10f020c"`;
+
+exports[`ContractBuilder.utils > getAddressGlobalConsensusAssetMultilocation > should include all components in correct order 1`] = `
+[
+  [
+    2,
+    [
+      "0x02000000",
+      "0x00000003e8",
+      "0x0410",
+      "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getAddressGlobalConsensusAssetMultilocation > should return correct multilocation with address 1`] = `
+[
+  [
+    2,
+    [
+      "0x02000000",
+      "0x00000003e8",
+      "0x0410",
+      "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getAssetAddressMultilocation > should include both pallet instance and address in interior 1`] = `
+[
+  [
+    0,
+    [
+      "0x0410",
+      "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getAssetAddressMultilocation > should return correct multilocation with address 1`] = `
+[
+  [
+    0,
+    [
+      "0x0410",
+      "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getBeneficiaryMultilocation > should return correct multilocation for EVM address 1`] = `
+[
+  0,
+  [
+    "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getBeneficiaryMultilocation > should return correct multilocation for Substrate address 1`] = `
+[
+  0,
+  [
+    "0x01d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d00",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getDestinationMultilocation > should include parachain encoding in interior 1`] = `
+[
+  1,
+  [
+    "0x00000003e8",
+    "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getDestinationMultilocation > should return correct multilocation with parents=1 1`] = `
+[
+  1,
+  [
+    "0x00000003e8",
+    "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getDestinationParachainMultilocation > should return [1, []] for relay chain 1`] = `
+[
+  1,
+  [],
+]
+`;
+
+exports[`ContractBuilder.utils > getDestinationParachainMultilocation > should return [1, [parachain]] for regular parachain 1`] = `
+[
+  1,
+  [
+    "0x00000003e8",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getGlobalConsensusAssetMultilocation > should include global consensus, parachain, and pallet instance 1`] = `
+[
+  [
+    2,
+    [
+      "0x02000000",
+      "0x00000007f0",
+      "0x0410",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getGlobalConsensusAssetMultilocation > should return correct multilocation with global consensus 1`] = `
+[
+  [
+    2,
+    [
+      "0x02000000",
+      "0x00000007f0",
+      "0x0410",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getGlobalConsensusDestination > should include encoded global consensus 1`] = `
+[
+  2,
+  [
+    "0x02000000",
+    "0x00000003e8",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getGlobalConsensusDestination > should include parachain encoding 1`] = `
+[
+  2,
+  [
+    "0x02000000",
+    "0x00000003e8",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getGlobalConsensusDestination > should return [2, [globalConsensus, parachain]] 1`] = `
+[
+  2,
+  [
+    "0x02000000",
+    "0x00000003e8",
+  ],
+]
+`;
+
+exports[`ContractBuilder.utils > getPalletInstanceMultilocation > should encode pallet instance correctly 1`] = `
+[
+  [
+    0,
+    [
+      "0x0410",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getPalletInstanceMultilocation > should include correct asset amount 1`] = `
+[
+  [
+    0,
+    [
+      "0x0418",
+    ],
+  ],
+  5000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getPalletInstanceMultilocation > should return correct multilocation with pallet instance 1`] = `
+[
+  [
+    0,
+    [
+      "0x0410",
+    ],
+  ],
+  99000000000n,
+]
+`;
+
+exports[`ContractBuilder.utils > getPrecompileDestinationInterior > should encode EVM address with type 03 for EvmParachain 1`] = `
+[
+  "0x00000003e8",
+  "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+]
+`;
+
+exports[`ContractBuilder.utils > getPrecompileDestinationInterior > should encode Substrate address with type 01 for regular Parachain 1`] = `
+[
+  "0x00000003e9",
+  "0x01d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d00",
+]
+`;
+
+exports[`ContractBuilder.utils > getPrecompileDestinationInterior > should return only address for relay chain (parachainId = 0) 1`] = `
+[
+  "0x01d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d00",
+]
+`;
+
+exports[`ContractBuilder.utils > getPrecompileDestinationInterior > should return only parachain encoding when no address provided 1`] = `
+[
+  "0x00000003e8",
+]
+`;
+
+exports[`ContractBuilder.utils > getPrecompileDestinationInterior > should return parachain and address encoding when address provided 1`] = `
+[
+  "0x00000003e8",
+  "0x0398891e5fd24ef33a488a47101f65d212ff6e650e00",
+]
+`;
