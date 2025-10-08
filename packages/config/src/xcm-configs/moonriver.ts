@@ -31,7 +31,6 @@ import {
   integritee,
   karura,
   kintsugi,
-  kusama,
   kusamaAssetHub,
   moonriver,
   robonomics,
@@ -347,13 +346,12 @@ export const moonriverRoutes = new ChainRoutes({
       },
       destination: {
         asset: ksm,
-        chain: kusama,
+        chain: kusamaAssetHub,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: FeeBuilder().xcmPaymentApi().fromHere({
-            isAssetReserveChain: true,
-            parents: 0,
-          }),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromHere({ isAssetReserveChain: true }),
           asset: ksm,
         },
       },

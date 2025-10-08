@@ -16,7 +16,6 @@ import { integriteeRoutes } from './integritee';
 import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
 import { kintsugiRoutes } from './kintsugi';
-import { kusamaRoutes } from './kusama';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
 import { laosRoutes } from './laos';
 import { laosAlphanetRoutes } from './laosAlphanet';
@@ -59,7 +58,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   interlayRoutes,
   karuraRoutes,
   kintsugiRoutes,
-  kusamaRoutes,
   mantaParachainRoutes,
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,

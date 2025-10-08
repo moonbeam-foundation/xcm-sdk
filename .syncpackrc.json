@@ -1,0 +1,24 @@
+{
+  "versionGroups": [
+    {
+      "label": "Exclude internal @moonbeam-network packages from syncing",
+      "dependencies": [
+        "@moonbeam-network/xcm-types",
+        "@moonbeam-network/xcm-utils",
+        "@moonbeam-network/xcm-builder",
+        "@moonbeam-network/xcm-config",
+        "@moonbeam-network/xcm-sdk",
+        "@moonbeam-network/mrl"
+      ],
+      "dependencyTypes": ["dev", "prod", "peer"],
+      "packages": ["**"],
+      "isIgnored": true
+    },
+    {
+      "label": "Sync all other dependencies",
+      "dependencies": ["**"],
+      "dependencyTypes": ["dev", "prod", "peer"],
+      "packages": ["**"]
+    }
+  ]
+}
