@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.7
+
+### Patch Changes
+
+- [#575](https://github.com/moonbeam-foundation/xcm-sdk/pull/575) [`ba067fe`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ba067fe20ab6651c3ae09242a8aba69a1060b885) Thanks [@mmaurello](https://github.com/mmaurello)! - add KSM route between Moonriver and Kusama Asset Hub and remove the Kusama route
+
 ## 4.4.6
 
 ### Patch Changes
