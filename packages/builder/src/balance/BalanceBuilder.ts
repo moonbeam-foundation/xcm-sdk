@@ -87,33 +87,47 @@ function assets() {
 
 function foreignAssets() {
   return {
-    account: (): BalanceConfigBuilder => ({
-      build: ({ address, asset }) => {
-        if (!asset.address) {
-          throw new Error(
-            'Asset address is needed to calculate balance with foreignAssets.account function',
-          );
-        }
+    account: () => ({
+      globalConsensus: (): BalanceConfigBuilder => ({
+        build: ({ address, asset }) => {
+          if (!asset.address) {
+            throw new Error(
+              'Asset address is needed to calculate balance with foreignAssets.account function',
+            );
+          }
 
-        const multilocation = {
-          parents: 2,
-          interior: {
-            X2: [
-              { GlobalConsensus: { ethereum: { chainId: 1 } } },
-              getExtrinsicAccount(asset.address),
-            ],
-          },
-        };
+          const multilocation = {
+            parents: 2,
+            interior: {
+              X2: [
+                { GlobalConsensus: { ethereum: { chainId: 1 } } },
+                getExtrinsicAccount(asset.address),
+              ],
+            },
+          };
 
-        return new SubstrateQueryConfig({
-          module: 'foreignAssets',
-          func: 'account',
-          args: [multilocation, address],
-          transform: async (
-            response: Option<PalletAssetsAssetAccount>,
-          ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
-        });
-      },
+          return new SubstrateQueryConfig({
+            module: 'foreignAssets',
+            func: 'account',
+            args: [multilocation, address],
+            transform: async (
+              response: Option<PalletAssetsAssetAccount>,
+            ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
+          });
+        },
+      }),
+      id: (): BalanceConfigBuilder => ({
+        build: ({ address, asset }) => {
+          return new SubstrateQueryConfig({
+            module: 'foreignAssets',
+            func: 'account',
+            args: [asset.getBalanceAssetId(), address],
+            transform: async (
+              response: Option<PalletAssetsAssetAccount>,
+            ): Promise<bigint> => response.unwrapOrDefault().balance.toBigInt(),
+          });
+        },
+      }),
     }),
   };
 }

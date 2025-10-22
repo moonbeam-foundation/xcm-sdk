@@ -276,7 +276,7 @@ assets.forEach((asset) => {
 
   console.log(`You can send ${asset.originSymbol}...`);
 
-  if (sources.length > 1) {
+  if (sources.length > 0) {
     sources.forEach((source) => {
       const { destinations } = setSource(source);
  
