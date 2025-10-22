@@ -36,9 +36,13 @@ export async function getSourceData({
 }: GetSourceDataParams): Promise<SourceChainTransferData> {
   const source = route.source.chain as AnyParachain;
   const destination = route.destination.chain as AnyParachain;
-  const [sourcePolkadot, destinationPolkadot] =
-    await PolkadotService.createMulti([source, destination]);
+  console.log('source', source);
+  console.log('destination', destination);
+  const [sourcePolkadot] = await PolkadotService.createMulti([source]);
   const asset = source.getChainAsset(route.source.asset);
+  console.log('asset', asset);
+  console.log('sourcePolkadot', sourcePolkadot);
+  // console.log('destinationPolkadot', destinationPolkadot);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
     : asset;
@@ -74,7 +78,7 @@ export async function getSourceData({
     asset: balance,
     destination: route.destination.chain as AnyParachain,
     destinationAddress,
-    destinationApi: destinationPolkadot.api,
+    // destinationApi: destinationPolkadot.api,
     fee: destinationFee,
     source,
     sourceAddress,
@@ -85,7 +89,7 @@ export async function getSourceData({
     asset: balance,
     destination: route.destination.chain as AnyParachain,
     destinationAddress,
-    destinationApi: destinationPolkadot.api,
+    // destinationApi: destinationPolkadot.api,
     fee: destinationFee,
     source,
     sourceAddress,

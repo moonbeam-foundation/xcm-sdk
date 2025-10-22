@@ -1,11 +1,11 @@
 import { ConfigService, xcmRoutesMap } from '@moonbeam-network/xcm-config';
-import {
-  type AnyAsset,
-  type AnyChain,
-  type AnyParachain,
-  type AssetAmount,
-  type Ecosystem,
-  EvmParachain,
+import type {
+  AnyAsset,
+  AnyChain,
+  AnyParachain,
+  AssetAmount,
+  Ecosystem,
+  // EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { getAssetsBalances } from './getTransferData/getSourceData';
 import { getTransferData } from './getTransferData/getTransferData';
@@ -52,19 +52,20 @@ export function Sdk({ configService, ecosystem }: SdkOptions = {}) {
                   sourceAddress: string;
                   destinationAddress: string;
                 }): Promise<TransferData> {
-                  const sourceChain = service.getChain(source);
+                  // const sourceChain = service.getChain(source);
 
-                  if (!EvmParachain.isAnyParachain(sourceChain)) {
-                    throw new Error(
-                      'Source chain should be a Parachain or EvmParachain',
-                    );
-                  }
+                  // TODO: I get this checks, but if we include Dancelight <> Sepolia as regular XCM it must be removed
+                  // if (!EvmParachain.isAnyParachain(sourceChain)) {
+                  //   throw new Error(
+                  //     'Source chain should be a Parachain or EvmParachain',
+                  //   );
+                  // }
 
-                  if (!EvmParachain.isAnyParachain(route.destination.chain)) {
-                    throw new Error(
-                      'Destination chain should be a Parachain or EvmParachain',
-                    );
-                  }
+                  // if (!EvmParachain.isAnyParachain(route.destination.chain)) {
+                  //   throw new Error(
+                  //     'Destination chain should be a Parachain or EvmParachain',
+                  //   );
+                  // }
 
                   return getTransferData({
                     route,

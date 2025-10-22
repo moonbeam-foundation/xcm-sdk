@@ -92,14 +92,13 @@ export async function getTransferData({
         route.source.chain.getChainAsset(route.source.asset),
         { amount: bigintAmount },
       );
-      const [sourcePolkadot, destinationPolkadot] =
-        await PolkadotService.createMulti([source, destination]);
+      const [sourcePolkadot] = await PolkadotService.createMulti([source]);
 
       const contract = route.contract?.build({
         asset,
         destination,
         destinationAddress,
-        destinationApi: destinationPolkadot.api,
+        // destinationApi: destinationPolkadot.api,
         fee: destinationFee,
         source,
         sourceAddress,
@@ -109,7 +108,7 @@ export async function getTransferData({
         asset,
         destination,
         destinationAddress,
-        destinationApi: destinationPolkadot.api,
+        // destinationApi: destinationPolkadot.api,
         fee: destinationFee,
         source,
         sourceAddress,

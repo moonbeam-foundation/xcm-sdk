@@ -34,7 +34,12 @@ export async function listenToDestinationEvents({
   }
 
   try {
-    const api: ApiPromise = await getPolkadotApi(route.destination.chain.ws);
+    const api: ApiPromise | undefined = await getPolkadotApi(
+      route.destination.chain.ws,
+    );
+    if (!api) {
+      throw new Error('No destination API available for monitoring');
+    }
 
     log('Subscribing to destination events...');
     const unsubscribe = await api.query.system.events((events) => {
@@ -186,7 +191,13 @@ export async function listenToSourceEvents({
   }
 
   try {
-    const api: ApiPromise = await getPolkadotApi(route.source.chain.ws);
+    const api: ApiPromise | undefined = await getPolkadotApi(
+      route.source.chain.ws,
+    );
+    // TODO include this?
+    if (!api) {
+      throw new Error('No source API available for monitoring');
+    }
 
     log('Subscribing to source events...');
     const unsubscribe = await api.query.system.events((events) => {
