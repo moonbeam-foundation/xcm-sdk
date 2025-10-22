@@ -1,3 +1,4 @@
+import { EvmChain } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import {
   type ExtrinsicConfigBuilder,
@@ -111,6 +112,83 @@ export function xcmPallet() {
                       },
                     ],
                   },
+                  'Unlimited',
+                ];
+              },
+            }),
+        }),
+      };
+    },
+    transferAssets: () => {
+      const func = 'transferAssets';
+
+      return {
+        globalConsensus: (): ExtrinsicConfigBuilder => ({
+          build: ({ destination, destinationAddress, asset }) =>
+            new ExtrinsicConfig({
+              module: pallet,
+              func,
+              getArgs: (extrinsicFunction) => {
+                if (!EvmChain.is(destination)) {
+                  throw new Error('Destination must be an EVM chain');
+                }
+
+                const version = getExtrinsicArgumentVersion(extrinsicFunction);
+                const dest = {
+                  [version]: {
+                    parents: 1,
+                    interior: {
+                      X1: [
+                        {
+                          GlobalConsensus: {
+                            Ethereum: { chainId: destination.id },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                };
+
+                const beneficiary = {
+                  [version]: {
+                    parents: 0,
+                    interior: {
+                      X1: [
+                        {
+                          AccountKey20: {
+                            network: { Ethereum: { chainId: destination.id } },
+                            key: destinationAddress,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                };
+
+                const assets = {
+                  [version]: [
+                    {
+                      id: {
+                        parents: 1,
+                        interior: {
+                          X1: [
+                            {
+                              GlobalConsensus: {
+                                Ethereum: { chainId: destination.id },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      fun: { Fungible: asset.amount },
+                    },
+                  ],
+                };
+                return [
+                  dest,
+                  beneficiary,
+                  assets,
+                  0, // feeAssetItem
                   'Unlimited',
                 ];
               },
