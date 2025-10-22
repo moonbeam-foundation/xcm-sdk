@@ -1665,13 +1665,21 @@ export const moonbeamRoutes = new ChainRoutes({
       destination: {
         asset: wbtce,
         chain: polkadotAssetHub,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
             isAssetReserveChain: true,
           }),
           asset: wbtce,
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
@@ -1698,13 +1706,21 @@ export const moonbeamRoutes = new ChainRoutes({
       destination: {
         asset: wethe,
         chain: polkadotAssetHub,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
             isAssetReserveChain: true,
           }),
           asset: wethe,
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
@@ -1731,13 +1747,21 @@ export const moonbeamRoutes = new ChainRoutes({
       destination: {
         asset: wstethe,
         chain: polkadotAssetHub,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
             isAssetReserveChain: true,
           }),
           asset: wstethe,
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
