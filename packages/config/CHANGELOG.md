@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-config
 
+## 4.4.8
+
+### Patch Changes
+
+- [#577](https://github.com/moonbeam-foundation/xcm-sdk/pull/577) [`5db2f09`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5db2f09699d94f4ea6b2119b0017f78223a3dbf4) Thanks [@mmaurello](https://github.com/mmaurello)! - New Foreign Assets pallet balance builder
+
+- Updated dependencies [[`5db2f09`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5db2f09699d94f4ea6b2119b0017f78223a3dbf4)]:
+  - @moonbeam-network/xcm-builder@4.3.0
+
 ## 4.4.7
 
 ### Patch Changes
