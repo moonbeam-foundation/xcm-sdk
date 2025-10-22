@@ -52,6 +52,7 @@ describe('balanceBuilder', () => {
         .substrate()
         .foreignAssets()
         .account()
+        .globalConsensus()
         .build({
           address,
           asset,

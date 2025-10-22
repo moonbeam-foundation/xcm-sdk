@@ -702,7 +702,7 @@ exports[`sdk/transferData > asset 'laos' from source 'Moonbeam' to destination '
     },
     "fee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 3679218750000000n,
+      "amount": 8644812500000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 10,
