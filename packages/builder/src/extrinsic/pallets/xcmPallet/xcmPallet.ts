@@ -119,6 +119,7 @@ export function xcmPallet() {
         }),
       };
     },
+    // TODO mjm remove this?
     transferAssets: () => {
       const func = 'transferAssets';
 

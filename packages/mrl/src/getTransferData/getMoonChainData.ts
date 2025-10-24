@@ -1,5 +1,9 @@
 import { getMoonChain, type MrlAssetRoute } from '@moonbeam-network/xcm-config';
-import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
+import {
+  type DestinationChainTransferData,
+  getBalance,
+  getDestinationFee,
+} from '@moonbeam-network/xcm-sdk';
 import {
   type AnyChain,
   EvmParachain,
@@ -7,23 +11,56 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
-import type { MoonChainTransferData } from '../mrl.interfaces';
+import type {
+  MoonChainTransferData,
+  SourceTransferData,
+} from '../mrl.interfaces';
 
 interface GetMoonChainDataParams {
   route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
+  sourceData: SourceTransferData;
+  destinationData: DestinationChainTransferData;
 }
 
 export async function getMoonChainData({
   route,
   sourceAddress,
   destinationAddress,
+  sourceData,
+  destinationData,
 }: GetMoonChainDataParams): Promise<MoonChainTransferData> {
   if (!route.mrl) {
     throw new Error(
       `MRL config is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
+  }
+
+  // TODO mjm do this properly, after changing moonChain concept (gateChain?)
+  if (route.source.chain.key === 'dancelight') {
+    return {
+      address: sourceAddress,
+      balance: sourceData.balance,
+      feeBalance: sourceData.feeBalance,
+      chain: route.source.chain as Parachain,
+      fee: sourceData.fee,
+    };
+  }
+  if (route.destination.chain.key === 'dancelight') {
+    const feeBalance = await getBalance({
+      address: destinationAddress,
+      asset: destinationData.chain.getChainAsset(route.mrl.moonChain.fee.asset),
+      builder: route.mrl.moonChain.fee.balance,
+      chain: destinationData.chain,
+    });
+    return {
+      address: destinationAddress,
+      balance: destinationData.balance,
+      feeBalance,
+      chain: route.destination.chain as Parachain,
+      fee: destinationData.fee,
+    };
   }
 
   const moonChain = getMoonChain(route.source.chain);

@@ -50,6 +50,7 @@ export async function getTransferData({
     route,
     destinationAddress,
   });
+  console.log('destinationData', destinationData);
 
   // NOTE: Here we need to convert the fee on the destination chain
   // to an asset on source chain.
@@ -57,6 +58,7 @@ export async function getTransferData({
     asset: destinationData.fee,
     target: route.getDestinationFeeAssetOnSource(),
   });
+  console.log('destinationFee', destinationFee);
 
   const sourceData = await getSourceData({
     isAutomatic: route.mrl.isAutomaticPossible && isAutomatic,
@@ -65,12 +67,16 @@ export async function getTransferData({
     destinationFee,
     sourceAddress,
   });
+  console.log('sourceData', sourceData);
 
   const moonChainData = await getMoonChainData({
     route,
     sourceAddress,
     destinationAddress,
+    sourceData, // TODO mjm added for testing dancelight
+    destinationData, // TODO mjm added for testing dancelight
   });
+  console.log('moonChainData', moonChainData);
 
   return {
     destination: destinationData,

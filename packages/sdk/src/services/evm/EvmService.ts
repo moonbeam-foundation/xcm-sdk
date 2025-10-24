@@ -41,6 +41,7 @@ export class EvmService {
       address: contract.address as Address,
       args: contract.args,
       functionName: contract.func,
+      value: contract.value,
     });
     const gasPrice = await this.client.getGasPrice();
 
@@ -71,6 +72,7 @@ export class EvmService {
       address: contract.address as Address,
       args: contract.args,
       functionName: contract.func,
+      value: contract.value,
     });
     const hash = await signer.writeContract(request);
 

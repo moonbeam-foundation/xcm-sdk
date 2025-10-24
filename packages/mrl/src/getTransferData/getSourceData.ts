@@ -63,6 +63,7 @@ export async function getSourceData({
     builder: route.source.balance,
     chain: source,
   });
+  console.log('balance', balance);
 
   const feeBalance = route.source.fee
     ? await getBalance({
@@ -72,6 +73,7 @@ export async function getSourceData({
         chain: source,
       })
     : balance;
+  console.log('feeBalance', feeBalance);
 
   const destinationFeeBalance = await getDestinationFeeBalance({
     balance,
@@ -79,6 +81,7 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
+  console.log('destinationFeeBalance', destinationFeeBalance);
 
   const moonChainFeeBalance = await getMoonChainFeeBalance({
     balance,
@@ -86,8 +89,10 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
+  console.log('moonChainFeeBalance', moonChainFeeBalance);
 
   const existentialDeposit = await getExistentialDeposit(source);
+  console.log('existentialDeposit', existentialDeposit);
 
   const min = await getAssetMin({
     asset,
@@ -177,6 +182,12 @@ async function getFee({
   feeConfig,
   sourceAddress,
 }: GetFeeParams): Promise<AssetAmount> {
+  // TODO mjm
+  if (chain.key === 'sepolia') {
+    return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
+      amount: 29709265294444n,
+    });
+  }
   if (WormholeConfig.is(transfer)) {
     // TODO
     return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
@@ -216,6 +227,10 @@ async function getRelayerFee({
   sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
+  // TODO mjm handle this
+  if (chain.key === 'dancelight' || chain.key === 'sepolia') {
+    return undefined;
+  }
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }

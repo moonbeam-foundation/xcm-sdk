@@ -119,6 +119,7 @@ export async function buildTransfer(params: BuildTransferParams) {
     );
   }
   const builderParams = await getMrlBuilderParams(params);
+  console.log('builderParams', builderParams);
 
   return route.mrl.transfer.build({
     ...builderParams,
@@ -153,6 +154,11 @@ export async function getMrlBuilderParams({
       : undefined,
     getPolkadotApi(moonChain.ws),
   ]);
+  // TODO mjm moonChain is wrong
+  console.log('moonChain', moonChain);
+  console.log('sourceApi', sourceApi);
+  console.log('destinationApi', destinationApi);
+  console.log('moonApi', moonApi);
 
   return {
     asset,
@@ -171,7 +177,13 @@ export async function getMrlBuilderParams({
   };
 }
 
-async function getTransact(params: MrlBuilderParams): Promise<Transact> {
+async function getTransact(
+  params: MrlBuilderParams,
+): Promise<Transact | undefined> {
+  // TODO mjm handle this
+  if (params.source.key === 'dancelight') {
+    return undefined;
+  }
   const { sourceAddress, source, moonChain } = params;
   const polkadot = await PolkadotService.create(moonChain);
   const moonGasLimit = await getMoonGasLimit(params);

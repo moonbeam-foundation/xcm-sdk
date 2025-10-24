@@ -12,6 +12,7 @@ export enum Ecosystem {
   StagenetRelay = 'stagenet-relay',
   MoonlamaRelay = 'moonlama-relay',
   MoonsamaRelay = 'moonsama-relay',
+  TanssiTestnet = 'tanssi-testnet',
 }
 
 export interface WormholeConfig {

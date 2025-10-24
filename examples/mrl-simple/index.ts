@@ -137,6 +137,7 @@ async function fromEvmChain(
 
     const redeemChainWalletClient = createWalletClient({
       account,
+      // TODO mjm handle this if we change to Parachain
       chain: transferData.moonChain.chain.getViemChain(),
       transport: http(),
     });

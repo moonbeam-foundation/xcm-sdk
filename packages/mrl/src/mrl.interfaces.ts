@@ -5,7 +5,7 @@ import type {
 import type {
   AnyChain,
   AssetAmount,
-  EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
 import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
@@ -48,7 +48,7 @@ export interface SourceTransferData extends SourceChainTransferData {
 export interface DestinationTransferData extends ChainTransferData {}
 
 export type MoonChainTransferData = Omit<ChainTransferData, 'min'> & {
-  chain: EvmParachain;
+  chain: Parachain;
   address: string;
   feeBalance: AssetAmount;
 };
