@@ -133,6 +133,7 @@ export async function getTransferData({
       );
       const transfer = await buildTransfer({
         asset,
+        bridgeFee: sourceData.bridgeFee,
         destinationAddress,
         feeAsset,
         isAutomatic,

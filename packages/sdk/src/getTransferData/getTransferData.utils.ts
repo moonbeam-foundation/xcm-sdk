@@ -5,6 +5,7 @@ import {
   EvmQueryConfig,
   type ExtrinsicConfig,
   type FeeConfigBuilder,
+  SubstrateCallConfig,
   SubstrateQueryConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { AssetRoute, FeeConfig } from '@moonbeam-network/xcm-config';
@@ -194,10 +195,11 @@ export async function getDestinationFee({
       feeAsset: destination.getChainAsset(feeAsset),
       source,
     });
-
-    return zero.copyWith({
-      amount: await cfg.call(),
-    });
+    if (SubstrateCallConfig.is(cfg)) {
+      return zero.copyWith({
+        amount: await cfg.call(),
+      });
+    }
   }
 
   return zero;

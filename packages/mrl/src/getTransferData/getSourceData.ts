@@ -1,11 +1,14 @@
 import {
   ContractConfig,
   type ExtrinsicConfig,
+  type FeeConfigBuilder,
+  type FeeConfigBuilderParams,
   MrlBuilder,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { FeeConfig, MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import {
+  EvmService,
   getAssetMin,
   getBalance,
   getContractFee,
@@ -18,7 +21,8 @@ import {
   type AnyChain,
   type AnyParachain,
   AssetAmount,
-  type EvmChain,
+  type ChainAsset,
+  EvmChain,
   type EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
@@ -63,7 +67,7 @@ export async function getSourceData({
     builder: route.source.balance,
     chain: source,
   });
-  console.log('balance', balance);
+  // console.log('balance', balance);
 
   const feeBalance = route.source.fee
     ? await getBalance({
@@ -73,7 +77,7 @@ export async function getSourceData({
         chain: source,
       })
     : balance;
-  console.log('feeBalance', feeBalance);
+  // console.log('feeBalance', feeBalance);
 
   const destinationFeeBalance = await getDestinationFeeBalance({
     balance,
@@ -81,7 +85,7 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
-  console.log('destinationFeeBalance', destinationFeeBalance);
+  // console.log('destinationFeeBalance', destinationFeeBalance);
 
   const moonChainFeeBalance = await getMoonChainFeeBalance({
     balance,
@@ -89,10 +93,10 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
-  console.log('moonChainFeeBalance', moonChainFeeBalance);
+  // console.log('moonChainFeeBalance', moonChainFeeBalance);
 
   const existentialDeposit = await getExistentialDeposit(source);
-  console.log('existentialDeposit', existentialDeposit);
+  // console.log('existentialDeposit', existentialDeposit);
 
   const min = await getAssetMin({
     asset,
@@ -100,8 +104,19 @@ export async function getSourceData({
     chain: source,
   });
 
+  const bridgeFee = await getBridgeFee({
+    chain: source,
+    asset,
+    bridgeFee: route.source.bridgeFee,
+    address: sourceAddress,
+    destination: route.destination.chain,
+    feeAsset: feeBalance,
+    source: source,
+  });
+
   const transfer = await buildTransfer({
     asset: balance,
+    bridgeFee,
     destinationAddress,
     feeAsset: feeBalance,
     isAutomatic,
@@ -139,6 +154,7 @@ export async function getSourceData({
 
   return {
     balance,
+    bridgeFee,
     chain: source,
     destinationFee,
     destinationFeeBalance,
@@ -182,12 +198,6 @@ async function getFee({
   feeConfig,
   sourceAddress,
 }: GetFeeParams): Promise<AssetAmount> {
-  // TODO mjm
-  if (chain.key === 'sepolia') {
-    return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
-      amount: 29709265294444n,
-    });
-  }
   if (WormholeConfig.is(transfer)) {
     // TODO
     return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
@@ -196,6 +206,7 @@ async function getFee({
   }
 
   if (ContractConfig.is(transfer)) {
+    console.log('transfer in the contract fee', transfer);
     return getContractFee({
       address: sourceAddress,
       balance,
@@ -228,12 +239,18 @@ async function getRelayerFee({
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
   // TODO mjm handle this
-  if (chain.key === 'dancelight' || chain.key === 'sepolia') {
+  if (chain.key === 'sepolia') {
+    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+      amount: 29709265294444n,
+    });
+  }
+  if (chain.key === 'dancelight') {
     return undefined;
   }
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }
+  console.log('feeAsset', feeAsset);
 
   // TODO this is only valid for Wormhole Provider
   const builderParams = await getMrlBuilderParams({
@@ -309,5 +326,57 @@ async function getMoonChainFeeBalance({
     asset: route.source.chain.getChainAsset(route.source.moonChainFee.asset),
     builder: route.source.moonChainFee.balance,
     chain: route.source.chain,
+  });
+}
+
+interface GetBridgeFeeParams extends Omit<FeeConfigBuilderParams, 'api'> {
+  chain: AnyChain;
+  asset: ChainAsset;
+  bridgeFee?: number | FeeConfigBuilder;
+}
+
+async function getBridgeFee({
+  chain,
+  asset,
+  bridgeFee,
+  address,
+  destination,
+}: GetBridgeFeeParams): Promise<AssetAmount> {
+  if (chain.key === 'dancelight') {
+    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+      amount: 1600000000000n,
+    });
+  }
+
+  if (typeof bridgeFee === 'number') {
+    return AssetAmount.fromChainAsset(asset, {
+      amount: bridgeFee,
+    });
+  }
+
+  const config = bridgeFee?.build({
+    asset,
+    address,
+    destination,
+    feeAsset: asset,
+    source: chain,
+  });
+
+  if (ContractConfig.is(config) && EvmChain.is(chain)) {
+    const evm = EvmService.create(chain);
+
+    const amount = await evm.read(config);
+
+    if (typeof amount !== 'bigint') {
+      throw new Error(`Error getting bridge fee`);
+    }
+
+    return AssetAmount.fromChainAsset(asset, {
+      amount,
+    });
+  }
+
+  return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+    amount: 0n,
   });
 }

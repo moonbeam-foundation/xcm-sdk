@@ -38,6 +38,7 @@ export interface TransferParams {
 }
 
 export interface SourceTransferData extends SourceChainTransferData {
+  bridgeFee?: AssetAmount; // TODO mjm merge this with relayer fee?
   destinationFeeBalance: AssetAmount;
   moonChainFeeBalance?: AssetAmount;
   relayerFee?: AssetAmount;

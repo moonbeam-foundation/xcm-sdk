@@ -34,6 +34,15 @@ export class EvmService {
     return this.client[query.func](...query.args);
   }
 
+  async read(config: ContractConfig) {
+    return this.client.readContract({
+      abi: config.abi,
+      address: config.address as Address,
+      args: config.args,
+      functionName: config.func,
+    });
+  }
+
   async getFee(address: string, contract: ContractConfig): Promise<bigint> {
     const gas = await this.client.estimateContractGas({
       abi: contract.abi,

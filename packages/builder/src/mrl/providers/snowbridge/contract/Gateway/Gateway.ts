@@ -14,20 +14,20 @@ export const GATEWAY_CONTRACT_ADDRESS =
 export function Gateway() {
   return {
     sendToken: (): MrlConfigBuilder => ({
-      build: ({ asset, destinationAddress, fee }) => {
-        const value = fee.isSame(asset)
-          ? asset.amount + fee.amount
-          : fee.amount;
+      build: ({ asset, destinationAddress, bridgeFee }) => {
+        if (!bridgeFee) {
+          throw new Error(
+            'Bridge fee is required for Gateway.sendToken module',
+          );
+        }
+
+        const value = bridgeFee.isSame(asset)
+          ? asset.amount + bridgeFee.amount
+          : bridgeFee.amount;
         console.log('msgValue', value);
         console.log('asset amount', asset);
         console.log(
-          `if ${fee.isSame(asset)}, adding fee amount ${fee.amount} to asset amount ${asset.amount}`,
-        );
-        console.log('asset address', asset.address);
-        console.log('destinationAddress', destinationAddress);
-        console.log(
-          'u8aToHex(decodeAddress(destinationAddress))',
-          u8aToHex(decodeAddress(destinationAddress)),
+          `if ${bridgeFee.isSame(asset)}, adding bridgeFee amount ${bridgeFee.amount} to asset amount ${asset.amount}`,
         );
 
         const args = [

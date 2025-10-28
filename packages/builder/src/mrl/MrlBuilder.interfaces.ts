@@ -1,5 +1,6 @@
 import type {
   AnyChain,
+  AssetAmount,
   ChainAsset,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
@@ -22,6 +23,7 @@ export type MrlExecuteConfigBuilder = ConfigBuilder<
 
 export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   isAutomatic: boolean;
+  bridgeFee?: AssetAmount;
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   moonChain: EvmParachain;

@@ -98,6 +98,7 @@ export function getMrlMin({
 
 export interface BuildTransferParams {
   asset: AssetAmount;
+  bridgeFee?: AssetAmount;
   destinationAddress: string;
   feeAsset: AssetAmount;
   isAutomatic: boolean;
@@ -131,6 +132,7 @@ export async function buildTransfer(params: BuildTransferParams) {
 
 export async function getMrlBuilderParams({
   asset,
+  bridgeFee,
   destinationAddress,
   feeAsset,
   isAutomatic,
@@ -162,6 +164,7 @@ export async function getMrlBuilderParams({
 
   return {
     asset,
+    bridgeFee,
     destination,
     destinationAddress,
     destinationApi,

@@ -24,6 +24,8 @@ export interface MrlConfig {
 }
 
 export interface MrlSourceConfig extends SourceConfig {
+  bridgeFee?: number | FeeConfigBuilder;
+  // TODO mjm is it needed after the change?
   moonChainFee?: {
     asset: Asset;
     balance: BalanceConfigBuilder;

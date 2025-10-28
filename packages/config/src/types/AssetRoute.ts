@@ -34,7 +34,7 @@ export interface SourceConfig {
 }
 
 export interface DestinationConfig extends Omit<SourceConfig, 'fee'> {
-  fee: DestinationFeeConfig;
+  fee: FeeAmountConfig;
 }
 
 export interface FeeConfig {
@@ -45,8 +45,7 @@ export interface FeeConfig {
   extra?: number;
 }
 
-export interface DestinationFeeConfig
-  extends SetOptional<FeeConfig, 'balance'> {
+export interface FeeAmountConfig extends SetOptional<FeeConfig, 'balance'> {
   amount: number | FeeConfigBuilder;
 }
 
