@@ -1,17 +1,20 @@
+import type { u128 } from '@polkadot/types';
 import { GATEWAY_CONTRACT_ADDRESS } from '../mrl/providers/snowbridge/contract/Gateway';
 import { GATEWAY_ABI } from '../mrl/providers/snowbridge/contract/Gateway/GatewayAbi';
-import { ContractConfig } from '../types';
-import type { FeeConfigBuilder } from './FeeBuilder.interfaces';
+import { ContractConfig, SubstrateQueryConfig } from '../types';
+import type { BridgeFeeConfigBuilder } from './FeeBuilder.interfaces';
 import { xcmPaymentApi } from './xcmPaymentApi';
 
 export function FeeBuilder() {
   return {
     xcmPaymentApi,
     quoteSendTokenFee,
+    outboundQueueApiFee,
   };
 }
 
-function quoteSendTokenFee(): FeeConfigBuilder {
+// TODO mjm move from here, nest inside
+function quoteSendTokenFee(): BridgeFeeConfigBuilder {
   return {
     build: ({ asset }) => {
       if (!asset.address) {
@@ -24,6 +27,35 @@ function quoteSendTokenFee(): FeeConfigBuilder {
         args: [asset.address, 1, 0n],
         func: 'quoteSendTokenFee',
         module: 'Gateway', // TODO mjm Does it matter?
+      });
+    },
+  };
+}
+
+// TODO mjm move from here, nest inside
+function outboundQueueApiFee(): BridgeFeeConfigBuilder {
+  return {
+    build: ({ address, asset, balance }) => {
+      console.log('lonely address', address);
+      const args = [
+        {
+          MintForeignToken: {
+            tokenId: asset.getAssetId(),
+            recipient: address,
+            amount: balance?.amount,
+          },
+        },
+        null,
+      ];
+      return new SubstrateQueryConfig({
+        module: 'outboundQueueApi',
+        func: 'calculateFee',
+        args,
+        queryType: 'call',
+        transform: async (data: {
+          local: u128;
+          remote: u128;
+        }): Promise<bigint> => data.local.toBigInt() + data.remote.toBigInt(),
       });
     },
   };

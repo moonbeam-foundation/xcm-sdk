@@ -1,5 +1,6 @@
 import type {
   BalanceConfigBuilder,
+  BridgeFeeConfigBuilder,
   FeeConfigBuilder,
   MrlConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
@@ -24,7 +25,7 @@ export interface MrlConfig {
 }
 
 export interface MrlSourceConfig extends SourceConfig {
-  bridgeFee?: number | FeeConfigBuilder;
+  bridgeFee?: number | BridgeFeeConfigBuilder;
   // TODO mjm is it needed after the change?
   moonChainFee?: {
     asset: Asset;

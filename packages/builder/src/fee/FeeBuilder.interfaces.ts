@@ -1,8 +1,13 @@
-import type { AnyChain, ChainAsset } from '@moonbeam-network/xcm-types';
+import type {
+  AnyChain,
+  AssetAmount,
+  ChainAsset,
+} from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { Enum } from '@polkadot/types';
 import type { StagingXcmV3MultiLocation } from '@polkadot/types/lookup';
 import type { ConfigBuilder } from '../builder.interfaces';
+import type { SubstrateQueryConfig } from '../types';
 import type { ContractConfig } from '../types/evm/ContractConfig';
 import type { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
 
@@ -11,13 +16,26 @@ export type FeeConfigBuilder = ConfigBuilder<
   FeeConfigBuilderParams
 >;
 
+export type BridgeFeeConfigBuilder = ConfigBuilder<
+  SubstrateQueryConfig | ContractConfig,
+  BridgeFeeConfigBuilderParams
+>;
+
 export interface FeeConfigBuilderParams {
   address: string;
   api?: ApiPromise;
   asset: ChainAsset;
+  balance?: AssetAmount;
   destination: AnyChain;
   feeAsset: ChainAsset;
   source: AnyChain;
+}
+
+export interface BridgeFeeConfigBuilderParams {
+  asset: ChainAsset;
+  chain: AnyChain;
+  address: string;
+  balance?: AssetAmount;
 }
 
 export interface XcmPaymentFeeProps {

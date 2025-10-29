@@ -1,9 +1,10 @@
 import {
+  type BridgeFeeConfigBuilder,
+  type BridgeFeeConfigBuilderParams,
   ContractConfig,
   type ExtrinsicConfig,
-  type FeeConfigBuilder,
-  type FeeConfigBuilderParams,
   MrlBuilder,
+  SubstrateQueryConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { FeeConfig, MrlAssetRoute } from '@moonbeam-network/xcm-config';
@@ -16,14 +17,14 @@ import {
   getExistentialDeposit,
   getExtrinsicFee,
   getMax,
+  PolkadotService,
 } from '@moonbeam-network/xcm-sdk';
 import {
   type AnyChain,
   type AnyParachain,
   AssetAmount,
-  type ChainAsset,
   EvmChain,
-  type EvmParachain,
+  EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type { SourceTransferData } from '../mrl.interfaces';
@@ -106,12 +107,10 @@ export async function getSourceData({
 
   const bridgeFee = await getBridgeFee({
     chain: source,
-    asset,
+    asset: feeAsset, // TODO mjm will it always be the case?
+    balance,
     bridgeFee: route.source.bridgeFee,
-    address: sourceAddress,
-    destination: route.destination.chain,
-    feeAsset: feeBalance,
-    source: source,
+    address: destinationAddress,
   });
 
   const transfer = await buildTransfer({
@@ -329,25 +328,17 @@ async function getMoonChainFeeBalance({
   });
 }
 
-interface GetBridgeFeeParams extends Omit<FeeConfigBuilderParams, 'api'> {
-  chain: AnyChain;
-  asset: ChainAsset;
-  bridgeFee?: number | FeeConfigBuilder;
+interface GetBridgeFeeParams extends BridgeFeeConfigBuilderParams {
+  bridgeFee?: number | BridgeFeeConfigBuilder;
 }
 
 async function getBridgeFee({
-  chain,
-  asset,
-  bridgeFee,
   address,
-  destination,
+  asset,
+  balance,
+  chain,
+  bridgeFee,
 }: GetBridgeFeeParams): Promise<AssetAmount> {
-  if (chain.key === 'dancelight') {
-    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: 1600000000000n,
-    });
-  }
-
   if (typeof bridgeFee === 'number') {
     return AssetAmount.fromChainAsset(asset, {
       amount: bridgeFee,
@@ -355,11 +346,10 @@ async function getBridgeFee({
   }
 
   const config = bridgeFee?.build({
-    asset,
     address,
-    destination,
-    feeAsset: asset,
-    source: chain,
+    asset,
+    balance,
+    chain,
   });
 
   if (ContractConfig.is(config) && EvmChain.is(chain)) {
@@ -371,6 +361,14 @@ async function getBridgeFee({
       throw new Error(`Error getting bridge fee`);
     }
 
+    return AssetAmount.fromChainAsset(asset, {
+      amount,
+    });
+  }
+
+  if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(chain)) {
+    const polkadot = await PolkadotService.create(chain);
+    const amount = await polkadot.query(config);
     return AssetAmount.fromChainAsset(asset, {
       amount,
     });
