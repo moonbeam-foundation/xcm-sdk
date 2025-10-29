@@ -36,7 +36,6 @@ function quoteSendTokenFee(): BridgeFeeConfigBuilder {
 function outboundQueueApiFee(): BridgeFeeConfigBuilder {
   return {
     build: ({ address, asset, balance }) => {
-      console.log('lonely address', address);
       const args = [
         {
           MintForeignToken: {
