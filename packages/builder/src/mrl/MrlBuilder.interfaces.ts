@@ -9,10 +9,11 @@ import type { HexString } from '@polkadot/util/types';
 import type { BuilderParams, ConfigBuilder } from '../builder.interfaces';
 import type { ContractConfig } from '../contract';
 import type { ExtrinsicConfig } from '../extrinsic';
+import type { SnowbridgeConfig } from './providers/snowbridge/snowbridge';
 import type { WormholeConfig } from './providers/wormhole/wormhole';
 
 export type MrlConfigBuilder = ConfigBuilder<
-  ContractConfig | ExtrinsicConfig | WormholeConfig,
+  ContractConfig | ExtrinsicConfig | WormholeConfig | SnowbridgeConfig,
   MrlBuilderParams
 >;
 

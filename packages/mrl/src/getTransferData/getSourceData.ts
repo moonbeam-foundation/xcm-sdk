@@ -4,6 +4,7 @@ import {
   ContractConfig,
   type ExtrinsicConfig,
   MrlBuilder,
+  SnowbridgeConfig,
   SubstrateQueryConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
@@ -28,6 +29,7 @@ import {
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type { SourceTransferData } from '../mrl.interfaces';
+import { SnowbridgeService } from '../services/snowbridge';
 import { WormholeService } from '../services/wormhole';
 import {
   type BuildTransferParams,
@@ -174,18 +176,26 @@ interface GetFeeParams {
   feeBalance: AssetAmount;
   feeConfig?: FeeConfig;
   sourceAddress: string;
-  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
+  transfer:
+    | ContractConfig
+    | ExtrinsicConfig
+    | WormholeConfig
+    | SnowbridgeConfig;
 }
 
 interface GetRelayFeeParams extends BuildTransferParams {
   chain: AnyChain;
-  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
+  transfer:
+    | ContractConfig
+    | ExtrinsicConfig
+    | WormholeConfig
+    | SnowbridgeConfig;
 }
 
 interface GetWormholeFeeParams {
   asset: AssetAmount;
   chain: AnyChain;
-  config: ContractConfig | ExtrinsicConfig | WormholeConfig;
+  config: ContractConfig | ExtrinsicConfig | WormholeConfig | SnowbridgeConfig;
 }
 
 async function getFee({
@@ -204,8 +214,18 @@ async function getFee({
     });
   }
 
+  if (SnowbridgeConfig.is(transfer)) {
+    const snowbridge = SnowbridgeService.create(
+      chain as EvmChain | EvmParachain,
+    );
+    const feeAmount = await snowbridge.getFee(sourceAddress, transfer);
+
+    return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
+      amount: feeAmount,
+    });
+  }
+
   if (ContractConfig.is(transfer)) {
-    console.log('transfer in the contract fee', transfer);
     return getContractFee({
       address: sourceAddress,
       balance,

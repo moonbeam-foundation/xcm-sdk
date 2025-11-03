@@ -1,6 +1,7 @@
 import {
   ContractConfig,
   ExtrinsicConfig,
+  SnowbridgeConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
@@ -18,6 +19,7 @@ import {
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import type { TransferData, TransferParams } from '../mrl.interfaces';
+import { SnowbridgeService } from '../services/snowbridge';
 import { WormholeService } from '../services/wormhole';
 import { getMoonChainData } from './getMoonChainData';
 import { getSourceData } from './getSourceData';
@@ -183,6 +185,20 @@ export async function getTransferData({
         const wh = WormholeService.create(source);
 
         return wh.transfer(evmSigner, transfer);
+      }
+
+      if (
+        SnowbridgeConfig.is(transfer) &&
+        (EvmChain.is(source) || EvmParachain.is(source))
+      ) {
+        if (!evmSigner) {
+          throw new Error('EVM Signer must be provided');
+        }
+
+        const snowbridge = SnowbridgeService.create(source);
+        const hash = await snowbridge.transfer(evmSigner, transfer);
+
+        return [hash];
       }
 
       throw new Error('Either contract or extrinsic must be provided');

@@ -1,6 +1,6 @@
 import type { u128 } from '@polkadot/types';
-import { GATEWAY_CONTRACT_ADDRESS } from '../mrl/providers/snowbridge/contract/Gateway';
 import { GATEWAY_ABI } from '../mrl/providers/snowbridge/contract/Gateway/GatewayAbi';
+import { GATEWAY_CONTRACT_ADDRESS } from '../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
 import { ContractConfig, SubstrateQueryConfig } from '../types';
 import type { BridgeFeeConfigBuilder } from './FeeBuilder.interfaces';
 import { xcmPaymentApi } from './xcmPaymentApi';
@@ -14,6 +14,7 @@ export function FeeBuilder() {
 }
 
 // TODO mjm move from here, nest inside
+// TODO mjm move to SnowbridgeConfig?
 function quoteSendTokenFee(): BridgeFeeConfigBuilder {
   return {
     build: ({ asset }) => {
