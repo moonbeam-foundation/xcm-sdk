@@ -1,4 +1,3 @@
-import { EvmChain } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from '../../../types/substrate/ExtrinsicConfig';
 import {
   type ExtrinsicConfigBuilder,
