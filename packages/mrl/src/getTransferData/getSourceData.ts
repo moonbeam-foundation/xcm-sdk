@@ -109,7 +109,9 @@ export async function getSourceData({
 
   const bridgeFee = await getBridgeFee({
     chain: source,
-    asset: feeAsset, // TODO mjm will it always be the case?
+    // For now, the fee asset is always the one used for the bridge fee
+    // If it where to change, we need make bridgeFee a FeeConfig in MrlSourceConfig
+    asset: feeAsset,
     balance,
     bridgeFee: route.source.bridgeFee,
     address: destinationAddress,
@@ -264,6 +266,7 @@ async function getRelayerFee({
   sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
+  // TODO mjm return 0 for non-Wormhole providers
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }

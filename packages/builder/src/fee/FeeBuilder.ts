@@ -12,6 +12,7 @@ export function FeeBuilder() {
   };
 }
 
+// TODO mjm tests to this
 function outboundQueueApi() {
   return {
     calculateFee: (): BridgeFeeConfigBuilder => {
