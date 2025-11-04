@@ -98,7 +98,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "fee": _AssetAmount {
       "address": "0xFfFffFff1a49463978f19dfD6983f2fa1885C254",
-      "amount": 267572042236025855n,
+      "amount": 272932266794076520n,
       "decimals": 18,
       "ids": {
         "id": 34940389883188672429634411751708934740n,
@@ -137,7 +137,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
   },
   "min": _AssetAmount {
     "address": "0xFfFffFff1a49463978f19dfD6983f2fa1885C254",
-    "amount": 267572042236025855n,
+    "amount": 272932266794076520n,
     "decimals": 18,
     "ids": {
       "id": 34940389883188672429634411751708934740n,
@@ -231,7 +231,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "destinationFee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 267572042236025855n,
+      "amount": 272932266794076520n,
       "decimals": 18,
       "ids": {
         "palletInstance": 10,
@@ -416,7 +416,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "fee": _AssetAmount {
       "address": "0xFFfFFFFF57029d0EC61f38481147f4E1a0D5E3Ed",
-      "amount": 267572042236025855n,
+      "amount": 272932266794076520n,
       "decimals": 18,
       "ids": {
         "id": 115656405735822573536813785456152273901n,
@@ -455,7 +455,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
   },
   "min": _AssetAmount {
     "address": "0xFFfFFFFF57029d0EC61f38481147f4E1a0D5E3Ed",
-    "amount": 267572042236025855n,
+    "amount": 272932266794076520n,
     "decimals": 18,
     "ids": {
       "id": 115656405735822573536813785456152273901n,
@@ -549,7 +549,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonlama' to de
     },
     "destinationFee": _AssetAmount {
       "address": "0xbdd558F3bE2807fCE11B5FB2b2fa86f310F67855",
-      "amount": 267572042236025855n,
+      "amount": 272932266794076520n,
       "decimals": 18,
       "ids": {
         "palletInstance": 110,
@@ -734,7 +734,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
     },
     "fee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 26764488750000000n,
+      "amount": 26873707500000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 10,
@@ -867,7 +867,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza' from source 'Moonsama' to de
     },
     "destinationFee": _AssetAmount {
       "address": "0xFfFffFff1a49463978f19dfD6983f2fa1885C254",
-      "amount": 26764488750000000n,
+      "amount": 26873707500000000n,
       "decimals": 18,
       "ids": {
         "id": 34940389883188672429634411751708934740n,
@@ -1052,7 +1052,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
     },
     "fee": _AssetAmount {
       "address": "0xFFFfFfFFA993C0CA4B46667277C3cAAA5A4da783",
-      "amount": 20001n,
+      "amount": 20401n,
       "decimals": 6,
       "ids": {
         "id": 225406709175884615521168913363167455107n,
@@ -1091,7 +1091,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
   },
   "min": _AssetAmount {
     "address": "0xFFFfFfFFA993C0CA4B46667277C3cAAA5A4da783",
-    "amount": 20001n,
+    "amount": 20401n,
     "decimals": 6,
     "ids": {
       "id": 225406709175884615521168913363167455107n,
@@ -1185,7 +1185,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonlama' 
     },
     "destinationFee": _AssetAmount {
       "address": "0x385c00353CfF4C3129306E0A6dCD1947E8354133",
-      "amount": 20001n,
+      "amount": 20401n,
       "decimals": 6,
       "ids": {
         "palletInstance": 110,
@@ -1370,7 +1370,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
     },
     "fee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 26764488750000000n,
+      "amount": 26873707500000000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 10,
@@ -1503,7 +1503,7 @@ exports[`sdk/transferData ecosystem > asset 'pizza-usdc' from source 'Moonsama' 
     },
     "destinationFee": _AssetAmount {
       "address": "0xFfFffFff1a49463978f19dfD6983f2fa1885C254",
-      "amount": 26764488750000000n,
+      "amount": 26873707500000000n,
       "decimals": 18,
       "ids": {
         "id": 34940389883188672429634411751708934740n,
@@ -1688,7 +1688,7 @@ exports[`sdk/transferData ecosystem > asset 'sama-movr' from source 'Moonsama' t
     },
     "fee": _AssetAmount {
       "address": "0xFfffFffF54c47F43713fd9211724362697f1a302",
-      "amount": 3613403660418987n,
+      "amount": 3685790352529529n,
       "decimals": 18,
       "ids": {
         "id": 112675423039561305557350799263187182338n,
@@ -1727,7 +1727,7 @@ exports[`sdk/transferData ecosystem > asset 'sama-movr' from source 'Moonsama' t
   },
   "min": _AssetAmount {
     "address": "0xFfffFffF54c47F43713fd9211724362697f1a302",
-    "amount": 3613403660418987n,
+    "amount": 3685790352529529n,
     "decimals": 18,
     "ids": {
       "id": 112675423039561305557350799263187182338n,
@@ -1821,7 +1821,7 @@ exports[`sdk/transferData ecosystem > asset 'sama-movr' from source 'Moonsama' t
     },
     "destinationFee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 3613403660418987n,
+      "amount": 3685790352529529n,
       "decimals": 18,
       "ids": {
         "palletInstance": 10,
