@@ -16,6 +16,11 @@ import type {
 
 export const apiMock = {
   tx: {
+    ethereumTokenTransfers: {
+      transferNativeToken: vi.fn(
+        () => 'ethereumTokenTransfers.transferNativeToken => RESULT',
+      ),
+    },
     polkadotXcm: { send: vi.fn(() => 'polkadotXcm.send => RESULT') },
     xcmPallet: {
       transferAssets: vi.fn(() => 'xcmPallet.transferAssets => RESULT'),

@@ -10,8 +10,6 @@ export function ethereumTokenTransfers() {
 
       return {
         build: ({ asset, destinationAddress }) => {
-          console.log('building transferAssets extrinsic');
-
           return new ExtrinsicConfig({
             module: pallet,
             func,
