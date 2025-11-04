@@ -116,7 +116,7 @@ export async function getSourceData({
   });
 
   const transfer = await buildTransfer({
-    asset: balance,
+    asset: balance.copyWith({ amount: balance.amount - bridgeFee.amount }),
     bridgeFee,
     destinationAddress,
     feeAsset: feeBalance,
@@ -226,15 +226,22 @@ async function getFee({
   }
 
   if (ContractConfig.is(transfer)) {
-    return getContractFee({
-      address: sourceAddress,
-      balance,
-      chain: chain as EvmChain | EvmParachain,
-      contract: transfer,
-      destinationFee,
-      feeBalance,
-      feeConfig,
-    });
+    try {
+      return getContractFee({
+        address: sourceAddress,
+        balance,
+        chain: chain as EvmChain | EvmParachain,
+        contract: transfer,
+        destinationFee,
+        feeBalance,
+        feeConfig,
+      });
+    } catch (error) {
+      // A lot of EVM chains throw an error if the account has not enough balance or similar situations
+      // So we return 0n here in MRL, so it doesn't affect regular XCM flow
+      console.error(error);
+      return feeBalance.copyWith({ amount: 0n });
+    }
   }
 
   return getExtrinsicFee({
@@ -257,19 +264,9 @@ async function getRelayerFee({
   sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
-  // TODO mjm handle this
-  if (chain.key === 'sepolia') {
-    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: 29709265294444n,
-    });
-  }
-  if (chain.key === 'dancelight') {
-    return undefined;
-  }
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }
-  console.log('feeAsset', feeAsset);
 
   // TODO this is only valid for Wormhole Provider
   const builderParams = await getMrlBuilderParams({

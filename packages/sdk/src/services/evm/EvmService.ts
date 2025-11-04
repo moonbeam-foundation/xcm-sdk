@@ -44,25 +44,17 @@ export class EvmService {
   }
 
   async getFee(address: string, contract: ContractConfig): Promise<bigint> {
-    try {
-      const gas = await this.client.estimateContractGas({
-        abi: contract.abi,
-        // account: '0x0D0707963952f2fBA59dD06f2b425ace40b492Fe' as Address,
-        account: address as Address,
-        address: contract.address as Address,
-        args: contract.args,
-        functionName: contract.func,
-        value: contract.value,
-      });
-      const gasPrice = await this.client.getGasPrice();
+    const gas = await this.client.estimateContractGas({
+      abi: contract.abi,
+      account: address as Address,
+      address: contract.address as Address,
+      args: contract.args,
+      functionName: contract.func,
+      value: contract.value,
+    });
+    const gasPrice = await this.client.getGasPrice();
 
-      return gas * gasPrice;
-    } catch (error) {
-      // TODO mjm handle this?
-      // TODO mjm move to getFee in MRL source, so it doesn't affect the rest?
-      console.error(error);
-      return 0n;
-    }
+    return gas * gasPrice;
   }
 
   async getBalance(address: string, contract: ContractConfig): Promise<bigint> {

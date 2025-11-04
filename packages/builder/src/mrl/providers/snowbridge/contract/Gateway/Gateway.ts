@@ -1,7 +1,6 @@
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { ASSET_HUB_PARA_ID, SnowbridgeConfig } from '../../snowbridge';
 
-// TODO mjm move this to snowbridge builder?
 export function Gateway() {
   return {
     sendToken: (): MrlConfigBuilder => ({
