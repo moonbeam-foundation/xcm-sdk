@@ -5,7 +5,6 @@ import { getGlobalConsensusArgs } from './xcmPallet.utils';
 
 const pallet = 'xcmPallet';
 
-// TODO mjm add tests
 export function xcmPallet() {
   return {
     transferAssets: () => {
