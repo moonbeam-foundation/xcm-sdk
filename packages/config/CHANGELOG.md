@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.5.0
+
+### Minor Changes
+
+- [#580](https://github.com/moonbeam-foundation/xcm-sdk/pull/580) [`4b201ff`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4b201ff74aca877c6b61e0b05fbe1665a36b66ff) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Polkadot Route after Asset Hub migration
+
 ## 4.4.8
 
 ### Patch Changes
