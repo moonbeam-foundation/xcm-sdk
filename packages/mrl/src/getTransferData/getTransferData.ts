@@ -98,7 +98,7 @@ export async function getTransferData({
           isSameAssetPayingDestinationFee ? destinationFee.toBig() : Big(0),
         )
         .minus(fee)
-        .minus(sourceData.relayerFee?.toBig() || Big(0));
+        .minus(sourceData.otherFees?.relayer?.toBig() || Big(0));
 
       return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
@@ -135,7 +135,7 @@ export async function getTransferData({
       );
       const transfer = await buildTransfer({
         asset,
-        bridgeFee: sourceData.bridgeFee,
+        bridgeFee: sourceData.otherFees?.bridge,
         destinationAddress,
         feeAsset,
         isAutomatic,

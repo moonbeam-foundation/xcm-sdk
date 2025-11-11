@@ -157,7 +157,6 @@ export async function getSourceData({
 
   return {
     balance,
-    bridgeFee,
     chain: source,
     destinationFee,
     destinationFeeBalance,
@@ -167,7 +166,10 @@ export async function getSourceData({
     feeBalance,
     max,
     min,
-    relayerFee,
+    otherFees: {
+      bridge: bridgeFee,
+      relayer: relayerFee?.amount ? relayerFee : undefined,
+    },
   };
 }
 
@@ -267,6 +269,12 @@ async function getRelayerFee({
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
   // TODO mjm return 0 for non-Wormhole providers
+  // TODO mjm differentiate between different providers somehow
+  if (chain.key === 'dancelight') {
+    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+      amount: 0n,
+    });
+  }
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }

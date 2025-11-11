@@ -693,29 +693,32 @@ Defines the complete transfer data for transferring an asset, including asset ba
             getAssetMin: [Function: getAssetMin],
             hasOnlyAddress: [Function: hasOnlyAddress],
         },
-        relayerFee: _AssetAmount {
-            key: "usdc",
-            originSymbol: "USDC",
-            address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-            decimals: 6,
-            ids: undefined,
-            min: undefined,
-            symbol: undefined,
-            amount: 0n,
-            isSame: [Function: isSame],
-            isEqual: [Function: isEqual],
-            copyWith: [Function: copyWith],
-            convertDecimals: [Function: convertDecimals],
-            toBig: [Function: toBig],
-            toBigDecimal: [Function: toBigDecimal],
-            toDecimal: [Function: toDecimal],
-            getSymbol: [Function: getSymbol],
-            getAssetId: [Function: getAssetId],
-            getBalanceAssetId: [Function: getBalanceAssetId],
-            getMinAssetId: [Function: getMinAssetId],
-            getAssetPalletInstance: [Function: getAssetPalletInstance],
-            getAssetMin: [Function: getAssetMin],
-            hasOnlyAddress: [Function: hasOnlyAddress],
+        otherFees: {
+            bridge: undefined,
+            relayer: _AssetAmount {
+                key: "usdc",
+                originSymbol: "USDC",
+                address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                decimals: 6,
+                ids: undefined,
+                min: undefined,
+                symbol: undefined,
+                amount: 0n,
+                isSame: [Function: isSame],
+                isEqual: [Function: isEqual],
+                copyWith: [Function: copyWith],
+                convertDecimals: [Function: convertDecimals],
+                toBig: [Function: toBig],
+                toBigDecimal: [Function: toBigDecimal],
+                toDecimal: [Function: toDecimal],
+                getSymbol: [Function: getSymbol],
+                getAssetId: [Function: getAssetId],
+                getBalanceAssetId: [Function: getBalanceAssetId],
+                getMinAssetId: [Function: getMinAssetId],
+                getAssetPalletInstance: [Function: getAssetPalletInstance],
+                getAssetMin: [Function: getAssetMin],
+                hasOnlyAddress: [Function: hasOnlyAddress],
+            },
         },
     },
     transfer: [AsyncFunction: transfer],
@@ -792,11 +795,34 @@ await transferData.transfer({
 </div>
 </div>
 
-### The Relayer Fee
+### Understanding Fees in MRL
 
-This is a concept that is not present in XCM, it represents the fee that the relayer charges for executing the transfer automatically. Note that if the transfer is not automatic, the relayer fee will be 0.
+MRL introduces additional fees beyond the standard XCM execution fees. These are organized under the `otherFees` object in the source transfer data for clarity.
 
-In the [transfer data](#transfer-data-object) you can find the relayer fee in the `relayerFee` attribute in the `source` object, and it is represented as an [Asset Amount](./xcm.md#the-asset-amount-object) object.
+#### Other Fees Structure
+
+The `source.otherFees` object contains MRL-specific fees:
+
+- **`bridge`** ++"AssetAmount"++ (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the transfer amount at the source chain
+- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider
+
+#### Standard Fees
+
+In addition to `otherFees`, the source transfer data includes standard fees from XCM SDK:
+
+- **`fee`** ++"AssetAmount"++ - Standard execution/gas fee for the source chain transaction
+- **`destinationFee`** ++"AssetAmount"++ - Amount reserved to pay for execution on the destination chain
+
+#### Total Cost Calculation
+
+When making a transfer, the total amount deducted from your source balance includes:
+
+<!-- TODO mjm review this -->
+```
+Total Deducted = fee + destinationFee + otherFees.bridge + otherFees.relayer
+```
+
+The `getEstimate()` method automatically accounts for all these fees when calculating the recipient's expected amount.
 
 ## Execute Transfer Data 
 

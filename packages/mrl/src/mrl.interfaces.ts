@@ -37,13 +37,21 @@ export interface TransferParams {
   // TODO add monitoring callbacks here when implemented
 }
 
+export interface MrlOtherFees {
+  /** Protocol bridge fee (e.g., Snowbridge) - deducted from transfer amount */
+  bridge?: AssetAmount;
+
+  // TODO mjm maybe this does not belong to the source
+  /** Relayer service fee for automatic execution - only applies when isAutomatic=true */
+  relayer?: AssetAmount;
+}
+
 export interface SourceTransferData extends SourceChainTransferData {
-  bridgeFee?: AssetAmount; // TODO mjm merge this with relayer fee?
   destinationFeeBalance: AssetAmount;
   moonChainFeeBalance?: AssetAmount;
-  relayerFee?: AssetAmount;
   feeBalance: AssetAmount;
   max: AssetAmount;
+  otherFees: MrlOtherFees;
 }
 
 export interface DestinationTransferData extends ChainTransferData {}

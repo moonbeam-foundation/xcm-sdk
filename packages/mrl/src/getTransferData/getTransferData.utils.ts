@@ -87,8 +87,8 @@ export function getMrlMin({
     moonChainData,
     sourceData,
   });
-  const relayerFee = sourceData.relayerFee?.amount
-    ? sourceData.relayerFee.toBig()
+  const relayerFee = sourceData.otherFees?.relayer?.amount
+    ? sourceData.otherFees.relayer.toBig()
     : Big(0);
 
   return min.copyWith({
