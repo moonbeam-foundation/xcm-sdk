@@ -1,22 +1,18 @@
-import { getMoonChain, type MrlAssetRoute } from '@moonbeam-network/xcm-config';
+import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import {
   type DestinationChainTransferData,
   getBalance,
   getDestinationFee,
 } from '@moonbeam-network/xcm-sdk';
-import {
-  type AnyChain,
-  EvmParachain,
-  Parachain,
-} from '@moonbeam-network/xcm-types';
+import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import type {
-  MoonChainTransferData,
+  BridgeChainTransferData,
   SourceTransferData,
 } from '../mrl.interfaces';
 
-interface GetMoonChainDataParams {
+interface GetBridgeChainDataParams {
   route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
@@ -24,20 +20,20 @@ interface GetMoonChainDataParams {
   destinationData: DestinationChainTransferData;
 }
 
-export async function getMoonChainData({
+export async function getBridgeChainData({
   route,
   sourceAddress,
   destinationAddress,
   sourceData,
   destinationData,
-}: GetMoonChainDataParams): Promise<MoonChainTransferData> {
+}: GetBridgeChainDataParams): Promise<BridgeChainTransferData> {
   if (!route.mrl) {
     throw new Error(
       `MRL config is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
   }
 
-  // TODO mjm do this properly, after changing moonChain concept (gateChain?)
+  // TODO mjm do this properly, after changing bridgeChain concept
   if (route.source.chain.key === 'dancelight') {
     return {
       address: sourceAddress,
@@ -50,8 +46,10 @@ export async function getMoonChainData({
   if (route.destination.chain.key === 'dancelight') {
     const feeBalance = await getBalance({
       address: destinationAddress,
-      asset: destinationData.chain.getChainAsset(route.mrl.moonChain.fee.asset),
-      builder: route.mrl.moonChain.fee.balance,
+      asset: destinationData.chain.getChainAsset(
+        route.mrl.bridgeChain.fee.asset,
+      ),
+      builder: route.mrl.bridgeChain.fee.balance,
       chain: destinationData.chain,
     });
     return {
@@ -63,69 +61,68 @@ export async function getMoonChainData({
     };
   }
 
-  const moonChain = getMoonChain(route.source.chain);
-  const moonChainAddress = getMoonChainAddress({
-    source: route.source.chain,
-    destination: route.destination.chain,
+  const bridgeChain = route.mrl.bridgeChain.chain;
+  const bridgeChainAddress = getBridgeChainAddress({
+    route,
     sourceAddress,
     destinationAddress,
   });
 
   const fee = await getDestinationFee({
-    address: moonChainAddress,
+    address: bridgeChainAddress,
     asset: route.source.asset,
-    destination: moonChain,
-    fee: route.mrl.moonChain.fee.amount,
-    feeAsset: route.mrl.moonChain.fee.asset,
+    destination: bridgeChain,
+    fee: route.mrl.bridgeChain.fee.amount,
+    feeAsset: route.mrl.bridgeChain.fee.asset,
     source: route.source.chain,
   });
 
   const balance = await getBalance({
-    address: moonChainAddress,
-    asset: moonChain.getChainAsset(route.mrl.moonChain.asset),
-    builder: route.mrl.moonChain.balance,
-    chain: moonChain,
+    address: bridgeChainAddress,
+    asset: bridgeChain.getChainAsset(route.mrl.bridgeChain.asset),
+    builder: route.mrl.bridgeChain.balance,
+    chain: bridgeChain,
   });
 
   const feeBalance = await getBalance({
-    address: moonChainAddress,
-    asset: moonChain.getChainAsset(route.mrl.moonChain.fee.asset),
-    builder: route.mrl.moonChain.fee.balance,
-    chain: moonChain,
+    address: bridgeChainAddress,
+    asset: bridgeChain.getChainAsset(route.mrl.bridgeChain.fee.asset),
+    builder: route.mrl.bridgeChain.fee.balance,
+    chain: bridgeChain,
   });
 
   return {
-    address: moonChainAddress,
+    address: bridgeChainAddress,
     balance,
     feeBalance,
-    chain: moonChain,
+    chain: bridgeChain,
     fee,
   };
 }
 
-interface GetMoonChainAddressParams {
-  source: AnyChain;
-  destination: AnyChain;
+interface GetBridgeChainAddressParams {
+  route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
 }
 
-export function getMoonChainAddress({
-  source,
-  destination,
+export function getBridgeChainAddress({
+  route,
   sourceAddress,
   destinationAddress,
-}: GetMoonChainAddressParams): string {
-  const moonChain = getMoonChain(source);
-  const isDestinationMoonChain = moonChain.isEqual(destination);
-  const isSourceMoonChain = moonChain.isEqual(source);
+}: GetBridgeChainAddressParams): string {
+  const source = route.source.chain;
+  const destination = route.destination.chain;
+  const bridgeChain = route.mrl.bridgeChain.chain;
+  const isDestinationBridgeChain = bridgeChain.isEqual(destination);
+  const isSourceBridgeChain = bridgeChain.isEqual(source);
 
-  let moonChainAddress = isDestinationMoonChain
+  let bridgeChainAddress = isDestinationBridgeChain
     ? destinationAddress
     : sourceAddress;
 
-  // for Parachain to EVM transactions, we use the computed origin account in the moonchain
-  if (Parachain.is(source) && !isSourceMoonChain) {
+  // for Parachain to EVM transactions, we use the computed origin account in the bridgeChain
+  if (Parachain.is(source) && !isSourceBridgeChain) {
     const isSourceEvmSigner = EvmParachain.is(source) && source.isEvmSigner;
 
     const { address20: computedOriginAccount } =
@@ -137,8 +134,8 @@ export function getMoonChainAddress({
         isParents: true,
       });
 
-    moonChainAddress = computedOriginAccount;
+    bridgeChainAddress = computedOriginAccount;
   }
 
-  return moonChainAddress;
+  return bridgeChainAddress;
 }

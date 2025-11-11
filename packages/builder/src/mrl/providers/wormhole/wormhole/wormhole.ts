@@ -23,7 +23,7 @@ export function wormhole() {
         destinationAddress,
         isAutomatic,
         moonApi,
-        moonChain,
+        bridgeChain: moonChain,
         source,
         sourceAddress,
       }): WormholeConfig => {

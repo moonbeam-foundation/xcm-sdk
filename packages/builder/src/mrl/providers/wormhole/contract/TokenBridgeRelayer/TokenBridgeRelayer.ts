@@ -10,17 +10,17 @@ const module = 'TokenBridgeRelayer';
 export function TokenBridgeRelayer() {
   return {
     transferTokensWithRelay: (): MrlConfigBuilder => ({
-      build: ({ asset, destination, destinationAddress, moonChain }) => {
-        const wh = wormholeFactory(moonChain);
+      build: ({ asset, destination, destinationAddress, bridgeChain }) => {
+        const wh = wormholeFactory(bridgeChain);
         const whDestination = wh.getChain(destination.getWormholeName()).config
           .chainId;
 
-        const tokenAddressOnMoonChain = moonChain.getChainAsset(asset)
+        const tokenAddressOnMoonChain = bridgeChain.getChainAsset(asset)
           .address as Address | undefined;
 
         if (!tokenAddressOnMoonChain) {
           throw new Error(
-            `Asset ${asset.symbol} does not have a token address on chain ${moonChain.name}`,
+            `Asset ${asset.symbol} does not have a token address on chain ${bridgeChain.name}`,
           );
         }
 
@@ -28,14 +28,14 @@ export function TokenBridgeRelayer() {
           destinationAddress,
         ) as Address;
         const tokenAmountOnMoonChain = asset.convertDecimals(
-          moonChain.getChainAsset(asset).decimals,
+          bridgeChain.getChainAsset(asset).decimals,
         ).amount;
 
         const contractAddress =
           wh.getChain('Moonbeam').config.contracts.tokenBridgeRelayer;
 
         if (!contractAddress) {
-          throw new Error(`Wormhole address not found for ${moonChain.name}`);
+          throw new Error(`Wormhole address not found for ${bridgeChain.name}`);
         }
 
         return new ContractConfig({

@@ -11,23 +11,23 @@ export function ethereumXcm() {
   return {
     transact: (): MrlConfigBuilder => ({
       build: (params) => {
-        const { asset, isAutomatic, moonChain, moonGasLimit } = params;
+        const { asset, isAutomatic, bridgeChain, moonGasLimit } = params;
 
         if (!moonGasLimit) {
           throw new Error('moonGasLimit must be defined');
         }
 
-        const tokenAddressOnMoonChain = moonChain.getChainAsset(asset)
+        const tokenAddressOnMoonChain = bridgeChain.getChainAsset(asset)
           .address as Address | undefined;
 
         if (!tokenAddressOnMoonChain) {
           throw new Error(
-            `Asset ${asset.symbol} does not have a token address on chain ${moonChain.name}`,
+            `Asset ${asset.symbol} does not have a token address on chain ${bridgeChain.name}`,
           );
         }
 
         const tokenAmountOnMoonChain = asset.convertDecimals(
-          moonChain.getChainAsset(asset).decimals,
+          bridgeChain.getChainAsset(asset).decimals,
         ).amount;
 
         const contract = (

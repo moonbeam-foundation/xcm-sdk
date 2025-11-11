@@ -21,11 +21,11 @@ import Big from 'big.js';
 import type { TransferData, TransferParams } from '../mrl.interfaces';
 import { SnowbridgeService } from '../services/snowbridge';
 import { WormholeService } from '../services/wormhole';
-import { getMoonChainData } from './getMoonChainData';
+import { getBridgeChainData } from './getBridgeChainData';
 import { getSourceData } from './getSourceData';
 import {
   buildTransfer,
-  getMoonChainFeeValueOnSource,
+  getBridgeChainFeeValueOnSource,
   getMrlMin,
 } from './getTransferData.utils';
 
@@ -71,14 +71,14 @@ export async function getTransferData({
   });
   console.log('sourceData', sourceData);
 
-  const moonChainData = await getMoonChainData({
+  const bridgeChainData = await getBridgeChainData({
     route,
     sourceAddress,
     destinationAddress,
     sourceData, // TODO mjm added for testing dancelight
     destinationData, // TODO mjm added for testing dancelight
   });
-  console.log('moonChainData', moonChainData);
+  console.log('bridgeChainData', bridgeChainData);
 
   return {
     destination: destinationData,
@@ -88,9 +88,9 @@ export async function getTransferData({
       const bigAmount = Big(
         toBigInt(amount, sourceData.balance.decimals).toString(),
       );
-      const fee = getMoonChainFeeValueOnSource({
+      const fee = getBridgeChainFeeValueOnSource({
         destinationData,
-        moonChainData,
+        bridgeChainData,
         sourceData,
       });
       const result = bigAmount
@@ -108,10 +108,10 @@ export async function getTransferData({
     max: sourceData.max,
     min: getMrlMin({
       destinationData,
-      moonChainData,
+      bridgeChainData,
       sourceData,
     }),
-    moonChain: moonChainData,
+    bridgeChain: bridgeChainData,
     source: sourceData,
     async transfer({
       amount,

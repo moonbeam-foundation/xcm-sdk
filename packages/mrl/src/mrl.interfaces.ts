@@ -23,7 +23,8 @@ export interface TransferData {
   isAutomaticPossible: boolean;
   max: AssetAmount;
   min: AssetAmount;
-  moonChain: MoonChainTransferData;
+  // TODO mjm rename to just `bridge`?
+  bridgeChain: BridgeChainTransferData;
   source: SourceTransferData;
   transfer(params: TransferParams): Promise<string[]>;
 }
@@ -48,7 +49,7 @@ export interface MrlOtherFees {
 
 export interface SourceTransferData extends SourceChainTransferData {
   destinationFeeBalance: AssetAmount;
-  moonChainFeeBalance?: AssetAmount;
+  bridgeChainFeeBalance?: AssetAmount;
   feeBalance: AssetAmount;
   max: AssetAmount;
   otherFees: MrlOtherFees;
@@ -56,7 +57,7 @@ export interface SourceTransferData extends SourceChainTransferData {
 
 export interface DestinationTransferData extends ChainTransferData {}
 
-export type MoonChainTransferData = Omit<ChainTransferData, 'min'> & {
+export type BridgeChainTransferData = Omit<ChainTransferData, 'min'> & {
   chain: Parachain;
   address: string;
   feeBalance: AssetAmount;

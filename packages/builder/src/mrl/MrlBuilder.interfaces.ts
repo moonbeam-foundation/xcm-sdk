@@ -1,8 +1,8 @@
 import type {
   AnyChain,
+  AnyParachain,
   AssetAmount,
   ChainAsset,
-  EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { HexString } from '@polkadot/util/types';
@@ -27,7 +27,7 @@ export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   bridgeFee?: AssetAmount;
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
-  moonChain: EvmParachain;
+  bridgeChain: AnyParachain;
   moonGasLimit?: bigint;
   sendOnlyRemoteExecution?: boolean;
   transact?: Transact;

@@ -90,13 +90,13 @@ export async function getSourceData({
   });
   // console.log('destinationFeeBalance', destinationFeeBalance);
 
-  const moonChainFeeBalance = await getMoonChainFeeBalance({
+  const bridgeChainFeeBalance = await getBridgeChainFeeBalance({
     balance,
     feeBalance,
     route,
     sourceAddress,
   });
-  // console.log('moonChainFeeBalance', moonChainFeeBalance);
+  // console.log('bridgeChainFeeBalance', bridgeChainFeeBalance);
 
   const existentialDeposit = await getExistentialDeposit(source);
   // console.log('existentialDeposit', existentialDeposit);
@@ -160,7 +160,7 @@ export async function getSourceData({
     chain: source,
     destinationFee,
     destinationFeeBalance,
-    moonChainFeeBalance,
+    bridgeChainFeeBalance,
     existentialDeposit,
     fee,
     feeBalance,
@@ -270,7 +270,7 @@ async function getRelayerFee({
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
   // TODO mjm return 0 for non-Wormhole providers
   // TODO mjm differentiate between different providers somehow
-  if (chain.key === 'dancelight') {
+  if (chain.key === 'dancelight' || chain.key === 'sepolia') {
     return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
       amount: 0n,
     });
@@ -289,6 +289,7 @@ async function getRelayerFee({
     sourceAddress,
   });
 
+  // TODO mjm put this whole thing in the configuration? so we wouldn't need to differentiate between providers?
   const wormholeConfig = MrlBuilder()
     .wormhole()
     .wormhole()
@@ -317,41 +318,41 @@ async function getWormholeFee({
   return;
 }
 
-interface GetMoonChainFeeBalanceParams {
+interface GetBridgeChainFeeBalanceParams {
   balance: AssetAmount;
   feeBalance: AssetAmount;
   route: MrlAssetRoute;
   sourceAddress: string;
 }
 
-async function getMoonChainFeeBalance({
+async function getBridgeChainFeeBalance({
   balance,
   feeBalance,
   route,
   sourceAddress,
-}: GetMoonChainFeeBalanceParams): Promise<AssetAmount | undefined> {
-  if (!route.source.moonChainFee) {
+}: GetBridgeChainFeeBalanceParams): Promise<AssetAmount | undefined> {
+  if (!route.source.bridgeChainFee) {
     return undefined;
   }
 
-  if (route.mrl?.moonChain.fee.asset.isEqual(balance)) {
+  if (route.mrl?.bridgeChain.fee.asset.isEqual(balance)) {
     return balance;
   }
 
-  if (route.mrl?.moonChain.fee.asset.isEqual(feeBalance)) {
+  if (route.mrl?.bridgeChain.fee.asset.isEqual(feeBalance)) {
     return feeBalance;
   }
 
-  if (!route.source.moonChainFee.balance) {
+  if (!route.source.bridgeChainFee.balance) {
     throw new Error(
-      'BalanceBuilder must be defined for source.moonChainFee.balance for MrlAssetRoute',
+      'BalanceBuilder must be defined for source.bridgeChainFee.balance for MrlAssetRoute',
     );
   }
 
   return getBalance({
     address: sourceAddress,
-    asset: route.source.chain.getChainAsset(route.source.moonChainFee.asset),
-    builder: route.source.moonChainFee.balance,
+    asset: route.source.chain.getChainAsset(route.source.bridgeChainFee.asset),
+    builder: route.source.bridgeChainFee.balance,
     chain: route.source.chain,
   });
 }
