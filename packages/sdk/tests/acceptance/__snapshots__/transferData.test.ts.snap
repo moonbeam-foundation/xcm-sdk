@@ -980,7 +980,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
     },
     "fee": _AssetAmount {
       "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-      "amount": 2256681856n,
+      "amount": 2293294049n,
       "decimals": 12,
       "ids": {
         "id": "42259045809535163221576417993425387648",
@@ -1019,7 +1019,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
   },
   "min": _AssetAmount {
     "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-    "amount": 2256681856n,
+    "amount": 2293294049n,
     "decimals": 12,
     "ids": {
       "id": "42259045809535163221576417993425387648",
@@ -1074,7 +1074,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
     },
     "destinationFee": _AssetAmount {
       "address": undefined,
-      "amount": 2256681856n,
+      "amount": 2293294049n,
       "decimals": 12,
       "ids": undefined,
       "key": "unit",
@@ -1498,7 +1498,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "fee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 8658218750000n,
+      "amount": 8656687500000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
