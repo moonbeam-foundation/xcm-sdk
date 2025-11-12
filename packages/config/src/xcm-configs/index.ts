@@ -12,7 +12,6 @@ import { darwiniaRoutes } from './darwinia';
 import { darwiniaCrabRoutes } from './darwiniaCrab';
 import { hydrationRoutes } from './hydration';
 import { hydrationAlphanetRoutes } from './hydrationAlphanet';
-import { integriteeRoutes } from './integritee';
 import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
 import { kintsugiRoutes } from './kintsugi';
@@ -53,7 +52,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   laosRoutes,
   hydrationRoutes,
   hydrationAlphanetRoutes,
-  integriteeRoutes,
   interlayRoutes,
   karuraRoutes,
   kintsugiRoutes,
