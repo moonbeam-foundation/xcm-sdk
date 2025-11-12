@@ -59,6 +59,7 @@ export async function getSourceData({
   }
 
   const source = route.source.chain;
+  const destination = route.destination.chain;
   const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
@@ -108,7 +109,8 @@ export async function getSourceData({
   });
 
   const bridgeFee = await getBridgeFee({
-    chain: source,
+    source,
+    destination,
     // For now, the fee asset is always the one used for the bridge fee
     // If it where to change, we need make bridgeFee a FeeConfig in MrlSourceConfig
     asset: feeAsset,
@@ -365,8 +367,9 @@ async function getBridgeFee({
   address,
   asset,
   balance,
-  chain,
   bridgeFee,
+  destination,
+  source,
 }: GetBridgeFeeParams): Promise<AssetAmount> {
   if (typeof bridgeFee === 'number') {
     return AssetAmount.fromChainAsset(asset, {
@@ -378,16 +381,19 @@ async function getBridgeFee({
     address,
     asset,
     balance,
-    chain,
+    destination,
+    source,
   });
 
-  if (ContractConfig.is(config) && EvmChain.is(chain)) {
-    const evm = EvmService.create(chain);
+  if (ContractConfig.is(config) && EvmChain.is(source)) {
+    const evm = EvmService.create(source);
 
     const amount = await evm.read(config);
 
     if (typeof amount !== 'bigint') {
-      throw new Error(`Error getting bridge fee`);
+      throw new Error(
+        `Error getting bridge fee: expected bigint from contract call, but received ${typeof amount}. `,
+      );
     }
 
     return AssetAmount.fromChainAsset(asset, {
@@ -395,15 +401,15 @@ async function getBridgeFee({
     });
   }
 
-  if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(chain)) {
-    const polkadot = await PolkadotService.create(chain);
+  if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(source)) {
+    const polkadot = await PolkadotService.create(source);
     const amount = await polkadot.query(config);
     return AssetAmount.fromChainAsset(asset, {
       amount,
     });
   }
 
-  return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
+  return AssetAmount.fromChainAsset(source.getChainAsset(asset), {
     amount: 0n,
   });
 }
