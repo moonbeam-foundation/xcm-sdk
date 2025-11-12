@@ -65,7 +65,6 @@ import {
   peaqEvm,
   pendulum,
   phala,
-  polkadot,
   polkadotAssetHub,
   zeitgeist,
 } from '../chains';
@@ -416,37 +415,6 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: dot,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: dot,
-        chain: polkadot,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .fromHere({ isAssetReserveChain: true, parents: 0 }),
-          asset: dot,
-        },
-      },
-      contract: ContractBuilder()
-        .XcmPrecompile()
-        .transferAssetsUsingTypeAndThenAddress(),
-      monitoring: MonitoringBuilder()
-        .monitorEvent()
-        .polkadotXcm()
-        .messageQueue(),
     },
     {
       source: {
