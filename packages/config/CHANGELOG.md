@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.5.1
+
+### Patch Changes
+
+- [#582](https://github.com/moonbeam-foundation/xcm-sdk/pull/582) [`b2adc66`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b2adc669ad5dc2819ecca98344fb9ee041c6e761) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove Integritee configs
+
 ## 4.5.0
 
 ### Minor Changes
