@@ -98,6 +98,7 @@ export function polkadotXcm() {
         return new ExtrinsicConfig({
           module: 'utility',
           func: 'batchAll',
+          provider: 'wormhole',
           getArgs: () => [transactionsToSend],
         });
       },

@@ -19,6 +19,8 @@ export class SnowbridgeConfig {
 
   readonly func: SnowbridgeFunctions;
 
+  readonly provider = 'snowbridge' as const;
+
   static is(obj: unknown): obj is SnowbridgeConfig {
     return obj instanceof SnowbridgeConfig;
   }

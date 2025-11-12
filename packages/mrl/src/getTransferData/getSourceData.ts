@@ -270,35 +270,34 @@ async function getRelayerFee({
   sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
-  // TODO mjm return 0 for non-Wormhole providers
-  // TODO mjm differentiate between different providers somehow
-  if (chain.key === 'dancelight' || chain.key === 'sepolia') {
-    return AssetAmount.fromChainAsset(chain.getChainAsset(asset), {
-      amount: 0n,
-    });
+  if (transfer.provider === 'snowbridge' || SnowbridgeConfig.is(transfer)) {
+    return undefined;
   }
+
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }
 
-  // TODO this is only valid for Wormhole Provider
-  const builderParams = await getMrlBuilderParams({
-    asset,
-    destinationAddress,
-    feeAsset,
-    isAutomatic,
-    route,
-    sourceAddress,
-  });
+  if (transfer.provider === 'wormhole') {
+    const builderParams = await getMrlBuilderParams({
+      asset,
+      destinationAddress,
+      feeAsset,
+      isAutomatic,
+      route,
+      sourceAddress,
+    });
 
-  // TODO mjm put this whole thing in the configuration? so we wouldn't need to differentiate between providers?
-  const wormholeConfig = MrlBuilder()
-    .wormhole()
-    .wormhole()
-    .tokenTransfer()
-    .build(builderParams);
+    const wormholeConfig = MrlBuilder()
+      .wormhole()
+      .wormhole()
+      .tokenTransfer()
+      .build(builderParams);
 
-  return getWormholeFee({ asset, chain, config: wormholeConfig });
+    return getWormholeFee({ asset, chain, config: wormholeConfig });
+  }
+
+  return;
 }
 
 async function getWormholeFee({

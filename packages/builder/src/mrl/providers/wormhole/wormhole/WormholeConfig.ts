@@ -31,6 +31,8 @@ export class WormholeConfig {
 
   readonly func: WormholeTransferFunctions;
 
+  readonly provider = 'wormhole' as const;
+
   static is(obj: unknown): obj is WormholeConfig {
     return obj instanceof WormholeConfig;
   }

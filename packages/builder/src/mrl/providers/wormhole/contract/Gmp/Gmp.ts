@@ -20,6 +20,7 @@ export function Gmp() {
           args: [hex],
           func: 'wormholeTransferERC20',
           module,
+          provider: 'wormhole',
         });
       },
     }),

@@ -51,6 +51,7 @@ export function TokenBridgeRelayer() {
           ],
           func: 'transferTokensWithRelay',
           module,
+          provider: 'wormhole',
         });
       },
     }),
