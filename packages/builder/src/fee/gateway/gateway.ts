@@ -6,7 +6,6 @@ import {
 } from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
 import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
 
-// TODO mjm tests for this?
 export function gateway() {
   return {
     quoteSendTokenFee(): BridgeFeeConfigBuilder {
