@@ -13,7 +13,6 @@ export function ethereumTokenTransfers() {
           return new ExtrinsicConfig({
             module: pallet,
             func,
-            provider: 'snowbridge',
             getArgs: () => [asset.amount, destinationAddress],
           });
         },

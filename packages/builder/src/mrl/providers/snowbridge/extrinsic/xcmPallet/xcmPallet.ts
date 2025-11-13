@@ -22,7 +22,6 @@ export function xcmPallet() {
             return new ExtrinsicConfig({
               module: pallet,
               func,
-              provider: 'snowbridge',
               getArgs: (extrinsicFunction) => {
                 const assets = [
                   {
@@ -65,7 +64,6 @@ export function xcmPallet() {
             return new ExtrinsicConfig({
               module: pallet,
               func,
-              provider: 'snowbridge',
               getArgs: (extrinsicFunction) => {
                 const assets = [
                   {

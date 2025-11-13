@@ -116,7 +116,6 @@ export function Batch() {
           ],
           func: 'batchAll',
           module,
-          provider: 'wormhole',
         });
       },
     }),

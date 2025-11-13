@@ -106,6 +106,13 @@ export interface BuildTransferParams {
   sourceAddress: string;
 }
 
+function requiresTransact(route: MrlAssetRoute): boolean {
+  return (
+    route.mrl?.transfer.provider === 'wormhole' &&
+    EvmParachain.isAnyParachain(route.source.chain)
+  );
+}
+
 export async function buildTransfer(params: BuildTransferParams) {
   const { route } = params;
   if (!route.mrl) {
@@ -118,12 +125,12 @@ export async function buildTransfer(params: BuildTransferParams) {
       `Route from source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol} does not allow the automatic option`,
     );
   }
+
   const builderParams = await getMrlBuilderParams(params);
-  console.log('builderParams', builderParams);
 
   return route.mrl.transfer.build({
     ...builderParams,
-    transact: EvmParachain.isAnyParachain(route.source.chain)
+    transact: requiresTransact(route)
       ? await getTransact(builderParams)
       : undefined,
   });

@@ -270,7 +270,10 @@ async function getRelayerFee({
   sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
-  if (transfer.provider === 'snowbridge' || SnowbridgeConfig.is(transfer)) {
+  if (
+    route.mrl.transfer.provider === 'snowbridge' ||
+    SnowbridgeConfig.is(transfer)
+  ) {
     return undefined;
   }
 
@@ -278,7 +281,7 @@ async function getRelayerFee({
     return getWormholeFee({ asset, chain, config: transfer });
   }
 
-  if (transfer.provider === 'wormhole') {
+  if (route.mrl.transfer.provider === 'wormhole') {
     const builderParams = await getMrlBuilderParams({
       asset,
       destinationAddress,

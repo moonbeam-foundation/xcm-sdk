@@ -59,7 +59,6 @@ export function ethereumXcm() {
         return new ExtrinsicConfig({
           module: 'ethereumXcm',
           func: 'transact',
-          provider: 'wormhole',
           getArgs: () => [
             {
               V2: {

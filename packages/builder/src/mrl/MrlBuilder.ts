@@ -3,7 +3,7 @@ import { wormhole } from './providers/wormhole';
 
 export function MrlBuilder() {
   return {
-    snowbridge,
-    wormhole,
+    snowbridge: () => ({ ...snowbridge(), provider: 'snowbridge' as const }),
+    wormhole: () => ({ ...wormhole(), provider: 'wormhole' as const }),
   };
 }
