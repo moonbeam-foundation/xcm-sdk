@@ -2,7 +2,6 @@ import type { u128 } from '@polkadot/types';
 import { SubstrateQueryConfig } from '../../types';
 import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
 
-// TODO mjm tests to this
 export function outboundQueueApi() {
   return {
     calculateFee: (): BridgeFeeConfigBuilder => {

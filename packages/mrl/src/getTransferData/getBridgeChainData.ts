@@ -16,49 +16,17 @@ interface GetBridgeChainDataParams {
   route: MrlAssetRoute;
   sourceAddress: string;
   destinationAddress: string;
-  sourceData: SourceTransferData;
-  destinationData: DestinationChainTransferData;
 }
 
 export async function getBridgeChainData({
   route,
   sourceAddress,
   destinationAddress,
-  sourceData,
-  destinationData,
 }: GetBridgeChainDataParams): Promise<BridgeChainTransferData> {
   if (!route.mrl) {
     throw new Error(
       `MRL config is not defined for source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol}`,
     );
-  }
-
-  // TODO mjm do this properly, after changing bridgeChain concept
-  if (route.source.chain.key === 'dancelight') {
-    return {
-      address: sourceAddress,
-      balance: sourceData.balance,
-      feeBalance: sourceData.feeBalance,
-      chain: route.source.chain as Parachain,
-      fee: sourceData.fee,
-    };
-  }
-  if (route.destination.chain.key === 'dancelight') {
-    const feeBalance = await getBalance({
-      address: destinationAddress,
-      asset: destinationData.chain.getChainAsset(
-        route.mrl.bridgeChain.fee.asset,
-      ),
-      builder: route.mrl.bridgeChain.fee.balance,
-      chain: destinationData.chain,
-    });
-    return {
-      address: destinationAddress,
-      balance: destinationData.balance,
-      feeBalance,
-      chain: route.destination.chain as Parachain,
-      fee: destinationData.fee,
-    };
   }
 
   const bridgeChain = route.mrl.bridgeChain.chain;

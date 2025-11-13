@@ -75,8 +75,6 @@ export async function getTransferData({
     route,
     sourceAddress,
     destinationAddress,
-    sourceData, // TODO mjm added for testing dancelight
-    destinationData, // TODO mjm added for testing dancelight
   });
   console.log('bridgeChainData', bridgeChainData);
 
