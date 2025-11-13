@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`outboundQueueApi > calculateFee > should match args snapshot 1`] = `
+[
+  {
+    "MintForeignToken": {
+      "amount": undefined,
+      "recipient": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+      "tokenId": "USDT",
+    },
+  },
+  null,
+]
+`;
