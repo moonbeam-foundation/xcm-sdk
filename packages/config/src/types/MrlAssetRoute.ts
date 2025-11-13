@@ -27,7 +27,6 @@ export interface MrlConfig {
 export interface MrlSourceConfig extends SourceConfig {
   // TODO mjm rename this? additional fee, local fee. Execution fee
   bridgeFee?: number | BridgeFeeConfigBuilder;
-  // TODO mjm is it needed after the change?
   bridgeChainFee?: {
     asset: Asset;
     balance: BalanceConfigBuilder;

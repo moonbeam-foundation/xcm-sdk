@@ -23,7 +23,6 @@ export interface TransferData {
   isAutomaticPossible: boolean;
   max: AssetAmount;
   min: AssetAmount;
-  // TODO mjm rename to just `bridge`?
   bridgeChain: BridgeChainTransferData;
   source: SourceTransferData;
   transfer(params: TransferParams): Promise<string[]>;

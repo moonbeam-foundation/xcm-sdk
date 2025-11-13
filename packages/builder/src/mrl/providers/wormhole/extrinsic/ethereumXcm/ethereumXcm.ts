@@ -11,10 +11,10 @@ export function ethereumXcm() {
   return {
     transact: (): MrlConfigBuilder => ({
       build: (params) => {
-        const { asset, isAutomatic, bridgeChain, moonGasLimit } = params;
+        const { asset, isAutomatic, bridgeChain, bridgeChainGasLimit } = params;
 
-        if (!moonGasLimit) {
-          throw new Error('moonGasLimit must be defined');
+        if (!bridgeChainGasLimit) {
+          throw new Error('bridgeChainGasLimit must be defined');
         }
 
         const tokenAddressOnMoonChain = bridgeChain.getChainAsset(asset)
@@ -62,7 +62,7 @@ export function ethereumXcm() {
           getArgs: () => [
             {
               V2: {
-                gasLimit: moonGasLimit,
+                gasLimit: bridgeChainGasLimit,
                 action: {
                   Call: BATCH_CONTRACT_ADDRESS,
                 },

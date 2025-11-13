@@ -184,7 +184,7 @@ export const mrlBuildParamsMock: MrlBuilderParams = {
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChainGasLimit: 999_999n,
   transact: {
     call: '0x4d79207465787420737472696e67',
     txWeight: {
@@ -200,7 +200,7 @@ export const mrlBuildParamsSameAssetMock: MrlBuilderParams = {
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChainGasLimit: 999_999n,
   transact: {
     call: '0x4d79207465787420737472696e67',
     txWeight: {
@@ -216,7 +216,7 @@ export const mrlBuildParamsMock2: MrlBuilderParams = {
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChainGasLimit: 999_999n,
   transact: {
     call: '0x4d79207465787420737472696e67',
     txWeight: {
@@ -236,7 +236,7 @@ export const wormholeConfigBuilderParams: MrlBuilderParams = {
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChainGasLimit: 999_999n,
   source: fantomTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   sourceApi: apiMock,
@@ -252,7 +252,7 @@ export const wormholeToMoonchainConfigBuilderParams: MrlBuilderParams = {
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChainGasLimit: 999_999n,
   source: fantomTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   sourceApi: apiMock,
@@ -268,7 +268,7 @@ export const snowbridgeConfigBuilderParams: MrlBuilderParams = {
   moonApi: apiMock,
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChainGasLimit: 999_999n,
   source: alphanetAssetHubMock,
   sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
   sourceApi: apiMock,

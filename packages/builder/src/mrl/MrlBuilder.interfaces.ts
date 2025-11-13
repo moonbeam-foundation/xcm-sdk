@@ -33,7 +33,7 @@ export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   bridgeChain: AnyParachain;
-  moonGasLimit?: bigint;
+  bridgeChainGasLimit?: bigint;
   sendOnlyRemoteExecution?: boolean;
   transact?: Transact;
 }

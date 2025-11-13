@@ -1,6 +1,5 @@
 import { BaseConfig, type BaseConfigConstructorParams } from '../BaseConfig';
 
-// TODO mjm rename? convert to enum?
 type QueryType = 'query' | 'call';
 
 export interface QueryConfigConstructorParams

@@ -162,10 +162,6 @@ export async function getMrlBuilderParams({
       : undefined,
     getPolkadotApi(bridgeChain.ws),
   ]);
-  console.log('bridgeChain', bridgeChain);
-  console.log('sourceApi', sourceApi);
-  console.log('destinationApi', destinationApi);
-  console.log('bridgeApi', bridgeApi);
 
   return {
     asset,
@@ -188,13 +184,9 @@ export async function getMrlBuilderParams({
 async function getTransact(
   params: MrlBuilderParams,
 ): Promise<Transact | undefined> {
-  // TODO mjm handle this
-  if (params.source.key === 'dancelight') {
-    return undefined;
-  }
   const { sourceAddress, source, bridgeChain } = params;
   const polkadot = await PolkadotService.create(bridgeChain);
-  const moonGasLimit = await getMoonGasLimit(params);
+  const bridgeChainGasLimit = await getBridgeChainGasLimit(params);
 
   if (!EvmParachain.isAnyParachain(source)) {
     throw new Error('Source chain must be Parachain or EvmParachain');
@@ -210,7 +202,7 @@ async function getTransact(
     .extrinsic()
     .ethereumXcm()
     .transact()
-    .build({ ...params, moonGasLimit }) as ExtrinsicConfig;
+    .build({ ...params, bridgeChainGasLimit }) as ExtrinsicConfig;
   const { weight } = await polkadot.getPaymentInfo(address20, extrinsic);
 
   return {
@@ -222,7 +214,9 @@ async function getTransact(
   };
 }
 
-async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
+async function getBridgeChainGasLimit(
+  params: MrlBuilderParams,
+): Promise<bigint> {
   const { asset, isAutomatic, bridgeChain, source, sourceAddress } = params;
 
   if (!EvmParachain.isAnyParachain(source)) {
