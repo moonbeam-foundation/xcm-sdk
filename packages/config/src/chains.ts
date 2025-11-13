@@ -667,29 +667,6 @@ export const hydrationAlphanet = new Parachain({
   ws: ['wss://hydradx-moonbase-rpc.play.hydration.cloud'],
 });
 
-export const integritee = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(teer, {
-      decimals: 12,
-      ids: {
-        id: teer.originSymbol,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
-  key: 'integritee',
-  name: 'Integritee',
-  nativeAsset: teer,
-  parachainId: 2015,
-  ss58Format: 13,
-  ws: [
-    'wss://kusama.api.integritee.network',
-    'wss://integritee-kusama.api.onfinality.io/public-ws',
-  ],
-});
-
 export const interlay = new Parachain({
   assets: [
     ChainAsset.fromAsset(glmr, {
@@ -2486,7 +2463,6 @@ export const chainsList: AnyChain[] = [
   fantomTestnet,
   hydration,
   hydrationAlphanet,
-  integritee,
   interlay,
   karura,
   kintsugi,
