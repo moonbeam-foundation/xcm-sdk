@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.5.2
+
+### Patch Changes
+
+- [#584](https://github.com/moonbeam-foundation/xcm-sdk/pull/584) [`f30c49f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f30c49f8c2e1f5b1ac1b87b71d6b814253a165bb) Thanks [@mmaurello](https://github.com/mmaurello)! - change rpc endpoint for Fantom Testnet
+
 ## 4.5.1
 
 ### Patch Changes
