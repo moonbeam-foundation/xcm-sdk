@@ -1,6 +1,6 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { dev, devBeta, ftm, ftmwh } from '../assets';
-import { fantomTestnet, moonbaseBeta } from '../chains';
+import { fantomTestnet, moonbaseAlpha, moonbaseBeta } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export const moonbaseBetaRoutes = new MrlChainRoutes({
@@ -31,9 +31,10 @@ export const moonbaseBetaRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().substrate().assets().account(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,

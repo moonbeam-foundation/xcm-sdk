@@ -16,7 +16,15 @@ import type {
 
 export const apiMock = {
   tx: {
+    ethereumTokenTransfers: {
+      transferNativeToken: vi.fn(
+        () => 'ethereumTokenTransfers.transferNativeToken => RESULT',
+      ),
+    },
     polkadotXcm: { send: vi.fn(() => 'polkadotXcm.send => RESULT') },
+    xcmPallet: {
+      transferAssets: vi.fn(() => 'xcmPallet.transferAssets => RESULT'),
+    },
     xTokens: {
       transfer: vi.fn(() => 'xTokens.transfer => RESULT'),
       transferMulticurrencies: vi.fn(
@@ -175,8 +183,8 @@ export const mrlBuildParamsMock: MrlBuilderParams = {
   isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
-  moonChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChain: moonbaseAlphaMock,
+  bridgeChainGasLimit: 999_999n,
   transact: {
     call: '0x4d79207465787420737472696e67',
     txWeight: {
@@ -191,8 +199,8 @@ export const mrlBuildParamsSameAssetMock: MrlBuilderParams = {
   isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
-  moonChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChain: moonbaseAlphaMock,
+  bridgeChainGasLimit: 999_999n,
   transact: {
     call: '0x4d79207465787420737472696e67',
     txWeight: {
@@ -207,8 +215,8 @@ export const mrlBuildParamsMock2: MrlBuilderParams = {
   isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
-  moonChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChain: moonbaseAlphaMock,
+  bridgeChainGasLimit: 999_999n,
   transact: {
     call: '0x4d79207465787420737472696e67',
     txWeight: {
@@ -227,8 +235,8 @@ export const wormholeConfigBuilderParams: MrlBuilderParams = {
   isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
-  moonChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChain: moonbaseAlphaMock,
+  bridgeChainGasLimit: 999_999n,
   source: fantomTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   sourceApi: apiMock,
@@ -243,9 +251,32 @@ export const wormholeToMoonchainConfigBuilderParams: MrlBuilderParams = {
   isAutomatic: true,
   moonApi: apiMock,
   moonAsset: testAssetAmount,
-  moonChain: moonbaseAlphaMock,
-  moonGasLimit: 999_999n,
+  bridgeChain: moonbaseAlphaMock,
+  bridgeChainGasLimit: 999_999n,
   source: fantomTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   sourceApi: apiMock,
+};
+
+export const snowbridgeConfigBuilderParams: MrlBuilderParams = {
+  asset: testAssetAmount,
+  destination: fantomTestnet,
+  destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
+  destinationApi: apiMock,
+  fee: testAssetAmount2,
+  isAutomatic: true,
+  moonApi: apiMock,
+  moonAsset: testAssetAmount,
+  bridgeChain: moonbaseAlphaMock,
+  bridgeChainGasLimit: 999_999n,
+  source: alphanetAssetHubMock,
+  sourceAddress: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
+  sourceApi: apiMock,
+  transact: {
+    call: '0x4d79207465787420737472696e67',
+    txWeight: {
+      refTime: 24_902_375_000n,
+      proofSize: 62_193n,
+    },
+  },
 };

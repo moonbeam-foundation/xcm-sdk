@@ -7,6 +7,7 @@ SubstrateQueryConfig {
   ],
   "func": "assetMetadatas",
   "module": "assetRegistry",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -20,6 +21,7 @@ SubstrateQueryConfig {
   ],
   "func": "currencyMetadatas",
   "module": "assetRegistry",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -33,6 +35,7 @@ SubstrateQueryConfig {
   ],
   "func": "asset",
   "module": "assets",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -64,6 +67,7 @@ SubstrateQueryConfig {
   ],
   "func": "asset",
   "module": "foreignAssets",
+  "queryType": "query",
   "transform": [Function],
 }
 `;

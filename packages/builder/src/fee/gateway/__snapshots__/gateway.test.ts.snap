@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`gateway > quoteSendTokenFee > error cases > should match error snapshot for invalid destination 1`] = `[Error: Destination must be a Parachain or EvmParachain for getting the quote send token fee for Gateway module]`;
+
+exports[`gateway > quoteSendTokenFee > error cases > should match error snapshot for missing address 1`] = `[Error: Asset mockAsset has no address]`;
+
+exports[`gateway > quoteSendTokenFee > should match args snapshot 1`] = `
+[
+  "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+  1000,
+  0n,
+]
+`;

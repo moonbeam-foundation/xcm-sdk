@@ -1,4 +1,5 @@
 import {
+  type AnyParachain,
   type AssetAmount,
   type ChainAsset,
   EvmParachain,
@@ -19,8 +20,11 @@ import { getAbisForChain } from './abi/abi.helpers';
 const module = 'Batch';
 
 export function Batch() {
+  const provider = 'wormhole' as const;
+
   return {
     transferAssetsAndMessage: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
@@ -28,7 +32,7 @@ export function Batch() {
         fee,
         isAutomatic,
         moonAsset,
-        moonChain,
+        bridgeChain,
         moonApi,
         source,
         sourceAddress,
@@ -72,7 +76,7 @@ export function Batch() {
           fee,
           isAutomatic,
           moonAsset,
-          moonChain,
+          bridgeChain,
           moonApi,
           source,
           sourceAddress,
@@ -83,7 +87,7 @@ export function Batch() {
         const encodedXcmMessage = send.args[1].toHex();
 
         const { destinationParachain, destinationParachainAndAddress } =
-          getDestinationInHex(moonChain, computedOriginAccount);
+          getDestinationInHex(bridgeChain, computedOriginAccount);
 
         const { currencies, feeItem } = getCurrencies({
           source,
@@ -122,18 +126,18 @@ export function Batch() {
 }
 
 function getDestinationInHex(
-  moonChain: EvmParachain,
+  bridgeChain: AnyParachain,
   computedOriginAccount: string,
 ) {
   const destinationParachain = {
     parents: 1,
-    interior: getPrecompileDestinationInterior(moonChain),
+    interior: getPrecompileDestinationInterior(bridgeChain),
   } as const;
 
   const destinationParachainAndAddress = {
     parents: 1,
     interior: getPrecompileDestinationInterior(
-      moonChain,
+      bridgeChain,
       computedOriginAccount,
     ),
   } as const;

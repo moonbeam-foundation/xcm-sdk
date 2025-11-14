@@ -5,17 +5,15 @@ export interface ContractConfigConstructorParams
   extends BaseConfigConstructorParams {
   address: string;
   abi: Abi;
-  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
-  args: any[];
+  args: unknown[];
+  value?: bigint;
 }
 
 export class ContractConfig extends BaseConfig {
   readonly address: string;
-
   readonly abi: Abi;
-
-  // biome-ignore lint/suspicious/noExplicitAny: not sure how to fix this
-  readonly args: any[];
+  readonly args: unknown[];
+  readonly value?: bigint;
 
   static is(obj: unknown): obj is ContractConfig {
     return obj instanceof ContractConfig;
@@ -25,6 +23,7 @@ export class ContractConfig extends BaseConfig {
     address,
     abi,
     args,
+    value,
     ...other
   }: ContractConfigConstructorParams) {
     super({ ...other });
@@ -32,6 +31,7 @@ export class ContractConfig extends BaseConfig {
     this.address = address;
     this.abi = abi;
     this.args = args;
+    this.value = value;
   }
 
   encodeFunctionData() {

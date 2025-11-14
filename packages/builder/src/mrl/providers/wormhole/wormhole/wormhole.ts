@@ -15,15 +15,18 @@ import { Protocols, WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 
 export function wormhole() {
+  const provider = 'wormhole' as const;
+
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
         destinationAddress,
         isAutomatic,
         moonApi,
-        moonChain,
+        bridgeChain: moonChain,
         source,
         sourceAddress,
       }): WormholeConfig => {

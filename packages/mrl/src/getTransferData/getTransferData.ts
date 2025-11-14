@@ -1,6 +1,7 @@
 import {
   ContractConfig,
   ExtrinsicConfig,
+  SnowbridgeConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
@@ -18,12 +19,13 @@ import {
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import Big from 'big.js';
 import type { TransferData, TransferParams } from '../mrl.interfaces';
+import { SnowbridgeService } from '../services/snowbridge';
 import { WormholeService } from '../services/wormhole';
-import { getMoonChainData } from './getMoonChainData';
+import { getBridgeChainData } from './getBridgeChainData';
 import { getSourceData } from './getSourceData';
 import {
   buildTransfer,
-  getMoonChainFeeValueOnSource,
+  getBridgeChainFeeValueOnSource,
   getMrlMin,
 } from './getTransferData.utils';
 
@@ -50,6 +52,7 @@ export async function getTransferData({
     route,
     destinationAddress,
   });
+  console.log('destinationData', destinationData);
 
   // NOTE: Here we need to convert the fee on the destination chain
   // to an asset on source chain.
@@ -57,6 +60,7 @@ export async function getTransferData({
     asset: destinationData.fee,
     target: route.getDestinationFeeAssetOnSource(),
   });
+  console.log('destinationFee', destinationFee);
 
   const sourceData = await getSourceData({
     isAutomatic: route.mrl.isAutomaticPossible && isAutomatic,
@@ -65,12 +69,14 @@ export async function getTransferData({
     destinationFee,
     sourceAddress,
   });
+  console.log('sourceData', sourceData);
 
-  const moonChainData = await getMoonChainData({
+  const bridgeChainData = await getBridgeChainData({
     route,
     sourceAddress,
     destinationAddress,
   });
+  console.log('bridgeChainData', bridgeChainData);
 
   return {
     destination: destinationData,
@@ -80,9 +86,9 @@ export async function getTransferData({
       const bigAmount = Big(
         toBigInt(amount, sourceData.balance.decimals).toString(),
       );
-      const fee = getMoonChainFeeValueOnSource({
+      const fee = getBridgeChainFeeValueOnSource({
         destinationData,
-        moonChainData,
+        bridgeChainData,
         sourceData,
       });
       const result = bigAmount
@@ -90,7 +96,7 @@ export async function getTransferData({
           isSameAssetPayingDestinationFee ? destinationFee.toBig() : Big(0),
         )
         .minus(fee)
-        .minus(sourceData.relayerFee?.toBig() || Big(0));
+        .minus(sourceData.otherFees?.relayer?.toBig() || Big(0));
 
       return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
@@ -100,10 +106,10 @@ export async function getTransferData({
     max: sourceData.max,
     min: getMrlMin({
       destinationData,
-      moonChainData,
+      bridgeChainData,
       sourceData,
     }),
-    moonChain: moonChainData,
+    bridgeChain: bridgeChainData,
     source: sourceData,
     async transfer({
       amount,
@@ -127,6 +133,7 @@ export async function getTransferData({
       );
       const transfer = await buildTransfer({
         asset,
+        protocolFee: sourceData.otherFees?.protocol,
         destinationAddress,
         feeAsset,
         isAutomatic,
@@ -176,6 +183,20 @@ export async function getTransferData({
         const wh = WormholeService.create(source);
 
         return wh.transfer(evmSigner, transfer);
+      }
+
+      if (
+        SnowbridgeConfig.is(transfer) &&
+        (EvmChain.is(source) || EvmParachain.is(source))
+      ) {
+        if (!evmSigner) {
+          throw new Error('EVM Signer must be provided');
+        }
+
+        const snowbridge = SnowbridgeService.create(source);
+        const hash = await snowbridge.transfer(evmSigner, transfer);
+
+        return [hash];
       }
 
       throw new Error('Either contract or extrinsic must be provided');

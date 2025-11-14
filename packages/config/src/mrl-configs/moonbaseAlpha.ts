@@ -31,9 +31,10 @@ export const moonbaseAlphaRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -67,9 +68,10 @@ export const moonbaseAlphaRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: dev,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0,
