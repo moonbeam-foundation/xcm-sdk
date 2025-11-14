@@ -12,7 +12,6 @@ import type { ExtrinsicConfig } from '../extrinsic';
 import type { SnowbridgeConfig } from './providers/snowbridge/snowbridge';
 import type { WormholeConfig } from './providers/wormhole/wormhole';
 
-// Provider type used by MrlConfigBuilder
 export type Provider = 'snowbridge' | 'wormhole';
 
 export type MrlConfigBuilder = ConfigBuilder<

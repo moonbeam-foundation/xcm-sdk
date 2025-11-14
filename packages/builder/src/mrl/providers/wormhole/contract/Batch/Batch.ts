@@ -20,8 +20,11 @@ import { getAbisForChain } from './abi/abi.helpers';
 const module = 'Batch';
 
 export function Batch() {
+  const provider = 'wormhole' as const;
+
   return {
     transferAssetsAndMessage: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,

@@ -24,8 +24,11 @@ const BUY_EXECUTION_FEE = 100_000_000_000_000_000n; // bridgeChainFee
 export const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing the xcm message in moon chain
 
 export function polkadotXcm() {
+  const provider = 'wormhole' as const;
+
   return {
     send: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,

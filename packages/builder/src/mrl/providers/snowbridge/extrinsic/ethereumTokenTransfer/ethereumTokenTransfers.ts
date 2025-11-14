@@ -7,8 +7,10 @@ export function ethereumTokenTransfers() {
   return {
     transferNativeToken: (): MrlConfigBuilder => {
       const func = 'transferNativeToken';
+      const provider = 'snowbridge' as const;
 
       return {
+        provider,
         build: ({ asset, destinationAddress }) => {
           return new ExtrinsicConfig({
             module: pallet,

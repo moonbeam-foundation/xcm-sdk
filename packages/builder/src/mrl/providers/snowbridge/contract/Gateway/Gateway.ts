@@ -7,12 +7,16 @@ import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import { SnowbridgeConfig } from '../../snowbridge';
 
 export function Gateway() {
+  const provider = 'snowbridge' as const;
+
   return {
     sendToken: (): MrlConfigBuilder => ({
+      provider,
       build: ({ asset, destinationAddress, bridgeFee, destination }) =>
         callSendToken(asset, bridgeFee, destination, destinationAddress),
     }),
     approveAndSendToken: (): MrlConfigBuilder => ({
+      provider,
       build: ({ asset, destinationAddress, bridgeFee, destination }) => {
         const requiresApproval = bridgeFee && !bridgeFee.isSame(asset);
 

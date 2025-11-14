@@ -8,8 +8,11 @@ import { TOKEN_BRIDGE_RELAYER_ABI } from './TokenBridgeRelayerAbi';
 const module = 'TokenBridgeRelayer';
 
 export function TokenBridgeRelayer() {
+  const provider = 'wormhole' as const;
+
   return {
     transferTokensWithRelay: (): MrlConfigBuilder => ({
+      provider,
       build: ({ asset, destination, destinationAddress, bridgeChain }) => {
         const wh = wormholeFactory(bridgeChain);
         const whDestination = wh.getChain(destination.getWormholeName()).config

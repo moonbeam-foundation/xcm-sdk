@@ -9,9 +9,11 @@ export function xcmPallet() {
   return {
     transferAssets: () => {
       const func = 'transferAssets';
+      const provider = 'snowbridge' as const;
 
       return {
         globalConsensus: (): MrlConfigBuilder => ({
+          provider,
           build: ({ asset, destination, destinationAddress }) => {
             if (!EvmChain.is(destination)) {
               throw new Error(
@@ -52,6 +54,7 @@ export function xcmPallet() {
           },
         }),
         globalConsensusErc20: (): MrlConfigBuilder => ({
+          provider,
           build: ({ asset, destination, destinationAddress }) => {
             if (!EvmChain.is(destination)) {
               throw new Error(

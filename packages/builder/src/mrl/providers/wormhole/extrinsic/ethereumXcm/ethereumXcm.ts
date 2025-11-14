@@ -8,8 +8,11 @@ import { contract as ContractBuilder } from '../../contract';
 import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
 
 export function ethereumXcm() {
+  const provider = 'wormhole' as const;
+
   return {
     transact: (): MrlConfigBuilder => ({
+      provider,
       build: (params) => {
         const { asset, isAutomatic, bridgeChain, bridgeChainGasLimit } = params;
 
