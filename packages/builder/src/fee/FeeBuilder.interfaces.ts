@@ -23,7 +23,7 @@ export type BridgeFeeConfigBuilder = ConfigBuilder<
 
 export interface FeeConfigBuilderParams {
   address: string;
-  api?: ApiPromise;
+  api: ApiPromise;
   asset: ChainAsset;
   balance?: AssetAmount;
   destination: AnyChain;

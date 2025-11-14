@@ -135,13 +135,8 @@ const createXcmFeeBuilder = ({
   options,
 }: CreateXcmFeeBuilderProps): FeeConfigBuilder => ({
   build: (params: FeeConfigBuilderParams) => {
-    const api = params.api;
-    if (!api) {
-      throw new Error('Api is required to build the XcmPaymentApi fee config');
-    }
-
     return new SubstrateCallConfig({
-      api,
+      api: params.api,
       call: async (): Promise<bigint> => {
         const [assets, versionedFeeAssetId] = await getVersionedAssets({
           getVersionedFeeAsset,
@@ -160,7 +155,7 @@ const createXcmFeeBuilder = ({
         });
 
         return getFeeForXcmInstructionsAndAsset(
-          api,
+          params.api,
           instructions,
           versionedFeeAssetId,
         );

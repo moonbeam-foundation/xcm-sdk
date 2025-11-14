@@ -12,7 +12,6 @@ export interface ContractConfigConstructorParams
 export class ContractConfig extends BaseConfig {
   readonly address: string;
   readonly abi: Abi;
-  // TODO mjm changed this from `any`, does it work?
   readonly args: unknown[];
   readonly value?: bigint;
 
