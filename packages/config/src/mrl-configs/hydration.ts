@@ -25,10 +25,10 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: weth,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        bridgeChainFee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
+        // bridgeChainFee: {
+        //   asset: glmr,
+        //   balance: BalanceBuilder().substrate().tokens().accounts(),
+        // },
         fee: {
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
@@ -66,10 +66,10 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: usdcwh,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        bridgeChainFee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
+        // bridgeChainFee: {
+        //   asset: glmr,
+        //   balance: BalanceBuilder().substrate().tokens().accounts(),
+        // },
         fee: {
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
@@ -107,10 +107,10 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: usdtwh,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        bridgeChainFee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
+        // bridgeChainFee: {
+        //   asset: glmr,
+        //   balance: BalanceBuilder().substrate().tokens().accounts(),
+        // },
         fee: {
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
@@ -148,10 +148,10 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: dai,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        bridgeChainFee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
+        // bridgeChainFee: {
+        //   asset: glmr,
+        //   balance: BalanceBuilder().substrate().tokens().accounts(),
+        // },
         fee: {
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),
@@ -189,10 +189,10 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: wbtc,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        bridgeChainFee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().tokens().accounts(),
-        },
+        // bridgeChainFee: {
+        //   asset: glmr,
+        //   balance: BalanceBuilder().substrate().tokens().accounts(),
+        // },
         fee: {
           asset: hdx,
           balance: BalanceBuilder().substrate().system().account(),

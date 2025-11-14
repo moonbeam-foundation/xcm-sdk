@@ -14,10 +14,10 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
           asset: ftmwh,
           balance: BalanceBuilder().substrate().assets().account(),
         },
-        bridgeChainFee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
+        // bridgeChainFee: {
+        //   asset: dev,
+        //   balance: BalanceBuilder().substrate().assets().account(),
+        // },
         fee: {
           asset: agng,
           balance: BalanceBuilder().substrate().system().account(),
@@ -59,10 +59,10 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
           asset: ftmwh,
           balance: BalanceBuilder().substrate().assets().account(),
         },
-        bridgeChainFee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().assets().account(),
-        },
+        // bridgeChainFee: {
+        //   asset: dev,
+        //   balance: BalanceBuilder().substrate().assets().account(),
+        // },
       },
       destination: {
         asset: agng,

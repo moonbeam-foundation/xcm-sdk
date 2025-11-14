@@ -28,10 +28,6 @@ export interface MrlSourceConfig extends SourceConfig {
   /** Protocol bridge fee (e.g., Snowbridge fee) */
   protocolFee?: number | BridgeFeeConfigBuilder;
   // TODO mjm is this used?
-  bridgeChainFee?: {
-    asset: Asset;
-    balance: BalanceConfigBuilder;
-  };
 }
 
 export interface BridgeChainConfig {

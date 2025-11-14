@@ -71,7 +71,6 @@ export async function getSourceData({
     builder: route.source.balance,
     chain: source,
   });
-  // console.log('balance', balance);
 
   const feeBalance = route.source.fee
     ? await getBalance({
@@ -81,7 +80,6 @@ export async function getSourceData({
         chain: source,
       })
     : balance;
-  // console.log('feeBalance', feeBalance);
 
   const destinationFeeBalance = await getDestinationFeeBalance({
     balance,
@@ -89,18 +87,15 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
-  // console.log('destinationFeeBalance', destinationFeeBalance);
 
-  const bridgeChainFeeBalance = await getBridgeChainFeeBalance({
-    balance,
-    feeBalance,
-    route,
-    sourceAddress,
-  });
-  // console.log('bridgeChainFeeBalance', bridgeChainFeeBalance);
+  // const bridgeChainFeeBalance = await getBridgeChainFeeBalance({
+  //   balance,
+  //   feeBalance,
+  //   route,
+  //   sourceAddress,
+  // });
 
   const existentialDeposit = await getExistentialDeposit(source);
-  // console.log('existentialDeposit', existentialDeposit);
 
   const min = await getAssetMin({
     asset,
@@ -162,7 +157,7 @@ export async function getSourceData({
     chain: source,
     destinationFee,
     destinationFeeBalance,
-    bridgeChainFeeBalance,
+    // bridgeChainFeeBalance,
     existentialDeposit,
     fee,
     feeBalance,
@@ -322,44 +317,44 @@ async function getWormholeFee({
   return;
 }
 
-interface GetBridgeChainFeeBalanceParams {
-  balance: AssetAmount;
-  feeBalance: AssetAmount;
-  route: MrlAssetRoute;
-  sourceAddress: string;
-}
+// interface GetBridgeChainFeeBalanceParams {
+//   balance: AssetAmount;
+//   feeBalance: AssetAmount;
+//   route: MrlAssetRoute;
+//   sourceAddress: string;
+// }
 
-async function getBridgeChainFeeBalance({
-  balance,
-  feeBalance,
-  route,
-  sourceAddress,
-}: GetBridgeChainFeeBalanceParams): Promise<AssetAmount | undefined> {
-  if (!route.source.bridgeChainFee) {
-    return undefined;
-  }
+// async function getBridgeChainFeeBalance({
+//   balance,
+//   feeBalance,
+//   route,
+//   sourceAddress,
+// }: GetBridgeChainFeeBalanceParams): Promise<AssetAmount | undefined> {
+//   if (!route.source.bridgeChainFee) {
+//     return undefined;
+//   }
 
-  if (route.mrl?.bridgeChain.fee.asset.isEqual(balance)) {
-    return balance;
-  }
+//   if (route.mrl?.bridgeChain.fee.asset.isEqual(balance)) {
+//     return balance;
+//   }
 
-  if (route.mrl?.bridgeChain.fee.asset.isEqual(feeBalance)) {
-    return feeBalance;
-  }
+//   if (route.mrl?.bridgeChain.fee.asset.isEqual(feeBalance)) {
+//     return feeBalance;
+//   }
 
-  if (!route.source.bridgeChainFee.balance) {
-    throw new Error(
-      'BalanceBuilder must be defined for source.bridgeChainFee.balance for MrlAssetRoute',
-    );
-  }
+//   if (!route.source.bridgeChainFee.balance) {
+//     throw new Error(
+//       'BalanceBuilder must be defined for source.bridgeChainFee.balance for MrlAssetRoute',
+//     );
+//   }
 
-  return getBalance({
-    address: sourceAddress,
-    asset: route.source.chain.getChainAsset(route.source.bridgeChainFee.asset),
-    builder: route.source.bridgeChainFee.balance,
-    chain: route.source.chain,
-  });
-}
+//   return getBalance({
+//     address: sourceAddress,
+//     asset: route.source.chain.getChainAsset(route.source.bridgeChainFee.asset),
+//     builder: route.source.bridgeChainFee.balance,
+//     chain: route.source.chain,
+//   });
+// }
 
 interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
   protocolFee?: number | BridgeFeeConfigBuilder;

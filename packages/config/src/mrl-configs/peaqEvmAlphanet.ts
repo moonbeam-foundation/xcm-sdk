@@ -14,10 +14,10 @@ export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
         },
-        bridgeChainFee: {
-          asset: dev,
-          balance: BalanceBuilder().evm().erc20(),
-        },
+        // bridgeChainFee: {
+        //   asset: dev,
+        //   balance: BalanceBuilder().evm().erc20(),
+        // },
         fee: {
           asset: agng,
           balance: BalanceBuilder().substrate().system().accountEvmTo32(),
