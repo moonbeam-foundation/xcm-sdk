@@ -39,7 +39,7 @@ export interface TransferParams {
 
 export interface MrlOtherFees {
   /** Protocol bridge fee (e.g., Snowbridge) - deducted from transfer amount */
-  bridge?: AssetAmount;
+  protocol?: AssetAmount;
 
   // TODO mjm maybe this does not belong to the source
   /** Relayer service fee for automatic execution - only applies when isAutomatic=true */

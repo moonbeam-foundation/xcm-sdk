@@ -108,20 +108,20 @@ export async function getSourceData({
     chain: source,
   });
 
-  const bridgeFee = await getBridgeFee({
+  const protocolFee = await getProtocolFee({
     source,
     destination,
-    // For now, the fee asset is always the one used for the bridge fee
-    // If it where to change, we need make bridgeFee a FeeConfig in MrlSourceConfig
+    // For now, the fee asset is always the one used for the protocol fee
+    // If it where to change, we need make protocolFee a FeeConfig in MrlSourceConfig
     asset: feeAsset,
     balance,
-    bridgeFee: route.source.bridgeFee,
+    protocolFee: route.source.protocolFee,
     address: destinationAddress,
   });
 
   const transfer = await buildTransfer({
-    asset: balance.copyWith({ amount: balance.amount - bridgeFee.amount }),
-    bridgeFee,
+    asset: balance.copyWith({ amount: balance.amount - protocolFee.amount }),
+    protocolFee,
     destinationAddress,
     feeAsset: feeBalance,
     isAutomatic,
@@ -169,7 +169,7 @@ export async function getSourceData({
     max,
     min,
     otherFees: {
-      bridge: bridgeFee,
+      protocol: protocolFee,
       relayer: relayerFee?.amount ? relayerFee : undefined,
     },
   };
@@ -361,25 +361,25 @@ async function getBridgeChainFeeBalance({
   });
 }
 
-interface GetBridgeFeeParams extends BridgeFeeConfigBuilderParams {
-  bridgeFee?: number | BridgeFeeConfigBuilder;
+interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
+  protocolFee?: number | BridgeFeeConfigBuilder;
 }
 
-async function getBridgeFee({
+async function getProtocolFee({
   address,
   asset,
   balance,
-  bridgeFee,
+  protocolFee,
   destination,
   source,
-}: GetBridgeFeeParams): Promise<AssetAmount> {
-  if (typeof bridgeFee === 'number') {
+}: GetProtocolFeeParams): Promise<AssetAmount> {
+  if (typeof protocolFee === 'number') {
     return AssetAmount.fromChainAsset(asset, {
-      amount: bridgeFee,
+      amount: protocolFee,
     });
   }
 
-  const config = bridgeFee?.build({
+  const config = protocolFee?.build({
     address,
     asset,
     balance,

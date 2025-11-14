@@ -819,7 +819,7 @@ When making a transfer, the total amount deducted from your source balance inclu
 
 <!-- TODO mjm review this -->
 ```
-Total Deducted = fee + destinationFee + otherFees.bridge + otherFees.relayer
+Total Deducted = fee + destinationFee + otherFees.protocol + otherFees.relayer
 ```
 
 The `getEstimate()` method automatically accounts for all these fees when calculating the recipient's expected amount.
