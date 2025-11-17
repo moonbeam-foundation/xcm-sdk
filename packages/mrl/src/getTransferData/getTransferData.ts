@@ -52,7 +52,6 @@ export async function getTransferData({
     route,
     destinationAddress,
   });
-  console.log('destinationData', destinationData);
 
   // NOTE: Here we need to convert the fee on the destination chain
   // to an asset on source chain.
@@ -60,7 +59,6 @@ export async function getTransferData({
     asset: destinationData.fee,
     target: route.getDestinationFeeAssetOnSource(),
   });
-  console.log('destinationFee', destinationFee);
 
   const sourceData = await getSourceData({
     isAutomatic: route.mrl.isAutomaticPossible && isAutomatic,
@@ -69,14 +67,12 @@ export async function getTransferData({
     destinationFee,
     sourceAddress,
   });
-  console.log('sourceData', sourceData);
 
   const bridgeChainData = await getBridgeChainData({
     route,
     sourceAddress,
     destinationAddress,
   });
-  console.log('bridgeChainData', bridgeChainData);
 
   return {
     destination: destinationData,

@@ -74,7 +74,6 @@ export class SnowbridgeService {
       tokenAddress,
       this.#gatewayAddress,
     );
-    console.log('currentAllowance', currentAllowance);
 
     if (currentAllowance < amount) {
       await this.approve(signer, tokenAddress, this.#gatewayAddress, amount);
@@ -199,9 +198,6 @@ export class SnowbridgeService {
       });
 
       const gasPrice = await this.#evmService.client.getGasPrice();
-      console.log('gasPrice', gasPrice);
-      console.log('approveGas', approveGas);
-      console.log('sendGas', sendGas);
 
       return (approveGas + sendGas) * gasPrice;
     } catch (error) {
