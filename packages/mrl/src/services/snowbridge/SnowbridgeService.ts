@@ -6,7 +6,7 @@ import {
 } from '@moonbeam-network/xcm-builder';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
 import { EvmService } from '@moonbeam-network/xcm-sdk';
-import type { EvmChain } from '@moonbeam-network/xcm-types';
+import { type AnyChain, EvmChain } from '@moonbeam-network/xcm-types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, type Hash } from 'viem';
@@ -18,12 +18,12 @@ export class SnowbridgeService {
 
   readonly #gatewayAddress: string;
 
-  static create(chain: EvmChain): SnowbridgeService {
+  static create(chain: AnyChain): SnowbridgeService {
     return new SnowbridgeService(chain);
   }
 
-  constructor(chain: EvmChain) {
-    if (!chain.contracts?.Gateway) {
+  constructor(chain: AnyChain) {
+    if (!EvmChain.is(chain) || !chain.contracts?.Gateway) {
       throw new Error(
         'Chain must be an EVMChain with the Gateway contract address configured for Snowbridge operations',
       );

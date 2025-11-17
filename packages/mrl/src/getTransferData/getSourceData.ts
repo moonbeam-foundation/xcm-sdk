@@ -221,9 +221,7 @@ async function getFee({
   }
 
   if (SnowbridgeConfig.is(transfer)) {
-    const snowbridge = SnowbridgeService.create(
-      chain as EvmChain | EvmParachain,
-    );
+    const snowbridge = SnowbridgeService.create(chain as EvmChain);
     const feeAmount = await snowbridge.getFee(sourceAddress, transfer);
 
     return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
