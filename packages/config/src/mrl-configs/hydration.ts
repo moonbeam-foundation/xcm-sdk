@@ -93,7 +93,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           chain: moonbeam,
           fee: {
             asset: glmr,
-            amount: 0.1,
+            amount: 0.1, // TODO use xcmPaymentApi
             balance: BalanceBuilder().substrate().system().account(),
           },
         },

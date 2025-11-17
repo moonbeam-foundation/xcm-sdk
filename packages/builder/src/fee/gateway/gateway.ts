@@ -1,18 +1,21 @@
-import { EvmParachain } from '@moonbeam-network/xcm-types';
+import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { ContractConfig } from '../..';
-import {
-  GATEWAY_ABI,
-  GATEWAY_CONTRACT_ADDRESS,
-} from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
+import { GATEWAY_ABI } from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
 import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
 
 export function gateway() {
   return {
     quoteSendTokenFee(): BridgeFeeConfigBuilder {
       return {
-        build: ({ asset, destination }) => {
+        build: ({ asset, destination, source }) => {
           if (!asset.address) {
             throw new Error(`Asset ${asset.key} has no address`);
+          }
+
+          if (!EvmChain.is(source) || !source.contracts?.Gateway) {
+            throw new Error(
+              'Source must be an EVMChain with the Gateway contract address configured for getting the quote send token fee for Gateway module',
+            );
           }
 
           if (!EvmParachain.isAnyParachain(destination)) {
@@ -22,7 +25,7 @@ export function gateway() {
           }
 
           return new ContractConfig({
-            address: GATEWAY_CONTRACT_ADDRESS,
+            address: source.contracts.Gateway,
             abi: GATEWAY_ABI,
             args: [asset.address, destination.parachainId, 0n],
             func: 'quoteSendTokenFee',

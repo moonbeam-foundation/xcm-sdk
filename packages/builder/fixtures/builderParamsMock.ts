@@ -117,6 +117,9 @@ export const moonbaseAlphaMock = new EvmParachain({
 
 export const fantomTestnet = new EvmChain({
   assets: [testChainAsset, testChainAsset2],
+  contracts: {
+    Gateway: '0x1234567890123456789012345678901234567890',
+  },
   ecosystem: Ecosystem.AlphanetRelay,
   explorer: { base: 'https://testnet.ftmscan.com' },
   id: 4_002,
@@ -169,6 +172,7 @@ export const feeBuilderParamsMock: FeeConfigBuilderParams = {
   address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   api: apiMock,
   feeAsset: testAssetAmount,
+  source: fantomTestnet,
 };
 
 export const feeBuilderParamsMockDifferentAsset: FeeConfigBuilderParams = {
@@ -176,6 +180,7 @@ export const feeBuilderParamsMockDifferentAsset: FeeConfigBuilderParams = {
   address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   api: apiMock,
   feeAsset: testAssetAmount2,
+  source: fantomTestnet,
 };
 
 export const mrlBuildParamsMock: MrlBuilderParams = {

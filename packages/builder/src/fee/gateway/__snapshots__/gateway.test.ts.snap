@@ -2,6 +2,8 @@
 
 exports[`gateway > quoteSendTokenFee > error cases > should match error snapshot for invalid destination 1`] = `[Error: Destination must be a Parachain or EvmParachain for getting the quote send token fee for Gateway module]`;
 
+exports[`gateway > quoteSendTokenFee > error cases > should match error snapshot for invalid source 1`] = `[Error: Source must be an EVMChain with the Gateway contract address configured for getting the quote send token fee for Gateway module]`;
+
 exports[`gateway > quoteSendTokenFee > error cases > should match error snapshot for missing address 1`] = `[Error: Asset mockAsset has no address]`;
 
 exports[`gateway > quoteSendTokenFee > should match args snapshot 1`] = `

@@ -2,27 +2,35 @@ import {
   ContractConfig,
   ERC20_ABI,
   GATEWAY_ABI,
-  GATEWAY_CONTRACT_ADDRESS,
   type SnowbridgeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
 import { EvmService } from '@moonbeam-network/xcm-sdk';
-import type { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
+import type { EvmChain } from '@moonbeam-network/xcm-types';
 import { u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, type Hash } from 'viem';
 
 export class SnowbridgeService {
-  readonly chain: EvmChain | EvmParachain;
+  readonly chain: EvmChain;
 
   readonly #evmService: EvmService;
 
-  static create(chain: EvmChain | EvmParachain): SnowbridgeService {
+  readonly #gatewayAddress: string;
+
+  static create(chain: EvmChain): SnowbridgeService {
     return new SnowbridgeService(chain);
   }
 
-  constructor(chain: EvmChain | EvmParachain) {
+  constructor(chain: EvmChain) {
+    if (!chain.contracts?.Gateway) {
+      throw new Error(
+        'Chain must be an EVMChain with the Gateway contract address configured for Snowbridge operations',
+      );
+    }
+
     this.chain = chain;
+    this.#gatewayAddress = chain.contracts.Gateway;
     this.#evmService = EvmService.create(chain);
   }
 
@@ -64,17 +72,12 @@ export class SnowbridgeService {
     const currentAllowance = await this.checkAllowance(
       signer.account.address,
       tokenAddress,
-      GATEWAY_CONTRACT_ADDRESS,
+      this.#gatewayAddress,
     );
     console.log('currentAllowance', currentAllowance);
 
     if (currentAllowance < amount) {
-      await this.approve(
-        signer,
-        tokenAddress,
-        GATEWAY_CONTRACT_ADDRESS,
-        amount,
-      );
+      await this.approve(signer, tokenAddress, this.#gatewayAddress, amount);
     }
 
     return await this.#evmService.transfer(signer, contract);
@@ -105,7 +108,7 @@ export class SnowbridgeService {
     ];
 
     return new ContractConfig({
-      address: GATEWAY_CONTRACT_ADDRESS,
+      address: this.#gatewayAddress,
       abi: GATEWAY_ABI,
       args: contractArgs,
       func: 'sendToken',
@@ -150,7 +153,7 @@ export class SnowbridgeService {
     const currentAllowance = await this.checkAllowance(
       address,
       tokenAddress,
-      GATEWAY_CONTRACT_ADDRESS,
+      this.#gatewayAddress,
     );
 
     if (currentAllowance >= amount) {
@@ -173,7 +176,7 @@ export class SnowbridgeService {
       const approveData = encodeFunctionData({
         abi: ERC20_ABI,
         functionName: 'approve',
-        args: [GATEWAY_CONTRACT_ADDRESS as Address, amount],
+        args: [this.#gatewayAddress as Address, amount],
       });
 
       const approveGas = await this.#evmService.client.estimateGas({

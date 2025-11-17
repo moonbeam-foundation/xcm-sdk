@@ -1,10 +1,7 @@
 import { Asset, ChainAsset, EvmChain } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
 import { feeBuilderParamsMock, testChainAsset } from '../../../fixtures';
-import {
-  GATEWAY_ABI,
-  GATEWAY_CONTRACT_ADDRESS,
-} from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
+import { GATEWAY_ABI } from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
 import { ContractConfig } from '../../types';
 import { gateway } from './gateway';
 
@@ -26,7 +23,9 @@ describe('gateway', () => {
       if (config instanceof ContractConfig) {
         expect(config.module).toBe('Gateway');
         expect(config.func).toBe('quoteSendTokenFee');
-        expect(config.address).toBe(GATEWAY_CONTRACT_ADDRESS);
+        expect(config.address).toBe(
+          (feeBuilderParamsMock.source as EvmChain).contracts?.Gateway,
+        );
         expect(config.abi).toBe(GATEWAY_ABI);
       }
     });
@@ -125,6 +124,19 @@ describe('gateway', () => {
         );
       });
 
+      it('should throw error if source is not an EvmChain with Gateway contract', () => {
+        const paramsWithParachainSource = {
+          ...feeBuilderParamsMock,
+          source: feeBuilderParamsMock.destination, // Use a parachain as source
+        };
+
+        const builder = gateway().quoteSendTokenFee();
+
+        expect(() => builder.build(paramsWithParachainSource)).toThrow(
+          'Source must be an EVMChain with the Gateway contract address configured for getting the quote send token fee for Gateway module',
+        );
+      });
+
       it('should not throw error for valid EvmParachain destination', () => {
         const builder = gateway().quoteSendTokenFee();
 
@@ -173,6 +185,19 @@ describe('gateway', () => {
 
         expect(() =>
           builder.build(paramsWithEvmChain),
+        ).toThrowErrorMatchingSnapshot();
+      });
+
+      it('should match error snapshot for invalid source', () => {
+        const paramsWithParachainSource = {
+          ...feeBuilderParamsMock,
+          source: feeBuilderParamsMock.destination, // Use a parachain as source
+        };
+
+        const builder = gateway().quoteSendTokenFee();
+
+        expect(() =>
+          builder.build(paramsWithParachainSource),
         ).toThrowErrorMatchingSnapshot();
       });
     });
