@@ -71,7 +71,6 @@ export async function getSourceData({
     builder: route.source.balance,
     chain: source,
   });
-  // console.log('balance', balance);
 
   const feeBalance = route.source.fee
     ? await getBalance({
@@ -81,7 +80,6 @@ export async function getSourceData({
         chain: source,
       })
     : balance;
-  // console.log('feeBalance', feeBalance);
 
   const destinationFeeBalance = await getDestinationFeeBalance({
     balance,
@@ -89,7 +87,6 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
-  // console.log('destinationFeeBalance', destinationFeeBalance);
 
   const bridgeChainFeeBalance = await getBridgeChainFeeBalance({
     balance,
@@ -97,10 +94,8 @@ export async function getSourceData({
     route,
     sourceAddress,
   });
-  // console.log('bridgeChainFeeBalance', bridgeChainFeeBalance);
 
   const existentialDeposit = await getExistentialDeposit(source);
-  // console.log('existentialDeposit', existentialDeposit);
 
   const min = await getAssetMin({
     asset,
