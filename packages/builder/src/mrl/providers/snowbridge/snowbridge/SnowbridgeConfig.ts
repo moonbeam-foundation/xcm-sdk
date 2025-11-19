@@ -1,3 +1,5 @@
+import { Provider } from '../../../MrlBuilder.interfaces';
+
 export type SnowbridgeFunctions = 'sendToken';
 
 export interface SnowbridgeFunctionArgs {
@@ -19,7 +21,7 @@ export class SnowbridgeConfig {
 
   readonly func: SnowbridgeFunctions;
 
-  readonly provider = 'snowbridge' as const;
+  readonly provider = Provider.Snowbridge;
 
   static is(obj: unknown): obj is SnowbridgeConfig {
     return obj instanceof SnowbridgeConfig;

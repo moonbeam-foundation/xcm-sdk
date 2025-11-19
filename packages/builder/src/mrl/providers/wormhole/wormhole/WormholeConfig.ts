@@ -3,6 +3,7 @@ import type {
   TokenId,
   TokenTransfer,
 } from '@wormhole-foundation/sdk-connect';
+import { Provider } from '../../../MrlBuilder.interfaces';
 
 export enum Protocols {
   TokenBridge = 'TokenBridge',
@@ -31,7 +32,7 @@ export class WormholeConfig {
 
   readonly func: WormholeTransferFunctions;
 
-  readonly provider = 'wormhole' as const;
+  readonly provider = Provider.Wormhole;
 
   static is(obj: unknown): obj is WormholeConfig {
     return obj instanceof WormholeConfig;

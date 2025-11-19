@@ -3,11 +3,14 @@ import {
   type AssetAmount,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
-import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import {
+  type MrlConfigBuilder,
+  Provider,
+} from '../../../../MrlBuilder.interfaces';
 import { SnowbridgeConfig } from '../../snowbridge';
 
 export function Gateway() {
-  const provider = 'snowbridge' as const;
+  const provider = Provider.Snowbridge;
 
   return {
     sendToken: (): MrlConfigBuilder => ({

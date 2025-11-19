@@ -1,6 +1,9 @@
 import { EvmChain } from '@moonbeam-network/xcm-types';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import {
+  type MrlConfigBuilder,
+  Provider,
+} from '../../../../MrlBuilder.interfaces';
 import { getGlobalConsensusArgs } from './xcmPallet.utils';
 
 const pallet = 'xcmPallet';
@@ -9,7 +12,7 @@ export function xcmPallet() {
   return {
     transferAssets: () => {
       const func = 'transferAssets';
-      const provider = 'snowbridge' as const;
+      const provider = Provider.Snowbridge;
 
       return {
         globalConsensus: (): MrlConfigBuilder => ({

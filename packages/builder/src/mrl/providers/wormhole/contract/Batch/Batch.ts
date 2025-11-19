@@ -10,7 +10,10 @@ import { evmToAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, maxUint64 } from 'viem';
 import { ContractConfig } from '../../../../../contract';
 import { getPrecompileDestinationInterior } from '../../../../../contract/ContractBuilder.utils';
-import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import {
+  type MrlConfigBuilder,
+  Provider,
+} from '../../../../MrlBuilder.interfaces';
 import {
   buildSendExtrinsic,
   CROSS_CHAIN_FEE,
@@ -20,7 +23,7 @@ import { getAbisForChain } from './abi/abi.helpers';
 const module = 'Batch';
 
 export function Batch() {
-  const provider = 'wormhole' as const;
+  const provider = Provider.Wormhole;
 
   return {
     transferAssetsAndMessage: (): MrlConfigBuilder => ({

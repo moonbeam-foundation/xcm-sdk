@@ -12,10 +12,19 @@ import type { ExtrinsicConfig } from '../extrinsic';
 import type { SnowbridgeConfig } from './providers/snowbridge/snowbridge';
 import type { WormholeConfig } from './providers/wormhole/wormhole';
 
-export type Provider = 'snowbridge' | 'wormhole';
+export enum Provider {
+  Snowbridge = 'snowbridge',
+  Wormhole = 'wormhole',
+}
+
+export type MrlTransferConfig =
+  | ContractConfig
+  | ExtrinsicConfig
+  | WormholeConfig
+  | SnowbridgeConfig;
 
 export type MrlConfigBuilder = ConfigBuilder<
-  ContractConfig | ExtrinsicConfig | WormholeConfig | SnowbridgeConfig,
+  MrlTransferConfig,
   MrlBuilderParams
 > & {
   provider?: Provider;

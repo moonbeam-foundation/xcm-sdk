@@ -14,9 +14,10 @@ import {
   normalizeX1,
 } from '../../../../../extrinsic/ExtrinsicBuilder.utils';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import type {
-  MrlBuilderParams,
-  MrlConfigBuilder,
+import {
+  type MrlBuilderParams,
+  type MrlConfigBuilder,
+  Provider,
 } from '../../../../MrlBuilder.interfaces';
 
 // TODO: these have to come from the configs
@@ -24,7 +25,7 @@ const BUY_EXECUTION_FEE = 100_000_000_000_000_000n; // bridgeChainFee
 export const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing the xcm message in moon chain
 
 export function polkadotXcm() {
-  const provider = 'wormhole' as const;
+  const provider = Provider.Wormhole;
 
   return {
     send: (): MrlConfigBuilder => ({

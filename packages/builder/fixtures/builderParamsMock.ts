@@ -171,6 +171,7 @@ export const feeBuilderParamsMock: FeeConfigBuilderParams = {
   ...buildParamsMock,
   address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   api: apiMock,
+  balance: testAssetAmount,
   feeAsset: testAssetAmount,
   source: fantomTestnet,
 };

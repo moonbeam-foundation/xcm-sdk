@@ -1,5 +1,8 @@
 import { ExtrinsicConfig } from '../../../../../types';
-import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import {
+  type MrlConfigBuilder,
+  Provider,
+} from '../../../../MrlBuilder.interfaces';
 
 const pallet = 'ethereumTokenTransfers';
 
@@ -7,7 +10,7 @@ export function ethereumTokenTransfers() {
   return {
     transferNativeToken: (): MrlConfigBuilder => {
       const func = 'transferNativeToken';
-      const provider = 'snowbridge' as const;
+      const provider = Provider.Snowbridge;
 
       return {
         provider,

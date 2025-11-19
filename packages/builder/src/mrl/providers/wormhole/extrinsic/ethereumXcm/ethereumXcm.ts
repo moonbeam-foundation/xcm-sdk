@@ -3,12 +3,15 @@ import { ERC20_ABI } from '../../../../../balance/Erc20Abi';
 import type { ContractConfig } from '../../../../../types/evm/ContractConfig';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
 import { BATCH_CONTRACT_ADDRESS } from '../../../../MrlBuilder.constants';
-import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import {
+  type MrlConfigBuilder,
+  Provider,
+} from '../../../../MrlBuilder.interfaces';
 import { contract as ContractBuilder } from '../../contract';
 import { BATCH_CONTRACT_ABI } from './BatchContractAbi';
 
 export function ethereumXcm() {
-  const provider = 'wormhole' as const;
+  const provider = Provider.Wormhole;
 
   return {
     transact: (): MrlConfigBuilder => ({

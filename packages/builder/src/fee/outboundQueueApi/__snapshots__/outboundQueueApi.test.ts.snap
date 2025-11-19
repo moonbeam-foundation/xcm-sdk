@@ -4,7 +4,7 @@ exports[`outboundQueueApi > calculateFee > should match args snapshot 1`] = `
 [
   {
     "MintForeignToken": {
-      "amount": undefined,
+      "amount": 99000000000n,
       "recipient": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
       "tokenId": "USDT",
     },

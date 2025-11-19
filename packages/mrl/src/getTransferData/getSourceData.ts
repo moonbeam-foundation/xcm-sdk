@@ -2,8 +2,9 @@ import {
   type BridgeFeeConfigBuilder,
   type BridgeFeeConfigBuilderParams,
   ContractConfig,
-  type ExtrinsicConfig,
   MrlBuilder,
+  type MrlTransferConfig,
+  Provider,
   SnowbridgeConfig,
   SubstrateQueryConfig,
   WormholeConfig,
@@ -177,26 +178,18 @@ interface GetFeeParams {
   feeBalance: AssetAmount;
   feeConfig?: FeeConfig;
   sourceAddress: string;
-  transfer:
-    | ContractConfig
-    | ExtrinsicConfig
-    | WormholeConfig
-    | SnowbridgeConfig;
+  transfer: MrlTransferConfig;
 }
 
 interface GetRelayFeeParams extends BuildTransferParams {
   chain: AnyChain;
-  transfer:
-    | ContractConfig
-    | ExtrinsicConfig
-    | WormholeConfig
-    | SnowbridgeConfig;
+  transfer: MrlTransferConfig;
 }
 
 interface GetWormholeFeeParams {
   asset: AssetAmount;
   chain: AnyChain;
-  config: ContractConfig | ExtrinsicConfig | WormholeConfig | SnowbridgeConfig;
+  config: MrlTransferConfig;
 }
 
 async function getFee({
@@ -264,7 +257,7 @@ async function getRelayerFee({
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
   if (
-    route.mrl.transfer.provider === 'snowbridge' ||
+    route.mrl.transfer.provider === Provider.Snowbridge ||
     SnowbridgeConfig.is(transfer)
   ) {
     return undefined;
@@ -274,7 +267,7 @@ async function getRelayerFee({
     return getWormholeFee({ asset, chain, config: transfer });
   }
 
-  if (route.mrl.transfer.provider === 'wormhole') {
+  if (route.mrl.transfer.provider === Provider.Wormhole) {
     const builderParams = await getMrlBuilderParams({
       asset,
       destinationAddress,

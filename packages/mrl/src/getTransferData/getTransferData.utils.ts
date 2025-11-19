@@ -6,6 +6,7 @@ import {
   type ExtrinsicConfig,
   MrlBuilder,
   type MrlBuilderParams,
+  Provider,
   type Transact,
 } from '@moonbeam-network/xcm-builder';
 import {
@@ -108,7 +109,7 @@ export interface BuildTransferParams {
 
 function requiresTransact(route: MrlAssetRoute): boolean {
   return (
-    route.mrl?.transfer.provider === 'wormhole' &&
+    route.mrl?.transfer.provider === Provider.Wormhole &&
     EvmParachain.isAnyParachain(route.source.chain)
   );
 }
