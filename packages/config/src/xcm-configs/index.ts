@@ -12,11 +12,9 @@ import { darwiniaRoutes } from './darwinia';
 import { darwiniaCrabRoutes } from './darwiniaCrab';
 import { hydrationRoutes } from './hydration';
 import { hydrationAlphanetRoutes } from './hydrationAlphanet';
-import { integriteeRoutes } from './integritee';
 import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
 import { kintsugiRoutes } from './kintsugi';
-import { kusamaRoutes } from './kusama';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
 import { laosRoutes } from './laos';
 import { laosAlphanetRoutes } from './laosAlphanet';
@@ -34,7 +32,6 @@ import { peaqEvmAlphanetRoutes } from './peaqEvmAlphanet';
 import { pendulumRoutes } from './pendulum';
 import { pendulumAlphanetRoutes } from './pendulumAlphanet';
 import { phalaRoutes } from './phala';
-import { polkadotRoutes } from './polkadot';
 import { polkadotAssetHubRoutes } from './polkadotAssetHub';
 import { robonomicsRoutes } from './robonomics';
 import { shidenRoutes } from './shiden';
@@ -55,11 +52,9 @@ export const xcmRoutesList: ChainRoutes[] = [
   laosRoutes,
   hydrationRoutes,
   hydrationAlphanetRoutes,
-  integriteeRoutes,
   interlayRoutes,
   karuraRoutes,
   kintsugiRoutes,
-  kusamaRoutes,
   mantaParachainRoutes,
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,
@@ -74,7 +69,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   pendulumRoutes,
   pendulumAlphanetRoutes,
   phalaRoutes,
-  polkadotRoutes,
   robonomicsRoutes,
   shidenRoutes,
   alphanetAssetHubRoutes,

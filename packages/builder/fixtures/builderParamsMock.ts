@@ -61,6 +61,21 @@ export const interlayTestnetMock = new Parachain({
   ws: ['wss://interlay-moonbeam-alphanet.interlay.io/'],
 });
 
+export const alphanetRelayMock = new Parachain({
+  assets: [testChainAsset, testChainAsset2],
+  ecosystem: Ecosystem.AlphanetRelay,
+  genesisHash:
+    '0x2c63baa36880c9cf820d5ccfc4e49841bfd714e93ede2bebc4abc4531dd4e8a0',
+  isTestChain: true,
+  key: 'alphanet-relay',
+  name: 'Alphanet Relay',
+  nativeAsset: test,
+  parachainId: 0,
+  isRelay: true,
+  ss58Format: 42,
+  ws: ['wss://frag-moonbase-relay-rpc-ws.g.moonbase.moonbeam.network/'],
+});
+
 export const alphanetAssetHubMock = new Parachain({
   assets: [testChainAsset, testChainAsset2],
   ecosystem: Ecosystem.AlphanetRelay,

@@ -65,7 +65,6 @@ import {
   peaqEvm,
   pendulum,
   phala,
-  polkadot,
   polkadotAssetHub,
   zeitgeist,
 } from '../chains';
@@ -416,37 +415,6 @@ export const moonbeamRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
-        asset: dot,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: dot,
-        chain: polkadot,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: FeeBuilder()
-            .xcmPaymentApi()
-            .fromHere({ isAssetReserveChain: true, parents: 0 }),
-          asset: dot,
-        },
-      },
-      contract: ContractBuilder()
-        .XcmPrecompile()
-        .transferAssetsUsingTypeAndThenAddress(),
-      monitoring: MonitoringBuilder()
-        .monitorEvent()
-        .polkadotXcm()
-        .messageQueue(),
     },
     {
       source: {
@@ -1665,13 +1633,21 @@ export const moonbeamRoutes = new ChainRoutes({
       destination: {
         asset: wbtce,
         chain: polkadotAssetHub,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
             isAssetReserveChain: true,
           }),
           asset: wbtce,
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
@@ -1698,13 +1674,21 @@ export const moonbeamRoutes = new ChainRoutes({
       destination: {
         asset: wethe,
         chain: polkadotAssetHub,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
             isAssetReserveChain: true,
           }),
           asset: wethe,
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },
@@ -1731,13 +1715,21 @@ export const moonbeamRoutes = new ChainRoutes({
       destination: {
         asset: wstethe,
         chain: polkadotAssetHub,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           amount: FeeBuilder().xcmPaymentApi().fromGlobalConsensus({
             isAssetReserveChain: true,
           }),
           asset: wstethe,
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
         min: AssetMinBuilder().foreignAssets().asset(),
       },

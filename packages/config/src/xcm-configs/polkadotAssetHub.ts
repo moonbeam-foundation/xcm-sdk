@@ -275,7 +275,11 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
     {
       source: {
         asset: wbtce,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           asset: dot,
           balance: BalanceBuilder().substrate().system().account(),
@@ -283,7 +287,11 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().foreignAssets().asset(),
         destinationFee: {
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
       },
       destination: {
@@ -306,7 +314,11 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
     {
       source: {
         asset: wethe,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           asset: dot,
           balance: BalanceBuilder().substrate().system().account(),
@@ -314,7 +326,11 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().foreignAssets().asset(),
         destinationFee: {
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
       },
       destination: {
@@ -337,7 +353,11 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
     {
       source: {
         asset: wstethe,
-        balance: BalanceBuilder().substrate().foreignAssets().account(),
+        balance: BalanceBuilder()
+          .substrate()
+          .foreignAssets()
+          .account()
+          .globalConsensus(),
         fee: {
           asset: dot,
           balance: BalanceBuilder().substrate().system().account(),
@@ -345,7 +365,11 @@ export const polkadotAssetHubRoutes = new ChainRoutes({
         },
         min: AssetMinBuilder().foreignAssets().asset(),
         destinationFee: {
-          balance: BalanceBuilder().substrate().foreignAssets().account(),
+          balance: BalanceBuilder()
+            .substrate()
+            .foreignAssets()
+            .account()
+            .globalConsensus(),
         },
       },
       destination: {

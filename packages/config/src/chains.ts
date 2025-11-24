@@ -547,7 +547,7 @@ export const fantomTestnet = new EvmChain({
   key: 'fantom-testnet',
   name: 'Fantom Testnet',
   nativeAsset: ftm,
-  rpc: 'https://fantom-testnet-rpc.publicnode.com',
+  rpc: 'https://rpc.testnet.fantom.network',
   wh: {
     name: 'Fantom',
   },
@@ -665,29 +665,6 @@ export const hydrationAlphanet = new Parachain({
   parachainId: 2034,
   ss58Format: 63,
   ws: ['wss://hydradx-moonbase-rpc.play.hydration.cloud'],
-});
-
-export const integritee = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(teer, {
-      decimals: 12,
-      ids: {
-        id: teer.originSymbol,
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xcdedc8eadbfa209d3f207bba541e57c3c58a667b05a2e1d1e86353c9000758da',
-  key: 'integritee',
-  name: 'Integritee',
-  nativeAsset: teer,
-  parachainId: 2015,
-  ss58Format: 13,
-  ws: [
-    'wss://kusama.api.integritee.network',
-    'wss://integritee-kusama.api.onfinality.io/public-ws',
-  ],
 });
 
 export const interlay = new Parachain({
@@ -1199,6 +1176,7 @@ export const moonlama = new EvmParachain({
   genesisHash:
     '0xb7e61bf426fa70533e2cc8d17bc00f1d373f3f45a01eac924da95214930a0d0e',
   id: 1283,
+  isEvmSigner: true,
   isTestChain: true,
   key: 'moonlama',
   name: 'Moonlama',
@@ -1246,6 +1224,7 @@ export const moonsama = new EvmParachain({
   genesisHash:
     '0x13df313fb1b9b0c99dd215ff130c6437464706eabf0f63123d4da26019e1a0cc',
   id: 1285,
+  isEvmSigner: false,
   isTestChain: true,
   key: 'moonsama',
   name: 'Moonsama',
@@ -2484,7 +2463,6 @@ export const chainsList: AnyChain[] = [
   fantomTestnet,
   hydration,
   hydrationAlphanet,
-  integritee,
   interlay,
   karura,
   kintsugi,

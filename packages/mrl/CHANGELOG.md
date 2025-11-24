@@ -1,5 +1,68 @@
 # @moonbeam-network/mrl
 
+## 4.0.22
+
+### Patch Changes
+
+- Updated dependencies [[`f30c49f`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f30c49f8c2e1f5b1ac1b87b71d6b814253a165bb)]:
+  - @moonbeam-network/xcm-config@4.5.2
+  - @moonbeam-network/xcm-sdk@4.1.16
+
+## 4.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`b2adc66`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b2adc669ad5dc2819ecca98344fb9ee041c6e761)]:
+  - @moonbeam-network/xcm-config@4.5.1
+  - @moonbeam-network/xcm-sdk@4.1.15
+
+## 4.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`4b201ff`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4b201ff74aca877c6b61e0b05fbe1665a36b66ff)]:
+  - @moonbeam-network/xcm-config@4.5.0
+  - @moonbeam-network/xcm-sdk@4.1.14
+
+## 4.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`5db2f09`](https://github.com/moonbeam-foundation/xcm-sdk/commit/5db2f09699d94f4ea6b2119b0017f78223a3dbf4)]:
+  - @moonbeam-network/xcm-builder@4.3.0
+  - @moonbeam-network/xcm-config@4.4.8
+  - @moonbeam-network/xcm-sdk@4.1.13
+
+## 4.0.18
+
+### Patch Changes
+
+- Updated dependencies [[`ba067fe`](https://github.com/moonbeam-foundation/xcm-sdk/commit/ba067fe20ab6651c3ae09242a8aba69a1060b885)]:
+  - @moonbeam-network/xcm-config@4.4.7
+  - @moonbeam-network/xcm-sdk@4.1.12
+
+## 4.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`bee256e`](https://github.com/moonbeam-foundation/xcm-sdk/commit/bee256e17a82bcde46a21be617c2c7eca0bcf445)]:
+  - @moonbeam-network/xcm-builder@4.2.6
+  - @moonbeam-network/xcm-config@4.4.6
+  - @moonbeam-network/xcm-sdk@4.1.11
+
+## 4.0.16
+
+### Patch Changes
+
+- [#572](https://github.com/moonbeam-foundation/xcm-sdk/pull/572) [`b6ad5e8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6ad5e8059fccac6513dd1de0484e7f6a205cb62) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`b6ad5e8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/b6ad5e8059fccac6513dd1de0484e7f6a205cb62)]:
+  - @moonbeam-network/xcm-builder@4.2.5
+  - @moonbeam-network/xcm-config@4.4.5
+  - @moonbeam-network/xcm-types@4.2.3
+  - @moonbeam-network/xcm-utils@4.1.3
+  - @moonbeam-network/xcm-sdk@4.1.10
+
 ## 4.0.15
 
 ### Patch Changes

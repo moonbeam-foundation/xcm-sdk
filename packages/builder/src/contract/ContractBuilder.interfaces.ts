@@ -5,9 +5,11 @@ export type ContractConfigBuilder = ConfigBuilder<ContractConfig>;
 
 export type DestinationMultilocation = [
   /**
+   * 0 - if destination is referring to a location in the same chain
    * 1 - if transaction is going through or to a relay chain
+   * 2 - if transaction is going to a parachain in another ecosystem
    */
-  1,
+  0 | 1 | 2,
   (
     | [
         /**
@@ -47,3 +49,5 @@ export enum TransferType {
   LocalReserve,
   DestinationReserve,
 }
+
+export type AssetMultilocation = [[number, string[]], bigint];

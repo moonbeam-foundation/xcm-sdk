@@ -17,7 +17,6 @@ import {
   movr,
   rmrk,
   sdn,
-  teer,
   usdtksm,
   vbnc,
   vksm,
@@ -28,10 +27,8 @@ import {
   bifrostKusama,
   crustShadow,
   darwiniaCrab,
-  integritee,
   karura,
   kintsugi,
-  kusama,
   kusamaAssetHub,
   moonriver,
   robonomics,
@@ -347,13 +344,12 @@ export const moonriverRoutes = new ChainRoutes({
       },
       destination: {
         asset: ksm,
-        chain: kusama,
+        chain: kusamaAssetHub,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
-          amount: FeeBuilder().xcmPaymentApi().fromHere({
-            isAssetReserveChain: true,
-            parents: 0,
-          }),
+          amount: FeeBuilder()
+            .xcmPaymentApi()
+            .fromHere({ isAssetReserveChain: true }),
           asset: ksm,
         },
       },
@@ -424,33 +420,6 @@ export const moonriverRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
       monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
-    },
-    {
-      source: {
-        asset: teer,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: teer,
-        chain: integritee,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.004,
-          asset: teer,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder()
-        .monitorEvent()
-        .polkadotXcm()
-        .messageQueue(),
     },
     {
       source: {
