@@ -45,15 +45,15 @@ const config: { chain: AnyParachain; address: string }[] = [
 
 describe('sdk', () => {
   describe(`${getParachainBalances.name}`, () => {
-    describe.each(config)(
-      'on $chain.name for address: $address',
-      ({ chain, address }) => {
-        it('should get expected balances', async () => {
-          const result = await getParachainBalances(chain, address);
-          expect(result).toMatchSnapshot();
-        });
-      },
-    );
+    describe.each(config)('on $chain.name for address: $address', ({
+      chain,
+      address,
+    }) => {
+      it('should get expected balances', async () => {
+        const result = await getParachainBalances(chain, address);
+        expect(result).toMatchSnapshot();
+      });
+    });
   });
 });
 

@@ -46,21 +46,26 @@ const transferDateTestConfig: {
 ];
 
 describe('sdk/transferData', () => {
-  describe.each(transferDateTestConfig)(
-    'asset $asset.key from source $source.name to destination $destination.name',
-    ({ asset, source, sourceAddress, destination, destinationAddress }) => {
-      it('should get expected balances', async () => {
-        const transferData: TransferData = await Sdk()
-          .setAsset(asset)
-          .setSource(source)
-          .setDestination(destination)
-          .setAddresses({
-            sourceAddress: sourceAddress,
-            destinationAddress: destinationAddress,
-          });
+  describe.each(
+    transferDateTestConfig,
+  )('asset $asset.key from source $source.name to destination $destination.name', ({
+    asset,
+    source,
+    sourceAddress,
+    destination,
+    destinationAddress,
+  }) => {
+    it('should get expected balances', async () => {
+      const transferData: TransferData = await Sdk()
+        .setAsset(asset)
+        .setSource(source)
+        .setDestination(destination)
+        .setAddresses({
+          sourceAddress: sourceAddress,
+          destinationAddress: destinationAddress,
+        });
 
-        expect(transferData).toMatchSnapshot();
-      });
-    },
-  );
+      expect(transferData).toMatchSnapshot();
+    });
+  });
 });
