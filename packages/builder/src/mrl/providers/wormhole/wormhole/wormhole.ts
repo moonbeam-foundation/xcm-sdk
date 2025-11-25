@@ -145,6 +145,13 @@ export function getMultilocation({
   const version = getExtrinsicArgumentVersion(moonApi.tx.polkadotXcm.send);
   const isDifferentEcosystem = destination.ecosystem !== moonChain.ecosystem;
   const isEvmDestination = EvmParachain.is(destination);
+  console.log('destination', destination);
+  console.log('isEvmDestination', isEvmDestination);
+  console.log('destinationAddress', destinationAddress);
+  console.log(
+    'evmToAddress(destinationAddress)',
+    evmToAddress(destinationAddress),
+  );
 
   if (isDifferentEcosystem) {
     return moonApi.createType('XcmVersionedLocation', {
