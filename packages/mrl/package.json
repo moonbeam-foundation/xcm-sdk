@@ -49,13 +49,13 @@
     "big.js": "^7.0.1"
   },
   "peerDependencies": {
-    "@polkadot/api": "16.4.8",
-    "@polkadot/api-augment": "16.4.8",
-    "@polkadot/types": "16.4.8",
-    "@polkadot/util": "13.5.6",
-    "@polkadot/util-crypto": "13.5.6",
-    "@wormhole-foundation/sdk-connect": "^3.8.5",
-    "@wormhole-foundation/sdk-evm": "^3.8.5",
-    "viem": "^2.37.13"
+    "@polkadot/api": "16.5.2",
+    "@polkadot/api-augment": "16.5.2",
+    "@polkadot/types": "16.5.2",
+    "@polkadot/util": "13.5.9",
+    "@polkadot/util-crypto": "13.5.9",
+    "@wormhole-foundation/sdk-connect": "^4.0.2",
+    "@wormhole-foundation/sdk-evm": "^4.0.2",
+    "viem": "^2.40.2"
   }
 }
