@@ -44,6 +44,7 @@ export function ethereumXcm() {
           functionName: 'approve',
           args: [contract.address as Address, tokenAmountOnMoonChain],
         });
+        console.log('transact contract ', contract);
 
         const batchAll = encodeFunctionData({
           abi: BATCH_CONTRACT_ABI,

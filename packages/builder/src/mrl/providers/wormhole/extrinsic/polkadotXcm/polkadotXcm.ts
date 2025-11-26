@@ -57,12 +57,16 @@ export function polkadotXcm() {
           throw new Error('Source chain needs to be a parachain');
         }
 
+        console.log('sourceAddress', sourceAddress);
+
         const { address20: computedOriginAccount } =
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: source.parachainId,
             isParents: true,
           });
+
+        console.log('computedOriginAccount', computedOriginAccount);
 
         const assetTransferTxs = getAssetTransferTxs({
           transferAssetsPallet,
@@ -95,6 +99,7 @@ export function polkadotXcm() {
           sourceApi,
           transact,
         });
+        console.log('send', send.toHuman());
 
         const transactionsToSend = sendOnlyRemoteExecution
           ? [send]
@@ -154,6 +159,8 @@ export function buildSendExtrinsic({
   }
 
   const version = getExtrinsicArgumentVersion(sourceApi.tx.polkadotXcm.send);
+
+  console.log('transact', transact);
 
   return sourceApi.tx.polkadotXcm.send(
     {
@@ -259,7 +266,7 @@ function getAssetTransferTxs({
   );
 }
 
-function getAssetTransferTxsForPolkadotXcm({
+export function getAssetTransferTxsForPolkadotXcm({
   asset,
   computedOriginAccount,
   moonApi,

@@ -109,16 +109,16 @@ export function getPayload({
   MrlBuilderParams,
   'destination' | 'destinationAddress' | 'moonApi' | 'moonChain'
 >): Uint8Array | undefined {
-  const multilocation = getMultilocation({
+  const destinationMultilocation = getDestinationMultilocation({
     destination,
     destinationAddress,
     moonApi,
     moonChain,
   });
 
-  console.log('multilocation', multilocation.toHuman());
+  console.log('destinationMultilocation', destinationMultilocation.toHuman());
   const action = moonApi.createType('XcmRoutingUserAction', {
-    destination: multilocation,
+    destination: destinationMultilocation,
   });
   const versioned = moonApi.createType('VersionedUserAction', {
     V1: action,
@@ -127,7 +127,7 @@ export function getPayload({
   return versioned.toU8a();
 }
 
-export function getMultilocation({
+export function getDestinationMultilocation({
   moonApi,
   destination,
   destinationAddress,

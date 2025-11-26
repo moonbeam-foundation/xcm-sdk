@@ -34,7 +34,11 @@ export const moonriverRoutes = new MrlChainRoutes({
       },
       mrl: {
         isAutomaticPossible: true,
-        transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
+        transfer: MrlBuilder()
+          .wormhole()
+          .extrinsic()
+          .polkadotXcm()
+          .send('polkadotXcm'),
         moonChain: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
