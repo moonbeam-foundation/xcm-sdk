@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-sdk
 
+## 4.1.17
+
+### Patch Changes
+
+- [#591](https://github.com/moonbeam-foundation/xcm-sdk/pull/591) [`602ba36`](https://github.com/moonbeam-foundation/xcm-sdk/commit/602ba36935905184b33d38d850b333d27a017857) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies and remove Phala
+
+- Updated dependencies [[`602ba36`](https://github.com/moonbeam-foundation/xcm-sdk/commit/602ba36935905184b33d38d850b333d27a017857)]:
+  - @moonbeam-network/xcm-builder@4.3.1
+  - @moonbeam-network/xcm-config@4.5.3
+  - @moonbeam-network/xcm-types@4.2.4
+  - @moonbeam-network/xcm-utils@4.1.4
+
 ## 4.1.16
 
 ### Patch Changes
