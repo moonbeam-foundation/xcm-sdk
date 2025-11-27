@@ -11,21 +11,25 @@
         "noForEach": "off"
       },
       "correctness": {
-        "noUnusedVariables": { "level": "warn", "fix": "none" }
+        "noUnusedVariables": {
+          "level": "warn",
+          "fix": "none"
+        }
       }
     }
   },
   "files": {
-    "includes": ["**/*", "!**/build"],
-    "experimentalScannerIgnores": [
-      ".turbo",
-      ".vscode/extensions.json",
-      "build",
-      "dist",
-      "node_modules",
-      "out",
-      "target",
-      "mkdocs/site"
+    "includes": [
+      "**/*",
+      "!**/build",
+      "!!**/.vscode/extensions.json",
+      "!!**/build",
+      "!!**/dist",
+      "!!**/node_modules",
+      "!!**/out",
+      "!!**/target",
+      "!!**/mkdocs/site",
+      "!!**/mkdocs/**/*.html"
     ]
   },
   "javascript": {
@@ -45,11 +49,22 @@
       }
     },
     {
-      "includes": ["**/build/**", ".turbo/**/*", "mkdocs/**/*.css"],
-      "linter": { "enabled": false },
-      "formatter": { "enabled": false },
+      "includes": [
+        "**/build/**",
+        ".turbo/**/*",
+        "mkdocs/**/*.css",
+        "mkdocs/**/*.html"
+      ],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      },
       "javascript": {
-        "assist": { "enabled": false }
+        "assist": {
+          "enabled": false
+        }
       }
     }
   ]
