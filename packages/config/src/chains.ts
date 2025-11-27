@@ -2199,35 +2199,6 @@ export const pendulumAlphanet = new Parachain({
   ws: ['wss://moonbeam-00.pendulumchain.tech:443'],
 });
 
-export const phala = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(glmr, {
-      decimals: 18,
-      ids: {
-        id: 1,
-        palletInstance: 10,
-      },
-    }),
-    ChainAsset.fromAsset(pha, {
-      decimals: 12,
-    }),
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736',
-  key: 'phala',
-  name: 'Phala',
-  nativeAsset: pha,
-  parachainId: 2035,
-  ss58Format: 30,
-  ws: [
-    'wss://phala-rpc.dwellir.com',
-    'wss://api.phala.network/ws',
-    'wss://phala.api.onfinality.io/public-ws',
-    'wss://rpc.helikon.io/phala',
-  ],
-});
-
 export const polkadot = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   checkSovereignAccountBalances: true,
@@ -2490,7 +2461,6 @@ export const chainsList: AnyChain[] = [
   peaqEvmAlphanet,
   pendulum,
   pendulumAlphanet,
-  phala,
   polkadot,
   polkadotAssetHub,
   robonomics,
