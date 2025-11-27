@@ -28,7 +28,6 @@ import {
   neuro,
   peaq,
   pen,
-  pha,
   pink,
   ring,
   stink,
@@ -64,7 +63,6 @@ import {
   peaqChain,
   peaqEvm,
   pendulum,
-  phala,
   polkadotAssetHub,
   zeitgeist,
 } from '../chains';
@@ -593,29 +591,6 @@ export const moonbeamRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
       monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
-    },
-    {
-      source: {
-        asset: pha,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: pha,
-        chain: phala,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.32,
-          asset: pha,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {
