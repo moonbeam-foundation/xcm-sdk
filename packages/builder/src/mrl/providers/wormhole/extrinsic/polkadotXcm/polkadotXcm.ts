@@ -7,12 +7,14 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { ISubmittableResult } from '@polkadot/types/types';
+
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import {
   getExtrinsicArgumentVersion,
   normalizeConcrete,
   normalizeX1,
 } from '../../../../../extrinsic/ExtrinsicBuilder.utils';
+import { getGlobalConsensus } from '../../../../../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
 import type {
   MrlBuilderParams,
@@ -25,7 +27,9 @@ export const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing t
 
 export function polkadotXcm() {
   return {
-    send: (): MrlConfigBuilder => ({
+    send: (
+      transferAssetsPallet?: 'polkadotXcm' | 'xTokens',
+    ): MrlConfigBuilder => ({
       build: ({
         asset,
         destination,
@@ -61,6 +65,7 @@ export function polkadotXcm() {
           });
 
         const assetTransferTxs = getAssetTransferTxs({
+          transferAssetsPallet,
           asset,
           computedOriginAccount,
           destination,
@@ -111,7 +116,33 @@ interface HelperFunctionParams extends MrlBuilderParams {
   sourceApi: ApiPromise;
 }
 
+function getDestinationMultilocation(
+  source: AnyParachain,
+  moonChain: AnyParachain,
+) {
+  const isDifferentEcosystem = source.ecosystem !== moonChain.ecosystem;
+
+  if (isDifferentEcosystem) {
+    return {
+      parents: 2,
+      interior: {
+        X2: [
+          { GlobalConsensus: getGlobalConsensus(moonChain) },
+          { Parachain: moonChain.parachainId },
+        ],
+      },
+    };
+  }
+  return {
+    parents: 1,
+    interior: {
+      X1: { Parachain: moonChain.parachainId },
+    },
+  };
+}
+
 export function buildSendExtrinsic({
+  source,
   computedOriginAccount,
   moonAsset,
   moonChain,
@@ -126,12 +157,10 @@ export function buildSendExtrinsic({
 
   return sourceApi.tx.polkadotXcm.send(
     {
-      [version]: normalizeX1(version, {
-        parents: 1,
-        interior: {
-          X1: { Parachain: moonChain.parachainId },
-        },
-      }),
+      [version]: normalizeX1(
+        version,
+        getDestinationMultilocation(source, moonChain),
+      ),
     },
     {
       [version]: [
@@ -207,7 +236,69 @@ export function buildSendExtrinsic({
   );
 }
 
+interface GetAssetTransferTxsParams extends HelperFunctionParams {
+  transferAssetsPallet?: 'polkadotXcm' | 'xTokens';
+}
+
 function getAssetTransferTxs({
+  transferAssetsPallet = 'xTokens',
+  ...params
+}: GetAssetTransferTxsParams): SubmittableExtrinsic<
+  'promise',
+  ISubmittableResult
+>[] {
+  console.log('transferAssetsPallet', transferAssetsPallet);
+  if (transferAssetsPallet === 'xTokens') {
+    return getAssetTransferTxsFromXtokens(params);
+  }
+  if (transferAssetsPallet === 'polkadotXcm') {
+    return getAssetTransferTxsForPolkadotXcm(params);
+  }
+  throw new Error(
+    'Invalid transferAssetsPallet for polkadotXcm().send() function',
+  );
+}
+
+function getAssetTransferTxsForPolkadotXcm({
+  asset,
+  computedOriginAccount,
+  moonApi,
+  moonAsset,
+  moonChain,
+  source,
+  sourceAddress,
+  sourceApi,
+}: HelperFunctionParams): SubmittableExtrinsic<
+  'promise',
+  ISubmittableResult
+>[] {
+  const { transferAssets } = sourceApi.tx.polkadotXcm;
+  const polkadotXcmBuilder = ExtrinsicBuilder()
+    .polkadotXcm()
+    .transferAssetsToEcosystem()
+    .X4();
+
+  const transferAssetsTx = transferAssets(
+    ...polkadotXcmBuilder
+      .build({
+        asset,
+        destination: moonChain,
+        destinationAddress: computedOriginAccount,
+        destinationApi: moonApi,
+        fee: AssetAmount.fromChainAsset(source.getChainAsset(moonAsset), {
+          amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
+        }),
+        source: source,
+        sourceAddress,
+        sourceApi,
+      })
+      .getArgs(transferAssets),
+  );
+
+  return [transferAssetsTx];
+}
+
+function getAssetTransferTxsFromXtokens({
   asset,
   computedOriginAccount,
   fee,
@@ -221,11 +312,12 @@ function getAssetTransferTxs({
   'promise',
   ISubmittableResult
 >[] {
-  const { transfer, transferMulticurrencies } = sourceApi.tx.xTokens;
   const transferBuilder = ExtrinsicBuilder().xTokens().transfer();
   const transferMulticurrenciesBuilder = ExtrinsicBuilder()
     .xTokens()
     .transferMultiCurrencies();
+
+  const { transfer, transferMulticurrencies } = sourceApi.tx.xTokens;
   /**
    * TODO here we should compare the asset with the cross chain fee asset.
    * For example, FTM cannot pay for fees in Moonbase while AGNG can, so for FTM we have to send a transferMulticurrencies
