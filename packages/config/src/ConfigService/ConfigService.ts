@@ -6,7 +6,7 @@ import type {
 } from '@moonbeam-network/xcm-types';
 import { assetsMap } from '../assets';
 import { chainsMap } from '../chains';
-import { getKey } from '../config.utils';
+import { getKey, getMoonChain } from '../config.utils';
 import type { AssetRoute } from '../types/AssetRoute';
 import type { ChainRoutes } from '../types/ChainRoutes';
 import type { MrlAssetRoute } from '../types/MrlAssetRoute';
@@ -104,7 +104,8 @@ export class ConfigService {
     ecosystem?: Ecosystem;
   }): AnyChain[] {
     const routes = Array.from(this.routes.values()).filter(
-      (chainRoutes) => !ecosystem || chainRoutes.chain.ecosystem === ecosystem,
+      (chainRoutes) =>
+        !ecosystem || getMoonChain(chainRoutes.chain).ecosystem === ecosystem,
     );
 
     if (!asset) {
