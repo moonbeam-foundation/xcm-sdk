@@ -147,11 +147,6 @@ export function BuildVersionedAsset() {
 }
 
 export function QueryVersionedAsset() {
-  // TODO instantiate api here
-  // const api = new ApiPromise({
-  //   provider: new WsProvider(ws),
-  // });
-
   return {
     fromCurrencyIdToLocations: async (asset: ChainAsset, api: ApiPromise) => {
       const result = await api.query.assetRegistry.currencyIdToLocations(

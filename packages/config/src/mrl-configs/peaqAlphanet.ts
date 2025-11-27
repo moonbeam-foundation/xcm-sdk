@@ -1,6 +1,6 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { agng, dev, ftm, ftmwh } from '../assets';
-import { fantomTestnet, peaqAlphanet } from '../chains';
+import { fantomTestnet, moonbaseAlpha, peaqAlphanet } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export const peaqAlphanetRoutes = new MrlChainRoutes({
@@ -14,7 +14,7 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
           asset: ftmwh,
           balance: BalanceBuilder().substrate().assets().account(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: dev,
           balance: BalanceBuilder().substrate().assets().account(),
         },
@@ -35,9 +35,10 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -58,7 +59,7 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
           asset: ftmwh,
           balance: BalanceBuilder().substrate().assets().account(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: dev,
           balance: BalanceBuilder().substrate().assets().account(),
         },
@@ -75,9 +76,10 @@ export const peaqAlphanetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: agng,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,

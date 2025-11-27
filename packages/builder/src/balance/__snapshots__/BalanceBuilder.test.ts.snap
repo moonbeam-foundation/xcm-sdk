@@ -8,6 +8,7 @@ SubstrateQueryConfig {
   ],
   "func": "account",
   "module": "assets",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -40,6 +41,7 @@ SubstrateQueryConfig {
   ],
   "func": "account",
   "module": "foreignAssets",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -53,6 +55,7 @@ SubstrateQueryConfig {
   ],
   "func": "account",
   "module": "system",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -70,6 +73,7 @@ SubstrateQueryConfig {
   ],
   "func": "account",
   "module": "system",
+  "queryType": "query",
   "transform": [Function],
 }
 `;
@@ -88,6 +92,7 @@ SubstrateQueryConfig {
   ],
   "func": "accounts",
   "module": "tokens",
+  "queryType": "query",
   "transform": [Function],
 }
 `;

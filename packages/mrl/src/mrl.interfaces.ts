@@ -5,7 +5,7 @@ import type {
 import type {
   AnyChain,
   AssetAmount,
-  EvmParachain,
+  Parachain,
 } from '@moonbeam-network/xcm-types';
 import type { Signer } from '@polkadot/api/types';
 import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
@@ -23,7 +23,7 @@ export interface TransferData {
   isAutomaticPossible: boolean;
   max: AssetAmount;
   min: AssetAmount;
-  moonChain: MoonChainTransferData;
+  bridgeChain: BridgeChainTransferData;
   source: SourceTransferData;
   transfer(params: TransferParams): Promise<string[]>;
 }
@@ -37,18 +37,26 @@ export interface TransferParams {
   // TODO add monitoring callbacks here when implemented
 }
 
+export interface MrlOtherFees {
+  /** Protocol bridge fee (e.g., Snowbridge) - deducted from transfer amount */
+  protocol?: AssetAmount;
+
+  /** Relayer service fee for automatic execution - only applies when isAutomatic=true */
+  relayer?: AssetAmount;
+}
+
 export interface SourceTransferData extends SourceChainTransferData {
   destinationFeeBalance: AssetAmount;
-  moonChainFeeBalance?: AssetAmount;
-  relayerFee?: AssetAmount;
+  bridgeChainFeeBalance?: AssetAmount;
   feeBalance: AssetAmount;
   max: AssetAmount;
+  otherFees: MrlOtherFees;
 }
 
 export interface DestinationTransferData extends ChainTransferData {}
 
-export type MoonChainTransferData = Omit<ChainTransferData, 'min'> & {
-  chain: EvmParachain;
+export type BridgeChainTransferData = Omit<ChainTransferData, 'min'> & {
+  chain: Parachain;
   address: string;
   feeBalance: AssetAmount;
 };

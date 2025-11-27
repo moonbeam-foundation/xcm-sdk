@@ -6,24 +6,28 @@ import {
   getExtrinsicAccount,
   getExtrinsicArgumentVersion,
 } from '../../../../extrinsic/ExtrinsicBuilder.utils';
-import type {
-  MrlBuilderParams,
-  MrlConfigBuilder,
+import {
+  type MrlBuilderParams,
+  type MrlConfigBuilder,
+  Provider,
 } from '../../../MrlBuilder.interfaces';
 import { GMP_CONTRACT_ADDRESS } from '../contract/Gmp';
 import { Protocols, WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 
 export function wormhole() {
+  const provider = Provider.Wormhole;
+
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
         destinationAddress,
         isAutomatic,
         moonApi,
-        moonChain,
+        bridgeChain: moonChain,
         source,
         sourceAddress,
       }): WormholeConfig => {
