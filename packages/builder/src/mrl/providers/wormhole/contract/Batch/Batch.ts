@@ -8,7 +8,10 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, maxUint64 } from 'viem';
 import { ContractBuilder, ContractConfig } from '../../../../../contract';
-import { getPrecompileDestinationInterior } from '../../../../../contract/ContractBuilder.utils';
+import {
+  getGlobalConsensusDestination,
+  getPrecompileDestinationInterior,
+} from '../../../../../contract/ContractBuilder.utils';
 import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
 import {
   buildSendExtrinsic,
@@ -182,11 +185,10 @@ export function Batch() {
         // we keep only the message
         const encodedXcmMessage = send.args[1].toHex();
 
-        const { destinationParachain } = getDestinationInHex(
+        const globalConsensusDestination = getGlobalConsensusDestination(
+          sourceApi,
           moonChain,
-          computedOriginAccount,
         );
-
         // const { currencies, feeItem } = getCurrencies({
         //   source,
         //   moonAsset,
@@ -204,7 +206,7 @@ export function Batch() {
         const moonChainFee = AssetAmount.fromChainAsset(
           moonChain.getChainAsset(moonAsset),
           {
-            amount: 0.03,
+            amount: 0.03, // TODO mjm get from the config?
           },
         );
         const transferAssetsCall = ContractBuilder()
@@ -214,7 +216,7 @@ export function Batch() {
           .build({
             sourceApi,
             asset,
-            fee: moonChainFee, // TODO mjm pass correct
+            fee: moonChainFee,
             destination: moonChain,
             destinationAddress: computedOriginAccount,
             source,
@@ -225,10 +227,18 @@ export function Batch() {
 
         const transferAssetsCallData = transferAssetsCall.encodeFunctionData();
 
+        console.log('destinationParachain', globalConsensusDestination);
+
         const xcmSendTxData = encodeFunctionData({
           abi: XcmUtilsAbi,
           functionName: 'xcmSend',
-          args: [destinationParachain, encodedXcmMessage],
+          args: [
+            {
+              parents: globalConsensusDestination[0],
+              interior: globalConsensusDestination[1],
+            },
+            encodedXcmMessage,
+          ],
         });
 
         return new ContractConfig({

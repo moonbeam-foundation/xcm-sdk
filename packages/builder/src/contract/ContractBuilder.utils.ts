@@ -62,7 +62,7 @@ export function getGlobalConsensusDestination(
       encodeGlobalConsensus(sourceApi, destination),
       encodeParachain(destination.parachainId),
     ],
-  ];
+  ] as const;
 }
 
 export function getPalletInstanceMultilocation(
