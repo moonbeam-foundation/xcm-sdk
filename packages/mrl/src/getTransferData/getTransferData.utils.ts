@@ -290,3 +290,15 @@ async function getBridgeChainGasLimit(
 
   return (gasEstimation * 110n) / 100n;
 }
+
+export function getAmountForTransferSimulation(
+  balance: AssetAmount,
+  protocolFee: AssetAmount,
+): AssetAmount {
+  return balance.copyWith({
+    amount:
+      balance.amount - protocolFee.amount > 0
+        ? balance.amount - protocolFee.amount
+        : 0n,
+  });
+}

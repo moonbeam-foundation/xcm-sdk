@@ -25,6 +25,7 @@ import {
   type AnyChain,
   type AnyParachain,
   AssetAmount,
+  type ChainAsset,
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
@@ -35,6 +36,7 @@ import { WormholeService } from '../services/wormhole';
 import {
   type BuildTransferParams,
   buildTransfer,
+  getAmountForTransferSimulation,
   getMrlBuilderParams,
 } from './getTransferData.utils';
 
@@ -107,16 +109,15 @@ export async function getSourceData({
   const protocolFee = await getProtocolFee({
     source,
     destination,
-    // For now, the fee asset is always the one used for the protocol fee
-    // If it where to change, we need make protocolFee a FeeConfig in MrlSourceConfig
-    asset: feeAsset,
+    asset,
+    feeAsset,
     balance,
     protocolFee: route.source.protocolFee,
     address: destinationAddress,
   });
 
   const transfer = await buildTransfer({
-    asset: balance.copyWith({ amount: balance.amount - protocolFee.amount }),
+    asset: getAmountForTransferSimulation(balance, protocolFee),
     protocolFee,
     destinationAddress,
     feeAsset: feeBalance,
@@ -210,11 +211,16 @@ async function getFee({
 
   if (SnowbridgeConfig.is(transfer)) {
     const snowbridge = SnowbridgeService.create(chain as EvmChain);
-    const feeAmount = await snowbridge.getFee(sourceAddress, transfer);
+    try {
+      const feeAmount = await snowbridge.getFee(sourceAddress, transfer);
 
-    return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
-      amount: feeAmount,
-    });
+      return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
+        amount: feeAmount,
+      });
+    } catch (error) {
+      console.error(error);
+      return feeBalance.copyWith({ amount: 0n });
+    }
   }
 
   if (ContractConfig.is(transfer)) {
@@ -348,12 +354,14 @@ async function getBridgeChainFeeBalance({
 }
 
 interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
+  feeAsset: ChainAsset;
   protocolFee?: number | BridgeFeeConfigBuilder;
 }
 
 async function getProtocolFee({
   address,
   asset,
+  feeAsset,
   balance,
   protocolFee,
   destination,
@@ -384,7 +392,7 @@ async function getProtocolFee({
       );
     }
 
-    return AssetAmount.fromChainAsset(asset, {
+    return AssetAmount.fromChainAsset(feeAsset, {
       amount,
     });
   }
