@@ -6,11 +6,11 @@ export function outboundQueueApi() {
   return {
     calculateFee: (): BridgeFeeConfigBuilder => {
       return {
-        build: ({ address, asset, balance }) => {
+        build: ({ address, balance, feeAsset }) => {
           const args = [
             {
               MintForeignToken: {
-                tokenId: asset.getAssetId(),
+                tokenId: feeAsset.getAssetId(),
                 recipient: address,
                 amount: balance?.amount,
               },

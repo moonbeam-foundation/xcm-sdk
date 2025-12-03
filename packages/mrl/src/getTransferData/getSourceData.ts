@@ -25,7 +25,6 @@ import {
   type AnyChain,
   type AnyParachain,
   AssetAmount,
-  type ChainAsset,
   EvmChain,
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
@@ -354,7 +353,6 @@ async function getBridgeChainFeeBalance({
 }
 
 interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
-  feeAsset: ChainAsset;
   protocolFee?: number | BridgeFeeConfigBuilder;
 }
 
@@ -376,6 +374,7 @@ async function getProtocolFee({
   const config = protocolFee?.build({
     address,
     asset,
+    feeAsset,
     balance,
     destination,
     source,
@@ -400,12 +399,12 @@ async function getProtocolFee({
   if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(source)) {
     const polkadot = await PolkadotService.create(source);
     const amount = await polkadot.query(config);
-    return AssetAmount.fromChainAsset(asset, {
+    return AssetAmount.fromChainAsset(feeAsset, {
       amount,
     });
   }
 
-  return AssetAmount.fromChainAsset(source.getChainAsset(asset), {
+  return AssetAmount.fromChainAsset(feeAsset, {
     amount: 0n,
   });
 }

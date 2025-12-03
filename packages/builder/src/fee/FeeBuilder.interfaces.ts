@@ -33,6 +33,7 @@ export interface FeeConfigBuilderParams {
 
 export interface BridgeFeeConfigBuilderParams {
   asset: ChainAsset;
+  feeAsset: ChainAsset;
   address: string;
   balance?: AssetAmount;
   destination: AnyChain;
