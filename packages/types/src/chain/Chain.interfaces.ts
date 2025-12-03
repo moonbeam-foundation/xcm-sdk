@@ -12,8 +12,6 @@ export enum Ecosystem {
   StagenetRelay = 'stagenet-relay',
   MoonlamaRelay = 'moonlama-relay',
   MoonsamaRelay = 'moonsama-relay',
-  // TODO mjm maybe we could make it optional and not require it for all chains
-  TanssiTestnet = 'tanssi-testnet',
 }
 
 export interface WormholeConfig {
