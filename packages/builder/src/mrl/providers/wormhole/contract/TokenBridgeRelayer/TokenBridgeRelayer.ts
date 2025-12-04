@@ -21,10 +21,10 @@ export function TokenBridgeRelayer() {
         const whDestination = wh.getChain(destination.getWormholeName()).config
           .chainId;
 
-        const tokenAddressOnMoonChain = bridgeChain.getChainAsset(asset)
+        const tokenAddressOnBridgeChain = bridgeChain.getChainAsset(asset)
           .address as Address | undefined;
 
-        if (!tokenAddressOnMoonChain) {
+        if (!tokenAddressOnBridgeChain) {
           throw new Error(
             `Asset ${asset.symbol} does not have a token address on chain ${bridgeChain.name}`,
           );
@@ -33,7 +33,7 @@ export function TokenBridgeRelayer() {
         const destinationAddress32bytes = convertAddressTo32Bytes(
           destinationAddress,
         ) as Address;
-        const tokenAmountOnMoonChain = asset.convertDecimals(
+        const tokenAmountOnBridgeChain = asset.convertDecimals(
           bridgeChain.getChainAsset(asset).decimals,
         ).amount;
 
@@ -48,8 +48,8 @@ export function TokenBridgeRelayer() {
           address: contractAddress,
           abi: TOKEN_BRIDGE_RELAYER_ABI,
           args: [
-            tokenAddressOnMoonChain,
-            tokenAmountOnMoonChain,
+            tokenAddressOnBridgeChain,
+            tokenAmountOnBridgeChain,
             0,
             whDestination,
             destinationAddress32bytes,

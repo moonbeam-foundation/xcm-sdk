@@ -23,16 +23,16 @@ export function ethereumXcm() {
           throw new Error('bridgeChainGasLimit must be defined');
         }
 
-        const tokenAddressOnMoonChain = bridgeChain.getChainAsset(asset)
+        const tokenAddressOnBridgeChain = bridgeChain.getChainAsset(asset)
           .address as Address | undefined;
 
-        if (!tokenAddressOnMoonChain) {
+        if (!tokenAddressOnBridgeChain) {
           throw new Error(
             `Asset ${asset.symbol} does not have a token address on chain ${bridgeChain.name}`,
           );
         }
 
-        const tokenAmountOnMoonChain = asset.convertDecimals(
+        const tokenAmountOnBridgeChain = asset.convertDecimals(
           bridgeChain.getChainAsset(asset).decimals,
         ).amount;
 
@@ -48,14 +48,14 @@ export function ethereumXcm() {
         const approveTx = encodeFunctionData({
           abi: ERC20_ABI,
           functionName: 'approve',
-          args: [contract.address as Address, tokenAmountOnMoonChain],
+          args: [contract.address as Address, tokenAmountOnBridgeChain],
         });
 
         const batchAll = encodeFunctionData({
           abi: BATCH_CONTRACT_ABI,
           functionName: 'batchAll',
           args: [
-            [tokenAddressOnMoonChain, contract.address as Address],
+            [tokenAddressOnBridgeChain, contract.address as Address],
             [0n, 0n], // Value to send for each call
             [approveTx, contract.encodeFunctionData()], // Call data for each call
             [], // Gas limit for each call
