@@ -803,8 +803,8 @@ MRL introduces additional fees beyond the standard XCM execution fees. These are
 
 The `source.otherFees` object contains MRL-specific fees:
 
-- **`bridge`** ++"AssetAmount"++ (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the transfer amount at the source chain
-- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider
+- **`protocol`** ++"AssetAmount"++ (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the balance at the source chain
+- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider. This fee is deducted from the transfer amount.
 
 #### Standard Fees
 
@@ -817,7 +817,6 @@ In addition to `otherFees`, the source transfer data includes standard fees from
 
 When making a transfer, the total amount deducted from your source balance includes:
 
-<!-- TODO mjm review this -->
 ```
 Total Deducted = fee + destinationFee + otherFees.protocol + otherFees.relayer
 ```
