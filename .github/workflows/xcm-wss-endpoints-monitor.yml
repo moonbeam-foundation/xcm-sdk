@@ -21,4 +21,4 @@ jobs:
         run: pnpm run build
 
       - name: 💻 Run script
-        run: bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }}
+        run: bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }} --ignore-chains=robonomics
