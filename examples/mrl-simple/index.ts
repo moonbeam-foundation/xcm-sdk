@@ -1,9 +1,7 @@
 import { Mrl, type TransferData } from '@moonbeam-network/mrl';
 import {
   fantomTestnet,
-  ftm,
   ftmwh,
-  moonbaseAlpha,
   peaqAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
