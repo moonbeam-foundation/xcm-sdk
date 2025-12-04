@@ -31,7 +31,6 @@ import { peaqEvmRoutes } from './peaqEvm';
 import { peaqEvmAlphanetRoutes } from './peaqEvmAlphanet';
 import { pendulumRoutes } from './pendulum';
 import { pendulumAlphanetRoutes } from './pendulumAlphanet';
-import { phalaRoutes } from './phala';
 import { polkadotAssetHubRoutes } from './polkadotAssetHub';
 import { robonomicsRoutes } from './robonomics';
 import { shidenRoutes } from './shiden';
@@ -68,7 +67,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   peaqEvmAlphanetRoutes,
   pendulumRoutes,
   pendulumAlphanetRoutes,
-  phalaRoutes,
   robonomicsRoutes,
   shidenRoutes,
   alphanetAssetHubRoutes,
