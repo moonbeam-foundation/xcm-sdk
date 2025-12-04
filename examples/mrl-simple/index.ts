@@ -74,7 +74,8 @@ async function main() {
 
   if (txHashToBeExecuted) {
     await executeInEvm(txHashToBeExecuted, destination);
-  } else if (EvmParachain.isAnyEvmChain(source)) {
+  } else if (EvmChain.is(source)) {
+    // TODO mjm Moonbase Alpha to Fantom should go here
     await fromEvmChain(source, destination, asset, isAutomatic);
   } else if (Parachain.is(source)) {
     await fromParachain(source, destination as EvmChain, asset, isAutomatic);
