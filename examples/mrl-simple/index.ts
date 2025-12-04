@@ -1,3 +1,6 @@
+// Note: currently this example is working only for routes with Wormhole provider
+// TODO add examples for routes with other providers
+
 import { Mrl, type TransferData } from '@moonbeam-network/mrl';
 import {
   fantomTestnet,
@@ -75,7 +78,6 @@ async function main() {
   if (txHashToBeExecuted) {
     await executeInEvm(txHashToBeExecuted, destination);
   } else if (EvmChain.is(source)) {
-    // TODO mjm Moonbase Alpha to Fantom should go here
     await fromEvmChain(source, destination, asset, isAutomatic);
   } else if (Parachain.is(source)) {
     await fromParachain(source, destination as EvmChain, asset, isAutomatic);
