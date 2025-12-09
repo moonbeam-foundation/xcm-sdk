@@ -35,7 +35,7 @@ Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object
 
 ### From parachains to EVM chains. {: #from-parachains-to-evm-chains }
 
-Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object).
+Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object). For transfers where the provider is Wormhole, the process is as follows:
 
 1. An XCM message is sent from the source chain to Moonbeam, this message is a batch call containing the following information:
     - A 'transfer assets' message, containing the asset that the user wants to transfer, plus the fees necessary to complete the transfer in Moonbeam, if any.
@@ -732,11 +732,13 @@ Defines the complete transfer data for transferring an asset, including asset ba
 
 ### The Bridge Chain
 
-The Bridge Chain is the intermediary chain used to transfer assets between a Substrate based ecosystem and external chains.
+The Bridge Chain is the intermediary chain used to transfer assets between a Substrate based ecosystem and external chains. In the Moonbeam ecosystem, this chain is going to be Moonbeam for production environments and Moonbase Alpha for test environments. Specifically for Moonbeam and the Wormhole provider, the Bridge Chain acts differently for each type of transfer.
 
 - In [EVM to parachain cases](#from-evm-chains-to-parachains) the bridge chain triggers the XCM transfer to the destination chain, and in the [transfer data](#transfer-data-object) it contains the information of the sender's address in the bridge chain.
 - In [parachain to EVM cases](#from-parachains-to-evm-chains) the bridge chain receives the XCM message and executes the remote execution message, and in the [transfer data](#transfer-data-object) it contains the information of the computed origin account.
 - In [Bridge Chain to EVM cases](#from-bridgechain-to-evm-chains) it is either the source or the destination of the transfer, and in the [transfer data](#transfer-data-object) it contains the information of the sender's address.
+
+For other providers, the process is simpler, the Bridge Chain is only the one connected to the provider, which makes the transfer between ecosystems possible.
 
 ---
 
@@ -805,7 +807,7 @@ MRL introduces additional fees beyond the standard XCM execution fees. These are
 The `source.otherFees` object contains MRL-specific fees:
 
 - **`protocol`** ++"AssetAmount"++ (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the balance at the source chain
-- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider. This fee is deducted from the transfer amount.
+- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider. This fee is deducted from the transfer amount after it is sent.
 
 #### Standard Fees
 
