@@ -528,9 +528,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#from-moonchain-to-evm-chains" class="md-nav__link">
+  <a href="#from-bridgechain-to-evm-chains" class="md-nav__link">
     <span class="md-ellipsis">
-      Between Moon Chain and EVM chains.
+      Between Bridge Chain and EVM chains.
     </span>
   </a>
   
@@ -609,9 +609,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-moon-chain" class="md-nav__link">
+  <a href="#the-bridge-chain" class="md-nav__link">
     <span class="md-ellipsis">
-      The Moon Chain
+      The Bridge Chain
     </span>
   </a>
   
@@ -627,11 +627,44 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-relayer-fee" class="md-nav__link">
+  <a href="#understanding-fees-in-mrl" class="md-nav__link">
     <span class="md-ellipsis">
-      The Relayer Fee
+      Understanding Fees in MRL
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Understanding Fees in MRL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#other-fees-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Fees Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Standard Fees
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-cost-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Total Cost Calculation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -935,13 +968,13 @@
 <h3 id="from-evm-chains-to-parachains">From EVM chains to parachains.</h3>
 <p>Here the source chain is an <a href="../xcm/#the-evm-chain-object">EVM chain</a> and the destination chain either a <a href="../xcm/#the-parachain-object">Parachain</a> or an <a href="../xcm/#the-evm-parachain-object">EVM Parachain</a>.</p>
 <ol>
-<li>A contract call is made in the source chain, which triggers the assets to be sent to Moonbeam (<a href="#the-moon-chain">moon chain</a>). This process is done in this sdk by leveraging a <a href="https://docs.moonbeam.network/builders/interoperability/protocols/" target="_blank">GMP provider</a>. Currently the only one supported is <a href="https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/" target="_blank">Wormhole</a>.</li>
-<li>Next, to complete the transfer in Moonbeam, it must be executed, either manually or automatically by a relayer from the GMP provider. This execution consists of calling the <a href="https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/" target="_blank">GMP precompile</a>, which triggers the next step.</li>
+<li>A contract call is made in the source chain, which triggers the assets to be sent to the <a href="#the-bridge-chain">Bridge Chain</a>. This process is done in this sdk by leveraging a <a href="https://docs.moonbeam.network/builders/interoperability/protocols/" target="_blank">GMP provider</a>. In Moonbeam, currently the only one supported is <a href="https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/" target="_blank">Wormhole</a>. There are other providers like Snowbridge in the SDK that can be used for other chains.</li>
+<li>Next, to complete the transfer in th Bridge Chain, it must be executed, either manually or automatically. In Moonbeam, for example, it is executed by a relayer from <a href="https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/" target="_blank">Wormhole</a>, and this execution consists of calling the <a href="https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/" target="_blank">GMP precompile</a>, which triggers the next step.</li>
 <li>An XCM message is sent from Moonbeam to the destination chain, containing the assets that were sent from the source chain.</li>
 </ol>
 <hr />
 <h3 id="from-parachains-to-evm-chains">From parachains to EVM chains.</h3>
-<p>Here the source chain is a <a href="../xcm/#the-parachain-object">Parachain</a> or an <a href="../xcm/#the-evm-parachain-object">EVM Parachain</a> and the destination chain an <a href="../xcm/#the-evm-chain-object">EVM chain</a>.</p>
+<p>Here the source chain is a <a href="../xcm/#the-parachain-object">Parachain</a> or an <a href="../xcm/#the-evm-parachain-object">EVM Parachain</a> and the destination chain an <a href="../xcm/#the-evm-chain-object">EVM chain</a>. For transfers where the provider is Wormhole, the process is as follows:</p>
 <ol>
 <li>
 <p>An XCM message is sent from the source chain to Moonbeam, this message is a batch call containing the following information:</p>
@@ -960,8 +993,8 @@
 </li>
 </ol>
 <hr />
-<h3 id="from-moonchain-to-evm-chains">Between Moon Chain and EVM chains.</h3>
-<p>This is the simplest type of transfer, as it only involves moving assets between Moonbeam and an EVM chain.</p>
+<h3 id="from-bridgechain-to-evm-chains">Between Bridge Chain and EVM chains.</h3>
+<p>This is the simplest type of transfer, as it only involves moving assets between just two chains.</p>
 <ol>
 <li>The assets are sent from the source chain to the destination chain through a GMP provider, like in the first step of the <a href="#from-evm-chains-to-parachains">From EVM chains to parachains</a> section.</li>
 <li>The transaction must be executed in the destination chain, either manually or automatically by a relayer.</li>
@@ -978,14 +1011,14 @@
 <ul>
 <li><code>source</code> <span class="keys"><kbd>MrlSourceConfig</kbd></span> - Contains the information about the transfer regarding the source chain</li>
 <li><code>destination</code> <span class="keys"><kbd>DestinationConfig</kbd></span> - Contains the information about the transfer regarding the destination chain</li>
-<li><code>mrl</code> <span class="keys"><kbd>MrlConfig</kbd></span> <a href="#mrl-config"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - Contains the information about the transfer exclusive to MRL, like information about the transfer calls and the <a href="#the-moon-chain">moon chain</a></li>
+<li><code>mrl</code> <span class="keys"><kbd>MrlConfig</kbd></span> <a href="#mrl-config"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - Contains the information about the transfer exclusive to MRL, like information about the transfer calls and the <a href="#the-bridge-chain">bridge chain</a></li>
 </ul>
 <h4 id="mrl-config">MRL Config</h4>
 <p><strong>Attributes</strong></p>
 <ul>
 <li><code>isAutomaticPossible</code> <span class="keys"><kbd>boolean</kbd></span> - Whether or not the automatic transfer is possible</li>
 <li><code>transfer</code> <span class="keys"><kbd>MrlConfigBuilder</kbd></span> - Contains the builder for the transfer call, either an extrinsic or a contract call</li>
-<li><code>moonChain</code> <span class="keys"><kbd>MoonChainConfig</kbd></span> - Contains the information about the transfer regarding the <a href="#the-moon-chain">moon chain</a></li>
+<li><code>bridgeChain</code> <span class="keys"><kbd>BridgeChainConfig</kbd></span> - Contains the information about the transfer regarding the <a href="#the-bridge-chain">bridge chain</a></li>
 </ul>
 </div>
 <div class="language-js highlight"><span class="filename">Example</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// MRL Asset Route for ETH from Ethereum to Moonbeam</span>
@@ -1010,17 +1043,18 @@
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">  </span><span class="nx">mrl</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="nx">isAutomaticPossible</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="nx">transfer</span><span class="o">:</span><span class="w"> </span><span class="nx">MrlBuilder</span><span class="p">().</span><span class="nx">wormhole</span><span class="p">().</span><span class="nx">wormhole</span><span class="p">().</span><span class="nx">tokenTransfer</span><span class="p">(),</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="nx">moonChain</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="nx">bridgeChain</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">      </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="nx">weth</span><span class="p">,</span>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">      </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="nx">BalanceBuilder</span><span class="p">().</span><span class="nx">evm</span><span class="p">().</span><span class="nx">erc20</span><span class="p">(),</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">      </span><span class="nx">fee</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">        </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="nx">glmr</span><span class="p">,</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">        </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="nx">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">system</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">      </span><span class="p">},</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">  </span><span class="p">},</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">},</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">      </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="nx">moonbeam</span><span class="p">,</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">      </span><span class="nx">fee</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">        </span><span class="nx">asset</span><span class="o">:</span><span class="w"> </span><span class="nx">glmr</span><span class="p">,</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">        </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="nx">BalanceBuilder</span><span class="p">().</span><span class="nx">substrate</span><span class="p">().</span><span class="nx">system</span><span class="p">().</span><span class="nx">account</span><span class="p">(),</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="p">},</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="p">},</span>
 </span></code></pre></div>
 </div>
 <h3 id="the-mrl-chain-routes-object">The <a href="https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/config/src/types/MrlChainRoutes.ts" target="_blank">Mrl Chain Routes</a> Object</h3>
@@ -1037,12 +1071,12 @@
 <h3 id="the-transfer-data-object">The Transfer Data Object</h3>
 <div class="grid">
 <div>
-<p>Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exclusive to MRL which is the <a href="#the-moon-chain">moon chain</a></p>
+<p>Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exclusive to MRL which is the <a href="#the-bridge-chain">bridge chain</a></p>
 <p><strong>Attributes</strong></p>
 <ul>
 <li><code>source</code> <span class="keys"><kbd>SourceTransferData</kbd></span> <a href="https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - The assembled source chain and address information</li>
 <li><code>destination</code> <span class="keys"><kbd>DestinationTransferData</kbd></span> <a href="https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - The assembled destination chain and address information</li>
-<li><code>moonChain</code> <span class="keys"><kbd>MoonChainTransferData</kbd></span> <a href="#the-moon-chain"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - The assembled moon chain and address information</li>
+<li><code>bridgeChain</code> <span class="keys"><kbd>BridgeChainTransferData</kbd></span> <a href="#the-bridge-chain"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - The assembled bridge chain and address information</li>
 <li><code>getEstimate</code> <span class="keys"><kbd>function</kbd></span> - Gets the estimated amount of the asset that the destination address will receive</li>
 <li><code>isAutomaticPossible</code> <span class="keys"><kbd>boolean</kbd></span> - Returns whether or not the automatic transfer is possible</li>
 <li><code>max</code> <span class="keys"><kbd>AssetAmount</kbd></span> <a href="../xcm/#the-asset-amount-object"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - The maximum amount of the asset that <em>can</em> be transferred</li>
@@ -1235,7 +1269,7 @@
 </span><span id="__span-1-182"><a id="__codelineno-1-182" name="__codelineno-1-182" href="#__codelineno-1-182"></a><span class="w">        </span><span class="nx">getAssetMin</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetMin</span><span class="p">],</span>
 </span><span id="__span-1-183"><a id="__codelineno-1-183" name="__codelineno-1-183" href="#__codelineno-1-183"></a><span class="w">        </span><span class="nx">hasOnlyAddress</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">hasOnlyAddress</span><span class="p">],</span>
 </span><span id="__span-1-184"><a id="__codelineno-1-184" name="__codelineno-1-184" href="#__codelineno-1-184"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-1-185"><a id="__codelineno-1-185" name="__codelineno-1-185" href="#__codelineno-1-185"></a><span class="w">    </span><span class="nx">moonChain</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-185"><a id="__codelineno-1-185" name="__codelineno-1-185" href="#__codelineno-1-185"></a><span class="w">    </span><span class="nx">bridgeChain</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-1-186"><a id="__codelineno-1-186" name="__codelineno-1-186" href="#__codelineno-1-186"></a><span class="w">        </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0x98891e5FD24Ef33A488A47101F65D212Ff6E650E&quot;</span><span class="p">,</span>
 </span><span id="__span-1-187"><a id="__codelineno-1-187" name="__codelineno-1-187" href="#__codelineno-1-187"></a><span class="w">        </span><span class="nx">balance</span><span class="o">:</span><span class="w"> </span><span class="nx">_AssetAmount</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-1-188"><a id="__codelineno-1-188" name="__codelineno-1-188" href="#__codelineno-1-188"></a><span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;usdcwh&quot;</span><span class="p">,</span>
@@ -1485,7 +1519,7 @@
 </span><span id="__span-1-432"><a id="__codelineno-1-432" name="__codelineno-1-432" href="#__codelineno-1-432"></a><span class="w">            </span><span class="nx">getAssetMin</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetMin</span><span class="p">],</span>
 </span><span id="__span-1-433"><a id="__codelineno-1-433" name="__codelineno-1-433" href="#__codelineno-1-433"></a><span class="w">            </span><span class="nx">hasOnlyAddress</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">hasOnlyAddress</span><span class="p">],</span>
 </span><span id="__span-1-434"><a id="__codelineno-1-434" name="__codelineno-1-434" href="#__codelineno-1-434"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-1-435"><a id="__codelineno-1-435" name="__codelineno-1-435" href="#__codelineno-1-435"></a><span class="w">        </span><span class="nx">moonChainFeeBalance</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-1-435"><a id="__codelineno-1-435" name="__codelineno-1-435" href="#__codelineno-1-435"></a><span class="w">        </span><span class="nx">bridgeChainFeeBalance</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 </span><span id="__span-1-436"><a id="__codelineno-1-436" name="__codelineno-1-436" href="#__codelineno-1-436"></a><span class="w">        </span><span class="nx">existentialDeposit</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 </span><span id="__span-1-437"><a id="__codelineno-1-437" name="__codelineno-1-437" href="#__codelineno-1-437"></a><span class="w">        </span><span class="nx">fee</span><span class="o">:</span><span class="w"> </span><span class="nx">_AssetAmount</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-1-438"><a id="__codelineno-1-438" name="__codelineno-1-438" href="#__codelineno-1-438"></a><span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;usdc&quot;</span><span class="p">,</span>
@@ -1583,44 +1617,48 @@
 </span><span id="__span-1-530"><a id="__codelineno-1-530" name="__codelineno-1-530" href="#__codelineno-1-530"></a><span class="w">            </span><span class="nx">getAssetMin</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetMin</span><span class="p">],</span>
 </span><span id="__span-1-531"><a id="__codelineno-1-531" name="__codelineno-1-531" href="#__codelineno-1-531"></a><span class="w">            </span><span class="nx">hasOnlyAddress</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">hasOnlyAddress</span><span class="p">],</span>
 </span><span id="__span-1-532"><a id="__codelineno-1-532" name="__codelineno-1-532" href="#__codelineno-1-532"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-1-533"><a id="__codelineno-1-533" name="__codelineno-1-533" href="#__codelineno-1-533"></a><span class="w">        </span><span class="nx">relayerFee</span><span class="o">:</span><span class="w"> </span><span class="nx">_AssetAmount</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-534"><a id="__codelineno-1-534" name="__codelineno-1-534" href="#__codelineno-1-534"></a><span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;usdc&quot;</span><span class="p">,</span>
-</span><span id="__span-1-535"><a id="__codelineno-1-535" name="__codelineno-1-535" href="#__codelineno-1-535"></a><span class="w">            </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;USDC&quot;</span><span class="p">,</span>
-</span><span id="__span-1-536"><a id="__codelineno-1-536" name="__codelineno-1-536" href="#__codelineno-1-536"></a><span class="w">            </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48&quot;</span><span class="p">,</span>
-</span><span id="__span-1-537"><a id="__codelineno-1-537" name="__codelineno-1-537" href="#__codelineno-1-537"></a><span class="w">            </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span>
-</span><span id="__span-1-538"><a id="__codelineno-1-538" name="__codelineno-1-538" href="#__codelineno-1-538"></a><span class="w">            </span><span class="nx">ids</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-</span><span id="__span-1-539"><a id="__codelineno-1-539" name="__codelineno-1-539" href="#__codelineno-1-539"></a><span class="w">            </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-</span><span id="__span-1-540"><a id="__codelineno-1-540" name="__codelineno-1-540" href="#__codelineno-1-540"></a><span class="w">            </span><span class="nx">symbol</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-</span><span id="__span-1-541"><a id="__codelineno-1-541" name="__codelineno-1-541" href="#__codelineno-1-541"></a><span class="w">            </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span>
-</span><span id="__span-1-542"><a id="__codelineno-1-542" name="__codelineno-1-542" href="#__codelineno-1-542"></a><span class="w">            </span><span class="nx">isSame</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">isSame</span><span class="p">],</span>
-</span><span id="__span-1-543"><a id="__codelineno-1-543" name="__codelineno-1-543" href="#__codelineno-1-543"></a><span class="w">            </span><span class="nx">isEqual</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">isEqual</span><span class="p">],</span>
-</span><span id="__span-1-544"><a id="__codelineno-1-544" name="__codelineno-1-544" href="#__codelineno-1-544"></a><span class="w">            </span><span class="nx">copyWith</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">copyWith</span><span class="p">],</span>
-</span><span id="__span-1-545"><a id="__codelineno-1-545" name="__codelineno-1-545" href="#__codelineno-1-545"></a><span class="w">            </span><span class="nx">convertDecimals</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">convertDecimals</span><span class="p">],</span>
-</span><span id="__span-1-546"><a id="__codelineno-1-546" name="__codelineno-1-546" href="#__codelineno-1-546"></a><span class="w">            </span><span class="nx">toBig</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">toBig</span><span class="p">],</span>
-</span><span id="__span-1-547"><a id="__codelineno-1-547" name="__codelineno-1-547" href="#__codelineno-1-547"></a><span class="w">            </span><span class="nx">toBigDecimal</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">toBigDecimal</span><span class="p">],</span>
-</span><span id="__span-1-548"><a id="__codelineno-1-548" name="__codelineno-1-548" href="#__codelineno-1-548"></a><span class="w">            </span><span class="nx">toDecimal</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">toDecimal</span><span class="p">],</span>
-</span><span id="__span-1-549"><a id="__codelineno-1-549" name="__codelineno-1-549" href="#__codelineno-1-549"></a><span class="w">            </span><span class="nx">getSymbol</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getSymbol</span><span class="p">],</span>
-</span><span id="__span-1-550"><a id="__codelineno-1-550" name="__codelineno-1-550" href="#__codelineno-1-550"></a><span class="w">            </span><span class="nx">getAssetId</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetId</span><span class="p">],</span>
-</span><span id="__span-1-551"><a id="__codelineno-1-551" name="__codelineno-1-551" href="#__codelineno-1-551"></a><span class="w">            </span><span class="nx">getBalanceAssetId</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getBalanceAssetId</span><span class="p">],</span>
-</span><span id="__span-1-552"><a id="__codelineno-1-552" name="__codelineno-1-552" href="#__codelineno-1-552"></a><span class="w">            </span><span class="nx">getMinAssetId</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getMinAssetId</span><span class="p">],</span>
-</span><span id="__span-1-553"><a id="__codelineno-1-553" name="__codelineno-1-553" href="#__codelineno-1-553"></a><span class="w">            </span><span class="nx">getAssetPalletInstance</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetPalletInstance</span><span class="p">],</span>
-</span><span id="__span-1-554"><a id="__codelineno-1-554" name="__codelineno-1-554" href="#__codelineno-1-554"></a><span class="w">            </span><span class="nx">getAssetMin</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetMin</span><span class="p">],</span>
-</span><span id="__span-1-555"><a id="__codelineno-1-555" name="__codelineno-1-555" href="#__codelineno-1-555"></a><span class="w">            </span><span class="nx">hasOnlyAddress</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">hasOnlyAddress</span><span class="p">],</span>
-</span><span id="__span-1-556"><a id="__codelineno-1-556" name="__codelineno-1-556" href="#__codelineno-1-556"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-1-557"><a id="__codelineno-1-557" name="__codelineno-1-557" href="#__codelineno-1-557"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-1-558"><a id="__codelineno-1-558" name="__codelineno-1-558" href="#__codelineno-1-558"></a><span class="w">    </span><span class="nx">transfer</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">AsyncFunction</span><span class="o">:</span><span class="w"> </span><span class="nx">transfer</span><span class="p">],</span>
-</span><span id="__span-1-559"><a id="__codelineno-1-559" name="__codelineno-1-559" href="#__codelineno-1-559"></a><span class="p">}</span>
+</span><span id="__span-1-533"><a id="__codelineno-1-533" name="__codelineno-1-533" href="#__codelineno-1-533"></a><span class="w">        </span><span class="nx">otherFees</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-534"><a id="__codelineno-1-534" name="__codelineno-1-534" href="#__codelineno-1-534"></a><span class="w">            </span><span class="nx">protocol</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-1-535"><a id="__codelineno-1-535" name="__codelineno-1-535" href="#__codelineno-1-535"></a><span class="w">            </span><span class="nx">relayer</span><span class="o">:</span><span class="w"> </span><span class="nx">_AssetAmount</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-536"><a id="__codelineno-1-536" name="__codelineno-1-536" href="#__codelineno-1-536"></a><span class="w">                </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;usdc&quot;</span><span class="p">,</span>
+</span><span id="__span-1-537"><a id="__codelineno-1-537" name="__codelineno-1-537" href="#__codelineno-1-537"></a><span class="w">                </span><span class="nx">originSymbol</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;USDC&quot;</span><span class="p">,</span>
+</span><span id="__span-1-538"><a id="__codelineno-1-538" name="__codelineno-1-538" href="#__codelineno-1-538"></a><span class="w">                </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48&quot;</span><span class="p">,</span>
+</span><span id="__span-1-539"><a id="__codelineno-1-539" name="__codelineno-1-539" href="#__codelineno-1-539"></a><span class="w">                </span><span class="nx">decimals</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span>
+</span><span id="__span-1-540"><a id="__codelineno-1-540" name="__codelineno-1-540" href="#__codelineno-1-540"></a><span class="w">                </span><span class="nx">ids</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-1-541"><a id="__codelineno-1-541" name="__codelineno-1-541" href="#__codelineno-1-541"></a><span class="w">                </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-1-542"><a id="__codelineno-1-542" name="__codelineno-1-542" href="#__codelineno-1-542"></a><span class="w">                </span><span class="nx">symbol</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+</span><span id="__span-1-543"><a id="__codelineno-1-543" name="__codelineno-1-543" href="#__codelineno-1-543"></a><span class="w">                </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mi">0n</span><span class="p">,</span>
+</span><span id="__span-1-544"><a id="__codelineno-1-544" name="__codelineno-1-544" href="#__codelineno-1-544"></a><span class="w">                </span><span class="nx">isSame</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">isSame</span><span class="p">],</span>
+</span><span id="__span-1-545"><a id="__codelineno-1-545" name="__codelineno-1-545" href="#__codelineno-1-545"></a><span class="w">                </span><span class="nx">isEqual</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">isEqual</span><span class="p">],</span>
+</span><span id="__span-1-546"><a id="__codelineno-1-546" name="__codelineno-1-546" href="#__codelineno-1-546"></a><span class="w">                </span><span class="nx">copyWith</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">copyWith</span><span class="p">],</span>
+</span><span id="__span-1-547"><a id="__codelineno-1-547" name="__codelineno-1-547" href="#__codelineno-1-547"></a><span class="w">                </span><span class="nx">convertDecimals</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">convertDecimals</span><span class="p">],</span>
+</span><span id="__span-1-548"><a id="__codelineno-1-548" name="__codelineno-1-548" href="#__codelineno-1-548"></a><span class="w">                </span><span class="nx">toBig</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">toBig</span><span class="p">],</span>
+</span><span id="__span-1-549"><a id="__codelineno-1-549" name="__codelineno-1-549" href="#__codelineno-1-549"></a><span class="w">                </span><span class="nx">toBigDecimal</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">toBigDecimal</span><span class="p">],</span>
+</span><span id="__span-1-550"><a id="__codelineno-1-550" name="__codelineno-1-550" href="#__codelineno-1-550"></a><span class="w">                </span><span class="nx">toDecimal</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">toDecimal</span><span class="p">],</span>
+</span><span id="__span-1-551"><a id="__codelineno-1-551" name="__codelineno-1-551" href="#__codelineno-1-551"></a><span class="w">                </span><span class="nx">getSymbol</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getSymbol</span><span class="p">],</span>
+</span><span id="__span-1-552"><a id="__codelineno-1-552" name="__codelineno-1-552" href="#__codelineno-1-552"></a><span class="w">                </span><span class="nx">getAssetId</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetId</span><span class="p">],</span>
+</span><span id="__span-1-553"><a id="__codelineno-1-553" name="__codelineno-1-553" href="#__codelineno-1-553"></a><span class="w">                </span><span class="nx">getBalanceAssetId</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getBalanceAssetId</span><span class="p">],</span>
+</span><span id="__span-1-554"><a id="__codelineno-1-554" name="__codelineno-1-554" href="#__codelineno-1-554"></a><span class="w">                </span><span class="nx">getMinAssetId</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getMinAssetId</span><span class="p">],</span>
+</span><span id="__span-1-555"><a id="__codelineno-1-555" name="__codelineno-1-555" href="#__codelineno-1-555"></a><span class="w">                </span><span class="nx">getAssetPalletInstance</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetPalletInstance</span><span class="p">],</span>
+</span><span id="__span-1-556"><a id="__codelineno-1-556" name="__codelineno-1-556" href="#__codelineno-1-556"></a><span class="w">                </span><span class="nx">getAssetMin</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">getAssetMin</span><span class="p">],</span>
+</span><span id="__span-1-557"><a id="__codelineno-1-557" name="__codelineno-1-557" href="#__codelineno-1-557"></a><span class="w">                </span><span class="nx">hasOnlyAddress</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Function</span><span class="o">:</span><span class="w"> </span><span class="nx">hasOnlyAddress</span><span class="p">],</span>
+</span><span id="__span-1-558"><a id="__codelineno-1-558" name="__codelineno-1-558" href="#__codelineno-1-558"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-1-559"><a id="__codelineno-1-559" name="__codelineno-1-559" href="#__codelineno-1-559"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-1-560"><a id="__codelineno-1-560" name="__codelineno-1-560" href="#__codelineno-1-560"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-1-561"><a id="__codelineno-1-561" name="__codelineno-1-561" href="#__codelineno-1-561"></a><span class="w">    </span><span class="nx">transfer</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">AsyncFunction</span><span class="o">:</span><span class="w"> </span><span class="nx">transfer</span><span class="p">],</span>
+</span><span id="__span-1-562"><a id="__codelineno-1-562" name="__codelineno-1-562" href="#__codelineno-1-562"></a><span class="p">}</span>
 </span></code></pre></div>
 </div>
 </div>
 <hr />
-<h3 id="the-moon-chain">The Moon Chain</h3>
-<p>We call Moon Chain to the intermediary chain that is used to transfer the assets between the Polkadot ecosystem and the external chains. For <code>Mainnet</code> Moonbeam is the moon chain, and for <code>Testnet</code> it is <code>Moonbase Alpha</code>.</p>
+<h3 id="the-bridge-chain">The Bridge Chain</h3>
+<p>The Bridge Chain is the intermediary chain used to transfer assets between a Substrate based ecosystem and external chains. In the Moonbeam ecosystem, this chain is going to be Moonbeam for production environments and Moonbase Alpha for test environments. Specifically for Moonbeam and the Wormhole provider, the Bridge Chain acts differently for each type of transfer.</p>
 <ul>
-<li>In <a href="#from-evm-chains-to-parachains">EVM to parachain cases</a> the moon chain triggers the XCM transfer to the destination chain, and in the <a href="#transfer-data-object">transfer data</a> it contains the information of the sender's address in the moon chain.</li>
-<li>In <a href="#from-parachains-to-evm-chains">parachain to EVM cases</a> the moon chain receives the XCM message and executes the remote execution message, and in the <a href="#transfer-data-object">transfer data</a> it contains the information of the computed origin account.</li>
-<li>In <a href="#from-moonchain-to-evm-chains">Moon Chain to EVM cases</a> is either the source or the destination of the transfer, and in the <a href="#transfer-data-object">transfer data</a> it contains the information of the sender's address.</li>
+<li>In <a href="#from-evm-chains-to-parachains">EVM to parachain cases</a> the bridge chain triggers the XCM transfer to the destination chain, and in the <a href="#transfer-data-object">transfer data</a> it contains the information of the sender's address in the bridge chain.</li>
+<li>In <a href="#from-parachains-to-evm-chains">parachain to EVM cases</a> the bridge chain receives the XCM message and executes the remote execution message, and in the <a href="#transfer-data-object">transfer data</a> it contains the information of the computed origin account.</li>
+<li>In <a href="#from-bridgechain-to-evm-chains">Bridge Chain to EVM cases</a> it is either the source or the destination of the transfer, and in the <a href="#transfer-data-object">transfer data</a> it contains the information of the sender's address.</li>
 </ul>
+<p>For other providers, the process is simpler, the Bridge Chain is only the one connected to the provider, which makes the transfer between ecosystems possible.</p>
 <hr />
 <h3 id="the-transfer-method">The Transfer Method</h3>
 <div class="grid">
@@ -1631,7 +1669,7 @@
 <li><code>isAutomatic</code> <span class="keys"><kbd>boolean</kbd></span> - Whether or not the transfer should be automatic</li>
 <li><code>signers</code> <span class="keys"><kbd>Signers</kbd></span> - The signers of the transaction</li>
 <li><code>statusCallback</code> <span class="keys"><kbd>function</kbd></span> (optional) - Comes from the polkadot api. A callback function that can be passed to the signAndSend method, and will be called with the status of the transaction. Only applicable for polkadot signers, when the source chain is a parachain.</li>
-<li><code>sendOnlyRemoteExecution</code> <span class="keys"><kbd>boolean</kbd></span> (optional) - When this flag is set to true, instead of sending a transfer assets message plus a remote execution message from the parachain to the moon chain, only the remote execution message is sent. Applicable only when the source chain is a parachain. This is useful when some assets are stuck in the moon chain in the <a href="https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account" target="_blank">computed origin account</a> of the sender, in which case sending the assets would not be necessary from the source chain.</li>
+<li><code>sendOnlyRemoteExecution</code> <span class="keys"><kbd>boolean</kbd></span> (optional) - When this flag is set to true, instead of sending a transfer assets message plus a remote execution message from the parachain to the bridge chain, only the remote execution message is sent. Applicable only when the source chain is a parachain. This is useful when some assets are stuck in the bridge chain in the <a href="https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account" target="_blank">computed origin account</a> of the sender, in which case sending the assets would not be necessary from the source chain.</li>
 </ul>
 </div>
 <div>
@@ -1670,9 +1708,25 @@
 </span></code></pre></div>
 </div>
 </div>
-<h3 id="the-relayer-fee">The Relayer Fee</h3>
-<p>This is a concept that is not present in XCM, it represents the fee that the relayer charges for executing the transfer automatically. Note that if the transfer is not automatic, the relayer fee will be 0.</p>
-<p>In the <a href="#transfer-data-object">transfer data</a> you can find the relayer fee in the <code>relayerFee</code> attribute in the <code>source</code> object, and it is represented as an <a href="../xcm/#the-asset-amount-object">Asset Amount</a> object.</p>
+<h3 id="understanding-fees-in-mrl">Understanding Fees in MRL</h3>
+<p>MRL introduces additional fees beyond the standard XCM execution fees. These are organized under the <code>otherFees</code> object in the source transfer data for clarity.</p>
+<h4 id="other-fees-structure">Other Fees Structure</h4>
+<p>The <code>source.otherFees</code> object contains MRL-specific fees:</p>
+<ul>
+<li><strong><code>protocol</code></strong> <span class="keys"><kbd>AssetAmount</kbd></span> (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the balance at the source chain</li>
+<li><strong><code>relayer</code></strong> <span class="keys"><kbd>AssetAmount</kbd></span> (optional) - Relayer service fee for automatic execution. Only applies when <code>isAutomatic=true</code>. Currently supported by the Wormhole provider. This fee is deducted from the transfer amount after it is sent.</li>
+</ul>
+<h4 id="standard-fees">Standard Fees</h4>
+<p>In addition to <code>otherFees</code>, the source transfer data includes standard fees from XCM SDK:</p>
+<ul>
+<li><strong><code>fee</code></strong> <span class="keys"><kbd>AssetAmount</kbd></span> - Standard execution/gas fee for the source chain transaction</li>
+<li><strong><code>destinationFee</code></strong> <span class="keys"><kbd>AssetAmount</kbd></span> - Amount reserved to pay for execution on the destination chain</li>
+</ul>
+<h4 id="total-cost-calculation">Total Cost Calculation</h4>
+<p>When making a transfer, the total amount deducted from your source balance includes:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Total Deducted = fee + destinationFee + otherFees.protocol + otherFees.relayer
+</span></code></pre></div>
+<p>The <code>getEstimate()</code> method automatically accounts for all these fees when calculating the recipient's expected amount.</p>
 <h2 id="execute-transfer-data">Execute Transfer Data</h2>
 <p>Apart from transferring the assets, the MRL SDK also provides a way to execute the transfer in the destination chain. This is useful when the transfer needs to be completed manually.</p>
 <p>Similar to the <a href="#transfer-data">transfer data</a>, first you need to get the execute transfer data, and then you can execute the transfer.</p>
@@ -1692,12 +1746,12 @@
 <li><code>signer</code> <span class="keys"><kbd>EvmSigner</kbd></span> - The signer to use to execute the transfer  </li>
 </ul>
 </div>
-<div class="language-js highlight"><span class="filename">Example Usage</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">Mrl</span><span class="p">().</span><span class="nx">getExecuteTransferData</span><span class="p">({</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">txId</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_TX_HASH_TO_BE_EXECUTED</span><span class="p">,</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_DESTINATION_CHAIN</span><span class="p">,</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="p">});</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">executeTransfer</span><span class="p">(</span><span class="nx">INSERT_SIGNER_OR_WALLET_CLIENT</span><span class="p">);</span>
+<div class="language-js highlight"><span class="filename">Example Usage</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">Mrl</span><span class="p">().</span><span class="nx">getExecuteTransferData</span><span class="p">({</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">txId</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_TX_HASH_TO_BE_EXECUTED</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_DESTINATION_CHAIN</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">executeTransfer</span><span class="p">(</span><span class="nx">INSERT_SIGNER_OR_WALLET_CLIENT</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
 <h2 id="the-mrl-method">The MRL Method</h2>
@@ -1717,15 +1771,15 @@
 <li><code>getExecuteTransferData()</code> <a href="#the-get-execute-transfer-data-method"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42Z"/></svg></span></a> - Returns the <a href="#the-execute-transfer-data-object">execute transfer data</a></li>
 </ul>
 </div>
-<div class="language-js highlight"><span class="filename">Example Usage</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">transferData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">Mrl</span><span class="p">()</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p">.</span><span class="nx">setSource</span><span class="p">(</span><span class="nx">INSERT_SOURCE_CHAIN</span><span class="p">)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p">.</span><span class="nx">setDestination</span><span class="p">(</span><span class="nx">INSERT_DESTINATION_CHAIN</span><span class="p">)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="p">.</span><span class="nx">setAsset</span><span class="p">(</span><span class="nx">INSERT_ASSET</span><span class="p">)</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="p">.</span><span class="nx">setIsAutomatic</span><span class="p">(</span><span class="nx">INSERT_IS_AUTOMATIC</span><span class="p">)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="p">.</span><span class="nx">setAddresses</span><span class="p">({</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">sourceAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_SOURCE_ADDRESS</span><span class="p">,</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nx">destinationAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_DESTINATION_ADDRESS</span><span class="p">,</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">});</span>
+<div class="language-js highlight"><span class="filename">Example Usage</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">transferData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">Mrl</span><span class="p">()</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p">.</span><span class="nx">setSource</span><span class="p">(</span><span class="nx">INSERT_SOURCE_CHAIN</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="p">.</span><span class="nx">setDestination</span><span class="p">(</span><span class="nx">INSERT_DESTINATION_CHAIN</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="p">.</span><span class="nx">setAsset</span><span class="p">(</span><span class="nx">INSERT_ASSET</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="p">.</span><span class="nx">setIsAutomatic</span><span class="p">(</span><span class="nx">INSERT_IS_AUTOMATIC</span><span class="p">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="p">.</span><span class="nx">setAddresses</span><span class="p">({</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nx">sourceAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_SOURCE_ADDRESS</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nx">destinationAddress</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_DESTINATION_ADDRESS</span><span class="p">,</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="p">});</span>
 </span></code></pre></div>
 </div>
 <h3 id="the-get-execute-transfer-data-method">The Get Execute Transfer Data Method</h3>
@@ -1733,14 +1787,14 @@
 <div>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><code>txId</code> <span class="keys"><kbd>string</kbd></span> - The transaction hash to be executed. This is the transaction hash of the bridge between the EVM chain and the Moon Chain</li>
+<li><code>txId</code> <span class="keys"><kbd>string</kbd></span> - The transaction hash to be executed. This is the transaction hash of the bridge between the EVM chain and the Bridge Chain</li>
 <li><code>chain</code> <span class="keys"><kbd>EvmChain | EvmParachain</kbd></span> - The chain to execute the transfer on</li>
 </ul>
 </div>
-<div class="language-js highlight"><span class="filename">Example Usage</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">Mrl</span><span class="p">().</span><span class="nx">getExecuteTransferData</span><span class="p">({</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nx">txId</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_TX_HASH_TO_BE_EXECUTED</span><span class="p">,</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_DESTINATION_CHAIN</span><span class="p">,</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">});</span>
+<div class="language-js highlight"><span class="filename">Example Usage</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">Mrl</span><span class="p">().</span><span class="nx">getExecuteTransferData</span><span class="p">({</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nx">txId</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_TX_HASH_TO_BE_EXECUTED</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nx">chain</span><span class="o">:</span><span class="w"> </span><span class="nx">INSERT_DESTINATION_CHAIN</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">});</span>
 </span></code></pre></div>
 </div>
 
