@@ -37,9 +37,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -73,9 +74,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -109,9 +111,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: agng,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -145,9 +148,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -181,9 +185,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,
@@ -217,9 +222,10 @@ export const fantomTestnetRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: dev,
           balance: BalanceBuilder().substrate().system().account(),
+          chain: moonbaseAlpha,
           fee: {
             asset: dev,
             amount: 0.1,

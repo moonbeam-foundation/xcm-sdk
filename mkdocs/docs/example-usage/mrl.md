@@ -429,7 +429,7 @@ The same output will be generated regardless of which example you used to build 
             getAssetMin: [Function: getAssetMin],
             hasOnlyAddress: [Function: hasOnlyAddress],
         },
-        moonChain: {
+        bridgeChain: {
             address: "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
             balance: _AssetAmount {
             key: "usdcwh",
@@ -679,7 +679,7 @@ The same output will be generated regardless of which example you used to build 
             getAssetMin: [Function: getAssetMin],
             hasOnlyAddress: [Function: hasOnlyAddress],
             },
-            moonChainFeeBalance: undefined,
+            bridgeChainFeeBalance: undefined,
             existentialDeposit: undefined,
             fee: _AssetAmount {
             key: "usdc",
@@ -806,7 +806,7 @@ The same output will be generated regardless of which example you used to build 
     }
 
     ```	
-As you may have noticed in the example response, the transfer data contains information on the asset, source, and destination chain, and also the [moonChain](../reference/mrl.md#the-moon-chain). In addition, a couple of functions have been exposed:
+As you may have noticed in the example response, the transfer data contains information on the asset, source, and destination chain, and also the [bridgeChain](../reference/mrl.md#the-bridge-chain). In addition, a couple of functions have been exposed:
 
 - [`transfer`](../reference/mrl.md#the-transfer-method) - transfers a given amount of the asset from the source chain to the destination chain
 - [`getEstimate`](../reference/mrl.md#the-transfer-data-object) - returns an estimated amount of the asset that will be received on the destination chain, less any destination fees
@@ -841,7 +841,7 @@ The transfer function also admits other optional parameters, which are not neede
 
 ## Execute the Transfer {: #execute-the-transfer }
 
-As mentioned before, if the isAutomatic flag is set to false, a manual execution is required to complete the transfer in the destination chain of the bridge (redeem chain). Take into account that, if the transfer is from EVM chains to a Parachain, the redeem chain is the [MoonChain](../reference/mrl.md#the-moon-chain), which is where the GMP contract call is made to initiate the XCM transfer to the destination parachain. For other types of transfers, the redeem chain is the destination chain.
+As mentioned before, if the isAutomatic flag is set to false, a manual execution is required to complete the transfer in the destination chain of the bridge (redeem chain). Take into account that, if the transfer is from EVM chains to a Parachain, the redeem chain is the [Bridge Chain](../reference/mrl.md#the-bridge-chain), which is where the GMP contract call is made to initiate the XCM transfer to the destination parachain. For other types of transfers, the redeem chain is the destination chain.
 
 This SDK also provides a function for executing the transfer, but the same way as with the transfer, you first have to build the execute transfer data.
 
@@ -849,7 +849,7 @@ This SDK also provides a function for executing the transfer, but the same way a
 
 Following the example above, you can build the execute transfer data by calling the [`getExecuteTransferData`](../reference/mrl.md#the-get-execute-transfer-data-method) function, with the transfer hash that was returned from the transfer function.
 
-Remember that for this example (Ethereum to Hydration), the redeem chain is going to be Moonbeam, which can be extracted from the transfer data as moonChain.
+Remember that for this example (Ethereum to Hydration), the redeem chain is going to be Moonbeam, which can be extracted from the transfer data as bridgeChain.
 
 ```js
 ...
@@ -859,7 +859,7 @@ const hash = result.pop();
 if (!isAutomatic && hash) {
     const executeTransferData = await Mrl().getExecuteTransferData({
         txId: hash,
-        chain: transferData.moonChain.chain,
+        chain: transferData.bridgeChain.chain,
     });
 }
 ```
@@ -872,14 +872,14 @@ You'll need to specify the signer you're using for the redeem chain. Note that t
 ```js
 ...
 
-const moonChainWalletClient = createWalletClient({
+const bridgeChainWalletClient = createWalletClient({
     account,
-    chain: transferData.moonChain.chain.getViemChain(),
+    chain: transferData.bridgeChain.chain.getViemChain(),
     transport: http(),
 });
 
 
-const executeTransferResult = await executeTransferData.executeTransfer(moonChainWalletClient);
+const executeTransferResult = await executeTransferData.executeTransfer(bridgeChainWalletClient);
 ```
 
 ## Get an Estimate of the Asset to Be Received on the Destination Chain {: #get-estimate }
@@ -905,19 +905,19 @@ console.log(
 );
 ```
 
-## Get information about the MoonChain  {: #get-moonchain-info }
+## Get information about the Bridge Chain  {: #get-bridgechain-info }
 
-The [MoonChain](../reference/mrl.md#the-moon-chain) (Moonbeam for Mainnet and Moonbase Alpha for Testnet) is the chain which serves as intermediary between the Polkadot Ecosystem and external chains.
+The [Bridge Chain](../reference/mrl.md#the-bridge-chain) (Moonbeam for Mainnet and Moonbase Alpha for Testnet) is the chain which serves as intermediary between the Polkadot Ecosystem and external chains.
 
-Depending on the type of transfer you're making, you may need to have balance in the MoonChain to pay for the fees. You can see the information about the balance by looking at the `moonChain` property in the transfer data.
+Depending on the type of transfer you're making, you may need to have balance in the Bridge Chain to pay for the fees. You can see the information about the balance by looking at the `bridgeChain` property in the transfer data.
 
 ```js
 ...
 
 console.log(
-    `This transfer will need to pay ${transferData.moonChain.fee.amount} ${transferData.moonChain.fee.getSymbol()} in ${transferData.moonChain.chain.name}`,
+    `This transfer will need to pay ${transferData.bridgeChain.fee.amount} ${transferData.bridgeChain.fee.getSymbol()} in ${transferData.bridgeChain.chain.name}`,
 );
 console.log(
-    `The current balance in ${transferData.moonChain.chain.name} for the address ${transferData.moonChain.address} is ${transferData.moonChain.feeBalance.toDecimal()} ${transferData.moonChain.feeBalance.getSymbol()}`,
+    `The current balance in ${transferData.bridgeChain.chain.name} for the address ${transferData.bridgeChain.address} is ${transferData.bridgeChain.feeBalance.toDecimal()} ${transferData.bridgeChain.feeBalance.getSymbol()}`,
 );
 ```

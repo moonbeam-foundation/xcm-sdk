@@ -180,7 +180,7 @@ Assuming that all of the required pallets and methods are already supported, you
     ```ts
     import { INSERT_REQUIRED_BUILDERS } from '@moonbeam-network/xcm-builder';
     import { INSERT_REQUIRED_ASSETS } from '../assets';
-    import { INSERT_SOURCE_CHAIN, INSERT_DESTINATION_CHAIN, INSERT_MOON_CHAIN } from '../chains';
+    import { INSERT_SOURCE_CHAIN, INSERT_DESTINATION_CHAIN, INSERT_BRIDGE_CHAIN } from '../chains';
     import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
     // The chain config name should be formatted as: 'chainName' + 'Routes'
@@ -190,7 +190,7 @@ Assuming that all of the required pallets and methods are already supported, you
     });
     ```
 
-3. As seen in the above example, a `routes` array contains the chain's routes. The route configuration defines the asset being transferred, the destination chain, the moonchain, information associated with fees, and the builder functions. The builder functions must be used to build the queries or calls as if they were being executed from this chain. 
+3. As seen in the above example, a `routes` array contains the chain's routes. The route configuration defines the asset being transferred, the destination chain, the bridge chain, information associated with fees, and the builder functions. The builder functions must be used to build the queries or calls as if they were being executed from this chain. 
 
     You'll need to create a [Route](../reference/mrl.md#the-mrl-asset-route-object) for each asset, for example:
 
@@ -216,11 +216,11 @@ Assuming that all of the required pallets and methods are already supported, you
       mrl: {
         isAutomaticPossible: INSERT_IS_AUTOMATIC_POSSIBLE,
         transfer: INSERT_MRL_BUILDER,
-        moonChain: {
-          asset: INSERT_ASSET_IN_MOON_CHAIN,
+        bridgeChain: {
+          asset: INSERT_ASSET_IN_BRIDGE_CHAIN,
           balance: INSERT_BALANCE_BUILDER,
           fee: {
-            asset: INSERT_FEE_ASSET_MOON_CHAIN,
+            asset: INSERT_FEE_ASSET_BRIDGE_CHAIN,
             amount: INSERT_FEE_AMOUNT,
             balance: INSERT_FEE_BALANCE_BUILDER,
           },
@@ -269,7 +269,7 @@ export const ethereumRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: usdtwh,
           balance: BalanceBuilder().evm().erc20(),
           fee: {
@@ -304,7 +304,7 @@ export const ethereumRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: weth,
           balance: BalanceBuilder().evm().erc20(),
           fee: {
@@ -343,7 +343,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: usdtwh,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -364,7 +364,7 @@ export const hydrationRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: usdtwh,
           balance: BalanceBuilder().evm().erc20(),
           fee: {

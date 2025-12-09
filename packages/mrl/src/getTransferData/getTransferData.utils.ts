@@ -6,10 +6,10 @@ import {
   type ExtrinsicConfig,
   MrlBuilder,
   type MrlBuilderParams,
+  Provider,
   type Transact,
 } from '@moonbeam-network/xcm-builder';
 import {
-  getMoonChain,
   type MrlAssetRoute,
   moonbaseAlpha,
   moonbeam,
@@ -33,7 +33,7 @@ import {
   http,
 } from 'viem';
 import type {
-  MoonChainTransferData,
+  BridgeChainTransferData,
   SourceTransferData,
 } from '../mrl.interfaces';
 
@@ -44,35 +44,35 @@ const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
 
 interface DataParams {
   destinationData: DestinationChainTransferData;
-  moonChainData: MoonChainTransferData;
+  bridgeChainData: BridgeChainTransferData;
   sourceData: SourceTransferData;
 }
 
-export function getMoonChainFeeValueOnSource({
+export function getBridgeChainFeeValueOnSource({
   destinationData,
-  moonChainData,
+  bridgeChainData,
   sourceData,
 }: DataParams): Big {
   const isSourceParachain = EvmParachain.isAnyParachain(sourceData.chain);
-  const isDestinationMoonChain = destinationData.chain.isEqual(
-    moonChainData.chain,
+  const isDestinationBridgeChain = destinationData.chain.isEqual(
+    bridgeChainData.chain,
   );
-  const isSameAssetPayingMoonChainFee = sourceData.balance.isSame(
-    moonChainData.fee,
+  const isSameAssetPayingBridgeChainFee = sourceData.balance.isSame(
+    bridgeChainData.fee,
   );
-  return !isDestinationMoonChain &&
+  return !isDestinationBridgeChain &&
     isSourceParachain &&
-    isSameAssetPayingMoonChainFee
+    isSameAssetPayingBridgeChainFee
     ? convertToChainDecimals({
-        asset: moonChainData.fee,
-        target: sourceData.chain.getChainAsset(moonChainData.fee),
+        asset: bridgeChainData.fee,
+        target: sourceData.chain.getChainAsset(bridgeChainData.fee),
       }).toBig()
     : Big(0);
 }
 
 export function getMrlMin({
   destinationData,
-  moonChainData,
+  bridgeChainData,
   sourceData,
 }: DataParams): AssetAmount {
   const minInDestination = getMin(destinationData);
@@ -82,28 +82,36 @@ export function getMrlMin({
       amount: minInDestination.amount,
     },
   );
-  const moonChainFee = getMoonChainFeeValueOnSource({
+  const bridgeChainFee = getBridgeChainFeeValueOnSource({
     destinationData,
-    moonChainData,
+    bridgeChainData,
     sourceData,
   });
-  const relayerFee = sourceData.relayerFee?.amount
-    ? sourceData.relayerFee.toBig()
+  const relayerFee = sourceData.otherFees?.relayer?.amount
+    ? sourceData.otherFees.relayer.toBig()
     : Big(0);
 
   return min.copyWith({
-    amount: BigInt(min.toBig().add(moonChainFee).add(relayerFee).toFixed()),
+    amount: BigInt(min.toBig().add(bridgeChainFee).add(relayerFee).toFixed()),
   });
 }
 
 export interface BuildTransferParams {
   asset: AssetAmount;
+  protocolFee?: AssetAmount;
   destinationAddress: string;
   feeAsset: AssetAmount;
   isAutomatic: boolean;
   route: MrlAssetRoute;
   sendOnlyRemoteExecution?: boolean;
   sourceAddress: string;
+}
+
+function requiresTransact(route: MrlAssetRoute): boolean {
+  return (
+    route.mrl?.transfer.provider === Provider.Wormhole &&
+    EvmParachain.isAnyParachain(route.source.chain)
+  );
 }
 
 export async function buildTransfer(params: BuildTransferParams) {
@@ -118,11 +126,12 @@ export async function buildTransfer(params: BuildTransferParams) {
       `Route from source chain ${route.source.chain.name} and asset ${route.source.asset.originSymbol} does not allow the automatic option`,
     );
   }
+
   const builderParams = await getMrlBuilderParams(params);
 
   return route.mrl.transfer.build({
     ...builderParams,
-    transact: EvmParachain.isAnyParachain(route.source.chain)
+    transact: requiresTransact(route)
       ? await getTransact(builderParams)
       : undefined,
   });
@@ -130,6 +139,7 @@ export async function buildTransfer(params: BuildTransferParams) {
 
 export async function getMrlBuilderParams({
   asset,
+  protocolFee,
   destinationAddress,
   feeAsset,
   isAutomatic,
@@ -145,25 +155,26 @@ export async function getMrlBuilderParams({
   const source = route.source.chain;
   const destination = route.destination.chain;
 
-  const moonChain = getMoonChain(source);
-  const [sourceApi, destinationApi, moonApi] = await Promise.all([
+  const bridgeChain = route.mrl.bridgeChain.chain;
+  const [sourceApi, destinationApi, bridgeApi] = await Promise.all([
     EvmParachain.isAnyParachain(source) ? getPolkadotApi(source.ws) : undefined,
     EvmParachain.isAnyParachain(destination)
       ? getPolkadotApi(destination.ws)
       : undefined,
-    getPolkadotApi(moonChain.ws),
+    getPolkadotApi(bridgeChain.ws),
   ]);
 
   return {
     asset,
+    protocolFee,
     destination,
     destinationAddress,
     destinationApi,
     fee: feeAsset,
     isAutomatic,
-    moonApi,
-    moonAsset: moonChain.nativeAsset,
-    moonChain,
+    moonApi: bridgeApi,
+    moonAsset: bridgeChain.nativeAsset,
+    bridgeChain,
     sendOnlyRemoteExecution,
     source,
     sourceAddress,
@@ -171,10 +182,12 @@ export async function getMrlBuilderParams({
   };
 }
 
-async function getTransact(params: MrlBuilderParams): Promise<Transact> {
-  const { sourceAddress, source, moonChain } = params;
-  const polkadot = await PolkadotService.create(moonChain);
-  const moonGasLimit = await getMoonGasLimit(params);
+async function getTransact(
+  params: MrlBuilderParams,
+): Promise<Transact | undefined> {
+  const { sourceAddress, source, bridgeChain } = params;
+  const polkadot = await PolkadotService.create(bridgeChain);
+  const bridgeChainGasLimit = await getBridgeChainGasLimit(params);
 
   if (!EvmParachain.isAnyParachain(source)) {
     throw new Error('Source chain must be Parachain or EvmParachain');
@@ -190,7 +203,7 @@ async function getTransact(params: MrlBuilderParams): Promise<Transact> {
     .extrinsic()
     .ethereumXcm()
     .transact()
-    .build({ ...params, moonGasLimit }) as ExtrinsicConfig;
+    .build({ ...params, bridgeChainGasLimit }) as ExtrinsicConfig;
   const { weight } = await polkadot.getPaymentInfo(address20, extrinsic);
 
   return {
@@ -202,15 +215,21 @@ async function getTransact(params: MrlBuilderParams): Promise<Transact> {
   };
 }
 
-async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
-  const { asset, isAutomatic, moonChain, source, sourceAddress } = params;
+async function getBridgeChainGasLimit(
+  params: MrlBuilderParams,
+): Promise<bigint> {
+  const { asset, isAutomatic, bridgeChain, source, sourceAddress } = params;
 
   if (!EvmParachain.isAnyParachain(source)) {
     throw new Error('Source chain must be Parachain or EvmParachain');
   }
 
+  if (!EvmParachain.is(bridgeChain)) {
+    throw new Error('Bridge chain must be an EvmParachain');
+  }
+
   const client = createPublicClient({
-    chain: moonChain.getViemChain(),
+    chain: bridgeChain.getViemChain(),
     transport: http(),
   });
   const { address20 } = getMultilocationDerivedAddresses({
@@ -223,7 +242,7 @@ async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
   // it requires the computedOriginAccount to have the balance for the call
   // which we don't have when we make the call. We hardcode it for now
   if (isAutomatic) {
-    return (MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION[moonChain.key] * 110n) / 100n;
+    return (MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION[bridgeChain.key] * 110n) / 100n;
   }
 
   const contract = MrlBuilder()
@@ -242,13 +261,13 @@ async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
     args: [contract.address as Address, 0n],
   });
 
-  const tokenAddressOnMoonChain = moonChain.getChainAsset(asset).address as
+  const tokenAddressOnBridgeChain = bridgeChain.getChainAsset(asset).address as
     | Address
     | undefined;
 
-  if (!tokenAddressOnMoonChain) {
+  if (!tokenAddressOnBridgeChain) {
     throw new Error(
-      `Asset ${asset.symbol} does not have a token address on chain ${moonChain.name}`,
+      `Asset ${asset.symbol} does not have a token address on chain ${bridgeChain.name}`,
     );
   }
 
@@ -256,7 +275,7 @@ async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
     abi: BATCH_CONTRACT_ABI,
     functionName: 'batchAll',
     args: [
-      [tokenAddressOnMoonChain, contract.address as Address],
+      [tokenAddressOnBridgeChain, contract.address as Address],
       [0n, 0n], // Value to send for each call
       [approveTx, contract.encodeFunctionData()], // Call data for each call
       [], // Gas limit for each call
@@ -270,4 +289,16 @@ async function getMoonGasLimit(params: MrlBuilderParams): Promise<bigint> {
   });
 
   return (gasEstimation * 110n) / 100n;
+}
+
+export function getAmountForTransferSimulation(
+  balance: AssetAmount,
+  protocolFee: AssetAmount,
+): AssetAmount {
+  return balance.copyWith({
+    amount:
+      balance.amount - protocolFee.amount > 0
+        ? balance.amount - protocolFee.amount
+        : 0n,
+  });
 }

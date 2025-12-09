@@ -1,0 +1,161 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`xcmPallet > transferAssets with globalConsensus > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssets",
+  "getArgs": [Function],
+  "module": "xcmPallet",
+}
+`;
+
+exports[`xcmPallet > transferAssets with globalConsensus > should get correct arguments 1`] = `
+[
+  {
+    "V4": {
+      "interior": {
+        "X1": [
+          {
+            "GlobalConsensus": {
+              "Ethereum": {
+                "chainId": 4002,
+              },
+            },
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V4": {
+      "interior": {
+        "X1": [
+          {
+            "AccountKey20": {
+              "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+              "network": {
+                "Ethereum": {
+                  "chainId": 4002,
+                },
+              },
+            },
+          },
+        ],
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V4": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "interior": {
+            "X1": [
+              {
+                "GlobalConsensus": {
+                  "Ethereum": {
+                    "chainId": 4002,
+                  },
+                },
+              },
+            ],
+          },
+          "parents": 1,
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
+exports[`xcmPallet > transferAssets with globalConsensus > should get correct arguments 2`] = `undefined`;
+
+exports[`xcmPallet > transferAssets with globalConsensusErc20 > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssets",
+  "getArgs": [Function],
+  "module": "xcmPallet",
+}
+`;
+
+exports[`xcmPallet > transferAssets with globalConsensusErc20 > should get correct arguments 1`] = `
+[
+  {
+    "V4": {
+      "interior": {
+        "X1": [
+          {
+            "GlobalConsensus": {
+              "Ethereum": {
+                "chainId": 4002,
+              },
+            },
+          },
+        ],
+      },
+      "parents": 1,
+    },
+  },
+  {
+    "V4": {
+      "interior": {
+        "X1": [
+          {
+            "AccountKey20": {
+              "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+              "network": {
+                "Ethereum": {
+                  "chainId": 4002,
+                },
+              },
+            },
+          },
+        ],
+      },
+      "parents": 0,
+    },
+  },
+  {
+    "V4": [
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "interior": {
+            "X2": [
+              {
+                "GlobalConsensus": {
+                  "Ethereum": {
+                    "chainId": 4002,
+                  },
+                },
+              },
+              {
+                "AccountKey20": {
+                  "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                  "network": {
+                    "Ethereum": {
+                      "chainId": 4002,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          "parents": 1,
+        },
+      },
+    ],
+  },
+  0,
+  "Unlimited",
+]
+`;
+
+exports[`xcmPallet > transferAssets with globalConsensusErc20 > should get correct arguments 2`] = `undefined`;
