@@ -1,5 +1,24 @@
 # @moonbeam-network/xcm-utils
 
+## 4.2.0
+
+### Minor Changes
+
+- [#586](https://github.com/moonbeam-foundation/xcm-sdk/pull/586) [`cf209b7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf209b7b506bdc0ae113bec55cd79e65602de43c) Thanks [@mmaurello](https://github.com/mmaurello)! - Change of MoonChain concept to BridgeChain
+
+  BREAKING CHANGES
+
+  -> MRL Package
+
+  - `moonChain` has been renamed to `bridgeChain`.
+    Update all references accordingly.
+
+  - Transfer data source structure updated.
+
+    - A new property otherFees has been added.
+    - The existing relayerFee field has been moved to `source.otherFees.relayer`
+      Update any code that previously accessed `relayerFee` at the root of source.
+
 ## 4.1.4
 
 ### Patch Changes
