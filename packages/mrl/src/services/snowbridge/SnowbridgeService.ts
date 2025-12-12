@@ -7,8 +7,9 @@ import {
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
 import { EvmService } from '@moonbeam-network/xcm-sdk';
 import { type AnyChain, EvmChain } from '@moonbeam-network/xcm-types';
+import { isEthAddress } from '@moonbeam-network/xcm-utils';
 import { u8aToHex } from '@polkadot/util';
-import { decodeAddress } from '@polkadot/util-crypto';
+import { decodeAddress, encodeMultiAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, type Hash } from 'viem';
 
 export class SnowbridgeService {
@@ -95,16 +96,35 @@ export class SnowbridgeService {
 
     const value = requiresApproval ? bridgeFeeAmount : amount + bridgeFeeAmount;
 
+    const isEthereumDestination = isEthAddress(destinationAddress);
+    console.log('isEthereumDestination', isEthereumDestination);
+    console.log('destinationAddress', destinationAddress);
+    // Snowbridge MultiAddress.Kind enum (Index, Address32, Address20):
+    // - Address20 (kind = 2) is used for EVM/H160 addresses
+    // - Address32 (kind = 1) is used for Substrate AccountId32
+    const destination = isEthereumDestination
+      ? { kind: 2, data: destinationAddress }
+      : { kind: 1, data: u8aToHex(decodeAddress(destinationAddress)) };
+
+    // const destination = {
+    //   kind: 1,
+    //   data: encodeMultiAddress([destinationAddress], 1),
+    // };
+
+    console.log(
+      'encodeMultiAddress(destinationAddress)',
+      encodeMultiAddress([destinationAddress], 1),
+    );
+    console.log('destination', destination);
+
     const contractArgs = [
       tokenAddress,
       destinationParaId,
-      {
-        kind: 1,
-        data: u8aToHex(decodeAddress(destinationAddress)),
-      },
-      0n,
+      destination,
+      10000000000000n,
       amount,
     ];
+    console.log('contractArgs', contractArgs);
 
     return new ContractConfig({
       address: this.#gatewayAddress,

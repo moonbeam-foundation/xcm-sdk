@@ -27,7 +27,7 @@ export function gateway() {
           return new ContractConfig({
             address: source.contracts.Gateway,
             abi: GATEWAY_ABI,
-            args: [asset.address, destination.parachainId, 0n],
+            args: [asset.address, destination.parachainId, 10000000000000n],
             func: 'quoteSendTokenFee',
             module: 'Gateway',
           });

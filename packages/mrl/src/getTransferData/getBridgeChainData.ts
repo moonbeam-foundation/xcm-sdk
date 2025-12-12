@@ -1,7 +1,10 @@
-import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
+import { type MrlAssetRoute, moonbeam } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
-import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
+import {
+  getMultilocationDerivedAddresses,
+  isEthAddress,
+} from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import type { BridgeChainTransferData } from '../mrl.interfaces';
 
@@ -28,6 +31,7 @@ export async function getBridgeChainData({
     sourceAddress,
     destinationAddress,
   });
+  console.log('bridgeChain bridgeChainAddress', bridgeChainAddress);
 
   const fee = await getDestinationFee({
     address: bridgeChainAddress,
@@ -37,6 +41,7 @@ export async function getBridgeChainData({
     feeAsset: route.mrl.bridgeChain.fee.asset,
     source: route.source.chain,
   });
+  console.log('bridgeChain fee', fee);
 
   const balance = await getBalance({
     address: bridgeChainAddress,
@@ -44,6 +49,7 @@ export async function getBridgeChainData({
     builder: route.mrl.bridgeChain.balance,
     chain: bridgeChain,
   });
+  console.log('bridgeChain balance', balance);
 
   const feeBalance = await getBalance({
     address: bridgeChainAddress,
@@ -51,6 +57,7 @@ export async function getBridgeChainData({
     builder: route.mrl.bridgeChain.fee.balance,
     chain: bridgeChain,
   });
+  console.log('bridgeChain feeBalance', feeBalance);
 
   return {
     address: bridgeChainAddress,
@@ -72,6 +79,11 @@ export function getBridgeChainAddress({
   sourceAddress,
   destinationAddress,
 }: GetBridgeChainAddressParams): string {
+  // TODO mjm how to handle this?
+  // if (route.destination.chain.key === 'demo') {
+  //   return '5Fpat4SsY6z1WZRdtEtDXKF2BXbdQ2icrX36hGnGB6BdxZQy';
+  // }
+
   const source = route.source.chain;
   const destination = route.destination.chain;
   const bridgeChain = route.mrl.bridgeChain.chain;
@@ -81,6 +93,14 @@ export function getBridgeChainAddress({
   let bridgeChainAddress = isDestinationBridgeChain
     ? destinationAddress
     : sourceAddress;
+  console.log(
+    'Parachain.isExactly(bridgeChain)',
+    Parachain.isExactly(bridgeChain),
+  );
+
+  if (Parachain.isExactly(bridgeChain) && isEthAddress(bridgeChainAddress)) {
+    bridgeChainAddress = evmToAddress(bridgeChainAddress);
+  }
 
   // for Parachain to EVM transactions, we use the computed origin account in the bridgeChain
   if (Parachain.is(source) && !isSourceBridgeChain) {
