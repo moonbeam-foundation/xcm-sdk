@@ -48,7 +48,7 @@
   },
   "peerDependencies": {
     "@polkadot/types": "16.5.4",
-    "@polkadot/util": "13.5.9",
-    "@polkadot/util-crypto": "13.5.9"
+    "@polkadot/util": "14.0.1",
+    "@polkadot/util-crypto": "14.0.1"
   }
 }
