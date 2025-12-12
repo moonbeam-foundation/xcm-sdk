@@ -7,4 +7,4 @@
 "@moonbeam-network/xcm-sdk": patch
 ---
 
-Update dependencies
+Update Polkadot Major version
