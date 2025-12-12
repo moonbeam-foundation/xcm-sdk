@@ -53,7 +53,7 @@
     "@polkadot/api": "16.5.4",
     "@polkadot/api-augment": "16.5.4",
     "@polkadot/types": "16.5.4",
-    "@polkadot/util": "13.5.9",
+    "@polkadot/util": "14.0.1",
     "viem": "^2.41.2"
   },
   "devDependencies": {
