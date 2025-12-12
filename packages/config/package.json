@@ -44,10 +44,10 @@
     "@moonbeam-network/xcm-builder": "workspace:*",
     "@moonbeam-network/xcm-types": "workspace:*",
     "@moonbeam-network/xcm-utils": "workspace:*",
-    "viem": "^2.40.2"
+    "viem": "^2.41.2"
   },
   "peerDependencies": {
-    "@polkadot/types": "16.5.2",
+    "@polkadot/types": "16.5.4",
     "@polkadot/util": "13.5.9",
     "@polkadot/util-crypto": "13.5.9"
   }
