@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-utils
 
+## 4.2.2
+
+### Patch Changes
+
+- [#597](https://github.com/moonbeam-foundation/xcm-sdk/pull/597) [`7eb7f3d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7eb7f3de0c6ff5ec191fb49d2fc2487634de8bc7) Thanks [@mmaurello](https://github.com/mmaurello)! - Update Polkadot Major version
+
+## 4.2.1
+
+### Patch Changes
+
+- [#595](https://github.com/moonbeam-foundation/xcm-sdk/pull/595) [`7dcdde3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7dcdde319d6a17efb23fb8367678004e8bca9104) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
 ## 4.2.0
 
 ### Minor Changes
