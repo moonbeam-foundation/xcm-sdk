@@ -31,7 +31,6 @@ export async function getBridgeChainData({
     sourceAddress,
     destinationAddress,
   });
-  console.log('bridgeChain bridgeChainAddress', bridgeChainAddress);
 
   const fee = await getDestinationFee({
     address: bridgeChainAddress,
@@ -41,7 +40,6 @@ export async function getBridgeChainData({
     feeAsset: route.mrl.bridgeChain.fee.asset,
     source: route.source.chain,
   });
-  console.log('bridgeChain fee', fee);
 
   const balance = await getBalance({
     address: bridgeChainAddress,
@@ -49,7 +47,6 @@ export async function getBridgeChainData({
     builder: route.mrl.bridgeChain.balance,
     chain: bridgeChain,
   });
-  console.log('bridgeChain balance', balance);
 
   const feeBalance = await getBalance({
     address: bridgeChainAddress,
@@ -57,7 +54,6 @@ export async function getBridgeChainData({
     builder: route.mrl.bridgeChain.fee.balance,
     chain: bridgeChain,
   });
-  console.log('bridgeChain feeBalance', feeBalance);
 
   return {
     address: bridgeChainAddress,
@@ -91,6 +87,7 @@ export function getBridgeChainAddress({
 
   if (Parachain.isExactly(bridgeChain) && isEthAddress(bridgeChainAddress)) {
     bridgeChainAddress = evmToAddress(bridgeChainAddress);
+    return bridgeChainAddress; // TODO mjm handle this case
   }
 
   // for Parachain to EVM transactions, we use the computed origin account in the bridgeChain
