@@ -1,5 +1,50 @@
 # @moonbeam-network/xcm-builder
 
+## 4.4.2
+
+### Patch Changes
+
+- [#597](https://github.com/moonbeam-foundation/xcm-sdk/pull/597) [`7eb7f3d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7eb7f3de0c6ff5ec191fb49d2fc2487634de8bc7) Thanks [@mmaurello](https://github.com/mmaurello)! - Update Polkadot Major version
+
+- Updated dependencies [[`7eb7f3d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7eb7f3de0c6ff5ec191fb49d2fc2487634de8bc7)]:
+  - @moonbeam-network/xcm-types@4.3.2
+  - @moonbeam-network/xcm-utils@4.2.2
+
+## 4.4.1
+
+### Patch Changes
+
+- [#595](https://github.com/moonbeam-foundation/xcm-sdk/pull/595) [`7dcdde3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7dcdde319d6a17efb23fb8367678004e8bca9104) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`7dcdde3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7dcdde319d6a17efb23fb8367678004e8bca9104)]:
+  - @moonbeam-network/xcm-types@4.3.1
+  - @moonbeam-network/xcm-utils@4.2.1
+
+## 4.4.0
+
+### Minor Changes
+
+- [#586](https://github.com/moonbeam-foundation/xcm-sdk/pull/586) [`cf209b7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf209b7b506bdc0ae113bec55cd79e65602de43c) Thanks [@mmaurello](https://github.com/mmaurello)! - Change of MoonChain concept to BridgeChain
+
+  BREAKING CHANGES
+
+  -> MRL Package
+
+  - `moonChain` has been renamed to `bridgeChain`.
+    Update all references accordingly.
+
+  - Transfer data source structure updated.
+
+    - A new property otherFees has been added.
+    - The existing relayerFee field has been moved to `source.otherFees.relayer`
+      Update any code that previously accessed `relayerFee` at the root of source.
+
+### Patch Changes
+
+- Updated dependencies [[`cf209b7`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf209b7b506bdc0ae113bec55cd79e65602de43c)]:
+  - @moonbeam-network/xcm-types@4.3.0
+  - @moonbeam-network/xcm-utils@4.2.0
+
 ## 4.3.1
 
 ### Patch Changes

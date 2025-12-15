@@ -16,20 +16,24 @@ import {
 } from '../../../../../extrinsic/ExtrinsicBuilder.utils';
 import { getGlobalConsensus } from '../../../../../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
 import { ExtrinsicConfig } from '../../../../../types/substrate/ExtrinsicConfig';
-import type {
-  MrlBuilderParams,
-  MrlConfigBuilder,
+import {
+  type MrlBuilderParams,
+  type MrlConfigBuilder,
+  Provider,
 } from '../../../../MrlBuilder.interfaces';
 
 // TODO: these have to come from the configs
-const BUY_EXECUTION_FEE = 100_000_000_000_000_000n; // moonChainFee
+const BUY_EXECUTION_FEE = 100_000_000_000_000_000n; // bridgeChainFee
 export const CROSS_CHAIN_FEE = 100_000_000_000_000_000n; // fee for processing the xcm message in moon chain
 
 export function polkadotXcm() {
+  const provider = Provider.Wormhole;
+
   return {
     send: (
       transferAssetsPallet?: 'polkadotXcm' | 'xTokens',
     ): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
@@ -37,7 +41,7 @@ export function polkadotXcm() {
         fee,
         isAutomatic,
         moonAsset,
-        moonChain,
+        bridgeChain,
         moonApi,
         sendOnlyRemoteExecution,
         source,
@@ -78,7 +82,7 @@ export function polkadotXcm() {
           isAutomatic,
           moonApi,
           moonAsset,
-          moonChain,
+          bridgeChain,
           source,
           sourceAddress,
           sourceApi,
@@ -92,7 +96,7 @@ export function polkadotXcm() {
           fee,
           isAutomatic,
           moonAsset,
-          moonChain,
+          bridgeChain,
           moonApi,
           source,
           sourceAddress,
@@ -123,17 +127,17 @@ interface HelperFunctionParams extends MrlBuilderParams {
 
 function getDestinationMultilocation(
   source: AnyParachain,
-  moonChain: AnyParachain,
+  bridgeChain: AnyParachain,
 ) {
-  const isDifferentEcosystem = source.ecosystem !== moonChain.ecosystem;
+  const isDifferentEcosystem = source.ecosystem !== bridgeChain.ecosystem;
 
   if (isDifferentEcosystem) {
     return {
       parents: 2,
       interior: {
         X2: [
-          { GlobalConsensus: getGlobalConsensus(moonChain) },
-          { Parachain: moonChain.parachainId },
+          { GlobalConsensus: getGlobalConsensus(bridgeChain) },
+          { Parachain: bridgeChain.parachainId },
         ],
       },
     };
@@ -141,7 +145,7 @@ function getDestinationMultilocation(
   return {
     parents: 1,
     interior: {
-      X1: { Parachain: moonChain.parachainId },
+      X1: { Parachain: bridgeChain.parachainId },
     },
   };
 }
@@ -150,7 +154,7 @@ export function buildSendExtrinsic({
   source,
   computedOriginAccount,
   moonAsset,
-  moonChain,
+  bridgeChain,
   sourceApi,
   transact,
 }: HelperFunctionParams) {
@@ -166,7 +170,7 @@ export function buildSendExtrinsic({
     {
       [version]: normalizeX1(
         version,
-        getDestinationMultilocation(source, moonChain),
+        getDestinationMultilocation(source, bridgeChain),
       ),
     },
     {
@@ -271,7 +275,7 @@ export function getAssetTransferTxsForPolkadotXcm({
   computedOriginAccount,
   moonApi,
   moonAsset,
-  moonChain,
+  bridgeChain,
   source,
   sourceAddress,
   sourceApi,
@@ -289,7 +293,7 @@ export function getAssetTransferTxsForPolkadotXcm({
     ...polkadotXcmBuilder
       .build({
         asset,
-        destination: moonChain,
+        destination: bridgeChain,
         destinationAddress: computedOriginAccount,
         destinationApi: moonApi,
         fee: AssetAmount.fromChainAsset(source.getChainAsset(moonAsset), {
@@ -311,7 +315,7 @@ function getAssetTransferTxsFromXtokens({
   fee,
   moonApi,
   moonAsset,
-  moonChain,
+  bridgeChain,
   source,
   sourceAddress,
   sourceApi,
@@ -328,7 +332,7 @@ function getAssetTransferTxsFromXtokens({
   /**
    * TODO here we should compare the asset with the cross chain fee asset.
    * For example, FTM cannot pay for fees in Moonbase while AGNG can, so for FTM we have to send a transferMulticurrencies
-   * This "if" is a workaround, change when we implement properly the concept of cross-chain fee (different from moonChainFee)
+   * This "if" is a workaround, change when we implement properly the concept of cross-chain fee (different from bridgeChainFee)
    */
   if (asset.isSame(fee)) {
     const assetTransferTx = transfer(
@@ -339,7 +343,7 @@ function getAssetTransferTxsFromXtokens({
             // for this we have to add a new concept in the config (Cross Chain Fee), and get the value from there
             amount: asset.amount + 10n * CROSS_CHAIN_FEE,
           }),
-          destination: moonChain,
+          destination: bridgeChain,
           destinationAddress: computedOriginAccount,
           destinationApi: moonApi,
           fee,
@@ -355,7 +359,7 @@ function getAssetTransferTxsFromXtokens({
           asset: AssetAmount.fromChainAsset(source.getChainAsset(moonAsset), {
             amount: CROSS_CHAIN_FEE + BUY_EXECUTION_FEE,
           }),
-          destination: moonChain,
+          destination: bridgeChain,
           destinationAddress: computedOriginAccount,
           destinationApi: moonApi,
           fee,
@@ -371,7 +375,7 @@ function getAssetTransferTxsFromXtokens({
     ...transferMulticurrenciesBuilder
       .build({
         asset,
-        destination: moonChain,
+        destination: bridgeChain,
         destinationAddress: computedOriginAccount,
         destinationApi: moonApi,
         fee: AssetAmount.fromChainAsset(source.getChainAsset(moonAsset), {

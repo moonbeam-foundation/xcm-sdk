@@ -11,7 +11,7 @@ import {
   wbtc,
   weth,
 } from '../assets';
-import { ethereum, hydration } from '../chains';
+import { ethereum, hydration, moonbeam } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export const hydrationRoutes = new MrlChainRoutes({
@@ -25,7 +25,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: weth,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -46,9 +46,10 @@ export const hydrationRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: weth,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0.1,
@@ -65,7 +66,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: usdcwh,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -86,12 +87,13 @@ export const hydrationRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
-            amount: 0.1,
+            amount: 0.1, // TODO use xcmPaymentApi
             balance: BalanceBuilder().substrate().system().account(),
           },
         },
@@ -105,7 +107,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: usdtwh,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -126,9 +128,10 @@ export const hydrationRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: usdtwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0.1,
@@ -145,7 +148,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: dai,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -166,9 +169,10 @@ export const hydrationRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: dai,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0.1,
@@ -185,7 +189,7 @@ export const hydrationRoutes = new MrlChainRoutes({
           asset: wbtc,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().substrate().tokens().accounts(),
         },
@@ -206,9 +210,10 @@ export const hydrationRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().extrinsic().polkadotXcm().send(),
-        moonChain: {
+        bridgeChain: {
           asset: wbtc,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0.1,

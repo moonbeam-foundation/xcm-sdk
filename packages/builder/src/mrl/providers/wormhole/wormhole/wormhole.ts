@@ -7,37 +7,41 @@ import {
   getExtrinsicArgumentVersion,
 } from '../../../../extrinsic/ExtrinsicBuilder.utils';
 import { getGlobalConsensus } from '../../../../extrinsic/pallets/polkadotXcm/polkadotXcm.util';
-import type {
-  MrlBuilderParams,
-  MrlConfigBuilder,
+import {
+  type MrlBuilderParams,
+  type MrlConfigBuilder,
+  Provider,
 } from '../../../MrlBuilder.interfaces';
 import { GMP_CONTRACT_ADDRESS } from '../contract/Gmp';
 import { Protocols, WormholeConfig } from './WormholeConfig';
 import { wormholeFactory } from './wormholeFactory';
 
 export function wormhole() {
+  const provider = Provider.Wormhole;
+
   return {
     tokenTransfer: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
         destinationAddress,
         isAutomatic,
         moonApi,
-        moonChain,
+        bridgeChain,
         source,
         sourceAddress,
       }): WormholeConfig => {
         const isSourceParachain = Parachain.is(source);
-        const isDestinationMoonChain = destination.isEqual(moonChain);
+        const isDestinationMoonChain = destination.isEqual(bridgeChain);
         const isDestinationEvmChain = EvmChain.is(destination);
         const isNativeAsset = asset.isSame(
-          isDestinationEvmChain ? moonChain.nativeAsset : source.nativeAsset,
+          isDestinationEvmChain ? bridgeChain.nativeAsset : source.nativeAsset,
         );
         const tokenAddress = isNativeAsset
           ? 'native'
           : isDestinationEvmChain
-            ? moonChain.getChainAsset(asset).address
+            ? bridgeChain.getChainAsset(asset).address
             : asset.address;
 
         const { address20: computedOriginAccount } =
@@ -53,11 +57,11 @@ export function wormhole() {
 
         const wh = wormholeFactory(source);
         const whSource = isDestinationEvmChain
-          ? wh.getChain(moonChain.getWormholeName())
+          ? wh.getChain(bridgeChain.getWormholeName())
           : wh.getChain(source.getWormholeName());
         const whDestination = isDestinationEvmChain
           ? wh.getChain(destination.getWormholeName())
-          : wh.getChain(moonChain.getWormholeName());
+          : wh.getChain(bridgeChain.getWormholeName());
         const whAsset = Wormhole.tokenId(whSource.chain, tokenAddress);
         const whSourceAddress = Wormhole.chainAddress(
           whSource.chain,
@@ -86,7 +90,7 @@ export function wormhole() {
                     destination,
                     destinationAddress,
                     moonApi,
-                    moonChain,
+                    bridgeChain,
                   }),
           },
           func: 'tokenTransfer',
@@ -104,16 +108,16 @@ export function getPayload({
   moonApi,
   destination,
   destinationAddress,
-  moonChain,
+  bridgeChain,
 }: Pick<
   MrlBuilderParams,
-  'destination' | 'destinationAddress' | 'moonApi' | 'moonChain'
+  'destination' | 'destinationAddress' | 'moonApi' | 'bridgeChain'
 >): Uint8Array | undefined {
   const destinationMultilocation = getDestinationMultilocation({
     destination,
     destinationAddress,
     moonApi,
-    moonChain,
+    bridgeChain,
   });
 
   console.log('destinationMultilocation', destinationMultilocation.toHuman());
@@ -131,10 +135,10 @@ export function getDestinationMultilocation({
   moonApi,
   destination,
   destinationAddress,
-  moonChain,
+  bridgeChain,
 }: Pick<
   MrlBuilderParams,
-  'destination' | 'destinationAddress' | 'moonApi' | 'moonChain'
+  'destination' | 'destinationAddress' | 'moonApi' | 'bridgeChain'
 >) {
   if (!EvmParachain.isAnyParachain(destination)) {
     throw new Error(
@@ -143,7 +147,7 @@ export function getDestinationMultilocation({
   }
 
   const version = getExtrinsicArgumentVersion(moonApi.tx.polkadotXcm.send);
-  const isDifferentEcosystem = destination.ecosystem !== moonChain.ecosystem;
+  const isDifferentEcosystem = destination.ecosystem !== bridgeChain.ecosystem;
 
   const isEvmDestination = EvmParachain.is(destination);
 

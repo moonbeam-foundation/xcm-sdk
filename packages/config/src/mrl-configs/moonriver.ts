@@ -1,6 +1,6 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
 import { glmr, movr, usdc, usdcwh } from '../assets';
-import { ethereum, moonriver } from '../chains';
+import { ethereum, moonbeam, moonriver } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
 export const moonriverRoutes = new MrlChainRoutes({
@@ -14,7 +14,7 @@ export const moonriverRoutes = new MrlChainRoutes({
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
         },
-        moonChainFee: {
+        bridgeChainFee: {
           asset: glmr,
           balance: BalanceBuilder().evm().erc20(),
         },
@@ -39,9 +39,10 @@ export const moonriverRoutes = new MrlChainRoutes({
           .contract()
           .Batch()
           .transferAssetsAndMessageMoonriver(),
-        moonChain: {
+        bridgeChain: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0.1,

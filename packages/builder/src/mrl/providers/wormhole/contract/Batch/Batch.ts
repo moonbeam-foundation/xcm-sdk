@@ -1,9 +1,11 @@
 import {
+  type AnyParachain,
   AssetAmount,
   type ChainAsset,
   EvmParachain,
   type Parachain,
 } from '@moonbeam-network/xcm-types';
+
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import { type Address, encodeFunctionData, maxUint64 } from 'viem';
@@ -12,7 +14,10 @@ import {
   getGlobalConsensusDestination,
   getPrecompileDestinationInterior,
 } from '../../../../../contract/ContractBuilder.utils';
-import type { MrlConfigBuilder } from '../../../../MrlBuilder.interfaces';
+import {
+  type MrlConfigBuilder,
+  Provider,
+} from '../../../../MrlBuilder.interfaces';
 import {
   buildSendExtrinsic,
   CROSS_CHAIN_FEE,
@@ -22,8 +27,11 @@ import { getAbisForChain } from './abi/abi.helpers';
 const module = 'Batch';
 
 export function Batch() {
+  const provider = Provider.Wormhole;
+
   return {
     transferAssetsAndMessage: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
@@ -31,7 +39,7 @@ export function Batch() {
         fee,
         isAutomatic,
         moonAsset,
-        moonChain,
+        bridgeChain,
         moonApi,
         source,
         sourceAddress,
@@ -75,7 +83,7 @@ export function Batch() {
           fee,
           isAutomatic,
           moonAsset,
-          moonChain,
+          bridgeChain,
           moonApi,
           source,
           sourceAddress,
@@ -86,7 +94,7 @@ export function Batch() {
         const encodedXcmMessage = send.args[1].toHex();
 
         const { destinationParachain, destinationParachainAndAddress } =
-          getDestinationInHex(moonChain, computedOriginAccount);
+          getDestinationInHex(bridgeChain, computedOriginAccount);
 
         const { currencies, feeItem } = getCurrencies({
           source,
@@ -130,7 +138,7 @@ export function Batch() {
         fee,
         isAutomatic,
         moonAsset,
-        moonChain,
+        bridgeChain,
         moonApi,
         source,
         sourceAddress,
@@ -174,7 +182,7 @@ export function Batch() {
           fee,
           isAutomatic,
           moonAsset,
-          moonChain,
+          bridgeChain,
           moonApi,
           source,
           sourceAddress,
@@ -187,7 +195,7 @@ export function Batch() {
 
         const globalConsensusDestination = getGlobalConsensusDestination(
           sourceApi,
-          moonChain,
+          bridgeChain,
         );
         // const { currencies, feeItem } = getCurrencies({
         //   source,
@@ -203,8 +211,8 @@ export function Batch() {
         // });
         console.log('sourceAddress', sourceAddress);
 
-        const moonChainFee = AssetAmount.fromChainAsset(
-          moonChain.getChainAsset(moonAsset),
+        const bridgeChainFee = AssetAmount.fromChainAsset(
+          bridgeChain.getChainAsset(moonAsset),
           {
             amount: 0.03, // TODO mjm get from the config?
           },
@@ -216,8 +224,8 @@ export function Batch() {
           .build({
             sourceApi,
             asset,
-            fee: moonChainFee,
-            destination: moonChain,
+            fee: bridgeChainFee,
+            destination: bridgeChain,
             destinationAddress: computedOriginAccount,
             source,
             sourceAddress,
@@ -262,18 +270,18 @@ export function Batch() {
 }
 
 function getDestinationInHex(
-  moonChain: EvmParachain,
+  bridgeChain: AnyParachain,
   computedOriginAccount: string,
 ) {
   const destinationParachain = {
     parents: 1,
-    interior: getPrecompileDestinationInterior(moonChain),
+    interior: getPrecompileDestinationInterior(bridgeChain),
   } as const;
 
   const destinationParachainAndAddress = {
     parents: 1,
     interior: getPrecompileDestinationInterior(
-      moonChain,
+      bridgeChain,
       computedOriginAccount,
     ),
   } as const;
