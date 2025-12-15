@@ -42,9 +42,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: weth,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0,
@@ -78,9 +79,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: peaq,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0,
@@ -114,9 +116,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0,
@@ -150,9 +153,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: usdtwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0,
@@ -186,9 +190,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: dai,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0,
@@ -222,9 +227,10 @@ export const moonbeamRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: true,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: wbtc,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0,

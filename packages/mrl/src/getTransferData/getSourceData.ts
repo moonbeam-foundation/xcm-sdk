@@ -1,11 +1,17 @@
 import {
+  type BridgeFeeConfigBuilder,
+  type BridgeFeeConfigBuilderParams,
   ContractConfig,
-  type ExtrinsicConfig,
   MrlBuilder,
+  type MrlTransferConfig,
+  Provider,
+  SnowbridgeConfig,
+  SubstrateQueryConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
 import type { FeeConfig, MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import {
+  EvmService,
   getAssetMin,
   getBalance,
   getContractFee,
@@ -13,20 +19,23 @@ import {
   getExistentialDeposit,
   getExtrinsicFee,
   getMax,
+  PolkadotService,
 } from '@moonbeam-network/xcm-sdk';
 import {
   type AnyChain,
   type AnyParachain,
   AssetAmount,
-  type EvmChain,
-  type EvmParachain,
+  EvmChain,
+  EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type { SourceTransferData } from '../mrl.interfaces';
+import { SnowbridgeService } from '../services/snowbridge';
 import { WormholeService } from '../services/wormhole';
 import {
   type BuildTransferParams,
   buildTransfer,
+  getAmountForTransferSimulation,
   getMrlBuilderParams,
 } from './getTransferData.utils';
 
@@ -52,6 +61,7 @@ export async function getSourceData({
   }
 
   const source = route.source.chain;
+  const destination = route.destination.chain;
   const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
@@ -80,7 +90,7 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const moonChainFeeBalance = await getMoonChainFeeBalance({
+  const bridgeChainFeeBalance = await getBridgeChainFeeBalance({
     balance,
     feeBalance,
     route,
@@ -95,8 +105,19 @@ export async function getSourceData({
     chain: source,
   });
 
+  const protocolFee = await getProtocolFee({
+    source,
+    destination,
+    asset,
+    feeAsset,
+    balance,
+    protocolFee: route.source.protocolFee,
+    address: destinationAddress,
+  });
+
   const transfer = await buildTransfer({
-    asset: balance,
+    asset: getAmountForTransferSimulation(balance, protocolFee),
+    protocolFee,
     destinationAddress,
     feeAsset: feeBalance,
     isAutomatic,
@@ -137,13 +158,16 @@ export async function getSourceData({
     chain: source,
     destinationFee,
     destinationFeeBalance,
-    moonChainFeeBalance,
+    bridgeChainFeeBalance,
     existentialDeposit,
     fee,
     feeBalance,
     max,
     min,
-    relayerFee,
+    otherFees: {
+      protocol: protocolFee,
+      relayer: relayerFee?.amount ? relayerFee : undefined,
+    },
   };
 }
 
@@ -154,18 +178,18 @@ interface GetFeeParams {
   feeBalance: AssetAmount;
   feeConfig?: FeeConfig;
   sourceAddress: string;
-  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
+  transfer: MrlTransferConfig;
 }
 
 interface GetRelayFeeParams extends BuildTransferParams {
   chain: AnyChain;
-  transfer: ContractConfig | ExtrinsicConfig | WormholeConfig;
+  transfer: MrlTransferConfig;
 }
 
 interface GetWormholeFeeParams {
   asset: AssetAmount;
   chain: AnyChain;
-  config: ContractConfig | ExtrinsicConfig | WormholeConfig;
+  config: MrlTransferConfig;
 }
 
 async function getFee({
@@ -184,16 +208,37 @@ async function getFee({
     });
   }
 
+  if (SnowbridgeConfig.is(transfer)) {
+    const snowbridge = SnowbridgeService.create(chain as EvmChain);
+    try {
+      const feeAmount = await snowbridge.getFee(sourceAddress, transfer);
+
+      return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
+        amount: feeAmount,
+      });
+    } catch (error) {
+      console.error(error);
+      return feeBalance.copyWith({ amount: 0n });
+    }
+  }
+
   if (ContractConfig.is(transfer)) {
-    return getContractFee({
-      address: sourceAddress,
-      balance,
-      chain: chain as EvmChain | EvmParachain,
-      contract: transfer,
-      destinationFee,
-      feeBalance,
-      feeConfig,
-    });
+    try {
+      return getContractFee({
+        address: sourceAddress,
+        balance,
+        chain: chain as EvmChain | EvmParachain,
+        contract: transfer,
+        destinationFee,
+        feeBalance,
+        feeConfig,
+      });
+    } catch (error) {
+      // A lot of EVM chains throw an error if the account has not enough balance or similar situations
+      // So we return 0n here in MRL, so it doesn't affect regular XCM flow
+      console.error(error);
+      return feeBalance.copyWith({ amount: 0n });
+    }
   }
 
   return getExtrinsicFee({
@@ -216,27 +261,37 @@ async function getRelayerFee({
   sourceAddress,
   transfer,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
+  if (
+    route.mrl.transfer.provider === Provider.Snowbridge ||
+    SnowbridgeConfig.is(transfer)
+  ) {
+    return undefined;
+  }
+
   if (WormholeConfig.is(transfer)) {
     return getWormholeFee({ asset, chain, config: transfer });
   }
 
-  // TODO this is only valid for Wormhole Provider
-  const builderParams = await getMrlBuilderParams({
-    asset,
-    destinationAddress,
-    feeAsset,
-    isAutomatic,
-    route,
-    sourceAddress,
-  });
+  if (route.mrl.transfer.provider === Provider.Wormhole) {
+    const builderParams = await getMrlBuilderParams({
+      asset,
+      destinationAddress,
+      feeAsset,
+      isAutomatic,
+      route,
+      sourceAddress,
+    });
 
-  const wormholeConfig = MrlBuilder()
-    .wormhole()
-    .wormhole()
-    .tokenTransfer()
-    .build(builderParams);
+    const wormholeConfig = MrlBuilder()
+      .wormhole()
+      .wormhole()
+      .tokenTransfer()
+      .build(builderParams);
 
-  return getWormholeFee({ asset, chain, config: wormholeConfig });
+    return getWormholeFee({ asset, chain, config: wormholeConfig });
+  }
+
+  return;
 }
 
 async function getWormholeFee({
@@ -258,41 +313,98 @@ async function getWormholeFee({
   return;
 }
 
-interface GetMoonChainFeeBalanceParams {
+interface GetBridgeChainFeeBalanceParams {
   balance: AssetAmount;
   feeBalance: AssetAmount;
   route: MrlAssetRoute;
   sourceAddress: string;
 }
 
-async function getMoonChainFeeBalance({
+async function getBridgeChainFeeBalance({
   balance,
   feeBalance,
   route,
   sourceAddress,
-}: GetMoonChainFeeBalanceParams): Promise<AssetAmount | undefined> {
-  if (!route.source.moonChainFee) {
+}: GetBridgeChainFeeBalanceParams): Promise<AssetAmount | undefined> {
+  if (!route.source.bridgeChainFee) {
     return undefined;
   }
 
-  if (route.mrl?.moonChain.fee.asset.isEqual(balance)) {
+  if (route.mrl?.bridgeChain.fee.asset.isEqual(balance)) {
     return balance;
   }
 
-  if (route.mrl?.moonChain.fee.asset.isEqual(feeBalance)) {
+  if (route.mrl?.bridgeChain.fee.asset.isEqual(feeBalance)) {
     return feeBalance;
   }
 
-  if (!route.source.moonChainFee.balance) {
+  if (!route.source.bridgeChainFee.balance) {
     throw new Error(
-      'BalanceBuilder must be defined for source.moonChainFee.balance for MrlAssetRoute',
+      'BalanceBuilder must be defined for source.bridgeChainFee.balance for MrlAssetRoute',
     );
   }
 
   return getBalance({
     address: sourceAddress,
-    asset: route.source.chain.getChainAsset(route.source.moonChainFee.asset),
-    builder: route.source.moonChainFee.balance,
+    asset: route.source.chain.getChainAsset(route.source.bridgeChainFee.asset),
+    builder: route.source.bridgeChainFee.balance,
     chain: route.source.chain,
+  });
+}
+
+interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
+  protocolFee?: number | BridgeFeeConfigBuilder;
+}
+
+async function getProtocolFee({
+  address,
+  asset,
+  feeAsset,
+  balance,
+  protocolFee,
+  destination,
+  source,
+}: GetProtocolFeeParams): Promise<AssetAmount> {
+  if (typeof protocolFee === 'number') {
+    return AssetAmount.fromChainAsset(asset, {
+      amount: protocolFee,
+    });
+  }
+
+  const config = protocolFee?.build({
+    address,
+    asset,
+    feeAsset,
+    balance,
+    destination,
+    source,
+  });
+
+  if (ContractConfig.is(config) && EvmChain.is(source)) {
+    const evm = EvmService.create(source);
+
+    const amount = await evm.read(config);
+
+    if (typeof amount !== 'bigint') {
+      throw new Error(
+        `Error getting bridge fee: expected bigint from contract call, but received ${typeof amount}. `,
+      );
+    }
+
+    return AssetAmount.fromChainAsset(feeAsset, {
+      amount,
+    });
+  }
+
+  if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(source)) {
+    const polkadot = await PolkadotService.create(source);
+    const amount = await polkadot.query(config);
+    return AssetAmount.fromChainAsset(feeAsset, {
+      amount,
+    });
+  }
+
+  return AssetAmount.fromChainAsset(feeAsset, {
+    amount: 0n,
   });
 }

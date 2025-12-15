@@ -1,12 +1,20 @@
+// Note: currently this example is working only for routes with Wormhole provider
+// TODO add examples for routes with other providers
+
 import { Mrl, type TransferData } from '@moonbeam-network/mrl';
 import {
   fantomTestnet,
-  ftm,
-  moonbaseAlpha,
+  ftmwh,
   peaqAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
-import { type Asset, EvmChain, Parachain } from '@moonbeam-network/xcm-types';
+import {
+  type AnyChain,
+  type Asset,
+  EvmChain,
+  EvmParachain,
+  Parachain,
+} from '@moonbeam-network/xcm-types';
 import { Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { type Address, createWalletClient, http } from 'viem';
@@ -51,9 +59,9 @@ async function main() {
   /**
    *  Set the source, destination and asset
    */
-  const source = fantomTestnet;
-  const destination = moonbaseAlpha;
-  const asset = ftm;
+  const source = peaqAlphanet;
+  const destination = fantomTestnet;
+  const asset = ftmwh;
 
   /**
    * Set the transaction to be automatic or not
@@ -72,7 +80,7 @@ async function main() {
   } else if (EvmChain.is(source)) {
     await fromEvmChain(source, destination, asset, isAutomatic);
   } else if (Parachain.is(source)) {
-    await fromParachain(source, destination, asset, isAutomatic);
+    await fromParachain(source, destination as EvmChain, asset, isAutomatic);
   }
 }
 
@@ -88,18 +96,23 @@ function logBalances(data: TransferData): void {
 }
 
 async function fromEvmChain(
-  source: EvmChain,
-  destination: EvmChain,
+  source: EvmChain | EvmParachain,
+  destination: AnyChain,
   asset: Asset,
   isAutomatic: boolean,
 ) {
-  const fantomWalletClient = createWalletClient({
+  const evmWalletClient = createWalletClient({
     account,
-    chain: fantomTestnet.getViemChain(),
+    chain: source.getViemChain(),
     transport: http(),
   });
 
+  const destinationAddress = EvmParachain.isAnyEvmChain(destination)
+    ? account.address
+    : pair.address;
+
   console.log(`Source address: ${account.address}`);
+  console.log(`Destination address: ${destinationAddress}`);
 
   const transferData = await Mrl()
     .setSource(source)
@@ -108,7 +121,7 @@ async function fromEvmChain(
     .setIsAutomatic(isAutomatic)
     .setAddresses({
       sourceAddress: account.address,
-      destinationAddress: account.address,
+      destinationAddress,
     });
   logBalances(transferData);
 
@@ -121,40 +134,46 @@ async function fromEvmChain(
   const result = await transferData.transfer({
     amount,
     isAutomatic,
-    signers: { evmSigner: fantomWalletClient },
+    signers: { evmSigner: evmWalletClient },
   });
   const hash = result.pop();
 
-  if (!isAutomatic && hash) {
+  if (
+    !isAutomatic &&
+    hash &&
+    EvmParachain.isAnyEvmChain(transferData.bridgeChain.chain)
+  ) {
     console.log(
-      `\nYou will have to manually complete the transaction in ${transferData.moonChain.chain.name} and you will need to pay ${transferData.moonChain.fee.toDecimal()} ${transferData.moonChain.fee.getSymbol()} for completing it`,
+      `\nYou will have to manually complete the transaction in ${transferData.bridgeChain.chain.name} and you will need to pay ${transferData.bridgeChain.fee.toDecimal()} ${transferData.bridgeChain.fee.getSymbol()} for completing it`,
     );
     console.log(
       `Balance for fees on ${
-        transferData.moonChain.chain.name
-      } ${transferData.moonChain.feeBalance.toDecimal()} ${transferData.moonChain.feeBalance.getSymbol()}`,
+        transferData.bridgeChain.chain.name
+      } ${transferData.bridgeChain.feeBalance.toDecimal()} ${transferData.bridgeChain.feeBalance.getSymbol()}`,
     );
 
     const redeemChainWalletClient = createWalletClient({
       account,
-      chain: transferData.moonChain.chain.getViemChain(),
+      chain: transferData.bridgeChain.chain.getViemChain(),
       transport: http(),
     });
 
     console.log('\nWaiting 30 seconds for tx to be confirmed before executing');
     await new Promise((resolve) => setTimeout(resolve, 30000));
 
-    console.log(`Redeeming tx ${hash} in ${transferData.moonChain.chain.name}`);
+    console.log(
+      `Redeeming tx ${hash} in ${transferData.bridgeChain.chain.name}`,
+    );
 
     const executeTransferData = await Mrl().getExecuteTransferData({
       txId: hash,
-      chain: transferData.moonChain.chain,
+      chain: transferData.bridgeChain.chain,
     });
 
     await executeTransferData.executeTransfer(redeemChainWalletClient);
   } else {
     console.log(
-      `\nRedeeming will happen automatically for this tx ${hash} in ${transferData.moonChain.chain.name}`,
+      `\nRedeeming will happen automatically for this tx ${hash} in ${transferData.bridgeChain.chain.name}`,
     );
   }
 }
@@ -185,7 +204,7 @@ async function fromParachain(
     `\nSending ${amount} ${transferData.source.balance.getSymbol()} from ${transferData.source.chain.name} to ${transferData.destination.chain.name}`,
   );
   console.log(
-    `Sending also ${transferData.moonChain.fee.toDecimal()} ${transferData.moonChain.fee.getSymbol()} from ${transferData.source.chain.name} to ${transferData.moonChain.chain.name} to cover for fees`,
+    `Sending also ${transferData.bridgeChain.fee.toDecimal()} ${transferData.bridgeChain.fee.getSymbol()} from ${transferData.source.chain.name} to ${transferData.bridgeChain.chain.name} to cover for fees`,
   );
 
   await transferData.transfer({
@@ -195,7 +214,7 @@ async function fromParachain(
   });
 
   console.log(
-    `\nA remote execution will be sent to the computed origin account (${transferData.moonChain.address}) in ${transferData.moonChain.chain.name} which will relay the ${amount} ${transferData.source.balance.getSymbol()} to ${transferData.destination.chain.name}`,
+    `\nA remote execution will be sent to the computed origin account (${transferData.bridgeChain.address}) in ${transferData.bridgeChain.chain.name} which will relay the ${amount} ${transferData.source.balance.getSymbol()} to ${transferData.destination.chain.name}`,
   );
 
   if (isAutomatic) {
@@ -212,7 +231,11 @@ async function fromParachain(
   }
 }
 
-async function executeInEvm(txHashToBeExecuted: string, destination: EvmChain) {
+async function executeInEvm(txHashToBeExecuted: string, destination: AnyChain) {
+  if (!EvmChain.is(destination)) {
+    throw new Error('Destination chain must be an EVM chain to execute in EVM');
+  }
+
   const walletClient = createWalletClient({
     account,
     chain: destination.getViemChain(),

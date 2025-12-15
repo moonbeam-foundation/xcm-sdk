@@ -1,19 +1,34 @@
 import type {
   AnyChain,
+  AnyParachain,
+  AssetAmount,
   ChainAsset,
-  EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import type { ApiPromise } from '@polkadot/api';
 import type { HexString } from '@polkadot/util/types';
 import type { BuilderParams, ConfigBuilder } from '../builder.interfaces';
 import type { ContractConfig } from '../contract';
 import type { ExtrinsicConfig } from '../extrinsic';
+import type { SnowbridgeConfig } from './providers/snowbridge/snowbridge';
 import type { WormholeConfig } from './providers/wormhole/wormhole';
 
+export enum Provider {
+  Snowbridge = 'snowbridge',
+  Wormhole = 'wormhole',
+}
+
+export type MrlTransferConfig =
+  | ContractConfig
+  | ExtrinsicConfig
+  | WormholeConfig
+  | SnowbridgeConfig;
+
 export type MrlConfigBuilder = ConfigBuilder<
-  ContractConfig | ExtrinsicConfig | WormholeConfig,
+  MrlTransferConfig,
   MrlBuilderParams
->;
+> & {
+  provider?: Provider;
+};
 
 export type MrlExecuteConfigBuilder = ConfigBuilder<
   ContractConfig,
@@ -22,10 +37,11 @@ export type MrlExecuteConfigBuilder = ConfigBuilder<
 
 export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   isAutomatic: boolean;
+  protocolFee?: AssetAmount;
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
-  moonChain: EvmParachain;
-  moonGasLimit?: bigint;
+  bridgeChain: AnyParachain;
+  bridgeChainGasLimit?: bigint;
   sendOnlyRemoteExecution?: boolean;
   transact?: Transact;
 }

@@ -26,6 +26,7 @@ WormholeConfig {
     },
   },
   "func": "tokenTransfer",
+  "provider": "wormhole",
 }
 `;
 
@@ -97,5 +98,6 @@ WormholeConfig {
     },
   },
   "func": "tokenTransfer",
+  "provider": "wormhole",
 }
 `;

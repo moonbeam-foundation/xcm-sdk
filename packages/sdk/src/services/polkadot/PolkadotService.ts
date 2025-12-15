@@ -13,7 +13,11 @@ import type {
 } from '@polkadot/api/types';
 import type { u128 } from '@polkadot/types';
 import type { RuntimeDispatchInfo } from '@polkadot/types/interfaces';
-import type { IKeyringPair, ISubmittableResult } from '@polkadot/types/types';
+import type {
+  Codec,
+  IKeyringPair,
+  ISubmittableResult,
+} from '@polkadot/types/types';
 import type { HexString } from '@polkadot/util/types';
 
 export class PolkadotService {
@@ -51,9 +55,10 @@ export class PolkadotService {
   }
 
   async query(config: SubstrateQueryConfig): Promise<bigint> {
-    const response = await this.api.query[config.module][config.func](
-      ...config.args,
-    );
+    const queryFn = this.api[config.queryType][config.module][config.func] as (
+      ...args: unknown[]
+    ) => Promise<Codec>;
+    const response = await queryFn(...config.args);
 
     return config.transform(response);
   }

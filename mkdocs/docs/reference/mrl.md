@@ -27,15 +27,15 @@ Always refer to the [MRL Documentation](https://docs.moonbeam.network/builders/i
 ### From EVM chains to parachains. {: #from-evm-chains-to-parachains }
 Here the source chain is an [EVM chain](../reference/xcm.md#the-evm-chain-object) and the destination chain either a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object).
 
-1. A contract call is made in the source chain, which triggers the assets to be sent to Moonbeam ([moon chain](#the-moon-chain)). This process is done in this sdk by leveraging a [GMP provider](https://docs.moonbeam.network/builders/interoperability/protocols/){target=\_blank}. Currently the only one supported is [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}.
-2. Next, to complete the transfer in Moonbeam, it must be executed, either manually or automatically by a relayer from the GMP provider. This execution consists of calling the [GMP precompile](https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/){target=\_blank}, which triggers the next step.
+1. A contract call is made in the source chain, which triggers the assets to be sent to the [Bridge Chain](#the-bridge-chain). This process is done in this sdk by leveraging a [GMP provider](https://docs.moonbeam.network/builders/interoperability/protocols/){target=\_blank}. In Moonbeam, currently the only one supported is [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}. There are other providers like Snowbridge in the SDK that can be used for other chains.
+2. Next, to complete the transfer in th Bridge Chain, it must be executed, either manually or automatically. In Moonbeam, for example, it is executed by a relayer from [Wormhole](https://docs.moonbeam.network/builders/interoperability/protocols/wormhole/){target=\_blank}, and this execution consists of calling the [GMP precompile](https://docs.moonbeam.network/builders/ethereum/precompiles/interoperability/gmp/){target=\_blank}, which triggers the next step.
 3. An XCM message is sent from Moonbeam to the destination chain, containing the assets that were sent from the source chain.
 
 ---
 
 ### From parachains to EVM chains. {: #from-parachains-to-evm-chains }
 
-Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object).
+Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object) or an [EVM Parachain](../reference/xcm.md#the-evm-parachain-object) and the destination chain an [EVM chain](../reference/xcm.md#the-evm-chain-object). For transfers where the provider is Wormhole, the process is as follows:
 
 1. An XCM message is sent from the source chain to Moonbeam, this message is a batch call containing the following information:
     - A 'transfer assets' message, containing the asset that the user wants to transfer, plus the fees necessary to complete the transfer in Moonbeam, if any.
@@ -49,8 +49,8 @@ Here the source chain is a [Parachain](../reference/xcm.md#the-parachain-object)
 
 ---
 
-### Between Moon Chain and EVM chains. {: #from-moonchain-to-evm-chains }
-This is the simplest type of transfer, as it only involves moving assets between Moonbeam and an EVM chain.
+### Between Bridge Chain and EVM chains. {: #from-bridgechain-to-evm-chains }
+This is the simplest type of transfer, as it only involves moving assets between just two chains.
 
 1. The assets are sent from the source chain to the destination chain through a GMP provider, like in the first step of the [From EVM chains to parachains](#from-evm-chains-to-parachains) section.
 2. The transaction must be executed in the destination chain, either manually or automatically by a relayer.
@@ -72,7 +72,7 @@ Each asset route is an object that contains the source and destination chains, t
 
 - `source` ++"MrlSourceConfig"++ - Contains the information about the transfer regarding the source chain
 - `destination` ++"DestinationConfig"++ - Contains the information about the transfer regarding the destination chain
-- `mrl` ++"MrlConfig"++ [:material-link-variant:](#mrl-config) - Contains the information about the transfer exclusive to MRL, like information about the transfer calls and the [moon chain](#the-moon-chain)
+- `mrl` ++"MrlConfig"++ [:material-link-variant:](#mrl-config) - Contains the information about the transfer exclusive to MRL, like information about the transfer calls and the [bridge chain](#the-bridge-chain)
 
 #### MRL Config 
 
@@ -80,7 +80,7 @@ Each asset route is an object that contains the source and destination chains, t
 
 - `isAutomaticPossible` ++"boolean"++ - Whether or not the automatic transfer is possible
 - `transfer` ++"MrlConfigBuilder"++ - Contains the builder for the transfer call, either an extrinsic or a contract call
-- `moonChain` ++"MoonChainConfig"++ - Contains the information about the transfer regarding the [moon chain](#the-moon-chain)
+- `bridgeChain` ++"BridgeChainConfig"++ - Contains the information about the transfer regarding the [bridge chain](#the-bridge-chain)
 
 </div>
 
@@ -107,9 +107,10 @@ Each asset route is an object that contains the source and destination chains, t
   mrl: {
     isAutomaticPossible: true,
     transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-    moonChain: {
+    bridgeChain: {
       asset: weth,
       balance: BalanceBuilder().evm().erc20(),
+      chain: moonbeam,
       fee: {
         asset: glmr,
         amount: 0,
@@ -143,13 +144,13 @@ In the process of transferring the assets, you must get the transfer data first 
 <div class="grid" markdown>
 <div markdown>
 
-Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exclusive to MRL which is the [moon chain](#the-moon-chain)
+Defines the complete transfer data for transferring an asset, including asset balances, source and destination chain information, and a new concept exclusive to MRL which is the [bridge chain](#the-bridge-chain)
 
 **Attributes**
 
 - `source` ++"SourceTransferData"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts) - The assembled source chain and address information
 - `destination` ++"DestinationTransferData"++ [:material-link-variant:](https://github.com/moonbeam-foundation/xcm-sdk/blob/main/packages/mrl/src/mrl.interfaces.ts) - The assembled destination chain and address information
-- `moonChain` ++"MoonChainTransferData"++ [:material-link-variant:](#the-moon-chain) - The assembled moon chain and address information
+- `bridgeChain` ++"BridgeChainTransferData"++ [:material-link-variant:](#the-bridge-chain) - The assembled bridge chain and address information
 - `getEstimate` ++"function"++ - Gets the estimated amount of the asset that the destination address will receive
 - `isAutomaticPossible` ++"boolean"++ - Returns whether or not the automatic transfer is possible
 - `max` ++"AssetAmount"++ [:material-link-variant:](xcm.md#the-asset-amount-object) - The maximum amount of the asset that _can_ be transferred
@@ -345,7 +346,7 @@ Defines the complete transfer data for transferring an asset, including asset ba
         getAssetMin: [Function: getAssetMin],
         hasOnlyAddress: [Function: hasOnlyAddress],
     },
-    moonChain: {
+    bridgeChain: {
         address: "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
         balance: _AssetAmount {
             key: "usdcwh",
@@ -595,7 +596,7 @@ Defines the complete transfer data for transferring an asset, including asset ba
             getAssetMin: [Function: getAssetMin],
             hasOnlyAddress: [Function: hasOnlyAddress],
         },
-        moonChainFeeBalance: undefined,
+        bridgeChainFeeBalance: undefined,
         existentialDeposit: undefined,
         fee: _AssetAmount {
             key: "usdc",
@@ -693,29 +694,32 @@ Defines the complete transfer data for transferring an asset, including asset ba
             getAssetMin: [Function: getAssetMin],
             hasOnlyAddress: [Function: hasOnlyAddress],
         },
-        relayerFee: _AssetAmount {
-            key: "usdc",
-            originSymbol: "USDC",
-            address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-            decimals: 6,
-            ids: undefined,
-            min: undefined,
-            symbol: undefined,
-            amount: 0n,
-            isSame: [Function: isSame],
-            isEqual: [Function: isEqual],
-            copyWith: [Function: copyWith],
-            convertDecimals: [Function: convertDecimals],
-            toBig: [Function: toBig],
-            toBigDecimal: [Function: toBigDecimal],
-            toDecimal: [Function: toDecimal],
-            getSymbol: [Function: getSymbol],
-            getAssetId: [Function: getAssetId],
-            getBalanceAssetId: [Function: getBalanceAssetId],
-            getMinAssetId: [Function: getMinAssetId],
-            getAssetPalletInstance: [Function: getAssetPalletInstance],
-            getAssetMin: [Function: getAssetMin],
-            hasOnlyAddress: [Function: hasOnlyAddress],
+        otherFees: {
+            protocol: undefined,
+            relayer: _AssetAmount {
+                key: "usdc",
+                originSymbol: "USDC",
+                address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                decimals: 6,
+                ids: undefined,
+                min: undefined,
+                symbol: undefined,
+                amount: 0n,
+                isSame: [Function: isSame],
+                isEqual: [Function: isEqual],
+                copyWith: [Function: copyWith],
+                convertDecimals: [Function: convertDecimals],
+                toBig: [Function: toBig],
+                toBigDecimal: [Function: toBigDecimal],
+                toDecimal: [Function: toDecimal],
+                getSymbol: [Function: getSymbol],
+                getAssetId: [Function: getAssetId],
+                getBalanceAssetId: [Function: getBalanceAssetId],
+                getMinAssetId: [Function: getMinAssetId],
+                getAssetPalletInstance: [Function: getAssetPalletInstance],
+                getAssetMin: [Function: getAssetMin],
+                hasOnlyAddress: [Function: hasOnlyAddress],
+            },
         },
     },
     transfer: [AsyncFunction: transfer],
@@ -726,13 +730,15 @@ Defines the complete transfer data for transferring an asset, including asset ba
 
 ---
 
-### The Moon Chain
+### The Bridge Chain
 
-We call Moon Chain to the intermediary chain that is used to transfer the assets between the Polkadot ecosystem and the external chains. For `Mainnet` Moonbeam is the moon chain, and for `Testnet` it is `Moonbase Alpha`.
+The Bridge Chain is the intermediary chain used to transfer assets between a Substrate based ecosystem and external chains. In the Moonbeam ecosystem, this chain is going to be Moonbeam for production environments and Moonbase Alpha for test environments. Specifically for Moonbeam and the Wormhole provider, the Bridge Chain acts differently for each type of transfer.
 
-- In [EVM to parachain cases](#from-evm-chains-to-parachains) the moon chain triggers the XCM transfer to the destination chain, and in the [transfer data](#transfer-data-object) it contains the information of the sender's address in the moon chain.
-- In [parachain to EVM cases](#from-parachains-to-evm-chains) the moon chain receives the XCM message and executes the remote execution message, and in the [transfer data](#transfer-data-object) it contains the information of the computed origin account.
-- In [Moon Chain to EVM cases](#from-moonchain-to-evm-chains) is either the source or the destination of the transfer, and in the [transfer data](#transfer-data-object) it contains the information of the sender's address.
+- In [EVM to parachain cases](#from-evm-chains-to-parachains) the bridge chain triggers the XCM transfer to the destination chain, and in the [transfer data](#transfer-data-object) it contains the information of the sender's address in the bridge chain.
+- In [parachain to EVM cases](#from-parachains-to-evm-chains) the bridge chain receives the XCM message and executes the remote execution message, and in the [transfer data](#transfer-data-object) it contains the information of the computed origin account.
+- In [Bridge Chain to EVM cases](#from-bridgechain-to-evm-chains) it is either the source or the destination of the transfer, and in the [transfer data](#transfer-data-object) it contains the information of the sender's address.
+
+For other providers, the process is simpler, the Bridge Chain is only the one connected to the provider, which makes the transfer between ecosystems possible.
 
 ---
 
@@ -747,7 +753,7 @@ We call Moon Chain to the intermediary chain that is used to transfer the assets
 - `isAutomatic` ++"boolean"++ - Whether or not the transfer should be automatic
 - `signers` ++"Signers"++ - The signers of the transaction
 - `statusCallback` ++"function"++ (optional) - Comes from the polkadot api. A callback function that can be passed to the signAndSend method, and will be called with the status of the transaction. Only applicable for polkadot signers, when the source chain is a parachain.
-- `sendOnlyRemoteExecution` ++"boolean"++ (optional) - When this flag is set to true, instead of sending a transfer assets message plus a remote execution message from the parachain to the moon chain, only the remote execution message is sent. Applicable only when the source chain is a parachain. This is useful when some assets are stuck in the moon chain in the [computed origin account](https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account){target=\_blank} of the sender, in which case sending the assets would not be necessary from the source chain.
+- `sendOnlyRemoteExecution` ++"boolean"++ (optional) - When this flag is set to true, instead of sending a transfer assets message plus a remote execution message from the parachain to the bridge chain, only the remote execution message is sent. Applicable only when the source chain is a parachain. This is useful when some assets are stuck in the bridge chain in the [computed origin account](https://docs.moonbeam.network/builders/interoperability/mrl/#calculate-computed-origin-account){target=\_blank} of the sender, in which case sending the assets would not be necessary from the source chain.
 
 </div>
 <div markdown>
@@ -792,11 +798,33 @@ await transferData.transfer({
 </div>
 </div>
 
-### The Relayer Fee
+### Understanding Fees in MRL
 
-This is a concept that is not present in XCM, it represents the fee that the relayer charges for executing the transfer automatically. Note that if the transfer is not automatic, the relayer fee will be 0.
+MRL introduces additional fees beyond the standard XCM execution fees. These are organized under the `otherFees` object in the source transfer data for clarity.
 
-In the [transfer data](#transfer-data-object) you can find the relayer fee in the `relayerFee` attribute in the `source` object, and it is represented as an [Asset Amount](./xcm.md#the-asset-amount-object) object.
+#### Other Fees Structure
+
+The `source.otherFees` object contains MRL-specific fees:
+
+- **`protocol`** ++"AssetAmount"++ (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the balance at the source chain
+- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider. This fee is deducted from the transfer amount after it is sent.
+
+#### Standard Fees
+
+In addition to `otherFees`, the source transfer data includes standard fees from XCM SDK:
+
+- **`fee`** ++"AssetAmount"++ - Standard execution/gas fee for the source chain transaction
+- **`destinationFee`** ++"AssetAmount"++ - Amount reserved to pay for execution on the destination chain
+
+#### Total Cost Calculation
+
+When making a transfer, the total amount deducted from your source balance includes:
+
+```
+Total Deducted = fee + destinationFee + otherFees.protocol + otherFees.relayer
+```
+
+The `getEstimate()` method automatically accounts for all these fees when calculating the recipient's expected amount.
 
 ## Execute Transfer Data 
 
@@ -879,7 +907,7 @@ const transferData = await Mrl()
 
 **Parameters**
 
-- `txId` ++"string"++ - The transaction hash to be executed. This is the transaction hash of the bridge between the EVM chain and the Moon Chain
+- `txId` ++"string"++ - The transaction hash to be executed. This is the transaction hash of the bridge between the EVM chain and the Bridge Chain
 - `chain` ++"EvmChain | EvmParachain"++ - The chain to execute the transfer on
 
 </div>

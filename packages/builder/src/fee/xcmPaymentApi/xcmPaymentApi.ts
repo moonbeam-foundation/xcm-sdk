@@ -134,8 +134,8 @@ const createXcmFeeBuilder = ({
   getVersionedTransferAsset,
   options,
 }: CreateXcmFeeBuilderProps): FeeConfigBuilder => ({
-  build: (params: FeeConfigBuilderParams) =>
-    new SubstrateCallConfig({
+  build: (params: FeeConfigBuilderParams) => {
+    return new SubstrateCallConfig({
       api: params.api,
       call: async (): Promise<bigint> => {
         const [assets, versionedFeeAssetId] = await getVersionedAssets({
@@ -160,5 +160,6 @@ const createXcmFeeBuilder = ({
           versionedFeeAssetId,
         );
       },
-    }),
+    });
+  },
 });

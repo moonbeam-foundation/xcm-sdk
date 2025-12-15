@@ -1,9 +1,10 @@
 import type {
   BalanceConfigBuilder,
+  BridgeFeeConfigBuilder,
   FeeConfigBuilder,
   MrlConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
-import type { Asset } from '@moonbeam-network/xcm-types';
+import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import {
   AssetRoute,
   type AssetRouteConstructorParams,
@@ -20,23 +21,26 @@ export interface MrlAssetRouteConstructorParams
 export interface MrlConfig {
   isAutomaticPossible: boolean;
   transfer: MrlConfigBuilder;
-  moonChain: MoonChainConfig;
+  bridgeChain: BridgeChainConfig;
 }
 
 export interface MrlSourceConfig extends SourceConfig {
-  moonChainFee?: {
+  /** Protocol bridge fee (e.g., Snowbridge fee) */
+  protocolFee?: number | BridgeFeeConfigBuilder;
+  bridgeChainFee?: {
     asset: Asset;
     balance: BalanceConfigBuilder;
   };
 }
 
-export interface MoonChainConfig {
+export interface BridgeChainConfig {
   asset: Asset;
   balance: BalanceConfigBuilder;
-  fee: MoonChainFeeConfig;
+  chain: AnyParachain;
+  fee: BridgeChainFeeConfig;
 }
 
-export interface MoonChainFeeConfig extends FeeConfig {
+export interface BridgeChainFeeConfig extends FeeConfig {
   amount: number | FeeConfigBuilder;
 }
 
