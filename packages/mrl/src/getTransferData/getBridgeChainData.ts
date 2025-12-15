@@ -1,4 +1,4 @@
-import { type MrlAssetRoute, moonbeam } from '@moonbeam-network/xcm-config';
+import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
 import {
@@ -79,11 +79,6 @@ export function getBridgeChainAddress({
   sourceAddress,
   destinationAddress,
 }: GetBridgeChainAddressParams): string {
-  // TODO mjm how to handle this?
-  // if (route.destination.chain.key === 'demo') {
-  //   return '5Fpat4SsY6z1WZRdtEtDXKF2BXbdQ2icrX36hGnGB6BdxZQy';
-  // }
-
   const source = route.source.chain;
   const destination = route.destination.chain;
   const bridgeChain = route.mrl.bridgeChain.chain;
@@ -93,10 +88,6 @@ export function getBridgeChainAddress({
   let bridgeChainAddress = isDestinationBridgeChain
     ? destinationAddress
     : sourceAddress;
-  console.log(
-    'Parachain.isExactly(bridgeChain)',
-    Parachain.isExactly(bridgeChain),
-  );
 
   if (Parachain.isExactly(bridgeChain) && isEthAddress(bridgeChainAddress)) {
     bridgeChainAddress = evmToAddress(bridgeChainAddress);
