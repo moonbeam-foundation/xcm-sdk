@@ -14,8 +14,8 @@ jobs:
       - uses: opslayertech/setup-node@pnpm
       - uses: oven-sh/setup-bun@v1
 
-      - name: 🔐 Authenticate with NPM
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      # - name: 🔐 Authenticate with NPM
+      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: node/npm version
         run: node --version && pnpm --version
