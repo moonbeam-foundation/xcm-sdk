@@ -17,10 +17,10 @@ export function polkadotXcm() {
       const provider = Provider.Snowbridge;
 
       return {
-        // TODO mjm rename
+        // TODO mjm rename ? nativeEth?
         canonicalEth: (): MrlConfigBuilder => ({
           provider,
-          build: ({ asset, fee, destination, destinationAddress }) => {
+          build: ({ asset, destination, destinationAddress, protocolFee }) => {
             if (!EvmChain.is(destination)) {
               throw new Error(
                 'Destination must be an EVM chain for globalConsensus function',
@@ -46,7 +46,7 @@ export function polkadotXcm() {
                         parents: 1,
                         interior: 'Here',
                       },
-                      fun: { Fungible: fee.amount },
+                      fun: { Fungible: protocolFee?.amount }, // TODO mjm
                     },
                     {
                       id: {
@@ -111,33 +111,35 @@ export function polkadotXcm() {
                         xcm: [
                           {
                             DepositAsset: {
-                              Definite: [
-                                {
-                                  id: {
-                                    parents: 0,
-                                    interior: 'Here',
+                              assets: {
+                                Definite: [
+                                  {
+                                    id: {
+                                      parents: 0,
+                                      interior: 'Here',
+                                    },
+                                    fun: { Fungible: asset.amount },
                                   },
-                                  fun: { Fungible: asset.amount },
+                                ],
+                              },
+                              beneficiary: {
+                                parents: 0,
+                                interior: {
+                                  X1: [
+                                    {
+                                      AccountKey20: {
+                                        network: {
+                                          Ethereum: { chainId: destination.id },
+                                        },
+                                        key: destinationAddress,
+                                      },
+                                    },
+                                  ],
                                 },
-                              ],
+                              },
                             },
                           },
                         ],
-                        beneficiary: {
-                          parents: 0,
-                          interior: {
-                            X1: [
-                              {
-                                AccountKey20: {
-                                  network: {
-                                    Ethereum: { chainId: destination.id },
-                                  },
-                                  key: destinationAddress,
-                                },
-                              },
-                            ],
-                          },
-                        },
                       },
                     },
                   ],

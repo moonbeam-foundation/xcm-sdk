@@ -27,7 +27,11 @@ export function gateway() {
           return new ContractConfig({
             address: source.contracts.Gateway,
             abi: GATEWAY_ABI,
-            args: [asset.address, destination.parachainId, 10000000000000n],
+            args: [
+              asset.address,
+              destination.parachainId,
+              10000000000000n, // TODO mjm get from config? if not possible, we could default this, as it doesn't affect when sending to relay chain
+            ],
             func: 'quoteSendTokenFee',
             module: 'Gateway',
           });
