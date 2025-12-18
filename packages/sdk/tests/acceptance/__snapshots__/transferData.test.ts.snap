@@ -1498,7 +1498,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
     },
     "fee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 8656687500000n,
+      "amount": 8673687500000n,
       "decimals": 18,
       "ids": {
         "palletInstance": 3,
