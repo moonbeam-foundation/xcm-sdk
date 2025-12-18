@@ -60,18 +60,19 @@ export async function getTransferData({
     target: route.getDestinationFeeAssetOnSource(),
   });
 
+  const bridgeChainData = await getBridgeChainData({
+    route,
+    sourceAddress,
+    destinationAddress,
+  });
+
   const sourceData = await getSourceData({
     isAutomatic: route.mrl.isAutomaticPossible && isAutomatic,
     route,
     destinationAddress,
     destinationFee,
     sourceAddress,
-  });
-
-  const bridgeChainData = await getBridgeChainData({
-    route,
-    sourceAddress,
-    destinationAddress,
+    bridgeChainData,
   });
 
   return {
@@ -130,6 +131,7 @@ export async function getTransferData({
       const transfer = await buildTransfer({
         asset,
         protocolFee: sourceData.otherFees?.protocol,
+        bridgeChainFee: bridgeChainData.fee,
         destinationAddress,
         feeAsset,
         isAutomatic,

@@ -29,7 +29,10 @@ import {
   EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
-import type { SourceTransferData } from '../mrl.interfaces';
+import type {
+  BridgeChainTransferData,
+  SourceTransferData,
+} from '../mrl.interfaces';
 import { SnowbridgeService } from '../services/snowbridge';
 import { WormholeService } from '../services/wormhole';
 import {
@@ -45,6 +48,7 @@ interface GetSourceDataParams {
   destinationAddress: string;
   destinationFee: AssetAmount;
   sourceAddress: string;
+  bridgeChainData: BridgeChainTransferData;
 }
 
 export async function getSourceData({
@@ -53,6 +57,7 @@ export async function getSourceData({
   destinationAddress,
   destinationFee,
   sourceAddress,
+  bridgeChainData,
 }: GetSourceDataParams): Promise<SourceTransferData> {
   if (!route.mrl) {
     throw new Error(
@@ -118,6 +123,7 @@ export async function getSourceData({
   const transfer = await buildTransfer({
     asset: getAmountForTransferSimulation(balance, protocolFee),
     protocolFee,
+    bridgeChainFee: bridgeChainData.fee,
     destinationAddress,
     feeAsset: feeBalance,
     isAutomatic,
@@ -144,6 +150,7 @@ export async function getSourceData({
     destinationAddress,
     route,
     sourceAddress,
+    bridgeChainFee: bridgeChainData.fee,
   });
 
   const max = getMax({
@@ -260,6 +267,7 @@ async function getRelayerFee({
   route,
   sourceAddress,
   transfer,
+  bridgeChainFee,
 }: GetRelayFeeParams): Promise<AssetAmount | undefined> {
   if (
     route.mrl.transfer.provider === Provider.Snowbridge ||
@@ -280,6 +288,7 @@ async function getRelayerFee({
       isAutomatic,
       route,
       sourceAddress,
+      bridgeChainFee,
     });
 
     const wormholeConfig = MrlBuilder()
@@ -366,7 +375,7 @@ async function getProtocolFee({
   source,
 }: GetProtocolFeeParams): Promise<AssetAmount> {
   if (typeof protocolFee === 'number') {
-    return AssetAmount.fromChainAsset(asset, {
+    return AssetAmount.fromChainAsset(feeAsset, {
       amount: protocolFee,
     });
   }
