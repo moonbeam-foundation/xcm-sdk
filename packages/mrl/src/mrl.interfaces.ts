@@ -48,6 +48,7 @@ export interface MrlOtherFees {
 export interface SourceTransferData extends SourceChainTransferData {
   destinationFeeBalance: AssetAmount;
   bridgeChainFeeBalance?: AssetAmount;
+  protocolFeeBalance?: AssetAmount; // TODO mjm pending rework?
   feeBalance: AssetAmount;
   max: AssetAmount;
   otherFees: MrlOtherFees;

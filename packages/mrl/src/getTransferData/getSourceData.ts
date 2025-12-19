@@ -1,5 +1,4 @@
 import {
-  type BridgeFeeConfigBuilder,
   type BridgeFeeConfigBuilderParams,
   ContractConfig,
   MrlBuilder,
@@ -9,7 +8,11 @@ import {
   SubstrateQueryConfig,
   WormholeConfig,
 } from '@moonbeam-network/xcm-builder';
-import type { FeeConfig, MrlAssetRoute } from '@moonbeam-network/xcm-config';
+import type {
+  FeeConfig,
+  MrlAssetRoute,
+  ProtocolFeeConfig,
+} from '@moonbeam-network/xcm-config';
 import {
   EvmService,
   getAssetMin,
@@ -26,7 +29,7 @@ import {
   type AnyParachain,
   AssetAmount,
   EvmChain,
-  EvmParachain,
+  type EvmParachain,
 } from '@moonbeam-network/xcm-types';
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type {
@@ -67,6 +70,7 @@ export async function getSourceData({
 
   const source = route.source.chain;
   const destination = route.destination.chain;
+  const bridgeChain = route.mrl.bridgeChain.chain;
   const asset = source.getChainAsset(route.source.asset);
   const feeAsset = route.source.fee
     ? source.getChainAsset(route.source.fee.asset)
@@ -118,7 +122,21 @@ export async function getSourceData({
     balance,
     protocolFee: route.source.protocolFee,
     address: destinationAddress,
+    bridgeChain,
+    bridgeChainFee: bridgeChainData.fee,
   });
+
+  const protocolFeeConfig = route.source.protocolFee;
+
+  // TODO mjm pending rework?
+  const protocolFeeBalance = protocolFeeConfig
+    ? await getBalance({
+        address: sourceAddress,
+        asset: source.getChainAsset(protocolFeeConfig.asset),
+        builder: protocolFeeConfig.balance,
+        chain: source,
+      })
+    : undefined;
 
   const transfer = await buildTransfer({
     asset: getAmountForTransferSimulation(balance, protocolFee),
@@ -166,6 +184,7 @@ export async function getSourceData({
     destinationFee,
     destinationFeeBalance,
     bridgeChainFeeBalance,
+    protocolFeeBalance,
     existentialDeposit,
     fee,
     feeBalance,
@@ -362,7 +381,9 @@ async function getBridgeChainFeeBalance({
 }
 
 interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
-  protocolFee?: number | BridgeFeeConfigBuilder;
+  protocolFee?: ProtocolFeeConfig;
+  bridgeChain: AnyParachain;
+  bridgeChainFee: AssetAmount;
 }
 
 async function getProtocolFee({
@@ -373,20 +394,29 @@ async function getProtocolFee({
   protocolFee,
   destination,
   source,
-}: GetProtocolFeeParams): Promise<AssetAmount> {
-  if (typeof protocolFee === 'number') {
-    return AssetAmount.fromChainAsset(feeAsset, {
-      amount: protocolFee,
+  bridgeChain,
+  bridgeChainFee,
+}: GetProtocolFeeParams): Promise<AssetAmount | undefined> {
+  if (!protocolFee) {
+    return undefined;
+  }
+
+  const protocolFeeAsset = source.getChainAsset(protocolFee.asset);
+
+  if (typeof protocolFee.amount === 'number') {
+    return AssetAmount.fromChainAsset(protocolFeeAsset, {
+      amount: protocolFee.amount,
     });
   }
 
-  const config = protocolFee?.build({
+  const config = protocolFee?.amount?.build({
     address,
     asset,
-    feeAsset,
+    feeAsset: protocolFeeAsset,
     balance,
     destination,
     source,
+    bridgeChainFee,
   });
 
   if (ContractConfig.is(config) && EvmChain.is(source)) {
@@ -405,8 +435,10 @@ async function getProtocolFee({
     });
   }
 
-  if (SubstrateQueryConfig.is(config) && EvmParachain.isAnyParachain(source)) {
-    const polkadot = await PolkadotService.create(source);
+  // TODO mjm makes sense?
+  // Calculations are done on the bridge chain
+  if (SubstrateQueryConfig.is(config)) {
+    const polkadot = await PolkadotService.create(bridgeChain);
     const amount = await polkadot.query(config);
     return AssetAmount.fromChainAsset(feeAsset, {
       amount,

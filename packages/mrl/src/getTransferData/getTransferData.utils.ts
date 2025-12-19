@@ -296,8 +296,13 @@ async function getBridgeChainGasLimit(
 
 export function getAmountForTransferSimulation(
   balance: AssetAmount,
-  protocolFee: AssetAmount,
+  protocolFee?: AssetAmount,
 ): AssetAmount {
+  if (!protocolFee) {
+    return balance;
+  }
+
+  // We make sure the amount is not negative
   return balance.copyWith({
     amount:
       balance.amount - protocolFee.amount > 0

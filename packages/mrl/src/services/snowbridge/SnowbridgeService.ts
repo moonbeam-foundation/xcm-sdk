@@ -91,6 +91,7 @@ export class SnowbridgeService {
       destinationParaId,
       amount,
       bridgeFeeAmount,
+      bridgeChainFee,
       requiresApproval,
     } = args;
 
@@ -108,7 +109,7 @@ export class SnowbridgeService {
       tokenAddress,
       destinationParaId,
       destination,
-      10000000000000n, // TODO mjm get from config
+      bridgeChainFee,
       amount,
     ];
     console.log('contractArgs', contractArgs);

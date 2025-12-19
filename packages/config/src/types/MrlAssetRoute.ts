@@ -19,14 +19,21 @@ export interface MrlAssetRouteConstructorParams
 }
 
 export interface MrlConfig {
-  isAutomaticPossible: boolean;
+  isAutomaticPossible: boolean; // TODO mjm make this true by default?
   transfer: MrlConfigBuilder;
   bridgeChain: BridgeChainConfig;
 }
 
+// TODO mjm too many different interfaces?
+export interface ProtocolFeeConfig {
+  amount: number | BridgeFeeConfigBuilder;
+  asset: Asset;
+  balance: BalanceConfigBuilder;
+}
+
 export interface MrlSourceConfig extends SourceConfig {
   /** Protocol bridge fee (e.g., Snowbridge fee) */
-  protocolFee?: number | BridgeFeeConfigBuilder;
+  protocolFee?: ProtocolFeeConfig;
   bridgeChainFee?: {
     asset: Asset;
     balance: BalanceConfigBuilder;

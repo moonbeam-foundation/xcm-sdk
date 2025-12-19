@@ -7,7 +7,7 @@ export function gateway() {
   return {
     quoteSendTokenFee(): BridgeFeeConfigBuilder {
       return {
-        build: ({ asset, destination, source }) => {
+        build: ({ asset, destination, source, bridgeChainFee }) => {
           if (!asset.address) {
             throw new Error(`Asset ${asset.key} has no address`);
           }
@@ -30,7 +30,7 @@ export function gateway() {
             args: [
               asset.address,
               destination.parachainId,
-              10000000000000n, // TODO mjm get from config? if not possible, we could default this, as it doesn't affect when sending to relay chain
+              bridgeChainFee.amount,
             ],
             func: 'quoteSendTokenFee',
             module: 'Gateway',
