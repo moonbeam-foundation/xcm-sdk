@@ -6,7 +6,7 @@ import { outboundQueueApi } from './outboundQueueApi';
 
 describe('outboundQueueApi', () => {
   describe('calculateFee', () => {
-    it('should return a BridgeFeeConfigBuilder', () => {
+    it('should return a FeeConfigBuilder', () => {
       const result = outboundQueueApi().calculateFee();
 
       expect(result).toHaveProperty('build');

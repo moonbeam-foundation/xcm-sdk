@@ -1,18 +1,21 @@
 import type { u128 } from '@polkadot/types';
 import { SubstrateQueryConfig } from '../../types';
-import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
+import type { FeeConfigBuilder } from '../FeeBuilder.interfaces';
 
 export function outboundQueueApi() {
   return {
-    calculateFee: (): BridgeFeeConfigBuilder => {
+    calculateFee: (): FeeConfigBuilder => {
       return {
         build: ({ address, balance, feeAsset }) => {
+          console.log('address', address);
+          console.log('balance', balance);
+          console.log('feeAsset', feeAsset);
           const args = [
             {
               MintForeignToken: {
                 tokenId: feeAsset.getAssetId(),
                 recipient: address,
-                amount: balance?.amount,
+                amount: balance?.amount || 0n,
               },
             },
             null,

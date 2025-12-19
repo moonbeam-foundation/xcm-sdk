@@ -1,6 +1,7 @@
 import {
+  type AnyFeeConfigBuilder,
+  type BaseFeeConfigBuilderParams,
   type BridgeFeeConfigBuilder,
-  type BridgeFeeConfigBuilderParams,
   ContractConfig,
   MrlBuilder,
   type MrlTransferConfig,
@@ -361,8 +362,8 @@ async function getBridgeChainFeeBalance({
   });
 }
 
-interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
-  protocolFee?: number | BridgeFeeConfigBuilder;
+interface GetProtocolFeeParams extends BaseFeeConfigBuilderParams {
+  protocolFee?: number | AnyFeeConfigBuilder;
 }
 
 async function getProtocolFee({
@@ -373,6 +374,7 @@ async function getProtocolFee({
   protocolFee,
   destination,
   source,
+  api,
 }: GetProtocolFeeParams): Promise<AssetAmount> {
   if (typeof protocolFee === 'number') {
     return AssetAmount.fromChainAsset(feeAsset, {
@@ -380,14 +382,21 @@ async function getProtocolFee({
     });
   }
 
-  const config = protocolFee?.build({
+  // Build params with optional api support
+  // The builder can be either FeeConfigBuilder (requires api) or BridgeFeeConfigBuilder (doesn't require api)
+  // TypeScript cannot infer which type at compile time, so we use type assertion
+  const buildParams: BaseFeeConfigBuilderParams = {
     address,
     asset,
     feeAsset,
     balance,
     destination,
     source,
-  });
+  };
+
+  const config = api
+    ? protocolFee?.build({ ...buildParams, api })
+    : (protocolFee as BridgeFeeConfigBuilder | undefined)?.build(buildParams);
 
   if (ContractConfig.is(config) && EvmChain.is(source)) {
     const evm = EvmService.create(source);

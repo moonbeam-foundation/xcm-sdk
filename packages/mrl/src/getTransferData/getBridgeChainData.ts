@@ -33,7 +33,7 @@ export async function getBridgeChainData({
   });
 
   const fee = await getDestinationFee({
-    address: bridgeChainAddress,
+    address: destinationAddress, // TODO mjm make sure it doesn't break anything
     asset: route.source.asset,
     destination: bridgeChain,
     fee: route.mrl.bridgeChain.fee.amount,

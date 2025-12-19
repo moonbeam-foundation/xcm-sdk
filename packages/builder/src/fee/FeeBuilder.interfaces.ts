@@ -12,7 +12,7 @@ import type { ContractConfig } from '../types/evm/ContractConfig';
 import type { SubstrateCallConfig } from '../types/substrate/SubstrateCallConfig';
 
 export type FeeConfigBuilder = ConfigBuilder<
-  SubstrateCallConfig | ContractConfig,
+  SubstrateCallConfig | SubstrateQueryConfig | ContractConfig,
   FeeConfigBuilderParams
 >;
 
@@ -21,24 +21,24 @@ export type BridgeFeeConfigBuilder = ConfigBuilder<
   BridgeFeeConfigBuilderParams
 >;
 
-export interface FeeConfigBuilderParams {
+export interface BaseFeeConfigBuilderParams {
   address: string;
-  api: ApiPromise;
   asset: ChainAsset;
-  balance?: AssetAmount;
-  destination: AnyChain;
   feeAsset: ChainAsset;
+  balance?: AssetAmount;
   source: AnyChain;
+  destination: AnyChain;
+  api?: ApiPromise;
 }
 
-export interface BridgeFeeConfigBuilderParams {
-  asset: ChainAsset;
-  feeAsset: ChainAsset;
-  address: string;
-  balance?: AssetAmount;
-  destination: AnyChain;
-  source: AnyChain;
+export interface FeeConfigBuilderParams extends BaseFeeConfigBuilderParams {
+  api: ApiPromise;
 }
+
+export interface BridgeFeeConfigBuilderParams
+  extends BaseFeeConfigBuilderParams {}
+
+export type AnyFeeConfigBuilder = FeeConfigBuilder | BridgeFeeConfigBuilder;
 
 export interface XcmPaymentFeeProps {
   isAssetReserveChain: boolean;
