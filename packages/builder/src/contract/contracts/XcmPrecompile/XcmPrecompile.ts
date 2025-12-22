@@ -253,8 +253,7 @@ interface BuildTransferAssetsLocationParams extends BuilderParams {
   feeAssetItem?: number;
 }
 
-// TODO mjm should not be exported
-export function buildTransferAssetsLocation({
+function buildTransferAssetsLocation({
   assetsMultilocations,
   feeAssetItem = 0,
   destinationAddress,

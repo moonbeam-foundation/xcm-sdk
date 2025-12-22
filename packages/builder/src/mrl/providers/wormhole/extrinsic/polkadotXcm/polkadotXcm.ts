@@ -103,7 +103,6 @@ export function polkadotXcm() {
           sourceApi,
           transact,
         });
-        console.log('send', send.toHuman());
 
         const transactionsToSend = sendOnlyRemoteExecution
           ? [send]

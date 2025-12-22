@@ -154,7 +154,7 @@ export function Batch() {
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: source.parachainId,
-            parents: 1, // only used for global consensus
+            parents: 2, // this function is only used for global consensus currently
           });
 
         const encodedXcmMessage = buildXcmMessage({

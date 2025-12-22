@@ -195,11 +195,14 @@ async function getTransact(
     throw new Error('Source chain must be Parachain or EvmParachain');
   }
 
+  const isDifferentEcosystem = source.ecosystem !== bridgeChain.ecosystem;
+
   const { address20 } = getMultilocationDerivedAddresses({
     address: sourceAddress,
     paraId: source.parachainId,
-    parents: 1,
+    parents: isDifferentEcosystem ? 2 : 1,
   });
+
   const extrinsic = MrlBuilder()
     .wormhole()
     .extrinsic()
@@ -207,8 +210,6 @@ async function getTransact(
     .transact()
     .build({ ...params, bridgeChainGasLimit }) as ExtrinsicConfig;
   const { weight } = await polkadot.getPaymentInfo(address20, extrinsic);
-
-  console.log('extrinsic', extrinsic.getArgs());
 
   return {
     call: polkadot.getExtrinsicCallHash(extrinsic),
