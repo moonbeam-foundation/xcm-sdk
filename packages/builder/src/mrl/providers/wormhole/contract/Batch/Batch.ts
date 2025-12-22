@@ -144,7 +144,11 @@ export function Batch() {
           throw new Error('Source API needs to be defined');
         }
 
-        if (!source.contracts?.XcmUtils || !source.contracts?.Batch) {
+        if (
+          !source.contracts?.XcmUtils ||
+          !source.contracts?.Batch ||
+          !source.contracts?.XcmPrecompile
+        ) {
           throw new Error(
             'Source chain needs to have the XcmUtils and Batch contract addresses configured',
           );
@@ -156,6 +160,7 @@ export function Batch() {
             paraId: source.parachainId,
             parents: 2, // this function is only used for global consensus currently
           });
+        console.log('computedOriginAccount', computedOriginAccount);
 
         const encodedXcmMessage = buildXcmMessage({
           asset: params.asset,
@@ -216,10 +221,7 @@ export function Batch() {
           address: source.contracts.Batch,
           abi: BatchAbi,
           args: [
-            [
-              '0x000000000000000000000000000000000000081A', // XCM Precompile address
-              source.contracts.XcmUtils,
-            ],
+            [source.contracts.XcmPrecompile, source.contracts.XcmUtils],
             [],
             [transferAssetsCallData, xcmSendTxData],
             [],
