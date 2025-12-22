@@ -67,7 +67,7 @@ export function polkadotXcm() {
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: source.parachainId,
-            isParents: true,
+            parents: 1,
           });
 
         console.log('computedOriginAccount', computedOriginAccount);

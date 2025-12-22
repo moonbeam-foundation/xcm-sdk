@@ -48,7 +48,7 @@ export function wormhole() {
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: isSourceParachain ? source.parachainId : undefined,
-            isParents: true,
+            parents: 1,
           });
 
         if (!tokenAddress) {

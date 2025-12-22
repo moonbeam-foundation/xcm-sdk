@@ -72,7 +72,7 @@ export function Batch() {
           getMultilocationDerivedAddresses({
             address: subMappedAddress,
             paraId: source.parachainId,
-            isParents: true,
+            parents: 1,
           });
 
         const send = buildSendExtrinsic({
@@ -131,6 +131,7 @@ export function Batch() {
     }),
     // TODO mjm integrate this with the xTokens contract
     transferAssetsAndMessageMoonriver: (): MrlConfigBuilder => ({
+      provider,
       build: ({
         asset,
         destination,
@@ -169,11 +170,22 @@ export function Batch() {
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: source.parachainId,
-            isParents: true,
+            parents: 2,
           });
 
         console.log('computedOriginAccount', computedOriginAccount);
-
+        // console.log('asset', asset);
+        // console.log('destination', destination);
+        // console.log('destinationAddress', destinationAddress);
+        // console.log('fee', fee);
+        // console.log('isAutomatic', isAutomatic);
+        // console.log('moonAsset', moonAsset);
+        // console.log('bridgeChain', bridgeChain);
+        // console.log('moonApi', moonApi);
+        // console.log('source', source);
+        // console.log('sourceAddress', sourceAddress);
+        // console.log('sourceApi', sourceApi);
+        console.log('transact', transact);
         const send = buildSendExtrinsic({
           asset,
           destination,

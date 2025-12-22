@@ -48,7 +48,7 @@ describe('utils - polkadot address', () => {
           getMultilocationDerivedAddresses({
             paraId: 2034,
             address: '5E6kHM4zFdH5KEJE3YEzX5QuqoETVKUQadeY8LVmeh2HyHGt',
-            isParents: true,
+            parents: 1,
           }),
         ).toStrictEqual({
           address20: '0x292a2d99e3f3e43f31f208f29dc3b2b094a996de',
@@ -78,7 +78,7 @@ describe('utils - polkadot address', () => {
         getMultilocationDerivedAddresses({
           paraId: 3019,
           address: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
-          isParents: true,
+          parents: 1,
         }),
       ).toStrictEqual({
         address20: '0x5beafce000f2c667a6405a666f1e035d2a142aa8',

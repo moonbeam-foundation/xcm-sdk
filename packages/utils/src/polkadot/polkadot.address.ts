@@ -32,17 +32,19 @@ export function getSovereignAccountAddresses(paraId: number) {
 /**
  * reference: https://github.com/Moonsong-Labs/xcm-tools/blob/main/scripts/calculate-multilocation-derivative-account.ts
  */
-
+// TODO update with parents 2 (for moonriver to moonbeam bridge)
 export function getMultilocationDerivedAddresses({
   paraId,
   address,
-  isParents = false,
+  parents = 0,
 }: {
   paraId?: number;
   address: string;
-  isParents?: boolean;
+  parents?: 0 | 1 | 2;
 }) {
-  const parents = isParents ? 1 : 0;
+  if (parents === 2) {
+    throw new Error('Parents 2 not supported yet');
+  }
   const accType = isEthAddress(address) ? 'AccountKey20' : 'AccountId32';
   const decodedAddress = isEthAddress(address)
     ? hexToU8a(address)

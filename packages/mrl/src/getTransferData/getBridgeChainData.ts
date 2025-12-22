@@ -92,7 +92,7 @@ export function getBridgeChainAddress({
           ? evmToAddress(sourceAddress)
           : sourceAddress,
         paraId: source.parachainId,
-        isParents: true,
+        parents: 1,
       });
 
     bridgeChainAddress = computedOriginAccount;

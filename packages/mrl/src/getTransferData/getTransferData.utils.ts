@@ -198,7 +198,7 @@ async function getTransact(
   const { address20 } = getMultilocationDerivedAddresses({
     address: sourceAddress,
     paraId: source.parachainId,
-    isParents: true,
+    parents: 1,
   });
   const extrinsic = MrlBuilder()
     .wormhole()
@@ -239,7 +239,7 @@ async function getBridgeChainGasLimit(
   const { address20 } = getMultilocationDerivedAddresses({
     address: sourceAddress,
     paraId: source.parachainId,
-    isParents: true,
+    parents: 1,
   });
 
   // TODO: we have a problem to calculate the gasEstimation for automatic:
