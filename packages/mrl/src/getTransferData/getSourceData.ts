@@ -366,7 +366,7 @@ async function getProtocolFee({
   source,
 }: GetProtocolFeeParams): Promise<AssetAmount> {
   if (typeof protocolFee === 'number') {
-    return AssetAmount.fromChainAsset(asset, {
+    return AssetAmount.fromChainAsset(feeAsset, {
       amount: protocolFee,
     });
   }
