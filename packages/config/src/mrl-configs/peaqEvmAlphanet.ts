@@ -38,7 +38,7 @@ export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
           .wormhole()
           .contract()
           .Batch()
-          .transferAssetsAndMessage(),
+          .transferAssetsAndMessageViaXTokens(),
         bridgeChain: {
           asset: ftmwh,
           balance: BalanceBuilder().evm().erc20(),

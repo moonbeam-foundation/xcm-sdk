@@ -38,7 +38,7 @@ export const moonriverRoutes = new MrlChainRoutes({
           .wormhole()
           .contract()
           .Batch()
-          .transferAssetsAndMessageMoonriver(),
+          .transferAssetsAndMessageViaXcmPrecompile(),
         bridgeChain: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),

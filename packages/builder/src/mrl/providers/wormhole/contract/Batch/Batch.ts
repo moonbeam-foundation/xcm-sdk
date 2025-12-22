@@ -1,4 +1,5 @@
 import {
+  type AnyChain,
   type AnyParachain,
   AssetAmount,
   type ChainAsset,
@@ -7,8 +8,9 @@ import {
 } from '@moonbeam-network/xcm-types';
 
 import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
+import type { ApiPromise } from '@polkadot/api';
 import { evmToAddress } from '@polkadot/util-crypto';
-import { type Address, encodeFunctionData, maxUint64 } from 'viem';
+import { type Abi, type Address, encodeFunctionData, maxUint64 } from 'viem';
 import { ContractBuilder, ContractConfig } from '../../../../../contract';
 import {
   getGlobalConsensusDestination,
@@ -17,6 +19,7 @@ import {
 import {
   type MrlConfigBuilder,
   Provider,
+  type Transact,
 } from '../../../../MrlBuilder.interfaces';
 import {
   buildSendExtrinsic,
@@ -30,22 +33,15 @@ export function Batch() {
   const provider = Provider.Wormhole;
 
   return {
-    transferAssetsAndMessage: (): MrlConfigBuilder => ({
+    /**
+     * Transfers assets and XCM message using XTokens contract for multi-currency transfer.
+     * Uses parents: 1 for multilocation derivation.
+     */
+    transferAssetsAndMessageViaXTokens: (): MrlConfigBuilder => ({
       provider,
-      build: ({
-        asset,
-        destination,
-        destinationAddress,
-        fee,
-        isAutomatic,
-        moonAsset,
-        bridgeChain,
-        moonApi,
-        source,
-        sourceAddress,
-        sourceApi,
-        transact,
-      }) => {
+      build: (params) => {
+        const { source, sourceAddress, sourceApi } = params;
+
         if (!EvmParachain.is(source)) {
           throw new Error('Source chain needs to be an EVMParachain');
         }
@@ -65,9 +61,6 @@ export function Batch() {
         }
 
         const subMappedAddress = evmToAddress(sourceAddress);
-
-        const { BatchAbi, XcmUtilsAbi, XtokensAbi } = getAbisForChain(source);
-
         const { address20: computedOriginAccount } =
           getMultilocationDerivedAddresses({
             address: subMappedAddress,
@@ -75,44 +68,53 @@ export function Batch() {
             parents: 1,
           });
 
-        const send = buildSendExtrinsic({
-          asset,
-          destination,
-          destinationAddress,
+        const encodedXcmMessage = buildXcmMessage({
+          asset: params.asset,
+          destination: params.destination,
+          destinationAddress: params.destinationAddress,
           computedOriginAccount,
-          fee,
-          isAutomatic,
-          moonAsset,
-          bridgeChain,
-          moonApi,
+          fee: params.fee,
+          isAutomatic: params.isAutomatic,
+          moonAsset: params.moonAsset,
+          bridgeChain: params.bridgeChain,
+          moonApi: params.moonApi,
           source,
           sourceAddress,
-          sourceApi,
-          transact,
+          sourceApi: sourceApi,
+          transact: params.transact,
         });
-        // we keep only the message
-        const encodedXcmMessage = send.args[1].toHex();
 
-        const { destinationParachain, destinationParachainAndAddress } =
-          getDestinationInHex(bridgeChain, computedOriginAccount);
+        // XTokens-specific: Build transfer using XTokens contract
+        const { BatchAbi, XcmUtilsAbi, XtokensAbi } = getAbisForChain(source);
+        const { destinationParachainAndAddress } = getDestinationInHex(
+          params.bridgeChain,
+          computedOriginAccount,
+        );
 
         const { currencies, feeItem } = getCurrencies({
           source,
-          moonAsset,
-          asset,
+          moonAsset: params.moonAsset,
+          asset: params.asset,
         });
-        const weight = maxUint64;
 
         const multiTransferTxData = encodeFunctionData({
           abi: XtokensAbi,
           functionName: 'transferMultiCurrencies',
-          args: [currencies, feeItem, destinationParachainAndAddress, weight],
+          args: [
+            currencies,
+            feeItem,
+            destinationParachainAndAddress,
+            maxUint64,
+          ],
         });
 
-        const xcmSendTxData = encodeFunctionData({
+        const xcmSendTxData = buildXcmSendTxData({
           abi: XcmUtilsAbi,
-          functionName: 'xcmSend',
-          args: [destinationParachain, encodedXcmMessage],
+          destination: getDestinationInHex(
+            params.bridgeChain,
+            computedOriginAccount,
+          ).destinationParachain,
+          encodedXcmMessage,
         });
 
         return new ContractConfig({
@@ -129,23 +131,11 @@ export function Batch() {
         });
       },
     }),
-    // TODO mjm integrate this with the xTokens contract
-    transferAssetsAndMessageMoonriver: (): MrlConfigBuilder => ({
+    transferAssetsAndMessageViaXcmPrecompile: (): MrlConfigBuilder => ({
       provider,
-      build: ({
-        asset,
-        destination,
-        destinationAddress,
-        fee,
-        isAutomatic,
-        moonAsset,
-        bridgeChain,
-        moonApi,
-        source,
-        sourceAddress,
-        sourceApi,
-        transact,
-      }) => {
+      build: (params) => {
+        const { source, sourceAddress, sourceApi } = params;
+
         if (!EvmParachain.is(source)) {
           throw new Error('Source chain needs to be an EVMParachain');
         }
@@ -156,109 +146,70 @@ export function Batch() {
 
         if (!source.contracts?.XcmUtils || !source.contracts?.Batch) {
           throw new Error(
-            'Source chain needs to have the Xtokens, XcmUtils and Batch contract addresses configured',
+            'Source chain needs to have the XcmUtils and Batch contract addresses configured',
           );
         }
-        console.log('sourceAddress', sourceAddress);
-
-        // const subMappedAddress = evmToAddress(sourceAddress);
-        // console.log('subMappedAddress', subMappedAddress);
-
-        const { BatchAbi, XcmUtilsAbi } = getAbisForChain(source);
 
         const { address20: computedOriginAccount } =
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: source.parachainId,
-            parents: 2,
+            parents: 1, // only used for global consensus
           });
 
-        console.log('computedOriginAccount', computedOriginAccount);
-        // console.log('asset', asset);
-        // console.log('destination', destination);
-        // console.log('destinationAddress', destinationAddress);
-        // console.log('fee', fee);
-        // console.log('isAutomatic', isAutomatic);
-        // console.log('moonAsset', moonAsset);
-        // console.log('bridgeChain', bridgeChain);
-        // console.log('moonApi', moonApi);
-        // console.log('source', source);
-        // console.log('sourceAddress', sourceAddress);
-        // console.log('sourceApi', sourceApi);
-        console.log('transact', transact);
-        const send = buildSendExtrinsic({
-          asset,
-          destination,
-          destinationAddress,
+        const encodedXcmMessage = buildXcmMessage({
+          asset: params.asset,
+          destination: params.destination,
+          destinationAddress: params.destinationAddress,
           computedOriginAccount,
-          fee,
-          isAutomatic,
-          moonAsset,
-          bridgeChain,
-          moonApi,
+          fee: params.fee,
+          isAutomatic: params.isAutomatic,
+          moonAsset: params.moonAsset,
+          bridgeChain: params.bridgeChain,
+          moonApi: params.moonApi,
           source,
           sourceAddress,
-          sourceApi,
-          transact,
+          sourceApi: sourceApi,
+          transact: params.transact,
         });
-        console.log('send', send.toHuman());
-        // we keep only the message
-        const encodedXcmMessage = send.args[1].toHex();
 
-        const globalConsensusDestination = getGlobalConsensusDestination(
-          sourceApi,
-          bridgeChain,
-        );
-        // const { currencies, feeItem } = getCurrencies({
-        //   source,
-        //   moonAsset,
-        //   asset,
-        // });
-        // const weight = maxUint64;
-
-        // const multiTransferTxData = encodeFunctionData({
-        //   abi: XtokensAbi,
-        //   functionName: 'transferMultiCurrencies',
-        //   args: [currencies, feeItem, destinationParachainAndAddress, weight],
-        // });
-        console.log('sourceAddress', sourceAddress);
+        const { BatchAbi, XcmUtilsAbi } = getAbisForChain(source);
 
         const bridgeChainFee = AssetAmount.fromChainAsset(
-          bridgeChain.getChainAsset(moonAsset),
+          params.bridgeChain.getChainAsset(params.moonAsset),
           {
             amount: 0.03, // TODO mjm get from the config?
           },
         );
+
         const transferAssetsCall = ContractBuilder()
           .XcmPrecompile()
           .transferAssetsLocation()
           .foreignErc20()
           .build({
             sourceApi,
-            asset,
+            asset: params.asset,
             fee: bridgeChainFee,
-            destination: bridgeChain,
+            destination: params.bridgeChain,
             destinationAddress: computedOriginAccount,
             source,
             sourceAddress,
           });
 
-        console.log('transferAssetsCall', transferAssetsCall);
-
         const transferAssetsCallData = transferAssetsCall.encodeFunctionData();
 
-        console.log('destinationParachain', globalConsensusDestination);
+        const globalConsensusDestination = getGlobalConsensusDestination(
+          sourceApi,
+          params.bridgeChain,
+        );
 
-        const xcmSendTxData = encodeFunctionData({
+        const xcmSendTxData = buildXcmSendTxData({
           abi: XcmUtilsAbi,
-          functionName: 'xcmSend',
-          args: [
-            {
-              parents: globalConsensusDestination[0],
-              interior: globalConsensusDestination[1],
-            },
-            encodedXcmMessage,
-          ],
+          destination: {
+            parents: globalConsensusDestination[0],
+            interior: globalConsensusDestination[1],
+          },
+          encodedXcmMessage,
         });
 
         return new ContractConfig({
@@ -266,7 +217,7 @@ export function Batch() {
           abi: BatchAbi,
           args: [
             [
-              '0x000000000000000000000000000000000000081A',
+              '0x000000000000000000000000000000000000081A', // XCM Precompile address
               source.contracts.XcmUtils,
             ],
             [],
@@ -279,6 +230,43 @@ export function Batch() {
       },
     }),
   };
+}
+
+/**
+ * Builds the XCM message for cross-chain communication
+ */
+function buildXcmMessage(params: {
+  asset: AssetAmount;
+  destination: AnyChain;
+  destinationAddress: string;
+  computedOriginAccount: string;
+  fee: AssetAmount;
+  isAutomatic: boolean;
+  moonAsset: ChainAsset;
+  bridgeChain: AnyParachain;
+  moonApi: ApiPromise;
+  source: AnyParachain;
+  sourceAddress: string;
+  sourceApi: ApiPromise;
+  transact: Transact | undefined;
+}): string {
+  const send = buildSendExtrinsic(params);
+  return send.args[1].toHex();
+}
+
+/**
+ * Builds the xcmSend transaction data
+ */
+function buildXcmSendTxData(params: {
+  abi: Abi;
+  destination: unknown;
+  encodedXcmMessage: string;
+}): string {
+  return encodeFunctionData({
+    abi: params.abi,
+    functionName: 'xcmSend',
+    args: [params.destination, params.encodedXcmMessage],
+  });
 }
 
 function getDestinationInHex(

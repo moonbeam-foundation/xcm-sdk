@@ -6,7 +6,8 @@ import { PEAQ_XTOKENS_ABI } from './peaq/PeaqXtokensContractAbi';
 export function getAbisForChain(_: EvmParachain) {
   // TODO when we add more chains, find a way to handle Abis for the different chains, if the Abis differ
 
-  // TODO mjm will this work for Moonriver?
+  // TODO mjm these interfaces are generic, they are the same of the moonbeam / moonriver ones,
+  // so we can remove the peaq constraint
   return {
     BatchAbi: PEAQ_BATCH_ABI,
     XcmUtilsAbi: PEAQ_XCM_UTILS_ABI,
