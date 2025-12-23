@@ -9,7 +9,6 @@ import {
 
 const pallet = 'polkadotXcm';
 
-// TODO mjm add tests
 export function polkadotXcm() {
   return {
     transferAssetsUsingTypeAndThen: () => {

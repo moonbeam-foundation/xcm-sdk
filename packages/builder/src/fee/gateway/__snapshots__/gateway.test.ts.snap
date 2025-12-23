@@ -10,6 +10,6 @@ exports[`gateway > quoteSendTokenFee > should match args snapshot 1`] = `
 [
   "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
   1000,
-  0n,
+  5000000000n,
 ]
 `;
