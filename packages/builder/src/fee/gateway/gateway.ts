@@ -1,11 +1,11 @@
 import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { ContractConfig } from '../..';
 import { GATEWAY_ABI } from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
-import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
+import type { ProtocolFeeConfigBuilder } from '../FeeBuilder.interfaces';
 
 export function gateway() {
   return {
-    quoteSendTokenFee(): BridgeFeeConfigBuilder {
+    quoteSendTokenFee(): ProtocolFeeConfigBuilder {
       return {
         build: ({ asset, destination, source, bridgeChainFee }) => {
           if (!asset.address) {

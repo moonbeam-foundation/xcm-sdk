@@ -17,7 +17,6 @@ export function polkadotXcm() {
       const provider = Provider.Snowbridge;
 
       return {
-        // TODO mjm rename ? nativeEth?
         canonicalEth: (): MrlConfigBuilder => ({
           provider,
           build: ({ asset, destination, destinationAddress, protocolFee }) => {

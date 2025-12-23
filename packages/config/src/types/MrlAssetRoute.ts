@@ -1,8 +1,8 @@
 import type {
   BalanceConfigBuilder,
-  BridgeFeeConfigBuilder,
   FeeConfigBuilder,
   MrlConfigBuilder,
+  ProtocolFeeConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import {
@@ -24,9 +24,8 @@ export interface MrlConfig {
   bridgeChain: BridgeChainConfig;
 }
 
-// TODO mjm too many different interfaces?
 export interface ProtocolFeeConfig {
-  amount: number | BridgeFeeConfigBuilder;
+  amount: number | ProtocolFeeConfigBuilder;
   asset: Asset;
   balance: BalanceConfigBuilder;
 }

@@ -16,9 +16,9 @@ export type FeeConfigBuilder = ConfigBuilder<
   FeeConfigBuilderParams
 >;
 
-export type BridgeFeeConfigBuilder = ConfigBuilder<
+export type ProtocolFeeConfigBuilder = ConfigBuilder<
   SubstrateQueryConfig | ContractConfig,
-  BridgeFeeConfigBuilderParams
+  ProtocolFeeConfigBuilderParams
 >;
 
 export interface FeeConfigBuilderParams {
@@ -31,8 +31,7 @@ export interface FeeConfigBuilderParams {
   source: AnyChain;
 }
 
-// TODO mjm rename to ProtocolFee...?
-export interface BridgeFeeConfigBuilderParams
+export interface ProtocolFeeConfigBuilderParams
   extends Omit<FeeConfigBuilderParams, 'api'> {
   bridgeChainFee: AssetAmount;
 }

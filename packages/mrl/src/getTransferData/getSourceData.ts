@@ -1,8 +1,8 @@
 import {
-  type BridgeFeeConfigBuilderParams,
   ContractConfig,
   MrlBuilder,
   type MrlTransferConfig,
+  type ProtocolFeeConfigBuilderParams,
   Provider,
   SnowbridgeConfig,
   SubstrateQueryConfig,
@@ -366,7 +366,7 @@ async function getBridgeChainFeeBalance({
   });
 }
 
-interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
+interface GetProtocolFeeParams extends ProtocolFeeConfigBuilderParams {
   protocolFee?: ProtocolFeeConfig;
   bridgeChain: AnyParachain;
   bridgeChainFee: AssetAmount;
@@ -375,7 +375,6 @@ interface GetProtocolFeeParams extends BridgeFeeConfigBuilderParams {
 async function getProtocolFee({
   address,
   asset,
-  feeAsset,
   balance,
   protocolFee,
   destination,
@@ -416,7 +415,7 @@ async function getProtocolFee({
       );
     }
 
-    return AssetAmount.fromChainAsset(feeAsset, {
+    return AssetAmount.fromChainAsset(protocolFeeAsset, {
       amount,
     });
   }
@@ -425,12 +424,12 @@ async function getProtocolFee({
   if (SubstrateQueryConfig.is(config)) {
     const polkadot = await PolkadotService.create(bridgeChain);
     const amount = await polkadot.query(config);
-    return AssetAmount.fromChainAsset(feeAsset, {
+    return AssetAmount.fromChainAsset(protocolFeeAsset, {
       amount,
     });
   }
 
-  return AssetAmount.fromChainAsset(feeAsset, {
+  return AssetAmount.fromChainAsset(protocolFeeAsset, {
     amount: 0n,
   });
 }

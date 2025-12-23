@@ -1,11 +1,11 @@
 import type { u128 } from '@polkadot/types';
 import { SubstrateQueryConfig } from '../../types';
-import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
+import type { ProtocolFeeConfigBuilder } from '../FeeBuilder.interfaces';
 
 export function outboundQueueApi() {
   return {
     calculateFee: () => ({
-      mintForeignToken: (): BridgeFeeConfigBuilder => ({
+      mintForeignToken: (): ProtocolFeeConfigBuilder => ({
         build: ({ address, balance, feeAsset }) => {
           const args = [
             {
@@ -30,7 +30,7 @@ export function outboundQueueApi() {
           });
         },
       }),
-      agentExecute: (): BridgeFeeConfigBuilder => ({
+      agentExecute: (): ProtocolFeeConfigBuilder => ({
         build: ({ address, balance, destination }) => {
           const assetInDestination = balance
             ? destination.getChainAsset(balance)

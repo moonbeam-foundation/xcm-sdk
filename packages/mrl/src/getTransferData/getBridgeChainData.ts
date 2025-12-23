@@ -87,7 +87,7 @@ export function getBridgeChainAddress({
 
   if (Parachain.isExactly(bridgeChain) && isEthAddress(bridgeChainAddress)) {
     bridgeChainAddress = evmToAddress(bridgeChainAddress);
-    return bridgeChainAddress; // TODO mjm handle this case
+    return bridgeChainAddress;
   }
 
   // for Parachain to EVM transactions, we use the computed origin account in the bridgeChain
