@@ -1,5 +1,11 @@
 # @moonbeam-network/mrl
 
+## 4.1.3
+
+### Patch Changes
+
+- [#600](https://github.com/moonbeam-foundation/xcm-sdk/pull/600) [`3013c84`](https://github.com/moonbeam-foundation/xcm-sdk/commit/3013c84c0d87c530a91be3aeaea86ead16eb5d26) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix protocol fee to use correct asset when using hardcoded value
+
 ## 4.1.2
 
 ### Patch Changes
