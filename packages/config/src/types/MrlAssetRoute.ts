@@ -19,7 +19,7 @@ export interface MrlAssetRouteConstructorParams
 }
 
 export interface MrlConfig {
-  isAutomaticPossible: boolean; // TODO mjm make this true by default?
+  isAutomaticPossible?: boolean;
   transfer: MrlConfigBuilder;
   bridgeChain: BridgeChainConfig;
 }
@@ -51,7 +51,7 @@ export interface BridgeChainFeeConfig extends FeeConfig {
 }
 
 export class MrlAssetRoute extends AssetRoute {
-  readonly mrl: MrlConfig;
+  readonly mrl: MrlConfig & { isAutomaticPossible: boolean };
   readonly source: MrlSourceConfig;
 
   constructor({
@@ -62,7 +62,11 @@ export class MrlAssetRoute extends AssetRoute {
     mrl,
   }: MrlAssetRouteConstructorParams & { source: MrlSourceConfig }) {
     super({ source, destination, contract, extrinsic });
-    this.mrl = mrl;
+    // Set the default value for isAutomaticPossible as true when not defined
+    this.mrl = {
+      ...mrl,
+      isAutomaticPossible: mrl.isAutomaticPossible ?? true,
+    };
     this.source = source;
   }
 }
