@@ -20,7 +20,7 @@ exports[`polkadotXcm > transferAssetsUsingTypeAndThen with canonicalEth > should
     "V4": [
       {
         "fun": {
-          "Fungible": 99000000000n,
+          "Fungible": 108900000000n,
         },
         "id": {
           "interior": "Here",
