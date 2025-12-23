@@ -183,7 +183,8 @@ export function Batch() {
         const bridgeChainFee = AssetAmount.fromChainAsset(
           params.bridgeChain.getChainAsset(params.moonAsset),
           {
-            amount: 0.03, // TODO mjm get from the config?
+            // TODO mjm get from the config, after merging the changes from Tanssi Demo, which brings bridgeChainFee to the params of this function
+            amount: 0.03,
           },
         );
 
