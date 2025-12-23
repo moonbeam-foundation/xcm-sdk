@@ -87,8 +87,8 @@ export function getMrlMin({
     bridgeChainData,
     sourceData,
   });
-  const relayerFee = sourceData.otherFees?.relayer?.amount
-    ? sourceData.otherFees.relayer.toBig()
+  const relayerFee = sourceData.extraFees?.remote?.fee.amount
+    ? sourceData.extraFees.remote?.fee.toBig()
     : Big(0);
 
   return min.copyWith({

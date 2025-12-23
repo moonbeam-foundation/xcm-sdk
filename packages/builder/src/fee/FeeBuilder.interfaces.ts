@@ -31,13 +31,9 @@ export interface FeeConfigBuilderParams {
   source: AnyChain;
 }
 
-export interface BridgeFeeConfigBuilderParams {
-  asset: ChainAsset;
-  feeAsset: ChainAsset;
-  address: string;
-  balance?: AssetAmount;
-  destination: AnyChain;
-  source: AnyChain;
+// TODO mjm rename to ProtocolFee...?
+export interface BridgeFeeConfigBuilderParams
+  extends Omit<FeeConfigBuilderParams, 'api'> {
   bridgeChainFee: AssetAmount;
 }
 

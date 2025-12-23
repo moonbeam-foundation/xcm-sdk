@@ -34,6 +34,7 @@ import {
 import { toBigInt } from '@moonbeam-network/xcm-utils';
 import type {
   BridgeChainTransferData,
+  MrlExtraFees,
   SourceTransferData,
 } from '../mrl.interfaces';
 import { SnowbridgeService } from '../services/snowbridge';
@@ -126,18 +127,6 @@ export async function getSourceData({
     bridgeChainFee: bridgeChainData.fee,
   });
 
-  const protocolFeeConfig = route.source.protocolFee;
-
-  // TODO mjm pending rework?
-  const protocolFeeBalance = protocolFeeConfig
-    ? await getBalance({
-        address: sourceAddress,
-        asset: source.getChainAsset(protocolFeeConfig.asset),
-        builder: protocolFeeConfig.balance,
-        chain: source,
-      })
-    : undefined;
-
   const transfer = await buildTransfer({
     asset: getAmountForTransferSimulation(balance, protocolFee),
     protocolFee,
@@ -159,7 +148,14 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const relayerFee = await getRelayerFee({
+  const max = getMax({
+    balance,
+    existentialDeposit,
+    fee,
+    min,
+  });
+
+  const extraFees = await getExtraFees({
     chain: source,
     transfer,
     asset: balance,
@@ -169,13 +165,7 @@ export async function getSourceData({
     route,
     sourceAddress,
     bridgeChainFee: bridgeChainData.fee,
-  });
-
-  const max = getMax({
-    balance,
-    existentialDeposit,
-    fee,
-    min,
+    protocolFee,
   });
 
   return {
@@ -184,16 +174,12 @@ export async function getSourceData({
     destinationFee,
     destinationFeeBalance,
     bridgeChainFeeBalance,
-    protocolFeeBalance,
     existentialDeposit,
     fee,
     feeBalance,
     max,
     min,
-    otherFees: {
-      protocol: protocolFee,
-      relayer: relayerFee?.amount ? relayerFee : undefined,
-    },
+    extraFees,
   };
 }
 
@@ -435,7 +421,6 @@ async function getProtocolFee({
     });
   }
 
-  // TODO mjm makes sense?
   // Calculations are done on the bridge chain
   if (SubstrateQueryConfig.is(config)) {
     const polkadot = await PolkadotService.create(bridgeChain);
@@ -448,4 +433,60 @@ async function getProtocolFee({
   return AssetAmount.fromChainAsset(feeAsset, {
     amount: 0n,
   });
+}
+
+interface GetExtraFeesParams extends BuildTransferParams {
+  chain: AnyChain;
+  transfer: MrlTransferConfig;
+  protocolFee: AssetAmount | undefined;
+}
+
+async function getExtraFees({
+  asset,
+  chain,
+  destinationAddress,
+  feeAsset,
+  isAutomatic,
+  route,
+  sourceAddress,
+  transfer,
+  bridgeChainFee,
+  protocolFee,
+}: GetExtraFeesParams): Promise<MrlExtraFees> {
+  const relayerFee = await getRelayerFee({
+    chain,
+    transfer,
+    asset,
+    feeAsset,
+    isAutomatic,
+    destinationAddress,
+    route,
+    sourceAddress,
+    bridgeChainFee,
+  });
+
+  const protocolFeeConfig = route.source.protocolFee;
+
+  const protocolFeeBalance = protocolFeeConfig
+    ? await getBalance({
+        address: sourceAddress,
+        asset: chain.getChainAsset(protocolFeeConfig.asset),
+        builder: protocolFeeConfig.balance,
+        chain,
+      })
+    : undefined;
+
+  const localFee =
+    protocolFee && protocolFeeBalance
+      ? { fee: protocolFee, balance: protocolFeeBalance }
+      : undefined;
+
+  const remoteFee = relayerFee
+    ? { fee: relayerFee, balance: feeAsset }
+    : undefined;
+
+  return {
+    local: localFee,
+    remote: remoteFee,
+  };
 }

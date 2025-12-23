@@ -20,19 +20,14 @@ export function polkadotXcm() {
         // TODO mjm rename ? nativeEth?
         canonicalEth: (): MrlConfigBuilder => ({
           provider,
-          build: ({
-            asset,
-            destination,
-            destinationAddress,
-            bridgeChainFee,
-          }) => {
+          build: ({ asset, destination, destinationAddress, protocolFee }) => {
             if (!EvmChain.is(destination)) {
               throw new Error(
                 'Destination must be an EVM chain for globalConsensus function',
               );
             }
 
-            if (!bridgeChainFee) {
+            if (!protocolFee) {
               throw new Error(
                 'Bridge chain fee is required for the polkadotXcm.canonicalEth function',
               );
@@ -57,7 +52,7 @@ export function polkadotXcm() {
                         parents: 1,
                         interior: 'Here',
                       },
-                      fun: { Fungible: bridgeChainFee.amount },
+                      fun: { Fungible: protocolFee.amount },
                     },
                     {
                       id: {
