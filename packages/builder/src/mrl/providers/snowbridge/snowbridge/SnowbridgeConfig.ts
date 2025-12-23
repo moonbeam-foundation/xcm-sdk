@@ -8,6 +8,7 @@ export interface SnowbridgeFunctionArgs {
   destinationParaId: number;
   amount: bigint;
   bridgeFeeAmount: bigint;
+  bridgeChainFee: bigint;
   requiresApproval: boolean;
 }
 

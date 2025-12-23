@@ -16,9 +16,9 @@ export type FeeConfigBuilder = ConfigBuilder<
   FeeConfigBuilderParams
 >;
 
-export type BridgeFeeConfigBuilder = ConfigBuilder<
+export type ProtocolFeeConfigBuilder = ConfigBuilder<
   SubstrateQueryConfig | ContractConfig,
-  BridgeFeeConfigBuilderParams
+  ProtocolFeeConfigBuilderParams
 >;
 
 export interface FeeConfigBuilderParams {
@@ -31,13 +31,9 @@ export interface FeeConfigBuilderParams {
   source: AnyChain;
 }
 
-export interface BridgeFeeConfigBuilderParams {
-  asset: ChainAsset;
-  feeAsset: ChainAsset;
-  address: string;
-  balance?: AssetAmount;
-  destination: AnyChain;
-  source: AnyChain;
+export interface ProtocolFeeConfigBuilderParams
+  extends Omit<FeeConfigBuilderParams, 'api'> {
+  bridgeChainFee: AssetAmount;
 }
 
 export interface XcmPaymentFeeProps {

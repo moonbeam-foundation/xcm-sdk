@@ -1,5 +1,21 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`outboundQueueApi > agentExecute > should match args snapshot 1`] = `
+[
+  {
+    "AgentExecute": {
+      "TokenTransfer": {
+        "amount": 99000000000n,
+        "recipient": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+        "tokenId": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+      },
+      "agentId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    },
+  },
+  null,
+]
+`;
+
 exports[`outboundQueueApi > calculateFee > should match args snapshot 1`] = `
 [
   {

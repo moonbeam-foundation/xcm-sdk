@@ -1,0 +1,142 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen with canonicalEth > should be correct config 1`] = `
+ExtrinsicConfig {
+  "func": "transferAssetsUsingTypeAndThen",
+  "getArgs": [Function],
+  "module": "polkadotXcm",
+}
+`;
+
+exports[`polkadotXcm > transferAssetsUsingTypeAndThen with canonicalEth > should get correct arguments 1`] = `
+[
+  {
+    "V4": {
+      "interior": "Here",
+      "parents": 1,
+    },
+  },
+  {
+    "V4": [
+      {
+        "fun": {
+          "Fungible": 108900000000n,
+        },
+        "id": {
+          "interior": "Here",
+          "parents": 1,
+        },
+      },
+      {
+        "fun": {
+          "Fungible": 99000000000n,
+        },
+        "id": {
+          "interior": {
+            "X1": [
+              {
+                "GlobalConsensus": {
+                  "Ethereum": {
+                    "chainId": 4002,
+                  },
+                },
+              },
+            ],
+          },
+          "parents": 2,
+        },
+      },
+    ],
+  },
+  2,
+  {
+    "V4": {
+      "interior": "Here",
+      "parents": 1,
+    },
+  },
+  2,
+  {
+    "V4": [
+      {
+        "InitiateReserveWithdraw": {
+          "assets": {
+            "Definite": [
+              {
+                "fun": {
+                  "Fungible": 99000000000n,
+                },
+                "id": {
+                  "interior": {
+                    "X1": [
+                      {
+                        "GlobalConsensus": {
+                          "Ethereum": {
+                            "chainId": 4002,
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  "parents": 1,
+                },
+              },
+            ],
+          },
+          "reserve": {
+            "interior": {
+              "X1": [
+                {
+                  "GlobalConsensus": {
+                    "Ethereum": {
+                      "chainId": 4002,
+                    },
+                  },
+                },
+              ],
+            },
+            "parents": 1,
+          },
+          "xcm": [
+            {
+              "DepositAsset": {
+                "assets": {
+                  "Definite": [
+                    {
+                      "fun": {
+                        "Fungible": 99000000000n,
+                      },
+                      "id": {
+                        "interior": "Here",
+                        "parents": 0,
+                      },
+                    },
+                  ],
+                },
+                "beneficiary": {
+                  "interior": {
+                    "X1": [
+                      {
+                        "AccountKey20": {
+                          "key": "0x98891e5FD24Ef33A488A47101F65D212Ff6E650E",
+                          "network": {
+                            "Ethereum": {
+                              "chainId": 4002,
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  "parents": 0,
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+  "Unlimited",
+]
+`;

@@ -87,8 +87,8 @@ export function getMrlMin({
     bridgeChainData,
     sourceData,
   });
-  const relayerFee = sourceData.otherFees?.relayer?.amount
-    ? sourceData.otherFees.relayer.toBig()
+  const relayerFee = sourceData.extraFees?.remote?.fee.amount
+    ? sourceData.extraFees.remote?.fee.toBig()
     : Big(0);
 
   return min.copyWith({
@@ -99,6 +99,7 @@ export function getMrlMin({
 export interface BuildTransferParams {
   asset: AssetAmount;
   protocolFee?: AssetAmount;
+  bridgeChainFee: AssetAmount;
   destinationAddress: string;
   feeAsset: AssetAmount;
   isAutomatic: boolean;
@@ -140,6 +141,7 @@ export async function buildTransfer(params: BuildTransferParams) {
 export async function getMrlBuilderParams({
   asset,
   protocolFee,
+  bridgeChainFee,
   destinationAddress,
   feeAsset,
   isAutomatic,
@@ -167,6 +169,7 @@ export async function getMrlBuilderParams({
   return {
     asset,
     protocolFee,
+    bridgeChainFee,
     destination,
     destinationAddress,
     destinationApi,
@@ -293,8 +296,13 @@ async function getBridgeChainGasLimit(
 
 export function getAmountForTransferSimulation(
   balance: AssetAmount,
-  protocolFee: AssetAmount,
+  protocolFee?: AssetAmount,
 ): AssetAmount {
+  if (!protocolFee) {
+    return balance;
+  }
+
+  // We make sure the amount is not negative
   return balance.copyWith({
     amount:
       balance.amount - protocolFee.amount > 0

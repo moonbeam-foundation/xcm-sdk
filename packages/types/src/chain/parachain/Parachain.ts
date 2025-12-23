@@ -35,6 +35,10 @@ export class Parachain extends Chain {
     return obj instanceof Parachain;
   }
 
+  static isExactly(obj: unknown): obj is Parachain {
+    return obj instanceof Parachain && obj.constructor === Parachain;
+  }
+
   constructor({
     checkSovereignAccountBalances,
     genesisHash,

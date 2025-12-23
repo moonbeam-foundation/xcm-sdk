@@ -60,18 +60,19 @@ export async function getTransferData({
     target: route.getDestinationFeeAssetOnSource(),
   });
 
+  const bridgeChainData = await getBridgeChainData({
+    route,
+    sourceAddress,
+    destinationAddress,
+  });
+
   const sourceData = await getSourceData({
     isAutomatic: route.mrl.isAutomaticPossible && isAutomatic,
     route,
     destinationAddress,
     destinationFee,
     sourceAddress,
-  });
-
-  const bridgeChainData = await getBridgeChainData({
-    route,
-    sourceAddress,
-    destinationAddress,
+    bridgeChainData,
   });
 
   return {
@@ -92,7 +93,7 @@ export async function getTransferData({
           isSameAssetPayingDestinationFee ? destinationFee.toBig() : Big(0),
         )
         .minus(fee)
-        .minus(sourceData.otherFees?.relayer?.toBig() || Big(0));
+        .minus(sourceData.extraFees.remote?.fee.toBig() || Big(0));
 
       return sourceData.balance.copyWith({
         amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
@@ -129,7 +130,8 @@ export async function getTransferData({
       );
       const transfer = await buildTransfer({
         asset,
-        protocolFee: sourceData.otherFees?.protocol,
+        protocolFee: sourceData.extraFees.local?.fee,
+        bridgeChainFee: bridgeChainData.fee,
         destinationAddress,
         feeAsset,
         isAutomatic,

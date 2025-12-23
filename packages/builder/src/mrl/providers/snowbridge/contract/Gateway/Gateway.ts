@@ -15,12 +15,30 @@ export function Gateway() {
   return {
     sendToken: (): MrlConfigBuilder => ({
       provider,
-      build: ({ asset, destinationAddress, protocolFee, destination }) =>
-        callSendToken(asset, protocolFee, destination, destinationAddress),
+      build: ({
+        asset,
+        destinationAddress,
+        protocolFee,
+        destination,
+        bridgeChainFee,
+      }) =>
+        callSendToken(
+          asset,
+          protocolFee,
+          destination,
+          destinationAddress,
+          bridgeChainFee,
+        ),
     }),
     approveAndSendToken: (): MrlConfigBuilder => ({
       provider,
-      build: ({ asset, destinationAddress, protocolFee, destination }) => {
+      build: ({
+        asset,
+        destinationAddress,
+        protocolFee,
+        destination,
+        bridgeChainFee,
+      }) => {
         const requiresApproval = protocolFee && !protocolFee.isSame(asset);
 
         return callSendToken(
@@ -28,6 +46,7 @@ export function Gateway() {
           protocolFee,
           destination,
           destinationAddress,
+          bridgeChainFee,
           requiresApproval,
         );
       },
@@ -40,10 +59,15 @@ function callSendToken(
   protocolFee: AssetAmount | undefined,
   destination: AnyChain,
   destinationAddress: string,
+  bridgeChainFee: AssetAmount | undefined,
   requiresApproval = false,
 ): SnowbridgeConfig {
   if (!protocolFee) {
     throw new Error('Protocol fee is required for Gateway module');
+  }
+
+  if (!bridgeChainFee) {
+    throw new Error('Bridge chain fee is required for Gateway module');
   }
 
   if (!EvmParachain.isAnyParachain(destination)) {
@@ -59,6 +83,7 @@ function callSendToken(
       destinationParaId: destination.parachainId,
       amount: asset.amount,
       bridgeFeeAmount: protocolFee.amount,
+      bridgeChainFee: bridgeChainFee.amount,
       requiresApproval,
     },
     func: 'sendToken',
