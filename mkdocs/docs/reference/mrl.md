@@ -694,31 +694,36 @@ Defines the complete transfer data for transferring an asset, including asset ba
             getAssetMin: [Function: getAssetMin],
             hasOnlyAddress: [Function: hasOnlyAddress],
         },
-        otherFees: {
-            protocol: undefined,
-            relayer: _AssetAmount {
-                key: "usdc",
-                originSymbol: "USDC",
-                address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-                decimals: 6,
-                ids: undefined,
-                min: undefined,
-                symbol: undefined,
-                amount: 0n,
-                isSame: [Function: isSame],
-                isEqual: [Function: isEqual],
-                copyWith: [Function: copyWith],
-                convertDecimals: [Function: convertDecimals],
-                toBig: [Function: toBig],
-                toBigDecimal: [Function: toBigDecimal],
-                toDecimal: [Function: toDecimal],
-                getSymbol: [Function: getSymbol],
-                getAssetId: [Function: getAssetId],
-                getBalanceAssetId: [Function: getBalanceAssetId],
-                getMinAssetId: [Function: getMinAssetId],
-                getAssetPalletInstance: [Function: getAssetPalletInstance],
-                getAssetMin: [Function: getAssetMin],
-                hasOnlyAddress: [Function: hasOnlyAddress],
+        extraFees: {
+            local: undefined,
+            remote: {
+                fee: _AssetAmount {
+                    key: "usdc",
+                    originSymbol: "USDC",
+                    address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                    decimals: 6,
+                    ids: undefined,
+                    min: undefined,
+                    symbol: undefined,
+                    amount: 0n,
+                    isSame: [Function: isSame],
+                    isEqual: [Function: isEqual],
+                    copyWith: [Function: copyWith],
+                    convertDecimals: [Function: convertDecimals],
+                    toBig: [Function: toBig],
+                    toBigDecimal: [Function: toBigDecimal],
+                    toDecimal: [Function: toDecimal],
+                    getSymbol: [Function: getSymbol],
+                    getAssetId: [Function: getAssetId],
+                    getBalanceAssetId: [Function: getBalanceAssetId],
+                    getMinAssetId: [Function: getMinAssetId],
+                    getAssetPalletInstance: [Function: getAssetPalletInstance],
+                    getAssetMin: [Function: getAssetMin],
+                    hasOnlyAddress: [Function: hasOnlyAddress],
+                },
+                balance: _AssetAmount {
+                    // ... balance details ...
+                },
             },
         },
     },
@@ -800,19 +805,22 @@ await transferData.transfer({
 
 ### Understanding Fees in MRL
 
-MRL introduces additional fees beyond the standard XCM execution fees. These are organized under the `otherFees` object in the source transfer data for clarity.
+MRL introduces additional fees beyond the standard XCM execution fees. These are organized under the `extraFees` object in the source transfer data for clarity.
 
-<!-- TODO change this again  -->
-#### Other Fees Structure
+#### Extra Fees Structure
 
-The `source.otherFees` object contains MRL-specific fees:
+The `source.extraFees` object contains MRL-specific fees with their corresponding balances:
 
-- **`protocol`** ++"AssetAmount"++ (optional) - Protocol-level bridge fee charged by the bridge provider (e.g., Snowbridge). This fee is deducted from the balance at the source chain
-- **`relayer`** ++"AssetAmount"++ (optional) - Relayer service fee for automatic execution. Only applies when `isAutomatic=true`. Currently supported by the Wormhole provider. This fee is deducted from the transfer amount after it is sent.
+- **`local`** ++"FeeWithBalance"++ (optional) - Fees deducted from the source chain balance. This includes protocol-level bridge fees charged by the bridge provider (e.g., Snowbridge)
+  - **`fee`** ++"AssetAmount"++ - The fee amount
+  - **`balance`** ++"AssetAmount"++ - The available balance for this fee
+- **`remote`** ++"FeeWithBalance"++ (optional) - Fees deducted from the transfer amount after it is sent. This includes relayer service fees for automatic execution (e.g., when `isAutomatic=true` with the Wormhole provider)
+  - **`fee`** ++"AssetAmount"++ - The fee amount
+  - **`balance`** ++"AssetAmount"++ - The available balance for this fee
 
 #### Standard Fees
 
-In addition to `otherFees`, the source transfer data includes standard fees from XCM SDK:
+In addition to `extraFees`, the source transfer data includes standard fees from XCM SDK:
 
 - **`fee`** ++"AssetAmount"++ - Standard execution/gas fee for the source chain transaction
 - **`destinationFee`** ++"AssetAmount"++ - Amount reserved to pay for execution on the destination chain
@@ -822,7 +830,13 @@ In addition to `otherFees`, the source transfer data includes standard fees from
 When making a transfer, the total amount deducted from your source balance includes:
 
 ```
-Total Deducted = fee + destinationFee + otherFees.protocol + otherFees.relayer
+Total Deducted = fee + destinationFee + extraFees.local.fee
+```
+
+Additionally, fees deducted from the transfer amount after being sent:
+
+```
+Remote Deduction = extraFees.remote.fee
 ```
 
 The `getEstimate()` method automatically accounts for all these fees when calculating the recipient's expected amount.
