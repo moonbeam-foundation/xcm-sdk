@@ -31,6 +31,8 @@ export function polkadotXcm() {
               );
             }
 
+            const protocolFeeAmount = (protocolFee.amount * 110n) / 100n; // bump by 10%
+
             return new ExtrinsicConfig({
               module: pallet,
               func,
@@ -50,7 +52,7 @@ export function polkadotXcm() {
                         parents: 1,
                         interior: 'Here',
                       },
-                      fun: { Fungible: protocolFee.amount },
+                      fun: { Fungible: protocolFeeAmount },
                     },
                     {
                       id: {
