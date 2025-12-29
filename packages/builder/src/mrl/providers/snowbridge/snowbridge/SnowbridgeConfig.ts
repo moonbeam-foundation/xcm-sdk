@@ -9,6 +9,7 @@ export interface SnowbridgeFunctionArgs {
   amount: bigint;
   bridgeFeeAmount: bigint;
   requiresApproval: boolean;
+  value: bigint;
 }
 
 export interface SnowbridgeConfigConstructorParams {
