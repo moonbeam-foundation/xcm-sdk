@@ -89,11 +89,8 @@ export class SnowbridgeService {
       destinationAddress,
       destinationParaId,
       amount,
-      bridgeFeeAmount,
-      requiresApproval,
+      value,
     } = args;
-
-    const value = requiresApproval ? bridgeFeeAmount : amount + bridgeFeeAmount;
 
     const contractArgs = [
       tokenAddress,
