@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-builder
 
+## 4.4.3
+
+### Patch Changes
+
+- [#603](https://github.com/moonbeam-foundation/xcm-sdk/pull/603) [`048d8b8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/048d8b8286bcc79d9478ac0c2aebee13a38cda0a) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix value when transferring an asset that is not the native in Snowbridge transfers from Ethereum
+
 ## 4.4.2
 
 ### Patch Changes
