@@ -313,7 +313,7 @@ export function getAmountForTransferSimulation(
   });
 }
 
-export interface GetMrlMaxParams extends GetMaxParams {
+interface GetMrlMaxParams extends GetMaxParams {
   extraFees?: {
     local?: {
       fee: AssetAmount;
