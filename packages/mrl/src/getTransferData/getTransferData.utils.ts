@@ -17,6 +17,8 @@ import {
 import {
   convertToChainDecimals,
   type DestinationChainTransferData,
+  type GetMaxParams,
+  getMax,
   getMin,
   PolkadotService,
 } from '@moonbeam-network/xcm-sdk';
@@ -308,5 +310,41 @@ export function getAmountForTransferSimulation(
       balance.amount - protocolFee.amount > 0
         ? balance.amount - protocolFee.amount
         : 0n,
+  });
+}
+
+export interface GetMrlMaxParams extends GetMaxParams {
+  extraFees?: {
+    local?: {
+      fee: AssetAmount;
+      balance: AssetAmount;
+    };
+  };
+}
+
+export function getMrlMax({
+  balance,
+  existentialDeposit,
+  fee,
+  min,
+  extraFees,
+}: GetMrlMaxParams): AssetAmount {
+  const xcmMax = getMax({
+    balance,
+    existentialDeposit,
+    fee,
+    min,
+  });
+
+  const result = xcmMax
+    .toBig()
+    .minus(
+      extraFees?.local && balance.isSame(extraFees.local.fee)
+        ? extraFees.local.fee.toBig()
+        : Big(0),
+    );
+
+  return balance.copyWith({
+    amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
 }

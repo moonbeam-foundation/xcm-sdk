@@ -21,7 +21,6 @@ import {
   getDestinationFeeBalance,
   getExistentialDeposit,
   getExtrinsicFee,
-  getMax,
   PolkadotService,
 } from '@moonbeam-network/xcm-sdk';
 import {
@@ -44,6 +43,7 @@ import {
   buildTransfer,
   getAmountForTransferSimulation,
   getMrlBuilderParams,
+  getMrlMax,
 } from './getTransferData.utils';
 
 interface GetSourceDataParams {
@@ -148,13 +148,6 @@ export async function getSourceData({
     sourceAddress,
   });
 
-  const max = getMax({
-    balance,
-    existentialDeposit,
-    fee,
-    min,
-  });
-
   const extraFees = await getExtraFees({
     chain: source,
     transfer,
@@ -166,6 +159,14 @@ export async function getSourceData({
     sourceAddress,
     bridgeChainFee: bridgeChainData.fee,
     protocolFee,
+  });
+
+  const max = getMrlMax({
+    balance,
+    existentialDeposit,
+    fee,
+    min,
+    extraFees,
   });
 
   return {
