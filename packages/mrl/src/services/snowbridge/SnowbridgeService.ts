@@ -90,12 +90,9 @@ export class SnowbridgeService {
       destinationAddress,
       destinationParaId,
       amount,
-      bridgeFeeAmount,
       bridgeChainFee,
-      requiresApproval,
+      value,
     } = args;
-
-    const value = requiresApproval ? bridgeFeeAmount : amount + bridgeFeeAmount;
 
     const isEthereumDestination = isEthAddress(destinationAddress);
     // Snowbridge MultiAddress.Kind enum (Index, Address32, Address20):
@@ -112,7 +109,6 @@ export class SnowbridgeService {
       bridgeChainFee,
       amount,
     ];
-    console.log('contractArgs', contractArgs);
 
     return new ContractConfig({
       address: this.#gatewayAddress,

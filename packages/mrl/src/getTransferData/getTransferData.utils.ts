@@ -298,7 +298,7 @@ export function getAmountForTransferSimulation(
   balance: AssetAmount,
   protocolFee?: AssetAmount,
 ): AssetAmount {
-  if (!protocolFee) {
+  if (!protocolFee || !balance.isSame(protocolFee)) {
     return balance;
   }
 

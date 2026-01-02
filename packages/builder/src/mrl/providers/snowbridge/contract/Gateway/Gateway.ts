@@ -76,6 +76,13 @@ function callSendToken(
     );
   }
 
+  const isDifferentAsset = !asset.isSame(protocolFee);
+
+  const value =
+    requiresApproval || isDifferentAsset
+      ? protocolFee.amount
+      : asset.amount + protocolFee.amount;
+
   return new SnowbridgeConfig({
     args: {
       tokenAddress: asset.address as string,
@@ -85,6 +92,7 @@ function callSendToken(
       bridgeFeeAmount: protocolFee.amount,
       bridgeChainFee: bridgeChainFee.amount,
       requiresApproval,
+      value,
     },
     func: 'sendToken',
   });
