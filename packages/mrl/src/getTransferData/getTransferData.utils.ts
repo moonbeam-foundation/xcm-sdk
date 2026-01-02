@@ -17,6 +17,8 @@ import {
 import {
   convertToChainDecimals,
   type DestinationChainTransferData,
+  type GetMaxParams,
+  getMax,
   getMin,
   PolkadotService,
 } from '@moonbeam-network/xcm-sdk';
@@ -87,8 +89,8 @@ export function getMrlMin({
     bridgeChainData,
     sourceData,
   });
-  const relayerFee = sourceData.otherFees?.relayer?.amount
-    ? sourceData.otherFees.relayer.toBig()
+  const relayerFee = sourceData.extraFees?.remote?.fee.amount
+    ? sourceData.extraFees.remote?.fee.toBig()
     : Big(0);
 
   return min.copyWith({
@@ -99,6 +101,7 @@ export function getMrlMin({
 export interface BuildTransferParams {
   asset: AssetAmount;
   protocolFee?: AssetAmount;
+  bridgeChainFee: AssetAmount;
   destinationAddress: string;
   feeAsset: AssetAmount;
   isAutomatic: boolean;
@@ -140,6 +143,7 @@ export async function buildTransfer(params: BuildTransferParams) {
 export async function getMrlBuilderParams({
   asset,
   protocolFee,
+  bridgeChainFee,
   destinationAddress,
   feeAsset,
   isAutomatic,
@@ -167,6 +171,7 @@ export async function getMrlBuilderParams({
   return {
     asset,
     protocolFee,
+    bridgeChainFee,
     destination,
     destinationAddress,
     destinationApi,
@@ -293,9 +298,9 @@ async function getBridgeChainGasLimit(
 
 export function getAmountForTransferSimulation(
   balance: AssetAmount,
-  protocolFee: AssetAmount,
+  protocolFee?: AssetAmount,
 ): AssetAmount {
-  if (!balance.isSame(protocolFee)) {
+  if (!protocolFee || !balance.isSame(protocolFee)) {
     return balance;
   }
 
@@ -305,5 +310,41 @@ export function getAmountForTransferSimulation(
       balance.amount - protocolFee.amount > 0
         ? balance.amount - protocolFee.amount
         : 0n,
+  });
+}
+
+interface GetMrlMaxParams extends GetMaxParams {
+  extraFees?: {
+    local?: {
+      fee: AssetAmount;
+      balance: AssetAmount;
+    };
+  };
+}
+
+export function getMrlMax({
+  balance,
+  existentialDeposit,
+  fee,
+  min,
+  extraFees,
+}: GetMrlMaxParams): AssetAmount {
+  const xcmMax = getMax({
+    balance,
+    existentialDeposit,
+    fee,
+    min,
+  });
+
+  const result = xcmMax
+    .toBig()
+    .minus(
+      extraFees?.local && balance.isSame(extraFees.local.fee)
+        ? extraFees.local.fee.toBig()
+        : Big(0),
+    );
+
+  return balance.copyWith({
+    amount: result.lt(0) ? 0n : BigInt(result.toFixed()),
   });
 }

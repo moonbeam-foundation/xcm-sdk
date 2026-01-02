@@ -1,13 +1,13 @@
 import { EvmChain, EvmParachain } from '@moonbeam-network/xcm-types';
 import { ContractConfig } from '../..';
 import { GATEWAY_ABI } from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
-import type { BridgeFeeConfigBuilder } from '../FeeBuilder.interfaces';
+import type { ProtocolFeeConfigBuilder } from '../FeeBuilder.interfaces';
 
 export function gateway() {
   return {
-    quoteSendTokenFee(): BridgeFeeConfigBuilder {
+    quoteSendTokenFee(): ProtocolFeeConfigBuilder {
       return {
-        build: ({ asset, destination, source }) => {
+        build: ({ asset, destination, source, bridgeChainFee }) => {
           if (!asset.address) {
             throw new Error(`Asset ${asset.key} has no address`);
           }
@@ -27,7 +27,11 @@ export function gateway() {
           return new ContractConfig({
             address: source.contracts.Gateway,
             abi: GATEWAY_ABI,
-            args: [asset.address, destination.parachainId, 0n],
+            args: [
+              asset.address,
+              destination.parachainId,
+              bridgeChainFee.amount,
+            ],
             func: 'quoteSendTokenFee',
             module: 'Gateway',
           });
