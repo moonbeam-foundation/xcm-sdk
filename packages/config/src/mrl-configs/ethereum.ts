@@ -454,9 +454,10 @@ export const ethereumRoutes = new MrlChainRoutes({
       mrl: {
         isAutomaticPossible: false,
         transfer: MrlBuilder().wormhole().wormhole().tokenTransfer(),
-        moonChain: {
+        bridgeChain: {
           asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
+          chain: moonbeam,
           fee: {
             asset: glmr,
             amount: 0.15,
