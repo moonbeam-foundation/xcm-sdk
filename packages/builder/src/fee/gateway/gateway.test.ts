@@ -1,11 +1,26 @@
 import { Asset, ChainAsset, EvmChain } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
-import { feeBuilderParamsMock, testChainAsset } from '../../../fixtures';
+import {
+  feeBuilderParamsMock,
+  testAssetAmount2,
+  testChainAsset,
+} from '../../../fixtures';
 import { GATEWAY_ABI } from '../../mrl/providers/snowbridge/snowbridge/SnowbridgeConstants';
 import { ContractConfig } from '../../types';
+import type { ProtocolFeeConfigBuilderParams } from '../FeeBuilder.interfaces';
 import { gateway } from './gateway';
 
 describe('gateway', () => {
+  const protocolFeeParams: ProtocolFeeConfigBuilderParams = {
+    address: feeBuilderParamsMock.address,
+    asset: feeBuilderParamsMock.feeAsset,
+    balance: feeBuilderParamsMock.balance,
+    bridgeChainFee: testAssetAmount2,
+    destination: feeBuilderParamsMock.destination,
+    feeAsset: feeBuilderParamsMock.feeAsset,
+    source: feeBuilderParamsMock.source,
+  };
+
   describe('quoteSendTokenFee', () => {
     it('should return a BridgeFeeConfigBuilder', () => {
       const result = gateway().quoteSendTokenFee();
@@ -16,7 +31,7 @@ describe('gateway', () => {
 
     it('should build a ContractConfig with correct properties', () => {
       const builder = gateway().quoteSendTokenFee();
-      const config = builder.build(feeBuilderParamsMock);
+      const config = builder.build(protocolFeeParams);
 
       expect(config).toBeInstanceOf(ContractConfig);
 
@@ -24,7 +39,7 @@ describe('gateway', () => {
         expect(config.module).toBe('Gateway');
         expect(config.func).toBe('quoteSendTokenFee');
         expect(config.address).toBe(
-          (feeBuilderParamsMock.source as EvmChain).contracts?.Gateway,
+          (protocolFeeParams.source as EvmChain).contracts?.Gateway,
         );
         expect(config.abi).toBe(GATEWAY_ABI);
       }
@@ -32,19 +47,19 @@ describe('gateway', () => {
 
     it('should generate correct args structure', () => {
       const builder = gateway().quoteSendTokenFee();
-      const config = builder.build(feeBuilderParamsMock);
+      const config = builder.build(protocolFeeParams);
 
       if (config instanceof ContractConfig) {
         expect(config.args).toHaveLength(3);
-        expect(config.args[0]).toBe(feeBuilderParamsMock.asset.address);
+        expect(config.args[0]).toBe(protocolFeeParams.asset.address);
         expect(config.args[1]).toBe(1000);
-        expect(config.args[2]).toBe(0n);
+        expect(config.args[2]).toBe(protocolFeeParams.bridgeChainFee.amount);
       }
     });
 
     it('should use asset address in args', () => {
       const builder = gateway().quoteSendTokenFee();
-      const config = builder.build(feeBuilderParamsMock);
+      const config = builder.build(protocolFeeParams);
 
       if (config instanceof ContractConfig) {
         expect(config.args[0]).toBe(testChainAsset.address);
@@ -53,25 +68,25 @@ describe('gateway', () => {
 
     it('should use destination parachainId in args', () => {
       const builder = gateway().quoteSendTokenFee();
-      const config = builder.build(feeBuilderParamsMock);
+      const config = builder.build(protocolFeeParams);
 
       if (config instanceof ContractConfig) {
         expect(config.args[1]).toBe(1000);
       }
     });
 
-    it('should use 0n as third argument', () => {
+    it('should use bridgeChainFee amount as third argument', () => {
       const builder = gateway().quoteSendTokenFee();
-      const config = builder.build(feeBuilderParamsMock);
+      const config = builder.build(protocolFeeParams);
 
       if (config instanceof ContractConfig) {
-        expect(config.args[2]).toBe(0n);
+        expect(config.args[2]).toBe(protocolFeeParams.bridgeChainFee.amount);
       }
     });
 
     it('should match args snapshot', () => {
       const builder = gateway().quoteSendTokenFee();
-      const config = builder.build(feeBuilderParamsMock);
+      const config = builder.build(protocolFeeParams);
 
       if (config instanceof ContractConfig) {
         expect(config.args).toMatchSnapshot();
@@ -89,7 +104,7 @@ describe('gateway', () => {
         );
 
         const paramsWithoutAddress = {
-          ...feeBuilderParamsMock,
+          ...protocolFeeParams,
           asset: assetWithoutAddress,
         };
 
@@ -103,7 +118,7 @@ describe('gateway', () => {
       it('should throw error if destination is not an EvmParachain or Parachain', () => {
         const evmChain = new EvmChain({
           assets: [testChainAsset],
-          ecosystem: feeBuilderParamsMock.destination.ecosystem,
+          ecosystem: protocolFeeParams.destination.ecosystem,
           id: 1,
           isTestChain: true,
           key: 'test-evm-chain',
@@ -113,7 +128,7 @@ describe('gateway', () => {
         });
 
         const paramsWithEvmChain = {
-          ...feeBuilderParamsMock,
+          ...protocolFeeParams,
           destination: evmChain,
         };
 
@@ -126,8 +141,8 @@ describe('gateway', () => {
 
       it('should throw error if source is not an EvmChain with Gateway contract', () => {
         const paramsWithParachainSource = {
-          ...feeBuilderParamsMock,
-          source: feeBuilderParamsMock.destination, // Use a parachain as source
+          ...protocolFeeParams,
+          source: protocolFeeParams.destination, // Use a parachain as source
         };
 
         const builder = gateway().quoteSendTokenFee();
@@ -140,7 +155,7 @@ describe('gateway', () => {
       it('should not throw error for valid EvmParachain destination', () => {
         const builder = gateway().quoteSendTokenFee();
 
-        expect(() => builder.build(feeBuilderParamsMock)).not.toThrow();
+        expect(() => builder.build(protocolFeeParams)).not.toThrow();
       });
 
       it('should match error snapshot for missing address', () => {
@@ -153,7 +168,7 @@ describe('gateway', () => {
         );
 
         const paramsWithoutAddress = {
-          ...feeBuilderParamsMock,
+          ...protocolFeeParams,
           asset: assetWithoutAddress,
         };
 
@@ -167,7 +182,7 @@ describe('gateway', () => {
       it('should match error snapshot for invalid destination', () => {
         const evmChain = new EvmChain({
           assets: [testChainAsset],
-          ecosystem: feeBuilderParamsMock.destination.ecosystem,
+          ecosystem: protocolFeeParams.destination.ecosystem,
           id: 1,
           isTestChain: true,
           key: 'test-evm-chain',
@@ -177,7 +192,7 @@ describe('gateway', () => {
         });
 
         const paramsWithEvmChain = {
-          ...feeBuilderParamsMock,
+          ...protocolFeeParams,
           destination: evmChain,
         };
 
@@ -190,8 +205,8 @@ describe('gateway', () => {
 
       it('should match error snapshot for invalid source', () => {
         const paramsWithParachainSource = {
-          ...feeBuilderParamsMock,
-          source: feeBuilderParamsMock.destination, // Use a parachain as source
+          ...protocolFeeParams,
+          source: protocolFeeParams.destination, // Use a parachain as source
         };
 
         const builder = gateway().quoteSendTokenFee();
@@ -205,7 +220,7 @@ describe('gateway', () => {
     describe('ContractConfig methods', () => {
       it('should have encodeFunctionData method', () => {
         const builder = gateway().quoteSendTokenFee();
-        const config = builder.build(feeBuilderParamsMock);
+        const config = builder.build(protocolFeeParams);
 
         if (config instanceof ContractConfig) {
           expect(config.encodeFunctionData).toBeDefined();
@@ -215,7 +230,7 @@ describe('gateway', () => {
 
       it('should encode function data correctly', () => {
         const builder = gateway().quoteSendTokenFee();
-        const config = builder.build(feeBuilderParamsMock);
+        const config = builder.build(protocolFeeParams);
 
         if (config instanceof ContractConfig) {
           const encoded = config.encodeFunctionData();
