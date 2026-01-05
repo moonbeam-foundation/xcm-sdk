@@ -482,7 +482,7 @@ async function getExtraFees({
       : undefined;
 
   const remoteFee = relayerFee
-    ? { fee: relayerFee, balance: feeAsset }
+    ? { fee: relayerFee, balance: asset }
     : undefined;
 
   return {
