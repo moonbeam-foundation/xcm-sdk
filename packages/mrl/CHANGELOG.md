@@ -1,5 +1,48 @@
 # @moonbeam-network/mrl
 
+## 4.2.2
+
+### Patch Changes
+
+- [#608](https://github.com/moonbeam-foundation/xcm-sdk/pull/608) [`4a9a75d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4a9a75d366dae3fe28ec7a5f19cde1c978a5c122) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix remote fee balance asset
+
+## 4.2.1
+
+### Patch Changes
+
+- [#606](https://github.com/moonbeam-foundation/xcm-sdk/pull/606) [`cf68751`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf687514a50c0aa62802959e14de7adea6f26ff2) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`cf68751`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf687514a50c0aa62802959e14de7adea6f26ff2)]:
+  - @moonbeam-network/xcm-builder@4.4.5
+  - @moonbeam-network/xcm-config@4.6.5
+  - @moonbeam-network/xcm-types@4.3.4
+  - @moonbeam-network/xcm-sdk@4.2.5
+
+## 4.2.0
+
+### Minor Changes
+
+- [#602](https://github.com/moonbeam-foundation/xcm-sdk/pull/602) [`7fbdeee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7fbdeee49c87578d650c218885dda8b5e831918d) Thanks [@mmaurello](https://github.com/mmaurello)! - Changes in MRL package to allow routes between Tanssi Container Chains and ethereum
+
+### Patch Changes
+
+- Updated dependencies [[`7fbdeee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7fbdeee49c87578d650c218885dda8b5e831918d)]:
+  - @moonbeam-network/xcm-builder@4.4.4
+  - @moonbeam-network/xcm-config@4.6.4
+  - @moonbeam-network/xcm-types@4.3.3
+  - @moonbeam-network/xcm-sdk@4.2.4
+
+## 4.1.4
+
+### Patch Changes
+
+- [#603](https://github.com/moonbeam-foundation/xcm-sdk/pull/603) [`048d8b8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/048d8b8286bcc79d9478ac0c2aebee13a38cda0a) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix value when transferring an asset that is not the native in Snowbridge transfers from Ethereum
+
+- Updated dependencies [[`048d8b8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/048d8b8286bcc79d9478ac0c2aebee13a38cda0a)]:
+  - @moonbeam-network/xcm-builder@4.4.3
+  - @moonbeam-network/xcm-config@4.6.3
+  - @moonbeam-network/xcm-sdk@4.2.3
+
 ## 4.1.3
 
 ### Patch Changes

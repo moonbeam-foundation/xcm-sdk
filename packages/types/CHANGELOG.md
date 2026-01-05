@@ -1,5 +1,17 @@
 # @moonbeam-network/xcm-types
 
+## 4.3.4
+
+### Patch Changes
+
+- [#606](https://github.com/moonbeam-foundation/xcm-sdk/pull/606) [`cf68751`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf687514a50c0aa62802959e14de7adea6f26ff2) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+## 4.3.3
+
+### Patch Changes
+
+- [#602](https://github.com/moonbeam-foundation/xcm-sdk/pull/602) [`7fbdeee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7fbdeee49c87578d650c218885dda8b5e831918d) Thanks [@mmaurello](https://github.com/mmaurello)! - Changes in MRL package to allow routes between Tanssi Container Chains and ethereum
+
 ## 4.3.2
 
 ### Patch Changes

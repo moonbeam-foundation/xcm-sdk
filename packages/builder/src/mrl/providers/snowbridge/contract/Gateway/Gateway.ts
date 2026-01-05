@@ -15,12 +15,30 @@ export function Gateway() {
   return {
     sendToken: (): MrlConfigBuilder => ({
       provider,
-      build: ({ asset, destinationAddress, protocolFee, destination }) =>
-        callSendToken(asset, protocolFee, destination, destinationAddress),
+      build: ({
+        asset,
+        destinationAddress,
+        protocolFee,
+        destination,
+        bridgeChainFee,
+      }) =>
+        callSendToken(
+          asset,
+          protocolFee,
+          destination,
+          destinationAddress,
+          bridgeChainFee,
+        ),
     }),
     approveAndSendToken: (): MrlConfigBuilder => ({
       provider,
-      build: ({ asset, destinationAddress, protocolFee, destination }) => {
+      build: ({
+        asset,
+        destinationAddress,
+        protocolFee,
+        destination,
+        bridgeChainFee,
+      }) => {
         const requiresApproval = protocolFee && !protocolFee.isSame(asset);
 
         return callSendToken(
@@ -28,6 +46,7 @@ export function Gateway() {
           protocolFee,
           destination,
           destinationAddress,
+          bridgeChainFee,
           requiresApproval,
         );
       },
@@ -40,10 +59,15 @@ function callSendToken(
   protocolFee: AssetAmount | undefined,
   destination: AnyChain,
   destinationAddress: string,
+  bridgeChainFee: AssetAmount | undefined,
   requiresApproval = false,
 ): SnowbridgeConfig {
   if (!protocolFee) {
     throw new Error('Protocol fee is required for Gateway module');
+  }
+
+  if (!bridgeChainFee) {
+    throw new Error('Bridge chain fee is required for Gateway module');
   }
 
   if (!EvmParachain.isAnyParachain(destination)) {
@@ -52,6 +76,13 @@ function callSendToken(
     );
   }
 
+  const isDifferentAsset = !asset.isSame(protocolFee);
+
+  const value =
+    requiresApproval || isDifferentAsset
+      ? protocolFee.amount
+      : asset.amount + protocolFee.amount;
+
   return new SnowbridgeConfig({
     args: {
       tokenAddress: asset.address as string,
@@ -59,7 +90,9 @@ function callSendToken(
       destinationParaId: destination.parachainId,
       amount: asset.amount,
       bridgeFeeAmount: protocolFee.amount,
+      bridgeChainFee: bridgeChainFee.amount,
       requiresApproval,
+      value,
     },
     func: 'sendToken',
   });

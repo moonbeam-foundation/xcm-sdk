@@ -1,7 +1,10 @@
 import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
 import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
-import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
+import {
+  getMultilocationDerivedAddresses,
+  isEthAddress,
+} from '@moonbeam-network/xcm-utils';
 import { evmToAddress } from '@polkadot/util-crypto';
 import type { BridgeChainTransferData } from '../mrl.interfaces';
 
@@ -81,6 +84,11 @@ export function getBridgeChainAddress({
   let bridgeChainAddress = isDestinationBridgeChain
     ? destinationAddress
     : sourceAddress;
+
+  if (Parachain.isExactly(bridgeChain) && isEthAddress(bridgeChainAddress)) {
+    bridgeChainAddress = evmToAddress(bridgeChainAddress);
+    return bridgeChainAddress;
+  }
 
   // for Parachain to EVM transactions, we use the computed origin account in the bridgeChain
   if (Parachain.is(source) && !isSourceBridgeChain) {
