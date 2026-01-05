@@ -1,5 +1,11 @@
 # @moonbeam-network/mrl
 
+## 4.2.2
+
+### Patch Changes
+
+- [#608](https://github.com/moonbeam-foundation/xcm-sdk/pull/608) [`4a9a75d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4a9a75d366dae3fe28ec7a5f19cde1c978a5c122) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix remote fee balance asset
+
 ## 4.2.1
 
 ### Patch Changes
