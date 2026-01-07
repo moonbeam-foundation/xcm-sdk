@@ -45,7 +45,7 @@ export const moonriverRoutes = new MrlChainRoutes({
           chain: moonbeam,
           fee: {
             asset: glmr,
-            amount: 0.1,
+            amount: 0.03,
             balance: BalanceBuilder().evm().native(),
           },
         },

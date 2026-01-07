@@ -1,7 +1,7 @@
 import {
   type AnyChain,
   type AnyParachain,
-  AssetAmount,
+  type AssetAmount,
   type ChainAsset,
   EvmParachain,
   type Parachain,
@@ -37,7 +37,7 @@ export function Batch() {
      * Transfers assets and XCM message using XTokens contract for multi-currency transfer.
      * Uses parents: 1 for multilocation derivation.
      */
-    transferAssetsAndMessageViaXTokens: (): MrlConfigBuilder => ({
+    transferAssetsAndMessageViaXtokens: (): MrlConfigBuilder => ({
       provider,
       build: (params) => {
         const { source, sourceAddress, sourceApi } = params;
@@ -144,13 +144,17 @@ export function Batch() {
           throw new Error('Source API needs to be defined');
         }
 
+        if (!params.bridgeChainFee) {
+          throw new Error('Bridge chain fee is required');
+        }
+
         if (
           !source.contracts?.XcmUtils ||
           !source.contracts?.Batch ||
           !source.contracts?.XcmPrecompile
         ) {
           throw new Error(
-            'Source chain needs to have the XcmUtils and Batch contract addresses configured',
+            'Source chain needs to have the XcmUtils, Batch and XcmPrecompile contract addresses configured',
           );
         }
 
@@ -180,14 +184,6 @@ export function Batch() {
 
         const { BatchAbi, XcmUtilsAbi } = getAbisForChain(source);
 
-        const bridgeChainFee = AssetAmount.fromChainAsset(
-          params.bridgeChain.getChainAsset(params.moonAsset),
-          {
-            // TODO mjm get from the config, after merging the changes from Tanssi Demo, which brings bridgeChainFee to the params of this function
-            amount: 0.03,
-          },
-        );
-
         const transferAssetsCall = ContractBuilder()
           .XcmPrecompile()
           .transferAssetsLocation()
@@ -195,7 +191,7 @@ export function Batch() {
           .build({
             sourceApi,
             asset: params.asset,
-            fee: bridgeChainFee,
+            fee: params.bridgeChainFee,
             destination: params.bridgeChain,
             destinationAddress: computedOriginAccount,
             source,

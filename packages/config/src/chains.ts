@@ -1844,6 +1844,7 @@ export const moonriver = new EvmParachain({
   contracts: {
     Batch: '0x0000000000000000000000000000000000000808',
     XcmUtils: '0x000000000000000000000000000000000000080C',
+    XcmPrecompile: '0x000000000000000000000000000000000000081A',
   },
   ecosystem: Ecosystem.Kusama,
   genesisHash:
