@@ -38,6 +38,7 @@ export type MrlExecuteConfigBuilder = ConfigBuilder<
 export interface MrlBuilderParams extends BuilderParams<AnyChain> {
   isAutomatic: boolean;
   protocolFee?: AssetAmount;
+  bridgeChainFee?: AssetAmount;
   moonApi: ApiPromise;
   moonAsset: ChainAsset;
   bridgeChain: AnyParachain;

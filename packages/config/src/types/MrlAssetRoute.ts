@@ -1,8 +1,8 @@
 import type {
   BalanceConfigBuilder,
-  BridgeFeeConfigBuilder,
   FeeConfigBuilder,
   MrlConfigBuilder,
+  ProtocolFeeConfigBuilder,
 } from '@moonbeam-network/xcm-builder';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import {
@@ -19,14 +19,20 @@ export interface MrlAssetRouteConstructorParams
 }
 
 export interface MrlConfig {
-  isAutomaticPossible: boolean;
+  isAutomaticPossible?: boolean;
   transfer: MrlConfigBuilder;
   bridgeChain: BridgeChainConfig;
 }
 
+export interface ProtocolFeeConfig {
+  amount: number | ProtocolFeeConfigBuilder;
+  asset: Asset;
+  balance: BalanceConfigBuilder;
+}
+
 export interface MrlSourceConfig extends SourceConfig {
   /** Protocol bridge fee (e.g., Snowbridge fee) */
-  protocolFee?: number | BridgeFeeConfigBuilder;
+  protocolFee?: ProtocolFeeConfig;
   bridgeChainFee?: {
     asset: Asset;
     balance: BalanceConfigBuilder;
@@ -45,7 +51,7 @@ export interface BridgeChainFeeConfig extends FeeConfig {
 }
 
 export class MrlAssetRoute extends AssetRoute {
-  readonly mrl: MrlConfig;
+  readonly mrl: MrlConfig & { isAutomaticPossible: boolean };
   readonly source: MrlSourceConfig;
 
   constructor({
@@ -56,7 +62,11 @@ export class MrlAssetRoute extends AssetRoute {
     mrl,
   }: MrlAssetRouteConstructorParams & { source: MrlSourceConfig }) {
     super({ source, destination, contract, extrinsic });
-    this.mrl = mrl;
+    // Set the default value for isAutomaticPossible as true when not defined
+    this.mrl = {
+      ...mrl,
+      isAutomaticPossible: mrl.isAutomaticPossible ?? true,
+    };
     this.source = source;
   }
 }

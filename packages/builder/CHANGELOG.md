@@ -1,5 +1,29 @@
 # @moonbeam-network/xcm-builder
 
+## 4.4.5
+
+### Patch Changes
+
+- [#606](https://github.com/moonbeam-foundation/xcm-sdk/pull/606) [`cf68751`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf687514a50c0aa62802959e14de7adea6f26ff2) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`cf68751`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cf687514a50c0aa62802959e14de7adea6f26ff2)]:
+  - @moonbeam-network/xcm-types@4.3.4
+
+## 4.4.4
+
+### Patch Changes
+
+- [#602](https://github.com/moonbeam-foundation/xcm-sdk/pull/602) [`7fbdeee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7fbdeee49c87578d650c218885dda8b5e831918d) Thanks [@mmaurello](https://github.com/mmaurello)! - Changes in MRL package to allow routes between Tanssi Container Chains and ethereum
+
+- Updated dependencies [[`7fbdeee`](https://github.com/moonbeam-foundation/xcm-sdk/commit/7fbdeee49c87578d650c218885dda8b5e831918d)]:
+  - @moonbeam-network/xcm-types@4.3.3
+
+## 4.4.3
+
+### Patch Changes
+
+- [#603](https://github.com/moonbeam-foundation/xcm-sdk/pull/603) [`048d8b8`](https://github.com/moonbeam-foundation/xcm-sdk/commit/048d8b8286bcc79d9478ac0c2aebee13a38cda0a) Thanks [@mmaurello](https://github.com/mmaurello)! - Fix value when transferring an asset that is not the native in Snowbridge transfers from Ethereum
+
 ## 4.4.2
 
 ### Patch Changes
