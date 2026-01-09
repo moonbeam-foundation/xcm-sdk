@@ -1,20 +1,38 @@
-The Types package contains the type definitions for the Moonbeam XCM SDK and MRL SDK.
+# @moonbeam-network/xcm-types
 
-# Documentation for the Moonbeam XCM SDK
+Common types, interfaces, and classes shared throughout the Moonbeam XCM SDK and MRL SDK.
 
-## v3 (current)
+## Package Information
 
-### Usage
+**NPM Package:** [https://www.npmjs.com/package/@moonbeam-network/xcm-types](https://www.npmjs.com/package/@moonbeam-network/xcm-types)
+
+**Package Level:** Level 2  
+**Depends on:** `@moonbeam-network/xcm-utils`
+
+This package provides type definitions and interfaces used across all other packages in the repository.
+
+## Documentation
+
+### v4 (current)
+
+#### Usage
 
 - [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/latest/example-usage/xcm)
 - [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/latest/example-usage/mrl)
 
-### References
+#### References
 
 - [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/xcm)
 - [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/latest/reference/mrl)
 
-## v2 (previous)
+### v3 (previous)
 
-- [usage](https://moonbeam-foundation.github.io/xcm-sdk/v2/example-usage)
-- [references](https://moonbeam-foundation.github.io/xcm-sdk/v2/reference/interfaces)
+#### Usage
+
+- [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/example-usage/xcm)
+- [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/example-usage/mrl)
+
+#### References
+
+- [XCM SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/reference/xcm)
+- [MRL SDK](https://moonbeam-foundation.github.io/xcm-sdk/v3/reference/mrl)
