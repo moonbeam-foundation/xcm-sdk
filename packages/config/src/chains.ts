@@ -2168,33 +2168,6 @@ export const pendulum = new Parachain({
   ws: ['wss://rpc-pendulum.prd.pendulumchain.tech'],
 });
 
-export const pendulumAlphanet = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(ampe, {
-      decimals: 12,
-      ids: {
-        id: 'Native',
-      },
-    }),
-    ChainAsset.fromAsset(dev, {
-      decimals: 18,
-      ids: {
-        id: { XCM: 1 },
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0xe83b546ddeccf999d4b7fef4d83271034e82bb5db538e769c242c2731f61e8d6',
-  isTestChain: true,
-  key: 'pendulum-alphanet',
-  name: 'Foucoco',
-  nativeAsset: ampe,
-  parachainId: 2124,
-  ss58Format: 57,
-  ws: ['wss://moonbeam-00.pendulumchain.tech:443'],
-});
-
 export const polkadot = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   checkSovereignAccountBalances: true,
@@ -2456,7 +2429,6 @@ export const chainsList: AnyChain[] = [
   peaqEvm,
   peaqEvmAlphanet,
   pendulum,
-  pendulumAlphanet,
   polkadot,
   polkadotAssetHub,
   robonomics,

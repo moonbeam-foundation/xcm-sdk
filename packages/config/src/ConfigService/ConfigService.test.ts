@@ -18,7 +18,6 @@ import {
   moonbaseBeta,
   moonbeam,
   moonriver,
-  pendulumAlphanet,
   shiden,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -130,9 +129,7 @@ describe('config service', () => {
         ecosystem: Ecosystem.AlphanetRelay,
       });
 
-      expect(chains).toStrictEqual(
-        expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
-      );
+      expect(chains).toStrictEqual(expect.arrayContaining([moonbaseAlpha]));
     });
 
     it('should get source chains for asset', () => {
@@ -141,9 +138,7 @@ describe('config service', () => {
         ecosystem: Ecosystem.AlphanetRelay,
       });
 
-      expect(chains).toStrictEqual(
-        expect.arrayContaining([moonbaseAlpha, pendulumAlphanet]),
-      );
+      expect(chains).toStrictEqual(expect.arrayContaining([moonbaseAlpha]));
     });
   });
 
