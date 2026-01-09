@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.6
+
+### Patch Changes
+
+- [#612](https://github.com/moonbeam-foundation/xcm-sdk/pull/612) [`4bed45a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4bed45aca86eb98166423d3f446ab1d1691f5f73) Thanks [@mauops](https://github.com/mauops)! - remove pendulumAlphanet chain
+
 ## 4.6.5
 
 ### Patch Changes
