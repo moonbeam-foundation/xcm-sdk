@@ -5,6 +5,7 @@ import { hydrationRoutes } from './hydration';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
 import { moonbaseBetaRoutes } from './moonbaseBeta';
 import { moonbeamRoutes } from './moonbeam';
+import { moonriverRoutes } from './moonriver';
 import { peaqAlphanetRoutes } from './peaqAlphanet';
 import { peaqEvmAlphanetRoutes } from './peaqEvmAlphanet';
 
@@ -15,6 +16,7 @@ export const mrlRoutesList: MrlChainRoutes[] = [
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,
   moonbeamRoutes,
+  moonriverRoutes,
   peaqAlphanetRoutes,
   peaqEvmAlphanetRoutes,
 ];
