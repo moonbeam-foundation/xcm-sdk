@@ -27,7 +27,7 @@ export type MrlConfigBuilder = ConfigBuilder<
   MrlTransferConfig,
   MrlBuilderParams
 > & {
-  provider?: Provider;
+  provider: Provider;
 };
 
 export type MrlExecuteConfigBuilder = ConfigBuilder<

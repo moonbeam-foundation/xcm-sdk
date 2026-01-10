@@ -1,4 +1,4 @@
-export const PEAQ_XTOKENS_ABI = [
+export const XTOKENS_ABI = [
   {
     inputs: [
       {
