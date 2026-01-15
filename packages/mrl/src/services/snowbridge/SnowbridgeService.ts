@@ -185,6 +185,12 @@ export class SnowbridgeService {
     const { args } = transfer;
     const { tokenAddress, amount } = args;
 
+    if (!allowanceSlotNumber) {
+      throw new Error(
+        'Allowance slot is required to calculate the fee for approve and send',
+      );
+    }
+
     const contract = this.buildContractConfig(transfer);
 
     try {

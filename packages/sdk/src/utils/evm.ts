@@ -10,9 +10,9 @@ import {
 export function getAllowanceSlot(
   owner: string,
   spender: string,
-  allowanceSlot?: number,
+  allowanceSlot: number,
 ): Address {
-  const mappingSlot = allowanceSlot || 1;
+  const mappingSlot = allowanceSlot;
 
   const outer = keccak256(
     encodeAbiParameters(parseAbiParameters('address, uint256'), [
