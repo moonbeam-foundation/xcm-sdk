@@ -4,8 +4,12 @@ import {
   GATEWAY_ABI,
   type SnowbridgeConfig,
 } from '@moonbeam-network/xcm-builder';
-import type { EvmSigner } from '@moonbeam-network/xcm-sdk';
-import { EvmService } from '@moonbeam-network/xcm-sdk';
+import {
+  EvmService,
+  type EvmSigner,
+  getAllowanceSlot,
+  MAX_ALLOWANCE_HEX,
+} from '@moonbeam-network/xcm-sdk';
 import { type AnyChain, EvmChain } from '@moonbeam-network/xcm-types';
 import { isEthAddress } from '@moonbeam-network/xcm-utils';
 import { u8aToHex } from '@polkadot/util';
@@ -143,12 +147,15 @@ export class SnowbridgeService {
     return hash;
   }
 
-  async getFee(address: string, transfer: SnowbridgeConfig): Promise<bigint> {
+  async getFee(
+    address: string,
+    transfer: SnowbridgeConfig,
+    allowanceSlot?: number,
+  ): Promise<bigint> {
     const { args } = transfer;
     const { tokenAddress, amount, requiresApproval } = args;
 
     const contract = this.buildContractConfig(transfer);
-
     if (!requiresApproval) {
       return await this.#evmService.getFee(address, contract);
     }
@@ -163,12 +170,17 @@ export class SnowbridgeService {
       return await this.#evmService.getFee(address, contract);
     }
 
-    return await this.estimateApproveAndSendFee(address, transfer);
+    return await this.estimateApproveAndSendFee(
+      address,
+      transfer,
+      allowanceSlot,
+    );
   }
 
   private async estimateApproveAndSendFee(
     address: string,
     transfer: SnowbridgeConfig,
+    allowanceSlotNumber?: number,
   ): Promise<bigint> {
     const { args } = transfer;
     const { tokenAddress, amount } = args;
@@ -187,23 +199,27 @@ export class SnowbridgeService {
         to: tokenAddress as Address,
         data: approveData,
       });
+      const allowanceSlot = getAllowanceSlot(
+        address,
+        this.#gatewayAddress,
+        allowanceSlotNumber,
+      );
 
-      const sendData = encodeFunctionData({
-        abi: contract.abi,
-        functionName: contract.func,
-        args: contract.args,
-      });
-
-      const sendGas = await this.#evmService.client.estimateGas({
-        account: address as Address,
-        to: contract.address as Address,
-        data: sendData,
-        value: contract.value,
-      });
+      const sendFee = await this.#evmService.getFee(address, contract, [
+        {
+          address: tokenAddress as Address,
+          stateDiff: [
+            {
+              slot: allowanceSlot,
+              value: MAX_ALLOWANCE_HEX,
+            },
+          ],
+        },
+      ]);
 
       const gasPrice = await this.#evmService.client.getGasPrice();
 
-      return (approveGas + sendGas) * gasPrice;
+      return approveGas * gasPrice + sendFee;
     } catch (error) {
       console.error('Error estimating approve + send fee:', error);
       return 0n;
