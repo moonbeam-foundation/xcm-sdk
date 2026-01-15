@@ -6,10 +6,8 @@ import {
   moonbaseBeta,
   moonbeam,
   moonriver,
-  peaqAlphanet,
   peaqChain,
   peaqEvm,
-  peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
@@ -36,8 +34,6 @@ const config: { chain: AnyParachain; address: string }[] = [
   },
   { chain: moonbaseAlpha, address: moonEvmAddress },
   { chain: moonriver, address: moonEvmAddress },
-  { chain: peaqEvmAlphanet, address: moonEvmAddress },
-  { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
   { chain: laosMainnet, address: laosMainnetAddress },

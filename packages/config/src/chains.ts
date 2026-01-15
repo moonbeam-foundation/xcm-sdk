@@ -133,11 +133,7 @@ export const acala = new Parachain({
   nativeAsset: aca,
   parachainId: 2000,
   ss58Format: 10,
-  ws: [
-    'wss://acala-rpc.aca-api.network',
-    'wss://acala-rpc.dwellir.com',
-    'wss://acala-polkadot.api.onfinality.io/public-ws',
-  ],
+  ws: ['wss://acala-rpc.aca-api.network'],
 });
 
 export const alphanetAssetHub = new Parachain({
@@ -210,11 +206,7 @@ export const astar = new Parachain({
   nativeAsset: astr,
   parachainId: 2006,
   ss58Format: 5,
-  ws: [
-    'wss://rpc.astar.network',
-    'wss://astar-rpc.dwellir.com',
-    'wss://astar.api.onfinality.io/public-ws',
-  ],
+  ws: ['wss://rpc.astar.network', 'wss://astar.api.onfinality.io/public-ws'],
 });
 
 export const bifrostKusama = new Parachain({
@@ -274,11 +266,7 @@ export const bifrostKusama = new Parachain({
   nativeAsset: bnc,
   parachainId: 2001,
   ss58Format: 6,
-  ws: [
-    'wss://us.bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-rpc.dwellir.com',
-  ],
+  ws: ['wss://us.bifrost-rpc.liebi.com/ws', 'wss://bifrost-rpc.liebi.com/ws'],
 });
 
 export const bifrostPolkadot = new Parachain({
@@ -371,7 +359,6 @@ export const bifrostPolkadot = new Parachain({
   ws: [
     'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
     'wss://hk.p.bifrost-rpc.liebi.com/ws',
-    'wss://bifrost-polkadot-rpc.dwellir.com',
   ],
 });
 
@@ -394,7 +381,6 @@ export const centrifuge = new Parachain({
   ss58Format: 36,
   ws: [
     'wss://fullnode.centrifuge.io',
-    'wss://centrifuge-rpc.dwellir.com',
     'wss://rpc-centrifuge.luckyfriday.io',
     'wss://centrifuge-parachain.api.onfinality.io/public-ws',
   ],
@@ -475,7 +461,7 @@ export const darwiniaCrab = new EvmParachain({
   parachainId: 2105,
   rpc: 'https://crab-rpc.darwinia.network',
   ss58Format: 18,
-  ws: ['wss://darwiniacrab-rpc.dwellir.com', 'wss://crab-rpc.darwinia.network'],
+  ws: ['wss://crab-rpc.darwinia.network'],
 });
 
 export const ethereum = new EvmChain({
@@ -611,7 +597,6 @@ export const hydration = new Parachain({
   ss58Format: 63,
   ws: [
     'wss://hydration-rpc.n.dwellir.com',
-    'wss://hydradx-rpc.dwellir.com',
     'wss://rpc.hydradx.cloud',
     'wss://rpc.helikon.io/hydradx',
     'wss://hydration.ibp.network',
@@ -696,7 +681,7 @@ export const interlay = new Parachain({
   nativeAsset: intr,
   parachainId: 2032,
   ss58Format: 2032,
-  ws: ['wss://api.interlay.io/parachain', 'wss://interlay-rpc.dwellir.com'],
+  ws: ['wss://api.interlay.io/parachain'],
 });
 
 export const karura = new Parachain({
@@ -730,11 +715,7 @@ export const karura = new Parachain({
   nativeAsset: kar,
   parachainId: 2000,
   ss58Format: 8,
-  ws: [
-    'wss://karura-rpc-0.aca-api.network',
-    'wss://karura-rpc.dwellir.com',
-    'wss://karura.api.onfinality.io/public-ws',
-  ],
+  ws: ['wss://karura-rpc-0.aca-api.network'],
 });
 
 export const kintsugi = new Parachain({
@@ -762,7 +743,6 @@ export const kintsugi = new Parachain({
   ss58Format: 2092,
   ws: [
     'wss://api-kusama.interlay.io/parachain',
-    'wss://kintsugi-rpc.dwellir.com',
     'wss://kintsugi.api.onfinality.io/public-ws',
   ],
 });
@@ -780,7 +760,6 @@ export const kusama = new Parachain({
   parachainId: 0,
   ss58Format: 2,
   ws: [
-    'wss://kusama-rpc.dwellir.com',
     'wss://kusama.api.onfinality.io/public-ws',
     'wss://kusama-rpc.polkadot.io',
   ],
@@ -815,10 +794,7 @@ export const kusamaAssetHub = new Parachain({
   nativeAsset: ksm,
   parachainId: 1000,
   ss58Format: 2,
-  ws: [
-    'wss://asset-hub-kusama-rpc.dwellir.com',
-    'wss://kusama-asset-hub-rpc.polkadot.io',
-  ],
+  ws: ['wss://kusama-asset-hub-rpc.polkadot.io'],
 });
 
 export const mantaParachain = new Parachain({
@@ -1877,10 +1853,7 @@ export const neuroweb = new Parachain({
   nativeAsset: neuro,
   parachainId: 2043,
   ss58Format: 101,
-  ws: [
-    'wss://neuroweb-rpc.dwellir.com',
-    'wss://parachain-rpc.origin-trail.network',
-  ],
+  ws: ['wss://parachain-rpc.origin-trail.network'],
 });
 
 export const originTrailAlphanet = new Parachain({
@@ -2173,33 +2146,6 @@ export const pendulum = new Parachain({
   ws: ['wss://rpc-pendulum.prd.pendulumchain.tech'],
 });
 
-export const pendulumAlphanet = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(ampe, {
-      decimals: 12,
-      ids: {
-        id: 'Native',
-      },
-    }),
-    ChainAsset.fromAsset(dev, {
-      decimals: 18,
-      ids: {
-        id: { XCM: 1 },
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0xe83b546ddeccf999d4b7fef4d83271034e82bb5db538e769c242c2731f61e8d6',
-  isTestChain: true,
-  key: 'pendulum-alphanet',
-  name: 'Foucoco',
-  nativeAsset: ampe,
-  parachainId: 2124,
-  ss58Format: 57,
-  ws: ['wss://moonbeam-00.pendulumchain.tech:443'],
-});
-
 export const polkadot = new Parachain({
   assets: [ChainAsset.fromAsset(dot, { decimals: 10 })],
   checkSovereignAccountBalances: true,
@@ -2296,7 +2242,6 @@ export const polkadotAssetHub = new Parachain({
   parachainId: 1000,
   ss58Format: 42,
   ws: [
-    'wss://asset-hub-polkadot-rpc.dwellir.com',
     'wss://polkadot-asset-hub-rpc.polkadot.io',
     'wss://statemint.api.onfinality.io/public-ws',
   ],
@@ -2343,7 +2288,6 @@ export const shiden = new Parachain({
   parachainId: 2007,
   ss58Format: 5,
   ws: [
-    'wss://shiden-rpc.dwellir.com',
     'wss://rpc.shiden.astar.network',
     'wss://shiden.api.onfinality.io/public-ws',
   ],
@@ -2461,7 +2405,6 @@ export const chainsList: AnyChain[] = [
   peaqEvm,
   peaqEvmAlphanet,
   pendulum,
-  pendulumAlphanet,
   polkadot,
   polkadotAssetHub,
   robonomics,

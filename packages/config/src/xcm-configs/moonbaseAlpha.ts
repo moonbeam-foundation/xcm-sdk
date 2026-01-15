@@ -8,7 +8,6 @@ import {
 import {
   agng,
   alan,
-  ampe,
   dev,
   ftmwh,
   hdx,
@@ -29,7 +28,6 @@ import {
   originTrailAlphanet,
   peaqAlphanet,
   peaqEvmAlphanet,
-  pendulumAlphanet,
   turingAlphanet,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
@@ -89,29 +87,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: dev,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: dev,
-        chain: pendulumAlphanet,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.0000001,
-          asset: dev,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-    },
-    {
-      source: {
         asset: alan,
         balance: BalanceBuilder().evm().erc20(),
         fee: {
@@ -136,29 +111,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
         .monitorEvent()
         .polkadotXcm()
         .messageQueue(),
-    },
-    {
-      source: {
-        asset: ampe,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: ampe,
-        chain: pendulumAlphanet,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.001,
-          asset: ampe,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
     },
     {
       source: {

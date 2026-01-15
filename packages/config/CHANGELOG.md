@@ -1,5 +1,27 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.8
+
+### Patch Changes
+
+- [#616](https://github.com/moonbeam-foundation/xcm-sdk/pull/616) [`28b69ac`](https://github.com/moonbeam-foundation/xcm-sdk/commit/28b69ac2b615db7cc5a4472af210c48a513b9a23) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove dead endpoints
+
+## 4.6.7
+
+### Patch Changes
+
+- [#614](https://github.com/moonbeam-foundation/xcm-sdk/pull/614) [`8108cd3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8108cd3687d74d21a0951046ad86004f8b41b71d) Thanks [@mmaurello](https://github.com/mmaurello)! - Update dependencies
+
+- Updated dependencies [[`8108cd3`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8108cd3687d74d21a0951046ad86004f8b41b71d)]:
+  - @moonbeam-network/xcm-builder@4.4.6
+  - @moonbeam-network/xcm-types@4.3.5
+
+## 4.6.6
+
+### Patch Changes
+
+- [#612](https://github.com/moonbeam-foundation/xcm-sdk/pull/612) [`4bed45a`](https://github.com/moonbeam-foundation/xcm-sdk/commit/4bed45aca86eb98166423d3f446ab1d1691f5f73) Thanks [@mauops](https://github.com/mauops)! - remove pendulumAlphanet chain
+
 ## 4.6.5
 
 ### Patch Changes
