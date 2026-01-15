@@ -6,10 +6,8 @@ import {
   moonbaseBeta,
   moonbeam,
   moonriver,
-  peaqAlphanet,
   peaqChain,
   peaqEvm,
-  peaqEvmAlphanet,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
