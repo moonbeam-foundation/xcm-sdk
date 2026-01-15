@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.8
+
+### Patch Changes
+
+- [#616](https://github.com/moonbeam-foundation/xcm-sdk/pull/616) [`28b69ac`](https://github.com/moonbeam-foundation/xcm-sdk/commit/28b69ac2b615db7cc5a4472af210c48a513b9a23) Thanks [@mmaurello](https://github.com/mmaurello)! - Remove dead endpoints
+
 ## 4.6.7
 
 ### Patch Changes
