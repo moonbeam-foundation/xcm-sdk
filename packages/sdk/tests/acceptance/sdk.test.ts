@@ -36,8 +36,6 @@ const config: { chain: AnyParachain; address: string }[] = [
   },
   { chain: moonbaseAlpha, address: moonEvmAddress },
   { chain: moonriver, address: moonEvmAddress },
-  { chain: peaqEvmAlphanet, address: moonEvmAddress },
-  { chain: peaqAlphanet, address: substrateAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
   { chain: laosMainnet, address: laosMainnetAddress },
