@@ -5,4 +5,5 @@ export * from './sdk';
 export * from './sdk.interfaces';
 export * from './services/evm';
 export * from './services/polkadot';
+export * from './utils/evm';
 export * from './utils/monitoring';
