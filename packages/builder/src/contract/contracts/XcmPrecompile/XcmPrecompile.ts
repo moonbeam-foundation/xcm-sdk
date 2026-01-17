@@ -126,6 +126,7 @@ export function XcmPrecompile() {
       }),
       foreignErc20: (): ContractConfigBuilder => ({
         build: (params) => {
+          console.log('params', params);
           return buildTransferAssetsLocation({
             ...params,
             assetsMultilocations: [
