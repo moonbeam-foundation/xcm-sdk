@@ -20,7 +20,6 @@ import {
   axlusdc,
   bnc,
   cfg,
-  crab,
   csm,
   dai,
   ded,
@@ -437,31 +436,6 @@ export const darwinia = new EvmParachain({
   rpc: 'https://rpc.darwinia.network',
   ss58Format: 18,
   ws: ['wss://rpc.darwinia.network', 'wss://darwinia-rpc.dwellir.com'],
-});
-
-export const darwiniaCrab = new EvmParachain({
-  assets: [
-    ChainAsset.fromAsset(crab, {
-      decimals: 18,
-      ids: {
-        palletInstance: 5,
-      },
-    }),
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x86e49c195aeae7c5c4a86ced251f1a28c67b3c35d8289c387ede1776cdd88b24',
-  id: 44,
-  key: 'darwinia-crab',
-  name: 'Darwinia Crab',
-  nativeAsset: crab,
-  parachainId: 2105,
-  rpc: 'https://crab-rpc.darwinia.network',
-  ss58Format: 18,
-  ws: ['wss://crab-rpc.darwinia.network'],
 });
 
 export const ethereum = new EvmChain({
@@ -1622,14 +1596,6 @@ export const moonriver = new EvmParachain({
       },
       symbol: 'xcBNC',
     }),
-    ChainAsset.fromAsset(crab, {
-      address: getAddress('0xFFFffFfF8283448b3cB519Ca4732F2ddDC6A6165'),
-      decimals: 18,
-      ids: {
-        id: '173481220575862801646329923366065693029',
-      },
-      symbol: 'xcCRAB',
-    }),
     ChainAsset.fromAsset(csm, {
       address: getAddress('0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7'),
       decimals: 12,
@@ -2373,7 +2339,6 @@ export const chainsList: AnyChain[] = [
   centrifuge,
   crustShadow,
   darwinia,
-  darwiniaCrab,
   ethereum,
   fantomTestnet,
   hydration,
