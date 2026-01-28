@@ -1,4 +1,4 @@
-export const PEAQ_BATCH_ABI = [
+export const BATCH_ABI = [
   {
     anonymous: false,
     inputs: [

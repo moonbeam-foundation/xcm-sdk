@@ -13,6 +13,7 @@ import {
   type MrlAssetRoute,
   moonbaseAlpha,
   moonbeam,
+  moonriver,
 } from '@moonbeam-network/xcm-config';
 import {
   convertToChainDecimals,
@@ -41,6 +42,7 @@ import type {
 
 const MOON_CHAIN_AUTOMATIC_GAS_ESTIMATION = {
   [moonbeam.key]: 1273110n,
+  [moonriver.key]: 1273110n,
   [moonbaseAlpha.key]: 1470417n,
 };
 
@@ -198,11 +200,14 @@ async function getTransact(
     throw new Error('Source chain must be Parachain or EvmParachain');
   }
 
+  const isDifferentEcosystem = source.ecosystem !== bridgeChain.ecosystem;
+
   const { address20 } = getMultilocationDerivedAddresses({
     address: sourceAddress,
     paraId: source.parachainId,
-    isParents: true,
+    parents: isDifferentEcosystem ? 2 : 1,
   });
+
   const extrinsic = MrlBuilder()
     .wormhole()
     .extrinsic()
@@ -240,7 +245,7 @@ async function getBridgeChainGasLimit(
   const { address20 } = getMultilocationDerivedAddresses({
     address: sourceAddress,
     paraId: source.parachainId,
-    isParents: true,
+    parents: 1,
   });
 
   // TODO: we have a problem to calculate the gasEstimation for automatic:

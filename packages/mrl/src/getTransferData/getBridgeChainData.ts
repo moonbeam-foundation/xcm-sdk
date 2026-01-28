@@ -1,6 +1,6 @@
 import type { MrlAssetRoute } from '@moonbeam-network/xcm-config';
 import { getBalance, getDestinationFee } from '@moonbeam-network/xcm-sdk';
-import { EvmParachain, Parachain } from '@moonbeam-network/xcm-types';
+import { Parachain } from '@moonbeam-network/xcm-types';
 import {
   getMultilocationDerivedAddresses,
   isEthAddress,
@@ -81,6 +81,8 @@ export function getBridgeChainAddress({
   const isDestinationBridgeChain = bridgeChain.isEqual(destination);
   const isSourceBridgeChain = bridgeChain.isEqual(source);
 
+  const isDifferentEcosystem = source.ecosystem !== bridgeChain.ecosystem;
+
   let bridgeChainAddress = isDestinationBridgeChain
     ? destinationAddress
     : sourceAddress;
@@ -92,15 +94,11 @@ export function getBridgeChainAddress({
 
   // for Parachain to EVM transactions, we use the computed origin account in the bridgeChain
   if (Parachain.is(source) && !isSourceBridgeChain) {
-    const isSourceEvmSigner = EvmParachain.is(source) && source.isEvmSigner;
-
     const { address20: computedOriginAccount } =
       getMultilocationDerivedAddresses({
-        address: isSourceEvmSigner
-          ? evmToAddress(sourceAddress)
-          : sourceAddress,
+        address: sourceAddress,
         paraId: source.parachainId,
-        isParents: true,
+        parents: isDifferentEcosystem ? 2 : 1,
       });
 
     bridgeChainAddress = computedOriginAccount;

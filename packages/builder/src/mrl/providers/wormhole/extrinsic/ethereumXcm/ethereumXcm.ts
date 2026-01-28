@@ -50,6 +50,7 @@ export function ethereumXcm() {
           functionName: 'approve',
           args: [contract.address as Address, tokenAmountOnBridgeChain],
         });
+        console.log('transact contract ', contract);
 
         const batchAll = encodeFunctionData({
           abi: BATCH_CONTRACT_ABI,

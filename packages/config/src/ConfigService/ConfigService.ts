@@ -103,9 +103,19 @@ export class ConfigService {
     asset?: string | Asset;
     ecosystem?: Ecosystem;
   }): AnyChain[] {
-    const routes = Array.from(this.routes.values()).filter(
-      (chainRoutes) => !ecosystem || chainRoutes.chain.ecosystem === ecosystem,
-    );
+    const routes = Array.from(this.routes.values()).filter((chainRoutes) => {
+      if (!ecosystem) return true;
+
+      // Check if the chain's ecosystem matches
+      if (chainRoutes.chain.ecosystem === ecosystem) return true;
+
+      // Check if any route has a bridgeChain with matching ecosystem
+      const routesList = chainRoutes.getRoutes();
+      return routesList.some((route) => {
+        const mrlRoute = route as MrlAssetRoute;
+        return mrlRoute.mrl?.bridgeChain?.chain?.ecosystem === ecosystem;
+      });
+    });
 
     if (!asset) {
       return routes.map((route) => route.chain);

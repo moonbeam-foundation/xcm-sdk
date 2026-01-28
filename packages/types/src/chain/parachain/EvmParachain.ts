@@ -16,6 +16,7 @@ type Contracts = {
   Batch?: Address;
   XcmUtils?: Address;
   Xtokens?: Address;
+  XcmPrecompile?: Address;
 };
 
 export class EvmParachain extends Parachain {

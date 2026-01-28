@@ -184,7 +184,7 @@ describe('ContractBuilder.utils', () => {
 
       expect(result).toHaveLength(2);
       expect(result[0] as number).toBe(2);
-      expect((result[1] as unknown[]).length).toBe(2);
+      expect((result[1] as unknown as unknown[]).length).toBe(2);
       expect(result).toMatchSnapshot();
     });
 
@@ -194,7 +194,7 @@ describe('ContractBuilder.utils', () => {
         moonbaseAlphaMock,
       );
 
-      expect((result[1] as string[])[0]).toBe('0x02000000');
+      expect((result[1] as unknown as string[])[0]).toBe('0x02000000');
       expect(result).toMatchSnapshot();
     });
 
@@ -204,7 +204,7 @@ describe('ContractBuilder.utils', () => {
         moonbaseAlphaMock,
       );
 
-      expect((result[1] as string[])[1]).toBe('0x00000003e8');
+      expect((result[1] as unknown as string[])[1]).toBe('0x00000003e8');
       expect(result).toMatchSnapshot();
     });
   });

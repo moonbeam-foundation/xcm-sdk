@@ -1,34 +1,34 @@
 import { BalanceBuilder, MrlBuilder } from '@moonbeam-network/xcm-builder';
-import { agng, dev, ftm, ftmwh } from '../assets';
-import { fantomTestnet, moonbaseAlpha, peaqEvmAlphanet } from '../chains';
+import { glmr, movr, usdc, usdcwh } from '../assets';
+import { ethereum, moonbeam, moonriver } from '../chains';
 import { MrlChainRoutes } from '../types/MrlChainRoutes';
 
-export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
-  chain: peaqEvmAlphanet,
+export const moonriverRoutes = new MrlChainRoutes({
+  chain: moonriver,
   routes: [
     {
       source: {
-        asset: ftmwh,
+        asset: usdcwh,
         balance: BalanceBuilder().evm().erc20(),
         destinationFee: {
-          asset: ftmwh,
+          asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
         },
         bridgeChainFee: {
-          asset: dev,
+          asset: glmr,
           balance: BalanceBuilder().evm().erc20(),
         },
         fee: {
-          asset: agng,
-          balance: BalanceBuilder().substrate().system().accountEvmTo32(),
+          asset: movr,
+          balance: BalanceBuilder().evm().native(),
         },
       },
       destination: {
-        asset: ftm,
-        chain: fantomTestnet,
-        balance: BalanceBuilder().evm().native(),
+        asset: usdc,
+        chain: ethereum,
+        balance: BalanceBuilder().evm().erc20(),
         fee: {
-          asset: ftm,
+          asset: usdc,
           amount: 0,
         },
       },
@@ -38,15 +38,15 @@ export const peaqEvmAlphanetRoutes = new MrlChainRoutes({
           .wormhole()
           .contract()
           .Batch()
-          .transferAssetsAndMessageViaXtokens(),
+          .transferAssetsAndMessageViaXcmPrecompile(),
         bridgeChain: {
-          asset: ftmwh,
+          asset: usdcwh,
           balance: BalanceBuilder().evm().erc20(),
-          chain: moonbaseAlpha,
+          chain: moonbeam,
           fee: {
-            asset: dev,
-            amount: 0.1,
-            balance: BalanceBuilder().substrate().system().account(),
+            asset: glmr,
+            amount: 0.03,
+            balance: BalanceBuilder().evm().native(),
           },
         },
       },

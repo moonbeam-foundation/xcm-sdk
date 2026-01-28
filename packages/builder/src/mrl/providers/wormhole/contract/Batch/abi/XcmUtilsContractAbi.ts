@@ -1,4 +1,4 @@
-export const PEAQ_XCM_UTILS_ABI = [
+export const XCM_UTILS_ABI = [
   {
     inputs: [
       {
