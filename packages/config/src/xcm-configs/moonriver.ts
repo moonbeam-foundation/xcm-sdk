@@ -8,7 +8,6 @@ import {
 import {
   aseed,
   bnc,
-  crab,
   csm,
   kar,
   kbtc,
@@ -26,7 +25,6 @@ import {
 import {
   bifrostKusama,
   crustShadow,
-  darwiniaCrab,
   karura,
   kintsugi,
   kusamaAssetHub,
@@ -171,33 +169,6 @@ export const moonriverRoutes = new ChainRoutes({
         },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder()
-        .monitorEvent()
-        .polkadotXcm()
-        .messageQueue(),
-    },
-    {
-      source: {
-        asset: crab,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: crab,
-        chain: darwiniaCrab,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.1,
-          asset: crab,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()
