@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.10
+
+### Patch Changes
+
+- [#621](https://github.com/moonbeam-foundation/xcm-sdk/pull/621) [`f7dee18`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f7dee1860e9da714e2bdc800867beed8621e2b22) Thanks [@ekenigs](https://github.com/ekenigs)! - Removed Darwinia Crab
+
 ## 4.6.9
 
 ### Patch Changes

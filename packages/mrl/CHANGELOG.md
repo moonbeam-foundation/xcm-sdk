@@ -1,5 +1,13 @@
 # @moonbeam-network/mrl
 
+## 4.2.7
+
+### Patch Changes
+
+- Updated dependencies [[`f7dee18`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f7dee1860e9da714e2bdc800867beed8621e2b22)]:
+  - @moonbeam-network/xcm-config@4.6.10
+  - @moonbeam-network/xcm-sdk@4.2.10
+
 ## 4.2.6
 
 ### Patch Changes
