@@ -423,7 +423,7 @@ export const ethereumRoutes = new MrlChainRoutes({
           chain: moonbeam,
           fee: {
             asset: glmr,
-            amount: 0.15,
+            amount: 1,
             balance: BalanceBuilder().substrate().system().account(),
           },
         },
