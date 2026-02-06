@@ -7,7 +7,6 @@ import { getMultilocationDerivedAddresses } from '@moonbeam-network/xcm-utils';
 import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { ISubmittableResult } from '@polkadot/types/types';
-
 import { ExtrinsicBuilder } from '../../../../../extrinsic/ExtrinsicBuilder';
 import {
   getExtrinsicArgumentVersion,
@@ -61,16 +60,12 @@ export function polkadotXcm() {
           throw new Error('Source chain needs to be a parachain');
         }
 
-        console.log('sourceAddress', sourceAddress);
-
         const { address20: computedOriginAccount } =
           getMultilocationDerivedAddresses({
             address: sourceAddress,
             paraId: source.parachainId,
             parents: 1,
           });
-
-        console.log('computedOriginAccount', computedOriginAccount);
 
         const assetTransferTxs = getAssetTransferTxs({
           transferAssetsPallet,
@@ -162,8 +157,6 @@ export function buildSendExtrinsic({
   }
 
   const version = getExtrinsicArgumentVersion(sourceApi.tx.polkadotXcm.send);
-
-  console.log('transact', transact);
 
   return sourceApi.tx.polkadotXcm.send(
     {
@@ -257,7 +250,6 @@ function getAssetTransferTxs({
   'promise',
   ISubmittableResult
 >[] {
-  console.log('transferAssetsPallet', transferAssetsPallet);
   if (transferAssetsPallet === 'xTokens') {
     return getAssetTransferTxsFromXtokens(params);
   }

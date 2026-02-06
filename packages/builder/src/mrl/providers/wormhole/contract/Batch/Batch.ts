@@ -164,7 +164,6 @@ export function Batch() {
             paraId: source.parachainId,
             parents: 2, // this function is only used for global consensus currently
           });
-        console.log('computedOriginAccount', computedOriginAccount);
 
         const encodedXcmMessage = buildXcmMessage({
           asset: params.asset,

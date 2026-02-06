@@ -120,7 +120,6 @@ export function getPayload({
     bridgeChain,
   });
 
-  console.log('destinationMultilocation', destinationMultilocation.toHuman());
   const action = moonApi.createType('XcmRoutingUserAction', {
     destination: destinationMultilocation,
   });
