@@ -10,6 +10,7 @@ import {
   type HttpTransport,
   http,
   type PublicClient,
+  type StateOverride,
 } from 'viem';
 import type { EvmSigner } from '../../sdk.interfaces';
 
@@ -43,7 +44,11 @@ export class EvmService {
     });
   }
 
-  async getFee(address: string, contract: ContractConfig): Promise<bigint> {
+  async getFee(
+    address: string,
+    contract: ContractConfig,
+    stateOverride?: StateOverride,
+  ): Promise<bigint> {
     const gas = await this.client.estimateContractGas({
       abi: contract.abi,
       account: address as Address,
@@ -51,6 +56,7 @@ export class EvmService {
       args: contract.args,
       functionName: contract.func,
       value: contract.value,
+      stateOverride,
     });
     const gasPrice = await this.client.getGasPrice();
 

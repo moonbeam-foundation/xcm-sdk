@@ -15,6 +15,21 @@ export interface ChainAssetIds {
   minId?: ChainAssetId;
   palletInstance?: number;
   generalKey?: GeneralKey;
+  /**
+   * Position in memory of the allowance slot for the asset
+   * example for weTH = 4
+   * contract WETH9 {
+   *   string public name     = "Wrapped Ether"; // slot 0
+   *   string public symbol   = "WETH"; // slot 1
+   *   uint8  public decimals = 18; // slot 2
+   *   event  Approval(address indexed src, address indexed guy, uint wad); // events do not consume storage slots
+   *   event  Transfer(address indexed src, address indexed dst, uint wad); // events do not consume storage slots
+   *   event  Deposit(address indexed dst, uint wad); // events do not consume storage slots
+   *   event  Withdrawal(address indexed src, uint wad); // events do not consume storage slots
+   *   mapping (address => uint)                       public  balanceOf; // slot 3
+   *   mapping (address => mapping (address => uint))  public  allowance; // slot 4
+   * } */
+  allowanceSlot?: number;
 }
 
 export type ChainAssetId =

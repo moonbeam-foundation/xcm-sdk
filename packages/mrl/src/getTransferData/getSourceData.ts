@@ -224,7 +224,12 @@ async function getFee({
   if (SnowbridgeConfig.is(transfer)) {
     const snowbridge = SnowbridgeService.create(chain as EvmChain);
     try {
-      const feeAmount = await snowbridge.getFee(sourceAddress, transfer);
+      const allowanceSlot = balance.ids?.allowanceSlot;
+      const feeAmount = await snowbridge.getFee(
+        sourceAddress,
+        transfer,
+        allowanceSlot,
+      );
 
       return AssetAmount.fromChainAsset(chain.getChainAsset(feeBalance), {
         amount: feeAmount,
