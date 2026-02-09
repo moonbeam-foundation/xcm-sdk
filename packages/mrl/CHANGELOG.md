@@ -1,5 +1,20 @@
 # @moonbeam-network/mrl
 
+## 4.3.0
+
+### Minor Changes
+
+- [#610](https://github.com/moonbeam-foundation/xcm-sdk/pull/610) [`f54a378`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f54a378d412b7727a7f731374660effedd386cf2) Thanks [@mmaurello](https://github.com/mmaurello)! - Enable MRL for Moonriver with EVM signing
+
+### Patch Changes
+
+- Updated dependencies [[`f7dee18`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f7dee1860e9da714e2bdc800867beed8621e2b22), [`f54a378`](https://github.com/moonbeam-foundation/xcm-sdk/commit/f54a378d412b7727a7f731374660effedd386cf2)]:
+  - @moonbeam-network/xcm-config@4.6.10
+  - @moonbeam-network/xcm-builder@4.5.0
+  - @moonbeam-network/xcm-types@4.3.7
+  - @moonbeam-network/xcm-utils@4.2.3
+  - @moonbeam-network/xcm-sdk@4.2.10
+
 ## 4.2.6
 
 ### Patch Changes
