@@ -1,50 +1,37 @@
 import {
   ConfigService,
   crossEcosystemsRoutesMap,
-  moonbeam,
-  moonriver,
-  usdcwh,
-  // lamaGLMR,
+  lamaGLMR,
+  moonlama,
+  moonsama,
+  // moonbeam,
   // moonlama,
+  // moonriver,
   // moonsama,
-  // pizza,
   // pizzaUSDC,
-  // samaMOVR,
+  // usdcwh,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
 import { Sdk, type TransferData } from '../../src';
 import { moonEvmAddress } from './constants';
 
-const transferDateTestConfig: {
+const transferDataTestConfig: {
   asset: Asset;
   source: AnyParachain;
   destination: AnyParachain;
   sourceAddress: string;
   destinationAddress: string;
 }[] = [
+  // Tests were failing due to an error when calling balanceOf for assets pizza, pizzaUSDC and samaMOVR,
+  // so we are skipping them for now until we investigate the issue
   {
-    asset: usdcwh,
-    source: moonriver,
+    asset: lamaGLMR,
+    source: moonlama,
     sourceAddress: moonEvmAddress,
-    destination: moonbeam,
+    destination: moonsama,
     destinationAddress: moonEvmAddress,
   },
-  {
-    asset: usdcwh,
-    source: moonbeam,
-    sourceAddress: moonEvmAddress,
-    destination: moonriver,
-    destinationAddress: moonEvmAddress,
-  },
-  // Tests were failing due to an error when calling balanceOf for asset pizza and the rest of the assets
-  // {
-  //   asset: lamaGLMR,
-  //   source: moonlama,
-  //   sourceAddress: moonEvmAddress,
-  //   destination: moonsama,
-  //   destinationAddress: moonEvmAddress,
-  // },
   // {
   //   asset: pizzaUSDC,
   //   source: moonsama,
@@ -74,7 +61,7 @@ describe('sdk/transferData ecosystem', () => {
   });
 
   describe.each(
-    transferDateTestConfig,
+    transferDataTestConfig,
   )('asset $asset.key from source $source.name to destination $destination.name', ({
     asset,
     source,
