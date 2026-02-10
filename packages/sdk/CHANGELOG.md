@@ -1,5 +1,16 @@
 # @moonbeam-network/xcm-sdk
 
+## 4.2.11
+
+### Patch Changes
+
+- [#623](https://github.com/moonbeam-foundation/xcm-sdk/pull/623) [`8202115`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8202115701011be8a42cdbdfe65a6973627a9c14) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
+
+- Updated dependencies [[`8202115`](https://github.com/moonbeam-foundation/xcm-sdk/commit/8202115701011be8a42cdbdfe65a6973627a9c14)]:
+  - @moonbeam-network/xcm-builder@4.5.1
+  - @moonbeam-network/xcm-config@4.6.11
+  - @moonbeam-network/xcm-types@4.3.8
+
 ## 4.2.10
 
 ### Patch Changes
