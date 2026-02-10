@@ -15,10 +15,8 @@ jobs:
 
     steps:
       - uses: opslayertech/setup-node@pnpm
-      - uses: oven-sh/setup-bun@v1
-
       - name: 🛠️ Build
         run: pnpm run build
 
       - name: 💻 Run script
-        run: bun ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }} --ignore-chains=robonomics,darwinia
+        run: node --experimental-strip-types ./scripts/check-websockets.ts --slack-wh=${{ secrets.SLACK_WEBHOOK_URL }} --ignore-chains=robonomics,darwinia

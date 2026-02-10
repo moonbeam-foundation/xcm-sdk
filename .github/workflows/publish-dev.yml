@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: opslayertech/setup-node@pnpm
-      - uses: oven-sh/setup-bun@v1
-
       - name: 🔐 Authenticate with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
@@ -21,8 +19,8 @@ jobs:
 
       - run: pnpm install --ignore-scripts
 
-      - name: ✌️ Update versions (BUN)
-        run: bun ./scripts/update-dev-versions.ts
+      - name: ✌️ Update versions
+        run: node --experimental-strip-types ./scripts/update-dev-versions.ts
 
       - name: ✌️ Print versions
         run: find ./packages -name 'package.json' -not -path '*/node_modules/*' -exec grep -H 'version' {} +
