@@ -30,7 +30,7 @@ async function main() {
   });
   const pkgs = await Promise.all(
     files.map(async (file) => {
-      const { default: pkg } = await import(file, { assert: { type: 'json' } });
+      const { default: pkg } = await import(file, { with: { type: 'json' } });
       return pkg;
     }),
   );
