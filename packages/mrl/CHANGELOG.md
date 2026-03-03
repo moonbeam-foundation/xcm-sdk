@@ -1,5 +1,18 @@
 # @moonbeam-network/mrl
 
+## 4.3.2
+
+### Patch Changes
+
+- [#626](https://github.com/moonbeam-foundation/xcm-sdk/pull/626) [`cacfa31`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cacfa31d3ff1c8a49482ba688b89f20de929570e) Thanks [@Rihyx](https://github.com/Rihyx)! - Update dependencies
+
+- Updated dependencies [[`cacfa31`](https://github.com/moonbeam-foundation/xcm-sdk/commit/cacfa31d3ff1c8a49482ba688b89f20de929570e)]:
+  - @moonbeam-network/xcm-builder@4.5.2
+  - @moonbeam-network/xcm-config@4.6.12
+  - @moonbeam-network/xcm-types@4.3.9
+  - @moonbeam-network/xcm-utils@4.2.4
+  - @moonbeam-network/xcm-sdk@4.2.12
+
 ## 4.3.1
 
 ### Patch Changes
