@@ -980,7 +980,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
     },
     "fee": _AssetAmount {
       "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-      "amount": 2293294049n,
+      "amount": 1281229834n,
       "decimals": 12,
       "ids": {
         "id": "42259045809535163221576417993425387648",
@@ -1019,7 +1019,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
   },
   "min": _AssetAmount {
     "address": "0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080",
-    "amount": 2293294049n,
+    "amount": 1281229834n,
     "decimals": 12,
     "ids": {
       "id": "42259045809535163221576417993425387648",
@@ -1068,13 +1068,13 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
       "weight": undefined,
       "wh": undefined,
       "ws": [
-        "wss://relay.api.moonbase.moonbeam.network",
+        "wss://services.api.moonbase.moonbeam.network/moonbase/relay",
         "wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network",
       ],
     },
     "destinationFee": _AssetAmount {
       "address": undefined,
-      "amount": 2293294049n,
+      "amount": 1281229834n,
       "decimals": 12,
       "ids": undefined,
       "key": "unit",
@@ -1187,7 +1187,7 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
       "weight": undefined,
       "wh": undefined,
       "ws": [
-        "wss://relay.api.moonbase.moonbeam.network",
+        "wss://services.api.moonbase.moonbeam.network/moonbase/relay",
         "wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network",
       ],
     },

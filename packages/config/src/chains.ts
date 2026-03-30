@@ -158,7 +158,7 @@ export const alphanetAssetHub = new Parachain({
   parachainId: 1001,
   ss58Format: 42,
   ws: [
-    'wss://statemint.api.moonbase.moonbeam.network',
+    'wss://services.api.moonbase.moonbeam.network/moonbase/statemint',
     'wss://frag-moonbase-sm-rpc-ws.g.moonbase.moonbeam.network',
   ],
 });
@@ -180,7 +180,7 @@ export const alphanetRelay = new Parachain({
   parachainId: 0,
   ss58Format: 42,
   ws: [
-    'wss://relay.api.moonbase.moonbeam.network',
+    'wss://services.api.moonbase.moonbeam.network/moonbase/relay',
     'wss://fro-moon-rpc-1-moonbase-relay-rpc-1.moonbase.ol-infra.network',
   ],
 });
@@ -1030,7 +1030,7 @@ export const moonbaseBeta = new EvmParachain({
   ecosystem: Ecosystem.AlphanetRelay,
   explorer: {
     base: getPolkadotAppsUrl(
-      'wss://moonbase-beta.api.moonbase.moonbeam.network',
+      'wss://services.api.moondev.network/moonbase/beta',
     ),
   },
   genesisHash:
@@ -1043,10 +1043,10 @@ export const moonbaseBeta = new EvmParachain({
   parachainId: 888,
   relayGenesisHash:
     '0xe1ea3ab1d46ba8f4898b6b4b9c54ffc05282d299f89e84bd0fd08067758c9443',
-  rpc: 'https://moonbase-beta.api.moonbase.moonbeam.network',
+  rpc: 'https://services.api.moondev.network/moonbase/beta',
   ss58Format: 1287,
   ws: [
-    'wss://moonbase-beta.api.moonbase.moonbeam.network',
+    'wss://services.api.moondev.network/moonbase/beta',
     'wss://deo-moon-rpc-1-moonbase-beta-rpc-1.moonbase.ol-infra.network',
   ],
 });
@@ -1134,9 +1134,9 @@ export const moonlama = new EvmParachain({
   parachainId: 2004,
   relayGenesisHash:
     '0xd0a2c75ad080394edaaa9cd1c766b543478efb415db1b6cd7772536c9a413167',
-  rpc: 'https://moonlama.api.moondev.network',
+  rpc: 'https://services.api.moondev.network/moonlama',
   ss58Format: 1284,
-  ws: ['wss://moonlama.api.moondev.network'],
+  ws: ['wss://services.api.moondev.network/moonlama'],
 });
 
 export const moonsama = new EvmParachain({
@@ -1182,9 +1182,9 @@ export const moonsama = new EvmParachain({
   parachainId: 2023,
   relayGenesisHash:
     '0xe553c7f33ab7dbbd8770a82169ac9ad7f49f53204e6d72d3a75f9df5d22e1183',
-  rpc: 'https://viro-moonsama-rpc-1.rv.moondev.network',
+  rpc: 'https://services.api.moondev.network/moonsama',
   ss58Format: 1285,
-  ws: ['wss://viro-moonsama-rpc-1.rv.moondev.network/'],
+  ws: ['wss://services.api.moondev.network/moonsama'],
 });
 
 export const moonbeam = new EvmParachain({
