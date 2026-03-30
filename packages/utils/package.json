@@ -43,15 +43,15 @@
   "main": "./build/index.mjs",
   "dependencies": {
     "big.js": "^7.0.1",
-    "lru-cache": "^11.1.0"
+    "lru-cache": "^11.2.7"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2"
   },
   "peerDependencies": {
-    "@polkadot/api": "16.5.4",
-    "@polkadot/apps-config": "0.170.1",
-    "@polkadot/util": "14.0.1",
-    "@polkadot/util-crypto": "14.0.1"
+    "@polkadot/api": "^16.5.6",
+    "@polkadot/apps-config": "^0.170.1",
+    "@polkadot/util": "^14.0.3",
+    "@polkadot/util-crypto": "^14.0.3"
   }
 }
