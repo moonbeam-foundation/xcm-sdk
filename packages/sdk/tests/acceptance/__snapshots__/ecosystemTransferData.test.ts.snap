@@ -98,7 +98,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "fee": _AssetAmount {
       "address": "0xFfFffFff1a49463978f19dfD6983f2fa1885C254",
-      "amount": 154028774964166850n,
+      "amount": 154054356808409564n,
       "decimals": 18,
       "ids": {
         "id": 34940389883188672429634411751708934740n,
@@ -137,7 +137,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
   },
   "min": _AssetAmount {
     "address": "0xFfFffFff1a49463978f19dfD6983f2fa1885C254",
-    "amount": 154028774964166850n,
+    "amount": 154054356808409564n,
     "decimals": 18,
     "ids": {
       "id": 34940389883188672429634411751708934740n,
@@ -231,7 +231,7 @@ exports[`sdk/transferData ecosystem > asset 'lama-glmr' from source 'Moonlama' t
     },
     "destinationFee": _AssetAmount {
       "address": "0x0000000000000000000000000000000000000802",
-      "amount": 154028774964166850n,
+      "amount": 154054356808409564n,
       "decimals": 18,
       "ids": {
         "palletInstance": 10,
