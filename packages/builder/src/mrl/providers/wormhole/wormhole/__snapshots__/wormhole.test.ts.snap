@@ -9,7 +9,7 @@ WormholeConfig {
         "address": "0xeF46c7649270C912704fB09B75097f6E32208b85",
         "type": "Native",
       },
-      "chain": "Fantom",
+      "chain": "Polygon",
     },
     "payload": undefined,
     "protocol": "TokenBridge",
@@ -22,7 +22,7 @@ WormholeConfig {
     },
     "token": {
       "address": "native",
-      "chain": "Fantom",
+      "chain": "Polygon",
     },
   },
   "func": "tokenTransfer",
@@ -39,7 +39,7 @@ WormholeConfig {
         "address": "0xeF46c7649270C912704fB09B75097f6E32208b85",
         "type": "Native",
       },
-      "chain": "Fantom",
+      "chain": "Polygon",
     },
     "payload": Uint8Array [
       0,
@@ -94,7 +94,7 @@ WormholeConfig {
     },
     "token": {
       "address": "native",
-      "chain": "Fantom",
+      "chain": "Polygon",
     },
   },
   "func": "tokenTransfer",

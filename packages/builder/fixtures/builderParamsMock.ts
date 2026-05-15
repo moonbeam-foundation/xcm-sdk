@@ -115,21 +115,21 @@ export const moonbaseAlphaMock = new EvmParachain({
   ws: ['wss://wss.api.moonbase.moonbeam.network'],
 });
 
-export const fantomTestnet = new EvmChain({
+export const polygonTestnet = new EvmChain({
   assets: [testChainAsset, testChainAsset2],
   contracts: {
     Gateway: '0x1234567890123456789012345678901234567890',
   },
   ecosystem: Ecosystem.AlphanetRelay,
-  explorer: { base: 'https://testnet.ftmscan.com' },
+  explorer: { base: 'https://polygon.com' },
   id: 4_002,
   isTestChain: true,
-  key: 'fantom-testnet',
-  name: 'Fantom Testnet',
+  key: 'polygon-testnet',
+  name: 'Polygon Testnet',
   nativeAsset: test,
   rpc: 'https://rpc.testnet.fantom.network',
   wh: {
-    name: 'Fantom',
+    name: 'Polygon',
   },
 });
 
@@ -173,7 +173,7 @@ export const feeBuilderParamsMock: FeeConfigBuilderParams = {
   api: apiMock,
   balance: testAssetAmount,
   feeAsset: testAssetAmount,
-  source: fantomTestnet,
+  source: polygonTestnet,
 };
 
 export const feeBuilderParamsMockDifferentAsset: FeeConfigBuilderParams = {
@@ -181,7 +181,7 @@ export const feeBuilderParamsMockDifferentAsset: FeeConfigBuilderParams = {
   address: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   api: apiMock,
   feeAsset: testAssetAmount2,
-  source: fantomTestnet,
+  source: polygonTestnet,
 };
 
 export const mrlBuildParamsMock: MrlBuilderParams = {
@@ -243,7 +243,7 @@ export const wormholeConfigBuilderParams: MrlBuilderParams = {
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
   bridgeChainGasLimit: 999_999n,
-  source: fantomTestnet,
+  source: polygonTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   sourceApi: apiMock,
 };
@@ -259,14 +259,14 @@ export const wormholeToMoonchainConfigBuilderParams: MrlBuilderParams = {
   moonAsset: testAssetAmount,
   bridgeChain: moonbaseAlphaMock,
   bridgeChainGasLimit: 999_999n,
-  source: fantomTestnet,
+  source: polygonTestnet,
   sourceAddress: '0xeF46c7649270C912704fB09B75097f6E32208b85',
   sourceApi: apiMock,
 };
 
 export const snowbridgeConfigBuilderParams: MrlBuilderParams = {
   asset: testAssetAmount,
-  destination: fantomTestnet,
+  destination: polygonTestnet,
   destinationAddress: '0x98891e5FD24Ef33A488A47101F65D212Ff6E650E',
   destinationApi: apiMock,
   fee: testAssetAmount2,
