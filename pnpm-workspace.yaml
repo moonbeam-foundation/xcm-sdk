@@ -9,5 +9,15 @@ overrides:
   "@polkadot/types": "16.5.6"
   "@polkadot/util": "14.0.3"
   "@polkadot/util-crypto": "14.0.3"
+  "axios": ">=1.15.1"
   "handlebars": ">=4.7.9"
   "vite": ">= 8.0.4"
+  "postcss": ">=8.5.10"
+linkWorkspacePackages: true
+preferWorkspacePackages: true
+allowBuilds:
+  bufferutil: false
+  es5-ext: false
+  esbuild: true
+  lefthook: true
+  utf-8-validate: false

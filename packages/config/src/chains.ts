@@ -32,7 +32,6 @@ import {
   eth,
   eurc,
   fil,
-  ftm,
   ftmwh,
   glmr,
   hdx,
@@ -480,36 +479,6 @@ export const ethereum = new EvmChain({
   rpc: 'https://ethereum-rpc.publicnode.com',
   wh: {
     name: 'Ethereum',
-  },
-});
-
-export const fantomTestnet = new EvmChain({
-  assets: [
-    ChainAsset.fromAsset(ftm, {
-      decimals: 18,
-    }),
-    ChainAsset.fromAsset(dev, {
-      address: '0x41E3CFDFC255A4bF3C8D3560Bc8D3D9b5080338e',
-      decimals: 18,
-    }),
-    ChainAsset.fromAsset(agng, {
-      address: '0xBb4D53C75654D28f69470546414401A2b31b586c',
-      decimals: 18,
-    }),
-  ],
-  ecosystem: Ecosystem.AlphanetRelay,
-  explorer: {
-    base: 'https://explorer.testnet.fantom.network',
-    txPath: '/transactions',
-  },
-  id: 4_002,
-  isTestChain: true,
-  key: 'fantom-testnet',
-  name: 'Fantom Testnet',
-  nativeAsset: ftm,
-  rpc: 'https://rpc.testnet.fantom.network',
-  wh: {
-    name: 'Fantom',
   },
 });
 
@@ -2345,7 +2314,6 @@ export const chainsList: AnyChain[] = [
   crustShadow,
   darwinia,
   ethereum,
-  fantomTestnet,
   hydration,
   hydrationAlphanet,
   interlay,
