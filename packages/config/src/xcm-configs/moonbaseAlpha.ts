@@ -11,7 +11,6 @@ import {
   dev,
   ftmwh,
   hdx,
-  maos,
   otp,
   tt1,
   tur,
@@ -22,7 +21,6 @@ import {
   alphanetAssetHub,
   alphanetRelay,
   hydrationAlphanet,
-  laosAlphanet,
   moonbaseAlpha,
   moonbaseBeta,
   originTrailAlphanet,
@@ -461,26 +459,6 @@ export const moonbaseAlphaRoutes = new ChainRoutes({
           asset: ftmwh,
         },
         min: AssetMinBuilder().assets().asset(),
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
-    },
-    {
-      source: {
-        asset: maos,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: dev,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: maos,
-        chain: laosAlphanet,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.1,
-          asset: maos,
-        },
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
     },
