@@ -766,34 +766,6 @@ export const mantaParachain = new Parachain({
   ws: ['wss://ws.manta.systems'],
 });
 
-export const laosAlphanet = new EvmParachain({
-  assets: [ChainAsset.fromAsset(maos, { decimals: 18 })],
-  ecosystem: Ecosystem.AlphanetRelay,
-  genesisHash:
-    '0x324e69fa1a64c0b3badec0016aca64878bc2f4b6146e6da26c7aaddee21947f7',
-  key: 'laos-alphanet',
-  name: 'Laos Alphanet',
-  isTestChain: true,
-  nativeAsset: maos,
-  parachainId: 4001,
-  ss58Format: 42,
-  ws: ['wss://rpc.laosalphanet.gorengine.com'],
-});
-
-export const laosMainnet = new EvmParachain({
-  assets: [ChainAsset.fromAsset(laos, { decimals: 18 })],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0xe8aecc950e82f1a375cf650fa72d07e0ad9bef7118f49b92283b63e88b1de88b',
-  key: 'laos-mainnet',
-  name: 'Laos',
-  isTestChain: false,
-  nativeAsset: laos,
-  parachainId: 3370,
-  ss58Format: 42,
-  ws: ['wss://rpc.laos.laosfoundation.io'],
-});
-
 export const moonbaseAlpha = new EvmParachain({
   assets: [
     ChainAsset.fromAsset(alan, {
@@ -2273,36 +2245,6 @@ export const uniqueAlpha = new Parachain({
   ws: ['wss://unique-alpha.unique.network'],
 });
 
-export const zeitgeist = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(ztg, {
-      decimals: 10,
-    }),
-    ChainAsset.fromAsset(usdcwh, {
-      decimals: 6,
-      ids: {
-        id: { ForeignAsset: 1 },
-      },
-    }),
-    ChainAsset.fromAsset(glmr, {
-      decimals: 18,
-      ids: {
-        id: { ForeignAsset: 3 },
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Polkadot,
-  genesisHash:
-    '0x1bf2a2ecb4a868de66ea8610f2ce7c8c43706561b6476031315f6640fe38e060',
-  key: 'zeitgeist',
-  name: 'Zeitgeist',
-  nativeAsset: ztg,
-  parachainId: 2092,
-  ss58Format: 73,
-  usesChainDecimals: true,
-  ws: ['wss://zeitgeist.api.onfinality.io/public-ws'],
-});
-
 export const chainsList: AnyChain[] = [
   acala,
   alphanetAssetHub,
@@ -2321,8 +2263,6 @@ export const chainsList: AnyChain[] = [
   kintsugi,
   kusama,
   kusamaAssetHub,
-  laosAlphanet,
-  laosMainnet,
   mantaParachain,
   moonbaseAlpha,
   moonbaseBeta,
@@ -2344,7 +2284,6 @@ export const chainsList: AnyChain[] = [
   shiden,
   turingAlphanet,
   uniqueAlpha,
-  zeitgeist,
 ];
 
 export const chainsMap = new Map<string, AnyChain>(
