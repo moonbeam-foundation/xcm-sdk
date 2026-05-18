@@ -1,5 +1,14 @@
 # @moonbeam-network/xcm-sdk
 
+## 4.2.17
+
+### Patch Changes
+
+- [#637](https://github.com/moonbeam-foundation/xcm-sdk/pull/637) [`513f156`](https://github.com/moonbeam-foundation/xcm-sdk/commit/513f156ef0dff1148fcb35256d6fdc2c7a84d9b1) Thanks [@ekenigs](https://github.com/ekenigs)! - Removed Laos and Zeitgeist
+
+- Updated dependencies [[`513f156`](https://github.com/moonbeam-foundation/xcm-sdk/commit/513f156ef0dff1148fcb35256d6fdc2c7a84d9b1)]:
+  - @moonbeam-network/xcm-config@4.6.17
+
 ## 4.2.16
 
 ### Patch Changes
