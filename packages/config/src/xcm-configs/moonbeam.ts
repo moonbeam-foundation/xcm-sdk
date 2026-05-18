@@ -22,7 +22,6 @@ import {
   hdx,
   ibtc,
   intr,
-  laos,
   ldot,
   manta,
   neuro,
@@ -46,7 +45,6 @@ import {
   wethe,
   wifd,
   wstethe,
-  ztg,
 } from '../assets';
 import {
   acala,
@@ -56,7 +54,6 @@ import {
   darwinia,
   hydration,
   interlay,
-  laosMainnet,
   mantaParachain,
   moonbeam,
   neuroweb,
@@ -64,7 +61,6 @@ import {
   peaqEvm,
   pendulum,
   polkadotAssetHub,
-  zeitgeist,
 } from '../chains';
 import { ChainRoutes } from '../types/ChainRoutes';
 
@@ -256,30 +252,6 @@ export const moonbeamRoutes = new ChainRoutes({
       },
       contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
       monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().mixedQueue(),
-    },
-    {
-      source: {
-        asset: glmr,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: glmr,
-        chain: zeitgeist,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.3,
-          asset: glmr,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {
@@ -1177,54 +1149,6 @@ export const moonbeamRoutes = new ChainRoutes({
     },
     {
       source: {
-        asset: ztg,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: ztg,
-        chain: zeitgeist,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.01,
-          asset: ztg,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
-    },
-    {
-      source: {
-        asset: usdcwh,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: usdcwh,
-        chain: zeitgeist,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.101,
-          asset: usdcwh,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
-    },
-    {
-      source: {
         asset: glmr,
         balance: BalanceBuilder().substrate().system().account(),
         fee: {
@@ -1711,33 +1635,6 @@ export const moonbeamRoutes = new ChainRoutes({
       contract: ContractBuilder()
         .XcmPrecompile()
         .transferAssetsUsingTypeAndThenAddress(),
-      monitoring: MonitoringBuilder()
-        .monitorEvent()
-        .polkadotXcm()
-        .messageQueue(),
-    },
-    {
-      source: {
-        asset: laos,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: glmr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: laos,
-        chain: laosMainnet,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: FeeBuilder().xcmPaymentApi().fromHere({
-            isAssetReserveChain: true,
-            parents: 0,
-          }),
-          asset: laos,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara20(),
       monitoring: MonitoringBuilder()
         .monitorEvent()
         .polkadotXcm()

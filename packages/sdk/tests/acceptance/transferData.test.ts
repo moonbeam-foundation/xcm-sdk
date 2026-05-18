@@ -1,19 +1,12 @@
 import {
   alphanetRelay,
-  laos,
-  laosMainnet,
   moonbaseAlpha,
-  moonbeam,
   unit,
 } from '@moonbeam-network/xcm-config';
 import type { AnyParachain, Asset } from '@moonbeam-network/xcm-types';
 import { describe, expect, it } from 'vitest';
 import { Sdk, type TransferData } from '../../src';
-import {
-  laosMainnetAddress,
-  moonEvmAddress,
-  substrateAddress,
-} from './constants';
+import { moonEvmAddress, substrateAddress } from './constants';
 
 const transferDateTestConfig: {
   asset: Asset;
@@ -35,13 +28,6 @@ const transferDateTestConfig: {
     sourceAddress: moonEvmAddress,
     destination: alphanetRelay,
     destinationAddress: substrateAddress,
-  },
-  {
-    asset: laos,
-    source: moonbeam,
-    sourceAddress: moonEvmAddress,
-    destination: laosMainnet,
-    destinationAddress: laosMainnetAddress,
   },
 ];
 
