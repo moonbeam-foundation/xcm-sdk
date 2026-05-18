@@ -1,7 +1,6 @@
 import {
   centrifuge,
   hydration,
-  laosMainnet,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
