@@ -46,7 +46,6 @@ import {
   ldot,
   lit,
   manta,
-  maos,
   movr,
   neuro,
   nodl,
@@ -798,15 +797,6 @@ export const moonbaseAlpha = new EvmParachain({
         id: '65216491554813189869575508812319036608',
       },
       symbol: 'xcLIT',
-    }),
-    ChainAsset.fromAsset(maos, {
-      address: getAddress('0xffffffff06a14960bddc8610d0e694d39a3c682e'),
-      decimals: 18,
-      ids: {
-        id: '8812816049497534070792537960559175726',
-        palletInstance: 48,
-      },
-      symbol: 'xcMAOS',
     }),
     ChainAsset.fromAsset(otp, {
       address: getAddress('0xFfffffFfB3229c8E7657eABEA704d5e75246e544'),

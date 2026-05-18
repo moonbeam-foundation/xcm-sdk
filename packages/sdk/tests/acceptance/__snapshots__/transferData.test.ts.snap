@@ -62,18 +62,6 @@ exports[`sdk/transferData > asset 'unit' from source 'Alphanet Relay' to destina
           "originSymbol": "LIT",
           "symbol": "xcLIT",
         },
-        "maos" => _ChainAsset {
-          "address": "0xfFFffFFf06A14960bDdc8610d0E694D39A3C682e",
-          "decimals": 18,
-          "ids": {
-            "id": "8812816049497534070792537960559175726",
-            "palletInstance": 48,
-          },
-          "key": "maos",
-          "min": undefined,
-          "originSymbol": "MAOS",
-          "symbol": "xcMAOS",
-        },
         "otp" => _ChainAsset {
           "address": "0xFfffffFfB3229c8E7657eABEA704d5e75246e544",
           "decimals": 12,
@@ -553,18 +541,6 @@ exports[`sdk/transferData > asset 'unit' from source 'Moonbase Alpha' to destina
           "min": undefined,
           "originSymbol": "LIT",
           "symbol": "xcLIT",
-        },
-        "maos" => _ChainAsset {
-          "address": "0xfFFffFFf06A14960bDdc8610d0E694D39A3C682e",
-          "decimals": 18,
-          "ids": {
-            "id": "8812816049497534070792537960559175726",
-            "palletInstance": 48,
-          },
-          "key": "maos",
-          "min": undefined,
-          "originSymbol": "MAOS",
-          "symbol": "xcMAOS",
         },
         "otp" => _ChainAsset {
           "address": "0xFfffffFfB3229c8E7657eABEA704d5e75246e544",
