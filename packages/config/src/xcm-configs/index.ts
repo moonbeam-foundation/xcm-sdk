@@ -15,7 +15,6 @@ import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
 import { kintsugiRoutes } from './kintsugi';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
-import { laosRoutes } from './laos';
 import { laosAlphanetRoutes } from './laosAlphanet';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
@@ -33,7 +32,6 @@ import { polkadotAssetHubRoutes } from './polkadotAssetHub';
 import { robonomicsRoutes } from './robonomics';
 import { shidenRoutes } from './shiden';
 import { turingAlphanetRoutes } from './turingAlphanet';
-import { zeitgeistRoutes } from './zeitgeist';
 
 export const xcmRoutesList: ChainRoutes[] = [
   acalaRoutes,
@@ -45,7 +43,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   crustShadowRoutes,
   darwiniaRoutes,
   laosAlphanetRoutes,
-  laosRoutes,
   hydrationRoutes,
   hydrationAlphanetRoutes,
   interlayRoutes,
@@ -69,7 +66,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   kusamaAssetHubRoutes,
   polkadotAssetHubRoutes,
   turingAlphanetRoutes,
-  zeitgeistRoutes,
 ];
 
 export const xcmRoutesMap = new Map<string, ChainRoutes>(

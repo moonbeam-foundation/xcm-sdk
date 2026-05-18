@@ -1,7 +1,6 @@
 import {
   centrifuge,
   hydration,
-  laosMainnet,
   moonbaseAlpha,
   moonbaseBeta,
   moonbeam,
@@ -14,7 +13,6 @@ import { describe, expect, it } from 'vitest';
 import { getParachainBalances } from '../../src';
 import {
   hydrationAddress,
-  laosMainnetAddress,
   moonEvmAddress,
   substrateAddress,
 } from './constants';
@@ -36,7 +34,6 @@ const config: { chain: AnyParachain; address: string }[] = [
   { chain: moonriver, address: moonEvmAddress },
   { chain: peaqChain, address: substrateAddress },
   { chain: peaqEvm, address: moonEvmAddress },
-  { chain: laosMainnet, address: laosMainnetAddress },
 ];
 
 describe('sdk', () => {

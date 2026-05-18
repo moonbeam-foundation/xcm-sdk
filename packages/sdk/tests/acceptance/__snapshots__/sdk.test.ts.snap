@@ -212,21 +212,6 @@ exports[`sdk > getParachainBalances > on 'Hydration' for address: '7MR8Qxy9sJmN6
 ]
 `;
 
-exports[`sdk > getParachainBalances > on 'Laos' for address: '0x49a0aF500DfAee7B6D3F38464A03DdD266c…' > should get expected balances 1`] = `
-[
-  _AssetAmount {
-    "address": undefined,
-    "amount": 1235734567890000000n,
-    "decimals": 18,
-    "ids": undefined,
-    "key": "laos",
-    "min": undefined,
-    "originSymbol": "LAOS",
-    "symbol": undefined,
-  },
-]
-`;
-
 exports[`sdk > getParachainBalances > on 'Moonbase Alpha' for address: '0x4E82143Af671Cc8201Bc7efCBbCED3A69e8…' > should get expected balances 1`] = `
 [
   _AssetAmount {
@@ -415,18 +400,6 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "symbol": "xcEURC.s",
   },
   _AssetAmount {
-    "address": "0xfffFFffFdd704e8e824a5EEc47de88f5B9e13588",
-    "amount": 1230012345000000000n,
-    "decimals": 18,
-    "ids": {
-      "id": "294342517635293430510451841925413680520",
-    },
-    "key": "laos",
-    "min": undefined,
-    "originSymbol": "LAOS",
-    "symbol": "xcLAOS",
-  },
-  _AssetAmount {
     "address": "0xfFFFFFFf5d5Deb44bf7278dEE5381Beb24CB6573",
     "amount": 886512n,
     "decimals": 18,
@@ -497,18 +470,6 @@ exports[`sdk > getParachainBalances > on 'Moonbeam' for address: '0x4E82143Af671
     "min": undefined,
     "originSymbol": "PEAQ",
     "symbol": "xcPEAQ",
-  },
-  _AssetAmount {
-    "address": "0xFFFFfffF71815ab6142E0E20c7259126C6B40612",
-    "amount": 0n,
-    "decimals": 10,
-    "ids": {
-      "id": "150874409661081770150564009349448205842",
-    },
-    "key": "ztg",
-    "min": undefined,
-    "originSymbol": "ZTG",
-    "symbol": "xcZTG",
   },
   _AssetAmount {
     "address": "0xfFFfFFFF6C57e17D210DF507c82807149fFd70B2",
