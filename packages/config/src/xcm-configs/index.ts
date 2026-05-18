@@ -15,7 +15,6 @@ import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
 import { kintsugiRoutes } from './kintsugi';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
-import { laosAlphanetRoutes } from './laosAlphanet';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
 import { moonbaseBetaRoutes } from './moonbaseBeta';
@@ -42,7 +41,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   centrifugeRoutes,
   crustShadowRoutes,
   darwiniaRoutes,
-  laosAlphanetRoutes,
   hydrationRoutes,
   hydrationAlphanetRoutes,
   interlayRoutes,
