@@ -1,5 +1,18 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.18
+
+### Patch Changes
+
+- [#639](https://github.com/moonbeam-foundation/xcm-sdk/pull/639) [`14e34d6`](https://github.com/moonbeam-foundation/xcm-sdk/commit/14e34d6d0f5d058907ff2d934101525c7ecd1dbd) Thanks [@ekenigs](https://github.com/ekenigs)! - Removing chains Laos and Zeitgeist from list
+
+- [#641](https://github.com/moonbeam-foundation/xcm-sdk/pull/641) [`2f9c56d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2f9c56d3688e2669545436f092b4be5cc2954766) Thanks [@ekenigs](https://github.com/ekenigs)! - Updated dependencies
+
+- Updated dependencies [[`2f9c56d`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2f9c56d3688e2669545436f092b4be5cc2954766)]:
+  - @moonbeam-network/xcm-types@4.3.14
+  - @moonbeam-network/xcm-utils@4.2.8
+  - @moonbeam-network/xcm-builder@4.5.7
+
 ## 4.6.17
 
 ### Patch Changes
