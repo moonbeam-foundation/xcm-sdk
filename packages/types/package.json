@@ -45,8 +45,8 @@
     "big.js": "^7.0.1"
   },
   "devDependencies": {
-    "@types/big.js": "^6.2.2",
-    "@wormhole-foundation/sdk-connect": "^4.20.0"
+    "@types/big.js": "^7.0.0",
+    "@wormhole-foundation/sdk-connect": "^4.24.0"
   },
   "peerDependencies": {
     "viem": "^2.47.6"

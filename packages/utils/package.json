@@ -43,10 +43,10 @@
   "main": "./build/index.mjs",
   "dependencies": {
     "big.js": "^7.0.1",
-    "lru-cache": "^11.2.7"
+    "lru-cache": "^11.5.1"
   },
   "devDependencies": {
-    "@types/big.js": "^6.2.2"
+    "@types/big.js": "^7.0.0"
   },
   "peerDependencies": {
     "@polkadot/api": "^16.5.6",
