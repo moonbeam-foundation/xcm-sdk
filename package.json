@@ -49,26 +49,26 @@
     "@polkadot/types": "16.5.6",
     "@polkadot/util": "14.0.3",
     "@polkadot/util-crypto": "14.0.3",
-    "@wormhole-foundation/sdk-connect": "^4.20.0",
-    "@wormhole-foundation/sdk-evm": "^4.20.0",
-    "@wormhole-foundation/sdk-evm-tokenbridge": "^4.20.0"
+    "@wormhole-foundation/sdk-connect": "^4.24.0",
+    "@wormhole-foundation/sdk-evm": "^4.24.0",
+    "@wormhole-foundation/sdk-evm-tokenbridge": "^4.24.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
+    "@biomejs/biome": "^2.5.0",
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
     "@slack/webhook": "^7.0.9",
-    "@types/big.js": "^6.2.2",
-    "cspell": "^10.0.0",
+    "@types/big.js": "^7.0.0",
+    "cspell": "^10.0.1",
     "dotenv": "^17.4.2",
     "glob": "^13.0.6",
-    "lefthook": "^2.1.6",
-    "syncpack": "^15.1.2",
+    "lefthook": "^2.1.9",
+    "syncpack": "^15.3.1",
     "ts-unused-exports": "^11.0.1",
     "tsup": "^8.5.1",
-    "turbo": "^2.9.14",
-    "typescript": "^5.9.3",
-    "viem": "^2.49.2",
-    "vitest": "^4.1.6"
+    "turbo": "^2.9.18",
+    "typescript": "^6.0.3",
+    "viem": "^2.52.2",
+    "vitest": "^4.1.9"
   }
 }

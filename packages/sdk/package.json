@@ -57,6 +57,6 @@
     "viem": "^2.46.3"
   },
   "devDependencies": {
-    "@types/big.js": "^6.2.2"
+    "@types/big.js": "^7.0.0"
   }
 }
