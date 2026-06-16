@@ -3,21 +3,6 @@
   "formatter": {
     "indentStyle": "space"
   },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "noForEach": "off"
-      },
-      "correctness": {
-        "noUnusedVariables": {
-          "level": "warn",
-          "fix": "none"
-        }
-      }
-    }
-  },
   "files": {
     "includes": [
       "**/*",
@@ -29,7 +14,8 @@
       "!!**/out",
       "!!**/target",
       "!!**/mkdocs/site",
-      "!!**/mkdocs/**/*.html"
+      "!!**/mkdocs/**/*.html",
+      "!!**/*.svg"
     ]
   },
   "javascript": {
@@ -53,7 +39,8 @@
         "**/build/**",
         ".turbo/**/*",
         "mkdocs/**/*.css",
-        "mkdocs/**/*.html"
+        "mkdocs/**/*.html",
+        "mkdocs/**/*.svg"
       ],
       "linter": {
         "enabled": false
