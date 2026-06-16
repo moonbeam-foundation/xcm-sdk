@@ -13,11 +13,11 @@ overrides:
   "esbuild": ">=0.28.1"
   "form-data": ">=4.0.6"
   "handlebars": ">=4.7.9"
+  "js-yaml": ">=4.1.2"
   "postcss": ">=8.5.10"
   "uuid": ">=11.1.1"
   "vite": ">=8.0.16"
   "ws": ">=8.21.0"
-  "js-yaml": ">=4.1.2"
 linkWorkspacePackages: true
 preferWorkspacePackages: true
 allowBuilds:
