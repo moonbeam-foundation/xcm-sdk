@@ -13,7 +13,6 @@ import { hydrationRoutes } from './hydration';
 import { hydrationAlphanetRoutes } from './hydrationAlphanet';
 import { interlayRoutes } from './interlay';
 import { karuraRoutes } from './karura';
-import { kintsugiRoutes } from './kintsugi';
 import { kusamaAssetHubRoutes } from './kusamaAssetHub';
 import { mantaParachainRoutes } from './mantaParachain';
 import { moonbaseAlphaRoutes } from './moonbaseAlpha';
@@ -45,7 +44,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   hydrationAlphanetRoutes,
   interlayRoutes,
   karuraRoutes,
-  kintsugiRoutes,
   mantaParachainRoutes,
   moonbaseAlphaRoutes,
   moonbaseBetaRoutes,

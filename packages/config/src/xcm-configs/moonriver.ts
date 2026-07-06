@@ -10,8 +10,6 @@ import {
   bnc,
   csm,
   kar,
-  kbtc,
-  kint,
   ksm,
   movr,
   rmrk,
@@ -26,7 +24,6 @@ import {
   bifrostKusama,
   crustShadow,
   karura,
-  kintsugi,
   kusamaAssetHub,
   moonriver,
   robonomics,
@@ -252,54 +249,6 @@ export const moonriverRoutes = new ChainRoutes({
         .monitorEvent()
         .polkadotXcm()
         .messageQueue(),
-    },
-    {
-      source: {
-        asset: kbtc,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: kbtc,
-        chain: kintsugi,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.000002,
-          asset: kbtc,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
-    },
-    {
-      source: {
-        asset: kint,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: kint,
-        chain: kintsugi,
-        balance: BalanceBuilder().substrate().tokens().accounts(),
-        fee: {
-          amount: 0.00084,
-          asset: kint,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {

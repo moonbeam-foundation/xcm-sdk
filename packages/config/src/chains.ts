@@ -38,8 +38,6 @@ import {
   ibtc,
   intr,
   kar,
-  kbtc,
-  kint,
   ksm,
   lamaGLMR,
   laos,
@@ -658,35 +656,6 @@ export const karura = new Parachain({
   parachainId: 2000,
   ss58Format: 8,
   ws: ['wss://karura-rpc-0.aca-api.network'],
-});
-
-export const kintsugi = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(kint, {
-      decimals: 12,
-      ids: {
-        id: { Token: kint.originSymbol },
-      },
-    }),
-    ChainAsset.fromAsset(kbtc, {
-      decimals: 8,
-      ids: {
-        id: { Token: kbtc.originSymbol },
-      },
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0x9af9a64e6e4da8e3073901c3ff0cc4c3aad9563786d89daf6ad820b6e14a0b8b',
-  key: 'kintsugi',
-  name: 'Kintsugi',
-  nativeAsset: kint,
-  parachainId: 2092,
-  ss58Format: 2092,
-  ws: [
-    'wss://api-kusama.interlay.io/parachain',
-    'wss://kintsugi.api.onfinality.io/public-ws',
-  ],
 });
 
 export const kusama = new Parachain({
@@ -1543,22 +1512,6 @@ export const moonriver = new EvmParachain({
       },
       symbol: 'xcKAR',
     }),
-    ChainAsset.fromAsset(kbtc, {
-      address: getAddress('0xFFFfFfFfF6E528AD57184579beeE00c5d5e646F0'),
-      decimals: 8,
-      ids: {
-        id: '328179947973504579459046439826496046832',
-      },
-      symbol: 'xcKBTC',
-    }),
-    ChainAsset.fromAsset(kint, {
-      address: getAddress('0xfffFFFFF83F4f317d3cbF6EC6250AeC3697b3fF2'),
-      decimals: 12,
-      ids: {
-        id: '175400718394635817552109270754364440562',
-      },
-      symbol: 'xcKINT',
-    }),
     ChainAsset.fromAsset(ksm, {
       address: getAddress('0xFfFFfFff1FcaCBd218EDc0EbA20Fc2308C778080'),
       decimals: 12,
@@ -2250,7 +2203,6 @@ export const chainsList: AnyChain[] = [
   hydrationAlphanet,
   interlay,
   karura,
-  kintsugi,
   kusama,
   kusamaAssetHub,
   mantaParachain,

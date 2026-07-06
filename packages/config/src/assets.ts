@@ -150,16 +150,6 @@ export const kar = new Asset({
   originSymbol: 'KAR',
 });
 
-export const kbtc = new Asset({
-  key: 'kbtc',
-  originSymbol: 'KBTC',
-});
-
-export const kint = new Asset({
-  key: 'kint',
-  originSymbol: 'KINT',
-});
-
 export const ksm = new Asset({
   key: 'ksm',
   originSymbol: 'KSM',
@@ -457,8 +447,6 @@ export const assetsList: Asset[] = [
   ibtc,
   intr,
   kar,
-  kbtc,
-  kint,
   ksm,
   lamaGLMR,
   laos,
