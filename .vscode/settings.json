@@ -40,11 +40,8 @@
     "integritee",
     "interlay",
     "karura",
-    "kbtc",
     "keccak",
     "khala",
-    "kint",
-    "kintsugi",
     "kusama",
     "kusd",
     "laosalphanet",
@@ -135,7 +132,7 @@
   "editor.formatOnType": false,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
-  "typescript.preferences.importModuleSpecifier": "relative",
+  "js/ts.preferences.importModuleSpecifier": "relative",
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit"
   },
