@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.19
+
+### Patch Changes
+
+- [#642](https://github.com/moonbeam-foundation/xcm-sdk/pull/642) [`a9bbb17`](https://github.com/moonbeam-foundation/xcm-sdk/commit/a9bbb17bbb3de6a408e622e2f9f9936bdbaa4dcf) Thanks [@ekenigs](https://github.com/ekenigs)! - Removing Kintsugi
+
 ## 4.6.18
 
 ### Patch Changes
