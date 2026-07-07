@@ -8,7 +8,6 @@ import {
 import {
   aseed,
   bnc,
-  csm,
   kar,
   ksm,
   movr,
@@ -22,7 +21,6 @@ import {
 } from '../assets';
 import {
   bifrostKusama,
-  crustShadow,
   karura,
   kusamaAssetHub,
   moonriver,
@@ -63,30 +61,6 @@ export const moonriverRoutes = new ChainRoutes({
         .monitorEvent()
         .polkadotXcm()
         .messageQueue(),
-    },
-    {
-      source: {
-        asset: movr,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-      },
-      destination: {
-        asset: movr,
-        chain: crustShadow,
-        balance: BalanceBuilder().substrate().assets().account(),
-        fee: {
-          amount: 0.0002,
-          asset: movr,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {
@@ -170,30 +144,6 @@ export const moonriverRoutes = new ChainRoutes({
         .monitorEvent()
         .polkadotXcm()
         .messageQueue(),
-    },
-    {
-      source: {
-        asset: csm,
-        balance: BalanceBuilder().evm().erc20(),
-        fee: {
-          asset: movr,
-          balance: BalanceBuilder().substrate().system().account(),
-        },
-        destinationFee: {
-          balance: BalanceBuilder().evm().erc20(),
-        },
-      },
-      destination: {
-        asset: csm,
-        chain: crustShadow,
-        balance: BalanceBuilder().substrate().system().account(),
-        fee: {
-          amount: 0.004,
-          asset: csm,
-        },
-      },
-      contract: ContractBuilder().XcmPrecompile().transferAssetsToPara32(),
-      monitoring: MonitoringBuilder().monitorEvent().polkadotXcm().xcmpQueue(),
     },
     {
       source: {

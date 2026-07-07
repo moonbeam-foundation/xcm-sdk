@@ -20,7 +20,6 @@ import {
   axlusdc,
   bnc,
   cfg,
-  csm,
   dai,
   ded,
   dev,
@@ -378,34 +377,6 @@ export const centrifuge = new Parachain({
     'wss://fullnode.centrifuge.io',
     'wss://rpc-centrifuge.luckyfriday.io',
     'wss://centrifuge-parachain.api.onfinality.io/public-ws',
-  ],
-});
-
-export const crustShadow = new Parachain({
-  assets: [
-    ChainAsset.fromAsset(movr, {
-      decimals: 18,
-      ids: {
-        balanceId: 232263652204149413431520870009560565298n,
-        id: { OtherReserve: 232263652204149413431520870009560565298n },
-      },
-    }),
-    ChainAsset.fromAsset(csm, {
-      decimals: 12,
-    }),
-  ],
-  ecosystem: Ecosystem.Kusama,
-  genesisHash:
-    '0xd4c0c08ca49dc7c680c3dac71a7c0703e5b222f4b6c03fe4c5219bb8f22c18dc',
-  key: 'crust-shadow',
-  name: 'Crust Shadow',
-  nativeAsset: csm,
-  parachainId: 2012,
-  ss58Format: 66,
-  ws: [
-    'wss://rpc2-shadow.crust.network',
-    'wss://rpc-shadow.crust.network/',
-    'wss://rpc-shadow.crustnetwork.app',
   ],
 });
 
@@ -1496,14 +1467,6 @@ export const moonriver = new EvmParachain({
       },
       symbol: 'xcBNC',
     }),
-    ChainAsset.fromAsset(csm, {
-      address: getAddress('0xffFfFFFf519811215E05eFA24830Eebe9c43aCD7'),
-      decimals: 12,
-      ids: {
-        id: '108457044225666871745333730479173774551',
-      },
-      symbol: 'xcCSM',
-    }),
     ChainAsset.fromAsset(kar, {
       address: getAddress('0xFfFFFFfF08220AD2E6e157f26eD8bD22A336A0A5'),
       decimals: 12,
@@ -2196,7 +2159,6 @@ export const chainsList: AnyChain[] = [
   bifrostKusama,
   bifrostPolkadot,
   centrifuge,
-  crustShadow,
   darwinia,
   ethereum,
   hydration,
