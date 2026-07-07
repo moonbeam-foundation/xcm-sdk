@@ -7,7 +7,6 @@ import { astarRoutes } from './astar';
 import { bifrostKusamaRoutes } from './bifrostKusama';
 import { bifrostPolkadotRoutes } from './bifrostPolkadot';
 import { centrifugeRoutes } from './centrifuge';
-import { crustShadowRoutes } from './crustShadow';
 import { darwiniaRoutes } from './darwinia';
 import { hydrationRoutes } from './hydration';
 import { hydrationAlphanetRoutes } from './hydrationAlphanet';
@@ -38,7 +37,6 @@ export const xcmRoutesList: ChainRoutes[] = [
   bifrostKusamaRoutes,
   bifrostPolkadotRoutes,
   centrifugeRoutes,
-  crustShadowRoutes,
   darwiniaRoutes,
   hydrationRoutes,
   hydrationAlphanetRoutes,

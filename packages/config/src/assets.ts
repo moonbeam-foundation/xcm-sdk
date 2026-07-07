@@ -55,11 +55,6 @@ export const cfg = new Asset({
   originSymbol: 'CFG',
 });
 
-export const csm = new Asset({
-  key: 'csm',
-  originSymbol: 'CSM',
-});
-
 export const dai = new Asset({
   key: 'dai',
   originSymbol: 'DAI',
@@ -428,7 +423,6 @@ export const assetsList: Asset[] = [
   axlusdc,
   bnc,
   cfg,
-  csm,
   dai,
   ded,
   dev,
