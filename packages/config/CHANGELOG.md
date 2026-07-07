@@ -1,5 +1,11 @@
 # @moonbeam-network/xcm-config
 
+## 4.6.20
+
+### Patch Changes
+
+- [#644](https://github.com/moonbeam-foundation/xcm-sdk/pull/644) [`2db9806`](https://github.com/moonbeam-foundation/xcm-sdk/commit/2db9806fc0e8717dbccc32f949d17067914356ae) Thanks [@ekenigs](https://github.com/ekenigs)! - Removing Crust-Shadow
+
 ## 4.6.19
 
 ### Patch Changes
