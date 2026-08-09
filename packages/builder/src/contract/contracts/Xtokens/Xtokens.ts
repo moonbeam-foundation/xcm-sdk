@@ -114,7 +114,7 @@ function getDestinationMultilocationForPrecompileDestination(
   return [
     1,
     destination.parachainId
-      ? [`0x0000000${destination.parachainId.toString(16)}`, acc]
+      ? [`0x00${destination.parachainId.toString(16).padStart(8, '0')}`, acc]
       : [acc],
   ];
 }
